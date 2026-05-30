@@ -1,0 +1,58 @@
+import { fail, redirect, error } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
+import { getSourceDetail, updateSource } from '$lib/server/queries';
+import { parseSourceForm, revisionSummary } from '$lib/server/form';
+import { asArray } from '$lib/format';
+
+export const load: PageServerLoad = async ({ params, locals, url }) => {
+	if (!locals.user) redirect(302, '/login?redirect=' + encodeURIComponent(url.pathname));
+	const detail = await getSourceDetail(params.slug);
+	if (!detail) error(404, 'Source not found');
+	const s = detail.source;
+	const initial = {
+		slug: s.slug,
+		title: s.title,
+		titleEn: s.titleEn ?? '',
+		titleAin: s.titleAin ?? '',
+		category: s.category,
+		type: s.type,
+		author: s.author ?? '',
+		yearText: s.yearText ?? '',
+		yearStart: s.yearStart,
+		yearEnd: s.yearEnd,
+		yearCertainty: s.yearCertainty ?? 'exact',
+		dialect: s.dialect ?? '',
+		region: s.region ?? '',
+		languages: asArray(s.languages).join(', '),
+		scripts: asArray(s.scripts).join(', '),
+		holdingInstitution: s.holdingInstitution ?? '',
+		callNumber: s.callNumber ?? '',
+		entryCount: s.entryCount,
+		entryCountLabel: s.entryCountLabel ?? '',
+		license: s.license ?? '',
+		summary: s.summary ?? '',
+		notes: s.notes ?? '',
+		reliability: s.reliability ?? '',
+		links: detail.links.map((l) => ({ type: l.type, label: l.label ?? '', url: l.url })),
+		tags: detail.tags.map((t) => t.name).join(', ')
+	};
+	return { initial, slug: s.slug, title: s.title };
+};
+
+export const actions: Actions = {
+	default: async ({ request, params, locals }) => {
+		if (!locals.user) return fail(401, { error: 'Sign in to edit.' });
+		const detail = await getSourceDetail(params.slug);
+		if (!detail) return fail(404, { error: 'Source not found.' });
+		const fd = await request.formData();
+		const { input, error: err } = parseSourceForm(fd);
+		if (!input) return fail(400, { error: err });
+		await updateSource(
+			detail.source.id,
+			input,
+			{ id: locals.user.id, name: locals.user.name },
+			revisionSummary(fd)
+		);
+		redirect(303, '/sources/' + params.slug);
+	}
+};

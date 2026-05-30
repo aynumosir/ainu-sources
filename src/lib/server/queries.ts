@@ -1,0 +1,746 @@
+import { db } from './db';
+import {
+	sources,
+	sourceLinks,
+	persons,
+	sourcePersons,
+	places,
+	sourcePlaces,
+	institutions,
+	sourceInstitutions,
+	sourceRelations,
+	tags,
+	sourceTags,
+	sourceRevisions,
+	type Source,
+	type Person,
+	type Place,
+	type Institution,
+	type Tag
+} from './db/schema';
+import { and, or, eq, ne, like, inArray, gte, lte, desc, asc, sql, count } from 'drizzle-orm';
+import type {
+	SourceFilters,
+	Facets,
+	FacetBucket,
+	SourceListResult,
+	SourceDetail,
+	DbStats,
+	TimelinePoint,
+	MapPlace,
+	PersonRef,
+	PlaceRef,
+	InstitutionRef,
+	RelatedSource
+} from '$lib/types';
+import { asArray, centuryOf, slugify } from '$lib/format';
+
+type SQLCond = ReturnType<typeof eq>;
+
+const SEEDED = ['ainu-dictionaries', 'ainu-grammar', 'ainu-corpora'];
+
+// ---------------------------------------------------------------------------
+// Filter → SQL conditions
+// ---------------------------------------------------------------------------
+
+/** Conditions shared by the list view and the facet counts. */
+function baseConditions(f: SourceFilters): SQLCond[] {
+	const c: SQLCond[] = [];
+	if (f.q && f.q.trim()) {
+		const q = `%${f.q.trim()}%`;
+		c.push(
+			or(
+				like(sources.title, q),
+				like(sources.titleEn, q),
+				like(sources.titleAin, q),
+				like(sources.author, q),
+				like(sources.dialect, q),
+				like(sources.summary, q)
+			)!
+		);
+	}
+	if (f.tag) {
+		c.push(
+			inArray(
+				sources.id,
+				db
+					.select({ id: sourceTags.sourceId })
+					.from(sourceTags)
+					.innerJoin(tags, eq(sourceTags.tagId, tags.id))
+					.where(eq(tags.slug, f.tag))
+			)
+		);
+	}
+	if (f.person) {
+		c.push(
+			inArray(
+				sources.id,
+				db
+					.select({ id: sourcePersons.sourceId })
+					.from(sourcePersons)
+					.innerJoin(persons, eq(sourcePersons.personId, persons.id))
+					.where(eq(persons.slug, f.person))
+			)
+		);
+	}
+	if (f.hasDigital) {
+		c.push(inArray(sources.id, db.select({ id: sourceLinks.sourceId }).from(sourceLinks)));
+	}
+	return c;
+}
+
+function jsonAnyOf(column: typeof sources.languages | typeof sources.scripts, values: string[]) {
+	return or(...values.map((v) => like(column, `%"${v}"%`)))!;
+}
+
+function centuryConds(centuries: number[]) {
+	return or(
+		...centuries.map((cn) =>
+			and(gte(sources.yearStart, (cn - 1) * 100 + 1), lte(sources.yearStart, cn * 100))!
+		)
+	)!;
+}
+
+/** All conditions, including the multi-select facet dimensions. */
+function fullConditions(f: SourceFilters): SQLCond[] {
+	const c = baseConditions(f);
+	if (f.category) c.push(eq(sources.category, f.category));
+	if (f.types?.length) c.push(inArray(sources.type, f.types));
+	if (f.regions?.length) c.push(inArray(sources.region, f.regions));
+	if (f.languages?.length) c.push(jsonAnyOf(sources.languages, f.languages));
+	if (f.scripts?.length) c.push(jsonAnyOf(sources.scripts, f.scripts));
+	if (f.centuries?.length) c.push(centuryConds(f.centuries));
+	return c;
+}
+
+function orderBy(sort: SourceFilters['sort']) {
+	switch (sort) {
+		case 'year-desc':
+			return [desc(sources.yearStart), asc(sources.title)];
+		case 'title':
+			return [asc(sources.title)];
+		case 'updated':
+			return [desc(sources.updatedAt)];
+		case 'entries-desc':
+			return [desc(sources.entryCount)];
+		case 'year-asc':
+		default:
+			return [asc(sources.yearStart), asc(sources.title)];
+	}
+}
+
+// ---------------------------------------------------------------------------
+// List + facets
+// ---------------------------------------------------------------------------
+
+export async function listSources(f: SourceFilters): Promise<SourceListResult> {
+	const page = Math.max(1, f.page ?? 1);
+	const pageSize = Math.min(100, Math.max(1, f.pageSize ?? 24));
+	const conds = fullConditions(f);
+	const where = conds.length ? and(...conds) : undefined;
+
+	const [items, totalRow] = await Promise.all([
+		db
+			.select()
+			.from(sources)
+			.where(where)
+			.orderBy(...orderBy(f.sort))
+			.limit(pageSize)
+			.offset((page - 1) * pageSize),
+		db.select({ n: count() }).from(sources).where(where)
+	]);
+
+	const total = totalRow[0]?.n ?? 0;
+	return { items, total, page, pageSize, pageCount: Math.max(1, Math.ceil(total / pageSize)) };
+}
+
+function tally(values: string[]): FacetBucket[] {
+	const m = new Map<string, number>();
+	for (const v of values) if (v) m.set(v, (m.get(v) ?? 0) + 1);
+	return [...m.entries()].map(([key, count]) => ({ key, count })).sort((a, b) => b.count - a.count);
+}
+
+/**
+ * Per-dimension predicates for the selected facet values. Standard faceted-search
+ * semantics: a dimension's own buckets are counted with every OTHER selected
+ * dimension applied, but NOT its own filter — so the visible options narrow as you
+ * pick across dimensions, while you can still widen a selection within one dimension.
+ */
+type FacetRow = {
+	category: string;
+	type: string;
+	region: string | null;
+	languages: unknown;
+	scripts: unknown;
+	yearStart: number | null;
+};
+
+export async function computeFacets(f: SourceFilters): Promise<Facets> {
+	const conds = baseConditions(f);
+	const where = conds.length ? and(...conds) : undefined;
+	const rows: FacetRow[] = await db
+		.select({
+			category: sources.category,
+			type: sources.type,
+			region: sources.region,
+			languages: sources.languages,
+			scripts: sources.scripts,
+			yearStart: sources.yearStart
+		})
+		.from(sources)
+		.where(where);
+
+	// Predicate per dimension (true = row passes that dimension's selected filter).
+	const matchCategory = (r: FacetRow) => !f.category || r.category === f.category;
+	const matchType = (r: FacetRow) => !f.types?.length || f.types.includes(r.type);
+	const matchRegion = (r: FacetRow) => !f.regions?.length || f.regions.includes(r.region ?? '');
+	const matchLanguages = (r: FacetRow) =>
+		!f.languages?.length || asArray(r.languages).some((v) => f.languages!.includes(v));
+	const matchScripts = (r: FacetRow) =>
+		!f.scripts?.length || asArray(r.scripts).some((v) => f.scripts!.includes(v));
+	const matchCenturies = (r: FacetRow) => {
+		if (!f.centuries?.length) return true;
+		const c = centuryOf(r.yearStart);
+		return c != null && f.centuries.includes(c);
+	};
+
+	// For dimension X, keep rows passing all dimensions except X.
+	const except = (skip: keyof SourceFilters) =>
+		rows.filter(
+			(r) =>
+				(skip === 'category' || matchCategory(r)) &&
+				(skip === 'types' || matchType(r)) &&
+				(skip === 'regions' || matchRegion(r)) &&
+				(skip === 'languages' || matchLanguages(r)) &&
+				(skip === 'scripts' || matchScripts(r)) &&
+				(skip === 'centuries' || matchCenturies(r))
+		);
+
+	const centuryKeys = (rs: FacetRow[]) =>
+		rs
+			.map((r) => centuryOf(r.yearStart))
+			.filter((c): c is number => c != null)
+			.map(String);
+
+	return {
+		categories: tally(except('category').map((r) => r.category)),
+		types: tally(except('types').map((r) => r.type)),
+		regions: tally(except('regions').map((r) => r.region ?? '')),
+		languages: tally(except('languages').flatMap((r) => asArray(r.languages))),
+		scripts: tally(except('scripts').flatMap((r) => asArray(r.scripts))),
+		centuries: tally(centuryKeys(except('centuries'))).sort((a, b) => Number(a.key) - Number(b.key))
+	};
+}
+
+// ---------------------------------------------------------------------------
+// Source detail
+// ---------------------------------------------------------------------------
+
+export async function getSourceBySlug(slug: string): Promise<Source | undefined> {
+	const r = await db.select().from(sources).where(eq(sources.slug, slug)).limit(1);
+	return r[0];
+}
+
+export async function getSourceDetail(slug: string): Promise<SourceDetail | undefined> {
+	const source = await getSourceBySlug(slug);
+	if (!source) return undefined;
+	const id = source.id;
+
+	const [links, personRows, placeRows, instRows, tagRows, relOut, relIn, revCount] =
+		await Promise.all([
+			db.select().from(sourceLinks).where(eq(sourceLinks.sourceId, id)).orderBy(asc(sourceLinks.sortOrder)),
+			db
+				.select({ person: persons, role: sourcePersons.role, sortOrder: sourcePersons.sortOrder })
+				.from(sourcePersons)
+				.innerJoin(persons, eq(sourcePersons.personId, persons.id))
+				.where(eq(sourcePersons.sourceId, id))
+				.orderBy(asc(sourcePersons.sortOrder)),
+			db
+				.select({ place: places, role: sourcePlaces.role })
+				.from(sourcePlaces)
+				.innerJoin(places, eq(sourcePlaces.placeId, places.id))
+				.where(eq(sourcePlaces.sourceId, id)),
+			db
+				.select({ institution: institutions, role: sourceInstitutions.role, callNumber: sourceInstitutions.callNumber })
+				.from(sourceInstitutions)
+				.innerJoin(institutions, eq(sourceInstitutions.institutionId, institutions.id))
+				.where(eq(sourceInstitutions.sourceId, id)),
+			db
+				.select({ tag: tags })
+				.from(sourceTags)
+				.innerJoin(tags, eq(sourceTags.tagId, tags.id))
+				.where(eq(sourceTags.sourceId, id)),
+			db
+				.select({ relation: sourceRelations, source: sources })
+				.from(sourceRelations)
+				.innerJoin(sources, eq(sourceRelations.toSourceId, sources.id))
+				.where(eq(sourceRelations.fromSourceId, id)),
+			db
+				.select({ relation: sourceRelations, source: sources })
+				.from(sourceRelations)
+				.innerJoin(sources, eq(sourceRelations.fromSourceId, sources.id))
+				.where(eq(sourceRelations.toSourceId, id)),
+			db.select({ n: count() }).from(sourceRevisions).where(eq(sourceRevisions.sourceId, id))
+		]);
+
+	const personsR: PersonRef[] = personRows.map((r) => ({ ...r.person, role: r.role }));
+	const placesR: PlaceRef[] = placeRows.map((r) => ({ ...r.place, role: r.role }));
+	const instR: InstitutionRef[] = instRows.map((r) => ({
+		...r.institution,
+		role: r.role,
+		callNumber: r.callNumber
+	}));
+	const related: RelatedSource[] = [
+		...relOut.map((r) => ({ relation: r.relation, source: r.source, direction: 'out' as const })),
+		...relIn.map((r) => ({ relation: r.relation, source: r.source, direction: 'in' as const }))
+	];
+
+	return {
+		source,
+		links,
+		persons: personsR,
+		places: placesR,
+		institutions: instR,
+		tags: tagRows.map((r) => r.tag),
+		related,
+		revisionCount: revCount[0]?.n ?? 0
+	};
+}
+
+// ---------------------------------------------------------------------------
+// Stats / timeline / map
+// ---------------------------------------------------------------------------
+
+export async function getStats(): Promise<DbStats> {
+	const rows = await db
+		.select({ category: sources.category, region: sources.region, type: sources.type, yearStart: sources.yearStart })
+		.from(sources);
+	const [pc, plc, ic, dig] = await Promise.all([
+		db.select({ n: count() }).from(persons),
+		db.select({ n: count() }).from(places),
+		db.select({ n: count() }).from(institutions),
+		db.select({ n: sql<number>`count(distinct ${sourceLinks.sourceId})` }).from(sourceLinks)
+	]);
+	const years = rows.map((r) => r.yearStart).filter((y): y is number => y != null);
+	return {
+		total: rows.length,
+		byCategory: tally(rows.map((r) => r.category)),
+		byRegion: tally(rows.map((r) => r.region ?? '')),
+		byType: tally(rows.map((r) => r.type)),
+		personCount: pc[0]?.n ?? 0,
+		placeCount: plc[0]?.n ?? 0,
+		institutionCount: ic[0]?.n ?? 0,
+		yearMin: years.length ? Math.min(...years) : null,
+		yearMax: years.length ? Math.max(...years) : null,
+		withDigital: dig[0]?.n ?? 0
+	};
+}
+
+export async function getTimeline(): Promise<TimelinePoint[]> {
+	const rows = await db
+		.select({
+			slug: sources.slug,
+			title: sources.title,
+			titleEn: sources.titleEn,
+			yearStart: sources.yearStart,
+			yearEnd: sources.yearEnd,
+			yearCertainty: sources.yearCertainty,
+			category: sources.category,
+			type: sources.type,
+			region: sources.region
+		})
+		.from(sources)
+		.orderBy(asc(sources.yearStart));
+	return rows.filter((r): r is TimelinePoint => r.yearStart != null);
+}
+
+export async function getMapPlaces(): Promise<MapPlace[]> {
+	const rows = await db
+		.select({
+			id: places.id,
+			slug: places.slug,
+			name: places.name,
+			nameEn: places.nameEn,
+			region: places.region,
+			kind: places.kind,
+			lat: places.lat,
+			lng: places.lng,
+			sourceCount: sql<number>`count(${sourcePlaces.sourceId})`
+		})
+		.from(places)
+		.leftJoin(sourcePlaces, eq(sourcePlaces.placeId, places.id))
+		.groupBy(places.id);
+	return rows.filter((r): r is MapPlace => r.lat != null && r.lng != null);
+}
+
+// ---------------------------------------------------------------------------
+// Persons / places / institutions / tags directories
+// ---------------------------------------------------------------------------
+
+export interface PersonWithCount extends Person {
+	sourceCount: number;
+	roles: string[];
+}
+
+export interface PersonListOptions {
+	q?: string;
+	role?: string;
+	sort?: 'count' | 'name' | 'name-desc';
+}
+
+export async function listPersons(opts: PersonListOptions = {}): Promise<PersonWithCount[]> {
+	const conds: SQLCond[] = [];
+	if (opts.q && opts.q.trim()) {
+		const q = `%${opts.q.trim()}%`;
+		conds.push(or(like(persons.name, q), like(persons.nameEn, q))!);
+	}
+	if (opts.role) {
+		conds.push(
+			inArray(
+				persons.id,
+				db
+					.select({ id: sourcePersons.personId })
+					.from(sourcePersons)
+					.where(eq(sourcePersons.role, opts.role))
+			)
+		);
+	}
+
+	const cnt = sql<number>`count(${sourcePersons.sourceId})`;
+	const order =
+		opts.sort === 'name'
+			? [asc(persons.name)]
+			: opts.sort === 'name-desc'
+				? [desc(persons.name)]
+				: [desc(cnt), asc(persons.name)];
+
+	const rows = await db
+		.select({
+			person: persons,
+			n: cnt,
+			roles: sql<string | null>`group_concat(distinct ${sourcePersons.role})`
+		})
+		.from(persons)
+		.leftJoin(sourcePersons, eq(sourcePersons.personId, persons.id))
+		.where(conds.length ? and(...conds) : undefined)
+		.groupBy(persons.id)
+		.orderBy(...order);
+
+	return rows.map((r) => ({
+		...r.person,
+		sourceCount: r.n,
+		roles: r.roles ? r.roles.split(',').filter(Boolean) : []
+	}));
+}
+
+/** Distinct person roles present in the data, for the People filter dropdown. */
+export async function listPersonRoles(): Promise<string[]> {
+	const rows = await db
+		.selectDistinct({ role: sourcePersons.role })
+		.from(sourcePersons)
+		.orderBy(asc(sourcePersons.role));
+	return rows.map((r) => r.role).filter(Boolean);
+}
+
+export async function getPersonBySlug(
+	slug: string
+): Promise<{ person: Person; sources: { source: Source; role: string }[] } | undefined> {
+	const r = await db.select().from(persons).where(eq(persons.slug, slug)).limit(1);
+	const person = r[0];
+	if (!person) return undefined;
+	const srcs = await db
+		.select({ source: sources, role: sourcePersons.role })
+		.from(sourcePersons)
+		.innerJoin(sources, eq(sourcePersons.sourceId, sources.id))
+		.where(eq(sourcePersons.personId, person.id))
+		.orderBy(asc(sources.yearStart));
+	return { person, sources: srcs };
+}
+
+export interface PlaceWithCount extends Place {
+	sourceCount: number;
+}
+export async function listPlaces(): Promise<PlaceWithCount[]> {
+	const rows = await db
+		.select({ place: places, n: sql<number>`count(${sourcePlaces.sourceId})` })
+		.from(places)
+		.leftJoin(sourcePlaces, eq(sourcePlaces.placeId, places.id))
+		.groupBy(places.id)
+		.orderBy(desc(sql`count(${sourcePlaces.sourceId})`), asc(places.name));
+	return rows.map((r) => ({ ...r.place, sourceCount: r.n }));
+}
+
+export async function getPlaceBySlug(
+	slug: string
+): Promise<{ place: Place; sources: { source: Source; role: string }[] } | undefined> {
+	const r = await db.select().from(places).where(eq(places.slug, slug)).limit(1);
+	const place = r[0];
+	if (!place) return undefined;
+	const srcs = await db
+		.select({ source: sources, role: sourcePlaces.role })
+		.from(sourcePlaces)
+		.innerJoin(sources, eq(sourcePlaces.sourceId, sources.id))
+		.where(eq(sourcePlaces.placeId, place.id))
+		.orderBy(asc(sources.yearStart));
+	return { place, sources: srcs };
+}
+
+export interface InstitutionWithCount extends Institution {
+	sourceCount: number;
+}
+export async function listInstitutions(): Promise<InstitutionWithCount[]> {
+	const rows = await db
+		.select({ inst: institutions, n: sql<number>`count(${sourceInstitutions.sourceId})` })
+		.from(institutions)
+		.leftJoin(sourceInstitutions, eq(sourceInstitutions.institutionId, institutions.id))
+		.groupBy(institutions.id)
+		.orderBy(desc(sql`count(${sourceInstitutions.sourceId})`), asc(institutions.name));
+	return rows.map((r) => ({ ...r.inst, sourceCount: r.n }));
+}
+
+export async function getInstitutionBySlug(
+	slug: string
+): Promise<{ institution: Institution; sources: { source: Source; role: string }[] } | undefined> {
+	const r = await db.select().from(institutions).where(eq(institutions.slug, slug)).limit(1);
+	const institution = r[0];
+	if (!institution) return undefined;
+	const srcs = await db
+		.select({ source: sources, role: sourceInstitutions.role })
+		.from(sourceInstitutions)
+		.innerJoin(sources, eq(sourceInstitutions.sourceId, sources.id))
+		.where(eq(sourceInstitutions.institutionId, institution.id))
+		.orderBy(asc(sources.yearStart));
+	return { institution, sources: srcs };
+}
+
+export interface TagWithCount extends Tag {
+	sourceCount: number;
+}
+export async function listTags(): Promise<TagWithCount[]> {
+	const rows = await db
+		.select({ tag: tags, n: sql<number>`count(${sourceTags.sourceId})` })
+		.from(tags)
+		.leftJoin(sourceTags, eq(sourceTags.tagId, tags.id))
+		.groupBy(tags.id)
+		.orderBy(desc(sql`count(${sourceTags.sourceId})`), asc(tags.name));
+	return rows.map((r) => ({ ...r.tag, sourceCount: r.n }));
+}
+
+// ---------------------------------------------------------------------------
+// Quick search (for the live search box / API)
+// ---------------------------------------------------------------------------
+
+export async function quickSearch(q: string, limit = 8): Promise<Source[]> {
+	if (!q.trim()) return [];
+	const term = `%${q.trim()}%`;
+	return db
+		.select()
+		.from(sources)
+		.where(
+			or(
+				like(sources.title, term),
+				like(sources.titleEn, term),
+				like(sources.author, term),
+				like(sources.dialect, term)
+			)
+		)
+		.orderBy(asc(sources.yearStart))
+		.limit(limit);
+}
+
+// ---------------------------------------------------------------------------
+// Editing (wiki) — create / update with revision history
+// ---------------------------------------------------------------------------
+
+export interface SourceInput {
+	title: string;
+	titleEn?: string | null;
+	titleAin?: string | null;
+	category: string;
+	type: string;
+	author?: string | null;
+	yearText?: string | null;
+	yearStart?: number | null;
+	yearEnd?: number | null;
+	yearCertainty?: string | null;
+	dialect?: string | null;
+	region?: string | null;
+	languages?: string[];
+	scripts?: string[];
+	holdingInstitution?: string | null;
+	callNumber?: string | null;
+	entryCount?: number | null;
+	entryCountLabel?: string | null;
+	license?: string | null;
+	summary?: string | null;
+	notes?: string | null;
+	reliability?: string | null;
+	links?: { type: string; label?: string | null; url: string }[];
+	tagNames?: string[];
+}
+
+async function ensureUniqueSlug(base: string, excludeId?: string): Promise<string> {
+	let candidate = base || 'source';
+	let n = 1;
+	// eslint-disable-next-line no-constant-condition
+	while (true) {
+		const existing = await db
+			.select({ id: sources.id })
+			.from(sources)
+			.where(eq(sources.slug, candidate))
+			.limit(1);
+		if (!existing[0] || existing[0].id === excludeId) return candidate;
+		n += 1;
+		candidate = `${base}-${n}`;
+	}
+}
+
+/** The interactive-transaction handle drizzle hands to `db.transaction()`. */
+type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
+
+async function tagIdsFor(tx: Tx, names: string[]): Promise<string[]> {
+	const ids: string[] = [];
+	for (const raw of names) {
+		const name = raw.trim();
+		if (!name) continue;
+		const slug = slugify(name) || name;
+		const existing = await tx.select().from(tags).where(eq(tags.slug, slug)).limit(1);
+		if (existing[0]) {
+			ids.push(existing[0].id);
+		} else {
+			const id = crypto.randomUUID();
+			await tx.insert(tags).values({ id, slug, name, category: 'topic' });
+			ids.push(id);
+		}
+	}
+	return ids;
+}
+
+async function writeLinksAndTags(tx: Tx, sourceId: string, input: SourceInput) {
+	await tx.delete(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
+	const links = (input.links ?? []).filter((l) => l.url?.trim());
+	if (links.length) {
+		await tx.insert(sourceLinks).values(
+			links.map((l, i) => ({
+				sourceId,
+				type: l.type || 'website',
+				label: l.label?.trim() || null,
+				url: l.url.trim(),
+				sortOrder: i
+			}))
+		);
+	}
+	await tx.delete(sourceTags).where(eq(sourceTags.sourceId, sourceId));
+	const tagIds = await tagIdsFor(tx, input.tagNames ?? []);
+	if (tagIds.length) {
+		await tx.insert(sourceTags).values(tagIds.map((tagId) => ({ sourceId, tagId })));
+	}
+}
+
+function scalarValues(input: SourceInput) {
+	return {
+		title: input.title,
+		titleEn: input.titleEn || null,
+		titleAin: input.titleAin || null,
+		category: input.category,
+		type: input.type,
+		author: input.author || null,
+		yearText: input.yearText || null,
+		yearStart: input.yearStart ?? null,
+		yearEnd: input.yearEnd ?? null,
+		yearCertainty: input.yearCertainty || 'exact',
+		dialect: input.dialect || null,
+		region: input.region || null,
+		languages: input.languages?.length ? input.languages : null,
+		scripts: input.scripts?.length ? input.scripts : null,
+		holdingInstitution: input.holdingInstitution || null,
+		callNumber: input.callNumber || null,
+		entryCount: input.entryCount ?? null,
+		entryCountLabel: input.entryCountLabel || null,
+		license: input.license || null,
+		summary: input.summary || null,
+		notes: input.notes || null,
+		reliability: input.reliability || null
+	};
+}
+
+/** Compact snapshot recorded with each revision (queried within the tx). */
+async function snapshot(tx: Tx, sourceId: string): Promise<Record<string, unknown>> {
+	const [src] = await tx.select().from(sources).where(eq(sources.id, sourceId)).limit(1);
+	if (!src) return {};
+	const links = await tx.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
+	const tagRows = await tx
+		.select({ name: tags.name })
+		.from(sourceTags)
+		.innerJoin(tags, eq(sourceTags.tagId, tags.id))
+		.where(eq(sourceTags.sourceId, sourceId));
+	return { source: src, links, tags: tagRows.map((t) => t.name) };
+}
+
+export interface EditUser {
+	id?: string;
+	name?: string;
+}
+
+export async function createSource(input: SourceInput, user: EditUser, summary?: string): Promise<string> {
+	const id = crypto.randomUUID();
+	const slug = await ensureUniqueSlug(slugify(input.titleEn || input.title));
+	await db.transaction(async (tx) => {
+		await tx.insert(sources).values({
+			id,
+			slug,
+			...scalarValues(input),
+			provenanceRepo: 'manual',
+			createdBy: user.id ?? null,
+			updatedBy: user.id ?? null,
+			createdAt: new Date(),
+			updatedAt: new Date()
+		});
+		await writeLinksAndTags(tx, id, input);
+		await tx.insert(sourceRevisions).values({
+			sourceId: id,
+			userId: user.id ?? null,
+			userName: user.name ?? null,
+			summary: summary || 'Created',
+			action: 'create',
+			snapshot: await snapshot(tx, id)
+		});
+	});
+	return slug;
+}
+
+export async function updateSource(
+	id: string,
+	input: SourceInput,
+	user: EditUser,
+	summary?: string
+): Promise<string> {
+	const current = await db.select({ slug: sources.slug }).from(sources).where(eq(sources.id, id)).limit(1);
+	if (!current[0]) throw new Error('Source not found');
+	await db.transaction(async (tx) => {
+		await tx
+			.update(sources)
+			.set({ ...scalarValues(input), updatedBy: user.id ?? null, updatedAt: new Date() })
+			.where(eq(sources.id, id));
+		await writeLinksAndTags(tx, id, input);
+		await tx.insert(sourceRevisions).values({
+			sourceId: id,
+			userId: user.id ?? null,
+			userName: user.name ?? null,
+			summary: summary || 'Updated',
+			action: 'update',
+			snapshot: await snapshot(tx, id)
+		});
+	});
+	return current[0].slug;
+}
+
+export async function getRevisions(sourceId: string) {
+	return db
+		.select()
+		.from(sourceRevisions)
+		.where(eq(sourceRevisions.sourceId, sourceId))
+		.orderBy(desc(sourceRevisions.createdAt));
+}
+
+export { SEEDED };

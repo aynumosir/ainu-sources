@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+/* -------------------------------------------------------------------------
+   アイヌ語文献資料データベース — design tokens
+   A scholarly "archive" aesthetic: warm parchment ground, sepia ink, rubric
+   red (the colour medieval scribes reserved for emphasis) as the accent, and
+   antique-brass hairlines. Serif display type (Spectral + Noto Serif JP).
+------------------------------------------------------------------------- */
+@theme {
+	--color-paper: #f4ecd9; /* parchment */
+	--color-paper-card: #fbf5e7; /* aged leaf, a touch lighter */
+	--color-paper-sunk: #ece0c6; /* inset / sunken panels */
+	--color-ink: #2b2114; /* sepia-black */
+
+	/* rubrication red — scholarly manuscript accent (links, primary actions) */
+	--color-brand-50: #f8ece5;
+	--color-brand-100: #efd6c8;
+	--color-brand-300: #d39f89;
+	--color-brand-400: #c07a5d;
+	--color-brand-600: #9a3d2c;
+	--color-brand-700: #843123;
+	--color-brand-800: #69261a;
+
+	/* antique brass — secondary accent / fine rules */
+	--color-gold: #9a7b3f;
+
+	/* warm neutrals replacing Tailwind's cool stone for grounds & hairlines
+	   (text greys stone-400..900 keep their warm defaults) */
+	--color-stone-100: #ece1cb;
+	--color-stone-200: #ddcdac;
+	--color-stone-300: #cbb78f;
+
+	--font-sans:
+		'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-serif: 'Spectral', 'Noto Serif JP', 'Source Serif 4', ui-serif, Georgia, 'Times New Roman', serif;
+}
+
+@layer base {
+	html {
+		font-family: var(--font-sans);
+		scroll-behavior: smooth;
+	}
+	body {
+		min-height: 100svh;
+		color: var(--color-ink);
+		/* a faint, even wash of warm light from the top — subtle paper feel */
+		background-color: var(--color-paper);
+		background-image: radial-gradient(140% 100% at 50% -20%, #fbf6ea 0%, rgba(251, 246, 234, 0) 55%);
+		background-attachment: fixed;
+	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: var(--font-serif);
+		font-weight: 700;
+		color: var(--color-ink);
+		letter-spacing: -0.01em;
+		text-wrap: balance;
+	}
+	/* Tabular numerals for years / counts */
+	.tnum {
+		font-variant-numeric: tabular-nums;
+	}
+	/* Ainu Latin text: keep it crisp */
+	[lang^='ain'] {
+		font-feature-settings: 'kern' 1;
+	}
+}
+
+@layer components {
+	.link {
+		color: var(--color-brand-700);
+		text-decoration-line: underline;
+		text-decoration-color: color-mix(in srgb, var(--color-brand-700) 32%, transparent);
+		text-underline-offset: 2px;
+	}
+	.link:hover {
+		text-decoration-color: currentColor;
+	}
+	.card {
+		background: var(--color-paper-card);
+		border: 1px solid var(--color-stone-200);
+		border-radius: 0.5rem;
+		box-shadow: 0 1px 0 color-mix(in srgb, var(--color-ink) 4%, transparent);
+	}
+	/* small-caps editorial label, e.g. section eyebrows */
+	.eyebrow {
+		font-family: var(--font-sans);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+	}
+	/* a centred fleuron / rule divider */
+	.fleuron {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		color: var(--color-gold);
+	}
+	.fleuron::before,
+	.fleuron::after {
+		content: '';
+		height: 1px;
+		flex: 1;
+		background: color-mix(in srgb, var(--color-gold) 45%, transparent);
+	}
+	.prose-notes {
+		white-space: pre-wrap;
+		line-height: 1.7;
+	}
+}
+
+/* -------------------------------------------------------------------------
+   Scrollbars — tuned to the parchment/sepia palette: a sunken track and a
+   warm brass thumb that darkens on hover. Firefox uses scrollbar-color;
+   WebKit/Blink use the ::-webkit pseudo-elements.
+------------------------------------------------------------------------- */
+@layer base {
+	html {
+		scrollbar-color: color-mix(in srgb, var(--color-gold) 60%, transparent) transparent;
+		scrollbar-width: thin;
+	}
+	* {
+		scrollbar-color: color-mix(in srgb, var(--color-gold) 55%, transparent) transparent;
+		scrollbar-width: thin;
+	}
+	::-webkit-scrollbar {
+		width: 12px;
+		height: 12px;
+	}
+	::-webkit-scrollbar-track {
+		background: var(--color-paper-sunk);
+	}
+	::-webkit-scrollbar-thumb {
+		background: color-mix(in srgb, var(--color-gold) 55%, var(--color-paper-sunk));
+		border: 3px solid var(--color-paper-sunk);
+		border-radius: 999px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--color-gold);
+	}
+	::-webkit-scrollbar-corner {
+		background: var(--color-paper-sunk);
+	}
+}
+
+/* Leaflet tweaks (map page) */
+.leaflet-container {
+	font-family: var(--font-sans);
+	background: #e6ddc6;
+}

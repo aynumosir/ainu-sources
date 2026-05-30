@@ -1,0 +1,1 @@
+ALTER TABLE `persons` ADD `researchmap` text;

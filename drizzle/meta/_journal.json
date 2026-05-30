@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1780114064919,
+      "tag": "0000_yummy_sumo",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1780136041166,
+      "tag": "0001_daffy_cerise",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1780136995243,
+      "tag": "0002_brief_black_bird",
+      "breakpoints": true
+    }
+  ]
+}
