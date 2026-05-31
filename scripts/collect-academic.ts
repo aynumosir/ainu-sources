@@ -34,6 +34,7 @@ export interface AcademicRecord {
 	url: string | null; // canonical landing (DOI or OA)
 	pdf: string | null; // open-access PDF if any
 	category?: string; // 'secondary' (default) | 'primary' (e.g. Edo-period wordlists)
+	links?: { type: string; url: string; label?: string | null }[]; // extra typed links (iiif, transcription…)
 }
 
 const stripTags = (s: string): string => s.replace(/<[^>]+>/g, '');
@@ -744,6 +745,168 @@ export async function collectSGU(): Promise<AcademicRecord[]> {
 	return out;
 }
 
+// --- みんなで翻刻 (Honkoku) — ongoing crowdsourced transcription project --------
+// The "アイヌ関連資料" project: Edo-period Ainu manuscripts being transcribed by
+// volunteers. Each entry has an IIIF manifest (the digitised original at its
+// holding library) + a Honkoku transcription workspace. We emit one PRIMARY
+// record per entry carrying BOTH links; seedAcademic grafts them onto the
+// matching original book (e.g. the 藻汐草 we already hold) via coreKey, realising
+// "link the transcriptions with the original books".
+const HONKOKU_KEY = 'AIzaSyB-n5klhtxCtVmJqcsnhIc7-bWj5Ou--GY';
+const HONKOKU_FS =
+	`https://firestore.googleapis.com/v1/projects/honkoku3-c466c/databases/(default)/documents:runQuery?key=${HONKOKU_KEY}`;
+
+const fsStr = (f: any): string | null => f?.stringValue ?? null;
+
+// Pull author + year out of an IIIF manifest (v2 label/value or v3 language maps).
+async function iiifAuthorYear(manifestUrl: string): Promise<{ author: string | null; year: number | null }> {
+	let m: any;
+	try {
+		m = await jget(manifestUrl);
+	} catch {
+		return { author: null, year: null };
+	}
+	const meta: any[] = m.metadata ?? [];
+	const flat = (v: any): string => {
+		if (v == null) return '';
+		if (typeof v === 'string') return v;
+		if (Array.isArray(v)) return v.map(flat).find(Boolean) ?? '';
+		if (typeof v === 'object') return flat(v['@value'] ?? v.ja ?? v.en ?? v.none ?? Object.values(v)[0]);
+		return String(v);
+	};
+	const pick = (re: RegExp): string | null => {
+		for (const e of meta) if (re.test(flat(e.label))) {
+			const s = flat(e.value).replace(/<[^>]+>/g, '').trim();
+			if (s) return s;
+		}
+		return null;
+	};
+	const dateStr = pick(/date|year|年|刊年|成立|和暦|西暦/i) ?? '';
+	return { author: pick(/author|creator|著者|作者|編者|筆者/i), year: Number((dateStr.match(/\d{4}/) ?? [])[0]) || null };
+}
+
+export async function collectHonkoku(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	let docs: any[];
+	try {
+		const res = await fetch(HONKOKU_FS, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
+			body: JSON.stringify({
+				structuredQuery: {
+					from: [{ collectionId: 'entries' }],
+					where: { fieldFilter: { field: { fieldPath: 'projectId' }, op: 'EQUAL', value: { stringValue: 'ainu' } } }
+				}
+			})
+		});
+		docs = ((await res.json()) as any[]).filter((r) => r?.document);
+	} catch {
+		return out;
+	}
+	for (const r of docs) {
+		const f = r.document.fields;
+		const id = String(r.document.name).split('/').pop()!;
+		const title = (fsStr(f.label) ?? '')
+			.replace(/[（(][^）)]*[)）]\s*$/, '') // drop trailing （holding library）
+			.replace(/[\s　]+/g, ' ')
+			.trim();
+		if (!title) continue;
+		const manifest = fsStr(f.manifestUrl);
+		const holding = fsStr(f.attribution);
+		const { author, year } = manifest ? await iiifAuthorYear(manifest) : { author: null, year: null };
+		const links: { type: string; url: string; label?: string | null }[] = [
+			{ type: 'transcription', url: `https://app.honkoku.org/reader/${id}`, label: 'みんなで翻刻' }
+		];
+		if (manifest) links.push({ type: 'iiif', url: manifest, label: holding && !/^https?:/.test(holding) ? holding : 'IIIF manifest' });
+		out.push({
+			source: 'honkoku',
+			externalId: id,
+			doi: null,
+			title,
+			year,
+			type: 'grammar-book',
+			rawType: 'honkoku-entry',
+			language: 'ja',
+			authors: author ? [author] : [],
+			venue: holding && !/^https?:/.test(holding) ? holding : null,
+			url: null,
+			pdf: null,
+			category: 'primary',
+			links
+		});
+	}
+	console.log(`  Honkoku (みんなで翻刻 アイヌ関連資料): +${out.length}`);
+	return out;
+}
+
+// --- NIJL 国書データベース (Kokusho) IIIF — 蝦夷/Ainu language materials --------
+// Edo-period Ainu-language manuscripts & prints with IIIF images. We hit the
+// (undocumented) biblioSimpleSearch API on the language-specific slice, keep
+// IIIF-bearing items only, and emit PRIMARY records whose IIIF manifest grafts
+// onto the matching original (蝦夷方言藻汐草, 蝦夷語集…) via coreKey.
+const KOKUSHO_API = 'https://kokusho.nijl.ac.jp/api/biblioSimpleSearch?keyword=';
+const KOKUSHO_QUERIES = [
+	'蝦夷語', '蝦夷方言', 'アイヌ語', '藻汐草', '蝦夷詞', '夷語', '蝦夷言葉',
+	'蝦夷語集', '夷言', '蝦夷会話', '通辞'
+];
+// Require BOTH an Ezo/Ainu marker AND a language marker — 藻汐草 alone is a generic
+// poetic title (佐州怪談藻汐草, 藻塩艸 …) and 蝦夷 alone admits geography/maps.
+const KOKUSHO_AINU_RE = /蝦夷|夷|アイヌ|愛努/;
+const KOKUSHO_LANG_RE = /語|方言|言葉|夷言|詞|ことば|単語|和解|対話|訳|俗話|会話|藻汐草/;
+const KOKUSHO_SKIP_RE = /図|圖|地図|絵巻|絵図|風俗/; // maps / picture-scrolls are out of scope
+
+export async function collectKokusho(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seenWork = new Set<string>(); // one IIIF witness per work (else 10× 蝦夷語箋)
+	for (const q of KOKUSHO_QUERIES) {
+		let arr: any[];
+		try {
+			arr = await jget(KOKUSHO_API + encodeURIComponent(q));
+		} catch {
+			continue;
+		}
+		let kept = 0;
+		for (const it of Array.isArray(arr) ? arr : []) {
+			const bid = String(it.bid ?? '');
+			if (!bid) continue;
+			if (String(it.image) !== '1') continue; // IIIF only
+			const name = String(it.name ?? '').replace(/／/g, ' ').replace(/\s+/g, ' ').trim();
+			if (!name || KOKUSHO_SKIP_RE.test(name)) continue;
+			const hay = `${name} ${it.wname ?? ''} ${it.wkeyword ?? ''}`;
+			if (!KOKUSHO_AINU_RE.test(name) || !KOKUSHO_LANG_RE.test(hay)) continue;
+			const work = String(it.wid ?? bid);
+			if (seenWork.has(work)) continue;
+			seenWork.add(work);
+			const authors = (Array.isArray(it.authorlist) ? it.authorlist : [])
+				.map((a: string) => String(a).replace(/／/g, ' ').trim())
+				.filter(Boolean);
+			const year = Number((String(it.syear ?? it.wyear ?? '').match(/\d{4}/) ?? [])[0]) || null;
+			out.push({
+				source: 'kokusho',
+				externalId: bid,
+				doi: null,
+				title: name,
+				year,
+				type: 'grammar-book',
+				rawType: it.kansha === '写' ? 'manuscript' : 'kokusho-record',
+				language: 'ja',
+				authors,
+				venue: it.collection ?? null,
+				url: null,
+				pdf: null,
+				category: 'primary',
+				links: [
+					{ type: 'iiif', url: `https://kokusho.nijl.ac.jp/biblio/${bid}/manifest`, label: it.collection ?? 'NIJL 国書DB' },
+					{ type: 'website', url: `https://kokusho.nijl.ac.jp/biblio/${bid}`, label: '国書データベース' }
+				]
+			});
+			kept += 1;
+		}
+		console.log(`  Kokusho "${q}": +${kept} (total ${out.length})`);
+	}
+	return out;
+}
+
 async function main() {
 	if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 	console.log('Collecting OpenAlex (Ainu × Linguistics)…');
@@ -779,6 +942,10 @@ async function main() {
 	const hoppodb = await collectHoppoDB();
 	console.log('Collecting SGU curated bibliography…');
 	const sgu = await collectSGU();
+	console.log('Collecting Honkoku transcription project (みんなで翻刻)…');
+	const honkoku = await collectHonkoku();
+	console.log('Collecting NIJL Kokusho IIIF (蝦夷 materials)…');
+	const kokusho = await collectKokusho();
 
 	// Merge with cross-source dedup: DOI-bearing records first (OpenAlex,
 	// Crossref), then articles (CiNii), then books (Open Library, NDL). Same
@@ -795,12 +962,21 @@ async function main() {
 		...cyberleninka,
 		...togo,
 		...hoppodb,
-		...sgu
+		...sgu,
+		...honkoku,
+		...kokusho
 	].filter((r) => r.title && r.title.length > 2);
 	const seenDoi = new Set<string>();
 	const seenTitle = new Set<string>();
 	const merged: AcademicRecord[] = [];
 	for (const r of all) {
+		// Link-bearing records (Honkoku transcriptions, Kokusho IIIF) are kept as
+		// individual witnesses — seedAcademic dedups/grafts their links onto the
+		// matching original book, so we must NOT collapse them here by title.
+		if (r.links?.length) {
+			merged.push(r);
+			continue;
+		}
 		const d = r.doi?.toLowerCase() ?? null;
 		const t = normTitle(r.title);
 		if ((d && seenDoi.has(d)) || (t && seenTitle.has(t))) continue;
@@ -815,7 +991,7 @@ async function main() {
 	console.log(`\nWrote ${merged.length} records → ${path.relative(process.cwd(), OUT_FILE)}`);
 	console.log(`  by source: ${JSON.stringify(bySource)} · with DOI: ${withDoi}`);
 	console.log(
-		`  (raw: openalex ${openalex.length}, openalex-native ${openalexNative.length}, openalex-chained ${openalexChained.length}, openalex-forward ${openalexForward.length}, crossref ${crossref.length}, cinii ${cinii.length}, togo ${togo.length}, hoppodb ${hoppodb.length}, sgu ${sgu.length})`
+		`  (raw: openalex ${openalex.length}, native ${openalexNative.length}, chained ${openalexChained.length}, forward ${openalexForward.length}, crossref ${crossref.length}, cinii ${cinii.length}, togo ${togo.length}, hoppodb ${hoppodb.length}, sgu ${sgu.length}, honkoku ${honkoku.length}, kokusho ${kokusho.length})`
 	);
 }
 

@@ -6935,22 +6935,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.55105/2687-1440-2022-51-322-330",
-    "doi": "10.55105/2687-1440-2022-51-322-330",
-    "title": "Destruction of the Ainu Language",
-    "year": 2022,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "V. M. Alpatov"
-    ],
-    "venue": "Yearbook Japan",
-    "url": "https://doi.org/10.55105/2687-1440-2022-51-322-330",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.4324/9780429454776-15",
     "doi": "10.4324/9780429454776-15",
     "title": "Current status of Ainu cultural revitalization",
@@ -6979,6 +6963,22 @@
     ],
     "venue": "Ainu Spirits Singing",
     "url": "https://doi.org/10.21313/hawaii/9780824835125.003.0006",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.55105/2687-1440-2022-51-322-330",
+    "doi": "10.55105/2687-1440-2022-51-322-330",
+    "title": "Destruction of the Ainu Language",
+    "year": 2022,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "V. M. Alpatov"
+    ],
+    "venue": "Yearbook Japan",
+    "url": "https://doi.org/10.55105/2687-1440-2022-51-322-330",
     "pdf": null
   },
   {
@@ -7313,6 +7313,39 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.22459/ie.2018.02",
+    "doi": "10.22459/ie.2018.02",
+    "title": "Cikornay National Trust: Emancipation of Our Ainu land from Colonial Land Use and for the Enjoyment of Ainu Culture",
+    "year": 2018,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Kouichi Kaizawa"
+    ],
+    "venue": "Indigenous Efflorescence: Beyond Revitalisation in Sapmi and Ainu Mosir",
+    "url": "https://doi.org/10.22459/ie.2018.02",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.21313/hawaii/9780824836979.003.0006",
+    "doi": "10.21313/hawaii/9780824836979.003.0006",
+    "title": "As a Child of Ainu",
+    "year": 2013,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Sunazawa Kayo",
+      "ann-elise lewallen"
+    ],
+    "venue": "Beyond Ainu Studies",
+    "url": "https://doi.org/10.21313/hawaii/9780824836979.003.0006",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.5040/9781350456204.0010",
     "doi": "10.5040/9781350456204.0010",
     "title": "The Ainu ‘Situation’",
@@ -7341,22 +7374,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.22459/ie.2018.02",
-    "doi": "10.22459/ie.2018.02",
-    "title": "Cikornay National Trust: Emancipation of Our Ainu land from Colonial Land Use and for the Enjoyment of Ainu Culture",
-    "year": 2018,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Kouichi Kaizawa"
-    ],
-    "venue": "Indigenous Efflorescence: Beyond Revitalisation in Sapmi and Ainu Mosir",
-    "url": "https://doi.org/10.22459/ie.2018.02",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.2307/j.ctv3f8pkp.8",
     "doi": "10.2307/j.ctv3f8pkp.8",
     "title": "EL SURGIMIENTO DEL MOVIMIENTO DE RESISTENCIA AINU CONTRA LA DISCRIMINACIÓN RACIAL",
@@ -7367,23 +7384,6 @@
     "authors": [],
     "venue": "La literatura de resistencia de las mujeres ainu",
     "url": "https://doi.org/10.2307/j.ctv3f8pkp.8",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.21313/hawaii/9780824836979.003.0006",
-    "doi": "10.21313/hawaii/9780824836979.003.0006",
-    "title": "As a Child of Ainu",
-    "year": 2013,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Sunazawa Kayo",
-      "ann-elise lewallen"
-    ],
-    "venue": "Beyond Ainu Studies",
-    "url": "https://doi.org/10.21313/hawaii/9780824836979.003.0006",
     "pdf": null
   },
   {
@@ -7412,20 +7412,6 @@
     "authors": [],
     "venue": "Ainu of Japan Resisting the Suppression of Languages",
     "url": "https://doi.org/10.5040/9781350456204.0007",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.30687/978-88-6969-862-0/019",
-    "doi": "10.30687/978-88-6969-862-0/019",
-    "title": "19 • Ainu’s Relation to Other Languages",
-    "year": 2025,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [],
-    "venue": "Materials and Methods of Analysis for the Study of the Ainu Language\n Southern Hokkaidō and Sakhalin",
-    "url": "https://doi.org/10.30687/978-88-6969-862-0/019",
     "pdf": null
   },
   {
@@ -7479,6 +7465,20 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.30687/978-88-6969-862-0/019",
+    "doi": "10.30687/978-88-6969-862-0/019",
+    "title": "19 • Ainu’s Relation to Other Languages",
+    "year": 2025,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [],
+    "venue": "Materials and Methods of Analysis for the Study of the Ainu Language\n Southern Hokkaidō and Sakhalin",
+    "url": "https://doi.org/10.30687/978-88-6969-862-0/019",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.1515/9780824839185-007",
     "doi": "10.1515/9780824839185-007",
     "title": "6 .As a Child of Ainu",
@@ -7527,22 +7527,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.22459/ie.2018.13",
-    "doi": "10.22459/ie.2018.13",
-    "title": "Towards a Respectful Repatriation of Stolen Ainu Ancestral Remains",
-    "year": 2018,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Yuji Shimizu"
-    ],
-    "venue": "Indigenous Efflorescence: Beyond Revitalisation in Sapmi and Ainu Mosir",
-    "url": "https://doi.org/10.22459/ie.2018.13",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.4324/9780429498534-13",
     "doi": "10.4324/9780429498534-13",
     "title": "As a Member of the Ainu People",
@@ -7556,6 +7540,22 @@
     ],
     "venue": "Our Land Was a Forest",
     "url": "https://doi.org/10.4324/9780429498534-13",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.22459/ie.2018.13",
+    "doi": "10.22459/ie.2018.13",
+    "title": "Towards a Respectful Repatriation of Stolen Ainu Ancestral Remains",
+    "year": 2018,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Yuji Shimizu"
+    ],
+    "venue": "Indigenous Efflorescence: Beyond Revitalisation in Sapmi and Ainu Mosir",
+    "url": "https://doi.org/10.22459/ie.2018.13",
     "pdf": null
   },
   {
@@ -7622,22 +7622,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1515/9780824839185-005",
-    "doi": "10.1515/9780824839185-005",
-    "title": "4. Tokyo Ainu and the Urban Indigenous Experience",
-    "year": 2017,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Mark K. Watson"
-    ],
-    "venue": "Beyond Ainu Studies",
-    "url": "https://doi.org/10.1515/9780824839185-005",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.4324/9780429498534-12",
     "doi": "10.4324/9780429498534-12",
     "title": "Building the Museum of Ainu Cultural Resources",
@@ -7651,6 +7635,22 @@
     ],
     "venue": "Our Land Was a Forest",
     "url": "https://doi.org/10.4324/9780429498534-12",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1515/9780824839185-005",
+    "doi": "10.1515/9780824839185-005",
+    "title": "4. Tokyo Ainu and the Urban Indigenous Experience",
+    "year": 2017,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Mark K. Watson"
+    ],
+    "venue": "Beyond Ainu Studies",
+    "url": "https://doi.org/10.1515/9780824839185-005",
     "pdf": null
   },
   {
@@ -7787,22 +7787,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.24201/eaa.v33i1.1490",
-    "doi": "10.24201/eaa.v33i1.1490",
-    "title": "Ainu Moshir y Kamui Moshir. Cosmovisión religiosa del pueblo ainu",
-    "year": 1998,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Yolanda Muñoz González"
-    ],
-    "venue": "Estudios de Asia y África",
-    "url": "https://doi.org/10.24201/eaa.v33i1.1490",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.1515/9780824839185-014",
     "doi": "10.1515/9780824839185-014",
     "title": "13 .The Ainu, Law, and Legal Mobilization, 1984–2009",
@@ -7833,18 +7817,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1017/s1557466009008754",
-    "doi": "10.1017/s1557466009008754",
-    "title": "On the Dawn of a New National Ainu Policy: The “‘Ainu’ as a Situation” Today",
-    "year": 2009,
+    "externalId": "10.24201/eaa.v33i1.1490",
+    "doi": "10.24201/eaa.v33i1.1490",
+    "title": "Ainu Moshir y Kamui Moshir. Cosmovisión religiosa del pueblo ainu",
+    "year": 1998,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Mark Winchester"
+      "Yolanda Muñoz González"
     ],
-    "venue": "Asia-Pacific Journal",
-    "url": "https://doi.org/10.1017/s1557466009008754",
+    "venue": "Estudios de Asia y África",
+    "url": "https://doi.org/10.24201/eaa.v33i1.1490",
     "pdf": null
   },
   {
@@ -7882,22 +7866,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1515/9780824839185-011",
-    "doi": "10.1515/9780824839185-011",
-    "title": "10. Our Ancestors’ Handprints The Evolution of Ainu Women’s Clothing Culture",
-    "year": 2017,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Tsuda Nobuko"
-    ],
-    "venue": "Beyond Ainu Studies",
-    "url": "https://doi.org/10.1515/9780824839185-011",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.1353/jjs.2013.0009",
     "doi": "10.1353/jjs.2013.0009",
     "title": "Ainu Spirits Singing: The Living World of Chiri Yukie’s by Ainu Shin’yōshū (review)",
@@ -7914,16 +7882,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1093/oed/1090432425",
-    "doi": "10.1093/oed/1090432425",
-    "title": "Ainu, n. &amp; adj.",
-    "year": 2023,
+    "externalId": "10.1515/9780824839185-011",
+    "doi": "10.1515/9780824839185-011",
+    "title": "10. Our Ancestors’ Handprints The Evolution of Ainu Women’s Clothing Culture",
+    "year": 2017,
     "type": "grammar-book",
     "rawType": "book-chapter",
     "language": null,
-    "authors": [],
-    "venue": "Oxford English Dictionary",
-    "url": "https://doi.org/10.1093/oed/1090432425",
+    "authors": [
+      "Tsuda Nobuko"
+    ],
+    "venue": "Beyond Ainu Studies",
+    "url": "https://doi.org/10.1515/9780824839185-011",
     "pdf": null
   },
   {
@@ -7940,6 +7910,20 @@
     ],
     "venue": null,
     "url": "https://doi.org/10.4324/9781315077130",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1093/oed/1090432425",
+    "doi": "10.1093/oed/1090432425",
+    "title": "Ainu, n. &amp; adj.",
+    "year": 2023,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [],
+    "venue": "Oxford English Dictionary",
+    "url": "https://doi.org/10.1093/oed/1090432425",
     "pdf": null
   },
   {
@@ -7993,10 +7977,10 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1017/s1557466011011387",
-    "doi": "10.1017/s1557466011011387",
-    "title": "Everything you know about Ainu is wrong: Kobayashi Yoshinori's excursion into Ainu historiography",
-    "year": 2011,
+    "externalId": "10.1017/s1557466009008754",
+    "doi": "10.1017/s1557466009008754",
+    "title": "On the Dawn of a New National Ainu Policy: The “‘Ainu’ as a Situation” Today",
+    "year": 2009,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
@@ -8004,7 +7988,7 @@
       "Mark Winchester"
     ],
     "venue": "Asia-Pacific Journal",
-    "url": "https://doi.org/10.1017/s1557466011011387",
+    "url": "https://doi.org/10.1017/s1557466009008754",
     "pdf": null
   },
   {
@@ -8021,6 +8005,22 @@
     ],
     "venue": "Indigenous Efflorescence: Beyond Revitalisation in Sapmi and Ainu Mosir",
     "url": "https://doi.org/10.22459/ie.2018.17",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1017/s1557466011011387",
+    "doi": "10.1017/s1557466011011387",
+    "title": "Everything you know about Ainu is wrong: Kobayashi Yoshinori's excursion into Ainu historiography",
+    "year": 2011,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Mark Winchester"
+    ],
+    "venue": "Asia-Pacific Journal",
+    "url": "https://doi.org/10.1017/s1557466011011387",
     "pdf": null
   },
   {
@@ -8108,18 +8108,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.22459/ie.2018.05",
-    "doi": "10.22459/ie.2018.05",
-    "title": "Revival of Salmon Resources and Restoration of a Traditional Ritual of the Ainu, the Indigenous People of Japan",
-    "year": 2018,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
+    "externalId": "10.26812/pajls.v4i.1040",
+    "doi": "10.26812/pajls.v4i.1040",
+    "title": "Whoever said springtime was for blossoms? Kokinshū poetics, Ainu orality, and Chiri Yukie's preface to the Ainu Shin'yōshū",
+    "year": 2004,
+    "type": "grammar-article",
+    "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Yōsuke Kosaka"
+      "Sarah M. Strong"
     ],
-    "venue": "Indigenous Efflorescence: Beyond Revitalisation in Sapmi and Ainu Mosir",
-    "url": "https://doi.org/10.22459/ie.2018.05",
+    "venue": "Proceedings of the Association for Japanese Literary Studies",
+    "url": "https://doi.org/10.26812/pajls.v4i.1040",
     "pdf": null
   },
   {
@@ -8153,6 +8153,22 @@
     ],
     "venue": "Expert Systems with Applications",
     "url": "https://doi.org/10.1016/j.eswa.2012.04.031",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.21832/9781800419254-016",
+    "doi": "10.21832/9781800419254-016",
+    "title": "12 Sowing Seeds of Knowledge for Future Generations: Possibilities to Empower Ainu Language and People through Tourism",
+    "year": 2025,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Saana Santalahti"
+    ],
+    "venue": "Ideologies of Communication in Japan",
+    "url": "https://doi.org/10.21832/9781800419254-016",
     "pdf": null
   },
   {
@@ -8205,22 +8221,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.21832/9781800419254-016",
-    "doi": "10.21832/9781800419254-016",
-    "title": "12 Sowing Seeds of Knowledge for Future Generations: Possibilities to Empower Ainu Language and People through Tourism",
-    "year": 2025,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Saana Santalahti"
-    ],
-    "venue": "Ideologies of Communication in Japan",
-    "url": "https://doi.org/10.21832/9781800419254-016",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.1679/aohc1950.44.385",
     "doi": "10.1679/aohc1950.44.385",
     "title": "Ultrastructure and histochemistry of the submandibular gland of the Japanese wood mouse (Apodemus ainu ainu tokuda).",
@@ -8233,6 +8233,38 @@
     ],
     "venue": "Archivum histologicum japonicum",
     "url": "https://doi.org/10.1679/aohc1950.44.385",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1080/09555803.2024.2447068",
+    "doi": "10.1080/09555803.2024.2447068",
+    "title": "Picturing the Ainu: Representations of Ainu and Americans in Hokkaidō and beyond, during the Meiji Era (1871–1909)",
+    "year": 2025,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Ayelet Zohar"
+    ],
+    "venue": "Japan Forum",
+    "url": "https://doi.org/10.1080/09555803.2024.2447068",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1080/13527250500160500",
+    "doi": "10.1080/13527250500160500",
+    "title": "Rethinking Ainu Heritage: A Case Study of an Ainu Settlement in Hokkaido, Japan",
+    "year": 2005,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Sidney C. H. Cheung"
+    ],
+    "venue": "International Journal of Heritage Studies",
+    "url": "https://doi.org/10.1080/13527250500160500",
     "pdf": null
   },
   {
@@ -8333,50 +8365,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1080/09555803.2024.2447068",
-    "doi": "10.1080/09555803.2024.2447068",
-    "title": "Picturing the Ainu: Representations of Ainu and Americans in Hokkaidō and beyond, during the Meiji Era (1871–1909)",
-    "year": 2025,
+    "externalId": "10.1017/s1557466016027352",
+    "doi": "10.1017/s1557466016027352",
+    "title": "Documenting Urban Indigeneity: <i>TOKYO Ainu</i> and the 2011 Survey on the Living Conditions of Ainu outside Hokkaido",
+    "year": 2016,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Ayelet Zohar"
+      "Simon Cotterill"
     ],
-    "venue": "Japan Forum",
-    "url": "https://doi.org/10.1080/09555803.2024.2447068",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.29311/mas.v5i3.104",
-    "doi": "10.29311/mas.v5i3.104",
-    "title": "Managing the cultural promotion of indigenous people in a community-based Museum: the Ainu Culture Cluster Project at the Nibutani Ainu Culture Museum, Japan",
-    "year": 2007,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Naohiro Nakamura"
-    ],
-    "venue": "Museum &amp; Society",
-    "url": "https://doi.org/10.29311/mas.v5i3.104",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.4324/9780429452147-1",
-    "doi": "10.4324/9780429452147-1",
-    "title": "The Ainu Aborigines.",
-    "year": 2019,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Anna C. Hartshorne"
-    ],
-    "venue": "Japan and her People",
-    "url": "https://doi.org/10.4324/9780429452147-1",
+    "venue": "Asia-Pacific Journal",
+    "url": "https://doi.org/10.1017/s1557466016027352",
     "pdf": null
   },
   {
@@ -8399,6 +8399,36 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.1007/978-1-4020-5614-7_93",
+    "doi": "10.1007/978-1-4020-5614-7_93",
+    "title": "Ainu (Japan, Russia)",
+    "year": 2008,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [],
+    "venue": "Encyclopedia of Public Health",
+    "url": "https://doi.org/10.1007/978-1-4020-5614-7_93",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.29311/mas.v5i3.104",
+    "doi": "10.29311/mas.v5i3.104",
+    "title": "Managing the cultural promotion of indigenous people in a community-based Museum: the Ainu Culture Cluster Project at the Nibutani Ainu Culture Museum, Japan",
+    "year": 2007,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Naohiro Nakamura"
+    ],
+    "venue": "Museum &amp; Society",
+    "url": "https://doi.org/10.29311/mas.v5i3.104",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.1515/9783110820768-015",
     "doi": "10.1515/9783110820768-015",
     "title": "The Ainu",
@@ -8409,38 +8439,6 @@
     "authors": [],
     "venue": "The Aborigines of Sakhalin",
     "url": "https://doi.org/10.1515/9783110820768-015",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1017/s1557466016027352",
-    "doi": "10.1017/s1557466016027352",
-    "title": "Documenting Urban Indigeneity: <i>TOKYO Ainu</i> and the 2011 Survey on the Living Conditions of Ainu outside Hokkaido",
-    "year": 2016,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Simon Cotterill"
-    ],
-    "venue": "Asia-Pacific Journal",
-    "url": "https://doi.org/10.1017/s1557466016027352",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1080/13527250500160500",
-    "doi": "10.1080/13527250500160500",
-    "title": "Rethinking Ainu Heritage: A Case Study of an Ainu Settlement in Hokkaido, Japan",
-    "year": 2005,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Sidney C. H. Cheung"
-    ],
-    "venue": "International Journal of Heritage Studies",
-    "url": "https://doi.org/10.1080/13527250500160500",
     "pdf": null
   },
   {
@@ -8457,6 +8455,22 @@
     ],
     "venue": null,
     "url": "https://doi.org/10.4324/9780203435465",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.4324/9780429452147-1",
+    "doi": "10.4324/9780429452147-1",
+    "title": "The Ainu Aborigines.",
+    "year": 2019,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Anna C. Hartshorne"
+    ],
+    "venue": "Japan and her People",
+    "url": "https://doi.org/10.4324/9780429452147-1",
     "pdf": null
   },
   {
@@ -8491,16 +8505,16 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1007/978-1-4020-5614-7_93",
-    "doi": "10.1007/978-1-4020-5614-7_93",
-    "title": "Ainu (Japan, Russia)",
-    "year": 2008,
+    "externalId": "10.1525/9780520354425-029",
+    "doi": "10.1525/9780520354425-029",
+    "title": "Shiromainu",
+    "year": 2000,
     "type": "grammar-book",
     "rawType": "book-chapter",
     "language": null,
     "authors": [],
-    "venue": "Encyclopedia of Public Health",
-    "url": "https://doi.org/10.1007/978-1-4020-5614-7_93",
+    "venue": "Harukor",
+    "url": "https://doi.org/10.1525/9780520354425-029",
     "pdf": null
   },
   {
@@ -8537,6 +8551,54 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.58942/eqs.144.18",
+    "doi": "10.58942/eqs.144.18",
+    "title": "Ainu-Repunkuru: desfazendo amarele universal",
+    "year": 2025,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Umeno Morita"
+    ],
+    "venue": "Filosofia, Raça e Decolonialidade",
+    "url": "https://doi.org/10.58942/eqs.144.18",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.31857/s0869541524040135",
+    "doi": "10.31857/s0869541524040135",
+    "title": "The World of Chiri Yukie’s Deities [Mir bozhestv Tiri Yukie]: A Review of Pesni bogov naroda ainu, zapisannye Tiri Yukie [Ainu Divine Songs Collection Compiled by Chiri Yukie]",
+    "year": 2024,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Marina V. Osipova"
+    ],
+    "venue": "Ètnografičeskoe obozrenie",
+    "url": "https://doi.org/10.31857/s0869541524040135",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.2307/j.ctv3f8pkp",
+    "doi": "10.2307/j.ctv3f8pkp",
+    "title": "La literatura de resistencia de las mujeres ainu",
+    "year": 2008,
+    "type": "grammar-book",
+    "rawType": "monograph",
+    "language": null,
+    "authors": [
+      "Yolanda Muñoz González"
+    ],
+    "venue": null,
+    "url": "https://doi.org/10.2307/j.ctv3f8pkp",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.2307/1496296",
     "doi": "10.2307/1496296",
     "title": "Ainu Riddles",
@@ -8569,54 +8631,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.31857/s0869541524040135",
-    "doi": "10.31857/s0869541524040135",
-    "title": "The World of Chiri Yukie’s Deities [Mir bozhestv Tiri Yukie]: A Review of Pesni bogov naroda ainu, zapisannye Tiri Yukie [Ainu Divine Songs Collection Compiled by Chiri Yukie]",
-    "year": 2024,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Marina V. Osipova"
-    ],
-    "venue": "Ètnografičeskoe obozrenie",
-    "url": "https://doi.org/10.31857/s0869541524040135",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.58942/eqs.144.18",
-    "doi": "10.58942/eqs.144.18",
-    "title": "Ainu-Repunkuru: desfazendo amarele universal",
-    "year": 2025,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Umeno Morita"
-    ],
-    "venue": "Filosofia, Raça e Decolonialidade",
-    "url": "https://doi.org/10.58942/eqs.144.18",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2307/j.ctv3f8pkp",
-    "doi": "10.2307/j.ctv3f8pkp",
-    "title": "La literatura de resistencia de las mujeres ainu",
-    "year": 2008,
-    "type": "grammar-book",
-    "rawType": "monograph",
-    "language": null,
-    "authors": [
-      "Yolanda Muñoz González"
-    ],
-    "venue": null,
-    "url": "https://doi.org/10.2307/j.ctv3f8pkp",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.2307/2792798",
     "doi": "10.2307/2792798",
     "title": "133. Smoking Among the Ainu",
@@ -8629,22 +8643,6 @@
     ],
     "venue": "Man",
     "url": "https://doi.org/10.2307/2792798",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.18356/603504dc-en",
-    "doi": "10.18356/603504dc-en",
-    "title": "Sustainability and indigenous people: A case study of the Ainu people",
-    "year": 2013,
-    "type": "grammar-article",
-    "rawType": "component",
-    "language": null,
-    "authors": [
-      "Koji Yamasaki"
-    ],
-    "venue": null,
-    "url": "https://doi.org/10.18356/603504dc-en",
     "pdf": null
   },
   {
@@ -8727,6 +8725,36 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.18356/603504dc-en",
+    "doi": "10.18356/603504dc-en",
+    "title": "Sustainability and indigenous people: A case study of the Ainu people",
+    "year": 2013,
+    "type": "grammar-article",
+    "rawType": "component",
+    "language": null,
+    "authors": [
+      "Koji Yamasaki"
+    ],
+    "venue": null,
+    "url": "https://doi.org/10.18356/603504dc-en",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1215/9781478007456-014",
+    "doi": "10.1215/9781478007456-014",
+    "title": "A New View of the Ainu",
+    "year": 2020,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [],
+    "venue": "The Ocean Reader",
+    "url": "https://doi.org/10.1215/9781478007456-014",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.55105/2500-2872-2023-3-112-119",
     "doi": "10.55105/2500-2872-2023-3-112-119",
     "title": "Unknown pages of history of the Ainu. Review of the book &lt;i&gt;Ainu Through the Eyes of Japanese: An Unknown Collection by A.V. Grigoriev&lt;/i&gt; by Vasily V. Shchepkin",
@@ -8739,6 +8767,20 @@
     ],
     "venue": "Japanese Studies in Russia",
     "url": "https://doi.org/10.55105/2500-2872-2023-3-112-119",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.4324/9781315698328-27",
+    "doi": "10.4324/9781315698328-27",
+    "title": "My Work as an Ainu Woman",
+    "year": 2015,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [],
+    "venue": "Voices from the Japanese Women's Movement",
+    "url": "https://doi.org/10.4324/9781315698328-27",
     "pdf": null
   },
   {
@@ -8759,44 +8801,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.4324/9781315698328-27",
-    "doi": "10.4324/9781315698328-27",
-    "title": "My Work as an Ainu Woman",
-    "year": 2015,
+    "externalId": "10.70249/9798893980103-001",
+    "doi": "10.70249/9798893980103-001",
+    "title": "THE AINU OF NORTHERN JAPAN",
+    "year": 1960,
     "type": "grammar-book",
     "rawType": "book-chapter",
     "language": null,
-    "authors": [],
-    "venue": "Voices from the Japanese Women's Movement",
-    "url": "https://doi.org/10.4324/9781315698328-27",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1215/9781478007456-014",
-    "doi": "10.1215/9781478007456-014",
-    "title": "A New View of the Ainu",
-    "year": 2020,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [],
-    "venue": "The Ocean Reader",
-    "url": "https://doi.org/10.1215/9781478007456-014",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.4324/9780203884997-8",
-    "doi": "10.4324/9780203884997-8",
-    "title": "The Ainu Indigenous people of Japan",
-    "year": 2008,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [],
-    "venue": "Japan's Minorities",
-    "url": "https://doi.org/10.4324/9780203884997-8",
+    "authors": [
+      "Takakura Shinichiro"
+    ],
+    "venue": "Ainu of Northern Japan",
+    "url": "https://doi.org/10.70249/9798893980103-001",
     "pdf": null
   },
   {
@@ -8849,35 +8865,30 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.47044/2527-080x.2021v10.97111",
-    "doi": "10.47044/2527-080x.2021v10.97111",
-    "title": "O ÉPICO NA LITERATURA AINU: KUTUNE SHIRKA",
-    "year": 2021,
+    "externalId": "10.15281/jplantres1887.6.62_app_1",
+    "doi": "10.15281/jplantres1887.6.62_app_1",
+    "title": "Ainu names of Hokkaido plants",
+    "year": 1892,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
-    "authors": [
-      "anna beatriz paula",
-      "Esther Matsuo"
-    ],
-    "venue": "Revista Épicas",
-    "url": "https://doi.org/10.47044/2527-080x.2021v10.97111",
+    "authors": [],
+    "venue": "Shokubutsugaku Zasshi",
+    "url": "https://doi.org/10.15281/jplantres1887.6.62_app_1",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.70249/9798893980103-001",
-    "doi": "10.70249/9798893980103-001",
-    "title": "THE AINU OF NORTHERN JAPAN",
-    "year": 1960,
+    "externalId": "10.4324/9780203884997-8",
+    "doi": "10.4324/9780203884997-8",
+    "title": "The Ainu Indigenous people of Japan",
+    "year": 2008,
     "type": "grammar-book",
     "rawType": "book-chapter",
     "language": null,
-    "authors": [
-      "Takakura Shinichiro"
-    ],
-    "venue": "Ainu of Northern Japan",
-    "url": "https://doi.org/10.70249/9798893980103-001",
+    "authors": [],
+    "venue": "Japan's Minorities",
+    "url": "https://doi.org/10.4324/9780203884997-8",
     "pdf": null
   },
   {
@@ -8896,20 +8907,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.15281/jplantres1887.6.62_app_1",
-    "doi": "10.15281/jplantres1887.6.62_app_1",
-    "title": "Ainu names of Hokkaido plants",
-    "year": 1892,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [],
-    "venue": "Shokubutsugaku Zasshi",
-    "url": "https://doi.org/10.15281/jplantres1887.6.62_app_1",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.2307/2791918",
     "doi": "10.2307/2791918",
     "title": "33. Yaikurekarapa: An Old Ainu Oration",
@@ -8922,20 +8919,6 @@
     ],
     "venue": "Man",
     "url": "https://doi.org/10.2307/2791918",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1525/9780520930872-010",
-    "doi": "10.1525/9780520930872-010",
-    "title": "8. Ainu Identity And The Meiji State",
-    "year": 2019,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [],
-    "venue": "Geographies of Identity in Nineteenth-Century Japan",
-    "url": "https://doi.org/10.1525/9780520930872-010",
     "pdf": null
   },
   {
@@ -8972,35 +8955,19 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.2307/3772943",
-    "doi": "10.2307/3772943",
-    "title": "Kinship Organization of the Saru Ainu",
-    "year": 1962,
+    "externalId": "10.47044/2527-080x.2021v10.97111",
+    "doi": "10.47044/2527-080x.2021v10.97111",
+    "title": "O ÉPICO NA LITERATURA AINU: KUTUNE SHIRKA",
+    "year": 2021,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Kenichi Sugiura",
-      "Harumi Befu"
+      "anna beatriz paula",
+      "Esther Matsuo"
     ],
-    "venue": "Ethnology",
-    "url": "https://doi.org/10.2307/3772943",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1537/ase1911.65.109",
-    "doi": "10.1537/ase1911.65.109",
-    "title": "Local Characteristics of the Ainu and the Mixed Ainu in Hokkaido viewed from Toe Prints",
-    "year": 1956,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "GORO SHIMA"
-    ],
-    "venue": "Journal of the Anthropological Society of Nippon",
-    "url": "https://doi.org/10.1537/ase1911.65.109",
+    "venue": "Revista Épicas",
+    "url": "https://doi.org/10.47044/2527-080x.2021v10.97111",
     "pdf": null
   },
   {
@@ -9068,6 +9035,22 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.1537/ase1911.65.109",
+    "doi": "10.1537/ase1911.65.109",
+    "title": "Local Characteristics of the Ainu and the Mixed Ainu in Hokkaido viewed from Toe Prints",
+    "year": 1956,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "GORO SHIMA"
+    ],
+    "venue": "Journal of the Anthropological Society of Nippon",
+    "url": "https://doi.org/10.1537/ase1911.65.109",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.1163/2210-7975_hrd-0209-0031",
     "doi": "10.1163/2210-7975_hrd-0209-0031",
     "title": "mrg-reports-no3-japans-minorities-burakumin-koreans-ainu-and-okinawans-aug-1983-22-pp",
@@ -9110,6 +9093,22 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.2307/2382650",
+    "doi": "10.2307/2382650",
+    "title": "Zahlworter im Japanischen, Koreanischen und Ainu",
+    "year": 1941,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Johannes Rahder"
+    ],
+    "venue": "Monumenta Nipponica",
+    "url": "https://doi.org/10.2307/2382650",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.2307/1580525",
     "doi": "10.2307/1580525",
     "title": "August Pfizmaier und seine Arbeiten zur Ainu-Grammatik",
@@ -9126,34 +9125,19 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1177/117718011300900106",
-    "doi": "10.1177/117718011300900106",
-    "title": "Disregard for the Conservation of Ainu Culture and the Environment: The Biratori Dam project and Japan's current policy toward the Ainu",
-    "year": 2013,
+    "externalId": "10.2307/3772943",
+    "doi": "10.2307/3772943",
+    "title": "Kinship Organization of the Saru Ainu",
+    "year": 1962,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Hiroshi Maruyama"
+      "Kenichi Sugiura",
+      "Harumi Befu"
     ],
-    "venue": "AlterNative: An International Journal of Indigenous Peoples",
-    "url": "https://doi.org/10.1177/117718011300900106",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2307/2382650",
-    "doi": "10.2307/2382650",
-    "title": "Zahlworter im Japanischen, Koreanischen und Ainu",
-    "year": 1941,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Johannes Rahder"
-    ],
-    "venue": "Monumenta Nipponica",
-    "url": "https://doi.org/10.2307/2382650",
+    "venue": "Ethnology",
+    "url": "https://doi.org/10.2307/3772943",
     "pdf": null
   },
   {
@@ -9174,6 +9158,23 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.2307/2796918",
+    "doi": "10.2307/2796918",
+    "title": "285. The Building of an Ainu House.",
+    "year": 1959,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "N. G. Munro's",
+      "Lord Raglan"
+    ],
+    "venue": "Man",
+    "url": "https://doi.org/10.2307/2796918",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.15760/etd.7229",
     "doi": "10.15760/etd.7229",
     "title": "Crania Japonica: Ethnographic Portraiture, Scientific Discourse, and the Fashioning of Ainu/Japanese Colonial Identities",
@@ -9186,6 +9187,22 @@
     ],
     "venue": null,
     "url": "https://doi.org/10.15760/etd.7229",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1177/117718011300900106",
+    "doi": "10.1177/117718011300900106",
+    "title": "Disregard for the Conservation of Ainu Culture and the Environment: The Biratori Dam project and Japan's current policy toward the Ainu",
+    "year": 2013,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Hiroshi Maruyama"
+    ],
+    "venue": "AlterNative: An International Journal of Indigenous Peoples",
+    "url": "https://doi.org/10.1177/117718011300900106",
     "pdf": null
   },
   {
@@ -9206,19 +9223,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.2307/2796918",
-    "doi": "10.2307/2796918",
-    "title": "285. The Building of an Ainu House.",
-    "year": 1959,
+    "externalId": "10.1037/e645042011-001",
+    "doi": "10.1037/e645042011-001",
+    "title": "Indigeneity Interrupted: Japan's Multiculturalist Policy and the Ainu Question",
+    "year": 2010,
     "type": "grammar-article",
-    "rawType": "journal-article",
+    "rawType": "dataset",
     "language": null,
     "authors": [
-      "N. G. Munro's",
-      "Lord Raglan"
+      "Ann-Elise Lewallen"
     ],
-    "venue": "Man",
-    "url": "https://doi.org/10.2307/2796918",
+    "venue": "PsycEXTRA Dataset",
+    "url": "https://doi.org/10.1037/e645042011-001",
     "pdf": null
   },
   {
@@ -9256,38 +9272,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1126/science.75.1952.562",
-    "doi": "10.1126/science.75.1952.562",
-    "title": "AINU PITS IN THE KURILE ISLANDS",
-    "year": 1932,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "M. L. Peelle"
-    ],
-    "venue": "Science",
-    "url": "https://doi.org/10.1126/science.75.1952.562",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.4324/9781003198888-28",
-    "doi": "10.4324/9781003198888-28",
-    "title": "Rethinking Ezo-chi, the Ainu, and Tokugawa Japan in a global perspective",
-    "year": 2021,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Noémi Godefroy"
-    ],
-    "venue": "The Tokugawa World",
-    "url": "https://doi.org/10.4324/9781003198888-28",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.1080/14631360124887",
     "doi": "10.1080/14631360124887",
     "title": "Ainu and Koreans in Japan",
@@ -9300,22 +9284,6 @@
     ],
     "venue": "Asian Ethnicity",
     "url": "https://doi.org/10.1080/14631360124887",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.4324/9781315187457-11",
-    "doi": "10.4324/9781315187457-11",
-    "title": "Tourism and Ainu Identity, Hokkaido, Northern Japan",
-    "year": 2019,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Jane Wilkinson"
-    ],
-    "venue": "Souvenirs: The Material Culture of Tourism",
-    "url": "https://doi.org/10.4324/9781315187457-11",
     "pdf": null
   },
   {
@@ -9336,35 +9304,36 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.2307/2382882",
-    "doi": "10.2307/2382882",
-    "title": "Gli Iku-Bashui Degli Ainu.",
-    "year": 1943,
-    "type": "grammar-article",
-    "rawType": "journal-article",
+    "externalId": "10.1007/978-3-319-51726-1_33-2",
+    "doi": "10.1007/978-3-319-51726-1_33-2",
+    "title": "Hokkaido Sequence and the Archaeology of the Ainu People",
+    "year": 2018,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "Otto Karow",
-      "Fosco Maraini"
+      "Hirofumi Kato"
     ],
-    "venue": "Monumenta Nipponica",
-    "url": "https://doi.org/10.2307/2382882",
+    "venue": "Encyclopedia of Global Archaeology",
+    "url": "https://doi.org/10.1007/978-3-319-51726-1_33-2",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.1037/e645042011-001",
-    "doi": "10.1037/e645042011-001",
-    "title": "Indigeneity Interrupted: Japan's Multiculturalist Policy and the Ainu Question",
-    "year": 2010,
+    "externalId": "10.21203/rs.3.rs-8265421/v1",
+    "doi": "10.21203/rs.3.rs-8265421/v1",
+    "title": "Transnational Ainu media: YouTube Itak before and after 2019",
+    "year": 2026,
     "type": "grammar-article",
-    "rawType": "dataset",
+    "rawType": "posted-content",
     "language": null,
     "authors": [
-      "Ann-Elise Lewallen"
+      "Xanat Vargas Meza",
+      "Kengo Tanaka",
+      "Yoichi Ochiai"
     ],
-    "venue": "PsycEXTRA Dataset",
-    "url": "https://doi.org/10.1037/e645042011-001",
+    "venue": null,
+    "url": "https://doi.org/10.21203/rs.3.rs-8265421/v1",
     "pdf": null
   },
   {
@@ -9397,36 +9366,51 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.21203/rs.3.rs-8265421/v1",
-    "doi": "10.21203/rs.3.rs-8265421/v1",
-    "title": "Transnational Ainu media: YouTube Itak before and after 2019",
-    "year": 2026,
-    "type": "grammar-article",
-    "rawType": "posted-content",
-    "language": null,
-    "authors": [
-      "Xanat Vargas Meza",
-      "Kengo Tanaka",
-      "Yoichi Ochiai"
-    ],
-    "venue": null,
-    "url": "https://doi.org/10.21203/rs.3.rs-8265421/v1",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1007/978-3-319-51726-1_33-2",
-    "doi": "10.1007/978-3-319-51726-1_33-2",
-    "title": "Hokkaido Sequence and the Archaeology of the Ainu People",
-    "year": 2018,
+    "externalId": "10.4324/9781315187457-11",
+    "doi": "10.4324/9781315187457-11",
+    "title": "Tourism and Ainu Identity, Hokkaido, Northern Japan",
+    "year": 2019,
     "type": "grammar-book",
     "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "Hirofumi Kato"
+      "Jane Wilkinson"
     ],
-    "venue": "Encyclopedia of Global Archaeology",
-    "url": "https://doi.org/10.1007/978-3-319-51726-1_33-2",
+    "venue": "Souvenirs: The Material Culture of Tourism",
+    "url": "https://doi.org/10.4324/9781315187457-11",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.2307/2382882",
+    "doi": "10.2307/2382882",
+    "title": "Gli Iku-Bashui Degli Ainu.",
+    "year": 1943,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Otto Karow",
+      "Fosco Maraini"
+    ],
+    "venue": "Monumenta Nipponica",
+    "url": "https://doi.org/10.2307/2382882",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1525/california/9780520240858.003.0005",
+    "doi": "10.1525/california/9780520240858.003.0005",
+    "title": "Ainu Identity and the Early Modern State",
+    "year": 2005,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "David L. Howell"
+    ],
+    "venue": "Geographies of Identity in Nineteenth-Century Japan",
+    "url": "https://doi.org/10.1525/california/9780520240858.003.0005",
     "pdf": null
   },
   {
@@ -9447,34 +9431,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1007/bf02909729",
-    "doi": "10.1007/bf02909729",
-    "title": "Medicinal plants of the Ainu",
-    "year": 1976,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Hiroshi Mitsuhashi"
-    ],
-    "venue": "Economic Botany",
-    "url": "https://doi.org/10.1007/bf02909729",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.25143/prom-rsu_2011-23_pdk",
-    "doi": "10.25143/prom-rsu_2011-23_pdk",
-    "title": "Cilvēka parvovīrusa B19 nozīme reimatoīdā artrīta etiopatoģenēzē un iespējamā korelācija ar slimības aktivitāti, stadiju un klīnisko ainu. Promocijas darba kopsavilkums",
-    "year": null,
+    "externalId": "10.4324/9781315641997-19",
+    "doi": "10.4324/9781315641997-19",
+    "title": "Archaeological heritage and Hokkaido Ainu",
+    "year": 2017,
     "type": "grammar-book",
-    "rawType": "dissertation",
+    "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "Kakurina Nataļja"
+      "Hirofumi Kato"
     ],
-    "venue": null,
-    "url": "https://doi.org/10.25143/prom-rsu_2011-23_pdk",
+    "venue": "Archaeologies of “Us” and “Them”",
+    "url": "https://doi.org/10.4324/9781315641997-19",
     "pdf": null
   },
   {
@@ -9511,64 +9479,34 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1093/acrefore/9780190277727.013.662",
-    "doi": "10.1093/acrefore/9780190277727.013.662",
-    "title": "Japan and the Ainu in the Early Modern Period",
-    "year": 2022,
-    "type": "grammar-article",
-    "rawType": "reference-entry",
-    "language": null,
-    "authors": [
-      "Noémi Godefroy"
-    ],
-    "venue": "Oxford Research Encyclopedia of Asian History",
-    "url": "https://doi.org/10.1093/acrefore/9780190277727.013.662",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1177/002190967801300311",
-    "doi": "10.1177/002190967801300311",
-    "title": "Book Reviews : Hiroshi Watanabe, The Ainu Exocystem : Environment and Group Structure. University of Washington, 1973. Kirsten Yuriko Taguchi, An annotated Catalogue of Ainu Materials. Scandinavian Inst. of Asian Studies, 1973",
-    "year": 1978,
+    "externalId": "10.1126/science.75.1952.562",
+    "doi": "10.1126/science.75.1952.562",
+    "title": "AINU PITS IN THE KURILE ISLANDS",
+    "year": 1932,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "H. Befu"
+      "M. L. Peelle"
     ],
-    "venue": "Journal of Asian and African Studies",
-    "url": "https://doi.org/10.1177/002190967801300311",
+    "venue": "Science",
+    "url": "https://doi.org/10.1126/science.75.1952.562",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.1515/9783110820768-019",
-    "doi": "10.1515/9783110820768-019",
-    "title": "Statistical data on Sakhalin Ainu for the year 1904",
-    "year": 1998,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [],
-    "venue": "The Aborigines of Sakhalin",
-    "url": "https://doi.org/10.1515/9783110820768-019",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1525/california/9780520240858.003.0005",
-    "doi": "10.1525/california/9780520240858.003.0005",
-    "title": "Ainu Identity and the Early Modern State",
-    "year": 2005,
+    "externalId": "10.4324/9781003198888-28",
+    "doi": "10.4324/9781003198888-28",
+    "title": "Rethinking Ezo-chi, the Ainu, and Tokugawa Japan in a global perspective",
+    "year": 2021,
     "type": "grammar-book",
     "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "David L. Howell"
+      "Noémi Godefroy"
     ],
-    "venue": "Geographies of Identity in Nineteenth-Century Japan",
-    "url": "https://doi.org/10.1525/california/9780520240858.003.0005",
+    "venue": "The Tokugawa World",
+    "url": "https://doi.org/10.4324/9781003198888-28",
     "pdf": null
   },
   {
@@ -9605,6 +9543,36 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.1177/002190967801300311",
+    "doi": "10.1177/002190967801300311",
+    "title": "Book Reviews : Hiroshi Watanabe, The Ainu Exocystem : Environment and Group Structure. University of Washington, 1973. Kirsten Yuriko Taguchi, An annotated Catalogue of Ainu Materials. Scandinavian Inst. of Asian Studies, 1973",
+    "year": 1978,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "H. Befu"
+    ],
+    "venue": "Journal of Asian and African Studies",
+    "url": "https://doi.org/10.1177/002190967801300311",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1515/9783110820768-019",
+    "doi": "10.1515/9783110820768-019",
+    "title": "Statistical data on Sakhalin Ainu for the year 1904",
+    "year": 1998,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [],
+    "venue": "The Aborigines of Sakhalin",
+    "url": "https://doi.org/10.1515/9783110820768-019",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.18254/s268684310026736-7",
     "doi": "10.18254/s268684310026736-7",
     "title": "Iyomante: The Ainu Bear Festival in Hokkaido and Sakhalin",
@@ -9617,6 +9585,22 @@
     ],
     "venue": "Oriental Courier",
     "url": "https://doi.org/10.18254/s268684310026736-7",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1093/acrefore/9780190277727.013.662",
+    "doi": "10.1093/acrefore/9780190277727.013.662",
+    "title": "Japan and the Ainu in the Early Modern Period",
+    "year": 2022,
+    "type": "grammar-article",
+    "rawType": "reference-entry",
+    "language": null,
+    "authors": [
+      "Noémi Godefroy"
+    ],
+    "venue": "Oxford Research Encyclopedia of Asian History",
+    "url": "https://doi.org/10.1093/acrefore/9780190277727.013.662",
     "pdf": null
   },
   {
@@ -9637,18 +9621,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.4324/9781315641997-19",
-    "doi": "10.4324/9781315641997-19",
-    "title": "Archaeological heritage and Hokkaido Ainu",
-    "year": 2017,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
+    "externalId": "10.2307/2059280",
+    "doi": "10.2307/2059280",
+    "title": "European Studies on Ainu Language and Culture. Edited by Josef Kreiner. Monographien aus dem Deutschen Institut für Japanstudien der Philipp-Franz-von-Siebold-Stifung, volume 6. Munich: Iudicium, 1993. 324 pp.",
+    "year": 1994,
+    "type": "grammar-article",
+    "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Hirofumi Kato"
+      "David L. Howell"
     ],
-    "venue": "Archaeologies of “Us” and “Them”",
-    "url": "https://doi.org/10.4324/9781315641997-19",
+    "venue": "The Journal of Asian Studies",
+    "url": "https://doi.org/10.2307/2059280",
     "pdf": null
   },
   {
@@ -9665,20 +9649,6 @@
     ],
     "venue": "The Invention of Race",
     "url": "https://doi.org/10.4324/9781315813318-12",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1126/science.284.5414.583a",
-    "doi": "10.1126/science.284.5414.583a",
-    "title": "Possible Ainu Site Creates Buzz",
-    "year": 1999,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [],
-    "venue": "Science",
-    "url": "https://doi.org/10.1126/science.284.5414.583a",
     "pdf": null
   },
   {
@@ -9778,6 +9748,24 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.2307/852337",
+    "doi": "10.2307/852337",
+    "title": "Ainu Songs Japan/Chants des Ainou Japon",
+    "year": 1985,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Linda Fujie",
+      "Kazuyuki Tanimoto",
+      "Jean-Jacques Nattiez"
+    ],
+    "venue": "Ethnomusicology",
+    "url": "https://doi.org/10.2307/852337",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.2139/ssrn.5710363",
     "doi": "10.2139/ssrn.5710363",
     "title": "Indigenous Diplomacy: Sakhalin Ainu (Enchiw) In The Shaping Of Modern East Asia",
@@ -9790,6 +9778,22 @@
     ],
     "venue": "SSRN Electronic Journal",
     "url": "https://doi.org/10.2139/ssrn.5710363",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1007/978-94-6300-124-3_10",
+    "doi": "10.1007/978-94-6300-124-3_10",
+    "title": "Ainu: “Homogenous” Japan’s Indigenous People",
+    "year": 2015,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Sayaka Saito"
+    ],
+    "venue": "Transgressions",
+    "url": "https://doi.org/10.1007/978-94-6300-124-3_10",
     "pdf": null
   },
   {
@@ -9822,22 +9826,6 @@
     ],
     "venue": "Zeitschrift für Morphologie und Anthropologie",
     "url": "https://doi.org/10.1127/zma/69/1978/209",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1007/978-94-6300-124-3_10",
-    "doi": "10.1007/978-94-6300-124-3_10",
-    "title": "Ainu: “Homogenous” Japan’s Indigenous People",
-    "year": 2015,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Sayaka Saito"
-    ],
-    "venue": "Transgressions",
-    "url": "https://doi.org/10.1007/978-94-6300-124-3_10",
     "pdf": null
   },
   {
@@ -9906,24 +9894,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.2307/852337",
-    "doi": "10.2307/852337",
-    "title": "Ainu Songs Japan/Chants des Ainou Japon",
-    "year": 1985,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Linda Fujie",
-      "Kazuyuki Tanimoto",
-      "Jean-Jacques Nattiez"
-    ],
-    "venue": "Ethnomusicology",
-    "url": "https://doi.org/10.2307/852337",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.2307/2668267",
     "doi": "10.2307/2668267",
     "title": "Harukor: An Ainu Woman's Tale",
@@ -9938,23 +9908,6 @@
     ],
     "venue": "Monumenta Nipponica",
     "url": "https://doi.org/10.2307/2668267",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2307/2802795",
-    "doi": "10.2307/2802795",
-    "title": "Illness and Healing Among the Sakhalin Ainu.",
-    "year": 1985,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Carol P. MacCormack",
-      "Emiko Ohnuki-Tierney"
-    ],
-    "venue": "Man",
-    "url": "https://doi.org/10.2307/2802795",
     "pdf": null
   },
   {
@@ -10007,6 +9960,22 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.18874/jjrs.47.2.2020.341-351",
+    "doi": "10.18874/jjrs.47.2.2020.341-351",
+    "title": "The Inaw of Ishikawa: Ainu Religious Implements in Japanese Shrines and Temples",
+    "year": 2020,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Avery Morrow"
+    ],
+    "venue": "Japanese Journal of Religious Studies",
+    "url": "https://doi.org/10.18874/jjrs.47.2.2020.341-351",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.5363/tits.16.9_96",
     "doi": "10.5363/tits.16.9_96",
     "title": "Toward a New Ainu Policy",
@@ -10036,6 +10005,22 @@
     ],
     "venue": "Monumenta Nipponica",
     "url": "https://doi.org/10.2307/2383684",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.4324/9780367809126-4",
+    "doi": "10.4324/9780367809126-4",
+    "title": "Star lore of the Hokkaido Ainu",
+    "year": 2020,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Akira Goto"
+    ],
+    "venue": "Cultural Astronomy of the Japanese Archipelago",
+    "url": "https://doi.org/10.4324/9780367809126-4",
     "pdf": null
   },
   {
@@ -10149,6 +10134,23 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.2307/2802795",
+    "doi": "10.2307/2802795",
+    "title": "Illness and Healing Among the Sakhalin Ainu.",
+    "year": 1985,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Carol P. MacCormack",
+      "Emiko Ohnuki-Tierney"
+    ],
+    "venue": "Man",
+    "url": "https://doi.org/10.2307/2802795",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.4324/9781315768670-14",
     "doi": "10.4324/9781315768670-14",
     "title": "The making of Ainu citizenship from the viewpoint of gender and ethnicity",
@@ -10192,22 +10194,6 @@
     ],
     "venue": "Gastroenterologia Japonica",
     "url": "https://doi.org/10.1007/bf02779732",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.4324/9780367809126-4",
-    "doi": "10.4324/9780367809126-4",
-    "title": "Star lore of the Hokkaido Ainu",
-    "year": 2020,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Akira Goto"
-    ],
-    "venue": "Cultural Astronomy of the Japanese Archipelago",
-    "url": "https://doi.org/10.4324/9780367809126-4",
     "pdf": null
   },
   {
@@ -10272,39 +10258,6 @@
     ],
     "venue": "Anthropology News",
     "url": "https://doi.org/10.1111/an.1987.28.8.2.4",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1017/s1557466005002408",
-    "doi": "10.1017/s1557466005002408",
-    "title": "Music as Weapon: Ainu musician fights for cultural survival",
-    "year": 2005,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Tomoto OTAKE"
-    ],
-    "venue": "Asia-Pacific Journal",
-    "url": "https://doi.org/10.1017/s1557466005002408",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.3390/sym11080985",
-    "doi": "10.3390/sym11080985",
-    "title": "Symmetrical Patterns of Ainu Heritage and Their Virtual and Physical Prototyping",
-    "year": 2019,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Tashi",
-      "AMM Sharif Ullah"
-    ],
-    "venue": "Symmetry",
-    "url": "https://doi.org/10.3390/sym11080985",
     "pdf": null
   },
   {
@@ -10390,22 +10343,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.18874/jjrs.47.2.2020.341-351",
-    "doi": "10.18874/jjrs.47.2.2020.341-351",
-    "title": "The Inaw of Ishikawa: Ainu Religious Implements in Japanese Shrines and Temples",
-    "year": 2020,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Avery Morrow"
-    ],
-    "venue": "Japanese Journal of Religious Studies",
-    "url": "https://doi.org/10.18874/jjrs.47.2.2020.341-351",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.1525/aa.1963.65.4.02a00510",
     "doi": "10.1525/aa.1963.65.4.02a00510",
     "title": "Ainu Creed and Cult",
@@ -10418,6 +10355,22 @@
     ],
     "venue": "American Anthropologist",
     "url": "https://doi.org/10.1525/aa.1963.65.4.02a00510",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1017/s1557466022019088",
+    "doi": "10.1017/s1557466022019088",
+    "title": "Ainu Ethnogenesis and State Evasion (12th-17th Centuries)",
+    "year": 2022,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Hosanna Fukuzawa"
+    ],
+    "venue": "Asia-Pacific Journal",
+    "url": "https://doi.org/10.1017/s1557466022019088",
     "pdf": null
   },
   {
@@ -10466,18 +10419,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1017/s1557466022019088",
-    "doi": "10.1017/s1557466022019088",
-    "title": "Ainu Ethnogenesis and State Evasion (12th-17th Centuries)",
-    "year": 2022,
+    "externalId": "10.16979/jmak..42.201311.161",
+    "doi": "10.16979/jmak..42.201311.161",
+    "title": "Ainu representation of “Frep trip” by Hakushu Kitahara",
+    "year": 2013,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Hosanna Fukuzawa"
+      "안노 마사히데"
     ],
-    "venue": "Asia-Pacific Journal",
-    "url": "https://doi.org/10.1017/s1557466022019088",
+    "venue": "The Japanese Modern Association of Korea",
+    "url": "https://doi.org/10.16979/jmak..42.201311.161",
     "pdf": null
   },
   {
@@ -10512,38 +10465,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.2307/596946",
-    "doi": "10.2307/596946",
-    "title": "Hokkaido Ainu Phonemics",
-    "year": 1969,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "George Simeon"
-    ],
-    "venue": "Journal of the American Oriental Society",
-    "url": "https://doi.org/10.2307/596946",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.16979/jmak..42.201311.161",
-    "doi": "10.16979/jmak..42.201311.161",
-    "title": "Ainu representation of “Frep trip” by Hakushu Kitahara",
-    "year": 2013,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "안노 마사히데"
-    ],
-    "venue": "The Japanese Modern Association of Korea",
-    "url": "https://doi.org/10.16979/jmak..42.201311.161",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.1163/9789004644847_049",
     "doi": "10.1163/9789004644847_049",
     "title": "The Meiji State and the Logic of Ainu “Protection”",
@@ -10560,32 +10481,35 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.4324/9781003674214-12",
-    "doi": "10.4324/9781003674214-12",
-    "title": "Ainu and the Borders of Japan",
-    "year": 2026,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
+    "externalId": "10.3390/sym11080985",
+    "doi": "10.3390/sym11080985",
+    "title": "Symmetrical Patterns of Ainu Heritage and Their Virtual and Physical Prototyping",
+    "year": 2019,
+    "type": "grammar-article",
+    "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Edward Boyle"
+      "Tashi",
+      "AMM Sharif Ullah"
     ],
-    "venue": "Global Japanese History and Culture",
-    "url": "https://doi.org/10.4324/9781003674214-12",
+    "venue": "Symmetry",
+    "url": "https://doi.org/10.3390/sym11080985",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.4324/9780203029107-21",
-    "doi": "10.4324/9780203029107-21",
-    "title": "Positioning oneself in the Japanese nation state: The Hokkaido Ainu case",
-    "year": 2007,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
+    "externalId": "10.1017/s1557466005002408",
+    "doi": "10.1017/s1557466005002408",
+    "title": "Music as Weapon: Ainu musician fights for cultural survival",
+    "year": 2005,
+    "type": "grammar-article",
+    "rawType": "journal-article",
     "language": null,
-    "authors": [],
-    "venue": "Transcultural Japan",
-    "url": "https://doi.org/10.4324/9780203029107-21",
+    "authors": [
+      "Tomoto OTAKE"
+    ],
+    "venue": "Asia-Pacific Journal",
+    "url": "https://doi.org/10.1017/s1557466005002408",
     "pdf": null
   },
   {
@@ -10618,6 +10542,23 @@
     ],
     "venue": "Anthropological Science",
     "url": "https://doi.org/10.1537/ase.106.supplement_1",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.4324/9781003230335-6",
+    "doi": "10.4324/9781003230335-6",
+    "title": "Power, Policies, and Cultural Sensitivity in Ainu Tourism",
+    "year": 2024,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Mayumi Okada",
+      "Johan Edelheim"
+    ],
+    "venue": "The Routledge Handbook of Tourism and Indigenous Peoples",
+    "url": "https://doi.org/10.4324/9781003230335-6",
     "pdf": null
   },
   {
@@ -10664,6 +10605,52 @@
     ],
     "venue": "Rethinking Japan",
     "url": "https://doi.org/10.4324/9781315060316-17",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1111/an.1997.38.5.13.2",
+    "doi": "10.1111/an.1997.38.5.13.2",
+    "title": "Japan Recognizes Ainu as Indigenous Minority",
+    "year": 1997,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [],
+    "venue": "Anthropology News",
+    "url": "https://doi.org/10.1111/an.1997.38.5.13.2",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.2307/532957",
+    "doi": "10.2307/532957",
+    "title": "Items of Ainu Folk-Lore",
+    "year": 1894,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "John Batchelor"
+    ],
+    "venue": "The Journal of American Folklore",
+    "url": "https://doi.org/10.2307/532957",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.4324/9781003674214-12",
+    "doi": "10.4324/9781003674214-12",
+    "title": "Ainu and the Borders of Japan",
+    "year": 2026,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Edward Boyle"
+    ],
+    "venue": "Global Japanese History and Culture",
+    "url": "https://doi.org/10.4324/9781003674214-12",
     "pdf": null
   },
   {
@@ -10761,6 +10748,52 @@
     ],
     "venue": "SSRN Electronic Journal",
     "url": "https://doi.org/10.2139/ssrn.6663198",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.4324/9780203029107-21",
+    "doi": "10.4324/9780203029107-21",
+    "title": "Positioning oneself in the Japanese nation state: The Hokkaido Ainu case",
+    "year": 2007,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [],
+    "venue": "Transcultural Japan",
+    "url": "https://doi.org/10.4324/9780203029107-21",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.2307/596946",
+    "doi": "10.2307/596946",
+    "title": "Hokkaido Ainu Phonemics",
+    "year": 1969,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "George Simeon"
+    ],
+    "venue": "Journal of the American Oriental Society",
+    "url": "https://doi.org/10.2307/596946",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.2139/ssrn.3877970",
+    "doi": "10.2139/ssrn.3877970",
+    "title": "From the Ainu to the Modern Timber Trade: Case of Japan's Ecological Exploitation and Building Dependency",
+    "year": 2021,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Hosanna Fukuzawa"
+    ],
+    "venue": "SSRN Electronic Journal",
+    "url": "https://doi.org/10.2139/ssrn.3877970",
     "pdf": null
   },
   {
@@ -10875,22 +10908,6 @@
     ],
     "venue": "Cahiers de linguistique - Asie orientale",
     "url": "https://doi.org/10.3406/clao.1977.1030",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2139/ssrn.3877970",
-    "doi": "10.2139/ssrn.3877970",
-    "title": "From the Ainu to the Modern Timber Trade: Case of Japan's Ecological Exploitation and Building Dependency",
-    "year": 2021,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Hosanna Fukuzawa"
-    ],
-    "venue": "SSRN Electronic Journal",
-    "url": "https://doi.org/10.2139/ssrn.3877970",
     "pdf": null
   },
   {
@@ -11413,53 +11430,51 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1080/09555809508721532",
-    "doi": "10.1080/09555809508721532",
-    "title": "Symposium on the Ainu question",
-    "year": 1995,
+    "externalId": "10.5040/9781350324633.ch-002",
+    "doi": "10.5040/9781350324633.ch-002",
+    "title": "The ‘time of the now’: Upopoy and Ainu ancestral remains as sites of memory",
+    "year": 2024,
     "type": "grammar-article",
-    "rawType": "journal-article",
+    "rawType": "other",
     "language": null,
     "authors": [
-      "Fosco Maraini",
-      "Richard Siddle",
-      "Delia Davin"
+      "Michael Roellinghoff"
     ],
-    "venue": "Japan Forum",
-    "url": "https://doi.org/10.1080/09555809508721532",
+    "venue": "Contesting Memorial Spaces of Japan's Empire",
+    "url": "https://doi.org/10.5040/9781350324633.ch-002",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.1016/0305-4403(87)90007-0",
-    "doi": "10.1016/0305-4403(87)90007-0",
-    "title": "Ainu ancestors and prehistoric Asian agriculture",
-    "year": 1987,
+    "externalId": "10.5363/tits.16.9_79",
+    "doi": "10.5363/tits.16.9_79",
+    "title": "The Ainu and Japanese Policy for Indigenous People",
+    "year": 2011,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Gary W. Crawford",
-      "Masakazu Yoshizaki"
+      "Teruki TSUNEMOTO"
     ],
-    "venue": "Journal of Archaeological Science",
-    "url": "https://doi.org/10.1016/0305-4403(87)90007-0",
+    "venue": "TRENDS IN THE SCIENCES",
+    "url": "https://doi.org/10.5363/tits.16.9_79",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.1590/2238-38752019v9217",
-    "doi": "10.1590/2238-38752019v9217",
-    "title": "OS AINU E SUAS PLANTAS NO NORTE DO JAPÃO",
+    "externalId": "10.11606/issn.2447-7125.v0i42p129-143",
+    "doi": "10.11606/issn.2447-7125.v0i42p129-143",
+    "title": "O divino nas narrativas Ainu",
     "year": 2019,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Felipe Vander Velden"
+      "Luana Bueno Barbosa Cyríaco da Silva",
+      "Márcia Hitomi Namekata"
     ],
-    "venue": "Sociologia &amp; Antropologia",
-    "url": "https://doi.org/10.1590/2238-38752019v9217",
+    "venue": "Estudos Japoneses",
+    "url": "https://doi.org/10.11606/issn.2447-7125.v0i42p129-143",
     "pdf": null
   },
   {
@@ -11476,39 +11491,6 @@
     ],
     "venue": "Этнографическое обозрение / Ethno review",
     "url": "https://doi.org/10.7868/s3034627425040025",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1007/bf01573415",
-    "doi": "10.1007/bf01573415",
-    "title": "A culturally-determined mental reaction among the Ainu",
-    "year": 1964,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Y. Kumasaka"
-    ],
-    "venue": "The Psychiatric Quarterly",
-    "url": "https://doi.org/10.1007/bf01573415",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2535/ofaj1936.21.4_407",
-    "doi": "10.2535/ofaj1936.21.4_407",
-    "title": "Anthropologische Untersuchungen an Ainu=Japaner= Mischungsfamilien.",
-    "year": 1942,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Tadao Mitui",
-      "Sigeru Sumi"
-    ],
-    "venue": "Okajimas Folia Anatomica Japonica",
-    "url": "https://doi.org/10.2535/ofaj1936.21.4_407",
     "pdf": null
   },
   {
@@ -11530,18 +11512,51 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.5363/tits.16.9_65",
-    "doi": "10.5363/tits.16.9_65",
-    "title": "The Ainu Today: Towards a Policy of Multicultural Co-existence",
-    "year": 2011,
+    "externalId": "10.1007/bf01573415",
+    "doi": "10.1007/bf01573415",
+    "title": "A culturally-determined mental reaction among the Ainu",
+    "year": 1964,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Matori YAMAMOTO"
+      "Y. Kumasaka"
     ],
-    "venue": "TRENDS IN THE SCIENCES",
-    "url": "https://doi.org/10.5363/tits.16.9_65",
+    "venue": "The Psychiatric Quarterly",
+    "url": "https://doi.org/10.1007/bf01573415",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.31857/s086954150000410-1",
+    "doi": "10.31857/s086954150000410-1",
+    "title": "From the History of the Sakhalin Ainu – Forced Migrants, 1875–1948",
+    "year": 2018,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Sofya Lim"
+    ],
+    "venue": "Этнографическое обозрение",
+    "url": "https://doi.org/10.31857/s086954150000410-1",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.2535/ofaj1936.21.4_407",
+    "doi": "10.2535/ofaj1936.21.4_407",
+    "title": "Anthropologische Untersuchungen an Ainu=Japaner= Mischungsfamilien.",
+    "year": 1942,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Tadao Mitui",
+      "Sigeru Sumi"
+    ],
+    "venue": "Okajimas Folia Anatomica Japonica",
+    "url": "https://doi.org/10.2535/ofaj1936.21.4_407",
     "pdf": null
   },
   {
@@ -11595,18 +11610,35 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.31857/s086954150000410-1",
-    "doi": "10.31857/s086954150000410-1",
-    "title": "From the History of the Sakhalin Ainu – Forced Migrants, 1875–1948",
+    "externalId": "10.1017/s1557466018014158",
+    "doi": "10.1017/s1557466018014158",
+    "title": "Rethinking Japan's Constitution from the Perspective of the Ainu and Ryūkyū Peoples",
     "year": 2018,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Sofya Lim"
+      "Uemura Hideaki",
+      "Jeffry Gayman"
     ],
-    "venue": "Этнографическое обозрение",
-    "url": "https://doi.org/10.31857/s086954150000410-1",
+    "venue": "Asia-Pacific Journal",
+    "url": "https://doi.org/10.1017/s1557466018014158",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1590/2238-38752019v9217",
+    "doi": "10.1590/2238-38752019v9217",
+    "title": "OS AINU E SUAS PLANTAS NO NORTE DO JAPÃO",
+    "year": 2019,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Felipe Vander Velden"
+    ],
+    "venue": "Sociologia &amp; Antropologia",
+    "url": "https://doi.org/10.1590/2238-38752019v9217",
     "pdf": null
   },
   {
@@ -11659,35 +11691,35 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1017/s1557466018014158",
-    "doi": "10.1017/s1557466018014158",
-    "title": "Rethinking Japan's Constitution from the Perspective of the Ainu and Ryūkyū Peoples",
-    "year": 2018,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Uemura Hideaki",
-      "Jeffry Gayman"
-    ],
-    "venue": "Asia-Pacific Journal",
-    "url": "https://doi.org/10.1017/s1557466018014158",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.5363/tits.16.9_100",
-    "doi": "10.5363/tits.16.9_100",
-    "title": "How Can We Construct the National Awareness on Ainu Issues?",
+    "externalId": "10.5363/tits.16.9_83",
+    "doi": "10.5363/tits.16.9_83",
+    "title": "The Problems and Studies on Skeletal Biology of Ainu",
     "year": 2011,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Sachiko KUBOTA"
+      "Kenichi SHINODA"
     ],
     "venue": "TRENDS IN THE SCIENCES",
-    "url": "https://doi.org/10.5363/tits.16.9_100",
+    "url": "https://doi.org/10.5363/tits.16.9_83",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1016/0305-4403(87)90007-0",
+    "doi": "10.1016/0305-4403(87)90007-0",
+    "title": "Ainu ancestors and prehistoric Asian agriculture",
+    "year": 1987,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Gary W. Crawford",
+      "Masakazu Yoshizaki"
+    ],
+    "venue": "Journal of Archaeological Science",
+    "url": "https://doi.org/10.1016/0305-4403(87)90007-0",
     "pdf": null
   },
   {
@@ -11709,34 +11741,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.5363/tits.16.9_83",
-    "doi": "10.5363/tits.16.9_83",
-    "title": "The Problems and Studies on Skeletal Biology of Ainu",
-    "year": 2011,
-    "type": "grammar-article",
-    "rawType": "journal-article",
+    "externalId": "10.2307/jj.13568100.13",
+    "doi": "10.2307/jj.13568100.13",
+    "title": "Settler-Colonialism, Ecology, and Expropriation of Ainu Mosir:",
+    "year": 2022,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "Kenichi SHINODA"
+      "Katsuya Hirano"
     ],
-    "venue": "TRENDS IN THE SCIENCES",
-    "url": "https://doi.org/10.5363/tits.16.9_83",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2307/835296",
-    "doi": "10.2307/835296",
-    "title": "Traditional Music of the Ainu",
-    "year": 1961,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Takashi Ogawa"
-    ],
-    "venue": "Journal of the International Folk Music Council",
-    "url": "https://doi.org/10.2307/835296",
+    "venue": "Migrant Ecologies",
+    "url": "https://doi.org/10.2307/jj.13568100.13",
     "pdf": null
   },
   {
@@ -11804,18 +11820,34 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.17730/humo.30.1.q42u042w08357p77",
-    "doi": "10.17730/humo.30.1.q42u042w08357p77",
-    "title": "The Contemporary Ainu: A People in Search of Society",
-    "year": 1971,
+    "externalId": "10.55512/wmo192526",
+    "doi": "10.55512/wmo192526",
+    "title": "Scholarly Conference “Expeditions to the Ainu Lands” (St. Petersburg, December 8, 2022)",
+    "year": 2023,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Peter Geiser"
+      "Vasilii V. Shchepkin"
     ],
-    "venue": "Human Organization",
-    "url": "https://doi.org/10.17730/humo.30.1.q42u042w08357p77",
+    "venue": "Письменные памятники Востока",
+    "url": "https://doi.org/10.55512/wmo192526",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1504/ijbg.2014.063393",
+    "doi": "10.1504/ijbg.2014.063393",
+    "title": "Education for the indigenous Ainu and entrepreneurship: an explanatory study",
+    "year": 2014,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Tatsuyoshi Masuda"
+    ],
+    "venue": "International Journal of Business and Globalisation",
+    "url": "https://doi.org/10.1504/ijbg.2014.063393",
     "pdf": null
   },
   {
@@ -11871,34 +11903,67 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.55512/wmo192526",
-    "doi": "10.55512/wmo192526",
-    "title": "Scholarly Conference “Expeditions to the Ainu Lands” (St. Petersburg, December 8, 2022)",
-    "year": 2023,
+    "externalId": "10.2307/835296",
+    "doi": "10.2307/835296",
+    "title": "Traditional Music of the Ainu",
+    "year": 1961,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Vasilii V. Shchepkin"
+      "Takashi Ogawa"
     ],
-    "venue": "Письменные памятники Востока",
-    "url": "https://doi.org/10.55512/wmo192526",
+    "venue": "Journal of the International Folk Music Council",
+    "url": "https://doi.org/10.2307/835296",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.1504/ijbg.2014.063393",
-    "doi": "10.1504/ijbg.2014.063393",
-    "title": "Education for the indigenous Ainu and entrepreneurship: an explanatory study",
-    "year": 2014,
+    "externalId": "10.1525/aa.1988.90.1.02a00020",
+    "doi": "10.1525/aa.1988.90.1.02a00020",
+    "title": "A Glimpse into the Demography of the Ainu",
+    "year": 1988,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Tatsuyoshi Masuda"
+      "E. A. Hammel"
     ],
-    "venue": "International Journal of Business and Globalisation",
-    "url": "https://doi.org/10.1504/ijbg.2014.063393",
+    "venue": "American Anthropologist",
+    "url": "https://doi.org/10.1525/aa.1988.90.1.02a00020",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.17730/humo.30.1.q42u042w08357p77",
+    "doi": "10.17730/humo.30.1.q42u042w08357p77",
+    "title": "The Contemporary Ainu: A People in Search of Society",
+    "year": 1971,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Peter Geiser"
+    ],
+    "venue": "Human Organization",
+    "url": "https://doi.org/10.17730/humo.30.1.q42u042w08357p77",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.2307/598702",
+    "doi": "10.2307/598702",
+    "title": "An Annotated Catalogue of Ainu Material",
+    "year": 1978,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Haruo Aoki",
+      "Kirsten Yumiko Taguchi"
+    ],
+    "venue": "Journal of the American Oriental Society",
+    "url": "https://doi.org/10.2307/598702",
     "pdf": null
   },
   {
@@ -11951,56 +12016,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1525/aa.1988.90.1.02a00020",
-    "doi": "10.1525/aa.1988.90.1.02a00020",
-    "title": "A Glimpse into the Demography of the Ainu",
-    "year": 1988,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "E. A. Hammel"
-    ],
-    "venue": "American Anthropologist",
-    "url": "https://doi.org/10.1525/aa.1988.90.1.02a00020",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2307/598702",
-    "doi": "10.2307/598702",
-    "title": "An Annotated Catalogue of Ainu Material",
-    "year": 1978,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Haruo Aoki",
-      "Kirsten Yumiko Taguchi"
-    ],
-    "venue": "Journal of the American Oriental Society",
-    "url": "https://doi.org/10.2307/598702",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2991/assehr.k.200321.069",
-    "doi": "10.2991/assehr.k.200321.069",
-    "title": "Visual Reception of Ainu Folklore Hima Na Konabe",
-    "year": 2020,
-    "type": "grammar-article",
-    "rawType": "proceedings-article",
-    "language": null,
-    "authors": [
-      "Wanda Listiani",
-      "Ida Ayu Laksmita Sari"
-    ],
-    "venue": "Proceedings of the 2nd International Conference on Arts and Design Education (ICADE 2019)",
-    "url": "https://doi.org/10.2991/assehr.k.200321.069",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.4000/11zzf",
     "doi": "10.4000/11zzf",
     "title": "The Ainu, indigenous people of Japan, facing the challenges of identity reconstruction",
@@ -12013,54 +12028,6 @@
     ],
     "venue": "L’Asie-Monde – III",
     "url": "https://doi.org/10.4000/11zzf",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1086/soutjanth.10.3.3629131",
-    "doi": "10.1086/soutjanth.10.3.3629131",
-    "title": "The Saghalien Trade: A Contribution to Ainu Studies",
-    "year": 1954,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "John A. Harrison"
-    ],
-    "venue": "Southwestern Journal of Anthropology",
-    "url": "https://doi.org/10.1086/soutjanth.10.3.3629131",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.2307/536044",
-    "doi": "10.2307/536044",
-    "title": "The Kamui Oina: A Sacred Charter of the Ainu",
-    "year": 1952,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Richard W. Howell"
-    ],
-    "venue": "The Journal of American Folklore",
-    "url": "https://doi.org/10.2307/536044",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1525/9780520316775-020",
-    "doi": "10.1525/9780520316775-020",
-    "title": "Chapter 12. Contemporary Ainu Wood and Stone Carving",
-    "year": 1976,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Setha M. Low"
-    ],
-    "venue": "Ethnic and Tourist Arts",
-    "url": "https://doi.org/10.1525/9780520316775-020",
     "pdf": null
   },
   {
@@ -12097,6 +12064,40 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.5363/tits.16.9_100",
+    "doi": "10.5363/tits.16.9_100",
+    "title": "How Can We Construct the National Awareness on Ainu Issues?",
+    "year": 2011,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Sachiko KUBOTA"
+    ],
+    "venue": "TRENDS IN THE SCIENCES",
+    "url": "https://doi.org/10.5363/tits.16.9_100",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1007/bf01440963",
+    "doi": "10.1007/bf01440963",
+    "title": "Enhanced sensitivity to noradrenaline of the Ainu",
+    "year": 1970,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "S. Itoh",
+      "K. Doi",
+      "A. Kuroshima"
+    ],
+    "venue": "International Journal of Biometeorology",
+    "url": "https://doi.org/10.1007/bf01440963",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.2307/3024145",
     "doi": "10.2307/3024145",
     "title": "Review: <i>The Ainu of Northern Japan. A Study in Conquest and Acculturation</i>, by Takakura Shinichiro",
@@ -12129,20 +12130,6 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1177/002205740406001322",
-    "doi": "10.1177/002205740406001322",
-    "title": "Book Review: The Ainu Group at the St. Louis Exposition",
-    "year": 1904,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [],
-    "venue": "Journal of Education",
-    "url": "https://doi.org/10.1177/002205740406001322",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
     "externalId": "10.5860/choice.39-4740",
     "doi": "10.5860/choice.39-4740",
     "title": "The conquest of Ainu lands: ecology and culture in Japanese expansion, 1590-1800",
@@ -12157,105 +12144,80 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.21203/rs.3.rs-1940193/v1",
-    "doi": "10.21203/rs.3.rs-1940193/v1",
-    "title": "Technique and results of robotic VVF repair with AINU technique of limited transverse cystotomy",
-    "year": 2022,
+    "externalId": "10.1177/002205740406001322",
+    "doi": "10.1177/002205740406001322",
+    "title": "Book Review: The Ainu Group at the St. Louis Exposition",
+    "year": 1904,
     "type": "grammar-article",
-    "rawType": "posted-content",
+    "rawType": "journal-article",
     "language": null,
-    "authors": [
-      "Mallikarjuna Chiruvella",
-      "Syed mohammed ghouse",
-      "Likhiteswer pallagani",
-      "Amish wani",
-      "Rajesh reddy adapala",
-      "Mohammed Taif"
-    ],
-    "venue": null,
-    "url": "https://doi.org/10.21203/rs.3.rs-1940193/v1",
+    "authors": [],
+    "venue": "Journal of Education",
+    "url": "https://doi.org/10.1177/002205740406001322",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.5209/mira.80013",
-    "doi": "10.5209/mira.80013",
-    "title": "La arqueología japonesa y la construcción del paradigma ainu -más allá del mito del cazador primitivo",
-    "year": 2022,
+    "externalId": "10.4049/jimmunol.12.2.91",
+    "doi": "10.4049/jimmunol.12.2.91",
+    "title": "On the Biochemical Racial-Index of the Ainu, Gilyak and Orokko in Karafuto (Saghalien)",
+    "year": 1926,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Rafael Abad de los Santos"
+      "Takayoshi Kishi"
     ],
-    "venue": "Mirai. Estudios Japoneses",
-    "url": "https://doi.org/10.5209/mira.80013",
+    "venue": "The Journal of Immunology",
+    "url": "https://doi.org/10.4049/jimmunol.12.2.91",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.1057/9780230601192_2",
-    "doi": "10.1057/9780230601192_2",
-    "title": "Redefining the Past, Taking Charge of the Present, Appropriating the Future; The Hokkaido Ainu Case",
-    "year": 2006,
+    "externalId": "10.3861/jshhe.6.374",
+    "doi": "10.3861/jshhe.6.374",
+    "title": "Dermatologische Untersuchungen von Ainu.",
+    "year": 1938,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Sh. Takahashi"
+    ],
+    "venue": "Japanese Journal of Health and Human Ecology",
+    "url": "https://doi.org/10.3861/jshhe.6.374",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1515/9781782381617-008",
+    "doi": "10.1515/9781782381617-008",
+    "title": "Chapter 6 Japanese Anthropology and Depictions of the Ainu",
+    "year": 2022,
     "type": "grammar-book",
     "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "Katarina Sjöberg"
+      "Sidney C. H. Cheung"
     ],
-    "venue": "Cultural Genocide and Asian State Peripheries",
-    "url": "https://doi.org/10.1057/9780230601192_2",
+    "venue": "The Making of Anthropology in East and Southeast Asia",
+    "url": "https://doi.org/10.1515/9781782381617-008",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.31091/mudra.v34i2.702",
-    "doi": "10.31091/mudra.v34i2.702",
-    "title": "Antara Teks dan Praktik: Ritual Iomante pada Cerita Rakyat Ainu Jepang",
-    "year": 2019,
+    "externalId": "10.1525/mua.1996.20.3.108",
+    "doi": "10.1525/mua.1996.20.3.108",
+    "title": "Exhibiting Ainu Culture at Minpaku: A Reply to Sandra A. Niessen",
+    "year": 1996,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Ida Ayu Laksmita Sari"
+      "Kazuyoshi Ohtsuka"
     ],
-    "venue": "Mudra Jurnal Seni Budaya",
-    "url": "https://doi.org/10.31091/mudra.v34i2.702",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.55105/2658-6444-2023-1-88-100",
-    "doi": "10.55105/2658-6444-2023-1-88-100",
-    "title": "A Brief List of Japanese Writings About the Ainu Lands and Russia Until 1799",
-    "year": 2023,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "V. Yu. Klimov"
-    ],
-    "venue": "Russian Japanology Review",
-    "url": "https://doi.org/10.55105/2658-6444-2023-1-88-100",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1534/genetics.115.178673",
-    "doi": "10.1534/genetics.115.178673",
-    "title": "Deep History of East Asian Populations Revealed Through Genetic Analysis of the Ainu",
-    "year": 2015,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Choongwon Jeong",
-      "Shigeki Nakagome",
-      "Anna Di Rienzo"
-    ],
-    "venue": "Genetics",
-    "url": "https://doi.org/10.1534/genetics.115.178673",
+    "venue": "Museum Anthropology",
+    "url": "https://doi.org/10.1525/mua.1996.20.3.108",
     "pdf": null
   },
   {
@@ -12272,24 +12234,6 @@
     ],
     "venue": "International Journal of Heritage Studies",
     "url": "https://doi.org/10.1080/13527258.2025.2611221",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.26742/panggung.v30i2.1205",
-    "doi": "10.26742/panggung.v30i2.1205",
-    "title": "Gastronomi dalam Cerita Rakyat Ainu Jepang",
-    "year": 2020,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Ida Ayu Laksmita Sari",
-      "I Nyoman Darma Putra",
-      "Ni Luh Kade Yuliani Giri"
-    ],
-    "venue": "Panggung",
-    "url": "https://doi.org/10.26742/panggung.v30i2.1205",
     "pdf": null
   },
   {
@@ -12360,6 +12304,22 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.55105/2658-6444-2023-1-88-100",
+    "doi": "10.55105/2658-6444-2023-1-88-100",
+    "title": "A Brief List of Japanese Writings About the Ainu Lands and Russia Until 1799",
+    "year": 2023,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "V. Yu. Klimov"
+    ],
+    "venue": "Russian Japanology Review",
+    "url": "https://doi.org/10.55105/2658-6444-2023-1-88-100",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.35462/flv8.2",
     "doi": "10.35462/flv8.2",
     "title": "Ainu und Kaschinawa, sprachliche Beziehungen eine paläoeurasischen Sprache auf Sachalin zu einer Panosprache in Nordperu",
@@ -12376,20 +12336,71 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1007/bf01440963",
-    "doi": "10.1007/bf01440963",
-    "title": "Enhanced sensitivity to noradrenaline of the Ainu",
-    "year": 1970,
+    "externalId": "10.1057/9780230601192_2",
+    "doi": "10.1057/9780230601192_2",
+    "title": "Redefining the Past, Taking Charge of the Present, Appropriating the Future; The Hokkaido Ainu Case",
+    "year": 2006,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Katarina Sjöberg"
+    ],
+    "venue": "Cultural Genocide and Asian State Peripheries",
+    "url": "https://doi.org/10.1057/9780230601192_2",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.31091/mudra.v34i2.702",
+    "doi": "10.31091/mudra.v34i2.702",
+    "title": "Antara Teks dan Praktik: Ritual Iomante pada Cerita Rakyat Ainu Jepang",
+    "year": 2019,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "S. Itoh",
-      "K. Doi",
-      "A. Kuroshima"
+      "Ida Ayu Laksmita Sari"
     ],
-    "venue": "International Journal of Biometeorology",
-    "url": "https://doi.org/10.1007/bf01440963",
+    "venue": "Mudra Jurnal Seni Budaya",
+    "url": "https://doi.org/10.31091/mudra.v34i2.702",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.21203/rs.3.rs-1940193/v1",
+    "doi": "10.21203/rs.3.rs-1940193/v1",
+    "title": "Technique and results of robotic VVF repair with AINU technique of limited transverse cystotomy",
+    "year": 2022,
+    "type": "grammar-article",
+    "rawType": "posted-content",
+    "language": null,
+    "authors": [
+      "Mallikarjuna Chiruvella",
+      "Syed mohammed ghouse",
+      "Likhiteswer pallagani",
+      "Amish wani",
+      "Rajesh reddy adapala",
+      "Mohammed Taif"
+    ],
+    "venue": null,
+    "url": "https://doi.org/10.21203/rs.3.rs-1940193/v1",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.5209/mira.80013",
+    "doi": "10.5209/mira.80013",
+    "title": "La arqueología japonesa y la construcción del paradigma ainu -más allá del mito del cazador primitivo",
+    "year": 2022,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Rafael Abad de los Santos"
+    ],
+    "venue": "Mirai. Estudios Japoneses",
+    "url": "https://doi.org/10.5209/mira.80013",
     "pdf": null
   },
   {
@@ -12406,23 +12417,6 @@
     ],
     "venue": "Biological Shape Analysis",
     "url": "https://doi.org/10.1142/9789814518413_0006",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1515/9781800736245-017",
-    "doi": "10.1515/9781800736245-017",
-    "title": "CHAPTER 9 The Japanese Gaze and the Memory of the Kuril Ainu",
-    "year": 2022,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Takahiro Yamamoto",
-      "Takehiro Okabe"
-    ],
-    "venue": "Borders in East and West",
-    "url": "https://doi.org/10.1515/9781800736245-017",
     "pdf": null
   },
   {
@@ -12455,6 +12449,55 @@
     ],
     "venue": "Japanese Education in an Era of Globalization",
     "url": "https://doi.org/10.65528/9780807772089-009",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1515/9781800736245-017",
+    "doi": "10.1515/9781800736245-017",
+    "title": "CHAPTER 9 The Japanese Gaze and the Memory of the Kuril Ainu",
+    "year": 2022,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
+    "language": null,
+    "authors": [
+      "Takahiro Yamamoto",
+      "Takehiro Okabe"
+    ],
+    "venue": "Borders in East and West",
+    "url": "https://doi.org/10.1515/9781800736245-017",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1080/0955580022000008763",
+    "doi": "10.1080/0955580022000008763",
+    "title": "An epoch-making event? The 1997 Ainu Cultural Promotion Act and its impact",
+    "year": 2002,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Richard Siddle"
+    ],
+    "venue": "Japan Forum",
+    "url": "https://doi.org/10.1080/0955580022000008763",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.5771/0257-9774-2015-2-628",
+    "doi": "10.5771/0257-9774-2015-2-628",
+    "title": "Hudson, Mark J., Ann-Elise Lewallen, and Mark K. Watson (eds.): Beyond Ainu Studies. Changing Academic and Public Perspectives",
+    "year": 2015,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Katarina Sjöberg"
+    ],
+    "venue": "Anthropos",
+    "url": "https://doi.org/10.5771/0257-9774-2015-2-628",
     "pdf": null
   },
   {
@@ -12508,6 +12551,23 @@
   },
   {
     "source": "crossref",
+    "externalId": "10.2991/assehr.k.200321.069",
+    "doi": "10.2991/assehr.k.200321.069",
+    "title": "Visual Reception of Ainu Folklore Hima Na Konabe",
+    "year": 2020,
+    "type": "grammar-article",
+    "rawType": "proceedings-article",
+    "language": null,
+    "authors": [
+      "Wanda Listiani",
+      "Ida Ayu Laksmita Sari"
+    ],
+    "venue": "Proceedings of the 2nd International Conference on Arts and Design Education (ICADE 2019)",
+    "url": "https://doi.org/10.2991/assehr.k.200321.069",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
     "externalId": "10.1093/ssjj/jyv015",
     "doi": "10.1093/ssjj/jyv015",
     "title": "Japan’s Ainu Minority in Tokyo: Diasporic Indigeneity and Urban Politics",
@@ -12520,6 +12580,40 @@
     ],
     "venue": "Social Science Japan Journal",
     "url": "https://doi.org/10.1093/ssjj/jyv015",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.2330/joralbiosci1965.13.504",
+    "doi": "10.2330/joralbiosci1965.13.504",
+    "title": "On the accessory foramen near infraorbital foramen in Ainu skulls (SHIZUNAI)",
+    "year": 1971,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "F. NAKANE"
+    ],
+    "venue": "Japanese Journal of Oral Biology",
+    "url": "https://doi.org/10.2330/joralbiosci1965.13.504",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1534/genetics.115.178673",
+    "doi": "10.1534/genetics.115.178673",
+    "title": "Deep History of East Asian Populations Revealed Through Genetic Analysis of the Ainu",
+    "year": 2015,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Choongwon Jeong",
+      "Shigeki Nakagome",
+      "Anna Di Rienzo"
+    ],
+    "venue": "Genetics",
+    "url": "https://doi.org/10.1534/genetics.115.178673",
     "pdf": null
   },
   {
@@ -12557,18 +12651,38 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.2330/joralbiosci1965.13.504",
-    "doi": "10.2330/joralbiosci1965.13.504",
-    "title": "On the accessory foramen near infraorbital foramen in Ainu skulls (SHIZUNAI)",
-    "year": 1971,
-    "type": "grammar-article",
-    "rawType": "journal-article",
+    "externalId": "10.4324/9780203730966-14",
+    "doi": "10.4324/9780203730966-14",
+    "title": "Paradoxes and prospects of repatriation to the Ainu",
+    "year": 2020,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "F. NAKANE"
+      "Tsuyoshi Hirata",
+      "Ryūkichi Ogawa",
+      "Yūji Shimizu",
+      "Tsugio Kuzuno",
+      "Jeff Gayman"
     ],
-    "venue": "Japanese Journal of Oral Biology",
-    "url": "https://doi.org/10.2330/joralbiosci1965.13.504",
+    "venue": "The Routledge Companion to Indigenous Repatriation",
+    "url": "https://doi.org/10.4324/9780203730966-14",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.70249/9798893980103",
+    "doi": "10.70249/9798893980103",
+    "title": "Ainu of Northern Japan",
+    "year": 1960,
+    "type": "grammar-book",
+    "rawType": "edited-book",
+    "language": null,
+    "authors": [
+      "Takakura Shinichiro"
+    ],
+    "venue": null,
+    "url": "https://doi.org/10.70249/9798893980103",
     "pdf": null
   },
   {
@@ -12605,66 +12719,36 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.5771/0257-9774-2015-2-628",
-    "doi": "10.5771/0257-9774-2015-2-628",
-    "title": "Hudson, Mark J., Ann-Elise Lewallen, and Mark K. Watson (eds.): Beyond Ainu Studies. Changing Academic and Public Perspectives",
-    "year": 2015,
+    "externalId": "10.1080/14672715.2015.1131400",
+    "doi": "10.1080/14672715.2015.1131400",
+    "title": "“Clamoring Blood”: The Materiality of Belonging in Modern Ainu Identity",
+    "year": 2016,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Katarina Sjöberg"
+      "ann-elise lewallen"
     ],
-    "venue": "Anthropos",
-    "url": "https://doi.org/10.5771/0257-9774-2015-2-628",
+    "venue": "Critical Asian Studies",
+    "url": "https://doi.org/10.1080/14672715.2015.1131400",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.1080/1362102032000134976",
-    "doi": "10.1080/1362102032000134976",
-    "title": "The limits to citizenship in Japan: multiculturalism, indigenous rights and the Ainu",
-    "year": 2003,
+    "externalId": "10.26742/panggung.v30i2.1205",
+    "doi": "10.26742/panggung.v30i2.1205",
+    "title": "Gastronomi dalam Cerita Rakyat Ainu Jepang",
+    "year": 2020,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Richard Siddle"
+      "Ida Ayu Laksmita Sari",
+      "I Nyoman Darma Putra",
+      "Ni Luh Kade Yuliani Giri"
     ],
-    "venue": "Citizenship Studies",
-    "url": "https://doi.org/10.1080/1362102032000134976",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1080/0955580022000008763",
-    "doi": "10.1080/0955580022000008763",
-    "title": "An epoch-making event? The 1997 Ainu Cultural Promotion Act and its impact",
-    "year": 2002,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Richard Siddle"
-    ],
-    "venue": "Japan Forum",
-    "url": "https://doi.org/10.1080/0955580022000008763",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1515/fabula-2025-0011",
-    "doi": "10.1515/fabula-2025-0011",
-    "title": "Erzählungen der Ainu. Zur Edition von Folkloretexten aus dem Nachlass Gerhard Hubers O.F.M.",
-    "year": 2025,
-    "type": "grammar-article",
-    "rawType": "journal-article",
-    "language": null,
-    "authors": [
-      "Michael Knüppel"
-    ],
-    "venue": "Fabula",
-    "url": "https://doi.org/10.1515/fabula-2025-0011",
+    "venue": "Panggung",
+    "url": "https://doi.org/10.26742/panggung.v30i2.1205",
     "pdf": null
   },
   {
@@ -12704,18 +12788,18 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1080/14672715.2015.1131400",
-    "doi": "10.1080/14672715.2015.1131400",
-    "title": "“Clamoring Blood”: The Materiality of Belonging in Modern Ainu Identity",
-    "year": 2016,
+    "externalId": "10.1080/1362102032000134976",
+    "doi": "10.1080/1362102032000134976",
+    "title": "The limits to citizenship in Japan: multiculturalism, indigenous rights and the Ainu",
+    "year": 2003,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "ann-elise lewallen"
+      "Richard Siddle"
     ],
-    "venue": "Critical Asian Studies",
-    "url": "https://doi.org/10.1080/14672715.2015.1131400",
+    "venue": "Citizenship Studies",
+    "url": "https://doi.org/10.1080/1362102032000134976",
     "pdf": null
   },
   {
@@ -12753,35 +12837,34 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.4324/9780429400834-11",
-    "doi": "10.4324/9780429400834-11",
-    "title": "Questioning current issues in the higher education sector for Japan’s Ainu People",
-    "year": 2020,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Jeffrey J. Gayman",
-      "Masayuki Ueno"
-    ],
-    "venue": "Post-Imperial Perspectives on Indigenous Education",
-    "url": "https://doi.org/10.4324/9780429400834-11",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1080/14672710701686026",
-    "doi": "10.1080/14672710701686026",
-    "title": "BONES OF CONTENTION: Negotiating Anthropological Ethics within Fields of Ainu Refusal",
-    "year": 2007,
+    "externalId": "10.63428/vd5gj438",
+    "doi": "10.63428/vd5gj438",
+    "title": "Book Review: The Fabric of Indigeneity: Ainu Identity, Gender, and Settler Colonialism in Japan by Ann-Elise Lewallen",
+    "year": 2025,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "ann-elise lewallen"
+      "Bertha Miller"
     ],
-    "venue": "Critical Asian Studies",
-    "url": "https://doi.org/10.1080/14672710701686026",
+    "venue": "Fourth World Journal",
+    "url": "https://doi.org/10.63428/vd5gj438",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1111/muan.12168",
+    "doi": "10.1111/muan.12168",
+    "title": "Marking Ownership on Ainu Objects: Three Museum Collections in the United States",
+    "year": 2018,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "Christopher B. Lowman"
+    ],
+    "venue": "Museum Anthropology",
+    "url": "https://doi.org/10.1111/muan.12168",
     "pdf": null
   },
   {
@@ -12870,67 +12953,67 @@
   },
   {
     "source": "crossref",
-    "externalId": "10.1111/muan.12168",
-    "doi": "10.1111/muan.12168",
-    "title": "Marking Ownership on Ainu Objects: Three Museum Collections in the United States",
-    "year": 2018,
-    "type": "grammar-article",
-    "rawType": "journal-article",
+    "externalId": "10.1163/9789004314399_007",
+    "doi": "10.1163/9789004314399_007",
+    "title": "Threats to Human Security Imposed on the Ainu in Biratori, Hokkaido, Japan",
+    "year": 2016,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "Christopher B. Lowman"
+      "Hiroshi Maruyama"
     ],
-    "venue": "Museum Anthropology",
-    "url": "https://doi.org/10.1111/muan.12168",
+    "venue": "Understanding the Many Faces of Human Security",
+    "url": "https://doi.org/10.1163/9789004314399_007",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.1086/soutjanth.5.4.3628594",
-    "doi": "10.1086/soutjanth.5.4.3628594",
-    "title": "The Concepts behind the Ainu Bear Festival (Kumamatsuri)",
-    "year": 1949,
-    "type": "grammar-article",
-    "rawType": "journal-article",
+    "externalId": "10.4324/9780429400834-11",
+    "doi": "10.4324/9780429400834-11",
+    "title": "Questioning current issues in the higher education sector for Japan’s Ainu People",
+    "year": 2020,
+    "type": "grammar-book",
+    "rawType": "book-chapter",
     "language": null,
     "authors": [
-      "Kyōsuke Kindaichi",
-      "Minori Yoshida"
+      "Jeffrey J. Gayman",
+      "Masayuki Ueno"
     ],
-    "venue": "Southwestern Journal of Anthropology",
-    "url": "https://doi.org/10.1086/soutjanth.5.4.3628594",
+    "venue": "Post-Imperial Perspectives on Indigenous Education",
+    "url": "https://doi.org/10.4324/9780429400834-11",
     "pdf": null
   },
   {
     "source": "crossref",
-    "externalId": "10.63428/vd5gj438",
-    "doi": "10.63428/vd5gj438",
-    "title": "Book Review: The Fabric of Indigeneity: Ainu Identity, Gender, and Settler Colonialism in Japan by Ann-Elise Lewallen",
+    "externalId": "10.1080/14672710701686026",
+    "doi": "10.1080/14672710701686026",
+    "title": "BONES OF CONTENTION: Negotiating Anthropological Ethics within Fields of Ainu Refusal",
+    "year": 2007,
+    "type": "grammar-article",
+    "rawType": "journal-article",
+    "language": null,
+    "authors": [
+      "ann-elise lewallen"
+    ],
+    "venue": "Critical Asian Studies",
+    "url": "https://doi.org/10.1080/14672710701686026",
+    "pdf": null
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1515/fabula-2025-0011",
+    "doi": "10.1515/fabula-2025-0011",
+    "title": "Erzählungen der Ainu. Zur Edition von Folkloretexten aus dem Nachlass Gerhard Hubers O.F.M.",
     "year": 2025,
     "type": "grammar-article",
     "rawType": "journal-article",
     "language": null,
     "authors": [
-      "Bertha Miller"
+      "Michael Knüppel"
     ],
-    "venue": "Fourth World Journal",
-    "url": "https://doi.org/10.63428/vd5gj438",
-    "pdf": null
-  },
-  {
-    "source": "crossref",
-    "externalId": "10.1163/9789004300439_003",
-    "doi": "10.1163/9789004300439_003",
-    "title": "2 Hokkaido Island: Ainu",
-    "year": 2015,
-    "type": "grammar-book",
-    "rawType": "book-chapter",
-    "language": null,
-    "authors": [
-      "Richard Zgusta"
-    ],
-    "venue": "The Peoples of Northeast Asia through Time",
-    "url": "https://doi.org/10.1163/9789004300439_003",
+    "venue": "Fabula",
+    "url": "https://doi.org/10.1515/fabula-2025-0011",
     "pdf": null
   },
   {
@@ -45128,5 +45211,321 @@
     "venue": null,
     "url": "https://pub.sgu.ac.jp/~ainu/biblio/japanese.html",
     "pdf": null
+  },
+  {
+    "source": "honkoku",
+    "externalId": "0916dafb80cdc48ca7687afcad4a4f35",
+    "doi": null,
+    "title": "蝦夷記行",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "honkoku-entry",
+    "language": "ja",
+    "authors": [
+      "間宮林藏[著]"
+    ],
+    "venue": "龍谷大学図書館",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/0916dafb80cdc48ca7687afcad4a4f35",
+        "label": "みんなで翻刻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://da.library.ryukoku.ac.jp/iiif/170161/1/manifest.json",
+        "label": "龍谷大学図書館"
+      }
+    ]
+  },
+  {
+    "source": "honkoku",
+    "externalId": "28556c9ece7f2b208437d213ad5f7dd8",
+    "doi": null,
+    "title": "北海随筆",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "honkoku-entry",
+    "language": "ja",
+    "authors": [
+      "板倉／源次郎"
+    ],
+    "venue": "筑波大学附属図書館 国文学研究資料館",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/28556c9ece7f2b208437d213ad5f7dd8",
+        "label": "みんなで翻刻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100334875/manifest",
+        "label": "筑波大学附属図書館 国文学研究資料館"
+      }
+    ]
+  },
+  {
+    "source": "honkoku",
+    "externalId": "3daea514503efa7c8ec5ccc61c9be9d8",
+    "doi": null,
+    "title": "蝦夷方言藻汐草 乾巻",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "honkoku-entry",
+    "language": "ja",
+    "authors": [
+      "上原熊次郎"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/3daea514503efa7c8ec5ccc61c9be9d8",
+        "label": "みんなで翻刻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://dglb01.ninjal.ac.jp/ninjaldl/ezomosio/001/manifest.json",
+        "label": "IIIF manifest"
+      }
+    ]
+  },
+  {
+    "source": "honkoku",
+    "externalId": "60cea8fb013aea6ece937dde8bffc2bb",
+    "doi": null,
+    "title": "蝦夷草紙",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "honkoku-entry",
+    "language": "ja",
+    "authors": [
+      "最上 徳内"
+    ],
+    "venue": "国文学研究資料館",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/60cea8fb013aea6ece937dde8bffc2bb",
+        "label": "みんなで翻刻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/200019346/manifest",
+        "label": "国文学研究資料館"
+      }
+    ]
+  },
+  {
+    "source": "honkoku",
+    "externalId": "62c6743982041882d0aefd6582ac6a84",
+    "doi": null,
+    "title": "蝦夷方言藻汐草 坤巻",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "honkoku-entry",
+    "language": "ja",
+    "authors": [
+      "上原熊次郎"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/62c6743982041882d0aefd6582ac6a84",
+        "label": "みんなで翻刻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://dglb01.ninjal.ac.jp/ninjaldl/ezomosio/002/manifest.json",
+        "label": "IIIF manifest"
+      }
+    ]
+  },
+  {
+    "source": "honkoku",
+    "externalId": "83b29132c6d01a596a847de5ba3b0b0d",
+    "doi": null,
+    "title": "蝦夷方言",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "honkoku-entry",
+    "language": "ja",
+    "authors": [],
+    "venue": "Nationaal Museum van Wereldculturen (Rijksmuseum Volkenkunde, Leiden)",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/83b29132c6d01a596a847de5ba3b0b0d",
+        "label": "みんなで翻刻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://www.dh-jac.net/db1/books/RV-578-131-/portal/manifest.json",
+        "label": "Nationaal Museum van Wereldculturen (Rijksmuseum Volkenkunde, Leiden)"
+      }
+    ]
+  },
+  {
+    "source": "honkoku",
+    "externalId": "9987c791c64b854f7fadde0412de937a",
+    "doi": null,
+    "title": "蝦夷草紙",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "honkoku-entry",
+    "language": "ja",
+    "authors": [
+      "最上徳内著"
+    ],
+    "venue": "龍谷大学図書館",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/9987c791c64b854f7fadde0412de937a",
+        "label": "みんなで翻刻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://da.library.ryukoku.ac.jp/iiif/170155/1/manifest.json",
+        "label": "龍谷大学図書館"
+      }
+    ]
+  },
+  {
+    "source": "honkoku",
+    "externalId": "a3013422bbda9107097d0fa32db5da97",
+    "doi": null,
+    "title": "蝦夷奇観",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "honkoku-entry",
+    "language": "ja",
+    "authors": [
+      "秦 檍丸"
+    ],
+    "venue": "北海道大学附属図書館 国文学研究資料館",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/a3013422bbda9107097d0fa32db5da97",
+        "label": "みんなで翻刻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100348684/manifest",
+        "label": "北海道大学附属図書館 国文学研究資料館"
+      }
+    ]
+  },
+  {
+    "source": "kokusho",
+    "externalId": "100081128",
+    "doi": null,
+    "title": "蝦夷語箋",
+    "year": 1854,
+    "type": "grammar-book",
+    "rawType": "kokusho-record",
+    "language": "ja",
+    "authors": [
+      "上原 有次(上原 熊次郎)"
+    ],
+    "venue": "阪大忍頂寺",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100081128/manifest",
+        "label": "阪大忍頂寺"
+      },
+      {
+        "type": "website",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100081128",
+        "label": "国書データベース"
+      }
+    ]
+  },
+  {
+    "source": "kokusho",
+    "externalId": "100348736",
+    "doi": null,
+    "title": "蝦夷方言藻汐草",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "kokusho-record",
+    "language": "ja",
+    "authors": [
+      "上原 熊次郎",
+      "阿部 長三郎"
+    ],
+    "venue": "北大図",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100348736/manifest",
+        "label": "北大図"
+      },
+      {
+        "type": "website",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100348736",
+        "label": "国書データベース"
+      }
+    ]
+  },
+  {
+    "source": "kokusho",
+    "externalId": "100226198",
+    "doi": null,
+    "title": "蝦夷記",
+    "year": null,
+    "type": "grammar-book",
+    "rawType": "manuscript",
+    "language": "ja",
+    "authors": [],
+    "venue": "酒田光丘",
+    "url": null,
+    "pdf": null,
+    "category": "primary",
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100226198/manifest",
+        "label": "酒田光丘"
+      },
+      {
+        "type": "website",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100226198",
+        "label": "国書データベース"
+      }
+    ]
   }
 ]

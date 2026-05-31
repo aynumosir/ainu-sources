@@ -234,12 +234,15 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		遠藤志保: { nameEn: 'Endo Shiho', researchmap: 'hacrc_hm' },
 		'北原モコットゥナㇱ': { nameEn: 'Mokottunas Kitahara', researchmap: '1976' },
 		小野洋平: { nameEn: 'Ono Yohei', researchmap: 'ono_yohei' },
+		切替英雄: { nameEn: 'Kirikae Hideo', researchmap: 'read0049566' }, // verified api.researchmap.jp 切替/英雄
+		大坂拓: { nameEn: 'Osaka Taku', researchmap: 'osaka_taku' }, // verified api.researchmap.jp 大坂/拓
 		'Anna Bugaeva': { researchmap: 'read0144912' },
 		// keyed by canonical slug so it applies no matter which name form created the person
 		'sato-tomomi': { researchmap: 'ainlingsat' },
 		'nakagawa-hiroshi': { researchmap: 'read0064265' },
 		'fukazawa-mika': { researchmap: 'mkfk' },
-		'bugaeva-anna': { researchmap: 'read0144912' }
+		'bugaeva-anna': { researchmap: 'read0144912' },
+		'kirikae-hideo': { nameEn: 'Kirikae Hideo', researchmap: 'read0049566' }
 	};
 
 // Japanese personal names that arrived without the conventional space between
@@ -413,6 +416,12 @@ function parsePersonName(raw: string): { name: string; nameEn: string | null } {
 		nameEn = main;
 	}
 
+	// CJK "姓, 名" (Crossref/OpenAlex export form) → "姓 名" so it merges with the
+	// space-separated form already in the DB (中川, 裕 ⇒ 中川 裕).
+	if (KANA_KANJI.test(name) && name.includes(',')) {
+		name = name.replace(/\s*,\s*/g, ' ').replace(/\s+/g, ' ').trim();
+	}
+
 	// "Surname, Given" → "Given Surname" for clean Latin personal names
 	if (!KANA_KANJI.test(name)) {
 		const ci = name.indexOf(',');
@@ -434,7 +443,9 @@ function getPerson(name: string): string {
 	const parsed = parsePersonName(name);
 	const display = parsed.name;
 	const canon = canonicalSlugFor(name.trim()) ?? canonicalSlugFor(display);
-	const key = canon ? `canon:${canon}` : display;
+	// CJK names key space-insensitively so "大坂 拓" (OpenAlex/CiNii) and "大坂拓"
+	// (catalog) collapse to one person even without an explicit alias.
+	const key = canon ? `canon:${canon}` : KANA_KANJI.test(display) ? display.replace(/\s+/g, '') : display;
 	const existing = personByKey.get(key);
 	if (existing) return existing;
 	// Hand-verified enrichment (romaji / researchmap / wikidata), matched on either
@@ -569,6 +580,29 @@ function addPersons(sourceId: string, author: string | null | undefined, role = 
 	parts.forEach((name, i) => {
 		sourcePersonRows.push({ id: uuid(), sourceId, personId: getPerson(name), role, sortOrder: i });
 	});
+}
+
+// Academic authors become person entities only above a prominence threshold, so
+// /people stays curated (long-tail one-off authors remain free-text). Institutions
+// masquerading as authors are excluded.
+const INSTITUTION_RE = /協会|センター|委員会|大学|研究所|博物館|教育委員会|学会|財団|館$|会$|編集部|研究会|資料室|室$|Museum|University|Institute|Association|Foundation|Center|Society/i;
+function simplePersonKey(name: string): string {
+	return stripParens(name).replace(/[\s　,，、.．]+/g, '').trim();
+}
+function authorParts(author: string): string[] {
+	return author
+		.split(/\s*[&;]\s*|、|，|\s+and\s+/)
+		.flatMap(splitNakaguro)
+		.map((s) => s.trim())
+		.filter(Boolean);
+}
+function addPersonsGated(sourceId: string, authors: string[], allow: Set<string>, role = 'author') {
+	let i = 0;
+	for (const a of authors)
+		for (const name of authorParts(a)) {
+			if (INSTITUTION_RE.test(name) || !allow.has(simplePersonKey(name))) continue;
+			sourcePersonRows.push({ id: uuid(), sourceId, personId: getPerson(name), role, sortOrder: i++ });
+		}
 }
 
 function addPlaces(sourceId: string, dialect: string | null | undefined, role = 'dialect') {
@@ -1144,6 +1178,24 @@ function normTitle(s: string): string {
 		.trim();
 }
 
+// Fuzzy work-key for matching a digitised witness to its catalogued original:
+// drop （holding library） parens and trailing volume markers (乾/坤/上/下/巻/冊…).
+function coreKey(s: string): string {
+	const stripped = (s || '')
+		.replace(/[（(][^）)]*[)）]/g, '')
+		.replace(/[\s　]+/g, '')
+		.replace(/(乾巻|坤巻|乾|坤|上巻|下巻|上|下|前編|後編|[全]?[一二三四五六七八九十百\d]+巻|巻[上中下一二三四五六七八九十\d]*|[一二三四五六七八九十\d]+冊|第[一二三四五六七八九十\d]+冊?)$/u, '');
+	return normTitle(stripped);
+}
+
+// Script(s) for an imported academic record. Japanese/Chinese titles are written
+// in kanji(+kana), Russian in Cyrillic; romanised studies stay Latin.
+function scriptsForAcademic(title: string, metalang: string | null): string[] {
+	if (metalang === 'rus') return ['cyrl'];
+	if (hasCJK(title)) return metalang === 'zho' ? ['kanji'] : ['kanji', 'kana'];
+	return ['latn'];
+}
+
 function seedAcademic(): { added: number; skipped: number } {
 	if (!fs.existsSync(ACADEMIC_FILE)) {
 		console.warn(`! academic index not found at ${ACADEMIC_FILE} — run collect-academic.ts; skipping`);
@@ -1154,30 +1206,72 @@ function seedAcademic(): { added: number; skipped: number } {
 		year: number | null; type: string; language: string | null;
 		authors: string[]; venue: string | null; url: string | null; pdf: string | null;
 		category?: string;
+		links?: { type: string; url: string; label?: string | null }[];
 	}
 	const records: Rec[] = JSON.parse(fs.readFileSync(ACADEMIC_FILE, 'utf8'));
 
-	// Dedup keys from everything already loaded.
-	const seenTitles = new Set<string>();
-	const seenDois = new Set<string>();
+	// Prominence pre-pass: an author is promoted to a person entity only with ≥3
+	// works in the index (keeps /people curated; merging/researchmap come via
+	// getPerson/PERSON_ENRICH). Counted on a space/comma-insensitive key.
+	const AUTHOR_MIN_WORKS = 3;
+	const authorCount = new Map<string, number>();
+	for (const rec of records)
+		for (const a of rec.authors ?? [])
+			for (const part of authorParts(String(a))) {
+				if (INSTITUTION_RE.test(part)) continue;
+				const k = simplePersonKey(part);
+				if (k) authorCount.set(k, (authorCount.get(k) ?? 0) + 1);
+			}
+	const prominentAuthors = new Set([...authorCount].filter(([, n]) => n >= AUTHOR_MIN_WORKS).map(([k]) => k));
+
+	// Dedup + enrichment indexes from everything already loaded. On a collision we
+	// don't merely drop the record — if it carries typed `links` (a Honkoku
+	// transcription, a Kokusho IIIF manifest…) we graft those onto the existing
+	// source, so a digitisation of a book we already hold becomes a resource ON
+	// that book. Records with links also match by a fuzzy `coreKey` (volume- and
+	// holding-suffix-stripped) so 「藻汐草　乾巻」 lands on 「蝦夷方言藻汐草」.
+	const idByTitle = new Map<string, string>();
+	const idByDoi = new Map<string, string>();
+	const idByCore = new Map<string, string>();
+	const linkSeen = new Set<string>();
 	for (const r of sourceRows) {
-		seenTitles.add(normTitle(r.title as string));
-		if (r.titleEn) seenTitles.add(normTitle(r.titleEn as string));
+		const t = normTitle(r.title as string);
+		if (t) { idByTitle.set(t, r.id as string); idByCore.set(coreKey(r.title as string), r.id as string); }
+		if (r.titleEn) { const te = normTitle(r.titleEn as string); if (te) idByTitle.set(te, r.id as string); }
 		const ext = r.externalIds as Record<string, string> | undefined;
-		if (ext?.doi) seenDois.add(ext.doi.toLowerCase());
+		if (ext?.doi) idByDoi.set(ext.doi.toLowerCase(), r.id as string);
 	}
+	for (const l of linkRows) linkSeen.add(`${l.sourceId}\t${l.url}`);
+
+	const addLink = (sourceId: string, type: string, url: string | null | undefined, label: string | null | undefined, so: number) => {
+		if (!url) return;
+		const k = `${sourceId}\t${url}`;
+		if (linkSeen.has(k)) return;
+		linkSeen.add(k);
+		linkRows.push({ id: uuid(), sourceId, type, label: label ?? null, url, sortOrder: so });
+	};
 
 	let added = 0;
+	let enriched = 0;
 	let skipped = 0;
 	for (const rec of records) {
 		const nt = normTitle(rec.title);
 		const doi = rec.doi?.toLowerCase() ?? null;
-		if (!nt || seenTitles.has(nt) || (doi && seenDois.has(doi))) {
+		const hasLinks = !!(rec.links?.length || rec.pdf);
+		const existingId =
+			(doi ? idByDoi.get(doi) : undefined) ??
+			(nt ? idByTitle.get(nt) : undefined) ??
+			(hasLinks ? idByCore.get(coreKey(rec.title)) : undefined); // fuzzy only when there's something to graft
+		if (!nt || existingId) {
+			if (existingId && hasLinks) {
+				let so = 50;
+				for (const l of rec.links ?? []) addLink(existingId, l.type, l.url, l.label, so++);
+				if (rec.pdf) addLink(existingId, 'pdf', rec.pdf, 'Open access PDF', so++);
+				enriched += 1;
+			}
 			skipped += 1;
 			continue;
 		}
-		seenTitles.add(nt);
-		if (doi) seenDois.add(doi);
 
 		const id = uuid();
 		const y = parseYear(rec.year != null ? String(rec.year) : '');
@@ -1195,7 +1289,7 @@ function seedAcademic(): { added: number; skipped: number } {
 			author: rec.authors.join(', ') || null,
 			...y,
 			languages: metalang ? ['ain', metalang] : ['ain'],
-			scripts: ['latn'],
+			scripts: scriptsForAcademic(rec.title, metalang),
 			summary: rec.venue ?? null,
 			provenanceRepo: rec.source,
 			provenancePath: rec.externalId,
@@ -1203,12 +1297,19 @@ function seedAcademic(): { added: number; skipped: number } {
 			createdAt: new Date(),
 			updatedAt: new Date()
 		});
+		idByTitle.set(nt, id);
+		idByCore.set(coreKey(rec.title), id);
+		if (doi) idByDoi.set(doi, id);
 		let so = 0;
-		if (rec.url) linkRows.push({ id: uuid(), sourceId: id, type: doi ? 'doi' : 'website', label: doi ? `doi:${rec.doi}` : rec.venue, url: rec.url, sortOrder: so++ });
-		if (rec.pdf) linkRows.push({ id: uuid(), sourceId: id, type: 'pdf', label: 'Open access PDF', url: rec.pdf, sortOrder: so++ });
+		if (rec.url) addLink(id, doi ? 'doi' : 'website', rec.url, doi ? `doi:${rec.doi}` : rec.venue, so++);
+		if (rec.pdf) addLink(id, 'pdf', rec.pdf, 'Open access PDF', so++);
+		for (const l of rec.links ?? []) addLink(id, l.type, l.url, l.label, so++);
+		addPersonsGated(id, rec.authors ?? [], prominentAuthors);
 		attachTags(id, rec.title, 'grammar');
 		added += 1;
 	}
+	if (enriched) console.log(`  academic: enriched ${enriched} existing source(s) with IIIF/transcription links`);
+	console.log(`  academic: ${prominentAuthors.size} authors promoted to person entities (≥${AUTHOR_MIN_WORKS} works)`);
 	return { added, skipped };
 }
 
