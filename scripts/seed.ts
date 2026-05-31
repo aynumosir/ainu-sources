@@ -1137,7 +1137,10 @@ function normTitle(s: string): string {
 		.normalize('NFKD')
 		.replace(/[̀-ͯ]/g, '')
 		.toLowerCase()
-		.replace(/[^a-z0-9぀-ヿ一-龯Ѐ-ӿ]+/g, '')
+		// Keep Latin, kana, Han, Cyrillic AND Hangul (NFKD decomposes Korean
+		// syllables to conjoining jamo U+1100–U+11FF) — else Korean/Russian titles
+		// normalize to '' and either collapse on dedup or get dropped at seed.
+		.replace(/[^a-z0-9぀-ヿ一-龯Ѐ-ӿᄀ-ᇿ가-힣]+/g, '')
 		.trim();
 }
 
@@ -1150,6 +1153,7 @@ function seedAcademic(): { added: number; skipped: number } {
 		source: string; externalId: string; doi: string | null; title: string;
 		year: number | null; type: string; language: string | null;
 		authors: string[]; venue: string | null; url: string | null; pdf: string | null;
+		category?: string;
 	}
 	const records: Rec[] = JSON.parse(fs.readFileSync(ACADEMIC_FILE, 'utf8'));
 
@@ -1186,7 +1190,7 @@ function seedAcademic(): { added: number; skipped: number } {
 			slug,
 			title: rec.title,
 			titleEn: hasCJK(rec.title) ? null : rec.title,
-			category: 'secondary',
+			category: rec.category === 'primary' ? 'primary' : 'secondary',
 			type: rec.type,
 			author: rec.authors.join(', ') || null,
 			...y,
