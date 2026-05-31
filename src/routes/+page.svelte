@@ -4,7 +4,7 @@
 	import SourceCard from '$lib/components/SourceCard.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import SearchBox from '$lib/components/SearchBox.svelte';
-	import { tl, REGION_LABELS, TYPE_LABELS } from '$lib/constants';
+	import { tl, REGION_LABELS, TYPE_LABELS, LANGUAGE_LABELS } from '$lib/constants';
 
 	let { data } = $props();
 	const { stats, recent, timeline } = $derived(data);
@@ -38,6 +38,9 @@
 
 	const typeRows = $derived(stats.byType.filter((b) => b.key));
 	const typeMax = $derived(Math.max(1, ...typeRows.map((b) => b.count)));
+
+	const languageRows = $derived(stats.byLanguage.filter((b) => b.key));
+	const languageMax = $derived(Math.max(1, ...languageRows.map((b) => b.count)));
 </script>
 
 <svelte:head><title>{m.site_title()} · {m.site_short()}</title></svelte:head>
@@ -45,7 +48,11 @@
 <!-- Hero -->
 <section class="bg-paper">
 	<div class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
-		<h1 class="max-w-3xl font-serif text-4xl font-bold leading-tight text-ink sm:text-5xl">
+		<!-- word-break:keep-all + the U+200B breaks in the JA string restrict Japanese
+		     line breaks to 文節 boundaries; no effect on en/ru/ain (keep-all == normal there). -->
+		<h1
+			class="max-w-3xl font-serif text-4xl font-bold leading-tight text-ink [word-break:keep-all] sm:text-5xl"
+		>
 			{m.home_hero_title()}
 		</h1>
 		<p class="mt-5 max-w-2xl text-lg leading-relaxed text-stone-600">{m.home_hero_lead()}</p>
@@ -131,6 +138,28 @@
 					</a>
 				{/each}
 			</div>
+		</div>
+	</section>
+
+	<!-- By written language -->
+	<section>
+		<h2 class="font-serif text-2xl font-bold text-ink">{m.home_by_language()}</h2>
+		<div class="mt-6 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+			{#each languageRows as row (row.key)}
+				<a
+					href={localizeHref('/sources?languages=' + row.key)}
+					class="group flex items-center gap-3 rounded-lg px-2 py-1.5 transition hover:bg-stone-100"
+				>
+					<span class="w-28 shrink-0 truncate text-sm text-ink">{tl(LANGUAGE_LABELS, row.key)}</span>
+					<span class="relative h-2.5 flex-1 overflow-hidden rounded-full bg-stone-100">
+						<span
+							class="absolute inset-y-0 left-0 rounded-full bg-brand-400 transition group-hover:bg-brand-600"
+							style="width:{(row.count / languageMax) * 100}%"
+						></span>
+					</span>
+					<span class="tnum w-12 shrink-0 text-right text-sm text-stone-500">{num(row.count)}</span>
+				</a>
+			{/each}
 		</div>
 	</section>
 

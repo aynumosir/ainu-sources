@@ -86,6 +86,7 @@ export interface DbStats {
 	byCategory: FacetBucket[];
 	byRegion: FacetBucket[];
 	byType: FacetBucket[];
+	byLanguage: FacetBucket[];
 	personCount: number;
 	placeCount: number;
 	institutionCount: number;

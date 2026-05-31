@@ -71,7 +71,14 @@ export const LANGUAGE_LABELS: Record<string, L> = {
 	rus: { en: 'Russian', ja: 'ロシア語', ru: 'Русский', ain: 'Nuca itak' },
 	eng: { en: 'English', ja: '英語', ru: 'Английский' },
 	lat: { en: 'Latin', ja: 'ラテン語', ru: 'Латинский' },
-	zho: { en: 'Chinese', ja: '中国語', ru: 'Китайский' }
+	zho: { en: 'Chinese', ja: '中国語', ru: 'Китайский' },
+	kor: { en: 'Korean', ja: '韓国語', ru: 'Корейский' },
+	deu: { en: 'German', ja: 'ドイツ語', ru: 'Немецкий' },
+	fra: { en: 'French', ja: 'フランス語', ru: 'Французский' },
+	spa: { en: 'Spanish', ja: 'スペイン語', ru: 'Испанский' },
+	ita: { en: 'Italian', ja: 'イタリア語', ru: 'Итальянский' },
+	pol: { en: 'Polish', ja: 'ポーランド語', ru: 'Польский' },
+	nld: { en: 'Dutch', ja: 'オランダ語', ru: 'Нидерландский' }
 };
 
 // --- scripts (文字体系) ---

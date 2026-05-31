@@ -47,7 +47,7 @@
 	"common_search": "検索",
 	"common_sources_n": "{count} 件の資料",
 
-	"home_hero_title": "アイヌ語のすべての資料を、ひとつの索引に",
+	"home_hero_title": "アイヌ語の​すべての​資料を、​ひとつの​索引に",
 	"home_hero_lead": "アイヌ語研究のための文献情報基盤。どこに、どんな資料があり、誰がどう読み、どんな研究があるのか——時代・地域・方言を横断して一望できます。",
 	"home_browse_cta": "すべての資料を見る",
 	"home_search_cta": "検索",
@@ -64,6 +64,7 @@
 	"home_by_period": "時代別",
 	"home_by_region": "地域別",
 	"home_by_type": "種別",
+	"home_by_language": "言語別",
 	"home_featured": "注目の資料",
 	"home_recent": "最近更新",
 	"home_explore_timeline": "年表を見る",

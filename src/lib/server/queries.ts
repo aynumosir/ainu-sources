@@ -313,7 +313,13 @@ export async function getSourceDetail(slug: string): Promise<SourceDetail | unde
 
 export async function getStats(): Promise<DbStats> {
 	const rows = await db
-		.select({ category: sources.category, region: sources.region, type: sources.type, yearStart: sources.yearStart })
+		.select({
+			category: sources.category,
+			region: sources.region,
+			type: sources.type,
+			languages: sources.languages,
+			yearStart: sources.yearStart
+		})
 		.from(sources);
 	const [pc, plc, ic, dig] = await Promise.all([
 		db.select({ n: count() }).from(persons),
@@ -327,6 +333,7 @@ export async function getStats(): Promise<DbStats> {
 		byCategory: tally(rows.map((r) => r.category)),
 		byRegion: tally(rows.map((r) => r.region ?? '')),
 		byType: tally(rows.map((r) => r.type)),
+		byLanguage: tally(rows.flatMap((r) => asArray(r.languages))),
 		personCount: pc[0]?.n ?? 0,
 		placeCount: plc[0]?.n ?? 0,
 		institutionCount: ic[0]?.n ?? 0,
