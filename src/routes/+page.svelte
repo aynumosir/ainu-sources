@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+	import { collectionPageJsonLd } from '$lib/seo';
 	import SourceCard from '$lib/components/SourceCard.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import SearchBox from '$lib/components/SearchBox.svelte';
@@ -8,6 +11,17 @@
 
 	let { data } = $props();
 	const { stats, recent, timeline } = $derived(data);
+
+	const origin = $derived(page.url.origin);
+	const seoJsonLd = $derived(
+		collectionPageJsonLd({
+			origin,
+			path: '/',
+			name: m.site_title(),
+			description: m.site_description(),
+			numberOfItems: stats.total
+		})
+	);
 
 	const num = (n: number | null | undefined) => (n ?? 0).toLocaleString('en-US');
 
@@ -43,7 +57,11 @@
 	const languageMax = $derived(Math.max(1, ...languageRows.map((b) => b.count)));
 </script>
 
-<svelte:head><title>{m.site_title()} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${m.site_title()} · ${m.site_short()}`}
+	description={m.site_description()}
+	jsonLd={seoJsonLd}
+/>
 
 <!-- Hero -->
 <section class="bg-paper">

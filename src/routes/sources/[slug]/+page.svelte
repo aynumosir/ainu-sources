@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+	import { sourceJsonLd, breadcrumbJsonLd, truncate } from '$lib/seo';
 	import Badge from '$lib/components/Badge.svelte';
 	import { formatYear, formatCount, asArray, youtubeId } from '$lib/format';
 	import {
@@ -19,6 +22,21 @@
 	let { data } = $props();
 	const d = $derived(data.detail);
 	const s = $derived(d.source);
+
+	const origin = $derived(page.url.origin);
+	const seoDescription = $derived(
+		s.summary?.trim()
+			? truncate(s.summary)
+			: `${tl(TYPE_LABELS, s.type)}${s.author ? ' · ' + s.author : ''} · ${formatYear(s)}`
+	);
+	const seoJsonLd = $derived([
+		sourceJsonLd(d, origin),
+		breadcrumbJsonLd(origin, [
+			{ name: m.site_short(), path: '/' },
+			{ name: m.nav_sources(), path: '/sources' },
+			{ name: s.title, path: `/sources/${s.slug}` }
+		])
+	]);
 	const langs = $derived(asArray(s.languages));
 	const scripts = $derived(asArray(s.scripts));
 	const alt = $derived(asArray(s.altTitles));
@@ -30,7 +48,12 @@
 	);
 </script>
 
-<svelte:head><title>{s.title} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${s.title} · ${m.site_short()}`}
+	description={seoDescription}
+	ogType="article"
+	jsonLd={seoJsonLd}
+/>
 
 <article class="mx-auto max-w-5xl px-4 py-8">
 	<a href={localizeHref('/sources')} class="text-sm text-stone-500 hover:text-brand-700"

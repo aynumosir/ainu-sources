@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+	import { institutionJsonLd, breadcrumbJsonLd } from '$lib/seo';
 	import { tl, TYPE_LABELS } from '$lib/constants';
 	import { formatYear } from '$lib/format';
 
@@ -10,9 +13,26 @@
 	const location = $derived(
 		[institution.city, institution.country].filter(Boolean).join(', ')
 	);
+
+	const origin = $derived(page.url.origin);
+	const seoDescription = $derived(
+		`${institution.nameEn && institution.nameEn !== institution.name ? institution.nameEn + ' — ' : ''}${location ? location + ' · ' : ''}${m.common_sources_n({ count: sources.length })}`
+	);
+	const seoJsonLd = $derived([
+		institutionJsonLd(institution, origin),
+		breadcrumbJsonLd(origin, [
+			{ name: m.site_short(), path: '/' },
+			{ name: m.institutions_title(), path: '/institutions' },
+			{ name: institution.name, path: `/institutions/${institution.slug}` }
+		])
+	]);
 </script>
 
-<svelte:head><title>{institution.name} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${institution.name} · ${m.site_short()}`}
+	description={seoDescription}
+	jsonLd={seoJsonLd}
+/>
 
 <article class="mx-auto max-w-5xl px-4 py-8">
 	<a href={localizeHref('/institutions')} class="text-sm text-stone-500 hover:text-brand-700"

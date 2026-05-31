@@ -1,10 +1,28 @@
 <script lang="ts">
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+	import { collectionPageJsonLd, breadcrumbJsonLd } from '$lib/seo';
 	import { tl, PERSON_ROLE_LABELS } from '$lib/constants';
 
 	let { data } = $props();
 	const people = $derived(data.people);
+
+	const origin = $derived(page.url.origin);
+	const seoJsonLd = $derived([
+		collectionPageJsonLd({
+			origin,
+			path: '/people',
+			name: m.people_title(),
+			description: m.people_lead(),
+			numberOfItems: people.length
+		}),
+		breadcrumbJsonLd(origin, [
+			{ name: m.site_short(), path: '/' },
+			{ name: m.people_title(), path: '/people' }
+		])
+	]);
 
 	function dates(p: { birthYear: number | null; deathYear: number | null }): string {
 		if (p.birthYear == null && p.deathYear == null) return '';
@@ -16,7 +34,11 @@
 	}
 </script>
 
-<svelte:head><title>{m.people_title()} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${m.people_title()} · ${m.site_short()}`}
+	description={m.people_lead()}
+	jsonLd={seoJsonLd}
+/>
 
 <div class="mx-auto max-w-5xl px-4 py-8">
 	<h1 class="font-serif text-3xl font-bold text-ink">{m.people_title()}</h1>

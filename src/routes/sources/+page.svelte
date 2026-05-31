@@ -2,6 +2,8 @@
 	import { page } from '$app/state';
 	import { localizeHref, deLocalizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import Seo from '$lib/components/Seo.svelte';
+	import { collectionPageJsonLd, breadcrumbJsonLd } from '$lib/seo';
 	import Facets from '$lib/components/Facets.svelte';
 	import SourceCard from '$lib/components/SourceCard.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
@@ -19,6 +21,21 @@
 	let { data } = $props();
 	const { filters, result, facets } = $derived(data);
 	const user = $derived(page.data.user);
+
+	const origin = $derived(page.url.origin);
+	const seoJsonLd = $derived([
+		collectionPageJsonLd({
+			origin,
+			path: '/sources',
+			name: m.nav_sources(),
+			description: m.site_description(),
+			numberOfItems: result.total
+		}),
+		breadcrumbJsonLd(origin, [
+			{ name: m.site_short(), path: '/' },
+			{ name: m.nav_sources(), path: '/sources' }
+		])
+	]);
 
 	const sortLabel: Record<string, () => string> = {
 		'year-asc': () => m.sort_year_asc(),
@@ -70,7 +87,11 @@
 	}
 </script>
 
-<svelte:head><title>{m.nav_sources()} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${m.nav_sources()} · ${m.site_short()}`}
+	description={`${m.results_count({ count: result.total })} · ${m.site_tagline()}`}
+	jsonLd={seoJsonLd}
+/>
 
 <div class="mx-auto max-w-6xl px-4 py-8">
 	<div class="flex flex-wrap items-end justify-between gap-3">

@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+	import { placeJsonLd, breadcrumbJsonLd } from '$lib/seo';
 	import Badge from '$lib/components/Badge.svelte';
 	import { formatYear } from '$lib/format';
 	import { tl, PLACE_ROLE_LABELS, REGION_LABELS, TYPE_LABELS } from '$lib/constants';
@@ -8,9 +11,26 @@
 	let { data } = $props();
 	const place = $derived(data.place);
 	const sources = $derived(data.sources);
+
+	const origin = $derived(page.url.origin);
+	const seoDescription = $derived(
+		`${place.nameEn && place.nameEn !== place.name ? place.nameEn + ' — ' : ''}${place.region ? tl(REGION_LABELS, place.region) + ' · ' : ''}${sources.length} ${m.place_sources()}`
+	);
+	const seoJsonLd = $derived([
+		placeJsonLd(place, origin),
+		breadcrumbJsonLd(origin, [
+			{ name: m.site_short(), path: '/' },
+			{ name: m.places_title(), path: '/places' },
+			{ name: place.name, path: `/places/${place.slug}` }
+		])
+	]);
 </script>
 
-<svelte:head><title>{place.name} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${place.name} · ${m.site_short()}`}
+	description={seoDescription}
+	jsonLd={seoJsonLd}
+/>
 
 <article class="mx-auto max-w-5xl px-4 py-8">
 	<a href={localizeHref('/places')} class="text-sm text-stone-500 hover:text-brand-700"

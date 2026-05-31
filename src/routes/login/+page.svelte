@@ -2,13 +2,14 @@
 	import { enhance } from '$app/forms';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let { data, form } = $props();
 	const inputCls =
 		'mt-1 w-full rounded-md border-stone-300 bg-white text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
-<svelte:head><title>{m.auth_login()} · {m.site_short()}</title></svelte:head>
+<Seo title={`${m.auth_login()} · ${m.site_short()}`} noindex />
 
 <div class="mx-auto flex max-w-sm flex-col px-4 py-12">
 	<h1 class="text-center font-serif text-2xl font-bold text-ink">{m.auth_login()}</h1>

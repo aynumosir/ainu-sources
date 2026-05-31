@@ -1,9 +1,33 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+	import { breadcrumbJsonLd, truncate, localizedAbs } from '$lib/seo';
+
+	const origin = $derived(page.url.origin);
+	const seoJsonLd = $derived([
+		{
+			'@context': 'https://schema.org',
+			'@type': 'AboutPage',
+			url: localizedAbs(origin, '/about'),
+			name: m.about_title(),
+			description: m.about_intro(),
+			isPartOf: { '@id': `${origin}/#website` }
+		},
+		breadcrumbJsonLd(origin, [
+			{ name: m.site_short(), path: '/' },
+			{ name: m.about_title(), path: '/about' }
+		])
+	]);
 </script>
 
-<svelte:head><title>{m.about_title()} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${m.about_title()} · ${m.site_short()}`}
+	description={truncate(m.about_intro())}
+	ogType="article"
+	jsonLd={seoJsonLd}
+/>
 
 <article class="mx-auto max-w-3xl px-4 py-10">
 	<header class="space-y-6">

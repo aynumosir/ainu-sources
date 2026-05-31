@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages.js';
+	import Seo from '$lib/components/Seo.svelte';
 	import SourceForm from '$lib/components/SourceForm.svelte';
 
 	let { form } = $props();
 </script>
 
-<svelte:head><title>{m.new_source_title()} · {m.site_short()}</title></svelte:head>
+<Seo title={`${m.new_source_title()} · ${m.site_short()}`} noindex />
 
 <div class="mx-auto max-w-3xl px-4 py-8">
 	<h1 class="font-serif text-3xl font-bold text-ink">{m.new_source_title()}</h1>

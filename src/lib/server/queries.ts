@@ -534,6 +534,28 @@ export async function listTags(): Promise<TagWithCount[]> {
 }
 
 // ---------------------------------------------------------------------------
+// Sitemap
+// ---------------------------------------------------------------------------
+
+export interface SitemapEntries {
+	sources: { slug: string; updatedAt: Date }[];
+	persons: { slug: string; updatedAt: Date }[];
+	places: { slug: string }[];
+	institutions: { slug: string }[];
+}
+
+/** Slugs (+ lastmod where available) for every public, indexable detail page. */
+export async function getSitemapEntries(): Promise<SitemapEntries> {
+	const [s, pe, pl, inst] = await Promise.all([
+		db.select({ slug: sources.slug, updatedAt: sources.updatedAt }).from(sources).orderBy(asc(sources.slug)),
+		db.select({ slug: persons.slug, updatedAt: persons.updatedAt }).from(persons).orderBy(asc(persons.slug)),
+		db.select({ slug: places.slug }).from(places).orderBy(asc(places.slug)),
+		db.select({ slug: institutions.slug }).from(institutions).orderBy(asc(institutions.slug))
+	]);
+	return { sources: s, persons: pe, places: pl, institutions: inst };
+}
+
+// ---------------------------------------------------------------------------
 // Quick search (for the live search box / API)
 // ---------------------------------------------------------------------------
 

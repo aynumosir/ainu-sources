@@ -1,10 +1,28 @@
 <script lang="ts">
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+	import { collectionPageJsonLd, breadcrumbJsonLd } from '$lib/seo';
 	import { tl, REGION_LABELS, REGION_ORDER } from '$lib/constants';
 
 	let { data } = $props();
 	const places = $derived(data.places);
+
+	const origin = $derived(page.url.origin);
+	const seoJsonLd = $derived([
+		collectionPageJsonLd({
+			origin,
+			path: '/places',
+			name: m.places_title(),
+			description: m.places_lead(),
+			numberOfItems: places.length
+		}),
+		breadcrumbJsonLd(origin, [
+			{ name: m.site_short(), path: '/' },
+			{ name: m.places_title(), path: '/places' }
+		])
+	]);
 
 	// Group places by region. Recognized keys come first (in REGION_ORDER),
 	// then any other/empty region falls into the "unassigned" bucket.
@@ -26,7 +44,11 @@
 	});
 </script>
 
-<svelte:head><title>{m.places_title()} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${m.places_title()} · ${m.site_short()}`}
+	description={m.places_lead()}
+	jsonLd={seoJsonLd}
+/>
 
 <div class="mx-auto max-w-5xl px-4 py-8">
 	<div class="flex flex-wrap items-end justify-between gap-3">

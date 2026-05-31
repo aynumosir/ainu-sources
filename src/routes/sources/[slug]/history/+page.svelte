@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { localizeHref, getLocale } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let { data } = $props();
 
@@ -18,7 +19,7 @@
 		a === 'create' ? m.history_action_create() : m.history_action_update();
 </script>
 
-<svelte:head><title>{m.history_title()} · {data.source.title}</title></svelte:head>
+<Seo title={`${m.history_title()} · ${data.source.title}`} noindex />
 
 <div class="mx-auto max-w-3xl px-4 py-8">
 	<a href={localizeHref(`/sources/${data.source.slug}`)} class="text-sm text-stone-500 hover:text-brand-700"

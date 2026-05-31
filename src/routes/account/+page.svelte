@@ -2,11 +2,12 @@
 	import { enhance } from '$app/forms';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let { data } = $props();
 </script>
 
-<svelte:head><title>{m.auth_account()} · {m.site_short()}</title></svelte:head>
+<Seo title={`${m.auth_account()} · ${m.site_short()}`} noindex />
 
 <div class="mx-auto max-w-2xl px-4 py-12">
 	<h1 class="font-serif text-3xl font-bold text-ink">{m.auth_account()}</h1>

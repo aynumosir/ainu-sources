@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+	import { personJsonLd, breadcrumbJsonLd, truncate } from '$lib/seo';
 	import Badge from '$lib/components/Badge.svelte';
 	import { formatYear, personFindLinks } from '$lib/format';
 	import { tl, PERSON_ROLE_LABELS } from '$lib/constants';
@@ -10,6 +13,20 @@
 	const sources = $derived(data.sources);
 	const findLinks = $derived(personFindLinks(person));
 
+	const origin = $derived(page.url.origin);
+	const seoDescription = $derived(
+		truncate(person.bio) ||
+			`${person.nameEn && person.nameEn !== person.name ? person.nameEn + ' — ' : ''}${sources.length} ${m.person_sources()}`
+	);
+	const seoJsonLd = $derived([
+		personJsonLd(person, origin),
+		breadcrumbJsonLd(origin, [
+			{ name: m.site_short(), path: '/' },
+			{ name: m.people_title(), path: '/people' },
+			{ name: person.name, path: `/people/${person.slug}` }
+		])
+	]);
+
 	const dates = $derived(
 		person.birthYear == null && person.deathYear == null
 			? ''
@@ -17,7 +34,12 @@
 	);
 </script>
 
-<svelte:head><title>{person.name} · {m.site_short()}</title></svelte:head>
+<Seo
+	title={`${person.name} · ${m.site_short()}`}
+	description={seoDescription}
+	ogType="profile"
+	jsonLd={seoJsonLd}
+/>
 
 <article class="mx-auto max-w-5xl px-4 py-8">
 	<a href={localizeHref('/people')} class="text-sm text-stone-500 hover:text-brand-700"
