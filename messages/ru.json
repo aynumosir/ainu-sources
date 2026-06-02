@@ -32,6 +32,11 @@
 	"auth_or": "или",
 	"auth_no_account": "Нет аккаунта? Зарегистрируйтесь",
 	"auth_have_account": "Уже есть аккаунт? Войдите",
+	"account_connections": "Связанные аккаунты",
+	"account_password": "Эл. почта и пароль",
+	"account_connect": "Подключить",
+	"account_disconnect": "Отключить",
+	"account_connected": "Подключено",
 
 	"common_all": "Все",
 	"common_loading": "Загрузка…",
@@ -122,6 +127,10 @@
 	"source_type": "Тип",
 	"source_category": "Категория",
 	"source_provenance_note": "Импортировано из",
+	"source_cite": "Цитировать",
+	"cite_copy": "Копировать",
+	"cite_copied": "Скопировано",
+	"cite_download": "Скачать",
 
 	"new_source_title": "Добавить источник",
 	"edit_source_title": "Редактировать источник",

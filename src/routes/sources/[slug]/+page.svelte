@@ -5,6 +5,8 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import { sourceJsonLd, breadcrumbJsonLd, truncate } from '$lib/seo';
 	import Badge from '$lib/components/Badge.svelte';
+	import SourceMap from '$lib/components/SourceMap.svelte';
+	import CiteBox from '$lib/components/CiteBox.svelte';
 	import { formatYear, formatCount, asArray, youtubeId } from '$lib/format';
 	import {
 		tl,
@@ -16,6 +18,7 @@
 		PERSON_ROLE_LABELS,
 		PLACE_ROLE_LABELS,
 		RELATION_TYPE_LABELS,
+		RELATION_TYPE_LABELS_IN,
 		YEAR_CERTAINTY_LABELS
 	} from '$lib/constants';
 
@@ -91,16 +94,6 @@
 				href={localizeHref(`/sources/${s.slug}/history`)}
 				class="rounded-md px-3 py-1.5 font-medium text-stone-600 ring-1 ring-stone-300 hover:bg-stone-100"
 				>{m.source_history()} ({d.revisionCount})</a
-			>
-			<a
-				href="/sources/{s.slug}/cite.bib"
-				class="rounded-md px-3 py-1.5 font-medium text-stone-600 ring-1 ring-stone-300 hover:bg-stone-100"
-				>BibTeX</a
-			>
-			<a
-				href="/sources/{s.slug}/cite.json"
-				class="rounded-md px-3 py-1.5 font-medium text-stone-600 ring-1 ring-stone-300 hover:bg-stone-100"
-				>CSL-JSON</a
 			>
 		</div>
 	</header>
@@ -224,6 +217,11 @@
 							</li>
 						{/each}
 					</ul>
+					{#if d.places.some((p) => p.lat != null && p.lng != null)}
+						<div class="mt-3">
+							<SourceMap places={d.places} />
+						</div>
+					{/if}
 				</div>
 			{/if}
 
@@ -266,12 +264,23 @@
 						{#each d.related as r (r.relation.id)}
 							<li>
 								<a href={localizeHref(`/sources/${r.source.slug}`)} class="link">{r.source.title}</a>
-								<span class="text-xs text-stone-400">· {tl(RELATION_TYPE_LABELS, r.relation.type)}</span>
+								{#if r.source.yearStart}<span class="text-xs text-stone-400">({r.source.yearStart})</span
+									>{/if}
+								<span class="text-xs text-stone-400"
+									>· {tl(
+										r.direction === 'in' && RELATION_TYPE_LABELS_IN[r.relation.type]
+											? RELATION_TYPE_LABELS_IN
+											: RELATION_TYPE_LABELS,
+										r.relation.type
+									)}</span
+								>
 							</li>
 						{/each}
 					</ul>
 				</div>
 			{/if}
+
+			<CiteBox slug={s.slug} reference={data.citation} />
 
 			<div>
 				<h2 class="font-sans text-xs font-semibold uppercase tracking-wide text-stone-400">

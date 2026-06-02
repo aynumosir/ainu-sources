@@ -32,6 +32,11 @@
 	"auth_or": "or",
 	"auth_no_account": "No account yet? Register",
 	"auth_have_account": "Already have an account? Log in",
+	"account_connections": "Connected accounts",
+	"account_password": "Email & password",
+	"account_connect": "Connect",
+	"account_disconnect": "Disconnect",
+	"account_connected": "Connected",
 
 	"common_all": "All",
 	"common_loading": "Loading…",
@@ -122,6 +127,10 @@
 	"source_type": "Type",
 	"source_category": "Category",
 	"source_provenance_note": "Imported from",
+	"source_cite": "Cite",
+	"cite_copy": "Copy",
+	"cite_copied": "Copied!",
+	"cite_download": "Download",
 
 	"new_source_title": "Add a source",
 	"edit_source_title": "Edit source",

@@ -23,6 +23,12 @@ export function tl(map: Record<string, L>, key: string | null | undefined): stri
 	return entry[locale] ?? entry.en ?? key;
 }
 
+/** Localize a label object directly (no key lookup). */
+export function tlabel(entry: L): string {
+	const locale = getLocale() as Locale;
+	return entry[locale] ?? entry.en;
+}
+
 // --- broad category (大分類) ---
 export const CATEGORY_LABELS: Record<string, L> = {
 	primary: { en: 'Primary source', ja: '一次資料', ru: 'Первоисточник', ain: 'hoski kampi' },
@@ -46,13 +52,21 @@ export const TYPE_LABELS: Record<string, L> = {
 	reference: { en: 'Reference dataset', ja: '参照データ', ru: 'Справочные данные' },
 	'valency-dataset': { en: 'Valency dataset', ja: '結合価データ', ru: 'Данные валентности' },
 	workbook: { en: 'Workbook', ja: 'ワークブック', ru: 'Рабочая тетрадь' },
-	'grammar-book': { en: 'Grammar / book', ja: '文法書・単行本', ru: 'Грамматика / книга' },
-	'grammar-article': { en: 'Article', ja: '論文', ru: 'Статья' },
+	// --- scholarship ---
+	grammar: { en: 'Grammar', ja: '文法書', ru: 'Грамматика' },
+	book: { en: 'Book / monograph', ja: '単行本・著書', ru: 'Книга / монография' },
+	article: { en: 'Article', ja: '論文・記事', ru: 'Статья' },
+	thesis: { en: 'Thesis / dissertation', ja: '学位論文', ru: 'Диссертация' },
+	bibliography: { en: 'Bibliography', ja: '文献目録', ru: 'Библиография' },
+	// --- corpora & data ---
 	'corpus-text': { en: 'Corpus / text collection', ja: 'コーパス・テキスト集', ru: 'Корпус / собрание текстов' },
+	dataset: { en: 'Dataset', ja: 'データセット', ru: 'Набор данных' },
 	// --- modern tools & media ---
-	video: { en: 'Video / animation', ja: '動画・アニメ', ru: 'Видео / анимация' },
+	'web-article': { en: 'Web article', ja: 'ウェブ記事', ru: 'Веб-статья' },
+	model: { en: 'Language model', ja: '言語モデル', ru: 'Языковая модель' },
 	software: { en: 'Software / app', ja: 'ソフトウェア・アプリ', ru: 'Программа / приложение' },
-	website: { en: 'Website / portal', ja: 'ウェブサイト・ポータル', ru: 'Сайт / портал' }
+	website: { en: 'Website / portal', ja: 'ウェブサイト・ポータル', ru: 'Сайт / портал' },
+	video: { en: 'Video / animation', ja: '動画・アニメ', ru: 'Видео / анимация' }
 };
 
 // --- macro-region (地域) ---
@@ -72,6 +86,7 @@ export const LANGUAGE_LABELS: Record<string, L> = {
 	eng: { en: 'English', ja: '英語', ru: 'Английский' },
 	lat: { en: 'Latin', ja: 'ラテン語', ru: 'Латинский' },
 	zho: { en: 'Chinese', ja: '中国語', ru: 'Китайский' },
+	lzh: { en: 'Literary Chinese', ja: '漢文', ru: 'Классический китайский' },
 	kor: { en: 'Korean', ja: '韓国語', ru: 'Корейский' },
 	deu: { en: 'German', ja: 'ドイツ語', ru: 'Немецкий' },
 	fra: { en: 'French', ja: 'フランス語', ru: 'Французский' },
@@ -124,10 +139,21 @@ export const PERSON_ROLE_LABELS: Record<string, L> = {
 // --- place roles ---
 export const PLACE_ROLE_LABELS: Record<string, L> = {
 	composition: { en: 'Place of composition', ja: '成立地', ru: 'Место создания' },
+	publication: { en: 'Place of publication', ja: '出版地', ru: 'Место издания' },
 	record: { en: 'Place of record', ja: '記録地', ru: 'Место записи' },
 	dialect: { en: 'Dialect area', ja: '方言地域', ru: 'Диалектная область' },
 	subject: { en: 'Subject area', ja: '対象地域', ru: 'Объектная область' },
 	holding: { en: 'Holding location', ja: '所蔵地', ru: 'Место хранения' }
+};
+
+/** Pin colours for the per-source map, by place role. */
+export const PLACE_ROLE_COLOR: Record<string, string> = {
+	composition: '#4338ca', // indigo
+	publication: '#7c3aed', // violet
+	record: '#e11d48', // rose
+	dialect: '#059669', // emerald
+	subject: '#d97706', // amber
+	holding: '#78716c' // stone
 };
 
 // --- source-to-source relation types ---
@@ -139,6 +165,17 @@ export const RELATION_TYPE_LABELS: Record<string, L> = {
 	'derived-from': { en: 'Derived from', ja: '派生', ru: 'Производно от' },
 	related: { en: 'Related', ja: '関連', ru: 'Связано' },
 	'same-work': { en: 'Same work', ja: '同一著作', ru: 'То же произведение' }
+};
+
+// Inverse labels for INCOMING relations: a stored edge A→B of type `cites` means
+// "A cites B", so on B's page (where the edge arrives) it must read "Cited by A".
+// Symmetric types (related, same-work) fall back to the forward label.
+export const RELATION_TYPE_LABELS_IN: Record<string, L> = {
+	cites: { en: 'Cited by', ja: '被引用', ru: 'Цитируется в' },
+	'manuscript-of': { en: 'Has manuscript', ja: '写本あり', ru: 'Есть рукопись' },
+	'edition-of': { en: 'Has edition', ja: '刊本あり', ru: 'Есть издание' },
+	'transcription-of': { en: 'Has transcription', ja: '翻刻あり', ru: 'Есть транскрипция' },
+	'derived-from': { en: 'Source of', ja: '派生元', ru: 'Источник для' }
 };
 
 export const YEAR_CERTAINTY_LABELS: Record<string, L> = {
@@ -158,6 +195,49 @@ export const TAG_CATEGORY_LABELS: Record<string, L> = {
 /** Ordered keys for filter UIs. */
 export const TYPE_ORDER = Object.keys(TYPE_LABELS);
 export const CATEGORY_ORDER = ['primary', 'corpus', 'secondary', 'tool'];
+
+/**
+ * Fine `type`s grouped into families, so the type filter reads as a two-level
+ * hierarchy (a big family heading + its sub-types) instead of one flat list.
+ * A type omitted from every group falls into an "other" bucket in the UI.
+ */
+export const TYPE_GROUPS: { key: string; label: L; types: string[] }[] = [
+	{
+		key: 'lexicography',
+		label: { en: 'Dictionaries & wordlists', ja: '辞書・語彙集', ru: 'Словари и глоссарии' },
+		types: [
+			'dictionary',
+			'japanese-ainu-dictionary',
+			'topical-dictionary',
+			'online-dictionary',
+			'wordlist',
+			'comparative-wordlist',
+			'glossary',
+			'nouns',
+			'verbs'
+		]
+	},
+	{
+		key: 'literature',
+		label: { en: 'Research literature', ja: '研究文献', ru: 'Научная литература' },
+		types: ['grammar', 'book', 'article', 'thesis', 'bibliography']
+	},
+	{
+		key: 'texts',
+		label: { en: 'Texts & documents', ja: 'テキスト・古文献', ru: 'Тексты и документы' },
+		types: ['old-document', 'workbook']
+	},
+	{
+		key: 'corpora',
+		label: { en: 'Corpora & datasets', ja: 'コーパス・データ', ru: 'Корпусы и данные' },
+		types: ['corpus-text', 'dataset', 'reference', 'valency-dataset']
+	},
+	{
+		key: 'digital',
+		label: { en: 'Tools & media', ja: 'ツール・メディア', ru: 'Инструменты и медиа' },
+		types: ['model', 'software', 'web-article', 'website', 'video']
+	}
+];
 export const REGION_ORDER = ['hokkaido', 'sakhalin', 'kuril', 'proto', 'other'];
 export const LANGUAGE_ORDER = Object.keys(LANGUAGE_LABELS);
 export const SCRIPT_ORDER = Object.keys(SCRIPT_LABELS);

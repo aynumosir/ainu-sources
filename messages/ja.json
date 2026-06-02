@@ -32,6 +32,11 @@
 	"auth_or": "または",
 	"auth_no_account": "アカウントがありませんか？登録",
 	"auth_have_account": "既にアカウントをお持ちですか？ログイン",
+	"account_connections": "連携アカウント",
+	"account_password": "メールアドレス・パスワード",
+	"account_connect": "連携する",
+	"account_disconnect": "連携解除",
+	"account_connected": "連携済み",
 
 	"common_all": "すべて",
 	"common_loading": "読み込み中…",
@@ -122,6 +127,10 @@
 	"source_type": "種別",
 	"source_category": "区分",
 	"source_provenance_note": "取り込み元",
+	"source_cite": "引用",
+	"cite_copy": "コピー",
+	"cite_copied": "コピーしました",
+	"cite_download": "ダウンロード",
 
 	"new_source_title": "資料を追加",
 	"edit_source_title": "資料を編集",

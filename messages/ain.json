@@ -32,6 +32,11 @@
 	"auth_or": "or",
 	"auth_no_account": "Cinuyeanup isam? Cinuyeanup kar",
 	"auth_have_account": "Cinuyeanup e=kor? Ahun",
+	"account_connections": "Uekarpa account",
+	"account_password": "Email & password",
+	"account_connect": "Uekarpare",
+	"account_disconnect": "Tuye",
+	"account_connected": "Uekarpa wa an",
 
 	"common_all": "Opitta",
 	"common_loading": "Ek kor an…",
@@ -122,6 +127,10 @@
 	"source_type": "Ikir",
 	"source_category": "Isoneka",
 	"source_provenance_note": "Imported from",
+	"source_cite": "Eyaynu",
+	"cite_copy": "Copy",
+	"cite_copied": "Copied!",
+	"cite_download": "Download",
 
 	"new_source_title": "Add a source",
 	"edit_source_title": "Edit source",
