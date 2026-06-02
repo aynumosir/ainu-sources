@@ -106,6 +106,17 @@ function fullConditions(f: SourceFilters): SQLCond[] {
 	const c = baseConditions(f);
 	if (f.category) c.push(eq(sources.category, f.category));
 	if (f.types?.length) c.push(inArray(sources.type, f.types));
+	if (f.genres?.length)
+		c.push(
+			inArray(
+				sources.id,
+				db
+					.select({ id: sourceTags.sourceId })
+					.from(sourceTags)
+					.innerJoin(tags, eq(sourceTags.tagId, tags.id))
+					.where(inArray(tags.slug, f.genres))
+			)
+		);
 	if (f.regions?.length) c.push(inArray(sources.region, f.regions));
 	if (f.languages?.length) c.push(jsonAnyOf(sources.languages, f.languages));
 	if (f.scripts?.length) c.push(jsonAnyOf(sources.scripts, f.scripts));
@@ -167,6 +178,7 @@ function tally(values: string[]): FacetBucket[] {
  * pick across dimensions, while you can still widen a selection within one dimension.
  */
 type FacetRow = {
+	id: string;
 	category: string;
 	type: string;
 	region: string | null;
@@ -180,6 +192,7 @@ export async function computeFacets(f: SourceFilters): Promise<Facets> {
 	const where = conds.length ? and(...conds) : undefined;
 	const rows: FacetRow[] = await db
 		.select({
+			id: sources.id,
 			category: sources.category,
 			type: sources.type,
 			region: sources.region,
@@ -190,9 +203,24 @@ export async function computeFacets(f: SourceFilters): Promise<Facets> {
 		.from(sources)
 		.where(where);
 
+	// Genre tags per source (genre is a tag-derived dimension, not a column).
+	const genreRows = await db
+		.select({ sid: sourceTags.sourceId, slug: tags.slug })
+		.from(sourceTags)
+		.innerJoin(tags, eq(tags.id, sourceTags.tagId))
+		.where(eq(tags.category, 'genre'));
+	const genreBySource = new Map<string, string[]>();
+	for (const g of genreRows) {
+		const arr = genreBySource.get(g.sid);
+		if (arr) arr.push(g.slug);
+		else genreBySource.set(g.sid, [g.slug]);
+	}
+	const genresOf = (r: FacetRow) => genreBySource.get(r.id) ?? [];
+
 	// Predicate per dimension (true = row passes that dimension's selected filter).
 	const matchCategory = (r: FacetRow) => !f.category || r.category === f.category;
 	const matchType = (r: FacetRow) => !f.types?.length || f.types.includes(r.type);
+	const matchGenre = (r: FacetRow) => !f.genres?.length || genresOf(r).some((g) => f.genres!.includes(g));
 	const matchRegion = (r: FacetRow) => !f.regions?.length || f.regions.includes(r.region ?? '');
 	const matchLanguages = (r: FacetRow) =>
 		!f.languages?.length || asArray(r.languages).some((v) => f.languages!.includes(v));
@@ -210,6 +238,7 @@ export async function computeFacets(f: SourceFilters): Promise<Facets> {
 			(r) =>
 				(skip === 'category' || matchCategory(r)) &&
 				(skip === 'types' || matchType(r)) &&
+				(skip === 'genres' || matchGenre(r)) &&
 				(skip === 'regions' || matchRegion(r)) &&
 				(skip === 'languages' || matchLanguages(r)) &&
 				(skip === 'scripts' || matchScripts(r)) &&
@@ -225,6 +254,7 @@ export async function computeFacets(f: SourceFilters): Promise<Facets> {
 	return {
 		categories: tally(except('category').map((r) => r.category)),
 		types: tally(except('types').map((r) => r.type)),
+		genres: tally(except('genres').flatMap(genresOf)),
 		regions: tally(except('regions').map((r) => r.region ?? '')),
 		languages: tally(except('languages').flatMap((r) => asArray(r.languages))),
 		scripts: tally(except('scripts').flatMap((r) => asArray(r.scripts))),

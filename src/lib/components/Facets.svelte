@@ -11,7 +11,8 @@
 		LANGUAGE_LABELS,
 		SCRIPT_LABELS,
 		CATEGORY_LABELS,
-		CATEGORY_ORDER
+		CATEGORY_ORDER,
+		GENRE_LABELS
 	} from '$lib/constants';
 	import { centuryLabel } from '$lib/format';
 
@@ -21,6 +22,7 @@
 	const sel = (arr?: string[]) => new Set(arr ?? []);
 
 	const types = $derived(sel(current.types));
+	const genres = $derived(sel(current.genres));
 	const regions = $derived(sel(current.regions));
 	const languages = $derived(sel(current.languages));
 	const scripts = $derived(sel(current.scripts));
@@ -195,6 +197,7 @@
 		</fieldset>
 	{/if}
 
+	{@render checkGroup('genres', m.filter_genre(), facets.genres, genres, (k) => tl(GENRE_LABELS, k))}
 	{@render checkGroup('regions', m.filter_region(), facets.regions, regions, (k) => tl(REGION_LABELS, k))}
 	{@render checkGroup('languages', m.filter_language(), facets.languages, languages, (k) => tl(LANGUAGE_LABELS, k))}
 	{@render checkGroup('scripts', m.filter_script(), facets.scripts, scripts, (k) => tl(SCRIPT_LABELS, k))}

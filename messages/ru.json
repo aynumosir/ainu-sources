@@ -72,6 +72,7 @@
 	"filter_heading": "Фильтр",
 	"filter_category": "Категория",
 	"filter_type": "Тип",
+	"filter_genre": "Жанр",
 	"filter_region": "Регион",
 	"filter_language": "Язык",
 	"filter_script": "Письменность",

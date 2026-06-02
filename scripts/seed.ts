@@ -795,9 +795,12 @@ const TAG_DEFS: { slug: string; name: string; nameEn: string; category: string; 
 	{ slug: 'dialectology', name: '方言', nameEn: 'Dialectology', category: 'topic', match: /方言|dialect/i },
 	{ slug: 'comparative', name: '比較・系統', nameEn: 'Comparative & genealogy', category: 'topic', match: /比較|系統|借用|comparative|swadesh|abvd|cognate|proto|loanword|genealog/i },
 	{ slug: 'revitalization', name: '復興・教育', nameEn: 'Revitalization & education', category: 'topic', match: /復興|再生|継承|教育|学習|教材|revital|revival|reclamation|heritage|learner|language nest/i },
+	{ slug: 'oral-literature', name: '口承文芸', nameEn: 'Oral literature', category: 'genre', match: /口承|口頭文芸|oral (literature|narrative|tradition)|散文説話|韻文/i },
+	{ slug: 'yukar', name: 'ユカㇻ・叙事詩', nameEn: 'Yukar (heroic epic)', category: 'genre', match: /ユカ[ㇻラ]|ユーカラ|\byukar|英雄叙事詩|叙事詩|サコ[ロㇿ]ペ|sakorpe/i },
+	{ slug: 'kamuy-yukar', name: '神謡', nameEn: 'Kamuy-yukar (god songs)', category: 'genre', match: /神謡|カムイ.?ユカ|kamuy.?yukar|オイナ|\boina\b|聖伝/i },
+	{ slug: 'folktale', name: '昔話・散文説話', nameEn: 'Folktale / prose tale', category: 'genre', match: /昔話|民譚|民話|説話|folktale|uwepeker|ウエペケ|ウウェペケ|トゥイタ|tuyta/i },
+	{ slug: 'song', name: '歌謡・ウポポ', nameEn: 'Song', category: 'genre', match: /ウポポ|upopo|リムセ|rimse|歌謡|子守歌|イヨンルイカ|iyonruyka|love.?song|歌曲/i },
 	{ slug: 'conversation', name: '会話', nameEn: 'Conversation', category: 'genre', match: /会話|conversation|phrasebook/i },
-	{ slug: 'oral-literature', name: '口承文芸', nameEn: 'Oral literature', category: 'genre', match: /神謡|叙事詩|口承|ユーカラ|ユカㇻ|yukar|kamuy|epic|散文説話|韻文/i },
-	{ slug: 'folktale', name: '昔話・民譚', nameEn: 'Folktale', category: 'genre', match: /昔話|民譚|民話|説話|folktale|uwepeker|ウエペケレ/i },
 	{ slug: 'religious-text', name: '宗教テキスト', nameEn: 'Religious text', category: 'genre', match: /聖書|bible|gospel|新約|讃美歌/i }
 ];
 

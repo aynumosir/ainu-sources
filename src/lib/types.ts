@@ -19,6 +19,7 @@ export interface SourceFilters {
 	q?: string;
 	category?: string;
 	types?: string[];
+	genres?: string[]; // genre tag slugs
 	regions?: string[];
 	languages?: string[];
 	scripts?: string[];
@@ -39,6 +40,7 @@ export interface FacetBucket {
 export interface Facets {
 	categories: FacetBucket[];
 	types: FacetBucket[];
+	genres: FacetBucket[]; // key = genre tag slug
 	regions: FacetBucket[];
 	languages: FacetBucket[];
 	scripts: FacetBucket[];

@@ -72,6 +72,7 @@
 	"filter_heading": "Filter",
 	"filter_category": "Category",
 	"filter_type": "Type",
+	"filter_genre": "Genre",
 	"filter_region": "Region",
 	"filter_language": "Language",
 	"filter_script": "Script",

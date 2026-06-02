@@ -72,6 +72,7 @@
 	"filter_heading": "絞り込み",
 	"filter_category": "区分",
 	"filter_type": "種別",
+	"filter_genre": "ジャンル",
 	"filter_region": "地域",
 	"filter_language": "言語",
 	"filter_script": "文字",

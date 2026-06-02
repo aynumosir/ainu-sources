@@ -14,6 +14,7 @@ export function parseFilters(sp: URLSearchParams): SourceFilters {
 		q: sp.get('q')?.trim() || undefined,
 		category: sp.get('category') || undefined,
 		types: sp.getAll('types').filter(Boolean),
+		genres: sp.getAll('genres').filter(Boolean),
 		regions: sp.getAll('regions').filter(Boolean),
 		languages: sp.getAll('languages').filter(Boolean),
 		scripts: sp.getAll('scripts').filter(Boolean),

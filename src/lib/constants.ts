@@ -178,6 +178,17 @@ export const RELATION_TYPE_LABELS_IN: Record<string, L> = {
 	'derived-from': { en: 'Source of', ja: '派生元', ru: 'Источник для' }
 };
 
+// --- genre facet labels (genre-category tag slugs) ---
+export const GENRE_LABELS: Record<string, L> = {
+	'oral-literature': { en: 'Oral literature', ja: '口承文芸', ru: 'Устная литература' },
+	yukar: { en: 'Yukar (heroic epic)', ja: 'ユカㇻ・叙事詩', ru: 'Юкар (эпос)' },
+	'kamuy-yukar': { en: 'Kamuy-yukar (god songs)', ja: '神謡', ru: 'Камуй-юкар' },
+	folktale: { en: 'Folktale / prose tale', ja: '昔話・散文説話', ru: 'Сказки / проза' },
+	song: { en: 'Song', ja: '歌謡・ウポポ', ru: 'Песни' },
+	conversation: { en: 'Conversation', ja: '会話', ru: 'Разговорник' },
+	'religious-text': { en: 'Religious text', ja: '宗教テキスト', ru: 'Религиозные тексты' }
+};
+
 export const YEAR_CERTAINTY_LABELS: Record<string, L> = {
 	exact: { en: 'exact', ja: '確実', ru: 'точно' },
 	range: { en: 'range', ja: '範囲', ru: 'диапазон' },
