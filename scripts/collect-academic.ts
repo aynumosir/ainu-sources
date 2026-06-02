@@ -16,6 +16,7 @@ import path from 'node:path';
 
 const OUT_DIR = path.join(import.meta.dir, 'data');
 const OUT_FILE = path.join(OUT_DIR, 'academic-index.json');
+const EDGES_FILE = path.join(OUT_DIR, 'citation-edges.json');
 const MAILTO = 'mkpoli@mkpo.li';
 const UA = 'ainu-sources-collector/1.0 (https://db.aynu.org; mkpoli@mkpo.li)';
 const LINGUISTICS = 'C41895202'; // OpenAlex concept: Linguistics
@@ -26,7 +27,7 @@ export interface AcademicRecord {
 	doi: string | null;
 	title: string;
 	year: number | null;
-	type: string; // normalized: 'grammar-book' | 'grammar-article'
+	type: string; // normalized: 'book' | 'article'
 	rawType: string;
 	language: string | null;
 	authors: string[];
@@ -52,7 +53,9 @@ async function jget(url: string): Promise<any> {
 }
 
 function normType(t: string): string {
-	return /book|monograph|dissertation|thesis/i.test(t) ? 'grammar-book' : 'grammar-article';
+	if (/dissertation|thesis/i.test(t)) return 'thesis';
+	if (/book|monograph/i.test(t)) return 'book';
+	return 'article';
 }
 
 // Map a raw OpenAlex work object → our AcademicRecord (shared by every OpenAlex
@@ -250,6 +253,61 @@ async function collectOpenAlexChained(seedIds: string[]): Promise<AcademicRecord
 	return out;
 }
 
+// --- Citation edges among indexed works (the `cites` relation graph) --------
+// Build the internal citation network: which OpenAlex works in our index cite
+// which OTHER works in our index. Unlike chaining (which fetches thousands of
+// out-of-scope cited works to discover new ones), this only reads each indexed
+// work's `referenced_works` (a thin select) and keeps an edge A→B iff B is also
+// in our index — so it's ~|works|/50 cheap requests, no out-of-scope fetching.
+// The result feeds source_relations(type='cites') at seed time. Real data only:
+// every edge is an OpenAlex-attested citation between two works we actually hold.
+export interface CitationEdge {
+	from: string; // OpenAlex id (W…) of the citing work
+	to: string; // OpenAlex id (W…) of the cited work
+}
+
+export async function collectCitationEdges(oaIds: string[]): Promise<CitationEdge[]> {
+	const inIndex = new Set(oaIds.filter((id) => /^W\d+$/.test(id)));
+	const edges: CitationEdge[] = [];
+	const ids = [...inIndex];
+	let done = 0;
+	for (const batch of chunk(ids, CHAIN_CHUNK)) {
+		const url =
+			`https://api.openalex.org/works?filter=ids.openalex:${batch.join('|')}` +
+			`&per-page=${batch.length}&select=id,referenced_works&mailto=${MAILTO}`;
+		let data: any;
+		try {
+			data = await jget(url);
+		} catch {
+			done += batch.length;
+			continue;
+		}
+		for (const w of data.results ?? []) {
+			const from = String(w.id).replace('https://openalex.org/', '');
+			for (const r of w.referenced_works ?? []) {
+				const to = String(r).replace('https://openalex.org/', '');
+				if (to !== from && inIndex.has(to)) edges.push({ from, to });
+			}
+		}
+		done += batch.length;
+		console.log(`  citation edges: ${done}/${ids.length} works probed, ${edges.length} in-index edges`);
+	}
+	return edges;
+}
+
+// Regenerate scripts/data/citation-edges.json from the current academic index.
+// Standalone (bun collect-academic.ts edges) so it can be refreshed without a
+// full — slow, flaky — collector run.
+export async function writeCitationEdges(): Promise<number> {
+	const recs: AcademicRecord[] = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
+	const oaIds = recs.filter((r) => r.source === 'openalex').map((r) => r.externalId);
+	console.log(`Building citation graph from ${oaIds.length} OpenAlex works in the index…`);
+	const edges = await collectCitationEdges(oaIds);
+	fs.writeFileSync(EDGES_FILE, JSON.stringify(edges, null, 2));
+	console.log(`Wrote ${edges.length} citation edges → ${path.relative(process.cwd(), EDGES_FILE)}`);
+	return edges.length;
+}
+
 // --- OpenAlex forward citation chaining (works that CITE our articles) ------
 // The mirror of collectOpenAlexChained: instead of a work's bibliography we
 // follow its citers. `filter=cites:W1|W2,title.search:Ainu` returns Ainu-titled
@@ -382,7 +440,7 @@ async function collectCiNii(): Promise<AcademicRecord[]> {
 					doi: null,
 					title,
 					year,
-					type: 'grammar-article',
+					type: 'article',
 					rawType: String(w['dc:type'] ?? ''),
 					language: /[぀-ヿ㐀-鿿一-鿿]/.test(title) ? 'ja' : 'en',
 					authors: creators,
@@ -429,7 +487,7 @@ async function collectOpenLibrary(): Promise<AcademicRecord[]> {
 					doi: null,
 					title,
 					year: w.first_publish_year ?? null,
-					type: 'grammar-book',
+					type: 'book',
 					rawType: 'book',
 					language: OL_LANG[w.language?.[0]] ?? null,
 					authors: w.author_name ?? [],
@@ -488,7 +546,7 @@ async function collectNDL(): Promise<AcademicRecord[]> {
 				doi: null,
 				title,
 				year,
-				type: 'grammar-book',
+				type: 'book',
 				rawType: 'book',
 				language: 'ja',
 				authors: author ? [author] : [],
@@ -536,7 +594,7 @@ async function collectCyberLeninka(): Promise<AcademicRecord[]> {
 					doi: null,
 					title,
 					year: Number(a.year) || null,
-					type: 'grammar-article',
+					type: 'article',
 					rawType: 'article',
 					language: 'ru',
 					authors: Array.isArray(a.authors) ? a.authors : [],
@@ -618,7 +676,7 @@ export async function collectTOGO(): Promise<AcademicRecord[]> {
 					doi: null,
 					title,
 					year,
-					type: 'grammar-article',
+					type: 'article',
 					rawType: 'togo-record',
 					language: 'ja',
 					authors: author && !/(会|編)$/.test(author) ? [author] : [],
@@ -678,7 +736,7 @@ export async function collectHoppoDB(): Promise<AcademicRecord[]> {
 				doi: null,
 				title,
 				year: null,
-				type: 'grammar-book',
+				type: 'book',
 				rawType: 'hoppodb-record',
 				language: 'ja',
 				authors: author ? [author] : [],
@@ -732,7 +790,7 @@ export async function collectSGU(): Promise<AcademicRecord[]> {
 			doi: null,
 			title,
 			year: Number(m[2]),
-			type: /辞[書典]|辞書|dictionary/i.test(title) ? 'grammar-book' : 'grammar-article',
+			type: /辞[書典]|辞書|dictionary/i.test(title) ? 'book' : 'article',
 			rawType: 'sgu-biblio',
 			language: 'ja',
 			authors: author ? [author] : [],
@@ -824,7 +882,7 @@ export async function collectHonkoku(): Promise<AcademicRecord[]> {
 			doi: null,
 			title,
 			year,
-			type: 'grammar-book',
+			type: 'book',
 			rawType: 'honkoku-entry',
 			language: 'ja',
 			authors: author ? [author] : [],
@@ -887,7 +945,7 @@ export async function collectKokusho(): Promise<AcademicRecord[]> {
 				doi: null,
 				title: name,
 				year,
-				type: 'grammar-book',
+				type: 'book',
 				rawType: it.kansha === '写' ? 'manuscript' : 'kokusho-record',
 				language: 'ja',
 				authors,
@@ -905,6 +963,603 @@ export async function collectKokusho(): Promise<AcademicRecord[]> {
 		console.log(`  Kokusho "${q}": +${kept} (total ${out.length})`);
 	}
 	return out;
+}
+
+// --- Hugging Face — Ainu-language NLP models & datasets ---------------------
+// Yasuoka's UD/POS models, aynumosir's mt5/gpt2-ainu, AinuTrans, byt5 latinizers,
+// TTS… The "ainu" token must be a real language designator: `ainu` delimited by
+// -_/. or followed by "trans" — this excludes the many decoys (Ainur, AINurse,
+// ai-nuclear, …) whose ids merely contain the substring.
+const HF_AINU_RE = /(^|[-_/])ainu(trans|[-_/.]|$)/i;
+export async function collectHuggingFace(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	for (const kind of ['models', 'datasets']) {
+		let arr: any[];
+		try {
+			arr = await jget(`https://huggingface.co/api/${kind}?search=ainu&limit=200`);
+		} catch {
+			continue;
+		}
+		for (const m of Array.isArray(arr) ? arr : []) {
+			const id = String(m.id ?? m.modelId ?? '');
+			if (!id || seen.has(id) || !HF_AINU_RE.test(id)) continue;
+			seen.add(id);
+			const org = id.split('/')[0];
+			const repo = id.split('/')[1] ?? id;
+			out.push({
+				source: 'huggingface',
+				externalId: id,
+				doi: null,
+				title: repo,
+				year: Number(String(m.createdAt ?? '').slice(0, 4)) || null,
+				type: kind === 'datasets' ? 'reference' : 'software',
+				rawType: kind === 'datasets' ? 'hf-dataset' : 'hf-model',
+				language: 'ain',
+				authors: org ? [org] : [],
+				venue: kind === 'datasets' ? 'Hugging Face dataset' : 'Hugging Face model',
+				url: null,
+				pdf: null,
+				category: 'tool',
+				links: [
+					{
+						type: 'huggingface',
+						url: `https://huggingface.co/${kind === 'datasets' ? 'datasets/' : ''}${id}`,
+						label: 'Hugging Face'
+					}
+				]
+			});
+		}
+	}
+	console.log(`  Hugging Face (Ainu models/datasets): +${out.length}`);
+	return out;
+}
+
+// --- Qiita — アイヌ語 technical articles (NLP/OCR/UD, mostly 安岡孝一) -----------
+const QIITA_QUERIES = ['アイヌ語', '蝦夷語'];
+export async function collectQiita(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	for (const q of QIITA_QUERIES) {
+		let arr: any[];
+		try {
+			arr = await jget(`https://qiita.com/api/v2/items?query=${encodeURIComponent(q)}&per_page=100`);
+		} catch {
+			continue;
+		}
+		for (const it of Array.isArray(arr) ? arr : []) {
+			const title = String(it.title ?? '').trim();
+			const id = String(it.id ?? '');
+			if (!title || !id || seen.has(id) || !/アイヌ|蝦夷|ainu/i.test(title)) continue;
+			seen.add(id);
+			out.push({
+				source: 'qiita',
+				externalId: id,
+				doi: null,
+				title,
+				year: Number(String(it.created_at ?? '').slice(0, 4)) || null,
+				type: 'website',
+				rawType: 'qiita-article',
+				language: 'ja',
+				authors: it.user?.id ? [it.user.id] : [],
+				venue: 'Qiita',
+				url: null,
+				pdf: null,
+				category: 'tool',
+				links: [{ type: 'website', url: it.url ?? `https://qiita.com/items/${id}`, label: 'Qiita' }]
+			});
+		}
+	}
+	console.log(`  Qiita (アイヌ語 articles): +${out.length}`);
+	return out;
+}
+
+// ===========================================================================
+// Extra collectors (2026-06 expansion) — discovered via parallel recon.
+// Each was probed against the live API before implementation. All are
+// linguistics-scoped and expose a stable dedup key (DOI, NCID, handle, ref id).
+// ===========================================================================
+
+// Small regex helpers for the XML/RSS sources below.
+const xmlFirst = (block: string, tag: string): string | null => {
+	const m = block.match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)</${tag}>`, 'i'));
+	return m ? m[1] : null;
+};
+const decodeEntities = (s: string): string =>
+	s
+		.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
+		.replace(/&quot;/g, '"')
+		.replace(/&#39;|&apos;/g, "'")
+		.replace(/&amp;/g, '&')
+		.trim();
+// Decode entities/CDATA FIRST, then strip real tags — otherwise stripTags eats
+// a whole <![CDATA[…]]> block (no '>' inside) and the text vanishes.
+const cleanText = (s: string | null | undefined): string => stripTags(decodeEntities(String(s ?? ''))).replace(/\s+/g, ' ').trim();
+
+// --- J-STAGE — Japanese journal & 紀要 articles (service=3, full-text) -------
+// 1,490 hits for アイヌ語; every record carries a prism:doi. Full-text search
+// dilutes past the first pages, so we KEEP a record only when its title says
+// アイヌ/Ainu OR it sits in a linguistics-journal allowlist. Atom+PRISM XML.
+const JSTAGE_QUERIES = [
+	'アイヌ語', 'アイヌ語 方言', 'アイヌ語 文法', 'アイヌ語 地名', 'アイヌ語 音韻',
+	'アイヌ語 動詞', 'アイヌ語 語彙', 'アイヌ語 人称', 'アイヌ 樺太', 'アイヌ 千歳',
+	'アイヌ 沙流', 'ユーカラ アイヌ', 'アイヌ 口承', 'アイヌ語 辞典'
+];
+// J-STAGE journal codes (cdjournal) that are linguistics / Ainu venues — a hit
+// in one of these is kept even if the title regex is borderline.
+const JSTAGE_LING_JOURNALS = new Set([
+	'gengo', 'gengo1939', 'hlj', 'jajls', 'namjournal', 'jnlp', 'nihongkenkyu', 'jslp'
+]);
+export async function collectJStage(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	const COUNT = 100;
+	for (const q of JSTAGE_QUERIES) {
+		for (let start = 1; start <= 600; start += COUNT) {
+			const url =
+				`https://api.jstage.jst.go.jp/searchapi/do?service=3&text=${encodeURIComponent(q)}` +
+				`&start=${start}&count=${COUNT}`;
+			let xml: string;
+			try {
+				xml = await htext(url);
+			} catch {
+				break;
+			}
+			const entries = xml.split('<entry>').slice(1);
+			if (!entries.length) break;
+			let kept = 0;
+			for (const e of entries) {
+				const titleBlock = xmlFirst(e, 'article_title') ?? '';
+				const titleJa = cleanText(xmlFirst(titleBlock, 'ja'));
+				const titleEn = cleanText(xmlFirst(titleBlock, 'en'));
+				// Strip 体育学会-style conference session codes that prefix proceedings
+				// titles ("124 共 A20702 …", "90A10805 …", "121X08 …") — a leading
+				// number + optional session marker + a LETTER+digits code. Year/century
+				// openers ("19世紀…", "1822年…") have no [A-Z]\d code, so survive.
+				const stripCode = (t: string) => t.replace(/^\d{1,4}\s*(?:[共一専般]\s*)?[A-Z]\d{2,6}\s+/, '').trim();
+				const title = stripCode(titleJa || titleEn);
+				if (!title) continue;
+				const cdjournal = cleanText(xmlFirst(e, 'cdjournal'));
+				// Scope: Ainu in title (ja or en), or an allowlisted linguistics venue.
+				const onTopic = /アイヌ|ainu|ユーカラ|樺太/i.test(`${titleJa} ${titleEn}`);
+				if (!onTopic && !JSTAGE_LING_JOURNALS.has(cdjournal)) continue;
+				// even venue-allowlisted hits must mention Ainu somewhere to stay in-scope
+				if (!/アイヌ|ainu|ユーカラ|yukar|樺太|sakhalin/i.test(`${titleJa} ${titleEn}`)) continue;
+				const doi = cleanText(xmlFirst(e, 'prism:doi')) || null;
+				const id = doi || cleanText(xmlFirst(e, 'id'));
+				if (!id || seen.has(id)) continue;
+				seen.add(id);
+				const matBlock = xmlFirst(e, 'material_title') ?? '';
+				const venue = cleanText(xmlFirst(matBlock, 'ja')) || cleanText(xmlFirst(matBlock, 'en')) || null;
+				const authBlock = xmlFirst(e, 'author') ?? '';
+				const authJa = xmlFirst(authBlock, 'ja') ?? '';
+				const authEn = xmlFirst(authBlock, 'en') ?? '';
+				const authors = [...(authJa.match(/<name>[\s\S]*?<\/name>/g) ?? [])].map((n) => cleanText(n)).filter(Boolean);
+				const authorsEn = [...(authEn.match(/<name>[\s\S]*?<\/name>/g) ?? [])].map((n) => cleanText(n)).filter(Boolean);
+				const linkJa = cleanText(xmlFirst(xmlFirst(e, 'article_link') ?? '', 'ja'));
+				const yearStr = cleanText(xmlFirst(e, 'pubyear'));
+				out.push({
+					source: 'jstage',
+					externalId: doi || linkJa || id,
+					doi,
+					title,
+					year: /^\d{4}$/.test(yearStr) ? Number(yearStr) : null,
+					type: 'article',
+					rawType: 'article',
+					language: titleJa ? 'ja' : 'en',
+					authors: authors.length ? authors : authorsEn,
+					venue,
+					url: doi ? `https://doi.org/${doi}` : linkJa || null,
+					pdf: null
+				});
+				kept++;
+			}
+			console.log(`  J-STAGE "${q}" start ${start}: +${kept} (total ${out.length})`);
+			if (entries.length < COUNT) break;
+		}
+	}
+	return out;
+}
+
+// --- CiNii Books — Japanese academic books / serials (NCID) -----------------
+// 929 hits; no DOI (dedup by NCID + normalized title). The OpenSearch summary
+// lacks the year, so we fetch the per-record .json (throttled) for survivors.
+export async function collectCiNiiBooks(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	const COUNT = 200;
+	for (let p = 1; p <= 6; p++) {
+		const url =
+			`https://ci.nii.ac.jp/books/opensearch/search?q=${encodeURIComponent('アイヌ語')}` +
+			`&format=json&count=${COUNT}&p=${p}`;
+		let data: any;
+		try {
+			data = await jget(url);
+		} catch {
+			break;
+		}
+		const items = data['@graph']?.[0]?.items ?? [];
+		if (!items.length) break;
+		for (const it of items) {
+			const title = String(it.title ?? '').trim();
+			if (!title || !/アイヌ|ainu/i.test(title)) continue;
+			const ncid = String(it['@id'] ?? '').replace('https://ci.nii.ac.jp/ncid/', '');
+			if (!ncid || seen.has(ncid)) continue;
+			seen.add(ncid);
+			const creators = Array.isArray(it['dc:creator']) ? it['dc:creator'] : it['dc:creator'] ? [it['dc:creator']] : [];
+			out.push({
+				source: 'cinii-books',
+				externalId: ncid,
+				doi: null,
+				title,
+				year: null,
+				type: 'book',
+				rawType: 'book',
+				language: 'ja',
+				authors: creators.map((c: any) => String(c).trim()).filter(Boolean),
+				venue: null,
+				url: String(it['@id'] ?? `https://ci.nii.ac.jp/ncid/${ncid}`),
+				pdf: null
+			});
+		}
+		console.log(`  CiNii Books p${p}: total ${out.length}`);
+		if (items.length < COUNT) break;
+	}
+	return out;
+}
+
+// Fill the year (and refine language) for kept CiNii Books records from the
+// per-NCID detail JSON. Called post-dedup so we only fetch survivors.
+async function enrichCiNiiBooks(records: AcademicRecord[]): Promise<void> {
+	let done = 0;
+	for (const r of records) {
+		try {
+			const d = await jget(`https://ci.nii.ac.jp/ncid/${r.externalId}.json`);
+			const g = d['@graph']?.find((x: any) => x['dc:date'] || x['prism:publicationDate']) ?? d['@graph']?.[0] ?? {};
+			const date = g['dc:date'] ?? g['prism:publicationDate'] ?? '';
+			const ym = String(Array.isArray(date) ? date[0] : date).match(/\d{4}/);
+			if (ym) r.year = Number(ym[0]);
+		} catch {
+			/* leave year null */
+		}
+		if (++done % 50 === 0) console.log(`  CiNii Books year enrich: ${done}/${records.length}`);
+	}
+}
+
+// --- IRDB — Japanese institutional repositories (NII aggregator) ------------
+// 607 hits for アイヌ語; RSS2.0. No DOI in the feed (handle/URI is the key). We
+// keep linguistics titles and drop ritual/genetics/archaeology/policy items.
+const IRDB_KEEP_RE =
+	/アイヌ語|方言|文法|語彙|音韻|音声|地名|口承|ユカ[ㇻラ]|ユーカラ|神謡|叙事詩|筆録|口述|昔話|民話|カムイユカ|ウエペケ|辞典|辞書|menoko|yukar|loanword|passive|dialect|toponym|grammar|phonolog|受動|人称|証拠性|否定|敬語|アクセント|韻律/i;
+const IRDB_DROP_RE =
+	/儀礼|祭祀|遺跡|DNA|ゲノム|遺伝|観光|政策|ヤサーク|賦課|考古|裁判|アイデンティティ|先住民族の包摂|林業|農業|経済|看護|保健/i;
+const IRDB_TYPE: Record<string, string> = {
+	'Thesis': 'thesis', 'Doctoral Thesis': 'thesis', 'Book': 'book', 'Article': 'article',
+	'Journal Article': 'article', 'Departmental Bulletin Paper': 'article', 'Conference Paper': 'article',
+	'Learning Material': 'article', 'Research Paper': 'article'
+};
+export async function collectIRDB(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	const COUNT = 100;
+	for (const q of ['アイヌ語', 'アイヌ 方言', 'アイヌ 口承']) {
+		for (let start = 1; start <= 800; start += COUNT) {
+			const url = `https://irdb.nii.ac.jp/opensearch/search?q=${encodeURIComponent(q)}&count=${COUNT}&start=${start}`;
+			let xml: string;
+			try {
+				xml = await htext(url);
+			} catch {
+				break;
+			}
+			const items = xml.split('<item>').slice(1);
+			if (!items.length) break;
+			for (const it of items) {
+				const title = cleanText(xmlFirst(it, 'title'));
+				if (!title) continue;
+				if (!IRDB_KEEP_RE.test(title) || IRDB_DROP_RE.test(title)) continue;
+				const uri = cleanText(xmlFirst(it, 'URI'));
+				const link = cleanText(xmlFirst(it, 'link'));
+				const key = uri || link;
+				if (!key || seen.has(key)) continue;
+				seen.add(key);
+				const cat = cleanText(xmlFirst(it, 'category'));
+				const pub = cleanText(xmlFirst(it, 'pubDate'));
+				const ym = pub.match(/\d{4}/);
+				// Each <author> tag is ONE person in "Surname, Given" form (中川, 裕 =
+				// Nakagawa Hiroshi). Co-authors get their own tags. Do NOT split on the
+				// comma — it separates surname from given, not co-authors — keep it so
+				// the seed's parsePersonName resolves "姓, 名" → "姓 名".
+				const authors = [...it.matchAll(/<author>([\s\S]*?)<\/author>/g)]
+					.map((m) => cleanText(m[1]))
+					.filter(Boolean);
+				out.push({
+					source: 'irdb',
+					externalId: key,
+					doi: null,
+					title,
+					year: ym ? Number(ym[0]) : null,
+					type: IRDB_TYPE[cat] ?? 'article',
+					rawType: cat || 'article',
+					language: 'ja',
+					authors,
+					venue: cleanText(xmlFirst(it, 'irname')) || null,
+					url: uri || link,
+					pdf: null
+				});
+			}
+			console.log(`  IRDB "${q}" start ${start}: total ${out.length}`);
+			if (items.length < COUNT) break;
+		}
+	}
+	return out;
+}
+
+// --- Crossref — edited-volume chapters (ISBN / container enumeration) -------
+// Free-text Crossref is relevance-ranked; the clean way to get the blind-spot
+// chapters (whose titles lack "Ainu") is to enumerate by ISBN / container of
+// the landmark Ainu-linguistics volumes. Every record carries a DOI.
+const CROSSREF_AINU_ISBNS = [
+	'9788869698613', // Dal Corso, Ainu grammar (Ca' Foscari, 2024)
+	'9788869698620', // …2025 edition
+	'9788869695858' // Bugaeva et al., Materials & Methods (Ca' Foscari, 2022)
+];
+const CROSSREF_AINU_CONTAINERS = [
+	'Handbook of the Ainu Language' // clean, substantive linguistics chapters
+];
+const CHAPTER_FRONTMATTER_RE =
+	/^(front\s?matter|back\s?matter|frontmatter|table of contents|contents|preface|introduction to|index|subject index|author index|list of (contributors|illustrations|abbreviations)|contributors|copyright|title pages?|plate|illustration|map\b)/i;
+export async function collectCrossrefChapters(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	const emit = (w: any, forceAinu: boolean) => {
+		const title = (w.title?.[0] ?? '').trim();
+		if (!title) return;
+		if (CHAPTER_FRONTMATTER_RE.test(title)) return;
+		// container-enumerated volumes are all in-scope; free-text needs the Ainu gate
+		if (!forceAinu && !/ainu/i.test(title)) return;
+		const doi = w.DOI;
+		if (!doi || seen.has(doi)) return;
+		seen.add(doi);
+		out.push({
+			source: 'crossref',
+			externalId: doi,
+			doi,
+			title,
+			year: w.issued?.['date-parts']?.[0]?.[0] ?? null,
+			type: normType(w.type ?? 'book-chapter'),
+			rawType: w.type ?? 'book-chapter',
+			language: null,
+			authors: (w.author ?? [])
+				.map((a: any) => [a.given, a.family].filter(Boolean).join(' ').trim())
+				.filter(Boolean),
+			venue: w['container-title']?.[0] ?? null,
+			url: `https://doi.org/${doi}`,
+			pdf: null
+		});
+	};
+	// 1) ISBN enumeration — every chapter of the landmark Ainu grammar volumes.
+	for (const isbn of CROSSREF_AINU_ISBNS) {
+		const url = `https://api.crossref.org/works?filter=type:book-chapter,isbn:${isbn}&rows=100&select=DOI,title,author,issued,type,container-title&mailto=${MAILTO}`;
+		try {
+			const data = await jget(url);
+			for (const w of data.message?.items ?? []) emit(w, true);
+			console.log(`  Crossref ISBN ${isbn}: total ${out.length}`);
+		} catch {
+			/* skip */
+		}
+	}
+	// 2) Container enumeration — top chapters of the Ainu volumes, frontmatter dropped.
+	for (const c of CROSSREF_AINU_CONTAINERS) {
+		const url = `https://api.crossref.org/works?query.container-title=${encodeURIComponent(c)}&filter=type:book-chapter&rows=80&select=DOI,title,author,issued,type,container-title&mailto=${MAILTO}`;
+		try {
+			const data = await jget(url);
+			for (const w of data.message?.items ?? []) {
+				const cont = (w['container-title']?.[0] ?? '').toLowerCase();
+				if (!/ainu/i.test(cont)) continue; // only chapters actually in an Ainu volume
+				emit(w, true);
+			}
+			console.log(`  Crossref container "${c}": total ${out.length}`);
+		} catch {
+			/* skip */
+		}
+	}
+	// 3) Free-text book-chapters with "Ainu" in the title (catches standalone chapters).
+	try {
+		const url = `https://api.crossref.org/works?query=${encodeURIComponent('Ainu')}&filter=type:book-chapter&rows=300&select=DOI,title,author,issued,type,container-title&mailto=${MAILTO}`;
+		const data = await jget(url);
+		for (const w of data.message?.items ?? []) emit(w, false);
+		console.log(`  Crossref free-text chapters: total ${out.length}`);
+	} catch {
+		/* skip */
+	}
+	return out;
+}
+
+// --- Glottolog — curated Ainu reference bibliography (langdoc.csv) ----------
+// The family-root export (language=ainu1252) returns the full 108-ref superset.
+// Already-curated & language-scoped; we filter by hhtype to keep linguistics.
+const GLOTTOLOG_KEEP_HHTYPE = new Set([
+	'dictionary', 'grammar', 'grammar_sketch', 'phonology', 'comparative', 'text',
+	'wordlist', 'dialectology', 'specific_feature', 'minimal', 'wordlist_or_less',
+	'overview', 'new_testament', 'bible'
+]);
+function parseCsvLine(line: string): string[] {
+	const out: string[] = [];
+	let cur = '';
+	let q = false;
+	for (let i = 0; i < line.length; i++) {
+		const ch = line[i];
+		if (q) {
+			if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+			else if (ch === '"') q = false;
+			else cur += ch;
+		} else if (ch === '"') q = true;
+		else if (ch === ',') { out.push(cur); cur = ''; }
+		else cur += ch;
+	}
+	out.push(cur);
+	return out;
+}
+const deLatex = (s: string): string =>
+	s.replace(/\\(?:emph|textit|textbf|zh|ja|url|href)\{([^}]*)\}/g, '$1').replace(/[{}]/g, '').replace(/\\[a-z]+/gi, '').trim();
+export async function collectGlottolog(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	let csv: string;
+	try {
+		csv = await htext('https://glottolog.org/langdoc.csv?language=ainu1252');
+	} catch {
+		console.log('  Glottolog: fetch failed');
+		return out;
+	}
+	const lines = csv.split(/\r?\n/).filter((l) => l.trim());
+	const header = parseCsvLine(lines[0]);
+	const col = (row: string[], name: string) => {
+		const i = header.indexOf(name);
+		return i >= 0 ? row[i] : '';
+	};
+	for (const line of lines.slice(1)) {
+		const row = parseCsvLine(line);
+		const id = col(row, 'id');
+		const titleRaw = col(row, 'title');
+		if (!id || !titleRaw) continue;
+		if (/^personal communication$/i.test(titleRaw.trim())) continue; // bib stub, not a work
+		let hhtype = '';
+		let titleEnglish = '';
+		try {
+			const jd = JSON.parse(col(row, 'jsondata') || '{}');
+			hhtype = jd.hhtype ?? '';
+			titleEnglish = jd.title_english ?? '';
+		} catch {
+			/* ignore */
+		}
+		// keep only linguistics document types (ethnographic etc. excluded)
+		if (hhtype && !GLOTTOLOG_KEEP_HHTYPE.has(hhtype)) continue;
+		const title = deLatex(titleRaw);
+		const yearM = (col(row, 'year_int') || col(row, 'year')).match(/\d{4}/);
+		const authorRaw = col(row, 'author') || col(row, 'editor');
+		const authors = authorRaw
+			? authorRaw.split(/\s+and\s+/i).map((a) => a.trim()).filter(Boolean)
+			: [];
+		const bt = col(row, 'bibtex_type');
+		const doiM = (col(row, 'jsondata').match(/"doi":\s*"([^"]+)"/) ?? [])[1];
+		out.push({
+			source: 'glottolog',
+			externalId: id,
+			doi: doiM ? doiM.replace(/^https?:\/\/doi\.org\//, '') : null,
+			title: titleEnglish && titleEnglish !== title ? `${title} (${titleEnglish})` : title,
+			year: yearM ? Number(yearM[0]) : null,
+			type: /article|incollection/.test(bt) ? 'article' : /phdthesis|mastersthesis/.test(bt) ? 'thesis' : 'book',
+			rawType: bt || hhtype || 'book',
+			language: null,
+			authors,
+			venue: col(row, 'journal') || col(row, 'booktitle') || null,
+			url: doiM ? `https://doi.org/${doiM.replace(/^https?:\/\/doi\.org\//, '')}` : `https://glottolog.org/resource/reference/id/${id}`,
+			pdf: null
+		});
+	}
+	console.log(`  Glottolog (ainu1252): +${out.length} linguistics refs`);
+	return out;
+}
+
+// --- OpenAlex — by-author harvest + book-chapter blind spots ----------------
+// The keyword collector is title-blind to Ainu chapters in edited volumes and
+// to works by core authors whose titles omit "Ainu". We harvest validated Ainu
+// linguists' works, keeping only those anchored to an Ainu venue or title, plus
+// the linguistics-tagged book-chapters. DOI (or Wid) dedup downstream.
+const OPENALEX_AINU_AUTHORS = [
+	'A5023827507', // Anna Bugaeva
+	'A5083262553', // Hidetoshi Shiraishi
+	'A5086749194', // Hideo Kirikae
+	'A5006225596' // Elia Dal Corso
+];
+// Venues (host source display names) that are wholly Ainu-linguistics.
+const OPENALEX_AINU_VENUE_RE =
+	/handbook of the ainu language|materials and methods.*ainu|ainu language|ca'? foscari japanese studies/i;
+export async function collectOpenAlexExtra(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	const keep = (w: any) => {
+		const id = String(w.id).replace('https://openalex.org/', '');
+		if (seen.has(id)) return;
+		const title = (w.title ?? w.display_name ?? '').trim();
+		const venue = w.primary_location?.source?.display_name ?? '';
+		const onTopic = /ainu|アイヌ|sakhalin ainu/i.test(title) || OPENALEX_AINU_VENUE_RE.test(venue);
+		if (!onTopic) return;
+		if (/^(frontmatter|backmatter|table of contents|contents|preface|index|contributors|subject index)/i.test(title)) return;
+		seen.add(id);
+		out.push(oaRecord(w));
+	};
+	// (1) book-chapters whose title contains Ainu + Linguistics concept
+	try {
+		const url = `https://api.openalex.org/works?filter=title.search:Ainu,type:book-chapter,concepts.id:${LINGUISTICS}&per-page=200&mailto=${MAILTO}`;
+		for (const w of (await jget(url)).results ?? []) keep(w);
+		console.log(`  OpenAlex chapters: total ${out.length}`);
+	} catch {
+		/* skip */
+	}
+	// (2) by-author harvest, venue/title-gated to avoid polymath dilution
+	for (const aid of OPENALEX_AINU_AUTHORS) {
+		try {
+			const url = `https://api.openalex.org/works?filter=author.id:${aid}&per-page=200&select=id,display_name,title,doi,publication_year,type,primary_location,authorships,concepts,primary_topic,best_oa_location&mailto=${MAILTO}`;
+			for (const w of (await jget(url)).results ?? []) keep(w);
+			console.log(`  OpenAlex author ${aid}: total ${out.length}`);
+		} catch {
+			/* skip */
+		}
+	}
+	return out;
+}
+
+// Run only the new collectors and merge them into the existing index (the full
+// main() run is slow/flaky). `bun collect-academic.ts extra`.
+export async function collectExtra(): Promise<void> {
+	if (!fs.existsSync(OUT_FILE)) throw new Error('academic-index.json missing — run a full collect first');
+	const existing: AcademicRecord[] = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
+	console.log(`Existing index: ${existing.length} records`);
+
+	console.log('Collecting J-STAGE…');
+	const jstage = await collectJStage();
+	console.log('Collecting CiNii Books…');
+	const ciniiBooks = await collectCiNiiBooks();
+	console.log('Collecting IRDB…');
+	const irdb = await collectIRDB();
+	console.log('Collecting Crossref chapters…');
+	const crChap = await collectCrossrefChapters();
+	console.log('Collecting Glottolog…');
+	const glotto = await collectGlottolog();
+	console.log('Collecting OpenAlex extra…');
+	const oaExtra = await collectOpenAlexExtra();
+
+	// Dedup against the existing index (DOI + normalized title) and each other.
+	const seenDoi = new Set<string>();
+	const seenTitle = new Set<string>();
+	for (const r of existing) {
+		const d = r.doi?.toLowerCase();
+		if (d) seenDoi.add(d);
+		const t = normTitle(r.title);
+		if (t) seenTitle.add(t);
+	}
+	const fresh: AcademicRecord[] = [];
+	const perSource: Record<string, number> = {};
+	for (const r of [...jstage, ...ciniiBooks, ...irdb, ...crChap, ...glotto, ...oaExtra]) {
+		const d = r.doi?.toLowerCase() ?? null;
+		const t = normTitle(r.title);
+		if ((d && seenDoi.has(d)) || (t && seenTitle.has(t))) continue;
+		if (d) seenDoi.add(d);
+		if (t) seenTitle.add(t);
+		fresh.push(r);
+		perSource[r.source] = (perSource[r.source] ?? 0) + 1;
+	}
+
+	// Enrich kept CiNii Books with publication year (survivors only).
+	await enrichCiNiiBooks(fresh.filter((r) => r.source === 'cinii-books'));
+
+	const merged = [...existing, ...fresh];
+	fs.writeFileSync(OUT_FILE, JSON.stringify(merged, null, 2));
+	console.log(`\nAdded ${fresh.length} new records (by source: ${JSON.stringify(perSource)})`);
+	console.log(`Index: ${existing.length} → ${merged.length}`);
 }
 
 async function main() {
@@ -946,6 +1601,10 @@ async function main() {
 	const honkoku = await collectHonkoku();
 	console.log('Collecting NIJL Kokusho IIIF (蝦夷 materials)…');
 	const kokusho = await collectKokusho();
+	console.log('Collecting Hugging Face (Ainu models)…');
+	const huggingface = await collectHuggingFace();
+	console.log('Collecting Qiita (アイヌ語 articles)…');
+	const qiita = await collectQiita();
 
 	// Merge with cross-source dedup: DOI-bearing records first (OpenAlex,
 	// Crossref), then articles (CiNii), then books (Open Library, NDL). Same
@@ -964,7 +1623,9 @@ async function main() {
 		...hoppodb,
 		...sgu,
 		...honkoku,
-		...kokusho
+		...kokusho,
+		...huggingface,
+		...qiita
 	].filter((r) => r.title && r.title.length > 2);
 	const seenDoi = new Set<string>();
 	const seenTitle = new Set<string>();
@@ -986,17 +1647,27 @@ async function main() {
 	}
 
 	fs.writeFileSync(OUT_FILE, JSON.stringify(merged, null, 2));
+	console.log('Building internal citation graph (cites relations)…');
+	await writeCitationEdges().catch((e) => console.warn('  ! citation edges failed:', e?.message ?? e));
 	const bySource = merged.reduce<Record<string, number>>((m, r) => ((m[r.source] = (m[r.source] ?? 0) + 1), m), {});
 	const withDoi = merged.filter((r) => r.doi).length;
 	console.log(`\nWrote ${merged.length} records → ${path.relative(process.cwd(), OUT_FILE)}`);
 	console.log(`  by source: ${JSON.stringify(bySource)} · with DOI: ${withDoi}`);
 	console.log(
-		`  (raw: openalex ${openalex.length}, native ${openalexNative.length}, chained ${openalexChained.length}, forward ${openalexForward.length}, crossref ${crossref.length}, cinii ${cinii.length}, togo ${togo.length}, hoppodb ${hoppodb.length}, sgu ${sgu.length}, honkoku ${honkoku.length}, kokusho ${kokusho.length})`
+		`  (raw: openalex ${openalex.length}, native ${openalexNative.length}, chained ${openalexChained.length}, forward ${openalexForward.length}, crossref ${crossref.length}, cinii ${cinii.length}, togo ${togo.length}, hoppodb ${hoppodb.length}, sgu ${sgu.length}, honkoku ${honkoku.length}, kokusho ${kokusho.length}, hf ${huggingface.length}, qiita ${qiita.length})`
 	);
 }
 
-if (import.meta.main)
-	main().catch((e) => {
+if (import.meta.main) {
+	// `bun collect-academic.ts edges` refreshes only the citation graph; `… extra`
+	// runs only the new collectors and merges them in; no args runs everything.
+	const task = process.argv.includes('edges')
+		? writeCitationEdges()
+		: process.argv.includes('extra')
+			? collectExtra()
+			: main();
+	task.catch((e) => {
 		console.error(e);
 		process.exit(1);
-});
+	});
+}

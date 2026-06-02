@@ -10,6 +10,7 @@
  */
 import { createClient } from '@libsql/client';
 import { drizzle } from 'drizzle-orm/libsql';
+import { eq, inArray } from 'drizzle-orm';
 import fs from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline';
@@ -104,6 +105,10 @@ const GAZETTEER: { match: RegExp; place: GazEntry }[] = [
 	{ match: /石狩|ishikari/i, place: { slug: 'ishikari', name: '石狩', nameEn: 'Ishikari', kind: 'region', region: 'hokkaido', lat: 43.17, lng: 141.32 } },
 	{ match: /釧路|kushiro/i, place: { slug: 'kushiro', name: '釧路', nameEn: 'Kushiro', kind: 'settlement', region: 'hokkaido', lat: 42.98, lng: 144.38 } },
 	{ match: /色丹|shikotan/i, place: { slug: 'shikotan', name: '色丹島', nameEn: 'Shikotan', kind: 'island', region: 'kuril', lat: 43.85, lng: 146.75 } },
+	// --- Sakhalin sub-dialect areas (East/West coast + Taraika), like Hokkaidō's ---
+	{ match: /多蘭泊|多来加|タライカ|taraika|小田洲|落帆|ochiho|白浦|敷香|poronaysk/i, place: { slug: 'taraika', name: '多蘭泊（タライカ）', nameEn: 'Taraika', kind: 'settlement', region: 'sakhalin', lat: 49.0, lng: 143.2 } },
+	{ match: /西海岸|真岡|maoka|名好|nayoro|本斗/i, place: { slug: 'sakhalin-west', name: '樺太西海岸', nameEn: 'West Sakhalin coast', kind: 'region', region: 'sakhalin', lat: 47.5, lng: 142.0 } },
+	{ match: /東海岸|内淵|naibuchi/i, place: { slug: 'sakhalin-east', name: '樺太東海岸', nameEn: 'East Sakhalin coast', kind: 'region', region: 'sakhalin', lat: 48.0, lng: 142.7 } },
 	{ match: /樺太|サハリン|sakhalin|エンチウ/i, place: { slug: 'sakhalin', name: '樺太', nameEn: 'Sakhalin', kind: 'region', region: 'sakhalin', lat: 49.5, lng: 142.5 } },
 	{ match: /千島|クリル|kuril/i, place: { slug: 'kuril', name: '千島', nameEn: 'Kuril Islands', kind: 'island', region: 'kuril', lat: 45.5, lng: 149.0 } },
 	{ match: /北海道|hokkaido/i, place: { slug: 'hokkaido', name: '北海道', nameEn: 'Hokkaidō', kind: 'region', region: 'hokkaido', lat: 43.4, lng: 142.8 } }
@@ -112,7 +117,8 @@ const GAZETTEER: { match: RegExp; place: GazEntry }[] = [
 function regionFor(dialect: string): string {
 	if (!dialect) return '';
 	const macros = new Set<string>();
-	if (/樺太|サハリン|sakhalin|エンチウ/i.test(dialect)) macros.add('sakhalin');
+	if (/樺太|サハリン|sakhalin|エンチウ|多蘭泊|多来加|タライカ|taraika|小田洲|落帆|ochiho|白浦|敷香|西海岸|真岡|maoka|名好|nayoro|本斗|東海岸|内淵|naibuchi/i.test(dialect))
+		macros.add('sakhalin');
 	if (/千島|色丹|クリル|kuril|shikotan/i.test(dialect)) macros.add('kuril');
 	if (/祖アイヌ|proto/i.test(dialect)) macros.add('proto');
 	if (/北海道|沙流|千歳|様似|旭川|浦河|鵡川|幌別|静内|十勝|石狩|釧路|hokkaido|saru|chitose|samani|asahikawa|urakawa|mukawa|horobetsu|shizunai|tokachi|ishikari|kushiro/i.test(dialect))
@@ -133,10 +139,12 @@ function placesFor(dialect: string): GazEntry[] {
 			seen.add(place.slug);
 		}
 	}
-	// Drop the broad "hokkaido" pin only when a *specific* Hokkaido place matched;
-	// keep it for bi-regional sources (e.g. 北海道・樺太) so the Sakhalin link stays too.
-	const hasSpecificHokkaido = found.some((p) => p.region === 'hokkaido' && p.slug !== 'hokkaido');
-	return hasSpecificHokkaido ? found.filter((p) => p.slug !== 'hokkaido') : found;
+	// Drop a broad region pin (北海道 / 樺太 / 千島) when a more specific place of the
+	// SAME region matched — but keep broad pins of other regions (e.g. bi-regional
+	// 北海道・樺太 keeps both). Generalises the old Hokkaidō-only rule to Sakhalin.
+	const BROAD = new Set(['hokkaido', 'sakhalin', 'kuril']);
+	const specificRegions = new Set(found.filter((p) => !BROAD.has(p.slug)).map((p) => p.region));
+	return found.filter((p) => !(BROAD.has(p.slug) && specificRegions.has(p.region)));
 }
 
 // --- institutions keyed by URI host ---
@@ -194,6 +202,26 @@ const PERSON_ALIASES: Record<string, string> = {
 	Shibatani: 'shibatani-masayoshi', 'Shibatani, Masayoshi': 'shibatani-masayoshi', 'Shibatani Masayoshi': 'shibatani-masayoshi', 柴谷方良: 'shibatani-masayoshi',
 	Kirikae: 'kirikae-hideo', 切替英雄: 'kirikae-hideo',
 	Fukazawa: 'fukazawa-mika', 'Fukazawa Mika': 'fukazawa-mika', 深沢美香: 'fukazawa-mika', 深澤美香: 'fukazawa-mika',
+	Yasuoka: 'yasuoka-koichi', 'Yasuoka Koichi': 'yasuoka-koichi', 'Koichi Yasuoka': 'yasuoka-koichi', KoichiYasuoka: 'yasuoka-koichi', 安岡孝一: 'yasuoka-koichi',
+	// --- de-duplication: kanji ⇄ Latin / variant-kanji / reversed forms of one person ---
+	桃内佳雄: 'momouchi-yoshio', 'Momouchi Yoshio': 'momouchi-yoshio',
+	片山龍峯: 'katayama-tatsumine', 片山竜峯: 'katayama-tatsumine', 'Katayama Tatsumine': 'katayama-tatsumine',
+	鏡味明克: 'kagami-akikatsu', 'Kagami Akikatsu': 'kagami-akikatsu',
+	石田肇: 'ishida-hajime', 'Ishida Hajime': 'ishida-hajime',
+	鳴海日出志: 'narumi-hideshi', 'Narumi Hideshi': 'narumi-hideshi',
+	Batchelor: 'batchelor-john', 'John Batchelor': 'batchelor-john', 'Batchelor John': 'batchelor-john', バチェラー: 'batchelor-john', 'ジョン バチェラー': 'batchelor-john', 'ジョン・バチェラー': 'batchelor-john', ジョンバチェラー: 'batchelor-john',
+	知己佐藤: 'sato-tomomi', // surname/given reversed
+	'John C. Batchelor': 'batchelor-john', 'John C Batchelor': 'batchelor-john',
+	'Jeff Gayman': 'gayman-jeffry', 'Jeffry Gayman': 'gayman-jeffry', 'Jeffry Joseph Gayman': 'gayman-jeffry',
+	// romaji-only Japanese researchers → recovered kanji canon (swap handles "Given Surname")
+	宮川創: 'miyagawa-so', 'Miyagawa So': 'miyagawa-so', 'So Miyagawa': 'miyagawa-so', SoMiyagawa: 'miyagawa-so',
+	白石英才: 'shiraishi-hidetoshi', 'Shiraishi Hidetoshi': 'shiraishi-hidetoshi',
+	五十嵐涼: 'igarashi-ryo', 'Igarashi Ryo': 'igarashi-ryo',
+	丸山博: 'maruyama-hiroshi', 'Maruyama Hiroshi': 'maruyama-hiroshi',
+	桝井文人: 'masui-fumito', 'Masui Fumito': 'masui-fumito',
+	山崎幸治: 'yamasaki-koji', 'Yamasaki Koji': 'yamasaki-koji',
+	山田孝子: 'yamada-takako', 'Yamada Takako': 'yamada-takako',
+	平野克弥: 'hirano-katsuya', 'Hirano Katsuya': 'hirano-katsuya',
 	北海道ウタリ協会: 'hokkaido-utari-kyokai'
 };
 const PERSON_CANON: Record<string, { name: string; nameEn?: string }> = {
@@ -210,6 +238,23 @@ const PERSON_CANON: Record<string, { name: string; nameEn?: string }> = {
 	'shibatani-masayoshi': { name: 'Shibatani Masayoshi' },
 	'kirikae-hideo': { name: '切替 英雄', nameEn: 'Kirikae Hideo' },
 	'fukazawa-mika': { name: '深澤 美香', nameEn: 'Fukazawa Mika' },
+	'yasuoka-koichi': { name: '安岡 孝一', nameEn: 'Yasuoka Koichi' },
+	'momouchi-yoshio': { name: '桃内 佳雄', nameEn: 'Momouchi Yoshio' },
+	'katayama-tatsumine': { name: '片山 龍峯', nameEn: 'Katayama Tatsumine' },
+	'kagami-akikatsu': { name: '鏡味 明克', nameEn: 'Kagami Akikatsu' },
+	'ishida-hajime': { name: '石田 肇', nameEn: 'Ishida Hajime' },
+	'narumi-hideshi': { name: '鳴海 日出志', nameEn: 'Narumi Hideshi' },
+	'batchelor-john': { name: 'John Batchelor' },
+	'gayman-jeffry': { name: 'Jeffry Gayman' },
+	// kanji recovered for romaji-only Japanese researchers (web/researchmap-verified)
+	'miyagawa-so': { name: '宮川 創', nameEn: 'Miyagawa So' },
+	'shiraishi-hidetoshi': { name: '白石 英才', nameEn: 'Shiraishi Hidetoshi' },
+	'igarashi-ryo': { name: '五十嵐 涼', nameEn: 'Igarashi Ryo' },
+	'maruyama-hiroshi': { name: '丸山 博', nameEn: 'Maruyama Hiroshi' },
+	'masui-fumito': { name: '桝井 文人', nameEn: 'Masui Fumito' },
+	'yamasaki-koji': { name: '山崎 幸治', nameEn: 'Yamasaki Koji' },
+	'yamada-takako': { name: '山田 孝子', nameEn: 'Yamada Takako' },
+	'hirano-katsuya': { name: '平野 克弥', nameEn: 'Hirano Katsuya' },
 	'hokkaido-utari-kyokai': { name: '北海道ウタリ協会', nameEn: 'Hokkaido Utari Association' }
 };
 
@@ -242,7 +287,139 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		'nakagawa-hiroshi': { researchmap: 'read0064265' },
 		'fukazawa-mika': { researchmap: 'mkfk' },
 		'bugaeva-anna': { researchmap: 'read0144912' },
-		'kirikae-hideo': { nameEn: 'Kirikae Hideo', researchmap: 'read0049566' }
+		'kirikae-hideo': { nameEn: 'Kirikae Hideo', researchmap: 'read0049566' },
+		'yasuoka-koichi': { nameEn: 'Yasuoka Koichi', researchmap: 'read0012388' },
+		'miyagawa-so': { researchmap: 'SoMiyagawa' }, // verified api.researchmap.jp 宮川/創
+		'shiraishi-hidetoshi': { researchmap: 'read0127694' },
+		'maruyama-hiroshi': { researchmap: 'read0119850' },
+		'masui-fumito': { researchmap: 'read0067315' },
+		'yamasaki-koji': { researchmap: 'koji_yamasaki' },
+		于拙: { nameEn: 'Cjyet Yo', researchmap: 'yocjyet' }, // verified; DIFFERENT person from 宮川創
+		// Romaji for prominent kanji-only authors (established readings; some given
+		// names best-effort). Keyed by despaced kanji — getPerson looks these up.
+		伊藤せいち: { nameEn: 'Itō Seichi' }, 大友幸男: { nameEn: 'Ōtomo Yukio' },
+		高橋靖以: { nameEn: 'Takahashi Yasui' }, 鏡味明克: { nameEn: 'Kagami Akikatsu' },
+		井筒勝信: { nameEn: 'Izutsu Katsunobu' }, 清水清次郎: { nameEn: 'Shimizu Seijirō' },
+		吉原克己: { nameEn: 'Yoshihara Katsumi' }, 村上啓司: { nameEn: 'Murakami Keiji' },
+		榊原正文: { nameEn: 'Sakakibara Masafumi' }, 佐藤直太郎: { nameEn: 'Satō Naotarō' },
+		吉田巌: { nameEn: 'Yoshida Iwao' }, 落合いずみ: { nameEn: 'Ochiai Izumi' },
+		古原敏弘: { nameEn: 'Furuhara Toshihiro' }, 岸本宜久: { nameEn: 'Kishimoto Nobuhisa' },
+		鳴海日出志: { nameEn: 'Narumi Hideshi' }, 平隆一: { nameEn: 'Taira Ryūichi' },
+		久保寺逸彦: { nameEn: 'Kubodera Itsuhiko' }, 秋山秀敏: { nameEn: 'Akiyama Hidetoshi' },
+		甲地利恵: { nameEn: 'Katchi Rie' }, 加藤鉄三郎: { nameEn: 'Katō Tetsusaburō' },
+		福田吉次郎: { nameEn: 'Fukuda Kichijirō' }, 三好勲: { nameEn: 'Miyoshi Isao' },
+		田村雅史: { nameEn: 'Tamura Masashi' }, 大谷洋一: { nameEn: 'Ōtani Yōichi' },
+		後藤利雄: { nameEn: 'Gotō Toshio' }, 萩中美枝: { nameEn: 'Haginaka Mie' },
+		留目政治: { nameEn: 'Todome Seiji' }, 其田良雄: { nameEn: 'Sonota Yoshio' },
+		鬼春人: { nameEn: 'Oni Haruto' }, 西鶴定嘉: { nameEn: 'Saikaku Sadayoshi' },
+		佐々木弘太郎: { nameEn: 'Sasaki Kōtarō' }, 岡田路明: { nameEn: 'Okada Michiaki' },
+		亀丸由紀子: { nameEn: 'Kamemaru Yukiko' }, 橘善光: { nameEn: 'Tachibana Yoshimitsu' },
+		小川正人: { nameEn: 'Ogawa Masato' }, 葛西猛千代: { nameEn: 'Kasai Takechiyo' },
+		田中吉人: { nameEn: 'Tanaka Yoshito' }, 大野徹人: { nameEn: 'Ōno Tetsuto' },
+		菱沼右一: { nameEn: 'Hishinuma Uichi' }, 横平弘: { nameEn: 'Yokohira Hiroshi' },
+		本田優子: { nameEn: 'Honda Yūko' }, 白山友正: { nameEn: 'Shirayama Tomomasa' },
+		知里高央: { nameEn: 'Chiri Takanaka' }, 田村将人: { nameEn: 'Tamura Masato' },
+		宮崎耕太: { nameEn: 'Miyazaki Kōta' }, 間方徳松: { nameEn: 'Magata Tokumatsu' },
+		澤井春美: { nameEn: 'Sawai Harumi' }, 橘正一: { nameEn: 'Tachibana Shōichi' },
+		川上まつ子: { nameEn: 'Kawakami Matsuko' }, 和田完: { nameEn: 'Wada Kan' },
+		岸本翠月: { nameEn: 'Kishimoto Suigetsu' }, 片山竜峯: { nameEn: 'Katayama Tatsumine' },
+		大出あや子: { nameEn: 'Ōide Ayako' }, 福田友之: { nameEn: 'Fukuda Tomoyuki' },
+		佐賀彩美: { nameEn: 'Saga Ayami' }, 伊藤公平: { nameEn: 'Itō Kōhei' },
+		中野良宣: { nameEn: 'Nakano Yoshinobu' }, 渡辺茂: { nameEn: 'Watanabe Shigeru' },
+		石田肇: { nameEn: 'Ishida Hajime' }, 井上拓也: { nameEn: 'Inoue Takuya' },
+		大島稔: { nameEn: 'Ōshima Minoru' },
+		成田修一: { nameEn: 'Narita Shūichi' }, 女鹿潤哉: { nameEn: 'Mega Jun’ya' },
+		片山龍峯: { nameEn: 'Katayama Tatsumine' }, 菅泰雄: { nameEn: 'Suga Yasuo' },
+		井口利夫: { nameEn: 'Iguchi Toshio' }, 安田千夏: { nameEn: 'Yasuda Chinatsu' },
+		松井恒幸: { nameEn: 'Matsui Tsuneyuki' }, 湯淺正: { nameEn: 'Yuasa Tadashi' },
+		礒部精一: { nameEn: 'Isobe Seiichi' }, 金丸継夫: { nameEn: 'Kanemaru Tsuguo' },
+		上田トシ: { nameEn: 'Ueda Toshi' }, 太田満: { nameEn: 'Ōta Mitsuru' },
+		安岡素子: { nameEn: 'Yasuoka Motoko' }, 木村きみ: { nameEn: 'Kimura Kimi' },
+		瀧口夕美: { nameEn: 'Takiguchi Yūmi' }, 越前谷博: { nameEn: 'Echizenya Hiroshi' },
+		関根健司: { nameEn: 'Sekine Kenji' }, 関根摩耶: { nameEn: 'Sekine Maya' },
+		下倉絵美: { nameEn: 'Shimokura Emi' }, 中井貴規: { nameEn: 'Nakai Takanori' },
+		// variant-kanji / alternate-name forms that must share a romaji to merge
+		吉田巖: { nameEn: 'Yoshida Iwao' }, // 巖 = variant of 巌
+		上原熊次郎: { nameEn: 'Uehara Kumajirō' }, 上原有次: { nameEn: 'Uehara Kumajirō' }, // 有次 = Kumajirō's other name
+		// Ainu narrators / tradition-bearers (kana given names)
+		北風磯吉: { nameEn: 'Kitakaze Isokichi' }, 山田ハヨ: { nameEn: 'Yamada Hayo' },
+		平賀さだも: { nameEn: 'Hiraga Sadamo' }, 小川シゲノ: { nameEn: 'Ogawa Shigeno' },
+		上野サダ: { nameEn: 'Ueno Sada' }, 平目よし: { nameEn: 'Hirame Yoshi' },
+		丸野和子: { nameEn: 'Maruno Kazuko' }, 八谷麻衣: { nameEn: 'Hachiya Mai' },
+		八重昌子: { nameEn: 'Yae Masako' }, 八重清敏: { nameEn: 'Yae Kiyotoshi' },
+		加納ルミ子: { nameEn: 'Kanō Rumiko' }, 加藤大樹: { nameEn: 'Katō Daiki' },
+		吉本裕子: { nameEn: 'Yoshimoto Yūko' }, 吉村冬子: { nameEn: 'Yoshimura Fuyuko' },
+		吉村明夫: { nameEn: 'Yoshimura Akio' }, 吉田恵理佳: { nameEn: 'Yoshida Erika' },
+		堀悦子: { nameEn: 'Hori Etsuko' }, 大須賀るえ子: { nameEn: 'Ōsuga Rueko' },
+		天内重樹: { nameEn: 'Amanai Shigeki' }, 奥田幸子: { nameEn: 'Okuda Sachiko' },
+		安曇恭徳: { nameEn: 'Azumi Yasunori' }, 宮田久子: { nameEn: 'Miyata Hisako' },
+		小川早苗: { nameEn: 'Ogawa Sanae' }, 小川昌代: { nameEn: 'Ogawa Masayo' },
+		小松和弘: { nameEn: 'Komatsu Kazuhiro' }, 小松哲郎: { nameEn: 'Komatsu Tetsurō' },
+		岡本朋也: { nameEn: 'Okamoto Tomoya' }, 岡田勇樹: { nameEn: 'Okada Yūki' },
+		川上容子: { nameEn: 'Kawakami Yōko' }, 川上恵: { nameEn: 'Kawakami Megumi' },
+		平石清隆: { nameEn: 'Hiraishi Kiyotaka' }, 中野巴絵: { nameEn: 'Nakano Tomoe' },
+		赤木三兵: { nameEn: 'Akagi Sanpei' }, 高橋慎: { nameEn: 'Takahashi Shin' },
+		松島トミ: { nameEn: 'Matsushima Tomi' }, 熊谷カネ: { nameEn: 'Kumagai Kane' },
+		沢井トメノ: { nameEn: 'Sawai Tomeno' }, 貝澤とぅるしの: { nameEn: 'Kaizawa Turushino' },
+		遠島タネランケ: { nameEn: 'Tōshima Taneranke' }, 鍋澤ねぷき: { nameEn: 'Nabesawa Nepuki' },
+		黒川てしめ: { nameEn: 'Kurokawa Teshime' }, 平賀サダ: { nameEn: 'Hiraga Sada' },
+		太田カムㇱオッカイ: { nameEn: 'Ōta Kamus Okkay' },
+		李志恒: { nameEn: 'Yi Chi-hang' }, 馬長城: { nameEn: 'Ma Changcheng' },
+		徳冨圭: { nameEn: 'Tokutomi Kei' }, 成田英敏: { nameEn: 'Narita Hidetoshi' },
+		押野朱美: { nameEn: 'Oshino Akemi' }, 押野里架: { nameEn: 'Oshino Rika' },
+		早坂駿: { nameEn: 'Hayasaka Shun' }, 木村多栄子: { nameEn: 'Kimura Taeko' },
+		木村梨乃: { nameEn: 'Kimura Rino' }, 松本成美: { nameEn: 'Matsumoto Narumi' },
+		横山裕之: { nameEn: 'Yokoyama Hiroyuki' }, 浜田隆史: { nameEn: 'Hamada Takashi' },
+		澤井政敏: { nameEn: 'Sawai Masatoshi' }, 田澤崇: { nameEn: 'Tazawa Takashi' },
+		相原典明: { nameEn: 'Aihara Noriaki' }, 神崎雅好: { nameEn: 'Kanzaki Masayoshi' },
+		秋辺日出男: { nameEn: 'Akibe Hideo' }, 稲垣克彦: { nameEn: 'Inagaki Katsuhiko' },
+		米澤諒: { nameEn: 'Yonezawa Ryō' }, 米田儀行: { nameEn: 'Yoneda Noriyuki' },
+		菅原勝吉: { nameEn: 'Sugawara Katsukichi' }, 菅原勝良: { nameEn: 'Sugawara Katsuyoshi' },
+		菅野由布子: { nameEn: 'Kanno Yūko' }, 葛野大喜: { nameEn: 'Kuzuno Daiki' },
+		豊川容子: { nameEn: 'Toyokawa Yōko' }, 貝澤美和子: { nameEn: 'Kaizawa Miwako' },
+		野本久栄: { nameEn: 'Nomoto Hisae' }, 金澤庄三郎: { nameEn: 'Kanazawa Shōzaburō' },
+		鍋沢元蔵: { nameEn: 'Nabesawa Motozō' }, 長濱清蔵: { nameEn: 'Nagahama Seizō' },
+		高木喜久恵: { nameEn: 'Takagi Kikue' }, 片山弘子: { nameEn: 'Katayama Hiroko' },
+		リッコッペ: { nameEn: 'Rikkoppe' }, ペンレㇰ: { nameEn: 'Penrek' },
+		レタンナイ: { nameEn: 'Retannay' }, ケチ: { nameEn: 'Keci' },
+		ラリウ: { nameEn: 'Rariw' }, クワンノ: { nameEn: 'Kuwanno' },
+		シッチャリ: { nameEn: 'Sicchari' }, ポロナイ: { nameEn: 'Poronay' },
+		ステファニー: { nameEn: 'Stephanie' }, 'ポン・フチ': { nameEn: 'Pon Huci' },
+		廣澤: { nameEn: 'Hirosawa' }, 松野綾香: { nameEn: 'Matsuno Ayaka' },
+		磯部恵津子: { nameEn: 'Isobe Etsuko' },
+		'フダー・クラーラ': { nameEn: 'Klára Chudá' },
+		'Suga Toshinoru (菅俊仍縷)?': { nameEn: 'Suga Toshinoru' },
+		// Batch 8 (2026-06-02): authors from the new collectors (J-STAGE/IRDB/CiNii/
+		// Glottolog), each verified against researchmap/CiNii/Wikipedia/J-STAGE. Where
+		// a name also appears in katakana, both keys carry the same romaji so the
+		// forms merge via the diacritic-folded romaji key in getPerson.
+		遠藤匡俊: { nameEn: 'Endō Masatoshi' }, 加藤百一: { nameEn: 'Katō Hyakuichi' },
+		藤田護: { nameEn: 'Fujita Mamoru' },
+		大喜多紀明: { nameEn: 'Ōkita Noriaki' }, オオギタノリアキ: { nameEn: 'Ōkita Noriaki' },
+		徳田貞一: { nameEn: 'Tokuda Sadakazu' }, 上野昌之: { nameEn: 'Ueno Masayuki' },
+		美山治: { nameEn: 'Miyama Osamu' }, 河野廣道: { nameEn: 'Kōno Hiromichi' },
+		佐藤昌彦: { nameEn: 'Satō Masahiko' },
+		石田收藏: { nameEn: 'Ishida Shūzō' }, 石田収藏: { nameEn: 'Ishida Shūzō' },
+		渡辺仁: { nameEn: 'Watanabe Hitoshi' }, 佐々木史郎: { nameEn: 'Sasaki Shirō' },
+		新岡武彦: { nameEn: 'Niioka Takehiko' }, 桑林賢治: { nameEn: 'Kuwabayashi Kenji' },
+		八幡巴絵: { nameEn: 'Yahata Tomoe' }, 錦谷禎: { nameEn: 'Nishikiya Tadashi' },
+		知里眞志保: { nameEn: 'Chiri Mashiho' }, 藤本英夫: { nameEn: 'Fujimoto Hideo' },
+		石川元助: { nameEn: 'Ishikawa Motosuke' }, 百瀬響: { nameEn: 'Momose Hibiki' },
+		杉山壽榮男: { nameEn: 'Sugiyama Sueo' },
+		松名隆: { nameEn: 'Matsuna Takashi' }, マツナタカシ: { nameEn: 'Matsuna Takashi' },
+		小野米一: { nameEn: 'Ono Yoneichi' },
+		板橋義三: { nameEn: 'Itabashi Yoshizō' }, イタバシヨシゾウ: { nameEn: 'Itabashi Yoshizō' },
+		津曲敏郎: { nameEn: 'Tsumagari Toshirō' }, ヌルミユッシ: { nameEn: 'Jussi Nurmi' },
+		煎本孝: { nameEn: 'Irimoto Takashi' }, 馬場裕美: { nameEn: 'Baba Yumi' },
+		關政則: { nameEn: 'Seki Masanori' }, 関政則: { nameEn: 'Seki Masanori' },
+		大垣直明: { nameEn: 'Ōgaki Naoaki' },
+		カガミアキカツ: { nameEn: 'Kagami Akikatsu' }, 鏡味明克: { nameEn: 'Kagami Akikatsu' },
+		北原モコットゥナシ: { nameEn: 'Kitahara Mokottunas' },
+		小林孝二: { nameEn: 'Kobayashi Kōji' }, 岩澤孝子: { nameEn: 'Iwasawa Takako' },
+		古川恭子: { nameEn: 'Furukawa Kyōko' }, 笹倉いる美: { nameEn: 'Sasakura Irumi' },
+		村崎恭子: { nameEn: 'Murasaki Kyōko' }, ムラサキキョウコ: { nameEn: 'Murasaki Kyōko' },
+		竹ケ原幸朗: { nameEn: 'Takegahara Yukio' }, 小浜基次: { nameEn: 'Kohama Mototsugu' },
+		新井かおり: { nameEn: 'Arai Kaori' }, 小片保: { nameEn: 'Ogata Tamotsu' }
 	};
 
 // Japanese personal names that arrived without the conventional space between
@@ -301,12 +478,19 @@ function canonicalSlugFor(display: string): string | null {
 		add(m[1].trim()); // bare "Last"
 		add(`${m[2].trim()} ${m[1].trim()}`); // "First Last"
 	}
+	// A 2-token Latin name → also try the swapped order. OpenAlex/Crossref emit
+	// "Given Surname" while the aliases use "Surname Given", so this is what lets
+	// e.g. "Hiroshi Nakagawa" resolve to the same canon as 中川裕.
+	const toks = bare.split(/\s+/).filter(Boolean);
+	if (toks.length === 2 && !KANA_KANJI.test(bare)) add(`${toks[1]} ${toks[0]}`);
 	for (const f of forms) if (PERSON_ALIASES[f]) return PERSON_ALIASES[f];
-	// Space-insensitive fallback so "中川裕" and "中川 裕" resolve to the same canon.
+	// Space- AND diacritic-insensitive fallback so "中川裕"="中川 裕" and
+	// "Satō Tomomi"="Sato Tomomi" (macron) resolve to the same canon.
+	const fold = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '').toLowerCase();
 	for (const f of forms) {
-		const fc = f.replace(/\s+/g, '');
+		const fc = fold(f);
 		for (const [k, v] of Object.entries(PERSON_ALIASES)) {
-			if (k.replace(/\s+/g, '') === fc) return v;
+			if (fold(k) === fc) return v;
 		}
 	}
 	return null;
@@ -333,8 +517,10 @@ const sourcePersonRows: Row[] = [];
 const sourcePlaceRows: Row[] = [];
 const sourceInstRows: Row[] = [];
 const sourceTagRows: Row[] = [];
+const sourceRelationRows: Row[] = [];
 
 const personByKey = new Map<string, string>(); // key → id
+const personById = new Map<string, Row>(); // id → row (for upgrade-on-merge)
 const personRows: Row[] = [];
 const usedPersonSlugs = new Set<string>();
 const placeBySlug = new Map<string, string>();
@@ -399,7 +585,7 @@ function parsePersonName(raw: string): { name: string; nameEn: string | null } {
 
 	// A trailing role marker — "(rec.)", "(ed.)", "（編）" … — is not part of the
 	// name; drop it so the base name merges with the person's other appearances.
-	if (paren && /^(rec|ed|comp|trans|tr|eds|録音?|編(訳|者)?|訳|採録)\.?$/i.test(paren)) {
+	if (paren && /^(rec|ed|comp|trans|tr|eds|録音?|編(訳|者|著|纂|輯)?|訳|採録|撰|選|輯|纂|著|校訂)\.?$/i.test(paren)) {
 		name = main;
 		paren = null;
 	} else if (paren && KANA_KANJI.test(paren) && !KANA_KANJI.test(main)) {
@@ -420,6 +606,17 @@ function parsePersonName(raw: string): { name: string; nameEn: string | null } {
 	// space-separated form already in the DB (中川, 裕 ⇒ 中川 裕).
 	if (KANA_KANJI.test(name) && name.includes(',')) {
 		name = name.replace(/\s*,\s*/g, ' ').replace(/\s+/g, ' ').trim();
+	}
+
+	// A role suffix glued onto a CJK name — "井筒勝信編", "田村すゞ子著", "研究推進機構編集"
+	// — is not part of the name. Strip it (only when ≥2 chars remain) so the bare
+	// name merges with the person's other appearances (and institutions then match
+	// INSTITUTION_RE on the bare org name).
+	if (KANA_KANJI.test(name)) {
+		const stripped = name
+			.replace(/\s*(編集|編著|編纂|編訳|共編|共著|校訂|監修|採録|口述|編者|著者|編|著|訳|撰)$/, '')
+			.trim();
+		if (stripped.length >= 2 && stripped !== name) name = stripped;
 	}
 
 	// "Surname, Given" → "Given Surname" for clean Latin personal names
@@ -443,35 +640,56 @@ function getPerson(name: string): string {
 	const parsed = parsePersonName(name);
 	const display = parsed.name;
 	const canon = canonicalSlugFor(name.trim()) ?? canonicalSlugFor(display);
-	// CJK names key space-insensitively so "大坂 拓" (OpenAlex/CiNii) and "大坂拓"
-	// (catalog) collapse to one person even without an explicit alias.
-	const key = canon ? `canon:${canon}` : KANA_KANJI.test(display) ? display.replace(/\s+/g, '') : display;
-	const existing = personByKey.get(key);
-	if (existing) return existing;
-	// Hand-verified enrichment (romaji / researchmap / wikidata), matched on either
-	// the raw or normalized name.
-	// Enrichment lookup: by canonical slug first (most reliable), then by name
-	// forms (space-insensitive; kanji keys are stored without spaces).
+	// Hand-verified enrichment (romaji / researchmap / wikidata), by canonical slug
+	// first (most reliable), then by name forms (space-insensitive).
 	const enrich =
 		(canon ? PERSON_ENRICH[canon] : undefined) ??
 		PERSON_ENRICH[name.trim()] ??
 		PERSON_ENRICH[stripParens(display)] ??
 		PERSON_ENRICH[stripParens(display).replace(/\s+/g, '')] ??
 		PERSON_ENRICH[stripParens(name.trim()).replace(/\s+/g, '')];
+	// Merge key: anyone with a known romaji keys on its DIACRITIC-FOLDED,
+	// ORDER-INSENSITIVE romaji, so "Tomomi Satō" / "Sato Tomomi" / 佐藤知己 (and
+	// kanji⇄Latin generally) collapse to one person. No-romaji kanji keys on the
+	// despaced kanji; a plain Latin name without romaji on its alphanumerics.
+	const romaji = enrich?.nameEn ?? parsed.nameEn;
+	const foldRomaji = (s: string) =>
+		s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').trim().split(/\s+/).filter(Boolean).sort().join(' ');
+	const key = canon
+		? `canon:${canon}`
+		: romaji && !KANA_KANJI.test(romaji)
+			? `r:${foldRomaji(romaji)}`
+			: KANA_KANJI.test(display)
+				? display.replace(/\s+/g, '')
+				: display.toLowerCase().replace(/[^a-z0-9]/g, '');
 	const researchmap: string | null = enrich?.researchmap ?? null;
 	const wikidata: string | null = enrich?.wikidata ?? null;
+	// Canonical display + romaji for this name form (canon form preferred).
+	const c = canon ? PERSON_CANON[canon] : undefined;
+	let pName = c ? c.name : display;
+	let pNameEn: string | null = enrich?.nameEn ?? (c ? c.nameEn ?? (hasCJK(c.name) ? null : c.name) : parsed.nameEn);
+
+	const existing = personByKey.get(key);
+	if (existing) {
+		// Merge: upgrade the kept person with anything better this form provides —
+		// prefer a kanji display over a romanised one, and never lose a romaji or
+		// researchmap/wikidata that only this form supplies.
+		const row = personById.get(existing);
+		if (row) {
+			if (pName && KANA_KANJI.test(pName) && !KANA_KANJI.test(row.name as string)) row.name = pName;
+			// prefer a curated (canon/enrich) romaji over a parsed Latin one
+			if (enrich?.nameEn || c?.nameEn) row.nameEn = enrich?.nameEn ?? c?.nameEn;
+			else if (!row.nameEn && pNameEn) row.nameEn = pNameEn;
+			if (!row.researchmap && researchmap) row.researchmap = researchmap;
+			if (!row.wikidata && wikidata) row.wikidata = wikidata;
+		}
+		return existing;
+	}
 
 	const id = uuid();
 	let slug: string;
-	let pName = display;
-	let pNameEn: string | null = enrich?.nameEn ?? parsed.nameEn;
 	if (canon) {
 		slug = canon;
-		const c = PERSON_CANON[canon];
-		if (c) {
-			pName = c.name;
-			pNameEn = enrich?.nameEn ?? c.nameEn ?? (hasCJK(c.name) ? null : c.name);
-		}
 		usedPersonSlugs.add(slug);
 	} else {
 		// Prefer a readable slug from romaji (incl. enrichment) over a hash.
@@ -487,7 +705,14 @@ function getPerson(name: string): string {
 	}
 
 	personByKey.set(key, id);
-	personRows.push({
+	// Also index by the folded romaji, so a later Latin form (e.g. "Hideo Kirikae")
+	// finds a person that was first created under a canon or kanji key.
+	const idxRomaji = romaji ?? (canon ? PERSON_CANON[canon]?.nameEn : undefined);
+	if (idxRomaji && !KANA_KANJI.test(idxRomaji)) {
+		const rk = `r:${foldRomaji(idxRomaji)}`;
+		if (!personByKey.has(rk)) personByKey.set(rk, id);
+	}
+	const row: Row = {
 		id,
 		slug,
 		name: pName,
@@ -496,7 +721,9 @@ function getPerson(name: string): string {
 		nameAin: null,
 		researchmap,
 		wikidata
-	});
+	};
+	personRows.push(row);
+	personById.set(id, row);
 	return id;
 }
 
@@ -573,25 +800,29 @@ function addPersons(sourceId: string, author: string | null | undefined, role = 
 	// source's free-text author, never as a person entity.
 	if (/\b(various|compilation)\b/i.test(cleaned)) return;
 	const parts = cleaned
-		.split(/\s*[&;]\s*|、|\s+and\s+/)
+		.split(/\s*[&;|｜/／]\s*|、|，|\s+and\s+/) // ｜/| = co-author separators in the source data
 		.flatMap(splitNakaguro)
 		.map((s) => s.trim())
 		.filter(Boolean);
-	parts.forEach((name, i) => {
-		sourcePersonRows.push({ id: uuid(), sourceId, personId: getPerson(name), role, sortOrder: i });
-	});
+	let i = 0;
+	for (const name of parts) {
+		// Organisations credited as contributors (e.g. 「タネ・プロジェクト (協力:…)」)
+		// are not people — keep them out of the person graph.
+		if (INSTITUTION_RE.test(name)) continue;
+		sourcePersonRows.push({ id: uuid(), sourceId, personId: getPerson(name), role, sortOrder: i++ });
+	}
 }
 
 // Academic authors become person entities only above a prominence threshold, so
 // /people stays curated (long-tail one-off authors remain free-text). Institutions
 // masquerading as authors are excluded.
-const INSTITUTION_RE = /協会|センター|委員会|大学|研究所|博物館|教育委員会|学会|財団|館$|会$|編集部|研究会|資料室|室$|Museum|University|Institute|Association|Foundation|Center|Society/i;
+const INSTITUTION_RE = /協会|センター|委員会|大学|高校|高等学校|研究所|博物館|教育委員会|学会|財団|機構|振興|協議会|連合会|館$|会$|編集部|研究会|研究部|郷土研究|郷土史|郷土資料|郷土|資料室|室$|クラブ|プロジェクト|実行委|刊行会|出版|書店|書房|文庫|^北海道$|^樺太$|Museum|University|Institute|Association|Foundation|Center|Society|Committee|Club|Project/i;
 function simplePersonKey(name: string): string {
 	return stripParens(name).replace(/[\s　,，、.．]+/g, '').trim();
 }
 function authorParts(author: string): string[] {
 	return author
-		.split(/\s*[&;]\s*|、|，|\s+and\s+/)
+		.split(/\s*[&;|｜/／]\s*|、|，|\s+and\s+/)
 		.flatMap(splitNakaguro)
 		.map((s) => s.trim())
 		.filter(Boolean);
@@ -600,7 +831,9 @@ function addPersonsGated(sourceId: string, authors: string[], allow: Set<string>
 	let i = 0;
 	for (const a of authors)
 		for (const name of authorParts(a)) {
-			if (INSTITUTION_RE.test(name) || !allow.has(simplePersonKey(name))) continue;
+			// Link prominent authors (threshold) OR anyone with a known alias/canon
+			// (so 安岡孝一's Qiita/HF handle "KoichiYasuoka" attaches to his person).
+			if (INSTITUTION_RE.test(name) || (!allow.has(simplePersonKey(name)) && !canonicalSlugFor(name))) continue;
 			sourcePersonRows.push({ id: uuid(), sourceId, personId: getPerson(name), role, sortOrder: i++ });
 		}
 }
@@ -635,7 +868,7 @@ function langsForDict(e: CatalogEntry): { languages: string[]; scripts: string[]
 		languages.add('rus');
 		scripts.add('cyrl');
 	}
-	if (/english|batchelor|shibatani|vovin|asjp|northeuralex|abvd|swadesh|valpal|bugaeva|steller/i.test(hay)) {
+	if (/english|batchelor|shibatani|vovin|asjp|northeuralex|abvd|swadesh|valpal|bugaeva/i.test(hay)) {
 		languages.add('eng');
 		scripts.add('latn');
 	}
@@ -652,13 +885,36 @@ function langsForDict(e: CatalogEntry): { languages: string[]; scripts: string[]
 	return { languages: [...languages], scripts: [...scripts] };
 }
 
+// Hand corrections for catalog entries the heuristic langsForDict / catalog year
+// gets wrong, verified against the actual documents. Keyed by source_dir (slug
+// stays stable — it derives from source_dir, not from year/language).
+const CATALOG_OVERRIDES: Record<
+	string,
+	{ languages?: string[]; scripts?: string[]; year?: string; author?: string }
+> = {
+	// 李志恒『漂舟録』— Joseon Korean castaway's account, written in Literary Chinese (漢文), NOT Japanese
+	'1696_Anon_Hyoshuroku': { languages: ['ain', 'lzh'], scripts: ['kanji'], author: '李志恒' },
+	// Steller's Kuril-Ainu vocabulary — the original is German (no English material on Ainu predates Cook, c.1779)
+	'1743_Steller_Kuril-Ainu-Vocabulary': { languages: ['ain', 'deu'], scripts: ['latn'] },
+	// 黙魯庵漫録 — NDL Search dates it 1930–1933 (catalog had 18XX)
+	'18XX_Anon_Mokuroan-Manroku': { year: '1930-1933' },
+	// De Angelis (Italian Jesuit) — original "Relazione del regno di Yezo" is Italian, not Japanese
+	'1621_DeAngelis_Second-Ezo-Report': { languages: ['ain', 'ita'], scripts: ['latn'] },
+	// Krasheninnikov 1738 "Vocabularium: Latine-Curilice-…" — Latin-glossed Kuril Ainu wordlist
+	'1738_Krasheninnikov_Latino-Curilice': { languages: ['ain', 'lat'], scripts: ['latn'] }
+};
+
 function seedDictionaries() {
 	const catalog: CatalogEntry[] = JSON.parse(fs.readFileSync(path.join(DICT_DIR, 'catalog.json'), 'utf8'));
 	for (const e of catalog) {
 		const id = uuid();
 		const slug = uniqueSlug(slugify(e.source_dir));
-		const y = parseYear(e.year);
-		const { languages, scripts } = langsForDict(e);
+		const ov = CATALOG_OVERRIDES[e.source_dir];
+		const y = parseYear(ov?.year ?? e.year);
+		const base = langsForDict(e);
+		const languages = ov?.languages ?? base.languages;
+		const scripts = ov?.scripts ?? base.scripts;
+		const author = ov?.author ?? e.author;
 		const dialect = e.dialect || '';
 		sourceRows.push({
 			id,
@@ -667,7 +923,7 @@ function seedDictionaries() {
 			titleEn: e.title_en ?? null,
 			category: 'primary',
 			type: e.type,
-			author: e.author && !/^unknown$/i.test(e.author) ? e.author : null,
+			author: author && !/^unknown$/i.test(author) ? author : null,
 			...y,
 			dialect: dialect || null,
 			region: regionFor(dialect) || null,
@@ -681,7 +937,7 @@ function seedDictionaries() {
 			createdAt: new Date(),
 			updatedAt: new Date()
 		});
-		addPersons(id, e.author);
+		addPersons(id, author);
 		addPlaces(id, dialect);
 		attachTags(id, e.title, e.title_en, e.type, dialect);
 	}
@@ -719,7 +975,7 @@ function seedGrammar() {
 				title: known?.title ?? `${author}（${year}）`,
 				titleEn: known?.titleEn ?? `${author} (${year})`,
 				category: 'secondary',
-				type: 'grammar-book',
+				type: 'grammar',
 				author,
 				...parseYear(year),
 				languages: ['ain'],
@@ -758,7 +1014,7 @@ function seedGrammar() {
 				title,
 				titleEn: isJa ? null : title,
 				category: 'secondary',
-				type: 'grammar-article',
+				type: 'article',
 				author,
 				...parseYear(year),
 				languages: isJa ? ['ain', 'jpn'] : ['ain', 'eng'],
@@ -1160,6 +1416,7 @@ function seedManual(): number {
 // already loaded (esp. the ainu-grammar bibliography).
 // ---------------------------------------------------------------------------
 const ACADEMIC_FILE = path.join(import.meta.dir, 'data', 'academic-index.json');
+const CITATION_EDGES_FILE = path.join(import.meta.dir, 'data', 'citation-edges.json');
 
 const META_LANG: Record<string, string> = {
 	en: 'eng', ja: 'jpn', ru: 'rus', de: 'deu', fr: 'fra', es: 'spa',
@@ -1188,24 +1445,73 @@ function coreKey(s: string): string {
 	return normTitle(stripped);
 }
 
+// Categorisation review: derive a proper {category, type} for an imported record
+// instead of the crude grammar-book/grammar-article binary. Honours collector-set
+// tool/primary categories; refines secondary papers by title.
+function classifyAcademic(rec: {
+	title: string;
+	type: string;
+	category?: string;
+	source?: string;
+	rawType?: string;
+}): { category: string; type: string } {
+	const t = rec.title || '';
+	// Digital resources
+	if (rec.source === 'huggingface')
+		return rec.rawType === 'hf-dataset'
+			? { category: 'corpus', type: 'dataset' } // a folklore/translation dataset IS corpus data
+			: { category: 'tool', type: 'model' };
+	if (rec.source === 'qiita' || rec.source === 'note')
+		return { category: 'tool', type: 'web-article' }; // blog post, distinct from a published article
+	if (rec.category === 'tool') return { category: 'tool', type: rec.type };
+	// Primary Edo materials: a vocabulary keeps its lexicographic form; else a document
+	if (rec.category === 'primary') {
+		if (/藻汐草|語箋|語集|蝦夷語|方言|単語|語彙|詞|言葉|ことば|辞書|辞典/.test(t))
+			return { category: 'primary', type: 'wordlist' };
+		return { category: 'primary', type: 'old-document' };
+	}
+	if (/コーパス|corpus|テキスト集|用例集/i.test(t)) return { category: 'corpus', type: 'corpus-text' };
+	// Normalise the incoming form (handles indexes built before the grammar-* rename)
+	const baseType =
+		rec.type === 'grammar-book' ? 'book' : rec.type === 'grammar-article' ? 'article' : rec.type;
+	// Secondary literature, by bibliographic FORM (subject is captured by tags)
+	let type = 'article';
+	if (/辞典|辞書|字典|事典|辭典|dictionary|lexicon|和愛|愛和/i.test(t)) type = 'dictionary';
+	else if (/語彙集|単語集|wordlist|vocabular/i.test(t)) type = 'wordlist';
+	else if (/文献目録|書誌|bibliograph/i.test(t)) type = 'bibliography';
+	else if (/博士論文|修士論文|学位論文|dissertation|\bph\.?\s?d\b|doctoral thesis/i.test(t)) type = 'thesis';
+	else if (/(アイヌ語|ainu)[^。]{0,8}(文法|文典|grammar)|grammar of|文法書/i.test(t)) type = 'grammar';
+	else if (baseType === 'thesis') type = 'thesis';
+	else if (
+		baseType === 'book' ||
+		/入門|教材|テキスト|叢書|全集|ハンドブック|handbook|introduction|読本|講座/i.test(t)
+	)
+		type = 'book';
+	return { category: 'secondary', type };
+}
+
 // Script(s) for an imported academic record. Japanese/Chinese titles are written
 // in kanji(+kana), Russian in Cyrillic; romanised studies stay Latin.
 function scriptsForAcademic(title: string, metalang: string | null): string[] {
+	// Base the writing system on the WORK's language, not on whether its (often
+	// bilingual) title happens to contain kanji — else an English paper with a
+	// Japanese subtitle gets mis-tagged kanji/kana.
 	if (metalang === 'rus') return ['cyrl'];
-	if (hasCJK(title)) return metalang === 'zho' ? ['kanji'] : ['kanji', 'kana'];
-	return ['latn'];
+	if (metalang === 'jpn') return ['kanji', 'kana'];
+	if (metalang === 'zho' || metalang === 'lzh') return ['kanji'];
+	return ['latn']; // eng/deu/fra/ita/lat/spa/pol/nld/kor & romanised Ainu
 }
 
-function seedAcademic(): { added: number; skipped: number } {
+function seedAcademic(): { added: number; skipped: number; cites: number } {
 	if (!fs.existsSync(ACADEMIC_FILE)) {
 		console.warn(`! academic index not found at ${ACADEMIC_FILE} — run collect-academic.ts; skipping`);
-		return { added: 0, skipped: 0 };
+		return { added: 0, skipped: 0, cites: 0 };
 	}
 	interface Rec {
 		source: string; externalId: string; doi: string | null; title: string;
 		year: number | null; type: string; language: string | null;
 		authors: string[]; venue: string | null; url: string | null; pdf: string | null;
-		category?: string;
+		category?: string; rawType?: string;
 		links?: { type: string; url: string; label?: string | null }[];
 	}
 	const records: Rec[] = JSON.parse(fs.readFileSync(ACADEMIC_FILE, 'utf8'));
@@ -1215,13 +1521,15 @@ function seedAcademic(): { added: number; skipped: number } {
 	// getPerson/PERSON_ENRICH). Counted on a space/comma-insensitive key.
 	const AUTHOR_MIN_WORKS = 3;
 	const authorCount = new Map<string, number>();
-	for (const rec of records)
+	for (const rec of records) {
+		if (rec.category === 'tool') continue; // HF orgs / Qiita handles aren't people
 		for (const a of rec.authors ?? [])
 			for (const part of authorParts(String(a))) {
 				if (INSTITUTION_RE.test(part)) continue;
 				const k = simplePersonKey(part);
 				if (k) authorCount.set(k, (authorCount.get(k) ?? 0) + 1);
 			}
+	}
 	const prominentAuthors = new Set([...authorCount].filter(([, n]) => n >= AUTHOR_MIN_WORKS).map(([k]) => k));
 
 	// Dedup + enrichment indexes from everything already loaded. On a collision we
@@ -1251,6 +1559,10 @@ function seedAcademic(): { added: number; skipped: number } {
 		linkRows.push({ id: uuid(), sourceId, type, label: label ?? null, url, sortOrder: so });
 	};
 
+	// OpenAlex work id → the source it ended up as (whether freshly inserted or
+	// merged into an earlier record). Lets us rebuild the citation graph below.
+	const oaToSource = new Map<string, string>();
+
 	let added = 0;
 	let enriched = 0;
 	let skipped = 0;
@@ -1262,6 +1574,7 @@ function seedAcademic(): { added: number; skipped: number } {
 			(doi ? idByDoi.get(doi) : undefined) ??
 			(nt ? idByTitle.get(nt) : undefined) ??
 			(hasLinks ? idByCore.get(coreKey(rec.title)) : undefined); // fuzzy only when there's something to graft
+		if (rec.source === 'openalex' && existingId) oaToSource.set(rec.externalId, existingId);
 		if (!nt || existingId) {
 			if (existingId && hasLinks) {
 				let so = 50;
@@ -1279,13 +1592,14 @@ function seedAcademic(): { added: number; skipped: number } {
 		const slug = uniqueSlug(
 			`${rec.year ?? 'nd'}-${slugify(rec.authors[0] ?? '') || 'x'}-${slugify(rec.title).slice(0, 50) || djb2(rec.externalId)}`
 		);
+		const cls = classifyAcademic(rec);
 		sourceRows.push({
 			id,
 			slug,
 			title: rec.title,
 			titleEn: hasCJK(rec.title) ? null : rec.title,
-			category: rec.category === 'primary' ? 'primary' : 'secondary',
-			type: rec.type,
+			category: cls.category,
+			type: cls.type,
 			author: rec.authors.join(', ') || null,
 			...y,
 			languages: metalang ? ['ain', metalang] : ['ain'],
@@ -1304,13 +1618,34 @@ function seedAcademic(): { added: number; skipped: number } {
 		if (rec.url) addLink(id, doi ? 'doi' : 'website', rec.url, doi ? `doi:${rec.doi}` : rec.venue, so++);
 		if (rec.pdf) addLink(id, 'pdf', rec.pdf, 'Open access PDF', so++);
 		for (const l of rec.links ?? []) addLink(id, l.type, l.url, l.label, so++);
+		if (rec.source === 'openalex') oaToSource.set(rec.externalId, id);
 		addPersonsGated(id, rec.authors ?? [], prominentAuthors);
 		attachTags(id, rec.title, 'grammar');
 		added += 1;
 	}
 	if (enriched) console.log(`  academic: enriched ${enriched} existing source(s) with IIIF/transcription links`);
 	console.log(`  academic: ${prominentAuthors.size} authors promoted to person entities (≥${AUTHOR_MIN_WORKS} works)`);
-	return { added, skipped };
+
+	// Materialise the OpenAlex citation graph as source_relations(type='cites').
+	// Each edge A→B is a real OpenAlex-attested citation between two works we hold;
+	// we drop edges whose endpoints merged into the same source (self-loops) and
+	// de-duplicate so a (from,to) pair is recorded once.
+	let cites = 0;
+	if (fs.existsSync(CITATION_EDGES_FILE)) {
+		const edges: { from: string; to: string }[] = JSON.parse(fs.readFileSync(CITATION_EDGES_FILE, 'utf8'));
+		const seen = new Set<string>();
+		for (const e of edges) {
+			const fromId = oaToSource.get(e.from);
+			const toId = oaToSource.get(e.to);
+			if (!fromId || !toId || fromId === toId) continue;
+			const k = `${fromId}\t${toId}`;
+			if (seen.has(k)) continue;
+			seen.add(k);
+			sourceRelationRows.push({ id: uuid(), fromSourceId: fromId, toSourceId: toId, type: 'cites', notes: null });
+		}
+		console.log(`  academic: ${cites = sourceRelationRows.length} citation relations (cites) from ${edges.length} edges`);
+	}
+	return { added, skipped, cites };
 }
 
 // ---------------------------------------------------------------------------
@@ -1508,6 +1843,86 @@ async function bulkInsert(table: Parameters<typeof db.insert>[0], rows: Row[]) {
 	}
 }
 
+// ---------------------------------------------------------------------------
+// Revision safety — NEVER lose user edits/history on reseed.
+//
+// A user-created or -edited source carries source_revisions (create/update).
+// We capture those + the edited source rows BEFORE wiping, back them up to a
+// timestamped JSON file, then AFTER the fresh seed we re-apply each user edit
+// on top of the regenerated source and re-insert every revision (re-pointed to
+// the live source). Set FORCE_FRESH=1 to intentionally start clean (still
+// backs up first). Matching uses the stable identity (provenanceRepo+path).
+// ---------------------------------------------------------------------------
+interface Preserved {
+	revisions: Record<string, unknown>[];
+	editedSources: Record<string, unknown>[];
+}
+
+const srcIdentity = (r: Record<string, unknown>) =>
+	`${r.provenanceRepo ?? ''} ${r.provenancePath ?? ''}`;
+
+// Columns a user can change — overlaid back onto the regenerated source.
+const CONTENT_COLS = [
+	'title', 'titleEn', 'titleAin', 'altTitles', 'category', 'type', 'author',
+	'yearText', 'yearStart', 'yearEnd', 'yearCertainty', 'dialect', 'region',
+	'languages', 'scripts', 'holdingInstitution', 'callNumber', 'entryCount',
+	'entryCountLabel', 'license', 'summary', 'notes', 'reliability', 'externalIds',
+	'featured', 'updatedAt'
+];
+
+async function captureUserContent(): Promise<Preserved> {
+	let revisions: Record<string, unknown>[] = [];
+	try {
+		revisions = (await db.select().from(schema.sourceRevisions)) as Record<string, unknown>[];
+	} catch {
+		return { revisions: [], editedSources: [] }; // table missing on first ever seed
+	}
+	if (!revisions.length) return { revisions: [], editedSources: [] };
+	const ids = [...new Set(revisions.map((r) => r.sourceId).filter(Boolean))] as string[];
+	const editedSources = ids.length
+		? ((await db.select().from(schema.sources).where(inArray(schema.sources.id, ids))) as Record<string, unknown>[])
+		: [];
+	const dir = path.join(import.meta.dir, 'data', 'backups');
+	fs.mkdirSync(dir, { recursive: true });
+	const file = path.join(dir, `user-content-${Date.now()}.json`);
+	fs.writeFileSync(file, JSON.stringify({ revisions, editedSources }, null, 2));
+	console.log(`🛟 Backed up ${revisions.length} revision(s) + ${editedSources.length} edited source(s) → ${path.relative(process.cwd(), file)}`);
+	return { revisions, editedSources };
+}
+
+async function restoreUserContent(p: Preserved) {
+	if (!p.revisions.length) return;
+	if (process.env.FORCE_FRESH) {
+		console.warn(`⚠️  FORCE_FRESH set — NOT restoring ${p.revisions.length} revision(s) (backup kept).`);
+		return;
+	}
+	const freshByIdentity = new Map(sourceRows.map((s) => [srcIdentity(s), s]));
+	const remap = new Map<string, string>(); // old source id → live source id
+	const reinsert: Row[] = [];
+	let overlaid = 0;
+	for (const es of p.editedSources) {
+		const fresh = freshByIdentity.get(srcIdentity(es)) as Record<string, unknown> | undefined;
+		if (fresh) {
+			remap.set(es.id as string, fresh.id as string);
+			const vals: Row = {};
+			for (const c of CONTENT_COLS) if (c in es) vals[c] = es[c];
+			await db.update(schema.sources).set(vals as never).where(eq(schema.sources.id, fresh.id as string));
+			overlaid += 1;
+		} else {
+			// User-created source the seed doesn't regenerate — keep it as-is.
+			remap.set(es.id as string, es.id as string);
+			reinsert.push(es as Row);
+		}
+	}
+	if (reinsert.length) await bulkInsert(schema.sources, reinsert);
+	const revs = p.revisions.map((r) => ({
+		...r,
+		sourceId: r.sourceId ? remap.get(r.sourceId as string) ?? r.sourceId : r.sourceId
+	}));
+	await bulkInsert(schema.sourceRevisions, revs as Row[]);
+	console.log(`♻️  Restored ${p.revisions.length} revision(s); re-applied ${overlaid} user edit(s); re-inserted ${reinsert.length} user-created source(s).`);
+}
+
 async function wipe() {
 	// order matters: children before parents (FK)
 	await db.delete(schema.sourceRevisions);
@@ -1526,6 +1941,8 @@ async function wipe() {
 
 async function main() {
 	console.log('AINU_ROOT =', AINU_ROOT);
+	console.log('Capturing user content (revisions + edits) before wipe…');
+	const preserved = await captureUserContent();
 	console.log('Wiping domain tables…');
 	await wipe();
 
@@ -1548,6 +1965,9 @@ async function main() {
 	await bulkInsert(schema.sourcePlaces, sourcePlaceRows);
 	await bulkInsert(schema.sourceInstitutions, sourceInstRows);
 	await bulkInsert(schema.sourceTags, sourceTagRows);
+	await bulkInsert(schema.sourceRelations, sourceRelationRows);
+
+	await restoreUserContent(preserved);
 
 	console.log('--- seeded ---');
 	console.table({
@@ -1562,7 +1982,8 @@ async function main() {
 		places: placeRows.length,
 		institutions: instRows.length,
 		tags: tagRows.length,
-		links: linkRows.length
+		links: linkRows.length,
+		relations: sourceRelationRows.length
 	});
 	process.exit(0);
 }
