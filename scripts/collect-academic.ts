@@ -1579,6 +1579,66 @@ export async function collectResearchmap(permalinks: string[]): Promise<Academic
 	return out;
 }
 
+// --- Internet Archive — digitized historical Ainu-language books -------------
+// Foundational primary sources with full text: Batchelor's dictionary (1905),
+// Chamberlain (1887), Krusenstern's vocabularies (1813), Kindaichi… The full-text
+// link grafts onto an existing catalogue record when we already hold the book.
+export async function collectInternetArchive(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	const queries = [
+		'subject:"Ainu language"',
+		'(title:(Ainu) OR title:(Aino) OR title:(Aïno)) AND (title:(grammar) OR title:(dictionary) OR title:(vocabulary) OR title:(language) OR title:(folk-tales) OR title:(folklore) OR title:(conversation) OR title:(grammatik) OR title:(wörter))',
+		'(Aino OR Ainu) AND (vocabulary OR grammar OR dictionary OR "folk-tales" OR conversation)'
+	];
+	for (const q of queries) {
+		const url =
+			`https://archive.org/advancedsearch.php?q=${encodeURIComponent('(' + q + ') AND mediatype:texts')}` +
+			`&fl[]=identifier&fl[]=title&fl[]=creator&fl[]=year&fl[]=date&fl[]=subject&rows=120&output=json`;
+		let data: any;
+		try {
+			data = await jget(url);
+		} catch {
+			continue;
+		}
+		for (const d of data.response?.docs ?? []) {
+			const id = String(d.identifier ?? '');
+			const title = String(d.title ?? '').trim();
+			if (!id || !title || seen.has(id)) continue;
+			if (/^(enwiki|jawiki|wikipedia|wikimedia)/i.test(id)) continue; // drop wiki dumps
+			const subj = Array.isArray(d.subject) ? d.subject.join(' ') : String(d.subject ?? '');
+			// Require Ainu in the TITLE, or a primary "Ainu language" subject (keeps
+			// subject-only classics like Krusenstern's Wörter-Sammlungen).
+			const titleHasAinu =
+				/ainu|aïno/i.test(title) || (/\baino\b/i.test(title) && /vocab|grammar|dictionar|language|folk|tales|conversation|wörter|grammatik/i.test(title));
+			const subjectIsAinu = /ainu language|アイヌ語/i.test(subj);
+			if (!titleHasAinu && !subjectIsAinu) continue;
+			// Hard drops for cross-language false positives that slip through metadata.
+			if (/indo-european|chamorro|chamoro|magyar|fiatal kutató|únkp|tagalog|chamoru/i.test(title)) continue;
+			seen.add(id);
+			const yr = d.year ?? (d.date ? String(d.date).slice(0, 4) : null);
+			const year = yr ? Number(yr) : null;
+			out.push({
+				source: 'internetarchive',
+				externalId: id,
+				doi: null,
+				title,
+				year: Number.isFinite(year) ? year : null,
+				type: 'book',
+				rawType: 'book',
+				language: null,
+				authors: d.creator ? (Array.isArray(d.creator) ? d.creator : [d.creator]).map(String) : [],
+				venue: null,
+				url: `https://archive.org/details/${id}`,
+				pdf: null,
+				links: [{ type: 'fulltext', url: `https://archive.org/details/${id}`, label: 'Internet Archive (full text)' }]
+			});
+		}
+		console.log(`  Internet Archive "${q.slice(0, 30)}…": total ${out.length}`);
+	}
+	return out;
+}
+
 // Run only the new collectors and merge them into the existing index (the full
 // main() run is slow/flaky). `bun collect-academic.ts extra`.
 export async function collectExtra(): Promise<void> {
@@ -1600,6 +1660,8 @@ export async function collectExtra(): Promise<void> {
 	const oaExtra = await collectOpenAlexExtra();
 	console.log('Collecting researchmap (individual researchers)…');
 	const rmap = await collectResearchmap(RESEARCHMAP_PERMALINKS);
+	console.log('Collecting Internet Archive (digitized historical books)…');
+	const ia = await collectInternetArchive();
 
 	// Dedup against the existing index (DOI + normalized title) and each other.
 	const seenDoi = new Set<string>();
@@ -1612,7 +1674,14 @@ export async function collectExtra(): Promise<void> {
 	}
 	const fresh: AcademicRecord[] = [];
 	const perSource: Record<string, number> = {};
-	for (const r of [...jstage, ...ciniiBooks, ...irdb, ...crChap, ...glotto, ...oaExtra, ...rmap]) {
+	for (const r of [...jstage, ...ciniiBooks, ...irdb, ...crChap, ...glotto, ...oaExtra, ...rmap, ...ia]) {
+		// Link-bearing records (IA full text, IIIF…) are KEPT even on a title match —
+		// seedAcademic grafts their links onto the existing record rather than drop.
+		if (r.links?.length || r.pdf) {
+			fresh.push(r);
+			perSource[r.source] = (perSource[r.source] ?? 0) + 1;
+			continue;
+		}
 		const d = r.doi?.toLowerCase() ?? null;
 		const t = normTitle(r.title);
 		if ((d && seenDoi.has(d)) || (t && seenTitle.has(t))) continue;
