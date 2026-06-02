@@ -1512,6 +1512,63 @@ export async function collectOpenAlexExtra(): Promise<AcademicRecord[]> {
 	return out;
 }
 
+// --- researchmap — an individual researcher's own Ainu-linguistics output -----
+// Follows a researcher's researchmap profile (published_papers + books + misc)
+// and keeps their Ainu-language works. Reusable for any researcher we hold a
+// permalink for; their works link to them as author at seed time.
+const RESEARCHMAP_PERMALINKS = ['SAKAGUCHI_Ryo'];
+export async function collectResearchmap(permalinks: string[]): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	const titleOf = (it: any): { ja: string; en: string } => {
+		const t = it.paper_title ?? it.book_title ?? it.misc_title ?? it.presentation_title ?? it.title;
+		if (typeof t === 'string') return { ja: t, en: '' };
+		return { ja: (t?.ja ?? '').trim(), en: (t?.en ?? '').trim() };
+	};
+	for (const pl of permalinks) {
+		for (const kind of ['published_papers', 'books_etc', 'misc']) {
+			let data: any;
+			try {
+				data = await jget(`https://api.researchmap.jp/${encodeURIComponent(pl)}/${kind}?limit=200`);
+			} catch {
+				continue;
+			}
+			for (const it of data.items ?? []) {
+				const { ja: titleJa, en: titleEn } = titleOf(it);
+				const title = (titleJa || titleEn).replace(/^[『「]|[』」]$/g, '').trim();
+				if (!title) continue;
+				if (!/アイヌ|ainu|樺太|sakhalin|カラフト/i.test(`${titleJa} ${titleEn}`)) continue; // Ainu scope
+				const rawDoi = it.identifiers?.doi;
+				const doi = (Array.isArray(rawDoi) ? rawDoi[0] : rawDoi) || null;
+				const cleanDoi = doi ? String(doi).replace(/^https?:\/\/(dx\.)?doi\.org\//i, '') : null;
+				const key = cleanDoi || `${pl}:${it['rm:id'] ?? title}`;
+				if (seen.has(key)) continue;
+				seen.add(key);
+				const auth = it.authors?.ja ?? it.authors?.en ?? [];
+				const venueObj = it.publication_name;
+				const venue = (typeof venueObj === 'string' ? venueObj : venueObj?.ja || venueObj?.en) || it.publisher || null;
+				const yr = it.publication_date ? Number(String(it.publication_date).slice(0, 4)) : null;
+				out.push({
+					source: 'researchmap',
+					externalId: cleanDoi || key,
+					doi: cleanDoi,
+					title,
+					year: Number.isFinite(yr) ? yr : null,
+					type: kind === 'books_etc' ? 'book' : 'article',
+					rawType: kind,
+					language: 'jpn',
+					authors: (auth as any[]).map((a) => String(a.name ?? '').trim()).filter(Boolean),
+					venue: typeof venue === 'string' ? venue : null,
+					url: cleanDoi ? `https://doi.org/${cleanDoi}` : (it.see_also?.[0]?.['@id'] ?? null),
+					pdf: null
+				});
+			}
+		}
+		console.log(`  researchmap ${pl}: total ${out.length}`);
+	}
+	return out;
+}
+
 // Run only the new collectors and merge them into the existing index (the full
 // main() run is slow/flaky). `bun collect-academic.ts extra`.
 export async function collectExtra(): Promise<void> {
@@ -1531,6 +1588,8 @@ export async function collectExtra(): Promise<void> {
 	const glotto = await collectGlottolog();
 	console.log('Collecting OpenAlex extra…');
 	const oaExtra = await collectOpenAlexExtra();
+	console.log('Collecting researchmap (individual researchers)…');
+	const rmap = await collectResearchmap(RESEARCHMAP_PERMALINKS);
 
 	// Dedup against the existing index (DOI + normalized title) and each other.
 	const seenDoi = new Set<string>();
@@ -1543,7 +1602,7 @@ export async function collectExtra(): Promise<void> {
 	}
 	const fresh: AcademicRecord[] = [];
 	const perSource: Record<string, number> = {};
-	for (const r of [...jstage, ...ciniiBooks, ...irdb, ...crChap, ...glotto, ...oaExtra]) {
+	for (const r of [...jstage, ...ciniiBooks, ...irdb, ...crChap, ...glotto, ...oaExtra, ...rmap]) {
 		const d = r.doi?.toLowerCase() ?? null;
 		const t = normTitle(r.title);
 		if ((d && seenDoi.has(d)) || (t && seenTitle.has(t))) continue;
