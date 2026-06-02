@@ -109,7 +109,7 @@ const GAZETTEER: { match: RegExp; place: GazEntry }[] = [
 	{ match: /多蘭泊|多来加|タライカ|taraika|小田洲|落帆|ochiho|白浦|敷香|poronaysk/i, place: { slug: 'taraika', name: '多蘭泊（タライカ）', nameEn: 'Taraika', kind: 'settlement', region: 'sakhalin', lat: 49.0, lng: 143.2 } },
 	{ match: /西海岸|真岡|maoka|名好|nayoro|本斗/i, place: { slug: 'sakhalin-west', name: '樺太西海岸', nameEn: 'West Sakhalin coast', kind: 'region', region: 'sakhalin', lat: 47.5, lng: 142.0 } },
 	{ match: /東海岸|内淵|naibuchi/i, place: { slug: 'sakhalin-east', name: '樺太東海岸', nameEn: 'East Sakhalin coast', kind: 'region', region: 'sakhalin', lat: 48.0, lng: 142.7 } },
-	{ match: /樺太|サハリン|sakhalin|エンチウ/i, place: { slug: 'sakhalin', name: '樺太', nameEn: 'Sakhalin', kind: 'region', region: 'sakhalin', lat: 49.5, lng: 142.5 } },
+	{ match: /樺太|サハリン|sakhalin|karafuto|エンチウ/i, place: { slug: 'sakhalin', name: '樺太', nameEn: 'Sakhalin', kind: 'region', region: 'sakhalin', lat: 49.5, lng: 142.5 } },
 	{ match: /千島|クリル|kuril/i, place: { slug: 'kuril', name: '千島', nameEn: 'Kuril Islands', kind: 'island', region: 'kuril', lat: 45.5, lng: 149.0 } },
 	{ match: /北海道|hokkaido/i, place: { slug: 'hokkaido', name: '北海道', nameEn: 'Hokkaidō', kind: 'region', region: 'hokkaido', lat: 43.4, lng: 142.8 } }
 ];
@@ -764,14 +764,22 @@ function getInstitution(inst: InstEntry): string {
 	return id;
 }
 
+// Topical / genre tags derived from a source's title (+ type/dialect). Matched
+// as a keyword sweep in attachTags — a source can carry several. Kept high-
+// precision so the tag facet is meaningful (NOT a catch-all: academic records
+// no longer force a blanket "grammar" tag).
 const TAG_DEFS: { slug: string; name: string; nameEn: string; category: string; match: RegExp }[] = [
 	{ slug: 'placenames', name: '地名', nameEn: 'Place names', category: 'topic', match: /地名|placename|toponym/i },
+	{ slug: 'phonology', name: '音韻・音声', nameEn: 'Phonology & phonetics', category: 'topic', match: /音韻|音声|アクセント|韻律|声調|phonolog|phonet|accent|prosod/i },
+	{ slug: 'grammar', name: '文法・統語', nameEn: 'Grammar & syntax', category: 'topic', match: /文法|構文|統語|grammar|syntax|morpholog|\bverb\b|動詞|名詞|助詞|人称|valency|結合価|aspect|アスペクト|使役|受動|応用|applicative|incorporation|抱合|証拠性|evidential/i },
+	{ slug: 'lexicon', name: '語彙・辞典', nameEn: 'Lexicon & dictionaries', category: 'topic', match: /語彙|辞典|辞書|語誌|語源|lexic|vocabular|dictionar|etymolog/i },
+	{ slug: 'dialectology', name: '方言', nameEn: 'Dialectology', category: 'topic', match: /方言|dialect/i },
+	{ slug: 'comparative', name: '比較・系統', nameEn: 'Comparative & genealogy', category: 'topic', match: /比較|系統|借用|comparative|swadesh|abvd|cognate|proto|loanword|genealog/i },
+	{ slug: 'revitalization', name: '復興・教育', nameEn: 'Revitalization & education', category: 'topic', match: /復興|再生|継承|教育|学習|教材|revital|revival|reclamation|heritage|learner|language nest/i },
 	{ slug: 'conversation', name: '会話', nameEn: 'Conversation', category: 'genre', match: /会話|conversation|phrasebook/i },
-	{ slug: 'oral-literature', name: '口承文芸', nameEn: 'Oral literature', category: 'genre', match: /神謡|叙事詩|口承|yukar|yukara|kamuy|epic/i },
-	{ slug: 'folktale', name: '昔話・民譚', nameEn: 'Folktale', category: 'genre', match: /昔話|民譚|民話|folktale|uwepeker/i },
-	{ slug: 'religious-text', name: '宗教テキスト', nameEn: 'Religious text', category: 'genre', match: /聖書|bible|gospel|新約/i },
-	{ slug: 'grammar', name: '文法', nameEn: 'Grammar', category: 'topic', match: /文法|grammar|syntax|morpholog|verb|動詞|助詞|valency|結合価/i },
-	{ slug: 'comparative', name: '比較・対照', nameEn: 'Comparative', category: 'topic', match: /比較|comparative|swadesh|abvd|cognate|proto/i }
+	{ slug: 'oral-literature', name: '口承文芸', nameEn: 'Oral literature', category: 'genre', match: /神謡|叙事詩|口承|ユーカラ|ユカㇻ|yukar|kamuy|epic|散文説話|韻文/i },
+	{ slug: 'folktale', name: '昔話・民譚', nameEn: 'Folktale', category: 'genre', match: /昔話|民譚|民話|説話|folktale|uwepeker|ウエペケレ/i },
+	{ slug: 'religious-text', name: '宗教テキスト', nameEn: 'Religious text', category: 'genre', match: /聖書|bible|gospel|新約|讃美歌/i }
 ];
 
 function getTag(def: (typeof TAG_DEFS)[number]): string {
@@ -843,6 +851,16 @@ function addPlaces(sourceId: string, dialect: string | null | undefined, role = 
 	for (const p of placesFor(dialect)) {
 		sourcePlaceRows.push({ id: uuid(), sourceId, placeId: getPlace(p), role });
 	}
+}
+
+// Prepare an academic title for geo-subject matching: strip institutional /
+// publisher compounds whose embedded place-name (esp. 北海道) would otherwise
+// register as a spurious geographic pin (北海道大学・北海道立図書館・樺太庁…).
+function geoSubjectText(title: string | null | undefined): string {
+	if (!title) return '';
+	return title
+		.replace(/北海道(大学|教育大学|立[^\s、。，]*|庁|博物館|新聞社?|開拓記念館|開拓使|ウタリ協会)/g, '')
+		.replace(/樺太庁/g, '');
 }
 
 // ---------------------------------------------------------------------------
@@ -1620,7 +1638,12 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 		for (const l of rec.links ?? []) addLink(id, l.type, l.url, l.label, so++);
 		if (rec.source === 'openalex') oaToSource.set(rec.externalId, id);
 		addPersonsGated(id, rec.authors ?? [], prominentAuthors);
-		attachTags(id, rec.title, 'grammar');
+		// Geo-locate the work from the dialect/region named in its title (沙流方言,
+		// Sakhalin Ainu, 千歳…). For a study this is its SUBJECT area (対象地域), not a
+		// recording dialect. Only real gazetteer place-names match; titles with an
+		// institutional "北海道大学" context are stripped first to avoid a false pin.
+		addPlaces(id, geoSubjectText(rec.title), 'subject');
+		attachTags(id, rec.title); // topical tags from the real title — NOT a forced 'grammar'
 		added += 1;
 	}
 	if (enriched) console.log(`  academic: enriched ${enriched} existing source(s) with IIIF/transcription links`);
