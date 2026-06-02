@@ -1522,7 +1522,10 @@ const RESEARCHMAP_PERMALINKS = [
 	'SAKAGUCHI_Ryo', 'ainlingsat', 'read0064265', 'read0012388', 'read0144912',
 	'read0049566', 'read0021678', 'mkfk', 'osaka_taku', 'ono_yohei',
 	'tangikuitsuji', 'kobayashi_miki', 'y.yoshikawa', '1976', 'hacrc_hm',
-	'read0127694', 'read0119850', 'koji_yamasaki', 'SoMiyagawa', 'read0067315', 'yocjyet'
+	'read0127694', 'read0119850', 'koji_yamasaki', 'SoMiyagawa', 'read0067315', 'yocjyet',
+	// discovered 2026-06-02 (verified via api.researchmap.jp): linguistics / oral-lit
+	'iii', 'utari', 'read0131605', 'akemi6oshino', 'mfujita1023',
+	'ksmtyshs', 'read0131604', 'takuya_inoue', '_retar', 'uchida_junko0069'
 ];
 export async function collectResearchmap(permalinks: string[]): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];

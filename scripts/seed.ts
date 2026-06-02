@@ -366,7 +366,7 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		太田カムㇱオッカイ: { nameEn: 'Ōta Kamus Okkay' },
 		李志恒: { nameEn: 'Yi Chi-hang' }, 馬長城: { nameEn: 'Ma Changcheng' },
 		徳冨圭: { nameEn: 'Tokutomi Kei' }, 成田英敏: { nameEn: 'Narita Hidetoshi' },
-		押野朱美: { nameEn: 'Oshino Akemi' }, 押野里架: { nameEn: 'Oshino Rika' },
+		押野朱美: { nameEn: 'Oshino Akemi', researchmap: 'akemi6oshino' }, 押野里架: { nameEn: 'Oshino Rika' },
 		早坂駿: { nameEn: 'Hayasaka Shun' }, 木村多栄子: { nameEn: 'Kimura Taeko' },
 		木村梨乃: { nameEn: 'Kimura Rino' }, 松本成美: { nameEn: 'Matsumoto Narumi' },
 		横山裕之: { nameEn: 'Yokoyama Hiroyuki' }, 浜田隆史: { nameEn: 'Hamada Takashi' },
@@ -394,8 +394,8 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		// a name also appears in katakana, both keys carry the same romaji so the
 		// forms merge via the diacritic-folded romaji key in getPerson.
 		遠藤匡俊: { nameEn: 'Endō Masatoshi' }, 加藤百一: { nameEn: 'Katō Hyakuichi' },
-		藤田護: { nameEn: 'Fujita Mamoru' },
-		大喜多紀明: { nameEn: 'Ōkita Noriaki' }, オオギタノリアキ: { nameEn: 'Ōkita Noriaki' },
+		藤田護: { nameEn: 'Fujita Mamoru', researchmap: 'mfujita1023' },
+		大喜多紀明: { nameEn: 'Ōkita Noriaki', researchmap: 'utari' }, オオギタノリアキ: { nameEn: 'Ōkita Noriaki' },
 		徳田貞一: { nameEn: 'Tokuda Sadakazu' }, 上野昌之: { nameEn: 'Ueno Masayuki' },
 		美山治: { nameEn: 'Miyama Osamu' }, 河野廣道: { nameEn: 'Kōno Hiromichi' },
 		佐藤昌彦: { nameEn: 'Satō Masahiko' },
@@ -419,7 +419,15 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		古川恭子: { nameEn: 'Furukawa Kyōko' }, 笹倉いる美: { nameEn: 'Sasakura Irumi' },
 		村崎恭子: { nameEn: 'Murasaki Kyōko' }, ムラサキキョウコ: { nameEn: 'Murasaki Kyōko' },
 		竹ケ原幸朗: { nameEn: 'Takegahara Yukio' }, 小浜基次: { nameEn: 'Kohama Mototsugu' },
-		新井かおり: { nameEn: 'Arai Kaori' }, 小片保: { nameEn: 'Ogata Tamotsu' }
+		新井かおり: { nameEn: 'Arai Kaori' }, 小片保: { nameEn: 'Ogata Tamotsu' },
+		// Researchers discovered + verified via researchmap (2026-06-02).
+		落合いずみ: { nameEn: 'Ochiai Izumi', researchmap: 'iii' },
+		甲地利恵: { nameEn: 'Kōchi Rie', researchmap: 'read0131605' },
+		岸本宜久: { nameEn: 'Kishimoto Yoshihisa', researchmap: 'ksmtyshs' },
+		大谷洋一: { nameEn: 'Ōtani Yōichi', researchmap: 'read0131604' },
+		井上拓也: { nameEn: 'Inoue Takuya', researchmap: 'takuya_inoue' },
+		坂田美奈子: { nameEn: 'Sakata Minako', researchmap: '_retar' },
+		内田順子: { nameEn: 'Uchida Junko', researchmap: 'uchida_junko0069' }
 	};
 
 // Japanese personal names that arrived without the conventional space between
