@@ -1516,7 +1516,14 @@ export async function collectOpenAlexExtra(): Promise<AcademicRecord[]> {
 // Follows a researcher's researchmap profile (published_papers + books + misc)
 // and keeps their Ainu-language works. Reusable for any researcher we hold a
 // permalink for; their works link to them as author at seed time.
-const RESEARCHMAP_PERMALINKS = ['SAKAGUCHI_Ryo'];
+// Verified researchmap permalinks of Ainu-studies researchers (their non-Ainu
+// works are dropped by the title filter). Keep in sync with persons.researchmap.
+const RESEARCHMAP_PERMALINKS = [
+	'SAKAGUCHI_Ryo', 'ainlingsat', 'read0064265', 'read0012388', 'read0144912',
+	'read0049566', 'read0021678', 'mkfk', 'osaka_taku', 'ono_yohei',
+	'tangikuitsuji', 'kobayashi_miki', 'y.yoshikawa', '1976', 'hacrc_hm',
+	'read0127694', 'read0119850', 'koji_yamasaki', 'SoMiyagawa', 'read0067315', 'yocjyet'
+];
 export async function collectResearchmap(permalinks: string[]): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	const seen = new Set<string>();

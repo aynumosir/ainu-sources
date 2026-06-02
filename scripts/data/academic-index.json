@@ -66641,5 +66641,5590 @@
     "venue": "文学部の新しい波 第16集 2016年度優秀論文集",
     "url": "https://iss.ndl.go.jp/books/R100000001-I086186216-00",
     "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:51224465",
+    "doi": null,
+    "title": "Basic Sentence Structures in Ainu アイヌ語における文の基本構造",
+    "year": 2025,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "Studia Orientalia",
+    "url": "https://api.researchmap.jp/ainlingsat/research_projects/45299902",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14943/bfhhs.165.l1",
+    "doi": "10.14943/bfhhs.165.l1",
+    "title": "アイヌ語学の諸問題 : 近年の議論と関連して",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "北海道大学文学研究院紀要",
+    "url": "https://doi.org/10.14943/bfhhs.165.l1",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:32597756",
+    "doi": null,
+    "title": "名詞所属形を用いたアイヌ語の所有構造について",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤知己"
+    ],
+    "venue": "津曲敏郎先生古稀記念集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:32345785",
+    "doi": null,
+    "title": "蝦夷記のアイヌ語申渡文における仮名の用法",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "日本語文字論の挑戦",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:23650817",
+    "doi": null,
+    "title": "アイヌ語古文献における仮名の用法",
+    "year": 2018,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "北海道大学文学研究科紀要",
+    "url": "https://api.researchmap.jp/ainlingsat/research_projects/10905198",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17353904",
+    "doi": null,
+    "title": "A Classification of the Types of Noun Incorporation in Ainu and its Implication fo Morphosyntactic Typology",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "Crosslinguistics and Linguistic Crossings in Northeast Asia",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:13414131",
+    "doi": null,
+    "title": "宝永元年空年上人筆録アイヌ語彙狄言葉の仮名・音韻対応表",
+    "year": 2015,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "北海道立アイヌ民族文化研究センター研究紀要",
+    "url": "http://ci.nii.ac.jp/naid/40020401291",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:7726337",
+    "doi": null,
+    "title": "宝永元[1704]年空念上人筆録アイヌ語「狄言葉」の言語学的特徴",
+    "year": 2014,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "北海道立アイヌ民族文化研究センター紀要",
+    "url": "http://ci.nii.ac.jp/naid/40020159692",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:4090527",
+    "doi": null,
+    "title": "アイヌ語千歳方言における抱合の種類とその諸制約",
+    "year": 2012,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "北海道立アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:4090522",
+    "doi": null,
+    "title": "アイヌ語のアスペクトと日本語のアスペクトの対照",
+    "year": 2007,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "日本語学",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:4090528",
+    "doi": null,
+    "title": "Sato, T.: \"Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu\", Bulletin of the Hokkaido Ainu Culture Research Center, 9: 11-34 (2003)*",
+    "year": 2003,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11985077",
+    "doi": null,
+    "title": "アイヌ語千歳方言の kane について",
+    "year": 2002,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "『北海道立アイヌ民族文化研究センター研究紀要』",
+    "url": "http://ci.nii.ac.jp/naid/40021039602",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:51099571",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(14)",
+    "year": 2025,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:45897361",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(13)",
+    "year": 2024,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:45897355",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(12)",
+    "year": 2023,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:36616721",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(11)",
+    "year": 2022,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:32481423",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(10)",
+    "year": 2021,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:32481422",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(9)",
+    "year": 2020,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:13470254",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(8)",
+    "year": 2019,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:51099715",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(7)",
+    "year": 2018,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:51099705",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(6)",
+    "year": 2017,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:10823840",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(5)",
+    "year": 2016,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:10823842",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(4)",
+    "year": 2015,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:10823843",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(3)",
+    "year": 2014,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:10823844",
+    "doi": null,
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(2)",
+    "year": 2013,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14943/bfhhs.171.l39",
+    "doi": "10.14943/bfhhs.171.l39",
+    "title": "研究ノート : 芥川龍之介と知里幸恵『アイヌ神謡集",
+    "year": 2023,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "北海道大学文学研究院紀要",
+    "url": "https://doi.org/10.14943/bfhhs.171.l39",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:36588141",
+    "doi": null,
+    "title": "N. A. ネフスキーによるアイヌ語の Upaskuma",
+    "year": 2022,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Tomomi Sato",
+      "Anna Bugaeva"
+    ],
+    "venue": "北方言語研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631124",
+    "doi": null,
+    "title": "知里博士のアイヌ語研究",
+    "year": 2010,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "知里真志保",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631123",
+    "doi": null,
+    "title": "アイヌ語千歳方言の昔話とその言語的特徴",
+    "year": 2010,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "言語研究の諸相",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361803",
+    "doi": null,
+    "title": "A Folktale of the Chitose Dialect of Ainu and its Linguistic Characteristics",
+    "year": 2010,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631105",
+    "doi": null,
+    "title": "アイヌの人々とアイヌ語の今 (特集 変容する日本のことば--言語の危機と話者の意識)",
+    "year": 2009,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "言語",
+    "url": "http://ci.nii.ac.jp/naid/40016674810",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631121",
+    "doi": null,
+    "title": "アイヌの人々とアイヌ語の今",
+    "year": 2009,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "月刊言語",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361801",
+    "doi": null,
+    "title": "The Present Situation of the Ainu People and the Ainu Language",
+    "year": 2009,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361800",
+    "doi": null,
+    "title": "Some Materials of the Ainu Language in the First Half of the 18th Century",
+    "year": 2009,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Tha Annual Report on Cultural Science",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631108",
+    "doi": null,
+    "title": "アイヌ語のアスペクトと日本語のアスペクトの対照 (特集 アスペクト研究の新展開)",
+    "year": 2007,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "日本語学",
+    "url": "http://ci.nii.ac.jp/naid/40015355427",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631126",
+    "doi": null,
+    "title": "アイヌ語研究の課題と展望",
+    "year": 2007,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "現代文化人類学の課題",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631117",
+    "doi": null,
+    "title": "北海道大学におけるアイヌ語研究の過去・現在・未来",
+    "year": 2006,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "先住民族と大学",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361799",
+    "doi": null,
+    "title": "the study of ainu in hokkaido university-past, present, and future",
+    "year": 2006,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361798",
+    "doi": null,
+    "title": "Japanese and Ainu",
+    "year": 2006,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:18853012",
+    "doi": null,
+    "title": "食・文・化・論アーティスト アイヌ民族の言語・文化と伝統料理",
+    "year": 2005,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "食品・食品添加物研究誌",
+    "url": "http://ci.nii.ac.jp/naid/40006649528",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631128",
+    "doi": null,
+    "title": "六種対照『アイヌ神謡集』(1)―校本作成のための資料と本文をめぐる諸問題",
+    "year": 2005,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "北海道大学文学研究科紀要",
+    "url": "http://ci.nii.ac.jp/naid/110006691379",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:17631114",
+    "doi": null,
+    "title": "アイヌ文学における一人称体の問題",
+    "year": 2004,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "『北海道大学文学研究科紀要』",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361809",
+    "doi": null,
+    "title": "アイヌ語千歳方言における反復による有音休止",
+    "year": 2000,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "『北海道立アイヌ民族文化研究センター研究紀要』",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361808",
+    "doi": null,
+    "title": "天理大学付属天理図書館所蔵「松前ノ言」について(2)",
+    "year": 1999,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "『北海道大学文学部紀要』",
+    "url": "http://ci.nii.ac.jp/naid/120000952580",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361807",
+    "doi": null,
+    "title": "天理大学付属天理図書館所蔵「松前ノ言」について",
+    "year": 1998,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "『北海道大学文学部紀要』",
+    "url": "http://ci.nii.ac.jp/naid/120000952550",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:11361806",
+    "doi": null,
+    "title": "Sato, T. : \"Possessive Expression in Ainu\", T. Hayashi and P. Bhaskararao (eds.) Studies in Possessive Expressions, Institute for the Study of Languages and Cultures of Asia and Africa. Tokyo University of Foreign Studies, 143-160, Tokyo (1997)",
+    "year": 1997,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:34870115",
+    "doi": null,
+    "title": "日本語とアイヌ語,ニヴフ語 (日本語研究とその周辺<特集>) -- (日本語研究と一般言語学)",
+    "year": 1991,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": "国文学解釈と鑑賞",
+    "url": "http://ci.nii.ac.jp/naid/40001338379",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227053",
+    "doi": null,
+    "title": "アイヌ口承文芸テキスト集５ ワウォリ：アオバトが生れたわけ",
+    "year": 2004,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227052",
+    "doi": null,
+    "title": "アイヌ口承文芸テキスト集４ ナナカマドのイナウで伝染病の神を倒した",
+    "year": 2003,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "千葉大学 ユーラシア言語文化論集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227045",
+    "doi": null,
+    "title": "日本語とアイヌ語の史的関係について．",
+    "year": 2003,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "アレキサンダー・ボビン、長田俊樹編『日本語系統論の現在』",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227050",
+    "doi": null,
+    "title": "アイヌ口承文芸テキスト集３ トパットゥミから逃れたウライウシナイの少年",
+    "year": 2002,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "千葉大学 ユーラシア言語文化論集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227043",
+    "doi": null,
+    "title": "アイヌ文学の精神像―散文説話を事例に―",
+    "year": 2002,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "中川 裕"
+    ],
+    "venue": "東北学",
+    "url": "http://ci.nii.ac.jp/naid/40005580980",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227049",
+    "doi": null,
+    "title": "トゥムンチ ペンチャイ、オコッコ ペンチャイ―アイヌ語千歳方言叙事詩テキスト―",
+    "year": 2001,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "三浦佑之編『叙事詩の学際的研究』",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227048",
+    "doi": null,
+    "title": "アイヌ口承文芸テキスト集２ 主人を助けられなかった犬",
+    "year": 2001,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "中川 裕"
+    ],
+    "venue": "千葉大学 ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/110004599162",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227064",
+    "doi": null,
+    "title": "アイヌ民族に関する指導資料",
+    "year": 2000,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "財団法人アイヌ文化振興・研究推進機構",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227047",
+    "doi": null,
+    "title": "アイヌ口承文芸テキスト集１ 狼から逃れた娘",
+    "year": 2000,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "千葉大学 ユーラシア言語文化論集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227040",
+    "doi": null,
+    "title": "Ainu Language : Present and Future",
+    "year": 1999,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "W.W.Fitzhugh and C.O.Dubreil ed., Ainu Spirit of a Northern People",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227034",
+    "doi": null,
+    "title": "Language Materials in Ainu Collections of MAE",
+    "year": 1998,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Journal of Chiba University Eurasian Society",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227062",
+    "doi": null,
+    "title": "口承文学２・アイヌ文学",
+    "year": 1997,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "岩波書店",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227058",
+    "doi": null,
+    "title": "エクスプレスアイヌ語(共著)",
+    "year": 1997,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "白水社",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227030",
+    "doi": null,
+    "title": "Express Ainu",
+    "year": 1997,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Hakusuisha",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227028",
+    "doi": null,
+    "title": "The Narrative World of Ainu",
+    "year": 1997,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Heibonsha",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227059",
+    "doi": null,
+    "title": "アイヌ物語文学ジャンル名の分布と歴史",
+    "year": 1996,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "柴田武先生喜寿記念論文集 言語学林1995-1996 三省堂",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227035",
+    "doi": null,
+    "title": "A Historical study of the Ainu Language through Linguistic Geography",
+    "year": 1996,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the Hokkaido Ainu Culture Research Center",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227033",
+    "doi": null,
+    "title": "言語地理学によるアイヌ語の史的研究",
+    "year": 1996,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "北海道立アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227031",
+    "doi": null,
+    "title": "Distribution and History of Genre Names of Ainu Narrative",
+    "year": 1996,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227036",
+    "doi": null,
+    "title": "アイヌ語研究の現状と問題点",
+    "year": 1995,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "言語研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227029",
+    "doi": null,
+    "title": "Fieldworks on Ainu Language",
+    "year": 1995,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Taishukan shoten",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0064265:24227027",
+    "doi": null,
+    "title": "An Ainu-Japanese Dictionary -Chitose Dialect-",
+    "year": 1995,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Sofukan",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:35662114",
+    "doi": null,
+    "title": "Unspecified participant: A case of antipassive in Ainu",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Anna Bugaeva"
+    ],
+    "venue": "In: Janic, Katarzyna and Alena Witzlack-Makarevich (eds.) Antipassive Typology, diachrony, and related constructions (TSL 130). Amsterdam & Philadelphia: John Benjamins",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:43540292",
+    "doi": null,
+    "title": "Dokumentirovanie v postjazykovoj period: v poiskakh ajnskikh kornej na Nizhnem Amure [Documentation in a post-language period: In search for Ainu roots in the Lower Amur region]",
+    "year": 2019,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna, Ekaterina Gruzdeva, Marina Temina,and Juha Janhunen"
+    ],
+    "venue": "Proceedings of the International conference “Documentation of Languages and Dialects of Indigenous Peoples of Russia”, Institute for Linguistic Studies",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021306",
+    "doi": null,
+    "title": "Ainu complex predicates with reference to Japanese",
+    "year": 2018,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In: Pardeshi, Prashant & Kageyama, Taro (eds.) Handbook of Japanese Contrastive Linguistics, De Gruyter Mouton",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021309",
+    "doi": null,
+    "title": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In: Gruzdeva, Ekaterina & Juha Janhunen (eds.) Linguistic Crossings and Crosslinguistics in Northeast Asia, Studia Orientalia 117 . Helsinki: Finno-Ugrian Society Press.",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021312",
+    "doi": null,
+    "title": "Southern Hokkaido Ainu (reprint of Bugaeva (2012), Routledge)",
+    "year": 2015,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In: Stefan Georg (ed.) Language Isolates (Critical Concepts in Linguistics), v.I-IV, Routledge",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021314",
+    "doi": null,
+    "title": "Relative clauses and noun complements in Ainu.",
+    "year": 2015,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ アンナ"
+    ],
+    "venue": "In:ブガエワ・アンナ、長崎郁（編） .『アイヌ語研究の諸問題』．北海道出版企画センター.",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021316",
+    "doi": null,
+    "title": "アイヌ語使役交替動詞対データ",
+    "year": 2014,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In: プラシャント・パルデシ（編）『使役交替言語地図』．国立国語研究所http://watp.ninjal.ac.jp",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021317",
+    "doi": null,
+    "title": "アイヌ語における使役構文に関する再考察",
+    "year": 2014,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ アンナ"
+    ],
+    "venue": "『北方言語研究』．札幌: 北海道大学大学院文学研究科",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021318",
+    "doi": null,
+    "title": "Ainu Valency Patterns",
+    "year": 2013,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In Hartmann, Iren & Haspelmath, Martin & Taylor, Bradley (eds.) Valency Patterns Leipzig. Leipzig: Max Planck Institute for Evolutionary Anthropology. http://www.valpal.info/languages/ainu",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021319",
+    "doi": null,
+    "title": "父は並ぶもののない長者だった」―アイヌ語における関係節を用いた最上級表現―",
+    "year": 2013,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ アンナ"
+    ],
+    "venue": "日本言語学会第146回大会予稿集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021325",
+    "doi": null,
+    "title": "\"Anticausative/causative verb alternation in Ainu\"",
+    "year": 2010,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "Societas Linguistica Europaea 43rd Annual Meeting, Book of Abstracts",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021327",
+    "doi": null,
+    "title": "Impersonal constructions in Ainu",
+    "year": 2009,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "稗田乃、峰岸真琴、川口裕司 (編) 『言語記述から言語分析の応用へ』（コーパスに基づく言語学教育研究報告２）．東京：東京外国語大学",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021329",
+    "doi": null,
+    "title": "\"Ainu causatives\"",
+    "year": 2008,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ アンナ"
+    ],
+    "venue": "日本言語学会第136回大会予稿集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021331",
+    "doi": null,
+    "title": "“Reciprocals and Sociatives in Ainu”",
+    "year": 2007,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Alpatov, V. M",
+      "A. Ju. Bugaeva",
+      "V. P. Nedjalkov"
+    ],
+    "venue": "In: V. P. Nedjalkov (ed.) Reciprocal Constructions [TSL 71]. Amsterdam & Philadelphia: John Benjamins",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021332",
+    "doi": null,
+    "title": "言語類型論的観点から見たアイヌ語の充当",
+    "year": 2006,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ アンナ"
+    ],
+    "venue": "日本言語学会第133回大会予稿集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021333",
+    "doi": null,
+    "title": "\"Direct and indirect speech in Ainu\"",
+    "year": 2006,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In: The Grammar and Pragmatics of Complex Sentences in Languages spoken in Europe and North and Central Asia. Book of Abstracts, Tomsk: Tomsk Pedagogical University",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:12021334",
+    "doi": null,
+    "title": "アイヌ語の充当接頭辞 (相互、共同の派生を中心に)",
+    "year": 2005,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ アンナ"
+    ],
+    "venue": "日本言語学会第131回大会予稿集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:43540295",
+    "doi": null,
+    "title": "Handbook of the Ainu Language (Handbooks of Japanese Language and Linguistics 12).",
+    "year": 2022,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna (ed.)"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:43540296",
+    "doi": null,
+    "title": "A glossed audio corpus of Ainu folklore (mobile phone version)",
+    "year": 2021,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Nakagawa, Hiroshi, Anna Bugaeva, Miki Kobayashi, and Yoshimi Yoshikawa"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:35662118",
+    "doi": null,
+    "title": "アイヌ語口承文芸コーパス―音声・グロス付き―』千歳方言物語8編追加（日本語版）",
+    "year": 2021,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "中川裕、アンナ・ブガエワ、小林美紀、吉川佳見 編"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:35662117",
+    "doi": null,
+    "title": "A Glossed Audio Corpus of Ainu Folklore: 8 Chitose Dialect Folktales Added (English version)",
+    "year": 2021,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Nakagawa, Hiroshi, Anna Bugaeva, Miki Kobayashi, Yoshimi Yoshikawa (eds)"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:30996420",
+    "doi": null,
+    "title": "アイヌ語口承文芸コーパス―音声・グロス付き―』千歳方言物語7編追加（日本語版）",
+    "year": 2020,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "中川裕、アンナ・ブガエワ、小林美紀、吉川佳見 編"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:30996419",
+    "doi": null,
+    "title": "A Glossed Audio Corpus of Ainu Folklore: 7 Chitose Dialect Folktales Added (English version)",
+    "year": 2020,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Nakagawa, Hiroshi, Anna Bugaeva, Miki Kobayashi, Yoshimi Yoshikawa (eds)"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:14643489",
+    "doi": null,
+    "title": "アイヌ語口承文芸コーパス―音声・グロス付き―』物語13編追加（日本語版）",
+    "year": 2018,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "中川裕",
+      "アンナ・ブガエワ",
+      "小林美紀"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:14643488",
+    "doi": null,
+    "title": "A Glossed Audio Corpus of Ainu Folklore: Addition of 13 glossed folktales (English version)",
+    "year": 2018,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Hiroshi Nakagawa",
+      "Anna Bugaeva",
+      "Miki Kobayashi"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:14643491",
+    "doi": null,
+    "title": "アイヌ語口承文芸コーパス―音声・グロス付き―",
+    "year": 2016,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "中川裕",
+      "アンナ・ブガエワ",
+      "小林美紀"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:14643490",
+    "doi": null,
+    "title": "A Glossed Audio Corpus of Ainu Folklore",
+    "year": 2016,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Nakagawa, Hiroshi",
+      "Bugaeva, Anna",
+      "Kobayashi, Miki"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:14643492",
+    "doi": null,
+    "title": "A topical dictionary of conversational Ainu (English HP)",
+    "year": 2015,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "BUGAEVA Anna",
+      "Endo, Shiho",
+      "Akasegawa, Shiro"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:14643494",
+    "doi": null,
+    "title": "トピック別 アイヌ語会話辞典』（日本語版）",
+    "year": 2015,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ アンナ",
+      "遠藤志保",
+      "赤瀬川史朗"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:14643495",
+    "doi": null,
+    "title": "A talking dictionary of Ainu: a new version of Kanazawa's Ainu conversational dictionary 『音声付きアイヌ語辞典――新編 金澤版アイヌ語会話辞典",
+    "year": 2010,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna",
+      "Shiho Endo",
+      "speaker",
+      "Setsu Kurokawa",
+      "multimedia developer",
+      "David Nathan"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:43540297",
+    "doi": null,
+    "title": "Documentation of the Saru dialect of Ainu",
+    "year": 2009,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Nakagawa, Hiroshi and Anna Bugaeva"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:14643496",
+    "doi": null,
+    "title": "Grammar and folklore texts of the Chitose dialect of Ainu (Idiolect of Ito Oda). +1 audio CD [アイヌ語千歳方言の文法と口承文芸―小田イトの個人語―]『環太平洋の言語の「消滅に瀕した言語」にかんする緊急調査研究シリーズ A2-045",
+    "year": 2004,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164082",
+    "doi": null,
+    "title": "Toward New Horizons in Ainu Studies: Research Activities of the NINJAL-based Ainu Research Group",
+    "year": 2017,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "東京外国語大学 国際日本学研究 報告I 2015年度国際シンポジウム国際日本研究 対話、交流、ダイナミクス Internationalizing Japan Studies: Dialogues, Interactions, Dynamics",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164084",
+    "doi": null,
+    "title": "アイヌ語は日本語に似たようなものか？",
+    "year": 2013,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ アンナ"
+    ],
+    "venue": "『日本語新発見―世界から見た日本語―』",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164086",
+    "doi": null,
+    "title": "\"Remarks on ditransitive constructions in Ainu\"",
+    "year": 2011,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In: T. Kurebito (ed.) Linguistic Typology of the North Vol.2, Tokyo: Research Institute for Languages and Cultures of Asia and Africa Tokyo University of Foreign Studies.",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164089",
+    "doi": null,
+    "title": "Documentation of Southern Hokkaido Ainu (2007-2009) [deposit 2]",
+    "year": 2011,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "Endangered Languages Archive, SOAS, University of London. Available online at : https://elar.soas.ac.uk/Collection/MPI124799",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164088",
+    "doi": null,
+    "title": "A talking dictionary of Ainu [deposit 3]",
+    "year": 2011,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "Endangered Languages Archive, SOAS, University of London. Available online at https://elar.soas.ac.uk/Collection/MPI124799",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164087",
+    "doi": null,
+    "title": "A corpus of folktales of the Saru dialect of Ainu by Mrs. Kimi Kimura (1900-1988) [deposit 1]",
+    "year": 2011,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Nakagawa Hiroshi",
+      "Anna Bugaeva"
+    ],
+    "venue": "Endangered Languages Archive, SOAS, University of London. Available online at : https://elar.soas.ac.uk/Collection/MPI124799",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164090",
+    "doi": null,
+    "title": "少数言語のインターネット活用―『音声付きアイヌ語会話辞典』を中心に",
+    "year": 2010,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In: 『「しまくとぅば」の未来―少数派の言語とその再活化―』 第32回南島文化市民講座、沖縄県立博物館・美術館講堂",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164095",
+    "doi": null,
+    "title": "\"Classification of reciprocals and sociatives in Ainu\"",
+    "year": 2004,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Bugaeva, Anna"
+    ],
+    "venue": "In: 宮岡伯人・遠藤史(編) 『環北太平洋の言語A2-044』．吹田：大阪学院大学",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0144912:20164099",
+    "doi": null,
+    "title": "アイヌ語千歳方言の特色",
+    "year": 2003,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "ブガエワ・アンナ"
+    ],
+    "venue": "In: 楠本勝子 (編) 『Itahcara』．札幌：北海道大学",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:6392773",
+    "doi": null,
+    "title": "アイヌ神謡集辞典",
+    "year": 2003,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:6392774",
+    "doi": null,
+    "title": "アイヌの人口統計が意味するもの 言語学的観点から",
+    "year": 1994,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:6392772",
+    "doi": null,
+    "title": "What does the Statistics of the Ainu Population means linguistically.",
+    "year": 1994,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482476",
+    "doi": null,
+    "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)",
+    "year": 1998,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "切替 英雄"
+    ],
+    "venue": "北海学園大学学園論集",
+    "url": "http://ci.nii.ac.jp/naid/40000441547",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482466",
+    "doi": null,
+    "title": "Lexicon and Grammatical Sketch of an Ainu Folktale in the Tokachi Dialect\"An Otasut Boy who Swam and pulled an Island\"(2)",
+    "year": 1998,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Gakuen Ronshu : The Journal of Hokkai-Gakuen University",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482465",
+    "doi": null,
+    "title": "A Study on an Ainu Tokachi Dialect Text Written with Japanese Letters",
+    "year": 1998,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Gakuen Ronshu : The Journal of Hokkai-Gakuen University",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482474",
+    "doi": null,
+    "title": "アイヌによるアイヌ語表記",
+    "year": 1997,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "国文学解釈の鑑賞",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482463",
+    "doi": null,
+    "title": "Studies on Ainu before Kyosuke Kindaichi in the Meiji Period : Kotora Jinbo's interest in Ainu",
+    "year": 1996,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482457",
+    "doi": null,
+    "title": "Lexicon and Grammatical Sketch of an Ainu Folktale in the Takachi Dialect \" An Otasut Boy who Swam and Pulled an Island \"(1)",
+    "year": 1996,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Gakuen Ronshu : The Journal of Hokkai-Gakuen University",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482462",
+    "doi": null,
+    "title": "pa/ca Correspondence between Ainu Dialects : A Linguistic-Geographical Study",
+    "year": 1994,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Proceedings of the 8th International Abashiri Symposium : Peoples and Cultures of the Bareal Forest",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482456",
+    "doi": null,
+    "title": "Some Aspects of Reflexivity in Ainu",
+    "year": 1994,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "A Comparative Study of the Function and Typology of Language",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482461",
+    "doi": null,
+    "title": "Some Geographical Concepts of the Ainu",
+    "year": 1993,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482459",
+    "doi": null,
+    "title": "Pilsudski's Memorandums on Containers of Ainu wax-coated cylinders",
+    "year": 1991,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the National Museum of Ethnology, Special Issue",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482469",
+    "doi": null,
+    "title": "アイヌ語はどんな言語か 一つの派生動詞をめぐって",
+    "year": 1985,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "言語(体修館書店)",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0049566:23482468",
+    "doi": null,
+    "title": "アイヌ語の名詞句の構造と合成名詞",
+    "year": 1984,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "言語研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:53742152",
+    "doi": null,
+    "title": "アイヌ口頭文芸における韻律と文字資料",
+    "year": 2026,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田統己"
+    ],
+    "venue": "口承文芸研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:41558045",
+    "doi": null,
+    "title": "アイヌ口頭文芸の継承における語り手と学習者の諸権利",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田統己"
+    ],
+    "venue": "口承文芸研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649579",
+    "doi": null,
+    "title": "アイヌ叙事詩における英雄像",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "口承文芸研究",
+    "url": "http://ci.nii.ac.jp/naid/40021215851",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649565",
+    "doi": null,
+    "title": "アイヌ語の韻文における音節数志向とアクセント志向 (金子亨先生追悼号)",
+    "year": 2012,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/120005939448",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:17725765",
+    "doi": null,
+    "title": "知里真志保のアイヌ文学研究とその後",
+    "year": 2010,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "とどまつ : 北海道開拓記念館・開拓の村文化振興会会報",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649567",
+    "doi": null,
+    "title": "アイヌ語資料の保存と活用 (特集 危機言語としてのアイヌ語と琉球語) -- (アイヌ語)",
+    "year": 2010,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "国文学 : 解釈と鑑賞",
+    "url": "http://ci.nii.ac.jp/naid/40016860065",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649569",
+    "doi": null,
+    "title": "アイヌの英雄叙事詩における英雄像の地域差",
+    "year": 2009,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/120005929795",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649572",
+    "doi": null,
+    "title": "アイヌ--6は「神聖な数」か (特集 聖数--500号記念増大号)",
+    "year": 2003,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "月刊考古学ジャ-ナル",
+    "url": "http://ci.nii.ac.jp/naid/40005776666",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649551",
+    "doi": null,
+    "title": "アイヌ口頭文芸のジャンル分類：目的と方法",
+    "year": 2002,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "口承文芸研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649553",
+    "doi": null,
+    "title": "アイヌ語静内方言の格助詞",
+    "year": 1999,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道立アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649552",
+    "doi": null,
+    "title": "アイヌ語静内方語の後置副詞",
+    "year": 1998,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道立アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649550",
+    "doi": null,
+    "title": "アイヌ語静内方言の副助詞と終助詞",
+    "year": 1997,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道立アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649549",
+    "doi": null,
+    "title": "アイヌ口頭文芸「聖伝」をめぐって",
+    "year": 1996,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "口承文芸研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649547",
+    "doi": null,
+    "title": "歴史研究の資料としてのアイヌ口頭文芸",
+    "year": 1996,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道立アイヌ民族文化研究センター紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649546",
+    "doi": null,
+    "title": "アイヌ語静内方言の接続助詞",
+    "year": 1995,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道立アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:16649575",
+    "doi": null,
+    "title": "日本語とアイヌ語における連体修飾と文の名詞化",
+    "year": 1989,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "早稲田大学語学教育研究所紀要",
+    "url": "http://ci.nii.ac.jp/naid/40003928622",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:11519301",
+    "doi": null,
+    "title": "伝承から探るアイヌの歴史（札幌大学付属総合研究所研究叢書１ ）",
+    "year": 2010,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:11519304",
+    "doi": null,
+    "title": "【アイヌ文化研究の今】１ アイヌの歴史と物語世界",
+    "year": 2005,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597402",
+    "doi": null,
+    "title": "Audio Materials of the Shizunai Dialect of the Ainu Recorded by Suzuko Tamura: Oral Literature and Conversation of Ms Suteno Orita and Ms Haru Torao",
+    "year": 2003,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597411",
+    "doi": null,
+    "title": "語り継がれる歴史と時間—アイヌの歴史認識を手がかりとして",
+    "year": 2002,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597401",
+    "doi": null,
+    "title": "Oral Transmission of the History and Time: Recognition of the History in Ainu",
+    "year": 2002,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597399",
+    "doi": null,
+    "title": "Lexicon and Concordance of the Shizunai Dialect of Ainu(with CD-ROM)",
+    "year": 1999,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597408",
+    "doi": null,
+    "title": "アイヌ史研究とアイヌ語-とくに「イオル」をめぐって-",
+    "year": 1998,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597407",
+    "doi": null,
+    "title": "(研究史・研究文献目録)アイヌ口頭文芸",
+    "year": 1998,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597398",
+    "doi": null,
+    "title": "Between Historical and Linguistic Research on Ainu : on the term \"ioru\"",
+    "year": 1998,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597397",
+    "doi": null,
+    "title": "(Research History and Bibliography)Ainu Oral Literature",
+    "year": 1998,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597406",
+    "doi": null,
+    "title": "公開講座北海道文化論第13集 アイヌ文化の現在(共著)",
+    "year": 1997,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597405",
+    "doi": null,
+    "title": "アイヌ文学(共著)",
+    "year": 1997,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597396",
+    "doi": null,
+    "title": "The Present of Ainu Culture",
+    "year": 1997,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597395",
+    "doi": null,
+    "title": "Ainu Literature",
+    "year": 1997,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597403",
+    "doi": null,
+    "title": "アイヌ口誦文芸の語りかたの解明のために",
+    "year": 1994,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:2597393",
+    "doi": null,
+    "title": "For the Research on the Performance of the Oral Literature of the Ainu",
+    "year": 1994,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:40517422",
+    "doi": null,
+    "title": "福島琴蔵（編）『アイヌ語の訳解",
+    "year": 2022,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "奥田統己"
+    ],
+    "venue": "国立歴史民俗博物館研究報告",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:36343859",
+    "doi": null,
+    "title": "アイヌ民族の歴史と文化―〈ひと〉〈暮らし〉〈ことば〉からさぐる―第8回 神謡―神々の物語",
+    "year": 2022,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "奥田統己"
+    ],
+    "venue": "開発こうほう",
+    "url": "https://www.hkk.or.jp/kouhou/file/no702_ainurace.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:22470729",
+    "doi": null,
+    "title": "アイヌ語の挨拶表現と「イランカラプテ」キャンペーンについて",
+    "year": 2013,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道方言研究会報",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:22470731",
+    "doi": null,
+    "title": "アイヌ語の使役と逆使役概観－日本語との対照から－",
+    "year": 2011,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道方言研究会報",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:22470732",
+    "doi": null,
+    "title": "アイヌ語の人称表示再考",
+    "year": 2009,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道方言研究会報",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:21811608",
+    "doi": null,
+    "title": "研究潮流 アイヌ語研究の足下--坂田美奈子「アイヌモシリにおけるウレシパの原則」(『北海道・東北史研究』1、2004年)をめぐって",
+    "year": 2007,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "北海道・東北史研究",
+    "url": "http://ci.nii.ac.jp/naid/40015884106",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:15610373",
+    "doi": null,
+    "title": "Ainu: Is 6 the Sacred Number ?",
+    "year": 2003,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Koukogaku Journal",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:15610370",
+    "doi": null,
+    "title": "Case Particles in the Shizunai Dialect of Ainu",
+    "year": 1999,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the Hokkaido Ainu Culture Research Center",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:15610369",
+    "doi": null,
+    "title": "Postpositional Adnouns in the Shizunai Dialect of Ainu",
+    "year": 1998,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the Holdcaido Aiun Culture Research Center",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:15610367",
+    "doi": null,
+    "title": "Adverbial Particles and Sentence Final Particles in the Shizunai Dialect of Ainu",
+    "year": 1997,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the Hokkaido Ainu Culture Research Center",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:15610366",
+    "doi": null,
+    "title": "In Regard to the \"Sacred Tradition\" (Seiden) of Ainu Oral Tradition",
+    "year": 1996,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Studies in Folk-Narrative",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:15610365",
+    "doi": null,
+    "title": "Ainu Oral Literature as Materials for Historical Study",
+    "year": 1996,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the Hokkaido Ainu Culture Research Center",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:15610363",
+    "doi": null,
+    "title": "Conjunctionalizers in the Shizunai Dialect of Ainu",
+    "year": 1995,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the Hokkaido Ainu Culture Research Center",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:21811610",
+    "doi": null,
+    "title": "アイヌ口誦文芸(2) : 上田トシさん口演「犬の子供をみごもった女の物語",
+    "year": 1990,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "札幌学院大学人文学会紀要",
+    "url": "http://ci.nii.ac.jp/naid/110000471063",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:21811611",
+    "doi": null,
+    "title": "アイヌ口承文芸(1) : 上田トシさん口演「カラスに育てられた男の物語",
+    "year": 1990,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "奥田 統己"
+    ],
+    "venue": "札幌学院大学人文学会紀要",
+    "url": "http://ci.nii.ac.jp/naid/110000471048",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021678:15610361",
+    "doi": null,
+    "title": "Ainu Oral Literature (1). (2)",
+    "year": 1990,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Journal of the Society of Humanites",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:50006657",
+    "doi": null,
+    "title": "〔資料紹介〕国立アイヌ民族博物館所蔵 知里真志保記入のアイヌ語基礎語彙調査表",
+    "year": 2025,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "深澤美香"
+    ],
+    "venue": "国立アイヌ民族博物館研究紀要",
+    "url": "https://nam.go.jp/surveys_and_research/bulletin-vol01/",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:53004748",
+    "doi": null,
+    "title": "Extraction of regularities and geographical patterns from the basic vocabulary of the Ainu language",
+    "year": 2025,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Mika Fukazawa"
+    ],
+    "venue": "Nor Hashimah Jalaluddin, Hiroyuki Suzuki, and Mitsuaki Endo (eds.) Studies in Geolinguistics, Monograph series, No. 10: Proceedings of the sixth International Conference on Asian Geolinguistics",
+    "url": "https://geolinguistics.sakura.ne.jp/Monograph/picag6-ebook.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.5281/zenodo.7118188",
+    "doi": "10.5281/zenodo.7118188",
+    "title": "Subgrouping of Ainu; ‘Rat’ in Ainu; ‘Chicken’ in Asian and African languages; ‘Chicken’ in Ainu; ‘Horse’ in Ainu; ‘Dog’ in Ainu; ‘Wolf’ in Ainu; ‘Bear’ in Asian and African languages; ‘Bear’ in Ainu",
+    "year": 2024,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Suzuki, Hiroyuki, Fukazawa, Mika, Yokoyama, Akiko and Mitsuaki Endo (eds.) Linguistic Atlas of Asia and Africa",
+    "url": "https://doi.org/10.5281/zenodo.7118188",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.5281/zenodo.10223731",
+    "doi": "10.5281/zenodo.10223731",
+    "title": "System of 'sibling' terms in Ainu; Alignment in Ainu; Numeral systems in Asian and African languages; Numeral systems in Ainu",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Linguistic Atlas of Asia and Africa",
+    "url": "https://doi.org/10.5281/zenodo.10223731",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.5281/zenodo.7754469",
+    "doi": "10.5281/zenodo.7754469",
+    "title": "'Wheat' in Ainu; 'Broomcorn millet' in Ainu; 'Foxtail millet' in Ainu; 'Barnyard millet' in Ainu; Stop series in Ainu",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Linguistic Atlas of Asia & Africa",
+    "url": "https://doi.org/10.5281/zenodo.7754469",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.5281/zenodo.8382130",
+    "doi": "10.5281/zenodo.8382130",
+    "title": "Tracking basic Ainu vocabulary: Updates and changes of geographical distributions",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Lan, Trịnh Cẩm; Hạnh, Trần Thị Hồng; Suzuki, Hiroyuki; Endo, Mitsuaki (eds.) Studies in Geolinguistics, Monograph Series 6: Proceedings of the fifth International Conference on Asian Geolinguistics",
+    "url": "https://doi.org/10.5281/zenodo.8382130",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47789631",
+    "doi": null,
+    "title": "Hokkaido Ainu dialects: Towards a classification of Ainu dialects",
+    "year": 2022,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Nakagawa, Hiroshi",
+      "Fukazawa, Mika"
+    ],
+    "venue": "Anna Bugaeva (ed) Handbook of the Ainu Language (Handbooks of Japanese Language and Linguistics, 12)",
+    "url": "https://ci.nii.ac.jp/ncid/BB17879115",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695828",
+    "doi": null,
+    "title": "‘Sun’ in Ainu; 'Rice plant' in Ainu; 'Milk' in Ainu; 'Wind' in Ainu; 'Iron' in Ainu; Numeric quantification in Ainu; Accent in Ainu; and 'It rains' in Ainu",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Endo, Mitsuaki. et al. (eds.) Linguistic Atlas of Asia",
+    "url": "https://ci.nii.ac.jp/ncid/BC10771060",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695514",
+    "doi": null,
+    "title": "Geographical distribution patterns of basic Ainu vocabulary in Hattori and Chiri (1960)",
+    "year": 2018,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Suzuki, Hiroyuki & Mitsuaki Endo (eds.) Studies in Asian Geolinguistics, Monograph Series No. 4: Papers from the Fourth International Conference on Asian Geolinguistics",
+    "url": "https://publication.aa-ken.jp/papers_4IC_Asian_geolinguistics_2018.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47684154",
+    "doi": null,
+    "title": "The basic color terms in Ainu",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Endo, Mitsuaki (ed.) Studies in Asian Geolinguistics, Monograph Series No. 1: Papers from the Third International Conference on Asian Geolinguistics",
+    "url": "https://publication.aa-ken.jp/papers_3IC_Asian_geolinguistics_2016.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695654",
+    "doi": null,
+    "title": "Geographical distribution of ‘daytime’ in Ainu",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Endo, Mitsuaki (ed.) Studies in Asian Geolinguistics I",
+    "url": "https://publication.aa-ken.jp/sag1_sun_2016.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.5281/zenodo.6423601",
+    "doi": "10.5281/zenodo.6423601",
+    "title": "The mystery of the phonological distribution /ca/ and /pa/ in the Eastern-Western dialects of Ainu",
+    "year": 2014,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Papers from the Second International Conference on Asian Geolinguistics (24 - 25, May, 2014, at Pathumwan Princess Hotel, Bangkok, Thailand)",
+    "url": "https://doi.org/10.5281/zenodo.6423601",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47495028",
+    "doi": null,
+    "title": "加賀家文書｢菊のかんざしみだれ髪｣からの眺め : 蝦夷通辞によるアイヌ語版｢お吉清三｣口説",
+    "year": 2014,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香"
+    ],
+    "venue": "口承文芸研究",
+    "url": "http://ci.nii.ac.jp/ncid/AN00353471",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.5281/zenodo.6423593",
+    "doi": "10.5281/zenodo.6423593",
+    "title": "The distribution of interrogative or indefinite roots in Ainu: hem & ne",
+    "year": 2013,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Papers from the First Annual Meeting of the Asian Geolinguistic Society of Japan",
+    "url": "https://doi.org/10.5281/zenodo.6423593",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.5281/zenodo.6423581",
+    "doi": "10.5281/zenodo.6423581",
+    "title": "The distribution and interpretation of words for parents ―'mother' and 'father' in Ainu dialects",
+    "year": 2012,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Papers from the First International Conference on Asian Geolinguistics (December 14th-15th, 2012, Aoyama Gakuin University, Tokyo, Japan)",
+    "url": "https://doi.org/10.5281/zenodo.6423581",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695412",
+    "doi": null,
+    "title": "【特別展パンフレット】50年ぶりによみがえるアイヌ語の世界～アイヌ語学者 故田村すゞ子氏の遺した川村カ子ト主催「ユーカラ大会」の記録～",
+    "year": 2016,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47681313",
+    "doi": null,
+    "title": "アイヌ語別海地方資料集成：蝦夷風俗図絵蝦夷語解説２現代日本語訳",
+    "year": 2011,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "深澤美香",
+      "長田祐季",
+      "三浦亜耶",
+      "倉重裕美",
+      "上野愛里",
+      "上野真吾"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47681160",
+    "doi": null,
+    "title": "シネプ トゥプ レプ！：小・中学校アイヌ語学習教材",
+    "year": 2010,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "アイヌ語教材研究会"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:53004791",
+    "doi": null,
+    "title": "アイヌ語の現況報告",
+    "year": 2025,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "深澤美香"
+    ],
+    "venue": "令和７年度危機的な状況にある 言語・方言サミット（八重山大会）資料集",
+    "url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/kikigengo/summit/pdf/94284401_01.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47696019",
+    "doi": null,
+    "title": "国立アイヌ民族博物館のアイヌ語による展示解説文と「私たち",
+    "year": 2023,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香"
+    ],
+    "venue": "国立アイヌ民族博物館（編）ウアイヌコㇿ コタン アカㇻ：ウポポイのことばと歴史",
+    "url": "http://ci.nii.ac.jp/ncid/BD01789288",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47495029",
+    "doi": null,
+    "title": "国立アイヌ民族博物館とアイヌ語",
+    "year": 2021,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香"
+    ],
+    "venue": "K：特集 イタㇰ 言葉をつなぐ",
+    "url": "https://cir.nii.ac.jp/crid/1521699231197771904?lang=ja",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47495033",
+    "doi": null,
+    "title": "多言語社会ニッポン アイヌ語 (12) an=kor itak ani an=kor puri an=eisoytak : 私たちのことばで私たちの文化を語る",
+    "year": 2021,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香",
+      "naakay"
+    ],
+    "venue": "『ことばと社会』編集委員会（編）ことばと社会 : 多言語社会研究",
+    "url": "http://ci.nii.ac.jp/ncid/AA11388046",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47495034",
+    "doi": null,
+    "title": "アイヌ語の継承にむけて : 国立アイヌ民族博物館の新たな挑戦",
+    "year": 2020,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香",
+      "矢崎 春菜"
+    ],
+    "venue": "「月刊社会教育」編集委員会（編）月刊社会教育 (特集 現代文化と社会教育)",
+    "url": "http://ci.nii.ac.jp/ncid/AN00073930",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695480",
+    "doi": null,
+    "title": "Accent in Ainu",
+    "year": 2017,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Studies in Asian Geolinguistics VII",
+    "url": "https://publication.aa-ken.jp/sag7_tone_2017.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695478",
+    "doi": null,
+    "title": "Means to count nouns in Ainu",
+    "year": 2017,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Studies in Asian Geolinguistics VI",
+    "url": "https://publication.aa-ken.jp/sag6_count_2017.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695458",
+    "doi": null,
+    "title": "\"Iron\" in Ainu",
+    "year": 2017,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Studies in Asian Geolinguistics V",
+    "url": "https://publication.aa-ken.jp/sag5_iron_2017.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695450",
+    "doi": null,
+    "title": "\"Wind\" in Ainu",
+    "year": 2017,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Studies in Asian Geolinguistics IV",
+    "url": "https://publication.aa-ken.jp/sag4_wind_2017.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695363",
+    "doi": null,
+    "title": "\"Milk\" in Ainu",
+    "year": 2016,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Studies in Asian Geolinguistics III",
+    "url": "https://publication.aa-ken.jp/sag3_milk_2016.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47695358",
+    "doi": null,
+    "title": "“Rice” in Ainu",
+    "year": 2016,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Studies in Asian Geolinguistics II",
+    "url": "https://publication.aa-ken.jp/sag2_rice_2016.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47694638",
+    "doi": null,
+    "title": "“Sun” in Ainu",
+    "year": 2016,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "Fukazawa, Mika"
+    ],
+    "venue": "Studies in Asian Geolinguistics I",
+    "url": "https://publication.aa-ken.jp/sag1_sun_2016.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.20776/s21857148-18-p151",
+    "doi": "10.20776/s21857148-18-p151",
+    "title": "加賀家文書 翻刻・現代語訳3「チャコルベ」：蝦夷通辞が記録したアイヌの求婚難題説話",
+    "year": 2016,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "https://doi.org/10.20776/s21857148-18-p151",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47683354",
+    "doi": null,
+    "title": "加賀家文書に残された道東のアイヌ語",
+    "year": 2014,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香"
+    ],
+    "venue": "第21回環オホーツク海文化のつどい報告書2013",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:52992146",
+    "doi": null,
+    "title": "押杵帯九郎の肖像 ―室蘭郡のアイヌを被写体とする画像資料に関する覚書―",
+    "year": 2026,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": "https://api.researchmap.jp/osaka_taku/research_projects/36622148",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:49640552",
+    "doi": null,
+    "title": "近代初頭の石狩川河口域におけるアイヌの鮭漁場 ─黒田清隆の指示による大網導入とそれに起因する経営破綻を中心として─",
+    "year": 2025,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "北方人文研究",
+    "url": "https://eprints.lib.hokudai.ac.jp/dspace/handle/2115/94480",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:48551185",
+    "doi": null,
+    "title": "1876年奥羽巡幸の奉迎に立ったアイヌの姿―「対雁に移る途上、小樽に上陸した樺太アイヌ一行」説の訂正―",
+    "year": 2024,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "札幌博物場研究会誌",
+    "url": "https://eprints.lib.hokudai.ac.jp/dspace/handle/2115/93631",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14943/jbr.14.1",
+    "doi": "10.14943/jbr.14.1",
+    "title": "近代北海道における〈アイヌ〉の境界 ─ 松前地西在相沼内村に生まれたサモテの事例を中心として ─",
+    "year": 2024,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "境界研究",
+    "url": "https://doi.org/10.14943/jbr.14.1",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:45877797",
+    "doi": null,
+    "title": "アイヌに対する「認知」の空白と博物館・美術館展示",
+    "year": 2024,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "北太平洋の先住民文化――歴史・言語・社会",
+    "url": "http://www.rinsen.com/linkbooks/ISBN978-4-653-04565-6.htm",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:41773609",
+    "doi": null,
+    "title": "北海道地券発行条例によるアイヌ民族「住居ノ地所」の 官有地第三種編入について ─札幌県作成「官有地調」の検討を中心として─",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "北方人文研究",
+    "url": "https://eprints.lib.hokudai.ac.jp/dspace/handle/2115/88710",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:41440708",
+    "doi": null,
+    "title": "千島アイヌの編組製品とその技術的系譜",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "第22回北アジア調査研究報告会予稿集",
+    "url": "https://api.researchmap.jp/osaka_taku/research_projects/11970289",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:40920685",
+    "doi": null,
+    "title": "札幌博物場所蔵アイヌ民具資料（死体包装用縄・背負縄）の資料情報の復元",
+    "year": 2022,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "加藤克",
+      "大坂拓"
+    ],
+    "venue": "札幌博物場研究会誌",
+    "url": "https://www.fsc.hokudai.ac.jp/mk_hunhm/hunhm_magazine/j_HUNHM2022/HUNHM_magazine_2022_09_21.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:39510530",
+    "doi": null,
+    "title": "アイヌ民族の塩利用",
+    "year": 2022,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "日本列島の人類史と製塩（季刊考古学・別冊38）",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:21771941",
+    "doi": null,
+    "title": "北海道アイヌの「死者用靴」ー日高東部地域の東方系出自集団に固有の死装束とその周辺ー",
+    "year": 2018,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂 拓"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:21771940",
+    "doi": null,
+    "title": "アイヌ民族の荷縄ー地域差と年代差、及び用途による形態差に関する基礎的検討ー",
+    "year": 2018,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂 拓"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:17677758",
+    "doi": null,
+    "title": "アイヌ民族の刀帯－分類群の共時的分布と通事的変化－",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂 拓"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:14649420",
+    "doi": null,
+    "title": "北海道アイヌの儀礼用冠について",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "大坂 拓"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:49252240",
+    "doi": null,
+    "title": "写真が語るアイヌの近代 「見せる」「見られる」のはざま",
+    "year": 2025,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:37224225",
+    "doi": null,
+    "title": "アイヌ文化史辞典",
+    "year": 2022,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": null,
+    "url": "https://www.amazon.co.jp/dp/4642014802?linkCode=osi&th=1&psc=1",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:34058258",
+    "doi": null,
+    "title": "アイヌのくらし――時代・地域・さまざまな姿",
+    "year": 2021,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓",
+      "谷本晃久",
+      "八幡巴絵",
+      "八谷麻衣",
+      "大矢京右",
+      "AINUance",
+      "亀丸由紀子",
+      "田中祐未",
+      "猪熊樹人",
+      "司馬哲也",
+      "貝澤徹",
+      "山崎幸治",
+      "瀧口夕美",
+      "北原モコットゥナシ"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:52992166",
+    "doi": null,
+    "title": "近代室蘭郡におけるアイヌの土地に関するいくつかの史料について",
+    "year": 2026,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": "https://api.researchmap.jp/osaka_taku/research_projects/36622148",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:52992154",
+    "doi": null,
+    "title": "鹿島清三郎著『The Ainu of Japan』について ―2025 年度新収蔵資料の紹介をかねて―",
+    "year": 2026,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓",
+      "小川正人"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": "https://api.researchmap.jp/osaka_taku/research_projects/36622148",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:49243339",
+    "doi": null,
+    "title": "〔書評〕浅倉有子編著『漆器からみるアイヌの社会と文化",
+    "year": 2024,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "弘前大学國史研究",
+    "url": "https://hirosaki.repo.nii.ac.jp/records/2000762",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:36911198",
+    "doi": null,
+    "title": "モノ」を通して、それを作り出した人びとの暮らしを見つめ直す 第18回企画テーマ展 「アイヌのくらし―時代・地域・さまざまな姿」開催",
+    "year": 2021,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "森のちゃれんがニュース",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:33302593",
+    "doi": null,
+    "title": "二つの「モノ」からたどるアイヌ民族の歴史",
+    "year": 2021,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "開発こうほう",
+    "url": "https://www.hkk.or.jp/kouhou/file/no696_ainurace.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:15558170",
+    "doi": null,
+    "title": "民具を通じてアイヌ民族の近現代を考える",
+    "year": 2019,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂 拓"
+    ],
+    "venue": "森のちゃれんがニュース",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:39510612",
+    "doi": null,
+    "title": "アイヌ民族の矢筒",
+    "year": 2018,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂拓"
+    ],
+    "venue": "BIOSTORY",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:22459737",
+    "doi": null,
+    "title": "千島アイヌ製作のハマニンニク製容器",
+    "year": 2017,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂 拓"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:19865485",
+    "doi": null,
+    "title": "北海道乙部町伝世の木綿衣ほか",
+    "year": 2016,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂 拓"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "osaka_taku:18177806",
+    "doi": null,
+    "title": "アイヌ民族の歴史",
+    "year": 2014,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "大坂 拓"
+    ],
+    "venue": "アイヌの世界を旅する",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ono_yohei:24584633",
+    "doi": null,
+    "title": "北海道アイヌ語方言の分類再考ーグラフ理論による方言研究の新展開: 人文学データの分析を代数構造から見直すー",
+    "year": 2020,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "小野洋平"
+    ],
+    "venue": "北海道言語文化研究",
+    "url": "http://hdl.handle.net/10258/0002000003",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:30508967",
+    "doi": null,
+    "title": "アイヌ語復興のこれまでとこれから",
+    "year": 2020,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "丹菊逸治"
+    ],
+    "venue": "民族學界",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:15378374",
+    "doi": null,
+    "title": "サハリンの植物相および植生から見たニヴフの植物資源利用",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "水島未記",
+      "白石英才",
+      "丹菊逸治"
+    ],
+    "venue": "北海道博物館研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:19449538",
+    "doi": null,
+    "title": "サハリン口承文学の地域差",
+    "year": 2013,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "口承文藝研究",
+    "url": "http://ci.nii.ac.jp/naid/40019747328",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:19449543",
+    "doi": null,
+    "title": "サハリン島アイヌ民族の「三人きょうだい譚」の成立仮説 : ニヴフ民族の「三人の猟師」からの影響",
+    "year": 2012,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "口承文藝研究",
+    "url": "http://ci.nii.ac.jp/naid/40019325300",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:19449548",
+    "doi": null,
+    "title": "アイヌ異類婚譚における「守護神」--ニブフ民族の伝承との比較から",
+    "year": 2010,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "表現学部紀要",
+    "url": "http://ci.nii.ac.jp/naid/40018787667",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:19449549",
+    "doi": null,
+    "title": "サハリンの口琴再考",
+    "year": 2009,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "篠原智花",
+      "丹菊逸治"
+    ],
+    "venue": "itahcara",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:19449551",
+    "doi": null,
+    "title": "アイヌとニヴフのシャマン伝承",
+    "year": 2003,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "千葉大学社会文化科学研究",
+    "url": "http://ci.nii.ac.jp/naid/110004597346",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:13173145",
+    "doi": null,
+    "title": "ニヴフとアイヌの異類婚譚",
+    "year": null,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "丹菊逸治"
+    ],
+    "venue": "千葉大学大学院",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:50599091",
+    "doi": null,
+    "title": "藤山ハル口述 樺太アイヌ語例文集（全）",
+    "year": 2025,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "藤山ハル(口",
+      "村崎恭子",
+      "丹菊逸治"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:50599218",
+    "doi": null,
+    "title": "和愛辞典；草稿版",
+    "year": 2022,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "太田満遺稿整理保存会",
+      "丹菊逸治"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:36852681",
+    "doi": null,
+    "title": "アイヌ韻文の朗唱法",
+    "year": 2022,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "丹菊逸治"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:13511282",
+    "doi": null,
+    "title": "アイヌ語復興の新しい流れ（『ことばと社会』20号）",
+    "year": 2019,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "丹菊逸治"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:14942125",
+    "doi": null,
+    "title": "サハリン先住民族文化の復興 （『アジア遊学』227 特集「アジアとしてのシベリア 」）",
+    "year": 2018,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "丹菊逸治"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:10499682",
+    "doi": null,
+    "title": "アイヌ民族否定論に抗する",
+    "year": 2015,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "岡和田晃",
+      "マーク・ウィンチェスター"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:14942112",
+    "doi": null,
+    "title": "ニヴフ語サハリン方言語彙集",
+    "year": 2014,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "丹菊逸治"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:32898336",
+    "doi": null,
+    "title": "ことばと文化にみるアイヌ民族の歴史（第3回文化財講演会）",
+    "year": 2021,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "文化情報",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:20898595",
+    "doi": null,
+    "title": "コメンテーターの視点から (第四〇回大会シンポジウム ユーラシアと日本列島 世界の中のアイヌ叙事詩)",
+    "year": 2017,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "丹菊逸治"
+    ],
+    "venue": "口承文藝研究",
+    "url": "http://ci.nii.ac.jp/naid/40021215854",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:18677067",
+    "doi": null,
+    "title": "アイヌ口承文芸と子ども (うたと語りと声) -- (うたと語りと声の力)",
+    "year": 2014,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "子どもの文化",
+    "url": "http://ci.nii.ac.jp/naid/40020163850",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:18677070",
+    "doi": null,
+    "title": "A Case of Nivkh Phonetic Material : Possibilities of Archiving Recordings of Endangered Languages in the Sakhalin Region (特集 北東ユーラシア地域のライフヒストリー研究)",
+    "year": 2013,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "北方人文研究",
+    "url": "http://ci.nii.ac.jp/naid/40019738228",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:13460423",
+    "doi": null,
+    "title": "ニヴフ語の植物名称:東方言を中心に",
+    "year": 2007,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "水島 未記",
+      "白石 英才",
+      "丹菊 逸治"
+    ],
+    "venue": "北海道開拓記念館研究紀要",
+    "url": "http://ci.nii.ac.jp/naid/40015420625",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:13460427",
+    "doi": null,
+    "title": "サハリン・ニヴフの昔話(1)",
+    "year": 2004,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治",
+      "Миглут Ю"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/110004599213",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:13460428",
+    "doi": null,
+    "title": "ニヴフ語口承文学テキスト「女に化けたキツネ",
+    "year": 2002,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治",
+      "TANZINA Nadzejde Yakoblevna"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/110004599188",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:38400842",
+    "doi": null,
+    "title": "サハリンアイヌの散文説話tuytahについて",
+    "year": 2001,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "口承文藝研究",
+    "url": "http://ci.nii.ac.jp/naid/40020362940",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "tangikuitsuji:13460430",
+    "doi": null,
+    "title": "アイヌ語沙流方言と日本語の母音フォルマントの比較レポート(金子亨先生退官記念号)",
+    "year": 1999,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "丹菊 逸治"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/110004599135",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "kobayashi_miki:47516502",
+    "doi": null,
+    "title": "多言語社会ニッポン アイヌ語(14)ウポポイ オッタ アイヌイタク アエイワンケ ヒ チェイソイタク : ウポポイでのアイヌ語の取り組みを語る",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "小林 美紀",
+      "矢崎 春菜"
+    ],
+    "venue": "ことばと社会 : 多言語社会研究 / 『ことばと社会』編集委員会 編",
+    "url": "http://ci.nii.ac.jp/ncid/AA11388046",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "kobayashi_miki:47516771",
+    "doi": null,
+    "title": "名詞項の意味役割が交替するアイヌ語動詞",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "小林美紀"
+    ],
+    "venue": "ひろがる北方研究の地平線：中川裕先生還暦記念論文集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "kobayashi_miki:47516737",
+    "doi": null,
+    "title": "アイヌ語におけるV-V型の一項動詞",
+    "year": 2015,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "小林美紀"
+    ],
+    "venue": "アイヌ語研究の諸問題",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "kobayashi_miki:49700158",
+    "doi": null,
+    "title": "最新アイヌ学がわかる",
+    "year": 2024,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐々木, 史郎",
+      "北原, 次郎太"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BD09402304",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "kobayashi_miki:47528527",
+    "doi": null,
+    "title": "ウアイヌコㇿコタンアカㇻウポポイのことばと歴史",
+    "year": 2023,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "国立アイヌ民族博物館",
+      "立石, 信一",
+      "佐々木, 史郎",
+      "田村, 将人"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BD01789288",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "kobayashi_miki:47561740",
+    "doi": null,
+    "title": "ウポポイでのアイヌ語表示・展示解説の試み",
+    "year": 2020,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "月刊みんぱく",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "y.yoshikawa:41611509",
+    "doi": null,
+    "title": "アイヌ語静内方言の存在型アスペクト―沙流、千歳方言との比較から―",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "y.yoshikawa:40528375",
+    "doi": null,
+    "title": "Existential aspectual forms in the Saru and Chitose dialects of Ainu",
+    "year": 2022,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Yoshimi Yoshikawa"
+    ],
+    "venue": "Bugaeva, Anna (ed.). 2022. Handbook of the Ainu language (Handbooks of Japanese Language and Linguistics 12). Berlin: De Gruyter Mouton. (699pp.)",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "y.yoshikawa:33504825",
+    "doi": null,
+    "title": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業―第2年次（北海道沙流郡平取町）調査研究報告書（全３巻）",
+    "year": 2015,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "複数著者"
+    ],
+    "venue": null,
+    "url": "http://www.town.biratori.hokkaido.jp/biratori/nibutani/culture/language/story/",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "y.yoshikawa:40528255",
+    "doi": null,
+    "title": "アイヌ語―時間の表現をさぐる",
+    "year": 2022,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "吉川佳見"
+    ],
+    "venue": "開発こうほう（2022年６月号）",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14943/Jais.5.063",
+    "doi": "10.14943/Jais.5.063",
+    "title": "研究ノート アイヌ民族に関する教育の脱植民地化",
+    "year": 2025,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "アイヌ・先住民研究",
+    "url": "https://doi.org/10.14943/Jais.5.063",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14943/Jais.4.127",
+    "doi": "10.14943/Jais.4.127",
+    "title": "アイヌ民族の葬制・祖霊祭祀と遺骨の「再埋葬・慰霊」 : 民族誌・文学による検討",
+    "year": 2024,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "アイヌ・先住民研究",
+    "url": "https://doi.org/10.14943/Jais.4.127",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:39926632",
+    "doi": null,
+    "title": "アイヌの火神はなぜ老婆なのか（第45回大会シンポジウム 神話と昔話―女性神をめぐって―）",
+    "year": 2022,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "口承文芸研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14943/Jais.2.103",
+    "doi": "10.14943/Jais.2.103",
+    "title": "アイヌ・和人への手紙（２）アイヌ・和人の当事者性 : 付A アイヌ文化の真正性 付B対談：アイデンティティ・当事者性について",
+    "year": 2022,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "アイヌ先住民研究",
+    "url": "https://doi.org/10.14943/Jais.2.103",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32975971",
+    "doi": null,
+    "title": "特集「歴史的トラウマから展望するアイヌ・先住民研究」序論 : アイヌ／和人への手紙",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナシ"
+    ],
+    "venue": "アイヌ・先住民研究",
+    "url": "https://eprints.lib.hokudai.ac.jp/dspace/bitstream/2115/80883/4/01_Introduction.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32975648",
+    "doi": null,
+    "title": "歴史的トラウマ概念のアイヌ研究への導入を探る",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナシ"
+    ],
+    "venue": "アイヌ・先住民学研究",
+    "url": "https://eprints.lib.hokudai.ac.jp/dspace/bitstream/2115/80884/4/02_Examining.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32978844",
+    "doi": null,
+    "title": "《研究ノート》近代アイヌ社会のミソジニー・ジャイノフィリア",
+    "year": 2020,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナシ"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "https://opac.ll.chiba-u.jp/da/curator/900119500/S21857148-22-P105-KIT.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32979105",
+    "doi": null,
+    "title": "アイヌ民族が語る「はじまりの物語",
+    "year": 2019,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原 次郎太",
+      "モコットゥナシ"
+    ],
+    "venue": "原教界",
+    "url": "https://alcd-web.s3-ap-northeast-1.amazonaws.com/uploads/2019/12/08/8f3bf8fa8af95ea2521e0d4575f9ca06.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32976453",
+    "doi": null,
+    "title": "アイヌ口承文芸に見るシャマン儀礼の再検討",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原次郎太"
+    ],
+    "venue": "口承文芸研究",
+    "url": "http://ci.nii.ac.jp/naid/40021215773",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32978964",
+    "doi": null,
+    "title": "≪テキスト≫『上川アイヌ 熊まつり』収載の祈り詞",
+    "year": 2013,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原, 次郎太"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/120005940014",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32979014",
+    "doi": null,
+    "title": "【資料報告】二谷国松口述 知里真志保筆録 新築祝いの祈り詞",
+    "year": 2012,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原, 次郎太"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/120005939458",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32979090",
+    "doi": null,
+    "title": "樺太アイヌの火神の祭壇",
+    "year": 2002,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原, 次郎太"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "https://opac.ll.chiba-u.jp/da/curator/900023334/KJ00004166031.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:32979097",
+    "doi": null,
+    "title": "沼端ウメ 口述・和田文治郎 筆録「貧しき子婿選びの試験にパスして女を得る",
+    "year": 2001,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "北原, 次郎太"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/110004599159",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:50611231",
+    "doi": null,
+    "title": "ミンタㇻ３ アイヌ民族33のニュース",
+    "year": 2024,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原,モコットゥナㇱ",
+      "瀧口, 夕美",
+      "小笠原, 小夜"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BD09537700",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:46866383",
+    "doi": null,
+    "title": "アイヌもやもや : 見えない化されている「わたしたち」と、そこにふれてはいけない気がしてしまう「わたしたち」の。",
+    "year": 2023,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原",
+      "モコットゥナㇱ(著",
+      "田房, 永子"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BD04798820",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:39926670",
+    "doi": null,
+    "title": "ミンタㇻ2 アイヌ民族 21の人物伝",
+    "year": 2022,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原 モコットゥナㇱ",
+      "小笠原小夜"
+    ],
+    "venue": null,
+    "url": "https://www.amazon.co.jp/dp/4867210714?linkCode=osi&th=1&psc=1",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:39926648",
+    "doi": null,
+    "title": "つないでほどく アイヌ／和人",
+    "year": 2022,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": null,
+    "url": "https://www.cais.hokudai.ac.jp/wp-content/uploads/2022/04/caisbooklet_12.pdf",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:39926654",
+    "doi": null,
+    "title": "ミンタㇻ1 アイヌ民族 27の昔話",
+    "year": 2021,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原 モコットゥナㇱ",
+      "小笠原, 小夜"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BC10314466",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:39926672",
+    "doi": null,
+    "title": "アイヌの真実 (ベスト新書)",
+    "year": 2020,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原",
+      "モコットゥナㇱ",
+      "谷本, 晃久"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BB31278738",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:39926683",
+    "doi": null,
+    "title": "調べる学習百科 アイヌ もっと知りたい! くらしや歴史 (岩崎書店の調べる学習百科シリーズ)",
+    "year": 2018,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原",
+      "モコットゥナㇱ",
+      "蓑島, 栄紀"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BB27060478",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:10447483",
+    "doi": null,
+    "title": "アイヌ・先住民研究センターブックレット4号 花とイナウ 世界の中のアイヌ文化",
+    "year": 2015,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原次郎太",
+      "共著者",
+      "今石みぎわ"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:10447481",
+    "doi": null,
+    "title": "アイヌの祭具 イナウの研究",
+    "year": 2014,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "北原次郎太"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:50619862",
+    "doi": null,
+    "title": "ヤランガに雁のとまる時 アイヌのたましい",
+    "year": 2025,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "アークティックサークル 北方民族博物館友の会季刊誌",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14943/Jais.4.181",
+    "doi": "10.14943/Jais.4.181",
+    "title": "北海道大学におけるアイヌ民族に対する差別的言動を防止するための取組",
+    "year": 2024,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "岡田, 真弓",
+      "北原, モコットゥナシ",
+      "谷本, 晃久"
+    ],
+    "venue": "アイヌ・先住民研究／Aynu Teetawanoankur Kanpinuye",
+    "url": "https://doi.org/10.14943/Jais.4.181",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:50619751",
+    "doi": null,
+    "title": "ヤランガに雁のとまる時 アイヌ文学とジェンダー",
+    "year": 2023,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "アークティックサークル 北方民族博物館友の会季刊誌",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:41550124",
+    "doi": null,
+    "title": "アイヌ文化と遠野物語",
+    "year": 2022,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "現代思想7月臨時増刊号",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:41550025",
+    "doi": null,
+    "title": "ヤランガに雁のとまる時 アイヌ民族の口承文芸",
+    "year": 2021,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "アークティックサークル 北方民族博物館友の会季刊誌",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:39927277",
+    "doi": null,
+    "title": "先住民族アイヌの精神世界を知る",
+    "year": 2020,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "北原モコットゥナㇱ"
+    ],
+    "venue": "別冊太陽 : 日本のこころ",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:34696180",
+    "doi": null,
+    "title": "モノ・コトからたどるアイヌの伝統文化 (アイヌをもっと知る図鑑 : 歴史を知り、未来へつなぐ) -- (アイヌ民族の世界観)",
+    "year": 2020,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "北原 モコットゥナシ",
+      "山崎 幸治"
+    ],
+    "venue": "別冊太陽 : 日本のこころ",
+    "url": "http://ci.nii.ac.jp/naid/40022257225",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "1976:13481309",
+    "doi": null,
+    "title": "アイヌ文化を伝承する : 生活と健康観",
+    "year": 2011,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "北原 次郎太"
+    ],
+    "venue": "日本看護科学会誌",
+    "url": "http://ci.nii.ac.jp/naid/10030239808",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:22060361",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩におけるハヨㇰペの語られ方",
+    "year": 2018,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "口承文芸研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:18511153",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩における登場人物の感情表現",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "ひろがる北方研究の地平線 中川裕先生還暦記念論文集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110938",
+    "doi": null,
+    "title": "鍋沢元蔵氏によるアイヌ語のカナ表記体系 ―国立民族学博物館所蔵筆録ノートから―",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "国立民族学博物館調査報告",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110930",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩におけるカムイという語の一用法",
+    "year": 2015,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "口承文芸研究",
+    "url": "http://ci.nii.ac.jp/naid/40020506906",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110929",
+    "doi": null,
+    "title": "アイヌ語韻文文学における接続句",
+    "year": 2015,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "アンナ・ブガエワ、長崎 郁（編）『アイヌ語研究の諸問題』",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110931",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩における敵対者の復活 －なぜ「童子たち」は一度しか現れないのか－",
+    "year": 2014,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110932",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩における結末 : 同一ストーリーにおける揺れを中心に",
+    "year": 2014,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "口承文芸研究",
+    "url": "http://ci.nii.ac.jp/naid/40020080460",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110934",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩「ニタイパカイェ」の2種類のテキストに関する考察",
+    "year": 2013,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "千葉大学人文社会科学研究",
+    "url": "http://ci.nii.ac.jp/naid/120005939926",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110935",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩における来歴話－鍋沢元蔵氏のテキストから",
+    "year": 2011,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "口承文芸研究",
+    "url": "http://ci.nii.ac.jp/naid/40018845363",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110937",
+    "doi": null,
+    "title": "アイヌの祈詞における語りの特徴",
+    "year": 2009,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "千葉大学人文社会科学研究科研究プロジェクト報告書",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:17110942",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩の戦闘場面－男の語りと女の語り－",
+    "year": 2008,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "口承文芸研究",
+    "url": "http://ci.nii.ac.jp/naid/40015959317",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:18837032",
+    "doi": null,
+    "title": "研究報告「アイヌの散文説話と周辺諸民族の説話",
+    "year": 2016,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "環オホーツクー環オホーツク海文化のつどい報告書2015－",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "hacrc_hm:22087201",
+    "doi": null,
+    "title": "アイヌトゥカプ」ほかアイヌの妖怪（全49項目）",
+    "year": 2013,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "遠藤 志保"
+    ],
+    "venue": "小松和彦（監修）『日本怪異妖怪大事典』",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:49549887",
+    "doi": null,
+    "title": "Ethnobotany on Sakhalin: Reisen im Amur-Lande und auf der Insel Sachalin from a Modern Perspective 1 Indigenous Plant Names Reported by F. Schmidt",
+    "year": 2025,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "MIZUSHIMA Miki",
+      "SHIRAISHI Hidetoshi",
+      "TANGIKU Itsuji",
+      "YAMADA Yoshiko",
+      "Martijn KNAPEN"
+    ],
+    "venue": "北海道博物館研究紀要",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.1093/oso/9780198856610.003.0007",
+    "doi": "10.1093/oso/9780198856610.003.0007",
+    "title": "Ainu: An urban-rural indigenous language of the North",
+    "year": 2022,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Language Communities in Japan",
+    "url": "https://doi.org/10.1093/oso/9780198856610.003.0007",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:36382005",
+    "doi": null,
+    "title": "Vowel co-occurrence restriction in Ainu",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "From semantics to Dialectometry: Festschrift in honor of John Nerbonne",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:53113656",
+    "doi": null,
+    "title": "Documentation and revitalisation of two endangered languages in eastern Asia: Nivkh and Ainu",
+    "year": 2013,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Tjeerd de Graaf",
+      "Hidetoshi Shiraishi"
+    ],
+    "venue": "Sustaining indigenous knowledge : learning tools and community initiatives for preserving endangered languages and local cultural heritage",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:48273221",
+    "doi": null,
+    "title": "ロシア・サハリン州におけるニヴフの植物利用（4）",
+    "year": 2013,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "水島未記",
+      "白石英才"
+    ],
+    "venue": "北方地域の人と環境の関係史 2010-12年度調査報告",
+    "url": "https://api.researchmap.jp/read0127694/research_projects/32143843",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:37599957",
+    "doi": null,
+    "title": "サハリンのニヴフにおける興味深い利用植物",
+    "year": 2011,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "水島 未記",
+      "白石 英才"
+    ],
+    "venue": "北海道開拓記念館研究紀要",
+    "url": "http://ci.nii.ac.jp/naid/40019033555",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:39241308",
+    "doi": null,
+    "title": "ロシア・サハリン州におけるニヴフの植物利用(3)",
+    "year": 2009,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "水島 未記",
+      "Nitkuk Elena S.",
+      "白石 英才",
+      "東 俊佑"
+    ],
+    "venue": "北海道開拓記念館研究紀要",
+    "url": "http://ci.nii.ac.jp/naid/40016937643",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:53113681",
+    "doi": null,
+    "title": "Vowel devoicing of Ainu",
+    "year": 2003,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Hidetoshi Shiraishi"
+    ],
+    "venue": "A new century of phonology and phonological theory : a festschrift for professor Shosuke Haraguchi on the occasion of his sixtieth birthday",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:36381950",
+    "doi": null,
+    "title": "Prosodic structure and sandhi phenomena in the Saru dialect of Ainu",
+    "year": 2001,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Issues in Japanese phonology and morphology",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:49834855",
+    "doi": null,
+    "title": "Possessive constructions and alienability in Ainu",
+    "year": 1997,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "白石 英才"
+    ],
+    "venue": "Philologie",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0127694:38858045",
+    "doi": null,
+    "title": "Folktales of the Saru Dialect of Ainu : Ueda Toshi's Uepeker 3",
+    "year": 2004,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "白石 英才"
+    ],
+    "venue": "千葉大学ユーラシア言語文化論集",
+    "url": "http://ci.nii.ac.jp/naid/110004599212",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:50562968",
+    "doi": null,
+    "title": "協働」を鍛える場としての博物館展示―アイヌ文化展示に集う人びと",
+    "year": 2025,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "山崎幸治"
+    ],
+    "venue": "山崎幸治・伊藤敦規編『先住民との「協働」研究』",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:33529613",
+    "doi": null,
+    "title": "The Siebold's Ainu collection: A comparison and their contemporary significance",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Koji Yamasaki"
+    ],
+    "venue": "Kaori Hidaka and Bettina Zorn, National Museum of Japanese History (eds.) Transmitters of another culture Ⅱ: The collection of Heinrich von Siebold",
+    "url": "https://api.researchmap.jp/koji_yamasaki/research_projects/32159810",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:33529308",
+    "doi": null,
+    "title": "シーボルト父子のアイヌ・コレクションの比較と現代的意義",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "山崎幸治"
+    ],
+    "venue": "日高薫・ベッティーナ・ツォルン責任編集、人間文化研究機構国立歴史民俗博物館編『異文化を伝えた人々Ⅱ：ハインリッヒ・フォン・シーボルトの蒐集資料』",
+    "url": "https://api.researchmap.jp/koji_yamasaki/research_projects/32159810",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32180701",
+    "doi": null,
+    "title": "Ainu Aesthetics and Philosophy of Art: Replication, Remembering, Recovery",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Koji Yamasaki",
+      "Mara Miller"
+    ],
+    "venue": "New Essays in Japanese Aesthetics.(Minh Nguyen)",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.15021/00006108",
+    "doi": "10.15021/00006108",
+    "title": "在外アイヌ資料調査経験から（コメント）",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治",
+      "Koji Yamasaki"
+    ],
+    "venue": "国立民族学博物館調査報告 = Senri Ethnological Reports",
+    "url": "https://doi.org/10.15021/00006108",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.15021/00006109",
+    "doi": "10.15021/00006109",
+    "title": "Overseas Ainu Collections and Info-Forum Museum Project : Comment",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治",
+      "Koji Yamasaki"
+    ],
+    "venue": "国立民族学博物館調査報告 = Senri Ethnological Reports",
+    "url": "https://doi.org/10.15021/00006109",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14943/jbr.s.141",
+    "doi": "10.14943/jbr.s.141",
+    "title": "境界を展示する : 「アイヌと境界」展における試み",
+    "year": 2014,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "境界研究",
+    "url": "https://doi.org/10.14943/jbr.s.141",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32159890",
+    "doi": null,
+    "title": "アイヌの霊魂観 (古代世界の霊魂観)",
+    "year": 2009,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "アジア遊学",
+    "url": "http://ci.nii.ac.jp/naid/40016959142",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32159893",
+    "doi": null,
+    "title": "アイヌ史研究におけるモノと文献--シーボルトの蝦夷細工を中心に",
+    "year": 2006,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "北海道・東北史研究",
+    "url": "http://ci.nii.ac.jp/naid/40015350258",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:40249429",
+    "doi": null,
+    "title": "もっと知りたいアイヌの美術",
+    "year": 2022,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "山崎, 幸治"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BC13227594",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:10381325",
+    "doi": null,
+    "title": "アイヌ・アートが担う新たな役割 : 米国先住民アートショーに学ぶ",
+    "year": 2015,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治",
+      "伊藤 敦規",
+      "城石 梨奈"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BB18377043",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32179221",
+    "doi": null,
+    "title": "Teetasinrit tekrukoci : The handprints of our ancestors : Ainu artifacts housed at Hokkaido University : inherited techniques",
+    "year": 2012,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "Yamasaki, Koji",
+      "Kato",
+      "Masaru"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BB09896094",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:10381326",
+    "doi": null,
+    "title": "世界のなかのアイヌ・アート",
+    "year": 2012,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "山崎, 幸治",
+      "伊藤, 敦規",
+      "北海道大学アイヌ・先住民研究センター",
+      "齋藤, 玲子(学芸員)",
+      "浅川, 泰",
+      "貝澤, 徹",
+      "小川, 早苗",
+      "川上, 哲",
+      "貝澤, 文俊",
+      "川村, 則子",
+      "深山, 直子",
+      "海野, るみ",
+      "谷本, 和子",
+      "内田, 純一",
+      "綾部, 真雄",
+      "貝澤, 和明",
+      "床, 州生"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BB09413000",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32159835",
+    "doi": null,
+    "title": "アイヌと境界 : 北海道大学グローバルCOEプログラム「境界研究の拠点形成」第四期展示",
+    "year": 2011,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "山崎, 幸治"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BB28535752",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32159836",
+    "doi": null,
+    "title": "現代アイヌの生活と意識",
+    "year": 2010,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "小内, 透",
+      "北海道大学アイヌ・先住民研究センター",
+      "山崎, 幸治",
+      "野崎, 剛毅",
+      "中村, 康利",
+      "品川, ひろみ",
+      "小野寺, 理佳(社会学)",
+      "櫻井, 義秀",
+      "常本, 照樹"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BB01575552",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:50562549",
+    "doi": null,
+    "title": "先人の手あと : 北大所蔵アイヌ資料 : 受けつぐ技 : 北大アイヌ・先住民研究センター/北大総合博物館企画展示",
+    "year": 2009,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "山崎, 幸治",
+      "加藤, 克",
+      "天野, 哲也",
+      "北海道大学アイヌ・先住民研究センター",
+      "北海道大学総合博物館"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BA89118398",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:10381327",
+    "doi": null,
+    "title": "先人の手あと : 北大所蔵アイヌ資料 : 受けつぐ技",
+    "year": 2009,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "山崎, 幸治",
+      "加藤, 克",
+      "天野, 哲也"
+    ],
+    "venue": null,
+    "url": "http://ci.nii.ac.jp/ncid/BB09896094",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:36313898",
+    "doi": null,
+    "title": "アイヌ工芸の美 (柳宗悦 : 民藝 美しさをもとめて) -- (民族へのまなざし)",
+    "year": 2021,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "別冊太陽 : 日本のこころ",
+    "url": "http://ci.nii.ac.jp/naid/40022741095",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32159878",
+    "doi": null,
+    "title": "シーボルト親子のアイヌ・コレクション (アイヌをもっと知る図鑑 : 歴史を知り、未来へつなぐ)",
+    "year": 2020,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "別冊太陽 : 日本のこころ",
+    "url": "http://ci.nii.ac.jp/naid/40022257233",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32159877",
+    "doi": null,
+    "title": "伝統文化に息を吹き込むアーティストたち (アイヌをもっと知る図鑑 : 歴史を知り、未来へつなぐ)",
+    "year": 2020,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "別冊太陽 : 日本のこころ",
+    "url": "http://ci.nii.ac.jp/naid/40022257264",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:40249537",
+    "doi": null,
+    "title": "アイヌの生活用具について",
+    "year": 2020,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "民藝",
+    "url": "https://cir.nii.ac.jp/crid/1010572092290337669?lang=ja",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:40249538",
+    "doi": null,
+    "title": "ハインリッヒ・フォン・シーボルトのアイヌ資料の調査",
+    "year": 2019,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "NEWS LETTER（国立歴史民俗博物館）",
+    "url": "https://cir.nii.ac.jp/crid/1010566775591371653?lang=ja",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:40249519",
+    "doi": null,
+    "title": "アイヌ工芸と持続可能性",
+    "year": 2018,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "DGs北海道の地域目標をつくろう２「SDGs×先住民族」",
+    "url": "https://cir.nii.ac.jp/crid/1010566775591371650?lang=ja",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:40249518",
+    "doi": null,
+    "title": "現代に受けつがれるアイヌ狩猟文化",
+    "year": 2018,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "『キムンカムイとアイヌ―春夏秋冬』",
+    "url": "https://cir.nii.ac.jp/crid/1010566775591371649?lang=ja",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14890/jasca.2013.0_97",
+    "doi": "10.14890/jasca.2013.0_97",
+    "title": "映像をもちいた現代アイヌ文化展示の試み:「アイヌと境界」展を事例として",
+    "year": 2013,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "日本文化人類学会研究大会発表要旨集",
+    "url": "https://doi.org/10.14890/jasca.2013.0_97",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14890/jasca.2012.0.20.0",
+    "doi": "10.14890/jasca.2012.0.20.0",
+    "title": "アイヌ文化展示と文化人類学的課題",
+    "year": 2012,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "日本文化人類学会研究大会発表要旨集",
+    "url": "https://doi.org/10.14890/jasca.2012.0.20.0",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.14890/jasca.2010.0.32.0",
+    "doi": "10.14890/jasca.2010.0.32.0",
+    "title": "アイヌ民族との協同による博物館展示",
+    "year": 2010,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "日本文化人類学会研究大会発表要旨集",
+    "url": "https://doi.org/10.14890/jasca.2010.0.32.0",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32159892",
+    "doi": null,
+    "title": "博物館と先住民研究--アイヌ・先住民研究センターが模索する可能性 (第22回北方民族文化シンポジウム報告書 北太平洋の文化--北方地域の博物館と民族文化(2))",
+    "year": 2008,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "山崎 幸治"
+    ],
+    "venue": "北方民族文化シンポジウム報告",
+    "url": "http://ci.nii.ac.jp/naid/40015942391",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "SoMiyagawa:53802202",
+    "doi": null,
+    "title": "LLM・RAGによる消滅危機言語ニューラル機械翻訳の試み：コプト語・北琉球与論語・タロコ語・アイヌ語における多指標評価と言語資源量の影響",
+    "year": 2026,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "宮川創"
+    ],
+    "venue": "『人工知能学会全国大会論文集』",
+    "url": "https://api.researchmap.jp/SoMiyagawa/research_projects/53329572",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "SoMiyagawa:44159077",
+    "doi": null,
+    "title": "Machine Translation for Highly Low-Resource Language: A Case Study of Ainu, a Critically Endangered Indigenous Language in Northern Japan",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "So Miyagawa"
+    ],
+    "venue": "Mika Hämäläinen, Emily Öhman, Flammie Pirinen, Khalid Alnajjar, So Miyagawa, Yuri Bizzoni, Niko Partanen, Jack Rueter (eds.) Proceedings of the Joint 3rd International Conference on Natural Language Processing for Digital Humanities and 8th International Workshop on Computational Linguistics for Uralic Languages. Association for Computational Linguistics.",
+    "url": "https://api.researchmap.jp/SoMiyagawa/research_projects/41015555",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "SoMiyagawa:36149333",
+    "doi": null,
+    "title": "京都大学デジタル人文学国際会議 KUDH2021開催記（1）：デジタルテキストコーパス、自然言語処理、Universal Dependencies（コプト語、アイヌ語、古典中国語、古典日本語）",
+    "year": 2021,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "宮川創"
+    ],
+    "venue": "『人文情報学月報』",
+    "url": null,
+    "pdf": null
   }
 ]
