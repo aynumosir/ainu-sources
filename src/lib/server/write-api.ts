@@ -29,22 +29,65 @@ export function requireWriteToken(request: Request): void {
 	if (!m || !safeEqual(m[1], expected)) throw error(401, 'invalid or missing write token');
 }
 
-// SourceInput keys accepted from a request body. Persons / places /
-// institutions / relations are intentionally excluded — they aren't editable
-// through the app either.
-const FIELDS = [
+// SourceInput keys accepted from a request body, grouped by expected type.
+// Persons / places / institutions / relations are intentionally excluded —
+// they aren't editable through the app either.
+const STRING_FIELDS = [
 	'title', 'titleEn', 'titleAin', 'category', 'type', 'author', 'yearText',
-	'yearStart', 'yearEnd', 'yearCertainty', 'dialect', 'region', 'languages',
-	'scripts', 'holdingInstitution', 'callNumber', 'entryCount', 'entryCountLabel',
-	'license', 'summary', 'notes', 'reliability', 'links', 'tagNames'
+	'yearCertainty', 'dialect', 'region', 'holdingInstitution', 'callNumber',
+	'entryCountLabel', 'license', 'summary', 'notes', 'reliability'
 ] as const;
+const NUMBER_FIELDS = ['yearStart', 'yearEnd', 'entryCount'] as const;
+const STRING_ARRAY_FIELDS = ['languages', 'scripts', 'tagNames'] as const;
 
-/** Copy only the SourceInput keys actually present in the body, so a PATCH
- * merge leaves unspecified fields untouched. */
+/** Keep only the string entries of an array; returns undefined if not an array. */
+function asStringArray(v: unknown): string[] | undefined {
+	return Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : undefined;
+}
+
+/** Normalize a links array to the { type, label, url } shape, dropping entries
+ * that aren't objects with a non-empty string url. Returns undefined if `v` is
+ * not an array. */
+function asLinks(v: unknown): SourceInput['links'] | undefined {
+	if (!Array.isArray(v)) return undefined;
+	const out: NonNullable<SourceInput['links']> = [];
+	for (const item of v) {
+		if (!item || typeof item !== 'object') continue;
+		const l = item as Record<string, unknown>;
+		if (typeof l.url !== 'string' || !l.url.trim()) continue;
+		out.push({
+			type: typeof l.type === 'string' ? l.type : 'website',
+			label: typeof l.label === 'string' ? l.label : null,
+			url: l.url
+		});
+	}
+	return out;
+}
+
+/** Copy only the SourceInput keys present in the body AND of the expected type,
+ * so a PATCH merge leaves unspecified fields untouched and malformed values
+ * never reach createSource/updateSource (the body is untrusted — the endpoint
+ * is token-gated but public). Invalid values are skipped, not coerced. */
 export function pickSourceInput(body: Record<string, unknown>): Partial<SourceInput> {
 	const out: Record<string, unknown> = {};
-	for (const k of FIELDS) if (k in body) out[k] = body[k];
+	for (const k of STRING_FIELDS) if (typeof body[k] === 'string') out[k] = body[k];
+	for (const k of NUMBER_FIELDS) if (typeof body[k] === 'number' && Number.isFinite(body[k])) out[k] = body[k];
+	for (const k of STRING_ARRAY_FIELDS) {
+		const arr = asStringArray(body[k]);
+		if (arr !== undefined) out[k] = arr;
+	}
+	const links = asLinks(body.links);
+	if (links !== undefined) out.links = links;
 	return out as Partial<SourceInput>;
+}
+
+/** Re-check the invariants createSource/updateSource rely on, AFTER picking /
+ * merging. Throws 400 on the first violation. Shared by the POST and PATCH
+ * handlers so create and (merged) update enforce the same required fields. */
+export function assertRequiredFields(input: Partial<SourceInput>): void {
+	if (typeof input.title !== 'string' || !input.title.trim()) throw error(400, 'title is required (non-empty string)');
+	if (typeof input.type !== 'string' || !input.type.trim()) throw error(400, 'type is required (non-empty string)');
+	if (typeof input.category !== 'string' || !input.category.trim()) throw error(400, 'category is required (non-empty string)');
 }
 
 /** The edit attribution (who made the change), recorded on the revision. */

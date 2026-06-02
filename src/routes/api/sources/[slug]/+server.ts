@@ -11,7 +11,8 @@ import {
 	pickSourceInput,
 	pickUser,
 	revisionSummaryOf,
-	detailToInput
+	detailToInput,
+	assertRequiredFields
 } from '$lib/server/write-api';
 
 const CORS = { 'access-control-allow-origin': '*' } as const;
@@ -39,9 +40,10 @@ export const PATCH: RequestHandler = async ({ request, params }) => {
 	} catch {
 		throw error(400, 'expected a JSON object body');
 	}
-	if (!body || typeof body !== 'object') throw error(400, 'expected a JSON object body');
+	if (!body || typeof body !== 'object' || Array.isArray(body)) throw error(400, 'expected a JSON object body');
 	const b = body as Record<string, unknown>;
 	const merged = { ...detailToInput(detail), ...pickSourceInput(b) };
+	assertRequiredFields(merged);
 	const slug = await updateSource(detail.source.id, merged, pickUser(b), revisionSummaryOf(b));
 	return json({ slug, source: await getSourceDetail(slug) });
 };

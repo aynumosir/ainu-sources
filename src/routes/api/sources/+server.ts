@@ -9,7 +9,13 @@ import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { listSources, createSource, getSourceDetail, type SourceInput } from '$lib/server/queries';
 import type { SourceFilters, SortKey } from '$lib/types';
-import { requireWriteToken, pickSourceInput, pickUser, revisionSummaryOf } from '$lib/server/write-api';
+import {
+	requireWriteToken,
+	pickSourceInput,
+	pickUser,
+	revisionSummaryOf,
+	assertRequiredFields
+} from '$lib/server/write-api';
 
 const CORS = { 'access-control-allow-origin': '*' } as const;
 const one = (v: string | null): string[] | undefined => (v ? [v] : undefined);
@@ -78,12 +84,11 @@ export const POST: RequestHandler = async ({ request }) => {
 	} catch {
 		throw error(400, 'expected a JSON object body');
 	}
-	if (!body || typeof body !== 'object') throw error(400, 'expected a JSON object body');
+	if (!body || typeof body !== 'object' || Array.isArray(body)) throw error(400, 'expected a JSON object body');
 	const b = body as Record<string, unknown>;
 	const input = pickSourceInput(b);
-	if (!input.title || !String(input.title).trim()) throw error(400, 'title is required');
-	if (!input.type || !String(input.type).trim()) throw error(400, 'type is required');
-	if (!input.category) input.category = 'primary';
+	if (input.category === undefined) input.category = 'primary';
+	assertRequiredFields(input);
 	const slug = await createSource(input as SourceInput, pickUser(b), revisionSummaryOf(b));
 	return json({ slug, source: await getSourceDetail(slug) }, { status: 201 });
 };
