@@ -7,7 +7,7 @@
 	import SourceCard from '$lib/components/SourceCard.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import SearchBox from '$lib/components/SearchBox.svelte';
-	import { tl, REGION_LABELS, TYPE_LABELS, LANGUAGE_LABELS } from '$lib/constants';
+	import { tl, tlabel, REGION_LABELS, TYPE_GROUPS, LANGUAGE_LABELS } from '$lib/constants';
 
 	let { data } = $props();
 	const { stats, recent, timeline } = $derived(data);
@@ -50,8 +50,21 @@
 	const regionRows = $derived(stats.byRegion.filter((b) => b.key));
 	const regionMax = $derived(Math.max(1, ...regionRows.map((b) => b.count)));
 
-	const typeRows = $derived(stats.byType.filter((b) => b.key));
-	const typeMax = $derived(Math.max(1, ...typeRows.map((b) => b.count)));
+	// "By type" rolled up into the big type families (TYPE_GROUPS); each bar links
+	// to all of its sub-types at once.
+	const typeCount = (key: string) => stats.byType.find((b) => b.key === key)?.count ?? 0;
+	const typeRows = $derived(
+		TYPE_GROUPS.map((g) => {
+			const present = g.types.filter((t) => typeCount(t) > 0);
+			return {
+				key: g.key,
+				label: g.label,
+				count: present.reduce((s, t) => s + typeCount(t), 0),
+				href: '/sources?' + present.map((t) => 'types=' + t).join('&')
+			};
+		}).filter((r) => r.count > 0)
+	);
+	const typeMax = $derived(Math.max(1, ...typeRows.map((r) => r.count)));
 
 	const languageRows = $derived(stats.byLanguage.filter((b) => b.key));
 	const languageMax = $derived(Math.max(1, ...languageRows.map((b) => b.count)));
@@ -140,12 +153,10 @@
 			<div class="mt-6 space-y-2">
 				{#each typeRows as row (row.key)}
 					<a
-						href={localizeHref('/sources?types=' + row.key)}
+						href={localizeHref(row.href)}
 						class="group flex items-center gap-3 rounded-lg px-2 py-1.5 transition hover:bg-stone-100"
 					>
-						<span class="w-40 shrink-0 truncate text-sm text-ink"
-							>{tl(TYPE_LABELS, row.key)}</span
-						>
+						<span class="w-40 shrink-0 truncate text-sm text-ink">{tlabel(row.label)}</span>
 						<span class="relative h-2.5 flex-1 overflow-hidden rounded-full bg-stone-100">
 							<span
 								class="absolute inset-y-0 left-0 rounded-full bg-brand-400 transition group-hover:bg-brand-600"

@@ -31,7 +31,7 @@ export const sources = sqliteTable(
 		/** broad bucket: 'primary' (一次資料) | 'secondary' (研究文献) | 'corpus' (コーパス) */
 		category: text('category').notNull().default('primary'),
 		/** fine type: old-document, dictionary, wordlist, comparative-wordlist,
-		 *  topical-dictionary, grammar-book, grammar-article, corpus-text, ... */
+		 *  topical-dictionary, grammar, book, article, corpus-text, ... */
 		type: text('type').notNull(),
 
 		// --- responsibility ---

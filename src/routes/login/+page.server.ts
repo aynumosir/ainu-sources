@@ -3,11 +3,13 @@ import type { Actions, PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
 import { APIError } from 'better-auth/api';
 import { safePath } from '$lib/server/form';
+import { env } from '$env/dynamic/private';
 
 export const load: PageServerLoad = async ({ locals, url }) => {
 	const redirectTo = safePath(url.searchParams.get('redirect'));
 	if (locals.user) redirect(302, redirectTo);
-	return { redirectTo };
+	// Only offer GitHub sign-in when the OAuth app is configured — otherwise it 404s.
+	return { redirectTo, githubEnabled: !!env.GITHUB_CLIENT_ID };
 };
 
 export const actions: Actions = {

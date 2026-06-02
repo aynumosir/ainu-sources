@@ -256,15 +256,20 @@ export function collectionPageJsonLd(opts: {
 /** Map a fine source `type` onto a Google-recognized schema.org @type. */
 function sourceSchemaType(type: string): string {
 	switch (type) {
-		case 'grammar-article':
+		case 'article':
 			return 'ScholarlyArticle';
-		case 'grammar-book':
+		case 'thesis':
+			return 'Thesis';
+		case 'grammar':
+		case 'book':
 		case 'dictionary':
 		case 'topical-dictionary':
 		case 'japanese-ainu-dictionary':
 		case 'online-dictionary':
 		case 'workbook':
 		case 'glossary':
+		case 'bibliography':
+		case 'old-document':
 			return 'Book';
 		case 'corpus-text':
 		case 'comparative-wordlist':
@@ -273,7 +278,15 @@ function sourceSchemaType(type: string): string {
 		case 'verbs':
 		case 'reference':
 		case 'valency-dataset':
+		case 'dataset':
 			return 'Dataset';
+		case 'software':
+		case 'model':
+			return 'SoftwareApplication';
+		case 'web-article':
+			return 'BlogPosting';
+		case 'website':
+			return 'WebSite';
 		default:
 			return 'CreativeWork';
 	}
