@@ -5,7 +5,14 @@
  */
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { getSourceDetail } from '$lib/server/queries';
+import { getSourceDetail, updateSource } from '$lib/server/queries';
+import {
+	requireWriteToken,
+	pickSourceInput,
+	pickUser,
+	revisionSummaryOf,
+	detailToInput
+} from '$lib/server/write-api';
 
 const CORS = { 'access-control-allow-origin': '*' } as const;
 
@@ -13,4 +20,28 @@ export const GET: RequestHandler = async ({ params }) => {
 	const detail = await getSourceDetail(params.slug);
 	if (!detail) throw error(404, `no source with slug ${params.slug}`);
 	return json(detail, { headers: CORS });
+};
+
+/**
+ * PATCH /api/sources/<slug> — update an existing source. Authorized by the
+ * SOURCES_WRITE_TOKEN bearer secret (see write-api.ts). Partial: only the
+ * SourceInput fields present in the body are changed; everything else (incl.
+ * links/tags if omitted) is carried over from the current record, then written
+ * via updateSource() so a revision is recorded.
+ */
+export const PATCH: RequestHandler = async ({ request, params }) => {
+	requireWriteToken(request);
+	const detail = await getSourceDetail(params.slug);
+	if (!detail) throw error(404, `no source with slug ${params.slug}`);
+	let body: unknown;
+	try {
+		body = await request.json();
+	} catch {
+		throw error(400, 'expected a JSON object body');
+	}
+	if (!body || typeof body !== 'object') throw error(400, 'expected a JSON object body');
+	const b = body as Record<string, unknown>;
+	const merged = { ...detailToInput(detail), ...pickSourceInput(b) };
+	const slug = await updateSource(detail.source.id, merged, pickUser(b), revisionSummaryOf(b));
+	return json({ slug, source: await getSourceDetail(slug) });
 };
