@@ -1962,6 +1962,69 @@ async function wipe() {
 	await db.delete(schema.institutions);
 }
 
+// ---------------------------------------------------------------------------
+// Curated bibliographies (hand-entered reading lists, e.g. the 帯広百年記念館
+// リウカ / 幕別町図書館 十勝-Ainu list). Each entry is real bibliographic data.
+// Dedup by normalized title against everything seeded so far: a match is
+// ENRICHED (holding library, curated summary, web link) rather than duplicated;
+// a miss is inserted as a new source.
+// ---------------------------------------------------------------------------
+const CURATED_BIBLIO_FILE = path.join(import.meta.dir, 'data', 'curated-biblio.json');
+interface CuratedEntry {
+	num: string; title: string; titleEn?: string | null; authors: string[];
+	publisher?: string; year?: number | null; type: string; category: string;
+	langs: string[]; scripts?: string[]; url?: string; urlType?: string;
+	summary?: string; holding?: string; callNumber?: string; dialect?: string;
+}
+function seedCuratedBiblio(): { added: number; enriched: number } {
+	if (!fs.existsSync(CURATED_BIBLIO_FILE)) return { added: 0, enriched: 0 };
+	const entries: CuratedEntry[] = JSON.parse(fs.readFileSync(CURATED_BIBLIO_FILE, 'utf8'));
+	const idByTitle = new Map<string, Row>();
+	for (const s of sourceRows) {
+		const t = normTitle(s.title as string);
+		if (t && !idByTitle.has(t)) idByTitle.set(t, s);
+		if (s.titleEn) { const te = normTitle(s.titleEn as string); if (te && !idByTitle.has(te)) idByTitle.set(te, s); }
+	}
+	const linkKey = new Set(linkRows.map((l) => `${l.sourceId}\t${l.url}`));
+	let added = 0, enriched = 0;
+	for (const e of entries) {
+		const nt = normTitle(e.title);
+		const hit = nt ? idByTitle.get(nt) : undefined;
+		if (hit) {
+			// Enrich an existing record (e.g. a famous book already pulled via NDL/CiNii).
+			if (!hit.holdingInstitution && e.holding) hit.holdingInstitution = e.holding;
+			if (!hit.callNumber && e.callNumber) hit.callNumber = e.callNumber;
+			if ((!hit.summary || hit.summary === '') && e.summary) hit.summary = e.summary;
+			if (e.url && !linkKey.has(`${hit.id}\t${e.url}`)) {
+				linkRows.push({ id: uuid(), sourceId: hit.id, type: e.urlType ?? 'website', label: e.publisher ?? null, url: e.url, sortOrder: 90 });
+				linkKey.add(`${hit.id}\t${e.url}`);
+			}
+			enriched += 1;
+			continue;
+		}
+		const id = uuid();
+		const slug = uniqueSlug(`${e.year ?? 'nd'}-${slugify(e.titleEn ?? '') || slugify(e.authors[0] ?? '') || 'x'}-${slugify(e.title).slice(0, 40) || `biblio-${e.num}`}`);
+		sourceRows.push({
+			id, slug, title: e.title, titleEn: e.titleEn ?? null,
+			category: e.category, type: e.type, author: e.authors.join('、') || null,
+			yearText: e.year ? String(e.year) : '', yearStart: e.year ?? null, yearEnd: null,
+			yearCertainty: e.year ? 'exact' : 'unknown', dialect: e.dialect ?? null, region: null,
+			languages: e.langs, scripts: e.scripts ?? ['kana', 'kanji'],
+			holdingInstitution: e.holding ?? null, callNumber: e.callNumber ?? null,
+			summary: e.summary ?? null, provenanceRepo: 'curated-makubetsu', provenancePath: `biblio/${e.num}`,
+			createdAt: new Date(), updatedAt: new Date()
+		});
+		idByTitle.set(nt, sourceRows[sourceRows.length - 1]);
+		if (e.url) linkRows.push({ id: uuid(), sourceId: id, type: e.urlType ?? 'website', label: e.publisher ?? null, url: e.url, sortOrder: 0 });
+		if (e.authors.length) addPersons(id, e.authors.join('、'), 'author');
+		addPlaces(id, `${geoSubjectText(e.title)} ${e.dialect ?? ''}`, 'subject');
+		attachTags(id, e.title, e.titleEn, e.summary);
+		added += 1;
+	}
+	console.log(`  curated biblio: +${added} new, ${enriched} enriched`);
+	return { added, enriched };
+}
+
 // Link the scattered parts of one work — multi-part serials (the Dobrotvorsky
 // Ainu-Russian dictionary translation in 19 installments, アイヌ語会話篇 一–五…)
 // and multi-volume primary sources (藻汐草 + 乾 + 坤) — with `same-work` relations,
@@ -2003,6 +2066,7 @@ async function main() {
 	const nCorp = await seedCorpus();
 	const nManual = seedManual();
 	const acad = seedAcademic();
+	const curated = seedCuratedBiblio();
 	buildSameWorkRelations();
 
 	await enrichPersonsWithWikidata();
@@ -2030,6 +2094,7 @@ async function main() {
 		manual: nManual,
 		academic: acad.added,
 		'academic dup': acad.skipped,
+		'curated +/enrich': `${curated.added}/${curated.enriched}`,
 		sources: sourceRows.length,
 		persons: personRows.length,
 		places: placeRows.length,
