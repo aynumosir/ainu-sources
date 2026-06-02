@@ -1962,6 +1962,35 @@ async function wipe() {
 	await db.delete(schema.institutions);
 }
 
+// Link the scattered parts of one work — multi-part serials (the Dobrotvorsky
+// Ainu-Russian dictionary translation in 19 installments, アイヌ語会話篇 一–五…)
+// and multi-volume primary sources (藻汐草 + 乾 + 坤) — with `same-work` relations,
+// clustered by coreKey (volume/part/holding-suffix-stripped title). A cluster
+// must have ≥2 DISTINCT titles (exact dups are already merged at seed time).
+function buildSameWorkRelations(): number {
+	const byCore = new Map<string, Row[]>();
+	for (const s of sourceRows) {
+		const k = coreKey(s.title as string);
+		if (k.length < 5) continue;
+		if (!byCore.has(k)) byCore.set(k, []);
+		byCore.get(k)!.push(s);
+	}
+	let n = 0;
+	for (const cluster of byCore.values()) {
+		if (cluster.length < 2) continue;
+		if (new Set(cluster.map((s) => s.title)).size < 2) continue; // identical titles ⇒ not a part series
+		if (cluster.length > 30) continue; // pathological (a too-generic core title) — skip
+		for (let i = 0; i < cluster.length; i++)
+			for (let j = 0; j < cluster.length; j++)
+				if (i !== j) {
+					sourceRelationRows.push({ id: uuid(), fromSourceId: cluster[i].id, toSourceId: cluster[j].id, type: 'same-work', notes: null });
+					n++;
+				}
+	}
+	console.log(`  same-work relations: ${n} (from coreKey clusters)`);
+	return n;
+}
+
 async function main() {
 	console.log('AINU_ROOT =', AINU_ROOT);
 	console.log('Capturing user content (revisions + edits) before wipe…');
@@ -1974,6 +2003,7 @@ async function main() {
 	const nCorp = await seedCorpus();
 	const nManual = seedManual();
 	const acad = seedAcademic();
+	buildSameWorkRelations();
 
 	await enrichPersonsWithWikidata();
 
