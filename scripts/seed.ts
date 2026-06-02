@@ -1696,6 +1696,7 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 // fabricate a link or guess an article that may not exist).
 // ---------------------------------------------------------------------------
 const WIKIDATA_CACHE_FILE = path.join(import.meta.dir, 'wikidata-cache.json');
+const WIKIDATA_DATES_CACHE_FILE = path.join(import.meta.dir, 'wikidata-dates-cache.json');
 const WD_UA = 'ainu-sources-seed/1.0 (https://db.aynu.org; mkpoli@mkpo.li)';
 
 type WdHit = { wikidata: string | null; wikipedia: string | null; enLabel: string | null };
@@ -1869,6 +1870,57 @@ async function enrichPersonsWithWikidata() {
 	console.log(
 		`Wikidata: ${withWp} verified Wikipedia articles, ${romajiFilled} romaji names backfilled.`
 	);
+}
+
+// Parse a 4-digit year from a Wikidata time claim ("+1909-05-24T00:00:00Z").
+function wdYearFromClaim(claims: any, prop: string): number | null {
+	const t = claims?.[prop]?.[0]?.mainsnak?.datavalue?.value?.time;
+	if (!t) return null;
+	const m = String(t).match(/^([+-])(\d{1,4})/);
+	if (!m) return null;
+	const y = Number(m[2]) * (m[1] === '-' ? -1 : 1);
+	return Number.isFinite(y) && y !== 0 ? y : null;
+}
+
+// Birth/death years for every person that has a Wikidata QID — a cheap batch
+// pass over wbgetentities (props=claims, P569/P570), so historical figures show
+// life dates (知里真志保 1909–1961, 金田一京助 1882–1971…). QID-keyed cache.
+async function enrichPersonDates() {
+	const qids = [...new Set(personRows.map((p) => p.wikidata as string).filter(Boolean))];
+	if (!qids.length) return;
+	let cache: Record<string, { b: number | null; d: number | null }> = {};
+	if (fs.existsSync(WIKIDATA_DATES_CACHE_FILE)) {
+		try {
+			cache = JSON.parse(fs.readFileSync(WIKIDATA_DATES_CACHE_FILE, 'utf8'));
+		} catch {
+			cache = {};
+		}
+	}
+	const todo = qids.filter((q) => !(q in cache));
+	if (todo.length) console.log(`Fetching birth/death dates for ${todo.length} Wikidata persons (cached: ${qids.length - todo.length})…`);
+	for (let i = 0; i < todo.length; i += 45) {
+		const batch = todo.slice(i, i + 45);
+		let data: any = null;
+		try {
+			data = await wdFetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=claims&ids=${batch.join('|')}`);
+		} catch {
+			continue;
+		}
+		for (const qid of batch) {
+			const claims = data?.entities?.[qid]?.claims;
+			cache[qid] = { b: wdYearFromClaim(claims, 'P569'), d: wdYearFromClaim(claims, 'P570') };
+		}
+		await wdSleep(150);
+	}
+	fs.writeFileSync(WIKIDATA_DATES_CACHE_FILE, JSON.stringify(cache, null, 2));
+	let filled = 0;
+	for (const p of personRows) {
+		const c = p.wikidata ? cache[p.wikidata as string] : null;
+		if (!c) continue;
+		if (p.birthYear == null && c.b != null) { p.birthYear = c.b; filled += 1; }
+		if (p.deathYear == null && c.d != null) p.deathYear = c.d;
+	}
+	console.log(`Wikidata dates: life years set for ${filled} persons.`);
 }
 
 // ---------------------------------------------------------------------------
@@ -2085,6 +2137,7 @@ async function main() {
 	buildSameWorkRelations();
 
 	await enrichPersonsWithWikidata();
+	await enrichPersonDates();
 
 	console.log('Inserting…');
 	await bulkInsert(schema.persons, personRows);
