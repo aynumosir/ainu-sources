@@ -1,11 +1,9 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"site_title": "Aynu itak kampi tatumpu",
 	"site_short": "Aynu Kampi",
 	"site_tagline": "Historical materials, transcriptions, decipherment studies & holdings",
 	"site_description": "An open philological knowledge base integrating historical documents, dictionaries, wordlists, oral-literature records and research on the Ainu language.",
-
 	"nav_sources": "Kampi",
 	"nav_timeline": "Pa utur",
 	"nav_map": "Sinrunoka",
@@ -15,7 +13,6 @@
 	"nav_about": "Uepeker",
 	"nav_search_placeholder": "Kampi hunara…",
 	"nav_menu": "Menu",
-
 	"auth_login": "Ahun",
 	"auth_register": "Cinuyeanup kar",
 	"auth_logout": "Soyne",
@@ -37,7 +34,6 @@
 	"account_connect": "Uekarpare",
 	"account_disconnect": "Tuye",
 	"account_connected": "Uekarpa wa an",
-
 	"common_all": "Opitta",
 	"common_loading": "Ek kor an…",
 	"common_no_results": "Pa awa isam.",
@@ -51,7 +47,6 @@
 	"common_more": "na poronno",
 	"common_search": "Hunara",
 	"common_sources_n": "{count} kampi",
-
 	"home_hero_title": "Aynu itak kampi opitta, sine uske ta",
 	"home_hero_lead": "A philological information base for the Ainu language: where the sources are, what they contain, who has read them, and which research surrounds them — across periods, regions and dialects.",
 	"home_browse_cta": "Kampi opitta nukar",
@@ -74,7 +69,6 @@
 	"home_recent": "Asinno inuye",
 	"home_explore_timeline": "Pa utur nukar",
 	"home_explore_map": "Sinrunoka nukar",
-
 	"filter_heading": "Cesoyep",
 	"filter_category": "Isoneka",
 	"filter_type": "Ikir",
@@ -84,19 +78,16 @@
 	"filter_century": "Century",
 	"filter_has_digital": "Intennet ka un",
 	"filter_clear": "Hosipire",
-
 	"sort_label": "Eyurenkare",
 	"sort_year_asc": "Pa (hoski)",
 	"sort_year_desc": "Pa (asir)",
 	"sort_title": "Sapa (A–Z)",
 	"sort_updated": "Asinno inuye",
 	"sort_entries": "Poronno",
-
 	"results_count": "{count} kampi",
 	"page_indicator": "Sos {page} / {total}",
 	"prev_page": "Hoski",
 	"next_page": "Ios",
-
 	"source_overview": "Overview",
 	"source_biblio": "Kampi asursos",
 	"source_alt_titles": "Oya sapa",
@@ -131,7 +122,6 @@
 	"cite_copy": "Copy",
 	"cite_copied": "Copied!",
 	"cite_download": "Download",
-
 	"new_source_title": "Add a source",
 	"edit_source_title": "Edit source",
 	"form_title": "Title (original)",
@@ -167,7 +157,6 @@
 	"form_required": "required",
 	"form_save_create": "Kampi kar",
 	"form_save_update": "Anu",
-
 	"history_title": "Revision history",
 	"history_by": "by",
 	"history_action_create": "created",
@@ -176,7 +165,6 @@
 	"history_none": "No revisions recorded.",
 	"history_anonymous": "anonymous",
 	"history_back_to_source": "Back to source",
-
 	"people_title": "Utar",
 	"people_lead": "Authors, recorders, speakers and researchers attested in the sources.",
 	"people_search_placeholder": "Utar hunara…",
@@ -187,28 +175,24 @@
 	"person_sources": "Kampi",
 	"person_dates": "Pa",
 	"person_find_more": "Na hunara",
-
+	"person_areas": "Research areas",
 	"places_title": "Uske, iposse",
 	"places_lead": "Composition places, recording regions and dialect areas of the sources.",
 	"place_sources": "Kampi",
 	"place_on_map": "Sinrunoka ka ta nukar",
-
 	"institutions_title": "Kampi kor usi",
 	"institutions_lead": "Libraries, museums and research institutes that hold or publish the sources.",
 	"institution_sources": "Kampi",
 	"institution_location": "Uske",
 	"institution_website": "Sayto",
-
 	"timeline_title": "Pa utur",
 	"timeline_lead": "Ainu-language sources by date, from the early Edo period to today.",
 	"timeline_legend": "Legend",
 	"timeline_by_century": "By century",
-
 	"map_title": "Sinrunoka",
 	"map_lead": "Dialect areas, recording regions and holding institutions of the sources.",
 	"map_sources_here": "kampi",
 	"map_note": "Coordinates are approximate, placed at the centre of each dialect area or institution.",
-
 	"about_title": "About this project",
 	"about_intro": "The Ainu Textual Sources Database collects historical documents, old manuscripts, dictionaries, wordlists, place-name materials, oral-literature records and field notes on the Ainu language, and links their bibliographic data, holdings, digital images, transcriptions, decipherment research, geographic and chronological information. It is not merely a list of materials but an open knowledge base spanning philology, linguistics, history and information science.",
 	"about_purpose_h": "Purpose",
@@ -221,7 +205,6 @@
 	"about_data_p": "The initial dataset is aggregated from the open ainu-dictionaries, ainu-grammar and ainu-corpora repositories. Bibliographic records can then be corrected and enriched collaboratively, with sourced statements and edit history.",
 	"about_contribute_h": "Contributing",
 	"about_contribute_p": "Sign in to add new sources or correct existing records. Every edit is versioned, so the history of each record is preserved.",
-
 	"footer_tagline": "An open philological knowledge base for Ainu-language sources.",
 	"footer_part_of": "Part of the Aynu.org family",
 	"footer_data_credit": "Data from ainu-dictionaries, ainu-grammar and ainu-corpora.",

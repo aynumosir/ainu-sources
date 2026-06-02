@@ -12,6 +12,13 @@
 	const person = $derived(data.person);
 	const sources = $derived(data.sources);
 	const findLinks = $derived(personFindLinks(person));
+	// Research areas = this person's works' topical tags, by frequency. Show the
+	// ones backed by ≥2 works (or the top 3 if none clear the bar), capped at 6.
+	const areas = $derived.by(() => {
+		const all = data.areas ?? [];
+		const strong = all.filter((a) => a.count >= 2);
+		return (strong.length ? strong : all).slice(0, 6);
+	});
 
 	const origin = $derived(page.url.origin);
 	const seoDescription = $derived(
@@ -56,6 +63,24 @@
 		{/if}
 		{#if person.bio}
 			<p class="mt-3 leading-relaxed text-stone-700">{person.bio}</p>
+		{/if}
+		{#if areas.length}
+			<div class="mt-4">
+				<h2 class="font-sans text-xs font-semibold uppercase tracking-wide text-stone-400">
+					{m.person_areas()}
+				</h2>
+				<ul class="mt-2 flex flex-wrap gap-1.5">
+					{#each areas as a (a.slug)}
+						<li>
+							<a
+								href={localizeHref(`/sources?tag=${a.slug}`)}
+								class="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-0.5 text-sm text-brand-800 ring-1 ring-inset ring-brand-200 hover:bg-brand-100"
+								>{a.name}<span class="text-xs text-brand-400">{a.count}</span></a
+							>
+						</li>
+					{/each}
+				</ul>
+			</div>
 		{/if}
 		<div class="mt-4">
 			<h2 class="font-sans text-xs font-semibold uppercase tracking-wide text-stone-400">

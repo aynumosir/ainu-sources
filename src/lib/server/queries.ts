@@ -449,9 +449,19 @@ export async function listPersonRoles(): Promise<string[]> {
 	return rows.map((r) => r.role).filter(Boolean);
 }
 
+export interface PersonArea {
+	slug: string;
+	name: string;
+	nameEn: string | null;
+	category: string;
+	count: number;
+}
 export async function getPersonBySlug(
 	slug: string
-): Promise<{ person: Person; sources: { source: Source; role: string }[] } | undefined> {
+): Promise<
+	| { person: Person; sources: { source: Source; role: string }[]; areas: PersonArea[] }
+	| undefined
+> {
 	const r = await db.select().from(persons).where(eq(persons.slug, slug)).limit(1);
 	const person = r[0];
 	if (!person) return undefined;
@@ -461,7 +471,31 @@ export async function getPersonBySlug(
 		.innerJoin(sources, eq(sourcePersons.sourceId, sources.id))
 		.where(eq(sourcePersons.personId, person.id))
 		.orderBy(asc(sources.yearStart));
-	return { person, sources: srcs };
+	// Research areas = the topical/genre tags of this person's works, by frequency.
+	// Derived from real publications, so a grammarian surfaces 文法, a comparatist
+	// 比較・系統, an oral-literature scholar 口承文芸.
+	const areaRows = await db
+		.select({
+			slug: tags.slug,
+			name: tags.name,
+			nameEn: tags.nameEn,
+			category: tags.category,
+			n: sql<number>`count(*)`
+		})
+		.from(sourcePersons)
+		.innerJoin(sourceTags, eq(sourceTags.sourceId, sourcePersons.sourceId))
+		.innerJoin(tags, eq(tags.id, sourceTags.tagId))
+		.where(eq(sourcePersons.personId, person.id))
+		.groupBy(tags.id)
+		.orderBy(desc(sql`count(*)`));
+	const areas: PersonArea[] = areaRows.map((a) => ({
+		slug: a.slug,
+		name: a.name,
+		nameEn: a.nameEn,
+		category: a.category,
+		count: a.n
+	}));
+	return { person, sources: srcs, areas };
 }
 
 export interface PlaceWithCount extends Place {

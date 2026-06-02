@@ -1,11 +1,9 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"site_title": "Ainu Textual Sources Database",
 	"site_short": "Ainu Sources",
 	"site_tagline": "Historical materials, transcriptions, decipherment studies & holdings",
 	"site_description": "An open philological knowledge base integrating historical documents, dictionaries, wordlists, oral-literature records and research on the Ainu language.",
-
 	"nav_sources": "Sources",
 	"nav_timeline": "Timeline",
 	"nav_map": "Map",
@@ -15,7 +13,6 @@
 	"nav_about": "About",
 	"nav_search_placeholder": "Search sources…",
 	"nav_menu": "Menu",
-
 	"auth_login": "Log in",
 	"auth_register": "Register",
 	"auth_logout": "Log out",
@@ -37,7 +34,6 @@
 	"account_connect": "Connect",
 	"account_disconnect": "Disconnect",
 	"account_connected": "Connected",
-
 	"common_all": "All",
 	"common_loading": "Loading…",
 	"common_no_results": "No matching sources.",
@@ -51,7 +47,6 @@
 	"common_more": "more",
 	"common_search": "Search",
 	"common_sources_n": "{count} sources",
-
 	"home_hero_title": "Every Ainu-language source, in one index",
 	"home_hero_lead": "A philological information base for the Ainu language: where the sources are, what they contain, who has read them, and which research surrounds them — across periods, regions and dialects.",
 	"home_browse_cta": "Browse all sources",
@@ -74,7 +69,6 @@
 	"home_recent": "Recently updated",
 	"home_explore_timeline": "Explore the timeline",
 	"home_explore_map": "Explore the map",
-
 	"filter_heading": "Filter",
 	"filter_category": "Category",
 	"filter_type": "Type",
@@ -84,19 +78,16 @@
 	"filter_century": "Century",
 	"filter_has_digital": "Has digital access",
 	"filter_clear": "Clear filters",
-
 	"sort_label": "Sort",
 	"sort_year_asc": "Date (oldest)",
 	"sort_year_desc": "Date (newest)",
 	"sort_title": "Title (A–Z)",
 	"sort_updated": "Recently updated",
 	"sort_entries": "Most entries",
-
 	"results_count": "{count} results",
 	"page_indicator": "Page {page} of {total}",
 	"prev_page": "Previous",
 	"next_page": "Next",
-
 	"source_overview": "Overview",
 	"source_biblio": "Bibliographic information",
 	"source_alt_titles": "Other titles",
@@ -131,7 +122,6 @@
 	"cite_copy": "Copy",
 	"cite_copied": "Copied!",
 	"cite_download": "Download",
-
 	"new_source_title": "Add a source",
 	"edit_source_title": "Edit source",
 	"form_title": "Title (original)",
@@ -167,7 +157,6 @@
 	"form_required": "required",
 	"form_save_create": "Create source",
 	"form_save_update": "Save changes",
-
 	"history_title": "Revision history",
 	"history_by": "by",
 	"history_action_create": "created",
@@ -176,7 +165,6 @@
 	"history_none": "No revisions recorded.",
 	"history_anonymous": "anonymous",
 	"history_back_to_source": "Back to source",
-
 	"people_title": "People",
 	"people_lead": "Authors, recorders, speakers and researchers attested in the sources.",
 	"people_search_placeholder": "Search people…",
@@ -187,28 +175,24 @@
 	"person_sources": "Sources",
 	"person_dates": "Dates",
 	"person_find_more": "Find more",
-
+	"person_areas": "Research areas",
 	"places_title": "Places & dialects",
 	"places_lead": "Composition places, recording regions and dialect areas of the sources.",
 	"place_sources": "Sources",
 	"place_on_map": "Show on map",
-
 	"institutions_title": "Holding institutions",
 	"institutions_lead": "Libraries, museums and research institutes that hold or publish the sources.",
 	"institution_sources": "Sources",
 	"institution_location": "Location",
 	"institution_website": "Website",
-
 	"timeline_title": "Timeline",
 	"timeline_lead": "Ainu-language sources by date, from the early Edo period to today.",
 	"timeline_legend": "Legend",
 	"timeline_by_century": "By century",
-
 	"map_title": "Map",
 	"map_lead": "Dialect areas, recording regions and holding institutions of the sources.",
 	"map_sources_here": "sources",
 	"map_note": "Coordinates are approximate, placed at the centre of each dialect area or institution.",
-
 	"about_title": "About this project",
 	"about_intro": "The Ainu Textual Sources Database collects historical documents, old manuscripts, dictionaries, wordlists, place-name materials, oral-literature records and field notes on the Ainu language, and links their bibliographic data, holdings, digital images, transcriptions, decipherment research, geographic and chronological information. It is not merely a list of materials but an open knowledge base spanning philology, linguistics, history and information science.",
 	"about_purpose_h": "Purpose",
@@ -221,7 +205,6 @@
 	"about_data_p": "The initial dataset is aggregated from the open ainu-dictionaries, ainu-grammar and ainu-corpora repositories. Bibliographic records can then be corrected and enriched collaboratively, with sourced statements and edit history.",
 	"about_contribute_h": "Contributing",
 	"about_contribute_p": "Sign in to add new sources or correct existing records. Every edit is versioned, so the history of each record is preserved.",
-
 	"footer_tagline": "An open philological knowledge base for Ainu-language sources.",
 	"footer_part_of": "Part of the Aynu.org family",
 	"footer_data_credit": "Data from ainu-dictionaries, ainu-grammar and ainu-corpora.",

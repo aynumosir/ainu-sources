@@ -1,11 +1,9 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"site_title": "アイヌ語文献資料データベース",
 	"site_short": "アイヌ語文献DB",
 	"site_tagline": "歴史資料・翻刻・解読研究・所蔵情報を統合する文献情報基盤",
 	"site_description": "アイヌ語に関する歴史資料・古文献・辞典・語彙集・口承文芸記録・研究を統合する、オープンな文献学的知識基盤。",
-
 	"nav_sources": "資料",
 	"nav_timeline": "年表",
 	"nav_map": "地図",
@@ -15,7 +13,6 @@
 	"nav_about": "本サイトについて",
 	"nav_search_placeholder": "資料を検索…",
 	"nav_menu": "メニュー",
-
 	"auth_login": "ログイン",
 	"auth_register": "登録",
 	"auth_logout": "ログアウト",
@@ -37,7 +34,6 @@
 	"account_connect": "連携する",
 	"account_disconnect": "連携解除",
 	"account_connected": "連携済み",
-
 	"common_all": "すべて",
 	"common_loading": "読み込み中…",
 	"common_no_results": "該当する資料がありません。",
@@ -51,7 +47,6 @@
 	"common_more": "他",
 	"common_search": "検索",
 	"common_sources_n": "{count} 件の資料",
-
 	"home_hero_title": "アイヌ語の​すべての​資料を、​ひとつの​索引に",
 	"home_hero_lead": "アイヌ語研究のための文献情報基盤。どこに、どんな資料があり、誰がどう読み、どんな研究があるのか——時代・地域・方言を横断して一望できます。",
 	"home_browse_cta": "すべての資料を見る",
@@ -74,7 +69,6 @@
 	"home_recent": "最近更新",
 	"home_explore_timeline": "年表を見る",
 	"home_explore_map": "地図を見る",
-
 	"filter_heading": "絞り込み",
 	"filter_category": "区分",
 	"filter_type": "種別",
@@ -84,19 +78,16 @@
 	"filter_century": "世紀",
 	"filter_has_digital": "デジタルあり",
 	"filter_clear": "条件をクリア",
-
 	"sort_label": "並び替え",
 	"sort_year_asc": "年代（古い順）",
 	"sort_year_desc": "年代（新しい順）",
 	"sort_title": "タイトル順",
 	"sort_updated": "更新順",
 	"sort_entries": "件数の多い順",
-
 	"results_count": "{count} 件",
 	"page_indicator": "{total} ページ中 {page} ページ目",
 	"prev_page": "前へ",
 	"next_page": "次へ",
-
 	"source_overview": "概要",
 	"source_biblio": "書誌情報",
 	"source_alt_titles": "別名・異称",
@@ -131,7 +122,6 @@
 	"cite_copy": "コピー",
 	"cite_copied": "コピーしました",
 	"cite_download": "ダウンロード",
-
 	"new_source_title": "資料を追加",
 	"edit_source_title": "資料を編集",
 	"form_title": "タイトル（原語）",
@@ -167,7 +157,6 @@
 	"form_required": "必須",
 	"form_save_create": "資料を作成",
 	"form_save_update": "変更を保存",
-
 	"history_title": "編集履歴",
 	"history_by": "編集者",
 	"history_action_create": "作成",
@@ -176,7 +165,6 @@
 	"history_none": "履歴はありません。",
 	"history_anonymous": "匿名",
 	"history_back_to_source": "資料に戻る",
-
 	"people_title": "人物",
 	"people_lead": "資料に現れる著者・記録者・話者・研究者。",
 	"people_search_placeholder": "人物を検索…",
@@ -187,28 +175,24 @@
 	"person_sources": "関連資料",
 	"person_dates": "生没年",
 	"person_find_more": "関連情報を探す",
-
+	"person_areas": "研究分野",
 	"places_title": "地域・方言",
 	"places_lead": "資料の成立地・記録地・方言地域。",
 	"place_sources": "関連資料",
 	"place_on_map": "地図で見る",
-
 	"institutions_title": "所蔵機関",
 	"institutions_lead": "資料を所蔵・刊行する図書館・博物館・研究機関。",
 	"institution_sources": "関連資料",
 	"institution_location": "所在地",
 	"institution_website": "ウェブサイト",
-
 	"timeline_title": "年表",
 	"timeline_lead": "近世初期から現代までのアイヌ語資料を年代順に。",
 	"timeline_legend": "凡例",
 	"timeline_by_century": "世紀別",
-
 	"map_title": "地図",
 	"map_lead": "資料の方言地域・記録地・所蔵機関。",
 	"map_sources_here": "件の資料",
 	"map_note": "座標は概算で、各方言地域や機関のおおよその中心に配置しています。",
-
 	"about_title": "本プロジェクトについて",
 	"about_intro": "アイヌ語文献資料データベースは、アイヌ語に関する歴史資料・古文献・辞典・語彙集・地名資料・口承文芸記録・調査ノートなどを集約し、書誌情報・所蔵情報・デジタル画像・翻刻・解読研究・地理情報・年代情報を相互に結びつけます。単なる資料一覧ではなく、文献学・言語学・歴史学・情報学を横断するオープンな知識基盤を目指します。",
 	"about_purpose_h": "目的",
@@ -221,7 +205,6 @@
 	"about_data_p": "初期データは、オープンな ainu-dictionaries・ainu-grammar・ainu-corpora リポジトリから集約しています。以後、出典付きで共同的に修正・拡充でき、編集履歴が保存されます。",
 	"about_contribute_h": "参加方法",
 	"about_contribute_p": "ログインすると資料の追加や既存記述の修正ができます。すべての編集はバージョン管理され、各記述の履歴が保存されます。",
-
 	"footer_tagline": "アイヌ語資料のためのオープンな文献学的知識基盤。",
 	"footer_part_of": "Aynu.org ファミリーの一部",
 	"footer_data_credit": "データ：ainu-dictionaries / ainu-grammar / ainu-corpora",
