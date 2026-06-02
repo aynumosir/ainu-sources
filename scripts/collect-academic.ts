@@ -1525,7 +1525,9 @@ const RESEARCHMAP_PERMALINKS = [
 	'read0127694', 'read0119850', 'koji_yamasaki', 'SoMiyagawa', 'read0067315', 'yocjyet',
 	// discovered 2026-06-02 (verified via api.researchmap.jp): linguistics / oral-lit
 	'iii', 'utari', 'read0131605', 'akemi6oshino', 'mfujita1023',
-	'ksmtyshs', 'read0131604', 'takuya_inoue', '_retar', 'uchida_junko0069'
+	'ksmtyshs', 'read0131604', 'takuya_inoue', '_retar', 'uchida_junko0069',
+	// round 2 (2026-06-02): typology + place-names + Ainu-NLP/documentation
+	'read0015553', 'read0166431', 'ptaszynski', 'read0021800', 'read0021804', 'nakagawanatuko'
 ];
 export async function collectResearchmap(permalinks: string[]): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];

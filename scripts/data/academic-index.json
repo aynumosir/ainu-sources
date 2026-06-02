@@ -74445,5 +74445,331 @@
         "label": "Internet Archive (full text)"
       }
     ]
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0166431:21322951",
+    "doi": null,
+    "title": "東北のアイヌ語地名考古学",
+    "year": 2012,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "アイヌ語地名研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0166431:21322949",
+    "doi": null,
+    "title": "先住民族の視点から見た沖縄とアイヌモシリ",
+    "year": 2010,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "琉球大学国際沖縄研究所2009年度所報",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0166431:21322947",
+    "doi": null,
+    "title": "シレトコ世界自然遺産へのアイヌ民族の参画と研究者の役割―先住民族ガヴァナンスから見た世界遺産",
+    "year": 2006,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [],
+    "venue": "環境社会学研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0166431:11959405",
+    "doi": null,
+    "title": "シレトコ世界自然遺産地域とアイヌ民族",
+    "year": 2014,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "10.11517/pjsai.jsai2017.0_1l15",
+    "doi": "10.11517/pjsai.jsai2017.0_1l15",
+    "title": "アイヌ語のトークン化を改善するための複数辞書の結合",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "PTASZYNSKI Michal",
+      "ITO Yuka",
+      "NOWAKOWSKI Karol",
+      "HONMA Hirotoshi",
+      "NAKAJIMA Yoko",
+      "MASUI Fumito"
+    ],
+    "venue": "人工知能学会全国大会論文集(CD-ROM)",
+    "url": "https://doi.org/10.11517/pjsai.jsai2017.0_1l15",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ptaszynski:21751153",
+    "doi": null,
+    "title": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language",
+    "year": 2016,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "PTASZYNSKI Michal",
+      "NOWAKOWSKI Karol",
+      "MOMOUCHI Yoshio",
+      "MASUI Fumito"
+    ],
+    "venue": "言語処理学会年次大会発表論文集(Web)",
+    "url": "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201602295328075764",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ptaszynski:45719402",
+    "doi": null,
+    "title": "アイヌ語に関する統一コーパスの提案",
+    "year": 2018,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "NOWAKOWSKI Karol",
+      "PTASZYNSKI Michal",
+      "MASUI Fumito"
+    ],
+    "venue": "情報処理学会研究報告(Web)",
+    "url": "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201802219912701129",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ptaszynski:45719401",
+    "doi": null,
+    "title": "危機言語のためのNLP:アイヌ語の形態素解析,翻訳支援とシャローパーシング",
+    "year": 2013,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "PTASZYNSKI Michal",
+      "MUKAICHI Kazuki",
+      "MOMOUCHI Yoshio"
+    ],
+    "venue": "言語処理学会年次大会発表論文集(Web)",
+    "url": "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201302206812204280",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ptaszynski:45719407",
+    "doi": null,
+    "title": "POST-AL:アイヌ語に対する品詞タグ付けプログラム",
+    "year": 2012,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "PTASZYNSKI Michal",
+      "PTASZYNSKI Michal",
+      "MOMOUCHI Yoshio"
+    ],
+    "venue": "言語処理学会年次大会発表論文集",
+    "url": "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201302268195710373",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021800:15625815",
+    "doi": null,
+    "title": "Acquisition of Word Translations Using Local Focus-based Learning in Ainu-Japanese Parallel Corpora (Collaboration)",
+    "year": 2004,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Proceedings of CICLing-2004 (Lecture Notes in Computer Science, Springer Verlag)",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021800:15625809",
+    "doi": null,
+    "title": "アイヌ語・日本語機械翻訳のための基礎的研究",
+    "year": 2002,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "北海学園大学 工学研究",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021800:15625780",
+    "doi": null,
+    "title": "Fundamental Study for Machine Translation from the Ainulanguage into Japanese",
+    "year": 2002,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Hokkai Gakuen University, Engineering Research",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021800:15625807",
+    "doi": null,
+    "title": "アイヌ語から日本語への漸進的な翻訳処理に関する基礎的考察(共著)",
+    "year": 2001,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "桃内 佳雄",
+      "大友 雄介",
+      "越前谷 博"
+    ],
+    "venue": "北海学園大学工学部研究報告",
+    "url": "http://ci.nii.ac.jp/naid/40004007451",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021800:15625777",
+    "doi": null,
+    "title": "Fundamental Studies of Incremental Translation from the Ainu Language into Japanese(Collaboration)",
+    "year": 2001,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the Faculty of Engineering, Hokkai-Gakuen University",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021800:15625812",
+    "doi": null,
+    "title": "Processing of noun sequences in word to word translation from the Ainu Language into Japanese",
+    "year": null,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "Bulletin of the Faculty of Engineering, Hokkai-Gakuen University",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021800:15625811",
+    "doi": null,
+    "title": "アイヌ語・日本語単語直接翻訳における名詞並びの処理について",
+    "year": null,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [],
+    "venue": "北海学園大学工学部研究報告",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021804:44333319",
+    "doi": null,
+    "title": "アイヌ語-日本語ニューラル翻訳におけるBilingual BERTによる単語埋め込みの適用",
+    "year": 2023,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "田中蒼大郎",
+      "越前谷博",
+      "荒木健治"
+    ],
+    "venue": "令和５年度電気・情報関係学会北海道支部連合大会",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021804:40282550",
+    "doi": null,
+    "title": "Linguistic Revival: How Japan Restored the Native Ainu Language with “AI Pirika”",
+    "year": 2021,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "Keona Blanks",
+      "Kenji Araki"
+    ],
+    "venue": "Stanford Rewired, Stanford University",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021804:38859328",
+    "doi": null,
+    "title": "局所着目方式によるアイヌ語－日本語名詞対訳語の抽出について",
+    "year": 2003,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "越前谷 博",
+      "荒木 健治",
+      "桃内 佳雄",
+      "栃内 香次"
+    ],
+    "venue": "情報処理学会研究報告自然言語処理（NL）",
+    "url": "http://ci.nii.ac.jp/naid/110002911583",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "read0021804:37439649",
+    "doi": null,
+    "title": "E-49 再帰チェーンリンク型学習を用いたアイヌ語-日本語間の対訳辞書の自動構築について(機械翻訳(1),E.自然言語・文書)",
+    "year": 2002,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "加藤 大樹",
+      "越前谷 博",
+      "荒木 健治",
+      "桃内 佳雄",
+      "栃内 香次"
+    ],
+    "venue": "情報科学技術フォーラム一般講演論文集",
+    "url": "http://ci.nii.ac.jp/naid/110007683046",
+    "pdf": null
   }
 ]

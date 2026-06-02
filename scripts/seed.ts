@@ -427,7 +427,14 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		大谷洋一: { nameEn: 'Ōtani Yōichi', researchmap: 'read0131604' },
 		井上拓也: { nameEn: 'Inoue Takuya', researchmap: 'takuya_inoue' },
 		坂田美奈子: { nameEn: 'Sakata Minako', researchmap: '_retar' },
-		内田順子: { nameEn: 'Uchida Junko', researchmap: 'uchida_junko0069' }
+		内田順子: { nameEn: 'Uchida Junko', researchmap: 'uchida_junko0069' },
+		// round 2 (2026-06-02)
+		風間伸次郎: { nameEn: 'Kazama Shinjirō', researchmap: 'read0015553' },
+		小野有五: { nameEn: 'Ono Yūgo', researchmap: 'read0166431' },
+		プタシンスキミハウ: { nameEn: 'Michał Ptaszyński', researchmap: 'ptaszynski' },
+		桃内佳雄: { nameEn: 'Momouchi Yoshio', researchmap: 'read0021800' },
+		荒木健治: { nameEn: 'Araki Kenji', researchmap: 'read0021804' },
+		中川奈津子: { nameEn: 'Nakagawa Natsuko', researchmap: 'nakagawanatuko' }
 	};
 
 // Japanese personal names that arrived without the conventional space between
