@@ -5,10 +5,17 @@
  * tag, person, sort, page, limit. Thin wrapper over `listSources()` (the same
  * query the /sources browse page uses), returning a compact row shape.
  */
-import { json } from '@sveltejs/kit';
+import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { listSources } from '$lib/server/queries';
+import { listSources, createSource, getSourceDetail, type SourceInput } from '$lib/server/queries';
 import type { SourceFilters, SortKey } from '$lib/types';
+import {
+	requireWriteToken,
+	pickSourceInput,
+	pickUser,
+	revisionSummaryOf,
+	assertRequiredFields
+} from '$lib/server/write-api';
 
 const CORS = { 'access-control-allow-origin': '*' } as const;
 const one = (v: string | null): string[] | undefined => (v ? [v] : undefined);
@@ -60,4 +67,28 @@ export const GET: RequestHandler = async ({ url }) => {
 		},
 		{ headers: CORS }
 	);
+};
+
+/**
+ * POST /api/sources — create a new source. Authorized by the SOURCES_WRITE_TOKEN
+ * bearer secret (see write-api.ts), not a login session. Body is a JSON
+ * SourceInput (title + type + category required) plus optional `user`
+ * ({ id?, name? }) attribution and `revisionSummary`. Reuses createSource() so
+ * the slug, links, tags and revision history are written exactly as the UI does.
+ */
+export const POST: RequestHandler = async ({ request }) => {
+	requireWriteToken(request);
+	let body: unknown;
+	try {
+		body = await request.json();
+	} catch {
+		throw error(400, 'expected a JSON object body');
+	}
+	if (!body || typeof body !== 'object' || Array.isArray(body)) throw error(400, 'expected a JSON object body');
+	const b = body as Record<string, unknown>;
+	const input = pickSourceInput(b);
+	if (input.category === undefined) input.category = 'primary';
+	assertRequiredFields(input);
+	const slug = await createSource(input as SourceInput, pickUser(b), revisionSummaryOf(b));
+	return json({ slug, source: await getSourceDetail(slug) }, { status: 201 });
 };
