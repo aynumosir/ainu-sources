@@ -267,6 +267,10 @@ const PERSON_CANON: Record<string, { name: string; nameEn?: string }> = {
 // surname/given space; the lookup is space-insensitive (see getPerson).
 const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wikidata?: string }> =
 	{
+		// 田村すゞ子 (Tamura Suzuko, 1934–2015, 早大名誉教授; アイヌ語・バスク語). No
+		// researchmap (deceased) — link her Wikidata so life dates fill in. Keyed by
+		// canon slug; all her name variants (incl. birth name 福田すゞ子) alias to it.
+		'tamura-suzuko': { nameEn: 'Tamura Suzuko', wikidata: 'Q11576823' },
 		吉川佳見: { nameEn: 'Yoshikawa Yoshimi', researchmap: 'y.yoshikawa' },
 		阪口諒: { nameEn: 'Sakaguchi Ryo', researchmap: 'SAKAGUCHI_Ryo' },
 		丹菊逸治: { nameEn: 'Tangiku Itsuji', researchmap: 'tangikuitsuji' },
@@ -1882,13 +1886,15 @@ function wdYearFromClaim(claims: any, prop: string): number | null {
 	return Number.isFinite(y) && y !== 0 ? y : null;
 }
 
-// Birth/death years for every person that has a Wikidata QID — a cheap batch
-// pass over wbgetentities (props=claims, P569/P570), so historical figures show
-// life dates (知里真志保 1909–1961, 金田一京助 1882–1971…). QID-keyed cache.
+// Birth/death years + Wikipedia article for every person that has a Wikidata QID
+// — a cheap batch pass over wbgetentities (P569/P570 + sitelinks), so historical
+// figures show life dates (田村すゞ子 1934–2015, 知里真志保 1909–1961…) and a
+// direct article link even when the QID came from PERSON_ENRICH (bypassing the
+// name search). QID-keyed cache; entries missing `wp` are re-fetched.
 async function enrichPersonDates() {
 	const qids = [...new Set(personRows.map((p) => p.wikidata as string).filter(Boolean))];
 	if (!qids.length) return;
-	let cache: Record<string, { b: number | null; d: number | null }> = {};
+	let cache: Record<string, { b: number | null; d: number | null; wp?: string | null }> = {};
 	if (fs.existsSync(WIKIDATA_DATES_CACHE_FILE)) {
 		try {
 			cache = JSON.parse(fs.readFileSync(WIKIDATA_DATES_CACHE_FILE, 'utf8'));
@@ -1896,19 +1902,21 @@ async function enrichPersonDates() {
 			cache = {};
 		}
 	}
-	const todo = qids.filter((q) => !(q in cache));
-	if (todo.length) console.log(`Fetching birth/death dates for ${todo.length} Wikidata persons (cached: ${qids.length - todo.length})…`);
+	const todo = qids.filter((q) => !(q in cache) || cache[q].wp === undefined);
+	if (todo.length) console.log(`Fetching dates + Wikipedia for ${todo.length} Wikidata persons (cached: ${qids.length - todo.length})…`);
 	for (let i = 0; i < todo.length; i += 45) {
 		const batch = todo.slice(i, i + 45);
 		let data: any = null;
 		try {
-			data = await wdFetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=claims&ids=${batch.join('|')}`);
+			data = await wdFetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=claims|sitelinks/urls&ids=${batch.join('|')}`);
 		} catch {
 			continue;
 		}
 		for (const qid of batch) {
-			const claims = data?.entities?.[qid]?.claims;
-			cache[qid] = { b: wdYearFromClaim(claims, 'P569'), d: wdYearFromClaim(claims, 'P570') };
+			const e = data?.entities?.[qid];
+			const sl = e?.sitelinks ?? {};
+			const wp = sl.jawiki?.url ?? sl.enwiki?.url ?? sl.ruwiki?.url ?? null;
+			cache[qid] = { b: wdYearFromClaim(e?.claims, 'P569'), d: wdYearFromClaim(e?.claims, 'P570'), wp };
 		}
 		await wdSleep(150);
 	}
@@ -1919,6 +1927,7 @@ async function enrichPersonDates() {
 		if (!c) continue;
 		if (p.birthYear == null && c.b != null) { p.birthYear = c.b; filled += 1; }
 		if (p.deathYear == null && c.d != null) p.deathYear = c.d;
+		if (!p.wikipedia && c.wp) p.wikipedia = c.wp;
 	}
 	console.log(`Wikidata dates: life years set for ${filled} persons.`);
 }

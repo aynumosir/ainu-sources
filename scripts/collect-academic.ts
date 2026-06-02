@@ -1472,7 +1472,9 @@ const OPENALEX_AINU_AUTHORS = [
 	'A5023827507', // Anna Bugaeva
 	'A5083262553', // Hidetoshi Shiraishi
 	'A5086749194', // Hideo Kirikae
-	'A5006225596' // Elia Dal Corso
+	'A5006225596', // Elia Dal Corso
+	// 田村すゞ子 (Tamura Suzuko) — fragmented across 5 OpenAlex author records
+	'A5077536442', 'A5131446470', 'A5131891363', 'A5129631365', 'A5132330564'
 ];
 // Venues (host source display names) that are wholly Ainu-linguistics.
 const OPENALEX_AINU_VENUE_RE =
