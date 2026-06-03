@@ -507,13 +507,19 @@ async function collectOpenLibrary(): Promise<AcademicRecord[]> {
 }
 
 // --- NDL Search (National Diet Library — Japanese book catalog) -------------
-async function collectNDL(): Promise<AcademicRecord[]> {
+const NDL_QUERIES = [
+	'アイヌ語', 'アイヌ 辞典', 'アイヌ 文法', 'アイヌ 地名', 'アイヌ 神謡', 'アイヌ ユーカラ',
+	'アイヌ 説話', 'アイヌ 物語', 'アイヌ 民話', 'アイヌ 会話', 'アイヌ 語彙', 'アイヌ 口承',
+	'アイヌ 樺太', 'アイヌ 方言', '蝦夷語', '蝦夷方言', '蝦夷 詞'
+];
+export async function collectNDL(): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	const seen = new Set<string>();
 	const cdata = (s: string) => s.replace(/<!\[CDATA\[|\]\]>/g, '').trim();
-	for (let idx = 1; idx <= 800; idx += 200) {
+	for (const term of NDL_QUERIES)
+	for (let idx = 1; idx <= 600; idx += 200) {
 		const url =
-			`https://ndlsearch.ndl.go.jp/api/opensearch?title=${encodeURIComponent('アイヌ語')}` +
+			`https://ndlsearch.ndl.go.jp/api/opensearch?title=${encodeURIComponent(term)}` +
 			`&dpid=iss-ndl-opac&cnt=200&idx=${idx}`;
 		let xml: string;
 		try {
@@ -525,7 +531,7 @@ async function collectNDL(): Promise<AcademicRecord[]> {
 		if (!items.length) break;
 		for (const it of items) {
 			const title = cdata(it.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? '');
-			if (!title || !/アイヌ|ainu/i.test(title)) continue;
+			if (!title || !/アイヌ|ainu|蝦夷[語方詞]|あいぬ/i.test(title)) continue;
 			const link = (it.match(/<link>([\s\S]*?)<\/link>/)?.[1] ?? '').trim();
 			const id = link || title;
 			if (seen.has(id)) continue;
@@ -1088,7 +1094,10 @@ const cleanText = (s: string | null | undefined): string => stripTags(decodeEnti
 const JSTAGE_QUERIES = [
 	'アイヌ語', 'アイヌ語 方言', 'アイヌ語 文法', 'アイヌ語 地名', 'アイヌ語 音韻',
 	'アイヌ語 動詞', 'アイヌ語 語彙', 'アイヌ語 人称', 'アイヌ 樺太', 'アイヌ 千歳',
-	'アイヌ 沙流', 'ユーカラ アイヌ', 'アイヌ 口承', 'アイヌ語 辞典'
+	'アイヌ 沙流', 'ユーカラ アイヌ', 'アイヌ 口承', 'アイヌ語 辞典',
+	'アイヌ語 名詞', 'アイヌ語 アクセント', 'アイヌ語 構文', 'アイヌ語 静内',
+	'アイヌ語 アスペクト', 'アイヌ語 使役', 'アイヌ 神謡', 'アイヌ 昔話',
+	'アイヌ語 教育', 'アイヌ語 継承', 'アイヌ語 借用', 'アイヌ語 比較', '蝦夷 言葉'
 ];
 // J-STAGE journal codes (cdjournal) that are linguistics / Ainu venues — a hit
 // in one of these is kept even if the title regex is borderline.
@@ -1169,13 +1178,15 @@ export async function collectJStage(): Promise<AcademicRecord[]> {
 // --- CiNii Books — Japanese academic books / serials (NCID) -----------------
 // 929 hits; no DOI (dedup by NCID + normalized title). The OpenSearch summary
 // lacks the year, so we fetch the per-record .json (throttled) for survivors.
+const CINII_BOOKS_QUERIES = ['アイヌ語', 'アイヌ 地名', 'アイヌ 神謡', 'アイヌ 民話', '蝦夷 語'];
 export async function collectCiNiiBooks(): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	const seen = new Set<string>();
 	const COUNT = 200;
-	for (let p = 1; p <= 6; p++) {
+	for (const term of CINII_BOOKS_QUERIES)
+	for (let p = 1; p <= 5; p++) {
 		const url =
-			`https://ci.nii.ac.jp/books/opensearch/search?q=${encodeURIComponent('アイヌ語')}` +
+			`https://ci.nii.ac.jp/books/opensearch/search?q=${encodeURIComponent(term)}` +
 			`&format=json&count=${COUNT}&p=${p}`;
 		let data: any;
 		try {
@@ -1187,7 +1198,7 @@ export async function collectCiNiiBooks(): Promise<AcademicRecord[]> {
 		if (!items.length) break;
 		for (const it of items) {
 			const title = String(it.title ?? '').trim();
-			if (!title || !/アイヌ|ainu/i.test(title)) continue;
+			if (!title || !/アイヌ|ainu|蝦夷[語方詞]/i.test(title)) continue;
 			const ncid = String(it['@id'] ?? '').replace('https://ci.nii.ac.jp/ncid/', '');
 			if (!ncid || seen.has(ncid)) continue;
 			seen.add(ncid);
