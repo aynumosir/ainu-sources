@@ -933,7 +933,7 @@ function addPersons(sourceId: string, author: string | null | undefined, role = 
 // Academic authors become person entities only above a prominence threshold, so
 // /people stays curated (long-tail one-off authors remain free-text). Institutions
 // masquerading as authors are excluded.
-const INSTITUTION_RE = /協会|センター|委員会|大学|高校|高等学校|研究所|博物館|教育委員会|学会|財団|機構|振興|協議会|連合会|グループ|製作委員会|教育庁|学習部|文化課|館$|会$|編集部|研究会|研究部|郷土研究|郷土史|郷土資料|郷土|資料室|室$|課$|クラブ|プロジェクト|実行委|刊行会|出版|書店|書房|文庫|^北海道$|^樺太$|Museum|University|Institute|Association|Foundation|Center|Society|Committee|Club|Project/i;
+const INSTITUTION_RE = /協会|センター|委員会|大学|高校|高等学校|研究所|博物館|教育委員会|学会|財団|機構|振興|協議会|連合会|グループ|製作委員会|教育庁|学習部|文化課|館$|会$|編集部|研究会|研究部|郷土研究|郷土史|郷土資料|郷土|資料室|室$|課$|局|署|庁|事務所|支庁|役場|管理署|クラブ|プロジェクト|実行委|刊行会|出版|書店|書房|文庫|^北海道$|^樺太$|Museum|University|Institute|Association|Foundation|Center|Society|Committee|Club|Project|Bureau|Office|Agency|Council/i;
 // Placeholder/garbage "author" tokens that aren't people — a strict prerequisite
 // for promoting low-frequency authors to person entities. Anchored to whole-field
 // matches so it never strips a substring of a real name.
