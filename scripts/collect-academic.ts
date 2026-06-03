@@ -354,12 +354,18 @@ async function collectOpenAlexForwardChained(seedIds: string[]): Promise<Academi
 }
 
 // --- Crossref ---------------------------------------------------------------
-async function collectCrossref(): Promise<AcademicRecord[]> {
+const CROSSREF_QUERIES = [
+	'Ainu language', 'Ainu grammar', 'Ainu dialect', 'Ainu phonology', 'Ainu folklore',
+	'Ainu verb', 'Ainu yukar', 'Sakhalin Ainu', 'Ainu toponymy', 'Ainu morphology', 'Ainu syntax'
+];
+export async function collectCrossref(): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
 	const ROWS = 100; // Crossref rejects larger page sizes here
-	for (let offset = 0; offset < 1000; offset += ROWS) {
+	for (const query of CROSSREF_QUERIES)
+	for (let offset = 0; offset < 500; offset += ROWS) {
 		const url =
-			`https://api.crossref.org/works?query=${encodeURIComponent('Ainu language')}` +
+			`https://api.crossref.org/works?query=${encodeURIComponent(query)}` +
 			`&rows=${ROWS}&offset=${offset}&select=DOI,title,author,issued,type,container-title&mailto=${MAILTO}`;
 		let data: any;
 		try {
@@ -370,7 +376,8 @@ async function collectCrossref(): Promise<AcademicRecord[]> {
 		const items = data.message?.items ?? [];
 		for (const w of items) {
 			const title = (w.title?.[0] ?? '').trim();
-			if (!/ainu/i.test(title)) continue; // title precision filter
+			if (!/ainu/i.test(title) || !w.DOI || seen.has(w.DOI)) continue; // title precision + dedup
+			seen.add(w.DOI);
 			out.push({
 				source: 'crossref',
 				externalId: w.DOI,
@@ -461,9 +468,12 @@ export async function collectCiNii(): Promise<AcademicRecord[]> {
 
 // --- Open Library (books, no key) ------------------------------------------
 const OL_LANG: Record<string, string> = { eng: 'en', jpn: 'ja', rus: 'ru', ger: 'de', fre: 'fr', ita: 'it', pol: 'pl', dut: 'nl', lat: 'la' };
-const OL_QUERIES = ['Ainu language', 'Ainu grammar', 'Ainu dictionary'];
+const OL_QUERIES = [
+	'Ainu language', 'Ainu grammar', 'Ainu dictionary', 'Ainu folklore', 'Ainu folk-tales',
+	'Ainu vocabulary', 'Ainu yukar', 'Ainu texts', 'Aino language', 'Sakhalin Ainu', 'Ainu place names'
+];
 
-async function collectOpenLibrary(): Promise<AcademicRecord[]> {
+export async function collectOpenLibrary(): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	const seen = new Set<string>();
 	for (const q of OL_QUERIES) {
@@ -571,9 +581,12 @@ export async function collectNDL(): Promise<AcademicRecord[]> {
 }
 
 // --- CyberLeninka (Russian open-access scholarship) ------------------------
-const CL_QUERIES = ['айнский язык', 'айнского языка', 'сахалинские айны язык'];
+const CL_QUERIES = [
+	'айнский язык', 'айнского языка', 'сахалинские айны язык', 'язык айнов',
+	'айнский фольклор', 'айнские топонимы', 'айны Сахалин', 'айнская лексика'
+];
 
-async function collectCyberLeninka(): Promise<AcademicRecord[]> {
+export async function collectCyberLeninka(): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	const seen = new Set<string>();
 	for (const q of CL_QUERIES) {
