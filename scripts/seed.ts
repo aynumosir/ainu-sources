@@ -438,7 +438,33 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		プタシンスキミハウ: { nameEn: 'Michał Ptaszyński', researchmap: 'ptaszynski' },
 		桃内佳雄: { nameEn: 'Momouchi Yoshio', researchmap: 'read0021800' },
 		荒木健治: { nameEn: 'Araki Kenji', researchmap: 'read0021804' },
-		中川奈津子: { nameEn: 'Nakagawa Natsuko', researchmap: 'nakagawanatuko' }
+		中川奈津子: { nameEn: 'Nakagawa Natsuko', researchmap: 'nakagawanatuko' },
+		// Batch 9 (2026-06-03): web-verified (researchmap/CiNii/NDL/KAKEN/Wikipedia)
+		金成まつ: { nameEn: 'Kannari Matsu' }, 'アンナ・ブガエワ': { nameEn: 'Anna Bugaeva' },
+		'ヌルミ・ユッシ': { nameEn: 'Jussi Nurmi' }, 齋藤玲子: { nameEn: 'Saito Reiko' },
+		姉帯正樹: { nameEn: 'Anetai Masaki' }, 安田節彦: { nameEn: 'Yasuda Setsuhiko' },
+		谷本晃久: { nameEn: 'Tanimoto Akihisa' }, 関口由彦: { nameEn: 'Sekiguchi Yoshihiko' },
+		出利葉浩司: { nameEn: 'Deriha Kōji' }, 内田祐一: { nameEn: 'Uchida Yūichi' },
+		水島未記: { nameEn: 'Mizushima Miki' }, 荻原真子: { nameEn: 'Ogihara Shinko' },
+		山本祐弘: { nameEn: 'Yamamoto Yūkō' }, 榎森進: { nameEn: 'Emori Susumu' },
+		関根達人: { nameEn: 'Sekine Tatsuhito' }, 矢崎春菜: { nameEn: 'Yazaki Haruna' },
+		計良光範: { nameEn: 'Keira Mitsunori' }, 清野春樹: { nameEn: 'Seino Haruki' },
+		福岡イト子: { nameEn: 'Fukuoka Itoko' }, 因幡勝雄: { nameEn: 'Inaba Katsuo' },
+		金谷栄二郎: { nameEn: 'Kanaya Eijirō' }, 篠原智花: { nameEn: 'Shinohara Chika' },
+		田中聖子: { nameEn: 'Tanaka Satoko' }, 蓮池悦子: { nameEn: 'Hasuike Etsuko' },
+		志賀雪湖: { nameEn: 'Shiga Setsuko' }, 小笠原小夜: { nameEn: 'Ogasawara Sayo' },
+		'M.M.ドブロトゥヴォールスキー': { nameEn: 'M. M. Dobrotvorsky' },
+		谷地田未緒: { nameEn: 'Yachita Mio' }, 前正七生: { nameEn: 'Mae Masanao' },
+		村木美幸: { nameEn: 'Muraki Miyuki' }, 加藤克: { nameEn: 'Katō Masaru' },
+		伊藤裕満: { nameEn: 'Itō Hiromitsu' }, 石田久大: { nameEn: 'Ishida Hisao' },
+		'佐藤ロスベアグナナ': { nameEn: 'Nana Sato-Rossberg' }, 高橋規: { nameEn: 'Takahashi Nori' },
+		荒木田家寿: { nameEn: 'Arakida Iehisa' }, 渡邊香織: { nameEn: 'Watanabe Kaori' },
+		西山史真子: { nameEn: 'Nishiyama Shimako' }, 萱野茂文: { nameEn: 'Kayano Shigeru' },
+		山路広明: { nameEn: 'Yamaji Hiroaki' }, 川上勇治: { nameEn: 'Kawakami Yūji' },
+		及川明彦: { nameEn: 'Oikawa Akihiko' }, 鈴木隆一: { nameEn: 'Suzuki Ryūichi' },
+		永田良茂: { nameEn: 'Nagata Yoshishige' },
+		廣田徹: { nameEn: 'Hirota Tōru' }, 長尾優花: { nameEn: 'Nagao Yuka' },
+		斎藤博之: { nameEn: 'Saitō Hiroyuki' }
 	};
 
 // Japanese personal names that arrived without the conventional space between
@@ -633,7 +659,8 @@ function parsePersonName(raw: string): { name: string; nameEn: string | null } {
 	// INSTITUTION_RE on the bare org name).
 	if (KANA_KANJI.test(name)) {
 		const stripped = name
-			.replace(/\s*(編集|編著|編纂|編訳|共編|共著|校訂|監修|採録|口述|編者|著者|編|著|訳|撰)$/, '')
+			.replace(/\s*[-‐–—]?\s*\d{0,4}\s*(通事|通辞)$/, '') // "上原熊次郎 -1827 通事"
+			.replace(/\s*(編集|編著|編纂|編訳|共編|共著|校訂|監修|採録|口述|編者|著者|編|著|訳|撰|絵|画|写真|構成)$/, '')
 			.trim();
 		if (stripped.length >= 2 && stripped !== name) name = stripped;
 	}
@@ -846,7 +873,7 @@ function addPersons(sourceId: string, author: string | null | undefined, role = 
 // Academic authors become person entities only above a prominence threshold, so
 // /people stays curated (long-tail one-off authors remain free-text). Institutions
 // masquerading as authors are excluded.
-const INSTITUTION_RE = /協会|センター|委員会|大学|高校|高等学校|研究所|博物館|教育委員会|学会|財団|機構|振興|協議会|連合会|館$|会$|編集部|研究会|研究部|郷土研究|郷土史|郷土資料|郷土|資料室|室$|クラブ|プロジェクト|実行委|刊行会|出版|書店|書房|文庫|^北海道$|^樺太$|Museum|University|Institute|Association|Foundation|Center|Society|Committee|Club|Project/i;
+const INSTITUTION_RE = /協会|センター|委員会|大学|高校|高等学校|研究所|博物館|教育委員会|学会|財団|機構|振興|協議会|連合会|グループ|製作委員会|教育庁|学習部|文化課|館$|会$|編集部|研究会|研究部|郷土研究|郷土史|郷土資料|郷土|資料室|室$|課$|クラブ|プロジェクト|実行委|刊行会|出版|書店|書房|文庫|^北海道$|^樺太$|Museum|University|Institute|Association|Foundation|Center|Society|Committee|Club|Project/i;
 function simplePersonKey(name: string): string {
 	return stripParens(name).replace(/[\s　,，、.．]+/g, '').trim();
 }
