@@ -2344,12 +2344,84 @@ function buildSameWorkRelations(): number {
 	return same + editions + dups;
 }
 
+const dedupeBy = (rows: Row[], cols: string[]) => {
+	const seen = new Set<string>();
+	return rows.filter((r) => {
+		const k = cols.map((c) => r[c]).join('\t');
+		if (seen.has(k)) return false;
+		seen.add(k);
+		return true;
+	});
+};
+
+// The 1893 北海氣象 source documents Kuril-Ainu speech RECORDED on 色丹島 — a recording
+// location, not merely a subject region. Promote that link to 'record' on the desired
+// rows (was once a manual post-reseed SQL step). Applies to both plan and apply.
+function applyShikotanRecordRole() {
+	const src = sourceRows.find((s) => /北海氣象/.test((s.title as string) ?? ''));
+	const place = placeRows.find((p) => p.name === '色丹島');
+	if (src && place)
+		for (const r of sourcePlaceRows)
+			if (r.sourceId === src.id && r.placeId === place.id) r.role = 'record';
+}
+
+// --- PLAN mode -------------------------------------------------------------
+// Diff the freshly-built desired rows against the LIVE DB and print what an apply
+// WOULD change — WITHOUT writing anything. A guardrail against a broken parser
+// silently wiping prod: a bad run shows up here as a huge red diff you can reject.
+// (Excludes Wikidata field-enrichment and the user-content restore, which don't
+// change row counts.) Run: `bun run seed:plan` against prod.
+async function planDiff(desired: Record<string, Row[]>) {
+	console.log('\n=== PLAN — no changes written (counts only; enrichment fields not diffed) ===');
+	const order = [
+		'sources', 'persons', 'places', 'institutions', 'tags', 'source_links',
+		'source_persons', 'source_institutions', 'source_places', 'source_tags', 'source_relations'
+	];
+	let danger = false;
+	const tableRows: Record<string, unknown>[] = [];
+	for (const name of order) {
+		const cur = Number((await client.execute(`SELECT COUNT(*) AS n FROM ${name}`)).rows[0].n);
+		const des = desired[name].length;
+		const delta = des - cur;
+		const drop = cur > 50 && des < cur * 0.5;
+		if (drop) danger = true;
+		tableRows.push({
+			table: name, live: cur, desired: des,
+			delta: (delta >= 0 ? '+' : '') + delta,
+			flag: drop ? '⚠️ LARGE DROP' : des === 0 && cur > 0 ? '⚠️ EMPTIED' : ''
+		});
+		if (des === 0 && cur > 0) danger = true;
+	}
+	console.table(tableRows);
+
+	// Identity-level diff for sources (provenance is the stable key; slug fallback).
+	const idOf = (repo: unknown, p: unknown, slug: unknown) =>
+		repo && p ? `${repo} ${p}` : `slug:${slug}`;
+	const live = (await client.execute(`SELECT provenance_repo, provenance_path, slug FROM sources`)).rows;
+	const liveSet = new Set(live.map((r) => idOf(r.provenance_repo, r.provenance_path, r.slug)));
+	const desSet = new Set(desired.sources.map((r) => idOf(r.provenanceRepo, r.provenancePath, r.slug)));
+	const added = [...desSet].filter((k) => !liveSet.has(k));
+	const removed = [...liveSet].filter((k) => !desSet.has(k));
+	console.log(`\nsources by identity:  +${added.length} new   -${removed.length} removed   ${desSet.size - added.length} kept (updated in place)`);
+	if (removed.length) {
+		console.log(`  sample of the ${removed.length} that would DISAPPEAR on apply:`);
+		for (const k of removed.slice(0, 15)) console.log('   -', String(k).replace(' ', '  /  '));
+	}
+	console.log(
+		danger
+			? '\n⚠️  REVIEW BEFORE APPLYING — a table would lose >50% of its rows or be emptied. Likely a broken parser/source file. Do NOT apply unless this is intended.'
+			: '\n✓ No catastrophic drops. Re-run without --plan to apply (full wipe+rebuild).'
+	);
+}
+
 async function main() {
-	console.log('AINU_ROOT =', AINU_ROOT);
-	console.log('Capturing user content (revisions + edits) before wipe…');
-	const preserved = await captureUserContent();
-	console.log('Wiping domain tables…');
-	await wipe();
+	const PLAN = process.argv.includes('--plan') || process.env.PLAN === '1';
+	console.log('AINU_ROOT =', AINU_ROOT, PLAN ? '(PLAN MODE — read-only)' : '');
+	const preserved = PLAN ? null : (console.log('Capturing user content (revisions + edits) before wipe…'), await captureUserContent());
+	if (!PLAN) {
+		console.log('Wiping domain tables…');
+		await wipe();
+	}
 
 	const nDict = seedDictionaries();
 	const nGram = seedGrammar();
@@ -2359,14 +2431,33 @@ async function main() {
 	const curated = seedCuratedBiblio();
 	buildSameWorkRelations();
 
-	await enrichPersonsWithWikidata();
-	await enrichPersonDates();
+	if (!PLAN) {
+		await enrichPersonsWithWikidata();
+		await enrichPersonDates();
+	}
 
 	// Normalise `scripts` for EVERY source from the actual glyphs in its titles —
 	// several seed paths (catalog dict, hard-coded grammar blocks) set scripts from
 	// a language guess and mis-tag Japanese titles as ['latn']. Title text is ground
 	// truth for "which writing systems this work's titles use".
 	for (const s of sourceRows) s.scripts = detectScripts(s.title as string, s.titleEn as string);
+	applyShikotanRecordRole();
+
+	// Dedupe the join tables exactly as the insert path does, so plan counts match.
+	const sourcePersonDedup = dedupeBy(sourcePersonRows, ['sourceId', 'personId', 'role']);
+	const sourcePlaceDedup = dedupeBy(sourcePlaceRows, ['sourceId', 'placeId', 'role']);
+	const sourceTagDedup = dedupeBy(sourceTagRows, ['sourceId', 'tagId']);
+	const sourceRelationDedup = dedupeBy(sourceRelationRows, ['fromSourceId', 'toSourceId', 'type']);
+
+	if (PLAN) {
+		await planDiff({
+			sources: sourceRows, persons: personRows, places: placeRows, institutions: instRows,
+			tags: tagRows, source_links: linkRows, source_persons: sourcePersonDedup,
+			source_institutions: sourceInstRows, source_places: sourcePlaceDedup,
+			source_tags: sourceTagDedup, source_relations: sourceRelationDedup
+		});
+		process.exit(0);
+	}
 
 	console.log('Inserting…');
 	await bulkInsert(schema.persons, personRows);
@@ -2375,40 +2466,12 @@ async function main() {
 	await bulkInsert(schema.tags, tagRows);
 	await bulkInsert(schema.sources, sourceRows);
 	await bulkInsert(schema.sourceLinks, linkRows);
-	// Dedupe person↔source links by (source, person, role): a merge can link the
-	// same work to a person twice, which crashes the keyed {#each} on their page.
-	const spSeen = new Set<string>();
-	const sourcePersonDedup = sourcePersonRows.filter((r) => {
-		const k = `${r.sourceId}\t${r.personId}\t${r.role}`;
-		if (spSeen.has(k)) return false;
-		spSeen.add(k);
-		return true;
-	});
 	console.log(`  source_persons: ${sourcePersonRows.length} → ${sourcePersonDedup.length} (deduped ${sourcePersonRows.length - sourcePersonDedup.length})`);
 	await bulkInsert(schema.sourcePersons, sourcePersonDedup);
-	const dedupeBy = (rows: Row[], cols: string[]) => {
-		const seen = new Set<string>();
-		return rows.filter((r) => {
-			const k = cols.map((c) => r[c]).join('\t');
-			if (seen.has(k)) return false;
-			seen.add(k);
-			return true;
-		});
-	};
-	// The 1893 北海氣象 source documents Kuril-Ainu speech RECORDED on 色丹島 — a
-	// recording location, not merely a subject region. Promote that link to 'record'
-	// here so it survives every reseed (was previously a manual post-reseed SQL step).
-	{
-		const src = sourceRows.find((s) => /北海氣象/.test((s.title as string) ?? ''));
-		const place = placeRows.find((p) => p.name === '色丹島');
-		if (src && place)
-			for (const r of sourcePlaceRows)
-				if (r.sourceId === src.id && r.placeId === place.id) r.role = 'record';
-	}
-	await bulkInsert(schema.sourcePlaces, dedupeBy(sourcePlaceRows, ['sourceId', 'placeId', 'role']));
+	await bulkInsert(schema.sourcePlaces, sourcePlaceDedup);
 	await bulkInsert(schema.sourceInstitutions, sourceInstRows);
-	await bulkInsert(schema.sourceTags, dedupeBy(sourceTagRows, ['sourceId', 'tagId']));
-	await bulkInsert(schema.sourceRelations, dedupeBy(sourceRelationRows, ['fromSourceId', 'toSourceId', 'type']));
+	await bulkInsert(schema.sourceTags, sourceTagDedup);
+	await bulkInsert(schema.sourceRelations, sourceRelationDedup);
 
 	await restoreUserContent(preserved);
 
