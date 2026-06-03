@@ -55,6 +55,45 @@ function stripParens(s: string): string {
 	return s.replace(/[(（][^)）]*[)）]/g, '').trim();
 }
 
+// A title is "Latin" only if it carries no CJK, Cyrillic or Hangul — used to
+// decide whether copying it into title_en is honest (a Russian/Korean title is
+// NOT an English translation of itself).
+const isLatinTitle = (s: string) => !/[぀-ヿ㐀-鿿豈-﫿Ѐ-ӿ가-힣ᄀ-ᇿ]/.test(s);
+
+// Decode HTML entities that Crossref/J-STAGE/CiNii leave in titles. Handles
+// numeric (&#8211; &#x31FB;), a focused named-entity table, and J-STAGE's
+// "^|^Name;" mangling of "&Name;". A hand-list is fragile, but these cover every
+// artifact the consistency audit surfaced.
+const NAMED_ENTITIES: Record<string, string> = {
+	amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', shy: '',
+	mdash: '—', ndash: '–', hellip: '…', middot: '·', times: '×', deg: '°',
+	ldquo: '“', rdquo: '”', lsquo: '‘', rsquo: '’', laquo: '«', raquo: '»',
+	Uuml: 'Ü', uuml: 'ü', Ouml: 'Ö', ouml: 'ö', Auml: 'Ä', auml: 'ä', szlig: 'ß',
+	eacute: 'é', egrave: 'è', ecirc: 'ê', agrave: 'à', acirc: 'â', aacute: 'á',
+	iacute: 'í', oacute: 'ó', uacute: 'ú', ntilde: 'ñ', ccedil: 'ç', oslash: 'ø'
+};
+function decodeEntities(s: string): string {
+	return s
+		.replace(/\^\|\^([A-Za-z]+);/g, '&$1;') // un-mangle J-STAGE "^|^Uuml;" → "&Uuml;"
+		.replace(/&#x([0-9a-fA-F]+);/g, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+		.replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
+		.replace(/&([A-Za-z][A-Za-z0-9]*);/g, (m, n) => NAMED_ENTITIES[n] ?? m);
+}
+
+// The set of writing systems actually present across a work's title fields, so
+// the script facet reflects the text rather than a language-derived guess. A
+// Japanese title yields kana/kanji even when its language code never resolved.
+function detectScripts(...parts: (string | null | undefined)[]): string[] {
+	const s = parts.filter(Boolean).join(' ');
+	const out: string[] = [];
+	if (/[A-Za-z]/.test(s)) out.push('latn');
+	if (/[぀-ゟ゠-ヿ]/.test(s)) out.push('kana');
+	if (/[一-鿿㐀-䶿豈-﫿]/.test(s)) out.push('kanji');
+	if (/[Ѐ-ӿ]/.test(s)) out.push('cyrl');
+	if (/[가-힣ᄀ-ᇿ]/.test(s)) out.push('hang');
+	return out.length ? out : ['latn'];
+}
+
 const hasCJK = (s: string) => /[぀-ヿ㐀-鿿豈-﫿]/.test(s);
 
 /** Parse a verbatim year string into numeric start/end + certainty. */
@@ -580,6 +619,9 @@ const tagRows: Row[] = [];
 const usedSlugs = new Set<string>();
 
 function uniqueSlug(base: string): string {
+	// Normalise the fully-assembled slug: a `${author}-${slugify(title).slice(0,50)}`
+	// build can leave a trailing dash (the slice cuts mid-word) or a double dash.
+	base = (base || '').replace(/-{2,}/g, '-').replace(/^-+|-+$/g, '');
 	let s = base || 'source';
 	let n = 1;
 	while (usedSlugs.has(s)) {
@@ -1489,8 +1531,13 @@ const ACADEMIC_FILE = path.join(import.meta.dir, 'data', 'academic-index.json');
 const CITATION_EDGES_FILE = path.join(import.meta.dir, 'data', 'citation-edges.json');
 
 const META_LANG: Record<string, string> = {
-	en: 'eng', ja: 'jpn', ru: 'rus', de: 'deu', fr: 'fra', es: 'spa',
-	it: 'ita', pl: 'pol', ko: 'kor', zh: 'zho', nl: 'nld', la: 'lat'
+	// Accept both 2-letter (CiNii/Crossref) and 3-letter (researchmap codes `jpn`,
+	// 501 records) language tags — else 3-letter ones fall through to null and the
+	// work gets mis-tagged languages:['ain'] + scripts:['latn'].
+	en: 'eng', eng: 'eng', ja: 'jpn', jpn: 'jpn', ru: 'rus', rus: 'rus',
+	de: 'deu', deu: 'deu', fr: 'fra', fra: 'fra', es: 'spa', spa: 'spa',
+	it: 'ita', ita: 'ita', pl: 'pol', pol: 'pol', ko: 'kor', kor: 'kor',
+	zh: 'zho', zho: 'zho', nl: 'nld', nld: 'nld', la: 'lat', lat: 'lat'
 };
 
 function normTitle(s: string): string {
@@ -1585,6 +1632,15 @@ const AUTHOR_OVERRIDES: Record<string, string[]> = {
 	'openalex:W2576849698': ['Tjeerd de Graaf', 'Hidetoshi Shiraishi'] // de Graaf co-authored (lead)
 };
 
+// Reprint/later-edition records whose year_start was harvested as the REPRINT
+// year, so earlier works that cite the original appear to cite the future. Keyed
+// by DOI, else "<source>:<externalId>"; the value is the ORIGINAL publication year.
+const SOURCE_YEAR_OVERRIDES: Record<string, number> = {
+	'openalex:W1498959860': 1905, // Batchelor, Ainu-English-Japanese Dictionary (repr. 2010; orig. 1889/1905)
+	'openalex:W1571539709': 1912, // Piłsudski, Materials for the Study of the Ainu Language (repr. 2004; orig. 1912)
+	'10.1515/9783110895681': 1912
+};
+
 function seedAcademic(): { added: number; skipped: number; cites: number } {
 	if (!fs.existsSync(ACADEMIC_FILE)) {
 		console.warn(`! academic index not found at ${ACADEMIC_FILE} — run collect-academic.ts; skipping`);
@@ -1662,9 +1718,8 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 		// Strip HTML markup that Crossref/CiNii embed in titles (<i>/<b>/<scp>/<sub>…)
 		// — it renders as literal tags and is ugly/unsafe. Decode common entities too.
 		if (rec.title)
-			rec.title = rec.title
+			rec.title = decodeEntities(rec.title)
 				.replace(/<\/?(b|i|em|strong|sub|sup|scp|sc|inf|span|u|tt|small|var|mml:[a-z]+)\b[^>]*>/gi, '')
-				.replace(/&(amp|lt|gt|quot|#39|apos);/g, (m) => ({ '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&apos;': "'" })[m] ?? m)
 				.replace(/\s+/g, ' ')
 				.trim();
 		const nt = normTitle(rec.title);
@@ -1689,6 +1744,10 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 		}
 
 		const id = uuid();
+		// Correct reprint records that carry the reprint year as year_start, which
+		// makes earlier works appear to "cite the future" (see SOURCE_YEAR_OVERRIDES).
+		const yearOv = SOURCE_YEAR_OVERRIDES[doi ?? ''] ?? SOURCE_YEAR_OVERRIDES[`${rec.source}:${rec.externalId}`];
+		if (yearOv != null) rec.year = yearOv;
 		const y = parseYear(rec.year != null ? String(rec.year) : '');
 		const metalang = rec.language && META_LANG[rec.language] ? META_LANG[rec.language] : null;
 		const slug = uniqueSlug(
@@ -1699,13 +1758,15 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 			id,
 			slug,
 			title: rec.title,
-			titleEn: hasCJK(rec.title) ? null : rec.title,
+			// Only mirror the title into title_en when it is genuinely Latin-script;
+			// a Cyrillic/Hangul/CJK title is not its own English translation.
+			titleEn: isLatinTitle(rec.title) ? rec.title : null,
 			category: cls.category,
 			type: cls.type,
 			author: rec.authors.join(', ') || null,
 			...y,
 			languages: metalang ? ['ain', metalang] : ['ain'],
-			scripts: scriptsForAcademic(rec.title, metalang),
+			scripts: detectScripts(rec.title),
 			summary: rec.venue ?? null,
 			provenanceRepo: rec.source,
 			provenancePath: rec.externalId,
@@ -1740,17 +1801,26 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 	let cites = 0;
 	if (fs.existsSync(CITATION_EDGES_FILE)) {
 		const edges: { from: string; to: string }[] = JSON.parse(fs.readFileSync(CITATION_EDGES_FILE, 'utf8'));
+		const yearById = new Map(sourceRows.map((s) => [s.id as string, s.yearStart as number | null]));
 		const seen = new Set<string>();
+		let dropped = 0;
 		for (const e of edges) {
 			const fromId = oaToSource.get(e.from);
 			const toId = oaToSource.get(e.to);
 			if (!fromId || !toId || fromId === toId) continue;
+			// Drop chronologically impossible citations: a work cannot cite one
+			// published more than a year later. After SOURCE_YEAR_OVERRIDES fixes the
+			// reprint-dated targets, the survivors are genuine reversed edges.
+			const fy = yearById.get(fromId);
+			const ty = yearById.get(toId);
+			if (fy != null && ty != null && fy < ty - 1) { dropped++; continue; }
 			const k = `${fromId}\t${toId}`;
 			if (seen.has(k)) continue;
 			seen.add(k);
 			sourceRelationRows.push({ id: uuid(), fromSourceId: fromId, toSourceId: toId, type: 'cites', notes: null });
 		}
-		console.log(`  academic: ${cites = sourceRelationRows.length} citation relations (cites) from ${edges.length} edges`);
+		cites = sourceRelationRows.length;
+		console.log(`  academic: ${cites} citation relations (cites) from ${edges.length} edges (dropped ${dropped} chronologically impossible)`);
 	}
 	return { added, skipped, cites };
 }
@@ -1943,8 +2013,13 @@ async function enrichPersonsWithWikidata() {
 
 // Parse a 4-digit year from a Wikidata time claim ("+1909-05-24T00:00:00Z").
 function wdYearFromClaim(claims: any, prop: string): number | null {
-	const t = claims?.[prop]?.[0]?.mainsnak?.datavalue?.value?.time;
+	const val = claims?.[prop]?.[0]?.mainsnak?.datavalue?.value;
+	const t = val?.time;
 	if (!t) return null;
+	// Wikidata precision: 9=year, 8=decade, 7=century, 6=millennium. Anything
+	// coarser than a year is not a real year — e.g. 寺島良安's death is century
+	// precision (+1800 = "18th c."), which must NOT be stored as the literal 1800.
+	if (typeof val.precision === 'number' && val.precision < 9) return null;
 	const m = String(t).match(/^([+-])(\d{1,4})/);
 	if (!m) return null;
 	const y = Number(m[2]) * (m[1] === '-' ? -1 : 1);
@@ -1994,8 +2069,24 @@ async function enrichPersonDates() {
 		if (p.deathYear == null && c.d != null) p.deathYear = c.d;
 		if (!p.wikipedia && c.wp) p.wikipedia = c.wp;
 	}
-	console.log(`Wikidata dates: life years set for ${filled} persons.`);
+	// Verified person-identity corrections, applied LAST so they win over the cache.
+	let corrected = 0;
+	for (const p of personRows) {
+		const ov = PERSON_OVERRIDES[p.name as string];
+		if (!ov) continue;
+		for (const [k, v] of Object.entries(ov)) (p as Row)[k] = v;
+		corrected += 1;
+	}
+	console.log(`Wikidata dates: life years set for ${filled} persons; ${corrected} identity corrections.`);
 }
+
+// Verified corrections for persons carrying wrong Wikidata-derived identity/dates.
+// Keyed by `name`; explicit null clears a field. (Terashima's death is genuinely
+// unknown — 没年不詳; 井上文夫 was merged with an unrelated comedian QID Q11366642.)
+const PERSON_OVERRIDES: Record<string, Record<string, unknown>> = {
+	'寺島 良安': { deathYear: null },
+	'井上 文夫': { birthYear: null, deathYear: null, wikidata: null, wikipedia: null, nameEn: 'Inoue Fumio' }
+};
 
 // ---------------------------------------------------------------------------
 // Bulk insert helper (chunked)
@@ -2184,12 +2275,13 @@ function buildSameWorkRelations(): number {
 		if (cluster.length < 2) continue;
 		if (new Set(cluster.map((s) => s.title)).size < 2) continue; // identical titles ⇒ not a part series
 		if (cluster.length > 30) continue; // pathological (a too-generic core title) — skip
+		// same-work is symmetric — store each undirected pair ONCE (i<j). The detail
+		// page surfaces it from either side via its inbound+outbound relation query.
 		for (let i = 0; i < cluster.length; i++)
-			for (let j = 0; j < cluster.length; j++)
-				if (i !== j) {
-					sourceRelationRows.push({ id: uuid(), fromSourceId: cluster[i].id, toSourceId: cluster[j].id, type: 'same-work', notes: null });
-					n++;
-				}
+			for (let j = i + 1; j < cluster.length; j++) {
+				sourceRelationRows.push({ id: uuid(), fromSourceId: cluster[i].id, toSourceId: cluster[j].id, type: 'same-work', notes: null });
+				n++;
+			}
 	}
 	console.log(`  same-work relations: ${n} (from coreKey clusters)`);
 	return n;
@@ -2212,6 +2304,12 @@ async function main() {
 
 	await enrichPersonsWithWikidata();
 	await enrichPersonDates();
+
+	// Normalise `scripts` for EVERY source from the actual glyphs in its titles —
+	// several seed paths (catalog dict, hard-coded grammar blocks) set scripts from
+	// a language guess and mis-tag Japanese titles as ['latn']. Title text is ground
+	// truth for "which writing systems this work's titles use".
+	for (const s of sourceRows) s.scripts = detectScripts(s.title as string, s.titleEn as string);
 
 	console.log('Inserting…');
 	await bulkInsert(schema.persons, personRows);
@@ -2240,6 +2338,16 @@ async function main() {
 			return true;
 		});
 	};
+	// The 1893 北海氣象 source documents Kuril-Ainu speech RECORDED on 色丹島 — a
+	// recording location, not merely a subject region. Promote that link to 'record'
+	// here so it survives every reseed (was previously a manual post-reseed SQL step).
+	{
+		const src = sourceRows.find((s) => /北海氣象/.test((s.title as string) ?? ''));
+		const place = placeRows.find((p) => p.name === '色丹島');
+		if (src && place)
+			for (const r of sourcePlaceRows)
+				if (r.sourceId === src.id && r.placeId === place.id) r.role = 'record';
+	}
 	await bulkInsert(schema.sourcePlaces, dedupeBy(sourcePlaceRows, ['sourceId', 'placeId', 'role']));
 	await bulkInsert(schema.sourceInstitutions, sourceInstRows);
 	await bulkInsert(schema.sourceTags, dedupeBy(sourceTagRows, ['sourceId', 'tagId']));

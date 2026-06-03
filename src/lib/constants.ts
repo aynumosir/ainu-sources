@@ -101,7 +101,8 @@ export const SCRIPT_LABELS: Record<string, L> = {
 	latn: { en: 'Latin', ja: 'ローマ字', ru: 'Латиница' },
 	kana: { en: 'Kana', ja: '仮名', ru: 'Кана' },
 	cyrl: { en: 'Cyrillic', ja: 'キリル文字', ru: 'Кириллица' },
-	kanji: { en: 'Kanji', ja: '漢字', ru: 'Иероглифы' }
+	kanji: { en: 'Kanji', ja: '漢字', ru: 'Иероглифы' },
+	hang: { en: 'Hangul', ja: 'ハングル', ru: 'Хангыль' }
 };
 
 // --- external link types ---
