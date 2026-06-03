@@ -398,14 +398,17 @@ async function collectCrossref(): Promise<AcademicRecord[]> {
 // Several Hokkaido-focused Ainu-linguistics queries, incl. the Hokkaido Ainu
 // Culture Research Center bulletin, dialect & grammar studies. Deduped by id.
 const CINII_QUERIES = [
-	'アイヌ語',
-	'アイヌ語 方言',
-	'アイヌ語 文法',
-	'アイヌ語 音韻',
-	'アイヌ民族文化研究センター研究紀要'
+	'アイヌ語', 'アイヌ語 方言', 'アイヌ語 文法', 'アイヌ語 音韻',
+	'アイヌ民族文化研究センター研究紀要',
+	// topic / genre / dialect facets to reach works past the per-query result cap
+	'アイヌ語 動詞', 'アイヌ語 人称', 'アイヌ語 名詞', 'アイヌ語 語彙', 'アイヌ語 辞典',
+	'アイヌ語 地名', 'アイヌ語 アクセント', 'アイヌ語 構文', 'アイヌ語 テキスト',
+	'アイヌ語 千歳', 'アイヌ語 沙流', 'アイヌ語 静内', 'アイヌ語 樺太', 'アイヌ語 北海道',
+	'アイヌ 神謡', 'アイヌ ユーカラ', 'アイヌ 口承文芸', 'アイヌ 昔話', 'アイヌ 散文説話',
+	'アイヌ 叙事詩', 'アイヌ 伝承', '蝦夷 言葉', '蝦夷 語彙', 'アイヌ語 教育'
 ];
 
-async function collectCiNii(): Promise<AcademicRecord[]> {
+export async function collectCiNii(): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	const seen = new Set<string>();
 	const COUNT = 200;
