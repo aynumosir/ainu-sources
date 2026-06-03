@@ -42,6 +42,7 @@
 		"wrangler": "^4.86.0"
 	},
 	"dependencies": {
+		"3d-force-graph": "^1.80.0",
 		"leaflet": "^1.9.4"
 	}
 }

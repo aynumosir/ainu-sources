@@ -13,6 +13,7 @@
 		{ href: '/sources', label: () => m.nav_sources() },
 		{ href: '/timeline', label: () => m.nav_timeline() },
 		{ href: '/map', label: () => m.nav_map() },
+		{ href: '/network', label: () => m.nav_network() },
 		{ href: '/people', label: () => m.nav_people() },
 		{ href: '/about', label: () => m.nav_about() }
 	];
