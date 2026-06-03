@@ -165,7 +165,8 @@ export const RELATION_TYPE_LABELS: Record<string, L> = {
 	'transcription-of': { en: 'Transcription of', ja: '翻刻', ru: 'Транскрипция' },
 	'derived-from': { en: 'Derived from', ja: '派生', ru: 'Производно от' },
 	related: { en: 'Related', ja: '関連', ru: 'Связано' },
-	'same-work': { en: 'Same work', ja: '同一著作', ru: 'То же произведение' }
+	'same-work': { en: 'Same work', ja: '同一著作', ru: 'То же произведение' },
+	'duplicate-of': { en: 'Duplicate of', ja: '重複', ru: 'Дубликат' }
 };
 
 // Inverse labels for INCOMING relations: a stored edge A→B of type `cites` means

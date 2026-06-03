@@ -860,14 +860,14 @@ function getInstitution(inst: InstEntry): string {
 // precision so the tag facet is meaningful (NOT a catch-all: academic records
 // no longer force a blanket "grammar" tag).
 const TAG_DEFS: { slug: string; name: string; nameEn: string; category: string; match: RegExp }[] = [
-	{ slug: 'placenames', name: '地名', nameEn: 'Place names', category: 'topic', match: /地名|placename|toponym/i },
-	{ slug: 'phonology', name: '音韻・音声', nameEn: 'Phonology & phonetics', category: 'topic', match: /音韻|音声|アクセント|韻律|声調|phonolog|phonet|accent|prosod/i },
-	{ slug: 'grammar', name: '文法・統語', nameEn: 'Grammar & syntax', category: 'topic', match: /文法|構文|統語|grammar|syntax|morpholog|\bverb\b|動詞|名詞|助詞|人称|valency|結合価|aspect|アスペクト|使役|受動|応用|applicative|incorporation|抱合|証拠性|evidential/i },
-	{ slug: 'lexicon', name: '語彙・辞典', nameEn: 'Lexicon & dictionaries', category: 'topic', match: /語彙|辞典|辞書|語誌|語源|lexic|vocabular|dictionar|etymolog/i },
+	{ slug: 'placenames', name: '地名', nameEn: 'Place names', category: 'topic', match: /地名|placename|place ?names?|toponym|hydronym|river names?|\bchimei\b|geographic(al)? names?/i },
+	{ slug: 'phonology', name: '音韻・音声', nameEn: 'Phonology & phonetics', category: 'topic', match: /音韻|音声|アクセント|韻律|声調|phonolog|phonet|accent|prosod|\bvowel|consonant|syllable|moraic|pitch|intonation|phonem|epenthesis/i },
+	{ slug: 'grammar', name: '文法・統語', nameEn: 'Grammar & syntax', category: 'topic', match: /文法|構文|統語|grammar|syntax|morpholog|\bverb\b|動詞|名詞|助詞|人称|valency|結合価|aspect|アスペクト|使役|受動|応用|applicative|incorporation|抱合|証拠性|evidential|noun phrase|clitic|nominaliz|relative clause|transitiv|intransitiv|causativ|passive|case marking|word order|grammatical|syntactic|morphosyntax|copula|demonstrativ|interrogativ|imperativ|negation|conjugation|inflection/i },
+	{ slug: 'lexicon', name: '語彙・辞典', nameEn: 'Lexicon & dictionaries', category: 'topic', match: /語彙|辞典|辞書|語誌|語源|lexic|vocabular|dictionar|etymolog|word ?list|glossary|lexeme|terminolog|loanword|kinship term|nomenclature|\bjiten\b/i },
 	{ slug: 'dialectology', name: '方言', nameEn: 'Dialectology', category: 'topic', match: /方言|dialect/i },
-	{ slug: 'comparative', name: '比較・系統', nameEn: 'Comparative & genealogy', category: 'topic', match: /比較|系統|借用|comparative|swadesh|abvd|cognate|proto|loanword|genealog/i },
-	{ slug: 'revitalization', name: '復興・教育', nameEn: 'Revitalization & education', category: 'topic', match: /復興|再生|継承|教育|学習|教材|revital|revival|reclamation|heritage|learner|language nest/i },
-	{ slug: 'oral-literature', name: '口承文芸', nameEn: 'Oral literature', category: 'genre', match: /口承|口頭文芸|oral (literature|narrative|tradition)|散文説話|韻文/i },
+	{ slug: 'comparative', name: '比較・系統', nameEn: 'Comparative & genealogy', category: 'topic', match: /比較|系統|借用|comparative|swadesh|abvd|cognate|proto|loanword|genealog|nivkh|nivx|austronesian|internal reconstruction|language contact|typolog/i },
+	{ slug: 'revitalization', name: '復興・教育', nameEn: 'Revitalization & education', category: 'topic', match: /復興|再生|継承|教育|学習|教材|revital|revival|reclamation|heritage language|learner|language nest|endangered language|language education|language teaching/i },
+	{ slug: 'oral-literature', name: '口承文芸', nameEn: 'Oral literature', category: 'genre', match: /口承|口頭文芸|oral (literature|narrative|tradition|poetry)|散文説話|韻文|folklore|verbal art|narrative tradition/i },
 	{ slug: 'yukar', name: 'ユカㇻ・叙事詩', nameEn: 'Yukar (heroic epic)', category: 'genre', match: /ユカ[ㇻラ]|ユーカラ|\byukar|英雄叙事詩|叙事詩|サコ[ロㇿ]ペ|sakorpe/i },
 	{ slug: 'kamuy-yukar', name: '神謡', nameEn: 'Kamuy-yukar (god songs)', category: 'genre', match: /神謡|カムイ.?ユカ|kamuy.?yukar|オイナ|\boina\b|聖伝/i },
 	{ slug: 'folktale', name: '昔話・散文説話', nameEn: 'Folktale / prose tale', category: 'genre', match: /昔話|民譚|民話|説話|folktale|uwepeker|ウエペケ|ウウェペケ|トゥイタ|tuyta/i },
@@ -892,6 +892,21 @@ function attachTags(sourceId: string, ...texts: (string | null | undefined)[]) {
 			sourceTagRows.push({ id: uuid(), sourceId, tagId: getTag(def) });
 		}
 	}
+}
+
+function pushTagBySlug(sourceId: string, slug: string) {
+	const def = TAG_DEFS.find((d) => d.slug === slug);
+	if (def) sourceTagRows.push({ id: uuid(), sourceId, tagId: getTag(def) });
+}
+
+// Journal/series names are a strong topical signal but need guarding: the
+// アイヌ語地名研究 journal ⇒ placenames, but its 月報 newsletter (forewords/memoirs)
+// is not; 口承文芸-family venues ⇒ oral-literature. (seed-level dedup drops any
+// overlap with the title-based sweep.)
+function attachVenueTags(sourceId: string, venue: string | null | undefined) {
+	if (!venue) return;
+	if (/地名/.test(venue) && !/月報/.test(venue)) pushTagBySlug(sourceId, 'placenames');
+	if (/口承文[芸藝]|口頭文芸|説話文学|説話・伝承学/.test(venue)) pushTagBySlug(sourceId, 'oral-literature');
 }
 
 function addPersons(sourceId: string, author: string | null | undefined, role = 'author') {
@@ -919,6 +934,20 @@ function addPersons(sourceId: string, author: string | null | undefined, role = 
 // /people stays curated (long-tail one-off authors remain free-text). Institutions
 // masquerading as authors are excluded.
 const INSTITUTION_RE = /協会|センター|委員会|大学|高校|高等学校|研究所|博物館|教育委員会|学会|財団|機構|振興|協議会|連合会|グループ|製作委員会|教育庁|学習部|文化課|館$|会$|編集部|研究会|研究部|郷土研究|郷土史|郷土資料|郷土|資料室|室$|課$|クラブ|プロジェクト|実行委|刊行会|出版|書店|書房|文庫|^北海道$|^樺太$|Museum|University|Institute|Association|Foundation|Center|Society|Committee|Club|Project/i;
+// Placeholder/garbage "author" tokens that aren't people — a strict prerequisite
+// for promoting low-frequency authors to person entities. Anchored to whole-field
+// matches so it never strips a substring of a real name.
+const GARBAGE_WORDS_RE = /^(compilation|various|unknown|anon(ymous)?|n\.?d\.?|s\.?n\.?|et al\.?|ほか|他|など|複数|諸氏|有志|aynumosir|著者不明|不明|無記名|collective|staff|editors?|compilers?)$/i;
+function isGarbageName(raw: string): boolean {
+	const n = stripParens(raw).trim();
+	if (!n) return true;
+	if (GARBAGE_WORDS_RE.test(n)) return true;
+	if (/[「」『』]/.test(n)) return true; // bracket-quoted org names (「環太平洋の言語」…)
+	if (/^[\d\s.,;·・]+$/.test(n)) return true; // pure numeric/punct
+	if (!/[A-Za-z]/.test(n) && [...n].length === 1) return true; // lone CJK character
+	if (/^[A-Za-z]/.test(n) && n.split(/\s+/).every((t) => t.replace(/\.$/, '').length <= 1)) return true; // initials only
+	return false;
+}
 function simplePersonKey(name: string): string {
 	return stripParens(name).replace(/[\s　,，、.．]+/g, '').trim();
 }
@@ -935,7 +964,7 @@ function addPersonsGated(sourceId: string, authors: string[], allow: Set<string>
 		for (const name of authorParts(a)) {
 			// Link prominent authors (threshold) OR anyone with a known alias/canon
 			// (so 安岡孝一's Qiita/HF handle "KoichiYasuoka" attaches to his person).
-			if (INSTITUTION_RE.test(name) || (!allow.has(simplePersonKey(name)) && !canonicalSlugFor(name))) continue;
+			if (INSTITUTION_RE.test(name) || isGarbageName(name) || (!allow.has(simplePersonKey(name)) && !canonicalSlugFor(name))) continue;
 			sourcePersonRows.push({ id: uuid(), sourceId, personId: getPerson(name), role, sortOrder: i++ });
 		}
 }
@@ -1098,7 +1127,7 @@ function seedGrammar() {
 				createdAt: new Date(),
 				updatedAt: new Date()
 			});
-			addPersons(id, author, 'researcher');
+			addPersons(id, author, 'author');
 			attachTags(id, known?.title, 'grammar');
 			count += 1;
 		}
@@ -1137,7 +1166,7 @@ function seedGrammar() {
 				createdAt: new Date(),
 				updatedAt: new Date()
 			});
-			addPersons(id, author, 'researcher');
+			addPersons(id, author, 'author');
 			attachTags(id, title, 'grammar');
 			count += 1;
 		}
@@ -1658,13 +1687,13 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 	// Prominence pre-pass: an author is promoted to a person entity only with ≥3
 	// works in the index (keeps /people curated; merging/researchmap come via
 	// getPerson/PERSON_ENRICH). Counted on a space/comma-insensitive key.
-	const AUTHOR_MIN_WORKS = 3;
+	const AUTHOR_MIN_WORKS = 2;
 	const authorCount = new Map<string, number>();
 	for (const rec of records) {
 		if (rec.category === 'tool') continue; // HF orgs / Qiita handles aren't people
 		for (const a of rec.authors ?? [])
 			for (const part of authorParts(String(a))) {
-				if (INSTITUTION_RE.test(part)) continue;
+				if (INSTITUTION_RE.test(part) || isGarbageName(part)) continue;
 				const k = simplePersonKey(part);
 				if (k) authorCount.set(k, (authorCount.get(k) ?? 0) + 1);
 			}
@@ -1788,7 +1817,8 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 		// recording dialect. Only real gazetteer place-names match; titles with an
 		// institutional "北海道大学" context are stripped first to avoid a false pin.
 		addPlaces(id, geoSubjectText(rec.title), 'subject');
-		attachTags(id, rec.title); // topical tags from the real title — NOT a forced 'grammar'
+		attachTags(id, rec.title, cls.type); // title + NORMALIZED type (dictionary→lexicon…); raw rec.type still holds legacy 'grammar-article'
+		attachVenueTags(id, rec.venue); // guarded journal/series signal (地名研究→placenames…)
 		added += 1;
 	}
 	if (enriched) console.log(`  academic: enriched ${enriched} existing source(s) with IIIF/transcription links`);
@@ -2257,11 +2287,25 @@ function seedCuratedBiblio(): { added: number; enriched: number } {
 	return { added, enriched };
 }
 
-// Link the scattered parts of one work — multi-part serials (the Dobrotvorsky
-// Ainu-Russian dictionary translation in 19 installments, アイヌ語会話篇 一–五…)
-// and multi-volume primary sources (藻汐草 + 乾 + 坤) — with `same-work` relations,
-// clustered by coreKey (volume/part/holding-suffix-stripped title). A cluster
-// must have ≥2 DISTINCT titles (exact dups are already merged at seed time).
+// A title carries a part/continuation marker (多巻 serial installment) — used to
+// tell genuine same-work serials apart from editions/duplicates of one title.
+const PART_MARKER_RE = /[(（]\s*[0-9０-９]+\s*[)）]|その\s*[0-9０-９一二三四五六七八九十]+|第\s*[0-9０-９一二三四五六七八九十]+\s*[回報編]|\bpart\s*[0-9]+|[(（]\s*[上中下一二三四五六七八九十]\s*[)）]|續|続|績|承前|つづき|補遺|遺稿|續稿|続稿|後篇|前篇|前編|後編|上巻|下巻|乾|坤/;
+const hasPartMarker = (t: string) => PART_MARKER_RE.test(t);
+// Loose author agreement (romanization/delimiter/variant-tolerant) — only used to
+// flag the safest duplicates, never as a gate (it false-negatives on romaji variants).
+function authAgree(a: string, b: string): boolean {
+	const norm = (s: string) => (s || '').normalize('NFKC').replace(/[\s　,;，；・]+/g, '').toLowerCase();
+	const x = norm(a), y = norm(b);
+	return !!x && !!y && (x === y || x.includes(y) || y.includes(x));
+}
+
+// Link the scattered parts of one work, clustered by coreKey (volume/part/holding-
+// suffix-stripped title). Classifies each pair: genuine multi-part serials (藻汐草
+// 乾/坤, アイヌ語会話篇 一–五, Dobrotvorsky 19 installments) stay `same-work`; a title
+// that contains another with the SAME year but from a different repo is `duplicate-of`;
+// the same title at a DIFFERENT year is `edition-of` (oldest = the original work).
+// The part-marker guard is mandatory — without it the substring rule matches every
+// installment against the bare base title and inflates editions 14→53 false pairs.
 function buildSameWorkRelations(): number {
 	const byCore = new Map<string, Row[]>();
 	for (const s of sourceRows) {
@@ -2270,21 +2314,34 @@ function buildSameWorkRelations(): number {
 		if (!byCore.has(k)) byCore.set(k, []);
 		byCore.get(k)!.push(s);
 	}
-	let n = 0;
+	let same = 0, editions = 0, dups = 0;
 	for (const cluster of byCore.values()) {
 		if (cluster.length < 2) continue;
 		if (new Set(cluster.map((s) => s.title)).size < 2) continue; // identical titles ⇒ not a part series
 		if (cluster.length > 30) continue; // pathological (a too-generic core title) — skip
-		// same-work is symmetric — store each undirected pair ONCE (i<j). The detail
-		// page surfaces it from either side via its inbound+outbound relation query.
 		for (let i = 0; i < cluster.length; i++)
 			for (let j = i + 1; j < cluster.length; j++) {
-				sourceRelationRows.push({ id: uuid(), fromSourceId: cluster[i].id, toSourceId: cluster[j].id, type: 'same-work', notes: null });
-				n++;
+				const a = cluster[i], b = cluster[j];
+				const ta = String(a.title), tb = String(b.title);
+				const na = normTitle(ta), nb = normTitle(tb);
+				const substr = na.includes(nb) || nb.includes(na);
+				const ya = a.yearStart as number | null, yb = b.yearStart as number | null;
+				if (!hasPartMarker(ta) && !hasPartMarker(tb) && substr && ya != null && yb != null && ya !== yb) {
+					const [from, to] = ya > yb ? [a, b] : [b, a]; // newer cites older; oldest = original
+					sourceRelationRows.push({ id: uuid(), fromSourceId: from.id, toSourceId: to.id, type: 'edition-of', notes: null });
+					editions++;
+				} else if (!hasPartMarker(ta) && !hasPartMarker(tb) && substr && ya != null && yb != null && ya === yb) {
+					const note = authAgree(String(a.author ?? ''), String(b.author ?? '')) ? 'author-confirmed' : null;
+					sourceRelationRows.push({ id: uuid(), fromSourceId: a.id, toSourceId: b.id, type: 'duplicate-of', notes: note });
+					dups++;
+				} else {
+					sourceRelationRows.push({ id: uuid(), fromSourceId: a.id, toSourceId: b.id, type: 'same-work', notes: null });
+					same++;
+				}
 			}
 	}
-	console.log(`  same-work relations: ${n} (from coreKey clusters)`);
-	return n;
+	console.log(`  coreKey relations: same-work ${same}, edition-of ${editions}, duplicate-of ${dups}`);
+	return same + editions + dups;
 }
 
 async function main() {
