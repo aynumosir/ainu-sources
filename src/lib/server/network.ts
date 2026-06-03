@@ -4,7 +4,7 @@
 // algorithm Google uses), plus citation in-degree. Powers the /network 3D graph.
 // ---------------------------------------------------------------------------
 import { db } from './db';
-import { sources, sourceRelations } from './db/schema';
+import { sources, sourceRelations, sourcePersons, persons } from './db/schema';
 import { and, eq, inArray } from 'drizzle-orm';
 
 export interface NetworkNode {
@@ -93,6 +93,43 @@ export async function getCitationNetwork(): Promise<NetworkData> {
 		.from(sources)
 		.where(inArray(sources.id, idList));
 
+	// Prefer the CURATED author/editor links (sourcePersons) over the free-form
+	// `sources.author` string, which carries OpenAlex/Crossref noise — e.g. book
+	// reviews whose reviewer gets merged in as a co-author (John C. Street was the
+	// reviewer of Refsing's Shizunai grammar, not its author). Fall back to the
+	// free-form string only when a work has no normalized author links.
+	const personRows = await db
+		.select({
+			sourceId: sourcePersons.sourceId,
+			name: persons.name,
+			nameEn: persons.nameEn,
+			role: sourcePersons.role,
+			sortOrder: sourcePersons.sortOrder
+		})
+		.from(sourcePersons)
+		.innerJoin(persons, eq(persons.id, sourcePersons.personId))
+		.where(
+			and(
+				inArray(sourcePersons.sourceId, idList),
+				inArray(sourcePersons.role, ['author', 'editor'])
+			)
+		);
+	const authorsBySource = new Map<string, { name: string; sortOrder: number }[]>();
+	for (const p of personRows) {
+		const list = authorsBySource.get(p.sourceId) ?? [];
+		list.push({ name: p.name ?? p.nameEn ?? '', sortOrder: p.sortOrder });
+		authorsBySource.set(p.sourceId, list);
+	}
+	const curatedAuthor = (id: string, freeform: string | null): string | null => {
+		const list = authorsBySource.get(id);
+		if (!list?.length) return freeform;
+		return list
+			.sort((a, b) => a.sortOrder - b.sortOrder)
+			.map((x) => x.name)
+			.filter(Boolean)
+			.join('、');
+	};
+
 	let topId: string | null = null;
 	let topPr = -1;
 	const nodes: NetworkNode[] = rows.map((r) => {
@@ -109,7 +146,7 @@ export async function getCitationNetwork(): Promise<NetworkData> {
 			year: r.year,
 			type: r.type,
 			category: r.category,
-			author: r.author,
+			author: curatedAuthor(r.id, r.author),
 			significance: p / maxPr, // normalized 0..1
 			inDegree: inDeg.get(r.id) ?? 0,
 			outDegree: outDeg.get(r.id) ?? 0

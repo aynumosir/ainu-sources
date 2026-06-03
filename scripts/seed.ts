@@ -1572,6 +1572,19 @@ function scriptsForAcademic(title: string, metalang: string | null): string[] {
 	return ['latn']; // eng/deu/fra/ita/lat/spa/pol/nld/kor & romanised Ainu
 }
 
+// Author corrections for records where OpenAlex/Crossref/JSTOR conflated a book's
+// *reviewer* (or a missing co-author) with its real author. Keyed by DOI, else by
+// "<source>:<externalId>". Replacing rec.authors fixes the free-form string, the
+// normalized person links, AND the slug in one place. (Verified case-by-case:
+// Street & Grim are reviewers of Refsing's grammar / Ohnuki-Tierney's book; Teeter
+// & de Graaf are genuine co-authors the normalized list was missing.)
+const AUTHOR_OVERRIDES: Record<string, string[]> = {
+	'10.2307/489315': ['Kirsten Refsing'], // John C. Street was the reviewer
+	'10.2307/1178372': ['Emiko Ohnuki‐Tierney'], // John A. Grim was the reviewer
+	'10.46538/hlj.8.2.5': ['Jennifer Teeter', 'Takayuki Okazaki'], // Teeter co-authored (lead)
+	'openalex:W2576849698': ['Tjeerd de Graaf', 'Hidetoshi Shiraishi'] // de Graaf co-authored (lead)
+};
+
 function seedAcademic(): { added: number; skipped: number; cites: number } {
 	if (!fs.existsSync(ACADEMIC_FILE)) {
 		console.warn(`! academic index not found at ${ACADEMIC_FILE} — run collect-academic.ts; skipping`);
@@ -1601,6 +1614,15 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 			}
 	}
 	const prominentAuthors = new Set([...authorCount].filter(([, n]) => n >= AUTHOR_MIN_WORKS).map(([k]) => k));
+	// Verified author-override names are correct by construction, so promote them
+	// past the "prominent enough" gate — otherwise a genuine but low-frequency
+	// co-author (Teeter, de Graaf) would be dropped from the normalized links.
+	for (const names of Object.values(AUTHOR_OVERRIDES))
+		for (const a of names)
+			for (const part of authorParts(a)) {
+				const k = simplePersonKey(part);
+				if (k) prominentAuthors.add(k);
+			}
 
 	// Dedup + enrichment indexes from everything already loaded. On a collision we
 	// don't merely drop the record — if it carries typed `links` (a Honkoku
@@ -1647,6 +1669,8 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 				.trim();
 		const nt = normTitle(rec.title);
 		const doi = rec.doi?.toLowerCase() ?? null;
+		const override = AUTHOR_OVERRIDES[doi ?? ''] ?? AUTHOR_OVERRIDES[`${rec.source}:${rec.externalId}`];
+		if (override) rec.authors = override;
 		const hasLinks = !!(rec.links?.length || rec.pdf);
 		const existingId =
 			(doi ? idByDoi.get(doi) : undefined) ??
