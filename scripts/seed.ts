@@ -464,7 +464,10 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		及川明彦: { nameEn: 'Oikawa Akihiko' }, 鈴木隆一: { nameEn: 'Suzuki Ryūichi' },
 		永田良茂: { nameEn: 'Nagata Yoshishige' },
 		廣田徹: { nameEn: 'Hirota Tōru' }, 長尾優花: { nameEn: 'Nagao Yuka' },
-		斎藤博之: { nameEn: 'Saitō Hiroyuki' }
+		斎藤博之: { nameEn: 'Saitō Hiroyuki' },
+		// user-confirmed readings (2026-06-03)
+		伊藤静致: { nameEn: 'Itō Seichi' }, 扇谷昌康: { nameEn: 'Ōgiya Masayasu' },
+		手塚順孝: { nameEn: 'Tezuka Yoritaka' }, 木戸調: { nameEn: 'Kido Shirabe' }
 	};
 
 // Japanese personal names that arrived without the conventional space between
@@ -1634,6 +1637,14 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 	let enriched = 0;
 	let skipped = 0;
 	for (const rec of records) {
+		// Strip HTML markup that Crossref/CiNii embed in titles (<i>/<b>/<scp>/<sub>…)
+		// — it renders as literal tags and is ugly/unsafe. Decode common entities too.
+		if (rec.title)
+			rec.title = rec.title
+				.replace(/<\/?(b|i|em|strong|sub|sup|scp|sc|inf|span|u|tt|small|var|mml:[a-z]+)\b[^>]*>/gi, '')
+				.replace(/&(amp|lt|gt|quot|#39|apos);/g, (m) => ({ '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&apos;': "'" })[m] ?? m)
+				.replace(/\s+/g, ' ')
+				.trim();
 		const nt = normTitle(rec.title);
 		const doi = rec.doi?.toLowerCase() ?? null;
 		const hasLinks = !!(rec.links?.length || rec.pdf);
