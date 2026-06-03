@@ -172,9 +172,11 @@
 
 <Seo title={`${m.network_title()} · ${m.site_short()}`} description={m.network_lead()} />
 
-<div class="flex h-[calc(100vh-3.5rem)] min-h-0 flex-col lg:flex-row">
+<!-- Mobile: graph then list flow naturally (footer sits below the full list).
+     Desktop: a fixed-height split pane whose sidebar scrolls internally. -->
+<div class="flex flex-col lg:h-[calc(100vh-3.5rem)] lg:min-h-0 lg:flex-row">
 	<!-- 3D graph -->
-	<div class="relative min-h-[55vh] flex-1 bg-[#0c0a09] lg:min-h-0">
+	<div class="relative h-[60vh] bg-[#0c0a09] lg:h-auto lg:min-h-0 lg:flex-1">
 		<div bind:this={container} class="absolute inset-0"></div>
 
 		<!-- Title + significance heat legend (replaces the old category swatches) -->
@@ -201,14 +203,14 @@
 
 	<!-- Ranked significance list. min-h-0 on the flex child lets overflow-y-auto work. -->
 	<aside
-		class="flex min-h-0 w-full shrink-0 flex-col border-t border-stone-200 bg-paper-card lg:w-96 lg:border-l lg:border-t-0"
+		class="flex w-full flex-col border-t border-stone-200 bg-paper-card lg:min-h-0 lg:w-96 lg:shrink-0 lg:border-l lg:border-t-0"
 	>
 		<div class="shrink-0 border-b border-stone-200/70 px-4 pb-3 pt-4">
 			<h2 class="font-serif text-base font-bold text-ink">{m.network_ranking()}</h2>
 			<p class="mt-1 text-xs text-stone-500">{m.network_ranking_lead()}</p>
 		</div>
 
-		<ol class="min-h-0 flex-1 space-y-px overflow-y-auto px-2 py-2">
+		<ol class="space-y-px px-2 py-2 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
 			{#each top as n, i (n.id)}
 				{@const hasEn = n.titleEn && n.titleEn !== n.title}
 				{@const heat = heatById.get(n.id) ?? 0}
