@@ -2196,11 +2196,30 @@ async function main() {
 	await bulkInsert(schema.tags, tagRows);
 	await bulkInsert(schema.sources, sourceRows);
 	await bulkInsert(schema.sourceLinks, linkRows);
-	await bulkInsert(schema.sourcePersons, sourcePersonRows);
-	await bulkInsert(schema.sourcePlaces, sourcePlaceRows);
+	// Dedupe person↔source links by (source, person, role): a merge can link the
+	// same work to a person twice, which crashes the keyed {#each} on their page.
+	const spSeen = new Set<string>();
+	const sourcePersonDedup = sourcePersonRows.filter((r) => {
+		const k = `${r.sourceId}\t${r.personId}\t${r.role}`;
+		if (spSeen.has(k)) return false;
+		spSeen.add(k);
+		return true;
+	});
+	console.log(`  source_persons: ${sourcePersonRows.length} → ${sourcePersonDedup.length} (deduped ${sourcePersonRows.length - sourcePersonDedup.length})`);
+	await bulkInsert(schema.sourcePersons, sourcePersonDedup);
+	const dedupeBy = (rows: Row[], cols: string[]) => {
+		const seen = new Set<string>();
+		return rows.filter((r) => {
+			const k = cols.map((c) => r[c]).join('\t');
+			if (seen.has(k)) return false;
+			seen.add(k);
+			return true;
+		});
+	};
+	await bulkInsert(schema.sourcePlaces, dedupeBy(sourcePlaceRows, ['sourceId', 'placeId', 'role']));
 	await bulkInsert(schema.sourceInstitutions, sourceInstRows);
-	await bulkInsert(schema.sourceTags, sourceTagRows);
-	await bulkInsert(schema.sourceRelations, sourceRelationRows);
+	await bulkInsert(schema.sourceTags, dedupeBy(sourceTagRows, ['sourceId', 'tagId']));
+	await bulkInsert(schema.sourceRelations, dedupeBy(sourceRelationRows, ['fromSourceId', 'toSourceId', 'type']));
 
 	await restoreUserContent(preserved);
 

@@ -495,12 +495,21 @@ export async function getPersonBySlug(
 	const r = await db.select().from(persons).where(eq(persons.slug, slug)).limit(1);
 	const person = r[0];
 	if (!person) return undefined;
-	const srcs = await db
+	const srcRows = await db
 		.select({ source: sources, role: sourcePersons.role })
 		.from(sourcePersons)
 		.innerJoin(sources, eq(sourcePersons.sourceId, sources.id))
 		.where(eq(sourcePersons.personId, person.id))
 		.orderBy(asc(sources.yearStart));
+	// A merged person can carry the same (source, role) twice — dedupe so the page's
+	// keyed {#each} doesn't get duplicate keys (which crashes hydration).
+	const seenSR = new Set<string>();
+	const srcs = srcRows.filter((r) => {
+		const k = `${r.source.id}\t${r.role}`;
+		if (seenSR.has(k)) return false;
+		seenSR.add(k);
+		return true;
+	});
 	// Research areas = the topical/genre tags of this person's works, by frequency.
 	// Derived from real publications, so a grammarian surfaces 文法, a comparatist
 	// 比較・系統, an oral-literature scholar 口承文芸.
