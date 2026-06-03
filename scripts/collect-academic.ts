@@ -1551,7 +1551,11 @@ export async function collectResearchmap(permalinks: string[]): Promise<Academic
 				const { ja: titleJa, en: titleEn } = titleOf(it);
 				const title = (titleJa || titleEn).replace(/^[『「]|[』」]$/g, '').trim();
 				if (!title) continue;
-				if (!/アイヌ|ainu|樺太|sakhalin|カラフト/i.test(`${titleJa} ${titleEn}`)) continue; // Ainu scope
+				// Ainu scope. These are all verified Ainu researchers, so also accept
+				// works titled 北方言語/北海道周辺言語/蝦夷 (Ainu-inclusive typology that
+				// omits the word アイヌ — e.g. 「北海道周辺言語における他動性交替」).
+				if (!/アイヌ|ainu|樺太|sakhalin|カラフト|蝦夷|aino|北方(諸)?言語|北方のことば|北海道周辺言語|北の言語/i.test(`${titleJa} ${titleEn}`))
+					continue;
 				const rawDoi = it.identifiers?.doi;
 				const doi = (Array.isArray(rawDoi) ? rawDoi[0] : rawDoi) || null;
 				const cleanDoi = doi ? String(doi).replace(/^https?:\/\/(dx\.)?doi\.org\//i, '') : null;

@@ -309,7 +309,7 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		吉田巌: { nameEn: 'Yoshida Iwao' }, 落合いずみ: { nameEn: 'Ochiai Izumi' },
 		古原敏弘: { nameEn: 'Furuhara Toshihiro' }, 岸本宜久: { nameEn: 'Kishimoto Nobuhisa' },
 		鳴海日出志: { nameEn: 'Narumi Hideshi' }, 平隆一: { nameEn: 'Taira Ryūichi' },
-		久保寺逸彦: { nameEn: 'Kubodera Itsuhiko' }, 秋山秀敏: { nameEn: 'Akiyama Hidetoshi' },
+		久保寺逸彦: { nameEn: 'Kubodera Itsuhiko', wikidata: 'Q11368989' }, 秋山秀敏: { nameEn: 'Akiyama Hidetoshi' },
 		甲地利恵: { nameEn: 'Katchi Rie' }, 加藤鉄三郎: { nameEn: 'Katō Tetsusaburō' },
 		福田吉次郎: { nameEn: 'Fukuda Kichijirō' }, 三好勲: { nameEn: 'Miyoshi Isao' },
 		田村雅史: { nameEn: 'Tamura Masashi' }, 大谷洋一: { nameEn: 'Ōtani Yōichi' },

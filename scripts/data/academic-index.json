@@ -77987,5 +77987,87 @@
         "label": "NDL Digital Collections"
       }
     ]
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:32481409",
+    "doi": null,
+    "title": "蝦夷言留の研究",
+    "year": 2020,
+    "type": "book",
+    "rawType": "books_etc",
+    "language": "jpn",
+    "authors": [
+      "佐藤 知己"
+    ],
+    "venue": null,
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "ainlingsat:36588196",
+    "doi": null,
+    "title": "山形県酒田市立光丘文庫所蔵「蝦夷記（蝦夷詞巻）」翻刻・索引",
+    "year": 2022,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "佐藤知己"
+    ],
+    "venue": "古記録の言語学的分析に基づくアイヌ語史の検証（基盤C）報告書",
+    "url": null,
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47495025",
+    "doi": null,
+    "title": "蝦夷通辞・加賀伝蔵の文法観：特に人称表現について",
+    "year": 2017,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香"
+    ],
+    "venue": "ひろがる北方研究の地平線：中川裕先生還暦記念論文集",
+    "url": "https://cir.nii.ac.jp/crid/1010282256880890880?lang=ja",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "mkfk:47495022",
+    "doi": null,
+    "title": "加賀家文書「［蝦夷語和解］」 : 蝦夷通辞・加賀伝蔵による『藻汐草』の語釈本",
+    "year": 2016,
+    "type": "article",
+    "rawType": "misc",
+    "language": "jpn",
+    "authors": [
+      "深澤 美香"
+    ],
+    "venue": "中川裕（編）千葉大学大学院人文社会科学研究科 研究プロジェクト報告書298集：アイヌ語の文献学的研究(2)",
+    "url": "https://cir.nii.ac.jp/crid/1050851497148813056?lang=ja",
+    "pdf": null
+  },
+  {
+    "source": "researchmap",
+    "externalId": "koji_yamasaki:32159895",
+    "doi": null,
+    "title": "蝦夷志料」引用書目誌稿",
+    "year": 2004,
+    "type": "article",
+    "rawType": "published_papers",
+    "language": "jpn",
+    "authors": [
+      "谷本 晃久",
+      "木田 歩",
+      "山崎 幸治"
+    ],
+    "venue": "史流",
+    "url": "http://ci.nii.ac.jp/naid/40006753931",
+    "pdf": null
   }
 ]
