@@ -74771,5 +74771,3221 @@
     "venue": "情報科学技術フォーラム一般講演論文集",
     "url": "http://ci.nii.ac.jp/naid/110007683046",
     "pdf": null
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12441911",
+    "doi": null,
+    "title": "アイヌ・英・和辞典",
+    "year": 1981,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "Batchelor, John"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12441911",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12441911/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12441911",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105282",
+    "doi": null,
+    "title": "アイヌ・英・和辞典",
+    "year": 1995,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "Batchelor, John"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105282",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105282/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105282",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520322",
+    "doi": null,
+    "title": "アイヌ雅語辞典 : ユーカラ語",
+    "year": 1990,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "飯野, 正典"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520322",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520322/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520322",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13471892",
+    "doi": null,
+    "title": "アイヌ口承文芸(散文説話)にみる神の衣装表現について : アイヌ語アーカイブ資料の分析",
+    "year": 2021,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13471892",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13471892/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13471892",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "2513297",
+    "doi": null,
+    "title": "アイヌ語彙記録 : 遺稿",
+    "year": 1967,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 高央"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/2513297",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/2513297/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/2513297",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572399",
+    "doi": null,
+    "title": "アイヌ語イラスト辞典",
+    "year": 1987,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 高央",
+      "横山, 孝雄"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572399",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572399/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572399",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105301",
+    "doi": null,
+    "title": "アイヌ語イラスト辞典",
+    "year": 1988,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 高央",
+      "横山, 孝雄"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105301",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105301/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105301",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520327",
+    "doi": null,
+    "title": "アイヌ語絵入り辞典",
+    "year": 1994,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 高央",
+      "横山, 孝雄"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520327",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520327/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520327",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520458",
+    "doi": null,
+    "title": "アイヌ語をフィールドワークする : ことばを訪ねて",
+    "year": 1995,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "中川, 裕"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520458",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520458/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520458",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520446",
+    "doi": null,
+    "title": "アイヌ語音声資料(1-6)語彙 : 全用例つき",
+    "year": 1991,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520446",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520446/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520446",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520445",
+    "doi": null,
+    "title": "アイヌ語音声資料(1-6)語彙 : 全用例つき",
+    "year": 1992,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520445",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520445/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520445",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520460",
+    "doi": null,
+    "title": "アイヌ語音声資料 : カタカナ版",
+    "year": 1999,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "早稲田大学語学教育研究所"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520460",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520460/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520460",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520441",
+    "doi": null,
+    "title": "アイヌ語音声資料索引",
+    "year": 1987,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520441",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520441/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520441",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520440",
+    "doi": null,
+    "title": "アイヌ語音声資料索引",
+    "year": 1990,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520440",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520440/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520440",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520326",
+    "doi": null,
+    "title": "アイヌ語会話イラスト辞典",
+    "year": 1988,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, むつみ",
+      "横山, 孝雄"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520326",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520326/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520326",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105291",
+    "doi": null,
+    "title": "アイヌ語沙流方言辞典",
+    "year": 1996,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105291",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105291/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105291",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1904895",
+    "doi": null,
+    "title": "アイヌ語集 : アイヌ語小辞典",
+    "year": null,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1904895",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1904895/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1904895",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572390",
+    "doi": null,
+    "title": "アイヌ語小辞典 : アイヌ語対和語",
+    "year": 1972,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572390",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572390/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572390",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1114328",
+    "doi": null,
+    "title": "アイヌ語辞典 : 和愛愛和",
+    "year": 1936,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "礒部, 精一"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1114328",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1114328/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1114328",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "2490531",
+    "doi": null,
+    "title": "アイヌ語辞典 : 和・アイヌーシサム・アイヌ・イタク・ウプン・カンビ",
+    "year": 1959,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "山路, 広明"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/2490531",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/2490531/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/2490531",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105280",
+    "doi": null,
+    "title": "アイヌ語千歳方言辞典",
+    "year": 1995,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "中川, 裕"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105280",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105280/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105280",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520321",
+    "doi": null,
+    "title": "アイヌ語・日本語辞典稿 : 久保寺逸彦アイヌ語収録ノート調査報告書",
+    "year": 1992,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "久保寺, 逸彦",
+      "北海道教育委員会"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520321",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520321/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520321",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "2503388",
+    "doi": null,
+    "title": "アイヌ語方言辞典",
+    "year": 1964,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "服部, 四郎"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/2503388",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/2503388/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/2503388",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105279",
+    "doi": null,
+    "title": "アイヌ語方言辞典",
+    "year": 1995,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "服部, 四郎"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105279",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105279/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105279",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520453",
+    "doi": null,
+    "title": "『アイヌ神謡集』辞典",
+    "year": 1989,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "切替, 英雄"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520453",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520453/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520453",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105292",
+    "doi": null,
+    "title": "萱野茂のアイヌ語辞典",
+    "year": 1996,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "萱野, 茂"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105292",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105292/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105292",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12170774",
+    "doi": null,
+    "title": "樺太アイヌ語地名小辞典",
+    "year": 1969,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "佐々木, 弘太郎"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12170774",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12170774/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12170774",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "2478588",
+    "doi": null,
+    "title": "アイヌ語入門 : とくに地名研究者のために",
+    "year": 1956,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 真志保"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/2478588",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/2478588/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/2478588",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "11570150",
+    "doi": null,
+    "title": "アイヌ語の電子コーパス及び基盤言語技術の開発における研究",
+    "year": 2020,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "KAROL PIOTR, NOWAKOWSKI"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/11570150",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/11570150/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/11570150",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1816161",
+    "doi": null,
+    "title": "アイヌ語法概説",
+    "year": 1936,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "金田一, 京助",
+      "知里, 真志保"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1816161",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1816161/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1816161",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14034744",
+    "doi": null,
+    "title": "アイヌ語古朝鮮語日本の地名散歩",
+    "year": 1997,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "大友, 幸男"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14034744",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14034744/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14034744",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "10374260",
+    "doi": null,
+    "title": "アイヌ語地名・アイヌ伝承から見た、減災対策への適応性に関する研究",
+    "year": 2016,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/10374260",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/10374260/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/10374260",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "9490924",
+    "doi": null,
+    "title": "アイヌ語地名を歩く",
+    "year": 1986,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "山田, 秀三"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/9490924",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/9490924/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/9490924",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "2985550",
+    "doi": null,
+    "title": "アイヌ語地名解 : 北海道地名の起源",
+    "year": 1966,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "更科, 源蔵"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/2985550",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/2985550/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/2985550",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578896",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ神謠 オイナ",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578896",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578896/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578896",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578877",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ神謠 カムイ・ユカラ",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578877",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578877/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578877",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578878",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ神謠 カムイ・ユカラ",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578878",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578878/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578878",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266966",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ神謠 サコラウ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266966",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266966/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266966",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266967",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ神謠 サコラウ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266967",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266967/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266967",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266969",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ神謠 マッヌカラ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266969",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266969/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266969",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266974",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ神謠 カムイ・ユカラ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266974",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266974/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266974",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572415",
+    "doi": null,
+    "title": "アイヌ語音声資料",
+    "year": 1988,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572415",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572415/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572415",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520442",
+    "doi": null,
+    "title": "アイヌ語音声資料 : カタカナ版",
+    "year": 1991,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520442",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520442/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520442",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520333",
+    "doi": null,
+    "title": "アイヌ語の集い : 知里真志保を継ぐ",
+    "year": 1994,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "北方言語研究者協議会"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520333",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520333/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520333",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "2488058",
+    "doi": null,
+    "title": "アイヌ神謡 : KAMUI YUKARU",
+    "year": 1958,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "岡村, 吉右衛門"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/2488058",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/2488058/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/2488058",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572437",
+    "doi": null,
+    "title": "アイヌ神謡集",
+    "year": 1978,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 幸恵"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572437",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572437/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572437",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572424",
+    "doi": null,
+    "title": "アイヌ神謡集 : 炉辺詞曲",
+    "year": 1970,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 幸恵"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572424",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572424/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572424",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105382",
+    "doi": null,
+    "title": "アイヌ神謡集 : ノート版",
+    "year": 1999,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 幸恵",
+      "北道, 邦彦"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105382",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105382/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105382",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105383",
+    "doi": null,
+    "title": "アイヌ神謡集 : ノート版",
+    "year": 2000,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 幸恵",
+      "北道, 邦彦"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105383",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105383/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105383",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572431",
+    "doi": null,
+    "title": "アイヌ叙事詩神謡・聖伝の研究",
+    "year": 1977,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "久保寺, 逸彦"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572431",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572431/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572431",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105303",
+    "doi": null,
+    "title": "アイヌ叙事詩神謡・聖伝の研究",
+    "year": 1995,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "久保寺, 逸彦"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105303",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105303/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105303",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1670792",
+    "doi": null,
+    "title": "アイヌに伝承される歌舞詞曲に関する調査研究",
+    "year": 1960,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 真志保"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1670792",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1670792/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1670792",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520469",
+    "doi": null,
+    "title": "アイヌの神謡 : 昔話とユーカラへの道",
+    "year": 1991,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "立石, 久雄"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520469",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520469/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520469",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8267362",
+    "doi": null,
+    "title": "樺太アイヌ神謡 オイナ",
+    "year": 1951,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8267362",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8267362/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8267362",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8267376",
+    "doi": null,
+    "title": "樺太アイヌ神謡 オイナ",
+    "year": 1951,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8267376",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8267376/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8267376",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266934",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩 ユーカラ（１）",
+    "year": 1949,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266934",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266934/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266934",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266935",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩 ユーカラ（２）",
+    "year": 1949,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266935",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266935/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266935",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266936",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩 ユーカラ（３）",
+    "year": 1949,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266936",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266936/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266936",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266937",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩 ユーカラ（４）",
+    "year": 1949,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266937",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266937/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266937",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266931",
+    "doi": null,
+    "title": "アイヌ英雄叙事詩 ユーカラ（５）",
+    "year": 1949,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266931",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266931/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266931",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "11926245",
+    "doi": null,
+    "title": "アイヌ革命論 : ユーカラ世界への",
+    "year": 1973,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "栗原, 登一"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/11926245",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/11926245/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/11926245",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578908",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ英雄叙事詩 ユーカラ",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578908",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578908/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578908",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578909",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ英雄叙事詩 ユーカラ",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578909",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578909/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578909",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578910",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ英雄叙事詩 ユーカラ（Ⅰ）",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578910",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578910/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578910",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578911",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ英雄叙事詩 ユーカラ（Ⅱ）",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578911",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578911/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578911",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578912",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ英雄叙事詩 ユーカラ（Ⅲ）",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578912",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578912/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578912",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578913",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ英雄叙事詩 ユーカラ（Ⅳ）",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578913",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578913/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578913",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "3578901",
+    "doi": null,
+    "title": "アイヌ歌謠集 第１集 アイヌ叙事詩 マチューカラ",
+    "year": 1947,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/3578901",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/3578901/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/3578901",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266976",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ英雄叙事詩 ユーカラ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266976",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266976/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266976",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266977",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ英雄叙事詩 ユーカラ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266977",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266977/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266977",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266978",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ英雄叙事詩 ユーカラ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266978",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266978/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266978",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266979",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ英雄叙事詩 ユーカラ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266979",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266979/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266979",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266980",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ英雄叙事詩 ユーカラ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266980",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266980/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266980",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "8266981",
+    "doi": null,
+    "title": "アイヌ歌謠集 第２集（完） アイヌ英雄叙事詩 ユーカラ",
+    "year": 1948,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/8266981",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/8266981/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/8266981",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572417",
+    "doi": null,
+    "title": "アイヌ語音声資料",
+    "year": 1991,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572417",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572417/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572417",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520462",
+    "doi": null,
+    "title": "アイヌ語音声資料 : カタカナ版",
+    "year": 1992,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520462",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520462/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520462",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572418",
+    "doi": null,
+    "title": "アイヌ語音声資料",
+    "year": 1993,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572418",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572418/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572418",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1214348",
+    "doi": null,
+    "title": "アイヌ叙事詩ユーカラ",
+    "year": 1936,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "金田一, 京助"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1214348",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1214348/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1214348",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1870051",
+    "doi": null,
+    "title": "アイヌの歌謡と万葉集の歌",
+    "year": null,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "金田一, 京助"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1870051",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1870051/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1870051",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13997466",
+    "doi": null,
+    "title": "アイヌの世界 : ヤイユーカラの森から",
+    "year": 1995,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "計良, 光範"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13997466",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13997466/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13997466",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572439",
+    "doi": null,
+    "title": "アイヌの文学ユーカラへの招待",
+    "year": 1980,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "萩中, 美枝"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572439",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572439/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572439",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "2498248",
+    "doi": null,
+    "title": "アイヌのユーカラ : 沙流地方の伝承",
+    "year": 1962,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "近藤, 鏡二郎",
+      "アイヌ民謡研究会",
+      "門別町郷土史研究会"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/2498248",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/2498248/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/2498248",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13326243",
+    "doi": null,
+    "title": "アイヌを生きる文化を継ぐ : 母キナフチと娘京子の物語",
+    "year": 1994,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "小坂, 洋右"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13326243",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13326243/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13326243",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "11453837",
+    "doi": null,
+    "title": "アイヌ口承文芸「散文説話」 : 河童に助けられた男の物語",
+    "year": 2016,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/11453837",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/11453837/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/11453837",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "11453849",
+    "doi": null,
+    "title": "アイヌ口承文芸「散文説話」 : 山の神と沖の神の子を身ごもった女の物語",
+    "year": 2017,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/11453849",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/11453849/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/11453849",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "9490860",
+    "doi": null,
+    "title": "アイヌ語地名の研究 : 山田秀三著作集",
+    "year": 1983,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "山田, 秀三"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/9490860",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/9490860/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/9490860",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "9490862",
+    "doi": null,
+    "title": "アイヌ語地名の研究 : 山田秀三著作集",
+    "year": 1983,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "山田, 秀三"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/9490862",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/9490862/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/9490862",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12145262",
+    "doi": null,
+    "title": "アイヌ人物語 : 北涯の悲劇",
+    "year": 1970,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "松好, 貞夫"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12145262",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12145262/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12145262",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1720560",
+    "doi": null,
+    "title": "アイヌ童話集",
+    "year": 1943,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "金田一, 京助",
+      "荒木田, 家寿",
+      "下川, 苔地"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1720560",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1720560/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1720560",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1338983",
+    "doi": null,
+    "title": "アイヌ童話集",
+    "year": 1949,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "金田一, 京助",
+      "荒木田, 家寿",
+      "下川, 苔地"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1338983",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1338983/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1338983",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1660475",
+    "doi": null,
+    "title": "アイヌ童話集",
+    "year": 1949,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "金田一, 京助",
+      "荒木田, 家寿"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1660475",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1660475/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1660475",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "10776248",
+    "doi": null,
+    "title": "アイヌについての知られざる物語 : テキストの紹介とコンテキストの模索",
+    "year": 2008,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/10776248",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/10776248/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/10776248",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1622736",
+    "doi": null,
+    "title": "アイヌの物語",
+    "year": 1959,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "四辻, 一朗"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1622736",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1622736/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1622736",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105379",
+    "doi": null,
+    "title": "アイヌの物語世界",
+    "year": 1997,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "中川, 裕"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105379",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105379/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105379",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1846021",
+    "doi": null,
+    "title": "アイヌの炉辺物語",
+    "year": 1925,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "Batchelor, John",
+      "河合, 裸石"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1846021",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1846021/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1846021",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "964148",
+    "doi": null,
+    "title": "アイヌの炉辺物語",
+    "year": 1925,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "Batchelor, John",
+      "河合, 裸石"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/964148",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/964148/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/964148",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572411",
+    "doi": null,
+    "title": "アイヌ語音声資料",
+    "year": 1984,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "早稲田大学語学教育研究所"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572411",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572411/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572411",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "13520439",
+    "doi": null,
+    "title": "アイヌ語音声資料 : カタカナ版",
+    "year": 1991,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/13520439",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/13520439/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/13520439",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "993685",
+    "doi": null,
+    "title": "アイヌ語会話字典",
+    "year": 1898,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "神保, 小虎",
+      "金沢, 庄三郎"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/993685",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/993685/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/993685",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572393",
+    "doi": null,
+    "title": "アイヌ語会話字典",
+    "year": 1973,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "神保, 小虎",
+      "金沢, 庄三郎"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572393",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572393/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572393",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572400",
+    "doi": null,
+    "title": "アイヌ語会話字典",
+    "year": 1986,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "神保, 小虎",
+      "金沢, 庄三郎"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572400",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572400/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572400",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572394",
+    "doi": null,
+    "title": "アイヌ語会話字典",
+    "year": 1978,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "神保, 小虎",
+      "金沢, 庄三郎"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572394",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572394/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572394",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "11450163",
+    "doi": null,
+    "title": "カラフトアイヌ語",
+    "year": 1976,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "村崎, 恭子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/11450163",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/11450163/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/11450163",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "9544862",
+    "doi": null,
+    "title": "アイヌ童話",
+    "year": 1965,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "吉田, 巌",
+      "小林, 正雄",
+      "帯広市教育委員会"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/9544862",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/9544862/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/9544862",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1624771",
+    "doi": null,
+    "title": "アイヌ童話集",
+    "year": 1962,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "鈴木, 義治",
+      "金田一, 京助",
+      "荒木田, 家寿"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1624771",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1624771/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1624771",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572440",
+    "doi": null,
+    "title": "アイヌ童話集",
+    "year": 1981,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "金田一, 京助",
+      "荒木田, 家寿"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572440",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572440/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572440",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14545141",
+    "doi": null,
+    "title": "銀のしずく降る降る : 知里幸恵「アイヌ神謡集」より",
+    "year": 1993,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "知里, 幸恵",
+      "知里, むつみ",
+      "横山, 孝雄"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14545141",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14545141/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14545141",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1170044",
+    "doi": null,
+    "title": "熊祭 : アイヌ童話集",
+    "year": 1943,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "杉浦, 伊作",
+      "中尾, 彰"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1170044",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1170044/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1170044",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1717854",
+    "doi": null,
+    "title": "朝鮮・台湾・アイヌ童話集",
+    "year": 1929,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "松村, 武雄",
+      "西岡, 英夫"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1717854",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1717854/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1717854",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1654353",
+    "doi": null,
+    "title": "西浦の神 : アイヌ童話集",
+    "year": 1968,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "金田一, 京助",
+      "荒木田, 家寿",
+      "久米, 宏一"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1654353",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1654353/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1654353",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "12572410",
+    "doi": null,
+    "title": "アイヌ語基礎語彙",
+    "year": 1983,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "早稲田大学語学教育研究所"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/12572410",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/12572410/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/12572410",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105377",
+    "doi": null,
+    "title": "アイヌ語北海道南部方言",
+    "year": 1998,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子",
+      "片山, 竜峯",
+      "志賀, 雪湖"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105377",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105377/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105377",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105376",
+    "doi": null,
+    "title": "アイヌ語北海道南部方言",
+    "year": 1998,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "田村, すゞ子"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105376",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105376/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105376",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "1875688",
+    "doi": null,
+    "title": "あいぬ物語",
+    "year": 1913,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "山辺, 安之助",
+      "金田一, 京助"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/1875688",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1875688/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/1875688",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "949451",
+    "doi": null,
+    "title": "あいぬ物語 : 附・あいぬ語大意及語彙",
+    "year": 1913,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "山辺, 安之助",
+      "金田一, 京助"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/949451",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/949451/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/949451",
+        "label": "NDL Digital Collections"
+      }
+    ]
+  },
+  {
+    "source": "ndldigital",
+    "externalId": "14105258",
+    "doi": null,
+    "title": "旭川採集アイヌ語動詞集",
+    "year": 2000,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "旭川市博物館"
+    ],
+    "venue": null,
+    "url": "https://dl.ndl.go.jp/pid/14105258",
+    "pdf": null,
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/14105258/manifest.json",
+        "label": "IIIF (NDL Digital)"
+      },
+      {
+        "type": "fulltext",
+        "url": "https://dl.ndl.go.jp/pid/14105258",
+        "label": "NDL Digital Collections"
+      }
+    ]
   }
 ]

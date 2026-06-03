@@ -1643,6 +1643,62 @@ export async function collectInternetArchive(): Promise<AcademicRecord[]> {
 	return out;
 }
 
+// --- NDL Digital Collections — digitized texts with IIIF --------------------
+// The ndlsearch OpenSearch RSS flags a digitized item with an <rdfs:seeAlso>
+// pointing at dl.ndl.go.jp/pid/N. We keep Ainu-language digitized items and
+// attach the NDL full-text page + IIIF manifest (public-domain items render).
+// Links graft onto an existing catalogue record (アイヌ神謡集…) when we hold it.
+const NDL_DIGITAL_QUERIES = [
+	'アイヌ語', 'アイヌ 辞典', 'アイヌ 文法', 'アイヌ 地名', 'アイヌ 神謡', 'アイヌ ユーカラ',
+	'アイヌ 物語', 'アイヌ 会話', 'アイヌ 童話', '蝦夷 言葉', 'アイヌ 語彙'
+];
+const NDL_LING_RE = /語彙?|辞典|辞書|文法|方言|地名|音声|会話|叙事詩|口承|ユーカラ|ユカ|神謡|説話|語学|言語|文字|物語|童話|歌|聖書|新約|入門|読本/;
+export async function collectNDLDigital(): Promise<AcademicRecord[]> {
+	const out: AcademicRecord[] = [];
+	const seen = new Set<string>();
+	for (const q of NDL_DIGITAL_QUERIES) {
+		let xml: string;
+		try {
+			xml = await htext(`https://ndlsearch.ndl.go.jp/api/opensearch?any=${encodeURIComponent(q)}&cnt=200`);
+		} catch {
+			continue;
+		}
+		for (const it of xml.split('<item>').slice(1)) {
+			const pidM = it.match(/dl\.ndl\.go\.jp\/pid\/(\d+)/);
+			if (!pidM) continue; // only digitized items carry a pid seeAlso
+			const pid = pidM[1];
+			if (seen.has(pid)) continue;
+			const title = cleanText(xmlFirst(it, 'title'));
+			if (!title || !/アイヌ|蝦夷|あいぬ/.test(title) || !NDL_LING_RE.test(title)) continue;
+			seen.add(pid);
+			const yr = (cleanText(xmlFirst(it, 'dc:date')) || cleanText(xmlFirst(it, 'dcterms:issued'))).match(/\d{4}/);
+			const creators = [...it.matchAll(/<dc:creator>([\s\S]*?)<\/dc:creator>/g)]
+				.map((m) => cleanText(m[1]).replace(/\s*,?\s*\d{4}-\d{0,4}\s*$/, '').trim())
+				.filter(Boolean);
+			out.push({
+				source: 'ndldigital',
+				externalId: pid,
+				doi: null,
+				title,
+				year: yr ? Number(yr[0]) : null,
+				type: 'book',
+				rawType: 'book',
+				language: null,
+				authors: [...new Set(creators)].slice(0, 4),
+				venue: null,
+				url: `https://dl.ndl.go.jp/pid/${pid}`,
+				pdf: null,
+				links: [
+					{ type: 'iiif', url: `https://dl.ndl.go.jp/api/iiif/${pid}/manifest.json`, label: 'IIIF (NDL Digital)' },
+					{ type: 'fulltext', url: `https://dl.ndl.go.jp/pid/${pid}`, label: 'NDL Digital Collections' }
+				]
+			});
+		}
+		console.log(`  NDL Digital "${q}": total ${out.length}`);
+	}
+	return out;
+}
+
 // Run only the new collectors and merge them into the existing index (the full
 // main() run is slow/flaky). `bun collect-academic.ts extra`.
 export async function collectExtra(): Promise<void> {
@@ -1666,6 +1722,8 @@ export async function collectExtra(): Promise<void> {
 	const rmap = await collectResearchmap(RESEARCHMAP_PERMALINKS);
 	console.log('Collecting Internet Archive (digitized historical books)…');
 	const ia = await collectInternetArchive();
+	console.log('Collecting NDL Digital Collections (IIIF)…');
+	const ndldig = await collectNDLDigital();
 
 	// Dedup against the existing index (DOI + normalized title) and each other.
 	const seenDoi = new Set<string>();
@@ -1678,7 +1736,7 @@ export async function collectExtra(): Promise<void> {
 	}
 	const fresh: AcademicRecord[] = [];
 	const perSource: Record<string, number> = {};
-	for (const r of [...jstage, ...ciniiBooks, ...irdb, ...crChap, ...glotto, ...oaExtra, ...rmap, ...ia]) {
+	for (const r of [...jstage, ...ciniiBooks, ...irdb, ...crChap, ...glotto, ...oaExtra, ...rmap, ...ia, ...ndldig]) {
 		// Link-bearing records (IA full text, IIIF…) are KEPT even on a title match —
 		// seedAcademic grafts their links onto the existing record rather than drop.
 		if (r.links?.length || r.pdf) {
