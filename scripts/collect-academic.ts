@@ -606,7 +606,12 @@ export async function collectCyberLeninka(): Promise<AcademicRecord[]> {
 			if (!arts.length) break;
 			for (const a of arts) {
 				const title = String(a.name ?? '').replace(/<\/?b>/g, '').trim();
+				// Require an Ainu ethnonym AND a language/linguistics/folklore marker —
+				// the broad queries otherwise admit Ainu material-culture papers
+				// (айнского меча…) and Tajik/other-Cyrillic false positives.
 				if (!title || !/айн/i.test(title)) continue;
+				if (!/язык|лингв|лексик|топоним|фольклор|диалект|граммати|фонетик|фонолог|словар|речь|\bтекст|устн|сказани|эпос|глагол|морфолог|синтакс|письмен|наречи|говор/i.test(title))
+					continue;
 				const id = a.link || title;
 				if (seen.has(id)) continue;
 				seen.add(id);
