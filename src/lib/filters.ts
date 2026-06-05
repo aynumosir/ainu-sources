@@ -25,9 +25,9 @@ export function parseFilters(sp: URLSearchParams): SourceFilters {
 		tag: sp.get('tag') || undefined,
 		person: sp.get('person') || undefined,
 		hasDigital: sp.get('digital') === '1' || undefined,
-		sort: sort && SORTS.has(sort as SortKey) ? (sort as SortKey) : 'year-asc',
+		sort: sort && SORTS.has(sort as SortKey) ? (sort as SortKey) : 'year-desc',
 		page: Number.isFinite(page) && page > 0 ? page : 1
 	};
 }
 
-export const SORT_OPTIONS: SortKey[] = ['year-asc', 'year-desc', 'title', 'entries-desc', 'updated'];
+export const SORT_OPTIONS: SortKey[] = ['year-desc', 'year-asc', 'title', 'entries-desc', 'updated'];
