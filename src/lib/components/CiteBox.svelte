@@ -28,9 +28,11 @@
 	async function copyFormat(ext: string, label: string) {
 		try {
 			const res = await fetch(`/sources/${slug}/${ext}`);
+			if (!res.ok) throw new Error(`Export failed: ${res.status}`);
 			await copy(await res.text(), label);
-		} catch {
-			/* ignore */
+		} catch (e) {
+			// Don't copy an error page as if it were a citation; surface it instead.
+			console.error(`Citation export (${ext}) failed`, e);
 		}
 	}
 </script>

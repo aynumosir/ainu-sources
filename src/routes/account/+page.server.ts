@@ -10,8 +10,9 @@ export const load: PageServerLoad = async ({ locals, request }) => {
 	try {
 		const accounts = await auth.api.listUserAccounts({ headers: request.headers });
 		providers = (accounts ?? []).map((a) => a.providerId);
-	} catch {
-		// non-fatal — just show no linked accounts
+	} catch (err) {
+		// non-fatal — just show no linked accounts, but don't fail silently
+		console.warn('account: listUserAccounts failed', err instanceof Error ? err.name : String(err));
 	}
 	return {
 		user: { name: locals.user.name, email: locals.user.email },
@@ -27,10 +28,18 @@ export const actions: Actions = {
 	},
 
 	linkGithub: async ({ request }) => {
-		const res = await auth.api.linkSocialAccount({
-			body: { provider: 'github', callbackURL: '/account' },
-			headers: request.headers
-		});
+		let res;
+		try {
+			res = await auth.api.linkSocialAccount({
+				body: { provider: 'github', callbackURL: '/account' },
+				headers: request.headers
+			});
+		} catch (e) {
+			if (e instanceof APIError)
+				return fail(400, { message: e.message || 'Could not connect GitHub.' });
+			throw e;
+		}
+		// redirect() throws its own control-flow signal, so keep it outside the try.
 		if (res?.url) redirect(303, res.url);
 		return fail(400, { message: 'GitHub linking is not configured.' });
 	},

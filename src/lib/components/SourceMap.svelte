@@ -12,47 +12,84 @@
 	// Distinct roles present, for the legend.
 	const legend = $derived([...new Set(pins.map((p) => p.role))]);
 
-	let el: HTMLDivElement;
+	let el = $state<HTMLDivElement>();
+	let L = $state<typeof import('leaflet') | null>(null);
+	let map = $state<import('leaflet').Map | null>(null);
+	let markers: import('leaflet').LayerGroup | null = null;
+
+	// Build a popup as DOM nodes (textContent), never an HTML string — name/role/href
+	// are data-derived and must not be interpolated into markup (XSS).
+	function popup(name: string, role: string, href: string, color: string) {
+		const div = document.createElement('div');
+		div.style.fontFamily = 'var(--font-sans)';
+		const a = document.createElement('a');
+		a.href = href;
+		a.style.fontWeight = '600';
+		a.style.color = color;
+		a.textContent = name;
+		const span = document.createElement('span');
+		span.style.color = '#78716c';
+		span.textContent = role;
+		div.appendChild(a);
+		div.appendChild(document.createElement('br'));
+		div.appendChild(span);
+		return div;
+	}
 
 	onMount(() => {
-		let map: import('leaflet').Map | undefined;
 		let cancelled = false;
 		(async () => {
-			const L = await import('leaflet');
-			if (cancelled || !el || !pins.length) return;
-			map = L.map(el, { scrollWheelZoom: false });
-			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			let mod: typeof import('leaflet');
+			try {
+				mod = await import('leaflet');
+			} catch (e) {
+				// Chunk failed to load (offline/network) — leave the map uninitialized.
+				console.error('SourceMap: failed to load leaflet', e);
+				return;
+			}
+			if (cancelled || !el) return;
+			const m = mod.map(el, { scrollWheelZoom: false });
+			mod.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				attribution: '&copy; OpenStreetMap contributors',
 				maxZoom: 12
-			}).addTo(map);
-
-			const latlngs: [number, number][] = [];
-			for (const p of pins) {
-				const color = PLACE_ROLE_COLOR[p.role] ?? '#78716c';
-				const name = p.nameEn && p.nameEn !== p.name ? `${p.name} · ${p.nameEn}` : p.name;
-				const role = tl(PLACE_ROLE_LABELS, p.role);
-				const href = localizeHref(`/places/${p.slug}`);
-				latlngs.push([p.lat!, p.lng!]);
-				L.circleMarker([p.lat!, p.lng!], {
-					radius: 8,
-					color,
-					weight: 2,
-					fillColor: color,
-					fillOpacity: 0.4
-				})
-					.addTo(map)
-					.bindPopup(
-						`<div style="font-family:var(--font-sans)"><a href="${href}" style="font-weight:600;color:${color}">${name}</a><br><span style="color:#78716c">${role}</span></div>`
-					);
-			}
-			if (latlngs.length === 1) map.setView(latlngs[0], 6);
-			else map.fitBounds(L.latLngBounds(latlngs).pad(0.3));
+			}).addTo(m);
+			markers = mod.layerGroup().addTo(m);
+			L = mod;
+			map = m;
 		})();
 
 		return () => {
 			cancelled = true;
 			map?.remove();
+			map = null;
+			markers = null;
 		};
+	});
+
+	// Re-render markers whenever the place set changes — otherwise client-side
+	// navigation to another source would leave the previous source's pins behind.
+	$effect(() => {
+		if (!L || !map || !markers) return;
+		markers.clearLayers();
+		const latlngs: [number, number][] = [];
+		for (const p of pins) {
+			const color = PLACE_ROLE_COLOR[p.role] ?? '#78716c';
+			const name = p.nameEn && p.nameEn !== p.name ? `${p.name} · ${p.nameEn}` : p.name;
+			const role = tl(PLACE_ROLE_LABELS, p.role);
+			const href = localizeHref(`/places/${p.slug}`);
+			latlngs.push([p.lat!, p.lng!]);
+			L.circleMarker([p.lat!, p.lng!], {
+				radius: 8,
+				color,
+				weight: 2,
+				fillColor: color,
+				fillOpacity: 0.4
+			})
+				.addTo(markers)
+				.bindPopup(popup(name, role, href, color));
+		}
+		if (latlngs.length === 1) map.setView(latlngs[0], 6);
+		else if (latlngs.length) map.fitBounds(L.latLngBounds(latlngs).pad(0.3));
 	});
 </script>
 

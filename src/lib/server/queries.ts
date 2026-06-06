@@ -18,7 +18,7 @@ import {
 	type Institution,
 	type Tag
 } from './db/schema';
-import { and, or, eq, ne, like, inArray, gte, lte, desc, asc, sql, count } from 'drizzle-orm';
+import { and, or, eq, ne, like, inArray, gte, lte, desc, asc, sql, count, countDistinct } from 'drizzle-orm';
 import type {
 	SourceFilters,
 	Facets,
@@ -114,7 +114,9 @@ function fullConditions(f: SourceFilters): SQLCond[] {
 					.select({ id: sourceTags.sourceId })
 					.from(sourceTags)
 					.innerJoin(tags, eq(sourceTags.tagId, tags.id))
-					.where(inArray(tags.slug, f.genres))
+					// Constrain to genre-category tags so a slug shared with a non-genre
+					// tag can't leak in — matches how genre facets are counted.
+					.where(and(inArray(tags.slug, f.genres), eq(tags.category, 'genre')))
 			)
 		);
 	if (f.regions?.length) c.push(inArray(sources.region, f.regions));
@@ -519,14 +521,16 @@ export async function getPersonBySlug(
 			name: tags.name,
 			nameEn: tags.nameEn,
 			category: tags.category,
-			n: sql<number>`count(*)`
+			// Count distinct works: a person can hold the same source twice (e.g. two
+			// roles), and the join would otherwise multiply the tag's tally.
+			n: countDistinct(sourcePersons.sourceId)
 		})
 		.from(sourcePersons)
 		.innerJoin(sourceTags, eq(sourceTags.sourceId, sourcePersons.sourceId))
 		.innerJoin(tags, eq(tags.id, sourceTags.tagId))
 		.where(eq(sourcePersons.personId, person.id))
 		.groupBy(tags.id)
-		.orderBy(desc(sql`count(*)`));
+		.orderBy(desc(countDistinct(sourcePersons.sourceId)));
 	const areas: PersonArea[] = areaRows.map((a) => ({
 		slug: a.slug,
 		name: a.name,
