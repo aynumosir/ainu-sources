@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import 'leaflet/dist/leaflet.css';
+	import 'maplibre-gl/dist/maplibre-gl.css';
 	import type { MapPlace } from '$lib/types';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
+	import { OSM_STYLE } from '$lib/map-style';
 
 	let { places, height = '70vh' }: { places: MapPlace[]; height?: string } = $props();
 
-	let el: HTMLDivElement;
+	let el = $state<HTMLDivElement>();
 
 	const REGION_COLOR: Record<string, string> = {
 		hokkaido: '#4338ca',
@@ -16,34 +17,73 @@
 		other: '#78716c'
 	};
 
+	// Circular marker element; radius scales with how many sources sit at the place.
+	function bubble(color: string, radius: number) {
+		const d = document.createElement('div');
+		const size = `${radius * 2}px`;
+		d.style.width = size;
+		d.style.height = size;
+		d.style.borderRadius = '50%';
+		d.style.background = color;
+		d.style.opacity = '0.4';
+		d.style.border = `1.5px solid ${color}`;
+		d.style.cursor = 'pointer';
+		return d;
+	}
+
+	// Popups are built from DOM nodes (textContent / href) — never an HTML string (XSS).
+	function popupNode(name: string, href: string, count: number) {
+		const div = document.createElement('div');
+		div.style.fontFamily = 'var(--font-sans)';
+		const a = document.createElement('a');
+		a.href = href;
+		a.style.fontWeight = '600';
+		a.style.color = '#4338ca';
+		a.textContent = name;
+		const span = document.createElement('span');
+		span.style.color = '#78716c';
+		span.textContent = `${count} ${m.map_sources_here()}`;
+		div.appendChild(a);
+		div.appendChild(document.createElement('br'));
+		div.appendChild(span);
+		return div;
+	}
+
 	onMount(() => {
-		let map: import('leaflet').Map | undefined;
+		let map: import('maplibre-gl').Map | undefined;
 		let cancelled = false;
 		(async () => {
-			const L = await import('leaflet');
+			let maplibre: typeof import('maplibre-gl');
+			try {
+				maplibre = await import('maplibre-gl');
+			} catch (e) {
+				// Chunk failed to load (offline/network) — leave the map uninitialized.
+				console.error('MapView: failed to load maplibre-gl', e);
+				return;
+			}
 			if (cancelled || !el) return;
-			map = L.map(el, { scrollWheelZoom: false }).setView([45.5, 143.5], 4);
-			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-				attribution: '&copy; OpenStreetMap contributors',
-				maxZoom: 12
-			}).addTo(map);
+			map = new maplibre.Map({
+				container: el,
+				style: OSM_STYLE,
+				center: [143.5, 45.5],
+				zoom: 3.5,
+				attributionControl: { compact: true }
+			});
+			map.scrollZoom.disable();
+			map.addControl(new maplibre.NavigationControl({ showCompass: false }), 'top-right');
 
 			for (const p of places) {
 				const color = REGION_COLOR[p.region ?? 'other'] ?? '#78716c';
-				const r = 6 + Math.min(22, Math.sqrt(p.sourceCount) * 3);
+				const radius = 6 + Math.min(22, Math.sqrt(p.sourceCount) * 3);
 				const name = p.nameEn && p.nameEn !== p.name ? `${p.name} · ${p.nameEn}` : p.name;
 				const href = localizeHref(`/places/${p.slug}`);
-				L.circleMarker([p.lat, p.lng], {
-					radius: r,
-					color,
-					weight: 1.5,
-					fillColor: color,
-					fillOpacity: 0.35
-				})
-					.addTo(map)
-					.bindPopup(
-						`<div style="font-family:var(--font-sans)"><a href="${href}" style="font-weight:600;color:#4338ca">${name}</a><br><span style="color:#78716c">${p.sourceCount} ${m.map_sources_here()}</span></div>`
-					);
+				const popup = new maplibre.Popup({ offset: radius, closeButton: false }).setDOMContent(
+					popupNode(name, href, p.sourceCount)
+				);
+				new maplibre.Marker({ element: bubble(color, radius) })
+					.setLngLat([p.lng, p.lat])
+					.setPopup(popup)
+					.addTo(map);
 			}
 		})();
 
@@ -54,4 +94,8 @@
 	});
 </script>
 
-<div bind:this={el} class="z-0 w-full overflow-hidden rounded-xl border border-stone-200" style="height:{height}"></div>
+<div
+	bind:this={el}
+	class="z-0 w-full overflow-hidden rounded-xl border border-stone-200"
+	style="height:{height}"
+></div>

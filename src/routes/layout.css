@@ -148,8 +148,12 @@
 	}
 }
 
-/* Leaflet tweaks (map page) */
-.leaflet-container {
+/* MapLibre GL tweaks (map page) */
+.maplibregl-map {
 	font-family: var(--font-sans);
 	background: #e6ddc6;
+}
+.maplibregl-popup-content {
+	font-family: var(--font-sans);
+	border-radius: 0.5rem;
 }
