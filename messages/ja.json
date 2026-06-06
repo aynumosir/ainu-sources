@@ -220,5 +220,6 @@
 	"footer_tagline": "アイヌ語資料のためのオープンな文献学的知識基盤。",
 	"footer_part_of": "Aynu.org ファミリーの一部",
 	"footer_data_credit": "データ：ainu-dictionaries / ainu-grammar / ainu-corpora",
-	"region_unassigned": "未分類"
+	"region_unassigned": "未分類",
+	"nav_audit": "監査"
 }

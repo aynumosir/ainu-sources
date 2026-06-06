@@ -849,4 +849,128 @@ export async function getRevisions(sourceId: string) {
 		.orderBy(desc(sourceRevisions.createdAt));
 }
 
+// ---------------------------------------------------------------------------
+// Content audit — data-quality review of the catalogue (public, read-only).
+// ---------------------------------------------------------------------------
+
+/** Compact source row shown in audit lists. */
+export interface AuditSource {
+	slug: string;
+	title: string;
+	titleEn: string | null;
+	yearText: string | null;
+	type: string;
+}
+
+export interface ContentAudit {
+	total: number;
+	/** Per-bucket total counts (full, not capped). */
+	missingCounts: { year: number; region: number; language: number; summary: number };
+	/** Capped sample lists for each missing-metadata bucket. */
+	missing: { year: AuditSource[]; region: AuditSource[]; language: AuditSource[]; summary: AuditSource[] };
+	/** Groups of records sharing a normalized title (likely duplicates). */
+	duplicates: { key: string; items: AuditSource[] }[];
+	duplicateGroups: number;
+	/** Persons with linked works but no verified Wikidata QID, by work count. */
+	weakPersons: { slug: string; name: string; nameEn: string | null; works: number }[];
+	weakPersonTotal: number;
+}
+
+const AUDIT_CAP = 100; // max rows shown per bucket (the counts above are full)
+
+/** Normalize a title for near-duplicate grouping: NFKC, lowercased, with spaces
+ * and common punctuation stripped so trivially-different titles collapse. */
+function dupKey(title: string): string {
+	return title
+		.normalize('NFKC')
+		.toLowerCase()
+		.replace(/\s+/g, '')
+		.replace(/["'’“”「」『』（）()[\]【】、。,.・:;!?\-–—_/]/g, '');
+}
+
+export async function getContentAudit(): Promise<ContentAudit> {
+	const rows = await db
+		.select({
+			slug: sources.slug,
+			title: sources.title,
+			titleEn: sources.titleEn,
+			yearText: sources.yearText,
+			yearStart: sources.yearStart,
+			type: sources.type,
+			region: sources.region,
+			languages: sources.languages,
+			summary: sources.summary
+		})
+		.from(sources);
+
+	const lite = (r: (typeof rows)[number]): AuditSource => ({
+		slug: r.slug,
+		title: r.title,
+		titleEn: r.titleEn,
+		yearText: r.yearText,
+		type: r.type
+	});
+	const blank = (s: string | null) => !s || !s.trim();
+
+	const year: AuditSource[] = [];
+	const region: AuditSource[] = [];
+	const language: AuditSource[] = [];
+	const summary: AuditSource[] = [];
+	const byKey = new Map<string, AuditSource[]>();
+
+	for (const r of rows) {
+		if (r.yearStart == null && blank(r.yearText)) year.push(lite(r));
+		if (blank(r.region)) region.push(lite(r));
+		if (!asArray(r.languages).length) language.push(lite(r));
+		if (blank(r.summary)) summary.push(lite(r));
+		const k = dupKey(r.title);
+		if (k) {
+			const g = byKey.get(k);
+			if (g) g.push(lite(r));
+			else byKey.set(k, [lite(r)]);
+		}
+	}
+
+	const duplicates = [...byKey.entries()]
+		.filter(([, items]) => items.length > 1)
+		.map(([key, items]) => ({ key, items }))
+		.sort((a, b) => b.items.length - a.items.length);
+
+	// Persons with ≥1 linked work but no verified Wikidata identity (incl. the
+	// nulled mis-disambiguations — they surface here as needing a real match).
+	const weak = await db
+		.select({
+			slug: persons.slug,
+			name: persons.name,
+			nameEn: persons.nameEn,
+			works: countDistinct(sourcePersons.sourceId)
+		})
+		.from(persons)
+		.leftJoin(sourcePersons, eq(sourcePersons.personId, persons.id))
+		.where(sql`(${persons.wikidata} is null or ${persons.wikidata} = '')`)
+		.groupBy(persons.id)
+		.having(sql`count(distinct ${sourcePersons.sourceId}) > 0`)
+		.orderBy(desc(countDistinct(sourcePersons.sourceId)), asc(persons.name));
+
+	return {
+		total: rows.length,
+		missingCounts: {
+			year: year.length,
+			region: region.length,
+			language: language.length,
+			summary: summary.length
+		},
+		missing: {
+			year: year.slice(0, AUDIT_CAP),
+			region: region.slice(0, AUDIT_CAP),
+			language: language.slice(0, AUDIT_CAP),
+			summary: summary.slice(0, AUDIT_CAP)
+		},
+		duplicates: duplicates.slice(0, AUDIT_CAP),
+		duplicateGroups: duplicates.length,
+		weakPersons: weak.slice(0, AUDIT_CAP),
+		weakPersonTotal: weak.length
+	};
+}
+
 export { SEEDED };

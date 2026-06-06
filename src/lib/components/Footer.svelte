@@ -22,7 +22,10 @@
 		},
 		{
 			heading: () => m.nav_about(),
-			links: [{ href: '/about', label: () => m.nav_about() }]
+			links: [
+				{ href: '/about', label: () => m.nav_about() },
+				{ href: '/audit', label: () => m.nav_audit() }
+			]
 		}
 	];
 </script>
