@@ -39,7 +39,14 @@
 	onMount(() => {
 		let cancelled = false;
 		(async () => {
-			const mod = await import('leaflet');
+			let mod: typeof import('leaflet');
+			try {
+				mod = await import('leaflet');
+			} catch (e) {
+				// Chunk failed to load (offline/network) — leave the map uninitialized.
+				console.error('SourceMap: failed to load leaflet', e);
+				return;
+			}
 			if (cancelled || !el) return;
 			const m = mod.map(el, { scrollWheelZoom: false });
 			mod.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
