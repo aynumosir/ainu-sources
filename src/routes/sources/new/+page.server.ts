@@ -10,6 +10,9 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
+		// Open editing is a feature: any signed-in account may create a source.
+		// Changes are attributed + versioned in sourceRevisions (wiki-style), so
+		// we gate on authentication only — ownership/roles are intentionally absent.
 		if (!locals.user) return fail(401, { error: 'Sign in to edit.' });
 		const fd = await request.formData();
 		const { input, error } = parseSourceForm(fd);
