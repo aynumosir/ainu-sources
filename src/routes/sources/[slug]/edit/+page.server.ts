@@ -41,6 +41,9 @@ export const load: PageServerLoad = async ({ params, locals, url }) => {
 
 export const actions: Actions = {
 	default: async ({ request, params, locals }) => {
+		// Open editing is a feature: any signed-in account may edit any source.
+		// Changes are attributed + versioned in sourceRevisions (wiki-style), so
+		// we gate on authentication only — ownership/roles are intentionally absent.
 		if (!locals.user) return fail(401, { error: 'Sign in to edit.' });
 		const detail = await getSourceDetail(params.slug);
 		if (!detail) return fail(404, { error: 'Source not found.' });
