@@ -5,7 +5,7 @@
 //   turso db shell ainu-sources-restore < scripts/data/backups/prod-<ts>.sql
 //
 // Run: bun run backup   (uses the `turso` CLI; auth via your turso login)
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 
 const DB = process.env.TURSO_DB ?? 'ainu-sources';
@@ -16,7 +16,8 @@ const ts = new Date().toISOString().replace(/[:.]/g, '-').replace('T', '_').slic
 const out = `${dir}/prod-${ts}.sql`;
 
 console.log(`Dumping ${DB} via turso CLI…`);
-const dump = execSync(`turso db shell ${DB} ".dump"`, { maxBuffer: 1 << 30 }).toString();
+// argv form (not a shell string) so DB can never be shell-interpolated.
+const dump = execFileSync('turso', ['db', 'shell', DB, '.dump'], { maxBuffer: 1 << 30 }).toString();
 
 // Sanity-check before trusting it as a backup — never write a truncated/empty dump.
 if (!dump.includes('CREATE TABLE') || !/INSERT INTO ["']?sources/.test(dump)) {

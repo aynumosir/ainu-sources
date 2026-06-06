@@ -376,8 +376,10 @@ export async function collectCrossref(): Promise<AcademicRecord[]> {
 		const items = data.message?.items ?? [];
 		for (const w of items) {
 			const title = (w.title?.[0] ?? '').trim();
-			if (!/ainu/i.test(title) || !w.DOI || seen.has(w.DOI)) continue; // title precision + dedup
-			seen.add(w.DOI);
+			// DOIs are case-insensitive — normalize before dedup so 10.x/AbC == 10.x/abc.
+			const doiNorm = w.DOI ? String(w.DOI).trim().toLowerCase() : '';
+			if (!/ainu/i.test(title) || !doiNorm || seen.has(doiNorm)) continue; // title precision + dedup
+			seen.add(doiNorm);
 			out.push({
 				source: 'crossref',
 				externalId: w.DOI,
@@ -1766,11 +1768,16 @@ export async function collectExtra(): Promise<void> {
 	// Dedup against the existing index (DOI + normalized title) and each other.
 	const seenDoi = new Set<string>();
 	const seenTitle = new Set<string>();
+	// Stable identity for link-bearing records (source + externalId), so reruns don't
+	// re-append the same IA/NDL entries — they bypass the DOI/title gate below.
+	const seenLink = new Set<string>();
+	const linkKey = (r: AcademicRecord) => `${r.source}\t${r.externalId}`;
 	for (const r of existing) {
 		const d = r.doi?.toLowerCase();
 		if (d) seenDoi.add(d);
 		const t = normTitle(r.title);
 		if (t) seenTitle.add(t);
+		if (r.links?.length || r.pdf) seenLink.add(linkKey(r));
 	}
 	const fresh: AcademicRecord[] = [];
 	const perSource: Record<string, number> = {};
@@ -1778,6 +1785,9 @@ export async function collectExtra(): Promise<void> {
 		// Link-bearing records (IA full text, IIIF…) are KEPT even on a title match —
 		// seedAcademic grafts their links onto the existing record rather than drop.
 		if (r.links?.length || r.pdf) {
+			const k = linkKey(r);
+			if (seenLink.has(k)) continue;
+			seenLink.add(k);
 			fresh.push(r);
 			perSource[r.source] = (perSource[r.source] ?? 0) + 1;
 			continue;
