@@ -220,5 +220,6 @@
 	"footer_tagline": "Открытая филологическая база знаний об айнских источниках.",
 	"footer_part_of": "Часть семейства Aynu.org",
 	"footer_data_credit": "Данные: ainu-dictionaries, ainu-grammar, ainu-corpora.",
-	"region_unassigned": "Без региона"
+	"region_unassigned": "Без региона",
+	"nav_audit": "Аудит"
 }

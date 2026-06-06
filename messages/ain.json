@@ -220,5 +220,6 @@
 	"footer_tagline": "An open philological knowledge base for Ainu-language sources.",
 	"footer_part_of": "Part of the Aynu.org family",
 	"footer_data_credit": "Data from ainu-dictionaries, ainu-grammar and ainu-corpora.",
-	"region_unassigned": "Unassigned"
+	"region_unassigned": "Unassigned",
+	"nav_audit": "Audit"
 }
