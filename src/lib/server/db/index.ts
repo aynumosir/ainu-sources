@@ -1,12 +1,10 @@
-import { drizzle } from 'drizzle-orm/libsql';
+import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 import { createClient as createWebClient } from '@libsql/client/web';
 import { createClient as createNodeClient } from '@libsql/client';
 import * as schema from './schema';
 import { env } from '$env/dynamic/private';
 
-if (!env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
-
-const url = env.DATABASE_URL;
+type DB = LibSQLDatabase<typeof schema>;
 
 // On Cloudflare Workers we MUST use the HTTP-only web client for remote
 // (libsql://, https://) URLs. The default client opens a persistent Hrana
@@ -20,11 +18,27 @@ const url = env.DATABASE_URL;
 // issues a stateless fetch per query, so each continuation stays in its own
 // request context. Local dev uses a file: URL, which only the node client
 // supports.
-const isFile = url.startsWith('file:');
-if (!isFile && !env.DATABASE_AUTH_TOKEN) throw new Error('DATABASE_AUTH_TOKEN is not set');
+function connect(): DB {
+	const url = env.DATABASE_URL;
+	if (!url) throw new Error('DATABASE_URL is not set');
+	const isFile = url.startsWith('file:');
+	if (!isFile && !env.DATABASE_AUTH_TOKEN) throw new Error('DATABASE_AUTH_TOKEN is not set');
+	const client = isFile
+		? createNodeClient({ url, authToken: env.DATABASE_AUTH_TOKEN })
+		: createWebClient({ url, authToken: env.DATABASE_AUTH_TOKEN });
+	return drizzle(client, { schema });
+}
 
-const client = isFile
-	? createNodeClient({ url, authToken: env.DATABASE_AUTH_TOKEN })
-	: createWebClient({ url, authToken: env.DATABASE_AUTH_TOKEN });
-
-export const db = drizzle(client, { schema });
+// Connect lazily, on first property access — NOT at import. SvelteKit's
+// post-build `analyse` step imports every server module, so a top-level
+// `throw`/connect here crashed `vite build` in CI, where the build container
+// has no DATABASE_URL. Deferring means the build never needs DB credentials —
+// only the running Worker does, and that's where the secret is actually set.
+let instance: DB | undefined;
+export const db: DB = new Proxy({} as DB, {
+	get(_target, prop) {
+		instance ??= connect();
+		const value = instance[prop as keyof DB];
+		return typeof value === 'function' ? (value as (...a: unknown[]) => unknown).bind(instance) : value;
+	}
+});
