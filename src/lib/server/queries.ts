@@ -126,17 +126,17 @@ function fullConditions(f: SourceFilters): SQLCond[] {
 
 function orderBy(sort: SourceFilters['sort']) {
 	switch (sort) {
-		case 'year-desc':
-			return [desc(sources.yearStart), asc(sources.title)];
+		case 'year-asc':
+			return [asc(sources.yearStart), asc(sources.title)];
 		case 'title':
 			return [asc(sources.title)];
 		case 'updated':
 			return [desc(sources.updatedAt)];
 		case 'entries-desc':
 			return [desc(sources.entryCount)];
-		case 'year-asc':
+		case 'year-desc':
 		default:
-			return [asc(sources.yearStart), asc(sources.title)];
+			return [desc(sources.yearStart), asc(sources.title)];
 	}
 }
 
