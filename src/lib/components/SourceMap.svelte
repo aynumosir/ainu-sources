@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import 'leaflet/dist/leaflet.css';
+	import 'maplibre-gl/dist/maplibre-gl.css';
 	import type { PlaceRef } from '$lib/types';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { tl, PLACE_ROLE_LABELS, PLACE_ROLE_COLOR } from '$lib/constants';
+	import { OSM_STYLE } from '$lib/map-style';
 
 	let { places, height = '260px' }: { places: PlaceRef[]; height?: string } = $props();
 
@@ -13,13 +14,24 @@
 	const legend = $derived([...new Set(pins.map((p) => p.role))]);
 
 	let el = $state<HTMLDivElement>();
-	let L = $state<typeof import('leaflet') | null>(null);
-	let map = $state<import('leaflet').Map | null>(null);
-	let markers: import('leaflet').LayerGroup | null = null;
+	let lib = $state<typeof import('maplibre-gl') | null>(null);
+	let map = $state<import('maplibre-gl').Map | null>(null);
+	let markers: import('maplibre-gl').Marker[] = [];
 
-	// Build a popup as DOM nodes (textContent), never an HTML string — name/role/href
-	// are data-derived and must not be interpolated into markup (XSS).
-	function popup(name: string, role: string, href: string, color: string) {
+	function dot(color: string) {
+		const d = document.createElement('div');
+		d.style.width = '16px';
+		d.style.height = '16px';
+		d.style.borderRadius = '50%';
+		d.style.background = color;
+		d.style.opacity = '0.5';
+		d.style.border = `2px solid ${color}`;
+		d.style.cursor = 'pointer';
+		return d;
+	}
+
+	// Popup built from DOM nodes (textContent / href) — never an HTML string (XSS).
+	function popupNode(name: string, role: string, href: string, color: string) {
 		const div = document.createElement('div');
 		div.style.fontFamily = 'var(--font-sans)';
 		const a = document.createElement('a');
@@ -39,57 +51,63 @@
 	onMount(() => {
 		let cancelled = false;
 		(async () => {
-			let mod: typeof import('leaflet');
+			let maplibre: typeof import('maplibre-gl');
 			try {
-				mod = await import('leaflet');
+				maplibre = await import('maplibre-gl');
 			} catch (e) {
 				// Chunk failed to load (offline/network) — leave the map uninitialized.
-				console.error('SourceMap: failed to load leaflet', e);
+				console.error('SourceMap: failed to load maplibre-gl', e);
 				return;
 			}
 			if (cancelled || !el) return;
-			const m = mod.map(el, { scrollWheelZoom: false });
-			mod.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-				attribution: '&copy; OpenStreetMap contributors',
-				maxZoom: 12
-			}).addTo(m);
-			markers = mod.layerGroup().addTo(m);
-			L = mod;
-			map = m;
+			const mp = new maplibre.Map({
+				container: el,
+				style: OSM_STYLE,
+				center: [142, 44],
+				zoom: 4,
+				attributionControl: { compact: true }
+			});
+			mp.scrollZoom.disable();
+			lib = maplibre;
+			map = mp;
 		})();
 
 		return () => {
 			cancelled = true;
+			for (const mk of markers) mk.remove();
+			markers = [];
 			map?.remove();
 			map = null;
-			markers = null;
+			lib = null;
 		};
 	});
 
-	// Re-render markers whenever the place set changes — otherwise client-side
+	// Re-render pins whenever the place set changes — otherwise client-side
 	// navigation to another source would leave the previous source's pins behind.
 	$effect(() => {
-		if (!L || !map || !markers) return;
-		markers.clearLayers();
-		const latlngs: [number, number][] = [];
+		if (!lib || !map) return;
+		const L = lib;
+		const mp = map;
+		for (const mk of markers) mk.remove();
+		markers = [];
+		const bounds = new L.LngLatBounds();
 		for (const p of pins) {
 			const color = PLACE_ROLE_COLOR[p.role] ?? '#78716c';
 			const name = p.nameEn && p.nameEn !== p.name ? `${p.name} · ${p.nameEn}` : p.name;
 			const role = tl(PLACE_ROLE_LABELS, p.role);
 			const href = localizeHref(`/places/${p.slug}`);
-			latlngs.push([p.lat!, p.lng!]);
-			L.circleMarker([p.lat!, p.lng!], {
-				radius: 8,
-				color,
-				weight: 2,
-				fillColor: color,
-				fillOpacity: 0.4
-			})
-				.addTo(markers)
-				.bindPopup(popup(name, role, href, color));
+			const popup = new L.Popup({ offset: 10, closeButton: false }).setDOMContent(
+				popupNode(name, role, href, color)
+			);
+			const mk = new L.Marker({ element: dot(color) })
+				.setLngLat([p.lng!, p.lat!])
+				.setPopup(popup)
+				.addTo(mp);
+			markers.push(mk);
+			bounds.extend([p.lng!, p.lat!]);
 		}
-		if (latlngs.length === 1) map.setView(latlngs[0], 6);
-		else if (latlngs.length) map.fitBounds(L.latLngBounds(latlngs).pad(0.3));
+		if (pins.length === 1) mp.jumpTo({ center: [pins[0].lng!, pins[0].lat!], zoom: 6 });
+		else if (pins.length) mp.fitBounds(bounds, { padding: 40, maxZoom: 8, duration: 0 });
 	});
 </script>
 
