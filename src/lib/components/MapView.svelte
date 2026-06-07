@@ -77,10 +77,12 @@
 				center: [143.5, 45.5],
 				zoom: 4,
 				maxZoom: 12,
+				// Cooperative gestures: a plain wheel scrolls the PAGE (no scroll trap);
+				// ⌘/ctrl+wheel zooms the map, and one finger pans the page vs two the map.
+				cooperativeGestures: true,
 				attributionControl: { compact: true }
 			});
-			// Keep it a flat, Leaflet-style 2D map — no scroll-zoom, no rotate/pitch.
-			map.scrollZoom.disable();
+			// Flat, Leaflet-style 2D map — no rotate/pitch.
 			map.dragRotate.disable();
 			map.touchZoomRotate.disableRotation();
 			map.addControl(new maplibre.NavigationControl({ showCompass: false }), 'top-right');
