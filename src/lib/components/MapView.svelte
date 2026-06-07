@@ -17,16 +17,25 @@
 		other: '#78716c'
 	};
 
+	// #rrggbb → rgba() with alpha. Transparency must live in the fill color, NOT
+	// element opacity: MapLibre's Marker rewrites element.style.opacity to 1 on
+	// every render (its terrain occlusion feature), which would force opaque pins.
+	function rgba(hex: string, a: number): string {
+		const n = parseInt(hex.replace('#', ''), 16);
+		return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+	}
+
 	// Circular marker element; radius scales with how many sources sit at the place.
+	// Translucent fill + solid stroke, matching the old Leaflet circleMarker.
 	function bubble(color: string, radius: number) {
 		const d = document.createElement('div');
 		const size = `${radius * 2}px`;
 		d.style.width = size;
 		d.style.height = size;
 		d.style.borderRadius = '50%';
-		d.style.background = color;
-		d.style.opacity = '0.4';
+		d.style.background = rgba(color, 0.35);
 		d.style.border = `1.5px solid ${color}`;
+		d.style.boxSizing = 'border-box';
 		d.style.cursor = 'pointer';
 		return d;
 	}
@@ -66,10 +75,14 @@
 				container: el,
 				style: OSM_STYLE,
 				center: [143.5, 45.5],
-				zoom: 3.5,
+				zoom: 4,
+				maxZoom: 12,
 				attributionControl: { compact: true }
 			});
+			// Keep it a flat, Leaflet-style 2D map — no scroll-zoom, no rotate/pitch.
 			map.scrollZoom.disable();
+			map.dragRotate.disable();
+			map.touchZoomRotate.disableRotation();
 			map.addControl(new maplibre.NavigationControl({ showCompass: false }), 'top-right');
 
 			for (const p of places) {

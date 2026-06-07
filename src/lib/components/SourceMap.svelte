@@ -18,14 +18,23 @@
 	let map = $state<import('maplibre-gl').Map | null>(null);
 	let markers: import('maplibre-gl').Marker[] = [];
 
+	// #rrggbb → rgba() with alpha. Transparency must live in the fill color, NOT
+	// element opacity: MapLibre's Marker rewrites element.style.opacity to 1 on
+	// every render, which would force opaque pins.
+	function rgba(hex: string, a: number): string {
+		const n = parseInt(hex.replace('#', ''), 16);
+		return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+	}
+
+	// Translucent fill + solid stroke, matching the old Leaflet circleMarker.
 	function dot(color: string) {
 		const d = document.createElement('div');
 		d.style.width = '16px';
 		d.style.height = '16px';
 		d.style.borderRadius = '50%';
-		d.style.background = color;
-		d.style.opacity = '0.5';
+		d.style.background = rgba(color, 0.4);
 		d.style.border = `2px solid ${color}`;
+		d.style.boxSizing = 'border-box';
 		d.style.cursor = 'pointer';
 		return d;
 	}
@@ -65,9 +74,14 @@
 				style: OSM_STYLE,
 				center: [142, 44],
 				zoom: 4,
+				maxZoom: 12,
 				attributionControl: { compact: true }
 			});
+			// Flat, Leaflet-style 2D map with zoom buttons; no scroll-zoom or rotate.
 			mp.scrollZoom.disable();
+			mp.dragRotate.disable();
+			mp.touchZoomRotate.disableRotation();
+			mp.addControl(new maplibre.NavigationControl({ showCompass: false }), 'top-right');
 			lib = maplibre;
 			map = mp;
 		})();
