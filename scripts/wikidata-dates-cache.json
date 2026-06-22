@@ -953,5 +953,65 @@
     "b": 1925,
     "d": 2022,
     "wp": "https://ja.wikipedia.org/wiki/%E4%BD%8F%E8%B0%B7%E4%B8%80%E5%BD%A6"
+  },
+  "Q81731": {
+    "b": 978,
+    "d": 1014,
+    "wp": "https://ja.wikipedia.org/wiki/%E7%B4%AB%E5%BC%8F%E9%83%A8"
+  },
+  "Q54007283": {
+    "b": null,
+    "d": null,
+    "wp": null
+  },
+  "Q11473282": {
+    "b": 1916,
+    "d": 2002,
+    "wp": "https://ja.wikipedia.org/wiki/%E5%B2%A1%E6%9D%91%E5%90%89%E5%8F%B3%E8%A1%9B%E9%96%80"
+  },
+  "Q11529524": {
+    "b": 1899,
+    "d": 1982,
+    "wp": "https://ja.wikipedia.org/wiki/%E6%9D%BE%E5%A5%BD%E8%B2%9E%E5%A4%AB"
+  },
+  "Q11397713": {
+    "b": 1964,
+    "d": null,
+    "wp": "https://ja.wikipedia.org/wiki/%E5%89%8D%E7%94%B0%E8%80%95%E5%8F%B8"
+  },
+  "Q1669091": {
+    "b": 1951,
+    "d": null,
+    "wp": "https://ja.wikipedia.org/wiki/%E5%B7%9D%E6%9D%91%E6%B9%8A"
+  },
+  "Q135811943": {
+    "b": 1982,
+    "d": null,
+    "wp": null
+  },
+  "Q108783784": {
+    "b": null,
+    "d": null,
+    "wp": "https://ja.wikipedia.org/wiki/%E5%89%8D%E7%94%B0%E6%84%9B%E7%BE%8E"
+  },
+  "Q11413636": {
+    "b": 1948,
+    "d": null,
+    "wp": "https://ja.wikipedia.org/wiki/%E5%90%89%E7%94%B0%E5%8B%9D%E5%B7%B1"
+  },
+  "Q105704182": {
+    "b": null,
+    "d": null,
+    "wp": "https://ja.wikipedia.org/wiki/%E5%B3%B6%E7%94%B0%E5%81%A5%E4%B8%80"
+  },
+  "Q20040257": {
+    "b": 1954,
+    "d": null,
+    "wp": "https://ja.wikipedia.org/wiki/%E5%B4%8E%E8%B0%B7%E6%BA%80"
+  },
+  "Q11371683": {
+    "b": 1950,
+    "d": null,
+    "wp": "https://ja.wikipedia.org/wiki/%E4%BA%8C%E6%A9%8B%E6%BD%A4%E4%B8%80"
   }
 }

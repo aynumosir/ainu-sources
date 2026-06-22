@@ -233,6 +233,9 @@ const PERSON_ALIASES: Record<string, string> = {
 	Kayano: 'kayano-shigeru', 'Kayano, Shigeru': 'kayano-shigeru', 'Kayano Shigeru': 'kayano-shigeru', 萱野茂: 'kayano-shigeru',
 	Sato: 'sato-tomomi', 'Sato, Tomomi': 'sato-tomomi', 'Sato Tomomi': 'sato-tomomi', 佐藤知己: 'sato-tomomi',
 	Bugaeva: 'bugaeva-anna', 'Bugaeva, Anna': 'bugaeva-anna', 'Bugaeva Anna': 'bugaeva-anna', 'Anna Bugaeva': 'bugaeva-anna', 'ブガエワ・アンナ': 'bugaeva-anna', ブガエワアンナ: 'bugaeva-anna',
+	// Karol Nowakowski (Sakhalin-Ainu ASR/NLP) — papers list him in Latin (OpenAlex
+	// emits the 3-token "NOWAKOWSKI KAROL PIOTR"); merge all forms so researchmap attaches.
+	Nowakowski: 'nowakowski-karol', 'Nowakowski Karol': 'nowakowski-karol', 'Karol Nowakowski': 'nowakowski-karol', 'Nowakowski, Karol': 'nowakowski-karol', 'Nowakowski Karol Piotr': 'nowakowski-karol', 'Karol Piotr Nowakowski': 'nowakowski-karol', 'ノヴァコフスキ・カロル': 'nowakowski-karol', ノヴァコフスキカロル: 'nowakowski-karol',
 	Ijas: 'ijas-silja', Silja: 'ijas-silja', 'Ijas Silja': 'ijas-silja', 'Silja Ijas': 'ijas-silja', 'Ijäs, Silja': 'ijas-silja',
 	Chiri: 'chiri-mashiho', 'Chiri, Mashiho': 'chiri-mashiho', 'Chiri Mashiho': 'chiri-mashiho', 知里真志保: 'chiri-mashiho',
 	'Chiri, Yukie': 'chiri-yukie', 'Chiri Yukie': 'chiri-yukie', 知里幸恵: 'chiri-yukie', 知里幸惠: 'chiri-yukie',
@@ -269,6 +272,7 @@ const PERSON_CANON: Record<string, { name: string; nameEn?: string }> = {
 	'kayano-shigeru': { name: '萱野 茂', nameEn: 'Kayano Shigeru' },
 	'sato-tomomi': { name: '佐藤 知己', nameEn: 'Sato Tomomi' },
 	'bugaeva-anna': { name: 'Anna Bugaeva' },
+	'nowakowski-karol': { name: 'Nowakowski Karol', nameEn: 'Nowakowski Karol' },
 	'ijas-silja': { name: 'Ijas Silja' },
 	'chiri-mashiho': { name: '知里 真志保', nameEn: 'Chiri Mashiho' },
 	'chiri-yukie': { name: '知里 幸恵', nameEn: 'Chiri Yukie' },
@@ -478,6 +482,11 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		桃内佳雄: { nameEn: 'Momouchi Yoshio', researchmap: 'read0021800' },
 		荒木健治: { nameEn: 'Araki Kenji', researchmap: 'read0021804' },
 		中川奈津子: { nameEn: 'Nakagawa Natsuko', researchmap: 'nakagawanatuko' },
+		// round 3 (2026-06-22): verified via api.researchmap.jp (NLP/ASR + revitalization + historical-comparative)
+		// Nowakowski keyed by canon (see PERSON_ALIASES/PERSON_CANON 'nowakowski-karol')
+		'nowakowski-karol': { nameEn: 'Nowakowski Karol', researchmap: 'nowakowski' },
+		上野昌之: { nameEn: 'Ueno Masayuki', researchmap: 'lukemasyk' },
+		板橋義三: { nameEn: 'Itabashi Yoshizo', researchmap: 'read0171971' },
 		// Batch 9 (2026-06-03): web-verified (researchmap/CiNii/NDL/KAKEN/Wikipedia)
 		金成まつ: { nameEn: 'Kannari Matsu' }, 'アンナ・ブガエワ': { nameEn: 'Anna Bugaeva' },
 		'ヌルミ・ユッシ': { nameEn: 'Jussi Nurmi' }, 齋藤玲子: { nameEn: 'Saito Reiko' },
@@ -937,7 +946,7 @@ const INSTITUTION_RE = /協会|センター|委員会|大学|高校|高等学校
 // Placeholder/garbage "author" tokens that aren't people — a strict prerequisite
 // for promoting low-frequency authors to person entities. Anchored to whole-field
 // matches so it never strips a substring of a real name.
-const GARBAGE_WORDS_RE = /^(compilation|various|unknown|anon(ymous)?|n\.?d\.?|s\.?n\.?|et al\.?|ほか|他|など|複数|諸氏|有志|aynumosir|著者不明|不明|無記名|collective|staff|editors?|compilers?)$/i;
+const GARBAGE_WORDS_RE = /^(compilation|various|unknown|anon(ymous)?|n\.?d\.?|s\.?n\.?|et al\.?|ほか|他|など|複数|諸氏|有志|aynumosir|著者不明|不明|無記名|collective|staff|editors?|compilers?|編集|編著|編纂|編訳|共編|共著|校訂|監修|採録|口述|編者|著者|編|著|訳|撰|監訳|訳注|校注|解説)$/i;
 function isGarbageName(raw: string): boolean {
 	const n = stripParens(raw).trim();
 	if (!n) return true;
