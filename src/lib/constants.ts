@@ -206,6 +206,15 @@ export const TAG_CATEGORY_LABELS: Record<string, L> = {
 	dialect: { en: 'Dialect', ja: '方言', ru: 'Диалект' }
 };
 
+/**
+ * Source provenance repos that are PRIVATE (internal GitHub repos, not publicly
+ * browsable). Their file path is not useful to visitors and shouldn't be exposed,
+ * so the source page hides the provenancePath for these (the public link, when
+ * present, is what gives access). Public bibliographic provenances (cinii,
+ * openalex, …) keep their path since it's a real external id/landing.
+ */
+export const PRIVATE_PROVENANCE_REPOS = new Set(['ainu-grammar', 'ainu-dictionaries', 'ainu-corpora']);
+
 /** Ordered keys for filter UIs. */
 export const TYPE_ORDER = Object.keys(TYPE_LABELS);
 export const CATEGORY_ORDER = ['primary', 'corpus', 'secondary', 'tool'];

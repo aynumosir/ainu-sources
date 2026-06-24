@@ -1,0 +1,1808 @@
+{
+  "books/2022_Bugaeva": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1970586434917385640",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2016_岸本宜久_アイヌ語沙流方言における動詞の助動詞用法と制約": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050869456408574208",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_中川裕_アイヌ口承文芸テキスト集19：白沢ナベ口述 ウエペケㇾ：クマが三度同じ人のところを訪れる話": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390290700505001472",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2013_北原次郎太_≪テキスト≫『上川アイヌ 熊まつり』収載の祈り詞": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050570022158879104",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2013_吉田恵理佳_アイヌ語の被抱合名詞に関する一考察": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390858608263680512",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_佐藤知己_アイヌ語学の諸問題：近年の議論と関連して": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390572176828814720",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2022_阪口諒_アイヌ語樺太方言における数詞と計算": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050025031474269312",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_馬長城_アイヌ語沙流方言の助動詞「a」の用法について：中国語の「過」から見たタクシス機能": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050587981428212864",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_安岡孝一・安岡素子_『蝦夷島奇觀』における漢訳アイヌ語について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1010302693971016322",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_岸本宜久_アイヌ語鵡川方言テキスト(1)：火の玉を見て気を失った話": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390866415333520640",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2017_高橋靖以_アイヌ語幌別方言の使役接尾辞について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050587981431254400",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2025_奥田統己_アイヌ語のわたり音と母音連続": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1520307746578605568",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2015_大谷洋一_カムイの散文説話：白キツネ兄弟の物語": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1522262179706573312",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_阪口諒_チェンバレン『アイノ民話』中のパナンペ・ペナンペ譚": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390854717620179712",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_阪口諒・渡邊香織_『アイヌ炉辺物語』 (1~5話)：ジョン・バチェラー、1924 年、東京": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390572175481745408",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_中川裕_アイヌ口承文芸テキスト集23：白沢ナベ口述：ウエペケㇾ タヌキの着物": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390866525722799232",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2010_小林美紀_アイヌ語の動詞接頭辞si-とyay-の項同定機能": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050570022159838336",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_吉川佳見_アイヌ語沙流方言における他動性": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390299926128260736",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2016_深澤美香_加賀家文書翻刻・現代語訳 3 「チヤコルベ」：蝦夷通辞が記録したアイヌの求婚難題説話": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390009224857811200",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2011_中川裕_アイヌ口承文芸テキスト集11 白沢ナベ口述 キネズミに妹をさらわれた男": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050288547188161280",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_阪口諒・ディクソンJ. M._「ツイシカリ・アイノ (対雁アイヌ) 」：J. M. ディクソン著、1982 年、東京": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390572175481744384",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_Miyagawa So & Igarashi Ryo_Ainu–Japanese Bi-directional Neural Machine Translation": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1360306906080145280",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_安岡孝一_Universal Dependenciesによるアイヌ語テキストコーパス": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050853179584930816",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_安岡素子・安岡孝一_ローマ字・カタカナ・キリル文字によるアイヌ語Universal Dependenciesの可能性": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390860996982530432",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2026_廣澤_アイヌ語における証拠性表現の用法について：ruwe neの用法を中心に": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390307746620053632",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2012_北原次郎太_【資料報告】二谷国松口述 知里真志保筆録 新築祝いの祈り詞": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050851497135632128",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_奥田統己_“地鎮祭”のアイヌ語：呼称および祈詞の事例について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/2050870367069821952",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_中川裕_アイヌ語広文典": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1970304959901729828",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2018_吉川佳見_アイヌ語の助動詞aanと証拠性": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050288547195324416",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_馬長城_アイヌ語の継続形式＋完了形式の意味機能": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050860687400794880",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_藤田護_金成マツ筆録ノートのアイヌ語口承文学テクストの原文対訳及び解釈：金田一京助宛ノート散文説話「雪狐のカムイ（upas cironnup kamuy）」": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390303575769378688",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2010_中川裕_アイヌ口承文芸テキスト集10 白沢ナベ口述 ペナンペ金の子犬を授かる": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050570022164872320",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2011_大谷洋一_和人の散文説話：継母から殺されかけた姉を救った妹": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1523106604667874944",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2018_岸本宜久_アイヌ語の複雑述語における連接と接合": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050282812510168064",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_阪口諒_アイヌ語樺太方言におけるutaraの用法": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390584940356790272",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_中川裕_アイヌ口承文芸テキスト集20：白沢ナベ口述 ユカㇻイルパイェ：若イㇱカㇻ人との決闘": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390854717622835584",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2026_安岡孝一・安岡素子_Qwen3.5によるカタカナアイヌ語OCRの開発": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050026890715650944",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_阪口諒_アイヌ語樺太方言における名詞複数接尾辞ahcinの用法": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050587981428701056",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2015_小林美紀_アイヌ語動詞の結合価と項構造": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1910583860655230464",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2017_深澤美香_加賀家文書におけるアイヌ語の文献学的研究": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1910302385686758016",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_安岡孝一_ローマ字・カタカナ・キリル文字併用アイヌ語RoBERTa・DeBERTaモデルの開発": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/2120307889985045504",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2017_小林美紀_アイヌ語における有対動詞の派生と重複": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390572174812259712",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_Nikitina Tatiana & Bugaeva Anna_Logophoric speech is not indirect": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1360853567688055936",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_佐藤知己_アイヌ語の動詞の結合価と3項動詞": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050306506450371328",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2026_落合いずみ_日本語借用形から探るアイヌ語sikerpe「キハダの実」の語源": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390026491503703552",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_大谷洋一_アイヌ口承文芸「散文説話」カッコウの神から守られた女": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/2051151842068161536",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_吉川佳見_アイヌ語の助動詞 nisa の用法についての一考察": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050851497138638976",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2018_中川裕・白沢ナベ_アイヌ口承文芸テキスト集 17：白沢ナベ口述 カムイユカㇻ アテヤテンナ：六つ首の狐": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390572174812263424",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_阪口諒_樺太アイヌ語における人称と数の標示に関する研究": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1910870696333154176",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2022_奥田統己_AIによるアイヌ語の自動処理：実現したこと、期待されること、やるべきでないこと": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/2051151842068162560",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_阪口諒_ニコライ・ネフスキー採集の女性叙事詩テキスト：「レプンノッの人にさらわれた女性」": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390572175481721856",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_落合いずみ_「蝦夷国報告書」のアイヌ語数詞における上位起算法の消失": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390584940356804736",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2018_高橋靖以_アイヌ語幌別方言における名詞化辞の文法化": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050025031476975616",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2022_吉川佳見_アイヌ語沙流方言のアスペクト": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390296123098079104",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_深澤美香_加賀家文書 翻刻・現代語訳4「アイヌ語解の歌」：蝦夷通辞によるアイヌ語学習歌": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390290700505000576",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2022_中川裕_アイヌ口承文芸テキスト集21：白沢ナベ口述 ウエペケㇾ：カラスの恩返し": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390295757684464896",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2025_佐藤知己_書評：中川裕著『アイヌ語広文典』": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390869844365946752",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_佐藤知己_国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390853022611704192",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2011_田村雅史_アイヌ語白糠方言の文法記述": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1910583860655056256",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_Baek Sangyub_地域類型論的観点から見たサハリン地域に分布するウイルタ語、アイヌ語、ニヴフ語の定動詞における3人称標示と複数接辞の文法的類似性について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390021990403371264",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_小林美紀_空間・場所を項とするアイヌ語動詞の結合価を増やす操作について：otke と kamu を例として": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390290700505004160",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2012_Ptaszynski Michal & Momouchi Yoshio_Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1360565165870919296",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2013_高橋靖以_アイヌ語十勝方言における証拠性と叙述類型": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050306506457050112",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_落合いずみ_アイヌ語の数詞再考：二十進法における下方算法から上方算法への切り替え": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390584940356793472",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2022_大谷洋一_アイヌ口承文芸 夫に浮気された女": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1520856815746800384",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2016_高橋靖以_アイヌ語十勝方言の否定構造について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050869456408642048",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2025_小林美紀_アイヌ語における主語抱合と所属形的接頭辞e-o-による派生": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390022457813774464",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_吉川佳見_アイヌ語の存在型アスペクト「kor an」「wa an」の意味範疇について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390853650458471296",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_小林美紀_アイヌ語動詞にあらわれるtaと充当接頭辞について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390584940356809088",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_Miyagawa So_Machine Translation for Highly Low-Resource Language: A Case Study of Ainu": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1010302693886822660",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_深澤美香・小野洋平_方言境界再考：アイヌ語の方言境界を例として": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390584940356807808",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_阪口諒_樺太アイヌのトゥイタㇵ：B. ピウスツキによる英訳テキスト": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390853651160156288",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_阪口諒_『アイヌ語ロシア語辞典』中のアイヌ語樺太方言テキスト": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050007072223331456",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2012_佐藤知己_アイヌ語の現状と復興": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390570862078010752",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_中川裕_アイヌ口承文芸テキスト集22：白沢ナベ口述 カムイユカㇻ：雷神の怒り": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390581257274565760",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_Nowakowski Karol_Applying Support Vector Machines to POS tagging of the Ainu Language": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1363951795348420096",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2022_吉本裕子_新たな話者たちによるアイヌ語復興": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1520014967587108864",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2014_小林美紀_アイヌ語鵡川方言の有対動詞": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050288547187278976",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_阪口諒_ピウスツキ採集のアイヌ語樺太方言民話テキスト_カレイ男とカジカ男": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050570022171882240",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2013_深澤美香_加賀家文書 翻刻・現代語訳1「菊のかんざしみだれ髪」-蝦夷通辞によるアイヌ語版「お吉清三」口説-": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050851497150561536",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_阪口諒_アイヌ語樺太西海岸南部方言テキスト(1)：「カワウソのばけもの」": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390866415333496704",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_吉川佳見_アイヌ語静内方言の kane an、wa an と状態性動詞との共起について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050570022161904384",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_安岡孝一_アイヌ語Universal Dependencies再考": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050290163801230720",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2025_中川裕_アイヌ口承文芸テキスト集24：白沢ナベ口述：ウエペケㇾ パナンペ・ペナンペ魚釣り": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1520870761230533376",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2020_佐藤知己_アイヌ語における文法的カテゴリーの転換について：語と句、動詞と名詞の相互関係をめぐって": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390303465380079744",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_中川裕・白沢ナベ_アイヌ口承文芸テキスト集18：白沢ナベ口述 カムイユカㇻ ソレイパソレ：和人の若殿の物語": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390572175481747840",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2023_藤田護_金成マツ筆録ノートのアイヌ語口承文学テクストの原文対訳及び解釈：金田一京助宛ノート散文説話「鹿を妻とした貧乏人（yuk mat ne kor wen aynu）」": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390581257274566656",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_Nam Deokhyun_Some evidence for the origin of the Ainu antipassive prefix i-": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390571106620331776",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2014_深澤美香_加賀家文書 翻刻・現代語訳2「学校往来夷解書」-蝦夷通辞によるアイヌ語版「寺子教訓書」-": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050288547197119232",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_Senuma Hajime & Aizawa Akiko_Computational Complexity of Natural Morphology Revisited": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1873399491349747328",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2024_馬長城_アイヌ語の時点を表す時間副詞": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390021990403386752",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2012_Bugaeva Anna_Southern Hokkaido Ainu": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1010282257109473675",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2021_佐藤知己_アイヌ語千歳方言の位置名詞orの用法": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1010009142328058504",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_阪口諒_山本多助筆録アイヌ語樺太方言テキスト(1)：「カラフト・ウベベケレ（オプケ ネワ イコロ ウペペケレ）」": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050587981429399040",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2017_中川裕・白沢ナベ_アイヌ口承文芸テキスト集 16：白沢ナベ口述 ウエペケレ 虐待された子熊": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390853649788964224",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2010_田村雅史_アイヌ語白糠方言の助動詞ci": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050851497136500096",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2011_高橋靖以_アイヌ語十勝方言の指示表現": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050025031482136704",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2015_高橋靖以_アイヌ語十勝方言における1人称と包括人称について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050587981432410368",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2015_中川裕_アイヌ口承文芸テキスト集 (14) 白沢ナベ口述 ウエペケㇾ 和人の殿様にもらわれた男の子": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390572174811278080",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2019_大谷洋一_アイヌ口承文芸「散文説話」タンネサㇻの男": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/2051151842046532608",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2016_中川裕_アイヌ口承文芸テキスト集 15：白沢ナベ口述 ウエペケレ 悪おじと少年": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390009224857810176",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2018_佐藤知己_アイヌ語古文献における仮名の用法：日本語とアイヌ語とで表記上の差異は存在するか": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390853649725138432",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2013_中川裕_アイヌ口承文芸テキスト集13 白沢ナベ口述 ウエペケレ チセコロカムイの怒り": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050851497135589888",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2014_高橋靖以_アイヌ語十勝方言における名詞化節の脱従属節化": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050869456409791360",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2025_藤田護_金田一京助記録「ユーカラ・ノート」における鍋沢コポアヌ口述のエゾイタチ（upas cironnup）に関する散文説話2編": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390026271625285120",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2018_阪口諒_山本多助筆録「サコロべ」のテキストとその言語的特徴": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390009224858836608",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2012_中川裕_アイヌ口承文芸テキスト集12 白沢ナベ口述 ユカㇻイルパイェ 敵の村の美女を妻に迎えたシヌタㇷ゚カウンクㇽ": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050851497150608384",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2010_佐藤知己_アイヌ語虻田方言の英雄叙事詩（yukar）テキストとその言語的特徴(2)": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1522825130572734720",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2025_安岡孝一_『狄島夜話記』におけるアイヌ語について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050025098815136128",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2016_遠藤志保_鍋沢元蔵によるアイヌ語のカナ表記体系：国立民族学博物館所蔵筆録ノートから": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390009224820926976",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "articles/2017_佐藤知己_江戸時代のアイヌ語彙集「狄さへつり」について": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050025031477593984",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "title+year+author"
+  },
+  "books/1912_Pilsudski": {
+    "titleEn": "Materials for the Study of the Ainu Language and Folklore (Cracow 1912)",
+    "doi": "10.1515/9783110818833",
+    "links": [
+      {
+        "type": "doi",
+        "url": "https://doi.org/10.1515/9783110818833",
+        "label": "De Gruyter — Collected Works of Bronisław Piłsudski, Vol. 2"
+      },
+      {
+        "type": "archive",
+        "url": "https://www.sbc.org.pl/dlibra/publication/129983/edition/122113/content",
+        "label": "Silesian Digital Library — original 1912 Cracow edition (full text)"
+      }
+    ],
+    "source": "publisher",
+    "verified": "web:title+author+year"
+  },
+  "books/1990_Shibatani": {
+    "titleEn": "The Languages of Japan (Cambridge Language Surveys)",
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://www.cambridge.org/0521369185",
+        "label": "Cambridge University Press"
+      }
+    ],
+    "source": "publisher",
+    "verified": "web:title+author+year"
+  },
+  "books/1942_Chiri": {
+    "title": "アイヌ語法研究 : 樺太方言を中心として",
+    "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://ci.nii.ac.jp/ncid/BN15890100",
+        "label": "CiNii Books"
+      }
+    ],
+    "source": "cinii",
+    "verified": "web:title+author+year"
+  },
+  "books/1994_HokkaidoUtariKyokai": {
+    "title": "アコロイタク : アイヌ語テキスト 1",
+    "titleEn": "Akor Itak: Ainu Language Text 1",
+    "doi": null,
+    "links": [
+      {
+        "type": "ndl",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000002724332",
+        "label": "NDL Search"
+      },
+      {
+        "type": "ndl",
+        "url": "https://dl.ndl.go.jp/pid/14105299",
+        "label": "NDL Digital Collections"
+      }
+    ],
+    "source": "ndl",
+    "verified": "web:title+author+year"
+  },
+  "books/1996_Tamura": {
+    "title": "アイヌ語沙流方言辞典",
+    "titleEn": "A Dictionary of the Saru Dialect of Ainu",
+    "doi": null,
+    "links": [
+      {
+        "type": "ndl",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000002590121",
+        "label": "NDL Search"
+      },
+      {
+        "type": "publisher",
+        "url": "https://www.hanmoto.com/bd/isbn/9784883230938",
+        "label": "Sōfūkan (ISBN 9784883230938)"
+      }
+    ],
+    "source": "ndl",
+    "verified": "web:title+author+year"
+  },
+  "books/1986_Refsing": {
+    "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+    "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+    "doi": null,
+    "links": [
+      {
+        "type": "ndl",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000003149223",
+        "label": "NDL Search"
+      },
+      {
+        "type": "worldcat",
+        "url": "https://search.worldcat.org/title/15582956",
+        "label": "WorldCat (OCLC 15582956)"
+      }
+    ],
+    "source": "ndl",
+    "verified": "web:title+author+year"
+  },
+  "books/2024_Nakagawa": {
+    "title": "アイヌ語広文典",
+    "titleEn": "Ainugo Kōbunten (A Comprehensive Grammar of Ainu)",
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://www.hakusuisha.co.jp/book/b649849.html",
+        "label": "Hakusuisha (publisher)"
+      },
+      {
+        "type": "ndl",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I033711792",
+        "label": "NDL Search"
+      }
+    ],
+    "source": "publisher",
+    "verified": "web:title+author+year"
+  },
+  "articles/2021_吉川佳見_アイヌ語における存在型アスペクト形式（博士論文）": {
+    "doi": "10.20776/900119556",
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1910302385677012992",
+        "label": "CiNii Research (博士論文)"
+      },
+      {
+        "type": "repository",
+        "url": "https://opac.ll.chiba-u.jp/da/curator/900119556/",
+        "label": "Chiba University repository"
+      },
+      {
+        "type": "ndl",
+        "url": "https://dl.ndl.go.jp/pid/12701508",
+        "label": "NDL Digital Collections"
+      }
+    ],
+    "source": "cinii",
+    "verified": "web:title+author+year"
+  },
+  "articles/2014_NINJAL_International Symposium on Polysynthesis in the World's Languages": {
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://www2.ninjal.ac.jp/past-events/polysynthesis-sympo/",
+        "label": "NINJAL symposium page"
+      }
+    ],
+    "source": "publisher",
+    "verified": "web:title+author+year"
+  },
+  "articles/2021_阪口諒_アイヌ語ロシア語辞典のアイヌ語話者に関する情報": {
+    "doi": null,
+    "links": [
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1050306506451501952",
+        "label": "CiNii Research"
+      },
+      {
+        "type": "repository",
+        "url": "https://hdl.handle.net/2115/80898",
+        "label": "Hokkaido University HUSCAP (full text)"
+      }
+    ],
+    "source": "cinii",
+    "verified": "web:title+author+year"
+  },
+  "articles/2020_Nowakowski Karol_Development of a Digital Corpus and Core Language Technologies for the Ainu Language": {
+    "doi": "10.19000/00008893",
+    "links": [
+      {
+        "type": "openalex",
+        "url": "https://openalex.org/W3166441469",
+        "label": "OpenAlex"
+      },
+      {
+        "type": "repository",
+        "url": "https://kitami-it.repo.nii.ac.jp/records/8930",
+        "label": "Kitami Institute of Technology repository"
+      },
+      {
+        "type": "ndl",
+        "url": "https://dl.ndl.go.jp/pid/11570150",
+        "label": "NDL Digital Collections"
+      }
+    ],
+    "source": "openalex",
+    "verified": "web:title+author+year"
+  },
+  "articles/2016_Sato Tomomi_A Classification of the Types of Noun Incorporation in Ainu and Its Implications for Morphosyntactic Typology": {
+    "doi": null,
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://journal.fi/store/article/view/59474",
+        "label": "Studia Orientalia (open access)"
+      }
+    ],
+    "source": "journalfi",
+    "verified": "web:title+author+year"
+  },
+  "articles/2018_Senuma Hajime & Aizawa Akiko_Universal Dependencies for Ainu": {
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://aclanthology.org/L18-1373/",
+        "label": "ACL Anthology (LREC 2018)"
+      },
+      {
+        "type": "openalex",
+        "url": "https://openalex.org/W2810515075",
+        "label": "OpenAlex"
+      }
+    ],
+    "source": "aclanthology",
+    "verified": "web:title+author+year"
+  },
+  "articles/2025_藤田護_金成マツ筆録ノートのアイヌ語口承文学テクストの原文対訳及び解釈：散文説話「頭の禿げた白いかさぶたがフケになっている女性がくにの上手からやって来るウェペケㇾ」": {
+    "doi": "10.20776/S21857148-27-P275",
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://opac.ll.chiba-u.jp/da/curator/900123772/",
+        "label": "千葉大学学術成果リポジトリ"
+      }
+    ],
+    "source": "researchmap",
+    "verified": "web:title+author+year"
+  },
+  "articles/2016_Bugaeva Anna_On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization": {
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://journal.fi/store/article/view/59475",
+        "label": "Studia Orientalia (open access)"
+      },
+      {
+        "type": "openalex",
+        "url": "https://openalex.org/W2766385315",
+        "label": "OpenAlex"
+      }
+    ],
+    "source": "openalex",
+    "verified": "web:title+author+year"
+  },
+  "articles/2025_藤田護_金成マツ筆録ノートのアイヌ語口承文学テクストの原文対訳及び解釈：散文説話「頭の禿げた白いかさぶたがフケになっている女性のウェペケㇾ」": {
+    "doi": "10.20776/S21857148-27-P275",
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://opac.ll.chiba-u.jp/da/curator/900123772/",
+        "label": "千葉大学学術成果リポジトリ"
+      }
+    ],
+    "source": "researchmap",
+    "verified": "web:title+author+year"
+  },
+  "articles/2021_Barrie Michael & Mathieu Éric_Noun Incorporation and Polysynthesis": {
+    "doi": "10.4324/9781315210636-11",
+    "links": [],
+    "source": "crossref",
+    "verified": "web:title+author+year"
+  },
+  "articles/2025_フダー・クラーラ_主観性から見たアイヌ語の所有表現の考察": {
+    "doi": "10.14943/rjgshhs.24.l241",
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://hdl.handle.net/2115/94041",
+        "label": "HUSCAP (Hokkaido University)"
+      },
+      {
+        "type": "openalex",
+        "url": "https://openalex.org/W4406602092",
+        "label": "OpenAlex"
+      }
+    ],
+    "source": "huscap",
+    "verified": "web:title+author+year"
+  },
+  "articles/2021_藤田護_金成マツ筆録ノートのアイヌ語口承文学テクストの原文対訳及び解釈：金田一京助宛ノート散文説話「カワウソが私に化けるウェペケㇾ」（前半）": {
+    "doi": "10.20776/S21857148-23-P143",
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://opac.ll.chiba-u.jp/da/curator/900120293/",
+        "label": "千葉大学学術成果リポジトリ"
+      }
+    ],
+    "source": "researchmap",
+    "verified": "web:title+author+year"
+  },
+  "articles/2017_Senuma Hajime & Aizawa Akiko_Toward Universal Dependencies for Ainu": {
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://aclanthology.org/W17-0417/",
+        "label": "ACL Anthology"
+      },
+      {
+        "type": "openalex",
+        "url": "https://openalex.org/W2724138346",
+        "label": "OpenAlex"
+      }
+    ],
+    "source": "aclanthology",
+    "verified": "web:title+author+year"
+  },
+  "articles/2014_Bugaeva Anna_Polysynthesis in Ainu": {
+    "doi": "10.1093/oxfordhb/9780199683208.013.48",
+    "links": [],
+    "source": "crossref",
+    "verified": "web:title+author+year"
+  },
+  "articles/2020_Matsuura Kohei et al_Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language": {
+    "doi": "10.48550/arXiv.2002.06675",
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://aclanthology.org/2020.lrec-1.319/",
+        "label": "ACL Anthology (LREC 2020)"
+      },
+      {
+        "type": "openalex",
+        "url": "https://openalex.org/W3028846133",
+        "label": "OpenAlex"
+      }
+    ],
+    "source": "openalex",
+    "verified": "web:title+author+year"
+  },
+  "articles/2025_Sato Tomomi_Basic Sentence Structures in Ainu": {
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://journal.fi/store/article/view/179230",
+        "label": "Studia Orientalia 126 (2025), open access"
+      }
+    ],
+    "source": "journalfi",
+    "verified": "web:title+author+year"
+  },
+  "articles/2025_Bugaeva Anna_A Diachronic Study of Anticausatives in Ainu": {
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://journal.fi/store/article/view/179222",
+        "label": "Studia Orientalia Electronica 126 (2025), open access"
+      }
+    ],
+    "source": "journalfi",
+    "verified": "web:title+author+year"
+  },
+  "articles/2024_ヌルミ・ユッシ_アイヌの物語における否定発話：ストーリー展開に関する役割として": {
+    "doi": "10.14943/110535",
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://eprints.lib.hokudai.ac.jp/dspace/handle/2115/92085",
+        "label": "Hokkaido University HUSCAP"
+      }
+    ],
+    "source": "huscap",
+    "verified": "web:title+author+year"
+  },
+  "articles/2021_Dal Corso Elia_The Development of Analytic Negatives in Sakhalin Ainu": {
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://web.stanford.edu/group/cslipublications/cslipublications/site/9781684000722.shtml",
+        "label": "CSLI Publications — Japanese/Korean Linguistics 28 (2021)"
+      }
+    ],
+    "source": "publisher",
+    "verified": "web:title+author+year"
+  },
+  "articles/2020_吉川佳見_アイヌ語における完了表現があらわす証拠性": {
+    "doi": null,
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://hdl.handle.net/2115/77597",
+        "label": "HUSCAP (Hokkaido University)"
+      },
+      {
+        "type": "researchmap",
+        "url": "https://researchmap.jp/y.yoshikawa/published_papers/31672246",
+        "label": "researchmap"
+      }
+    ],
+    "source": "huscap",
+    "verified": "web:title+author+year"
+  },
+  "articles/2023_Ijas Silja_Language revitalization through lexical modernization and neologism-coining in Ainu": {
+    "doi": "10.14943/Jais.3.117",
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://hdl.handle.net/2115/88326",
+        "label": "HUSCAP (Hokkaido University)"
+      }
+    ],
+    "source": "huscap",
+    "verified": "web:title+author+year"
+  },
+  "articles/2014_ブガエワ・アンナ_北海道南部のアイヌ語": {
+    "doi": null,
+    "links": [
+      {
+        "type": "repository",
+        "url": "http://hdl.handle.net/2065/48198",
+        "label": "Waseda University repository"
+      },
+      {
+        "type": "researchmap",
+        "url": "https://researchmap.jp/read0144912/misc/20164083",
+        "label": "researchmap (Anna Bugaeva)"
+      }
+    ],
+    "source": "waseda",
+    "verified": "web:title+author+year"
+  },
+  "articles/2010_井筒勝信_アイヌ語学習・教育用資料の電算化・集積・公開を可能にする情報ネットワーク構築のための基礎研究": {
+    "doi": "10.32150/00009883",
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://hokkyodai.repo.nii.ac.jp/records/9889",
+        "label": "北海道教育大学学術リポジトリ"
+      },
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1390013352874268800",
+        "label": "CiNii Research"
+      }
+    ],
+    "source": "cinii",
+    "verified": "web:title+author+year"
+  },
+  "articles/2022_藤田護_金成マツ筆録ノートのアイヌ語口承文学テクストの原文対訳及び解釈：金田一京助宛ノート散文説話「カワウソが私に化けるウェペケㇾ」（後半）": {
+    "doi": "10.20776/S21857148-24-P377",
+    "links": [
+      {
+        "type": "repository",
+        "url": "https://opac.ll.chiba-u.jp/da/curator/900121570/",
+        "label": "千葉大学学術成果リポジトリ"
+      }
+    ],
+    "source": "researchmap",
+    "verified": "web:title+author+year"
+  },
+  "articles/2025_Dal Corso Elia_The Mixed Nominative-Neutral-Inverse Morphological Alignment of Sakhalin Ainu": {
+    "doi": null,
+    "links": [
+      {
+        "type": "publisher",
+        "url": "https://journal.fi/store/article/view/179223",
+        "label": "Studia Orientalia 126 (2025)"
+      }
+    ],
+    "source": "journalfi",
+    "verified": "web:title+author+year"
+  }
+}
