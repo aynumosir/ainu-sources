@@ -1565,7 +1565,11 @@ const RESEARCHMAP_PERMALINKS = [
 	'iii', 'utari', 'read0131605', 'akemi6oshino', 'mfujita1023',
 	'ksmtyshs', 'read0131604', 'takuya_inoue', '_retar', 'uchida_junko0069',
 	// round 2 (2026-06-02): typology + place-names + Ainu-NLP/documentation
-	'read0015553', 'read0166431', 'ptaszynski', 'read0021800', 'read0021804', 'nakagawanatuko'
+	'read0015553', 'read0166431', 'ptaszynski', 'read0021800', 'read0021804', 'nakagawanatuko',
+	// round 3 (2026-06-22): verified via api.researchmap.jp
+	// nowakowski (Sakhalin-Ainu ASR/NLP), lukemasyk (上野昌之, revitalization),
+	// read0171971 (板橋義三, Sakhalin/Hokkaido Ainu historical-comparative)
+	'nowakowski', 'lukemasyk', 'read0171971'
 ];
 export async function collectResearchmap(permalinks: string[]): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
