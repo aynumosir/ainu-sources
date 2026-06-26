@@ -1113,6 +1113,30 @@ const BOOK_TITLES: Record<string, { title: string; titleEn: string | null }> = {
 	'1936_Kindaichi': { title: 'アイヌ語法概説', titleEn: 'An Outline of Ainu Grammar' }
 };
 
+// Public alternatives for the ainu-grammar imports (the repo is private). Keyed
+// by provenancePath (books/<dir> | articles/<base>); every link was verified to
+// resolve to the matching work (CiNii by-title pass + web research, author+year+
+// title checked). `title`/`titleEn` fill the placeholder-titled famous books.
+// See scripts/enrich-ainu-grammar.ts. Survives reseed.
+type AgLink = {
+	title?: string;
+	titleEn?: string;
+	doi?: string | null;
+	links?: { type: string; url: string; label?: string }[];
+	source?: string;
+};
+const AG_LINKS_FILE = path.join(import.meta.dir, 'data', 'ainu-grammar-links.json');
+const AG_LINKS: Record<string, AgLink> = fs.existsSync(AG_LINKS_FILE)
+	? JSON.parse(fs.readFileSync(AG_LINKS_FILE, 'utf8'))
+	: {};
+function attachAgLinks(sourceId: string, provenancePath: string, doi: string | null | undefined) {
+	const info = AG_LINKS[provenancePath];
+	if (!info) return;
+	let so = 0;
+	if (doi) linkRows.push({ id: uuid(), sourceId, type: 'doi', label: `doi:${doi}`, url: `https://doi.org/${doi}`, sortOrder: so++ });
+	for (const l of info.links ?? []) linkRows.push({ id: uuid(), sourceId, type: l.type, label: l.label ?? null, url: l.url, sortOrder: so++ });
+}
+
 function seedGrammar() {
 	let count = 0;
 	// --- books (directories named YYYY_Author) ---
@@ -1127,13 +1151,16 @@ function seedGrammar() {
 			const [, year, authorRaw] = m;
 			const author = authorRaw.replace(/([a-z])([A-Z])/g, '$1 $2');
 			const known = BOOK_TITLES[dir];
+			const provenancePath = `books/${dir}`;
+			const ag = AG_LINKS[provenancePath];
 			const id = uuid();
 			const slug = uniqueSlug(slugify(dir));
+			const bookTitle = known?.title ?? ag?.title ?? `${author}（${year}）`;
 			sourceRows.push({
 				id,
 				slug,
-				title: known?.title ?? `${author}（${year}）`,
-				titleEn: known?.titleEn ?? `${author} (${year})`,
+				title: bookTitle,
+				titleEn: known?.titleEn ?? ag?.titleEn ?? `${author} (${year})`,
 				category: 'secondary',
 				type: 'grammar',
 				author,
@@ -1142,12 +1169,14 @@ function seedGrammar() {
 				scripts: ['latn'],
 				license: null,
 				provenanceRepo: 'ainu-grammar',
-				provenancePath: `books/${dir}`,
+				provenancePath,
+				externalIds: ag?.doi ? { doi: ag.doi } : null,
 				createdAt: new Date(),
 				updatedAt: new Date()
 			});
 			addPersons(id, author, 'author');
-			attachTags(id, known?.title, 'grammar');
+			attachTags(id, bookTitle, 'grammar');
+			attachAgLinks(id, provenancePath, ag?.doi);
 			count += 1;
 		}
 	}
@@ -1165,6 +1194,8 @@ function seedGrammar() {
 			const [, year, authorRaw, titleRaw] = m;
 			const author = authorRaw.trim();
 			const title = titleRaw.trim();
+			const provenancePath = `articles/${base}`;
+			const ag = AG_LINKS[provenancePath];
 			const id = uuid();
 			const slug = uniqueSlug(`${year}-${slugify(author) || 'x'}-${slugify(title) || djb2(base)}`);
 			const isJa = hasCJK(title);
@@ -1181,12 +1212,14 @@ function seedGrammar() {
 				scripts: ['latn'],
 				license: null,
 				provenanceRepo: 'ainu-grammar',
-				provenancePath: `articles/${base}`,
+				provenancePath,
+				externalIds: ag?.doi ? { doi: ag.doi } : null,
 				createdAt: new Date(),
 				updatedAt: new Date()
 			});
 			addPersons(id, author, 'author');
 			attachTags(id, title, 'grammar');
+			attachAgLinks(id, provenancePath, ag?.doi);
 			count += 1;
 		}
 	}

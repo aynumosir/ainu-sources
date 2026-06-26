@@ -19,7 +19,8 @@
 		PLACE_ROLE_LABELS,
 		RELATION_TYPE_LABELS,
 		RELATION_TYPE_LABELS_IN,
-		YEAR_CERTAINTY_LABELS
+		YEAR_CERTAINTY_LABELS,
+		PRIVATE_PROVENANCE_REPOS
 	} from '$lib/constants';
 
 	let { data } = $props();
@@ -289,7 +290,9 @@
 				<p class="mt-2 text-xs text-stone-500">
 					{m.source_provenance_note()}
 					<span class="font-mono">{s.provenanceRepo}</span>
-					{#if s.provenancePath}<br /><span class="break-all font-mono text-stone-400">{s.provenancePath}</span>{/if}
+					{#if s.provenancePath && !PRIVATE_PROVENANCE_REPOS.has(s.provenanceRepo)}<br /><span
+							class="break-all font-mono text-stone-400">{s.provenancePath}</span
+						>{/if}
 				</p>
 			</div>
 		</aside>
