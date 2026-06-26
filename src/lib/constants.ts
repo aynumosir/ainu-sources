@@ -201,6 +201,7 @@ export const YEAR_CERTAINTY_LABELS: Record<string, L> = {
 export const TAG_CATEGORY_LABELS: Record<string, L> = {
 	topic: { en: 'Topic', ja: '主題', ru: 'Тема' },
 	genre: { en: 'Genre', ja: 'ジャンル', ru: 'Жанр' },
+	technology: { en: 'Language technology', ja: '言語技術', ru: 'Языковые технологии' },
 	feature: { en: 'Feature', ja: '特徴', ru: 'Особенность' },
 	dialect: { en: 'Dialect', ja: '方言', ru: 'Диалект' }
 };

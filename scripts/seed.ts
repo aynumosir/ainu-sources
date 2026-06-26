@@ -882,7 +882,17 @@ const TAG_DEFS: { slug: string; name: string; nameEn: string; category: string; 
 	{ slug: 'folktale', name: '昔話・散文説話', nameEn: 'Folktale / prose tale', category: 'genre', match: /昔話|民譚|民話|説話|folktale|uwepeker|ウエペケ|ウウェペケ|トゥイタ|tuyta/i },
 	{ slug: 'song', name: '歌謡・ウポポ', nameEn: 'Song', category: 'genre', match: /ウポポ|upopo|リムセ|rimse|歌謡|子守歌|イヨンルイカ|iyonruyka|love.?song|歌曲/i },
 	{ slug: 'conversation', name: '会話', nameEn: 'Conversation', category: 'genre', match: /会話|conversation|phrasebook/i },
-	{ slug: 'religious-text', name: '宗教テキスト', nameEn: 'Religious text', category: 'genre', match: /聖書|bible|gospel|新約|讃美歌/i }
+	{ slug: 'religious-text', name: '宗教テキスト', nameEn: 'Religious text', category: 'genre', match: /聖書|bible|gospel|新約|讃美歌/i },
+	// --- language technology (言語技術) — NLP/AI methods, models & resources. A
+	// distinct dimension from linguistic subfields: an Ainu LLM/OCR/MT paper or a
+	// Hugging Face model belongs here. Model-name patterns (gpt2/mt5/deberta/
+	// speecht5…) are matched because HF records have only a terse model name as title.
+	{ slug: 'nlp', name: '自然言語処理', nameEn: 'Natural language processing', category: 'technology', match: /自然言語処理|natural language processing|\bNLP\b|computational linguistic|計算言語学|形態素解析|universal dependenc|言語資源|language resource|人工知能|\bAI\b|機械学習|machine learning|深層学習|deep learning|ニューラルネット|neural network/i },
+	{ slug: 'ocr', name: '文字認識（OCR）', nameEn: 'OCR (text recognition)', category: 'technology', match: /\bOCR\b|文字認識|光学文字/i },
+	{ slug: 'machine-translation', name: '機械翻訳', nameEn: 'Machine translation', category: 'technology', match: /機械翻訳|machine translation|neural machine translation|\bNMT\b|統計的機械翻訳|ニューラル.{0,3}翻訳|翻訳システム|翻訳モデル|translation[ _]model|ainutrans|ainu.?2.?japanese/i },
+	{ slug: 'speech-recognition', name: '音声認識', nameEn: 'Speech recognition', category: 'technology', match: /音声認識|speech recognition|\bASR\b|end.to.end speech/i },
+	{ slug: 'speech-synthesis', name: '音声合成', nameEn: 'Speech synthesis', category: 'technology', match: /音声合成|text.to.speech|\bTTS\b|speecht5/i },
+	{ slug: 'language-model', name: '言語モデル', nameEn: 'Language model', category: 'technology', match: /言語モデル|large language model|大規模言語モデル|\bLLM\b|\bGPT\b|gpt-?2|\bBERT\b|roberta|deberta|\bm?t5\b|byt5|事前学習|pretrained|transformer/i }
 ];
 
 function getTag(def: (typeof TAG_DEFS)[number]): string {
@@ -1826,7 +1836,7 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 		// recording dialect. Only real gazetteer place-names match; titles with an
 		// institutional "北海道大学" context are stripped first to avoid a false pin.
 		addPlaces(id, geoSubjectText(rec.title), 'subject');
-		attachTags(id, rec.title, cls.type); // title + NORMALIZED type (dictionary→lexicon…); raw rec.type still holds legacy 'grammar-article'
+		attachTags(id, rec.title, cls.type, rec.venue); // title + NORMALIZED type (dictionary→lexicon…) + venue (言語処理学会/LREC→nlp); raw rec.type still holds legacy 'grammar-article'
 		attachVenueTags(id, rec.venue); // guarded journal/series signal (地名研究→placenames…)
 		added += 1;
 	}
