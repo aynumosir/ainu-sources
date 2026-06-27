@@ -29,6 +29,13 @@
       "when": 1782595975122,
       "tag": "0003_smart_harrier",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1782597533682,
+      "tag": "0004_light_alex_power",
+      "breakpoints": true
     }
   ]
 }
