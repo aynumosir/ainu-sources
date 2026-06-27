@@ -12,7 +12,9 @@
 //   else                       ~/.ainu-sources/backups
 // Writing inside the repo workspace is refused unless ALLOW_IN_REPO_BACKUP=1.
 //
-// Encryption at rest (first match wins; best-effort, never fails the backup):
+// Encryption at rest (first match wins). FAILS CLOSED: if any of these is set
+// but the tool is missing or the encrypt step errors, the backup ABORTS and no
+// plaintext dump is left on disk (see the fail-closed block below):
 //   AINU_BACKUP_AGE_RECIPIENT=<age1…>   age -r  → *.sql.age
 //   AINU_BACKUP_GPG_RECIPIENT=<keyid>   gpg -e  → *.sql.gpg
 //   AINU_BACKUP_PASSPHRASE=<pass>       gpg -c  → *.sql.gpg (symmetric)
@@ -26,7 +28,7 @@
 //
 // Run: bun run backup   (uses the `turso` CLI; auth via your turso login)
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync, unlinkSync, chmodSync } from 'node:fs';
+import { mkdirSync, writeFileSync, unlinkSync, chmodSync, existsSync } from 'node:fs';
 import { homedir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -70,7 +72,7 @@ if (!dump.includes('CREATE TABLE') || !/INSERT INTO ["']?sources/.test(dump)) {
 
 writeFileSync(out, dump, { mode: 0o600 });
 
-// --- At-rest encryption: best-effort, never fail the backup ------------------
+// --- At-rest encryption: FAIL CLOSED when requested but unavailable ----------
 const has = (bin: string): boolean => {
 	try {
 		execFileSync(bin, ['--version'], { stdio: 'ignore' });
@@ -83,49 +85,73 @@ const has = (bin: string): boolean => {
 const ageRcpt = process.env.AINU_BACKUP_AGE_RECIPIENT;
 const gpgRcpt = process.env.AINU_BACKUP_GPG_RECIPIENT;
 const passphrase = process.env.AINU_BACKUP_PASSPHRASE;
+const encryptionRequested = !!(ageRcpt || gpgRcpt || passphrase);
+
+// When encryption was explicitly requested but cannot be completed, NEVER leave
+// an unencrypted dump of Better-Auth secrets on disk. Delete the plaintext dump
+// and any partial encrypted output, then abort nonzero — fail closed, not open.
+const bail = (reason: string): never => {
+	for (const p of [out, `${out}.age`, `${out}.gpg`]) {
+		try {
+			if (existsSync(p)) unlinkSync(p);
+		} catch {
+			/* best-effort cleanup */
+		}
+	}
+	console.error(
+		`✗ Refusing to keep an unencrypted backup: encryption was requested but failed.\n` +
+			`    ${reason}\n` +
+			`  Deleted the plaintext dump and any partial encrypted output. Aborting.`
+	);
+	process.exit(1);
+};
 
 let finalPath = out;
-let restore = `turso db shell <new> < ${out}`;
-try {
-	if (ageRcpt && has('age')) {
-		finalPath = `${out}.age`;
-		execFileSync('age', ['-r', ageRcpt, '-o', finalPath, out]);
-		chmodSync(finalPath, 0o600);
-		unlinkSync(out);
-		restore = `age -d -i <identity> ${finalPath} | turso db shell <new>`;
-	} else if (gpgRcpt && has('gpg')) {
-		finalPath = `${out}.gpg`;
-		execFileSync('gpg', [
-			'--batch', '--yes', '--trust-model', 'always',
-			'--encrypt', '--recipient', gpgRcpt, '--output', finalPath, out
-		]);
-		chmodSync(finalPath, 0o600);
-		unlinkSync(out);
-		restore = `gpg -d ${finalPath} | turso db shell <new>`;
-	} else if (passphrase && has('gpg')) {
-		finalPath = `${out}.gpg`;
-		execFileSync(
-			'gpg',
-			['--batch', '--yes', '--pinentry-mode', 'loopback', '--passphrase-fd', '0', '-c', '--output', finalPath, out],
-			{ input: passphrase }
-		);
-		chmodSync(finalPath, 0o600);
-		unlinkSync(out);
-		restore = `gpg -d ${finalPath} | turso db shell <new>`;
-	} else {
-		console.warn(
-			'⚠ Backup is UNENCRYPTED. It contains Better-Auth secrets (emails, sessions,\n' +
-				'  OAuth tokens, password hashes). Configure one of:\n' +
-				'    AINU_BACKUP_AGE_RECIPIENT=age1…   (needs `age`)\n' +
-				'    AINU_BACKUP_GPG_RECIPIENT=<keyid>  (needs `gpg`)\n' +
-				'    AINU_BACKUP_PASSPHRASE=<pass>      (needs `gpg`, symmetric)'
-		);
+let restore = `turso db shell <new> < "${out}"`;
+if (!encryptionRequested) {
+	console.warn(
+		'⚠ Backup is UNENCRYPTED. It contains Better-Auth secrets (emails, sessions,\n' +
+			'  OAuth tokens, password hashes). Configure one of:\n' +
+			'    AINU_BACKUP_AGE_RECIPIENT=age1…   (needs `age`)\n' +
+			'    AINU_BACKUP_GPG_RECIPIENT=<keyid>  (needs `gpg`)\n' +
+			'    AINU_BACKUP_PASSPHRASE=<pass>      (needs `gpg`, symmetric)'
+	);
+} else {
+	// Only encryption runs in this try, so any throw means the requested
+	// encryption failed → bail (delete plaintext + partial, exit 1).
+	try {
+		if (ageRcpt) {
+			if (!has('age')) bail('AINU_BACKUP_AGE_RECIPIENT set but `age` is not installed');
+			finalPath = `${out}.age`;
+			execFileSync('age', ['-r', ageRcpt, '-o', finalPath, out]);
+			chmodSync(finalPath, 0o600);
+			unlinkSync(out);
+			restore = `age -d -i <identity> "${finalPath}" | turso db shell <new>`;
+		} else if (gpgRcpt) {
+			if (!has('gpg')) bail('AINU_BACKUP_GPG_RECIPIENT set but `gpg` is not installed');
+			finalPath = `${out}.gpg`;
+			execFileSync('gpg', [
+				'--batch', '--yes', '--trust-model', 'always',
+				'--encrypt', '--recipient', gpgRcpt, '--output', finalPath, out
+			]);
+			chmodSync(finalPath, 0o600);
+			unlinkSync(out);
+			restore = `gpg -d "${finalPath}" | turso db shell <new>`;
+		} else if (passphrase) {
+			if (!has('gpg')) bail('AINU_BACKUP_PASSPHRASE set but `gpg` is not installed');
+			finalPath = `${out}.gpg`;
+			execFileSync(
+				'gpg',
+				['--batch', '--yes', '--pinentry-mode', 'loopback', '--passphrase-fd', '0', '-c', '--output', finalPath, out],
+				{ input: passphrase }
+			);
+			chmodSync(finalPath, 0o600);
+			unlinkSync(out);
+			restore = `gpg -d "${finalPath}" | turso db shell <new>`;
+		}
+	} catch (err) {
+		bail((err as Error).message);
 	}
-} catch (err) {
-	// Encryption failed — the plaintext dump is already safely out of repo.
-	console.warn(`⚠ Encryption step failed (${(err as Error).message}); kept plaintext ${out}`);
-	finalPath = out;
-	restore = `turso db shell <new> < ${out}`;
 }
 
 const mb = (dump.length / 1e6).toFixed(1);
