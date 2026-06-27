@@ -56,6 +56,7 @@ export const TYPE_LABELS: Record<string, L> = {
 	grammar: { en: 'Grammar', ja: '文法書', ru: 'Грамматика' },
 	book: { en: 'Book / monograph', ja: '単行本・著書', ru: 'Книга / монография' },
 	article: { en: 'Article', ja: '論文・記事', ru: 'Статья' },
+	presentation: { en: 'Conference presentation', ja: '学会発表', ru: 'Доклад' },
 	thesis: { en: 'Thesis / dissertation', ja: '学位論文', ru: 'Диссертация' },
 	bibliography: { en: 'Bibliography', ja: '文献目録', ru: 'Библиография' },
 	// --- corpora & data ---
@@ -243,7 +244,7 @@ export const TYPE_GROUPS: { key: string; label: L; types: string[] }[] = [
 	{
 		key: 'literature',
 		label: { en: 'Research literature', ja: '研究文献', ru: 'Научная литература' },
-		types: ['grammar', 'book', 'article', 'thesis', 'bibliography']
+		types: ['grammar', 'book', 'article', 'presentation', 'thesis', 'bibliography']
 	},
 	{
 		key: 'texts',

@@ -1804,5 +1804,39 @@
     ],
     "source": "journalfi",
     "verified": "web:title+author+year"
+  },
+  "presentations/2026_白鳥詩織_口蓋化子音の大幅な改訂に向けたアイヌ祖語 *ia の提唱": {
+    "doi": null,
+    "links": [
+      {
+        "type": "website",
+        "url": "https://researchmap.jp/i_mage/presentations/52203915",
+        "label": "researchmap"
+      },
+      {
+        "type": "pdf",
+        "url": "https://researchmap.jp/i_mage/presentations/52203915/attachment_file.pdf",
+        "label": "発表資料 (PDF)"
+      }
+    ],
+    "source": "researchmap",
+    "verified": "researchmap:title+author+year"
+  },
+  "presentations/2026_春日勇人_深澤・小野（2025）の分類手法を拡張したアイヌ語多地点方言分類―語彙特徴・規則性特徴・地理情報の統合による75地点の計量的分析―": {
+    "doi": null,
+    "links": [
+      {
+        "type": "website",
+        "url": "https://researchmap.jp/hayatokasuga/presentations/54228259",
+        "label": "researchmap"
+      },
+      {
+        "type": "pdf",
+        "url": "https://researchmap.jp/hayatokasuga/presentations/54228259/attachment_file.pdf",
+        "label": "ポスター (PDF)"
+      }
+    ],
+    "source": "researchmap",
+    "verified": "researchmap:title+author+year"
   }
 }

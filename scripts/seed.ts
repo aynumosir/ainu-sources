@@ -328,6 +328,8 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		小野洋平: { nameEn: 'Ono Yohei', researchmap: 'ono_yohei' },
 		切替英雄: { nameEn: 'Kirikae Hideo', researchmap: 'read0049566' }, // verified api.researchmap.jp 切替/英雄
 		大坂拓: { nameEn: 'Osaka Taku', researchmap: 'osaka_taku' }, // verified api.researchmap.jp 大坂/拓
+		春日勇人: { nameEn: 'Kasuga Hayato', researchmap: 'hayatokasuga' }, // LSJ172 P-11 (アイヌ語方言分類)
+		白鳥詩織: { nameEn: 'Shiratori Shiori', researchmap: 'i_mage' }, // LSJ172 F-3 (アイヌ祖語 *ia)
 		'Anna Bugaeva': { researchmap: 'read0144912' },
 		// keyed by canonical slug so it applies no matter which name form created the person
 		'sato-tomomi': { researchmap: 'ainlingsat' },
@@ -1219,6 +1221,49 @@ function seedGrammar() {
 			});
 			addPersons(id, author, 'author');
 			attachTags(id, title, 'grammar');
+			attachAgLinks(id, provenancePath, ag?.doi);
+			count += 1;
+		}
+	}
+	// --- presentations (conference talks/posters; files YYYY_Author_Title.{pdf,ocr}) ---
+	const presDir = path.join(GRAMMAR_DIR, 'presentations');
+	if (fs.existsSync(presDir)) {
+		const seen = new Set<string>();
+		for (const file of fs.readdirSync(presDir)) {
+			if (file === 'ocr' || file === 'NAMING.md' || file.startsWith('.')) continue;
+			const base = file.replace(/\.(pdf|ocr|md|txt)$/i, '');
+			if (seen.has(base)) continue;
+			seen.add(base);
+			const m = base.match(/^(\d{4})_([^_]+)_(.+)$/);
+			if (!m) continue;
+			const [, year, authorRaw, titleRaw] = m;
+			const author = authorRaw.trim();
+			const title = titleRaw.trim();
+			const provenancePath = `presentations/${base}`;
+			const ag = AG_LINKS[provenancePath];
+			const id = uuid();
+			const slug = uniqueSlug(`${year}-${slugify(author) || 'x'}-${slugify(title) || djb2(base)}`);
+			const isJa = hasCJK(title);
+			sourceRows.push({
+				id,
+				slug,
+				title,
+				titleEn: isJa ? null : title,
+				category: 'secondary',
+				type: 'presentation',
+				author,
+				...parseYear(year),
+				languages: isJa ? ['ain', 'jpn'] : ['ain', 'eng'],
+				scripts: ['latn'],
+				license: null,
+				provenanceRepo: 'ainu-grammar',
+				provenancePath,
+				externalIds: ag?.doi ? { doi: ag.doi } : null,
+				createdAt: new Date(),
+				updatedAt: new Date()
+			});
+			addPersons(id, author, 'author');
+			attachTags(id, title, 'presentation');
 			attachAgLinks(id, provenancePath, ag?.doi);
 			count += 1;
 		}
