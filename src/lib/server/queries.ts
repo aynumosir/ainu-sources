@@ -736,18 +736,25 @@ async function writeLinksAndTags(tx: Tx, sourceId: string, input: SourceInput) {
 	const existingLinks = await tx.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
 	const linkKey = (type: string, url: string) => `${type}\n${url}`;
 	const byKey = new Map(existingLinks.map((l) => [linkKey(l.type, l.url), l]));
-	const links = (input.links ?? []).filter((l) => l.url?.trim());
-	for (let i = 0; i < links.length; i++) {
-		const l = links[i];
-		const type = l.type || 'website';
-		const url = l.url.trim();
-		const label = l.label?.trim() || null;
-		const existing = byKey.get(linkKey(type, url));
+	// Collapse duplicate (type, url) entries within the submission so a repeated
+	// link can never be inserted twice (there is no DB unique index yet). Last
+	// label wins; the earliest submitted position is kept for sortOrder.
+	const incoming = new Map<string, { type: string; url: string; label: string | null; sortOrder: number }>();
+	(input.links ?? [])
+		.filter((l) => l.url?.trim())
+		.forEach((l, i) => {
+			const type = l.type || 'website';
+			const url = l.url.trim();
+			const key = linkKey(type, url);
+			incoming.set(key, { type, url, label: l.label?.trim() || null, sortOrder: incoming.get(key)?.sortOrder ?? i });
+		});
+	for (const l of incoming.values()) {
+		const existing = byKey.get(linkKey(l.type, l.url));
 		if (existing) {
 			// Update presentation only; preserve notes and any other stored columns.
-			await tx.update(sourceLinks).set({ label, sortOrder: i }).where(eq(sourceLinks.id, existing.id));
+			await tx.update(sourceLinks).set({ label: l.label, sortOrder: l.sortOrder }).where(eq(sourceLinks.id, existing.id));
 		} else {
-			await tx.insert(sourceLinks).values({ sourceId, type, label, url, sortOrder: i });
+			await tx.insert(sourceLinks).values({ sourceId, type: l.type, label: l.label, url: l.url, sortOrder: l.sortOrder });
 		}
 	}
 
