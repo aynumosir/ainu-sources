@@ -8,6 +8,7 @@
 	import SourceMap from '$lib/components/SourceMap.svelte';
 	import CiteBox from '$lib/components/CiteBox.svelte';
 	import { formatYear, formatCount, asArray, youtubeId } from '$lib/format';
+	import { safeUrl } from '$lib/safe-url';
 	import {
 		tl,
 		TYPE_LABELS,
@@ -176,7 +177,7 @@
 									class="inline-flex shrink-0 items-center rounded bg-stone-100 px-1.5 py-0.5 text-xs font-medium text-stone-600 ring-1 ring-inset ring-stone-200"
 									>{tl(LINK_TYPE_LABELS, link.type)}</span
 								>
-								<a href={link.url} target="_blank" rel="noopener noreferrer" class="link break-all"
+								<a href={safeUrl(link.url) ?? undefined} target="_blank" rel="noopener noreferrer" class="link break-all"
 									>{link.label || link.url}</a
 								>
 							</li>
