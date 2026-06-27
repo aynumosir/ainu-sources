@@ -46,7 +46,7 @@ so run it for initial population only).
 bun install
 cp .env.example .env          # the defaults use a local file:local.db
 bun run db:migrate            # apply migrations to local.db
-bun run seed                  # populate from the sibling data repos
+ALLOW_LEGACY_WIPE=1 bun run seed  # populate from the sibling data repos (wipes + rebuilds; gated)
 bun run dev                   # http://localhost:5173
 ```
 
@@ -58,7 +58,7 @@ bun run dev                   # http://localhost:5173
    ```sh
    turso db create ainu-sources
    DATABASE_URL=libsql://… DATABASE_AUTH_TOKEN=… bun run db:migrate
-   DATABASE_URL=libsql://… DATABASE_AUTH_TOKEN=… bun run seed
+   DATABASE_URL=libsql://… DATABASE_AUTH_TOKEN=… ALLOW_LEGACY_WIPE=1 bun run seed
    ```
 2. Set Worker secrets:
    ```sh

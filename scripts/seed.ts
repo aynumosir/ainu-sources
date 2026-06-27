@@ -2526,6 +2526,17 @@ async function planDiff(desired: Record<string, Row[]>) {
 async function main() {
 	const PLAN = process.argv.includes('--plan') || process.env.PLAN === '1';
 	console.log('AINU_ROOT =', AINU_ROOT, PLAN ? '(PLAN MODE — read-only)' : '');
+	// Phase-0 safety gate: the non-PLAN path is a destructive full wipe + rebuild
+	// (wipe() db.delete's every domain table). Refuse to run it unless explicitly
+	// authorized, so `bun run seed` can never silently destroy prod. PLAN/--plan is
+	// read-only and intentionally NOT gated.
+	if (!PLAN && process.env.ALLOW_LEGACY_WIPE !== '1') {
+		throw new Error(
+			'Refusing destructive seed: this wipes every domain table then rebuilds and can ' +
+				'destroy production data. Use `bun run seed:plan` (or --plan / PLAN=1) for a ' +
+				'read-only diff, or set ALLOW_LEGACY_WIPE=1 to explicitly authorize the wipe.'
+		);
+	}
 	const preserved = PLAN ? null : (console.log('Capturing user content (revisions + edits) before wipe…'), await captureUserContent());
 	if (!PLAN) {
 		console.log('Wiping domain tables…');
