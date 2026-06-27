@@ -1,36 +1,1295 @@
 [
-  { "num": "siror", "title": "アイヌと自然デジタル図鑑", "titleEn": "Ainu and Nature Digital Encyclopedia (SIROR)", "authors": [], "publisher": "国立アイヌ民族博物館", "year": null, "type": "online-dictionary", "category": "tool", "langs": ["ain", "jpn"], "scripts": ["latn", "kana", "kanji"], "url": "https://ainugo.nam.go.jp/siror/", "urlType": "website", "summary": "国立アイヌ民族博物館による、アイヌ文化と関わりの深い植物・動物などをアイヌ語名から検索できるデジタル図鑑。" },
-  { "num": "riwka", "title": "アイヌ語で自然かんさつ図鑑", "titleEn": null, "authors": [], "publisher": "帯広百年記念館", "year": null, "type": "online-dictionary", "category": "tool", "langs": ["ain", "jpn"], "scripts": ["latn", "kana", "kanji"], "url": "http://www.museum-obihiro.jp/riwka/nature", "urlType": "website", "summary": "帯広百年記念館アイヌ民族文化情報センターによる、十勝地方に伝わる野生生物のアイヌ語名称や伝承を紹介するオンライン図鑑。" },
-  { "num": "orusipe", "title": "オルシペスウォプ（お話の箱）", "titleEn": "Oruspe Suwop (Box of Stories)", "authors": [], "publisher": "アイヌ文化財団", "year": null, "type": "video", "category": "tool", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "url": "https://www.ff-ainu.or.jp/web/learn/language/animation/index.html", "urlType": "video", "summary": "アイヌ文化振興・研究推進機構（現・アイヌ文化財団）が制作したアイヌ民族のお話アニメ。十勝の物語も3篇含まれる。" },
-  { "num": "kogaki", "title": "アイヌ語小文字発音講座", "titleEn": null, "authors": [], "publisher": "北海道新聞社", "year": null, "type": "video", "category": "tool", "langs": ["ain", "jpn"], "scripts": ["kana"], "url": "https://www.hokkaido-np.co.jp/f_movies/ainugo-kouza/", "urlType": "video", "summary": "北海道新聞による、アイヌ語の小文字カナの発音方法を動画で解説する講座。" },
-  { "num": "mintara-web", "title": "まなぶん ミンタラ", "titleEn": null, "authors": [], "publisher": "北海道新聞社", "year": null, "type": "website", "category": "tool", "langs": ["jpn", "ain"], "scripts": ["kanji", "kana"], "url": "https://www.hokkaido-np.co.jp/manadigi/md_read_know/md_mintara/", "urlType": "website", "summary": "北海道新聞によるイラスト付きでアイヌの歴史・文化を分かりやすく紹介する連載。書籍『ミンタラ』①〜③の元となった。" },
-  { "num": "pon-kampisos", "title": "アイヌ文化紹介小冊子（ポン カンピソシ）", "titleEn": "Pon Kampisos (Ainu culture booklets)", "authors": [], "publisher": "北海道博物館", "year": null, "type": "website", "category": "tool", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "url": "https://www.hm.pref.hokkaido.lg.jp/study/ainu-culture/booklet/", "urlType": "website", "summary": "北海道博物館による、言葉・衣服・食事・住まい・祈り・口頭文芸・芸能・民具・地名などをテーマにまとめた小冊子。" },
-
-  { "num": "53", "title": "アイヌ語をフィールドワークする : ことばを訪ねて", "authors": ["中川 裕"], "publisher": "大修館書店", "year": 1995, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館・札内分館", "summary": "アイヌ語研究者の中川裕が、現地調査でのエピソードを織りまぜ、アイヌ語を通した出会いやアイヌ文化の世界を分かりやすく紹介する。" },
-  { "num": "54", "title": "アイヌ語のむこうに広がる世界 : シリーズこの人に会いたかった", "authors": ["中川 裕"], "publisher": "グループSURE", "year": 2010, "type": "book", "category": "secondary", "langs": ["jpn", "ain"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "札内分館", "summary": "アイヌ語学者の中川裕と参加者たちの対談の記録。フィールドワークおよびその著書を中心に対話される。" },
-  { "num": "55", "title": "アイヌ語の贈り物 : アイヌの自然観にふれる", "authors": ["野上 ふさ子"], "publisher": "新泉社", "year": 2003, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "札内分館", "summary": "野上ふさ子（ポンフチ）がアイヌ語で語られる伝承を読み解きながら、アイヌの世界観や自然観を解説する。" },
-  { "num": "56", "title": "語り合うことばの力 : カムイたちと生きる世界", "authors": ["中川 裕"], "publisher": "岩波書店", "year": 2010, "type": "book", "category": "secondary", "langs": ["jpn", "ain"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "札内分館", "summary": "日常の話し合いから物語まで、カムイたちとともに生きるアイヌ民族の豊かな語りの世界を紹介する。口承文芸と伝統的世界観の入門。" },
-  { "num": "57", "title": "CDエクスプレスアイヌ語", "authors": ["中川 裕", "中本 ムツ子"], "publisher": "白水社", "year": 2004, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kana", "latn", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館・札内分館", "summary": "信頼できる最も使いやすいアイヌ語入門書。アイヌ語話者によるCD付き。アイヌ語を現代に使われる言葉として紹介する。" },
-  { "num": "58", "title": "カムイユカㇻを聞いてアイヌ語を学ぶ", "authors": ["中川 裕", "中本 ムツ子"], "publisher": "白水社", "year": 2023, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "千歳の中本ムツ子が伝承する聞きなし・歌・カムイユカㇻ（神々の物語）を通して楽しくアイヌ語を学べる教材。CD付き。" },
-  { "num": "59", "title": "アイヌの知恵・ウパㇱクマ 1, 2", "authors": ["中本 ムツ子", "片山 龍峯", "西山 史真子"], "publisher": "新日本教育図書／片山言語文化研究所", "year": 1999, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kana", "latn", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "千歳の中本ムツ子が母や祖母から聞き覚えたアイヌ民族の知恵と伝承を通してアイヌの言葉と文化を学べる。アイヌ語はカタカナとローマ字を併記。" },
-  { "num": "60", "title": "子どもとまなぶアイヌ語", "authors": ["瀧口 夕美", "中川 裕"], "publisher": "編集グループSURE", "year": 2021, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "十勝アイヌにルーツを持つ瀧口がアイヌ語教室を担当した経験を生かした入門書。子どもと一緒に楽しめる遊びを取り入れている。" },
-  { "num": "61", "title": "アイヌ語地名を歩く : 山田秀三の地名研究から 2006・釧路/十勝", "authors": ["北海道立アイヌ民族文化研究センター"], "publisher": "北海道立アイヌ民族文化研究センター", "year": 2006, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "山田秀三が残した資料を使った展覧会の図録。実際の地名調査の方法などを知ることができる。釧路・十勝のアイヌ語地名。" },
-  { "num": "62", "title": "北海道の地名", "authors": ["山田 秀三"], "publisher": "北海道新聞社", "year": 1984, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "北海道のアイヌ語由来地名を調べるための定番。山田秀三が半世紀にわたり全道を踏査し、各地の地名の語義・由来を解説する。" },
-  { "num": "63", "title": "アイヌ語地名を歩く", "authors": ["山田 秀三"], "publisher": "北海道新聞社", "year": 1986, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館・札内分館", "summary": "アイヌ語地名研究の第一人者が随筆風にアイヌ語地名を解説した本。地名調査の仕方や背後にある考え方を知ることができる。" },
-  { "num": "64", "title": "地名アイヌ語小辞典", "authors": ["知里 真志保"], "publisher": "北海道出版企画センター", "year": 1984, "type": "dictionary", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["latn", "kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "アイヌ語地名研究に欠かせない辞典。地名の語源ではなく、地名に用いられるアイヌ語そのものを解説する。" },
-
-  { "num": "70", "title": "アイヌ民族27の昔話 ミンタㇻ 1", "authors": ["北原 モコットゥナㇱ", "小笠原 小夜"], "publisher": "北海道新聞社", "year": 2021, "type": "book", "category": "primary", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館・忠類分館", "summary": "アイヌ民族が語り継いできた昔話27編を収録。神々や英雄、魔物などの物語を通じて楽しくアイヌ民族について学べる。" },
-  { "num": "71a", "title": "アイヌと神々の物語 : 炉端で聞いたウウェペケㇾ", "authors": ["萱野 茂"], "publisher": "山と溪谷社", "year": 2020, "type": "book", "category": "primary", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "ウウェペケㇾ「散文説話」38編を日本語で紹介し、各話に関連する文化解説を萱野茂自身が付けた一冊（ヤマケイ文庫）。" },
-  { "num": "71b", "title": "アイヌと神々の謡 : カムイユカㇻと子守歌", "authors": ["萱野 茂"], "publisher": "山と溪谷社", "year": 2020, "type": "book", "category": "primary", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "カムイユカㇻと子守歌を収めた『アイヌと神々の物語』の姉妹編（ヤマケイ文庫）。" },
-  { "num": "72", "title": "アイヌ伝説集", "authors": ["更科 源蔵"], "publisher": "北書房", "year": 1971, "type": "book", "category": "primary", "langs": ["jpn", "ain"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "北海道各地のアイヌ民族から直接聞き取った伝承を多数収録。十勝のアイヌ民族の伝承も多く載る。" },
-  { "num": "73", "title": "アイヌ民話集", "authors": ["更科 源蔵"], "publisher": "青土社", "year": 2021, "type": "book", "category": "primary", "langs": ["jpn", "ain"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "人間・動物・鳥・魚の話から星や月、お化けの話まで、各地・幅広いジャンルの話を一冊で読める。十勝で記録された物語も多い。" },
-  { "num": "74", "title": "沼田武男「採訪帖」アイヌ語十勝方言テキスト集", "authors": ["千葉大学アイヌ語研究会"], "publisher": "千葉大学文学部ユーラシア言語文化論講座", "year": 2021, "type": "book", "category": "primary", "langs": ["ain", "jpn"], "scripts": ["latn", "kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "dialect": "十勝", "summary": "幕別町札内出身の池田サクが語った物語を中心に、沼田武男が聞き取ったアイヌの物語をアイヌ語・日本語対訳で収録。十勝のアイヌ語・物語の貴重な資料。" },
-  { "num": "75", "title": "アイヌ童話 : 帯広市社会教育叢書 第10巻", "authors": ["吉田 巌", "小林 正雄"], "publisher": "帯広市教育委員会", "year": 1965, "type": "book", "category": "primary", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館・札内分館", "dialect": "十勝", "summary": "帯広のアイヌ学校教員だった吉田巌が生徒に書かせたアイヌ民話の記録。芽室・帯広など十勝のほか白老・有珠・長万部のアイヌ民話も記録した貴重な資料。" },
-  { "num": "76", "title": "アイヌ神謡集", "authors": ["知里 幸恵"], "publisher": "岩波書店", "year": 1978, "type": "book", "category": "primary", "langs": ["ain", "jpn"], "scripts": ["latn", "kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "アイヌ民族自身がアイヌ語で書いて出版した初めての本。神々の物語13編を収録し、著者による美しい日本語訳を付す（岩波文庫）。" },
-  { "num": "77", "title": "知里幸恵『アイヌ神謡集』誇り高く、生きる : 100分de名著", "authors": ["日本放送協会", "中川 裕"], "publisher": "NHK出版", "year": 2022, "type": "book", "category": "secondary", "langs": ["jpn", "ain"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館・忠類分館", "summary": "『アイヌ神謡集』が「100分de名著」で紹介された際のテキスト。カムイとは何かから始め、読み解くために必要な知識を解説する。" },
-  { "num": "78", "title": "「アイヌ神謡集」を読みとく", "authors": ["片山 龍峯"], "publisher": "片山言語文化研究所", "year": 2003, "type": "book", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["latn", "kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "『アイヌ神謡集』を誰でも読めるよう工夫した教材。アイヌ語は一語一語に訳が付く。別売CDで耳からも学べる。" },
-  { "num": "79", "title": "アイヌの神々の物語 : 四宅ヤエ媼伝承", "authors": ["四宅 ヤエ", "藤村 久和", "若月 亨", "合沢 寛"], "publisher": "藤田印刷エクセレントブックス", "year": 2018, "type": "book", "category": "primary", "langs": ["ain", "jpn"], "scripts": ["kana", "kanji"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "北海道東部・白糠の四宅ヤエが伝えた神々の物語を集めた本。本文はアイヌ語・日本語対訳で、物語の背景も詳しく説明される。" },
-  { "num": "80", "title": "語り、継ぐ。 : アイヌ口承文芸の世界", "authors": ["北海道立アイヌ民族文化研究センター", "北海道立文学館"], "publisher": "北海道文学館", "year": 2009, "type": "book", "category": "secondary", "langs": ["jpn", "ain"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "アイヌの口承文芸の魅力を豊富な資料写真とともに解説。これまでの記録・研究の歩みと今後の課題を知ることができる。" },
-  { "num": "81", "title": "改訂版 アイヌの物語世界 : 平凡社ライブラリー 899", "authors": ["中川 裕"], "publisher": "平凡社", "year": 2020, "type": "book", "category": "secondary", "langs": ["jpn", "ain"], "scripts": ["kanji", "kana"], "holding": "幕別町図書館", "callNumber": "幕別本館", "summary": "アイヌの物語文学を分かりやすく解説した本。様々なジャンルの物語の特徴や代表的な話を紹介する。" },
-  { "num": "okuda-tadosei", "title": "北海道周辺言語における他動性交替", "authors": ["佐々木 冠", "奥田 統己", "白石 英才"], "publisher": "北海道方言研究会", "year": 2014, "type": "article", "category": "secondary", "langs": ["ain", "jpn"], "scripts": ["kanji", "kana"], "summary": "北海道方言研究会40周年記念論文集『生活語の世界』所収。アイヌ語を含む北海道周辺の諸言語における他動性交替（自他対応）を対照的に論じる。" }
+	{
+		"num": "siror",
+		"title": "アイヌと自然デジタル図鑑",
+		"titleEn": "Ainu and Nature Digital Encyclopedia (SIROR)",
+		"authors": [],
+		"publisher": "国立アイヌ民族博物館",
+		"year": null,
+		"type": "online-dictionary",
+		"category": "tool",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"latn",
+			"kana",
+			"kanji"
+		],
+		"url": "https://ainugo.nam.go.jp/siror/",
+		"urlType": "website",
+		"summary": "国立アイヌ民族博物館による、アイヌ文化と関わりの深い植物・動物などをアイヌ語名から検索できるデジタル図鑑。"
+	},
+	{
+		"num": "riwka",
+		"title": "アイヌ語で自然かんさつ図鑑",
+		"titleEn": null,
+		"authors": [],
+		"publisher": "帯広百年記念館",
+		"year": null,
+		"type": "online-dictionary",
+		"category": "tool",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"latn",
+			"kana",
+			"kanji"
+		],
+		"url": "http://www.museum-obihiro.jp/riwka/nature",
+		"urlType": "website",
+		"summary": "帯広百年記念館アイヌ民族文化情報センターによる、十勝地方に伝わる野生生物のアイヌ語名称や伝承を紹介するオンライン図鑑。"
+	},
+	{
+		"num": "orusipe",
+		"title": "オルシペスウォプ（お話の箱）",
+		"titleEn": "Oruspe Suwop (Box of Stories)",
+		"authors": [],
+		"publisher": "アイヌ文化財団",
+		"year": null,
+		"type": "video",
+		"category": "tool",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"url": "https://www.ff-ainu.or.jp/web/learn/language/animation/index.html",
+		"urlType": "video",
+		"summary": "アイヌ文化振興・研究推進機構（現・アイヌ文化財団）が制作したアイヌ民族のお話アニメ。十勝の物語も3篇含まれる。"
+	},
+	{
+		"num": "kogaki",
+		"title": "アイヌ語小文字発音講座",
+		"titleEn": null,
+		"authors": [],
+		"publisher": "北海道新聞社",
+		"year": null,
+		"type": "video",
+		"category": "tool",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana"
+		],
+		"url": "https://www.hokkaido-np.co.jp/f_movies/ainugo-kouza/",
+		"urlType": "video",
+		"summary": "北海道新聞による、アイヌ語の小文字カナの発音方法を動画で解説する講座。"
+	},
+	{
+		"num": "mintara-web",
+		"title": "まなぶん ミンタラ",
+		"titleEn": null,
+		"authors": [],
+		"publisher": "北海道新聞社",
+		"year": null,
+		"type": "website",
+		"category": "tool",
+		"langs": [
+			"jpn",
+			"ain"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"url": "https://www.hokkaido-np.co.jp/manadigi/md_read_know/md_mintara/",
+		"urlType": "website",
+		"summary": "北海道新聞によるイラスト付きでアイヌの歴史・文化を分かりやすく紹介する連載。書籍『ミンタラ』①〜③の元となった。"
+	},
+	{
+		"num": "pon-kampisos",
+		"title": "アイヌ文化紹介小冊子（ポン カンピソシ）",
+		"titleEn": "Pon Kampisos (Ainu culture booklets)",
+		"authors": [],
+		"publisher": "北海道博物館",
+		"year": null,
+		"type": "website",
+		"category": "tool",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"url": "https://www.hm.pref.hokkaido.lg.jp/study/ainu-culture/booklet/",
+		"urlType": "website",
+		"summary": "北海道博物館による、言葉・衣服・食事・住まい・祈り・口頭文芸・芸能・民具・地名などをテーマにまとめた小冊子。"
+	},
+	{
+		"num": "53",
+		"title": "アイヌ語をフィールドワークする : ことばを訪ねて",
+		"authors": [
+			"中川 裕"
+		],
+		"publisher": "大修館書店",
+		"year": 1995,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館・札内分館",
+		"summary": "アイヌ語研究者の中川裕が、現地調査でのエピソードを織りまぜ、アイヌ語を通した出会いやアイヌ文化の世界を分かりやすく紹介する。"
+	},
+	{
+		"num": "54",
+		"title": "アイヌ語のむこうに広がる世界 : シリーズこの人に会いたかった",
+		"authors": [
+			"中川 裕"
+		],
+		"publisher": "グループSURE",
+		"year": 2010,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"jpn",
+			"ain"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "札内分館",
+		"summary": "アイヌ語学者の中川裕と参加者たちの対談の記録。フィールドワークおよびその著書を中心に対話される。"
+	},
+	{
+		"num": "55",
+		"title": "アイヌ語の贈り物 : アイヌの自然観にふれる",
+		"authors": [
+			"野上 ふさ子"
+		],
+		"publisher": "新泉社",
+		"year": 2003,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "札内分館",
+		"summary": "野上ふさ子（ポンフチ）がアイヌ語で語られる伝承を読み解きながら、アイヌの世界観や自然観を解説する。"
+	},
+	{
+		"num": "56",
+		"title": "語り合うことばの力 : カムイたちと生きる世界",
+		"authors": [
+			"中川 裕"
+		],
+		"publisher": "岩波書店",
+		"year": 2010,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"jpn",
+			"ain"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "札内分館",
+		"summary": "日常の話し合いから物語まで、カムイたちとともに生きるアイヌ民族の豊かな語りの世界を紹介する。口承文芸と伝統的世界観の入門。"
+	},
+	{
+		"num": "57",
+		"title": "CDエクスプレスアイヌ語",
+		"authors": [
+			"中川 裕",
+			"中本 ムツ子"
+		],
+		"publisher": "白水社",
+		"year": 2004,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"latn",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館・札内分館",
+		"summary": "信頼できる最も使いやすいアイヌ語入門書。アイヌ語話者によるCD付き。アイヌ語を現代に使われる言葉として紹介する。"
+	},
+	{
+		"num": "58",
+		"title": "カムイユカㇻを聞いてアイヌ語を学ぶ",
+		"authors": [
+			"中川 裕",
+			"中本 ムツ子"
+		],
+		"publisher": "白水社",
+		"year": 2023,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "千歳の中本ムツ子が伝承する聞きなし・歌・カムイユカㇻ（神々の物語）を通して楽しくアイヌ語を学べる教材。CD付き。"
+	},
+	{
+		"num": "59",
+		"title": "アイヌの知恵・ウパㇱクマ 1, 2",
+		"authors": [
+			"中本 ムツ子",
+			"片山 龍峯",
+			"西山 史真子"
+		],
+		"publisher": "新日本教育図書／片山言語文化研究所",
+		"year": 1999,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"latn",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "千歳の中本ムツ子が母や祖母から聞き覚えたアイヌ民族の知恵と伝承を通してアイヌの言葉と文化を学べる。アイヌ語はカタカナとローマ字を併記。"
+	},
+	{
+		"num": "60",
+		"title": "子どもとまなぶアイヌ語",
+		"authors": [
+			"瀧口 夕美",
+			"中川 裕"
+		],
+		"publisher": "編集グループSURE",
+		"year": 2021,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "十勝アイヌにルーツを持つ瀧口がアイヌ語教室を担当した経験を生かした入門書。子どもと一緒に楽しめる遊びを取り入れている。"
+	},
+	{
+		"num": "61",
+		"title": "アイヌ語地名を歩く : 山田秀三の地名研究から 2006・釧路/十勝",
+		"authors": [
+			"北海道立アイヌ民族文化研究センター"
+		],
+		"publisher": "北海道立アイヌ民族文化研究センター",
+		"year": 2006,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "山田秀三が残した資料を使った展覧会の図録。実際の地名調査の方法などを知ることができる。釧路・十勝のアイヌ語地名。"
+	},
+	{
+		"num": "62",
+		"title": "北海道の地名",
+		"authors": [
+			"山田 秀三"
+		],
+		"publisher": "北海道新聞社",
+		"year": 1984,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "北海道のアイヌ語由来地名を調べるための定番。山田秀三が半世紀にわたり全道を踏査し、各地の地名の語義・由来を解説する。"
+	},
+	{
+		"num": "63",
+		"title": "アイヌ語地名を歩く",
+		"authors": [
+			"山田 秀三"
+		],
+		"publisher": "北海道新聞社",
+		"year": 1986,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館・札内分館",
+		"summary": "アイヌ語地名研究の第一人者が随筆風にアイヌ語地名を解説した本。地名調査の仕方や背後にある考え方を知ることができる。"
+	},
+	{
+		"num": "64",
+		"title": "地名アイヌ語小辞典",
+		"authors": [
+			"知里 真志保"
+		],
+		"publisher": "北海道出版企画センター",
+		"year": 1984,
+		"type": "dictionary",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"latn",
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "アイヌ語地名研究に欠かせない辞典。地名の語源ではなく、地名に用いられるアイヌ語そのものを解説する。"
+	},
+	{
+		"num": "70",
+		"title": "アイヌ民族27の昔話 ミンタㇻ 1",
+		"authors": [
+			"北原 モコットゥナㇱ",
+			"小笠原 小夜"
+		],
+		"publisher": "北海道新聞社",
+		"year": 2021,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館・忠類分館",
+		"summary": "アイヌ民族が語り継いできた昔話27編を収録。神々や英雄、魔物などの物語を通じて楽しくアイヌ民族について学べる。"
+	},
+	{
+		"num": "71a",
+		"title": "アイヌと神々の物語 : 炉端で聞いたウウェペケㇾ",
+		"authors": [
+			"萱野 茂"
+		],
+		"publisher": "山と溪谷社",
+		"year": 2020,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "ウウェペケㇾ「散文説話」38編を日本語で紹介し、各話に関連する文化解説を萱野茂自身が付けた一冊（ヤマケイ文庫）。"
+	},
+	{
+		"num": "71b",
+		"title": "アイヌと神々の謡 : カムイユカㇻと子守歌",
+		"authors": [
+			"萱野 茂"
+		],
+		"publisher": "山と溪谷社",
+		"year": 2020,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "カムイユカㇻと子守歌を収めた『アイヌと神々の物語』の姉妹編（ヤマケイ文庫）。"
+	},
+	{
+		"num": "72",
+		"title": "アイヌ伝説集",
+		"authors": [
+			"更科 源蔵"
+		],
+		"publisher": "北書房",
+		"year": 1971,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"jpn",
+			"ain"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "北海道各地のアイヌ民族から直接聞き取った伝承を多数収録。十勝のアイヌ民族の伝承も多く載る。"
+	},
+	{
+		"num": "73",
+		"title": "アイヌ民話集",
+		"authors": [
+			"更科 源蔵"
+		],
+		"publisher": "青土社",
+		"year": 2021,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"jpn",
+			"ain"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "人間・動物・鳥・魚の話から星や月、お化けの話まで、各地・幅広いジャンルの話を一冊で読める。十勝で記録された物語も多い。"
+	},
+	{
+		"num": "74",
+		"title": "沼田武男「採訪帖」アイヌ語十勝方言テキスト集",
+		"authors": [
+			"千葉大学アイヌ語研究会"
+		],
+		"publisher": "千葉大学文学部ユーラシア言語文化論講座",
+		"year": 2021,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"latn",
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"dialect": "十勝",
+		"summary": "幕別町札内出身の池田サクが語った物語を中心に、沼田武男が聞き取ったアイヌの物語をアイヌ語・日本語対訳で収録。十勝のアイヌ語・物語の貴重な資料。"
+	},
+	{
+		"num": "75",
+		"title": "アイヌ童話 : 帯広市社会教育叢書 第10巻",
+		"authors": [
+			"吉田 巌",
+			"小林 正雄"
+		],
+		"publisher": "帯広市教育委員会",
+		"year": 1965,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館・札内分館",
+		"dialect": "十勝",
+		"summary": "帯広のアイヌ学校教員だった吉田巌が生徒に書かせたアイヌ民話の記録。芽室・帯広など十勝のほか白老・有珠・長万部のアイヌ民話も記録した貴重な資料。"
+	},
+	{
+		"num": "76",
+		"title": "アイヌ神謡集",
+		"authors": [
+			"知里 幸恵"
+		],
+		"publisher": "岩波書店",
+		"year": 1978,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"latn",
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "アイヌ民族自身がアイヌ語で書いて出版した初めての本。神々の物語13編を収録し、著者による美しい日本語訳を付す（岩波文庫）。"
+	},
+	{
+		"num": "77",
+		"title": "知里幸恵『アイヌ神謡集』誇り高く、生きる : 100分de名著",
+		"authors": [
+			"日本放送協会",
+			"中川 裕"
+		],
+		"publisher": "NHK出版",
+		"year": 2022,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"jpn",
+			"ain"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館・忠類分館",
+		"summary": "『アイヌ神謡集』が「100分de名著」で紹介された際のテキスト。カムイとは何かから始め、読み解くために必要な知識を解説する。"
+	},
+	{
+		"num": "78",
+		"title": "「アイヌ神謡集」を読みとく",
+		"authors": [
+			"片山 龍峯"
+		],
+		"publisher": "片山言語文化研究所",
+		"year": 2003,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"latn",
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "『アイヌ神謡集』を誰でも読めるよう工夫した教材。アイヌ語は一語一語に訳が付く。別売CDで耳からも学べる。"
+	},
+	{
+		"num": "79",
+		"title": "アイヌの神々の物語 : 四宅ヤエ媼伝承",
+		"authors": [
+			"四宅 ヤエ",
+			"藤村 久和",
+			"若月 亨",
+			"合沢 寛"
+		],
+		"publisher": "藤田印刷エクセレントブックス",
+		"year": 2018,
+		"type": "book",
+		"category": "primary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "北海道東部・白糠の四宅ヤエが伝えた神々の物語を集めた本。本文はアイヌ語・日本語対訳で、物語の背景も詳しく説明される。"
+	},
+	{
+		"num": "80",
+		"title": "語り、継ぐ。 : アイヌ口承文芸の世界",
+		"authors": [
+			"北海道立アイヌ民族文化研究センター",
+			"北海道立文学館"
+		],
+		"publisher": "北海道文学館",
+		"year": 2009,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"jpn",
+			"ain"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "アイヌの口承文芸の魅力を豊富な資料写真とともに解説。これまでの記録・研究の歩みと今後の課題を知ることができる。"
+	},
+	{
+		"num": "81",
+		"title": "改訂版 アイヌの物語世界 : 平凡社ライブラリー 899",
+		"authors": [
+			"中川 裕"
+		],
+		"publisher": "平凡社",
+		"year": 2020,
+		"type": "book",
+		"category": "secondary",
+		"langs": [
+			"jpn",
+			"ain"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"holding": "幕別町図書館",
+		"callNumber": "幕別本館",
+		"summary": "アイヌの物語文学を分かりやすく解説した本。様々なジャンルの物語の特徴や代表的な話を紹介する。"
+	},
+	{
+		"num": "okuda-tadosei",
+		"title": "北海道周辺言語における他動性交替",
+		"authors": [
+			"佐々木 冠",
+			"奥田 統己",
+			"白石 英才"
+		],
+		"publisher": "北海道方言研究会",
+		"year": 2014,
+		"type": "article",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kanji",
+			"kana"
+		],
+		"summary": "北海道方言研究会40周年記念論文集『生活語の世界』所収。アイヌ語を含む北海道周辺の諸言語における他動性交替（自他対応）を対照的に論じる。"
+	},
+	{
+		"num": "conf-x-2025-0",
+		"title": "宝永元年空念上人筆録アイヌ語彙「狄言葉」が記録された地域の推定",
+		"titleEn": null,
+		"authors": [
+			"春日勇人"
+		],
+		"publisher": "日本言語学会第171回大会 ポスター発表 [P-2]",
+		"year": 2025,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://ls-japan.org/wp-content/uploads/2025/10/abstractbook_lsj171_251024.pdf",
+		"urlType": "pdf",
+		"summary": "Linguistic study of the Ainu vocabulary list 「狄言葉」 recorded in 1704 (宝永元年) by the Soto-sect monk Kūnen (空念上人) — one of the oldest dated Ainu-language sources. C"
+	},
+	{
+		"num": "conf-x-2025-1",
+		"title": "アイヌ語と朝鮮語のナル的表現",
+		"titleEn": null,
+		"authors": [
+			"岡智之"
+		],
+		"publisher": "日本言語学会第171回大会 公開シンポジウム",
+		"year": 2025,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://ls-japan.org/taikai/program/pg171/",
+		"urlType": "website",
+		"summary": "Comparative/typological treatment of 'naru'-type (becoming) expressions covering Ainu (アイヌ語) alongside Korean, within a cross-Asian symposium (Turkic, Mongolic,"
+	},
+	{
+		"num": "conf-x-2025-2",
+		"title": "サハリンと北海道のアイヌ語地名に残る「川」の古形",
+		"titleEn": null,
+		"authors": [
+			"落合いずみ"
+		],
+		"publisher": "Evidence-based Linguistics Workshop 2025",
+		"year": 2025,
+		"type": "article",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://repository.ninjal.ac.jp/records/2000574",
+		"urlType": "website",
+		"summary": "Reconstructs the proto-Ainu word for 'river' (*peti) from Ainu-derived place names in Sakhalin and Hokkaido; argues Japanese borrowed names when Ainu still used"
+	},
+	{
+		"num": "conf-x-2023-3",
+		"title": "ローマ字・カタカナ・キリル文字によるアイヌ語Universal Dependenciesの可能性",
+		"titleEn": null,
+		"authors": [
+			"安岡孝一",
+			"安岡素子"
+		],
+		"publisher": "Evidence-based Linguistics Workshop 2023",
+		"year": 2023,
+		"type": "article",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://repository.ninjal.ac.jp/records/2000061",
+		"urlType": "website",
+		"summary": "Builds Universal Dependencies treebanks for written Ainu across three scripts (Latin/Katakana/Cyrillic), using アイヌ神謠集, アイヌ語會話字典, the Ainu translation of 五倫名義解, "
+	},
+	{
+		"num": "conf-x-2026-4",
+		"title": "アイヌ語の音声認識・合成及び琉球諸語への展開",
+		"titleEn": null,
+		"authors": [
+			"河原達也"
+		],
+		"publisher": "第160回 NINJALコロキウム",
+		"year": 2026,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://www.ninjal.ac.jp/events_jp/20260324a/",
+		"urlType": "website",
+		"summary": "Invited colloquium on ASR/TTS for the Ainu language: ~90%+ phoneme-recognition accuracy from the National Ainu Museum Ainu Language Archive, low-resource method"
+	},
+	{
+		"num": "conf-x-2025-5",
+		"title": "NINJAL国際シンポジウム「言語復興シナジーシンポジウム2025」",
+		"titleEn": null,
+		"authors": [
+			"本田優子"
+		],
+		"publisher": "NINJAL International Symposium, June 13-16 2025, 国立国語研究所",
+		"year": 2025,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://www.ninjal.ac.jp/events_jp/20250613a/",
+		"urlType": "website",
+		"summary": "Endangered-language revitalization symposium with substantial Ainu programming: the Ureshipa Project lecture and multiple Ainu-focused round tables + a closing "
+	},
+	{
+		"num": "conf-tomomisat-2023-6",
+		"title": "On stative/active intransitive split within tripartite alignment: A case of Kuril Ainu",
+		"titleEn": "On stative/active intransitive split within tripartite alignment: A case of Kuril Ainu",
+		"authors": [
+			"Tomomi Satō",
+			"Anna Bugaeva"
+		],
+		"publisher": "ICHL26 — 26th International Conference on Historical Linguistics, University of ",
+		"year": 2023,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"eng"
+		],
+		"scripts": [
+			"latn"
+		],
+		"url": "https://www.slav.uni-heidelberg.de/md/slav/forschung/tagungen/ichl26/ichl26_book_of_abstracts.pdf",
+		"urlType": "pdf",
+		"summary": "Dedicated Ainu historical/reconstruction talk: reconstructs the grammatical-relations system of the least-documented Kuril (Chishima) variety of Ainu from publi"
+	},
+	{
+		"num": "conf-martijnkna-2023-7",
+		"title": "Seals and sea ice: the",
+		"titleEn": "Seals and sea ice: the",
+		"authors": [
+			"Martijn Knapen"
+		],
+		"publisher": "ICHL26 — 26th International Conference on Historical Linguistics, University of ",
+		"year": 2023,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"eng"
+		],
+		"scripts": [
+			"latn"
+		],
+		"url": "https://www.slav.uni-heidelberg.de/md/slav/forschung/tagungen/ichl26/ichl26_book_of_abstracts.pdf",
+		"urlType": "pdf",
+		"summary": "Ainu prehistory / language-contact talk: examines Amuric (Nivkh) linguistic material in Proto-Ainu and Amuric→Sakhalin-Ainu borrowing (Shiraishi & Tangiku 2022)"
+	},
+	{
+		"num": "conf-x-2025-8",
+		"title": "逆翻訳を用いたアイヌ語・日本語機械翻訳の改善における研究",
+		"titleEn": null,
+		"authors": [
+			"菅原 葵",
+			"Karol Nowakowski",
+			"Michal Ptaszynski",
+			"Nick Overacker"
+		],
+		"publisher": "言語処理学会第31回年次大会",
+		"year": 2025,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://www.anlp.jp/proceedings/annual_meeting/2025/pdf_dir/A10-6.pdf",
+		"urlType": "pdf",
+		"summary": "Core Ainu language-technology / MT: improves low-resource Ainu-Japanese neural machine translation (NLLB-200) via iterative back-translation + random-sampling p"
+	},
+	{
+		"num": "conf-x-2025-9",
+		"title": "消滅危機言語のコーパス作成を支える言語識別 〜アイヌ語を対象として〜",
+		"titleEn": null,
+		"authors": [
+			"中田 琉稀",
+			"林 克彦"
+		],
+		"publisher": "第20回言語処理若手シンポジウム",
+		"year": 2025,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://yans.anlp.jp/entry/yans2025posterindex",
+		"urlType": "website",
+		"summary": "Language identification to support corpus creation for endangered languages, explicitly targeting Ainu (アイヌ語) — directly an Ainu corpus/NLP tooling paper."
+	},
+	{
+		"num": "conf-x-2023-10",
+		"title": "ローマ字・カタカナ・キリル文字併用アイヌ語RoBERTa・DeBERTaモデルの開発",
+		"titleEn": null,
+		"authors": [
+			"安岡 孝一"
+		],
+		"publisher": "情報処理学会研究報告 人文科学とコンピュータ",
+		"year": 2023,
+		"type": "article",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://hdl.handle.net/2433/279486",
+		"urlType": "website",
+		"summary": "Builds pre-trained RoBERTa/DeBERTa language models for Ainu handling three scripts (Latin / katakana / Cyrillic) simultaneously, for downstream morphological (形"
+	},
+	{
+		"num": "conf-x-2025-11",
+		"title": "ウポポイ園内マップによる12種のUniversal Dependencies",
+		"titleEn": null,
+		"authors": [
+			"安岡 孝一",
+			"安岡 素子"
+		],
+		"publisher": "情報処理学会研究報告 人文科学とコンピュータ",
+		"year": 2025,
+		"type": "article",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://hdl.handle.net/2433/294617",
+		"urlType": "website",
+		"summary": "Builds Universal Dependencies treebank data from the Upopoy (国立アイヌ民族博物館・民族共生象徴空間) park-map signage; part of Yasuoka's Ainu-UD research line. CAVEAT: could not c"
+	},
+	{
+		"num": "conf-x-2026-12",
+		"title": "Qwen3.5によるカタカナアイヌ語OCRの開発",
+		"titleEn": null,
+		"authors": [
+			"安岡 孝一",
+			"安岡 素子"
+		],
+		"publisher": "情報処理学会研究報告 人文科学とコンピュータ",
+		"year": 2026,
+		"type": "article",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://hdl.handle.net/2433/300894",
+		"urlType": "website",
+		"summary": "OCR for katakana-script Ainu text using the Qwen3.5 vision-language model — directly Ainu OCR / language-technology. Most recent item (May 2026)."
+	},
+	{
+		"num": "conf-x-2023-13",
+		"title": "危機言語の記録・維持・再生の諸問題：琉球諸語を中心に",
+		"titleEn": null,
+		"authors": [
+			"田窪 行則"
+		],
+		"publisher": "言語処理学会第29回年次大会",
+		"year": 2023,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://www.anlp.jp/proceedings/annual_meeting/2023/",
+		"urlType": "website",
+		"summary": "PERIPHERAL / LOW RELEVANCE — the talk lists アイヌ語 only as one of Japan's 8 UNESCO-recognized endangered languages alongside Hachijo and 6 Ryukyuan languages; the"
+	},
+	{
+		"num": "conf-tomomisat-2024-14",
+		"title": "Grammaticalization chains in Ainu: exploring the evolution of the auxiliary verb construction 'V1+V2aux'",
+		"titleEn": "Grammaticalization chains in Ainu: exploring the evolution of the auxiliary verb construction 'V1+V2aux'",
+		"authors": [
+			"Tomomi Satō",
+			"Anna Bugaeva"
+		],
+		"publisher": "CELEA 3 — Third Conference on the Endangered Languages of East Asia",
+		"year": 2024,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"eng"
+		],
+		"scripts": [
+			"latn"
+		],
+		"url": "https://www.unive.it/pag/fileadmin/user_upload/eventi/conferenze/CELEA/documenti/Book-abstractsCELEA3.pdf",
+		"urlType": "pdf",
+		"summary": "Core Ainu historical morphosyntax: diachrony of the V1+V2 auxiliary verb construction across Hokkaido, West/East Sakhalin and Kuril Ainu; grammaticalization/cla"
+	},
+	{
+		"num": "conf-eliadalcor-2024-15",
+		"title": "Non-reflexive reflexives? The conceptual domain of Sakhalin Ainu yay- and si-",
+		"titleEn": "Non-reflexive reflexives? The conceptual domain of Sakhalin Ainu yay- and si-",
+		"authors": [
+			"Elia Dal Corso"
+		],
+		"publisher": "CELEA 3 — Third Conference on the Endangered Languages of East Asia",
+		"year": 2024,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"eng"
+		],
+		"scripts": [
+			"latn"
+		],
+		"url": "https://www.unive.it/pag/fileadmin/user_upload/eventi/conferenze/CELEA/documenti/Book-abstractsCELEA3.pdf",
+		"urlType": "pdf",
+		"summary": "Semantics of the two Sakhalin Ainu reflexive prefixes yay- and si-; reflexive vs non-reflexive uses."
+	},
+	{
+		"num": "conf-siljaijs-2024-16",
+		"title": "Boundaries set by assumptions of \"authentic\" speakers and \"correct\" language – discussing examples of Ainu",
+		"titleEn": "Boundaries set by assumptions of \"authentic\" speakers and \"correct\" language – discussing examples of Ainu",
+		"authors": [
+			"Silja Ijäs",
+			"Saana Santalahti"
+		],
+		"publisher": "CELEA 3 — Third Conference on the Endangered Languages of East Asia",
+		"year": 2024,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"eng"
+		],
+		"scripts": [
+			"latn"
+		],
+		"url": "https://www.unive.it/pag/fileadmin/user_upload/eventi/conferenze/CELEA/documenti/Book-abstractsCELEA3.pdf",
+		"urlType": "pdf",
+		"summary": "Sociolinguistics of Ainu revitalisation/reclamation: who counts as an 'authentic'/'correct' Ainu speaker, new speakers, boundaries created by (ethnically Japane"
+	},
+	{
+		"num": "conf-goranvaage-2024-17",
+		"title": "A sociolinguistic analysis of humourous elements in Ainu language and culture",
+		"titleEn": "A sociolinguistic analysis of humourous elements in Ainu language and culture",
+		"authors": [
+			"Goran Vaage"
+		],
+		"publisher": "CELEA 3 — Third Conference on the Endangered Languages of East Asia",
+		"year": 2024,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"eng"
+		],
+		"scripts": [
+			"latn"
+		],
+		"url": "https://www.unive.it/pag/fileadmin/user_upload/eventi/conferenze/CELEA/documenti/Book-abstractsCELEA3.pdf",
+		"urlType": "pdf",
+		"summary": "Sociolinguistics of humour in Ainu oral tradition (riddles, language play, Penanpe/Pananpe comic tales, kamuy), based on recorded Ainu texts."
+	},
+	{
+		"num": "conf-x-2025-18",
+		"title": "語形と規則性の複合的なデータの構築 ―アイヌ語基礎語彙の情報の最大化に向けて―",
+		"titleEn": null,
+		"authors": [
+			"深澤美香",
+			"小野洋平"
+		],
+		"publisher": "日本北方言語学会 第8回大会",
+		"year": 2025,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://www.janols.org/annual_meeting/annual_meeting_2025.html",
+		"urlType": "website",
+		"summary": "Building combined word-form + regularity data for Ainu basic vocabulary, toward maximizing information in Ainu lexical data (lexicostatistics/dialectology)."
+	},
+	{
+		"num": "conf-x-2025-19",
+		"title": "分類から歴史へ ―アイヌ語方言データを用いた基礎語彙統計学の新しい方法論の検証―",
+		"titleEn": null,
+		"authors": [
+			"小野洋平",
+			"深澤美香"
+		],
+		"publisher": "日本北方言語学会 第8回大会",
+		"year": 2025,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://www.janols.org/annual_meeting/annual_meeting_2025.html",
+		"urlType": "website",
+		"summary": "From classification to history: testing a new lexicostatistic methodology on Ainu dialect basic-vocabulary data."
+	},
+	{
+		"num": "conf-annabugaev-2024-20",
+		"title": "A diachronic study of anticausatives in Ainu",
+		"titleEn": "A diachronic study of anticausatives in Ainu",
+		"authors": [
+			"Anna Bugaeva"
+		],
+		"publisher": "ALT XV — 15th International Conference of the Association for Linguistic Typolog",
+		"year": 2024,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"eng"
+		],
+		"scripts": [
+			"latn"
+		],
+		"url": "https://www.ntu.edu.sg/docs/librariesprovider120/research-doc/research-events-and-seminars/alt-xv/altxv-schedule-251124.pdf",
+		"urlType": "pdf",
+		"summary": "Typological/diachronic study of Ainu anticausative marking; core Ainu morphosyntax at a major typology conference."
+	},
+	{
+		"num": "conf-yocjyet-2026-mdb",
+		"title": "アイヌ語形態素データベースの構築と応用―抱合的構造と結合価の計算に着目して―",
+		"titleEn": null,
+		"authors": [
+			"于拙"
+		],
+		"publisher": "第141回人文科学とコンピュータ研究発表会",
+		"year": 2026,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://researchmap.jp/yocjyet/presentations/53675480",
+		"urlType": "website",
+		"summary": "アイヌ語の結合価情報付き形態素データベースの構築と、抱合的構造・結合価の計算的分析。"
+	},
+	{
+		"num": "conf-yocjyet-2026-nlp",
+		"title": "アイヌ語テキスト・コーパスを利用したアイヌ語の基本的な自然言語処理の試み",
+		"titleEn": null,
+		"authors": [
+			"于拙"
+		],
+		"publisher": "言語資源ワークショップ（researchmap 掲載）",
+		"year": 2026,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://researchmap.jp/yocjyet/presentations/53959716",
+		"urlType": "website",
+		"summary": "アイヌ語テキスト・コーパスを用いた基本的な自然言語処理の試み。"
+	},
+	{
+		"num": "conf-yocjyet-2026-mcp",
+		"title": "アイヌ語資源とLLMをつなぐ――MCPによる低資源言語研究基盤の構築と運用――",
+		"titleEn": null,
+		"authors": [
+			"于拙"
+		],
+		"publisher": "テクストアナリティクスとデジタルヒューマニティーズ研究会 (TADH)",
+		"year": 2026,
+		"type": "presentation",
+		"category": "secondary",
+		"langs": [
+			"ain",
+			"jpn"
+		],
+		"scripts": [
+			"kana",
+			"kanji",
+			"latn"
+		],
+		"url": "https://researchmap.jp/yocjyet/presentations/53959751",
+		"urlType": "website",
+		"summary": "MCP を用いたアイヌ語資源と LLM の連携、低資源言語研究基盤の構築・運用。"
+	}
 ]
