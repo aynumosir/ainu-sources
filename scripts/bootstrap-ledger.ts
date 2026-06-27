@@ -60,8 +60,9 @@
  *       DATABASE_URL=file:/tmp/p3.db bun run bootstrap --dry-run
  */
 import { createClient } from '@libsql/client';
-import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
-import { asc, eq, and } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/libsql';
+import { asc, eq } from 'drizzle-orm';
+import type { BatchItem } from 'drizzle-orm/batch';
 import { createHash } from 'node:crypto';
 import * as schema from '../src/lib/server/db/schema';
 import {
@@ -97,7 +98,6 @@ const LIMIT = argValue('--limit') ? Number(argValue('--limit')) : Infinity;
 
 const client = createClient({ url, authToken: authToken || undefined });
 const db = drizzle(client, { schema });
-type Tx = Parameters<Parameters<LibSQLDatabase<typeof schema>['transaction']>[0]>[0];
 
 // ── constants ────────────────────────────────────────────────────────────────
 const JOB = 'bootstrap-ledger';
@@ -109,6 +109,12 @@ const CURATED_CONF = 0.8;
 const EDITORIAL_CONF = 0.95;
 const BAND_CURATED = 800; // derivation band for 'curated_assertion'
 const BAND_EDITORIAL = 900; // derivation band for 'editorial_decision'
+/** Max bind-variables packed into a SINGLE multi-row INSERT inside a db.batch.
+ *  SQLite's SQLITE_MAX_VARIABLE_NUMBER is 32766 (libSQL/Turso); we stay well
+ *  under it. A multi-row insert binds rows×columns params, so wide tables (e.g.
+ *  field_claims ≈15 cols) are split into ≤⌊budget/cols⌋-row chunks. The chunks
+ *  all still ride in ONE db.batch → one network round-trip per batch. */
+const PARAM_BUDGET = 12000;
 
 /** The canonical fields that carry a field claim (§1.5 field-policy map):
  *  scalar_ranked ∪ controlled_scalar_ranked ∪ set_union ∪ append_or_ranked ∪
@@ -183,6 +189,44 @@ function groupBy<T>(rows: T[], key: (r: T) => string): Map<string, T[]> {
 	}
 	return m;
 }
+
+/** Split a row array so each chunk's bind-var count (rows×columns) stays under
+ *  PARAM_BUDGET, keeping every multi-row INSERT a legal single statement. */
+function chunkRows<T>(rows: T[]): T[][] {
+	if (rows.length === 0) return [];
+	const cols = Math.max(1, Object.keys(rows[0] as object).length);
+	const maxRows = Math.max(1, Math.floor(PARAM_BUDGET / cols));
+	if (rows.length <= maxRows) return [rows];
+	const out: T[][] = [];
+	for (let j = 0; j < rows.length; j += maxRows) out.push(rows.slice(j, j + maxRows));
+	return out;
+}
+
+/** Rows collected in memory for ONE batch, written via a single db.batch. */
+type BatchBuffers = {
+	observedRecords: (typeof schema.sourceObservedRecords.$inferInsert)[];
+	observations: (typeof schema.sourceObservations.$inferInsert)[];
+	identifiers: (typeof schema.sourceIdentifiers.$inferInsert)[];
+	claims: (typeof schema.sourceFieldClaims.$inferInsert)[];
+	provenance: (typeof schema.sourceFieldProvenance.$inferInsert)[];
+	lifecycle: (typeof schema.sourceLifecycleEvents.$inferInsert)[];
+	sourceUpdates: Array<{
+		id: string;
+		contentHash: string;
+		normalizerVersion: number;
+		firstSeenAt: Date;
+		lastSeenAt: Date;
+	}>;
+};
+const emptyBuffers = (): BatchBuffers => ({
+	observedRecords: [],
+	observations: [],
+	identifiers: [],
+	claims: [],
+	provenance: [],
+	lifecycle: [],
+	sourceUpdates: []
+});
 
 /** Fields that genuinely changed from the source's OWN create-snapshot baseline
  *  (F5). Requires an action='create' revision; otherwise no editorial claims. */
@@ -397,67 +441,52 @@ async function main() {
 		return { projection, contentHash: hashProjection(projection) };
 	}
 
-	// ── per-source bootstrap (runs inside the batch transaction) ────────────────
-	async function bootstrapSource(tx: Tx, source: Record<string, unknown>) {
+	// ── per-source row builder (buffers rows; flushed via one db.batch) ────────────────
+	//    Identical computations/values to the former per-statement writer; ONLY the
+	//    execution changed: rows are buffered and flushed via one atomic db.batch.
+	//    Reached only for sources whose sources.content_hash IS NULL (the resume
+	//    skip), so on a clean OR atomic-batch-resumed run every row here is new —
+	//    hence the freshly-minted observation id is used directly (the old code read
+	//    it back only for a conflict/partial-commit path an atomic db.batch makes
+	//    impossible) and the lifecycle 'create' is always emitted.
+	function collectSource(source: Record<string, unknown>, buf: BatchBuffers) {
 		const sid = source.id as string;
 		const { projection, contentHash } = projectionFor(source);
 		const createdAt = (source.createdAt as Date) ?? new Date();
 		const updatedAt = (source.updatedAt as Date) ?? createdAt;
 
 		// 2. observed record (origin, originRecordId=source.id) — UNIQUE guarded.
-		await tx
-			.insert(sourceObservedRecords)
-			.values({
-				id: uuid(),
-				origin: ORIGIN,
-				originRecordId: sid,
-				status: 'seen',
-				lastContentHash: contentHash,
-				normalizerVersion: NORMALIZER_VERSION,
-				firstSeenAt: createdAt,
-				lastSeenAt: updatedAt
-			})
-			.onConflictDoNothing();
+		buf.observedRecords.push({
+			id: uuid(),
+			origin: ORIGIN,
+			originRecordId: sid,
+			status: 'seen',
+			lastContentHash: contentHash,
+			normalizerVersion: NORMALIZER_VERSION,
+			firstSeenAt: createdAt,
+			lastSeenAt: updatedAt
+		});
 		counts.observedRecords += 1;
 
 		// 3. observation (curated assertion of the current canonical payload).
-		const insertedObs = await tx
-			.insert(sourceObservations)
-			.values({
-				id: uuid(),
-				origin: ORIGIN,
-				originRecordId: sid,
-				contentHash,
-				normalizerVersion: NORMALIZER_VERSION,
-				runId: runId ?? null,
-				derivation: 'curated_assertion',
-				confidence: CURATED_CONF,
-				evidence: 0,
-				payload: projection as unknown as Record<string, unknown>,
-				status: 'applied',
-				matchDecision: 'bootstrap_self',
-				actor: 'bootstrap',
-				createdAt: new Date()
-			})
-			.onConflictDoNothing()
-			.returning({ id: sourceObservations.id });
-		let obsId = insertedObs[0]?.id;
-		if (!obsId) {
-			const [ex] = await tx
-				.select({ id: sourceObservations.id })
-				.from(sourceObservations)
-				.where(
-					and(
-						eq(sourceObservations.origin, ORIGIN),
-						eq(sourceObservations.originRecordId, sid),
-						eq(sourceObservations.contentHash, contentHash)
-					)
-				)
-				.limit(1);
-			obsId = ex!.id;
-		} else {
-			counts.observations += 1;
-		}
+		const obsId = uuid();
+		buf.observations.push({
+			id: obsId,
+			origin: ORIGIN,
+			originRecordId: sid,
+			contentHash,
+			normalizerVersion: NORMALIZER_VERSION,
+			runId: runId ?? null,
+			derivation: 'curated_assertion',
+			confidence: CURATED_CONF,
+			evidence: 0,
+			payload: projection as unknown as Record<string, unknown>,
+			status: 'applied',
+			matchDecision: 'bootstrap_self',
+			actor: 'bootstrap',
+			createdAt: new Date()
+		});
+		counts.observations += 1;
 
 		// 4. identifiers from externalIds + provenance repo:path.
 		const ext = (source.externalIds as Record<string, string> | null) ?? {};
@@ -485,23 +514,20 @@ async function main() {
 				);
 				continue;
 			}
-			await tx
-				.insert(sourceIdentifiers)
-				.values({
-					id: uuid(),
-					sourceId: sid,
-					kind: spec.kind,
-					valueRaw: spec.raw,
-					valueNorm,
-					strength: spec.strength,
-					status: 'active',
-					origin: ORIGIN,
-					confidence: CURATED_CONF,
-					observationId: obsId,
-					firstSeenAt: createdAt,
-					lastSeenAt: updatedAt
-				})
-				.onConflictDoNothing();
+			buf.identifiers.push({
+				id: uuid(),
+				sourceId: sid,
+				kind: spec.kind,
+				valueRaw: spec.raw,
+				valueNorm,
+				strength: spec.strength,
+				status: 'active',
+				origin: ORIGIN,
+				confidence: CURATED_CONF,
+				observationId: obsId,
+				firstSeenAt: createdAt,
+				lastSeenAt: updatedAt
+			});
 			claimedIds.set(key, sid);
 			counts.identifiers += 1;
 			counts.identifiersByKind[spec.kind] = (counts.identifiersByKind[spec.kind] ?? 0) + 1;
@@ -525,85 +551,65 @@ async function main() {
 			const score = rankScore(confidence, evidence);
 			const valueHash = hashValue(value);
 			const claimId = uuid();
-			await tx
-				.insert(sourceFieldClaims)
-				.values({
-					id: claimId,
-					observationId: obsId,
-					sourceId: sid,
-					fieldName: field,
-					value: value as unknown,
-					valueHash,
-					op: 'set',
-					rankBand: band,
-					rankScore: score,
-					origin: ORIGIN,
-					derivation,
-					confidence,
-					evidence,
-					status: 'applied',
-					createdAt: new Date()
-				})
-				.onConflictDoNothing();
-			await tx
-				.insert(sourceFieldProvenance)
-				.values({
-					id: uuid(),
-					sourceId: sid,
-					fieldName: field,
-					currentClaimId: claimId,
-					valueHash,
-					rankBand: band,
-					rankScore: score,
-					origin: ORIGIN,
-					derivation,
-					confidence,
-					evidence,
-					updatedAt: new Date()
-				})
-				.onConflictDoNothing();
+			buf.claims.push({
+				id: claimId,
+				observationId: obsId,
+				sourceId: sid,
+				fieldName: field,
+				value: value as unknown,
+				valueHash,
+				op: 'set',
+				rankBand: band,
+				rankScore: score,
+				origin: ORIGIN,
+				derivation,
+				confidence,
+				evidence,
+				status: 'applied',
+				createdAt: new Date()
+			});
+			buf.provenance.push({
+				id: uuid(),
+				sourceId: sid,
+				fieldName: field,
+				currentClaimId: claimId,
+				valueHash,
+				rankBand: band,
+				rankScore: score,
+				origin: ORIGIN,
+				derivation,
+				confidence,
+				evidence,
+				updatedAt: new Date()
+			});
 			if (isEditorial) counts.claimsEditorial += 1;
 			else counts.claimsCurated += 1;
 			counts.provenanceRows += 1;
 		}
 
-		// 6. lifecycle 'create' event (existence-guarded — append-only, no UNIQUE).
-		const [existingLc] = await tx
-			.select({ id: sourceLifecycleEvents.id })
-			.from(sourceLifecycleEvents)
-			.where(
-				and(
-					eq(sourceLifecycleEvents.sourceId, sid),
-					eq(sourceLifecycleEvents.eventType, 'create'),
-					eq(sourceLifecycleEvents.actor, 'bootstrap')
-				)
-			)
-			.limit(1);
-		if (!existingLc) {
-			await tx.insert(sourceLifecycleEvents).values({
-				id: uuid(),
-				sourceId: sid,
-				observationId: obsId,
-				eventType: 'create',
-				toStatus: (source.status as string) ?? 'active',
-				reason: 'bootstrap import from current catalogue',
-				actor: 'bootstrap',
-				createdAt
-			});
-			counts.lifecycleEvents += 1;
-		}
+		// 6. lifecycle 'create' event (append-only; new for every collected source).
+		buf.lifecycle.push({
+			id: uuid(),
+			sourceId: sid,
+			observationId: obsId,
+			eventType: 'create',
+			toStatus: (source.status as string) ?? 'active',
+			reason: 'bootstrap import from current catalogue',
+			actor: 'bootstrap',
+			createdAt
+		});
+		counts.lifecycleEvents += 1;
 
 		// 7. stamp the EXCLUDED durability columns (never a projected column).
-		//    This is the final write → content_hash set ⇔ this source committed.
-		await tx
-			.update(sources)
-			.set({
-				contentHash,
-				normalizerVersion: NORMALIZER_VERSION,
-				firstSeenAt: createdAt,
-				lastSeenAt: updatedAt
-			})
-			.where(eq(sources.id, sid));
+		//    Buffered as the per-source UPDATE; flushed in the SAME atomic db.batch as
+		//    the ledger rows → content_hash set ⇔ this source's batch committed fully.
+		buf.sourceUpdates.push({
+			id: sid,
+			contentHash,
+			normalizerVersion: NORMALIZER_VERSION,
+			firstSeenAt: createdAt,
+			lastSeenAt: updatedAt
+		});
 		counts.sourcesStamped += 1;
 		counts.sourcesProcessed += 1;
 	}
@@ -668,24 +674,49 @@ async function main() {
 	} else {
 		for (let i = 0; i < limited.length; i += BATCH_SIZE) {
 			const batch = limited.slice(i, i + BATCH_SIZE);
-			await db.transaction(async (tx) => {
-				for (const source of batch) await bootstrapSource(tx, source);
-			});
+
+			// (a) build every row for the batch IN MEMORY (same values as before).
+			const buf = emptyBuffers();
+			for (const source of batch) collectSource(source, buf);
+
 			const lastId = batch[batch.length - 1]?.id ?? null;
 			const done = Math.min(i + batch.length, limited.length);
-			await db
-				.insert(migrationWatermarks)
-				.values({
-					jobName: JOB,
-					phase: 'sources',
-					lastSourceId: lastId,
-					status: 'running',
-					summary: { processed: done, total: limited.length, alreadyDone: counts.sourcesAlreadyDone },
-					updatedAt: new Date()
-				})
-				.onConflictDoUpdate({
-					target: migrationWatermarks.jobName,
-					set: {
+
+			// (b) assemble ONE atomic statement list: a (size-capped) multi-row INSERT
+			//     per ledger table + one UPDATE per source + the resumable watermark.
+			//     db.batch runs the whole array in a SINGLE request, wrapped in a
+			//     transaction (all-or-nothing) — so content_hash is set iff every
+			//     ledger row for this batch committed. ~1 network round-trip per batch.
+			const queries: BatchItem<'sqlite'>[] = [];
+			for (const part of chunkRows(buf.observedRecords))
+				queries.push(db.insert(sourceObservedRecords).values(part).onConflictDoNothing());
+			for (const part of chunkRows(buf.observations))
+				queries.push(db.insert(sourceObservations).values(part).onConflictDoNothing());
+			for (const part of chunkRows(buf.identifiers))
+				queries.push(db.insert(sourceIdentifiers).values(part).onConflictDoNothing());
+			for (const part of chunkRows(buf.claims))
+				queries.push(db.insert(sourceFieldClaims).values(part).onConflictDoNothing());
+			for (const part of chunkRows(buf.provenance))
+				queries.push(db.insert(sourceFieldProvenance).values(part).onConflictDoNothing());
+			for (const part of chunkRows(buf.lifecycle))
+				queries.push(db.insert(sourceLifecycleEvents).values(part).onConflictDoNothing());
+			for (const upd of buf.sourceUpdates)
+				queries.push(
+					db
+						.update(sources)
+						.set({
+							contentHash: upd.contentHash,
+							normalizerVersion: upd.normalizerVersion,
+							firstSeenAt: upd.firstSeenAt,
+							lastSeenAt: upd.lastSeenAt
+						})
+						.where(eq(sources.id, upd.id))
+				);
+			queries.push(
+				db
+					.insert(migrationWatermarks)
+					.values({
+						jobName: JOB,
 						phase: 'sources',
 						lastSourceId: lastId,
 						status: 'running',
@@ -695,8 +726,25 @@ async function main() {
 							alreadyDone: counts.sourcesAlreadyDone
 						},
 						updatedAt: new Date()
-					}
-				});
+					})
+					.onConflictDoUpdate({
+						target: migrationWatermarks.jobName,
+						set: {
+							phase: 'sources',
+							lastSourceId: lastId,
+							status: 'running',
+							summary: {
+								processed: done,
+								total: limited.length,
+								alreadyDone: counts.sourcesAlreadyDone
+							},
+							updatedAt: new Date()
+						}
+					})
+			);
+
+			// (c) flush the whole batch atomically.
+			if (queries.length > 0) await db.batch(queries as [BatchItem<'sqlite'>, ...BatchItem<'sqlite'>[]]);
 			process.stdout.write(`\r  processed ${done}/${limited.length} …`);
 		}
 		process.stdout.write('\n');
