@@ -29,3 +29,6 @@ project.inlang/cache/
 
 # seed user-content backups (revisions/edits)
 scripts/data/backups/
+
+# golden no-loss dump (large, local; regenerate with `bun run golden:dump`)
+scripts/data/golden/
