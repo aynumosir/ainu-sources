@@ -449,7 +449,7 @@ export const sourceRevisions = sqliteTable(
 		id: text('id').primaryKey().$defaultFn(uuid),
 		sourceId: text('source_id')
 			.notNull()
-			.references(() => sources.id, { onDelete: 'cascade' }),
+			.references(() => sources.id, { onDelete: 'restrict' }),
 		userId: text('user_id'),
 		userName: text('user_name'),
 		summary: text('summary'),
