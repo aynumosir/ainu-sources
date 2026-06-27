@@ -722,24 +722,49 @@ async function tagIdsFor(tx: Tx, names: string[]): Promise<string[]> {
 	return ids;
 }
 
+/**
+ * Merge the edit's links/tags into a source WITHOUT destroying anything the
+ * carrier (form / partial PATCH) did not send. Collector-supplied rows — DOI /
+ * PDF / IIIF links, topic tags — are preserved; we only add new entries and
+ * update the label + sortOrder of links that match an existing row by
+ * (sourceId + type + url), leaving columns the form never carries (notes, id)
+ * intact. Removal is intentionally NOT a side effect of editing: an item must
+ * be deleted explicitly, never by being absent from a save.
+ */
 async function writeLinksAndTags(tx: Tx, sourceId: string, input: SourceInput) {
-	await tx.delete(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
+	// Links: match existing rows by (type, url); update or insert, never delete.
+	const existingLinks = await tx.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
+	const linkKey = (type: string, url: string) => `${type}\n${url}`;
+	const byKey = new Map(existingLinks.map((l) => [linkKey(l.type, l.url), l]));
 	const links = (input.links ?? []).filter((l) => l.url?.trim());
-	if (links.length) {
-		await tx.insert(sourceLinks).values(
-			links.map((l, i) => ({
-				sourceId,
-				type: l.type || 'website',
-				label: l.label?.trim() || null,
-				url: l.url.trim(),
-				sortOrder: i
-			}))
-		);
+	for (let i = 0; i < links.length; i++) {
+		const l = links[i];
+		const type = l.type || 'website';
+		const url = l.url.trim();
+		const label = l.label?.trim() || null;
+		const existing = byKey.get(linkKey(type, url));
+		if (existing) {
+			// Update presentation only; preserve notes and any other stored columns.
+			await tx.update(sourceLinks).set({ label, sortOrder: i }).where(eq(sourceLinks.id, existing.id));
+		} else {
+			await tx.insert(sourceLinks).values({ sourceId, type, label, url, sortOrder: i });
+		}
 	}
-	await tx.delete(sourceTags).where(eq(sourceTags.sourceId, sourceId));
+
+	// Tags: add a (sourceId, tagId) row only when absent; never delete.
+	const existingTagIds = new Set(
+		(
+			await tx
+				.select({ tagId: sourceTags.tagId })
+				.from(sourceTags)
+				.where(eq(sourceTags.sourceId, sourceId))
+		).map((r) => r.tagId)
+	);
 	const tagIds = await tagIdsFor(tx, input.tagNames ?? []);
-	if (tagIds.length) {
-		await tx.insert(sourceTags).values(tagIds.map((tagId) => ({ sourceId, tagId })));
+	for (const tagId of tagIds) {
+		if (existingTagIds.has(tagId)) continue;
+		await tx.insert(sourceTags).values({ sourceId, tagId });
+		existingTagIds.add(tagId);
 	}
 }
 
