@@ -328,6 +328,8 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		小野洋平: { nameEn: 'Ono Yohei', researchmap: 'ono_yohei' },
 		切替英雄: { nameEn: 'Kirikae Hideo', researchmap: 'read0049566' }, // verified api.researchmap.jp 切替/英雄
 		大坂拓: { nameEn: 'Osaka Taku', researchmap: 'osaka_taku' }, // verified api.researchmap.jp 大坂/拓
+		春日勇人: { nameEn: 'Kasuga Hayato', researchmap: 'hayatokasuga' }, // LSJ172 P-11 (アイヌ語方言分類)
+		白鳥詩織: { nameEn: 'Shiratori Shiori', researchmap: 'i_mage' }, // LSJ172 F-3 (アイヌ祖語 *ia)
 		'Anna Bugaeva': { researchmap: 'read0144912' },
 		// keyed by canonical slug so it applies no matter which name form created the person
 		'sato-tomomi': { researchmap: 'ainlingsat' },
@@ -882,7 +884,17 @@ const TAG_DEFS: { slug: string; name: string; nameEn: string; category: string; 
 	{ slug: 'folktale', name: '昔話・散文説話', nameEn: 'Folktale / prose tale', category: 'genre', match: /昔話|民譚|民話|説話|folktale|uwepeker|ウエペケ|ウウェペケ|トゥイタ|tuyta/i },
 	{ slug: 'song', name: '歌謡・ウポポ', nameEn: 'Song', category: 'genre', match: /ウポポ|upopo|リムセ|rimse|歌謡|子守歌|イヨンルイカ|iyonruyka|love.?song|歌曲/i },
 	{ slug: 'conversation', name: '会話', nameEn: 'Conversation', category: 'genre', match: /会話|conversation|phrasebook/i },
-	{ slug: 'religious-text', name: '宗教テキスト', nameEn: 'Religious text', category: 'genre', match: /聖書|bible|gospel|新約|讃美歌/i }
+	{ slug: 'religious-text', name: '宗教テキスト', nameEn: 'Religious text', category: 'genre', match: /聖書|bible|gospel|新約|讃美歌/i },
+	// --- language technology (言語技術) — NLP/AI methods, models & resources. A
+	// distinct dimension from linguistic subfields: an Ainu LLM/OCR/MT paper or a
+	// Hugging Face model belongs here. Model-name patterns (gpt2/mt5/deberta/
+	// speecht5…) are matched because HF records have only a terse model name as title.
+	{ slug: 'nlp', name: '自然言語処理', nameEn: 'Natural language processing', category: 'technology', match: /自然言語処理|natural language processing|\bNLP\b|computational linguistic|計算言語学|形態素解析|universal dependenc|言語資源|language resource|人工知能|\bAI\b|機械学習|machine learning|深層学習|deep learning|ニューラルネット|neural network/i },
+	{ slug: 'ocr', name: '文字認識（OCR）', nameEn: 'OCR (text recognition)', category: 'technology', match: /\bOCR\b|文字認識|光学文字/i },
+	{ slug: 'machine-translation', name: '機械翻訳', nameEn: 'Machine translation', category: 'technology', match: /機械翻訳|machine translation|neural machine translation|\bNMT\b|統計的機械翻訳|ニューラル.{0,3}翻訳|翻訳システム|翻訳モデル|translation[ _]model|ainutrans|ainu.?2.?japanese/i },
+	{ slug: 'speech-recognition', name: '音声認識', nameEn: 'Speech recognition', category: 'technology', match: /音声認識|speech recognition|\bASR\b|end.to.end speech/i },
+	{ slug: 'speech-synthesis', name: '音声合成', nameEn: 'Speech synthesis', category: 'technology', match: /音声合成|text.to.speech|\bTTS\b|speecht5/i },
+	{ slug: 'language-model', name: '言語モデル', nameEn: 'Language model', category: 'technology', match: /言語モデル|large language model|大規模言語モデル|\bLLM\b|\bGPT\b|gpt-?2|\bBERT\b|roberta|deberta|\bm?t5\b|byt5|事前学習|pretrained|transformer/i }
 ];
 
 function getTag(def: (typeof TAG_DEFS)[number]): string {
@@ -1103,6 +1115,42 @@ const BOOK_TITLES: Record<string, { title: string; titleEn: string | null }> = {
 	'1936_Kindaichi': { title: 'アイヌ語法概説', titleEn: 'An Outline of Ainu Grammar' }
 };
 
+// Public alternatives for the ainu-grammar imports (the repo is private). Keyed
+// by provenancePath (books/<dir> | articles/<base>); every link was verified to
+// resolve to the matching work (CiNii by-title pass + web research, author+year+
+// title checked). `title`/`titleEn` fill the placeholder-titled famous books.
+// See scripts/enrich-ainu-grammar.ts. Survives reseed.
+type AgLink = {
+	title?: string;
+	titleEn?: string;
+	doi?: string | null;
+	links?: { type: string; url: string; label?: string }[];
+	source?: string;
+};
+const AG_LINKS_FILE = path.join(import.meta.dir, 'data', 'ainu-grammar-links.json');
+const AG_LINKS: Record<string, AgLink> = fs.existsSync(AG_LINKS_FILE)
+	? JSON.parse(fs.readFileSync(AG_LINKS_FILE, 'utf8'))
+	: {};
+function attachAgLinks(sourceId: string, provenancePath: string, doi: string | null | undefined) {
+	const info = AG_LINKS[provenancePath];
+	if (!info) return;
+	let so = 0;
+	// Dedup by URL: some AG_LINKS entries carry both a `doi` field and a
+	// `type:"doi"` link to the same doi.org URL (e.g. books/1912_Pilsudski),
+	// which would otherwise emit two identical rows.
+	const seen = new Set<string>();
+	if (doi) {
+		const url = `https://doi.org/${doi}`;
+		seen.add(url);
+		linkRows.push({ id: uuid(), sourceId, type: 'doi', label: `doi:${doi}`, url, sortOrder: so++ });
+	}
+	for (const l of info.links ?? []) {
+		if (seen.has(l.url)) continue;
+		seen.add(l.url);
+		linkRows.push({ id: uuid(), sourceId, type: l.type, label: l.label ?? null, url: l.url, sortOrder: so++ });
+	}
+}
+
 function seedGrammar() {
 	let count = 0;
 	// --- books (directories named YYYY_Author) ---
@@ -1117,13 +1165,16 @@ function seedGrammar() {
 			const [, year, authorRaw] = m;
 			const author = authorRaw.replace(/([a-z])([A-Z])/g, '$1 $2');
 			const known = BOOK_TITLES[dir];
+			const provenancePath = `books/${dir}`;
+			const ag = AG_LINKS[provenancePath];
 			const id = uuid();
 			const slug = uniqueSlug(slugify(dir));
+			const bookTitle = known?.title ?? ag?.title ?? `${author}（${year}）`;
 			sourceRows.push({
 				id,
 				slug,
-				title: known?.title ?? `${author}（${year}）`,
-				titleEn: known?.titleEn ?? `${author} (${year})`,
+				title: bookTitle,
+				titleEn: known?.titleEn ?? ag?.titleEn ?? `${author} (${year})`,
 				category: 'secondary',
 				type: 'grammar',
 				author,
@@ -1132,12 +1183,14 @@ function seedGrammar() {
 				scripts: ['latn'],
 				license: null,
 				provenanceRepo: 'ainu-grammar',
-				provenancePath: `books/${dir}`,
+				provenancePath,
+				externalIds: ag?.doi ? { doi: ag.doi } : null,
 				createdAt: new Date(),
 				updatedAt: new Date()
 			});
 			addPersons(id, author, 'author');
-			attachTags(id, known?.title, 'grammar');
+			attachTags(id, bookTitle, 'grammar');
+			attachAgLinks(id, provenancePath, ag?.doi);
 			count += 1;
 		}
 	}
@@ -1155,6 +1208,8 @@ function seedGrammar() {
 			const [, year, authorRaw, titleRaw] = m;
 			const author = authorRaw.trim();
 			const title = titleRaw.trim();
+			const provenancePath = `articles/${base}`;
+			const ag = AG_LINKS[provenancePath];
 			const id = uuid();
 			const slug = uniqueSlug(`${year}-${slugify(author) || 'x'}-${slugify(title) || djb2(base)}`);
 			const isJa = hasCJK(title);
@@ -1171,12 +1226,57 @@ function seedGrammar() {
 				scripts: ['latn'],
 				license: null,
 				provenanceRepo: 'ainu-grammar',
-				provenancePath: `articles/${base}`,
+				provenancePath,
+				externalIds: ag?.doi ? { doi: ag.doi } : null,
 				createdAt: new Date(),
 				updatedAt: new Date()
 			});
 			addPersons(id, author, 'author');
 			attachTags(id, title, 'grammar');
+			attachAgLinks(id, provenancePath, ag?.doi);
+			count += 1;
+		}
+	}
+	// --- presentations (conference talks/posters; files YYYY_Author_Title.{pdf,ocr}) ---
+	const presDir = path.join(GRAMMAR_DIR, 'presentations');
+	if (fs.existsSync(presDir)) {
+		const seen = new Set<string>();
+		for (const file of fs.readdirSync(presDir)) {
+			if (file === 'ocr' || file === 'NAMING.md' || file.startsWith('.')) continue;
+			const base = file.replace(/\.(pdf|ocr|md|txt)$/i, '');
+			if (seen.has(base)) continue;
+			seen.add(base);
+			const m = base.match(/^(\d{4})_([^_]+)_(.+)$/);
+			if (!m) continue;
+			const [, year, authorRaw, titleRaw] = m;
+			const author = authorRaw.trim();
+			const title = titleRaw.trim();
+			const provenancePath = `presentations/${base}`;
+			const ag = AG_LINKS[provenancePath];
+			const id = uuid();
+			const slug = uniqueSlug(`${year}-${slugify(author) || 'x'}-${slugify(title) || djb2(base)}`);
+			const isJa = hasCJK(title);
+			sourceRows.push({
+				id,
+				slug,
+				title,
+				titleEn: isJa ? null : title,
+				category: 'secondary',
+				type: 'presentation',
+				author,
+				...parseYear(year),
+				languages: isJa ? ['ain', 'jpn'] : ['ain', 'eng'],
+				scripts: ['latn'],
+				license: null,
+				provenanceRepo: 'ainu-grammar',
+				provenancePath,
+				externalIds: ag?.doi ? { doi: ag.doi } : null,
+				createdAt: new Date(),
+				updatedAt: new Date()
+			});
+			addPersons(id, author, 'author');
+			attachTags(id, title, 'presentation');
+			attachAgLinks(id, provenancePath, ag?.doi);
 			count += 1;
 		}
 	}
@@ -1826,7 +1926,7 @@ function seedAcademic(): { added: number; skipped: number; cites: number } {
 		// recording dialect. Only real gazetteer place-names match; titles with an
 		// institutional "北海道大学" context are stripped first to avoid a false pin.
 		addPlaces(id, geoSubjectText(rec.title), 'subject');
-		attachTags(id, rec.title, cls.type); // title + NORMALIZED type (dictionary→lexicon…); raw rec.type still holds legacy 'grammar-article'
+		attachTags(id, rec.title, cls.type, rec.venue); // title + NORMALIZED type (dictionary→lexicon…) + venue (言語処理学会/LREC→nlp); raw rec.type still holds legacy 'grammar-article'
 		attachVenueTags(id, rec.venue); // guarded journal/series signal (地名研究→placenames…)
 		added += 1;
 	}

@@ -56,6 +56,7 @@ export const TYPE_LABELS: Record<string, L> = {
 	grammar: { en: 'Grammar', ja: '文法書', ru: 'Грамматика' },
 	book: { en: 'Book / monograph', ja: '単行本・著書', ru: 'Книга / монография' },
 	article: { en: 'Article', ja: '論文・記事', ru: 'Статья' },
+	presentation: { en: 'Conference presentation', ja: '学会発表', ru: 'Доклад' },
 	thesis: { en: 'Thesis / dissertation', ja: '学位論文', ru: 'Диссертация' },
 	bibliography: { en: 'Bibliography', ja: '文献目録', ru: 'Библиография' },
 	// --- corpora & data ---
@@ -201,9 +202,19 @@ export const YEAR_CERTAINTY_LABELS: Record<string, L> = {
 export const TAG_CATEGORY_LABELS: Record<string, L> = {
 	topic: { en: 'Topic', ja: '主題', ru: 'Тема' },
 	genre: { en: 'Genre', ja: 'ジャンル', ru: 'Жанр' },
+	technology: { en: 'Language technology', ja: '言語技術', ru: 'Языковые технологии' },
 	feature: { en: 'Feature', ja: '特徴', ru: 'Особенность' },
 	dialect: { en: 'Dialect', ja: '方言', ru: 'Диалект' }
 };
+
+/**
+ * Source provenance repos that are PRIVATE (internal GitHub repos, not publicly
+ * browsable). Their file path is not useful to visitors and shouldn't be exposed,
+ * so the source page hides the provenancePath for these (the public link, when
+ * present, is what gives access). Public bibliographic provenances (cinii,
+ * openalex, …) keep their path since it's a real external id/landing.
+ */
+export const PRIVATE_PROVENANCE_REPOS = new Set(['ainu-grammar', 'ainu-dictionaries', 'ainu-corpora']);
 
 /** Ordered keys for filter UIs. */
 export const TYPE_ORDER = Object.keys(TYPE_LABELS);
@@ -233,7 +244,7 @@ export const TYPE_GROUPS: { key: string; label: L; types: string[] }[] = [
 	{
 		key: 'literature',
 		label: { en: 'Research literature', ja: '研究文献', ru: 'Научная литература' },
-		types: ['grammar', 'book', 'article', 'thesis', 'bibliography']
+		types: ['grammar', 'book', 'article', 'presentation', 'thesis', 'bibliography']
 	},
 	{
 		key: 'texts',
