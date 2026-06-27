@@ -11,6 +11,7 @@
 		"seed:plan": "bun scripts/seed.ts --plan",
 		"backup": "bun scripts/backup-db.ts",
 		"audit": "bun scripts/audit.ts",
+		"check:fk": "bun scripts/check-fk-enforcement.ts",
 		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "wrangler types --check && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
