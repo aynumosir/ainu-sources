@@ -1135,8 +1135,20 @@ function attachAgLinks(sourceId: string, provenancePath: string, doi: string | n
 	const info = AG_LINKS[provenancePath];
 	if (!info) return;
 	let so = 0;
-	if (doi) linkRows.push({ id: uuid(), sourceId, type: 'doi', label: `doi:${doi}`, url: `https://doi.org/${doi}`, sortOrder: so++ });
-	for (const l of info.links ?? []) linkRows.push({ id: uuid(), sourceId, type: l.type, label: l.label ?? null, url: l.url, sortOrder: so++ });
+	// Dedup by URL: some AG_LINKS entries carry both a `doi` field and a
+	// `type:"doi"` link to the same doi.org URL (e.g. books/1912_Pilsudski),
+	// which would otherwise emit two identical rows.
+	const seen = new Set<string>();
+	if (doi) {
+		const url = `https://doi.org/${doi}`;
+		seen.add(url);
+		linkRows.push({ id: uuid(), sourceId, type: 'doi', label: `doi:${doi}`, url, sortOrder: so++ });
+	}
+	for (const l of info.links ?? []) {
+		if (seen.has(l.url)) continue;
+		seen.add(l.url);
+		linkRows.push({ id: uuid(), sourceId, type: l.type, label: l.label ?? null, url: l.url, sortOrder: so++ });
+	}
 }
 
 function seedGrammar() {
