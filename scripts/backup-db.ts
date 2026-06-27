@@ -1,19 +1,64 @@
 // Point-in-time backup of the live Turso DB → a timestamped SQL dump.
 // The DB is the durable source of truth now, so snapshot it BEFORE any reseed
-// or migration. Restore into a fresh db with:
+// or migration.
+//
+// SECURITY: the dump includes Better-Auth tables (emails, sessions, OAuth
+// tokens, password hashes). It is therefore written OUT OF THE REPO by default
+// and encrypted at rest when an encryption tool + key is configured.
+//
+// Destination (first match wins):
+//   AINU_BACKUP_DIR=<path>     explicit out-of-repo directory
+//   ALLOW_IN_REPO_BACKUP=1     legacy scripts/data/backups (gitignored)
+//   else                       ~/.ainu-sources/backups
+// Writing inside the repo workspace is refused unless ALLOW_IN_REPO_BACKUP=1.
+//
+// Encryption at rest (first match wins). FAILS CLOSED: if any of these is set
+// but the tool is missing or the encrypt step errors, the backup ABORTS and no
+// plaintext dump is left on disk (see the fail-closed block below):
+//   AINU_BACKUP_AGE_RECIPIENT=<age1…>   age -r  → *.sql.age
+//   AINU_BACKUP_GPG_RECIPIENT=<keyid>   gpg -e  → *.sql.gpg
+//   AINU_BACKUP_PASSPHRASE=<pass>       gpg -c  → *.sql.gpg (symmetric)
+//   else                                plaintext *.sql + loud warning
+//
+// Restore into a fresh db:
 //   turso db create ainu-sources-restore
-//   turso db shell ainu-sources-restore < scripts/data/backups/prod-<ts>.sql
+//   age -d -i key.txt prod-<ts>.sql.age | turso db shell ainu-sources-restore
+//   gpg -d            prod-<ts>.sql.gpg | turso db shell ainu-sources-restore
+//   turso db shell ainu-sources-restore < prod-<ts>.sql
 //
 // Run: bun run backup   (uses the `turso` CLI; auth via your turso login)
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, unlinkSync, chmodSync, existsSync } from 'node:fs';
+import { homedir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const DB = process.env.TURSO_DB ?? 'ainu-sources';
-const dir = 'scripts/data/backups';
-mkdirSync(dir, { recursive: true });
+
+// --- Destination: out of the repo unless explicitly overridden ---------------
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const allowInRepo = process.env.ALLOW_IN_REPO_BACKUP === '1';
+const dir = path.resolve(
+	process.env.AINU_BACKUP_DIR ??
+		(allowInRepo
+			? path.join(repoRoot, 'scripts/data/backups')
+			: path.join(homedir(), '.ainu-sources', 'backups'))
+);
+
+const insideRepo = dir === repoRoot || dir.startsWith(repoRoot + path.sep);
+if (insideRepo && !allowInRepo) {
+	console.error(
+		`✗ Refusing to write backup inside the repo workspace:\n    ${dir}\n` +
+			`  Dumps contain Better-Auth secrets (emails, sessions, OAuth tokens, password hashes).\n` +
+			`  Set AINU_BACKUP_DIR=<out-of-repo path>, or ALLOW_IN_REPO_BACKUP=1 to override.`
+	);
+	process.exit(1);
+}
+
+mkdirSync(dir, { recursive: true, mode: 0o700 });
 
 const ts = new Date().toISOString().replace(/[:.]/g, '-').replace('T', '_').slice(0, 19);
-const out = `${dir}/prod-${ts}.sql`;
+const out = path.join(dir, `prod-${ts}.sql`);
 
 console.log(`Dumping ${DB} via turso CLI…`);
 // argv form (not a shell string) so DB can never be shell-interpolated.
@@ -25,8 +70,91 @@ if (!dump.includes('CREATE TABLE') || !/INSERT INTO ["']?sources/.test(dump)) {
 	process.exit(1);
 }
 
-writeFileSync(out, dump);
+writeFileSync(out, dump, { mode: 0o600 });
+
+// --- At-rest encryption: FAIL CLOSED when requested but unavailable ----------
+const has = (bin: string): boolean => {
+	try {
+		execFileSync(bin, ['--version'], { stdio: 'ignore' });
+		return true;
+	} catch {
+		return false;
+	}
+};
+
+const ageRcpt = process.env.AINU_BACKUP_AGE_RECIPIENT;
+const gpgRcpt = process.env.AINU_BACKUP_GPG_RECIPIENT;
+const passphrase = process.env.AINU_BACKUP_PASSPHRASE;
+const encryptionRequested = !!(ageRcpt || gpgRcpt || passphrase);
+
+// When encryption was explicitly requested but cannot be completed, NEVER leave
+// an unencrypted dump of Better-Auth secrets on disk. Delete the plaintext dump
+// and any partial encrypted output, then abort nonzero — fail closed, not open.
+const bail = (reason: string): never => {
+	for (const p of [out, `${out}.age`, `${out}.gpg`]) {
+		try {
+			if (existsSync(p)) unlinkSync(p);
+		} catch {
+			/* best-effort cleanup */
+		}
+	}
+	console.error(
+		`✗ Refusing to keep an unencrypted backup: encryption was requested but failed.\n` +
+			`    ${reason}\n` +
+			`  Deleted the plaintext dump and any partial encrypted output. Aborting.`
+	);
+	process.exit(1);
+};
+
+let finalPath = out;
+let restore = `turso db shell <new> < "${out}"`;
+if (!encryptionRequested) {
+	console.warn(
+		'⚠ Backup is UNENCRYPTED. It contains Better-Auth secrets (emails, sessions,\n' +
+			'  OAuth tokens, password hashes). Configure one of:\n' +
+			'    AINU_BACKUP_AGE_RECIPIENT=age1…   (needs `age`)\n' +
+			'    AINU_BACKUP_GPG_RECIPIENT=<keyid>  (needs `gpg`)\n' +
+			'    AINU_BACKUP_PASSPHRASE=<pass>      (needs `gpg`, symmetric)'
+	);
+} else {
+	// Only encryption runs in this try, so any throw means the requested
+	// encryption failed → bail (delete plaintext + partial, exit 1).
+	try {
+		if (ageRcpt) {
+			if (!has('age')) bail('AINU_BACKUP_AGE_RECIPIENT set but `age` is not installed');
+			finalPath = `${out}.age`;
+			execFileSync('age', ['-r', ageRcpt, '-o', finalPath, out]);
+			chmodSync(finalPath, 0o600);
+			unlinkSync(out);
+			restore = `age -d -i <identity> "${finalPath}" | turso db shell <new>`;
+		} else if (gpgRcpt) {
+			if (!has('gpg')) bail('AINU_BACKUP_GPG_RECIPIENT set but `gpg` is not installed');
+			finalPath = `${out}.gpg`;
+			execFileSync('gpg', [
+				'--batch', '--yes', '--trust-model', 'always',
+				'--encrypt', '--recipient', gpgRcpt, '--output', finalPath, out
+			]);
+			chmodSync(finalPath, 0o600);
+			unlinkSync(out);
+			restore = `gpg -d "${finalPath}" | turso db shell <new>`;
+		} else if (passphrase) {
+			if (!has('gpg')) bail('AINU_BACKUP_PASSPHRASE set but `gpg` is not installed');
+			finalPath = `${out}.gpg`;
+			execFileSync(
+				'gpg',
+				['--batch', '--yes', '--pinentry-mode', 'loopback', '--passphrase-fd', '0', '-c', '--output', finalPath, out],
+				{ input: passphrase }
+			);
+			chmodSync(finalPath, 0o600);
+			unlinkSync(out);
+			restore = `gpg -d "${finalPath}" | turso db shell <new>`;
+		}
+	} catch (err) {
+		bail((err as Error).message);
+	}
+}
+
 const mb = (dump.length / 1e6).toFixed(1);
 const lines = dump.split('\n').length;
-console.log(`✓ Backup → ${out}  (${mb} MB, ${lines} lines)`);
-console.log(`  Restore: turso db create <new>; turso db shell <new> < ${out}`);
+console.log(`✓ Backup → ${finalPath}  (${mb} MB, ${lines} lines)`);
+console.log(`  Restore: turso db create <new>; ${restore}`);
