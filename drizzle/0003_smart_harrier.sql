@@ -165,7 +165,7 @@ ALTER TABLE `places` ADD `first_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `places` ADD `last_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `source_institutions` ADD `status` text DEFAULT 'active';--> statement-breakpoint
 ALTER TABLE `source_institutions` ADD `origin` text;--> statement-breakpoint
-ALTER TABLE `source_institutions` ADD `observation_id` text REFERENCES source_observations(id);--> statement-breakpoint
+ALTER TABLE `source_institutions` ADD `observation_id` text REFERENCES source_observations(id) ON DELETE SET NULL;--> statement-breakpoint
 ALTER TABLE `source_institutions` ADD `confidence` real;--> statement-breakpoint
 ALTER TABLE `source_institutions` ADD `first_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `source_institutions` ADD `last_seen_at` integer;--> statement-breakpoint
@@ -175,18 +175,18 @@ ALTER TABLE `source_links` ADD `derivation` text;--> statement-breakpoint
 ALTER TABLE `source_links` ADD `confidence` real;--> statement-breakpoint
 ALTER TABLE `source_links` ADD `evidence` integer;--> statement-breakpoint
 ALTER TABLE `source_links` ADD `content_hash` text;--> statement-breakpoint
-ALTER TABLE `source_links` ADD `observation_id` text REFERENCES source_observations(id);--> statement-breakpoint
+ALTER TABLE `source_links` ADD `observation_id` text REFERENCES source_observations(id) ON DELETE SET NULL;--> statement-breakpoint
 ALTER TABLE `source_links` ADD `first_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `source_links` ADD `last_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `source_persons` ADD `status` text DEFAULT 'active';--> statement-breakpoint
 ALTER TABLE `source_persons` ADD `origin` text;--> statement-breakpoint
-ALTER TABLE `source_persons` ADD `observation_id` text REFERENCES source_observations(id);--> statement-breakpoint
+ALTER TABLE `source_persons` ADD `observation_id` text REFERENCES source_observations(id) ON DELETE SET NULL;--> statement-breakpoint
 ALTER TABLE `source_persons` ADD `confidence` real;--> statement-breakpoint
 ALTER TABLE `source_persons` ADD `first_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `source_persons` ADD `last_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `source_places` ADD `status` text DEFAULT 'active';--> statement-breakpoint
 ALTER TABLE `source_places` ADD `origin` text;--> statement-breakpoint
-ALTER TABLE `source_places` ADD `observation_id` text REFERENCES source_observations(id);--> statement-breakpoint
+ALTER TABLE `source_places` ADD `observation_id` text REFERENCES source_observations(id) ON DELETE SET NULL;--> statement-breakpoint
 ALTER TABLE `source_places` ADD `confidence` real;--> statement-breakpoint
 ALTER TABLE `source_places` ADD `first_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `source_places` ADD `last_seen_at` integer;--> statement-breakpoint
@@ -195,15 +195,15 @@ ALTER TABLE `source_relations` ADD `origin` text;--> statement-breakpoint
 ALTER TABLE `source_relations` ADD `derivation` text;--> statement-breakpoint
 ALTER TABLE `source_relations` ADD `confidence` real;--> statement-breakpoint
 ALTER TABLE `source_relations` ADD `evidence` integer;--> statement-breakpoint
-ALTER TABLE `source_relations` ADD `observation_id` text REFERENCES source_observations(id);--> statement-breakpoint
+ALTER TABLE `source_relations` ADD `observation_id` text REFERENCES source_observations(id) ON DELETE SET NULL;--> statement-breakpoint
 ALTER TABLE `source_tags` ADD `status` text DEFAULT 'active';--> statement-breakpoint
 ALTER TABLE `source_tags` ADD `origin` text;--> statement-breakpoint
-ALTER TABLE `source_tags` ADD `observation_id` text REFERENCES source_observations(id);--> statement-breakpoint
+ALTER TABLE `source_tags` ADD `observation_id` text REFERENCES source_observations(id) ON DELETE SET NULL;--> statement-breakpoint
 ALTER TABLE `source_tags` ADD `confidence` real;--> statement-breakpoint
 ALTER TABLE `source_tags` ADD `first_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `source_tags` ADD `last_seen_at` integer;--> statement-breakpoint
 ALTER TABLE `sources` ADD `status` text DEFAULT 'active' NOT NULL;--> statement-breakpoint
-ALTER TABLE `sources` ADD `merged_into_source_id` text REFERENCES sources(id);--> statement-breakpoint
+ALTER TABLE `sources` ADD `merged_into_source_id` text REFERENCES sources(id) ON DELETE RESTRICT;--> statement-breakpoint
 ALTER TABLE `sources` ADD `drift_status` text DEFAULT 'current' NOT NULL;--> statement-breakpoint
 ALTER TABLE `sources` ADD `content_hash` text;--> statement-breakpoint
 ALTER TABLE `sources` ADD `normalizer_version` integer;--> statement-breakpoint
