@@ -1,5 +1,14 @@
-import { integer, sqliteTable, text, real, index, uniqueIndex } from 'drizzle-orm/sqlite-core';
+import {
+	integer,
+	sqliteTable,
+	text,
+	real,
+	index,
+	uniqueIndex,
+	type AnySQLiteColumn
+} from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
+import { user } from './auth.schema';
 
 /**
  * アイヌ語文献資料データベース — data model
@@ -85,14 +94,35 @@ export const sources = sqliteTable(
 		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
 		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
 		createdBy: text('created_by'),
-		updatedBy: text('updated_by')
+		updatedBy: text('updated_by'),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		/** active | candidate | merged | deprecated | hidden | soft_deleted */
+		status: text('status').notNull().default('active'),
+		/** when status='merged', the winning source this row folds into (soft-merge) */
+		mergedIntoSourceId: text('merged_into_source_id').references(
+			(): AnySQLiteColumn => sources.id,
+			{ onDelete: 'restrict' }
+		),
+		/** current | drifted | missing | conflict — upstream observation drift */
+		driftStatus: text('drift_status').notNull().default('current'),
+		/** hash of the canonical flat projection (engine-maintained) */
+		contentHash: text('content_hash'),
+		/** normalizer version that produced contentHash / projection */
+		normalizerVersion: integer('normalizer_version'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' }),
+		contentChangedAt: integer('content_changed_at', { mode: 'timestamp_ms' })
 	},
 	(t) => [
 		uniqueIndex('sources_slug_idx').on(t.slug),
 		index('sources_type_idx').on(t.type),
 		index('sources_category_idx').on(t.category),
 		index('sources_region_idx').on(t.region),
-		index('sources_year_idx').on(t.yearStart)
+		index('sources_year_idx').on(t.yearStart),
+		index('sources_status_idx').on(t.status),
+		index('sources_merged_into_idx').on(t.mergedIntoSourceId),
+		index('sources_content_hash_idx').on(t.contentHash)
 	]
 );
 
@@ -111,8 +141,24 @@ export const sourceLinks = sqliteTable(
 		label: text('label'),
 		url: text('url').notNull(),
 		notes: text('notes'),
-		sortOrder: integer('sort_order').notNull().default(0)
+		sortOrder: integer('sort_order').notNull().default(0),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		/** active | candidate | removed | rejected | deprecated (removal = status, never delete) */
+		status: text('status').notNull().default('active'),
+		origin: text('origin'),
+		derivation: text('derivation'),
+		confidence: real('confidence'),
+		evidence: integer('evidence'),
+		contentHash: text('content_hash'),
+		observationId: text('observation_id').references(() => sourceObservations.id, {
+			onDelete: 'set null'
+		}),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
+	// NOTE: UNIQUE(source_id, type, url) is DEFERRED to the bootstrap/dedup phase —
+	// existing populated rows may contain duplicates that would break a unique index.
 	(t) => [index('source_links_source_idx').on(t.sourceId)]
 );
 
@@ -133,11 +179,24 @@ export const persons = sqliteTable(
 		wikidata: text('wikidata'), // Wikidata QID, e.g. "Q12345"
 		wikipedia: text('wikipedia'), // verified Wikipedia article URL (only set when it exists)
 		researchmap: text('researchmap'), // researchmap.jp permalink, e.g. "y.yoshikawa"
+		orcid: text('orcid'), // ORCID iD, e.g. "0000-0002-1825-0097"
 		bio: text('bio'),
 		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
-		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		status: text('status').notNull().default('active'),
+		origin: text('origin'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
-	(t) => [uniqueIndex('persons_slug_idx').on(t.slug)]
+	(t) => [
+		uniqueIndex('persons_slug_idx').on(t.slug),
+		// partial unique: only enforced where orcid is set (column is new/empty → safe)
+		uniqueIndex('persons_orcid_idx')
+			.on(t.orcid)
+			.where(sql`${t.orcid} is not null`)
+	]
 );
 
 export const sourcePersons = sqliteTable(
@@ -152,8 +211,19 @@ export const sourcePersons = sqliteTable(
 			.references(() => persons.id, { onDelete: 'cascade' }),
 		/** author | editor | compiler | recorder | speaker | transcriber | translator | researcher */
 		role: text('role').notNull().default('author'),
-		sortOrder: integer('sort_order').notNull().default(0)
+		sortOrder: integer('sort_order').notNull().default(0),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		status: text('status').default('active'),
+		origin: text('origin'),
+		observationId: text('observation_id').references(() => sourceObservations.id, {
+			onDelete: 'set null'
+		}),
+		confidence: real('confidence'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
+	// NOTE: UNIQUE(source_id, person_id, role) DEFERRED to bootstrap/dedup phase.
 	(t) => [
 		index('source_persons_source_idx').on(t.sourceId),
 		index('source_persons_person_idx').on(t.personId)
@@ -179,7 +249,13 @@ export const places = sqliteTable(
 		lng: real('lng'),
 		geonames: text('geonames'),
 		wikidata: text('wikidata'),
-		notes: text('notes')
+		notes: text('notes'),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		status: text('status').notNull().default('active'),
+		origin: text('origin'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
 	(t) => [uniqueIndex('places_slug_idx').on(t.slug)]
 );
@@ -196,8 +272,19 @@ export const sourcePlaces = sqliteTable(
 			.references(() => places.id, { onDelete: 'cascade' }),
 		/** composition | record | dialect | subject | holding */
 		role: text('role').notNull().default('dialect'),
-		notes: text('notes')
+		notes: text('notes'),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		status: text('status').default('active'),
+		origin: text('origin'),
+		observationId: text('observation_id').references(() => sourceObservations.id, {
+			onDelete: 'set null'
+		}),
+		confidence: real('confidence'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
+	// NOTE: UNIQUE(source_id, place_id, role) DEFERRED to bootstrap/dedup phase.
 	(t) => [
 		index('source_places_source_idx').on(t.sourceId),
 		index('source_places_place_idx').on(t.placeId)
@@ -220,9 +307,22 @@ export const institutions = sqliteTable(
 		lng: real('lng'),
 		url: text('url'),
 		wikidata: text('wikidata'),
-		notes: text('notes')
+		ror: text('ror'), // ROR id, e.g. "https://ror.org/03vek6s52" / "03vek6s52"
+		notes: text('notes'),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		status: text('status').notNull().default('active'),
+		origin: text('origin'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
-	(t) => [uniqueIndex('institutions_slug_idx').on(t.slug)]
+	(t) => [
+		uniqueIndex('institutions_slug_idx').on(t.slug),
+		// partial unique: only enforced where ror is set (column is new/empty → safe)
+		uniqueIndex('institutions_ror_idx')
+			.on(t.ror)
+			.where(sql`${t.ror} is not null`)
+	]
 );
 
 export const sourceInstitutions = sqliteTable(
@@ -238,8 +338,19 @@ export const sourceInstitutions = sqliteTable(
 		/** holding | publisher | digitizer */
 		role: text('role').notNull().default('holding'),
 		callNumber: text('call_number'),
-		notes: text('notes')
+		notes: text('notes'),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		status: text('status').default('active'),
+		origin: text('origin'),
+		observationId: text('observation_id').references(() => sourceObservations.id, {
+			onDelete: 'set null'
+		}),
+		confidence: real('confidence'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
+	// NOTE: UNIQUE(source_id, institution_id, role) DEFERRED to bootstrap/dedup phase.
 	(t) => [
 		index('source_institutions_source_idx').on(t.sourceId),
 		index('source_institutions_institution_idx').on(t.institutionId)
@@ -261,8 +372,20 @@ export const sourceRelations = sqliteTable(
 			.references(() => sources.id, { onDelete: 'cascade' }),
 		/** cites | manuscript-of | edition-of | transcription-of | derived-from | related | same-work */
 		type: text('type').notNull().default('related'),
-		notes: text('notes')
+		notes: text('notes'),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		/** accepted | candidate | rejected | removed */
+		status: text('status').notNull().default('accepted'),
+		origin: text('origin'),
+		derivation: text('derivation'),
+		confidence: real('confidence'),
+		evidence: integer('evidence'),
+		observationId: text('observation_id').references(() => sourceObservations.id, {
+			onDelete: 'set null'
+		})
 	},
+	// NOTE: UNIQUE(from_source_id, to_source_id, type) DEFERRED to bootstrap/dedup phase.
 	(t) => [
 		index('source_relations_from_idx').on(t.fromSourceId),
 		index('source_relations_to_idx').on(t.toSourceId)
@@ -281,7 +404,13 @@ export const tags = sqliteTable(
 		nameEn: text('name_en'),
 		/** topic | genre | feature | dialect */
 		category: text('category').notNull().default('topic'),
-		description: text('description')
+		description: text('description'),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		status: text('status').notNull().default('active'),
+		origin: text('origin'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
 	(t) => [uniqueIndex('tags_slug_idx').on(t.slug)]
 );
@@ -295,8 +424,19 @@ export const sourceTags = sqliteTable(
 			.references(() => sources.id, { onDelete: 'cascade' }),
 		tagId: text('tag_id')
 			.notNull()
-			.references(() => tags.id, { onDelete: 'cascade' })
+			.references(() => tags.id, { onDelete: 'cascade' }),
+
+		// --- durability / lifecycle (Phase 2 additive) ---
+		status: text('status').default('active'),
+		origin: text('origin'),
+		observationId: text('observation_id').references(() => sourceObservations.id, {
+			onDelete: 'set null'
+		}),
+		confidence: real('confidence'),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
+	// NOTE: UNIQUE(source_id, tag_id) DEFERRED to bootstrap/dedup phase.
 	(t) => [index('source_tags_source_idx').on(t.sourceId), index('source_tags_tag_idx').on(t.tagId)]
 );
 
@@ -323,6 +463,250 @@ export const sourceRevisions = sqliteTable(
 	(t) => [index('source_revisions_source_idx').on(t.sourceId)]
 );
 
+// ===========================================================================
+// Phase 2 — Durability ledger / identity / provenance (ADDITIVE)
+//
+// All foreign keys here are `restrict` or `set null` — NEVER cascade — so that
+// the no-hard-delete invariant holds and canonical/ledger data is never lost by
+// a parent deletion. These tables are append-only or current-winner projections
+// maintained by the merge engine (Phase 4); they are created empty here.
+// ===========================================================================
+
+// ---------------------------------------------------------------------------
+// Observation runs (収集ラン) — one row per harvest/import/website-write run
+// ---------------------------------------------------------------------------
+export const sourceObservationRuns = sqliteTable(
+	'source_observation_runs',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		origin: text('origin').notNull(),
+		/** full | incremental | targeted | manual | website */
+		mode: text('mode').notNull(),
+		/** running | completed | failed | partial */
+		status: text('status').notNull().default('running'),
+		collectorVersion: text('collector_version'),
+		normalizerVersion: integer('normalizer_version').notNull(),
+		summary: text('summary', { mode: 'json' }).$type<Record<string, unknown>>(),
+		startedAt: integer('started_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		finishedAt: integer('finished_at', { mode: 'timestamp_ms' })
+	},
+	(t) => [index('source_observation_runs_origin_idx').on(t.origin)]
+);
+
+// ---------------------------------------------------------------------------
+// Observed records (観測レコード) — current state of each upstream record
+// ---------------------------------------------------------------------------
+export const sourceObservedRecords = sqliteTable(
+	'source_observed_records',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		origin: text('origin').notNull(),
+		originRecordId: text('origin_record_id').notNull(),
+		/** seen | missing | gone | error */
+		status: text('status').notNull().default('seen'),
+		lastContentHash: text('last_content_hash'),
+		normalizerVersion: integer('normalizer_version').notNull(),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		contentChangedAt: integer('content_changed_at', { mode: 'timestamp_ms' }),
+		missingSinceAt: integer('missing_since_at', { mode: 'timestamp_ms' }),
+		missingCount: integer('missing_count').notNull().default(0)
+	},
+	(t) => [
+		uniqueIndex('source_observed_records_origin_record_idx').on(t.origin, t.originRecordId)
+	]
+);
+
+// ---------------------------------------------------------------------------
+// Observations (観測) — append-only ledger of every incoming payload
+// ---------------------------------------------------------------------------
+export const sourceObservations = sqliteTable(
+	'source_observations',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		origin: text('origin').notNull(),
+		originRecordId: text('origin_record_id').notNull(),
+		/** hash of the incoming canonical payload (idempotency key component) */
+		contentHash: text('content_hash').notNull(),
+		normalizerVersion: integer('normalizer_version').notNull(),
+		runId: text('run_id').references(() => sourceObservationRuns.id, { onDelete: 'set null' }),
+		derivation: text('derivation').notNull(),
+		confidence: real('confidence').notNull(),
+		evidence: integer('evidence').notNull().default(0),
+		payload: text('payload', { mode: 'json' }).$type<Record<string, unknown>>().notNull(),
+		rawPayload: text('raw_payload', { mode: 'json' }).$type<Record<string, unknown>>(),
+		/** submitted | applied | partial | noop | rejected | conflict | candidate */
+		status: text('status').notNull().default('submitted'),
+		matchDecision: text('match_decision'),
+		/** audit-only actor descriptor (never used for precedence) */
+		actor: text('actor'),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		uniqueIndex('source_observations_idempotency_idx').on(
+			t.origin,
+			t.originRecordId,
+			t.contentHash
+		),
+		index('source_observations_origin_record_idx').on(t.origin, t.originRecordId)
+	]
+);
+
+// ---------------------------------------------------------------------------
+// Identifiers (識別子) — DOI/OpenAlex/ISBN/repo-path/... per source
+// ---------------------------------------------------------------------------
+export const sourceIdentifiers = sqliteTable(
+	'source_identifiers',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		// nullable: unresolved candidate identifiers may not yet attach to a source
+		sourceId: text('source_id').references(() => sources.id, { onDelete: 'restrict' }),
+		/** doi | openalex_work | isbn | issn | cinii | ndl | jstage | repo_path | url_persistent | synthetic_stable */
+		kind: text('kind').notNull(),
+		valueRaw: text('value_raw').notNull(),
+		valueNorm: text('value_norm').notNull(),
+		/** strong | medium | weak */
+		strength: text('strength').notNull().default('medium'),
+		/** active | candidate | redirected | deprecated | conflict */
+		status: text('status').notNull().default('active'),
+		redirectsToIdentifierId: text('redirects_to_identifier_id').references(
+			(): AnySQLiteColumn => sourceIdentifiers.id,
+			{ onDelete: 'set null' }
+		),
+		canonicalValueNorm: text('canonical_value_norm'),
+		origin: text('origin'),
+		confidence: real('confidence'),
+		observationId: text('observation_id').references(() => sourceObservations.id, {
+			onDelete: 'set null'
+		}),
+		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		uniqueIndex('source_identifiers_kind_value_idx').on(t.kind, t.valueNorm),
+		index('source_identifiers_source_idx').on(t.sourceId)
+	]
+);
+
+// ---------------------------------------------------------------------------
+// Field claims (フィールド主張) — append-only per-field assertions
+// ---------------------------------------------------------------------------
+export const sourceFieldClaims = sqliteTable(
+	'source_field_claims',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		observationId: text('observation_id')
+			.notNull()
+			.references(() => sourceObservations.id, { onDelete: 'restrict' }),
+		sourceId: text('source_id')
+			.notNull()
+			.references(() => sources.id, { onDelete: 'restrict' }),
+		fieldName: text('field_name').notNull(),
+		value: text('value', { mode: 'json' }),
+		valueHash: text('value_hash').notNull(),
+		/** set | add | remove | append | explicit_delete */
+		op: text('op').notNull().default('set'),
+		rankBand: integer('rank_band').notNull(),
+		rankScore: integer('rank_score').notNull(),
+		origin: text('origin'),
+		derivation: text('derivation'),
+		confidence: real('confidence'),
+		evidence: integer('evidence'),
+		/** submitted | applied | superseded | rejected | conflict | held_below */
+		status: text('status').notNull().default('submitted'),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		uniqueIndex('source_field_claims_dedupe_idx').on(t.observationId, t.fieldName, t.valueHash),
+		index('source_field_claims_source_field_idx').on(t.sourceId, t.fieldName)
+	]
+);
+
+// ---------------------------------------------------------------------------
+// Field provenance (フィールド由来) — current winning claim per (source,field)
+// ---------------------------------------------------------------------------
+export const sourceFieldProvenance = sqliteTable(
+	'source_field_provenance',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		sourceId: text('source_id')
+			.notNull()
+			.references(() => sources.id, { onDelete: 'restrict' }),
+		fieldName: text('field_name').notNull(),
+		currentClaimId: text('current_claim_id').references(() => sourceFieldClaims.id, {
+			onDelete: 'set null'
+		}),
+		valueHash: text('value_hash'),
+		rankBand: integer('rank_band'),
+		rankScore: integer('rank_score'),
+		origin: text('origin'),
+		derivation: text('derivation'),
+		confidence: real('confidence'),
+		evidence: integer('evidence'),
+		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	// UNIQUE(source_id, field_name) is the CAS target for the merge engine.
+	(t) => [uniqueIndex('source_field_provenance_source_field_idx').on(t.sourceId, t.fieldName)]
+);
+
+// ---------------------------------------------------------------------------
+// Lifecycle events (ライフサイクル) — append-only status/merge history
+// ---------------------------------------------------------------------------
+export const sourceLifecycleEvents = sqliteTable(
+	'source_lifecycle_events',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		sourceId: text('source_id')
+			.notNull()
+			.references(() => sources.id, { onDelete: 'restrict' }),
+		observationId: text('observation_id').references(() => sourceObservations.id, {
+			onDelete: 'set null'
+		}),
+		/** create | status_change | soft_delete | restore | merge | unmerge | deprecate | hide | unhide */
+		eventType: text('event_type').notNull(),
+		fromStatus: text('from_status'),
+		toStatus: text('to_status'),
+		fromMergedInto: text('from_merged_into').references((): AnySQLiteColumn => sources.id, {
+			onDelete: 'set null'
+		}),
+		toMergedInto: text('to_merged_into').references((): AnySQLiteColumn => sources.id, {
+			onDelete: 'set null'
+		}),
+		reason: text('reason'),
+		/** audit-only actor descriptor */
+		actor: text('actor'),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [index('source_lifecycle_events_source_idx').on(t.sourceId, t.createdAt)]
+);
+
+// ---------------------------------------------------------------------------
+// App user roles (権限) — app-owned authz (Better-Auth `user` table untouched)
+// ---------------------------------------------------------------------------
+export const appUserRoles = sqliteTable('app_user_roles', {
+	userId: text('user_id')
+		.primaryKey()
+		.references(() => user.id, { onDelete: 'restrict' }),
+	/** editor | moderator | admin — a missing row is treated as 'editor' */
+	role: text('role').notNull().default('editor'),
+	createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+	updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+});
+
+// ---------------------------------------------------------------------------
+// Migration watermarks (移行ウォーターマーク) — resumable bootstrap/import cursors
+// ---------------------------------------------------------------------------
+export const migrationWatermarks = sqliteTable('migration_watermarks', {
+	jobName: text('job_name').primaryKey(),
+	phase: text('phase'),
+	cursor: text('cursor'),
+	lastSourceId: text('last_source_id'),
+	lastObservationId: text('last_observation_id'),
+	status: text('status'),
+	summary: text('summary', { mode: 'json' }).$type<Record<string, unknown>>(),
+	updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+});
+
 // --- inferred row types ---
 export type Source = typeof sources.$inferSelect;
 export type NewSource = typeof sources.$inferInsert;
@@ -333,5 +717,14 @@ export type Institution = typeof institutions.$inferSelect;
 export type Tag = typeof tags.$inferSelect;
 export type SourceRelation = typeof sourceRelations.$inferSelect;
 export type SourceRevision = typeof sourceRevisions.$inferSelect;
+export type SourceObservationRun = typeof sourceObservationRuns.$inferSelect;
+export type SourceObservedRecord = typeof sourceObservedRecords.$inferSelect;
+export type SourceObservation = typeof sourceObservations.$inferSelect;
+export type SourceIdentifier = typeof sourceIdentifiers.$inferSelect;
+export type SourceFieldClaim = typeof sourceFieldClaims.$inferSelect;
+export type SourceFieldProvenance = typeof sourceFieldProvenance.$inferSelect;
+export type SourceLifecycleEvent = typeof sourceLifecycleEvents.$inferSelect;
+export type AppUserRole = typeof appUserRoles.$inferSelect;
+export type MigrationWatermark = typeof migrationWatermarks.$inferSelect;
 
 export * from './auth.schema';
