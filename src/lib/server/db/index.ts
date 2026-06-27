@@ -23,9 +23,32 @@ function connect(): DB {
 	if (!url) throw new Error('DATABASE_URL is not set');
 	const isFile = url.startsWith('file:');
 	if (!isFile && !env.DATABASE_AUTH_TOKEN) throw new Error('DATABASE_AUTH_TOKEN is not set');
-	const client = isFile
-		? createNodeClient({ url, authToken: env.DATABASE_AUTH_TOKEN })
-		: createWebClient({ url, authToken: env.DATABASE_AUTH_TOKEN });
+	if (isFile) {
+		// Local/node client: @libsql/client (sqlite3.js) reuses ONE native SQLite
+		// connection for plain execute()-style queries. SQLite defaults foreign_keys
+		// to OFF per connection, so enforcement must be turned on explicitly.
+		// better-sqlite3's execute() is synchronous, so this PRAGMA actually applies
+		// before connect() returns drizzle(client) — non-transactional app queries
+		// run with it on. Best-effort only: this is reset whenever drizzle opens a
+		// transaction (libsql nulls the connection and lazily recreates a fresh one,
+		// which again defaults foreign_keys=OFF). So the PRAGMA is NOT a durability
+		// guarantee — scripts/check-fk-enforcement.ts is the real gate. Fire-and-
+		// forget with a logged catch — connect() must stay synchronous (lazy Proxy).
+		const client = createNodeClient({ url, authToken: env.DATABASE_AUTH_TOKEN });
+		client
+			.execute('PRAGMA foreign_keys = ON')
+			.catch((e) => console.error('[db] failed to enable PRAGMA foreign_keys (local):', e));
+		return drizzle(client, { schema });
+	}
+	// Remote/web (Cloudflare Worker) client: the HTTP client opens a FRESH Hrana
+	// stream per query and closes it within the same request (see @libsql/client
+	// http.js), so a session `PRAGMA foreign_keys=ON` cannot persist across queries
+	// — there is no long-lived connection to hold it, and floating an init promise
+	// here would reintroduce the cross-request-context hang documented above. FK
+	// enforcement on the Worker therefore relies on the Turso server's per-connection
+	// default (libSQL enables foreign_keys by default) and is NOT guaranteed by this
+	// code. scripts/check-fk-enforcement.ts is the deploy gate that verifies it live.
+	const client = createWebClient({ url, authToken: env.DATABASE_AUTH_TOKEN });
 	return drizzle(client, { schema });
 }
 
