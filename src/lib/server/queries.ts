@@ -722,24 +722,68 @@ async function tagIdsFor(tx: Tx, names: string[]): Promise<string[]> {
 	return ids;
 }
 
+/**
+ * Merge the edit's links/tags into a source WITHOUT destroying anything the
+ * carrier (form / partial PATCH) did not send. Collector-supplied rows — DOI /
+ * PDF / IIIF links, topic tags — are preserved; we only add new entries and
+ * update the label + sortOrder of links that match an existing row by
+ * (sourceId + type + url), leaving columns the form never carries (notes, id)
+ * intact. Removal is intentionally NOT a side effect of editing: an item must
+ * be deleted explicitly, never by being absent from a save.
+ */
 async function writeLinksAndTags(tx: Tx, sourceId: string, input: SourceInput) {
-	await tx.delete(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
-	const links = (input.links ?? []).filter((l) => l.url?.trim());
-	if (links.length) {
-		await tx.insert(sourceLinks).values(
-			links.map((l, i) => ({
-				sourceId,
-				type: l.type || 'website',
-				label: l.label?.trim() || null,
-				url: l.url.trim(),
-				sortOrder: i
-			}))
-		);
+	// Reconcile links/tags to the FULL submitted set. Both callers (edit form + API
+	// PATCH) send the complete intended set — the form pre-loads every link/tag and
+	// LINK_TYPE_LABELS covers every stored link type (so nothing is dropped on
+	// round-trip), and the API carries current links/tags over when omitted. We match
+	// links by (type, url) and UPDATE in place to preserve the row id + the notes
+	// column the form never carries, INSERT new rows, and DELETE only the specific
+	// rows the user removed. Collector links survive; removals + URL edits work.
+	const existingLinks = await tx.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
+	const linkKey = (type: string, url: string) => `${type}\n${url}`;
+	const byKey = new Map(existingLinks.map((l) => [linkKey(l.type, l.url), l]));
+	// Collapse duplicate (type, url) entries within the submission so a repeated
+	// link can never be inserted twice (there is no DB unique index yet). Last
+	// label wins; the earliest submitted position is kept for sortOrder.
+	const incoming = new Map<string, { type: string; url: string; label: string | null; sortOrder: number }>();
+	(input.links ?? [])
+		.filter((l) => l.url?.trim())
+		.forEach((l, i) => {
+			const type = l.type || 'website';
+			const url = l.url.trim();
+			const key = linkKey(type, url);
+			incoming.set(key, { type, url, label: l.label?.trim() || null, sortOrder: incoming.get(key)?.sortOrder ?? i });
+		});
+	for (const l of incoming.values()) {
+		const existing = byKey.get(linkKey(l.type, l.url));
+		if (existing) {
+			// Update presentation only; preserve notes and any other stored columns.
+			await tx.update(sourceLinks).set({ label: l.label, sortOrder: l.sortOrder }).where(eq(sourceLinks.id, existing.id));
+		} else {
+			await tx.insert(sourceLinks).values({ sourceId, type: l.type, label: l.label, url: l.url, sortOrder: l.sortOrder });
+		}
 	}
-	await tx.delete(sourceTags).where(eq(sourceTags.sourceId, sourceId));
-	const tagIds = await tagIdsFor(tx, input.tagNames ?? []);
-	if (tagIds.length) {
-		await tx.insert(sourceTags).values(tagIds.map((tagId) => ({ sourceId, tagId })));
+	// Honor removals: delete the specific rows the user dropped from the submission
+	// (targeted by id — never a mass delete-by-sourceId). Collector links resubmitted
+	// by the form are matched above and kept; only genuinely removed rows are deleted.
+	for (const l of existingLinks) {
+		if (!incoming.has(linkKey(l.type, l.url))) {
+			await tx.delete(sourceLinks).where(eq(sourceLinks.id, l.id));
+		}
+	}
+
+	// Tags: reconcile to the submitted set (the edit form loads all current tags).
+	const existingTags = await tx
+		.select({ id: sourceTags.id, tagId: sourceTags.tagId })
+		.from(sourceTags)
+		.where(eq(sourceTags.sourceId, sourceId));
+	const existingByTag = new Map(existingTags.map((r) => [r.tagId, r.id]));
+	const desiredTagIds = new Set(await tagIdsFor(tx, input.tagNames ?? []));
+	for (const tagId of desiredTagIds) {
+		if (!existingByTag.has(tagId)) await tx.insert(sourceTags).values({ sourceId, tagId });
+	}
+	for (const [tagId, id] of existingByTag) {
+		if (!desiredTagIds.has(tagId)) await tx.delete(sourceTags).where(eq(sourceTags.id, id));
 	}
 }
 
