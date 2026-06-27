@@ -5,6 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
+		"test": "vitest run",
+		"test:watch": "vitest",
 		"build": "wrangler types && vite build",
 		"deploy": "npm run build && wrangler deploy",
 		"seed": "bun scripts/seed.ts",
@@ -42,6 +44,7 @@
 		"tailwindcss": "^4.2.2",
 		"typescript": "^6.0.2",
 		"vite": "^8.0.7",
+		"vitest": "^4.1.9",
 		"wrangler": "^4.86.0"
 	},
 	"dependencies": {
