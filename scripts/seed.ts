@@ -1244,6 +1244,11 @@ function seedGrammar() {
 			const id = uuid();
 			const slug = uniqueSlug(`${year}-${slugify(author) || 'x'}-${slugify(title) || djb2(base)}`);
 			const isJa = hasCJK(title);
+			// Optional public note/summary (e.g. a Q&A digest), kept as a plain-text
+			// sidecar in this repo so it survives reseed. `.prose-notes` is pre-wrap,
+			// so author it as plain text with real newlines (markdown is not rendered).
+			const notesPath = path.join(import.meta.dir, 'data', 'notes', `${provenancePath}.txt`);
+			const notes = fs.existsSync(notesPath) ? fs.readFileSync(notesPath, 'utf8').trim() : null;
 			sourceRows.push({
 				id,
 				slug,
@@ -1256,6 +1261,7 @@ function seedGrammar() {
 				languages: isJa ? ['ain', 'jpn'] : ['ain', 'eng'],
 				scripts: ['latn'],
 				license: null,
+				notes,
 				provenanceRepo: 'ainu-grammar',
 				provenancePath,
 				externalIds: ag?.doi ? { doi: ag.doi } : null,
