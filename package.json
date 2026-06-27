@@ -12,6 +12,7 @@
 		"seed": "bun scripts/seed.ts",
 		"seed:plan": "bun scripts/seed.ts --plan",
 		"backup": "bun scripts/backup-db.ts",
+		"golden:dump": "bun scripts/golden-dump.ts",
 		"audit": "bun scripts/audit.ts",
 		"check:fk": "bun scripts/check-fk-enforcement.ts",
 		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
