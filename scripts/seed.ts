@@ -328,8 +328,8 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		小野洋平: { nameEn: 'Ono Yohei', researchmap: 'ono_yohei' },
 		切替英雄: { nameEn: 'Kirikae Hideo', researchmap: 'read0049566' }, // verified api.researchmap.jp 切替/英雄
 		大坂拓: { nameEn: 'Osaka Taku', researchmap: 'osaka_taku' }, // verified api.researchmap.jp 大坂/拓
-		春日勇人: { nameEn: 'Kasuga Hayato', researchmap: 'hayatokasuga' }, // LSJ172 P-11 (アイヌ語方言分類)
-		白鳥詩織: { nameEn: 'Shiratori Shiori', researchmap: 'i_mage' }, // LSJ172 F-3 (アイヌ祖語 *ia)
+		春日勇人: { nameEn: 'Kasuga Hayato', researchmap: 'hayatokasuga' },
+		白鳥詩織: { nameEn: 'Shiratori Shiori', researchmap: 'i_mage' },
 		'Anna Bugaeva': { researchmap: 'read0144912' },
 		// keyed by canonical slug so it applies no matter which name form created the person
 		'sato-tomomi': { researchmap: 'ainlingsat' },
@@ -343,7 +343,7 @@ const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: string; wik
 		'maruyama-hiroshi': { researchmap: 'read0119850' },
 		'masui-fumito': { researchmap: 'read0067315' },
 		'yamasaki-koji': { researchmap: 'koji_yamasaki' },
-		于拙: { nameEn: 'Cjyet Yo', researchmap: 'yocjyet' }, // verified; DIFFERENT person from 宮川創
+		于拙: { nameEn: 'Cjyet Yo', researchmap: 'yocjyet' },
 		// Romaji for prominent kanji-only authors (established readings; some given
 		// names best-effort). Keyed by despaced kanji — getPerson looks these up.
 		伊藤せいち: { nameEn: 'Itō Seichi' }, 大友幸男: { nameEn: 'Ōtomo Yukio' },
