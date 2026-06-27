@@ -732,7 +732,13 @@ async function tagIdsFor(tx: Tx, names: string[]): Promise<string[]> {
  * be deleted explicitly, never by being absent from a save.
  */
 async function writeLinksAndTags(tx: Tx, sourceId: string, input: SourceInput) {
-	// Links: match existing rows by (type, url); update or insert, never delete.
+	// Reconcile links/tags to the FULL submitted set. Both callers (edit form + API
+	// PATCH) send the complete intended set — the form pre-loads every link/tag and
+	// LINK_TYPE_LABELS covers every stored link type (so nothing is dropped on
+	// round-trip), and the API carries current links/tags over when omitted. We match
+	// links by (type, url) and UPDATE in place to preserve the row id + the notes
+	// column the form never carries, INSERT new rows, and DELETE only the specific
+	// rows the user removed. Collector links survive; removals + URL edits work.
 	const existingLinks = await tx.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
 	const linkKey = (type: string, url: string) => `${type}\n${url}`;
 	const byKey = new Map(existingLinks.map((l) => [linkKey(l.type, l.url), l]));
@@ -757,21 +763,27 @@ async function writeLinksAndTags(tx: Tx, sourceId: string, input: SourceInput) {
 			await tx.insert(sourceLinks).values({ sourceId, type: l.type, label: l.label, url: l.url, sortOrder: l.sortOrder });
 		}
 	}
+	// Honor removals: delete the specific rows the user dropped from the submission
+	// (targeted by id — never a mass delete-by-sourceId). Collector links resubmitted
+	// by the form are matched above and kept; only genuinely removed rows are deleted.
+	for (const l of existingLinks) {
+		if (!incoming.has(linkKey(l.type, l.url))) {
+			await tx.delete(sourceLinks).where(eq(sourceLinks.id, l.id));
+		}
+	}
 
-	// Tags: add a (sourceId, tagId) row only when absent; never delete.
-	const existingTagIds = new Set(
-		(
-			await tx
-				.select({ tagId: sourceTags.tagId })
-				.from(sourceTags)
-				.where(eq(sourceTags.sourceId, sourceId))
-		).map((r) => r.tagId)
-	);
-	const tagIds = await tagIdsFor(tx, input.tagNames ?? []);
-	for (const tagId of tagIds) {
-		if (existingTagIds.has(tagId)) continue;
-		await tx.insert(sourceTags).values({ sourceId, tagId });
-		existingTagIds.add(tagId);
+	// Tags: reconcile to the submitted set (the edit form loads all current tags).
+	const existingTags = await tx
+		.select({ id: sourceTags.id, tagId: sourceTags.tagId })
+		.from(sourceTags)
+		.where(eq(sourceTags.sourceId, sourceId));
+	const existingByTag = new Map(existingTags.map((r) => [r.tagId, r.id]));
+	const desiredTagIds = new Set(await tagIdsFor(tx, input.tagNames ?? []));
+	for (const tagId of desiredTagIds) {
+		if (!existingByTag.has(tagId)) await tx.insert(sourceTags).values({ sourceId, tagId });
+	}
+	for (const [tagId, id] of existingByTag) {
+		if (!desiredTagIds.has(tagId)) await tx.delete(sourceTags).where(eq(sourceTags.id, id));
 	}
 }
 
