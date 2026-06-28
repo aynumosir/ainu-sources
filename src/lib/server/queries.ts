@@ -33,8 +33,16 @@ import type {
 	InstitutionRef,
 	RelatedSource
 } from '$lib/types';
-import { asArray, centuryOf, slugify } from '$lib/format';
+import { asArray, centuryOf } from '$lib/format';
 import { activeSourcesOnly, publicRelationsOnly } from './visibility';
+import {
+	createSourceOnApp,
+	updateSourceOnApp,
+	mergeNotice,
+	type WebsiteEditResult
+} from './merge-write';
+
+export { mergeNotice, type WebsiteEditResult };
 
 type SQLCond = ReturnType<typeof eq>;
 
@@ -746,109 +754,13 @@ export interface SourceInput {
 	tagNames?: string[];
 }
 
-async function ensureUniqueSlug(base: string, excludeId?: string): Promise<string> {
-	let candidate = base || 'source';
-	let n = 1;
-	// eslint-disable-next-line no-constant-condition
-	while (true) {
-		const existing = await db
-			.select({ id: sources.id })
-			.from(sources)
-			.where(eq(sources.slug, candidate))
-			.limit(1);
-		if (!existing[0] || existing[0].id === excludeId) return candidate;
-		n += 1;
-		candidate = `${base}-${n}`;
-	}
-}
-
-/** The interactive-transaction handle drizzle hands to `db.transaction()`. */
-type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
-
-async function tagIdsFor(tx: Tx, names: string[]): Promise<string[]> {
-	const ids: string[] = [];
-	for (const raw of names) {
-		const name = raw.trim();
-		if (!name) continue;
-		const slug = slugify(name) || name;
-		const existing = await tx.select().from(tags).where(eq(tags.slug, slug)).limit(1);
-		if (existing[0]) {
-			ids.push(existing[0].id);
-		} else {
-			const id = crypto.randomUUID();
-			await tx.insert(tags).values({ id, slug, name, category: 'topic' });
-			ids.push(id);
-		}
-	}
-	return ids;
-}
-
 /**
- * Merge the edit's links/tags into a source WITHOUT destroying anything the
- * carrier (form / partial PATCH) did not send. Collector-supplied rows — DOI /
- * PDF / IIIF links, topic tags — are preserved; we only add new entries and
- * update the label + sortOrder of links that match an existing row by
- * (sourceId + type + url), leaving columns the form never carries (notes, id)
- * intact. Removal is intentionally NOT a side effect of editing: an item must
- * be deleted explicitly, never by being absent from a save.
+ * The flat `sources` column mapping the PRE-cutover write path produced. The
+ * merge path (see merge-write.ts) reproduces this for scalar/controlled fields
+ * via an `editorial_decision` claim, so it stays exported as the canonical
+ * equivalence reference the cutover test asserts against.
  */
-async function writeLinksAndTags(tx: Tx, sourceId: string, input: SourceInput) {
-	// Reconcile links/tags to the FULL submitted set. Both callers (edit form + API
-	// PATCH) send the complete intended set — the form pre-loads every link/tag and
-	// LINK_TYPE_LABELS covers every stored link type (so nothing is dropped on
-	// round-trip), and the API carries current links/tags over when omitted. We match
-	// links by (type, url) and UPDATE in place to preserve the row id + the notes
-	// column the form never carries, INSERT new rows, and DELETE only the specific
-	// rows the user removed. Collector links survive; removals + URL edits work.
-	const existingLinks = await tx.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
-	const linkKey = (type: string, url: string) => `${type}\n${url}`;
-	const byKey = new Map(existingLinks.map((l) => [linkKey(l.type, l.url), l]));
-	// Collapse duplicate (type, url) entries within the submission so a repeated
-	// link can never be inserted twice (there is no DB unique index yet). Last
-	// label wins; the earliest submitted position is kept for sortOrder.
-	const incoming = new Map<string, { type: string; url: string; label: string | null; sortOrder: number }>();
-	(input.links ?? [])
-		.filter((l) => l.url?.trim())
-		.forEach((l, i) => {
-			const type = l.type || 'website';
-			const url = l.url.trim();
-			const key = linkKey(type, url);
-			incoming.set(key, { type, url, label: l.label?.trim() || null, sortOrder: incoming.get(key)?.sortOrder ?? i });
-		});
-	for (const l of incoming.values()) {
-		const existing = byKey.get(linkKey(l.type, l.url));
-		if (existing) {
-			// Update presentation only; preserve notes and any other stored columns.
-			await tx.update(sourceLinks).set({ label: l.label, sortOrder: l.sortOrder }).where(eq(sourceLinks.id, existing.id));
-		} else {
-			await tx.insert(sourceLinks).values({ sourceId, type: l.type, label: l.label, url: l.url, sortOrder: l.sortOrder });
-		}
-	}
-	// Honor removals: delete the specific rows the user dropped from the submission
-	// (targeted by id — never a mass delete-by-sourceId). Collector links resubmitted
-	// by the form are matched above and kept; only genuinely removed rows are deleted.
-	for (const l of existingLinks) {
-		if (!incoming.has(linkKey(l.type, l.url))) {
-			await tx.delete(sourceLinks).where(eq(sourceLinks.id, l.id));
-		}
-	}
-
-	// Tags: reconcile to the submitted set (the edit form loads all current tags).
-	const existingTags = await tx
-		.select({ id: sourceTags.id, tagId: sourceTags.tagId })
-		.from(sourceTags)
-		.where(eq(sourceTags.sourceId, sourceId));
-	const existingByTag = new Map(existingTags.map((r) => [r.tagId, r.id]));
-	const desiredTagIds = new Set(await tagIdsFor(tx, input.tagNames ?? []));
-	for (const tagId of desiredTagIds) {
-		if (!existingByTag.has(tagId)) await tx.insert(sourceTags).values({ sourceId, tagId });
-	}
-	for (const [tagId, id] of existingByTag) {
-		if (!desiredTagIds.has(tagId)) await tx.delete(sourceTags).where(eq(sourceTags.id, id));
-	}
-}
-
-function scalarValues(input: SourceInput) {
+export function scalarValues(input: SourceInput) {
 	return {
 		title: input.title,
 		titleEn: input.titleEn || null,
@@ -875,75 +787,35 @@ function scalarValues(input: SourceInput) {
 	};
 }
 
-/** Compact snapshot recorded with each revision (queried within the tx). */
-async function snapshot(tx: Tx, sourceId: string): Promise<Record<string, unknown>> {
-	const [src] = await tx.select().from(sources).where(eq(sources.id, sourceId)).limit(1);
-	if (!src) return {};
-	const links = await tx.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
-	const tagRows = await tx
-		.select({ name: tags.name })
-		.from(sourceTags)
-		.innerJoin(tags, eq(sourceTags.tagId, tags.id))
-		.where(eq(sourceTags.sourceId, sourceId));
-	return { source: src, links, tags: tagRows.map((t) => t.name) };
-}
-
 export interface EditUser {
 	id?: string;
 	name?: string;
 }
 
-export async function createSource(input: SourceInput, user: EditUser, summary?: string): Promise<string> {
-	const id = crypto.randomUUID();
-	const slug = await ensureUniqueSlug(slugify(input.titleEn || input.title));
-	await db.transaction(async (tx) => {
-		await tx.insert(sources).values({
-			id,
-			slug,
-			...scalarValues(input),
-			provenanceRepo: 'manual',
-			createdBy: user.id ?? null,
-			updatedBy: user.id ?? null,
-			createdAt: new Date(),
-			updatedAt: new Date()
-		});
-		await writeLinksAndTags(tx, id, input);
-		await tx.insert(sourceRevisions).values({
-			sourceId: id,
-			userId: user.id ?? null,
-			userName: user.name ?? null,
-			summary: summary || 'Created',
-			action: 'create',
-			snapshot: await snapshot(tx, id)
-		});
-	});
-	return slug;
+/**
+ * Create a source through the merge engine (the "cutover"). The on-site write
+ * path no longer mutates `sources`/links/tags directly — it submits an
+ * `editorial_decision` observation so the edit is band-900 (wins over any
+ * machine claim) and harvested data is preserved no-loss. Returns the new slug
+ * for the post-save redirect PLUS the full `MergeResult` so the caller can
+ * surface a held/conflict outcome instead of silently discarding it (N4).
+ */
+export async function createSource(
+	input: SourceInput,
+	user: EditUser,
+	summary?: string
+): Promise<WebsiteEditResult> {
+	return createSourceOnApp(input, user, summary);
 }
 
+/** Update a source through the merge engine (see `createSource`). */
 export async function updateSource(
 	id: string,
 	input: SourceInput,
 	user: EditUser,
 	summary?: string
-): Promise<string> {
-	const current = await db.select({ slug: sources.slug }).from(sources).where(eq(sources.id, id)).limit(1);
-	if (!current[0]) throw new Error('Source not found');
-	await db.transaction(async (tx) => {
-		await tx
-			.update(sources)
-			.set({ ...scalarValues(input), updatedBy: user.id ?? null, updatedAt: new Date() })
-			.where(eq(sources.id, id));
-		await writeLinksAndTags(tx, id, input);
-		await tx.insert(sourceRevisions).values({
-			sourceId: id,
-			userId: user.id ?? null,
-			userName: user.name ?? null,
-			summary: summary || 'Updated',
-			action: 'update',
-			snapshot: await snapshot(tx, id)
-		});
-	});
-	return current[0].slug;
+): Promise<WebsiteEditResult> {
+	return updateSourceOnApp(id, input, user, summary);
 }
 
 export async function getRevisions(sourceId: string) {
