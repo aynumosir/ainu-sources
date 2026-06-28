@@ -69,6 +69,14 @@ export interface MergeInput {
 	/** a deliberate source-status transition (soft delete / hide / restore / …) */
 	lifecycle?: LifecycleInput;
 	runId?: string | null;
+	/**
+	 * Skip the engine's own `source_revisions` write. The website create/update
+	 * paths re-stamp (and would otherwise discard) the engine's revision with the
+	 * real user + summary immediately after, so writing it twice is pure
+	 * round-trip waste against the stateless Worker client. Harvest callers leave
+	 * this false so their history is still recorded by the engine.
+	 */
+	skipRevision?: boolean;
 	/** audit-only actor descriptor; NEVER used for precedence */
 	actor?: string | null;
 	rawPayload?: Record<string, unknown> | null;

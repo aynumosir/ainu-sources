@@ -30,7 +30,7 @@
  * `repo_path = website:<id>` identifier and pass it on the observation, so the
  * edit attaches via `repo_path_exact` regardless of which fields changed.
  */
-import { and, desc, eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { slugify } from '$lib/format';
 import { safeUrl } from '$lib/safe-url';
 import { db as appDb } from './db';
@@ -161,13 +161,19 @@ async function tagIdsFor(db: Db, names: string[]): Promise<string[]> {
 	return ids;
 }
 
-async function reconcileTags(db: Db, sourceId: string, tagNames: string[]): Promise<void> {
+async function reconcileTags(db: Db, sourceId: string, tagNames: string[], isNew = false): Promise<void> {
 	const desired = new Set(await tagIdsFor(db, tagNames));
-	const existing = await db
-		.select({ id: sourceTags.id, tagId: sourceTags.tagId })
-		.from(sourceTags)
-		.where(eq(sourceTags.sourceId, sourceId));
-	const existingByTag = new Map(existing.map((r) => [r.tagId, r.id]));
+	// A brand-new source has no tags yet — skip the existing-tags read + removal pass.
+	const existingByTag = isNew
+		? new Map<string, string>()
+		: new Map(
+				(
+					await db
+						.select({ id: sourceTags.id, tagId: sourceTags.tagId })
+						.from(sourceTags)
+						.where(eq(sourceTags.sourceId, sourceId))
+				).map((r) => [r.tagId, r.id])
+			);
 	for (const tagId of desired) {
 		if (!existingByTag.has(tagId))
 			await db.insert(sourceTags).values({ sourceId, tagId, status: 'active', origin: 'website' });
@@ -184,7 +190,12 @@ async function reconcileTags(db: Db, sourceId: string, tagNames: string[]): Prom
 // removal) and re-stamps label/sortOrder to the submitted presentation.
 // ---------------------------------------------------------------------------
 
-async function reconcileLinks(db: Db, sourceId: string, input: SourceInput): Promise<void> {
+async function reconcileLinks(db: Db, sourceId: string, input: SourceInput, isNew = false): Promise<void> {
+	// A brand-new source's only links are the ones the engine's set-union just
+	// inserted from THIS submission (same sanitization, label and sort order, in
+	// input order) — there is nothing to re-stamp or remove, so skip the read.
+	if (isNew) return;
+
 	// Submitted set, keyed by the SAME sanitized (type,url) the engine stored.
 	const submitted = new Map<string, { label: string | null; sortOrder: number }>();
 	let order = 0;
@@ -226,21 +237,19 @@ function editIdentifierValue(sourceId: string): string {
 
 async function ensureEditIdentifier(db: Db, sourceId: string): Promise<void> {
 	const valueNorm = editIdentifierValue(sourceId);
-	const [existing] = await db
-		.select({ id: sourceIdentifiers.id })
-		.from(sourceIdentifiers)
-		.where(and(eq(sourceIdentifiers.kind, 'repo_path'), eq(sourceIdentifiers.valueNorm, valueNorm)))
-		.limit(1);
-	if (existing) return;
-	await db.insert(sourceIdentifiers).values({
-		sourceId,
-		kind: 'repo_path',
-		valueRaw: valueNorm,
-		valueNorm,
-		strength: 'medium',
-		status: 'active',
-		origin: 'website'
-	});
+	// UNIQUE(kind, value_norm) makes this idempotent — one insert, no pre-read.
+	await db
+		.insert(sourceIdentifiers)
+		.values({
+			sourceId,
+			kind: 'repo_path',
+			valueRaw: valueNorm,
+			valueNorm,
+			strength: 'medium',
+			status: 'active',
+			origin: 'website'
+		})
+		.onConflictDoNothing();
 }
 
 // ---------------------------------------------------------------------------
@@ -258,9 +267,10 @@ async function applyAuditColumns(
 	await db.update(sources).set(set).where(eq(sources.id, sourceId));
 }
 
-/** Compact snapshot recorded with each revision — identical shape to before. */
+/** Compact snapshot recorded with each revision — identical shape to before.
+ *  The three reads ride in ONE batch (one Worker subrequest). */
 async function snapshot(db: Db, sourceId: string): Promise<Record<string, unknown>> {
-	const [[src], links, tagRows] = await Promise.all([
+	const [srcRows, links, tagRows] = await db.batch([
 		db.select().from(sources).where(eq(sources.id, sourceId)).limit(1),
 		db.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId)),
 		db
@@ -269,60 +279,39 @@ async function snapshot(db: Db, sourceId: string): Promise<Record<string, unknow
 			.innerJoin(tags, eq(sourceTags.tagId, tags.id))
 			.where(eq(sourceTags.sourceId, sourceId))
 	]);
+	const src = srcRows[0];
 	if (!src) return {};
 	return { source: src, links, tags: tagRows.map((t) => t.name) };
 }
 
 /**
- * The engine writes a source_revisions row, but stamps it with the audit `actor`
- * string and a `merge:…` summary. Re-stamp that row with the real user id + name
- * + the user's revision summary + the final snapshot (taken AFTER tag/link
- * reconcile) so the history page is unchanged from before. If the engine wrote no
- * revision (a duplicate-observation noop), record one ourselves so every save is
- * still attributed — exactly as the prior path did.
+ * Record the revision for this save. The engine is invoked with
+ * `skipRevision=true` (the website path owns history), so there is exactly ONE
+ * revision row per save and we INSERT it directly — no find-and-re-stamp
+ * round-trip. The snapshot is taken AFTER tag/link reconcile so the history page
+ * shows the final state, attributed to the real user + summary.
  */
 async function finalizeRevision(
 	db: Db,
 	sourceId: string,
 	user: EditUser,
 	summary: string | undefined,
-	action: 'create' | 'update',
-	beforeRevisionIds: Set<string>
-): Promise<void> {
+	action: 'create' | 'update'
+): Promise<string> {
 	const snap = await snapshot(db, sourceId);
 	const summ = summary?.trim() || (action === 'create' ? 'Created' : 'Updated');
-	const all = await db
-		.select()
-		.from(sourceRevisions)
-		.where(eq(sourceRevisions.sourceId, sourceId))
-		.orderBy(desc(sourceRevisions.createdAt));
-	const fresh = all.find((r) => !beforeRevisionIds.has(r.id));
-	if (fresh) {
-		await db
-			.update(sourceRevisions)
-			.set({
-				userId: user.id ?? null,
-				userName: user.name ?? null,
-				summary: summ,
-				action,
-				snapshot: snap
-			})
-			.where(eq(sourceRevisions.id, fresh.id));
-	} else {
-		await db.insert(sourceRevisions).values({
-			sourceId,
-			userId: user.id ?? null,
-			userName: user.name ?? null,
-			summary: summ,
-			action,
-			snapshot: snap
-		});
-	}
-}
-
-async function slugOf(db: Db, sourceId: string): Promise<string> {
-	const [s] = await db.select({ slug: sources.slug }).from(sources).where(eq(sources.id, sourceId)).limit(1);
-	return s?.slug ?? '';
+	await db.insert(sourceRevisions).values({
+		sourceId,
+		userId: user.id ?? null,
+		userName: user.name ?? null,
+		summary: summ,
+		action,
+		snapshot: snap
+	});
+	// The snapshot already read the source row — return its slug so the caller
+	// doesn't need a separate `slugOf` round-trip for the post-save redirect.
+	const src = (snap as { source?: { slug?: string } }).source;
+	return src?.slug ?? '';
 }
 
 // ---------------------------------------------------------------------------
@@ -355,6 +344,7 @@ export async function createSourceViaMerge(
 		explicitDeletes,
 		links: toLinkInputs(input),
 		identifiers: [{ kind: 'repo_path', value: `website:new:${newKey}` }],
+		skipRevision: true, // the website path writes the (single) revision below
 		actor: user.id ?? null
 	});
 
@@ -362,11 +352,11 @@ export async function createSourceViaMerge(
 	if (!sid) return { slug: '', result }; // rejected — nothing materialized
 
 	await ensureEditIdentifier(db, sid); // canonical edit handle for future edits
-	await reconcileTags(db, sid, input.tagNames ?? []);
-	await reconcileLinks(db, sid, input);
+	await reconcileTags(db, sid, input.tagNames ?? [], true);
+	await reconcileLinks(db, sid, input, true);
 	await applyAuditColumns(db, sid, user, true);
-	await finalizeRevision(db, sid, user, summary, 'create', new Set());
-	return { slug: await slugOf(db, sid), result };
+	const slug = await finalizeRevision(db, sid, user, summary, 'create');
+	return { slug, result };
 }
 
 export async function updateSourceViaMerge(
@@ -376,15 +366,8 @@ export async function updateSourceViaMerge(
 	user: EditUser,
 	summary?: string
 ): Promise<WebsiteEditResult> {
-	// Both reads are independent — run them together (one fewer sequential
-	// round-trip on the stateless Worker client).
-	const [currentRows, beforeRevs] = await Promise.all([
-		db.select().from(sources).where(eq(sources.id, id)).limit(1),
-		db.select({ id: sourceRevisions.id }).from(sourceRevisions).where(eq(sourceRevisions.sourceId, id))
-	]);
-	const current = currentRows[0];
+	const [current] = await db.select().from(sources).where(eq(sources.id, id)).limit(1);
 	if (!current) throw new Error('Source not found');
-	const beforeRevisionIds = new Set(beforeRevs.map((r) => r.id));
 
 	const { fields, explicitDeletes } = buildObservation(input, current);
 	// Attach to THIS source DETERMINISTICALLY via targetSourceId: the edit lands on
@@ -399,6 +382,7 @@ export async function updateSourceViaMerge(
 		fields,
 		explicitDeletes,
 		links: toLinkInputs(input),
+		skipRevision: true, // the website path writes the (single) revision below
 		actor: user.id ?? null
 	});
 
@@ -406,8 +390,8 @@ export async function updateSourceViaMerge(
 	await reconcileTags(db, sid, input.tagNames ?? []);
 	await reconcileLinks(db, sid, input);
 	await applyAuditColumns(db, sid, user, false);
-	await finalizeRevision(db, sid, user, summary, 'update', beforeRevisionIds);
-	return { slug: await slugOf(db, sid), result };
+	const slug = await finalizeRevision(db, sid, user, summary, 'update');
+	return { slug, result };
 }
 
 // ---------------------------------------------------------------------------

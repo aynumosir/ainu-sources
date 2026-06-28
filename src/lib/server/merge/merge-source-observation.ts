@@ -16,7 +16,8 @@
  * Single statements + CAS only — no interactive transaction (the Worker uses a
  * stateless web libSQL client where tx isolation does not hold).
  */
-import { and, eq, inArray } from 'drizzle-orm';
+import { and, eq, inArray, sql } from 'drizzle-orm';
+import type { BatchItem } from 'drizzle-orm/batch';
 import { slugify } from '$lib/format';
 import {
 	sources,
@@ -35,6 +36,7 @@ import {
 	sourceIdentifiers,
 	sourceFieldClaims,
 	sourceFieldProvenance,
+	sourceLifecycleEvents,
 	sourceRevisions
 } from '../db/schema';
 import { projectSource, hashProjection } from '../golden';
@@ -68,7 +70,7 @@ import {
 	type ProvenanceWrite,
 	type ProvenanceRow
 } from './cas';
-import { applyLifecycleOp, softMerge, writeLifecycleEvent } from './lifecycle';
+import { applyLifecycleOp } from './lifecycle';
 
 const uuid = () => crypto.randomUUID();
 const NULL_HASH = hashValue(null);
@@ -170,12 +172,18 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 	const finalize = async (
 		status: MergeResult['status'],
 		sourceId?: string,
-		matchDecision?: string
+		matchDecision?: string,
+		/** an optional preceding write to flush in the SAME batch as the observation
+		 *  status update — lets the happy path land the projection write + finalize
+		 *  in one subrequest instead of two. */
+		coWrite?: BatchItem<'sqlite'> | null
 	): Promise<MergeResult> => {
-		await db
+		const obsUpdate = db
 			.update(sourceObservations)
 			.set({ status: status === 'drift' ? 'noop' : status, matchDecision: matchDecision ?? null })
 			.where(eq(sourceObservations.id, observationId));
+		if (coWrite) await db.batch([coWrite, obsUpdate]);
+		else await obsUpdate;
 		return {
 			observationId,
 			sourceId,
@@ -246,22 +254,30 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 	if (decision.action === 'attach' && decision.sourceId) {
 		sourceId = decision.sourceId;
 	} else {
-		sourceId = await createSourceRow(db, {
+		// Assemble the new source row + its 'create' lifecycle event and flush both
+		// in ONE batch (parent first, then the FK-referencing event) — one subrequest
+		// instead of two sequential inserts.
+		const built = await buildSourceRow(db, {
 			fields: cleanFields,
 			status: decision.status,
 			origin,
 			nv,
 			candidate: decision.status === 'candidate'
 		});
+		sourceId = built.id;
 		createdNew = true;
-		await writeLifecycleEvent(db, {
-			sourceId,
-			eventType: 'create',
-			observationId,
-			toStatus: decision.status,
-			reason: `merge create (${decision.matchDecision})`,
-			actor
-		});
+		await db.batch([
+			db.insert(sources).values(built.values),
+			db.insert(sourceLifecycleEvents).values({
+				sourceId,
+				observationId,
+				eventType: 'create',
+				toStatus: decision.status,
+				reason: `merge create (${decision.matchDecision})`,
+				actor,
+				createdAt: new Date()
+			})
+		]);
 		lifecycleEvents.push({ eventType: 'create', toStatus: decision.status });
 
 		// candidate / conflict ⇒ same-work candidate relation(s) to the existing source(s)
@@ -295,8 +311,82 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 	// the no-op / empty-overwrite guard; batching that read is the single biggest
 	// round-trip reduction on the website edit path against the stateless Worker
 	// client. Per-field provenance is independent and each field is processed once,
-	// so this snapshot is a valid seed; the CAS apply re-reads on contention.
-	const provByField = await readAllProvenance(db, sourceId);
+	// so this snapshot is a valid seed; the CAS apply re-reads on contention. A
+	// JUST-created source has no provenance yet, so skip the read entirely.
+	const provByField = createdNew
+		? new Map<string, ProvenanceRow>()
+		: await readAllProvenance(db, sourceId);
+
+	// An editorial_decision is band 900 — the TOP band — so it DETERMINISTICALLY
+	// wins every scalar / controlled / set / notes / explicit_delete field against
+	// any existing claim (a later editorial replaces a prior editorial). There is
+	// therefore NO CAS contention to resolve: instead of the per-field
+	// read-decide-conditional-update triple (one autocommit round-trip each — the
+	// Worker-subrequest blowup the cutover hit), we ASSEMBLE every winning claim +
+	// its provenance upsert and flush them in ONE `db.batch` (claims first, then
+	// the provenance rows that FK-reference them — parent-before-child, one
+	// transaction, one round-trip). No-loss is intact: superseded claims stay in
+	// `source_field_claims`; only the provenance high-water pointer advances. The
+	// genuine CAS path below is kept verbatim for NON-editorial (contended) writes.
+	const isEditorialObs = derivation === 'editorial_decision';
+	const editorialClaimRows: Array<typeof sourceFieldClaims.$inferInsert> = [];
+	const editorialProvOps: Array<{ fieldName: string; write: ProvenanceWrite }> = [];
+	const editorialNow = new Date();
+
+	// The ONLY editorial field whose batched value depends on the current state is
+	// `notes` (append below an equal/lower winner — #34/B2). Read its current
+	// winning text once, up front, so the editorial flush needs no per-field read.
+	let existingNotesText = '';
+	if (isEditorialObs) {
+		const notesProv = provByField.get('notes');
+		const editsNotes = 'notes' in cleanFields && !explicitDeletes.has('notes') && CLAIMABLE.has('notes');
+		// Skip the read when the submitted notes already EQUAL the current winner
+		// (the common "re-submit the whole form unchanged" edit) — it is a no-op, so
+		// the existing text is never needed.
+		const incomingNotes = cleanFields['notes'];
+		const notesUnchanged =
+			typeof incomingNotes === 'string' && hashValue(incomingNotes) === notesProv?.valueHash;
+		if (editsNotes && notesProv?.currentClaimId && !notesUnchanged) {
+			const [c] = await db
+				.select({ value: sourceFieldClaims.value })
+				.from(sourceFieldClaims)
+				.where(eq(sourceFieldClaims.id, notesProv.currentClaimId))
+				.limit(1);
+			if (typeof c?.value === 'string') existingNotesText = c.value;
+		}
+	}
+
+	const planEditorial = (
+		field: string,
+		value: unknown,
+		valueHash: string,
+		op: string,
+		rank: Rank,
+		meta: { origin: string; derivation: string; confidence: number; evidence: number },
+		write: ProvenanceWrite
+	) => {
+		const id = uuid();
+		write.currentClaimId = id;
+		editorialClaimRows.push({
+			id,
+			observationId,
+			sourceId,
+			fieldName: field,
+			value: value as unknown as Record<string, unknown>,
+			valueHash,
+			op,
+			rankBand: rank.band,
+			rankScore: rank.score,
+			origin: meta.origin,
+			derivation: meta.derivation,
+			confidence: meta.confidence,
+			evidence: meta.evidence,
+			status: 'applied', // editorial deterministically wins — no 'submitted' → re-stamp
+			createdAt: editorialNow
+		});
+		editorialProvOps.push({ fieldName: field, write });
+		appliedClaims.push({ fieldName: field, op, status: 'applied', valueHash, band: rank.band, score: rank.score });
+	};
 
 	for (const field of fieldsToProcess) {
 		if (!CLAIMABLE.has(field)) continue;
@@ -333,6 +423,19 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		if (policy.policy === 'set_union') {
 			if (isExplicitDelete || isEmptyValue(value)) continue; // set fields are not cleared here
 			const incoming = Array.isArray(value) ? (value as string[]) : [];
+			if (isEditorialObs) {
+				// editorial REPLACES with EXACTLY the incoming member set (#34 removal
+				// sticks). No existing-member read needed; noop guarded by valueHash.
+				const merged = [...new Set(incoming)].sort();
+				const valueHash = hashValue(merged);
+				const prov = provByField.get(field);
+				if (prov && prov.valueHash === valueHash) {
+					appliedClaims.push({ fieldName: field, op: 'set', status: 'noop', valueHash, band: rank.band, score: rank.score });
+					continue;
+				}
+				planEditorial(field, merged, valueHash, 'set', rank, meta, provWrite(null, valueHash, rank, meta));
+				continue;
+			}
 			const out = await applySetUnion(db, sourceId, field, observationId, incoming, rank, meta);
 			pushOutcome(field, 'add', out, rank, appliedClaims, heldClaims, conflicts);
 			continue;
@@ -355,6 +458,40 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 
 		// ── append_or_ranked (notes): replace if it wins, else append (no loss) ───
 		if (policy.policy === 'append_or_ranked' && !isExplicitDelete) {
+			if (isEditorialObs) {
+				// Mirror applyNotes' #34/B2 semantics with the up-front winner snapshot:
+				// editorial REPLACES a lower/empty winner, APPENDS to an equal-rank
+				// editorial winner (keeping the high-water rank), and is a no-op when the
+				// text is already present — all deterministic, so it joins the batch.
+				const text = String(value);
+				const cur = prov ? { band: prov.rankBand ?? 0, score: prov.rankScore ?? 0 } : null;
+				if (cur && (existingNotesText === text || existingNotesText.includes(text))) {
+					appliedClaims.push({ fieldName: field, op, status: 'noop', valueHash: prov?.valueHash ?? '', band: rank.band, score: rank.score });
+					continue;
+				}
+				const wins = !cur || rank.band > cur.band || (rank.band === cur.band && rank.score - cur.score > NEAR_SCORE_DELTA);
+				const nextText = wins || !existingNotesText ? text : `${existingNotesText}\n\n${text}`;
+				const valueHash = hashValue(nextText);
+				if (prov && prov.valueHash === valueHash) {
+					appliedClaims.push({ fieldName: field, op, status: 'noop', valueHash, band: rank.band, score: rank.score });
+					continue;
+				}
+				// Below-band append must NOT downgrade the provenance high-water mark.
+				const write: ProvenanceWrite = wins
+					? provWrite(null, valueHash, rank, meta)
+					: {
+							currentClaimId: null,
+							valueHash,
+							rankBand: cur!.band,
+							rankScore: cur!.score,
+							origin: prov!.origin ?? meta.origin,
+							derivation: prov!.derivation ?? meta.derivation,
+							confidence: prov!.confidence ?? meta.confidence,
+							evidence: prov!.evidence ?? meta.evidence
+						};
+				planEditorial(field, nextText, valueHash, wins ? 'set' : 'append', rank, meta, write);
+				continue;
+			}
 			const out = await applyNotes(db, sourceId, field, observationId, String(value), rank, prov, meta);
 			pushOutcome(field, op, out, rank, appliedClaims, heldClaims, conflicts);
 			continue;
@@ -364,6 +501,18 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		const valueHash = hashValue(value);
 		if (prov && prov.valueHash === valueHash) {
 			appliedClaims.push({ fieldName: field, op, status: 'noop', valueHash, band: rank.band, score: rank.score });
+			continue;
+		}
+		if (isEditorialObs) {
+			// Editorial (band 900) deterministically WINS a scalar/controlled/delete
+			// field over any real winner — EXCEPT a winner pinned ABOVE the editorial
+			// band, which applyScalarCas would HOLD; preserve that (the held edit is
+			// surfaced via heldClaims, never silently clobbered — N4).
+			if (prov && (prov.rankBand ?? 0) > EDITORIAL_BAND) {
+				pushOutcome(field, op, { outcome: 'held_below', valueHash }, rank, appliedClaims, heldClaims, conflicts);
+				continue;
+			}
+			planEditorial(field, value, valueHash, op, rank, meta, provWrite(null, valueHash, rank, meta));
 			continue;
 		}
 		const claimId = await insertClaim(db, {
@@ -384,23 +533,43 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		pushOutcome(field, op, { outcome: out, valueHash }, rank, appliedClaims, heldClaims, conflicts);
 	}
 
-	// 10. set-union links (keeps existing IIIF / PDF / user links, never drops)
-	if (safeLinks.length) {
-		await mergeLinks(db, sourceId, safeLinks, observationId, { origin: normalizeOrigin(origin), derivation, confidence, evidence });
+	// Flush the editorial winners: all claim INSERTs then all provenance upserts in
+	// ONE batch (one Worker subrequest). Claims precede provenance so the
+	// current_claim_id FK resolves within the single transaction.
+	if (editorialClaimRows.length) {
+		const ops: BatchItem<'sqlite'>[] = [];
+		for (const row of editorialClaimRows) ops.push(db.insert(sourceFieldClaims).values(row));
+		for (const p of editorialProvOps) ops.push(provUpsertStmt(db, sourceId, p.fieldName, p.write));
+		await db.batch(ops as [BatchItem<'sqlite'>, ...BatchItem<'sqlite'>[]]);
 	}
 
-	// 11. project winners → flat `sources`; recompute content hash
-	await projectAndStore(db, sourceId, explicitDeletes);
+	// 10. set-union links (keeps existing IIIF / PDF / user links, never drops)
+	if (safeLinks.length) {
+		await mergeLinks(db, sourceId, safeLinks, observationId, { origin: normalizeOrigin(origin), derivation, confidence, evidence }, createdNew);
+	}
 
-	// 12. source_revisions row (history compat)
-	await db.insert(sourceRevisions).values({
-		sourceId,
-		userId: actor,
-		userName: actor,
-		summary: `merge:${origin}:${decision.matchDecision}`,
-		action: createdNew ? 'create' : 'update',
-		snapshot: await buildSnapshot(db, sourceId)
-	});
+	// 11. project winners → flat `sources`; recompute content hash. When the caller
+	// owns history (skipRevision), DEFER the projection's `sources` UPDATE so it
+	// rides in the same batch as the finalize observation-status UPDATE (one
+	// subrequest). Harvest (writes a revision below, whose snapshot must reflect the
+	// projected row) keeps the immediate write.
+	const { deferred: projUpdate } = await projectAndStore(db, sourceId, explicitDeletes, !!input.skipRevision);
+
+	// 12. source_revisions row (history compat). The website paths re-stamp this
+	// with the real user/summary right after, so they pass skipRevision=true and
+	// write exactly one revision themselves — avoiding a buildSnapshot + insert
+	// here AND a find-and-update there (the revision double-write was ~5 of the
+	// edit's round-trips). Harvest callers still record history through the engine.
+	if (!input.skipRevision) {
+		await db.insert(sourceRevisions).values({
+			sourceId,
+			userId: actor,
+			userName: actor,
+			summary: `merge:${origin}:${decision.matchDecision}`,
+			action: createdNew ? 'create' : 'update',
+			snapshot: await buildSnapshot(db, sourceId)
+		});
+	}
 
 	// 13. status
 	let status: MergeResult['status'];
@@ -415,7 +584,7 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		else if (anyApplied) status = 'applied';
 		else status = 'partial';
 	}
-	return finalize(status, sourceId, decision.matchDecision);
+	return finalize(status, sourceId, decision.matchDecision, projUpdate);
 }
 
 // ---------------------------------------------------------------------------
@@ -426,6 +595,42 @@ async function upsertObservedRecord(
 	db: Db,
 	args: { origin: string; originRecordId: string; contentHash: string; nv: number; presence: 'seen' | 'missing' }
 ): Promise<void> {
+	const now = new Date();
+
+	// 'seen' (every website edit + most harvest) is a single INSERT … ON CONFLICT
+	// DO UPDATE keyed on UNIQUE(origin, origin_record_id) — one round-trip instead
+	// of a select-then-insert/update. `content_changed_at` advances only when the
+	// content hash actually changed (the IS-NOT mirrors the prior `!==` incl. null);
+	// missing_count is left untouched (preserves the drift history). 'missing'
+	// keeps the read-modify path (it must increment/seed the missing counters).
+	if (args.presence === 'seen') {
+		await db
+			.insert(sourceObservedRecords)
+			.values({
+				origin: args.origin,
+				originRecordId: args.originRecordId,
+				status: 'seen',
+				lastContentHash: args.contentHash,
+				normalizerVersion: args.nv,
+				firstSeenAt: now,
+				lastSeenAt: now,
+				contentChangedAt: now,
+				missingCount: 0,
+				missingSinceAt: null
+			})
+			.onConflictDoUpdate({
+				target: [sourceObservedRecords.origin, sourceObservedRecords.originRecordId],
+				set: {
+					status: 'seen',
+					lastContentHash: args.contentHash,
+					lastSeenAt: now,
+					contentChangedAt: sql`CASE WHEN ${sourceObservedRecords.lastContentHash} IS NOT ${args.contentHash} THEN ${now.getTime()} ELSE ${sourceObservedRecords.contentChangedAt} END`,
+					missingSinceAt: null
+				}
+			});
+		return;
+	}
+
 	const [existing] = await db
 		.select()
 		.from(sourceObservedRecords)
@@ -436,7 +641,6 @@ async function upsertObservedRecord(
 			)
 		)
 		.limit(1);
-	const now = new Date();
 	if (existing) {
 		const changed = existing.lastContentHash !== args.contentHash;
 		await db
@@ -483,10 +687,10 @@ async function ensureUniqueSlug(db: Db, base: string): Promise<string> {
 	}
 }
 
-async function createSourceRow(
+async function buildSourceRow(
 	db: Db,
 	args: { fields: Record<string, unknown>; status: 'active' | 'candidate'; origin: string; nv: number; candidate: boolean }
-): Promise<string> {
+): Promise<{ id: string; values: typeof sources.$inferInsert }> {
 	const id = uuid();
 	const f = args.fields;
 	const titleStr = typeof f.title === 'string' && f.title.trim() ? f.title : '(untitled)';
@@ -503,21 +707,23 @@ async function createSourceRow(
 	}
 
 	const now = new Date();
-	await db.insert(sources).values({
+	return {
 		id,
-		slug,
-		title: titleStr,
-		type: initType,
-		category: initCategory,
-		status: args.status,
-		provenanceRepo: normalizeOrigin(args.origin) || 'manual',
-		normalizerVersion: args.nv,
-		firstSeenAt: now,
-		lastSeenAt: now,
-		createdAt: now,
-		updatedAt: now
-	});
-	return id;
+		values: {
+			id,
+			slug,
+			title: titleStr,
+			type: initType,
+			category: initCategory,
+			status: args.status,
+			provenanceRepo: normalizeOrigin(args.origin) || 'manual',
+			normalizerVersion: args.nv,
+			firstSeenAt: now,
+			lastSeenAt: now,
+			createdAt: now,
+			updatedAt: now
+		}
+	};
 }
 
 async function addCandidateRelation(
@@ -707,7 +913,7 @@ async function setClaimStatus(db: Db, claimId: string, status: string): Promise<
 type ScalarOutcome = 'applied' | 'held_below' | 'conflict' | 'noop';
 
 function provWrite(
-	claimId: string,
+	claimId: string | null,
 	valueHash: string,
 	rank: Rank,
 	meta: { origin: string; derivation: string; confidence: number; evidence: number }
@@ -722,6 +928,35 @@ function provWrite(
 		confidence: meta.confidence,
 		evidence: meta.evidence
 	};
+}
+
+/**
+ * An UNCONDITIONAL provenance upsert keyed on UNIQUE(source_id, field_name) — the
+ * batched write for an editorial (deterministically winning) claim. Correct &
+ * no-loss: editorial is the top band so it always becomes the winner, which is
+ * exactly what an unconditional `ON CONFLICT … DO UPDATE` records; the prior
+ * winning claim is untouched in `source_field_claims`. (The CAS path's CONDITIONAL
+ * `WHERE current_claim_id = ?` is only needed for contended NON-editorial writes.)
+ */
+function provUpsertStmt(db: Db, sourceId: string, fieldName: string, w: ProvenanceWrite) {
+	const row = {
+		currentClaimId: w.currentClaimId,
+		valueHash: w.valueHash,
+		rankBand: w.rankBand,
+		rankScore: w.rankScore,
+		origin: w.origin,
+		derivation: w.derivation,
+		confidence: w.confidence,
+		evidence: w.evidence,
+		updatedAt: new Date()
+	};
+	return db
+		.insert(sourceFieldProvenance)
+		.values({ sourceId, fieldName, ...row })
+		.onConflictDoUpdate({
+			target: [sourceFieldProvenance.sourceId, sourceFieldProvenance.fieldName],
+			set: row
+		});
 }
 
 /** Band-first CAS apply for a scalar/controlled/editorial/explicit_delete claim. */
@@ -961,9 +1196,11 @@ async function mergeLinks(
 	sourceId: string,
 	links: Array<{ type: string; url: string; label: string | null }>,
 	observationId: string,
-	meta: { origin: string; derivation: string; confidence: number; evidence: number }
+	meta: { origin: string; derivation: string; confidence: number; evidence: number },
+	/** a JUST-created source has no links yet — skip the existing-links read */
+	createdNew = false
 ): Promise<void> {
-	const existing = await db.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
+	const existing = createdNew ? [] : await db.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
 	const key = (t: string, u: string) => `${t}\n${u}`;
 	const have = new Map(existing.map((l) => [key(l.type, l.url), l]));
 	const now = new Date();
@@ -998,46 +1235,28 @@ async function mergeLinks(
 // projection → flat sources + content hash
 // ---------------------------------------------------------------------------
 
-async function projectAndStore(db: Db, sourceId: string, explicitDeletes: Set<string>): Promise<void> {
-	// Read the winning claim value for every (source, field) via provenance:
-	// provenance.currentClaimId points at the single winning claim per field.
-	const winners = await db
-		.select({ field: sourceFieldClaims.fieldName, value: sourceFieldClaims.value, op: sourceFieldClaims.op })
-		.from(sourceFieldProvenance)
-		.innerJoin(sourceFieldClaims, eq(sourceFieldProvenance.currentClaimId, sourceFieldClaims.id))
-		.where(eq(sourceFieldProvenance.sourceId, sourceId));
-
-	const winnerOp = new Map<string, string>();
-	const upd: Record<string, unknown> = {};
-	for (const r of winners) {
-		if (!CLAIMABLE.has(r.field)) continue;
-		upd[r.field] = r.value;
-		winnerOp.set(r.field, r.op);
-	}
-	// An explicit delete clears the flat projection ONLY when the delete CLAIM
-	// actually WON CAS — i.e. it is the current `source_field_provenance` winner
-	// for that field (op='explicit_delete'). A delete that was held_below / rejected
-	// by CAS (e.g. a LOW-band machine delete vs. a curated/editorial value) leaves
-	// the prior winner intact; nulling it unconditionally here let a low-band delete
-	// clobber a value CAS correctly held (Codex BLOCKER B1).
-	for (const f of explicitDeletes) {
-		if (CLAIMABLE.has(f) && winnerOp.get(f) === 'explicit_delete') upd[f] = null;
-	}
-	upd.updatedAt = new Date();
-	upd.lastSeenAt = new Date();
-	if (Object.keys(upd).length) {
-		await db.update(sources).set(upd).where(eq(sources.id, sourceId));
-	}
-	await recomputeContentHash(db, sourceId);
-}
-
-async function recomputeContentHash(db: Db, sourceId: string): Promise<void> {
-	// These eight reads are independent — fire them CONCURRENTLY. On the stateless
-	// Worker libSQL client each query is its own HTTP round-trip, so running them in
-	// parallel collapses the projection's read latency (the editorial-edit write path
-	// was a long sequential fan-out of single-statement round-trips).
-	const [src, links, tagRows, personRows, placeRows, instRows, relOut, relIn] = await Promise.all([
-		db.select().from(sources).where(eq(sources.id, sourceId)).limit(1).then((r) => r[0]),
+async function projectAndStore(
+	db: Db,
+	sourceId: string,
+	explicitDeletes: Set<string>,
+	/** when true, RETURN the `sources` update statement unexecuted so the caller can
+	 *  batch it with the finalize write; when false, execute it immediately. The
+	 *  statement is wrapped in an object because a drizzle query builder is THENABLE
+	 *  — returning it bare from an async fn would auto-execute it at the await. */
+	defer = false
+): Promise<{ deferred: BatchItem<'sqlite'> | null }> {
+	// One BATCH for every projection input (winning claims + the flat row + all
+	// related rows) — a single Worker subrequest instead of a sequential/parallel
+	// fan-out of single-statement round-trips. The flat field winners and the
+	// content hash are then written in ONE combined `sources` UPDATE (the two
+	// separate updates — field projection, then content hash — collapse to one).
+	const [winners, srcRows, links, tagRows, personRows, placeRows, instRows, relOut, relIn] = await db.batch([
+		db
+			.select({ field: sourceFieldClaims.fieldName, value: sourceFieldClaims.value, op: sourceFieldClaims.op })
+			.from(sourceFieldProvenance)
+			.innerJoin(sourceFieldClaims, eq(sourceFieldProvenance.currentClaimId, sourceFieldClaims.id))
+			.where(eq(sourceFieldProvenance.sourceId, sourceId)),
+		db.select().from(sources).where(eq(sources.id, sourceId)).limit(1),
 		db
 			.select()
 			.from(sourceLinks)
@@ -1071,7 +1290,28 @@ async function recomputeContentHash(db: Db, sourceId: string): Promise<void> {
 			.from(sourceRelations)
 			.where(eq(sourceRelations.toSourceId, sourceId))
 	]);
-	if (!src) return;
+
+	const src = srcRows[0];
+	if (!src) return { deferred: null };
+
+	const winnerOp = new Map<string, string>();
+	const upd: Record<string, unknown> = {};
+	for (const r of winners) {
+		if (!CLAIMABLE.has(r.field)) continue;
+		upd[r.field] = r.value;
+		winnerOp.set(r.field, r.op);
+	}
+	// An explicit delete clears the flat projection ONLY when the delete CLAIM
+	// actually WON CAS — i.e. it is the current `source_field_provenance` winner
+	// for that field (op='explicit_delete'). A delete that was held_below / rejected
+	// by CAS (e.g. a LOW-band machine delete vs. a curated/editorial value) leaves
+	// the prior winner intact; nulling it unconditionally here let a low-band delete
+	// clobber a value CAS correctly held (Codex BLOCKER B1).
+	for (const f of explicitDeletes) {
+		if (CLAIMABLE.has(f) && winnerOp.get(f) === 'explicit_delete') upd[f] = null;
+	}
+
+	// Endpoint slugs for relations (only when the source has any) — one extra read.
 	const endpointIds = [...relOut.map((r) => r.to), ...relIn.map((r) => r.from)];
 	const slugMap = new Map<string, string>();
 	if (endpointIds.length) {
@@ -1082,8 +1322,11 @@ async function recomputeContentHash(db: Db, sourceId: string): Promise<void> {
 		...relOut.map((r) => ({ type: r.type, toSlugOrId: slugMap.get(r.to) ?? r.to, direction: 'out' as const })),
 		...relIn.map((r) => ({ type: r.type, toSlugOrId: slugMap.get(r.from) ?? r.from, direction: 'in' as const }))
 	];
+	// Compute the projection from the row OVERLAID with the new field winners (we
+	// already hold them) — equivalent to writing them first then re-reading, but
+	// without the extra round-trip; the content hash is then exact for one UPDATE.
 	const projection = projectSource({
-		source: src as unknown as Record<string, unknown>,
+		source: { ...(src as unknown as Record<string, unknown>), ...upd },
 		links,
 		tags: tagRows.map((t) => t.name),
 		persons: personRows,
@@ -1092,11 +1335,14 @@ async function recomputeContentHash(db: Db, sourceId: string): Promise<void> {
 		relations
 	});
 	const hash = hashProjection(projection);
-	if (src.contentHash !== hash) {
-		await db.update(sources).set({ contentHash: hash, contentChangedAt: new Date() }).where(eq(sources.id, sourceId));
-	} else {
-		await db.update(sources).set({ contentHash: hash }).where(eq(sources.id, sourceId));
-	}
+
+	const now = new Date();
+	const finalUpd: Record<string, unknown> = { ...upd, contentHash: hash, updatedAt: now, lastSeenAt: now };
+	if (src.contentHash !== hash) finalUpd.contentChangedAt = now;
+	const stmt = db.update(sources).set(finalUpd).where(eq(sources.id, sourceId));
+	if (defer) return { deferred: stmt as unknown as BatchItem<'sqlite'> };
+	await stmt;
+	return { deferred: null };
 }
 
 // ---------------------------------------------------------------------------
@@ -1104,7 +1350,8 @@ async function recomputeContentHash(db: Db, sourceId: string): Promise<void> {
 // ---------------------------------------------------------------------------
 
 async function buildSnapshot(db: Db, sourceId: string): Promise<Record<string, unknown>> {
-	const [[src], links, tagRows] = await Promise.all([
+	// One batch (one subrequest) for the three snapshot reads.
+	const [srcRows, links, tagRows] = await db.batch([
 		db.select().from(sources).where(eq(sources.id, sourceId)).limit(1),
 		db.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId)),
 		db
@@ -1113,6 +1360,7 @@ async function buildSnapshot(db: Db, sourceId: string): Promise<Record<string, u
 			.innerJoin(tags, eq(sourceTags.tagId, tags.id))
 			.where(eq(sourceTags.sourceId, sourceId))
 	]);
+	const src = srcRows[0];
 	if (!src) return {};
 	return { source: src, links, tags: tagRows.map((t) => t.name) };
 }
