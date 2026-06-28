@@ -34,6 +34,7 @@ import type {
 	RelatedSource
 } from '$lib/types';
 import { asArray, centuryOf, slugify } from '$lib/format';
+import { activeSourcesOnly, publicRelationsOnly } from './visibility';
 
 type SQLCond = ReturnType<typeof eq>;
 
@@ -45,7 +46,10 @@ const SEEDED = ['ainu-dictionaries', 'ainu-grammar', 'ainu-corpora'];
 
 /** Conditions shared by the list view and the facet counts. */
 function baseConditions(f: SourceFilters): SQLCond[] {
-	const c: SQLCond[] = [];
+	// Public read model: only active sources surface. Shared by listSources and
+	// computeFacets, so merged/hidden/candidate/soft_deleted rows never appear in
+	// the browse list OR inflate a facet bucket. No-op while everything is active.
+	const c: SQLCond[] = [activeSourcesOnly()];
 	if (f.q && f.q.trim()) {
 		const q = `%${f.q.trim()}%`;
 		c.push(
@@ -269,8 +273,38 @@ export async function computeFacets(f: SourceFilters): Promise<Facets> {
 // ---------------------------------------------------------------------------
 
 export async function getSourceBySlug(slug: string): Promise<Source | undefined> {
-	const r = await db.select().from(sources).where(eq(sources.slug, slug)).limit(1);
+	// Public lookup: a non-active source (merged/hidden/candidate/soft_deleted) is
+	// treated as not-found here. The detail route turns "not found" into a 302 to
+	// the merge winner (see getMergeRedirectTarget) or a 404.
+	const r = await db
+		.select()
+		.from(sources)
+		.where(and(eq(sources.slug, slug), activeSourcesOnly()))
+		.limit(1);
 	return r[0];
+}
+
+/**
+ * Decide the public response for a slug that did NOT resolve to an active source.
+ * A merged loser (status='merged' + mergedIntoSourceId) redirects to its winner's
+ * slug — but only when that winner is itself active; everything else (hidden,
+ * soft_deleted, candidate, or genuinely missing) returns undefined → the caller
+ * 404s. Reads `sources` WITHOUT the active filter on purpose: it must see the
+ * non-active loser row to know where to send the visitor.
+ */
+export async function getMergeRedirectTarget(slug: string): Promise<string | undefined> {
+	const [row] = await db
+		.select({ status: sources.status, mergedIntoSourceId: sources.mergedIntoSourceId })
+		.from(sources)
+		.where(eq(sources.slug, slug))
+		.limit(1);
+	if (!row || row.status !== 'merged' || !row.mergedIntoSourceId) return undefined;
+	const [winner] = await db
+		.select({ slug: sources.slug })
+		.from(sources)
+		.where(and(eq(sources.id, row.mergedIntoSourceId), activeSourcesOnly()))
+		.limit(1);
+	return winner?.slug;
 }
 
 export async function getSourceDetail(slug: string): Promise<SourceDetail | undefined> {
@@ -306,12 +340,15 @@ export async function getSourceDetail(slug: string): Promise<SourceDetail | unde
 				.select({ relation: sourceRelations, source: sources })
 				.from(sourceRelations)
 				.innerJoin(sources, eq(sourceRelations.toSourceId, sources.id))
-				.where(eq(sourceRelations.fromSourceId, id)),
+				// Only accepted relations whose OTHER endpoint (the joined source) is
+				// itself active — a candidate/rejected edge, or one pointing at a
+				// hidden/merged source, is never shown on the detail page.
+				.where(and(eq(sourceRelations.fromSourceId, id), publicRelationsOnly(), activeSourcesOnly())),
 			db
 				.select({ relation: sourceRelations, source: sources })
 				.from(sourceRelations)
 				.innerJoin(sources, eq(sourceRelations.fromSourceId, sources.id))
-				.where(eq(sourceRelations.toSourceId, id)),
+				.where(and(eq(sourceRelations.toSourceId, id), publicRelationsOnly(), activeSourcesOnly())),
 			db.select({ n: count() }).from(sourceRevisions).where(eq(sourceRevisions.sourceId, id))
 		]);
 
@@ -352,12 +389,19 @@ export async function getStats(): Promise<DbStats> {
 			languages: sources.languages,
 			yearStart: sources.yearStart
 		})
-		.from(sources);
+		.from(sources)
+		.where(activeSourcesOnly());
 	const [pc, plc, ic, dig] = await Promise.all([
 		db.select({ n: count() }).from(persons),
 		db.select({ n: count() }).from(places),
 		db.select({ n: count() }).from(institutions),
-		db.select({ n: sql<number>`count(distinct ${sourceLinks.sourceId})` }).from(sourceLinks)
+		// "with digital access" = active sources that have ≥1 link (join sources so
+		// a link hanging off a hidden/merged source is not counted).
+		db
+			.select({ n: sql<number>`count(distinct ${sourceLinks.sourceId})` })
+			.from(sourceLinks)
+			.innerJoin(sources, eq(sources.id, sourceLinks.sourceId))
+			.where(activeSourcesOnly())
 	]);
 	const years = rows.map((r) => r.yearStart).filter((y): y is number => y != null);
 	return {
@@ -389,6 +433,7 @@ export async function getTimeline(): Promise<TimelinePoint[]> {
 			region: sources.region
 		})
 		.from(sources)
+		.where(activeSourcesOnly())
 		.orderBy(asc(sources.yearStart));
 	return rows.filter((r): r is TimelinePoint => r.yearStart != null);
 }
@@ -404,10 +449,14 @@ export async function getMapPlaces(): Promise<MapPlace[]> {
 			kind: places.kind,
 			lat: places.lat,
 			lng: places.lng,
-			sourceCount: sql<number>`count(${sourcePlaces.sourceId})`
+			// Count only active sources for the map badge: the inner-most join keeps a
+			// place even with zero active sources (leftJoin), but counts only the
+			// active ones. Identical to count(sourcePlaces.sourceId) when all active.
+			sourceCount: sql<number>`count(${sources.id})`
 		})
 		.from(places)
 		.leftJoin(sourcePlaces, eq(sourcePlaces.placeId, places.id))
+		.leftJoin(sources, and(eq(sources.id, sourcePlaces.sourceId), activeSourcesOnly()))
 		.groupBy(places.id);
 	return rows.filter((r): r is MapPlace => r.lat != null && r.lng != null);
 }
@@ -445,7 +494,11 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 		);
 	}
 
-	const cnt = sql<number>`count(${sourcePersons.sourceId})`;
+	// Count + role labels reflect only ACTIVE works: the second leftJoin keeps the
+	// person row even with zero active sources, but `sources.id` is non-null only
+	// for an active link, so count/roles ignore hidden/merged/candidate works. All
+	// no-ops when every source is active (sources.id then matches every link).
+	const cnt = sql<number>`count(${sources.id})`;
 	const order =
 		opts.sort === 'name'
 			? [asc(persons.name)]
@@ -457,10 +510,11 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 		.select({
 			person: persons,
 			n: cnt,
-			roles: sql<string | null>`group_concat(distinct ${sourcePersons.role})`
+			roles: sql<string | null>`group_concat(distinct case when ${sources.id} is not null then ${sourcePersons.role} end)`
 		})
 		.from(persons)
 		.leftJoin(sourcePersons, eq(sourcePersons.personId, persons.id))
+		.leftJoin(sources, and(eq(sources.id, sourcePersons.sourceId), activeSourcesOnly()))
 		.where(conds.length ? and(...conds) : undefined)
 		.groupBy(persons.id)
 		.orderBy(...order);
@@ -501,7 +555,7 @@ export async function getPersonBySlug(
 		.select({ source: sources, role: sourcePersons.role })
 		.from(sourcePersons)
 		.innerJoin(sources, eq(sourcePersons.sourceId, sources.id))
-		.where(eq(sourcePersons.personId, person.id))
+		.where(and(eq(sourcePersons.personId, person.id), activeSourcesOnly()))
 		.orderBy(asc(sources.yearStart));
 	// A merged person can carry the same (source, role) twice — dedupe so the page's
 	// keyed {#each} doesn't get duplicate keys (which crashes hydration).
@@ -526,9 +580,10 @@ export async function getPersonBySlug(
 			n: countDistinct(sourcePersons.sourceId)
 		})
 		.from(sourcePersons)
+		.innerJoin(sources, eq(sources.id, sourcePersons.sourceId))
 		.innerJoin(sourceTags, eq(sourceTags.sourceId, sourcePersons.sourceId))
 		.innerJoin(tags, eq(tags.id, sourceTags.tagId))
-		.where(eq(sourcePersons.personId, person.id))
+		.where(and(eq(sourcePersons.personId, person.id), activeSourcesOnly()))
 		.groupBy(tags.id)
 		.orderBy(desc(countDistinct(sourcePersons.sourceId)));
 	const areas: PersonArea[] = areaRows.map((a) => ({
@@ -546,11 +601,12 @@ export interface PlaceWithCount extends Place {
 }
 export async function listPlaces(): Promise<PlaceWithCount[]> {
 	const rows = await db
-		.select({ place: places, n: sql<number>`count(${sourcePlaces.sourceId})` })
+		.select({ place: places, n: sql<number>`count(${sources.id})` })
 		.from(places)
 		.leftJoin(sourcePlaces, eq(sourcePlaces.placeId, places.id))
+		.leftJoin(sources, and(eq(sources.id, sourcePlaces.sourceId), activeSourcesOnly()))
 		.groupBy(places.id)
-		.orderBy(desc(sql`count(${sourcePlaces.sourceId})`), asc(places.name));
+		.orderBy(desc(sql`count(${sources.id})`), asc(places.name));
 	return rows.map((r) => ({ ...r.place, sourceCount: r.n }));
 }
 
@@ -564,7 +620,7 @@ export async function getPlaceBySlug(
 		.select({ source: sources, role: sourcePlaces.role })
 		.from(sourcePlaces)
 		.innerJoin(sources, eq(sourcePlaces.sourceId, sources.id))
-		.where(eq(sourcePlaces.placeId, place.id))
+		.where(and(eq(sourcePlaces.placeId, place.id), activeSourcesOnly()))
 		.orderBy(asc(sources.yearStart));
 	return { place, sources: srcs };
 }
@@ -574,11 +630,12 @@ export interface InstitutionWithCount extends Institution {
 }
 export async function listInstitutions(): Promise<InstitutionWithCount[]> {
 	const rows = await db
-		.select({ inst: institutions, n: sql<number>`count(${sourceInstitutions.sourceId})` })
+		.select({ inst: institutions, n: sql<number>`count(${sources.id})` })
 		.from(institutions)
 		.leftJoin(sourceInstitutions, eq(sourceInstitutions.institutionId, institutions.id))
+		.leftJoin(sources, and(eq(sources.id, sourceInstitutions.sourceId), activeSourcesOnly()))
 		.groupBy(institutions.id)
-		.orderBy(desc(sql`count(${sourceInstitutions.sourceId})`), asc(institutions.name));
+		.orderBy(desc(sql`count(${sources.id})`), asc(institutions.name));
 	return rows.map((r) => ({ ...r.inst, sourceCount: r.n }));
 }
 
@@ -592,7 +649,7 @@ export async function getInstitutionBySlug(
 		.select({ source: sources, role: sourceInstitutions.role })
 		.from(sourceInstitutions)
 		.innerJoin(sources, eq(sourceInstitutions.sourceId, sources.id))
-		.where(eq(sourceInstitutions.institutionId, institution.id))
+		.where(and(eq(sourceInstitutions.institutionId, institution.id), activeSourcesOnly()))
 		.orderBy(asc(sources.yearStart));
 	return { institution, sources: srcs };
 }
@@ -602,11 +659,12 @@ export interface TagWithCount extends Tag {
 }
 export async function listTags(): Promise<TagWithCount[]> {
 	const rows = await db
-		.select({ tag: tags, n: sql<number>`count(${sourceTags.sourceId})` })
+		.select({ tag: tags, n: sql<number>`count(${sources.id})` })
 		.from(tags)
 		.leftJoin(sourceTags, eq(sourceTags.tagId, tags.id))
+		.leftJoin(sources, and(eq(sources.id, sourceTags.sourceId), activeSourcesOnly()))
 		.groupBy(tags.id)
-		.orderBy(desc(sql`count(${sourceTags.sourceId})`), asc(tags.name));
+		.orderBy(desc(sql`count(${sources.id})`), asc(tags.name));
 	return rows.map((r) => ({ ...r.tag, sourceCount: r.n }));
 }
 
@@ -624,7 +682,7 @@ export interface SitemapEntries {
 /** Slugs (+ lastmod where available) for every public, indexable detail page. */
 export async function getSitemapEntries(): Promise<SitemapEntries> {
 	const [s, pe, pl, inst] = await Promise.all([
-		db.select({ slug: sources.slug, updatedAt: sources.updatedAt }).from(sources).orderBy(asc(sources.slug)),
+		db.select({ slug: sources.slug, updatedAt: sources.updatedAt }).from(sources).where(activeSourcesOnly()).orderBy(asc(sources.slug)),
 		db.select({ slug: persons.slug, updatedAt: persons.updatedAt }).from(persons).orderBy(asc(persons.slug)),
 		db.select({ slug: places.slug }).from(places).orderBy(asc(places.slug)),
 		db.select({ slug: institutions.slug }).from(institutions).orderBy(asc(institutions.slug))
@@ -643,11 +701,14 @@ export async function quickSearch(q: string, limit = 8): Promise<Source[]> {
 		.select()
 		.from(sources)
 		.where(
-			or(
-				like(sources.title, term),
-				like(sources.titleEn, term),
-				like(sources.author, term),
-				like(sources.dialect, term)
+			and(
+				activeSourcesOnly(),
+				or(
+					like(sources.title, term),
+					like(sources.titleEn, term),
+					like(sources.author, term),
+					like(sources.dialect, term)
+				)
 			)
 		)
 		.orderBy(asc(sources.yearStart))
