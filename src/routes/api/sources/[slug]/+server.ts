@@ -27,8 +27,9 @@ export const GET: RequestHandler = async ({ params }) => {
  * PATCH /api/sources/<slug> — update an existing source. Authorized by the
  * SOURCES_WRITE_TOKEN bearer secret (see write-api.ts). Partial: only the
  * SourceInput fields present in the body are changed; everything else (incl.
- * links/tags if omitted) is carried over from the current record, then written
- * via updateSource() so a revision is recorded.
+ * links/tags if omitted) is carried over from the current record, then routed
+ * through the merge engine via updateSource(); the `MergeResult` is returned so
+ * the caller can see a held/conflict outcome.
  */
 export const PATCH: RequestHandler = async ({ request, params }) => {
 	requireWriteToken(request);
@@ -44,6 +45,6 @@ export const PATCH: RequestHandler = async ({ request, params }) => {
 	const b = body as Record<string, unknown>;
 	const merged = { ...detailToInput(detail), ...pickSourceInput(b) };
 	assertRequiredFields(merged);
-	const slug = await updateSource(detail.source.id, merged, pickUser(b), revisionSummaryOf(b));
-	return json({ slug, source: await getSourceDetail(slug) });
+	const { slug, result } = await updateSource(detail.source.id, merged, pickUser(b), revisionSummaryOf(b));
+	return json({ slug, result, source: await getSourceDetail(slug) });
 };

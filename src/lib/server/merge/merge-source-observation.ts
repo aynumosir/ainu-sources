@@ -61,10 +61,12 @@ import { auditIngest, auditCreation, auditLlmAssertions, isEmptyOverwrite } from
 import { resolveIdentity } from './identity';
 import {
 	readProvenance,
+	readAllProvenance,
 	casInsertFirst,
 	casUpdate,
 	CAS_MAX_RETRY,
-	type ProvenanceWrite
+	type ProvenanceWrite,
+	type ProvenanceRow
 } from './cas';
 import { applyLifecycleOp, softMerge, writeLifecycleEvent } from './lifecycle';
 
@@ -195,8 +197,12 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		return finalize('rejected');
 	}
 
-	// 6. identity find-or-create
-	const decision = await resolveIdentity(db, { identifiers: normIds, fields: cleanFields });
+	// 6. identity find-or-create (an explicit targetSourceId attaches deterministically)
+	const decision = await resolveIdentity(db, {
+		identifiers: normIds,
+		fields: cleanFields,
+		targetSourceId: input.targetSourceId
+	});
 
 	// 6a. upstream disappearance ⇒ drift only (NEVER mutate / delete)
 	if (presence === 'missing') {
@@ -284,6 +290,14 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 	const explicitDeletes = new Set(input.explicitDeletes ?? []);
 	const fieldsToProcess = new Set<string>([...Object.keys(cleanFields), ...explicitDeletes]);
 
+	// Read the CURRENT winner for every field up front in ONE round-trip (instead
+	// of one read per field below). Each scalar field needs its current winner for
+	// the no-op / empty-overwrite guard; batching that read is the single biggest
+	// round-trip reduction on the website edit path against the stateless Worker
+	// client. Per-field provenance is independent and each field is processed once,
+	// so this snapshot is a valid seed; the CAS apply re-reads on contention.
+	const provByField = await readAllProvenance(db, sourceId);
+
 	for (const field of fieldsToProcess) {
 		if (!CLAIMABLE.has(field)) continue;
 		const policy = FIELD_POLICIES[field];
@@ -324,8 +338,9 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 			continue;
 		}
 
-		// existing winner (also used for the empty-overwrite guard)
-		const prov = await readProvenance(db, sourceId, field);
+		// existing winner (also used for the empty-overwrite guard) — from the single
+		// up-front provenance read, not a per-field round-trip.
+		const prov = provByField.get(field);
 		const hasExistingNonEmpty = !!prov && prov.valueHash !== NULL_HASH;
 
 		// empty overwriting non-empty without an explicit delete ⇒ rejected
@@ -361,7 +376,10 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 			rank,
 			meta
 		});
-		const out = await applyScalarCas(db, sourceId, field, claimId, rank, valueHash, meta);
+		// Reuse the winner we already read above instead of re-reading it inside the
+		// CAS apply: a website edit fans out one autocommit round-trip PER field, so
+		// the duplicate read was a measurable cost on the stateless Worker client.
+		const out = await applyScalarCas(db, sourceId, field, claimId, rank, valueHash, meta, prov);
 		await setClaimStatus(db, claimId, out === 'applied' ? 'applied' : out === 'noop' ? 'applied' : out);
 		pushOutcome(field, op, { outcome: out, valueHash }, rank, appliedClaims, heldClaims, conflicts);
 	}
@@ -714,10 +732,13 @@ async function applyScalarCas(
 	claimId: string,
 	rank: Rank,
 	valueHash: string,
-	meta: { origin: string; derivation: string; confidence: number; evidence: number }
+	meta: { origin: string; derivation: string; confidence: number; evidence: number },
+	/** the current winner the caller already read (avoids a duplicate round-trip);
+	 *  the CAS loop still re-reads on contention, so concurrency safety is intact. */
+	initialProv?: ProvenanceRow
 ): Promise<ScalarOutcome> {
 	const editorial = rank.band === EDITORIAL_BAND;
-	let prov = await readProvenance(db, sourceId, field);
+	let prov = initialProv ?? (await readProvenance(db, sourceId, field));
 
 	if (!prov) {
 		const inserted = await casInsertFirst(db, sourceId, field, provWrite(claimId, valueHash, rank, meta));
@@ -1011,40 +1032,46 @@ async function projectAndStore(db: Db, sourceId: string, explicitDeletes: Set<st
 }
 
 async function recomputeContentHash(db: Db, sourceId: string): Promise<void> {
-	const [src] = await db.select().from(sources).where(eq(sources.id, sourceId)).limit(1);
+	// These eight reads are independent — fire them CONCURRENTLY. On the stateless
+	// Worker libSQL client each query is its own HTTP round-trip, so running them in
+	// parallel collapses the projection's read latency (the editorial-edit write path
+	// was a long sequential fan-out of single-statement round-trips).
+	const [src, links, tagRows, personRows, placeRows, instRows, relOut, relIn] = await Promise.all([
+		db.select().from(sources).where(eq(sources.id, sourceId)).limit(1).then((r) => r[0]),
+		db
+			.select()
+			.from(sourceLinks)
+			.where(and(eq(sourceLinks.sourceId, sourceId), eq(sourceLinks.status, 'active'))),
+		db
+			.select({ name: tags.name })
+			.from(sourceTags)
+			.innerJoin(tags, eq(sourceTags.tagId, tags.id))
+			.where(eq(sourceTags.sourceId, sourceId)),
+		db
+			.select({ slug: persons.slug, role: sourcePersons.role, sortOrder: sourcePersons.sortOrder })
+			.from(sourcePersons)
+			.innerJoin(persons, eq(sourcePersons.personId, persons.id))
+			.where(eq(sourcePersons.sourceId, sourceId)),
+		db
+			.select({ slug: places.slug, role: sourcePlaces.role, notes: sourcePlaces.notes })
+			.from(sourcePlaces)
+			.innerJoin(places, eq(sourcePlaces.placeId, places.id))
+			.where(eq(sourcePlaces.sourceId, sourceId)),
+		db
+			.select({ slug: institutions.slug, role: sourceInstitutions.role, callNumber: sourceInstitutions.callNumber, notes: sourceInstitutions.notes })
+			.from(sourceInstitutions)
+			.innerJoin(institutions, eq(sourceInstitutions.institutionId, institutions.id))
+			.where(eq(sourceInstitutions.sourceId, sourceId)),
+		db
+			.select({ to: sourceRelations.toSourceId, type: sourceRelations.type })
+			.from(sourceRelations)
+			.where(eq(sourceRelations.fromSourceId, sourceId)),
+		db
+			.select({ from: sourceRelations.fromSourceId, type: sourceRelations.type })
+			.from(sourceRelations)
+			.where(eq(sourceRelations.toSourceId, sourceId))
+	]);
 	if (!src) return;
-	const links = await db
-		.select()
-		.from(sourceLinks)
-		.where(and(eq(sourceLinks.sourceId, sourceId), eq(sourceLinks.status, 'active')));
-	const tagRows = await db
-		.select({ name: tags.name })
-		.from(sourceTags)
-		.innerJoin(tags, eq(sourceTags.tagId, tags.id))
-		.where(eq(sourceTags.sourceId, sourceId));
-	const personRows = await db
-		.select({ slug: persons.slug, role: sourcePersons.role, sortOrder: sourcePersons.sortOrder })
-		.from(sourcePersons)
-		.innerJoin(persons, eq(sourcePersons.personId, persons.id))
-		.where(eq(sourcePersons.sourceId, sourceId));
-	const placeRows = await db
-		.select({ slug: places.slug, role: sourcePlaces.role, notes: sourcePlaces.notes })
-		.from(sourcePlaces)
-		.innerJoin(places, eq(sourcePlaces.placeId, places.id))
-		.where(eq(sourcePlaces.sourceId, sourceId));
-	const instRows = await db
-		.select({ slug: institutions.slug, role: sourceInstitutions.role, callNumber: sourceInstitutions.callNumber, notes: sourceInstitutions.notes })
-		.from(sourceInstitutions)
-		.innerJoin(institutions, eq(sourceInstitutions.institutionId, institutions.id))
-		.where(eq(sourceInstitutions.sourceId, sourceId));
-	const relOut = await db
-		.select({ to: sourceRelations.toSourceId, type: sourceRelations.type })
-		.from(sourceRelations)
-		.where(eq(sourceRelations.fromSourceId, sourceId));
-	const relIn = await db
-		.select({ from: sourceRelations.fromSourceId, type: sourceRelations.type })
-		.from(sourceRelations)
-		.where(eq(sourceRelations.toSourceId, sourceId));
 	const endpointIds = [...relOut.map((r) => r.to), ...relIn.map((r) => r.from)];
 	const slugMap = new Map<string, string>();
 	if (endpointIds.length) {
@@ -1077,13 +1104,15 @@ async function recomputeContentHash(db: Db, sourceId: string): Promise<void> {
 // ---------------------------------------------------------------------------
 
 async function buildSnapshot(db: Db, sourceId: string): Promise<Record<string, unknown>> {
-	const [src] = await db.select().from(sources).where(eq(sources.id, sourceId)).limit(1);
+	const [[src], links, tagRows] = await Promise.all([
+		db.select().from(sources).where(eq(sources.id, sourceId)).limit(1),
+		db.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId)),
+		db
+			.select({ name: tags.name })
+			.from(sourceTags)
+			.innerJoin(tags, eq(sourceTags.tagId, tags.id))
+			.where(eq(sourceTags.sourceId, sourceId))
+	]);
 	if (!src) return {};
-	const links = await db.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId));
-	const tagRows = await db
-		.select({ name: tags.name })
-		.from(sourceTags)
-		.innerJoin(tags, eq(sourceTags.tagId, tags.id))
-		.where(eq(sourceTags.sourceId, sourceId));
 	return { source: src, links, tags: tagRows.map((t) => t.name) };
 }
