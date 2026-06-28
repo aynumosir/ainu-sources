@@ -115,6 +115,8 @@ export async function resolveIdentity(
 	args: {
 		identifiers: NormalizedIdentifier[];
 		fields: Record<string, unknown>;
+		/** deterministic attach target — see MergeInput.targetSourceId */
+		targetSourceId?: string;
 	}
 ): Promise<IdentityDecision> {
 	const ids = args.identifiers.filter((i) => i.valid);
@@ -127,6 +129,16 @@ export async function resolveIdentity(
 	const core = coreText(title);
 
 	const base = { hasStrongId, hasTitle, status: 'active' as const };
+
+	// ── 0. explicit target ──────────────────────────────────────────────────────
+	// An editorial edit names the source it is editing. Attach to it DIRECTLY — no
+	// catalogue scan, no identifier round-trips, and (crucially) no fork when a
+	// substantive field (title/author/year) changes. This is purely an IDENTITY
+	// decision: precedence/rank are still computed from the observation's own
+	// derivation/confidence downstream, exactly as for any other attach.
+	if (args.targetSourceId) {
+		return { ...base, action: 'attach', sourceId: args.targetSourceId, matchDecision: 'explicit_target' };
+	}
 
 	// ── 1. strong identifiers (include redirect targets in the lookup) ──────────
 	if (hasStrongId) {

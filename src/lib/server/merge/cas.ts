@@ -39,6 +39,42 @@ export interface ProvenanceWrite {
 	evidence: number | null;
 }
 
+/**
+ * Read EVERY current-winner provenance row for a source in ONE round-trip and
+ * return it keyed by field name. The merge field-loop checks the current winner
+ * for each incoming field (the no-op / empty-overwrite guard); doing that as one
+ * batched read instead of one round-trip PER field collapses the dominant read
+ * cost of an edit on the stateless Worker libSQL client. Provenance rows are
+ * per-field independent, so this pre-read snapshot is a valid seed — the CAS
+ * apply still re-reads the individual row on contention, so concurrency safety
+ * is unchanged.
+ */
+export async function readAllProvenance(
+	db: Db,
+	sourceId: string
+): Promise<Map<string, ProvenanceRow>> {
+	const rows = await db
+		.select({
+			fieldName: sourceFieldProvenance.fieldName,
+			currentClaimId: sourceFieldProvenance.currentClaimId,
+			valueHash: sourceFieldProvenance.valueHash,
+			rankBand: sourceFieldProvenance.rankBand,
+			rankScore: sourceFieldProvenance.rankScore,
+			origin: sourceFieldProvenance.origin,
+			derivation: sourceFieldProvenance.derivation,
+			confidence: sourceFieldProvenance.confidence,
+			evidence: sourceFieldProvenance.evidence
+		})
+		.from(sourceFieldProvenance)
+		.where(eq(sourceFieldProvenance.sourceId, sourceId));
+	const map = new Map<string, ProvenanceRow>();
+	for (const r of rows) {
+		const { fieldName, ...prov } = r;
+		map.set(fieldName, prov);
+	}
+	return map;
+}
+
 export async function readProvenance(
 	db: Db,
 	sourceId: string,

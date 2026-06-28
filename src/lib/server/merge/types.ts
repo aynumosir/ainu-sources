@@ -48,6 +48,17 @@ export interface MergeInput {
 	evidence?: number;
 	/** canonical scalar / set fields keyed by `sources` column name */
 	fields?: Record<string, unknown>;
+	/**
+	 * Deterministic identity target. When set, the merge ATTACHES to exactly this
+	 * source id (matchDecision='explicit_target') and skips find-or-create entirely
+	 * — an editorial EDIT lands on its own source instead of forking on a
+	 * substantive field change, and the costly catalogue scan in `resolveIdentity`
+	 * is avoided. IDENTITY ONLY: it never influences claim precedence / band-rank
+	 * (the website edit still carries its own derivation/confidence for ranking).
+	 * The caller MUST guarantee the source exists (the website update path reads it
+	 * first); a non-existent id would surface as an FK error on the first child write.
+	 */
+	targetSourceId?: string;
 	identifiers?: IdentifierInput[];
 	links?: LinkInput[];
 	/** field names to explicitly clear (op='explicit_delete'); lets an empty value
@@ -58,6 +69,14 @@ export interface MergeInput {
 	/** a deliberate source-status transition (soft delete / hide / restore / …) */
 	lifecycle?: LifecycleInput;
 	runId?: string | null;
+	/**
+	 * Skip the engine's own `source_revisions` write. The website create/update
+	 * paths re-stamp (and would otherwise discard) the engine's revision with the
+	 * real user + summary immediately after, so writing it twice is pure
+	 * round-trip waste against the stateless Worker client. Harvest callers leave
+	 * this false so their history is still recorded by the engine.
+	 */
+	skipRevision?: boolean;
 	/** audit-only actor descriptor; NEVER used for precedence */
 	actor?: string | null;
 	rawPayload?: Record<string, unknown> | null;

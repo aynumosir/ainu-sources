@@ -74,7 +74,8 @@ export const GET: RequestHandler = async ({ url }) => {
  * bearer secret (see write-api.ts), not a login session. Body is a JSON
  * SourceInput (title + type + category required) plus optional `user`
  * ({ id?, name? }) attribution and `revisionSummary`. Reuses createSource() so
- * the slug, links, tags and revision history are written exactly as the UI does.
+ * the source flows through the merge engine exactly as the UI does; the
+ * `MergeResult` is returned so the caller can see a held/conflict outcome.
  */
 export const POST: RequestHandler = async ({ request }) => {
 	requireWriteToken(request);
@@ -89,6 +90,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const input = pickSourceInput(b);
 	if (input.category === undefined) input.category = 'primary';
 	assertRequiredFields(input);
-	const slug = await createSource(input as SourceInput, pickUser(b), revisionSummaryOf(b));
-	return json({ slug, source: await getSourceDetail(slug) }, { status: 201 });
+	const { slug, result } = await createSource(input as SourceInput, pickUser(b), revisionSummaryOf(b));
+	if (!slug) return json({ result }, { status: 422 });
+	return json({ slug, result, source: await getSourceDetail(slug) }, { status: 201 });
 };

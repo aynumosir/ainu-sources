@@ -1,6 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { createSource } from '$lib/server/queries';
+import { createSource, mergeNotice } from '$lib/server/queries';
 import { parseSourceForm, revisionSummary } from '$lib/server/form';
 
 export const load: PageServerLoad = async ({ locals, url }) => {
@@ -17,11 +17,16 @@ export const actions: Actions = {
 		const fd = await request.formData();
 		const { input, error } = parseSourceForm(fd);
 		if (!input) return fail(400, { error });
-		const slug = await createSource(
+		const { slug, result } = await createSource(
 			input,
 			{ id: locals.user.id, name: locals.user.name },
 			revisionSummary(fd)
 		);
+		// The merge engine may hold/reject part of an edit below a higher-confidence
+		// value — surface that instead of silently discarding it (N4). A clean apply
+		// (the normal case for an editorial edit) redirects exactly as before.
+		const notice = mergeNotice(result);
+		if (!slug || notice) return fail(notice ? 409 : 422, { error: notice ?? 'Could not create the source.' });
 		redirect(303, '/sources/' + slug);
 	}
 };
