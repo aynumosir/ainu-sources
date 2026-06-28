@@ -1,6 +1,6 @@
 import { fail, redirect, error } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { getSourceDetail, updateSource, mergeNotice } from '$lib/server/queries';
+import { getSourceDetail, updateSource } from '$lib/server/queries';
 import { parseSourceForm, revisionSummary } from '$lib/server/form';
 import { asArray } from '$lib/format';
 
@@ -50,17 +50,12 @@ export const actions: Actions = {
 		const fd = await request.formData();
 		const { input, error: err } = parseSourceForm(fd);
 		if (!input) return fail(400, { error: err });
-		const { result } = await updateSource(
+		await updateSource(
 			detail.source.id,
 			input,
 			{ id: locals.user.id, name: locals.user.name },
 			revisionSummary(fd)
 		);
-		// Held/conflict/rejected parts of an edit are surfaced, never silently
-		// dropped (N4). A clean editorial apply redirects exactly as before; the
-		// slug never changes on edit, so redirect to the original path.
-		const notice = mergeNotice(result);
-		if (notice) return fail(409, { error: notice });
 		redirect(303, '/sources/' + params.slug);
 	}
 };
