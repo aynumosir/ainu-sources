@@ -6,6 +6,7 @@
 import { db } from './db';
 import { sources, sourceRelations, sourcePersons, persons } from './db/schema';
 import { and, eq, inArray } from 'drizzle-orm';
+import { activeSourcesOnly, publicRelationsOnly } from './visibility';
 
 export interface NetworkNode {
 	id: string;
@@ -54,11 +55,39 @@ function pageRank(ids: string[], out: Map<string, string[]>, d = 0.85, iters = 6
 }
 
 export async function getCitationNetwork(): Promise<NetworkData> {
-	const edges = await db
+	// Public graph = ACCEPTED 'cites' edges only (candidate/rejected/removed edges
+	// are invisible). No-op while every relation is 'accepted'.
+	const rawEdges = await db
 		.select({ f: sourceRelations.fromSourceId, t: sourceRelations.toSourceId })
 		.from(sourceRelations)
-		.where(eq(sourceRelations.type, 'cites'));
+		.where(and(eq(sourceRelations.type, 'cites'), publicRelationsOnly()));
 
+	const candidateIds = new Set<string>();
+	for (const e of rawEdges) {
+		candidateIds.add(e.f);
+		candidateIds.add(e.t);
+	}
+	if (!candidateIds.size) return { nodes: [], links: [], stats: { nodes: 0, edges: 0, topId: null } };
+
+	// Resolve which endpoints are publicly-visible (active) sources, then drop any
+	// edge that touches a non-active (or vanished) source so a hidden/merged work
+	// never appears as a node — nor as a phantom node referenced by a dangling link.
+	const rows = await db
+		.select({
+			id: sources.id,
+			slug: sources.slug,
+			title: sources.title,
+			titleEn: sources.titleEn,
+			year: sources.yearStart,
+			type: sources.type,
+			category: sources.category,
+			author: sources.author
+		})
+		.from(sources)
+		.where(and(inArray(sources.id, [...candidateIds]), activeSourcesOnly()));
+	const activeIds = new Set(rows.map((r) => r.id));
+
+	const edges = rawEdges.filter((e) => activeIds.has(e.f) && activeIds.has(e.t));
 	const ids = new Set<string>();
 	for (const e of edges) {
 		ids.add(e.f);
@@ -78,20 +107,6 @@ export async function getCitationNetwork(): Promise<NetworkData> {
 	const idList = [...ids];
 	const pr = pageRank(idList, out);
 	const maxPr = Math.max(...idList.map((i) => pr.get(i) ?? 0), 1e-9);
-
-	const rows = await db
-		.select({
-			id: sources.id,
-			slug: sources.slug,
-			title: sources.title,
-			titleEn: sources.titleEn,
-			year: sources.yearStart,
-			type: sources.type,
-			category: sources.category,
-			author: sources.author
-		})
-		.from(sources)
-		.where(inArray(sources.id, idList));
 
 	// Prefer the CURATED author/editor links (sourcePersons) over the free-form
 	// `sources.author` string, which carries OpenAlex/Crossref noise — e.g. book
@@ -130,9 +145,13 @@ export async function getCitationNetwork(): Promise<NetworkData> {
 			.join('、');
 	};
 
+	// `rows` is every active candidate endpoint; keep only those still present in a
+	// surviving edge (an active source whose every cites edge pointed at a hidden
+	// partner drops out of the graph entirely).
+	const visibleRows = rows.filter((r) => ids.has(r.id));
 	let topId: string | null = null;
 	let topPr = -1;
-	const nodes: NetworkNode[] = rows.map((r) => {
+	const nodes: NetworkNode[] = visibleRows.map((r) => {
 		const p = pr.get(r.id) ?? 0;
 		if (p > topPr) {
 			topPr = p;
