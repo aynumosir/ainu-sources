@@ -762,7 +762,24 @@ interface SetOutcome {
 	valueHash: string;
 }
 
-/** set_union: merge with the existing winner; never drops a member. */
+/**
+ * set_union (languages / scripts / altTitles).
+ *
+ * Chosen semantics (documented for the cutover):
+ *   - editorial_decision (band 900) is AUTHORITATIVE: the field is set to EXACTLY
+ *     the claim's member set, so an editor de-selecting a wrong member (a REMOVAL)
+ *     actually takes effect rather than being a silent no-op (N4). This is the
+ *     cutover blocker the reviews flagged: set-union was additive-only.
+ *   - every LOWER band (machine / curated) keeps the additive union with the
+ *     CURRENT winner — it can only ADD members, never drop one a higher band held.
+ *     So after an editorial baseline of ['ain'], a machine ['rus'] → ['ain','rus'].
+ *
+ * No-loss is preserved: a superseded member is NEVER erased from the ledger — every
+ * prior claim (and its members) stays in `source_field_claims`; only the PROJECTED
+ * winner set changes. (Union is rank-agnostic, so a later machine harvest that
+ * re-asserts a removed member would re-add it to the projection — persistent removal
+ * is therefore an editorial act, by design.)
+ */
 async function applySetUnion(
 	db: Db,
 	sourceId: string,
@@ -772,6 +789,7 @@ async function applySetUnion(
 	rank: Rank,
 	meta: { origin: string; derivation: string; confidence: number; evidence: number }
 ): Promise<SetOutcome> {
+	const editorial = rank.band === EDITORIAL_BAND;
 	for (let attempt = 0; attempt < CAS_MAX_RETRY; attempt++) {
 		const prov = await readProvenance(db, sourceId, field);
 		let existing: string[] = [];
@@ -783,7 +801,10 @@ async function applySetUnion(
 				.limit(1);
 			if (Array.isArray(c?.value)) existing = c!.value as string[];
 		}
-		const merged = [...new Set([...existing, ...incoming])].sort();
+		// editorial REPLACES (exact member set ⇒ removals stick); machine UNIONS.
+		const merged = editorial
+			? [...new Set(incoming)].sort()
+			: [...new Set([...existing, ...incoming])].sort();
 		const valueHash = hashValue(merged);
 		if (prov && prov.valueHash === valueHash) return { outcome: 'noop', valueHash };
 
@@ -793,7 +814,7 @@ async function applySetUnion(
 			fieldName: field,
 			value: merged,
 			valueHash,
-			op: 'add',
+			op: editorial ? 'set' : 'add',
 			rank,
 			meta
 		});
@@ -826,33 +847,71 @@ async function applyNotes(
 	prov: Awaited<ReturnType<typeof readProvenance>>,
 	meta: { origin: string; derivation: string; confidence: number; evidence: number }
 ): Promise<SetOutcome> {
-	let existing = '';
-	if (prov?.currentClaimId) {
-		const [c] = await db
-			.select({ value: sourceFieldClaims.value })
-			.from(sourceFieldClaims)
-			.where(eq(sourceFieldClaims.id, prov.currentClaimId))
-			.limit(1);
-		if (typeof c?.value === 'string') existing = c.value;
+	// Bounded CAS retry (mirrors applyScalarCas) so a concurrent note write is not
+	// lost: a failed casUpdate or a lost casInsertFirst create-race re-reads the
+	// winner and retries instead of silently returning 'applied' (Codex/Fugu B2).
+	let current = prov;
+	for (let attempt = 0; attempt < CAS_MAX_RETRY; attempt++) {
+		let existing = '';
+		if (current?.currentClaimId) {
+			const [c] = await db
+				.select({ value: sourceFieldClaims.value })
+				.from(sourceFieldClaims)
+				.where(eq(sourceFieldClaims.id, current.currentClaimId))
+				.limit(1);
+			if (typeof c?.value === 'string') existing = c.value;
+		}
+
+		// first note for this field — no winner yet
+		if (!current) {
+			const valueHash = hashValue(incomingText);
+			const claimId = await insertClaim(db, { observationId, sourceId, fieldName: field, value: incomingText, valueHash, op: 'set', rank, meta });
+			const inserted = await casInsertFirst(db, sourceId, field, provWrite(claimId, valueHash, rank, meta));
+			if (inserted) {
+				await setClaimStatus(db, claimId, 'applied');
+				return { outcome: 'applied', valueHash };
+			}
+			current = await readProvenance(db, sourceId, field); // lost create race → fall into the update path
+			continue;
+		}
+
+		if (existing === incomingText || existing.includes(incomingText)) {
+			return { outcome: 'noop', valueHash: current.valueHash ?? '' };
+		}
+
+		const cur = { band: current.rankBand ?? 0, score: current.rankScore ?? 0 };
+		const wins = rank.band > cur.band || (rank.band === cur.band && rank.score - cur.score > NEAR_SCORE_DELTA);
+		const nextText = wins ? incomingText : `${existing}\n\n${incomingText}`;
+		const valueHash = hashValue(nextText);
+		const claimId = await insertClaim(db, { observationId, sourceId, fieldName: field, value: nextText, valueHash, op: wins ? 'set' : 'append', rank, meta });
+
+		// When appending BELOW the current winner, KEEP the winner's rank (and its
+		// origin/derivation/confidence/evidence) on the provenance high-water mark —
+		// the appended text is added but the field's rank must NOT downgrade. Writing
+		// the incoming low rank (e.g. 900→700) would let a later band-700 note "win"
+		// and REPLACE the whole field, dropping the original editorial text (B2).
+		// Equivalent to modelling the winner rank as max(existing, incoming).
+		const write: ProvenanceWrite = wins
+			? provWrite(claimId, valueHash, rank, meta)
+			: {
+					currentClaimId: claimId,
+					valueHash,
+					rankBand: cur.band,
+					rankScore: cur.score,
+					origin: current.origin ?? meta.origin,
+					derivation: current.derivation ?? meta.derivation,
+					confidence: current.confidence ?? meta.confidence,
+					evidence: current.evidence ?? meta.evidence
+				};
+		const ok = await casUpdate(db, sourceId, field, current.currentClaimId, write);
+		if (ok) {
+			await setClaimStatus(db, claimId, 'applied');
+			return { outcome: 'applied', valueHash };
+		}
+		await setClaimStatus(db, claimId, 'superseded');
+		current = await readProvenance(db, sourceId, field); // contended → re-read + retry
 	}
-	if (!prov) {
-		const valueHash = hashValue(incomingText);
-		const claimId = await insertClaim(db, { observationId, sourceId, fieldName: field, value: incomingText, valueHash, op: 'set', rank, meta });
-		const inserted = await casInsertFirst(db, sourceId, field, provWrite(claimId, valueHash, rank, meta));
-		await setClaimStatus(db, claimId, 'applied');
-		return { outcome: inserted ? 'applied' : 'applied', valueHash };
-	}
-	if (existing === incomingText || existing.includes(incomingText)) {
-		return { outcome: 'noop', valueHash: prov.valueHash ?? '' };
-	}
-	const cur = { band: prov.rankBand ?? 0, score: prov.rankScore ?? 0 };
-	const wins = rank.band > cur.band || (rank.band === cur.band && rank.score - cur.score > NEAR_SCORE_DELTA);
-	const nextText = wins ? incomingText : `${existing}\n\n${incomingText}`;
-	const valueHash = hashValue(nextText);
-	const claimId = await insertClaim(db, { observationId, sourceId, fieldName: field, value: nextText, valueHash, op: wins ? 'set' : 'append', rank, meta });
-	const ok = await casUpdate(db, sourceId, field, prov.currentClaimId, provWrite(claimId, valueHash, rank, meta));
-	await setClaimStatus(db, claimId, ok ? 'applied' : 'superseded');
-	return { outcome: ok ? 'applied' : 'held_below', valueHash };
+	return { outcome: 'held_below', valueHash: '' };
 }
 
 function pushOutcome(
@@ -922,17 +981,27 @@ async function projectAndStore(db: Db, sourceId: string, explicitDeletes: Set<st
 	// Read the winning claim value for every (source, field) via provenance:
 	// provenance.currentClaimId points at the single winning claim per field.
 	const winners = await db
-		.select({ field: sourceFieldClaims.fieldName, value: sourceFieldClaims.value })
+		.select({ field: sourceFieldClaims.fieldName, value: sourceFieldClaims.value, op: sourceFieldClaims.op })
 		.from(sourceFieldProvenance)
 		.innerJoin(sourceFieldClaims, eq(sourceFieldProvenance.currentClaimId, sourceFieldClaims.id))
 		.where(eq(sourceFieldProvenance.sourceId, sourceId));
 
+	const winnerOp = new Map<string, string>();
 	const upd: Record<string, unknown> = {};
 	for (const r of winners) {
 		if (!CLAIMABLE.has(r.field)) continue;
 		upd[r.field] = r.value;
+		winnerOp.set(r.field, r.op);
 	}
-	for (const f of explicitDeletes) if (CLAIMABLE.has(f)) upd[f] = null;
+	// An explicit delete clears the flat projection ONLY when the delete CLAIM
+	// actually WON CAS — i.e. it is the current `source_field_provenance` winner
+	// for that field (op='explicit_delete'). A delete that was held_below / rejected
+	// by CAS (e.g. a LOW-band machine delete vs. a curated/editorial value) leaves
+	// the prior winner intact; nulling it unconditionally here let a low-band delete
+	// clobber a value CAS correctly held (Codex BLOCKER B1).
+	for (const f of explicitDeletes) {
+		if (CLAIMABLE.has(f) && winnerOp.get(f) === 'explicit_delete') upd[f] = null;
+	}
 	upd.updatedAt = new Date();
 	upd.lastSeenAt = new Date();
 	if (Object.keys(upd).length) {

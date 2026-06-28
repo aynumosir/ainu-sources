@@ -22,7 +22,10 @@ export interface ProvenanceRow {
 	valueHash: string | null;
 	rankBand: number | null;
 	rankScore: number | null;
+	origin: string | null;
 	derivation: string | null;
+	confidence: number | null;
+	evidence: number | null;
 }
 
 export interface ProvenanceWrite {
@@ -47,7 +50,10 @@ export async function readProvenance(
 			valueHash: sourceFieldProvenance.valueHash,
 			rankBand: sourceFieldProvenance.rankBand,
 			rankScore: sourceFieldProvenance.rankScore,
-			derivation: sourceFieldProvenance.derivation
+			origin: sourceFieldProvenance.origin,
+			derivation: sourceFieldProvenance.derivation,
+			confidence: sourceFieldProvenance.confidence,
+			evidence: sourceFieldProvenance.evidence
 		})
 		.from(sourceFieldProvenance)
 		.where(

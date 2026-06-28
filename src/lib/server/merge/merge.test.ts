@@ -15,6 +15,7 @@ import * as schema from '../db/schema';
 import { SOURCE_SCALAR_COLUMNS } from '../golden';
 import { mergeSourceObservation } from './merge-source-observation';
 import { FIELD_POLICIES } from './field-policies';
+import { EDITORIAL_BAND } from './rank';
 import { readProvenance, casUpdate } from './cas';
 import type { MergeInput } from './types';
 
@@ -502,5 +503,150 @@ describe('merge engine — properties', () => {
 		const obs = await db.select().from(schema.sourceObservations);
 		expect(obs.length).toBe(1);
 		expect(obs[0].status).toBe('rejected'); // kept in the ledger, no loss
+	});
+
+	// FIX 1 (Codex B1) — an explicit delete must go through CAS like any other
+	// claim: a LOW-band machine delete is HELD and must NOT clear a curated value,
+	// while an editorial delete WINS and clears it. (Uses `summary`, a nullable
+	// scalar — `title` is NOT NULL so clearing it is an orthogonal concern.)
+	it('explicit delete is CAS-gated: low-band HELD (value kept), editorial APPLIED (cleared)', async () => {
+		const id = { kind: 'repo_path', value: 'manual:del.json' };
+		const r1 = await merge({
+			origin: 'manual',
+			originRecordId: 'manual:del',
+			derivation: 'curated_assertion', // band 800
+			confidence: 0.8,
+			identifiers: [id],
+			fields: { title: 'Keep Title', summary: 'Curated summary', type: 'book', category: 'secondary' }
+		});
+		const sid = r1.sourceId!;
+		expect((await getSource(sid)).summary).toBe('Curated summary');
+
+		// low-band machine delete of `summary` → must be HELD by CAS, value preserved
+		const r2 = await merge({
+			origin: 'openalex',
+			originRecordId: 'openalex:del',
+			derivation: 'observed', // band 700 < 800 (higher score, lower band)
+			confidence: 0.99,
+			identifiers: [id],
+			explicitDeletes: ['summary']
+		});
+		expect(r2.heldClaims.some((c) => c.fieldName === 'summary')).toBe(true);
+		expect(r2.appliedClaims.some((c) => c.fieldName === 'summary')).toBe(false);
+		expect((await getSource(sid)).summary).toBe('Curated summary'); // UNCHANGED — delete held
+		expect((await readProvenance(db, sid, 'summary'))!.rankBand).toBe(800); // curated still the winner
+
+		// editorial delete → WINS CAS → field cleared
+		const r3 = await merge({
+			origin: 'website',
+			originRecordId: `website:${sid}`,
+			derivation: 'editorial_decision', // band 900 > 800
+			confidence: 1.0,
+			identifiers: [id],
+			explicitDeletes: ['summary']
+		});
+		expect(r3.appliedClaims.some((c) => c.fieldName === 'summary')).toBe(true);
+		expect((await getSource(sid)).summary).toBeNull(); // cleared — editorial wins
+	});
+
+	// FIX 2 (Codex/Fugu B2) — a note that appends BELOW the current winner must not
+	// downgrade the provenance rank, otherwise a later same-band note can REPLACE the
+	// whole field and drop the original editorial text.
+	it('below-band notes append keeps the editorial text and does NOT downgrade rank', async () => {
+		const id = { kind: 'repo_path', value: 'manual:notes.json' };
+		const r1 = await merge({
+			origin: 'manual',
+			originRecordId: 'manual:notes',
+			derivation: 'editorial_decision', // band 900
+			confidence: 0.5,
+			identifiers: [id],
+			fields: { title: 'Notes Source', type: 'book', category: 'secondary', notes: 'EDITORIAL_A' }
+		});
+		const sid = r1.sourceId!;
+		expect((await getSource(sid)).notes).toBe('EDITORIAL_A');
+		expect((await readProvenance(db, sid, 'notes'))!.rankBand).toBe(EDITORIAL_BAND);
+
+		// low-band observed note B → appends below; rank must stay at the editorial high-water mark
+		await merge({
+			origin: 'openalex',
+			originRecordId: 'openalex:notesB',
+			derivation: 'observed', // band 700, low score
+			confidence: 0.5,
+			evidence: 0,
+			identifiers: [id],
+			fields: { notes: 'MACHINE_B' }
+		});
+		const afterB = await getSource(sid);
+		expect(afterB.notes).toContain('EDITORIAL_A'); // preserved (appended)
+		expect(afterB.notes).toContain('MACHINE_B');
+		expect((await readProvenance(db, sid, 'notes'))!.rankBand).toBe(EDITORIAL_BAND); // NOT downgraded
+
+		// a SUBSEQUENT band-700 note with a HIGH score — would WIN a 700-vs-700 tie and
+		// REPLACE the field if the rank had been downgraded to 700 by note B.
+		await merge({
+			origin: 'crossref',
+			originRecordId: 'crossref:notesC',
+			derivation: 'observed', // band 700
+			confidence: 1.0,
+			evidence: 5, // max machine score
+			identifiers: [id],
+			fields: { notes: 'MACHINE_C' }
+		});
+		const afterC = await getSource(sid);
+		expect(afterC.notes).toContain('EDITORIAL_A'); // STILL preserved — no replacement
+		expect(afterC.notes).toContain('MACHINE_C');
+		expect((await readProvenance(db, sid, 'notes'))!.rankBand).toBe(EDITORIAL_BAND);
+	});
+
+	// FIX 3 (cutover blocker) — a set_union field is additive for machine claims but
+	// an editorial_decision REPLACES it exactly, so an editor removing a wrong member
+	// actually takes effect (not a silent no-op / N4 violation).
+	it('editorial_decision REPLACES a set_union field (removal sticks); machine stays additive', async () => {
+		const id = { kind: 'repo_path', value: 'manual:langs.json' };
+		const r1 = await merge({
+			origin: 'manual',
+			originRecordId: 'manual:langs',
+			derivation: 'curated_assertion',
+			confidence: 0.8,
+			identifiers: [id],
+			fields: { title: 'Langs Source', type: 'book', category: 'secondary', languages: ['ain'] }
+		});
+		const sid = r1.sourceId!;
+		// machine adds jpn via union (some members are machine-added)
+		await merge({
+			origin: 'openalex',
+			originRecordId: 'openalex:langs',
+			derivation: 'observed',
+			confidence: 0.9,
+			identifiers: [id],
+			fields: { languages: ['jpn'] }
+		});
+		expect(new Set((await getSource(sid)).languages)).toEqual(new Set(['ain', 'jpn']));
+
+		// editorial de-selects jpn → languages becomes EXACTLY ['ain']
+		const r3 = await merge({
+			origin: 'website',
+			originRecordId: `website:${sid}`,
+			derivation: 'editorial_decision',
+			confidence: 1.0,
+			identifiers: [id],
+			fields: { languages: ['ain'] }
+		});
+		expect(r3.appliedClaims.some((c) => c.fieldName === 'languages')).toBe(true);
+		const edited = await getSource(sid);
+		expect(new Set(edited.languages)).toEqual(new Set(['ain'])); // jpn REMOVED — not a silent no-op
+		expect(edited.languages).not.toContain('jpn');
+
+		// a later machine claim is still ADDITIVE against the editorial baseline
+		await merge({
+			origin: 'crossref',
+			originRecordId: 'crossref:langs',
+			derivation: 'observed',
+			confidence: 0.9,
+			identifiers: [id],
+			fields: { languages: ['rus'] }
+		});
+		const final = await getSource(sid);
+		expect(new Set(final.languages)).toEqual(new Set(['ain', 'rus'])); // rus added, jpn stays removed
 	});
 });
