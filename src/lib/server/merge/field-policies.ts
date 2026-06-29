@@ -14,6 +14,8 @@
  *   system_identity          identity / engine-maintained — never claimed
  */
 
+import { CATEGORY_LABELS, REGION_LABELS } from '$lib/constants';
+
 export type PolicyKind =
 	| 'scalar_ranked'
 	| 'controlled_scalar_ranked'
@@ -34,37 +36,28 @@ export interface FieldPolicy {
 	claimable: boolean;
 }
 
-/** Controlled vocabularies (schema doc comments are the source of truth). */
+/**
+ * Controlled vocabularies for the CLOSED scalar fields.
+ *
+ * `category` and `region` are closed taxonomies, so their allowlists are derived
+ * directly from the canonical localized label maps in `$lib/constants`
+ * (`CATEGORY_LABELS` / `REGION_LABELS`). Deriving — rather than hardcoding a
+ * second copy — guarantees the merge allowlist can never drift from the values
+ * the UI is built to render (the prior hardcoded copies were missing `tool` and
+ * `other`, which rejected real prod values).
+ *
+ * `type` is deliberately NOT here: it is an OPEN-ENDED vocabulary (harvest mints
+ * new document types, e.g. `web-article`, `model`, `valency-dataset`), so a
+ * frozen enum is the wrong model and would reject genuine values. It is a
+ * free-text `scalar_ranked` field instead — see `FIELD_POLICIES` below.
+ * `TYPE_LABELS` in `$lib/constants` remains the best-effort *display* map and
+ * falls back to the raw key for any type it does not yet label.
+ */
 export const ENUMS = {
-	category: new Set(['primary', 'secondary', 'corpus']),
-	region: new Set(['hokkaido', 'sakhalin', 'kuril', 'proto', '']),
+	category: new Set(Object.keys(CATEGORY_LABELS)), // primary, secondary, corpus, tool
+	region: new Set(Object.keys(REGION_LABELS)), // hokkaido, sakhalin, kuril, proto, other
 	yearCertainty: new Set(['exact', 'range', 'estimated', 'unknown']),
-	entryCountLabel: new Set(['entries', 'sentences', 'pages', 'lemmas']),
-	// `type` is broad but controlled — an unknown value yields a `rejected`
-	// claim (persisted in the ledger, never silently dropped). Extend here when
-	// a new genuine document type appears.
-	type: new Set([
-		'old-document',
-		'dictionary',
-		'wordlist',
-		'comparative-wordlist',
-		'topical-dictionary',
-		'grammar',
-		'book',
-		'article',
-		'corpus-text',
-		'thesis',
-		'manuscript',
-		'map',
-		'audio',
-		'video',
-		'periodical',
-		'proceedings',
-		'dataset',
-		'software',
-		'website',
-		'other'
-	])
+	entryCountLabel: new Set(['entries', 'sentences', 'pages', 'lemmas'])
 } as const;
 
 const scalarText = (): FieldPolicy => ({
@@ -118,7 +111,9 @@ export const FIELD_POLICIES: Record<string, FieldPolicy> = {
 	yearEnd: scalarInt(),
 	// --- controlled_scalar_ranked ---
 	category: controlled(ENUMS.category),
-	type: controlled(ENUMS.type),
+	// `type` is open-ended (harvest mints new document types) → free text, ranked
+	// like author/title; validated non-empty, never rejected as an unknown enum.
+	type: scalarText(),
 	region: controlled(ENUMS.region),
 	yearCertainty: controlled(ENUMS.yearCertainty),
 	entryCountLabel: controlled(ENUMS.entryCountLabel),
