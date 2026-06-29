@@ -694,7 +694,9 @@ async function buildSourceRow(
 	const id = uuid();
 	const f = args.fields;
 	const titleStr = typeof f.title === 'string' && f.title.trim() ? f.title : '(untitled)';
-	const initType = typeof f.type === 'string' && ENUMS.type.has(f.type) ? f.type : 'other';
+	// `type` is open-ended free text (no enum) — keep any non-empty incoming
+	// value, fall back to 'other' only when absent so the NOT-NULL column is set.
+	const initType = typeof f.type === 'string' && f.type.trim() ? f.type : 'other';
 	const initCategory = typeof f.category === 'string' && ENUMS.category.has(f.category) ? f.category : 'primary';
 
 	let slug: string;

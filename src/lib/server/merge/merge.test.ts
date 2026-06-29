@@ -283,6 +283,39 @@ describe('merge engine — properties', () => {
 		expect((await getSource(r1.sourceId!)).title).toBe('Human Title');
 	});
 
+	// 8b — real-taxonomy values an editorial website edit may assert must be
+	// ACCEPTED, not rejected as invalid_enum (regression for the widened
+	// allowlists: category=tool, region=other, and the now-open-ended type).
+	it('editorial claim with category=tool, region=other, type=web-article is ACCEPTED', async () => {
+		const r1 = await merge({
+			origin: 'crossref',
+			originRecordId: 'crossref:tax',
+			derivation: 'observed',
+			confidence: 0.9,
+			identifiers: [{ kind: 'repo_path', value: 'manual:tax.json' }],
+			fields: { title: 'Taxonomy Source', type: 'article', category: 'secondary', region: 'hokkaido' }
+		});
+		const r2 = await merge({
+			origin: 'website',
+			originRecordId: `website:${r1.sourceId}`,
+			derivation: 'editorial_decision',
+			confidence: 1.0,
+			identifiers: [{ kind: 'repo_path', value: 'manual:tax.json' }],
+			fields: { title: 'Taxonomy Source', type: 'web-article', category: 'tool', region: 'other' }
+		});
+		// none of the three are rejected as an unknown enum value
+		expect(r2.rejectedClaims.some((c) => c.reason === 'invalid_enum')).toBe(false);
+		// all three are applied as winning claims
+		for (const field of ['category', 'region', 'type']) {
+			expect(r2.appliedClaims.some((c) => c.fieldName === field)).toBe(true);
+		}
+		// and they land on the source row
+		const s = await getSource(r1.sourceId!);
+		expect(s.category).toBe('tool');
+		expect(s.region).toBe('other');
+		expect(s.type).toBe('web-article');
+	});
+
 	// 9
 	it('unsafe javascript:/data: URL is rejected at ingest', async () => {
 		const r1 = await merge({
