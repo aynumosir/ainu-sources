@@ -9,6 +9,7 @@ import {
 } from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth.schema';
+import type { SourceDiff } from '../merge/diff';
 
 /**
  * アイヌ語文献資料データベース — data model
@@ -548,7 +549,44 @@ export const sourceObservations = sqliteTable(
 			t.originRecordId,
 			t.contentHash
 		),
-		index('source_observations_origin_record_idx').on(t.origin, t.originRecordId)
+		index('source_observations_origin_record_idx').on(t.origin, t.originRecordId),
+		// queue / history scans by lifecycle status, newest first
+		index('source_observations_status_idx').on(t.status, t.createdAt)
+	]
+);
+
+// ---------------------------------------------------------------------------
+// Observation diffs (差分) — the per-observation "commit diff" (Phase 1)
+//
+// One stored diff per observation per kind: 'applied' for an auto-applied merge;
+// 'proposal'/'planned' reserved for the later PR phases. The `diff` column holds
+// the full canonical before→after `SourceDiff` (ALWAYS a JSON object, never a
+// bare string). FKs are restrict/set null — the no-hard-delete invariant.
+// ---------------------------------------------------------------------------
+export const sourceObservationDiffs = sqliteTable(
+	'source_observation_diffs',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		observationId: text('observation_id')
+			.notNull()
+			.references(() => sourceObservations.id, { onDelete: 'restrict' }),
+		// nullable: a brand-new-source proposal has no canonical source row yet.
+		sourceId: text('source_id').references(() => sources.id, { onDelete: 'set null' }),
+		/** proposal | planned | applied */
+		diffKind: text('diff_kind').notNull(),
+		isNewSource: integer('is_new_source', { mode: 'boolean' }).notNull().default(false),
+		baseContentHash: text('base_content_hash'),
+		resultContentHash: text('result_content_hash'),
+		changedScalarFields: text('changed_scalar_fields', { mode: 'json' }).$type<string[]>(),
+		changedCollections: text('changed_collections', { mode: 'json' }).$type<string[]>(),
+		hasConflicts: integer('has_conflicts', { mode: 'boolean' }).notNull().default(false),
+		/** the FULL SourceDiff object — ALWAYS a JSON object, never a bare string. */
+		diff: text('diff', { mode: 'json' }).$type<SourceDiff>().notNull(),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		uniqueIndex('source_obs_diffs_obs_kind_idx').on(t.observationId, t.diffKind),
+		index('source_obs_diffs_source_idx').on(t.sourceId, t.createdAt)
 	]
 );
 
@@ -720,6 +758,7 @@ export type SourceRevision = typeof sourceRevisions.$inferSelect;
 export type SourceObservationRun = typeof sourceObservationRuns.$inferSelect;
 export type SourceObservedRecord = typeof sourceObservedRecords.$inferSelect;
 export type SourceObservation = typeof sourceObservations.$inferSelect;
+export type SourceObservationDiff = typeof sourceObservationDiffs.$inferSelect;
 export type SourceIdentifier = typeof sourceIdentifiers.$inferSelect;
 export type SourceFieldClaim = typeof sourceFieldClaims.$inferSelect;
 export type SourceFieldProvenance = typeof sourceFieldProvenance.$inferSelect;
