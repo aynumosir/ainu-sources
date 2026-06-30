@@ -12,6 +12,10 @@ export {
 	planSourceObservation,
 	commitMerge,
 	openChangeRequest,
+	reviewChangeRequest,
+	applyChangeRequest,
+	recoverStuckApplyingChangeRequests,
+	ChangeRequestStale,
 	type CommitOptions
 } from './merge-source-observation';
 export {
@@ -27,6 +31,8 @@ export type {
 	MergeInput,
 	MergeResult,
 	ProposedMergeResult,
+	ReviewInput,
+	ReviewResult,
 	IdentifierInput,
 	LinkInput,
 	LifecycleInput,
