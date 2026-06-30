@@ -12,6 +12,10 @@
 # The one sanctioned mass-destructive path is the gated legacy seed
 # (scripts/seed.ts, ALLOW_LEGACY_WIPE=1), which lives outside src/ and is not scanned.
 #
+# Test files (*.test.ts) are EXCLUDED: test setup/teardown legitimately wipes and
+# bulk-deletes fixtures, and targeted delete-by-id in tests is allowed by design.
+# The guard targets production application code only.
+#
 # Run locally: bash scripts/ci-guards.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -19,7 +23,7 @@ cd "$(dirname "$0")/.."
 TABLES='sources|sourceLinks|sourceTags|sourceRelations|sourcePersons|sourcePlaces|sourceInstitutions|sourceRevisions|tags'
 PATTERN="\bwipe\s*\(|\.delete\(\s*schema\.($TABLES)\b|\.delete\(\s*($TABLES)\s*\)\.where\([^)]*\bsourceId\b"
 
-if rg -n "$PATTERN" src/; then
+if rg -n "$PATTERN" src/ --glob '!*.test.ts'; then
 	echo ""
 	echo "✗ CI guard FAILED: destructive catalog write found in src/**."
 	echo "  Forbidden: wipe(), db.delete(schema.<table>), and .delete(<table>).where(... sourceId ...)."
