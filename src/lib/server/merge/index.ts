@@ -7,7 +7,20 @@
  * Standalone in Phase 4: NOT yet wired into any route, the Worker, or the
  * website. Pure code + CAS over the Phase-2 ledger tables.
  */
-export { mergeSourceObservation } from './merge-source-observation';
+export {
+	mergeSourceObservation,
+	planSourceObservation,
+	commitMerge,
+	type CommitOptions
+} from './merge-source-observation';
+export {
+	decideChangeGate,
+	type GateDecision,
+	type GateMode,
+	type ChangeKind,
+	type MergePlan,
+	type PlannedFieldOutcome
+} from './decision';
 export type {
 	Db,
 	MergeInput,
