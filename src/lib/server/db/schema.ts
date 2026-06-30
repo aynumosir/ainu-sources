@@ -718,6 +718,98 @@ export const sourceLifecycleEvents = sqliteTable(
 	(t) => [index('source_lifecycle_events_source_idx').on(t.sourceId, t.createdAt)]
 );
 
+// ===========================================================================
+// Phase 3 — Change requests (変更リクエスト) / reviews — the "PR" layer (ADDITIVE)
+//
+// A change request is the Git PR of the model: a `proposed` observation that the
+// merge gate (decision.ts) routed to review instead of auto-applying. It carries
+// MUTABLE workflow state (open → approved → applying → applied) so the
+// append-only observation/diff ledger stays an immutable commit log. NO canonical
+// data (sources / claims / provenance / links) is touched until the CR is APPLIED
+// (Phase 4) — opening one writes only the 3 rows: the proposed observation, its
+// 'proposal' diff, and the change_requests envelope.
+//
+// All FKs are `restrict` / `set null` — never cascade — matching the
+// no-hard-delete invariant. `observation_id` is UNIQUE: one CR per observation.
+// ===========================================================================
+
+// ---------------------------------------------------------------------------
+// Change requests (変更リクエスト) — the PR envelope; one per proposed observation
+// ---------------------------------------------------------------------------
+export const changeRequests = sqliteTable(
+	'change_requests',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		observationId: text('observation_id')
+			.notNull()
+			.references(() => sourceObservations.id, { onDelete: 'restrict' }),
+		// nullable: a brand-new-source proposal has no canonical source row yet.
+		sourceId: text('source_id').references(() => sources.id, { onDelete: 'set null' }),
+		// pre-reserved (NOT an FK) for new-source proposals; becomes real on apply.
+		plannedSourceId: text('planned_source_id'),
+		plannedSlug: text('planned_slug'),
+		/** ChangeKind: field_update | new_source | enrichment | identity_conflict | lifecycle | drift */
+		kind: text('kind').notNull(),
+		/** open | needs_evidence | approved | applying | applied | rejected | superseded | withdrawn */
+		status: text('status').notNull().default('open'),
+		/** the gate.reason that routed this observation to review */
+		routingReason: text('routing_reason').notNull(),
+		title: text('title'),
+		summary: text('summary'),
+		// denormalized for cheap queue filtering (avoids a join on list):
+		origin: text('origin').notNull(),
+		originRecordId: text('origin_record_id').notNull(),
+		derivation: text('derivation').notNull(),
+		confidence: real('confidence').notNull(),
+		evidence: integer('evidence').notNull().default(0),
+		baseContentHash: text('base_content_hash'),
+		resultContentHash: text('result_content_hash'),
+		/** audit-only actor descriptor — NEVER used for precedence */
+		proposedByActor: text('proposed_by_actor'),
+		decidedByActor: text('decided_by_actor'),
+		decidedAt: integer('decided_at', { mode: 'timestamp_ms' }),
+		/** MergeResult.status recorded when the CR is applied (Phase 4) */
+		appliedObservationStatus: text('applied_observation_status'),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		// one change request per proposed observation
+		uniqueIndex('change_requests_observation_idx').on(t.observationId),
+		// the review queue: by workflow status, newest first
+		index('change_requests_status_idx').on(t.status, t.createdAt),
+		index('change_requests_source_idx').on(t.sourceId),
+		index('change_requests_origin_record_idx').on(t.origin, t.originRecordId)
+	]
+);
+
+// ---------------------------------------------------------------------------
+// Change request reviews (レビュー) — append-only verdicts (LLM + human + system)
+// ---------------------------------------------------------------------------
+export const changeRequestReviews = sqliteTable(
+	'change_request_reviews',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		changeRequestId: text('change_request_id')
+			.notNull()
+			.references(() => changeRequests.id, { onDelete: 'restrict' }),
+		/** llm | human | system */
+		reviewerKind: text('reviewer_kind').notNull(),
+		/** model id / user id — audit-only, NEVER precedence */
+		reviewerActor: text('reviewer_actor'),
+		/** apply | reject | needs_evidence */
+		verdict: text('verdict').notNull(),
+		/** LLM self-report, advisory only */
+		confidence: real('confidence'),
+		reason: text('reason').notNull(),
+		evidenceRefs: text('evidence_refs', { mode: 'json' }).$type<string[]>(),
+		/** raw validated reviewer response — ALWAYS a JSON object, never a bare string */
+		payload: text('payload', { mode: 'json' }).$type<Record<string, unknown>>(),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [index('cr_reviews_cr_idx').on(t.changeRequestId, t.createdAt)]
+);
+
 // ---------------------------------------------------------------------------
 // App user roles (権限) — app-owned authz (Better-Auth `user` table untouched)
 // ---------------------------------------------------------------------------
@@ -763,6 +855,10 @@ export type SourceIdentifier = typeof sourceIdentifiers.$inferSelect;
 export type SourceFieldClaim = typeof sourceFieldClaims.$inferSelect;
 export type SourceFieldProvenance = typeof sourceFieldProvenance.$inferSelect;
 export type SourceLifecycleEvent = typeof sourceLifecycleEvents.$inferSelect;
+export type ChangeRequest = typeof changeRequests.$inferSelect;
+export type NewChangeRequest = typeof changeRequests.$inferInsert;
+export type ChangeRequestReview = typeof changeRequestReviews.$inferSelect;
+export type NewChangeRequestReview = typeof changeRequestReviews.$inferInsert;
 export type AppUserRole = typeof appUserRoles.$inferSelect;
 export type MigrationWatermark = typeof migrationWatermarks.$inferSelect;
 
