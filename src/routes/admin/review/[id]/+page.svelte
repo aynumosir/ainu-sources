@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { localizeHref, getLocale } from '$lib/paraglide/runtime';
 	import Seo from '$lib/components/Seo.svelte';
 	import { kindBadge, statusBadge, verdictBadge, fmtVal, opClass } from '$lib/review-ui';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
-	let { data }: { data: PageData } = $props();
+	let { data, form }: { data: PageData; form: ActionData } = $props();
+
+	let submitting = $state(false);
 
 	const cr = $derived(data.detail.changeRequest);
 	const diff = $derived(data.detail.diff);
@@ -81,6 +84,10 @@
 	});
 
 	const pretty = (v: unknown) => JSON.stringify(v ?? null, null, 2);
+
+	// A CR only takes verdicts while it is still in the working set; once decided
+	// (applied / rejected / superseded / withdrawn) the actions are read-only.
+	const actionable = $derived(['open', 'needs_evidence', 'approved'].includes(cr.status));
 </script>
 
 <Seo title={`Review · ${cr.title || cr.kind}`} noindex />
@@ -89,6 +96,19 @@
 	<a href={localizeHref('/admin/review')} class="text-sm text-stone-500 hover:text-brand-700"
 		>← Review queue</a
 	>
+
+	<!-- Action result banner -->
+	{#if form?.ok}
+		<div
+			class="mt-3 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800"
+		>
+			{form.message}
+		</div>
+	{:else if form?.error}
+		<div class="mt-3 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-800">
+			{form.error}
+		</div>
+	{/if}
 
 	<!-- Header -->
 	<div class="mt-2 flex flex-wrap items-center gap-1.5">
@@ -351,6 +371,64 @@
 					</table>
 				</div>
 			</details>
+		{/if}
+	</section>
+
+	<!-- Decision -->
+	<section class="mt-8 rounded-xl border border-stone-200 bg-paper-card p-4">
+		<h2 class="font-serif text-lg font-bold text-ink">Decision</h2>
+		{#if actionable}
+			<p class="mt-1 text-sm text-stone-500">
+				Approving runs this proposal through the merge engine (claims still rank by their own
+				provenance — a verdict gates application, it never changes a claim's band).
+			</p>
+			<form
+				method="POST"
+				class="mt-3"
+				use:enhance={() => {
+					submitting = true;
+					return async ({ update }) => {
+						await update();
+						submitting = false;
+					};
+				}}
+			>
+				<textarea
+					name="reason"
+					rows="2"
+					placeholder="Reason (optional) — recorded on the append-only review log."
+					class="w-full rounded-lg border border-stone-300 bg-paper px-3 py-2 text-sm text-ink placeholder:text-stone-400 focus:border-brand-400 focus:outline-none"
+				></textarea>
+				<div class="mt-3 flex flex-wrap gap-2">
+					<button
+						formaction="?/approve"
+						disabled={submitting}
+						class="rounded-lg bg-emerald-700 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-emerald-800 disabled:opacity-50"
+						>Approve &amp; apply</button
+					>
+					<button
+						formaction="?/requestEvidence"
+						disabled={submitting}
+						class="rounded-lg border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-800 transition hover:bg-amber-100 disabled:opacity-50"
+						>Request evidence</button
+					>
+					<button
+						formaction="?/reject"
+						disabled={submitting}
+						class="rounded-lg border border-rose-300 bg-rose-50 px-3 py-1.5 text-sm font-medium text-rose-800 transition hover:bg-rose-100 disabled:opacity-50"
+						>Reject</button
+					>
+				</div>
+			</form>
+		{:else}
+			<p class="mt-1 text-sm text-stone-500">
+				This change request is <span class="font-medium text-ink">{cr.status}</span> and no longer
+				accepts verdicts.
+				{#if cr.decidedByActor}<span class="text-stone-400"
+						>Decided by {cr.decidedByActor}{#if cr.decidedAt}
+							· {when(cr.decidedAt)}{/if}.</span
+					>{/if}
+			</p>
 		{/if}
 	</section>
 </div>
