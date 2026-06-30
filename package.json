@@ -12,6 +12,8 @@
 		"seed": "bun scripts/seed.ts",
 		"seed:plan": "bun scripts/seed.ts --plan",
 		"backup": "bun scripts/backup-db.ts",
+		"backup:libsql": "bun scripts/backup-libsql.ts",
+		"restore:libsql": "bun scripts/restore-libsql.ts",
 		"golden:dump": "bun scripts/golden-dump.ts",
 		"bootstrap": "bun scripts/bootstrap-ledger.ts",
 		"audit": "bun scripts/audit.ts",
