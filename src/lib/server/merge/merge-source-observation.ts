@@ -37,9 +37,11 @@ import {
 	sourceFieldClaims,
 	sourceFieldProvenance,
 	sourceLifecycleEvents,
-	sourceRevisions
+	sourceRevisions,
+	sourceObservationDiffs
 } from '../db/schema';
-import { projectSource, hashProjection } from '../golden';
+import { projectSource, hashProjection, type SourceProjection } from '../golden';
+import { diffSourceProjection } from './diff';
 import type {
 	Db,
 	MergeInput,
@@ -173,17 +175,22 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		status: MergeResult['status'],
 		sourceId?: string,
 		matchDecision?: string,
-		/** an optional preceding write to flush in the SAME batch as the observation
-		 *  status update — lets the happy path land the projection write + finalize
-		 *  in one subrequest instead of two. */
-		coWrite?: BatchItem<'sqlite'> | null
+		/** optional preceding writes to flush in the SAME batch as the observation
+		 *  status update — lets the happy path land the projection write + the
+		 *  applied-diff write + finalize in ONE subrequest instead of several.
+		 *  Nullish entries are dropped, so the diff/projection writes are simply
+		 *  absent on the early-return paths. Adds ZERO round-trips. */
+		coWrites: Array<BatchItem<'sqlite'> | null | undefined> = []
 	): Promise<MergeResult> => {
 		const obsUpdate = db
 			.update(sourceObservations)
 			.set({ status: status === 'drift' ? 'noop' : status, matchDecision: matchDecision ?? null })
 			.where(eq(sourceObservations.id, observationId));
-		if (coWrite) await db.batch([coWrite, obsUpdate]);
-		else await obsUpdate;
+		const writes = coWrites.filter((w): w is BatchItem<'sqlite'> => !!w);
+		if (writes.length) {
+			const ops: BatchItem<'sqlite'>[] = [...writes, obsUpdate as unknown as BatchItem<'sqlite'>];
+			await db.batch(ops as [BatchItem<'sqlite'>, ...BatchItem<'sqlite'>[]]);
+		} else await obsUpdate;
 		return {
 			observationId,
 			sourceId,
@@ -553,7 +560,41 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 	// rides in the same batch as the finalize observation-status UPDATE (one
 	// subrequest). Harvest (writes a revision below, whose snapshot must reflect the
 	// projected row) keeps the immediate write.
-	const { deferred: projUpdate } = await projectAndStore(db, sourceId, explicitDeletes, !!input.skipRevision);
+	const { deferred: projUpdate, before, after, baseContentHash, resultContentHash } =
+		await projectAndStore(db, sourceId, explicitDeletes, !!input.skipRevision, createdNew);
+
+	// 11b. Build the ONE 'applied' source_observation_diffs row for this commit from
+	// the engine's own before→after projections (no extra read), folded into the
+	// finalize batch below — so the diff write adds ZERO round-trips. `after` is null
+	// only if the source vanished mid-merge; then there is nothing to diff.
+	let diffWrite: BatchItem<'sqlite'> | null = null;
+	if (after) {
+		const sourceDiff = diffSourceProjection({
+			sourceId,
+			slug: (after.slug as string | null) ?? null,
+			before,
+			after,
+			beforeHash: baseContentHash,
+			afterHash: resultContentHash!,
+			conflicts,
+			heldClaims,
+			rejectedClaims
+		});
+		diffWrite = db.insert(sourceObservationDiffs).values({
+			id: uuid(),
+			observationId,
+			sourceId,
+			diffKind: 'applied',
+			isNewSource: createdNew,
+			baseContentHash,
+			resultContentHash,
+			changedScalarFields: sourceDiff.changedScalarFields,
+			changedCollections: sourceDiff.changedCollections,
+			hasConflicts: conflicts.length > 0,
+			diff: sourceDiff,
+			createdAt: new Date()
+		});
+	}
 
 	// 12. source_revisions row (history compat). The website paths re-stamp this
 	// with the real user/summary right after, so they pass skipRevision=true and
@@ -584,7 +625,7 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		else if (anyApplied) status = 'applied';
 		else status = 'partial';
 	}
-	return finalize(status, sourceId, decision.matchDecision, projUpdate);
+	return finalize(status, sourceId, decision.matchDecision, [projUpdate, diffWrite]);
 }
 
 // ---------------------------------------------------------------------------
@@ -1237,6 +1278,19 @@ async function mergeLinks(
 // projection → flat sources + content hash
 // ---------------------------------------------------------------------------
 
+interface ProjectionResult {
+	deferred: BatchItem<'sqlite'> | null;
+	/** the canonical projection BEFORE this merge (pre-overlay flat row + children);
+	 *  null for a just-created source (the diff is then a brand-new-source add). */
+	before: SourceProjection | null;
+	/** the canonical projection AFTER this merge (flat row overlaid with winners). */
+	after: SourceProjection | null;
+	/** the source's stored content hash before this merge (diff staleness base). */
+	baseContentHash: string | null;
+	/** the recomputed content hash after this merge. */
+	resultContentHash: string | null;
+}
+
 async function projectAndStore(
 	db: Db,
 	sourceId: string,
@@ -1245,8 +1299,10 @@ async function projectAndStore(
 	 *  batch it with the finalize write; when false, execute it immediately. The
 	 *  statement is wrapped in an object because a drizzle query builder is THENABLE
 	 *  — returning it bare from an async fn would auto-execute it at the await. */
-	defer = false
-): Promise<{ deferred: BatchItem<'sqlite'> | null }> {
+	defer = false,
+	/** a JUST-created source's "before" is null (a brand-new-source diff). */
+	createdNew = false
+): Promise<ProjectionResult> {
 	// One BATCH for every projection input (winning claims + the flat row + all
 	// related rows) — a single Worker subrequest instead of a sequential/parallel
 	// fan-out of single-statement round-trips. The flat field winners and the
@@ -1294,7 +1350,7 @@ async function projectAndStore(
 	]);
 
 	const src = srcRows[0];
-	if (!src) return { deferred: null };
+	if (!src) return { deferred: null, before: null, after: null, baseContentHash: null, resultContentHash: null };
 
 	const winnerOp = new Map<string, string>();
 	const upd: Record<string, unknown> = {};
@@ -1324,27 +1380,49 @@ async function projectAndStore(
 		...relOut.map((r) => ({ type: r.type, toSlugOrId: slugMap.get(r.to) ?? r.to, direction: 'out' as const })),
 		...relIn.map((r) => ({ type: r.type, toSlugOrId: slugMap.get(r.from) ?? r.from, direction: 'in' as const }))
 	];
-	// Compute the projection from the row OVERLAID with the new field winners (we
-	// already hold them) — equivalent to writing them first then re-reading, but
-	// without the extra round-trip; the content hash is then exact for one UPDATE.
-	const projection = projectSource({
-		source: { ...(src as unknown as Record<string, unknown>), ...upd },
+	// The shared child inputs for the before/after projections — built once.
+	const childInputs = {
 		links,
 		tags: tagRows.map((t) => t.name),
 		persons: personRows,
 		places: placeRows,
 		institutions: instRows,
 		relations
+	};
+	// Compute the projection from the row OVERLAID with the new field winners (we
+	// already hold them) — equivalent to writing them first then re-reading, but
+	// without the extra round-trip; the content hash is then exact for one UPDATE.
+	const after = projectSource({
+		source: { ...(src as unknown as Record<string, unknown>), ...upd },
+		...childInputs
 	});
-	const hash = hashProjection(projection);
+	const hash = hashProjection(after);
+
+	// The "before" projection reuses the SAME children with the PRE-overlay flat row
+	// (the `sources` UPDATE below is deferred / not yet run, so `src` still holds the
+	// pre-merge scalars). It costs no extra round-trip. A just-created source has no
+	// prior state, so its before is null (a brand-new-source diff). NB: collections
+	// are read post-write, so before/after collections match — the applied diff
+	// surfaces SCALAR field changes (the editorial-edit case); collection deltas are
+	// a later-phase concern.
+	const before = createdNew
+		? null
+		: projectSource({ source: src as unknown as Record<string, unknown>, ...childInputs });
+	const baseContentHash = createdNew ? null : (src.contentHash ?? null);
 
 	const now = new Date();
 	const finalUpd: Record<string, unknown> = { ...upd, contentHash: hash, updatedAt: now, lastSeenAt: now };
 	if (src.contentHash !== hash) finalUpd.contentChangedAt = now;
 	const stmt = db.update(sources).set(finalUpd).where(eq(sources.id, sourceId));
-	if (defer) return { deferred: stmt as unknown as BatchItem<'sqlite'> };
-	await stmt;
-	return { deferred: null };
+	const result: ProjectionResult = {
+		deferred: defer ? (stmt as unknown as BatchItem<'sqlite'>) : null,
+		before,
+		after,
+		baseContentHash,
+		resultContentHash: hash
+	};
+	if (!defer) await stmt;
+	return result;
 }
 
 // ---------------------------------------------------------------------------
