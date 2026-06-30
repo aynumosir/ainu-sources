@@ -12,6 +12,7 @@ import {
 	tags,
 	sourceTags,
 	sourceRevisions,
+	sourceObservationDiffs,
 	type Source,
 	type Person,
 	type Place,
@@ -840,6 +841,46 @@ export async function getRevisions(sourceId: string) {
 		.where(eq(sourceRevisions.sourceId, sourceId))
 		.orderBy(desc(sourceRevisions.createdAt))
 		.limit(HISTORY_LIMIT);
+}
+
+/**
+ * /history data — revisions (who/when/summary) + the per-observation applied
+ * diffs (what changed), in ONE bounded round-trip (a `db.batch` of two capped
+ * selects). No per-row `__data.json` fan-out — the pattern that hung /history
+ * (see db/index.ts). The diff JSON is the full `SourceDiff`; the page renders its
+ * scalar before→after table and collection +/−/~ deltas.
+ */
+export async function getSourceHistory(sourceId: string) {
+	const [revisions, diffs] = await db.batch([
+		db
+			.select({
+				id: sourceRevisions.id,
+				action: sourceRevisions.action,
+				userName: sourceRevisions.userName,
+				summary: sourceRevisions.summary,
+				createdAt: sourceRevisions.createdAt
+			})
+			.from(sourceRevisions)
+			.where(eq(sourceRevisions.sourceId, sourceId))
+			.orderBy(desc(sourceRevisions.createdAt))
+			.limit(HISTORY_LIMIT),
+		db
+			.select({
+				id: sourceObservationDiffs.id,
+				diffKind: sourceObservationDiffs.diffKind,
+				isNewSource: sourceObservationDiffs.isNewSource,
+				hasConflicts: sourceObservationDiffs.hasConflicts,
+				changedScalarFields: sourceObservationDiffs.changedScalarFields,
+				changedCollections: sourceObservationDiffs.changedCollections,
+				diff: sourceObservationDiffs.diff,
+				createdAt: sourceObservationDiffs.createdAt
+			})
+			.from(sourceObservationDiffs)
+			.where(eq(sourceObservationDiffs.sourceId, sourceId))
+			.orderBy(desc(sourceObservationDiffs.createdAt))
+			.limit(HISTORY_LIMIT)
+	]);
+	return { revisions, diffs };
 }
 
 // ---------------------------------------------------------------------------

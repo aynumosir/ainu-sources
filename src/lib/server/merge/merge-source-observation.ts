@@ -187,8 +187,10 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 			.set({ status: status === 'drift' ? 'noop' : status, matchDecision: matchDecision ?? null })
 			.where(eq(sourceObservations.id, observationId));
 		const writes = coWrites.filter((w): w is BatchItem<'sqlite'> => !!w);
-		if (writes.length) await db.batch([...writes, obsUpdate] as [BatchItem<'sqlite'>, ...BatchItem<'sqlite'>[]]);
-		else await obsUpdate;
+		if (writes.length) {
+			const ops: BatchItem<'sqlite'>[] = [...writes, obsUpdate as unknown as BatchItem<'sqlite'>];
+			await db.batch(ops as [BatchItem<'sqlite'>, ...BatchItem<'sqlite'>[]]);
+		} else await obsUpdate;
 		return {
 			observationId,
 			sourceId,
