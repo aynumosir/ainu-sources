@@ -175,3 +175,45 @@ export interface ProposedMergeResult {
 	/** ALWAYS empty — a proposal writes no lifecycle event (uniform union shape) */
 	lifecycleEvents: LifecycleOutcome[];
 }
+
+/**
+ * A review verdict appended to a change request (Git-in-the-DB Phase 4). Reviews
+ * are append-only: every verdict — LLM, human, or system — is recorded as one
+ * immutable `change_request_reviews` row, then the CR's mutable workflow status is
+ * advanced. A reviewer NEVER changes a claim's band / score / rank (those are
+ * actor-agnostic and owned by `rank.ts`); a verdict only GATES whether an already
+ * band-ranked observation may enter the merge.
+ */
+export interface ReviewInput {
+	/** who is reviewing: an LLM (advisory by default), a human, or the system */
+	reviewerKind: 'llm' | 'human' | 'system';
+	/** model id / user id — audit-only, NEVER precedence */
+	reviewerActor?: string | null;
+	verdict: 'apply' | 'reject' | 'needs_evidence';
+	reason: string;
+	/** LLM self-report in [0,1] — advisory only */
+	confidence?: number | null;
+	evidenceRefs?: string[];
+	/** the raw validated reviewer response — ALWAYS an object, never a bare string */
+	payload?: Record<string, unknown>;
+}
+
+/**
+ * The result of {@link reviewChangeRequest}: the change request's resulting
+ * workflow status after the verdict was recorded and acted on.
+ *
+ *   - `needs_evidence` — the CR was sent back for more evidence;
+ *   - `rejected`       — the CR (and its observation) were rejected;
+ *   - `approved`       — an LLM `apply` verdict was recorded as ADVISORY (no
+ *                        canonical write); a human must still apply;
+ *   - `applied`        — a human `apply` (or LLM auto-approve) drove the merge;
+ *                        `applied` carries the {@link MergeResult}.
+ */
+export interface ReviewResult {
+	status: 'needs_evidence' | 'rejected' | 'approved' | 'applied';
+	/** the appended `change_request_reviews` row id */
+	reviewId: string;
+	changeRequestId: string;
+	/** present only when the verdict triggered an apply (human apply / LLM auto-approve) */
+	applied?: MergeResult;
+}

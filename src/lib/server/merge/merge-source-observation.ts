@@ -16,7 +16,7 @@
  * Single statements + CAS only — no interactive transaction (the Worker uses a
  * stateless web libSQL client where tx isolation does not hold).
  */
-import { and, eq, inArray, sql } from 'drizzle-orm';
+import { and, eq, inArray, lt, sql } from 'drizzle-orm';
 import type { BatchItem } from 'drizzle-orm/batch';
 import { slugify } from '$lib/format';
 import {
@@ -39,7 +39,10 @@ import {
 	sourceLifecycleEvents,
 	sourceRevisions,
 	sourceObservationDiffs,
-	changeRequests
+	changeRequests,
+	changeRequestReviews,
+	type SourceObservation,
+	type ChangeRequest
 } from '../db/schema';
 import { env } from '$env/dynamic/private';
 import { projectSource, hashProjection, type SourceProjection } from '../golden';
@@ -50,9 +53,12 @@ import type {
 	MergeInput,
 	MergeResult,
 	ProposedMergeResult,
+	ReviewInput,
+	ReviewResult,
 	ClaimOutcome,
 	ConflictOutcome,
-	LifecycleOutcome
+	LifecycleOutcome,
+	LifecycleInput
 } from './types';
 import type { IdentityDecision } from './identity';
 import { NORMALIZER_VERSION } from './constants';
@@ -563,23 +569,32 @@ export async function commitMerge(
 		};
 	}
 
+	// REUSE vs. INSERT: the Phase-4 apply path passes `opts.observationId` to commit
+	// a change request's OWN already-recorded `proposed` observation — that row
+	// EXISTS, so re-inserting it would collide on the PK / idempotency UNIQUE index.
+	// In reuse mode we skip the insert and let `finalize` flip the existing
+	// observation's status (`proposed` → applied/partial/…). Every other caller
+	// (Phase 2/3 auto-apply + reject paths) leaves `opts.observationId` unset and
+	// inserts a fresh observation exactly as before — byte-identical behavior.
 	const observationId = opts?.observationId ?? uuid();
-	await db.insert(sourceObservations).values({
-		id: observationId,
-		origin,
-		originRecordId,
-		contentHash,
-		normalizerVersion: nv,
-		runId: input.runId ?? null,
-		derivation,
-		confidence,
-		evidence,
-		payload,
-		rawPayload: input.rawPayload ?? null,
-		status: 'submitted',
-		actor,
-		createdAt: new Date()
-	});
+	if (!opts?.observationId) {
+		await db.insert(sourceObservations).values({
+			id: observationId,
+			origin,
+			originRecordId,
+			contentHash,
+			normalizerVersion: nv,
+			runId: input.runId ?? null,
+			derivation,
+			confidence,
+			evidence,
+			payload,
+			rawPayload: input.rawPayload ?? null,
+			status: 'submitted',
+			actor,
+			createdAt: new Date()
+		});
+	}
 
 	const finalize = async (
 		status: MergeResult['status'],
@@ -1165,6 +1180,360 @@ export async function openChangeRequest(db: Db, plan: MergePlan): Promise<Propos
 		conflicts: [...plan.conflicts, ...plan.predictedConflicts],
 		lifecycleEvents: []
 	};
+}
+
+// ---------------------------------------------------------------------------
+// Apply path (Phase 4) — review a change request, then apply it through the SAME
+// merge engine. A review GATES application; it never confers authority or rank.
+// ---------------------------------------------------------------------------
+
+/**
+ * A change request could not be applied because its state moved out from under
+ * the apply (a "rebase" failure): it became conflicting / now-rejected on the
+ * live re-plan, or another worker holds the `applying` lock, or it is already in a
+ * terminal non-applied state. 409-style: the caller should re-review, not retry
+ * blindly.
+ */
+export class ChangeRequestStale extends Error {
+	readonly code = 'change_request_stale';
+	/** HTTP-style status for a route handler to surface (advisory). */
+	readonly httpStatus = 409;
+	constructor(
+		message: string,
+		readonly changeRequestId?: string,
+		/** the CR's status at the point the apply gave up */
+		readonly crStatus?: string
+	) {
+		super(message);
+		this.name = 'ChangeRequestStale';
+	}
+}
+
+/**
+ * Whether an LLM `apply` verdict may DRIVE an apply (rather than merely advise).
+ * DEFAULT FALSE — an LLM verdict is advisory: it marks the CR `approved` and a
+ * human still has to apply. Flipped on only by an explicit env opt-in.
+ */
+function llmAutoApproveEnabled(): boolean {
+	return env.LLM_AUTOAPPROVE_CHANGE_REQUESTS === 'true';
+}
+
+/**
+ * Reconstruct the engine {@link MergeInput} from a stored `proposed` observation
+ * (+ its change request) so the apply can RE-PLAN live against current canonical —
+ * the DB equivalent of rebasing a PR before merge. The observation's `payload`
+ * carries the normalized fields / identifiers / links / explicitDeletes / presence
+ * / lifecycle exactly as `planSourceObservation` recorded them.
+ *
+ * IDENTITY PINNING: for an ATTACH change request we set `targetSourceId` to the
+ * reviewed `cr.sourceId`, so the apply lands on the EXACT source the proposal was
+ * reviewed against instead of risking a find-or-create fork into a duplicate. A
+ * new-source CR has no `sourceId`, so identity find-or-create runs (and the apply
+ * materializes the source). `targetSourceId` is identity-only; precedence/rank
+ * still come from the observation's own derivation/confidence.
+ */
+function observationToMergeInput(obs: SourceObservation, cr: ChangeRequest): MergeInput {
+	const payload = (obs.payload ?? {}) as {
+		fields?: Record<string, unknown>;
+		identifiers?: Array<{ kind: string; valueNorm: string }>;
+		links?: Array<{ type?: string; url: string; label?: string | null }>;
+		explicitDeletes?: string[];
+		presence?: 'seen' | 'missing';
+		lifecycle?: LifecycleInput | null;
+	};
+	const targetSourceId = !cr.plannedSourceId && cr.sourceId ? cr.sourceId : undefined;
+	return {
+		origin: obs.origin,
+		originRecordId: obs.originRecordId,
+		derivation: obs.derivation,
+		confidence: obs.confidence,
+		evidence: obs.evidence,
+		fields: payload.fields ?? {},
+		// stored identifiers are already normalized; feed the normalized value back in
+		// (re-normalization is idempotent for a normalized value).
+		identifiers: (payload.identifiers ?? []).map((i) => ({ kind: i.kind, value: i.valueNorm })),
+		links: payload.links ?? [],
+		explicitDeletes: payload.explicitDeletes ?? [],
+		presence: payload.presence ?? 'seen',
+		lifecycle: payload.lifecycle ?? undefined,
+		targetSourceId,
+		runId: obs.runId ?? null,
+		actor: obs.actor ?? null,
+		rawPayload: obs.rawPayload ?? null,
+		normalizerVersion: obs.normalizerVersion
+	};
+}
+
+/**
+ * The apply lock failed to claim the CR (`rowsAffected !== 1`). Either it is
+ * already `applied` — in which case the apply is IDEMPOTENT and we return its
+ * recorded terminal result without re-running the merge — or it is `applying`
+ * (another worker holds the lock) or terminal-non-applied (rejected / superseded /
+ * withdrawn), which cannot be applied ⇒ {@link ChangeRequestStale}.
+ */
+async function readAlreadyAppliedOrThrow(db: Db, crId: string): Promise<MergeResult> {
+	const [cr] = await db.select().from(changeRequests).where(eq(changeRequests.id, crId)).limit(1);
+	if (!cr) throw new ChangeRequestStale(`change request ${crId} not found`, crId);
+	if (cr.status === 'applied') {
+		return {
+			observationId: cr.observationId,
+			sourceId: cr.sourceId ?? undefined,
+			status: (cr.appliedObservationStatus as MergeResult['status']) ?? 'noop',
+			appliedClaims: [],
+			heldClaims: [],
+			rejectedClaims: [],
+			conflicts: [],
+			lifecycleEvents: []
+		};
+	}
+	throw new ChangeRequestStale(
+		`change request ${crId} is '${cr.status}', not applicable`,
+		crId,
+		cr.status
+	);
+}
+
+/**
+ * Append a review verdict to a change request, then ACT on it (Git-in-the-DB §3).
+ *
+ * The verdict row is ALWAYS recorded first (append-only ledger); then exactly one
+ * single-statement / one-`db.batch` action advances the CR's mutable workflow
+ * status:
+ *
+ *   - `needs_evidence` → CR `needs_evidence` (conditional: only from `open` /
+ *     `approved`, so a decided CR is never re-opened).
+ *   - `reject`         → ONE atomic `db.batch`: CR `rejected` (+ decidedBy/At) AND
+ *     its linked observation `rejected` (no canonical data is ever touched).
+ *   - `apply` + `llm`  (and `LLM_AUTOAPPROVE_CHANGE_REQUESTS !== 'true'`) → CR
+ *     `approved` ONLY — the LLM verdict is ADVISORY; NO canonical write. A human
+ *     must still apply.
+ *   - `apply` + `human` (or LLM auto-approve on) → drive {@link applyChangeRequest}.
+ *
+ * A reviewer NEVER changes a claim's band / score (actor-agnostic): an approved
+ * `llm_extraction` proposal stays in its band; the apply re-plans through the
+ * SAME {@link commitMerge} as every other write.
+ */
+export async function reviewChangeRequest(
+	db: Db,
+	crId: string,
+	review: ReviewInput
+): Promise<ReviewResult> {
+	const reviewId = uuid();
+	// 1. append the verdict (immutable) — ALWAYS, before acting.
+	await db.insert(changeRequestReviews).values({
+		id: reviewId,
+		changeRequestId: crId,
+		reviewerKind: review.reviewerKind,
+		reviewerActor: review.reviewerActor ?? null,
+		verdict: review.verdict,
+		confidence: review.confidence ?? null,
+		reason: review.reason,
+		evidenceRefs: review.evidenceRefs ?? [],
+		payload: review.payload ?? {},
+		createdAt: new Date()
+	});
+
+	// 2a. needs_evidence — bounce back for more evidence (only from a reviewable state).
+	if (review.verdict === 'needs_evidence') {
+		await db
+			.update(changeRequests)
+			.set({ status: 'needs_evidence', updatedAt: new Date() })
+			.where(and(eq(changeRequests.id, crId), inArray(changeRequests.status, ['open', 'approved'])));
+		return { status: 'needs_evidence', reviewId, changeRequestId: crId };
+	}
+
+	// 2b. reject — CR rejected AND its observation rejected, in ONE atomic batch.
+	if (review.verdict === 'reject') {
+		const [cr] = await db
+			.select({ observationId: changeRequests.observationId })
+			.from(changeRequests)
+			.where(eq(changeRequests.id, crId))
+			.limit(1);
+		const decidedAt = new Date();
+		await db.batch([
+			db
+				.update(changeRequests)
+				.set({
+					status: 'rejected',
+					decidedByActor: review.reviewerActor ?? null,
+					decidedAt,
+					updatedAt: decidedAt
+				})
+				.where(
+					and(
+						eq(changeRequests.id, crId),
+						inArray(changeRequests.status, ['open', 'needs_evidence', 'approved'])
+					)
+				),
+			db
+				.update(sourceObservations)
+				.set({ status: 'rejected' })
+				.where(eq(sourceObservations.id, cr?.observationId ?? ''))
+		]);
+		return { status: 'rejected', reviewId, changeRequestId: crId };
+	}
+
+	// 2c. apply + LLM (advisory) — record `approved` only; NO canonical write.
+	if (review.reviewerKind === 'llm' && !llmAutoApproveEnabled()) {
+		await db
+			.update(changeRequests)
+			.set({ status: 'approved', updatedAt: new Date() })
+			.where(
+				and(eq(changeRequests.id, crId), inArray(changeRequests.status, ['open', 'needs_evidence']))
+			);
+		return { status: 'approved', reviewId, changeRequestId: crId };
+	}
+
+	// 2d. apply + human (or explicitly-enabled LLM auto-approve) — drive the merge.
+	const applied = await applyChangeRequest(db, crId, review.reviewerActor ?? undefined);
+	return { status: 'applied', reviewId, changeRequestId: crId, applied };
+}
+
+/**
+ * Apply a change request through the SAME merge engine (Git-in-the-DB §3) — the
+ * "merge the PR" step. Concurrency-safe and idempotent:
+ *
+ *   1. LOCK — one atomic statement claims the CR exactly once:
+ *      `UPDATE … SET status='applying' WHERE id=? AND status IN
+ *      (open,needs_evidence,approved)`. If it does not affect exactly one row the
+ *      CR is already `applied` (return its recorded result — idempotent) or
+ *      `applying` / terminal ({@link ChangeRequestStale}). The lock guarantees a
+ *      single apply even under concurrent callers.
+ *   2. RE-PLAN LIVE — reconstruct the {@link MergeInput} from the proposed
+ *      observation and {@link planSourceObservation} against CURRENT canonical,
+ *      ignoring the CR's OWN proposed observation as a duplicate. The stored
+ *      proposal diff is advisory; this is the rebase-before-merge.
+ *   3. BOUNCE IF DANGEROUS — if the live re-plan now rejects or now has conflicts,
+ *      set the CR `needs_evidence` and throw {@link ChangeRequestStale} (never
+ *      apply a now-dangerous change).
+ *   4. COMMIT — {@link commitMerge} reusing the proposed observation id, which
+ *      flips it `proposed` → applied/partial and writes the claims / provenance /
+ *      sources / `applied` diff through the ONE engine (no bypass).
+ *   5. FINALIZE — one `UPDATE` records the terminal CR state.
+ *
+ * IDEMPOTENT: CAS is hash-idempotent (equal valueHash ⇒ noop), claims dedupe on
+ * `(observationId, fieldName, valueHash)`, and the lock = one apply — so a retried
+ * apply converges to the same end state.
+ */
+export async function applyChangeRequest(
+	db: Db,
+	crId: string,
+	actor?: string
+): Promise<MergeResult> {
+	// 1. claim the CR exactly once (atomic single-statement lock).
+	const lock = await db
+		.update(changeRequests)
+		.set({ status: 'applying', updatedAt: new Date() })
+		.where(
+			and(
+				eq(changeRequests.id, crId),
+				inArray(changeRequests.status, ['open', 'needs_evidence', 'approved'])
+			)
+		);
+	if (rowsAffected(lock) !== 1) return readAlreadyAppliedOrThrow(db, crId);
+
+	const [cr] = await db.select().from(changeRequests).where(eq(changeRequests.id, crId)).limit(1);
+	if (!cr) throw new ChangeRequestStale(`change request ${crId} vanished mid-apply`, crId);
+	const [obs] = await db
+		.select()
+		.from(sourceObservations)
+		.where(eq(sourceObservations.id, cr.observationId))
+		.limit(1);
+	if (!obs)
+		throw new ChangeRequestStale(`proposed observation ${cr.observationId} vanished`, crId, cr.status);
+
+	// 2. re-plan LIVE against current canonical (ignore the CR's own proposed obs as a
+	//    "duplicate"; simulate so a NEW same-band conflict surfaces in predictedConflicts).
+	const input = observationToMergeInput(obs, cr);
+	const live = await planSourceObservation(db, input, {
+		ignoreObservationId: cr.observationId,
+		simulate: true
+	});
+
+	// 3. became dangerous since the proposal (now rejects / now conflicts) ⇒ bounce
+	//    back to re-review rather than apply a stale, now-unsafe change.
+	if (live.gate.mode === 'reject' || live.conflicts.length || live.predictedConflicts.length) {
+		await db
+			.update(changeRequests)
+			.set({ status: 'needs_evidence', updatedAt: new Date() })
+			.where(eq(changeRequests.id, crId));
+		throw new ChangeRequestStale(
+			`change request ${crId} became conflicting on re-plan; needs re-review`,
+			crId,
+			'needs_evidence'
+		);
+	}
+
+	// 4. commit by REUSING the proposed observation id — flips proposed→applied/partial
+	//    and writes claims/provenance/sources + the 'applied' diff through the SAME engine.
+	const result = await commitMerge(db, live, {
+		observationId: cr.observationId,
+		skipDupNoop: true,
+		changeRequestId: crId,
+		actor
+	});
+
+	// 5. finalize the CR (single idempotent statement).
+	const decidedAt = new Date();
+	await db
+		.update(changeRequests)
+		.set({
+			status: 'applied',
+			appliedObservationStatus: result.status,
+			sourceId: result.sourceId ?? cr.sourceId,
+			decidedByActor: actor ?? cr.decidedByActor ?? null,
+			decidedAt,
+			updatedAt: decidedAt
+		})
+		.where(eq(changeRequests.id, crId));
+	return result;
+}
+
+/**
+ * Recover change requests STUCK in `applying` (Phase 4 sweeper).
+ *
+ * The apply lock flips a CR to `applying` as a single atomic statement, then
+ * re-plans → commits → finalizes. On a stateless Worker a crash / timeout / spend
+ * cutoff BETWEEN the lock and the finalize can pin a CR at `applying` forever — the
+ * lock's `WHERE status IN (open,needs_evidence,approved)` then refuses every retry,
+ * and the CR is wedged.
+ *
+ * This sweeper resets CRs that have sat in `applying` longer than `olderThanMs`
+ * (default 15 min) back to a reviewable `needs_evidence` so a human / retry can
+ * drive them again. SAFE TO RE-RUN: {@link applyChangeRequest} is idempotent (CAS
+ * hash-idempotent, claims dedupe on `(observationId, fieldName, valueHash)`), so a
+ * CR whose canonical writes actually landed before the crash simply converges to a
+ * noop on the next apply. The reset itself performs NO canonical write — it only
+ * re-opens the lock.
+ *
+ * Intentionally minimal and manual (call from a scheduled task / admin action);
+ * the `olderThanMs` floor avoids racing a healthy in-flight apply.
+ */
+export async function recoverStuckApplyingChangeRequests(
+	db: Db,
+	opts?: { olderThanMs?: number; now?: Date }
+): Promise<{ recovered: string[] }> {
+	const olderThanMs = opts?.olderThanMs ?? 15 * 60 * 1000;
+	const cutoff = new Date((opts?.now?.getTime() ?? Date.now()) - olderThanMs);
+	const stuck = await db
+		.select({ id: changeRequests.id })
+		.from(changeRequests)
+		.where(and(eq(changeRequests.status, 'applying'), lt(changeRequests.updatedAt, cutoff)));
+	if (!stuck.length) return { recovered: [] };
+	const ids = stuck.map((r) => r.id);
+	// Re-assert the `applying` + age guard in the WHERE so a CR that finalized in the
+	// gap between the read and this write is not clobbered.
+	await db
+		.update(changeRequests)
+		.set({ status: 'needs_evidence', updatedAt: new Date() })
+		.where(
+			and(
+				eq(changeRequests.status, 'applying'),
+				lt(changeRequests.updatedAt, cutoff),
+				inArray(changeRequests.id, ids)
+			)
+		);
+	return { recovered: ids };
 }
 
 // ---------------------------------------------------------------------------
