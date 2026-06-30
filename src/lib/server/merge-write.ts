@@ -43,9 +43,25 @@ import {
 	tags,
 	type Source
 } from './db/schema';
-import { mergeSourceObservation } from './merge';
+import { planSourceObservation, commitMerge } from './merge';
 import type { Db, MergeInput, MergeResult, LinkInput } from './merge';
 import type { SourceInput, EditUser } from './queries';
+
+/**
+ * Run an observation through the engine and ALWAYS commit it (auto-apply).
+ *
+ * The website write path deliberately bypasses the `SOURCES_ENABLE_PROPOSE` gate
+ * that `mergeSourceObservation` consults: that flag routes DIRECT engine callers
+ * (harvest / staging tests) to the change-request queue, but live source
+ * creation must NEVER be parked in a queue that nothing drains yet (the review →
+ * apply → UI path is Phases 4-5). The website → propose cutover is Phase 7.
+ *
+ * With the flag OFF (production) this is byte-identical to the previous
+ * `mergeSourceObservation` call — same reads, same writes, same round-trips.
+ */
+async function autoApplyMerge(db: Db, input: MergeInput): Promise<MergeResult> {
+	return commitMerge(db, await planSourceObservation(db, input));
+}
 
 export interface WebsiteEditResult {
 	/** The source's slug (for the post-save redirect). Empty only if no source
@@ -337,7 +353,7 @@ export async function createSourceViaMerge(
 	// A unique handle forces the create path (rather than a title-collision
 	// candidate) and seeds an identity the source can be re-found by.
 	const newKey = crypto.randomUUID();
-	const result = await mergeSourceObservation(db, {
+	const result = await autoApplyMerge(db, {
 		...baseObservation(),
 		originRecordId: `website:new:${newKey}`,
 		fields,
@@ -375,7 +391,7 @@ export async function updateSourceViaMerge(
 	// skips its catalogue scan + identifier round-trips entirely. Replaces the prior
 	// `repo_path = website:<id>` re-find handle (which required an extra insert +
 	// lookup per edit and was the fragile part of the cutover on remote Turso).
-	const result = await mergeSourceObservation(db, {
+	const result = await autoApplyMerge(db, {
 		...baseObservation(),
 		originRecordId: `website:${id}`,
 		targetSourceId: id,

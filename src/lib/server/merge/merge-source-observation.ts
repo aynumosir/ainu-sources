@@ -41,6 +41,7 @@ import {
 	sourceObservationDiffs,
 	changeRequests
 } from '../db/schema';
+import { env } from '$env/dynamic/private';
 import { projectSource, hashProjection, type SourceProjection } from '../golden';
 import { diffSourceProjection, loadSourceProjection, type SourceDiff } from './diff';
 import { decideChangeGate, type MergePlan, type PlannedFieldOutcome } from './decision';
@@ -98,27 +99,75 @@ function rowsAffected(res: unknown): number {
 // ---------------------------------------------------------------------------
 
 /**
+ * Is the propose path enabled? Reads the `SOURCES_ENABLE_PROPOSE` env flag fresh
+ * on every call (so tests can toggle it). DEFAULT OFF — and while off the engine
+ * is byte-identical to Phase 2: the gate is still computed but a `propose`
+ * verdict falls back to auto-apply, because the review→apply→UI path that drains
+ * the queue does not exist yet (Phases 4-5). We must NOT route live creation into
+ * an unprocessable queue.
+ */
+function proposeEnabled(): boolean {
+	return env.SOURCES_ENABLE_PROPOSE === 'true';
+}
+
+/**
  * The public idempotent entry. Splits into a pure-reads {@link planSourceObservation}
  * (which computes the {@link decideChangeGate} verdict) and a writer
- * {@link commitMerge}.
+ * {@link commitMerge}, branching on the gate.
  *
- * PHASE 2 — BEHAVIOR-PRESERVING: the gate is COMPUTED and surfaced on the result,
- * but every non-duplicate path still commits exactly as before. `propose` falls
- * back to auto-apply (see the TODO) because the `change_requests` table does not
- * exist yet; Phase 3 routes it to `openChangeRequest`. Output is byte-identical
- * to the pre-refactor monolith.
+ * FLAG-GATED (Phase 3): when `SOURCES_ENABLE_PROPOSE` is ON and the gate says
+ * `propose`, the observation is routed to {@link openChangeRequest} (a PR — ZERO
+ * canonical write) instead of committing. When the flag is OFF (the default, and
+ * production today), the engine is BYTE-IDENTICAL to Phase 2: it plans WITHOUT
+ * the proposal simulation and commits every non-reject path, so a `propose`
+ * verdict still auto-applies and round-trip counts are unchanged.
  */
-export async function mergeSourceObservation(db: Db, input: MergeInput): Promise<MergeResult> {
-	const plan = await planSourceObservation(db, input);
-
-	if (plan.gate.mode === 'propose') {
-		// TODO(phase3): route to openChangeRequest(db, plan) once `change_requests`
-		// exists. Until then a proposed observation AUTO-APPLIES — exactly today's
-		// behavior (every observation that reaches the engine is committed).
+export async function mergeSourceObservation(
+	db: Db,
+	input: MergeInput
+): Promise<MergeResult | ProposedMergeResult> {
+	// FLAG OFF — exactly Phase 2: plan (no simulate) then commit every path. The
+	// gate is computed and surfaced, but `propose` falls back to auto-apply.
+	if (!proposeEnabled()) {
+		const plan = await planSourceObservation(db, input);
 		return commitMerge(db, plan);
 	}
-	// 'auto_apply' commits; 'reject' commits too (records the rejected observation
-	// in the ledger without mutating canonical data) — both unchanged from before.
+
+	// FLAG ON — propose routing. Simulate so the propose path has its before→after
+	// diff AND so a predicted same-band conflict feeds the gate (decision.ts §4).
+	const plan = await planSourceObservation(db, input, { simulate: true });
+
+	// §3 duplicate-observation behavior: a re-submitted (origin, recordId, hash).
+	// If the recorded duplicate is itself a `proposed` observation, return its
+	// EXISTING change request instead of opening a second one (idempotent propose).
+	if (plan.duplicate) {
+		if (plan.duplicate.status === 'proposed') {
+			const [cr] = await db
+				.select({ id: changeRequests.id, sourceId: changeRequests.sourceId })
+				.from(changeRequests)
+				.where(eq(changeRequests.observationId, plan.duplicate.id))
+				.limit(1);
+			return {
+				status: 'proposed',
+				observationId: plan.duplicate.id,
+				changeRequestId: cr?.id ?? '',
+				diffId: '',
+				sourceId: cr?.sourceId ?? undefined,
+				gate: plan.gate,
+				appliedClaims: [],
+				heldClaims: [],
+				rejectedClaims: [],
+				conflicts: [],
+				lifecycleEvents: []
+			};
+		}
+		// an already-applied / rejected duplicate ⇒ the usual dedupe-noop in commit.
+		return commitMerge(db, plan);
+	}
+
+	// route on the gate: propose ⇒ PR (no canonical write); auto_apply / reject ⇒
+	// commit (reject records the rejected observation without mutating canonical).
+	if (plan.gate.mode === 'propose') return openChangeRequest(db, plan);
 	return commitMerge(db, plan);
 }
 
