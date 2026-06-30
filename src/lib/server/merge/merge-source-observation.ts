@@ -41,7 +41,8 @@ import {
 	sourceObservationDiffs
 } from '../db/schema';
 import { projectSource, hashProjection, type SourceProjection } from '../golden';
-import { diffSourceProjection } from './diff';
+import { diffSourceProjection, loadSourceProjection } from './diff';
+import { decideChangeGate, type MergePlan, type PlannedFieldOutcome } from './decision';
 import type {
 	Db,
 	MergeInput,
@@ -50,6 +51,7 @@ import type {
 	ConflictOutcome,
 	LifecycleOutcome
 } from './types';
+import type { IdentityDecision } from './identity';
 import { NORMALIZER_VERSION } from './constants';
 import { hashValue, hashPayload } from './hash';
 import {
@@ -60,7 +62,14 @@ import {
 } from './normalize';
 import { partitionLinks } from './url-allow';
 import { FIELD_POLICIES, ENUMS, CLAIMABLE_FIELDS } from './field-policies';
-import { rankOf, EDITORIAL_BAND, NEAR_SCORE_DELTA, normalizeOrigin, type Rank } from './rank';
+import {
+	rankOf,
+	compareRank,
+	EDITORIAL_BAND,
+	NEAR_SCORE_DELTA,
+	normalizeOrigin,
+	type Rank
+} from './rank';
 import { auditIngest, auditCreation, auditLlmAssertions, isEmptyOverwrite } from './audit-gate';
 import { resolveIdentity } from './identity';
 import {
@@ -83,10 +92,381 @@ function rowsAffected(res: unknown): number {
 }
 
 // ---------------------------------------------------------------------------
-// Entry point
+// Entry point — plan (pure reads) → gate → commit (writes)
 // ---------------------------------------------------------------------------
 
+/**
+ * The public idempotent entry. Splits into a pure-reads {@link planSourceObservation}
+ * (which computes the {@link decideChangeGate} verdict) and a writer
+ * {@link commitMerge}.
+ *
+ * PHASE 2 — BEHAVIOR-PRESERVING: the gate is COMPUTED and surfaced on the result,
+ * but every non-duplicate path still commits exactly as before. `propose` falls
+ * back to auto-apply (see the TODO) because the `change_requests` table does not
+ * exist yet; Phase 3 routes it to `openChangeRequest`. Output is byte-identical
+ * to the pre-refactor monolith.
+ */
 export async function mergeSourceObservation(db: Db, input: MergeInput): Promise<MergeResult> {
+	const plan = await planSourceObservation(db, input);
+
+	if (plan.gate.mode === 'propose') {
+		// TODO(phase3): route to openChangeRequest(db, plan) once `change_requests`
+		// exists. Until then a proposed observation AUTO-APPLIES — exactly today's
+		// behavior (every observation that reaches the engine is committed).
+		return commitMerge(db, plan);
+	}
+	// 'auto_apply' commits; 'reject' commits too (records the rejected observation
+	// in the ledger without mutating canonical data) — both unchanged from before.
+	return commitMerge(db, plan);
+}
+
+/**
+ * The READER half of the engine: normalize + hash the payload, probe for a
+ * duplicate observation, run the audit, resolve identity, and compute the
+ * {@link decideChangeGate} verdict. PURE READS — no mutation. The composed
+ * `mergeSourceObservation` does exactly the dedupe + identity reads the
+ * pre-refactor engine did (just earlier), so the writer can reuse them and the
+ * round-trip count is unchanged.
+ *
+ * `opts.simulate` additionally computes the read-only proposal preview
+ * (before/after projection, predicted field outcomes, the proposal diff). It is
+ * OFF on the commit path — the writer produces its own `applied` diff — so the
+ * auto-apply composition adds zero round-trips. Phase-3's propose path sets it.
+ */
+export async function planSourceObservation(
+	db: Db,
+	input: MergeInput,
+	opts?: { ignoreObservationId?: string; simulate?: boolean }
+): Promise<MergePlan> {
+	const nv = input.normalizerVersion ?? NORMALIZER_VERSION;
+	const origin = input.origin;
+	const originRecordId = input.originRecordId;
+	const presence = input.presence ?? 'seen';
+
+	// 1. normalize identifiers + fields, partition links by URL allowlist (pure)
+	const normIds = (input.identifiers ?? []).map((i) => normalizeIdentifier(i));
+	const cleanFields = normalizeFields(input.fields);
+	const { safe: safeLinks, unsafe: unsafeLinks } = partitionLinks(input.links);
+
+	// 2. payload hash (idempotency component) (pure)
+	const payload: Record<string, unknown> = {
+		fields: cleanFields,
+		identifiers: normIds.map((i) => ({ kind: i.kind, valueNorm: i.valueNorm })),
+		links: safeLinks,
+		explicitDeletes: [...(input.explicitDeletes ?? [])].sort(),
+		presence,
+		lifecycle: input.lifecycle ?? null
+	};
+	const contentHash = hashPayload(payload);
+
+	// 3. duplicate probe (READ) — same (origin, originRecordId, contentHash) already
+	//    recorded. The writer reuses this; it never re-reads. A single-column UNIQUE
+	//    index guarantees ≤ 1 row, so `ignoreObservationId` (Phase-4 re-plan) just
+	//    drops the change request's own proposed observation.
+	const [dupRow] = await db
+		.select({ id: sourceObservations.id, status: sourceObservations.status })
+		.from(sourceObservations)
+		.where(
+			and(
+				eq(sourceObservations.origin, origin),
+				eq(sourceObservations.originRecordId, originRecordId),
+				eq(sourceObservations.contentHash, contentHash)
+			)
+		)
+		.limit(1);
+	const duplicate = dupRow && dupRow.id !== opts?.ignoreObservationId ? dupRow : undefined;
+
+	// 4. audit gate (pure)
+	const fatal = auditIngest({
+		origin,
+		derivation: input.derivation,
+		confidence: input.confidence,
+		evidence: input.evidence ?? 0,
+		identifiers: normIds,
+		fields: cleanFields
+	});
+	const llm = auditLlmAssertions({
+		derivation: input.derivation,
+		evidence: input.evidence ?? 0,
+		identifiers: normIds,
+		fields: cleanFields
+	});
+
+	// 5. identity find-or-create (READ; an explicit targetSourceId short-circuits,
+	//    pure). SKIPPED for a known duplicate — the pre-refactor engine returned at
+	//    the dedupe check BEFORE resolving identity, so resolving it here would add a
+	//    read on the idempotent re-submit path. The gate is then irrelevant (commit
+	//    noops on the duplicate).
+	const identity: IdentityDecision = duplicate
+		? {
+				action: 'attach',
+				status: 'active',
+				matchDecision: 'duplicate',
+				hasStrongId: false,
+				hasTitle: false
+			}
+		: await resolveIdentity(db, {
+				identifiers: normIds,
+				fields: cleanFields,
+				targetSourceId: input.targetSourceId
+			});
+
+	const plan: MergePlan = {
+		input,
+		normIds,
+		cleanFields,
+		safeLinks,
+		unsafeLinks,
+		payload,
+		contentHash,
+		duplicate,
+		audit: { fatal, llm },
+		identity,
+		beforeProjection: null,
+		afterProjection: null,
+		baseContentHash: null,
+		resultContentHash: null,
+		predictedFieldOutcomes: [],
+		predictedConflicts: [],
+		conflicts: [],
+		heldClaims: [],
+		rejectedClaims: [],
+		diff: null,
+		// placeholder; the real verdict is computed once the plan is fully populated
+		gate: { mode: 'auto_apply', reason: 'pending', kind: 'field_update' }
+	};
+
+	// simulate BEFORE the gate so a predicted same-band conflict feeds the verdict.
+	if (opts?.simulate && !duplicate) await simulatePlan(db, plan);
+	plan.gate = decideChangeGate(plan);
+	return plan;
+}
+
+// ---------------------------------------------------------------------------
+// Read-only proposal simulation (Phase-3 facing; OFF on the commit path)
+// ---------------------------------------------------------------------------
+
+/**
+ * Fill a plan's proposal preview WITHOUT writing: the canonical `before`
+ * projection, a predicted `after` overlaying only the fields the merge would let
+ * win (decided by the SAME `compareRank` / `NEAR_SCORE_DELTA` / `EDITORIAL_BAND`
+ * the writer uses — the shared comparator that keeps plan and commit from
+ * diverging), and the resulting {@link SourceDiff}. The stored proposal diff is
+ * advisory: the Phase-4 apply path re-plans live against current canonical before
+ * it commits, so a stale preview can never silently misapply.
+ */
+async function simulatePlan(db: Db, plan: MergePlan): Promise<void> {
+	const { identity, cleanFields, input } = plan;
+	const origin = input.origin;
+	const derivation = input.derivation;
+	const confidence = input.confidence;
+	const evidence = input.evidence ?? 0;
+	const explicitDeletes = new Set(input.explicitDeletes ?? []);
+	const isEditorialObs = derivation === 'editorial_decision';
+
+	// before projection + current provenance winners (attach only).
+	let before: SourceProjection | null = null;
+	let baseContentHash: string | null = null;
+	let provByField = new Map<string, ProvenanceRow>();
+	const sourceId = identity.action === 'attach' ? identity.sourceId : undefined;
+	if (sourceId) {
+		const loaded = await loadSourceProjection(db, sourceId);
+		if (loaded) {
+			before = loaded.projection;
+			baseContentHash = loaded.contentHash;
+		}
+		provByField = await readAllProvenance(db, sourceId);
+	}
+
+	const beforeScalars = (before ?? {}) as Record<string, unknown>;
+	const overlay: Record<string, unknown> = {};
+	const predicted: PlannedFieldOutcome[] = [];
+	const predictedConflicts: ConflictOutcome[] = [];
+
+	const fieldsToProcess = new Set<string>([...Object.keys(cleanFields), ...explicitDeletes]);
+	for (const field of fieldsToProcess) {
+		if (!CLAIMABLE.has(field)) continue;
+		const policy = FIELD_POLICIES[field];
+		if (plan.audit.llm.rejectedFields.includes(field)) {
+			predicted.push(outcome(field, 'set', 'rejected', beforeScalars[field], beforeScalars[field], 0, 0, 'llm_restricted'));
+			continue;
+		}
+		if (policy.policy === 'editorial_only' && !isEditorialObs) {
+			predicted.push(outcome(field, 'set', 'rejected', beforeScalars[field], beforeScalars[field], 0, 0, 'editorial_only_field'));
+			continue;
+		}
+		const isExplicitDelete = explicitDeletes.has(field);
+		const value = isExplicitDelete ? null : cleanFields[field];
+		if (
+			policy.policy === 'controlled_scalar_ranked' &&
+			!isExplicitDelete &&
+			!isEmptyValue(value) &&
+			policy.enum &&
+			!policy.enum.has(String(value))
+		) {
+			predicted.push(outcome(field, 'set', 'rejected', beforeScalars[field], beforeScalars[field], 0, 0, 'invalid_enum'));
+			continue;
+		}
+
+		const rank = rankOf(field, { derivation, origin, confidence, evidence });
+		const prov = provByField.get(field);
+		const cur = prov ? { band: prov.rankBand ?? 0, score: prov.rankScore ?? 0 } : null;
+
+		// set_union: additive (editorial replaces). No-loss ⇒ always at least applies.
+		if (policy.policy === 'set_union') {
+			if (isExplicitDelete || isEmptyValue(value)) continue;
+			const incoming = Array.isArray(value) ? (value as string[]) : [];
+			const existing = Array.isArray(beforeScalars[field]) ? (beforeScalars[field] as string[]) : [];
+			const merged = isEditorialObs
+				? [...new Set(incoming)].sort()
+				: [...new Set([...existing, ...incoming])].sort();
+			const same = JSON.stringify(merged) === JSON.stringify([...existing].sort());
+			overlay[field] = merged;
+			predicted.push(outcome(field, 'set', same ? 'noop' : 'will_apply', existing, merged, rank.band, rank.score));
+			continue;
+		}
+
+		const hasExistingNonEmpty = !isEmptyValue(beforeScalars[field]);
+		if (!isExplicitDelete && isEmptyValue(value) && hasExistingNonEmpty) {
+			predicted.push(outcome(field, 'set', 'rejected', beforeScalars[field], beforeScalars[field], rank.band, rank.score, 'empty_overwrite'));
+			continue;
+		}
+		if (!isExplicitDelete && isEmptyValue(value)) continue;
+
+		const op = isExplicitDelete ? 'explicit_delete' : policy.policy === 'append_or_ranked' ? 'append' : 'set';
+		const decided = decidePredicted(rank, cur, isEditorialObs);
+		const beforeVal = beforeScalars[field] ?? null;
+		const afterVal = isExplicitDelete ? null : value;
+		if (decided === 'win') {
+			overlay[field] = isExplicitDelete ? null : value;
+			predicted.push(outcome(field, op, 'will_apply', beforeVal, afterVal, rank.band, rank.score));
+		} else if (decided === 'conflict') {
+			predicted.push(outcome(field, op, 'conflict', beforeVal, afterVal, rank.band, rank.score, 'same_band_conflict'));
+			predictedConflicts.push({ kind: 'field_conflict', fieldName: field, detail: `same-band conflict on ${field}` });
+		} else {
+			predicted.push(outcome(field, op, 'held_below', beforeVal, afterVal, rank.band, rank.score, 'held_below'));
+		}
+	}
+
+	// links: set-union with the existing (never drops). Other collections passthrough.
+	const beforeLinks = before?.links ?? [];
+	const linkKey = (t: string, u: string) => `${t}\n${u}`;
+	const haveLinks = new Set(beforeLinks.map((l) => linkKey(l.type, l.url)));
+	const afterLinks = [...beforeLinks];
+	let order = beforeLinks.length;
+	for (const l of plan.safeLinks) {
+		if (haveLinks.has(linkKey(l.type, l.url))) continue;
+		afterLinks.push({ type: l.type, url: l.url, label: l.label, sortOrder: order++ });
+		haveLinks.add(linkKey(l.type, l.url));
+	}
+
+	const after: SourceProjection = before
+		? ({ ...(before as Record<string, unknown>), ...overlay, links: afterLinks } as SourceProjection)
+		: (projectSource({
+				source: { ...overlay, slug: null },
+				links: afterLinks,
+				tags: [],
+				persons: [],
+				places: [],
+				institutions: [],
+				relations: []
+			}) as SourceProjection);
+	const resultContentHash = hashProjection(after);
+
+	const diff = diffSourceProjection({
+		sourceId: sourceId ?? null,
+		slug: (after.slug as string | null) ?? null,
+		before,
+		after,
+		beforeHash: baseContentHash,
+		afterHash: resultContentHash,
+		conflicts: predictedConflicts,
+		heldClaims: predicted.filter((o) => o.status === 'held_below').map(toClaim),
+		rejectedClaims: predicted.filter((o) => o.status === 'rejected').map(toClaim)
+	});
+
+	plan.beforeProjection = before;
+	plan.afterProjection = after;
+	plan.baseContentHash = baseContentHash;
+	plan.resultContentHash = resultContentHash;
+	plan.predictedFieldOutcomes = predicted;
+	plan.predictedConflicts = predictedConflicts;
+	plan.heldClaims = predicted.filter((o) => o.status === 'held_below').map(toClaim);
+	plan.rejectedClaims = predicted.filter((o) => o.status === 'rejected').map(toClaim);
+	plan.diff = diff;
+}
+
+/** The per-field win/hold/conflict decision, mirroring `applyScalarCas`'s
+ *  post-read branch (the shared comparator the spec calls the correctness guard). */
+function decidePredicted(
+	rank: Rank,
+	cur: { band: number; score: number } | null,
+	editorial: boolean
+): 'win' | 'hold' | 'conflict' {
+	if (!cur) return 'win';
+	if (editorial) {
+		// editorial (band 900) wins unless a winner is pinned ABOVE the editorial band
+		return (cur.band ?? 0) > EDITORIAL_BAND ? 'hold' : 'win';
+	}
+	const c = compareRank(rank, { band: cur.band, score: cur.score });
+	if (rank.band !== cur.band) return c > 0 ? 'win' : 'hold';
+	if (c > NEAR_SCORE_DELTA) return 'win';
+	if (c < -NEAR_SCORE_DELTA) return 'hold';
+	return 'conflict';
+}
+
+function outcome(
+	field: string,
+	op: string,
+	status: PlannedFieldOutcome['status'],
+	before: unknown,
+	after: unknown,
+	band: number,
+	score: number,
+	reason?: string
+): PlannedFieldOutcome {
+	return { field, op, status, before, after, band, score, reason };
+}
+
+function toClaim(o: PlannedFieldOutcome): ClaimOutcome {
+	const status: ClaimOutcome['status'] = o.status === 'will_apply' ? 'applied' : o.status;
+	return { fieldName: o.field, op: o.op, status, band: o.band, score: o.score, reason: o.reason };
+}
+
+// ---------------------------------------------------------------------------
+// Writer
+// ---------------------------------------------------------------------------
+
+export interface CommitOptions {
+	/** Reuse an existing observation row instead of inserting a fresh one — the
+	 *  Phase-4 apply path flips a `proposed` observation to `applied`. Phase 2
+	 *  always inserts a fresh observation. */
+	observationId?: string;
+	/** Do NOT short-circuit on a recorded duplicate. The Phase-4 apply path
+	 *  re-commits a change request's OWN proposed observation, which would
+	 *  otherwise look like a duplicate-noop. */
+	skipDupNoop?: boolean;
+	/** Phase-4: the change request this commit applies (audit only). */
+	changeRequestId?: string;
+	/** Audit-only actor override (never precedence). */
+	actor?: string;
+}
+
+/**
+ * The WRITER half of the engine: take a {@link MergePlan} (whose reads are
+ * already done) and perform every mutation — upsert the observed record, insert
+ * the observation, materialize / attach the source, band-rank + CAS the field
+ * claims, set-union links, project the flat `sources` row, write the `applied`
+ * diff, and finalize the observation status. Byte-identical to the pre-refactor
+ * `mergeSourceObservation` body; the plan only replaces the pure-read front
+ * matter (normalize / hash / dedupe probe / audit / identity) it consumed.
+ */
+export async function commitMerge(
+	db: Db,
+	plan: MergePlan,
+	opts?: CommitOptions
+): Promise<MergeResult> {
+	const input = plan.input;
 	const nv = input.normalizerVersion ?? NORMALIZER_VERSION;
 	const origin = input.origin;
 	const originRecordId = input.originRecordId;
@@ -102,10 +482,8 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 	const conflicts: ConflictOutcome[] = [];
 	const lifecycleEvents: LifecycleOutcome[] = [];
 
-	// 1. normalize identifiers + fields, partition links by URL allowlist
-	const normIds = (input.identifiers ?? []).map((i) => normalizeIdentifier(i));
-	const cleanFields = normalizeFields(input.fields);
-	const { safe: safeLinks, unsafe: unsafeLinks } = partitionLinks(input.links);
+	// 1. normalized inputs + payload hash come from the plan (pure reads done).
+	const { normIds, cleanFields, safeLinks, unsafeLinks, payload, contentHash } = plan;
 	for (const u of unsafeLinks) {
 		rejectedClaims.push({
 			fieldName: 'links',
@@ -115,45 +493,26 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		});
 	}
 
-	// 2. payload hash (idempotency component)
-	const payload: Record<string, unknown> = {
-		fields: cleanFields,
-		identifiers: normIds.map((i) => ({ kind: i.kind, valueNorm: i.valueNorm })),
-		links: safeLinks,
-		explicitDeletes: [...(input.explicitDeletes ?? [])].sort(),
-		presence,
-		lifecycle: input.lifecycle ?? null
-	};
-	const contentHash = hashPayload(payload);
-
-	// 3. upsert observed_record (origin, originRecordId)
+	// 2. upsert observed_record (origin, originRecordId)
 	await upsertObservedRecord(db, { origin, originRecordId, contentHash, nv, presence });
 
-	// 4. insert observation idempotently — duplicate (origin,originRecordId,contentHash) ⇒ noop
-	const [dup] = await db
-		.select({ id: sourceObservations.id })
-		.from(sourceObservations)
-		.where(
-			and(
-				eq(sourceObservations.origin, origin),
-				eq(sourceObservations.originRecordId, originRecordId),
-				eq(sourceObservations.contentHash, contentHash)
-			)
-		)
-		.limit(1);
-	if (dup) {
+	// 3. duplicate (origin,originRecordId,contentHash) ⇒ noop. The probe ran in the
+	//    plan (pure read); reuse it instead of re-reading. (skipDupNoop = the
+	//    Phase-4 apply path, which re-commits the CR's own proposed observation.)
+	if (plan.duplicate && !opts?.skipDupNoop) {
 		return {
-			observationId: dup.id,
+			observationId: plan.duplicate.id,
 			status: 'noop',
 			appliedClaims,
 			heldClaims,
 			rejectedClaims,
 			conflicts,
-			lifecycleEvents
+			lifecycleEvents,
+			gate: plan.gate
 		};
 	}
 
-	const observationId = uuid();
+	const observationId = opts?.observationId ?? uuid();
 	await db.insert(sourceObservations).values({
 		id: observationId,
 		origin,
@@ -199,12 +558,14 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 			heldClaims,
 			rejectedClaims,
 			conflicts,
-			lifecycleEvents
+			lifecycleEvents,
+			gate: plan.gate
 		};
 	};
 
-	// 5. audit gate (pre-identity, fatal) — rejected obs is KEPT in the ledger
-	const fatal = auditIngest({ origin, derivation, confidence, evidence, identifiers: normIds, fields: cleanFields });
+	// 4. audit gate (pre-identity, fatal) — rejected obs is KEPT in the ledger.
+	//    Computed in the plan (pure); reuse it.
+	const fatal = plan.audit.fatal;
 	if (fatal.length) {
 		for (const f of fatal) {
 			rejectedClaims.push({ fieldName: f.scope, op: 'set', status: 'rejected', reason: f.reason });
@@ -212,12 +573,8 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 		return finalize('rejected');
 	}
 
-	// 6. identity find-or-create (an explicit targetSourceId attaches deterministically)
-	const decision = await resolveIdentity(db, {
-		identifiers: normIds,
-		fields: cleanFields,
-		targetSourceId: input.targetSourceId
-	});
+	// 5. identity find-or-create — resolved in the plan (pure read). Reuse it.
+	const decision = plan.identity;
 
 	// 6a. upstream disappearance ⇒ drift only (NEVER mutate / delete)
 	if (presence === 'missing') {
@@ -308,8 +665,8 @@ export async function mergeSourceObservation(db: Db, input: MergeInput): Promise
 	const idConflicts = await attachIdentifiers(db, sourceId, normIds, observationId, origin, confidence);
 	conflicts.push(...idConflicts);
 
-	// 9. per-field claims + band-rank + CAS apply
-	const llm = auditLlmAssertions({ derivation, evidence, identifiers: normIds, fields: cleanFields });
+	// 9. per-field claims + band-rank + CAS apply (llm restrictions from the plan)
+	const llm = plan.audit.llm;
 	const explicitDeletes = new Set(input.explicitDeletes ?? []);
 	const fieldsToProcess = new Set<string>([...Object.keys(cleanFields), ...explicitDeletes]);
 

@@ -3,6 +3,7 @@
  */
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import type * as schema from '../db/schema';
+import type { GateDecision } from './decision';
 
 /** The Drizzle handle the engine operates on (app proxy OR a libSQL file: test DB). */
 export type Db = LibSQLDatabase<typeof schema>;
@@ -130,4 +131,11 @@ export interface MergeResult {
 	rejectedClaims: ClaimOutcome[];
 	conflicts: ConflictOutcome[];
 	lifecycleEvents: LifecycleOutcome[];
+	/**
+	 * The change-gate verdict the engine COMPUTED for this observation (Phase 2).
+	 * Surfaced for observability; not yet routed — every non-duplicate path still
+	 * commits (a `propose` verdict falls back to auto-apply until Phase 3). Absent
+	 * only on results produced outside `mergeSourceObservation`.
+	 */
+	gate?: GateDecision;
 }
