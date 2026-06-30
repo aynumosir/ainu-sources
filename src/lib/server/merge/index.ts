@@ -11,6 +11,7 @@ export {
 	mergeSourceObservation,
 	planSourceObservation,
 	commitMerge,
+	openChangeRequest,
 	type CommitOptions
 } from './merge-source-observation';
 export {
@@ -25,6 +26,7 @@ export type {
 	Db,
 	MergeInput,
 	MergeResult,
+	ProposedMergeResult,
 	IdentifierInput,
 	LinkInput,
 	LifecycleInput,

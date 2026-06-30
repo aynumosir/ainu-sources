@@ -132,10 +132,46 @@ export interface MergeResult {
 	conflicts: ConflictOutcome[];
 	lifecycleEvents: LifecycleOutcome[];
 	/**
-	 * The change-gate verdict the engine COMPUTED for this observation (Phase 2).
-	 * Surfaced for observability; not yet routed — every non-duplicate path still
-	 * commits (a `propose` verdict falls back to auto-apply until Phase 3). Absent
-	 * only on results produced outside `mergeSourceObservation`.
+	 * The change-gate verdict the engine COMPUTED for this observation. Surfaced
+	 * for observability. When `SOURCES_ENABLE_PROPOSE` is on, a `propose` verdict
+	 * is routed to {@link ProposedMergeResult} instead of committing; otherwise it
+	 * still falls back to auto-apply. Absent only on results produced outside
+	 * `mergeSourceObservation`.
 	 */
 	gate?: GateDecision;
+}
+
+/**
+ * The result of routing an observation to the change-request (PR) queue instead
+ * of committing it (Git-in-the-DB Phase 3). A proposal writes ONLY three rows —
+ * the `proposed` observation, its `proposal` diff, and the `change_requests`
+ * envelope — and ZERO canonical data (no `sources` / claim / provenance / link
+ * write happens until the CR is APPLIED in Phase 4).
+ *
+ * It carries the same `appliedClaims` / `heldClaims` / `rejectedClaims` /
+ * `conflicts` / `lifecycleEvents` / `gate` shape as {@link MergeResult} so the
+ * `MergeResult | ProposedMergeResult` union is ergonomic for callers; on a
+ * proposal `appliedClaims` and `lifecycleEvents` are ALWAYS empty (nothing was
+ * applied) and `heldClaims` / `rejectedClaims` / `conflicts` carry the dry-run
+ * preview from the plan. `changeRequestId` / `diffId` are the propose-only
+ * discriminating fields.
+ */
+export interface ProposedMergeResult {
+	status: 'proposed';
+	observationId: string;
+	/** the opened (or, for a duplicate proposal, the existing) change request */
+	changeRequestId: string;
+	/** the `proposal` diff row id (empty string when returning an existing dup CR) */
+	diffId: string;
+	/** the canonical source this proposal would attach to (absent for a new source) */
+	sourceId?: string;
+	/** the propose gate verdict (mode is always 'propose') */
+	gate?: GateDecision;
+	/** ALWAYS empty — a proposal applies nothing to canonical data (uniform union shape) */
+	appliedClaims: ClaimOutcome[];
+	heldClaims: ClaimOutcome[];
+	rejectedClaims: ClaimOutcome[];
+	conflicts: ConflictOutcome[];
+	/** ALWAYS empty — a proposal writes no lifecycle event (uniform union shape) */
+	lifecycleEvents: LifecycleOutcome[];
 }

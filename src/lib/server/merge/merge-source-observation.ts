@@ -38,15 +38,17 @@ import {
 	sourceFieldProvenance,
 	sourceLifecycleEvents,
 	sourceRevisions,
-	sourceObservationDiffs
+	sourceObservationDiffs,
+	changeRequests
 } from '../db/schema';
 import { projectSource, hashProjection, type SourceProjection } from '../golden';
-import { diffSourceProjection, loadSourceProjection } from './diff';
+import { diffSourceProjection, loadSourceProjection, type SourceDiff } from './diff';
 import { decideChangeGate, type MergePlan, type PlannedFieldOutcome } from './decision';
 import type {
 	Db,
 	MergeInput,
 	MergeResult,
+	ProposedMergeResult,
 	ClaimOutcome,
 	ConflictOutcome,
 	LifecycleOutcome
@@ -983,6 +985,137 @@ export async function commitMerge(
 		else status = 'partial';
 	}
 	return finalize(status, sourceId, decision.matchDecision, [projUpdate, diffWrite]);
+}
+
+// ---------------------------------------------------------------------------
+// Propose path (Phase 3) — open a change request, write ZERO canonical data
+// ---------------------------------------------------------------------------
+
+/** A short one-line title for a change-request queue row, derived from the diff. */
+function summarizeDiffTitle(diff: SourceDiff): string {
+	if (diff.isNewSource) {
+		const titleField = diff.scalars.find((s) => s.field === 'title');
+		const t = titleField?.after;
+		return `New source${typeof t === 'string' && t ? `: ${t}` : ''}`;
+	}
+	const n = diff.changedScalarFields.length + diff.changedCollections.length;
+	const first = diff.summaryLines[0];
+	if (first) return n > 1 ? `${first} (+${n - 1} more)` : first;
+	return 'Change request';
+}
+
+/**
+ * The PROPOSE writer (Git-in-the-DB §3): route a `propose`-gated observation to
+ * the change-request (PR) queue instead of committing it. Writes EXACTLY three
+ * rows in one atomic {@link Db.batch} — single round-trip, stateless-Worker-safe:
+ *
+ *   1. the observation itself, with `status='proposed'`;
+ *   2. a `source_observation_diffs` row, `diffKind='proposal'`, holding the
+ *      read-only before→after preview the plan simulated (reusing the Phase-1
+ *      {@link diffSourceProjection}); and
+ *   3. the `change_requests` envelope, `status='open'`.
+ *
+ * NO claim / CAS / `sources` / provenance / link write happens — a proposal
+ * mutates ZERO canonical data; that waits for the apply phase (Phase 4). Rows are
+ * inserted parent-first (observation → diff → change_request) so the
+ * `restrict`/`set null` FKs resolve inside the single batch transaction even on
+ * FK-enforcing remote Turso.
+ *
+ * REQUIRES a SIMULATED plan — call `planSourceObservation(db, input, { simulate:
+ * true })` first so `plan.diff` is populated (the public entry does this on the
+ * propose path).
+ */
+export async function openChangeRequest(db: Db, plan: MergePlan): Promise<ProposedMergeResult> {
+	const input = plan.input;
+	const diff = plan.diff;
+	if (!diff) {
+		throw new Error(
+			'openChangeRequest requires a simulated plan (plan.diff is null) — call planSourceObservation with { simulate: true }'
+		);
+	}
+	const nv = input.normalizerVersion ?? NORMALIZER_VERSION;
+	const sourceId =
+		plan.identity.action === 'attach' && plan.identity.sourceId ? plan.identity.sourceId : undefined;
+	const hasConflicts = plan.conflicts.length > 0 || plan.predictedConflicts.length > 0;
+
+	const observationId = uuid();
+	const diffId = uuid();
+	const changeRequestId = uuid();
+	const stampedAt = new Date();
+
+	await db.batch([
+		// 1. the proposed observation — recorded in the ledger, never auto-applied.
+		db.insert(sourceObservations).values({
+			id: observationId,
+			origin: input.origin,
+			originRecordId: input.originRecordId,
+			contentHash: plan.contentHash,
+			normalizerVersion: nv,
+			runId: input.runId ?? null,
+			derivation: input.derivation,
+			confidence: input.confidence,
+			evidence: input.evidence ?? 0,
+			payload: plan.payload,
+			rawPayload: input.rawPayload ?? null,
+			status: 'proposed',
+			matchDecision: plan.identity.matchDecision,
+			actor: input.actor ?? null,
+			createdAt: stampedAt
+		}),
+		// 2. the proposal diff — the dry-run before→after preview (advisory; the
+		//    apply path re-plans live before committing).
+		db.insert(sourceObservationDiffs).values({
+			id: diffId,
+			observationId,
+			sourceId: sourceId ?? null,
+			diffKind: 'proposal',
+			isNewSource: diff.isNewSource,
+			baseContentHash: plan.baseContentHash,
+			resultContentHash: plan.resultContentHash,
+			changedScalarFields: diff.changedScalarFields,
+			changedCollections: diff.changedCollections,
+			hasConflicts,
+			diff,
+			createdAt: stampedAt
+		}),
+		// 3. the change-request envelope — the mutable PR workflow state.
+		db.insert(changeRequests).values({
+			id: changeRequestId,
+			observationId,
+			sourceId: sourceId ?? null,
+			plannedSourceId: null,
+			plannedSlug: null,
+			kind: plan.gate.kind,
+			status: 'open',
+			routingReason: plan.gate.reason,
+			title: summarizeDiffTitle(diff),
+			summary: diff.summaryLines.length ? diff.summaryLines.join('\n') : null,
+			origin: input.origin,
+			originRecordId: input.originRecordId,
+			derivation: input.derivation,
+			confidence: input.confidence,
+			evidence: input.evidence ?? 0,
+			baseContentHash: plan.baseContentHash,
+			resultContentHash: plan.resultContentHash,
+			proposedByActor: input.actor ?? null,
+			createdAt: stampedAt,
+			updatedAt: stampedAt
+		})
+	]);
+
+	return {
+		status: 'proposed',
+		observationId,
+		changeRequestId,
+		diffId,
+		sourceId,
+		gate: plan.gate,
+		appliedClaims: [],
+		heldClaims: plan.heldClaims,
+		rejectedClaims: plan.rejectedClaims,
+		conflicts: [...plan.conflicts, ...plan.predictedConflicts],
+		lifecycleEvents: []
+	};
 }
 
 // ---------------------------------------------------------------------------
