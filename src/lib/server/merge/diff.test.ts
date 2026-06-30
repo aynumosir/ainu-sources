@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { createClient } from '@libsql/client';
 import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 import { migrate } from 'drizzle-orm/libsql/migrator';
+import { eq } from 'drizzle-orm';
 import * as schema from '../db/schema';
 import { projectSource, hashProjection } from '../golden';
 import { diffSourceProjection, loadSourceProjection } from './diff';
@@ -147,5 +148,82 @@ describe('loadSourceProjection (DB read helper)', () => {
 
 	it('returns null for a missing source', async () => {
 		expect(await loadSourceProjection(db, 'does-not-exist')).toBeNull();
+	});
+});
+
+describe('merge writes the applied diff (Phase 1)', () => {
+	let db: Db;
+	beforeEach(async () => {
+		const client = createClient({ url: ':memory:' });
+		db = drizzle(client, { schema });
+		await migrate(db, { migrationsFolder: MIGRATIONS });
+	});
+
+	async function diffsFor(observationId: string) {
+		return db
+			.select()
+			.from(schema.sourceObservationDiffs)
+			.where(eq(schema.sourceObservationDiffs.observationId, observationId));
+	}
+
+	it('create observation gets an applied, isNewSource diff; a later editorial edit diffs the scalar change', async () => {
+		const create = await mergeSourceObservation(db, {
+			origin: 'manual',
+			originRecordId: 'manual:d1',
+			derivation: 'curated_assertion',
+			confidence: 0.8,
+			identifiers: [{ kind: 'repo_path', value: 'manual:d1.json' }],
+			fields: { title: 'First Title', type: 'book', category: 'secondary' }
+		});
+		const sid = create.sourceId!;
+		const [createDiff] = await diffsFor(create.observationId);
+		expect(createDiff).toBeDefined();
+		expect(createDiff.diffKind).toBe('applied');
+		expect(createDiff.isNewSource).toBe(true);
+		expect(createDiff.diff.isNewSource).toBe(true);
+		expect(createDiff.diff.scalars.find((s) => s.field === 'title')).toMatchObject({ op: 'add', after: 'First Title' });
+
+		// editorial edit changing the title (attaches via targetSourceId)
+		const edit = await mergeSourceObservation(db, {
+			origin: 'website',
+			originRecordId: `website:${sid}`,
+			targetSourceId: sid,
+			derivation: 'editorial_decision',
+			confidence: 1,
+			evidence: 1,
+			fields: { title: 'Edited Title', type: 'book', category: 'secondary' }
+		});
+		expect(edit.sourceId).toBe(sid);
+		const [editDiff] = await diffsFor(edit.observationId);
+		expect(editDiff).toBeDefined();
+		expect(editDiff.diffKind).toBe('applied');
+		expect(editDiff.isNewSource).toBe(false);
+		expect(editDiff.changedScalarFields).toContain('title');
+		const titleDiff = editDiff.diff.scalars.find((s) => s.field === 'title');
+		expect(titleDiff).toMatchObject({ before: 'First Title', after: 'Edited Title', op: 'update' });
+		expect(editDiff.baseContentHash).toBeTruthy();
+		expect(editDiff.resultContentHash).toBeTruthy();
+		expect(editDiff.baseContentHash).not.toBe(editDiff.resultContentHash);
+
+		// exactly one diff per observation (unique on observationId+diffKind)
+		expect((await diffsFor(edit.observationId)).length).toBe(1);
+	});
+
+	it('a duplicate (noop) observation writes NO diff row', async () => {
+		const input = {
+			origin: 'manual',
+			originRecordId: 'manual:dup',
+			derivation: 'curated_assertion',
+			confidence: 0.8,
+			identifiers: [{ kind: 'repo_path' as const, value: 'manual:dup.json' }],
+			fields: { title: 'Dup', type: 'book', category: 'secondary' }
+		};
+		await mergeSourceObservation(db, input);
+		const r2 = await mergeSourceObservation(db, input);
+		expect(r2.status).toBe('noop');
+		// the noop returns the ORIGINAL observation id; it has its create diff, but no
+		// second diff was added for the duplicate submission.
+		const allDiffs = await db.select().from(schema.sourceObservationDiffs);
+		expect(allDiffs.length).toBe(1);
 	});
 });
