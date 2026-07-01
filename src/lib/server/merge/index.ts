@@ -20,12 +20,25 @@ export {
 } from './merge-source-observation';
 export {
 	decideChangeGate,
+	STRONG_ATTACH,
 	type GateDecision,
 	type GateMode,
 	type ChangeKind,
 	type MergePlan,
 	type PlannedFieldOutcome
 } from './decision';
+export {
+	buildLlmReviewContext,
+	callLlmReviewer,
+	validateLlmReviewOutput,
+	anthropicReviewClient,
+	LlmReviewSchemaError,
+	LLM_REVIEWER_MODEL,
+	type LlmReviewContext,
+	type LlmReviewOutput,
+	type LlmReviewClient,
+	type CallLlmReviewerOptions
+} from './llm-review';
 export type {
 	Db,
 	MergeInput,
