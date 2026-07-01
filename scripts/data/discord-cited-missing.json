@@ -1,0 +1,66 @@
+{
+  "_note": "Works cited in the アイヌ語サーバー Discord archive (via ainu-discord-archive/knowledge/facts.jsonl) that are NOT yet in curated-biblio.json / academic-index.json. Candidate entries for review + promotion into curated-biblio.json — bibliographic details flagged in `_verify` need confirming before promotion. Culture-only works (e.g. 萱野茂『アイヌの民具』) were intentionally excluded as out of language scope.",
+  "candidates": [
+    {
+      "title": "和愛辞典",
+      "authors": ["太田 満"],
+      "type": "dictionary",
+      "category": "secondary",
+      "langs": ["ain", "jpn"],
+      "scripts": ["latn", "kana", "kanji"],
+      "dialect": "石狩",
+      "summary": "太田満による石狩方言中心の和愛（日本語→アイヌ語）辞典。現代語彙・国家/政治語彙・造語の主要な出典（コミュニティで『太田案』と呼ばれる）。人権 aynu-oupekano / aynu-jus、大統領などの新語の典拠。",
+      "_verify": ["exact title", "year", "publisher", "distinguish from 2010 長田ら『アイヌ語旭川方言和愛辞典草案』"],
+      "_citedInDiscord": ["人権 aynu-oupekano/aynu-jus", "石狩方言の国家・政治新語（大統領 等）", "穀物語彙 momunki/munki/empaku"]
+    },
+    {
+      "title": "アイヌ語の人称接語の不定人称形と一人称複数形",
+      "authors": ["切替 英雄"],
+      "year": 1997,
+      "type": "article",
+      "category": "secondary",
+      "langs": ["ain", "jpn"],
+      "scripts": ["kana", "kanji", "latn"],
+      "summary": "アイヌ語の不定人称形（a-）と一人称複数形を論じる。口蓋化・非口蓋化の対立や ca/cu/ce の拗音非表記に関する議論でも参照される。",
+      "_verify": ["journal / venue", "volume/pages"],
+      "_citedInDiscord": ["不定人称 a- の分析", "ca/cu/ce を拗音で書かない母語話者感覚（切替1997）"]
+    },
+    {
+      "title": "山本多助氏のノートに含まれるアイヌ語樺太方言語彙",
+      "authors": ["田村 将人"],
+      "year": 2009,
+      "type": "article",
+      "category": "secondary",
+      "langs": ["ain", "jpn"],
+      "scripts": ["kana", "kanji", "latn"],
+      "dialect": "樺太",
+      "summary": "山本多助のノートから樺太アイヌ語語彙を紹介する資料論文（北海道大学リポジトリ HUSCAP 所収）。樺太方言語彙の一次資料。",
+      "_verify": ["exact journal/bulletin", "volume/pages", "HUSCAP URL"],
+      "_citedInDiscord": ["樺太方言語彙資料"]
+    },
+    {
+      "title": "アイヌ語は日本語に似たようなものなのか?",
+      "authors": ["アンナ・ブガエワ"],
+      "year": 2017,
+      "type": "video",
+      "category": "secondary",
+      "langs": ["jpn"],
+      "scripts": ["kanji", "kana"],
+      "summary": "ブガエワによる一般向け講演（コミュニティで『講演3』として紹介）。アイヌ語と日本語の類型的異同を扱う。",
+      "_verify": ["venue/organizer", "exact date", "recording URL", "whether to classify as talk vs video"],
+      "_citedInDiscord": ["アイヌ語と日本語の類似性についての講演"]
+    },
+    {
+      "title": "アイヌ語訳聖書（バチェラー訳）",
+      "titleEn": "Ainu Bible (Batchelor translation)",
+      "authors": ["John Batchelor"],
+      "type": "book",
+      "category": "primary",
+      "langs": ["ain"],
+      "scripts": ["latn", "kana"],
+      "summary": "ジョン・バチェラーによるアイヌ語訳聖書（新約 1897、全訳 1941 ほか）。近代アイヌ語の一次テキストで、比喩表現 itak-mawkustep などの用例源。ainu-corpora にも収録。",
+      "_verify": ["which edition(s) to record: 1897 新約 / 1941 / 個別書", "relation to existing 海老沢 1963 bibliographic note in DB"],
+      "_citedInDiscord": ["itak-mawkustep「比喩」の用例", "近代アイヌ語一次テキスト"]
+    }
+  ]
+}
