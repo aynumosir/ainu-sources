@@ -32,12 +32,18 @@ export {
 	callLlmReviewer,
 	validateLlmReviewOutput,
 	anthropicReviewClient,
+	reviewProposalWithLLM,
+	isSafeEnrichment,
+	llmAutoApproveEnabled,
 	LlmReviewSchemaError,
 	LLM_REVIEWER_MODEL,
+	LLM_SAFE_CONFIDENCE,
 	type LlmReviewContext,
 	type LlmReviewOutput,
 	type LlmReviewClient,
-	type CallLlmReviewerOptions
+	type CallLlmReviewerOptions,
+	type ReviewProposalOptions,
+	type ReviewProposalResult
 } from './llm-review';
 export type {
 	Db,

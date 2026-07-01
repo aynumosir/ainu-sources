@@ -27,11 +27,12 @@
  * `reviewChangeRequest` / `applyChangeRequest` (single statements / `db.batch`).
  */
 import { env } from '$env/dynamic/private';
-import type { Db } from './types';
+import type { Db, ReviewResult } from './types';
 import type { SourceDiff } from './diff';
-import type { ChangeKind } from './decision';
+import { STRONG_ATTACH, type ChangeKind } from './decision';
 import { getChangeRequestDetail, type CurrentProvenanceRow } from '../review-queue';
-import { LLM_RESTRICTED_FIELDS } from './audit-gate';
+import { LLM_RESTRICTED_FIELDS, auditLlmAssertions } from './audit-gate';
+import { reviewChangeRequest, applyChangeRequest, ChangeRequestStale } from './merge-source-observation';
 
 // ---------------------------------------------------------------------------
 // §5 — the reviewer interface
@@ -410,4 +411,192 @@ export function anthropicReviewClient(cfg?: {
 		if (!block) throw new Error('Anthropic response did not contain a record_review tool call');
 		return block.input;
 	};
+}
+
+// ---------------------------------------------------------------------------
+// §2 — reviewProposalWithLLM + safe-enrichment auto-approve
+// ---------------------------------------------------------------------------
+
+/** The confidence floor (both the observation's OWN and the reviewer's OWN) that a
+ *  safe-enrichment auto-apply requires. */
+export const LLM_SAFE_CONFIDENCE = 0.85;
+
+/** Is safe-enrichment auto-apply enabled? Reads the `SOURCES_LLM_AUTOAPPROVE` env
+ *  flag fresh on every call (tests toggle it). DEFAULT OFF — while off, an LLM
+ *  `apply` is purely advisory, and Phase-4 behavior is byte-identical. */
+export function llmAutoApproveEnabled(): boolean {
+	return env.SOURCES_LLM_AUTOAPPROVE === 'true';
+}
+
+/**
+ * Would this proposal + verdict be auto-applied by an LLM `apply`? The
+ * conservative safe-enrichment predicate — ALL must hold:
+ *
+ *   1. `kind === 'enrichment'`      — never a new source / conflict / lifecycle.
+ *   2. clean attach                 — attaches to an EXISTING source (not new) via a
+ *                                     strong/exact identity match ({@link STRONG_ATTACH}),
+ *                                     NOT a fuzzy title match.
+ *   3. no conflicts                 — the stored diff surfaced none.
+ *   4. observation confidence ≥ 0.85 (the proposal's OWN confidence).
+ *   5. reviewer confidence ≥ 0.85    (the LLM's OWN self-report).
+ *   6. NOT a strong-identifier assertion, and NOT setting an evidence-required
+ *      field without evidence — mirrors `audit-gate.ts` exactly
+ *      ({@link auditLlmAssertions}), plus a belt-and-suspenders guard on the
+ *      diff's changed fields for ANY derivation.
+ *
+ * Keys ONLY on `kind` / identity / confidence / conflicts / evidence — NEVER on the
+ * actor — so it composes with the actor-agnostic `rank.ts`. Everything else (new
+ * sources, conflicts, lifecycle, low-confidence, medium/fuzzy matches, strong-ID
+ * changes) stays advisory-only.
+ */
+export function isSafeEnrichment(context: LlmReviewContext, output: LlmReviewOutput): boolean {
+	if (output.verdict !== 'apply') return false;
+	const cr = context.changeRequest;
+
+	// 1. enrichment only.
+	if (cr.kind !== 'enrichment') return false;
+
+	// 2. clean attach: an existing source, strong/exact identity match.
+	if (context.diff.isNewSource) return false;
+	if (!context.diff.sourceId) return false;
+	if (!STRONG_ATTACH.has(context.observation.matchDecision ?? '')) return false;
+
+	// 3. no conflicts.
+	if (context.diff.conflicts.length > 0) return false;
+
+	// 4. + 5. confidence floors (proposal's own AND the reviewer's own).
+	if (!(cr.confidence >= LLM_SAFE_CONFIDENCE)) return false;
+	if (!(output.confidence >= LLM_SAFE_CONFIDENCE)) return false;
+
+	// 6. not a strong-identifier assertion / evidence-required set without evidence.
+	if (assertsStrongIdOrRestricted(context)) return false;
+	if (setsEvidenceRequiredFieldWithoutEvidence(context)) return false;
+
+	return true;
+}
+
+/** Mirror `audit-gate.ts`: would the engine's LLM-assertion audit reject this
+ *  observation's strong identifiers or restricted fields? Reconstructs the
+ *  observation's identifiers/fields from its normalized payload and runs the SAME
+ *  {@link auditLlmAssertions} the merge engine runs. */
+function assertsStrongIdOrRestricted(context: LlmReviewContext): boolean {
+	const payload = context.observation.payload as {
+		identifiers?: Array<{ kind?: string; valueNorm?: string }>;
+		fields?: Record<string, unknown>;
+	};
+	const identifiers = (payload.identifiers ?? []).map((i) => ({ kind: String(i.kind ?? '') }));
+	const fields = payload.fields ?? {};
+	const audit = auditLlmAssertions({
+		derivation: context.changeRequest.derivation,
+		evidence: context.changeRequest.evidence,
+		// auditLlmAssertions only reads `.kind`; a partial identifier is sufficient.
+		identifiers: identifiers as never,
+		fields
+	});
+	return audit.rejectStrongIds || audit.rejectedFields.length > 0;
+}
+
+/** Belt-and-suspenders (any derivation): if the CHANGED scalar fields include an
+ *  evidence-required field and the observation carries no evidence, it is not safe
+ *  to auto-apply — even for non-LLM derivations the audit gate does not restrict. */
+function setsEvidenceRequiredFieldWithoutEvidence(context: LlmReviewContext): boolean {
+	if (context.changeRequest.evidence > 0) return false;
+	return context.diff.changedScalarFields.some((f) => LLM_RESTRICTED_FIELDS.has(f));
+}
+
+/** Turn a validated {@link LlmReviewOutput} into the plain JSON object recorded on
+ *  the `change_request_reviews.payload` column (never a bare string). */
+function outputToPayload(output: LlmReviewOutput): Record<string, unknown> {
+	const payload: Record<string, unknown> = {
+		verdict: output.verdict,
+		confidence: output.confidence,
+		reason: output.reason
+	};
+	if (output.evidenceRefs) payload.evidenceRefs = output.evidenceRefs;
+	if (output.fieldNotes) payload.fieldNotes = output.fieldNotes;
+	return payload;
+}
+
+export interface ReviewProposalOptions extends CallLlmReviewerOptions {
+	/** override the recorded reviewerActor (default: {@link LLM_REVIEWER_MODEL}). */
+	actor?: string;
+}
+
+/** The outcome of {@link reviewProposalWithLLM}. */
+export interface ReviewProposalResult {
+	changeRequestId: string;
+	/** the strictly-validated reviewer output. */
+	output: LlmReviewOutput;
+	/** the recorded review + resulting CR workflow status (from `reviewChangeRequest`). */
+	review: ReviewResult;
+	/** did {@link isSafeEnrichment} hold for this proposal + verdict? */
+	safeEnrichment: boolean;
+	/** did the safe-enrichment auto-apply actually run (flag ON + predicate + not stale)? */
+	autoApplied: boolean;
+}
+
+/**
+ * Phase-6 orchestrator: build the review context → run the (INJECTABLE) reviewer
+ * (strictly validated) → RECORD the verdict as an advisory `change_request_reviews`
+ * row via the Phase-4 {@link reviewChangeRequest} → optionally AUTO-APPLY when the
+ * safe-enrichment predicate holds AND `SOURCES_LLM_AUTOAPPROVE` is on.
+ *
+ * Resolution policy (§5):
+ *   • `reject` / `needs_evidence`  → recorded; `reviewChangeRequest` advances the CR
+ *     (`needs_evidence`, or in v1 a hard LLM reject is left to that function's policy).
+ *   • `apply` (ADVISORY, default)  → `reviewChangeRequest` marks the CR `approved`
+ *     with ZERO canonical write (the LLM-advisory Phase-4 path, unchanged and
+ *     byte-identical while the coarse `LLM_AUTOAPPROVE_CHANGE_REQUESTS` is off).
+ *   • `apply` + `SOURCES_LLM_AUTOAPPROVE` on + {@link isSafeEnrichment} → we THEN
+ *     drive {@link applyChangeRequest}, which re-plans live and commits through the
+ *     ONE merge engine (no bypass). A live re-plan that turned conflicting bounces
+ *     to `needs_evidence` ({@link ChangeRequestStale}) — advisory, never a clobber.
+ *
+ * The reviewer NEVER changes a claim's band / score / value; it only gates whether
+ * an already-ranked proposed change applies. With the flag off, this function
+ * records an advisory review and performs NO canonical write.
+ */
+export async function reviewProposalWithLLM(
+	db: Db,
+	crId: string,
+	opts?: ReviewProposalOptions
+): Promise<ReviewProposalResult> {
+	const actor = opts?.actor ?? LLM_REVIEWER_MODEL;
+
+	// build → call (strictly validated; a schema violation rejects the whole review).
+	const context = await buildLlmReviewContext(db, crId);
+	const output = await callLlmReviewer(context, opts);
+
+	// record the verdict (advisory by default — reviewChangeRequest's LLM `apply`
+	// branch marks the CR `approved` without touching canonical data).
+	const review = await reviewChangeRequest(db, crId, {
+		reviewerKind: 'llm',
+		reviewerActor: actor,
+		verdict: output.verdict,
+		confidence: output.confidence,
+		reason: output.reason,
+		evidenceRefs: output.evidenceRefs,
+		payload: outputToPayload(output)
+	});
+
+	// safe-enrichment auto-apply: ONLY when the flag is on AND the predicate holds.
+	const safeEnrichment = isSafeEnrichment(context, output);
+	let autoApplied = false;
+	if (safeEnrichment && llmAutoApproveEnabled()) {
+		if (review.status === 'applied') {
+			// the coarse Phase-4 LLM_AUTOAPPROVE_CHANGE_REQUESTS already drove the apply.
+			autoApplied = true;
+		} else if (review.status === 'approved') {
+			// advisory-recorded → apply now (flag + predicate allow it).
+			try {
+				await applyChangeRequest(db, crId, actor);
+				autoApplied = true;
+			} catch (e) {
+				// a live re-plan that became conflicting bounces the CR to needs_evidence.
+				if (!(e instanceof ChangeRequestStale)) throw e;
+			}
+		}
+	}
+
+	return { changeRequestId: crId, output, review, safeEnrichment, autoApplied };
 }
