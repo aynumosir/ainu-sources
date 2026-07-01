@@ -96,8 +96,10 @@ export interface MergePlan {
 	gate: GateDecision;
 }
 
-/** matchDecision values that mean "we are confident this attaches to THIS source". */
-const STRONG_ATTACH = new Set([
+/** matchDecision values that mean "we are confident this attaches to THIS source".
+ *  Exported so the Phase-6 LLM reviewer can reuse the SAME "clean attach" definition
+ *  in its safe-enrichment auto-approve predicate (identity, never precedence). */
+export const STRONG_ATTACH = new Set([
 	'explicit_target', // website edit names the id
 	'strong_single', // single strong identifier hit
 	'repo_path_exact', // exact legacy repo_path hit

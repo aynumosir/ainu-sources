@@ -20,8 +20,11 @@ export interface AuditFinding {
 /** Low-trust derivations that MUST carry evidence (>0) to mutate anything. */
 const EVIDENCE_REQUIRED = new Set(['llm_extraction', 'inferred', 'heuristic']);
 
-/** Fields an LLM may not assert without evidence (ids handled separately). */
-const LLM_RESTRICTED_FIELDS = new Set([
+/** Fields an LLM may not assert without evidence (ids handled separately).
+ *  Exported so the Phase-6 LLM reviewer can surface the SAME evidence-required
+ *  field list in its review context (`rules.llmCannotSetWithoutEvidence`) and
+ *  mirror the gate in its safe-enrichment predicate. */
+export const LLM_RESTRICTED_FIELDS = new Set([
 	'holdingInstitution',
 	'callNumber',
 	'yearStart',

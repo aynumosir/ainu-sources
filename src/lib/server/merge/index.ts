@@ -20,12 +20,31 @@ export {
 } from './merge-source-observation';
 export {
 	decideChangeGate,
+	STRONG_ATTACH,
 	type GateDecision,
 	type GateMode,
 	type ChangeKind,
 	type MergePlan,
 	type PlannedFieldOutcome
 } from './decision';
+export {
+	buildLlmReviewContext,
+	callLlmReviewer,
+	validateLlmReviewOutput,
+	anthropicReviewClient,
+	reviewProposalWithLLM,
+	isSafeEnrichment,
+	llmAutoApproveEnabled,
+	LlmReviewSchemaError,
+	LLM_REVIEWER_MODEL,
+	LLM_SAFE_CONFIDENCE,
+	type LlmReviewContext,
+	type LlmReviewOutput,
+	type LlmReviewClient,
+	type CallLlmReviewerOptions,
+	type ReviewProposalOptions,
+	type ReviewProposalResult
+} from './llm-review';
 export type {
 	Db,
 	MergeInput,
