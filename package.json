@@ -17,6 +17,7 @@
 		"golden:dump": "bun scripts/golden-dump.ts",
 		"bootstrap": "bun scripts/bootstrap-ledger.ts",
 		"audit": "bun scripts/audit.ts",
+		"review:proposals": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/review-proposals.ts",
 		"check:fk": "bun scripts/check-fk-enforcement.ts",
 		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
 		"prepare": "svelte-kit sync || echo ''",
