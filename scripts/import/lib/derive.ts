@@ -751,12 +751,17 @@ export function derivePerson(raw: string): PersonDerivation {
 
 /**
  * The fold keys a person is indexed under, in RESOLUTION PRIORITY order:
- * canonical slug → diacritic-folded romaji → despaced kanji → alnum Latin. seed's
- * getPerson selected ONE primary key from this same ladder (plus a secondary
- * romaji index); the DB-backed resolver registers a person under ALL of these and
- * probes an incoming form's keys in this order, so every form seed folded into a
- * person still resolves to it (incl. names whose romaji was backfilled after the
- * bootstrap — their original despaced-kanji key is retained).
+ * canonical slug → EXACT despaced kanji / alnum Latin → diacritic-folded romaji.
+ * seed's getPerson selected ONE primary key from the ladder canon > romaji >
+ * despaced-kanji (plus a secondary romaji index); the DB-backed resolver registers
+ * a person under ALL of these and probes an incoming form's keys in order, so every
+ * form seed folded into a person still resolves to it — INCLUDING names whose
+ * romaji was backfilled after the bootstrap. Such a backfill hands two variant-kanji
+ * near-duplicates (e.g. 金澤 vs 金沢, same folded romaji) a SHARED romaji key that
+ * seed never had; probing the exact despaced-kanji key BEFORE the folded romaji lets
+ * an exact-kanji form land on its own row rather than the wrong twin, matching the
+ * bootstrap join. (For a canon / single-identity person every key resolves to the
+ * same id, so this order only ever disambiguates such pre-existing twins.)
  */
 export function personFoldKeys(d: {
 	canon: string | null;
@@ -765,16 +770,16 @@ export function personFoldKeys(d: {
 }): string[] {
 	const keys: string[] = [];
 	if (d.canon) keys.push(`canon:${d.canon}`);
-	if (d.nameEn && !KANA_KANJI.test(d.nameEn)) {
-		const r = foldRomaji(d.nameEn);
-		if (r) keys.push(`r:${r}`);
-	}
 	if (KANA_KANJI.test(d.name)) {
 		const k = d.name.replace(/\s+/g, '');
 		if (k) keys.push(k);
 	} else {
 		const k = d.name.toLowerCase().replace(/[^a-z0-9]/g, '');
 		if (k) keys.push(k);
+	}
+	if (d.nameEn && !KANA_KANJI.test(d.nameEn)) {
+		const r = foldRomaji(d.nameEn);
+		if (r) keys.push(`r:${r}`);
 	}
 	return keys;
 }
