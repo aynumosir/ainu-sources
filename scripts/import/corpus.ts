@@ -44,38 +44,24 @@ import {
 	linkTypeFor
 } from './lib/derive';
 import {
-	openDb,
 	addPersons,
 	addPlaces,
 	addInstitution,
 	attachTags,
+	type Db,
 	type EntityStamp
 } from './lib/entities';
-import { openRun, closeRun, emitSource, driftMissing } from './lib/run';
+import {
+	openRun,
+	closeRun,
+	emitSource,
+	driftMissing,
+	parseImporterCli,
+	summarize,
+	type ImporterRunOptions,
+	type ImporterSummary
+} from './lib/run';
 import type { LinkInput, MergeInput } from '../../src/lib/server/merge';
-
-// ── argv ─────────────────────────────────────────────────────────────────────
-function argValue(flag: string): string | undefined {
-	const i = process.argv.indexOf(flag);
-	if (i !== -1 && i + 1 < process.argv.length) return process.argv[i + 1];
-	const eqForm = process.argv.find((a) => a.startsWith(`${flag}=`));
-	return eqForm ? eqForm.slice(flag.length + 1) : undefined;
-}
-const hasFlag = (flag: string) => process.argv.includes(flag);
-
-const url = argValue('--db') ?? process.env.DATABASE_URL;
-if (!url) {
-	console.error('✗ No database specified. Pass --db file:/path/to/db or set DATABASE_URL.');
-	process.exit(1);
-}
-const isFile = url.startsWith('file:');
-const authToken = argValue('--token') ?? process.env.DATABASE_AUTH_TOKEN;
-if (!isFile && !authToken) {
-	console.error('✗ Remote DATABASE_URL given but no auth token (--token or DATABASE_AUTH_TOKEN).');
-	process.exit(1);
-}
-const DRY_RUN = hasFlag('--dry-run');
-const LIMIT = argValue('--limit') ? Number(argValue('--limit')) : Infinity;
 
 const AINU_ROOT = process.env.AINU_ROOT ?? path.resolve(import.meta.dir, '../../..');
 const CORPUS_FILE = path.join(AINU_ROOT, 'ainu-corpora', 'data.jsonl');
@@ -215,15 +201,16 @@ function deriveAgg(a: CorpusAgg): {
 	};
 }
 
-async function main() {
+export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<ImporterSummary> {
+	const DRY_RUN = opts.dryRun ?? false;
+	const LIMIT = opts.limit ?? Infinity;
 	if (!fs.existsSync(CORPUS_FILE)) {
-		console.error(
-			`✗ corpus file not found: ${CORPUS_FILE}\n  Set AINU_ROOT to the dir containing ainu-corpora/.`
+		throw new Error(
+			`corpus file not found: ${CORPUS_FILE}\n  Set AINU_ROOT to the dir containing ainu-corpora/.`
 		);
-		process.exit(1);
 	}
 
-	console.log(`${DRY_RUN ? '[DRY-RUN] ' : ''}import:corpus → ${url!.split('?')[0]}  (streaming ${CORPUS_FILE})`);
+	console.log(`${DRY_RUN ? '[DRY-RUN] ' : ''}import:corpus  (streaming ${CORPUS_FILE})`);
 	const aggs = await aggregate();
 	// Deterministic emit order (Risk H) — sort collections by their originRecordId.
 	// Per-collection field values are order-independent of this (each aggregate is
@@ -234,7 +221,6 @@ async function main() {
 		`${DRY_RUN ? '[DRY-RUN] ' : ''}aggregated ${collections.length} collections (${selected.length} selected)`
 	);
 
-	const db = openDb(url!, authToken);
 	const runId = DRY_RUN
 		? null
 		: await openRun(db, { origin: ORIGIN, mode: 'full', collectorVersion: 'import-corpus@1' });
@@ -322,11 +308,15 @@ async function main() {
 	console.log(
 		`${DRY_RUN ? '[DRY-RUN] ' : ''}done: applied=${stats.applied} noop=${stats.noop} other=${stats.other} drifted-missing=${drifted}`
 	);
+	return summarize('corpus', stats, drifted, { collections: selected.length });
 }
 
-main()
-	.then(() => process.exit(0))
-	.catch((err) => {
-		console.error('\n✗ import:corpus failed:', err);
-		process.exit(1);
-	});
+if (import.meta.main) {
+	const { db, opts } = parseImporterCli();
+	run(db, opts)
+		.then(() => process.exit(0))
+		.catch((err) => {
+			console.error('\n✗ import:corpus failed:', err);
+			process.exit(1);
+		});
+}

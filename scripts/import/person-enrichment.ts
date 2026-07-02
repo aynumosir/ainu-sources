@@ -51,32 +51,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { asc, eq } from 'drizzle-orm';
 import { stripParens } from './lib/derive';
-import { openDb } from './lib/entities';
-import { openRun, closeRun } from './lib/run';
+import {
+	openRun,
+	closeRun,
+	parseImporterCli,
+	type ImporterRunOptions,
+	type ImporterSummary
+} from './lib/run';
 import { persons } from '../../src/lib/server/db/schema';
 import type { Db } from './lib/entities';
-
-// ── argv ─────────────────────────────────────────────────────────────────────
-function argValue(flag: string): string | undefined {
-	const i = process.argv.indexOf(flag);
-	if (i !== -1 && i + 1 < process.argv.length) return process.argv[i + 1];
-	const eqForm = process.argv.find((a) => a.startsWith(`${flag}=`));
-	return eqForm ? eqForm.slice(flag.length + 1) : undefined;
-}
-const hasFlag = (flag: string) => process.argv.includes(flag);
-
-const url = argValue('--db') ?? process.env.DATABASE_URL;
-if (!url) {
-	console.error('✗ No database specified. Pass --db file:/path/to/db or set DATABASE_URL.');
-	process.exit(1);
-}
-const isFile = url.startsWith('file:');
-const authToken = argValue('--token') ?? process.env.DATABASE_AUTH_TOKEN;
-if (!isFile && !authToken) {
-	console.error('✗ Remote DATABASE_URL given but no auth token (--token or DATABASE_AUTH_TOKEN).');
-	process.exit(1);
-}
-const DRY_RUN = hasFlag('--dry-run');
 
 const ORIGIN = 'person-enrichment';
 
@@ -162,9 +145,9 @@ function computeFinal(
 	return next;
 }
 
-async function main() {
-	console.log(`${DRY_RUN ? '[DRY-RUN] ' : ''}import:person-enrichment → ${url!.split('?')[0]}`);
-	const db: Db = openDb(url!, authToken);
+export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<ImporterSummary> {
+	const DRY_RUN = opts.dryRun ?? false;
+	console.log(`${DRY_RUN ? '[DRY-RUN] ' : ''}import:person-enrichment`);
 
 	const wdCache = readJson<WdHit>(WIKIDATA_CACHE_FILE);
 	const datesCache = readJson<DateHit>(WIKIDATA_DATES_CACHE_FILE);
@@ -239,11 +222,24 @@ async function main() {
 		`${DRY_RUN ? '[DRY-RUN] ' : ''}done: scanned ${rows.length} persons, ${personsTouched} enriched ` +
 			`(wikidata +${filled.wikidata}, wikipedia +${filled.wikipedia}, birthYear +${filled.birthYear}, deathYear +${filled.deathYear})`
 	);
+	return {
+		feed: 'person-enrichment',
+		applied: personsTouched,
+		noop: rows.length - personsTouched,
+		candidate: 0,
+		conflict: 0,
+		drifted: 0,
+		other: 0,
+		detail: { personsScanned: rows.length, filled, overwritesSkipped: overwriteAttempts.length }
+	};
 }
 
-main()
-	.then(() => process.exit(0))
-	.catch((err) => {
-		console.error('\n✗ import:person-enrichment failed:', err);
-		process.exit(1);
-	});
+if (import.meta.main) {
+	const { db, opts } = parseImporterCli();
+	run(db, opts)
+		.then(() => process.exit(0))
+		.catch((err) => {
+			console.error('\n✗ import:person-enrichment failed:', err);
+			process.exit(1);
+		});
+}

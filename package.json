@@ -24,6 +24,7 @@
 		"import:academic": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/academic.ts",
 		"import:relations": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/relations.ts",
 		"import:person-enrichment": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/person-enrichment.ts",
+		"import:all": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import-all.ts",
 		"audit": "bun scripts/audit.ts",
 		"review:proposals": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/review-proposals.ts",
 		"check:fk": "bun scripts/check-fk-enforcement.ts",
