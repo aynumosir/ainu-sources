@@ -2319,8 +2319,28 @@ async function projectAndStore(
 	const baseContentHash = createdNew ? null : (src.contentHash ?? null);
 
 	const now = new Date();
-	const finalUpd: Record<string, unknown> = { ...upd, contentHash: hash, updatedAt: now, lastSeenAt: now };
-	if (src.contentHash !== hash) finalUpd.contentChangedAt = now;
+	// `updatedAt`/`contentChangedAt` bump ONLY on a REAL content change; a value-noop
+	// re-observation (idempotent re-harvest / drift-touch) MUST NOT restamp them.
+	// `updatedAt` IS a golden column (golden.ts SOURCE_SCALAR_COLUMNS), so churning it
+	// on every idempotent re-observation would touch all rows and break the golden-diff
+	// gate. `lastSeenAt` ("last observed" — NOT golden) still refreshes.
+	//
+	// The change signal is `before` vs `after` PROJECTION equality — NOT the recomputed
+	// hash vs the STORED `contentHash`. Because `updatedAt` is itself part of the hashed
+	// projection, the stored `contentHash` was computed with a now-stale `updatedAt`, so
+	// `src.contentHash !== hash` is ~always true (a restamp bumps updatedAt, which then
+	// changes the very hash used to decide the next restamp) — that self-reference is the
+	// churn. `before` and `after` instead share THIS source's current audit columns and
+	// the SAME child rows, so they differ IFF a winning claim actually changed a scalar
+	// value; the audit-column terms cancel. A brand-new source (before === null) always
+	// counts as changed. An editorial edit that changes a value ⇒ before ≠ after ⇒
+	// updatedAt still bumps exactly as before.
+	const contentChanged = before === null || hashProjection(before) !== hash;
+	const finalUpd: Record<string, unknown> = { ...upd, contentHash: hash, lastSeenAt: now };
+	if (contentChanged) {
+		finalUpd.updatedAt = now;
+		finalUpd.contentChangedAt = now;
+	}
 	const stmt = db.update(sources).set(finalUpd).where(eq(sources.id, sourceId));
 	const result: ProjectionResult = {
 		deferred: defer ? (stmt as unknown as BatchItem<'sqlite'>) : null,

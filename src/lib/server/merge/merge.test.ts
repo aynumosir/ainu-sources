@@ -683,3 +683,81 @@ describe('merge engine — properties', () => {
 		expect(new Set(final.languages)).toEqual(new Set(['ain', 'rus'])); // rus added, jpn stays removed
 	});
 });
+
+// ---------------------------------------------------------------------------
+// updatedAt / contentChangedAt bump ONLY on a real content change.
+//
+// A value-noop re-observation (idempotent re-harvest whose observation payload
+// differs enough to pass the duplicate probe, yet whose projected golden fields
+// are unchanged) MUST NOT restamp `updatedAt`/`contentChangedAt`. `updatedAt` is
+// a GOLDEN column (golden.ts SOURCE_SCALAR_COLUMNS); churning it on every
+// idempotent re-harvest would touch every row and break the golden-diff gate.
+// `lastSeenAt` ("last observed", NOT a golden column) may still refresh.
+// A merge that CHANGES a value still bumps updatedAt exactly as before.
+// ---------------------------------------------------------------------------
+describe('merge engine — updatedAt only bumps on a real content change', () => {
+	const base: MergeInput = {
+		origin: 'crossref',
+		originRecordId: 'crossref:10.5555/noop',
+		derivation: 'observed',
+		confidence: 0.9,
+		identifiers: [{ kind: 'doi', value: 'https://doi.org/10.5555/NOOP' }],
+		fields: { title: 'Noop Paper', type: 'article', category: 'secondary' }
+	};
+	// A distinct OLD timestamp so a restamp is unambiguous regardless of
+	// wall-clock granularity (two merges in the same ms would otherwise be
+	// indistinguishable from a no-restamp).
+	const OLD = new Date('2020-01-01T00:00:00.000Z');
+
+	it('value-noop re-observation leaves updatedAt/contentChangedAt UNCHANGED (lastSeenAt still refreshes)', async () => {
+		const r1 = await merge(base);
+		const sid = r1.sourceId!;
+		await db
+			.update(schema.sources)
+			.set({ updatedAt: OLD, contentChangedAt: OLD, lastSeenAt: OLD })
+			.where(eq(schema.sources.id, sid));
+		const before = await getSource(sid);
+
+		// re-observe the SAME source (same DOI ⇒ attaches) with a NEW originRecordId
+		// (bypasses the duplicate-observation probe so the full merge + projection
+		// runs) but IDENTICAL field values ⇒ the projection is unchanged.
+		const r2 = await merge({ ...base, originRecordId: 'crossref:10.5555/noop#again' });
+		expect(r2.sourceId).toBe(sid);
+		expect((await allSources()).length).toBe(1);
+
+		const after = await getSource(sid);
+		// Golden-relevant state is unchanged: the scalar fields AND the audit
+		// timestamp `updatedAt`/`contentChangedAt` are NOT restamped. (`contentHash`
+		// is NOT a golden column — see golden.ts — and re-syncs freely; it is not the
+		// change signal here, so it is intentionally not asserted.)
+		expect(after.title).toBe(before.title); // no scalar changed
+		expect(after.updatedAt.getTime()).toBe(OLD.getTime()); // NOT restamped
+		expect(after.contentChangedAt!.getTime()).toBe(OLD.getTime()); // NOT restamped
+		expect(after.lastSeenAt!.getTime()).toBeGreaterThan(OLD.getTime()); // "last observed" DID refresh
+	});
+
+	it('a merge that changes a scalar value bumps updatedAt AND contentChangedAt', async () => {
+		const r1 = await merge(base);
+		const sid = r1.sourceId!;
+		await db
+			.update(schema.sources)
+			.set({ updatedAt: OLD, contentChangedAt: OLD })
+			.where(eq(schema.sources.id, sid));
+		const before = await getSource(sid);
+
+		// re-observe with a CHANGED scalar (adds a summary) ⇒ the projection changes
+		// — this is the editorial/real-edit case that MUST still bump updatedAt.
+		const r2 = await merge({
+			...base,
+			originRecordId: 'crossref:10.5555/noop#edit',
+			fields: { ...base.fields, summary: 'a newly observed summary' }
+		});
+		expect(r2.sourceId).toBe(sid);
+
+		const after = await getSource(sid);
+		expect(after.summary).toBe('a newly observed summary'); // the change landed
+		expect(after.contentHash).not.toBe(before.contentHash); // projection changed
+		expect(after.updatedAt.getTime()).toBeGreaterThan(OLD.getTime()); // bumped
+		expect(after.contentChangedAt!.getTime()).toBeGreaterThan(OLD.getTime()); // bumped
+	});
+});
