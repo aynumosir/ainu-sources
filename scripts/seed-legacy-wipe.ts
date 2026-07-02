@@ -1,12 +1,23 @@
 /**
- * Seed the アイヌ語文献資料データベース from the sibling data repositories:
+ * ⚠️ RETIRED — legacy wipe-rebuild seed (formerly scripts/seed.ts).
+ *
+ * The idempotent, merge-engine seed is now `scripts/import-all.ts`
+ * (`bun run seed`), which DELETES NOTHING. This script — a full domain-table
+ * wipe + rebuild — is kept only for a confidence window behind the
+ * ALLOW_LEGACY_WIPE=1 gate (its --plan / PLAN=1 read-only diff stays ungated).
+ * Do NOT run it against production; prefer `bun run seed` / `bun run seed:plan`.
+ * Reachable via `bun run seed:legacy-wipe` (still gated). Slated for deletion
+ * once import-all has proven out on prod.
+ *
+ * Seeds the アイヌ語文献資料データベース from the sibling data repositories:
  *   - ../ainu-dictionaries/catalog.json   (dictionaries, wordlists, old documents)
  *   - ../ainu-grammar/{books,articles}     (secondary research literature)
  *   - ../ainu-corpora/data.jsonl           (aligned Ainu/Japanese corpus texts)
  *
- * Run:  bun scripts/seed.ts        (reads DATABASE_URL from .env)
+ * Run:  ALLOW_LEGACY_WIPE=1 bun scripts/seed-legacy-wipe.ts   (reads DATABASE_URL from .env)
+ *       bun scripts/seed-legacy-wipe.ts --plan                (read-only diff, ungated)
  *
- * Idempotent: wipes the domain tables (NOT the auth tables) and rebuilds.
+ * Wipes the domain tables (NOT the auth tables) and rebuilds.
  */
 import { createClient } from '@libsql/client';
 import { drizzle } from 'drizzle-orm/libsql';

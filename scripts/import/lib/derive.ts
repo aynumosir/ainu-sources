@@ -1,5 +1,6 @@
 /**
- * Pure, deterministic derivation helpers extracted VERBATIM from scripts/seed.ts.
+ * Pure, deterministic derivation helpers extracted VERBATIM from the original
+ * wipe-rebuild seed (now scripts/seed-legacy-wipe.ts).
  *
  * These slugify/parse/detect/classify helpers + the curated lookup tables
  * (PERSON_ALIASES/PERSON_CANON/PERSON_ENRICH/NAME_SPACING/GAZETTEER/INSTITUTIONS/
