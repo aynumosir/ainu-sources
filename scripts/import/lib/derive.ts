@@ -676,6 +676,121 @@ export function parsePersonName(raw: string): { name: string; nameEn: string | n
 	return { name, nameEn: nameEn || null };
 }
 
+// --- person identity folding (extracted VERBATIM from seed.ts's getPerson) -----
+// seed.ts collapses the many name spellings of one scholar/narrator into a single
+// person via an in-memory `personByKey` map keyed on FOLD KEYS. The bootstrap DB
+// was built from that map, so a re-import must reproduce the SAME fold keys to
+// resolve each name form to the person the bootstrap created (Risk A). These pure
+// helpers are that fold logic, shared by the DB-backed resolver in entities.ts.
+
+/**
+ * Diacritic-folded, ORDER-INSENSITIVE romaji key. "Tomomi Satō", "Sato Tomomi"
+ * and the romaji of 佐藤知己 all fold to the same string, so kanji⇄Latin and
+ * given/surname-order variants of one person collapse. (seed.ts getPerson's
+ * inline `foldRomaji`, byte-for-byte.)
+ */
+export function foldRomaji(s: string): string {
+	return s
+		.normalize('NFKD')
+		.replace(/[̀-ͯ]/g, '')
+		.toLowerCase()
+		.replace(/[^a-z0-9 ]/g, ' ')
+		.trim()
+		.split(/\s+/)
+		.filter(Boolean)
+		.sort()
+		.join(' ');
+}
+
+/** The canonical display + enrichment a name form resolves to. */
+export interface PersonDerivation {
+	/** parsed display before canon substitution (parsePersonName's `name`) */
+	display: string;
+	/** canonical slug (alias/canon fold) or null */
+	canon: string | null;
+	/** final display name — canon form preferred (seed's `pName`) */
+	name: string;
+	/** romaji / English reading — canon or enrichment preferred (seed's `pNameEn`) */
+	nameEn: string | null;
+	/** true when nameEn came from a curated canon/enrichment table (not a parse) */
+	curatedNameEn: boolean;
+	researchmap: string | null;
+	wikidata: string | null;
+	/** slug to CREATE with on a miss: canon, else readable romaji/display, else hash */
+	slug: string;
+}
+
+/**
+ * Resolve a free-form person string to its canonical display + enrichment + slug.
+ * This is seed.ts getPerson's derivation half (everything up to the personByKey
+ * lookup), extracted so entities.ts's DB-backed resolver derives byte-identical
+ * values. PURE — no DB, no map state.
+ */
+export function derivePerson(raw: string): PersonDerivation {
+	const parsed = parsePersonName(raw);
+	const display = parsed.name;
+	const canon = canonicalSlugFor(raw.trim()) ?? canonicalSlugFor(display);
+	const enrich =
+		(canon ? PERSON_ENRICH[canon] : undefined) ??
+		PERSON_ENRICH[raw.trim()] ??
+		PERSON_ENRICH[stripParens(display)] ??
+		PERSON_ENRICH[stripParens(display).replace(/\s+/g, '')] ??
+		PERSON_ENRICH[stripParens(raw.trim()).replace(/\s+/g, '')];
+	const c = canon ? PERSON_CANON[canon] : undefined;
+	const name = c ? c.name : display;
+	const curatedNameEn = Boolean(enrich?.nameEn || c?.nameEn);
+	const nameEn: string | null =
+		enrich?.nameEn ?? (c ? (c.nameEn ?? (hasCJK(c.name) ? null : c.name)) : parsed.nameEn);
+	const researchmap: string | null = enrich?.researchmap ?? null;
+	const wikidata: string | null = enrich?.wikidata ?? null;
+	const slug = canon
+		? canon
+		: slugify(stripParens(display)) || (nameEn ? slugify(nameEn) : '') || `p-${djb2(display)}`;
+	return { display, canon, name, nameEn, curatedNameEn, researchmap, wikidata, slug };
+}
+
+/**
+ * The fold keys a person is indexed under, in RESOLUTION PRIORITY order:
+ * canonical slug → EXACT despaced kanji / alnum Latin → diacritic-folded romaji.
+ * seed's getPerson selected ONE primary key from the ladder canon > romaji >
+ * despaced-kanji (plus a secondary romaji index); the DB-backed resolver registers
+ * a person under ALL of these and probes an incoming form's keys in order, so every
+ * form seed folded into a person still resolves to it — INCLUDING names whose
+ * romaji was backfilled after the bootstrap. Such a backfill hands two variant-kanji
+ * near-duplicates (e.g. 金澤 vs 金沢, same folded romaji) a SHARED romaji key that
+ * seed never had; probing the exact despaced-kanji key BEFORE the folded romaji lets
+ * an exact-kanji form land on its own row rather than the wrong twin, matching the
+ * bootstrap join. (For a canon / single-identity person every key resolves to the
+ * same id, so this order only ever disambiguates such pre-existing twins.)
+ */
+export function personFoldKeys(d: {
+	canon: string | null;
+	name: string;
+	nameEn: string | null;
+}): string[] {
+	const keys: string[] = [];
+	if (d.canon) keys.push(`canon:${d.canon}`);
+	if (KANA_KANJI.test(d.name)) {
+		const k = d.name.replace(/\s+/g, '');
+		if (k) keys.push(k);
+	} else {
+		const k = d.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+		if (k) keys.push(k);
+	}
+	if (d.nameEn && !KANA_KANJI.test(d.nameEn)) {
+		const r = foldRomaji(d.nameEn);
+		if (r) keys.push(`r:${r}`);
+	}
+	return keys;
+}
+
+/** Slugs that are CANONICAL person identities (alias targets / canon-table keys),
+ *  so a bootstrapped person's canon can be recovered from its stored slug. */
+export const PERSON_CANON_SLUGS: ReadonlySet<string> = new Set<string>([
+	...Object.keys(PERSON_CANON),
+	...Object.values(PERSON_ALIASES)
+]);
+
 // Topical / genre tags derived from a source's title (+ type/dialect). Matched
 // as a keyword sweep in attachTags — a source can carry several. Kept high-
 // precision so the tag facet is meaningful (NOT a catch-all: academic records
