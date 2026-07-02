@@ -26,9 +26,14 @@
  *                  a dup-noop: identity resolution is SKIPPED and ZERO source /
  *                  entity write happens (a forked source is NOT re-forked). This is
  *                  what makes the golden run1→run2 rootHash identical.
- * Identity keys : identifier `doi` (strong, when present) + `openalex_work` (strong,
- *                 when source=openalex). repo_path is deliberately NOT emitted for
- *                 academic — identity is doi/openalex_work, else coreText+author+year.
+ * Identity keys : `doi` (strong, when present) + the source-type strong id the
+ *                 Phase-3 bootstrap wrote for rec.source — doi(crossref) /
+ *                 openalex_work(openalex) / cinii(cinii,cinii-books) / ndl(ndl) /
+ *                 jstage(jstage), value = rec.externalId (SOURCE_ID_KIND == bootstrap
+ *                 ID_KIND_MAP). So a DOI-less cinii/ndl/cinii-books record attaches to
+ *                 its bootstrapped source via strong_single instead of forking.
+ *                 repo_path is deliberately NOT emitted for academic; an origin absent
+ *                 from the map (togo/researchmap/irdb/…) still keys on coreText+author+year.
  * Derivation    : extracted @ 0.7 (band 700 < the bootstrap's curated_assertion band
  *                  800, so it never clobbers a bootstrapped/editorial value; a
  *                  matching value noops by value-hash, a differing one is held_below).
@@ -115,6 +120,31 @@ const JOB = 'import:academic';
 const DERIVATION = 'extracted';
 const CONFIDENCE = 0.7;
 const AUTHOR_MIN_WORKS = 2;
+
+/**
+ * rec.source → the `source_identifiers.kind` the Phase-3 bootstrap wrote for that
+ * record. MUST stay byte-identical to scripts/bootstrap-ledger.ts's ID_KIND_MAP:
+ * the bootstrap keyed off each source's externalIds object, whose keys were
+ * seed.ts's `{ doi?, [rec.source]: rec.externalId }` (seed.ts §seedAcademic, line
+ * ~1127). So the (kind,value) this emits per record is exactly what the bootstrap
+ * indexed — letting a re-import resolve to the bootstrapped source via STRONG_SINGLE
+ * instead of forking. Every kind here is in STRONG_ID_KINDS (merge/constants.ts).
+ *
+ * The `doi` externalIds key is handled separately below (rec.doi). rec.source values
+ * ABSENT from this map (togo · researchmap · irdb · openlibrary · ndldigital ·
+ * glottolog · qiita · huggingface · hoppodb · internetarchive · cyberleninka · sgu ·
+ * honkoku · kokusho) were given NO strong identifier by the bootstrap (only a medium
+ * repo_path, which this importer deliberately does not emit), so a DOI-less record
+ * from one of those origins still resolves by coreText+author+year (medium) or forks.
+ */
+const SOURCE_ID_KIND: Record<string, string> = {
+	crossref: 'doi', // crossref externalId IS the DOI
+	openalex: 'openalex_work',
+	cinii: 'cinii',
+	'cinii-books': 'cinii',
+	ndl: 'ndl',
+	jstage: 'jstage'
+};
 
 /** One academic-index record (mirrors seed.ts's `Rec`). */
 interface Rec {
@@ -226,11 +256,18 @@ function deriveRecord(rec: Rec): {
 	if (y.yearEnd != null) fields.yearEnd = y.yearEnd;
 	if (rec.venue) fields.summary = rec.venue;
 
-	// Identity: doi (strong) + openalex_work (strong, source=openalex). NO repo_path.
+	// Identity: doi (strong) + the source-type strong id the Phase-3 bootstrap wrote
+	// for rec.source (SOURCE_ID_KIND == bootstrap ID_KIND_MAP), value = rec.externalId,
+	// normalized identically by the engine (merge/normalize.ts == bootstrap normId).
+	// This lets a DOI-less cinii / ndl / cinii-books / jstage record attach to its
+	// bootstrapped source via strong_single instead of forking. Emitted in a FIXED
+	// order (doi, then source-type — Risk H); a crossref record whose source-type kind
+	// IS 'doi' with the same value is a harmless dup (engine dedupes on (kind,valueNorm)).
+	// NO repo_path — identity is a strong id, else coreText+author+year.
 	const identifiers: MergeInput['identifiers'] = [];
 	if (rec.doi) identifiers.push({ kind: 'doi', value: rec.doi });
-	if (rec.source === 'openalex' && rec.externalId)
-		identifiers.push({ kind: 'openalex_work', value: rec.externalId });
+	const srcKind = SOURCE_ID_KIND[rec.source];
+	if (srcKind && rec.externalId) identifiers.push({ kind: srcKind, value: rec.externalId });
 
 	// Links in a FIXED order (Risk H), locally deduped by url like seed's linkSeen.
 	const links: LinkInput[] = [];
