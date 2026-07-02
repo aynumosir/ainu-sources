@@ -959,3 +959,108 @@ export const CORPUS_META: Record<string, { slug: string; titleEn: string }> = {
 	'鍋沢元蔵筆録ノート': { slug: 'nabesawa-motozo-notebooks', titleEn: "Nabesawa Motozō's Transcription Notebooks" }
 };
 
+// ---------------------------------------------------------------------------
+// Academic index (feed #5) — helpers extracted VERBATIM from seed.ts's
+// `seedAcademic` block. The bootstrap projection was built from these exact
+// values, so the merge-engine importer (scripts/import/academic.ts) reuses them
+// byte-for-byte — any drift here would break the golden projection gate.
+// ---------------------------------------------------------------------------
+
+// Language-code → 3-letter meta-language, accepting both 2-letter (CiNii/Crossref)
+// and 3-letter (researchmap) tags. seed.ts's `META_LANG`, verbatim.
+export const META_LANG: Record<string, string> = {
+	en: 'eng', eng: 'eng', ja: 'jpn', jpn: 'jpn', ru: 'rus', rus: 'rus',
+	de: 'deu', deu: 'deu', fr: 'fra', fra: 'fra', es: 'spa', spa: 'spa',
+	it: 'ita', ita: 'ita', pl: 'pol', pol: 'pol', ko: 'kor', kor: 'kor',
+	zh: 'zho', zho: 'zho', nl: 'nld', nld: 'nld', la: 'lat', lat: 'lat'
+};
+
+// Normalized title for the empty-title guard (seed skipped `!normTitle(title)`
+// records). Keeps Latin/kana/Han/Cyrillic/Hangul; strips diacritics + punctuation.
+// seed.ts's `normTitle`, verbatim (the engine uses its own `coreText` for identity;
+// this is only used here to reproduce seed's skip of untitled records).
+export function normTitle(s: string): string {
+	return (s || '')
+		.normalize('NFKD')
+		.replace(/[̀-ͯ]/g, '')
+		.toLowerCase()
+		.replace(/[^a-z0-9぀-ヿ一-龯Ѐ-ӿᄀ-ᇿ가-힣]+/g, '')
+		.trim();
+}
+
+// Derive a proper {category, type} for an imported academic record. Honours
+// collector-set tool/primary categories; refines secondary papers by title.
+// seed.ts's `classifyAcademic`, verbatim.
+export function classifyAcademic(rec: {
+	title: string;
+	type: string;
+	category?: string;
+	source?: string;
+	rawType?: string;
+}): { category: string; type: string } {
+	const t = rec.title || '';
+	// Digital resources
+	if (rec.source === 'huggingface')
+		return rec.rawType === 'hf-dataset'
+			? { category: 'corpus', type: 'dataset' } // a folklore/translation dataset IS corpus data
+			: { category: 'tool', type: 'model' };
+	if (rec.source === 'qiita' || rec.source === 'note')
+		return { category: 'tool', type: 'web-article' }; // blog post, distinct from a published article
+	if (rec.category === 'tool') return { category: 'tool', type: rec.type };
+	// Primary Edo materials: a vocabulary keeps its lexicographic form; else a document
+	if (rec.category === 'primary') {
+		if (/藻汐草|語箋|語集|蝦夷語|方言|単語|語彙|詞|言葉|ことば|辞書|辞典/.test(t))
+			return { category: 'primary', type: 'wordlist' };
+		return { category: 'primary', type: 'old-document' };
+	}
+	if (/コーパス|corpus|テキスト集|用例集/i.test(t)) return { category: 'corpus', type: 'corpus-text' };
+	// Normalise the incoming form (handles indexes built before the grammar-* rename)
+	const baseType =
+		rec.type === 'grammar-book' ? 'book' : rec.type === 'grammar-article' ? 'article' : rec.type;
+	// Secondary literature, by bibliographic FORM (subject is captured by tags)
+	let type = 'article';
+	if (/辞典|辞書|字典|事典|辭典|dictionary|lexicon|和愛|愛和/i.test(t)) type = 'dictionary';
+	else if (/語彙集|単語集|wordlist|vocabular/i.test(t)) type = 'wordlist';
+	else if (/文献目録|書誌|bibliograph/i.test(t)) type = 'bibliography';
+	else if (/博士論文|修士論文|学位論文|dissertation|\bph\.?\s?d\b|doctoral thesis/i.test(t)) type = 'thesis';
+	else if (/(アイヌ語|ainu)[^。]{0,8}(文法|文典|grammar)|grammar of|文法書/i.test(t)) type = 'grammar';
+	else if (baseType === 'thesis') type = 'thesis';
+	else if (
+		baseType === 'book' ||
+		/入門|教材|テキスト|叢書|全集|ハンドブック|handbook|introduction|読本|講座/i.test(t)
+	)
+		type = 'book';
+	return { category: 'secondary', type };
+}
+
+// Author corrections for records where OpenAlex/Crossref/JSTOR conflated a book's
+// *reviewer* (or a missing co-author) with its real author. Keyed by DOI, else by
+// "<source>:<externalId>". seed.ts's `AUTHOR_OVERRIDES`, verbatim.
+export const AUTHOR_OVERRIDES: Record<string, string[]> = {
+	'10.2307/489315': ['Kirsten Refsing'], // John C. Street was the reviewer
+	'10.2307/1178372': ['Emiko Ohnuki‐Tierney'], // John A. Grim was the reviewer
+	'10.46538/hlj.8.2.5': ['Jennifer Teeter', 'Takayuki Okazaki'], // Teeter co-authored (lead)
+	'openalex:W2576849698': ['Tjeerd de Graaf', 'Hidetoshi Shiraishi'] // de Graaf co-authored (lead)
+};
+
+// Reprint/later-edition records whose year_start was harvested as the REPRINT
+// year. Keyed by DOI, else "<source>:<externalId>"; value = ORIGINAL pub year.
+// seed.ts's `SOURCE_YEAR_OVERRIDES`, verbatim.
+export const SOURCE_YEAR_OVERRIDES: Record<string, number> = {
+	'openalex:W1498959860': 1905, // Batchelor, Ainu-English-Japanese Dictionary (repr. 2010; orig. 1889/1905)
+	'openalex:W1571539709': 1912, // Piłsudski, Materials for the Study of the Ainu Language (repr. 2004; orig. 1912)
+	'10.1515/9783110895681': 1912
+};
+
+// Venue/series → tag slugs (a guarded journal signal). seed.ts's `attachVenueTags`
+// matcher, verbatim: アイヌ語地名研究 ⇒ placenames (but not its 月報 newsletter);
+// 口承文芸-family venues ⇒ oral-literature. The importer maps these slugs to the
+// shared TAG_DEFS and attaches the tag join.
+export function venueTagSlugs(venue: string | null | undefined): string[] {
+	if (!venue) return [];
+	const out: string[] = [];
+	if (/地名/.test(venue) && !/月報/.test(venue)) out.push('placenames');
+	if (/口承文[芸藝]|口頭文芸|説話文学|説話・伝承学/.test(venue)) out.push('oral-literature');
+	return out;
+}
+
