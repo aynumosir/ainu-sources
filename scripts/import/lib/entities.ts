@@ -45,6 +45,10 @@ import {
 	splitNakaguro,
 	INSTITUTION_RE,
 	placesFor,
+	authorParts,
+	isGarbageName,
+	simplePersonKey,
+	venueTagSlugs,
 	type PersonDerivation,
 	type GazEntry,
 	type InstEntry
@@ -306,6 +310,57 @@ export async function addPersons(
 	}
 }
 
+/**
+ * Attach academic authors ABOVE a prominence gate (seed.ts's `addPersonsGated`,
+ * verbatim splitting/filtering). Each free-form author string is split into parts
+ * via `authorParts`; a part is promoted to a person entity only when it is neither
+ * an institution nor a garbage token AND is either in the prominent-author `allow`
+ * set (≥ AUTHOR_MIN_WORKS, computed by the caller's global pre-pass) OR carries a
+ * known canonical slug (so e.g. 安岡孝一's Qiita/HF handle still attaches). Person
+ * identity folds onto the bootstrapped record via getPerson (Risk A); the join is
+ * existence-checked so a re-run adds ZERO rows and preserves the golden sortOrder.
+ */
+export async function addPersonsGated(
+	db: Db,
+	sourceId: string,
+	authors: string[],
+	allow: Set<string>,
+	stamp: EntityStamp,
+	role = 'author'
+): Promise<void> {
+	let i = 0;
+	for (const a of authors)
+		for (const name of authorParts(a)) {
+			if (
+				INSTITUTION_RE.test(name) ||
+				isGarbageName(name) ||
+				(!allow.has(simplePersonKey(name)) && !canonicalSlugFor(name))
+			)
+				continue;
+			const personId = await getPerson(db, name, stamp);
+			await upsertJoin(
+				db,
+				schema.sourcePersons,
+				{ sourceId: schema.sourcePersons.sourceId, entity: schema.sourcePersons.personId, role: schema.sourcePersons.role },
+				{ sourceId, personId, role },
+				{
+					id: uuid(),
+					sourceId,
+					personId,
+					role,
+					sortOrder: i,
+					status: 'active',
+					origin: stamp.origin,
+					observationId: stamp.observationId ?? null,
+					confidence: stamp.confidence ?? null,
+					firstSeenAt: stampNow(stamp),
+					lastSeenAt: stampNow(stamp)
+				}
+			);
+			i += 1;
+		}
+}
+
 /** Attach dialect-derived places (role='dialect' by default). */
 export async function addPlaces(
 	db: Db,
@@ -385,6 +440,44 @@ export async function attachTags(
 	const hay = texts.filter(Boolean).join(' ');
 	for (const def of defs) {
 		if (!def.match.test(hay)) continue;
+		const tagId = await getTag(db, def, stamp);
+		await upsertJoinNoRole(
+			db,
+			schema.sourceTags,
+			{ sourceId: schema.sourceTags.sourceId, entity: schema.sourceTags.tagId },
+			{ sourceId, tagId },
+			{
+				id: uuid(),
+				sourceId,
+				tagId,
+				status: 'active',
+				origin: stamp.origin,
+				observationId: stamp.observationId ?? null,
+				confidence: stamp.confidence ?? null,
+				firstSeenAt: stampNow(stamp),
+				lastSeenAt: stampNow(stamp)
+			}
+		);
+	}
+}
+
+/**
+ * Attach the venue-derived tag(s) for a source (seed.ts's `attachVenueTags`). The
+ * matcher (`venueTagSlugs`) lives in derive.ts; here we map each produced slug to
+ * its shared TAG_DEFS entry and existence-check the (source, tag) join. seed's
+ * per-source dedup drops any overlap with the title-based sweep — the existence
+ * check reproduces that (a tag the title sweep already attached is a noop).
+ */
+export async function attachVenueTags(
+	db: Db,
+	sourceId: string,
+	venue: string | null | undefined,
+	stamp: EntityStamp,
+	defs: readonly TagDef[]
+): Promise<void> {
+	for (const slug of venueTagSlugs(venue)) {
+		const def = defs.find((d) => d.slug === slug);
+		if (!def) continue;
 		const tagId = await getTag(db, def, stamp);
 		await upsertJoinNoRole(
 			db,
