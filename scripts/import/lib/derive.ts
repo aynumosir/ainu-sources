@@ -988,6 +988,22 @@ export function normTitle(s: string): string {
 		.trim();
 }
 
+// Fuzzy work-key for matching a digitised witness to its catalogued original:
+// drop （holding library） parens and trailing volume markers (乾/坤/上/下/巻/冊…).
+// seed.ts's `coreKey`, VERBATIM — the same-work / edition-of / duplicate-of
+// clustering (feed #7, scripts/import/relations.ts) keys on it, so any drift from
+// seed's grouping would fork or drop a bootstrapped relation. Do not "improve".
+export function coreKey(s: string): string {
+	const stripped = (s || '')
+		.replace(/[（(][^）)]*[)）]/g, '')
+		.replace(/[\s　]+/g, '')
+		.replace(
+			/(乾巻|坤巻|乾|坤|上巻|下巻|上|下|前編|後編|[全]?[一二三四五六七八九十百\d]+巻|巻[上中下一二三四五六七八九十\d]*|[一二三四五六七八九十\d]+冊|第[一二三四五六七八九十\d]+冊?)$/u,
+			''
+		);
+	return normTitle(stripped);
+}
+
 // Derive a proper {category, type} for an imported academic record. Honours
 // collector-set tool/primary categories; refines secondary papers by title.
 // seed.ts's `classifyAcademic`, verbatim.
