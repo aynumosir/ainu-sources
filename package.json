@@ -18,6 +18,7 @@
 		"bootstrap": "bun scripts/bootstrap-ledger.ts",
 		"import:dictionaries": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/dictionaries.ts",
 		"import:manual": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/manual.ts",
+		"import:grammar": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/grammar.ts",
 		"audit": "bun scripts/audit.ts",
 		"review:proposals": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/review-proposals.ts",
 		"check:fk": "bun scripts/check-fk-enforcement.ts",
