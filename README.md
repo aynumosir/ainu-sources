@@ -26,8 +26,8 @@ The central entity is the **Source** (`資料`). Around it: `source_links`, `per
 
 ## Seed data
 
-`scripts/seed.ts` builds the database from three sibling repositories under `AINU_ROOT`
-(default: two levels up):
+`scripts/import-all.ts` (`bun run seed`) builds the database from the sibling
+repositories under `AINU_ROOT` (default: two levels up):
 
 | Repo | → | Sources |
 |------|---|---------|
@@ -36,9 +36,12 @@ The central entity is the **Source** (`資料`). Around it: `source_links`, `per
 | `ainu-corpora/data.jsonl` | aligned Ainu/Japanese corpus collections | 37 |
 
 It parses dates, extracts persons, maps dialects → geocoded places, derives
-languages/scripts, and links holding institutions from corpus URIs. Idempotent
-(wipes the domain tables — not auth — and rebuilds; manual edits are not preserved,
-so run it for initial population only).
+languages/scripts, and links holding institutions from corpus URIs. Every write
+routes through the merge engine, so it is **idempotent and non-destructive**:
+re-running deletes nothing (a 2nd run over an unchanged catalogue is a noop) and
+manual edits are preserved. Preview with `bun run seed:plan` (`--dry-run`). The
+old wipe-rebuild seed survives, gated, as `scripts/seed-legacy-wipe.ts`
+(`bun run seed:legacy-wipe`, requires `ALLOW_LEGACY_WIPE=1`).
 
 ## Local development
 
@@ -94,7 +97,7 @@ src/
     people|places|institutions/   directory + [slug]
     timeline/ map/ about/ login/ register/ account/
     api/search/      JSON quick-search
-scripts/seed.ts      ETL from the three data repos
+scripts/import-all.ts   idempotent merge-engine seed (`bun run seed`; ETL from the data repos)
 messages/{en,ja,ru}.json
 ```
 

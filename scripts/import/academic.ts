@@ -77,7 +77,6 @@ import {
 	TAG_DEFS
 } from './lib/derive';
 import {
-	openDb,
 	addPersonsGated,
 	addPlaces,
 	attachTags,
@@ -85,33 +84,19 @@ import {
 	type Db,
 	type EntityStamp
 } from './lib/entities';
-import { openRun, closeRun, emitSource, driftMissing } from './lib/run';
+import {
+	openRun,
+	closeRun,
+	emitSource,
+	driftMissing,
+	parseImporterCli,
+	summarize,
+	type ImporterRunOptions,
+	type ImporterSummary
+} from './lib/run';
 import { migrationWatermarks } from '../../src/lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import type { LinkInput, MergeInput } from '../../src/lib/server/merge';
-
-// ── argv ─────────────────────────────────────────────────────────────────────
-function argValue(flag: string): string | undefined {
-	const i = process.argv.indexOf(flag);
-	if (i !== -1 && i + 1 < process.argv.length) return process.argv[i + 1];
-	const eqForm = process.argv.find((a) => a.startsWith(`${flag}=`));
-	return eqForm ? eqForm.slice(flag.length + 1) : undefined;
-}
-const hasFlag = (flag: string) => process.argv.includes(flag);
-
-const url = argValue('--db') ?? process.env.DATABASE_URL;
-if (!url) {
-	console.error('✗ No database specified. Pass --db file:/path/to/db or set DATABASE_URL.');
-	process.exit(1);
-}
-const isFile = url.startsWith('file:');
-const authToken = argValue('--token') ?? process.env.DATABASE_AUTH_TOKEN;
-if (!isFile && !authToken) {
-	console.error('✗ Remote DATABASE_URL given but no auth token (--token or DATABASE_AUTH_TOKEN).');
-	process.exit(1);
-}
-const DRY_RUN = hasFlag('--dry-run');
-const LIMIT = argValue('--limit') ? Number(argValue('--limit')) : Infinity;
 
 // academic-index.json lives beside seed.ts (scripts/data), NOT under $AINU_ROOT.
 const ACADEMIC_FILE = path.join(import.meta.dir, '..', 'data', 'academic-index.json');
@@ -311,15 +296,16 @@ async function writeWatermark(
 		});
 }
 
-async function main() {
+export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<ImporterSummary> {
+	const DRY_RUN = opts.dryRun ?? false;
+	const LIMIT = opts.limit ?? Infinity;
 	if (!fs.existsSync(ACADEMIC_FILE)) {
-		console.error(`✗ academic index not found: ${ACADEMIC_FILE}\n  Run collect-academic.ts first.`);
-		process.exit(1);
+		throw new Error(`academic index not found: ${ACADEMIC_FILE}\n  Run collect-academic.ts first.`);
 	}
 	const records: Rec[] = JSON.parse(fs.readFileSync(ACADEMIC_FILE, 'utf8'));
 	const selected = LIMIT === Infinity ? records : records.slice(0, LIMIT);
 	console.log(
-		`${DRY_RUN ? '[DRY-RUN] ' : ''}import:academic → ${url!.split('?')[0]}  (${selected.length}/${records.length} records)`
+		`${DRY_RUN ? '[DRY-RUN] ' : ''}import:academic  (${selected.length}/${records.length} records)`
 	);
 
 	// Prominence pre-pass over ALL records (frozen before the per-record loop).
@@ -327,8 +313,6 @@ async function main() {
 	console.log(
 		`${DRY_RUN ? '[DRY-RUN] ' : ''}academic: ${prominentAuthors.size} authors promoted to person entities (≥${AUTHOR_MIN_WORKS} works + overrides)`
 	);
-
-	const db = openDb(url!, authToken);
 
 	// Resume point (full runs only). On resume we still count already-done records as
 	// SEEN so drift never marks them missing, but we do NOT re-emit them.
@@ -449,11 +433,20 @@ async function main() {
 	console.log(
 		`${DRY_RUN ? '[DRY-RUN] ' : ''}done: emitted=${stats.emitted} applied=${stats.applied} noop=${stats.noop} candidate=${stats.candidate} conflict=${stats.conflict} other=${stats.other} untitled-skipped=${stats.skippedUntitled} resume-skipped=${stats.resumeSkipped} drifted-missing=${drifted} origins=${runByOrigin.size || seenByOrigin.size}`
 	);
+	return summarize('academic', stats, drifted, {
+		emitted: stats.emitted,
+		untitledSkipped: stats.skippedUntitled,
+		resumeSkipped: stats.resumeSkipped,
+		origins: runByOrigin.size || seenByOrigin.size
+	});
 }
 
-main()
-	.then(() => process.exit(0))
-	.catch((err) => {
-		console.error('\n✗ import:academic failed:', err);
-		process.exit(1);
-	});
+if (import.meta.main) {
+	const { db, opts } = parseImporterCli();
+	run(db, opts)
+		.then(() => process.exit(0))
+		.catch((err) => {
+			console.error('\n✗ import:academic failed:', err);
+			process.exit(1);
+		});
+}

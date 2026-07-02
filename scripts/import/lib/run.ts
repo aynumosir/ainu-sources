@@ -21,8 +21,109 @@ import { and, eq, ne } from 'drizzle-orm';
 import { sources, sourceObservationRuns, sourceObservedRecords } from '../../../src/lib/server/db/schema';
 import { mergeSourceObservation, NORMALIZER_VERSION } from '../../../src/lib/server/merge';
 import type { Db, MergeInput, MergeResult } from '../../../src/lib/server/merge';
+import { openDb } from './entities';
 
 const uuid = () => crypto.randomUUID();
+
+// ── orchestrator contract (import-all.ts) ──────────────────────────────────────
+//
+// Every importer exposes `run(db, opts) → ImporterSummary`, guarded by an
+// `import.meta.main` CLI block so it stays runnable standalone (`bun run
+// import:<feed>`) AND callable by the import-all orchestrator on ONE shared db
+// handle. `run` opens its OWN source_observation_runs row (openRun/closeRun) and
+// returns a normalized summary the orchestrator aggregates.
+
+/** Flags the orchestrator (or a standalone CLI) passes down to an importer's run(). */
+export interface ImporterRunOptions {
+	/** derive + report but write nothing (pass-through --dry-run). */
+	dryRun?: boolean;
+	/** cap the number of upstream records processed (pass-through --limit). */
+	limit?: number;
+}
+
+/**
+ * The per-importer result the orchestrator aggregates. The five load-bearing
+ * counters (applied · noop · candidate · conflict · drifted) are normalized across
+ * every feed; `other` catches any residual engine status (e.g. a `proposed`
+ * routed to review when SOURCES_ENABLE_PROPOSE is on) and `detail` carries the
+ * importer-specific extras (entry counts, byType edges, filled columns, …).
+ */
+export interface ImporterSummary {
+	feed: string;
+	applied: number;
+	noop: number;
+	candidate: number;
+	conflict: number;
+	drifted: number;
+	other: number;
+	detail?: Record<string, unknown>;
+}
+
+/** The mutable per-record status counters an emit-loop importer keeps. */
+export type StatusTally = {
+	applied: number;
+	noop: number;
+	candidate: number;
+	conflict: number;
+	other: number;
+};
+
+/** Classify one MergeResult.status into a tally bucket (shared, so every feed agrees). */
+export function tallyStatus(t: StatusTally, status: string): void {
+	if (status === 'noop') t.noop += 1;
+	else if (status === 'applied' || status === 'partial') t.applied += 1;
+	else if (status === 'candidate') t.candidate += 1;
+	else if (status === 'conflict') t.conflict += 1;
+	else t.other += 1; // 'proposed' (propose path) and anything unforeseen
+}
+
+/** Fold a loose stats object + drift count into the normalized orchestrator summary. */
+export function summarize(
+	feed: string,
+	stats: Partial<Record<'applied' | 'noop' | 'candidate' | 'conflict' | 'other', number>>,
+	drifted: number,
+	detail?: Record<string, unknown>
+): ImporterSummary {
+	return {
+		feed,
+		applied: stats.applied ?? 0,
+		noop: stats.noop ?? 0,
+		candidate: stats.candidate ?? 0,
+		conflict: stats.conflict ?? 0,
+		other: stats.other ?? 0,
+		drifted,
+		detail
+	};
+}
+
+/**
+ * Standalone-CLI bootstrap shared by every importer's `import.meta.main` guard.
+ * Parses --db/DATABASE_URL (+ --token) into a live db handle and --dry-run/--limit
+ * into ImporterRunOptions, exiting (never throwing) on a misconfigured invocation
+ * so a directly-run importer fails fast with a clear message.
+ */
+export function parseImporterCli(): { db: Db; opts: ImporterRunOptions } {
+	const argValue = (flag: string): string | undefined => {
+		const i = process.argv.indexOf(flag);
+		if (i !== -1 && i + 1 < process.argv.length) return process.argv[i + 1];
+		const eqForm = process.argv.find((a) => a.startsWith(`${flag}=`));
+		return eqForm ? eqForm.slice(flag.length + 1) : undefined;
+	};
+	const url = argValue('--db') ?? process.env.DATABASE_URL;
+	if (!url) {
+		console.error('✗ No database specified. Pass --db file:/path/to/db or set DATABASE_URL.');
+		process.exit(1);
+	}
+	const isFile = url.startsWith('file:');
+	const authToken = argValue('--token') ?? process.env.DATABASE_AUTH_TOKEN;
+	if (!isFile && !authToken) {
+		console.error('✗ Remote DATABASE_URL given but no auth token (--token or DATABASE_AUTH_TOKEN).');
+		process.exit(1);
+	}
+	const dryRun = process.argv.includes('--dry-run');
+	const limit = argValue('--limit') ? Number(argValue('--limit')) : Infinity;
+	return { db: openDb(url, authToken), opts: { dryRun, limit } };
+}
 
 export interface OpenRunOpts {
 	origin: string;
