@@ -127,3 +127,75 @@ describe('getPerson slug resolution matches seed.ts', () => {
 		expect(await db.select().from(schema.persons)).toHaveLength(1);
 	});
 });
+
+describe('getPerson cross-form / cross-run identity folding (Risk A)', () => {
+	it('folds a romaji form and the kanji form of one person onto ONE person id', async () => {
+		// 'Hideo Kirikae' has NO canon alias (only 'Kirikae' / '切替英雄' do) → it would
+		// get slug 'hideo-kirikae', while '切替英雄' resolves to canon 'kirikae-hideo'.
+		// The romaji fold key (r:hideo kirikae) collapses them to one person.
+		const p1 = await getPerson(db, 'Hideo Kirikae', STAMP);
+		const p2 = await getPerson(db, '切替英雄', STAMP);
+		expect(p2).toBe(p1);
+		expect(await db.select().from(schema.persons)).toHaveLength(1);
+	});
+
+	it('resolves a name to an EXISTING DB person by romaji-fold WITHOUT creating one', async () => {
+		// Simulate a bootstrapped canon person (as seed.ts wrote it).
+		const bootId = crypto.randomUUID();
+		await db.insert(schema.persons).values({
+			id: bootId,
+			slug: 'kirikae-hideo',
+			name: '切替 英雄',
+			nameEn: 'Kirikae Hideo',
+			status: 'active'
+		});
+		// A differently-computed form (slug would be 'hideo-kirikae') must fold onto it.
+		const resolved = await getPerson(db, 'Hideo Kirikae', STAMP);
+		expect(resolved).toBe(bootId);
+		const people = await db.select().from(schema.persons);
+		expect(people).toHaveLength(1); // no duplicate minted
+		expect(people[0].id).toBe(bootId);
+		expect(people[0].slug).toBe('kirikae-hideo'); // slug/id untouched
+	});
+
+	it('backfills a bootstrapped romaji-display row to kanji + researchmap (non-projected, idempotent)', async () => {
+		// A person first seen as bare romaji, with no researchmap.
+		const bootId = crypto.randomUUID();
+		await db.insert(schema.persons).values({
+			id: bootId,
+			slug: 'sakaguchi-ryo',
+			name: 'Sakaguchi Ryo',
+			nameEn: 'Sakaguchi Ryo',
+			status: 'active'
+		});
+		// The kanji form (PERSON_ENRICH 阪口諒 → romaji 'Sakaguchi Ryo' + researchmap)
+		// folds onto it via the romaji key and upgrades the display — never the slug/id.
+		const r1 = await getPerson(db, '阪口諒', STAMP);
+		expect(r1).toBe(bootId);
+		let people = await db.select().from(schema.persons);
+		expect(people).toHaveLength(1);
+		expect(people[0].id).toBe(bootId);
+		expect(people[0].slug).toBe('sakaguchi-ryo');
+		expect(people[0].name).toBe('阪口 諒'); // romaji-display upgraded to kanji
+		expect(people[0].researchmap).toBe('SAKAGUCHI_Ryo'); // backfilled
+		// Second resolution of the same form is a pure noop.
+		const r2 = await getPerson(db, '阪口諒', STAMP);
+		expect(r2).toBe(bootId);
+		people = await db.select().from(schema.persons);
+		expect(people).toHaveLength(1);
+	});
+
+	it('idempotency: resolving the same name twice creates exactly one person', async () => {
+		const a = await getPerson(db, '知里眞志保', STAMP); // 眞 variant of 真, PERSON_ENRICH-known
+		const b = await getPerson(db, '知里眞志保', STAMP);
+		expect(b).toBe(a);
+		expect(await db.select().from(schema.persons)).toHaveLength(1);
+	});
+
+	it('an unrelated name creates a distinct person', async () => {
+		const known = await getPerson(db, '中川裕', STAMP);
+		const other = await getPerson(db, 'Jane Q. Fieldworker', STAMP);
+		expect(other).not.toBe(known);
+		expect(await db.select().from(schema.persons)).toHaveLength(2);
+	});
+});

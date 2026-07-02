@@ -11,18 +11,24 @@
  * it is absent.
  *
  * Idempotency (the golden-projection gate):
- *   • entities keyed on their UNIQUE `slug` column (persons/places/institutions/tags)
- *     → find-or-create never mints a second row for the same slug.
+ *   • places/institutions/tags keyed on their UNIQUE `slug` column → find-or-create
+ *     never mints a second row for the same slug.
+ *   • persons additionally fold cross-form / cross-run name variants onto the
+ *     bootstrapped identity via a DB-seeded fold-key index (see getPerson, Risk A),
+ *     so a re-import resolves each spelling to the SAME person seed created rather
+ *     than a slug-computed duplicate.
  *   • join rows: the durability UNIQUE(source,entity,role) indexes are DEFERRED
  *     (see schema.ts), so we can't rely on onConflictDoNothing. Instead an explicit
  *     existence check `SELECT 1 … WHERE sourceId=? AND entityId=? AND role=?` gates
  *     the insert — a second run adds ZERO join rows, preserving the existing
  *     sortOrder / role / notes / callNumber that the golden projection captures.
  *
- * Nothing here mutates a projected column of an EXISTING row: on a find we return the
+ * Nothing here mutates a PROJECTED column of an EXISTING row: on a find we return the
  * id untouched; on a create we stamp only durability columns (origin / status /
- * firstSeenAt / lastSeenAt) plus the entity's own display fields — none of which,
- * for an already-present entity, is ever revisited. Join rows carry observationId /
+ * firstSeenAt / lastSeenAt) plus the entity's own display fields. The one write to an
+ * existing row is getPerson's monotonic gap-fill of person name/nameEn/researchmap/
+ * wikidata — all OUTSIDE the golden projection (which keys persons on slug) and
+ * idempotent (second identical run is a noop). Join rows carry observationId /
  * confidence provenance stamps that are outside the golden projection.
  */
 import { and, eq, sql } from 'drizzle-orm';
@@ -32,16 +38,14 @@ import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import * as schema from '../../../src/lib/server/db/schema';
 import {
 	canonicalSlugFor,
-	parsePersonName,
-	PERSON_ENRICH,
-	PERSON_CANON,
-	stripParens,
-	slugify,
-	djb2,
+	derivePerson,
+	personFoldKeys,
+	PERSON_CANON_SLUGS,
 	hasCJK,
 	splitNakaguro,
 	INSTITUTION_RE,
 	placesFor,
+	type PersonDerivation,
 	type GazEntry,
 	type InstEntry
 } from './derive';
@@ -68,56 +72,132 @@ export interface EntityStamp {
 const stampNow = (s: EntityStamp) => s.now ?? new Date();
 
 // ---------------------------------------------------------------------------
-// Persons
+// Persons — cross-form / cross-run identity folding (Risk A)
 // ---------------------------------------------------------------------------
 
 /**
- * Resolve a free-form author string to a person id, find-by-slug-or-create.
+ * seed.ts collapsed the many spellings of one scholar/narrator (bare surname,
+ * "Last, First", CJK, reversed romaji, macron variants, née names …) into ONE
+ * person via an in-memory `personByKey` map keyed on FOLD KEYS — canon slug,
+ * diacritic-folded order-insensitive romaji, despaced kanji, alnum Latin — and the
+ * 809-person bootstrap DB was built from it. A re-import must reproduce that
+ * folding, or a form that folds to an existing person under a DIFFERENT computed
+ * slug mints a DUPLICATE person + join (Risk A: 4 duplicate speaker joins observed
+ * in the corpus feed, far worse for the 5.7k-record academic feed).
  *
- * The slug is computed by the SAME logic seed.ts's in-memory `getPerson` used —
- * `canonicalSlugFor` (alias/canon fold) first, else a readable slug from the
- * parsed display / enrichment romaji, else a djb2 hash — so a known scholar
- * (中川裕 / "Nakagawa, Hiroshi" / "Hiroshi Nakagawa") resolves to the one
- * canonical row that already exists. Cross-form romaji-key merging that does NOT
- * go through a canon alias (seed's in-memory personByKey) is a documented
- * follow-up (Risk A); for the dictionaries feed authors are canon- or slug-simple.
+ * The fold-key INDEX below is seed's personByKey rebuilt FROM THE DB's existing
+ * persons: every stored person is registered under all of its fold keys, so an
+ * incoming name whose fold key matches resolves to the bootstrapped person instead
+ * of creating a new one. It is lazily loaded once per Db handle and kept live —
+ * a person created mid-run is registered so a later cross-form reference in the
+ * SAME run folds onto it (exactly as seed's map accumulated).
+ */
+interface PersonIndex {
+	byKey: Map<string, string>;
+}
+const personIndexByDb = new WeakMap<Db, Promise<PersonIndex>>();
+
+/** Register a person id under fold keys, first-writer-wins (seed's map semantics). */
+function registerPersonKeys(idx: PersonIndex, keys: string[], id: string): void {
+	for (const k of keys) if (!idx.byKey.has(k)) idx.byKey.set(k, id);
+}
+
+/** The fold keys a DB person row is findable under (canon recovered from its slug). */
+function personKeysForRow(row: { slug: string; name: string; nameEn: string | null }): string[] {
+	const canon = PERSON_CANON_SLUGS.has(row.slug) ? row.slug : (canonicalSlugFor(row.name) ?? null);
+	return personFoldKeys({ canon, name: row.name, nameEn: row.nameEn });
+}
+
+/** Build seed's personByKey, SEEDED FROM THE DB, so resolution matches the bootstrap. */
+async function loadPersonIndex(db: Db): Promise<PersonIndex> {
+	const rows = await db
+		.select({ id: schema.persons.id, slug: schema.persons.slug, name: schema.persons.name, nameEn: schema.persons.nameEn })
+		.from(schema.persons)
+		.orderBy(schema.persons.slug); // deterministic order → stable first-writer-wins
+	const idx: PersonIndex = { byKey: new Map() };
+	for (const p of rows) registerPersonKeys(idx, personKeysForRow(p), p.id);
+	return idx;
+}
+
+function personIndex(db: Db): Promise<PersonIndex> {
+	let p = personIndexByDb.get(db);
+	if (!p) {
+		p = loadPersonIndex(db);
+		personIndexByDb.set(db, p);
+	}
+	return p;
+}
+
+/**
+ * Like seed's merge-on-hit: fill richer, NON-projected display fields on an already
+ * resolved person — a romaji-only display upgraded to kanji, and researchmap /
+ * wikidata backfilled when absent. name/nameEn/researchmap/wikidata are OUTSIDE the
+ * golden projection (which keys persons on slug), and the upgrade is monotonic
+ * (gap-fill + romaji→kanji only) so the SECOND identical run is a pure noop. The
+ * slug and id are NEVER touched.
+ */
+async function maybeUpgradePerson(db: Db, id: string, d: PersonDerivation): Promise<void> {
+	const [row] = await db
+		.select({
+			name: schema.persons.name,
+			nameEn: schema.persons.nameEn,
+			researchmap: schema.persons.researchmap,
+			wikidata: schema.persons.wikidata
+		})
+		.from(schema.persons)
+		.where(eq(schema.persons.id, id))
+		.limit(1);
+	if (!row) return;
+	const patch: Record<string, unknown> = {};
+	if (d.name && hasCJK(d.name) && !hasCJK(row.name)) patch.name = d.name;
+	if (d.nameEn && !row.nameEn) patch.nameEn = d.nameEn;
+	else if (d.curatedNameEn && d.nameEn && row.nameEn !== d.nameEn) patch.nameEn = d.nameEn;
+	if (d.researchmap && !row.researchmap) patch.researchmap = d.researchmap;
+	if (d.wikidata && !row.wikidata) patch.wikidata = d.wikidata;
+	if (Object.keys(patch).length === 0) return;
+	await db.update(schema.persons).set(patch).where(eq(schema.persons.id, id));
+}
+
+/**
+ * Resolve a free-form author string to a person id, folding cross-form / cross-run
+ * name variants onto the SAME person the bootstrap created (Risk A). Computes the
+ * incoming form's fold keys and probes the DB-seeded index in priority order —
+ * canon slug, folded romaji, despaced kanji, alnum Latin — before creating; on a
+ * hit it returns the existing id (and gap-fills richer display fields), on a miss
+ * it creates by slug and registers the new person's keys for the rest of the run.
+ * Deterministic + idempotent: a 2nd identical run mints zero persons and zero joins.
  */
 export async function getPerson(db: Db, name: string, stamp: EntityStamp): Promise<string> {
-	const parsed = parsePersonName(name);
-	const display = parsed.name;
-	const canon = canonicalSlugFor(name.trim()) ?? canonicalSlugFor(display);
-	const enrich =
-		(canon ? PERSON_ENRICH[canon] : undefined) ??
-		PERSON_ENRICH[name.trim()] ??
-		PERSON_ENRICH[stripParens(display)] ??
-		PERSON_ENRICH[stripParens(display).replace(/\s+/g, '')] ??
-		PERSON_ENRICH[stripParens(name.trim()).replace(/\s+/g, '')];
-	const c = canon ? PERSON_CANON[canon] : undefined;
-	const pName = c ? c.name : display;
-	const pNameEn: string | null =
-		enrich?.nameEn ?? (c ? (c.nameEn ?? (hasCJK(c.name) ? null : c.name)) : parsed.nameEn);
-	const researchmap: string | null = enrich?.researchmap ?? null;
-	const wikidata: string | null = enrich?.wikidata ?? null;
-
-	const baseSlug = canon
-		? canon
-		: slugify(stripParens(display)) || (pNameEn ? slugify(pNameEn) : '') || `p-${djb2(display)}`;
+	const d = derivePerson(name);
+	const keys = personFoldKeys(d);
+	const idx = await personIndex(db);
+	for (const k of keys) {
+		const hit = idx.byKey.get(k);
+		if (hit) {
+			await maybeUpgradePerson(db, hit, d);
+			return hit;
+		}
+	}
 
 	const now = stampNow(stamp);
-	return resolveBySlug(db, schema.persons, baseSlug, {
+	const id = await resolveBySlug(db, schema.persons, d.slug, {
 		id: uuid(),
-		slug: baseSlug,
-		name: pName,
-		nameEn: pNameEn,
+		slug: d.slug,
+		name: d.name,
+		nameEn: d.nameEn,
 		nameKana: null,
 		nameAin: null,
-		researchmap,
-		wikidata,
+		researchmap: d.researchmap,
+		wikidata: d.wikidata,
 		status: 'active',
 		origin: stamp.origin,
 		firstSeenAt: now,
 		lastSeenAt: now
 	});
+	// resolveBySlug may have FOUND a same-slug row rather than inserting; either way
+	// index this form's keys → the winning id so the rest of the run folds onto it.
+	registerPersonKeys(idx, keys, id);
+	return id;
 }
 
 // ---------------------------------------------------------------------------
