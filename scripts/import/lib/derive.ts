@@ -914,3 +914,48 @@ export const CATALOG_OVERRIDES: Record<
 	'1738_Krasheninnikov_Latino-Curilice': { languages: ['ain', 'lat'], scripts: ['latn'] }
 };
 
+// Curated slug + English title per aggregated corpus collection (keyed by the
+// raw `collection_lv1` value in ainu-corpora/data.jsonl). Extracted VERBATIM from
+// seed.ts's `seedCorpus` so the corpus importer derives byte-identical titleEn /
+// slug values — any drift here would break the golden projection gate. A missing
+// key falls back to a hashed slug + null titleEn (see the importer).
+export const CORPUS_META: Record<string, { slug: string; titleEn: string }> = {
+	'アイヌ神謡集': { slug: 'ainu-shinyoshu', titleEn: "Ainu Shin'yōshū (Chiri Yukie)" },
+	'アイヌ語訳新約聖書': { slug: 'ainu-new-testament', titleEn: 'Ainu New Testament' },
+	'アイヌ語口承文芸コーパス': { slug: 'ninjal-folklore-corpus', titleEn: 'NINJAL Ainu Folklore Corpus' },
+	'アイヌ語ラジオ講座テキスト': { slug: 'ainu-radio-course', titleEn: 'Ainu Radio Course Texts' },
+	'浅井タケ昔話全集 I, II': { slug: 'asai-take-folktales', titleEn: 'Asai Take Folktale Collection I, II' },
+	'トピック別 アイヌ語会話辞典': { slug: 'topical-ainu-conversation-corpus', titleEn: 'Topical Ainu Conversation Dictionary' },
+	'アイヌ語鵡川方言日本語‐アイヌ語辞典': { slug: 'mukawa-dialect-dictionary-corpus', titleEn: 'Mukawa Dialect Japanese–Ainu Dictionary' },
+	'アイヌ語音声資料': { slug: 'ainu-audio-materials', titleEn: 'Ainu Audio Materials' },
+	'ニューエクスプレスプラス アイヌ語': { slug: 'new-express-plus-ainu', titleEn: 'New Express Plus: Ainu' },
+	'ニューエクスプレス・スペシャル 日本語の隣人たち I+II': { slug: 'new-express-special-neighbors', titleEn: 'New Express Special: Neighbors of Japanese I+II' },
+	'CDエクスプレス アイヌ語': { slug: 'cd-express-ainu', titleEn: 'CD Express: Ainu' },
+	'千徳太郎治のピウスツキ宛書簡': { slug: 'sentoku-pilsudski-letters', titleEn: "Sentoku Tarōji's Letters to Piłsudski" },
+	'アイヌ語・アイヌ文化研究の課題': { slug: 'chiba-ainu-research-issues', titleEn: 'Issues in Ainu Language & Culture Research (Chiba U.)' },
+	'アイヌタイムズ': { slug: 'ainu-times', titleEn: 'Ainu Times' },
+	'アイヌ語アーカイブ': { slug: 'nam-ainu-archive', titleEn: 'National Ainu Museum Language Archive' },
+	'AA研アイヌ語資料': { slug: 'ilcaa-ainu-materials', titleEn: 'ILCAA Ainu Language Materials' },
+	'アイヌ民譚集': { slug: 'ainu-mintanshu', titleEn: 'Ainu Mintanshū (Chiri Mashiho)' },
+	'アイヌ口承文芸テキスト集': { slug: 'ainu-oral-literature-texts', titleEn: 'Ainu Oral Literature Text Collection' },
+	'アイヌの知恵・ウパㇱクマ1': { slug: 'upaskuma-1', titleEn: 'Ainu Wisdom: Upaskuma 1' },
+	'アイヌの知恵・ウパㇱクマ2': { slug: 'upaskuma-2', titleEn: 'Ainu Wisdom: Upaskuma 2' },
+	'ウポポイ館内展示': { slug: 'upopoy-exhibits', titleEn: 'Upopoy Exhibition Texts' },
+	'エンチウ（樺太アイヌ語）会話入門': { slug: 'enchiw-sakhalin-conversation', titleEn: 'Enchiw (Sakhalin Ainu) Conversation Primer' },
+	'アイヌ語復興に関わる諸問題': { slug: 'ainu-revitalization-issues', titleEn: 'Issues in Ainu Language Revitalization' },
+	'アイヌ語弁論大会': { slug: 'ainu-speech-contest', titleEn: 'Ainu Language Speech Contest' },
+	'長濱清蔵のアイヌ語': { slug: 'nagahama-seizo-ainu', titleEn: "Nagahama Seizō's Ainu" },
+	'千葉大学大学院人文公共学府研究プロジェクト報告書': { slug: 'chiba-grad-report', titleEn: 'Chiba University Graduate Research Project Report' },
+	'アイヌ語教材テキスト': { slug: 'ainu-teaching-materials', titleEn: 'Ainu Language Teaching Materials' },
+	'アコㇿイタㇰ': { slug: 'akor-itak', titleEn: 'Akor Itak ("Our Language") Textbook' },
+	'ウポポイ職員インタビュー': { slug: 'upopoy-staff-interviews', titleEn: 'Upopoy Staff Interviews' },
+	'カムイユカㇻを聞いてアイヌ語を学ぶ': { slug: 'learning-ainu-through-kamuy-yukar', titleEn: 'Learning Ainu by Listening to Kamuy Yukar' },
+	'北海道大学所在地の先住民族に対する敬意の表明': { slug: 'hokudai-indigenous-respect-statement', titleEn: "Statement of Respect for the Indigenous Peoples of Hokkaido University's Location" },
+	'北海道立アイヌ民族文化研究センター紀要': { slug: 'hokkaido-ainu-culture-center-bulletin', titleEn: 'Bulletin of the Hokkaido Ainu Culture Research Center' },
+	'川上まつ子の伝承': { slug: 'kawakami-matsuko-traditions', titleEn: 'Oral Traditions of Kawakami Matsuko' },
+	'平取町アイヌ口承文芸': { slug: 'biratori-ainu-oral-literature', titleEn: 'Biratori Town Ainu Oral Literature' },
+	'知里幸恵のウウェペケレ（昔話）': { slug: 'chiri-yukie-uwepeker', titleEn: "Chiri Yukie's Uwepeker (Folktales)" },
+	'葛野辰次郎の伝承': { slug: 'kuzuno-tatsujiro-traditions', titleEn: 'Oral Traditions of Kuzuno Tatsujirō' },
+	'鍋沢元蔵筆録ノート': { slug: 'nabesawa-motozo-notebooks', titleEn: "Nabesawa Motozō's Transcription Notebooks" }
+};
+
