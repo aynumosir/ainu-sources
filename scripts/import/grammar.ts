@@ -32,7 +32,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { parseYear, hasCJK, TAG_DEFS } from './lib/derive';
+import { parseYear, hasCJK, detectScripts, TAG_DEFS } from './lib/derive';
 import { openDb, addPersons, attachTags, type EntityStamp } from './lib/entities';
 import { openRun, closeRun, emitSource, driftMissing } from './lib/run';
 import type { LinkInput, MergeInput } from '../../src/lib/server/merge';
@@ -161,14 +161,20 @@ function collectRecords(): GrammarRecord[] {
 			const ag = AG_LINKS[provenancePath];
 			const doi = ag?.doi ?? null;
 			const bookTitle = known?.title ?? ag?.title ?? `${author}（${year}）`;
+			const bookTitleEn = known?.titleEn ?? ag?.titleEn ?? `${author} (${year})`;
 			const fields: Record<string, unknown> = {
 				title: bookTitle,
-				titleEn: known?.titleEn ?? ag?.titleEn ?? `${author} (${year})`,
+				titleEn: bookTitleEn,
 				category: 'secondary',
 				type: 'grammar',
 				author,
 				languages: ['ain'],
-				scripts: ['latn']
+				// seed.ts's global post-pass (seed.ts:1815) overwrites the block's hardcoded
+				// ['latn'] with detectScripts(title, titleEn) for EVERY source (title glyphs
+				// are ground truth). Replicate the EFFECTIVE derivation so scripts (a
+				// set_union field) is a value-noop on the enriched clone rather than adding
+				// a stray 'latn' to a Japanese-titled work.
+				scripts: detectScripts(bookTitle, bookTitleEn)
 			};
 			withYear(fields, year);
 			records.push({ provenancePath, fields, author, tagTexts: [bookTitle, 'grammar'], doi, links: buildAgLinks(provenancePath, doi) });
@@ -194,15 +200,18 @@ function collectRecords(): GrammarRecord[] {
 			const ag = AG_LINKS[provenancePath];
 			const doi = ag?.doi ?? null;
 			const isJa = hasCJK(title);
+			const titleEn = isJa ? null : title; // seed: titleEn = isJa ? null : title
 			const fields: Record<string, unknown> = {
 				title,
 				category: 'secondary',
 				type,
 				author,
 				languages: isJa ? ['ain', 'jpn'] : ['ain', 'eng'],
-				scripts: ['latn']
+				// EFFECTIVE scripts = seed.ts:1815 global detectScripts(title, titleEn) post-pass,
+				// NOT the block's hardcoded ['latn'] (see the books branch).
+				scripts: detectScripts(title, titleEn)
 			};
-			if (!isJa) fields.titleEn = title; // seed: titleEn = isJa ? null : title (null ⇒ omitted)
+			if (!isJa) fields.titleEn = title; // null ⇒ omitted (matches OMIT-empties rule)
 			withYear(fields, year);
 			// seed sweeps [title, <literal type keyword>]: 'grammar' for articles, 'presentation' for presentations
 			const tagKeyword = type === 'article' ? 'grammar' : 'presentation';
