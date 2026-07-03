@@ -173,7 +173,18 @@ export async function mergeSourceObservation(
 
 	// route on the gate: propose ⇒ PR (no canonical write); auto_apply / reject ⇒
 	// commit (reject records the rejected observation without mutating canonical).
-	if (plan.gate.mode === 'propose') return openChangeRequest(db, plan);
+	if (plan.gate.mode === 'propose') {
+		// EMPTY-DIFF SHORT-CIRCUIT: a propose-gated re-observation that ATTACHES to an
+		// existing source but would change NOTHING (every field noop / equal-value) is a
+		// would-be-noop, not a review item. Opening a change request for it floods the
+		// queue with spurious "changes nothing" proposals (1591 on a full harvest —
+		// medium-match extracted/curated re-observations). Record the observation as a
+		// `noop` (ledger + idempotency) and return — NO change request, NO canonical
+		// write. new_source / identity_conflict / a real attach-diff are NOT empty and
+		// still propose (see {@link isEmptyDiffAttach}).
+		if (isEmptyDiffAttach(plan)) return recordEmptyDiffNoop(db, plan);
+		return openChangeRequest(db, plan);
+	}
 	return commitMerge(db, plan);
 }
 
@@ -1179,6 +1190,103 @@ export async function openChangeRequest(db: Db, plan: MergePlan): Promise<Propos
 		rejectedClaims: plan.rejectedClaims,
 		conflicts: [...plan.conflicts, ...plan.predictedConflicts],
 		lifecycleEvents: []
+	};
+}
+
+// ---------------------------------------------------------------------------
+// Empty-diff short-circuit (propose path) — a would-be-noop re-observation must
+// NOT open a change request. Records the observation as a plain noop instead.
+// ---------------------------------------------------------------------------
+
+/**
+ * Does a `propose`-gated plan ATTACH to an existing source but change NOTHING —
+ * i.e. is it a would-be-noop re-observation that must NOT open a change request?
+ *
+ * TRUE requires ALL of:
+ *   • the gate says `propose` and its kind is NOT `identity_conflict` (an ambiguous
+ *     identity is reviewed even when the values happen to match — a same-band /
+ *     identifier conflict also lands here, so this one check excludes it);
+ *   • it is NOT a lifecycle op (a soft_delete / hide changes STATUS, not projection
+ *     scalars, so its diff looks empty but IS a real pending change to review);
+ *   • identity resolved to an ATTACH on a real existing sourceId (a new/candidate
+ *     source always proposes) and the simulated diff is not `isNewSource`;
+ *   • the diff has NO changed scalar fields and NO changed collections; and
+ *   • no predicted held/conflict field outcome represents a PENDING change — i.e.
+ *     none whose held / conflicting value actually DIFFERS from canonical. The
+ *     simulator predicts `held_below` for an equal-value LOWER-rank restatement
+ *     (which the committer treats as a plain noop); that equal-value hold is NOT a
+ *     disagreement worth reviewing. A held value that genuinely DIFFERS from
+ *     canonical is a real (losing) proposal — it keeps proposing.
+ *
+ * REQUIRES a SIMULATED plan (`plan.diff` populated); the public propose route
+ * always simulates. A null diff ⇒ false (fall through to `openChangeRequest`).
+ */
+export function isEmptyDiffAttach(plan: MergePlan): boolean {
+	if (plan.gate.mode !== 'propose') return false;
+	if (plan.gate.kind === 'identity_conflict') return false;
+	if (plan.input.lifecycle) return false;
+	const id = plan.identity;
+	if (id.action !== 'attach' || !id.sourceId) return false;
+	const diff = plan.diff;
+	if (!diff || diff.isNewSource) return false;
+	if (diff.changedScalarFields.length > 0 || diff.changedCollections.length > 0) return false;
+	// a held/conflict outcome is a PENDING change only when its value truly differs
+	// from canonical; an equal-value hold (lower-rank restatement) is a plain noop.
+	const hasPendingClaim = plan.predictedFieldOutcomes.some(
+		(o) =>
+			(o.status === 'held_below' || o.status === 'conflict') &&
+			JSON.stringify(o.before ?? null) !== JSON.stringify(o.after ?? null)
+	);
+	return !hasPendingClaim;
+}
+
+/**
+ * Record a propose-gated EMPTY-DIFF attach ({@link isEmptyDiffAttach}) as a plain
+ * `noop`: append the observation to the ledger (idempotency + audit — a re-run
+ * dedupes on the same (origin, recordId, contentHash) and dup-noops) and touch the
+ * observed-record, then return a `noop` {@link MergeResult}. Writes NO change
+ * request, NO diff row, and NO canonical data — a would-be-noop mutates nothing.
+ */
+async function recordEmptyDiffNoop(db: Db, plan: MergePlan): Promise<MergeResult> {
+	const input = plan.input;
+	const nv = input.normalizerVersion ?? NORMALIZER_VERSION;
+	const observationId = uuid();
+
+	await upsertObservedRecord(db, {
+		origin: input.origin,
+		originRecordId: input.originRecordId,
+		contentHash: plan.contentHash,
+		nv,
+		presence: input.presence ?? 'seen'
+	});
+	await db.insert(sourceObservations).values({
+		id: observationId,
+		origin: input.origin,
+		originRecordId: input.originRecordId,
+		contentHash: plan.contentHash,
+		normalizerVersion: nv,
+		runId: input.runId ?? null,
+		derivation: input.derivation,
+		confidence: input.confidence,
+		evidence: input.evidence ?? 0,
+		payload: plan.payload,
+		rawPayload: input.rawPayload ?? null,
+		status: 'noop',
+		matchDecision: plan.identity.matchDecision,
+		actor: input.actor ?? null,
+		createdAt: new Date()
+	});
+
+	return {
+		observationId,
+		sourceId: plan.identity.sourceId,
+		status: 'noop',
+		appliedClaims: [],
+		heldClaims: plan.heldClaims,
+		rejectedClaims: plan.rejectedClaims,
+		conflicts: [],
+		lifecycleEvents: [],
+		gate: plan.gate
 	};
 }
 

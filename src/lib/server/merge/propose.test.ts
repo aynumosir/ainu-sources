@@ -22,7 +22,8 @@ import * as schema from '../db/schema';
 import {
 	mergeSourceObservation,
 	planSourceObservation,
-	openChangeRequest
+	openChangeRequest,
+	isEmptyDiffAttach
 } from './merge-source-observation';
 import type { MergeInput, ProposedMergeResult } from './types';
 
@@ -266,5 +267,155 @@ describe('flag ON — auto_apply paths still commit canonical (not proposed)', (
 		// editorial edit is NOT proposed — it committed canonical data.
 		const [src] = await db.select().from(schema.sources).where(eq(schema.sources.id, sid));
 		expect(src.summary).toBe('editorial');
+	});
+});
+
+describe('empty-diff short-circuit — a would-be-noop attach is a noop, not a proposal', () => {
+	/** an extracted/curated-style re-observation that ATTACHES via the seed's strong
+	 *  id but carries EXACTLY the seed's fields ⇒ the merge changes nothing. Low-trust
+	 *  derivation keeps the gate at `propose` even on a clean attach, isolating the
+	 *  empty-diff short-circuit from the gate decision. */
+	const noopReobservation = (over: Partial<MergeInput>): MergeInput => ({
+		origin: 'openalex',
+		originRecordId: 'openalex:noop-1',
+		derivation: 'llm_extraction',
+		confidence: 0.9,
+		evidence: 2,
+		identifiers: [{ kind: 'doi', value: '10.1234/seed' }],
+		fields: { title: 'A Work', type: 'article', category: 'secondary' },
+		...over
+	});
+
+	it('a propose-gated attach with an EMPTY diff → noop, 0 change requests, observation recorded', async () => {
+		await seedSource(); // flag OFF ⇒ the seed auto-applies (a real, attachable source)
+		enablePropose();
+		const before = await counts();
+
+		// the plan the router sees: propose-gated, attaches to the seed, empty diff.
+		const plan = await planSourceObservation(db, noopReobservation({}), { simulate: true });
+		expect(plan.gate.mode).toBe('propose');
+		expect(plan.gate.kind).not.toBe('identity_conflict');
+		expect(plan.identity.action).toBe('attach');
+		expect(plan.diff?.changedScalarFields).toEqual([]);
+		expect(plan.diff?.changedCollections).toEqual([]);
+		expect(isEmptyDiffAttach(plan)).toBe(true);
+
+		const r = await mergeSourceObservation(db, noopReobservation({}));
+		const after = await counts();
+
+		expect(r.status).toBe('noop');
+		expect(after.changeRequests).toBe(before.changeRequests); // NO proposal opened
+		expect(after.diffs).toBe(before.diffs); // NO diff row written
+		expect(after.observations - before.observations).toBe(1); // observation IS recorded (idempotency/audit)
+		// ── ZERO canonical mutation ──
+		expect(after.sources).toBe(before.sources);
+		expect(after.provenance).toBe(before.provenance);
+		expect(after.claims).toBe(before.claims);
+		expect(after.links).toBe(before.links);
+
+		// the recorded observation is a `noop` in the ledger
+		const [obs] = await db
+			.select()
+			.from(schema.sourceObservations)
+			.where(eq(schema.sourceObservations.id, r.observationId));
+		expect(obs.status).toBe('noop');
+
+		// a SECOND identical run dedupes (same origin/recordId/contentHash) ⇒ still a
+		// noop, opens nothing, records no new observation (idempotent).
+		const r2 = await mergeSourceObservation(db, noopReobservation({}));
+		const after2 = await counts();
+		expect(r2.status).toBe('noop');
+		expect(after2.changeRequests).toBe(before.changeRequests);
+		expect(after2.observations).toBe(after.observations);
+	});
+
+	it('a propose-gated attach WITH a real scalar change → still opens a change request', async () => {
+		await seedSource(); // flag OFF ⇒ the seed auto-applies (a real, attachable source)
+		enablePropose();
+		const before = await counts();
+
+		// same clean attach, but now it adds a NEW field (summary) ⇒ non-empty diff.
+		const plan = await planSourceObservation(
+			db,
+			noopReobservation({
+				originRecordId: 'openalex:enrich-real',
+				fields: { title: 'A Work', type: 'article', category: 'secondary', summary: 'a new summary' }
+			}),
+			{ simulate: true }
+		);
+		expect(plan.gate.mode).toBe('propose');
+		expect(plan.diff?.changedScalarFields).toContain('summary');
+		expect(isEmptyDiffAttach(plan)).toBe(false);
+
+		const r = (await mergeSourceObservation(
+			db,
+			noopReobservation({
+				originRecordId: 'openalex:enrich-real',
+				fields: { title: 'A Work', type: 'article', category: 'secondary', summary: 'a new summary' }
+			})
+		)) as ProposedMergeResult;
+		const after = await counts();
+		expect(r.status).toBe('proposed');
+		expect(after.changeRequests - before.changeRequests).toBe(1); // real enrichment IS proposed
+	});
+
+	it('a new_source proposal is NOT an empty-diff noop (still proposes)', async () => {
+		enablePropose();
+		const before = await counts();
+
+		const plan = await planSourceObservation(
+			db,
+			observed({ originRecordId: 'crossref:new-not-noop' }),
+			{ simulate: true }
+		);
+		expect(plan.gate.kind).toBe('new_source');
+		expect(isEmptyDiffAttach(plan)).toBe(false);
+
+		const r = (await mergeSourceObservation(
+			db,
+			observed({ originRecordId: 'crossref:new-not-noop' })
+		)) as ProposedMergeResult;
+		const after = await counts();
+		expect(r.status).toBe('proposed');
+		expect(after.changeRequests - before.changeRequests).toBe(1);
+		expect(after.sources).toBe(before.sources); // no canonical source materialized
+	});
+
+	it('an identity_conflict proposal is NOT an empty-diff noop (propose even when values match)', async () => {
+		// two applied sources, each carrying a DISTINCT strong id (flag OFF ⇒ auto-apply).
+		const s1 = (
+			await mergeSourceObservation(
+				db,
+				observed({ originRecordId: 'crossref:c1', identifiers: [{ kind: 'doi', value: '10.1234/aaa' }] })
+			)
+		).sourceId!;
+		const s2 = (
+			await mergeSourceObservation(
+				db,
+				observed({ originRecordId: 'crossref:c2', identifiers: [{ kind: 'doi', value: '10.5678/bbb' }] })
+			)
+		).sourceId!;
+		expect(s1).not.toBe(s2);
+
+		enablePropose();
+		const before = await counts();
+		// one observation carrying BOTH strong ids ⇒ strong_multi ⇒ identity conflict —
+		// even though its fields exactly match the two sources' values.
+		const conflicting = observed({
+			originRecordId: 'crossref:conflict',
+			identifiers: [
+				{ kind: 'doi', value: '10.1234/aaa' },
+				{ kind: 'doi', value: '10.5678/bbb' }
+			]
+		});
+		const plan = await planSourceObservation(db, conflicting, { simulate: true });
+		expect(plan.gate.mode).toBe('propose');
+		expect(plan.gate.kind).toBe('identity_conflict');
+		expect(isEmptyDiffAttach(plan)).toBe(false);
+
+		const r = (await mergeSourceObservation(db, conflicting)) as ProposedMergeResult;
+		const after = await counts();
+		expect(r.status).toBe('proposed');
+		expect(after.changeRequests - before.changeRequests).toBe(1);
 	});
 });
