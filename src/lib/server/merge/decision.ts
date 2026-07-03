@@ -178,11 +178,18 @@ export function decideChangeGate(plan: MergePlan): GateDecision {
 		return { mode: 'auto_apply', reason: 'editorial_edit', kind: 'field_update' };
 
 	// 7. AUTO-APPLY: trusted harvest with a strong identity match.
+	//    A STRONG identifier match is itself high-confidence: the id certainty —
+	//    not the field confidence — is what a strong attach turns on, so the gate
+	//    keys on the 0.7 bootstrap band (curated_assertion 0.8, observed/extracted
+	//    0.7) rather than the 0.85 editorial-adjacent floor. Band precedence in the
+	//    writer still protects editorial/curated values from a lower-band harvest
+	//    claim, so lowering this threshold cannot clobber curated data — it only
+	//    lets trusted enrichments catch up instead of flooding the review queue.
 	if (
 		id.action === 'attach' &&
 		STRONG_ATTACH.has(id.matchDecision) &&
 		AUTO_TRUST.has(i.derivation) &&
-		i.confidence >= 0.85
+		i.confidence >= 0.7
 	)
 		return { mode: 'auto_apply', reason: 'strong_match_harvest', kind: 'field_update' };
 

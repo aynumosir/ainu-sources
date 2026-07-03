@@ -121,6 +121,57 @@ describe('decideChangeGate', () => {
 		expect(g.reason).toBe('strong_match_harvest');
 	});
 
+	// The harvest importers emit curated_assertion @0.8 and observed/extracted @0.7
+	// (kept ≤ the bootstrap band per Risk F). Because a STRONG identifier match is
+	// itself the certain thing, these attach cleanly and AUTO-APPLY — the gate keys
+	// on the 0.7 band, not the 0.85 editorial-adjacent floor. (Both were `propose`
+	// under the old 0.85 gate.)
+
+	it('curated_assertion @0.8 on a strong repo_path_exact attach ⇒ auto_apply (was propose)', () => {
+		const g = decideChangeGate(
+			makePlan({
+				input: { origin: 'ainu-grammar', derivation: 'curated_assertion', confidence: 0.8, evidence: 1 },
+				identity: { action: 'attach', matchDecision: 'repo_path_exact', hasStrongId: true }
+			})
+		);
+		expect(g.mode).toBe('auto_apply');
+		expect(g.reason).toBe('strong_match_harvest');
+		expect(g.kind).toBe('field_update');
+	});
+
+	it('observed @0.7 on a strong_single attach ⇒ auto_apply (was propose)', () => {
+		const g = decideChangeGate(
+			makePlan({
+				input: { origin: 'crossref', derivation: 'observed', confidence: 0.7, evidence: 1 },
+				identity: { action: 'attach', matchDecision: 'strong_single', hasStrongId: true }
+			})
+		);
+		expect(g.mode).toBe('auto_apply');
+		expect(g.reason).toBe('strong_match_harvest');
+	});
+
+	it('extracted @0.7 on a strong repo_path_exact attach ⇒ auto_apply (was propose)', () => {
+		const g = decideChangeGate(
+			makePlan({
+				input: { origin: 'github', derivation: 'extracted', confidence: 0.7, evidence: 1 },
+				identity: { action: 'attach', matchDecision: 'repo_path_exact', hasStrongId: true }
+			})
+		);
+		expect(g.mode).toBe('auto_apply');
+		expect(g.reason).toBe('strong_match_harvest');
+	});
+
+	it('trusted harvest strong attach BELOW the 0.7 band ⇒ propose', () => {
+		const g = decideChangeGate(
+			makePlan({
+				input: { origin: 'crossref', derivation: 'observed', confidence: 0.65, evidence: 1 },
+				identity: { action: 'attach', matchDecision: 'strong_single', hasStrongId: true }
+			})
+		);
+		expect(g.mode).toBe('propose');
+		expect(g.kind).toBe('enrichment');
+	});
+
 	// ── ordering / special-case branches ──────────────────────────────────────
 
 	it('fatal audit beats everything (even a clean editorial attach)', () => {
