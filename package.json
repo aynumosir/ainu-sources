@@ -29,6 +29,7 @@
 		"audit": "bun scripts/audit.ts",
 		"reslug": "bun scripts/apply-reslug.ts",
 		"review:proposals": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/review-proposals.ts",
+		"apply:approved": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/apply-approved.ts",
 		"check:fk": "bun scripts/check-fk-enforcement.ts",
 		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
 		"prepare": "svelte-kit sync || echo ''",
