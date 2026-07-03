@@ -42,6 +42,7 @@ export function parseSourceForm(fd: FormData): { input?: SourceInput; error?: st
 	}
 
 	const input: SourceInput = {
+		slug: opt('slug'), // create-form only; validated by the action (explicitSlugError)
 		title,
 		titleEn: opt('titleEn'),
 		titleAin: opt('titleAin'),

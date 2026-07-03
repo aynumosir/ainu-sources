@@ -30,7 +30,7 @@
  * `repo_path = website:<id>` identifier and pass it on the observation, so the
  * edit attaches via `repo_path_exact` regardless of which fields changed.
  */
-import { eq } from 'drizzle-orm';
+import { eq, or } from 'drizzle-orm';
 import { slugify } from '$lib/format';
 import { safeUrl } from '$lib/safe-url';
 import { db as appDb } from './db';
@@ -165,7 +165,14 @@ async function tagIdsFor(db: Db, names: string[]): Promise<string[]> {
 		const name = rawName.trim();
 		if (!name) continue;
 		const slug = slugify(name) || name;
-		const [existing] = await db.select().from(tags).where(eq(tags.slug, slug)).limit(1);
+		// Match by slug OR exact name: tags minted before slugify transliterated
+		// (e.g. a kana name whose slug fell back to the name itself) must re-match
+		// under the new derivation instead of forking a duplicate tag.
+		const [existing] = await db
+			.select()
+			.from(tags)
+			.where(or(eq(tags.slug, slug), eq(tags.name, name)))
+			.limit(1);
 		if (existing) {
 			ids.push(existing.id);
 		} else {
@@ -360,6 +367,9 @@ export async function createSourceViaMerge(
 		explicitDeletes,
 		links: toLinkInputs(input),
 		identifiers: [{ kind: 'repo_path', value: `website:new:${newKey}` }],
+		// Explicit slug (validated by the form action / POST handler) wins over
+		// title derivation; absent, the engine derives a transliterated slug.
+		slug: input.slug?.trim() || undefined,
 		skipRevision: true, // the website path writes the (single) revision below
 		actor: user.id ?? null
 	});

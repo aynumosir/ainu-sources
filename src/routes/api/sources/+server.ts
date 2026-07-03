@@ -7,7 +7,9 @@
  */
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { db } from '$lib/server/db';
 import { listSources, createSource, getSourceDetail, type SourceInput } from '$lib/server/queries';
+import { explicitSlugError } from '$lib/server/resolve-slug';
 import type { SourceFilters, SortKey } from '$lib/types';
 import {
 	requireWriteToken,
@@ -73,9 +75,12 @@ export const GET: RequestHandler = async ({ url }) => {
  * POST /api/sources — create a new source. Authorized by the SOURCES_WRITE_TOKEN
  * bearer secret (see write-api.ts), not a login session. Body is a JSON
  * SourceInput (title + type + category required) plus optional `user`
- * ({ id?, name? }) attribution and `revisionSummary`. Reuses createSource() so
- * the source flows through the merge engine exactly as the UI does; the
- * `MergeResult` is returned so the caller can see a held/conflict outcome.
+ * ({ id?, name? }) attribution, `revisionSummary`, and `slug` — an explicit
+ * slug (^[a-z0-9][a-z0-9-]{1,59}$) that wins over title derivation; 400 when
+ * malformed, taken by a source, or retired in slug_redirects. Reuses
+ * createSource() so the source flows through the merge engine exactly as the
+ * UI does; the `MergeResult` is returned so the caller can see a held/conflict
+ * outcome.
  */
 export const POST: RequestHandler = async ({ request }) => {
 	requireWriteToken(request);
@@ -90,6 +95,15 @@ export const POST: RequestHandler = async ({ request }) => {
 	const input = pickSourceInput(b);
 	if (input.category === undefined) input.category = 'primary';
 	assertRequiredFields(input);
+	// Optional explicit slug (create-only, so NOT part of pickSourceInput —
+	// PATCH must never carry one): validated here so a malformed / already-taken
+	// / retired slug is a clean 400 instead of a constraint error mid-merge.
+	if (typeof b.slug === 'string' && b.slug.trim()) {
+		const slug = b.slug.trim();
+		const slugProblem = await explicitSlugError(db, slug);
+		if (slugProblem) throw error(400, slugProblem);
+		input.slug = slug;
+	}
 	const { slug, result } = await createSource(input as SourceInput, pickUser(b), revisionSummaryOf(b));
 	if (!slug) return json({ result }, { status: 422 });
 	return json({ slug, result, source: await getSourceDetail(slug) }, { status: 201 });

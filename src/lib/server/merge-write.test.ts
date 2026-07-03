@@ -477,6 +477,37 @@ describe('cutover — create', () => {
 });
 
 // ---------------------------------------------------------------------------
+// 5b. Slug minting on create: an explicit slug wins over derivation; the
+//     fallback TRANSLITERATES (kana→romaji, Cyrillic→Latin) instead of
+//     degrading to machine garbage; the id-suffix last resort fires ONLY
+//     when too little real material remains (e.g. an all-kanji title).
+// ---------------------------------------------------------------------------
+describe('cutover — slug minting on create', () => {
+	it('mints an explicit slug verbatim (wins over title derivation)', async () => {
+		const { slug } = await createSourceViaMerge(
+			db,
+			makeInput({ title: 'アイヌ語法概説', slug: '1936-chiri-ainu-gohou' }),
+			USER
+		);
+		expect(slug).toBe('1936-chiri-ainu-gohou');
+	});
+
+	it('transliterates a kana title when no explicit slug is given', async () => {
+		const { slug } = await createSourceViaMerge(db, makeInput({ title: 'アイヌタイムズ' }), USER);
+		expect(slug).toBe('ainutaimuzu');
+	});
+
+	it('adds the id-suffix last resort ONLY when too little transliterates', async () => {
+		// all-kanji title: slugify skips kanji spans entirely → no material
+		const { slug } = await createSourceViaMerge(db, makeInput({ title: '言語学概論' }), USER);
+		expect(slug).toMatch(/^source-[0-9a-f]{8}$/);
+		// short-but-real material (アイヌ → 'ainu', 4 < 6 chars) keeps the material
+		const { slug: short } = await createSourceViaMerge(db, makeInput({ title: 'アイヌ語辞典' }), USER);
+		expect(short).toMatch(/^ainu-[0-9a-f]{8}$/);
+	});
+});
+
+// ---------------------------------------------------------------------------
 // 6. The held/conflict path is reachable AND surfaced (N4: never silent).
 //    Simulated by a higher-rank existing claim than even an editorial edit.
 // ---------------------------------------------------------------------------

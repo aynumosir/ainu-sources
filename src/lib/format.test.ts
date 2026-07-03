@@ -29,8 +29,51 @@ describe('slugify', () => {
 		expect(slugify('  --Foo   Bar--  ')).toBe('foo-bar');
 	});
 
-	it('returns an empty string for purely non-ASCII (e.g. CJK) input', () => {
-		expect(slugify('アイヌ')).toBe('');
+	it('transliterates katakana to Hepburn romaji (incl. halfwidth)', () => {
+		expect(slugify('アイヌ')).toBe('ainu');
+		expect(slugify('アイヌタイムズ')).toBe('ainutaimuzu');
+		expect(slugify('ｱｲﾇﾀｲﾑｽﾞ')).toBe('ainutaimuzu'); // NFKC composes halfwidth + ゛
+		expect(slugify('ヴァイオリン')).toBe('vaiorin');
+	});
+
+	it('transliterates hiragana with gemination, ん and long vowels', () => {
+		expect(slugify('にっぽん')).toBe('nippon'); // っ doubles the next consonant
+		expect(slugify('がっこう')).toBe('gakko'); // …and ou collapses
+		expect(slugify('とうきょう')).toBe('tokyo');
+		expect(slugify('コーヒー')).toBe('kohi'); // ー doubles the vowel, then collapses
+	});
+
+	it('handles small-kana digraphs and vowel combos', () => {
+		expect(slugify('きゃく')).toBe('kyaku');
+		expect(slugify('しゃしん')).toBe('shashin'); // sh/ch/j drop the y
+		expect(slugify('まっちゃ')).toBe('maccha');
+		expect(slugify('じゅんび')).toBe('junbi');
+		expect(slugify('ふぃるむ')).toBe('firumu'); // small vowel replaces fu's u
+	});
+
+	it('skips kanji spans (no deterministic reading) instead of guessing', () => {
+		expect(slugify('言語学')).toBe('');
+		expect(slugify('アイヌ語辞典')).toBe('ainu');
+	});
+
+	it('transliterates Cyrillic', () => {
+		expect(slugify('Русско-айнский словарь')).toBe('russko-aynskiy-slovar'); // й→y, ь dropped
+		expect(slugify('Живое слово, ёж и щука')).toBe('zhivoe-slovo-ezh-i-shchuka');
+	});
+
+	it('folds European diacritics, incl. the NFKD-non-decomposables', () => {
+		expect(slugify('Bronisław Piłsudski')).toBe('bronislaw-pilsudski');
+		expect(slugify('Grönländisch für Anfänger')).toBe('gronlandisch-fur-anfanger');
+	});
+
+	it('handles mixed-script input', () => {
+		expect(slugify('新版 アイヌ語入門 Introduction')).toBe('ainu-introduction');
+	});
+
+	it('caps at 60 chars, cutting at a word boundary', () => {
+		const long = slugify(`${'a'.repeat(20)} ${'b'.repeat(20)} ${'c'.repeat(20)} ${'d'.repeat(20)}`);
+		expect(long).toBe(`${'a'.repeat(20)}-${'b'.repeat(20)}`); // never mid-word
+		expect(slugify('x'.repeat(80))).toHaveLength(60); // single overlong word: hard cut
 	});
 });
 
