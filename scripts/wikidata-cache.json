@@ -4993,5 +4993,35 @@
     "wikidata": null,
     "wikipedia": null,
     "enLabel": null
+  },
+  "JuhaJanhunen": {
+    "wikidata": "Q2493941",
+    "wikipedia": "https://en.wikipedia.org/wiki/Juha_Janhunen",
+    "enLabel": "Juha Janhunen"
+  },
+  "平子達也": {
+    "wikidata": null,
+    "wikipedia": null,
+    "enLabel": null
+  },
+  "五十嵐陽介": {
+    "wikidata": "Q126005262",
+    "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BA%94%E5%8D%81%E5%B5%90%E9%99%BD%E4%BB%8B",
+    "enLabel": null
+  },
+  "MikhailZhivlov": {
+    "wikidata": "Q111281844",
+    "wikipedia": null,
+    "enLabel": "Mikhail Zhivlov"
+  },
+  "トマ・ペラール": {
+    "wikidata": "Q47353626",
+    "wikipedia": "https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%9E%E3%83%BB%E3%83%9A%E3%83%A9%E3%83%BC%E3%83%AB",
+    "enLabel": "Thomas Pellard"
+  },
+  "ThomasPellard": {
+    "wikidata": "Q47353626",
+    "wikipedia": "https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%9E%E3%83%BB%E3%83%9A%E3%83%A9%E3%83%BC%E3%83%AB",
+    "enLabel": "Thomas Pellard"
   }
 }
