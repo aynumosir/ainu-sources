@@ -442,6 +442,28 @@ export const sourceTags = sqliteTable(
 );
 
 // ---------------------------------------------------------------------------
+// Slug redirects (スラッグ転送) — the "old slugs never break" ledger
+//
+// When a source's slug is renamed (e.g. the planned database-wide re-slug), the
+// previous slug is recorded here so every public slug lookup can fall through
+// to a 301 redirect at the CURRENT slug. Append-only: `restrict` (never
+// cascade) matches the no-hard-delete invariant — a redirect must outlive any
+// attempt to hard-delete its source, exactly like `source_revisions`.
+// ---------------------------------------------------------------------------
+export const slugRedirects = sqliteTable(
+	'slug_redirects',
+	{
+		/** the retired slug — globally unique, may never be re-minted */
+		oldSlug: text('old_slug').primaryKey(),
+		sourceId: text('source_id')
+			.notNull()
+			.references(() => sources.id, { onDelete: 'restrict' }),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [index('slug_redirects_source_idx').on(t.sourceId)]
+);
+
+// ---------------------------------------------------------------------------
 // Revisions (編集履歴) — JSON snapshot of a source on each edit
 // ---------------------------------------------------------------------------
 export const sourceRevisions = sqliteTable(
@@ -846,6 +868,7 @@ export type Place = typeof places.$inferSelect;
 export type Institution = typeof institutions.$inferSelect;
 export type Tag = typeof tags.$inferSelect;
 export type SourceRelation = typeof sourceRelations.$inferSelect;
+export type SlugRedirect = typeof slugRedirects.$inferSelect;
 export type SourceRevision = typeof sourceRevisions.$inferSelect;
 export type SourceObservationRun = typeof sourceObservationRuns.$inferSelect;
 export type SourceObservedRecord = typeof sourceObservedRecords.$inferSelect;

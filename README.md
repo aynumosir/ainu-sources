@@ -33,10 +33,21 @@ pipelines, client libraries): download it once, then validate citation slugs loc
 
 The stability promise behind it:
 
-- **Slugs are immutable once minted** — a published slug is never renamed or reused.
+- **Published slugs never break** — once minted, a slug keeps resolving forever and is
+  never reused for a different source.
+- **Renames leave a permanent redirect** — when a slug is renamed (e.g. a database-wide
+  re-slug), the old slug is recorded in `slug_redirects` and every public route
+  (`/sources/<slug>`, `/api/sources/<slug>`, the `cite.*` endpoints) answers it with a
+  **301** to the current slug. The export lists each source's retired slugs in
+  `old_slugs`, so consumers can validate pre-rename citations offline too.
 - **Merges keep old slugs resolvable** — when two records are merged, the losing row
   keeps its slug with `status: "merged"` and `merged_into_slug` pointing at the
   winning source's slug, so existing citations never break.
+
+Batch renames are applied with `bun run reslug <renames.tsv>` (a dry-run plan;
+add `--apply` to write). Each applied row atomically renames the source, inserts
+the redirect and records a revision; the script is idempotent and refuses
+malformed or colliding slugs (`scripts/apply-reslug.ts`).
 
 ## Seed data
 

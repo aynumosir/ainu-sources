@@ -3,9 +3,11 @@
  * its linked persons, places, institutions, digital links, relations and tags.
  * Reuses `getSourceDetail()` — the same loader the /sources/[slug] page uses.
  */
-import { json, error } from '@sveltejs/kit';
+import { json, error, redirect } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { db } from '$lib/server/db';
 import { getSourceDetail, updateSource } from '$lib/server/queries';
+import { resolveSlug } from '$lib/server/resolve-slug';
 import {
 	requireWriteToken,
 	pickSourceInput,
@@ -19,7 +21,12 @@ const CORS = { 'access-control-allow-origin': '*' } as const;
 
 export const GET: RequestHandler = async ({ params }) => {
 	const detail = await getSourceDetail(params.slug);
-	if (!detail) throw error(404, `no source with slug ${params.slug}`);
+	if (!detail) {
+		// A renamed slug answers 301 + Location at the current slug (see resolve-slug.ts).
+		const renamed = await resolveSlug(db, params.slug);
+		if (renamed) redirect(301, `/api/sources/${renamed}`);
+		throw error(404, `no source with slug ${params.slug}`);
+	}
 	return json(detail, { headers: CORS });
 };
 

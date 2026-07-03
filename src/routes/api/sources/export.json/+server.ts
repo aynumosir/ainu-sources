@@ -8,13 +8,15 @@
  * (with `merged_into_slug` pointing at the winning source's slug, so old slugs
  * stay validatable) and 'deprecated'. Rows the public site never surfaces
  * (candidate / hidden / soft_deleted) are excluded, matching visibility.ts.
+ * Renamed sources carry every retired slug in `old_slugs` (see slug_redirects),
+ * so citations minted before a re-slug also validate offline.
  */
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { asc, eq, inArray } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/sqlite-core';
 import { db } from '$lib/server/db';
-import { sources } from '$lib/server/db/schema';
+import { slugRedirects, sources } from '$lib/server/db/schema';
 
 const HEADERS = {
 	'access-control-allow-origin': '*',
@@ -28,6 +30,7 @@ export const GET: RequestHandler = async () => {
 	const mergeTarget = alias(sources, 'merge_target');
 	const rows = await db
 		.select({
+			id: sources.id,
 			slug: sources.slug,
 			title: sources.title,
 			titleEn: sources.titleEn,
@@ -50,6 +53,19 @@ export const GET: RequestHandler = async () => {
 		.where(inArray(sources.status, EXPORT_STATUSES))
 		.orderBy(asc(sources.slug));
 
+	// Retired slugs (renames), grouped per source in ONE query — consumers use
+	// them to keep validating citations minted before a re-slug.
+	const redirectRows = await db
+		.select({ sourceId: slugRedirects.sourceId, oldSlug: slugRedirects.oldSlug })
+		.from(slugRedirects)
+		.orderBy(asc(slugRedirects.oldSlug));
+	const oldSlugsBySource = new Map<string, string[]>();
+	for (const r of redirectRows) {
+		const list = oldSlugsBySource.get(r.sourceId);
+		if (list) list.push(r.oldSlug);
+		else oldSlugsBySource.set(r.sourceId, [r.oldSlug]);
+	}
+
 	return json(
 		rows.map((r) => ({
 			slug: r.slug,
@@ -67,7 +83,8 @@ export const GET: RequestHandler = async () => {
 			provenance_path: r.provenancePath,
 			external_ids: r.externalIds,
 			status: r.status,
-			merged_into_slug: r.mergedIntoSlug
+			merged_into_slug: r.mergedIntoSlug,
+			old_slugs: oldSlugsBySource.get(r.id) ?? []
 		})),
 		{ headers: HEADERS }
 	);
