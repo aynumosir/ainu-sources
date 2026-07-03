@@ -109,17 +109,39 @@ export type LlmReviewClient = (
 	signal?: AbortSignal
 ) => Promise<unknown>;
 
+/** Which LLM backend the default reviewer transport hits. */
+export type LlmProvider = 'anthropic' | 'openrouter';
+
+/**
+ * Per-call token usage captured off the provider response, so a batch run can
+ * total the REAL cost. `costUsd` is populated only when the provider reports it
+ * (OpenRouter with `usage: { include: true }` returns an actual `usage.cost`);
+ * Anthropic reports tokens only.
+ */
+export interface LlmUsage {
+	model: string;
+	promptTokens: number;
+	completionTokens: number;
+	totalTokens: number;
+	/** actual USD cost when the provider reports it (OpenRouter `usage.cost`). */
+	costUsd?: number;
+}
+
 export interface CallLlmReviewerOptions {
-	/** inject a fake reviewer (tests). When set, `apiKey`/`model`/`fetchImpl` are ignored. */
+	/** inject a fake reviewer (tests). When set, provider/`apiKey`/`model`/`fetchImpl` are ignored. */
 	client?: LlmReviewClient;
-	/** override the Anthropic API key (default: `env.ANTHROPIC_API_KEY`). */
+	/** pick the backend (default: `env.LLM_PROVIDER` → `anthropic`). */
+	provider?: LlmProvider;
+	/** override the API key (default: the provider's env key). */
 	apiKey?: string;
-	/** override the model (default: {@link LLM_REVIEWER_MODEL}). */
+	/** override the model (default: `env.LLM_MODEL` → {@link LLM_REVIEWER_MODEL}). */
 	model?: string;
 	/** inject a `fetch` implementation (tests / non-DOM runtimes). */
 	fetchImpl?: typeof fetch;
 	/** abort the outbound request. */
 	signal?: AbortSignal;
+	/** capture per-call token usage / cost off the provider response. */
+	onUsage?: (usage: LlmUsage) => void;
 }
 
 // ---------------------------------------------------------------------------
@@ -252,11 +274,24 @@ export async function callLlmReviewer(
 	context: LlmReviewContext,
 	opts?: CallLlmReviewerOptions
 ): Promise<LlmReviewOutput> {
-	const client =
-		opts?.client ??
-		anthropicReviewClient({ apiKey: opts?.apiKey, model: opts?.model, fetchImpl: opts?.fetchImpl });
+	const client = opts?.client ?? defaultReviewClient(opts);
 	const raw = await client(context, opts?.signal);
 	return validateLlmReviewOutput(raw);
+}
+
+/** Resolve the default reviewer transport for the configured provider. The
+ *  provider comes from `opts.provider`, else `env.LLM_PROVIDER`, else `anthropic`
+ *  (unchanged default) — so the Anthropic path stays byte-identical unless a
+ *  caller opts into OpenRouter. Usage capture is threaded through `onUsage`. */
+export function defaultReviewClient(opts?: CallLlmReviewerOptions): LlmReviewClient {
+	const provider = (opts?.provider ?? env.LLM_PROVIDER ?? 'anthropic').toLowerCase() as LlmProvider;
+	const cfg = {
+		apiKey: opts?.apiKey,
+		model: opts?.model,
+		fetchImpl: opts?.fetchImpl,
+		onUsage: opts?.onUsage
+	};
+	return provider === 'openrouter' ? openrouterReviewClient(cfg) : anthropicReviewClient(cfg);
 }
 
 // ---------------------------------------------------------------------------
@@ -265,55 +300,79 @@ export async function callLlmReviewer(
 
 const ANTHROPIC_MESSAGES_URL = 'https://api.anthropic.com/v1/messages';
 const ANTHROPIC_VERSION = '2023-06-01';
+const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const REVIEW_TOOL_NAME = 'record_review';
+const REVIEW_TOOL_DESCRIPTION =
+	'Record your advisory review verdict for this proposed change request. ' +
+	'You are a non-privileged reviewer: you decide only WHETHER the already-ranked ' +
+	'proposed values should apply — you never change a value, band, or rank.';
 
-/** The forced structured-output tool: the model MUST call it with the verdict. */
+/** The record_review JSON schema — SHARED by the Anthropic (`input_schema`) and the
+ *  OpenAI/OpenRouter (`function.parameters`) tool shapes, so both providers force the
+ *  SAME structured output that {@link validateLlmReviewOutput} then strictly checks. */
+const REVIEW_TOOL_SCHEMA = {
+	type: 'object',
+	additionalProperties: false,
+	properties: {
+		verdict: {
+			type: 'string',
+			enum: ['apply', 'reject', 'needs_evidence'],
+			description:
+				"'apply' if the change is well-sourced and should land; 'needs_evidence' if it " +
+				"is plausible but under-evidenced; 'reject' if it contradicts better-sourced data or fabricates."
+		},
+		confidence: {
+			type: 'number',
+			description: 'Your confidence in this verdict, a number from 0 to 1.'
+		},
+		reason: { type: 'string', description: 'A concise justification grounded in the diff and evidence.' },
+		evidenceRefs: {
+			type: 'array',
+			items: { type: 'string' },
+			description: 'Optional references (URLs, identifiers) supporting the verdict.'
+		},
+		fieldNotes: {
+			type: 'array',
+			items: {
+				type: 'object',
+				additionalProperties: false,
+				properties: {
+					field: { type: 'string' },
+					verdict: { type: 'string', enum: ['apply', 'reject', 'needs_evidence'] },
+					reason: { type: 'string' }
+				},
+				required: ['field', 'verdict', 'reason']
+			},
+			description: 'Optional advisory per-field notes.'
+		}
+	},
+	required: ['verdict', 'confidence', 'reason']
+} as const;
+
+/** Anthropic Messages API tool shape (forced structured output). */
 const REVIEW_TOOL = {
 	name: REVIEW_TOOL_NAME,
-	description:
-		'Record your advisory review verdict for this proposed change request. ' +
-		'You are a non-privileged reviewer: you decide only WHETHER the already-ranked ' +
-		'proposed values should apply — you never change a value, band, or rank.',
-	input_schema: {
-		type: 'object',
-		additionalProperties: false,
-		properties: {
-			verdict: {
-				type: 'string',
-				enum: ['apply', 'reject', 'needs_evidence'],
-				description:
-					"'apply' if the change is well-sourced and should land; 'needs_evidence' if it " +
-					"is plausible but under-evidenced; 'reject' if it contradicts better-sourced data or fabricates."
-			},
-			confidence: {
-				type: 'number',
-				description: 'Your confidence in this verdict, a number from 0 to 1.'
-			},
-			reason: { type: 'string', description: 'A concise justification grounded in the diff and evidence.' },
-			evidenceRefs: {
-				type: 'array',
-				items: { type: 'string' },
-				description: 'Optional references (URLs, identifiers) supporting the verdict.'
-			},
-			fieldNotes: {
-				type: 'array',
-				items: {
-					type: 'object',
-					additionalProperties: false,
-					properties: {
-						field: { type: 'string' },
-						verdict: { type: 'string', enum: ['apply', 'reject', 'needs_evidence'] },
-						reason: { type: 'string' }
-					},
-					required: ['field', 'verdict', 'reason']
-				},
-				description: 'Optional advisory per-field notes.'
-			}
-		},
-		required: ['verdict', 'confidence', 'reason']
-	},
+	description: REVIEW_TOOL_DESCRIPTION,
+	input_schema: REVIEW_TOOL_SCHEMA,
 	strict: true
 } as const;
+
+/** OpenAI-compatible (OpenRouter) function-tool shape — same schema, chat wire format. */
+const REVIEW_TOOL_OPENAI = {
+	type: 'function',
+	function: {
+		name: REVIEW_TOOL_NAME,
+		description: REVIEW_TOOL_DESCRIPTION,
+		parameters: REVIEW_TOOL_SCHEMA
+	}
+} as const;
+
+/** The record_review key contract, restated for the JSON-mode fallback (models that
+ *  ignore forced tool calls) so the raw response still parses + validates. */
+const REVIEW_JSON_INSTRUCTION =
+	'Respond with ONLY a single JSON object (no markdown, no prose) with keys: ' +
+	'"verdict" (one of "apply", "reject", "needs_evidence"), "confidence" (a number 0..1), ' +
+	'"reason" (a non-empty string), and optionally "evidenceRefs" (array of strings).';
 
 const REVIEW_SYSTEM_PROMPT = [
 	'You are an advisory reviewer for a scholarly Ainu-language source catalogue.',
@@ -375,6 +434,7 @@ export function anthropicReviewClient(cfg?: {
 	apiKey?: string;
 	model?: string;
 	fetchImpl?: typeof fetch;
+	onUsage?: (usage: LlmUsage) => void;
 }): LlmReviewClient {
 	return async (context, signal) => {
 		const apiKey = cfg?.apiKey ?? env.ANTHROPIC_API_KEY;
@@ -404,12 +464,167 @@ export function anthropicReviewClient(cfg?: {
 			const text = await res.text().catch(() => '');
 			throw new Error(`Anthropic API error ${res.status}: ${text.slice(0, 500)}`);
 		}
-		const data = (await res.json()) as { content?: Array<{ type?: string; name?: string; input?: unknown }> };
+		const data = (await res.json()) as {
+			content?: Array<{ type?: string; name?: string; input?: unknown }>;
+			usage?: { input_tokens?: number; output_tokens?: number };
+		};
+		if (data.usage && cfg?.onUsage) {
+			const inTok = Number(data.usage.input_tokens ?? 0);
+			const outTok = Number(data.usage.output_tokens ?? 0);
+			cfg.onUsage({ model, promptTokens: inTok, completionTokens: outTok, totalTokens: inTok + outTok });
+		}
 		const block = (data.content ?? []).find(
 			(b) => b?.type === 'tool_use' && b?.name === REVIEW_TOOL_NAME
 		);
 		if (!block) throw new Error('Anthropic response did not contain a record_review tool call');
 		return block.input;
+	};
+}
+
+// ---------------------------------------------------------------------------
+// OpenRouter reviewer client — OpenAI-compatible chat completions over `fetch`
+// ---------------------------------------------------------------------------
+
+/** Loosely parse a model's JSON output: trim, strip ``` / ```json fences, then
+ *  fall back to extracting the first `{ … }` object. Returns `undefined` on
+ *  failure so the caller can try the JSON-mode fallback rather than throwing. */
+function tryParseJsonObject(text: string): unknown | undefined {
+	const cleaned = text
+		.trim()
+		.replace(/^```(?:json)?\s*/i, '')
+		.replace(/```\s*$/i, '')
+		.trim();
+	try {
+		return JSON.parse(cleaned);
+	} catch {
+		/* fall through */
+	}
+	const first = cleaned.indexOf('{');
+	const last = cleaned.lastIndexOf('}');
+	if (first !== -1 && last > first) {
+		try {
+			return JSON.parse(cleaned.slice(first, last + 1));
+		} catch {
+			/* give up */
+		}
+	}
+	return undefined;
+}
+
+interface OpenAiChatResponse {
+	model?: string;
+	choices?: Array<{
+		message?: {
+			content?: string | null;
+			tool_calls?: Array<{ function?: { name?: string; arguments?: string } }>;
+		};
+	}>;
+	usage?: {
+		prompt_tokens?: number;
+		completion_tokens?: number;
+		total_tokens?: number;
+		cost?: number;
+	};
+}
+
+/**
+ * The OpenRouter reviewer transport: OpenAI-compatible `POST /chat/completions`
+ * with `Authorization: Bearer <key>`, `usage: { include: true }` (so the response
+ * carries the REAL `usage.cost`), and a low temperature. It forces the
+ * {@link REVIEW_TOOL_OPENAI} `record_review` function call for structured output,
+ * and — for models that ignore forced tool calls — FALLS BACK to a second request
+ * with `response_format: { type: 'json_object' }`, parsing the raw JSON. Either way
+ * the RAW object is returned for {@link validateLlmReviewOutput} to strictly check.
+ *
+ * Reads the key from `env.OPENROUTER_API_KEY` and the model from `env.LLM_MODEL`
+ * (→ {@link LLM_REVIEWER_MODEL}) unless overridden. NEVER used in tests (they inject
+ * a fake client).
+ */
+export function openrouterReviewClient(cfg?: {
+	apiKey?: string;
+	model?: string;
+	fetchImpl?: typeof fetch;
+	onUsage?: (usage: LlmUsage) => void;
+}): LlmReviewClient {
+	return async (context, signal) => {
+		const apiKey = cfg?.apiKey ?? env.OPENROUTER_API_KEY;
+		if (!apiKey) throw new Error('OPENROUTER_API_KEY is not set (LLM reviewer)');
+		const model = cfg?.model ?? env.LLM_MODEL ?? LLM_REVIEWER_MODEL;
+		const doFetch = cfg?.fetchImpl ?? fetch;
+		const headers = {
+			'content-type': 'application/json',
+			authorization: `Bearer ${apiKey}`,
+			// OpenRouter attribution headers (optional, best-effort).
+			'HTTP-Referer': 'https://db.aynu.org',
+			'X-Title': 'ainu-sources LLM reviewer'
+		};
+		const messages = [
+			{ role: 'system', content: REVIEW_SYSTEM_PROMPT },
+			{ role: 'user', content: buildReviewUserPrompt(context) }
+		];
+
+		const reportUsage = (data: OpenAiChatResponse) => {
+			if (!data.usage || !cfg?.onUsage) return;
+			const inTok = Number(data.usage.prompt_tokens ?? 0);
+			const outTok = Number(data.usage.completion_tokens ?? 0);
+			cfg.onUsage({
+				model: data.model ?? model,
+				promptTokens: inTok,
+				completionTokens: outTok,
+				totalTokens: Number(data.usage.total_tokens ?? inTok + outTok),
+				costUsd: typeof data.usage.cost === 'number' ? data.usage.cost : undefined
+			});
+		};
+
+		const post = async (body: Record<string, unknown>): Promise<OpenAiChatResponse> => {
+			const res = await doFetch(OPENROUTER_URL, {
+				method: 'POST',
+				headers,
+				body: JSON.stringify({ model, temperature: 0, usage: { include: true }, ...body }),
+				signal
+			});
+			if (!res.ok) {
+				const text = await res.text().catch(() => '');
+				throw new Error(`OpenRouter API error ${res.status}: ${text.slice(0, 500)}`);
+			}
+			return (await res.json()) as OpenAiChatResponse;
+		};
+
+		// Attempt 1 — forced record_review tool call (structured output).
+		const data = await post({
+			messages,
+			tools: [REVIEW_TOOL_OPENAI],
+			tool_choice: { type: 'function', function: { name: REVIEW_TOOL_NAME } }
+		});
+		reportUsage(data);
+		const msg = data.choices?.[0]?.message;
+		const call =
+			msg?.tool_calls?.find((t) => t.function?.name === REVIEW_TOOL_NAME) ?? msg?.tool_calls?.[0];
+		if (call?.function?.arguments) {
+			const parsed = tryParseJsonObject(call.function.arguments);
+			if (parsed !== undefined) return parsed;
+		}
+		// some models emit the JSON inline in content instead of a tool call.
+		if (typeof msg?.content === 'string' && msg.content.trim()) {
+			const parsed = tryParseJsonObject(msg.content);
+			if (parsed !== undefined) return parsed;
+		}
+
+		// Attempt 2 — JSON-mode fallback (no tools) for models that ignore tool_choice.
+		const data2 = await post({
+			messages: [
+				{ role: 'system', content: `${REVIEW_SYSTEM_PROMPT}\n\n${REVIEW_JSON_INSTRUCTION}` },
+				{ role: 'user', content: buildReviewUserPrompt(context) }
+			],
+			response_format: { type: 'json_object' }
+		});
+		reportUsage(data2);
+		const content2 = data2.choices?.[0]?.message?.content;
+		if (typeof content2 === 'string' && content2.trim()) {
+			const parsed = tryParseJsonObject(content2);
+			if (parsed !== undefined) return parsed;
+		}
+		throw new Error('OpenRouter response did not contain a parseable record_review result');
 	};
 }
 
