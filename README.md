@@ -24,6 +24,20 @@ The central entity is the **Source** (`資料`). Around it: `source_links`, `per
 `source_institutions`, `source_relations`, `tags` + `source_tags`, and `source_revisions`
 (full edit history). See `src/lib/server/db/schema.ts`.
 
+## Machine-readable export & stability promise
+
+`GET /api/sources/export.json` returns the whole catalogue (no pagination) as a JSON
+array of compact records, ordered by slug, with CORS `*` and an hourly cache header.
+It is the offline-validation artifact for consumer repos (ainu-dictionaries CI, corpus
+pipelines, client libraries): download it once, then validate citation slugs locally.
+
+The stability promise behind it:
+
+- **Slugs are immutable once minted** — a published slug is never renamed or reused.
+- **Merges keep old slugs resolvable** — when two records are merged, the losing row
+  keeps its slug with `status: "merged"` and `merged_into_slug` pointing at the
+  winning source's slug, so existing citations never break.
+
 ## Seed data
 
 `scripts/import-all.ts` (`bun run seed`) builds the database from the sibling
