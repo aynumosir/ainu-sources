@@ -729,6 +729,10 @@ export async function quickSearch(q: string, limit = 8): Promise<Source[]> {
 // ---------------------------------------------------------------------------
 
 export interface SourceInput {
+	/** Explicit slug — honored on CREATE only and validated by the entry points
+	 *  (see `explicitSlugError`); an update never re-mints a slug (renames go
+	 *  through scripts/apply-reslug.ts so the redirect is recorded). */
+	slug?: string | null;
 	title: string;
 	titleEn?: string | null;
 	titleAin?: string | null;

@@ -38,3 +38,37 @@ export async function resolveSlug(db: Db, slug: string): Promise<string | undefi
 	if (!row || row.slug === slug) return undefined;
 	return row.slug;
 }
+
+// ---------------------------------------------------------------------------
+// Explicit-slug minting guard — the WRITE side of the same promise.
+// ---------------------------------------------------------------------------
+
+/** Shape of a mintable slug (same rule scripts/apply-reslug.ts enforces). */
+export const EXPLICIT_SLUG_RE = /^[a-z0-9][a-z0-9-]{1,59}$/;
+
+/**
+ * Why an explicit slug may NOT be minted for a NEW source, or null when it is
+ * free. Three checks: the shape rule, a collision with ANY existing source
+ * (`sources.slug` is UNIQUE across every status), and a collision with a
+ * retired slug in `slug_redirects` — re-minting a retired slug would shadow
+ * its permanent 301 and break the "old slugs never break" promise above.
+ * Callers turn the returned message into a 400 / form error; the UNIQUE
+ * constraint on `sources.slug` remains the last-resort guard.
+ */
+export async function explicitSlugError(db: Db, slug: string): Promise<string | null> {
+	if (!EXPLICIT_SLUG_RE.test(slug))
+		return `slug must match ${EXPLICIT_SLUG_RE} (lowercase letters, digits and hyphens; 2-60 chars; starts alphanumeric)`;
+	const [src] = await db
+		.select({ id: sources.id })
+		.from(sources)
+		.where(eq(sources.slug, slug))
+		.limit(1);
+	if (src) return `slug "${slug}" is already taken by an existing source`;
+	const [red] = await db
+		.select({ oldSlug: slugRedirects.oldSlug })
+		.from(slugRedirects)
+		.where(eq(slugRedirects.oldSlug, slug))
+		.limit(1);
+	if (red) return `slug "${slug}" is retired and permanently redirects to another slug`;
+	return null;
+}

@@ -128,6 +128,8 @@
 	"form_title": "タイトル（原語）",
 	"form_title_en": "タイトル（英語）",
 	"form_title_ain": "タイトル（アイヌ語）",
+	"form_slug": "スラッグ（URL名）",
+	"form_slug_hint": "任意。半角小文字・数字・ハイフン（2〜60文字）。例: year-author-short-title。一度発行されると恒久です。空欄の場合はタイトルから自動生成されます。",
 	"form_category": "区分",
 	"form_type": "種別",
 	"form_author": "著者・記録者",

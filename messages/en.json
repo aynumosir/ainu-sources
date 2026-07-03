@@ -128,6 +128,8 @@
 	"form_title": "Title (original)",
 	"form_title_en": "Title (English)",
 	"form_title_ain": "Title (Ainu)",
+	"form_slug": "Slug (URL name)",
+	"form_slug_hint": "Optional. Lowercase letters, digits and hyphens (2\u201360 chars), e.g. year-author-short-title. Permanent once minted; left blank, it is derived from the title.",
 	"form_category": "Category",
 	"form_type": "Type",
 	"form_author": "Author / recorder",

@@ -1,6 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import { db } from '$lib/server/db';
 import { createSource, mergeNotice } from '$lib/server/queries';
+import { explicitSlugError } from '$lib/server/resolve-slug';
 import { parseSourceForm, revisionSummary } from '$lib/server/form';
 
 export const load: PageServerLoad = async ({ locals, url }) => {
@@ -17,6 +19,12 @@ export const actions: Actions = {
 		const fd = await request.formData();
 		const { input, error } = parseSourceForm(fd);
 		if (!input) return fail(400, { error });
+		// Optional explicit slug — reject a malformed / already-taken / retired
+		// one up front (a retired slug would shadow its permanent redirect).
+		if (input.slug) {
+			const slugProblem = await explicitSlugError(db, input.slug);
+			if (slugProblem) return fail(400, { error: slugProblem });
+		}
 		const { slug, result } = await createSource(
 			input,
 			{ id: locals.user.id, name: locals.user.name },

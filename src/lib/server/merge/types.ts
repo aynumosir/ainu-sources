@@ -60,6 +60,15 @@ export interface MergeInput {
 	 * first); a non-existent id would surface as an FK error on the first child write.
 	 */
 	targetSourceId?: string;
+	/**
+	 * Explicit slug for a source this observation CREATES — wins over title
+	 * derivation. The caller MUST pre-validate it (shape + not taken by a source
+	 * or a `slug_redirects.old_slug` — see `explicitSlugError`); the engine uses
+	 * it verbatim and the UNIQUE constraint on `sources.slug` is the last-resort
+	 * guard. Ignored when the observation attaches to an existing source or
+	 * materializes a candidate (candidate slugs stay machine-prefixed).
+	 */
+	slug?: string;
 	identifiers?: IdentifierInput[];
 	links?: LinkInput[];
 	/** field names to explicitly clear (op='explicit_delete'); lets an empty value

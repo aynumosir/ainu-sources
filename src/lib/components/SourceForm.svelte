@@ -93,6 +93,21 @@
 			<span class={labelCls}>{m.form_title_ain()}</span>
 			<input name="titleAin" value={initial.titleAin ?? ''} lang="ain-Latn" class={inputCls} />
 		</label>
+		{#if mode === 'create'}
+			<!-- Slugs are permanent once minted (a rename records a redirect), so an
+			     explicit slug is offered on CREATE only. -->
+			<label class="sm:col-span-2">
+				<span class={labelCls}>{m.form_slug()}</span>
+				<input
+					name="slug"
+					value={initial.slug ?? ''}
+					pattern={'[a-z0-9][a-z0-9-]{1,59}'}
+					placeholder="1898-batchelor-ainu-grammar"
+					class={inputCls}
+				/>
+				<p class="mt-1 text-xs text-stone-500">{m.form_slug_hint()}</p>
+			</label>
+		{/if}
 	</fieldset>
 
 	<!-- Classification -->

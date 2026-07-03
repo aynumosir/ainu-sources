@@ -49,6 +49,14 @@ add `--apply` to write). Each applied row atomically renames the source, inserts
 the redirect and records a revision; the script is idempotent and refuses
 malformed or colliding slugs (`scripts/apply-reslug.ts`).
 
+New slugs stay clean at mint time: creation (`POST /api/sources` and the
+on-site form) accepts an optional explicit `slug` (`^[a-z0-9][a-z0-9-]{1,59}$`,
+rejected if taken by a source or retired in `slug_redirects` — a re-mint would
+shadow the permanent redirect), and when no slug is supplied the fallback
+transliterates instead of hashing: kana → Hepburn romaji, Cyrillic → Latin,
+European diacritics folded. Kanji spans have no deterministic reading and are
+skipped; a short id suffix is added only when too little material remains.
+
 ## Seed data
 
 `scripts/import-all.ts` (`bun run seed`) builds the database from the sibling

@@ -703,7 +703,8 @@ export async function commitMerge(
 			status: decision.status,
 			origin,
 			nv,
-			candidate: decision.status === 'candidate'
+			candidate: decision.status === 'candidate',
+			explicitSlug: input.slug
 		});
 		sourceId = built.id;
 		createdNew = true;
@@ -1746,7 +1747,14 @@ async function ensureUniqueSlug(db: Db, base: string): Promise<string> {
 
 async function buildSourceRow(
 	db: Db,
-	args: { fields: Record<string, unknown>; status: 'active' | 'candidate'; origin: string; nv: number; candidate: boolean }
+	args: {
+		fields: Record<string, unknown>;
+		status: 'active' | 'candidate';
+		origin: string;
+		nv: number;
+		candidate: boolean;
+		explicitSlug?: string;
+	}
 ): Promise<{ id: string; values: typeof sources.$inferInsert }> {
 	const id = uuid();
 	const f = args.fields;
@@ -1761,8 +1769,20 @@ async function buildSourceRow(
 		const short = id.slice(0, 8);
 		const tail = slugify(titleStr) || 'source';
 		slug = await ensureUniqueSlug(db, `cand-${short}-${tail}`);
+	} else if (args.explicitSlug) {
+		// Pre-validated by the caller (see MergeInput.slug) — used verbatim; the
+		// UNIQUE constraint on sources.slug is the last-resort guard.
+		slug = args.explicitSlug;
 	} else {
-		slug = await ensureUniqueSlug(db, slugify((f.titleEn as string) || titleStr) || 'source');
+		// Transliterated derivation (kana→romaji, Cyrillic→Latin, diacritics folded;
+		// kanji spans skipped — see slugify). With ≥6 chars of real material the
+		// title IS the slug; with less (e.g. an all-kanji title) keep the uniqueness
+		// last-resort: a short id suffix instead of bare numbering.
+		const base = slugify((f.titleEn as string) || titleStr);
+		slug =
+			base.replace(/-/g, '').length >= 6
+				? await ensureUniqueSlug(db, base)
+				: await ensureUniqueSlug(db, `${base ? `${base}-` : 'source-'}${id.slice(0, 8)}`);
 	}
 
 	const now = new Date();
