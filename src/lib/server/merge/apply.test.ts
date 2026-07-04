@@ -24,8 +24,11 @@ import { env } from '$env/dynamic/private';
 import * as schema from '../db/schema';
 import {
 	mergeSourceObservation,
+	planSourceObservation,
+	commitMerge,
 	applyChangeRequest,
-	ChangeRequestStale
+	ChangeRequestStale,
+	SlugConflictError
 } from './merge-source-observation';
 import type { MergeInput, ProposedMergeResult } from './types';
 
@@ -237,5 +240,103 @@ describe('re-plan rebase — a CR that became conflicting bounces to needs_evide
 		expect(after.summary).toBe('Existing B');
 		// the observation stays proposed (recoverable for re-review)
 		expect((await obsRow(cr.observationId)).status).toBe('proposed');
+	});
+});
+
+describe('slug-collision hardening — a duplicate of a now-existing work bounces, never a 500', () => {
+	it('(c) a new_source apply whose planned slug is taken bounces to needs_evidence (no UNIQUE throw, not stuck)', async () => {
+		// an existing source already owns a slug …
+		const existingSid = await seedSource();
+		const [existing] = await db
+			.select()
+			.from(schema.sources)
+			.where(eq(schema.sources.id, existingSid));
+		const takenSlug = existing.slug;
+
+		// … and a NEW-source proposal for a DIFFERENT work is opened.
+		const cr = await propose(
+			observed({
+				originRecordId: 'crossref:dupwork',
+				identifiers: [],
+				fields: { title: 'A Different Work Entirely', type: 'article', category: 'secondary' }
+			})
+		);
+		// mark it a duplicate of a now-existing work: on apply it reserves the TAKEN slug.
+		await db
+			.update(schema.changeRequests)
+			.set({ plannedSlug: takenSlug })
+			.where(eq(schema.changeRequests.id, cr.changeRequestId));
+		const sourcesBefore = (await db.select().from(schema.sources)).length;
+
+		// apply BOUNCES with a 409 stale — NOT a raw `UNIQUE constraint failed` 500.
+		await expect(
+			applyChangeRequest(db, cr.changeRequestId, 'apply-approved')
+		).rejects.toBeInstanceOf(ChangeRequestStale);
+
+		// released to needs_evidence — NOT stranded at `applying`.
+		expect((await crRow(cr.changeRequestId)).status).toBe('needs_evidence');
+		// no partial / duplicate source materialized (the create batch rolled back).
+		expect((await db.select().from(schema.sources)).length).toBe(sourcesBefore);
+		// the observation stays proposed (recoverable for re-review).
+		expect((await obsRow(cr.observationId)).status).toBe('proposed');
+	});
+
+	it('commitMerge on a new source whose explicit slug is taken raises SlugConflictError (not a raw UNIQUE)', async () => {
+		const existingSid = await seedSource();
+		const [existing] = await db
+			.select()
+			.from(schema.sources)
+			.where(eq(schema.sources.id, existingSid));
+
+		// a brand-new source that demands the ALREADY-TAKEN slug verbatim.
+		const plan = await planSourceObservation(
+			db,
+			observed({
+				originRecordId: 'crossref:verbatim-dup',
+				identifiers: [],
+				slug: existing.slug,
+				fields: { title: 'Yet Another Work', type: 'article', category: 'secondary' }
+			})
+		);
+		await expect(commitMerge(db, plan)).rejects.toBeInstanceOf(SlugConflictError);
+		// no duplicate / partial source materialized.
+		expect((await db.select().from(schema.sources)).length).toBe(1);
+	});
+});
+
+describe('lock release on error — a commit failure never strands a CR at applying', () => {
+	it('(d) applyChangeRequest whose commit throws releases the lock to needs_evidence and re-throws', async () => {
+		const sid = await seedSource();
+		const cr = await propose(
+			llmEnrichment({
+				originRecordId: 'openalex:boom',
+				fields: { title: 'A Work', type: 'article', category: 'secondary', summary: 'never lands' }
+			})
+		);
+
+		// A db whose FIRST commit write (upsertObservedRecord → insert) throws a generic
+		// (non-slug) error, while the lock / re-plan / release paths (select / update /
+		// batch) still run on the real db. Methods are bound to the target so drizzle's
+		// private fields resolve (the proxy only substitutes `insert`).
+		const boomDb = new Proxy(db, {
+			get(target, prop) {
+				if (prop === 'insert') {
+					return () => {
+						throw new Error('boom: simulated mid-commit failure');
+					};
+				}
+				const v = Reflect.get(target, prop);
+				return typeof v === 'function' ? v.bind(target) : v;
+			}
+		}) as typeof db;
+
+		await expect(applyChangeRequest(boomDb, cr.changeRequestId, 'mod-1')).rejects.toThrow(/boom/);
+
+		// NOT stranded at `applying` — released so a retry / human can drive it again.
+		expect((await crRow(cr.changeRequestId)).status).toBe('needs_evidence');
+		// nothing landed: observation still proposed, canonical untouched.
+		expect((await obsRow(cr.observationId)).status).toBe('proposed');
+		const [src] = await db.select().from(schema.sources).where(eq(schema.sources.id, sid));
+		expect(src.summary).toBeNull();
 	});
 });

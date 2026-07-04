@@ -21,7 +21,11 @@ import { migrate } from 'drizzle-orm/libsql/migrator';
 import { eq } from 'drizzle-orm';
 import { env } from '$env/dynamic/private';
 import * as schema from '../db/schema';
-import { mergeSourceObservation, reviewChangeRequest } from './merge-source-observation';
+import {
+	mergeSourceObservation,
+	reviewChangeRequest,
+	applyChangeRequest
+} from './merge-source-observation';
 import type { MergeInput, ProposedMergeResult } from './types';
 
 const MIGRATIONS = fileURLToPath(new URL('../../../../drizzle', import.meta.url));
@@ -186,7 +190,7 @@ describe('reviewChangeRequest — verdict is appended, then the CR is acted on',
 		expect((await obsStatus(cr.observationId)).status).toBe('proposed');
 	});
 
-	it('a HUMAN apply verdict drives the merge — canonical written, CR + observation applied', async () => {
+	it('a HUMAN apply verdict with applyNow drives the merge — canonical written, CR + observation applied', async () => {
 		const sid = await seedSource();
 		const cr = await propose(
 			llmEnrichment({
@@ -206,12 +210,13 @@ describe('reviewChangeRequest — verdict is appended, then the CR is acted on',
 			verdict: 'apply',
 			reason: 'ok'
 		});
-		// … then a human applies.
+		// … then a human applies INLINE (applyNow — the offline / explicit path).
 		const res = await reviewChangeRequest(db, cr.changeRequestId, {
 			reviewerKind: 'human',
 			reviewerActor: 'mod-1',
 			verdict: 'apply',
-			reason: 'confirmed against the catalogue'
+			reason: 'confirmed against the catalogue',
+			applyNow: true
 		});
 		expect(res.status).toBe('applied');
 		expect(['applied', 'partial']).toContain(res.applied?.status);
@@ -229,7 +234,7 @@ describe('reviewChangeRequest — verdict is appended, then the CR is acted on',
 		expect(reviews.length).toBe(2);
 	});
 
-	it('a human apply on a needs_evidence CR still applies (the lock accepts needs_evidence)', async () => {
+	it('a human apply (applyNow) on a needs_evidence CR still applies (the lock accepts needs_evidence)', async () => {
 		const cr = await propose(observed({ originRecordId: 'crossref:ne-apply' }));
 		await reviewChangeRequest(db, cr.changeRequestId, {
 			reviewerKind: 'human',
@@ -241,9 +246,71 @@ describe('reviewChangeRequest — verdict is appended, then the CR is acted on',
 			reviewerKind: 'human',
 			reviewerActor: 'mod-1',
 			verdict: 'apply',
-			reason: 'evidence supplied'
+			reason: 'evidence supplied',
+			applyNow: true
 		});
 		expect(res.status).toBe('applied');
 		expect((await crStatus(cr.changeRequestId)).status).toBe('applied');
+	});
+
+	// ── Decouple: the Worker /admin/review approve MUST NOT apply synchronously ──
+	it('(a) human apply with applyNow=false → CR approved, NO canonical write, NO apply', async () => {
+		const sid = await seedSource();
+		const cr = await propose(
+			llmEnrichment({
+				originRecordId: 'openalex:decouple',
+				fields: { title: 'A Work', type: 'article', category: 'secondary', summary: 'awaits batch apply' }
+			})
+		);
+		const before = await counts();
+
+		// exactly what the Worker route sends: a human apply, applyNow left unset.
+		const res = await reviewChangeRequest(db, cr.changeRequestId, {
+			reviewerKind: 'human',
+			reviewerActor: 'mod-1',
+			verdict: 'apply',
+			reason: 'looks good'
+		});
+		expect(res.status).toBe('approved'); // recorded, NOT applied
+		expect(res.applied).toBeUndefined(); // applyChangeRequest was never driven
+
+		const after = await counts();
+		expect(after.reviews - before.reviews).toBe(1); // only the verdict was appended
+		expect(after.sources).toBe(before.sources); // ZERO canonical write
+		expect(after.provenance).toBe(before.provenance);
+		expect(after.claims).toBe(before.claims);
+		expect(after.diffs).toBe(before.diffs); // no 'applied' diff written
+
+		expect((await crStatus(cr.changeRequestId)).status).toBe('approved');
+		// canonical untouched — the enrichment did NOT land, the observation is still proposed
+		const [src] = await db.select().from(schema.sources).where(eq(schema.sources.id, sid));
+		expect(src.summary).toBeNull();
+		expect((await obsStatus(cr.observationId)).status).toBe('proposed');
+	});
+
+	it('(b) the offline batch apply still publishes a human-approved CR', async () => {
+		const sid = await seedSource();
+		const cr = await propose(
+			llmEnrichment({
+				originRecordId: 'openalex:batch',
+				fields: { title: 'A Work', type: 'article', category: 'secondary', summary: 'published offline' }
+			})
+		);
+		// 1) Worker route: human approve (no applyNow) → CR approved, nothing applied.
+		await reviewChangeRequest(db, cr.changeRequestId, {
+			reviewerKind: 'human',
+			reviewerActor: 'mod-1',
+			verdict: 'apply',
+			reason: 'approve'
+		});
+		expect((await crStatus(cr.changeRequestId)).status).toBe('approved');
+
+		// 2) offline batch apply (apply:approved drives applyChangeRequest) → published.
+		const res = await applyChangeRequest(db, cr.changeRequestId, 'apply-approved');
+		expect(['applied', 'partial']).toContain(res.status);
+		expect((await crStatus(cr.changeRequestId)).status).toBe('applied');
+		const [src] = await db.select().from(schema.sources).where(eq(schema.sources.id, sid));
+		expect(src.summary).toBe('published offline'); // canonical NOW written
+		expect((await obsStatus(cr.observationId)).status).toMatch(/applied|partial/);
 	});
 });

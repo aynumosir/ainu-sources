@@ -708,18 +708,48 @@ export async function commitMerge(
 		});
 		sourceId = built.id;
 		createdNew = true;
-		await db.batch([
-			db.insert(sources).values(built.values),
-			db.insert(sourceLifecycleEvents).values({
-				sourceId,
-				observationId,
-				eventType: 'create',
-				toStatus: decision.status,
-				reason: `merge create (${decision.matchDecision})`,
-				actor,
-				createdAt: new Date()
-			})
-		]);
+
+		// Slug-collision guard. buildSourceRow's title-derived path already NUMBERS
+		// around an existing slug (ensureUniqueSlug), but an EXPLICIT (pre-validated)
+		// slug is used VERBATIM — a duplicate proposal of a now-existing work then
+		// collides on UNIQUE(sources.slug). Detect that up front and raise a
+		// SlugConflictError (never a raw `UNIQUE constraint failed` 500) so
+		// applyChangeRequest bounces the CR to needs_evidence for review.
+		if (input.slug) {
+			const [owner] = await db
+				.select({ id: sources.id })
+				.from(sources)
+				.where(eq(sources.slug, built.values.slug))
+				.limit(1);
+			if (owner) throw new SlugConflictError(built.values.slug, owner.id);
+		}
+
+		const createLifecycle = db.insert(sourceLifecycleEvents).values({
+			sourceId,
+			observationId,
+			eventType: 'create',
+			toStatus: decision.status,
+			reason: `merge create (${decision.matchDecision})`,
+			actor,
+			createdAt: new Date()
+		});
+		try {
+			await db.batch([db.insert(sources).values(built.values), createLifecycle]);
+		} catch (e) {
+			// Lost a race between the guard/ensureUniqueSlug read and this insert (a
+			// concurrent apply took the same slug — the offline batch runs applies in
+			// parallel). Surface it as a conflict, not a hard 500. The batch is one
+			// transaction, so it rolled back atomically (no orphaned source row).
+			if (isUniqueSlugError(e)) {
+				const [owner] = await db
+					.select({ id: sources.id })
+					.from(sources)
+					.where(eq(sources.slug, built.values.slug))
+					.limit(1);
+				throw new SlugConflictError(built.values.slug, owner?.id ?? null);
+			}
+			throw e;
+		}
 		lifecycleEvents.push({ eventType: 'create', toStatus: decision.status });
 
 		// candidate / conflict ⇒ same-work candidate relation(s) to the existing source(s)
@@ -1319,6 +1349,34 @@ export class ChangeRequestStale extends Error {
 }
 
 /**
+ * A NEW source could NOT be created because its slug is already taken by a
+ * DIFFERENT source — a duplicate proposal of a now-existing work, or (under the
+ * offline batch's concurrency) a sibling apply that raced {@link ensureUniqueSlug}
+ * to the same slug. Surfaced by {@link commitMerge} INSTEAD of a raw
+ * `UNIQUE constraint failed: sources.slug` so {@link applyChangeRequest} can bounce
+ * the CR to `needs_evidence` (a duplicate, for review) — exactly like the
+ * stale-replan bounce — rather than 500-ing or stranding the CR.
+ */
+export class SlugConflictError extends Error {
+	readonly code = 'slug_conflict';
+	constructor(
+		/** the slug the new source wanted */
+		readonly slug: string,
+		/** the existing source that already holds it (null if it vanished on re-read) */
+		readonly existingSourceId: string | null
+	) {
+		super(`slug '${slug}' is already taken${existingSourceId ? ` by source ${existingSourceId}` : ''}`);
+		this.name = 'SlugConflictError';
+	}
+}
+
+/** Is `e` the SQLite UNIQUE violation on `sources.slug` (a slug collision on insert)? */
+function isUniqueSlugError(e: unknown): boolean {
+	const m = (e instanceof Error ? e.message : String(e)).toLowerCase();
+	return m.includes('unique constraint failed') && m.includes('sources.slug');
+}
+
+/**
  * Whether an LLM `apply` verdict may DRIVE an apply (rather than merely advise).
  * DEFAULT FALSE — an LLM verdict is advisory: it marks the CR `approved` and a
  * human still has to apply. Flipped on only by an explicit env opt-in.
@@ -1366,6 +1424,11 @@ function observationToMergeInput(obs: SourceObservation, cr: ChangeRequest): Mer
 		presence: payload.presence ?? 'seen',
 		lifecycle: payload.lifecycle ?? undefined,
 		targetSourceId,
+		// Honor a pre-computed slug the proposal reserved (a new-source CR). Used
+		// verbatim by buildSourceRow; if the work was created under a different route
+		// in the meantime the slug now collides — commitMerge surfaces that as a
+		// SlugConflictError and applyChangeRequest bounces the CR to needs_evidence.
+		slug: cr.plannedSlug ?? undefined,
 		runId: obs.runId ?? null,
 		actor: obs.actor ?? null,
 		rawPayload: obs.rawPayload ?? null,
@@ -1413,10 +1476,13 @@ async function readAlreadyAppliedOrThrow(db: Db, crId: string): Promise<MergeRes
  *     `approved`, so a decided CR is never re-opened).
  *   - `reject`         → ONE atomic `db.batch`: CR `rejected` (+ decidedBy/At) AND
  *     its linked observation `rejected` (no canonical data is ever touched).
- *   - `apply` + `llm`  (and `LLM_AUTOAPPROVE_CHANGE_REQUESTS !== 'true'`) → CR
- *     `approved` ONLY — the LLM verdict is ADVISORY; NO canonical write. A human
- *     must still apply.
- *   - `apply` + `human` (or LLM auto-approve on) → drive {@link applyChangeRequest}.
+ *   - `apply` (default, `applyNow` unset) → CR `approved` ONLY — human- or
+ *     LLM-approved, NO canonical write, awaiting the OFFLINE batch apply
+ *     (`scripts/apply-approved.ts`). This is the path the Cloudflare Worker
+ *     `/admin/review` approve action takes: driving the heavy {@link
+ *     applyChangeRequest} inline would exceed the Worker's 50-subrequest limit.
+ *   - `apply` + `applyNow: true` (offline / explicit), OR an LLM `apply` with the
+ *     coarse `LLM_AUTOAPPROVE_CHANGE_REQUESTS` on → drive {@link applyChangeRequest}.
  *
  * A reviewer NEVER changes a claim's band / score (actor-agnostic): an approved
  * `llm_extraction` proposal stays in its band; the apply re-plans through the
@@ -1482,8 +1548,19 @@ export async function reviewChangeRequest(
 		return { status: 'rejected', reviewId, changeRequestId: crId };
 	}
 
-	// 2c. apply + LLM (advisory) — record `approved` only; NO canonical write.
-	if (review.reviewerKind === 'llm' && !llmAutoApproveEnabled()) {
+	// 2c. apply verdict — RECORD `approved`, do NOT apply, unless the caller EXPLICITLY
+	//     opts into an inline apply. Applying a change request drives {@link
+	//     applyChangeRequest} — a lock + live re-plan + full commit, 50–100 Turso
+	//     round-trips — which BLOWS the Cloudflare Worker's 50-subrequest limit. So the
+	//     Worker `/admin/review` approve action (which leaves `applyNow` false) records
+	//     the CR `approved` (human-approved, awaiting the OFFLINE batch apply,
+	//     `scripts/apply-approved.ts`) and returns in a couple of round-trips. An inline
+	//     apply happens ONLY when `applyNow` is set (the offline / explicit path) OR for
+	//     an LLM verdict when the coarse `LLM_AUTOAPPROVE_CHANGE_REQUESTS` flag is on
+	//     (unchanged advisory-vs-auto LLM semantics).
+	const llmCoarseAutoApprove = review.reviewerKind === 'llm' && llmAutoApproveEnabled();
+	const applyInline = review.applyNow === true || llmCoarseAutoApprove;
+	if (!applyInline) {
 		await db
 			.update(changeRequests)
 			.set({ status: 'approved', updatedAt: new Date() })
@@ -1493,7 +1570,7 @@ export async function reviewChangeRequest(
 		return { status: 'approved', reviewId, changeRequestId: crId };
 	}
 
-	// 2d. apply + human (or explicitly-enabled LLM auto-approve) — drive the merge.
+	// 2d. applyNow (offline / explicit) or coarse LLM auto-approve — drive the merge.
 	const applied = await applyChangeRequest(db, crId, review.reviewerActor ?? undefined);
 	return { status: 'applied', reviewId, changeRequestId: crId, applied };
 }
@@ -1517,12 +1594,16 @@ export async function reviewChangeRequest(
  *      apply a now-dangerous change).
  *   4. COMMIT — {@link commitMerge} reusing the proposed observation id, which
  *      flips it `proposed` → applied/partial and writes the claims / provenance /
- *      sources / `applied` diff through the ONE engine (no bypass).
+ *      sources / `applied` diff through the ONE engine (no bypass). If the commit
+ *      throws for ANY reason the `applying` lock is RELEASED to `needs_evidence`
+ *      (never wedged); a slug collision (a duplicate work) is re-thrown as the same
+ *      {@link ChangeRequestStale} bounce as a re-plan conflict.
  *   5. FINALIZE — one `UPDATE` records the terminal CR state.
  *
  * IDEMPOTENT: CAS is hash-idempotent (equal valueHash ⇒ noop), claims dedupe on
  * `(observationId, fieldName, valueHash)`, and the lock = one apply — so a retried
- * apply converges to the same end state.
+ * apply converges to the same end state. LOCK NEVER STRANDS: any commit failure
+ * releases the CR back to a reviewable state so it is re-lockable.
  */
 export async function applyChangeRequest(
 	db: Db,
@@ -1574,13 +1655,39 @@ export async function applyChangeRequest(
 	}
 
 	// 4. commit by REUSING the proposed observation id — flips proposed→applied/partial
-	//    and writes claims/provenance/sources + the 'applied' diff through the SAME engine.
-	const result = await commitMerge(db, live, {
-		observationId: cr.observationId,
-		skipDupNoop: true,
-		changeRequestId: crId,
-		actor
-	});
+	//    and writes claims/provenance/sources + the 'applied' diff through the SAME
+	//    engine. Wrapped so a commit failure NEVER strands the CR at `applying`: the
+	//    lock (step 1) set status='applying', and if the commit throws for ANY reason
+	//    the CR must be RELEASED to a reviewable state (never wedged — otherwise the
+	//    lock's `WHERE status IN (open,needs_evidence,approved)` refuses every retry).
+	let result: MergeResult;
+	try {
+		result = await commitMerge(db, live, {
+			observationId: cr.observationId,
+			skipDupNoop: true,
+			changeRequestId: crId,
+			actor
+		});
+	} catch (e) {
+		// Release the `applying` lock back to `needs_evidence` so a human / retry can
+		// drive it again (guarded on `applying` so a concurrent finalize is not
+		// clobbered). applyChangeRequest is idempotent, so a retry converges.
+		await db
+			.update(changeRequests)
+			.set({ status: 'needs_evidence', updatedAt: new Date() })
+			.where(and(eq(changeRequests.id, crId), eq(changeRequests.status, 'applying')));
+		// A slug collision is a duplicate of a now-existing work — surface it as the
+		// SAME 409 stale bounce as the re-plan-conflict path (the offline apply counts
+		// it as a clean stale-bounce, NOT an error) rather than a hard 500.
+		if (e instanceof SlugConflictError) {
+			throw new ChangeRequestStale(
+				`change request ${crId} slug '${e.slug}' is already taken (duplicate of an existing work); needs re-review`,
+				crId,
+				'needs_evidence'
+			);
+		}
+		throw e;
+	}
 
 	// 5. finalize the CR (single idempotent statement).
 	const decidedAt = new Date();
