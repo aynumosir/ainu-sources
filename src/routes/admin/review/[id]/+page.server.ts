@@ -51,7 +51,7 @@ async function runReview(
 	});
 	const messages: Record<ReviewResult['status'], string> = {
 		applied: 'Proposal approved and applied through the merge engine.',
-		approved: 'Recorded.',
+		approved: 'Approved — the change will be published by the batch apply.',
 		rejected: 'Proposal rejected.',
 		needs_evidence: 'Sent back for more evidence.'
 	};
@@ -68,7 +68,10 @@ const STALE_MESSAGE =
 	'This proposal changed since you opened it — it was sent back for re-review. Reload and review the updated diff.';
 
 export const actions: Actions = {
-	// Approve → reviewChangeRequest(verdict:'apply', human) → drives applyChangeRequest.
+	// Approve → reviewChangeRequest(verdict:'apply', human) records the CR `approved`
+	// (NO applyNow) — the heavy applyChangeRequest is decoupled from this request so
+	// the approve stays a couple of round-trips (Cloudflare's 50-subrequest limit). The
+	// approved change is published later by the offline batch apply (apply:approved).
 	approve: async ({ params, locals, request }) => {
 		const denied = gate(locals);
 		if (denied) return denied;

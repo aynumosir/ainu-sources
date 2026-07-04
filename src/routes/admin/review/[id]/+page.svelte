@@ -379,8 +379,8 @@
 		<h2 class="font-serif text-lg font-bold text-ink">Decision</h2>
 		{#if actionable}
 			<p class="mt-1 text-sm text-stone-500">
-				Approving runs this proposal through the merge engine (claims still rank by their own
-				provenance — a verdict gates application, it never changes a claim's band).
+				Approving marks this proposal for publishing by the batch apply (claims still rank by their
+				own provenance — a verdict gates application, it never changes a claim's band).
 			</p>
 			<form
 				method="POST"
@@ -404,7 +404,7 @@
 						formaction="?/approve"
 						disabled={submitting}
 						class="rounded-lg bg-emerald-700 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-emerald-800 disabled:opacity-50"
-						>Approve &amp; apply</button
+						>Approve</button
 					>
 					<button
 						formaction="?/requestEvidence"

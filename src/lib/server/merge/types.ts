@@ -205,6 +205,16 @@ export interface ReviewInput {
 	evidenceRefs?: string[];
 	/** the raw validated reviewer response — ALWAYS an object, never a bare string */
 	payload?: Record<string, unknown>;
+	/**
+	 * Drive the (heavy, 50–100 round-trip) {@link applyChangeRequest} INLINE for an
+	 * `apply` verdict. DEFAULT FALSE — an `apply` verdict merely records the CR
+	 * `approved` (human- or LLM-approved), awaiting the OFFLINE batch apply
+	 * (`scripts/apply-approved.ts`). The Cloudflare Worker `/admin/review` approve
+	 * action MUST leave this false: applying a change request exceeds the Worker's
+	 * 50-subrequest limit. Only an offline / explicit opt-in caller sets it true. An
+	 * LLM verdict additionally stays advisory unless the coarse env flag is on.
+	 */
+	applyNow?: boolean;
 }
 
 /**
@@ -213,10 +223,13 @@ export interface ReviewInput {
  *
  *   - `needs_evidence` — the CR was sent back for more evidence;
  *   - `rejected`       — the CR (and its observation) were rejected;
- *   - `approved`       — an LLM `apply` verdict was recorded as ADVISORY (no
- *                        canonical write); a human must still apply;
- *   - `applied`        — a human `apply` (or LLM auto-approve) drove the merge;
- *                        `applied` carries the {@link MergeResult}.
+ *   - `approved`       — an `apply` verdict was recorded WITHOUT applying (the
+ *                        default, and every Worker `/admin/review` approve): the CR
+ *                        is human- or LLM-approved and awaits the offline batch
+ *                        apply. NO canonical write happened;
+ *   - `applied`        — an `apply` verdict with `applyNow` (the offline / explicit
+ *                        inline-apply path, or coarse LLM auto-approve) drove the
+ *                        merge; `applied` carries the {@link MergeResult}.
  */
 export interface ReviewResult {
 	status: 'needs_evidence' | 'rejected' | 'approved' | 'applied';

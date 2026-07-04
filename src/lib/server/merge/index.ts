@@ -16,6 +16,7 @@ export {
 	applyChangeRequest,
 	recoverStuckApplyingChangeRequests,
 	ChangeRequestStale,
+	SlugConflictError,
 	type CommitOptions
 } from './merge-source-observation';
 export {
