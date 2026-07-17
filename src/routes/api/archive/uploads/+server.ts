@@ -3,15 +3,16 @@
  * slot in one database transaction, then begin the multipart upload in the
  * archive dataplane.
  */
-import { json } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { db } from '$lib/server/db';
-import { createUploadSession } from '$lib/server/archive/db';
+import { db as defaultDb } from '$lib/server/db';
+import { attachDataplaneUpload, createUploadSession, markUploadSessionFailed } from '$lib/server/archive/db';
 import { dataplane, getArchiveFetcher } from '$lib/server/archive/dataplane';
 import { archiveMutationPrincipal, readJsonObject, throwArchiveError } from '$lib/server/archive/route';
 
-export const POST: RequestHandler = async ({ request, platform }) => {
-	const principal = await archiveMutationPrincipal(request, 'archive_contributor');
+export const POST: RequestHandler = async ({ request, platform, locals }) => {
+	const db = routeDb(locals);
+	const principal = await archiveMutationPrincipal(request, 'archive_contributor', db);
 	const body = await readJsonObject(request);
 	try {
 		const created = await createUploadSession(db, principal, {
@@ -24,15 +25,68 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 			declaredMediaType: String(body.declared_media_type ?? body.declaredMediaType ?? '')
 		});
 		const response = await dataplane.multipartCreate(getArchiveFetcher(platform?.env), principal.userId, {
-			upload_id: created.session.id,
-			staging_key: created.session.stagingKey,
-			sha256: created.session.expectedSha256,
-			bytes: created.session.expectedBytes,
-			media_type: created.session.declaredMediaType
+			sessionId: created.session.id,
+			expectedSha256: created.session.expectedSha256,
+			expectedBytes: created.session.expectedBytes,
+			declaredMediaType: created.session.declaredMediaType
 		});
-		const dataplaneBody = response.headers.get('content-type')?.includes('json') ? await response.json() : null;
-		return json({ upload: created.session, dataplane: dataplaneBody }, { status: 201 });
+		const text = await safeResponseText(response);
+		if (!response.ok) {
+			const message = upstreamErrorMessage(response.status, text);
+			await markUploadSessionFailed(db, created.session.id, message);
+			throw error(500, message);
+		}
+		const dataplaneBody = parseDataplaneCreateResponse(text);
+		if (!dataplaneBody) {
+			const message = 'archive dataplane multipart create returned malformed response';
+			await markUploadSessionFailed(db, created.session.id, message);
+			throw error(500, message);
+		}
+		const upload = await attachDataplaneUpload(db, created.session.id, {
+			stagingKey: dataplaneBody.stagingKey,
+			multipartId: dataplaneBody.uploadId
+		});
+		return json({ upload, dataplane: dataplaneBody }, { status: 201 });
 	} catch (e) {
 		throwArchiveError(e);
 	}
 };
+
+async function safeResponseText(response: Response): Promise<string> {
+	try {
+		return await response.text();
+	} catch {
+		return '';
+	}
+}
+
+function upstreamErrorMessage(status: number, text: string): string {
+	try {
+		const body = JSON.parse(text) as { error?: unknown };
+		if (typeof body.error === 'string' && body.error.trim()) return truncate(body.error.trim());
+	} catch {
+		// Fall through to the raw body.
+	}
+	const raw = text.trim();
+	return raw ? truncate(raw) : `archive dataplane multipart create failed with HTTP ${status}`;
+}
+
+function parseDataplaneCreateResponse(text: string): { stagingKey: string; uploadId: string } | null {
+	try {
+		const body = JSON.parse(text) as { stagingKey?: unknown; uploadId?: unknown };
+		if (typeof body.stagingKey === 'string' && typeof body.uploadId === 'string') {
+			return { stagingKey: body.stagingKey, uploadId: body.uploadId };
+		}
+	} catch {
+		return null;
+	}
+	return null;
+}
+
+function truncate(value: string): string {
+	return value.length > 500 ? `${value.slice(0, 500)}...` : value;
+}
+
+function routeDb(locals: App.Locals) {
+	return (locals as App.Locals & { archiveDb?: typeof defaultDb }).archiveDb ?? defaultDb;
+}

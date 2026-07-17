@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gt, gte, isNull, lt, or, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, gte, isNull, lt, max, or, sql } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import { env } from '$env/dynamic/private';
 import {
@@ -28,6 +28,27 @@ const DEFAULT_DAILY_BYTES = 5 * 1024 * 1024 * 1024;
 const DEFAULT_CONCURRENT_STREAMS = 3;
 const SOURCE_FILE_ROLES = ['scan', 'epub', 'supplement', 'derivative'] as const;
 type SourceFileRole = (typeof SOURCE_FILE_ROLES)[number];
+
+type FinalizeSuccessResult = {
+	sessionId: string;
+	status: 'verified';
+	sha256: string;
+	bytes: number;
+	detectedMediaType: string;
+	blobKey: string;
+	finalizedAt: string;
+};
+
+type FinalizeMismatchResult = {
+	sessionId: string;
+	status: 'quarantined';
+	reason: string;
+	expectedSha256: string;
+	actualSha256: string;
+	expectedBytes: number;
+	actualBytes: number;
+	finalizedAt: string;
+};
 
 function uuid(): string {
 	return crypto.randomUUID();
@@ -60,6 +81,58 @@ function requireAccessState(principal: ArchivePrincipal, accessState: string): v
 	if (accessState === 'embargoed' && archiveRoleAtLeast(principal.role, 'archive_reviewer')) return;
 	if (accessState === 'takedown' && principal.role === 'archive_admin') return;
 	throw new ArchiveHttpError(403, 'revision is not readable');
+}
+
+function serializeUploadSession(row: schema.UploadSession) {
+	return {
+		...row,
+		createdAt: iso(row.createdAt),
+		updatedAt: iso(row.updatedAt),
+		expiresAt: iso(row.expiresAt)
+	};
+}
+
+function isFinalizeSuccessResult(value: unknown): value is FinalizeSuccessResult {
+	const row = value as Partial<FinalizeSuccessResult> | null;
+	return (
+		!!row &&
+		row.status === 'verified' &&
+		typeof row.sessionId === 'string' &&
+		typeof row.sha256 === 'string' &&
+		typeof row.bytes === 'number' &&
+		typeof row.detectedMediaType === 'string'
+	);
+}
+
+function isFinalizeMismatchResult(value: unknown): value is FinalizeMismatchResult {
+	const row = value as Partial<FinalizeMismatchResult> | null;
+	return (
+		!!row &&
+		row.status === 'quarantined' &&
+		typeof row.sessionId === 'string' &&
+		typeof row.reason === 'string' &&
+		typeof row.expectedSha256 === 'string' &&
+		typeof row.actualSha256 === 'string' &&
+		typeof row.expectedBytes === 'number' &&
+		typeof row.actualBytes === 'number'
+	);
+}
+
+function originalFilenameFor(sourceFile: Pick<schema.SourceFile, 'label' | 'checkoutPath'>, result: FinalizeSuccessResult, declaredMediaType: string): string {
+	if (sourceFile.label?.trim()) return sourceFile.label.trim();
+	const checkoutPath = sourceFile.checkoutPath?.trim();
+	if (checkoutPath) {
+		const name = checkoutPath.split(/[\\/]/u).filter(Boolean).at(-1);
+		if (name) return name;
+	}
+	const extension = mediaTypeExtension(declaredMediaType);
+	return `${result.sha256.slice(0, 12)}${extension ? `.${extension}` : ''}`;
+}
+
+function mediaTypeExtension(mediaType: string): string | null {
+	if (mediaType === 'application/pdf') return 'pdf';
+	if (mediaType === 'application/epub+zip') return 'epub';
+	return null;
 }
 
 export async function listSourceFiles(
@@ -326,18 +399,149 @@ export async function createUploadSession(
 	});
 }
 
+export async function attachDataplaneUpload(
+	db: Db,
+	sessionId: string,
+	input: { stagingKey: string; multipartId: string }
+) {
+	const [updated] = await db
+		.update(uploadSessions)
+		.set({
+			stagingKey: input.stagingKey,
+			multipartId: input.multipartId,
+			state: 'uploading',
+			updatedAt: new Date(),
+			errorCode: null
+		})
+		.where(eq(uploadSessions.id, sessionId))
+		.returning();
+	if (!updated) throw new ArchiveHttpError(404, 'upload not found');
+	return serializeUploadSession(updated);
+}
+
+export async function markUploadSessionFailed(db: Db, sessionId: string, errorCode: string) {
+	const [updated] = await db
+		.update(uploadSessions)
+		.set({ state: 'failed', errorCode, updatedAt: new Date() })
+		.where(eq(uploadSessions.id, sessionId))
+		.returning();
+	if (!updated) throw new ArchiveHttpError(404, 'upload not found');
+	return serializeUploadSession(updated);
+}
+
 export async function getUploadSession(db: Db, id: string, principal: ArchivePrincipal) {
 	const [row] = await db.select().from(uploadSessions).where(eq(uploadSessions.id, id)).limit(1);
 	if (!row) throw new ArchiveHttpError(404, 'upload not found');
 	if (row.submittedBy !== principal.userId && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
 		throw new ArchiveHttpError(404, 'upload not found');
 	}
-	return {
-		...row,
-		createdAt: iso(row.createdAt),
-		updatedAt: iso(row.updatedAt),
-		expiresAt: iso(row.expiresAt)
-	};
+	return serializeUploadSession(row);
+}
+
+export async function reconcileUploadFinalization(
+	db: Db,
+	sessionId: string,
+	principal: ArchivePrincipal,
+	finalize: { status: number; body: unknown }
+) {
+	if (finalize.status === 404) return getUploadSession(db, sessionId, principal);
+	if (isFinalizeSuccessResult(finalize.body)) {
+		const result = finalize.body;
+		if (result.sessionId !== sessionId) return getUploadSession(db, sessionId, principal);
+		return db.transaction(async (tx) => {
+			const [session] = await tx.select().from(uploadSessions).where(eq(uploadSessions.id, sessionId)).limit(1);
+			if (!session) throw new ArchiveHttpError(404, 'upload not found');
+			if (session.submittedBy !== principal.userId && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
+				throw new ArchiveHttpError(404, 'upload not found');
+			}
+			if (session.state === 'verified') return serializeUploadSession(session);
+
+			const [sourceFile] = await tx
+				.select({ label: sourceFiles.label, checkoutPath: sourceFiles.checkoutPath })
+				.from(sourceFiles)
+				.where(eq(sourceFiles.id, session.sourceFileId))
+				.limit(1);
+			if (!sourceFile) throw new ArchiveHttpError(500, 'source file not found');
+
+			const now = new Date();
+			await tx
+				.insert(archiveBlobs)
+				.values({
+					sha256: result.sha256,
+					bytes: result.bytes,
+					detectedMediaType: result.detectedMediaType,
+					storageState: 'verified',
+					verifiedAt: now,
+					createdBy: session.submittedBy
+				})
+				.onConflictDoNothing({ target: archiveBlobs.sha256 });
+
+			const [{ revisionNo }] = await tx
+				.select({ revisionNo: max(fileRevisions.revisionNo) })
+				.from(fileRevisions)
+				.where(eq(fileRevisions.sourceFileId, session.sourceFileId));
+			const nextRevisionNo = Number(revisionNo ?? 0) + 1;
+			// Upload creation does not carry a browser filename yet. This fallback
+			// preserves a readable value for the required column until that field is
+			// added to the wire contract.
+			const originalFilename = originalFilenameFor(sourceFile, result, session.declaredMediaType);
+			await tx.insert(fileRevisions).values({
+				id: uuid(),
+				sourceFileId: session.sourceFileId,
+				revisionNo: nextRevisionNo,
+				blobSha256: result.sha256,
+				originalFilename,
+				declaredMediaType: session.declaredMediaType,
+				artifactKind: 'original',
+				reviewStatus: 'pending',
+				isCurrent: false,
+				submittedBy: session.submittedBy,
+				submittedAt: now
+			});
+			const [updated] = await tx
+				.update(uploadSessions)
+				.set({ state: 'verified', errorCode: null, updatedAt: now })
+				.where(eq(uploadSessions.id, sessionId))
+				.returning();
+			await recordArchiveEvent(tx, {
+				entityType: 'upload_session',
+				entityId: sessionId,
+				eventType: 'upload_verified',
+				actor: principal.userId
+			});
+			return serializeUploadSession(updated);
+		});
+	}
+
+	if (!isFinalizeMismatchResult(finalize.body)) return getUploadSession(db, sessionId, principal);
+	const result = finalize.body;
+	if (result.sessionId !== sessionId) return getUploadSession(db, sessionId, principal);
+	return db.transaction(async (tx) => {
+		const [session] = await tx.select().from(uploadSessions).where(eq(uploadSessions.id, sessionId)).limit(1);
+		if (!session) throw new ArchiveHttpError(404, 'upload not found');
+		if (session.submittedBy !== principal.userId && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
+			throw new ArchiveHttpError(404, 'upload not found');
+		}
+		if (session.state === 'failed') return serializeUploadSession(session);
+		const [updated] = await tx
+			.update(uploadSessions)
+			.set({ state: 'failed', errorCode: result.reason, updatedAt: new Date() })
+			.where(eq(uploadSessions.id, sessionId))
+			.returning();
+		await recordArchiveEvent(tx, {
+			entityType: 'upload_session',
+			entityId: sessionId,
+			eventType: 'upload_quarantined',
+			actor: principal.userId,
+			details: {
+				expectedSha256: result.expectedSha256,
+				actualSha256: result.actualSha256,
+				expectedBytes: result.expectedBytes,
+				actualBytes: result.actualBytes
+			}
+		});
+		return serializeUploadSession(updated);
+	});
 }
 
 export async function completeUploadSession(db: Db, id: string, principal: ArchivePrincipal) {

@@ -11,6 +11,8 @@ export type ArchiveEventType =
 	| 'stream_opened'
 	| 'upload_created'
 	| 'upload_completed'
+	| 'upload_verified'
+	| 'upload_quarantined'
 	| 'upload_aborted'
 	| 'revision_approved'
 	| 'revision_rejected'

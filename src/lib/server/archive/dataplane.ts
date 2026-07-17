@@ -66,8 +66,8 @@ export const dataplane = {
 	multipartAbort(fetcher: ArchiveFetcher, actor: string, body: unknown) {
 		return call(fetcher, '/internal/multipart/abort', actor, { method: 'POST', body: jsonBody(body) });
 	},
-	blobsFinalize(fetcher: ArchiveFetcher, actor: string, body: unknown) {
-		return call(fetcher, '/internal/blobs/finalize', actor, { method: 'POST', body: jsonBody(body) });
+	finalizeResults(fetcher: ArchiveFetcher, actor: string, sessionId: string) {
+		return call(fetcher, `/internal/finalize-results/${encodeURIComponent(sessionId)}`, actor, { method: 'GET' });
 	},
 	derivativesLinearize(fetcher: ArchiveFetcher, actor: string, body: unknown) {
 		return call(fetcher, '/internal/derivatives/linearize', actor, { method: 'POST', body: jsonBody(body) });
