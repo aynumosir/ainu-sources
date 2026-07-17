@@ -26,6 +26,8 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_UPLOAD_TTL_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_DAILY_BYTES = 5 * 1024 * 1024 * 1024;
 const DEFAULT_CONCURRENT_STREAMS = 3;
+const SOURCE_FILE_ROLES = ['scan', 'epub', 'supplement', 'derivative'] as const;
+type SourceFileRole = (typeof SOURCE_FILE_ROLES)[number];
 
 function uuid(): string {
 	return crypto.randomUUID();
@@ -38,6 +40,12 @@ function intEnv(name: string, fallback: number): number {
 
 function updatedCursor(date: Date, id: string): FileCursor {
 	return { updatedAt: date.toISOString(), id };
+}
+
+function parseSourceFileRole(role: string | null | undefined): SourceFileRole | null {
+	if (role == null || role === '') return null;
+	if ((SOURCE_FILE_ROLES as readonly string[]).includes(role)) return role as SourceFileRole;
+	throw new ArchiveHttpError(400, 'invalid source file role');
 }
 
 function requireReviewReadable(principal: ArchivePrincipal, reviewStatus: string, submittedBy: string): void {
@@ -54,7 +62,22 @@ function requireAccessState(principal: ArchivePrincipal, accessState: string): v
 	throw new ArchiveHttpError(403, 'revision is not readable');
 }
 
-export async function listSourceFiles(db: Db, slug: string, principal: ArchivePrincipal) {
+export async function listSourceFiles(
+	db: Db,
+	slug: string,
+	principal: ArchivePrincipal,
+	options: { role?: string | null; includeHistory?: boolean } = {}
+) {
+	const role = parseSourceFileRole(options.role);
+	const revisionClause = options.includeHistory
+		? archiveRoleAtLeast(principal.role, 'archive_reviewer')
+			? or(eq(fileRevisions.reviewStatus, 'approved'), eq(fileRevisions.reviewStatus, 'pending'))
+			: eq(fileRevisions.reviewStatus, 'approved')
+		: archiveRoleAtLeast(principal.role, 'archive_reviewer')
+			? or(eq(fileRevisions.isCurrent, true), eq(fileRevisions.reviewStatus, 'pending'))
+			: eq(fileRevisions.isCurrent, true);
+	const clauses = [eq(sources.slug, slug)];
+	if (role) clauses.push(eq(sourceFiles.role, role));
 	const rows = await db
 		.select({
 			fileId: sourceFiles.id,
@@ -75,24 +98,28 @@ export async function listSourceFiles(db: Db, slug: string, principal: ArchivePr
 		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
 		.leftJoin(
 			fileRevisions,
-			and(
-				eq(fileRevisions.sourceFileId, sourceFiles.id),
-				archiveRoleAtLeast(principal.role, 'archive_reviewer')
-					? or(eq(fileRevisions.isCurrent, true), eq(fileRevisions.reviewStatus, 'pending'))
-					: eq(fileRevisions.isCurrent, true)
-			)
+			and(eq(fileRevisions.sourceFileId, sourceFiles.id), revisionClause)
 		)
 		.leftJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
-		.where(eq(sources.slug, slug))
+		.where(and(...clauses))
 		.orderBy(asc(sourceFiles.sortOrder), asc(sourceFiles.id), desc(fileRevisions.submittedAt));
 	return rows;
 }
 
-export async function listFiles(db: Db, cursorRaw: string | null, updatedSinceRaw: string | null, limit = 50) {
+export async function listFiles(
+	db: Db,
+	cursorRaw: string | null,
+	updatedSinceRaw: string | null,
+	limit = 50,
+	options: { role?: string | null; includeHistory?: boolean } = {}
+) {
 	const cursor = decodeCursor(cursorRaw);
 	const updatedSince = updatedSinceRaw ? new Date(updatedSinceRaw) : null;
 	if (updatedSinceRaw && Number.isNaN(updatedSince?.getTime())) throw new ArchiveHttpError(400, 'invalid updated_since');
-	const clauses = [eq(fileRevisions.reviewStatus, 'approved'), eq(fileRevisions.isCurrent, true)];
+	const role = parseSourceFileRole(options.role);
+	const clauses = [eq(fileRevisions.reviewStatus, 'approved')];
+	if (!options.includeHistory) clauses.push(eq(fileRevisions.isCurrent, true));
+	if (role) clauses.push(eq(sourceFiles.role, role));
 	if (updatedSince) clauses.push(gte(fileRevisions.reviewedAt, updatedSince));
 	if (cursor) {
 		const d = new Date(cursor.updatedAt);
@@ -126,6 +153,36 @@ export async function listFiles(db: Db, cursorRaw: string | null, updatedSinceRa
 			rows.length > limit && last?.reviewedAt
 				? encodeCursor(updatedCursor(last.reviewedAt, last.fileId))
 				: null
+	};
+}
+
+export async function getSourceFileById(db: Db, fileId: string, principal: ArchivePrincipal) {
+	const [row] = await db
+		.select({
+			fileId: sourceFiles.id,
+			sourceId: sourceFiles.sourceId,
+			sourceSlug: sources.slug,
+			role: sourceFiles.role,
+			checkoutPath: sourceFiles.checkoutPath,
+			currentRevisionId: sql<string | null>`(
+				select id from file_revisions cur
+				where cur.source_file_id = ${sourceFiles.id} and cur.is_current = 1
+				limit 1
+			)`,
+			pendingRevisionId: sql<string | null>`(
+				select id from file_revisions pending
+				where pending.source_file_id = ${sourceFiles.id} and pending.review_status = 'pending'
+				limit 1
+			)`
+		})
+		.from(sourceFiles)
+		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
+		.where(eq(sourceFiles.id, fileId))
+		.limit(1);
+	if (!row) throw new ArchiveHttpError(404, 'file not found');
+	return {
+		...row,
+		pendingRevisionId: archiveRoleAtLeast(principal.role, 'archive_reviewer') ? row.pendingRevisionId : null
 	};
 }
 

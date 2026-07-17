@@ -11,8 +11,17 @@ import { listFiles } from '$lib/server/archive/db';
 export const GET: RequestHandler = async ({ request, url }) => {
 	await archivePrincipal(request, 'archive_reader');
 	try {
-		return json(await listFiles(db, url.searchParams.get('cursor'), url.searchParams.get('updated_since')));
+		return json(
+			await listFiles(db, url.searchParams.get('cursor'), url.searchParams.get('updated_since'), 50, {
+				role: url.searchParams.get('role'),
+				includeHistory: parseIncludeHistory(url.searchParams.get('include_history'))
+			})
+		);
 	} catch (e) {
 		throwArchiveError(e);
 	}
 };
+
+function parseIncludeHistory(value: string | null): boolean {
+	return value === 'true' || value === '1';
+}
