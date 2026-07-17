@@ -156,6 +156,18 @@ export async function listFiles(
 	};
 }
 
+export async function listArchiveRepositories(db: Db) {
+	const rows = await db
+		.select({
+			id: archiveRepositories.id,
+			name: archiveRepositories.name,
+			active: archiveRepositories.active
+		})
+		.from(archiveRepositories)
+		.orderBy(asc(archiveRepositories.name));
+	return { repositories: rows };
+}
+
 export async function getSourceFileById(db: Db, fileId: string, principal: ArchivePrincipal) {
 	const [row] = await db
 		.select({
