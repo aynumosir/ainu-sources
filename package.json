@@ -66,6 +66,7 @@
 	},
 	"dependencies": {
 		"3d-force-graph": "^1.80.0",
+		"jose": "^6.2.3",
 		"maplibre-gl": "^5.24.0"
 	}
 }

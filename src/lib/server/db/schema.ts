@@ -723,14 +723,15 @@ export const sourceLifecycleEvents = sqliteTable(
 	'source_lifecycle_events',
 	{
 		id: text('id').primaryKey().$defaultFn(uuid),
-		sourceId: text('source_id')
-			.notNull()
-			.references(() => sources.id, { onDelete: 'restrict' }),
+		sourceId: text('source_id').references(() => sources.id, { onDelete: 'restrict' }),
 		observationId: text('observation_id').references(() => sourceObservations.id, {
 			onDelete: 'set null'
 		}),
 		/** create | status_change | soft_delete | restore | merge | unmerge | deprecate | hide | unhide */
 		eventType: text('event_type').notNull(),
+		entityType: text('entity_type'),
+		entityId: text('entity_id'),
+		details: text('details', { mode: 'json' }).$type<Record<string, unknown>>(),
 		fromStatus: text('from_status'),
 		toStatus: text('to_status'),
 		fromMergedInto: text('from_merged_into').references((): AnySQLiteColumn => sources.id, {
@@ -744,7 +745,14 @@ export const sourceLifecycleEvents = sqliteTable(
 		actor: text('actor'),
 		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
 	},
-	(t) => [index('source_lifecycle_events_source_idx').on(t.sourceId, t.createdAt)]
+	(t) => [
+		index('source_lifecycle_events_source_idx').on(t.sourceId, t.createdAt),
+		index('source_lifecycle_events_entity_idx').on(t.entityType, t.entityId, t.createdAt),
+		check(
+			'source_lifecycle_events_shape_check',
+			sql`((${t.sourceId} is not null and ${t.entityType} is null and ${t.entityId} is null) or (${t.sourceId} is null and ${t.entityType} is not null and ${t.entityId} is not null))`
+		)
+	]
 );
 
 // ===========================================================================
@@ -1127,6 +1135,41 @@ export const capabilityTokens = sqliteTable(
 	]
 );
 
+export const archiveStreamDailyUsage = sqliteTable(
+	'archive_stream_daily_usage',
+	{
+		userId: text('user_id')
+			.notNull()
+			.references(() => user.id, { onDelete: 'cascade' }),
+		day: text('day').notNull(),
+		bytesReserved: integer('bytes_reserved').notNull().default(0),
+		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		primaryKey({ columns: [t.userId, t.day] }),
+		check('archive_stream_daily_usage_bytes_check', sql`${t.bytesReserved} >= 0`)
+	]
+);
+
+export const archiveStreamLeases = sqliteTable(
+	'archive_stream_leases',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		userId: text('user_id')
+			.notNull()
+			.references(() => user.id, { onDelete: 'cascade' }),
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'cascade' }),
+		expiresAt: integer('expires_at', { mode: 'timestamp_ms' }).notNull(),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		index('archive_stream_leases_user_idx').on(t.userId, t.expiresAt),
+		index('archive_stream_leases_expires_idx').on(t.expiresAt)
+	]
+);
+
 // ---------------------------------------------------------------------------
 // App user roles (権限) — app-owned authz (Better-Auth `user` table untouched)
 // ---------------------------------------------------------------------------
@@ -1187,6 +1230,8 @@ export type RevisionOcrCoverage = typeof revisionOcrCoverage.$inferSelect;
 export type UploadSession = typeof uploadSessions.$inferSelect;
 export type BlobOrigin = typeof blobOrigins.$inferSelect;
 export type CapabilityToken = typeof capabilityTokens.$inferSelect;
+export type ArchiveStreamDailyUsage = typeof archiveStreamDailyUsage.$inferSelect;
+export type ArchiveStreamLease = typeof archiveStreamLeases.$inferSelect;
 export type AppUserRole = typeof appUserRoles.$inferSelect;
 export type MigrationWatermark = typeof migrationWatermarks.$inferSelect;
 
