@@ -1,14 +1,28 @@
 /**
- * POST /api/archive/uploads — create an upload session and its logical file
- * slot in one database transaction, then begin the multipart upload in the
- * archive dataplane.
+ * GET /api/archive/uploads lists resumable upload sessions. POST creates an
+ * upload session or a deduplicated pending revision for an already verified blob.
  */
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { db as defaultDb } from '$lib/server/db';
-import { attachDataplaneUpload, createUploadSession, markUploadSessionFailed } from '$lib/server/archive/db';
+import { attachDataplaneUpload, createUploadSession, listUploadSessions, markUploadSessionFailed } from '$lib/server/archive/db';
 import { dataplane, getArchiveFetcher } from '$lib/server/archive/dataplane';
-import { archiveMutationPrincipal, readJsonObject, throwArchiveError } from '$lib/server/archive/route';
+import { archiveMutationPrincipal, archivePrincipal, readJsonObject, throwArchiveError } from '$lib/server/archive/route';
+
+export const GET: RequestHandler = async ({ request, url, locals }) => {
+	const db = routeDb(locals);
+	const principal = await archivePrincipal(request, 'archive_contributor', db);
+	try {
+		return json(
+			await listUploadSessions(db, principal, {
+				states: parseStateParam(url.searchParams.get('state')),
+				all: url.searchParams.get('all') === '1'
+			})
+		);
+	} catch (e) {
+		throwArchiveError(e);
+	}
+};
 
 export const POST: RequestHandler = async ({ request, platform, locals }) => {
 	const db = routeDb(locals);
@@ -24,6 +38,9 @@ export const POST: RequestHandler = async ({ request, platform, locals }) => {
 			sha256: String(body.sha256 ?? ''),
 			declaredMediaType: String(body.declared_media_type ?? body.declaredMediaType ?? '')
 		});
+		if (created.kind === 'deduplicated') {
+			return json({ deduplicated: true, revisionId: created.revision.id, fileId: created.sourceFile.id }, { status: 200 });
+		}
 		const response = await dataplane.multipartCreate(getArchiveFetcher(platform?.env), principal.userId, {
 			sessionId: created.session.id,
 			expectedSha256: created.session.expectedSha256,
@@ -85,6 +102,11 @@ function parseDataplaneCreateResponse(text: string): { stagingKey: string; uploa
 
 function truncate(value: string): string {
 	return value.length > 500 ? `${value.slice(0, 500)}...` : value;
+}
+
+function parseStateParam(value: string | null): string[] | null {
+	if (value == null || value.trim() === '') return null;
+	return value.split(',').map((state) => state.trim()).filter(Boolean);
 }
 
 function routeDb(locals: App.Locals) {

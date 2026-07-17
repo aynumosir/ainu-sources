@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gt, gte, isNull, lt, max, or, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, gte, inArray, isNull, lt, max, or, sql } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import { env } from '$env/dynamic/private';
 import {
@@ -21,13 +21,16 @@ import { decodeCursor, encodeCursor, type FileCursor } from './cursor';
 import { archiveRoleAtLeast, iso, type ArchivePrincipal } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
+type Tx = Parameters<Parameters<Db['transaction']>[0]>[0];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_UPLOAD_TTL_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_DAILY_BYTES = 5 * 1024 * 1024 * 1024;
 const DEFAULT_CONCURRENT_STREAMS = 3;
 const SOURCE_FILE_ROLES = ['scan', 'epub', 'supplement', 'derivative'] as const;
+const UPLOAD_SESSION_STATES = ['initiated', 'uploading', 'uploaded', 'finalizing', 'verified', 'failed', 'aborted', 'expired'] as const;
 type SourceFileRole = (typeof SOURCE_FILE_ROLES)[number];
+type UploadSessionState = (typeof UPLOAD_SESSION_STATES)[number];
 
 type FinalizeSuccessResult = {
 	sessionId: string;
@@ -118,21 +121,87 @@ function isFinalizeMismatchResult(value: unknown): value is FinalizeMismatchResu
 	);
 }
 
-function originalFilenameFor(sourceFile: Pick<schema.SourceFile, 'label' | 'checkoutPath'>, result: FinalizeSuccessResult, declaredMediaType: string): string {
+function originalFilenameFor(
+	sourceFile: Pick<schema.SourceFile, 'label' | 'checkoutPath'>,
+	sha256: string,
+	declaredMediaType: string,
+	checkoutPath?: string | null
+): string {
 	if (sourceFile.label?.trim()) return sourceFile.label.trim();
-	const checkoutPath = sourceFile.checkoutPath?.trim();
-	if (checkoutPath) {
-		const name = checkoutPath.split(/[\\/]/u).filter(Boolean).at(-1);
+	const path = checkoutPath?.trim() || sourceFile.checkoutPath?.trim();
+	if (path) {
+		const name = path.split(/[\\/]/u).filter(Boolean).at(-1);
 		if (name) return name;
 	}
 	const extension = mediaTypeExtension(declaredMediaType);
-	return `${result.sha256.slice(0, 12)}${extension ? `.${extension}` : ''}`;
+	return `${sha256.slice(0, 12)}${extension ? `.${extension}` : ''}`;
 }
 
 function mediaTypeExtension(mediaType: string): string | null {
 	if (mediaType === 'application/pdf') return 'pdf';
 	if (mediaType === 'application/epub+zip') return 'epub';
 	return null;
+}
+
+async function nextRevisionNo(tx: Tx, sourceFileId: string): Promise<number> {
+	const [{ revisionNo }] = await tx
+		.select({ revisionNo: max(fileRevisions.revisionNo) })
+		.from(fileRevisions)
+		.where(eq(fileRevisions.sourceFileId, sourceFileId));
+	return Number(revisionNo ?? 0) + 1;
+}
+
+async function resolveUploadSourceFile(
+	tx: Tx,
+	principal: ArchivePrincipal,
+	input: { sourceSlug: string; role: string; checkoutRepo?: string | null; checkoutPath?: string | null }
+): Promise<schema.SourceFile> {
+	const [source] = await tx.select().from(sources).where(eq(sources.slug, input.sourceSlug)).limit(1);
+	if (!source) throw new ArchiveHttpError(404, 'source not found');
+	if (!source.humanDownload) throw new ArchiveHttpError(403, 'source rights do not allow archive uploads');
+	let repoId: string | null = null;
+	if (input.checkoutRepo) {
+		const [repo] = await tx
+			.select()
+			.from(archiveRepositories)
+			.where(eq(archiveRepositories.name, input.checkoutRepo))
+			.limit(1);
+		if (!repo) throw new ArchiveHttpError(400, 'checkout repository not found');
+		repoId = repo.id;
+	}
+	let [slot] = await tx
+		.select()
+		.from(sourceFiles)
+		.where(and(eq(sourceFiles.sourceId, source.id), eq(sourceFiles.role, input.role)))
+		.limit(1);
+	if (!slot) {
+		[slot] = await tx
+			.insert(sourceFiles)
+			.values({
+				id: uuid(),
+				sourceId: source.id,
+				role: input.role,
+				checkoutRepoId: repoId,
+				checkoutPath: input.checkoutPath ?? null,
+				createdBy: principal.userId
+			})
+			.returning();
+	}
+	return slot;
+}
+
+function alreadyDecidedDetails(row: {
+	reviewStatus: string;
+	reviewedBy: string | null;
+	reviewedAt: Date | null;
+	reviewNote: string | null;
+}): Record<string, unknown> {
+	return {
+		review_status: row.reviewStatus,
+		reviewed_by: row.reviewedBy,
+		reviewed_at: iso(row.reviewedAt),
+		review_note: row.reviewNote
+	};
 }
 
 export async function listSourceFiles(
@@ -337,40 +406,36 @@ export async function createUploadSession(
 ) {
 	if (!/^[0-9a-f]{64}$/u.test(input.sha256)) throw new ArchiveHttpError(400, 'sha256 must be 64 lowercase hex characters');
 	if (!Number.isSafeInteger(input.bytes) || input.bytes <= 0) throw new ArchiveHttpError(400, 'size must be positive');
-	const duplicate = await db.select().from(archiveBlobs).where(eq(archiveBlobs.sha256, input.sha256)).limit(1);
-	if (duplicate.length) throw new ArchiveHttpError(409, 'blob already exists');
 	const now = new Date();
 	return db.transaction(async (tx) => {
-		const [source] = await tx.select().from(sources).where(eq(sources.slug, input.sourceSlug)).limit(1);
-		if (!source) throw new ArchiveHttpError(404, 'source not found');
-		if (!source.humanDownload) throw new ArchiveHttpError(403, 'source rights do not allow archive uploads');
-		let repoId: string | null = null;
-		if (input.checkoutRepo) {
-			const [repo] = await tx
-				.select()
-				.from(archiveRepositories)
-				.where(eq(archiveRepositories.name, input.checkoutRepo))
-				.limit(1);
-			if (!repo) throw new ArchiveHttpError(400, 'checkout repository not found');
-			repoId = repo.id;
-		}
-		let [slot] = await tx
-			.select()
-			.from(sourceFiles)
-			.where(and(eq(sourceFiles.sourceId, source.id), eq(sourceFiles.role, input.role)))
-			.limit(1);
-		if (!slot) {
-			[slot] = await tx
-				.insert(sourceFiles)
+		const slot = await resolveUploadSourceFile(tx, principal, input);
+		const [blob] = await tx.select().from(archiveBlobs).where(eq(archiveBlobs.sha256, input.sha256)).limit(1);
+		if (blob?.storageState === 'verified') {
+			const revisionNo = await nextRevisionNo(tx, slot.id);
+			const [revision] = await tx
+				.insert(fileRevisions)
 				.values({
 					id: uuid(),
-					sourceId: source.id,
-					role: input.role,
-					checkoutRepoId: repoId,
-					checkoutPath: input.checkoutPath ?? null,
-					createdBy: principal.userId
+					sourceFileId: slot.id,
+					revisionNo,
+					blobSha256: input.sha256,
+					originalFilename: originalFilenameFor(slot, input.sha256, input.declaredMediaType, input.checkoutPath),
+					declaredMediaType: input.declaredMediaType,
+					artifactKind: 'original',
+					reviewStatus: 'pending',
+					isCurrent: false,
+					submittedBy: principal.userId,
+					submittedAt: now
 				})
 				.returning();
+			await recordArchiveEvent(tx, {
+				entityType: 'file_revision',
+				entityId: revision.id,
+				eventType: 'revision_deduplicated',
+				actor: principal.userId,
+				details: { source_file_id: slot.id, sha256: input.sha256, bytes: blob.bytes }
+			});
+			return { kind: 'deduplicated' as const, revision, sourceFile: slot };
 		}
 		const [session] = await tx
 			.insert(uploadSessions)
@@ -395,7 +460,7 @@ export async function createUploadSession(
 			actor: principal.userId,
 			details: { source_file_id: slot.id, sha256: input.sha256, bytes: input.bytes }
 		});
-		return { session, sourceFile: slot };
+		return { kind: 'session' as const, session, sourceFile: slot };
 	});
 }
 
@@ -438,6 +503,35 @@ export async function getUploadSession(db: Db, id: string, principal: ArchivePri
 	return serializeUploadSession(row);
 }
 
+export async function listUploadSessions(
+	db: Db,
+	principal: ArchivePrincipal,
+	options: { states?: string[] | null; all?: boolean } = {}
+) {
+	const states = parseUploadSessionStates(options.states);
+	const clauses = [inArray(uploadSessions.state, states)];
+	if (!(options.all && principal.role === 'archive_admin')) clauses.push(eq(uploadSessions.submittedBy, principal.userId));
+	// Upload resume lists are short-lived and small, so a fixed cap avoids cursor
+	// plumbing on a list that normally has only a few active rows.
+	const rows = await db
+		.select()
+		.from(uploadSessions)
+		.where(and(...clauses))
+		.orderBy(desc(uploadSessions.createdAt))
+		.limit(100);
+	return { uploads: rows.map(serializeUploadSession) };
+}
+
+function parseUploadSessionStates(values: string[] | null | undefined): UploadSessionState[] {
+	if (!values || values.length === 0) return ['initiated', 'uploading', 'uploaded', 'finalizing'];
+	for (const value of values) {
+		if (!(UPLOAD_SESSION_STATES as readonly string[]).includes(value)) {
+			throw new ArchiveHttpError(400, 'invalid upload state');
+		}
+	}
+	return values as UploadSessionState[];
+}
+
 export async function reconcileUploadFinalization(
 	db: Db,
 	sessionId: string,
@@ -476,19 +570,14 @@ export async function reconcileUploadFinalization(
 				})
 				.onConflictDoNothing({ target: archiveBlobs.sha256 });
 
-			const [{ revisionNo }] = await tx
-				.select({ revisionNo: max(fileRevisions.revisionNo) })
-				.from(fileRevisions)
-				.where(eq(fileRevisions.sourceFileId, session.sourceFileId));
-			const nextRevisionNo = Number(revisionNo ?? 0) + 1;
 			// Upload creation does not carry a browser filename yet. This fallback
 			// preserves a readable value for the required column until that field is
 			// added to the wire contract.
-			const originalFilename = originalFilenameFor(sourceFile, result, session.declaredMediaType);
+			const originalFilename = originalFilenameFor(sourceFile, result.sha256, session.declaredMediaType);
 			await tx.insert(fileRevisions).values({
 				id: uuid(),
 				sourceFileId: session.sourceFileId,
-				revisionNo: nextRevisionNo,
+				revisionNo: await nextRevisionNo(tx, session.sourceFileId),
 				blobSha256: result.sha256,
 				originalFilename,
 				declaredMediaType: session.declaredMediaType,
@@ -587,51 +676,193 @@ export async function abortUploadSession(db: Db, id: string, principal: ArchiveP
 	});
 }
 
-export async function listPendingReview(db: Db, cursorRaw: string | null, limit = 50) {
+export async function listPendingReview(db: Db, cursorRaw: string | null, limit = 50, options: { include?: 'full' } = {}) {
 	const cursor = decodeCursor(cursorRaw);
 	const clauses = [eq(fileRevisions.reviewStatus, 'pending')];
 	if (cursor) {
 		const d = new Date(cursor.updatedAt);
 		clauses.push(or(gt(fileRevisions.submittedAt, d), and(eq(fileRevisions.submittedAt, d), gt(fileRevisions.id, cursor.id)))!);
 	}
-	const rows = await db
-		.select({
-			revisionId: fileRevisions.id,
-			sourceSlug: sources.slug,
-			title: sources.title,
-			titleEn: sources.titleEn,
-			fileRole: sourceFiles.role,
-			checkoutPath: sourceFiles.checkoutPath,
-			uploader: fileRevisions.submittedBy,
-			submittedAt: fileRevisions.submittedAt,
-			filename: fileRevisions.originalFilename,
-			declaredMediaType: fileRevisions.declaredMediaType,
-			detectedMediaType: archiveBlobs.detectedMediaType,
-			bytes: archiveBlobs.bytes,
-			pageCount: fileRevisions.pageCount,
-			sha256: fileRevisions.blobSha256,
-			currentRevision: sql<string | null>`(
-				select id from file_revisions cur
-				where cur.source_file_id = ${sourceFiles.id} and cur.is_current = 1
-				limit 1
-			)`
-		})
-		.from(fileRevisions)
-		.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
-		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
-		.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
-		.where(and(...clauses))
-		.orderBy(asc(fileRevisions.submittedAt), asc(fileRevisions.id))
-		.limit(limit + 1);
+	const [rows, [{ total }]] = await Promise.all([
+		db
+			.select({
+				revisionId: fileRevisions.id,
+				sourceFileId: fileRevisions.sourceFileId,
+				sourceSlug: sources.slug,
+				title: sources.title,
+				titleEn: sources.titleEn,
+				fileRole: sourceFiles.role,
+				checkoutPath: sourceFiles.checkoutPath,
+				uploader: fileRevisions.submittedBy,
+				submittedAt: fileRevisions.submittedAt,
+				filename: fileRevisions.originalFilename,
+				declaredMediaType: fileRevisions.declaredMediaType,
+				detectedMediaType: archiveBlobs.detectedMediaType,
+				bytes: archiveBlobs.bytes,
+				pageCount: fileRevisions.pageCount,
+				sha256: fileRevisions.blobSha256,
+				currentRevision: sql<string | null>`(
+					select id from file_revisions cur
+					where cur.source_file_id = ${sourceFiles.id} and cur.is_current = 1
+					limit 1
+				)`
+			})
+			.from(fileRevisions)
+			.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
+			.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
+			.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
+			.where(and(...clauses))
+			.orderBy(asc(fileRevisions.submittedAt), asc(fileRevisions.id))
+			.limit(limit + 1),
+		db
+			.select({ total: sql<number>`count(*)` })
+			.from(fileRevisions)
+			.where(eq(fileRevisions.reviewStatus, 'pending'))
+	]);
 	const page = rows.slice(0, limit);
 	const last = page.at(-1);
+	const full = options.include === 'full' ? await reviewFullPayload(db, page) : null;
 	return {
-		items: page.map((r) => ({ ...r, submittedAt: iso(r.submittedAt), exactDuplicates: [] })),
+		items: page.map((r) => {
+			const { sourceFileId, ...publicRow } = r;
+			const base = {
+				...publicRow,
+				submittedAt: iso(r.submittedAt),
+				exactDuplicates: full?.exactDuplicates.get(r.revisionId) ?? []
+			};
+			if (!full) return base;
+			return {
+				...base,
+				currentRevisionSummary: full.currentRevisionSummary.get(sourceFileId) ?? null,
+				priorRevisions: full.priorRevisions.get(r.revisionId) ?? []
+			};
+		}),
 		nextCursor:
 			rows.length > limit && last?.submittedAt
 				? encodeCursor({ updatedAt: last.submittedAt.toISOString(), id: last.revisionId })
-				: null
+				: null,
+		total: Number(total)
 	};
+}
+
+async function reviewFullPayload(
+	db: Db,
+	page: {
+		revisionId: string;
+		sourceFileId: string;
+		sha256: string | null;
+	}[]
+) {
+	if (page.length === 0) {
+		return {
+			exactDuplicates: new Map<string, unknown[]>(),
+			currentRevisionSummary: new Map<string, unknown>(),
+			priorRevisions: new Map<string, unknown[]>()
+		};
+	}
+	const revisionIds = page.map((row) => row.revisionId);
+	const sourceFileIds = [...new Set(page.map((row) => row.sourceFileId))];
+	const sha256s = [...new Set(page.flatMap((row) => (row.sha256 ? [row.sha256] : [])))];
+	const [duplicateRows, currentRows, priorRows] = await Promise.all([
+		sha256s.length
+			? db
+					.select({
+						revisionId: fileRevisions.id,
+						sourceFileId: fileRevisions.sourceFileId,
+						sourceSlug: sources.slug,
+						reviewStatus: fileRevisions.reviewStatus,
+						sha256: fileRevisions.blobSha256
+					})
+					.from(fileRevisions)
+					.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
+					.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
+					.where(inArray(fileRevisions.blobSha256, sha256s))
+			: [],
+		db
+			.select({
+				id: fileRevisions.id,
+				sourceFileId: fileRevisions.sourceFileId,
+				revisionNo: fileRevisions.revisionNo,
+				submittedAt: fileRevisions.submittedAt,
+				reviewedAt: fileRevisions.reviewedAt,
+				bytes: archiveBlobs.bytes,
+				sha256: fileRevisions.blobSha256
+			})
+			.from(fileRevisions)
+			.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
+			.where(and(inArray(fileRevisions.sourceFileId, sourceFileIds), eq(fileRevisions.isCurrent, true))),
+		db
+			.select({
+				id: fileRevisions.id,
+				sourceFileId: fileRevisions.sourceFileId,
+				revisionNo: fileRevisions.revisionNo,
+				reviewStatus: fileRevisions.reviewStatus,
+				reviewedBy: fileRevisions.reviewedBy,
+				reviewedAt: fileRevisions.reviewedAt,
+				reviewNote: fileRevisions.reviewNote,
+				submittedAt: fileRevisions.submittedAt
+			})
+			.from(fileRevisions)
+			.where(inArray(fileRevisions.sourceFileId, sourceFileIds))
+			.orderBy(desc(fileRevisions.revisionNo))
+	]);
+	const pageByRevision = new Map(page.map((row) => [row.revisionId, row]));
+	const exactDuplicates = new Map<string, { revisionId: string; sourceFileId: string; sourceSlug: string; reviewStatus: string }[]>();
+	for (const row of page) exactDuplicates.set(row.revisionId, []);
+	for (const duplicate of duplicateRows) {
+		for (const row of page) {
+			if (duplicate.sha256 === row.sha256 && duplicate.revisionId !== row.revisionId) {
+				exactDuplicates.get(row.revisionId)?.push({
+					revisionId: duplicate.revisionId,
+					sourceFileId: duplicate.sourceFileId,
+					sourceSlug: duplicate.sourceSlug,
+					reviewStatus: duplicate.reviewStatus
+				});
+			}
+		}
+	}
+	const currentRevisionSummary = new Map(
+		currentRows.map((row) => [
+			row.sourceFileId,
+			{
+				id: row.id,
+				revisionNo: row.revisionNo,
+				submittedAt: iso(row.submittedAt),
+				reviewedAt: iso(row.reviewedAt),
+				bytes: row.bytes,
+				sha256: row.sha256
+			}
+		])
+	);
+	const priorRevisions = new Map<
+		string,
+		{
+			id: string;
+			revisionNo: number;
+			reviewStatus: string;
+			reviewedBy: string | null;
+			reviewedAt: string | null;
+			reviewNote: string | null;
+			submittedAt: string | null;
+		}[]
+	>();
+	for (const row of page) priorRevisions.set(row.revisionId, []);
+	for (const prior of priorRows) {
+		for (const [revisionId, row] of pageByRevision) {
+			if (prior.sourceFileId === row.sourceFileId && prior.id !== revisionId) {
+				priorRevisions.get(revisionId)?.push({
+					id: prior.id,
+					revisionNo: prior.revisionNo,
+					reviewStatus: prior.reviewStatus,
+					reviewedBy: prior.reviewedBy,
+					reviewedAt: iso(prior.reviewedAt),
+					reviewNote: prior.reviewNote,
+					submittedAt: iso(prior.submittedAt)
+				});
+			}
+		}
+	}
+	return { exactDuplicates, currentRevisionSummary, priorRevisions };
 }
 
 export async function approveRevision(db: Db, revisionId: string, principal: ArchivePrincipal) {
@@ -642,6 +873,9 @@ export async function approveRevision(db: Db, revisionId: string, principal: Arc
 				sourceFileId: fileRevisions.sourceFileId,
 				submittedBy: fileRevisions.submittedBy,
 				reviewStatus: fileRevisions.reviewStatus,
+				reviewedBy: fileRevisions.reviewedBy,
+				reviewedAt: fileRevisions.reviewedAt,
+				reviewNote: fileRevisions.reviewNote,
 				declaredMediaType: fileRevisions.declaredMediaType,
 				detectedMediaType: archiveBlobs.detectedMediaType,
 				humanDownload: sources.humanDownload
@@ -653,7 +887,9 @@ export async function approveRevision(db: Db, revisionId: string, principal: Arc
 			.where(eq(fileRevisions.id, revisionId))
 			.limit(1);
 		if (!row) throw new ArchiveHttpError(404, 'revision not found');
-		if (row.reviewStatus !== 'pending') throw new ArchiveHttpError(409, 'revision is not pending');
+		if (row.reviewStatus !== 'pending') {
+			throw new ArchiveHttpError(409, 'revision already decided', alreadyDecidedDetails(row));
+		}
 		if (row.submittedBy === principal.userId) throw new ArchiveHttpError(403, 'reviewer must differ from submitter');
 		if (row.declaredMediaType !== row.detectedMediaType) throw new ArchiveHttpError(409, 'declared media type does not match detected media type');
 		if (!row.humanDownload) throw new ArchiveHttpError(403, 'source rights do not allow approval');
@@ -680,20 +916,35 @@ export async function approveRevision(db: Db, revisionId: string, principal: Arc
 
 export async function rejectRevision(db: Db, revisionId: string, principal: ArchivePrincipal, note: string) {
 	if (!note.trim()) throw new ArchiveHttpError(400, 'review note is required');
-	const [updated] = await db
-		.update(fileRevisions)
-		.set({ reviewStatus: 'rejected', reviewedBy: principal.userId, reviewedAt: new Date(), reviewNote: note })
-		.where(and(eq(fileRevisions.id, revisionId), eq(fileRevisions.reviewStatus, 'pending')))
-		.returning();
-	if (!updated) throw new ArchiveHttpError(409, 'revision is not pending');
-	await recordArchiveEvent(db, {
-		entityType: 'file_revision',
-		entityId: revisionId,
-		eventType: 'revision_rejected',
-		actor: principal.userId,
-		details: { note }
+	return db.transaction(async (tx) => {
+		const [row] = await tx
+			.select({
+				reviewStatus: fileRevisions.reviewStatus,
+				reviewedBy: fileRevisions.reviewedBy,
+				reviewedAt: fileRevisions.reviewedAt,
+				reviewNote: fileRevisions.reviewNote
+			})
+			.from(fileRevisions)
+			.where(eq(fileRevisions.id, revisionId))
+			.limit(1);
+		if (!row) throw new ArchiveHttpError(404, 'revision not found');
+		if (row.reviewStatus !== 'pending') {
+			throw new ArchiveHttpError(409, 'revision already decided', alreadyDecidedDetails(row));
+		}
+		const [updated] = await tx
+			.update(fileRevisions)
+			.set({ reviewStatus: 'rejected', reviewedBy: principal.userId, reviewedAt: new Date(), reviewNote: note })
+			.where(eq(fileRevisions.id, revisionId))
+			.returning();
+		await recordArchiveEvent(tx, {
+			entityType: 'file_revision',
+			entityId: revisionId,
+			eventType: 'revision_rejected',
+			actor: principal.userId,
+			details: { note }
+		});
+		return updated;
 	});
-	return updated;
 }
 
 export async function withdrawRevision(db: Db, revisionId: string, principal: ArchivePrincipal) {
@@ -840,6 +1091,34 @@ export async function reserveStreamQuota(
 			createdAt: now
 		});
 		return leaseId;
+	});
+}
+
+export async function getUsageSummary(db: Db, principal: ArchivePrincipal) {
+	const dailyLimit = intEnv('ARCHIVE_DAILY_BYTE_LIMIT', DEFAULT_DAILY_BYTES);
+	const concurrencyLimit = intEnv('ARCHIVE_CONCURRENT_STREAM_LIMIT', DEFAULT_CONCURRENT_STREAMS);
+	const now = new Date();
+	const day = now.toISOString().slice(0, 10);
+	return db.transaction(async (tx) => {
+		await tx.delete(archiveStreamLeases).where(lt(archiveStreamLeases.expiresAt, now));
+		const [usage] = await tx
+			.select()
+			.from(archiveStreamDailyUsage)
+			.where(and(eq(archiveStreamDailyUsage.userId, principal.userId), eq(archiveStreamDailyUsage.day, day)))
+			.limit(1);
+		const [{ activeStreams }] = await tx
+			.select({ activeStreams: sql<number>`count(*)` })
+			.from(archiveStreamLeases)
+			.where(and(eq(archiveStreamLeases.userId, principal.userId), gt(archiveStreamLeases.expiresAt, now)));
+		const resetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+		return {
+			date: day,
+			bytesUsed: usage?.bytesReserved ?? 0,
+			dailyByteLimit: dailyLimit,
+			resetAt: resetAt.toISOString(),
+			activeStreams: Number(activeStreams),
+			concurrentStreamLimit: concurrencyLimit
+		};
 	});
 }
 

@@ -16,6 +16,7 @@ export type ArchiveEventType =
 	| 'upload_aborted'
 	| 'revision_approved'
 	| 'revision_rejected'
+	| 'revision_deduplicated'
 	| 'revision_withdrawn'
 	| 'capability_issued'
 	| 'capability_redeemed'

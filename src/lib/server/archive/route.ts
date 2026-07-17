@@ -39,7 +39,9 @@ export async function archiveMutationPrincipal(
 }
 
 export function throwArchiveError(e: unknown): never {
-	if (e instanceof ArchiveHttpError) throw error(e.status, e.message);
+	if (e instanceof ArchiveHttpError) {
+		throw error(e.status, { message: e.message, ...e.details } as App.Error);
+	}
 	throw e;
 }
 
