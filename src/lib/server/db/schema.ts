@@ -1053,6 +1053,25 @@ export const revisionOcrCoverage = sqliteTable(
 	]
 );
 
+export const ocrIngestState = sqliteTable(
+	'ocr_ingest_state',
+	{
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'cascade' }),
+		variant: text('variant').notNull(),
+		contentHash: text('content_hash').notNull(),
+		pageCount: integer('page_count').notNull(),
+		ingestedAt: integer('ingested_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		primaryKey({ columns: [t.revisionId, t.variant] }),
+		uniqueIndex('ocr_ingest_state_revision_variant_idx').on(t.revisionId, t.variant),
+		check('ocr_ingest_state_hash_check', sql`length(${t.contentHash}) = 64 and ${t.contentHash} not glob '*[^0-9a-f]*'`),
+		check('ocr_ingest_state_page_count_check', sql`${t.pageCount} >= 0`)
+	]
+);
+
 export const uploadSessions = sqliteTable(
 	'upload_sessions',
 	{
@@ -1227,6 +1246,7 @@ export type SourceFile = typeof sourceFiles.$inferSelect;
 export type FileRevision = typeof fileRevisions.$inferSelect;
 export type RevisionDerivation = typeof revisionDerivations.$inferSelect;
 export type RevisionOcrCoverage = typeof revisionOcrCoverage.$inferSelect;
+export type OcrIngestState = typeof ocrIngestState.$inferSelect;
 export type UploadSession = typeof uploadSessions.$inferSelect;
 export type BlobOrigin = typeof blobOrigins.$inferSelect;
 export type CapabilityToken = typeof capabilityTokens.$inferSelect;

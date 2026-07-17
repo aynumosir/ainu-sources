@@ -71,6 +71,13 @@
       "when": 1784296100000,
       "tag": "0009_archive_control_plane",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1784300000000,
+      "tag": "0010_archive_ocr",
+      "breakpoints": true
     }
   ]
 }

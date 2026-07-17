@@ -26,6 +26,7 @@
 		"import:relations": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/relations.ts",
 		"import:person-enrichment": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/person-enrichment.ts",
 		"import:all": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import-all.ts",
+		"archive:ingest-ocr": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/ingest-ocr.ts",
 		"audit": "bun scripts/audit.ts",
 		"reslug": "bun scripts/apply-reslug.ts",
 		"review:proposals": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/review-proposals.ts",
