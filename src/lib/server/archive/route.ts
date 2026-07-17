@@ -28,6 +28,9 @@ export async function archiveMutationPrincipal(
 ): Promise<ArchivePrincipal> {
 	const principal = await archivePrincipal(request, minRole, db);
 	try {
+		if (principal.authn === 'mcp_assertion') {
+			throw new ArchiveHttpError(403, 'assertion-authenticated principals cannot perform mutating actions');
+		}
 		await requireArchiveMutationGuards(request, principal.userId);
 		return principal;
 	} catch (e) {

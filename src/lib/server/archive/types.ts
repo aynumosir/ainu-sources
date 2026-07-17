@@ -11,7 +11,7 @@ export type ArchivePrincipal = {
 	userId: string;
 	role: ArchiveRole;
 	identity: { kind: 'access_sub' | 'github_login' | 'service_token'; value: string };
-	authn: 'access_jwt' | 'service_token';
+	authn: 'access_jwt' | 'service_token' | 'mcp_assertion';
 	email?: string;
 };
 

@@ -7,6 +7,7 @@ import { appUserRoles, userIdentities } from '$lib/server/db/schema';
 import type * as schema from '$lib/server/db/schema';
 import { recordArchiveEvent } from './audit';
 import { ArchiveHttpError } from './errors';
+import { verifyMcpAssertion } from './mcp-assertion';
 import { archiveRoleAtLeast, isArchiveRole, type ArchivePrincipal, type ArchiveRole } from './types';
 import { safeEqual } from './crypto';
 
@@ -89,6 +90,17 @@ async function resolveFromServiceToken(request: Request, db: Db): Promise<Archiv
 	return { userId: identity.userId, role, identity, authn: 'service_token' };
 }
 
+export async function resolveFromMcpAssertion(request: Request, db: Db): Promise<ArchivePrincipal | null> {
+	if (!request.headers.get('x-archive-assertion') || !request.headers.get('x-archive-signature')) return null;
+	const secret = env.ASSERTION_KEY_MCP;
+	if (!secret) throw new ArchiveHttpError(503, 'archive MCP assertion auth is not configured');
+	const result = await verifyMcpAssertion(request.headers, secret);
+	if (!result.ok) return null;
+	const identity = await resolveIdentity(db, 'github_login', result.actor);
+	if (!identity) return null;
+	return { userId: identity.userId, role: 'archive_reader', identity, authn: 'mcp_assertion' };
+}
+
 async function maybeDeactivateMembership(db: Db, userId: string, actor: string): Promise<void> {
 	if (env.ARCHIVE_ENFORCE_MEMBERSHIP !== '1') return;
 	await db.transaction(async (tx) => {
@@ -136,7 +148,11 @@ async function resolveFromAccessJwt(request: Request, db: Db): Promise<ArchivePr
 }
 
 export async function resolveArchivePrincipal(request: Request, db: Db): Promise<ArchivePrincipal | null> {
-	return (await resolveFromServiceToken(request, db)) ?? (await resolveFromAccessJwt(request, db));
+	return (
+		(await resolveFromServiceToken(request, db)) ??
+		(await resolveFromMcpAssertion(request, db)) ??
+		(await resolveFromAccessJwt(request, db))
+	);
 }
 
 export async function requireArchiveRole(

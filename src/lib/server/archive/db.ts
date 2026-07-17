@@ -451,6 +451,9 @@ export function capabilityExpiry(requestedTtlSeconds: number | undefined, now = 
 }
 
 export async function issueCapability(db: Db, revisionId: string, principal: ArchivePrincipal, ttlSeconds?: number) {
+	if (principal.authn === 'mcp_assertion') {
+		throw new ArchiveHttpError(403, 'assertion-authenticated principals cannot issue capabilities');
+	}
 	const revision = await getRevisionForContent(db, revisionId, principal);
 	if (!archiveRoleAtLeast(principal.role, 'archive_reviewer') && revision.submittedBy !== principal.userId) {
 		throw new ArchiveHttpError(403, 'capability issuance is not allowed');
