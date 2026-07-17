@@ -13,7 +13,7 @@ import { user } from '$lib/server/db/auth.schema';
 import { recordArchiveEvent } from './audit';
 import { archiveAuthzInternals, resolveArchivePrincipal } from './authz';
 import { compareCursor, decodeCursor, encodeCursor } from './cursor';
-import { issueArchiveCsrfToken, requireArchiveOrigin, verifyArchiveCsrfToken } from './csrf';
+import { issueArchiveCsrfToken, requireArchiveMutationGuards, requireArchiveOrigin, verifyArchiveCsrfToken } from './csrf';
 import { hmacSha256Hex } from './crypto';
 import {
 	approveRevision,
@@ -23,6 +23,7 @@ import {
 	issueCapability,
 	listFiles,
 	listSourceFiles,
+	reconcileUploadFinalization,
 	redeemCapability
 } from './db';
 import { ArchiveHttpError } from './errors';
@@ -39,7 +40,9 @@ const MIGRATIONS = fileURLToPath(new URL('../../../../drizzle', import.meta.url)
 type Db = LibSQLDatabase<typeof schema>;
 
 async function makeDb(): Promise<Db> {
-	const client = createClient({ url: `file:/tmp/archive-test-${crypto.randomUUID()}.db` });
+	const url = `file:/tmp/archive-test-${crypto.randomUUID()}.db`;
+	env.DATABASE_URL = url;
+	const client = createClient({ url });
 	const db = drizzle(client, { schema });
 	await migrate(db, { migrationsFolder: MIGRATIONS });
 	return db;
@@ -68,8 +71,8 @@ const reader: ArchivePrincipal = {
 };
 
 beforeEach(async () => {
-	db = await makeDb();
 	for (const key of Object.keys(env)) delete env[key];
+	db = await makeDb();
 	env.ARCHIVE_CSRF_SECRET = 'csrf-secret';
 	await db.insert(user).values([
 		{ id: 'reviewer', name: 'Reviewer', email: 'reviewer@example.test' },
@@ -123,6 +126,17 @@ async function seedRevision(status: 'pending' | 'approved' = 'pending', media = 
 	});
 }
 
+async function seedUploadSource(slug = 'source-one') {
+	await db.insert(schema.sources).values({
+		id: `${slug}-id`,
+		slug,
+		title: 'Source One',
+		category: 'primary',
+		type: 'book',
+		humanDownload: true
+	});
+}
+
 async function buildMcpAssertionHeaders(
 	secret: string,
 	actor: string,
@@ -134,6 +148,30 @@ async function buildMcpAssertionHeaders(
 		'X-Archive-Assertion': bytesToBase64(bytes),
 		'X-Archive-Signature': await hmacSha256Hex(secret, bytes)
 	});
+}
+
+async function seedServicePrincipal(
+	userId: string,
+	role: schema.AppUserRole['role'],
+	clientId = `${userId}-client`,
+	secret = `${userId}-secret`
+): Promise<{ auth: Headers; mutation: Headers }> {
+	env.ACCESS_SERVICE_TOKENS = `${clientId}:${secret}`;
+	await db.insert(schema.appUserRoles).values({ userId, role });
+	await db.insert(schema.userIdentities).values({ userId, kind: 'service_token', value: clientId });
+	const auth = new Headers({
+		'CF-Access-Client-Id': clientId,
+		'CF-Access-Client-Secret': secret
+	});
+	const mutation = new Headers(auth);
+	mutation.set('Origin', 'https://archive.aynu.org');
+	mutation.set('Content-Type', 'application/json');
+	mutation.set('X-Archive-CSRF', await issueArchiveCsrfToken(userId));
+	return { auth, mutation };
+}
+
+async function importRoute<T>(path: string): Promise<T> {
+	return (await import(path)) as T;
 }
 
 function bytesToBase64(bytes: Uint8Array): string {
@@ -280,6 +318,70 @@ describe('archive DB flows', () => {
 		expect(result.session.sourceFileId).toBe(result.sourceFile.id);
 		expect((await db.select().from(schema.sourceFiles)).length).toBe(1);
 		expect((await db.select().from(schema.uploadSessions)).length).toBe(1);
+	});
+
+	it('reconciles verified finalize results into a blob and pending revision once', async () => {
+		await seedUploadSource();
+		const created = await createUploadSession(db, contributor, {
+			sourceSlug: 'source-one',
+			role: 'scan',
+			bytes: 42,
+			sha256: 'b'.repeat(64),
+			declaredMediaType: 'application/pdf'
+		});
+		const result = {
+			sessionId: created.session.id,
+			status: 'verified',
+			sha256: 'b'.repeat(64),
+			bytes: 42,
+			detectedMediaType: 'application/pdf',
+			blobKey: `blobs/sha256/bb/${'b'.repeat(64)}`,
+			finalizedAt: '2026-01-01T00:00:00.000Z'
+		};
+
+		const upload = await reconcileUploadFinalization(db, created.session.id, contributor, { status: 200, body: result });
+		expect(upload.state).toBe('verified');
+		expect(await db.select().from(schema.archiveBlobs).where(eq(schema.archiveBlobs.sha256, result.sha256))).toHaveLength(1);
+		const revisions = await db.select().from(schema.fileRevisions).where(eq(schema.fileRevisions.sourceFileId, created.sourceFile.id));
+		expect(revisions).toHaveLength(1);
+		expect(revisions[0]).toMatchObject({
+			revisionNo: 1,
+			blobSha256: result.sha256,
+			originalFilename: 'bbbbbbbbbbbb.pdf',
+			reviewStatus: 'pending',
+			isCurrent: false
+		});
+
+		await reconcileUploadFinalization(db, created.session.id, contributor, { status: 200, body: result });
+		expect(await db.select().from(schema.archiveBlobs).where(eq(schema.archiveBlobs.sha256, result.sha256))).toHaveLength(1);
+		expect(await db.select().from(schema.fileRevisions).where(eq(schema.fileRevisions.sourceFileId, created.sourceFile.id))).toHaveLength(1);
+	});
+
+	it('reconciles quarantined finalize results into a failed upload session', async () => {
+		await seedUploadSource();
+		const created = await createUploadSession(db, contributor, {
+			sourceSlug: 'source-one',
+			role: 'scan',
+			bytes: 42,
+			sha256: 'c'.repeat(64),
+			declaredMediaType: 'application/pdf'
+		});
+		const result = {
+			sessionId: created.session.id,
+			status: 'quarantined',
+			reason: 'staging object digest or size mismatch',
+			expectedSha256: 'c'.repeat(64),
+			actualSha256: 'd'.repeat(64),
+			expectedBytes: 42,
+			actualBytes: 41,
+			finalizedAt: '2026-01-01T00:00:00.000Z'
+		};
+
+		const upload = await reconcileUploadFinalization(db, created.session.id, contributor, { status: 200, body: result });
+		expect(upload.state).toBe('failed');
+		expect(upload.errorCode).toBe(result.reason);
+		const [session] = await db.select().from(schema.uploadSessions).where(eq(schema.uploadSessions.id, created.session.id));
+		expect(session).toMatchObject({ state: 'failed', errorCode: result.reason });
 	});
 
 	it('approves a pending revision transactionally', async () => {
@@ -500,5 +602,152 @@ describe('archive DB flows', () => {
 			'media_type',
 			'pages'
 		]);
+	});
+});
+
+describe('archive API route handlers', () => {
+	it('sends the worker multipart create contract exactly', async () => {
+		env.ASSERTION_KEY_SOURCES = 'assertion-secret';
+		await seedUploadSource();
+		const { mutation } = await seedServicePrincipal('contributor', 'archive_contributor', 'svc-create');
+		let captured: Request | null = null;
+		const fetcher = {
+			async fetch(input: RequestInfo | URL, init?: RequestInit) {
+				captured = input instanceof Request ? input : new Request(input, init);
+				return Response.json({ stagingKey: 'staging/worker-owned', uploadId: 'mpu-1' });
+			}
+		};
+		const { POST } = await importRoute<typeof import('../../../routes/api/archive/uploads/+server')>(
+			'../../../routes/api/archive/uploads/+server'
+		);
+		const request = new Request('https://db.aynu.org/api/archive/uploads', {
+			method: 'POST',
+			headers: mutation,
+			body: JSON.stringify({
+				source_slug: 'source-one',
+				role: 'scan',
+				size: 42,
+				sha256: 'e'.repeat(64),
+				declared_media_type: 'application/pdf'
+			})
+		});
+
+		const response = await POST({ request, platform: { env: { ARCHIVE: fetcher } }, locals: { archiveDb: db } } as never);
+		expect(response.status).toBe(201);
+		const payload = (await response.json()) as {
+			upload: { id: string };
+			dataplane: { stagingKey: string; uploadId: string };
+		};
+		expect(payload.dataplane).toEqual({ stagingKey: 'staging/worker-owned', uploadId: 'mpu-1' });
+		expect(captured).toBeInstanceOf(Request);
+		expect(await captured!.clone().json()).toEqual({
+			sessionId: payload.upload.id,
+			expectedSha256: 'e'.repeat(64),
+			expectedBytes: 42,
+			declaredMediaType: 'application/pdf'
+		});
+		const [session] = await db.select().from(schema.uploadSessions).where(eq(schema.uploadSessions.id, payload.upload.id));
+		expect(session).toMatchObject({
+			state: 'uploading',
+			stagingKey: 'staging/worker-owned',
+			multipartId: 'mpu-1'
+		});
+	});
+
+	it('marks the session failed when dataplane multipart create fails', async () => {
+		env.ASSERTION_KEY_SOURCES = 'assertion-secret';
+		await seedUploadSource();
+		const { mutation } = await seedServicePrincipal('contributor', 'archive_contributor', 'svc-create-fail');
+		const fetcher = {
+			async fetch() {
+				return Response.json({ error: 'bad create contract' }, { status: 400 });
+			}
+		};
+		const { POST } = await importRoute<typeof import('../../../routes/api/archive/uploads/+server')>(
+			'../../../routes/api/archive/uploads/+server'
+		);
+		const request = new Request('https://db.aynu.org/api/archive/uploads', {
+			method: 'POST',
+			headers: mutation,
+			body: JSON.stringify({
+				source_slug: 'source-one',
+				role: 'scan',
+				size: 42,
+				sha256: 'f'.repeat(64),
+				declared_media_type: 'application/pdf'
+			})
+		});
+
+		await expect(
+			POST({ request, platform: { env: { ARCHIVE: fetcher } }, locals: { archiveDb: db } } as never)
+		).rejects.toMatchObject({
+			status: 500,
+			body: { message: 'bad create contract' }
+		});
+		const [session] = await db.select().from(schema.uploadSessions).where(eq(schema.uploadSessions.expectedSha256, 'f'.repeat(64)));
+		expect(session).toMatchObject({ state: 'failed', errorCode: 'bad create contract' });
+	});
+
+	it('issues CSRF tokens for session principals and rejects MCP assertion callers', async () => {
+		const { auth } = await seedServicePrincipal('reader', 'archive_reader', 'svc-reader');
+		const { GET } = await importRoute<typeof import('../../../routes/api/archive/csrf/+server')>(
+			'../../../routes/api/archive/csrf/+server'
+		);
+		const response = await GET({
+			request: new Request('https://db.aynu.org/api/archive/csrf', { headers: auth }),
+			locals: { archiveDb: db }
+		} as never);
+		expect(response.status).toBe(200);
+		const body = (await response.json()) as { token: string; expires_at: string };
+		expect(typeof body.token).toBe('string');
+		expect(body.expires_at).toMatch(/Z$/u);
+		await expect(verifyArchiveCsrfToken(body.token, 'reader')).resolves.toBeUndefined();
+		await expect(verifyArchiveCsrfToken(body.token, 'contributor')).rejects.toThrow(ArchiveHttpError);
+		await expect(
+			requireArchiveMutationGuards(
+				new Request('https://db.aynu.org/api/archive/uploads', {
+					method: 'POST',
+					headers: {
+						Origin: 'https://archive.aynu.org',
+						'Content-Type': 'application/json',
+						'X-Archive-CSRF': body.token
+					}
+				}),
+				'reader'
+			)
+		).resolves.toBeUndefined();
+
+		env.ASSERTION_KEY_MCP = 'mcp-secret';
+		await db.insert(schema.userIdentities).values({ userId: 'reader', kind: 'github_login', value: 'octocat' });
+		const mcpHeaders = await buildMcpAssertionHeaders(env.ASSERTION_KEY_MCP, 'octocat', Math.floor(Date.now() / 1000), 'csrf-denial');
+		await expect(
+			GET({
+				request: new Request('https://db.aynu.org/api/archive/csrf', { headers: mcpHeaders }),
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({ status: 403 });
+	});
+
+	it('lists archive repositories ordered by name', async () => {
+		const { auth } = await seedServicePrincipal('reader', 'archive_reader', 'svc-repos');
+		await db.insert(schema.archiveRepositories).values([
+			{ id: 'repo-z', name: 'zeta', active: true },
+			{ id: 'repo-a', name: 'alpha', active: false },
+			{ id: 'repo-m', name: 'middle', active: true }
+		]);
+		const { GET } = await importRoute<typeof import('../../../routes/api/archive/repositories/+server')>(
+			'../../../routes/api/archive/repositories/+server'
+		);
+		const response = await GET({
+			request: new Request('https://db.aynu.org/api/archive/repositories', { headers: auth }),
+			locals: { archiveDb: db }
+		} as never);
+		expect(await response.json()).toEqual({
+			repositories: [
+				{ id: 'repo-a', name: 'alpha', active: false },
+				{ id: 'repo-m', name: 'middle', active: true },
+				{ id: 'repo-z', name: 'zeta', active: true }
+			]
+		});
 	});
 });
