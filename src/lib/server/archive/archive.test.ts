@@ -20,18 +20,22 @@ import {
 	capabilityExpiry,
 	createUploadSession,
 	getSourceFileById,
+	getUsageSummary,
 	issueCapability,
 	listFiles,
+	listPendingReview,
 	listSourceFiles,
+	listUploadSessions,
 	reconcileUploadFinalization,
-	redeemCapability
+	redeemCapability,
+	rejectRevision
 } from './db';
 import { ArchiveHttpError } from './errors';
 import { renderManifest } from './manifest';
 import { verifyMcpAssertion } from './mcp-assertion';
-import { listOcrPages, searchOcr } from './ocr';
+import { listOcrPages, replaceOcrPages, searchOcr } from './ocr';
 import { buildRangeResponse, quotedSha256Etag } from './range';
-import { archiveMutationPrincipal } from './route';
+import { archiveMutationPrincipal, throwArchiveError } from './route';
 import { archiveRoleAtLeast, type ArchivePrincipal } from './types';
 import { ingestOcr } from '../../../../scripts/archive/ingest-ocr';
 
@@ -69,6 +73,12 @@ const reader: ArchivePrincipal = {
 	identity: { kind: 'github_login', value: 'reader' },
 	authn: 'access_jwt'
 };
+const admin: ArchivePrincipal = {
+	userId: 'admin',
+	role: 'archive_admin',
+	identity: { kind: 'github_login', value: 'admin' },
+	authn: 'access_jwt'
+};
 
 beforeEach(async () => {
 	for (const key of Object.keys(env)) delete env[key];
@@ -77,7 +87,9 @@ beforeEach(async () => {
 	await db.insert(user).values([
 		{ id: 'reviewer', name: 'Reviewer', email: 'reviewer@example.test' },
 		{ id: 'contributor', name: 'Contributor', email: 'contributor@example.test' },
-		{ id: 'reader', name: 'Reader', email: 'reader@example.test' }
+		{ id: 'reader', name: 'Reader', email: 'reader@example.test' },
+		{ id: 'admin', name: 'Admin', email: 'admin@example.test' },
+		{ id: 'other', name: 'Other', email: 'other@example.test' }
 	]);
 });
 
@@ -315,6 +327,8 @@ describe('archive DB flows', () => {
 			sha256: sha,
 			declaredMediaType: 'application/pdf'
 		});
+		expect(result.kind).toBe('session');
+		if (result.kind !== 'session') throw new Error('expected upload session');
 		expect(result.session.sourceFileId).toBe(result.sourceFile.id);
 		expect((await db.select().from(schema.sourceFiles)).length).toBe(1);
 		expect((await db.select().from(schema.uploadSessions)).length).toBe(1);
@@ -329,6 +343,8 @@ describe('archive DB flows', () => {
 			sha256: 'b'.repeat(64),
 			declaredMediaType: 'application/pdf'
 		});
+		expect(created.kind).toBe('session');
+		if (created.kind !== 'session') throw new Error('expected upload session');
 		const result = {
 			sessionId: created.session.id,
 			status: 'verified',
@@ -366,6 +382,8 @@ describe('archive DB flows', () => {
 			sha256: 'c'.repeat(64),
 			declaredMediaType: 'application/pdf'
 		});
+		expect(created.kind).toBe('session');
+		if (created.kind !== 'session') throw new Error('expected upload session');
 		const result = {
 			sessionId: created.session.id,
 			status: 'quarantined',
@@ -395,7 +413,7 @@ describe('archive DB flows', () => {
 
 	it('rejects invalid approval states', async () => {
 		await seedRevision('approved');
-		await expect(approveRevision(db, 'rev-1', reviewer)).rejects.toThrow('revision is not pending');
+		await expect(approveRevision(db, 'rev-1', reviewer)).rejects.toThrow('revision already decided');
 	});
 
 	it('rejects reviewer-is-submitter and media-type mismatch approvals', async () => {
@@ -449,6 +467,360 @@ describe('archive DB flows', () => {
 		} finally {
 			await rm(ainuRoot, { recursive: true, force: true });
 		}
+	});
+
+	it('returns OCR snippet offsets against normalized text and total visible hits', async () => {
+		await seedRevision('approved');
+		await db.insert(schema.sourceFiles).values({
+			id: 'file-2',
+			sourceId: 'source-1',
+			role: 'supplement',
+			checkoutRepoId: 'repo-1',
+			checkoutPath: 'books/supplement.pdf',
+			createdBy: 'contributor'
+		});
+		await db.insert(schema.archiveBlobs).values({
+			sha256: 'b'.repeat(64),
+			bytes: 99,
+			detectedMediaType: 'application/pdf',
+			storageState: 'verified',
+			verifiedAt: new Date()
+		});
+		await db.insert(schema.fileRevisions).values({
+			id: 'rev-2',
+			sourceFileId: 'file-2',
+			revisionNo: 1,
+			blobSha256: 'b'.repeat(64),
+			originalFilename: 'supplement.pdf',
+			declaredMediaType: 'application/pdf',
+			artifactKind: 'original',
+			reviewStatus: 'approved',
+			isCurrent: true,
+			submittedBy: 'contributor',
+			submittedAt: new Date(2_000),
+			reviewedBy: 'reviewer',
+			reviewedAt: new Date(3_000)
+		});
+		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'alpha   Kamuy\nbeta kamuy gamma' }]);
+		await replaceOcrPages(db, 'rev-2', 'gemini', [{ page: 1, text: 'delta kamuy epsilon' }]);
+
+		const result = await searchOcr(db, reader, { q: 'kamuy', limit: 1, maxChars: 80 });
+		expect(result.total).toBe(2);
+		expect(result.items).toHaveLength(1);
+		expect(result.nextCursor).toBeTruthy();
+		for (const offset of result.items[0].snippet.offsets) {
+			expect(result.items[0].snippet.text.slice(offset.start, offset.end).toLocaleLowerCase()).toBe('kamuy');
+		}
+	});
+
+	it('lists upload sessions by active defaults, explicit state, owner, and admin all scope', async () => {
+		await seedUploadSource();
+		const otherContributor: ArchivePrincipal = {
+			...contributor,
+			userId: 'other',
+			identity: { kind: 'github_login', value: 'other' }
+		};
+		const created: schema.UploadSession[] = [];
+		for (const [index, suffix] of ['1', '2', '3', '4'].entries()) {
+			const principal = index === 3 ? otherContributor : contributor;
+			const result = await createUploadSession(db, principal, {
+				sourceSlug: 'source-one',
+				role: 'scan',
+				bytes: 10 + index,
+				sha256: suffix.repeat(64),
+				declaredMediaType: 'application/pdf'
+			});
+			if (result.kind !== 'session') throw new Error('expected upload session');
+			created.push(result.session);
+		}
+		await db.update(schema.uploadSessions).set({ state: 'failed' }).where(eq(schema.uploadSessions.id, created[1].id));
+		await db.update(schema.uploadSessions).set({ state: 'verified' }).where(eq(schema.uploadSessions.id, created[2].id));
+
+		expect((await listUploadSessions(db, contributor)).uploads.map((row) => row.id)).toEqual([created[0].id]);
+		expect((await listUploadSessions(db, contributor, { states: ['failed'] })).uploads.map((row) => row.id)).toEqual([
+			created[1].id
+		]);
+		expect((await listUploadSessions(db, contributor, { all: true })).uploads.map((row) => row.submittedBy)).toEqual([
+			'contributor'
+		]);
+		expect((await listUploadSessions(db, admin, { all: true })).uploads.map((row) => row.id).sort()).toEqual(
+			[created[0].id, created[3].id].sort()
+		);
+		await expect(listUploadSessions(db, contributor, { states: ['bogus'] })).rejects.toMatchObject({ status: 400 });
+	});
+
+	it('carries decided revision details on approve and reject conflicts', async () => {
+		await seedRevision('pending');
+		const approved = await approveRevision(db, 'rev-1', reviewer);
+		const expected = {
+			review_status: 'approved',
+			reviewed_by: 'reviewer',
+			reviewed_at: approved.reviewedAt?.toISOString(),
+			review_note: null
+		};
+		await expect(approveRevision(db, 'rev-1', reviewer)).rejects.toMatchObject({
+			status: 409,
+			details: expected
+		});
+		let thrown: unknown;
+		try {
+			await rejectRevision(db, 'rev-1', reviewer, 'second decision');
+		} catch (e) {
+			try {
+				throwArchiveError(e);
+			} catch (routeError) {
+				thrown = routeError;
+			}
+		}
+		expect(thrown).toMatchObject({
+			status: 409,
+			body: { message: 'revision already decided', ...expected }
+		});
+	});
+
+	it('returns usage summary counts and denies MCP assertion callers at the route', async () => {
+		env.ARCHIVE_DAILY_BYTE_LIMIT = '1000';
+		env.ARCHIVE_CONCURRENT_STREAM_LIMIT = '5';
+		await seedRevision('approved');
+		const now = new Date();
+		const day = now.toISOString().slice(0, 10);
+		const resetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)).toISOString();
+		await db.insert(schema.archiveStreamDailyUsage).values({
+			userId: 'reader',
+			day,
+			bytesReserved: 321,
+			updatedAt: now
+		});
+		await db.insert(schema.archiveStreamLeases).values([
+			{
+				id: 'lease-active',
+				userId: 'reader',
+				revisionId: 'rev-1',
+				expiresAt: new Date(now.getTime() + 60_000),
+				createdAt: now
+			},
+			{
+				id: 'lease-expired',
+				userId: 'reader',
+				revisionId: 'rev-1',
+				expiresAt: new Date(now.getTime() - 60_000),
+				createdAt: now
+			}
+		]);
+
+		await expect(getUsageSummary(db, reader)).resolves.toEqual({
+			date: day,
+			bytesUsed: 321,
+			dailyByteLimit: 1000,
+			resetAt,
+			activeStreams: 1,
+			concurrentStreamLimit: 5
+		});
+
+		env.ASSERTION_KEY_MCP = 'mcp-secret';
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		await db.insert(schema.userIdentities).values({ userId: 'reader', kind: 'github_login', value: 'octocat' });
+		const { GET } = await importRoute<typeof import('../../../routes/api/archive/me/usage/+server')>(
+			'../../../routes/api/archive/me/usage/+server'
+		);
+		const headers = await buildMcpAssertionHeaders(env.ASSERTION_KEY_MCP, 'octocat', Math.floor(Date.now() / 1000), 'usage-denial');
+		await expect(
+			GET({
+				request: new Request('https://db.aynu.org/api/archive/me/usage', { headers }),
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({ status: 403 });
+	});
+
+	it('returns the same pending-review total on subsequent pages', async () => {
+		await seedRevision('pending');
+		for (let index = 2; index <= 4; index += 1) {
+			const hash = String(index).repeat(64);
+			await db.insert(schema.sourceFiles).values({
+				id: `file-${index}`,
+				sourceId: 'source-1',
+				role: index === 2 ? 'epub' : index === 3 ? 'supplement' : 'derivative',
+				checkoutRepoId: 'repo-1',
+				checkoutPath: `books/${index}.pdf`,
+				createdBy: 'contributor'
+			});
+			await db.insert(schema.archiveBlobs).values({
+				sha256: hash,
+				bytes: index,
+				detectedMediaType: 'application/pdf',
+				storageState: 'verified',
+				verifiedAt: new Date()
+			});
+			await db.insert(schema.fileRevisions).values({
+				id: `rev-${index}`,
+				sourceFileId: `file-${index}`,
+				revisionNo: 1,
+				blobSha256: hash,
+				originalFilename: `${index}.pdf`,
+				declaredMediaType: 'application/pdf',
+				artifactKind: 'original',
+				reviewStatus: 'pending',
+				isCurrent: false,
+				submittedBy: 'contributor',
+				submittedAt: new Date(1_000 + index)
+			});
+		}
+
+		const first = await listPendingReview(db, null, 2);
+		expect(first.total).toBe(4);
+		expect(first.nextCursor).toBeTruthy();
+		const second = await listPendingReview(db, first.nextCursor, 2);
+		expect(second.total).toBe(4);
+		expect(second.items).toHaveLength(2);
+	});
+
+	it('returns full review card context only when include full is requested', async () => {
+		await seedRevision('approved');
+		await db.update(schema.fileRevisions).set({ id: 'rev-current' }).where(eq(schema.fileRevisions.id, 'rev-1'));
+		await db.insert(schema.archiveBlobs).values([
+			{
+				sha256: 'b'.repeat(64),
+				bytes: 200,
+				detectedMediaType: 'application/pdf',
+				storageState: 'verified',
+				verifiedAt: new Date()
+			},
+			{
+				sha256: 'c'.repeat(64),
+				bytes: 300,
+				detectedMediaType: 'application/pdf',
+				storageState: 'verified',
+				verifiedAt: new Date()
+			}
+		]);
+		await db.insert(schema.fileRevisions).values([
+			{
+				id: 'rev-rejected',
+				sourceFileId: 'file-1',
+				revisionNo: 2,
+				blobSha256: 'b'.repeat(64),
+				originalFilename: 'old.pdf',
+				declaredMediaType: 'application/pdf',
+				artifactKind: 'original',
+				reviewStatus: 'rejected',
+				isCurrent: false,
+				submittedBy: 'contributor',
+				submittedAt: new Date(2_000),
+				reviewedBy: 'reviewer',
+				reviewedAt: new Date(3_000),
+				reviewNote: 'bad scan'
+			},
+			{
+				id: 'rev-pending',
+				sourceFileId: 'file-1',
+				revisionNo: 3,
+				blobSha256: 'c'.repeat(64),
+				originalFilename: 'new.pdf',
+				declaredMediaType: 'application/pdf',
+				artifactKind: 'original',
+				reviewStatus: 'pending',
+				isCurrent: false,
+				submittedBy: 'contributor',
+				submittedAt: new Date(4_000)
+			}
+		]);
+		await db.insert(schema.sourceFiles).values({
+			id: 'file-2',
+			sourceId: 'source-1',
+			role: 'supplement',
+			checkoutRepoId: 'repo-1',
+			checkoutPath: 'books/duplicate.pdf'
+		});
+		await db.insert(schema.fileRevisions).values({
+			id: 'rev-duplicate',
+			sourceFileId: 'file-2',
+			revisionNo: 1,
+			blobSha256: 'c'.repeat(64),
+			originalFilename: 'duplicate.pdf',
+			declaredMediaType: 'application/pdf',
+			artifactKind: 'original',
+			reviewStatus: 'approved',
+			isCurrent: true,
+			submittedBy: 'contributor',
+			submittedAt: new Date(5_000),
+			reviewedBy: 'reviewer',
+			reviewedAt: new Date(6_000)
+		});
+
+		const light = await listPendingReview(db, null, 10);
+		expect(light.items[0]).toMatchObject({ revisionId: 'rev-pending', exactDuplicates: [] });
+		expect(light.items[0]).not.toHaveProperty('currentRevisionSummary');
+		const full = await listPendingReview(db, null, 10, { include: 'full' });
+		expect(full.items[0]).toMatchObject({
+			revisionId: 'rev-pending',
+			currentRevision: 'rev-current',
+			currentRevisionSummary: {
+				id: 'rev-current',
+				revisionNo: 1,
+				bytes: 1234,
+				sha256: sha
+			},
+			exactDuplicates: [
+				{
+					revisionId: 'rev-duplicate',
+					sourceFileId: 'file-2',
+					sourceSlug: 'source-one',
+					reviewStatus: 'approved'
+				}
+			]
+		});
+		const fullItem = full.items[0] as (typeof full.items)[number] & { priorRevisions: { id: string }[] };
+		expect(fullItem.priorRevisions.map((row) => row.id)).toEqual(['rev-rejected', 'rev-current']);
+	});
+
+	it('deduplicates verified upload creates and lets quarantined hashes create sessions', async () => {
+		await seedUploadSource();
+		await db.insert(schema.archiveRepositories).values({ id: 'repo-1', name: 'books' });
+		await db.insert(schema.archiveBlobs).values([
+			{
+				sha256: 'd'.repeat(64),
+				bytes: 42,
+				detectedMediaType: 'application/pdf',
+				storageState: 'verified',
+				verifiedAt: new Date(),
+				createdBy: 'contributor'
+			},
+			{
+				sha256: 'e'.repeat(64),
+				bytes: 42,
+				detectedMediaType: 'application/pdf',
+				storageState: 'quarantined',
+				createdBy: 'contributor'
+			}
+		]);
+
+		const deduplicated = await createUploadSession(db, contributor, {
+			sourceSlug: 'source-one',
+			role: 'scan',
+			checkoutRepo: 'books',
+			checkoutPath: 'books/existing.pdf',
+			bytes: 42,
+			sha256: 'd'.repeat(64),
+			declaredMediaType: 'application/pdf'
+		});
+		expect(deduplicated.kind).toBe('deduplicated');
+		if (deduplicated.kind !== 'deduplicated') throw new Error('expected deduplicated revision');
+		expect(deduplicated.revision).toMatchObject({
+			blobSha256: 'd'.repeat(64),
+			reviewStatus: 'pending',
+			originalFilename: 'existing.pdf'
+		});
+		expect(await db.select().from(schema.uploadSessions)).toHaveLength(0);
+
+		const retry = await createUploadSession(db, contributor, {
+			sourceSlug: 'source-one',
+			role: 'scan',
+			bytes: 42,
+			sha256: 'e'.repeat(64),
+			declaredMediaType: 'application/pdf'
+		});
+		expect(retry.kind).toBe('session');
+		expect(await db.select().from(schema.uploadSessions)).toHaveLength(1);
 	});
 
 	it('validates source file role filters', async () => {
@@ -652,6 +1024,50 @@ describe('archive API route handlers', () => {
 			stagingKey: 'staging/worker-owned',
 			multipartId: 'mpu-1'
 		});
+	});
+
+	it('short-circuits upload create for an already verified blob', async () => {
+		env.ASSERTION_KEY_SOURCES = 'assertion-secret';
+		await seedUploadSource();
+		await db.insert(schema.archiveBlobs).values({
+			sha256: '9'.repeat(64),
+			bytes: 42,
+			detectedMediaType: 'application/pdf',
+			storageState: 'verified',
+			verifiedAt: new Date(),
+			createdBy: 'contributor'
+		});
+		const { mutation } = await seedServicePrincipal('contributor', 'archive_contributor', 'svc-dedup');
+		const fetcher = {
+			async fetch() {
+				throw new Error('dataplane should not be called');
+			}
+		};
+		const { POST } = await importRoute<typeof import('../../../routes/api/archive/uploads/+server')>(
+			'../../../routes/api/archive/uploads/+server'
+		);
+		const response = await POST({
+			request: new Request('https://db.aynu.org/api/archive/uploads', {
+				method: 'POST',
+				headers: mutation,
+				body: JSON.stringify({
+					source_slug: 'source-one',
+					role: 'scan',
+					size: 42,
+					sha256: '9'.repeat(64),
+					declared_media_type: 'application/pdf'
+				})
+			}),
+			platform: { env: { ARCHIVE: fetcher } },
+			locals: { archiveDb: db }
+		} as never);
+
+		expect(response.status).toBe(200);
+		const payload = (await response.json()) as { deduplicated: boolean; revisionId: string; fileId: string };
+		expect(payload).toMatchObject({ deduplicated: true, fileId: expect.any(String), revisionId: expect.any(String) });
+		expect(await db.select().from(schema.uploadSessions)).toHaveLength(0);
+		const [revision] = await db.select().from(schema.fileRevisions).where(eq(schema.fileRevisions.id, payload.revisionId));
+		expect(revision).toMatchObject({ blobSha256: '9'.repeat(64), reviewStatus: 'pending' });
 	});
 
 	it('marks the session failed when dataplane multipart create fails', async () => {
