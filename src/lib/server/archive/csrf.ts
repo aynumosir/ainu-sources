@@ -28,8 +28,12 @@ export function requireJsonContent(request: Request): void {
 	}
 }
 
+export function archiveCsrfExpiresAt(now = new Date()): Date {
+	return new Date(now.getTime() + MAX_AGE_MS);
+}
+
 export async function issueArchiveCsrfToken(userId: string, now = new Date()): Promise<string> {
-	const payload: TokenPayload = { uid: userId, exp: new Date(now.getTime() + MAX_AGE_MS).toISOString() };
+	const payload: TokenPayload = { uid: userId, exp: archiveCsrfExpiresAt(now).toISOString() };
 	const body = base64url(new TextEncoder().encode(canonicalJson(payload)));
 	return `${body}.${await hmacSha256(await csrfSecret(), body)}`;
 }
