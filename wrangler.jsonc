@@ -26,11 +26,18 @@
 	/**
 	 * Non-secret runtime vars (read via $env/dynamic/private on the Worker).
 	 * Secrets (DATABASE_URL, DATABASE_AUTH_TOKEN, BETTER_AUTH_SECRET,
-	 * GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET) are set with `wrangler secret put`.
+	 * GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, ASSERTION_KEY_SOURCES,
+	 * ACCESS_TEAM_DOMAIN, ACCESS_AUD, ACCESS_SERVICE_TOKENS,
+	 * ARCHIVE_CSRF_SECRET, ARCHIVE_ENFORCE_MEMBERSHIP, ARCHIVE_ORIGIN,
+	 * ARCHIVE_DAILY_BYTE_LIMIT, ARCHIVE_CONCURRENT_STREAM_LIMIT) are set with
+	 * `wrangler secret put`.
 	 */
 	"vars": {
 		"ORIGIN": "https://db.aynu.org"
-	}
+	},
+	"services": [
+		{ "binding": "ARCHIVE", "service": "ainu-archive" }
+	]
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
