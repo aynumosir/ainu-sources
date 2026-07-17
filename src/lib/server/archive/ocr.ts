@@ -141,7 +141,7 @@ export async function searchOcr(
 	}
 
 	const revisionIds = [...new Set(hits.map((hit) => hit.revisionId))];
-	if (revisionIds.length === 0) return { items: [], nextCursor: null };
+	if (revisionIds.length === 0) return { items: [], nextCursor: null, total: 0 };
 	const sourceClause = opts.sourceSlug ? eq(sources.slug, opts.sourceSlug) : undefined;
 	const metaRows = await db
 		.select({
@@ -179,12 +179,15 @@ export async function searchOcr(
 			revisionId: hit.revisionId,
 			page: hit.page,
 			variant: hit.variant,
+			// Offsets are measured against this normalized snippet text.
 			snippet: makeSnippet(hit.text, q, maxChars)
 		})),
 		nextCursor:
 			afterCursor.length > limit && last
 				? encodeSearchCursor({ revisionId: last.hit.revisionId, variant: last.hit.variant, page: last.hit.page })
-				: null
+				: null,
+		// Accurate within SEARCH_INTERNAL_LIMIT; cap hits should be narrowed.
+		total: visible.length
 	};
 }
 
@@ -248,21 +251,52 @@ function compareSearchKey(left: SearchCursor, right: SearchCursor): number {
 	return left.revisionId.localeCompare(right.revisionId) || left.variant.localeCompare(right.variant) || left.page - right.page;
 }
 
-function makeSnippet(text: string, q: string, maxChars: number): string {
+function makeSnippet(text: string, q: string, maxChars: number): { text: string; offsets: { start: number; end: number }[] } {
 	const width = Math.min(Math.max(maxChars, 40), 1000);
 	const needle = firstSnippetNeedle(q);
 	const lowerText = text.toLocaleLowerCase();
 	const index = needle ? lowerText.indexOf(needle.toLocaleLowerCase()) : -1;
 	const start = index === -1 ? 0 : Math.max(0, index - Math.floor(width / 3));
-	return text.slice(start, start + width).replace(/\s+/gu, ' ').trim();
+	const snippet = text.slice(start, start + width).replace(/\s+/gu, ' ').trim();
+	return { text: snippet, offsets: snippetOffsets(snippet, q) };
 }
 
 function firstSnippetNeedle(q: string): string | null {
+	return snippetTokens(q)[0] ?? null;
+}
+
+function snippetTokens(q: string): string[] {
+	const tokens: string[] = [];
 	for (const token of q.split(/\s+/u)) {
 		const clean = token.replace(/^["'([{]+|["')\]}]+$/gu, '');
-		if (clean && !/^(and|or|not)$/iu.test(clean)) return clean;
+		if (clean && !/^(and|or|not)$/iu.test(clean)) tokens.push(clean);
 	}
-	return null;
+	return tokens;
+}
+
+function snippetOffsets(text: string, q: string): { start: number; end: number }[] {
+	const lowerText = text.toLocaleLowerCase();
+	const ranges = snippetTokens(q).flatMap((token) => {
+		const lowerToken = token.toLocaleLowerCase();
+		const hits: { start: number; end: number }[] = [];
+		let index = lowerText.indexOf(lowerToken);
+		while (index !== -1) {
+			hits.push({ start: index, end: index + token.length });
+			index = lowerText.indexOf(lowerToken, index + 1);
+		}
+		return hits;
+	});
+	ranges.sort((a, b) => a.start - b.start || a.end - b.end);
+	const merged: { start: number; end: number }[] = [];
+	for (const range of ranges) {
+		const last = merged.at(-1);
+		if (!last || range.start > last.end) {
+			merged.push({ ...range });
+			continue;
+		}
+		last.end = Math.max(last.end, range.end);
+	}
+	return merged;
 }
 
 export const ocrIngestTables = { ocrIngestState, revisionOcrCoverage };
