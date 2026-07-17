@@ -20,7 +20,7 @@
 import { and, eq, ne } from 'drizzle-orm';
 import { sources, sourceObservationRuns, sourceObservedRecords } from '../../../src/lib/server/db/schema';
 import { mergeSourceObservation, NORMALIZER_VERSION } from '../../../src/lib/server/merge';
-import type { Db, MergeInput, MergeResult } from '../../../src/lib/server/merge';
+import type { Db, MergeInput, MergeResult, ProposedMergeResult } from '../../../src/lib/server/merge';
 import { openDb } from './entities';
 
 const uuid = () => crypto.randomUUID();
@@ -179,7 +179,7 @@ export interface EmitOpts {
  * preserved; on a genuine CREATE the engine left provenancePath NULL, so this fills
  * it (and it is idempotent on the second run — the value now matches).
  */
-export async function emitSource(db: Db, input: MergeInput, opts: EmitOpts = {}): Promise<MergeResult> {
+export async function emitSource(db: Db, input: MergeInput, opts: EmitOpts = {}): Promise<MergeResult | ProposedMergeResult> {
 	const result = await mergeSourceObservation(db, input);
 	const sid = result.sourceId;
 	if (!sid || (!opts.provenancePath && !opts.provenanceRepo)) return result;
