@@ -57,6 +57,13 @@
       "when": 1783099962790,
       "tag": "0007_slug-redirects",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1784286027414,
+      "tag": "0008_happy_scrambler",
+      "breakpoints": true
     }
   ]
 }

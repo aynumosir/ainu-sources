@@ -5,6 +5,8 @@ import {
 	real,
 	index,
 	uniqueIndex,
+	check,
+	primaryKey,
 	type AnySQLiteColumn
 } from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
@@ -74,6 +76,11 @@ export const sources = sqliteTable(
 
 		// --- rights ---
 		license: text('license'),
+		humanDownload: integer('human_download', { mode: 'boolean' }).notNull().default(false),
+		localProcessing: integer('local_processing', { mode: 'boolean' }).notNull().default(false),
+		hostedAiText: integer('hosted_ai_text', { mode: 'boolean' }).notNull().default(false),
+		hostedAiImages: integer('hosted_ai_images', { mode: 'boolean' }).notNull().default(false),
+		bulkExport: integer('bulk_export', { mode: 'boolean' }).notNull().default(false),
 
 		// --- prose ---
 		summary: text('summary'), // short description (markdown allowed)
@@ -833,6 +840,294 @@ export const changeRequestReviews = sqliteTable(
 );
 
 // ---------------------------------------------------------------------------
+// Archive metadata (aynumosir)
+// ---------------------------------------------------------------------------
+export const userIdentities = sqliteTable(
+	'user_identities',
+	{
+		kind: text('kind').notNull(),
+		value: text('value').notNull(),
+		userId: text('user_id')
+			.notNull()
+			.references(() => user.id, { onDelete: 'cascade' }),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		primaryKey({ columns: [t.kind, t.value] }),
+		uniqueIndex('user_identities_user_kind_value_idx').on(t.userId, t.kind, t.value),
+		check(
+			'user_identities_kind_check',
+			sql`${t.kind} in ('access_sub', 'github_login', 'service_token')`
+		)
+	]
+);
+
+export const archiveRepositories = sqliteTable(
+	'archive_repositories',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		name: text('name').notNull(),
+		active: integer('active', { mode: 'boolean' }).notNull().default(true),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [uniqueIndex('archive_repositories_name_idx').on(t.name)]
+);
+
+export const archiveBlobs = sqliteTable(
+	'archive_blobs',
+	{
+		sha256: text('sha256').primaryKey(),
+		bytes: integer('bytes').notNull(),
+		detectedMediaType: text('detected_media_type').notNull(),
+		r2Etag: text('r2_etag'),
+		r2Version: text('r2_version'),
+		storageState: text('storage_state').notNull(),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		createdBy: text('created_by').references(() => user.id, { onDelete: 'set null' }),
+		verifiedAt: integer('verified_at', { mode: 'timestamp_ms' }),
+		quarantineReviewDeadline: integer('quarantine_review_deadline', { mode: 'timestamp_ms' })
+	},
+	(t) => [
+		check(
+			'archive_blobs_sha256_check',
+			sql`length(${t.sha256}) = 64 and ${t.sha256} not glob '*[^0-9a-f]*'`
+		),
+		check('archive_blobs_bytes_check', sql`${t.bytes} >= 0`),
+		check(
+			'archive_blobs_storage_state_check',
+			sql`${t.storageState} in ('verified', 'quarantined', 'deleted')`
+		),
+		check(
+			'archive_blobs_verified_state_check',
+			sql`(${t.storageState} = 'verified' and ${t.verifiedAt} is not null) or ${t.storageState} in ('quarantined', 'deleted')`
+		)
+	]
+);
+
+export const sourceFiles = sqliteTable(
+	'source_files',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		sourceId: text('source_id')
+			.notNull()
+			.references(() => sources.id, { onDelete: 'restrict' }),
+		role: text('role').notNull(),
+		label: text('label'),
+		checkoutRepoId: text('checkout_repo_id').references(() => archiveRepositories.id),
+		checkoutPath: text('checkout_path'),
+		sortOrder: integer('sort_order').notNull().default(0),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		createdBy: text('created_by').references(() => user.id, { onDelete: 'set null' })
+	},
+	(t) => [
+		uniqueIndex('source_files_checkout_idx').on(t.checkoutRepoId, t.checkoutPath),
+		index('source_files_source').on(t.sourceId),
+		check('source_files_role_check', sql`${t.role} in ('scan', 'epub', 'supplement', 'derivative')`),
+		check(
+			'source_files_checkout_pair_check',
+			sql`(${t.checkoutRepoId} is null and ${t.checkoutPath} is null) or (${t.checkoutRepoId} is not null and ${t.checkoutPath} is not null)`
+		)
+	]
+);
+
+export const fileRevisions = sqliteTable(
+	'file_revisions',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		sourceFileId: text('source_file_id')
+			.notNull()
+			.references(() => sourceFiles.id, { onDelete: 'restrict' }),
+		revisionNo: integer('revision_no').notNull(),
+		blobSha256: text('blob_sha256').references(() => archiveBlobs.sha256, {
+			onDelete: 'restrict'
+		}),
+		originalFilename: text('original_filename').notNull(),
+		declaredMediaType: text('declared_media_type').notNull(),
+		artifactKind: text('artifact_kind').notNull(),
+		pageCount: integer('page_count'),
+		pageStart: integer('page_start'),
+		pageEnd: integer('page_end'),
+		reviewStatus: text('review_status').notNull(),
+		accessState: text('access_state').notNull().default('available'),
+		isCurrent: integer('is_current', { mode: 'boolean' }).notNull().default(false),
+		submittedBy: text('submitted_by')
+			.notNull()
+			.references(() => user.id),
+		submittedAt: integer('submitted_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		reviewedBy: text('reviewed_by').references(() => user.id, { onDelete: 'set null' }),
+		reviewedAt: integer('reviewed_at', { mode: 'timestamp_ms' }),
+		reviewNote: text('review_note')
+	},
+	(t) => [
+		uniqueIndex('file_revisions_source_file_revision_idx').on(t.sourceFileId, t.revisionNo),
+		uniqueIndex('source_file_one_current_revision')
+			.on(t.sourceFileId)
+			.where(sql`${t.isCurrent} = 1`),
+		uniqueIndex('source_file_one_pending_revision')
+			.on(t.sourceFileId)
+			.where(sql`${t.reviewStatus} = 'pending'`),
+		index('file_revisions_blob').on(t.blobSha256),
+		check('file_revisions_revision_no_check', sql`${t.revisionNo} > 0`),
+		check(
+			'file_revisions_artifact_kind_check',
+			sql`${t.artifactKind} in ('original', 'bbox', 'page_images', 'linearized')`
+		),
+		check('file_revisions_page_count_check', sql`${t.pageCount} is null or ${t.pageCount} > 0`),
+		check('file_revisions_page_start_check', sql`${t.pageStart} is null or ${t.pageStart} > 0`),
+		check('file_revisions_page_end_check', sql`${t.pageEnd} is null or ${t.pageEnd} > 0`),
+		check(
+			'file_revisions_review_status_check',
+			sql`${t.reviewStatus} in ('pending', 'approved', 'rejected', 'withdrawn', 'expunged')`
+		),
+		check(
+			'file_revisions_access_state_check',
+			sql`${t.accessState} in ('available', 'embargoed', 'takedown')`
+		),
+		check(
+			'file_revisions_page_range_check',
+			sql`(${t.pageStart} is null and ${t.pageEnd} is null) or (${t.pageStart} is not null and ${t.pageEnd} is not null and ${t.pageEnd} >= ${t.pageStart})`
+		),
+		check(
+			'file_revisions_review_pair_check',
+			sql`(${t.reviewedBy} is null and ${t.reviewedAt} is null) or (${t.reviewedBy} is not null and ${t.reviewedAt} is not null)`
+		),
+		check(
+			'file_revisions_current_review_status_check',
+			sql`${t.isCurrent} = 0 or ${t.reviewStatus} = 'approved'`
+		),
+		check(
+			'file_revisions_expunged_blob_check',
+			sql`(${t.reviewStatus} = 'expunged' and ${t.blobSha256} is null and ${t.isCurrent} = 0) or (${t.reviewStatus} <> 'expunged' and ${t.blobSha256} is not null)`
+		)
+	]
+);
+
+export const revisionDerivations = sqliteTable(
+	'revision_derivations',
+	{
+		derivedRevisionId: text('derived_revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'restrict' }),
+		parentRevisionId: text('parent_revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'restrict' }),
+		relation: text('relation').notNull(),
+		parametersJson: text('parameters_json', { mode: 'json' }).$type<Record<string, unknown>>()
+	},
+	(t) => [
+		primaryKey({ columns: [t.derivedRevisionId, t.parentRevisionId, t.relation] }),
+		check(
+			'revision_derivations_distinct_check',
+			sql`${t.derivedRevisionId} <> ${t.parentRevisionId}`
+		)
+	]
+);
+
+export const revisionOcrCoverage = sqliteTable(
+	'revision_ocr_coverage',
+	{
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'cascade' }),
+		variant: text('variant').notNull(),
+		status: text('status').notNull(),
+		tool: text('tool'),
+		toolVersion: text('tool_version'),
+		preferred: integer('preferred', { mode: 'boolean' }).notNull().default(false),
+		measuredAt: integer('measured_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		primaryKey({ columns: [t.revisionId, t.variant] }),
+		uniqueIndex('revision_one_preferred_ocr_variant')
+			.on(t.revisionId)
+			.where(sql`${t.preferred} = 1`),
+		check('revision_ocr_coverage_status_check', sql`${t.status} in ('none', 'partial', 'complete')`)
+	]
+);
+
+export const uploadSessions = sqliteTable(
+	'upload_sessions',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		sourceFileId: text('source_file_id')
+			.notNull()
+			.references(() => sourceFiles.id, { onDelete: 'restrict' }),
+		expectedSha256: text('expected_sha256').notNull(),
+		expectedBytes: integer('expected_bytes').notNull(),
+		declaredMediaType: text('declared_media_type').notNull(),
+		stagingKey: text('staging_key').notNull(),
+		multipartId: text('multipart_id'),
+		state: text('state').notNull(),
+		submittedBy: text('submitted_by')
+			.notNull()
+			.references(() => user.id),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		expiresAt: integer('expires_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		errorCode: text('error_code')
+	},
+	(t) => [
+		uniqueIndex('upload_sessions_staging_key_idx').on(t.stagingKey),
+		uniqueIndex('upload_sessions_multipart_idx').on(t.multipartId),
+		check('upload_sessions_expected_bytes_check', sql`${t.expectedBytes} > 0`),
+		check(
+			'upload_sessions_state_check',
+			sql`${t.state} in ('initiated', 'uploading', 'uploaded', 'finalizing', 'verified', 'failed', 'aborted', 'expired')`
+		)
+	]
+);
+
+export const blobOrigins = sqliteTable(
+	'blob_origins',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		blobSha256: text('blob_sha256')
+			.notNull()
+			.references(() => archiveBlobs.sha256, { onDelete: 'restrict' }),
+		originKind: text('origin_kind').notNull(),
+		lfsOid: text('lfs_oid'),
+		gitBlobSha1: text('git_blob_sha1'),
+		repository: text('repository'),
+		historicalPath: text('historical_path'),
+		pointerBytes: integer('pointer_bytes'),
+		firstCommit: text('first_commit'),
+		lastCommit: text('last_commit'),
+		note: text('note')
+	},
+	(t) => [
+		check('blob_origins_origin_kind_check', sql`${t.originKind} in ('lfs', 'git_blob', 'orphan')`),
+		check(
+			'blob_origins_kind_consistency_check',
+			sql`(${t.originKind} = 'lfs' and ${t.lfsOid} is not null and ${t.gitBlobSha1} is null) or (${t.originKind} = 'git_blob' and ${t.gitBlobSha1} is not null and ${t.lfsOid} is null) or (${t.originKind} = 'orphan' and ${t.lfsOid} is null and ${t.gitBlobSha1} is null and ${t.note} is not null)`
+		)
+	]
+);
+
+export const capabilityTokens = sqliteTable(
+	'capability_tokens',
+	{
+		jti: text('jti').primaryKey(),
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'restrict' }),
+		userId: text('user_id')
+			.notNull()
+			.references(() => user.id),
+		expiresAt: integer('expires_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		maxBytes: integer('max_bytes').notNull(),
+		bytesServed: integer('bytes_served').notNull().default(0),
+		redeemedAt: integer('redeemed_at', { mode: 'timestamp_ms' }),
+		revokedAt: integer('revoked_at', { mode: 'timestamp_ms' }),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		check('capability_tokens_max_bytes_check', sql`${t.maxBytes} > 0`),
+		check('capability_tokens_bytes_served_check', sql`${t.bytesServed} >= 0`),
+		check('capability_tokens_bytes_limit_check', sql`${t.bytesServed} <= ${t.maxBytes}`)
+	]
+);
+
+// ---------------------------------------------------------------------------
 // App user roles (権限) — app-owned authz (Better-Auth `user` table untouched)
 // ---------------------------------------------------------------------------
 export const appUserRoles = sqliteTable('app_user_roles', {
@@ -882,6 +1177,16 @@ export type ChangeRequest = typeof changeRequests.$inferSelect;
 export type NewChangeRequest = typeof changeRequests.$inferInsert;
 export type ChangeRequestReview = typeof changeRequestReviews.$inferSelect;
 export type NewChangeRequestReview = typeof changeRequestReviews.$inferInsert;
+export type UserIdentity = typeof userIdentities.$inferSelect;
+export type ArchiveRepository = typeof archiveRepositories.$inferSelect;
+export type ArchiveBlob = typeof archiveBlobs.$inferSelect;
+export type SourceFile = typeof sourceFiles.$inferSelect;
+export type FileRevision = typeof fileRevisions.$inferSelect;
+export type RevisionDerivation = typeof revisionDerivations.$inferSelect;
+export type RevisionOcrCoverage = typeof revisionOcrCoverage.$inferSelect;
+export type UploadSession = typeof uploadSessions.$inferSelect;
+export type BlobOrigin = typeof blobOrigins.$inferSelect;
+export type CapabilityToken = typeof capabilityTokens.$inferSelect;
 export type AppUserRole = typeof appUserRoles.$inferSelect;
 export type MigrationWatermark = typeof migrationWatermarks.$inferSelect;
 
