@@ -7,7 +7,7 @@
 </script>
 
 <div class="catalogue flex min-h-svh flex-col">
-	<Header user={data.user} />
+	<Header user={data.user} hasArchiveAccess={data.hasArchiveAccess} />
 	<main class="flex-1">
 		{@render children()}
 	</main>

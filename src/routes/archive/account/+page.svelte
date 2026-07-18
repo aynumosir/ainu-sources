@@ -49,6 +49,18 @@
 			{/if}
 		</section>
 
+		{#if data.principal.role === 'archive_admin'}
+			<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
+				<h2 class="text-[17px] font-semibold">Administration</h2>
+				<p class="mt-2 text-[15px] leading-7 text-[var(--archive-subtle)]">
+					Manage archive roles and administrative settings.
+				</p>
+				<a href="/archive/admin" class="mt-3 inline-flex rounded-md border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold">
+					Open admin
+				</a>
+			</section>
+		{/if}
+
 		<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
 			<h2 class="text-[17px] font-semibold">Audit</h2>
 			<p class="mt-2 text-[15px] leading-7 text-[var(--archive-subtle)]">

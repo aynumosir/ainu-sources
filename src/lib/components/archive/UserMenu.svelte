@@ -34,6 +34,14 @@
 		<option value="light">Light</option>
 		<option value="dark">Dark</option>
 	</select>
+	{#if principal.role === 'archive_admin'}
+		<a
+			href="/archive/admin"
+			class="inline-flex h-8 items-center rounded-md border border-[var(--archive-border)] bg-[var(--archive-surface)] px-2 text-[13px] text-[var(--archive-text)]"
+		>
+			Admin
+		</a>
+	{/if}
 	<form method="POST" action="/account?/signout">
 		<button
 			type="submit"

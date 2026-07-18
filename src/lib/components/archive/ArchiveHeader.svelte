@@ -21,7 +21,7 @@
 <header class="border-b border-[var(--archive-border)] bg-[var(--archive-surface)]">
 	<div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center">
 		<div class="flex items-center justify-between gap-4">
-			<a href="/archive" class="text-[17px] font-semibold text-[var(--archive-text)]">aynumosir archive</a>
+			<a href="/" class="text-[17px] font-semibold text-[var(--archive-text)]">aynumosir archive</a>
 			<div class="lg:hidden">
 				<UserMenu {principal} {usage} />
 			</div>
