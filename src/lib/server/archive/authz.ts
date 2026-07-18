@@ -14,6 +14,7 @@ import { safeEqual } from './crypto';
 type Db = LibSQLDatabase<typeof schema>;
 type IdentityKind = ArchivePrincipal['identity']['kind'];
 type ResolvedIdentity = { userId: string; kind: IdentityKind; value: string };
+export type ArchiveResolvedIdentity = { login: string };
 
 let jwksDomain: string | undefined;
 let jwks: ReturnType<typeof createRemoteJWKSet> | undefined;
@@ -90,6 +91,16 @@ async function resolveFromServiceToken(request: Request, db: Db): Promise<Archiv
 	return { userId: identity.userId, role, identity, authn: 'service_token' };
 }
 
+async function resolveIdentityFromServiceToken(request: Request, db: Db): Promise<ArchiveResolvedIdentity | null> {
+	const id = request.headers.get('cf-access-client-id');
+	const secret = request.headers.get('cf-access-client-secret');
+	if (!id || !secret) return null;
+	const expected = parseServiceTokens(env.ACCESS_SERVICE_TOKENS).get(id);
+	if (!expected || !safeEqual(secret, expected)) return null;
+	const identity = await resolveIdentity(db, 'service_token', id);
+	return identity ? { login: identity.value } : null;
+}
+
 export async function resolveFromMcpAssertion(request: Request, db: Db): Promise<ArchivePrincipal | null> {
 	if (!request.headers.get('x-archive-assertion') || !request.headers.get('x-archive-signature')) return null;
 	const secret = env.ASSERTION_KEY_MCP;
@@ -147,11 +158,45 @@ async function resolveFromAccessJwt(request: Request, db: Db): Promise<ArchivePr
 	return { userId: identity.userId, role, identity, authn: 'access_jwt', email: email ?? undefined };
 }
 
+async function resolveIdentityFromAccessJwt(request: Request, db: Db): Promise<ArchiveResolvedIdentity | null> {
+	const token = request.headers.get('cf-access-jwt-assertion');
+	if (!token) return null;
+	const teamDomain = env.ACCESS_TEAM_DOMAIN;
+	const audience = env.ACCESS_AUD;
+	if (!teamDomain || !audience) throw new ArchiveHttpError(503, 'archive Access auth is not configured');
+	const { payload } = await jwtVerify(token, accessJwks(teamDomain), {
+		issuer: accessIssuer(teamDomain),
+		audience
+	});
+	if (typeof payload.sub !== 'string' || !payload.sub) return null;
+	const email = getStringClaim(payload, ['email']);
+	const githubLogin = getStringClaim(payload, [
+		'github_login',
+		'login',
+		'preferred_username',
+		'custom:github_login'
+	]);
+	let identity = await resolveIdentity(db, 'access_sub', payload.sub);
+	if (!identity && githubLogin) identity = await resolveIdentity(db, 'github_login', githubLogin);
+	if (!identity) return { login: githubLogin ?? email ?? payload.sub };
+	if (!hasOrgMembership(payload)) {
+		await maybeDeactivateMembership(db, identity.userId, identity.userId);
+	}
+	return { login: githubLogin ?? email ?? identity.value };
+}
+
 export async function resolveArchivePrincipal(request: Request, db: Db): Promise<ArchivePrincipal | null> {
 	return (
 		(await resolveFromServiceToken(request, db)) ??
 		(await resolveFromMcpAssertion(request, db)) ??
 		(await resolveFromAccessJwt(request, db))
+	);
+}
+
+export async function resolveArchiveIdentity(request: Request, db: Db): Promise<ArchiveResolvedIdentity | null> {
+	return (
+		(await resolveIdentityFromServiceToken(request, db)) ??
+		(await resolveIdentityFromAccessJwt(request, db))
 	);
 }
 
