@@ -1,17 +1,19 @@
 import { env } from '$env/dynamic/private';
 import { ArchiveHttpError } from './errors';
-import { canonicalJson, hmacSha256 } from './crypto';
+import { hmacSha256Hex } from './crypto';
 
 export type ArchiveFetcher = { fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> };
 
 export type CallerAssertion = {
 	caller: 'sources';
 	actor: string;
-	ts: string;
+	ts: number;
 	nonce: string;
 };
 
-export type SignedCallerAssertion = CallerAssertion & { sig: string };
+export type SignedCallerAssertion = { payload: string; sig: string };
+
+const assertionEncoder = new TextEncoder();
 
 export async function createCallerAssertion(actor: string, now = new Date()): Promise<SignedCallerAssertion> {
 	const secret = env.ASSERTION_KEY_SOURCES;
@@ -19,15 +21,17 @@ export async function createCallerAssertion(actor: string, now = new Date()): Pr
 	const assertion: CallerAssertion = {
 		caller: 'sources',
 		actor,
-		ts: now.toISOString(),
+		ts: Math.floor(now.getTime() / 1000),
 		nonce: crypto.randomUUID()
 	};
-	return { ...assertion, sig: await hmacSha256(secret, canonicalJson(assertion)) };
+	const payload = JSON.stringify(assertion);
+	return { payload, sig: await hmacSha256Hex(secret, assertionEncoder.encode(payload)) };
 }
 
 function makeRequest(path: string, assertion: SignedCallerAssertion, init: RequestInit = {}): Request {
 	const headers = new Headers(init.headers);
-	headers.set('x-archive-caller-assertion', canonicalJson(assertion));
+	headers.set('X-Archive-Assertion', btoa(assertion.payload));
+	headers.set('X-Archive-Signature', assertion.sig);
 	if (init.body && !headers.has('content-type')) headers.set('content-type', 'application/json');
 	return new Request(`https://archive.internal${path}`, { ...init, headers });
 }
