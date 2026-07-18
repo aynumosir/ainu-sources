@@ -4,11 +4,18 @@ import { resolveArchiveIdentity, resolveArchivePrincipal } from '$lib/server/arc
 import { getUsageSummary, listPendingReview } from '$lib/server/archive/db';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
 
-export const load: LayoutServerLoad = async ({ request }) => {
+export const load: LayoutServerLoad = async ({ request, locals, url }) => {
 	const principal = await resolveArchivePrincipal(request, db);
 	if (!principal) {
 		const identity = await resolveArchiveIdentity(request, db);
-		return { principal: null, login: identity?.login ?? null, usage: null, pendingCount: 0 };
+		return {
+			principal: null,
+			login: identity?.login ?? null,
+			hasAppSession: !!locals.user,
+			signInHref: `/login?redirect=${encodeURIComponent(url.pathname + url.search)}`,
+			usage: null,
+			pendingCount: 0
+		};
 	}
 	const usage = principal.authn === 'mcp_assertion' ? null : await getUsageSummary(db, principal);
 	const pendingCount = archiveRoleAtLeast(principal.role, 'archive_reviewer')

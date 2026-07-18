@@ -20,7 +20,8 @@ export type ArchiveEventType =
 	| 'revision_withdrawn'
 	| 'capability_issued'
 	| 'capability_redeemed'
-	| 'membership_deactivated';
+	| 'membership_deactivated'
+	| 'github_login_claim_conflict';
 
 export type ArchiveAuditInput = {
 	entityType: ArchiveEventEntityType;

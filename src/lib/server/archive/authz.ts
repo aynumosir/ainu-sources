@@ -3,7 +3,7 @@ import { createRemoteJWKSet, jwtVerify } from 'jose';
 import { and, eq } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import { env } from '$env/dynamic/private';
-import { appUserRoles, userIdentities } from '$lib/server/db/schema';
+import { appUserRoles, githubLoginCache, userIdentities } from '$lib/server/db/schema';
 import type * as schema from '$lib/server/db/schema';
 import { recordArchiveEvent } from './audit';
 import { ArchiveHttpError } from './errors';
@@ -15,9 +15,12 @@ type Db = LibSQLDatabase<typeof schema>;
 type IdentityKind = ArchivePrincipal['identity']['kind'];
 type ResolvedIdentity = { userId: string; kind: IdentityKind; value: string };
 export type ArchiveResolvedIdentity = { login: string };
+type AppSessionUser = { id: string; email: string };
+type AppSessionLookup = (request: Request) => Promise<AppSessionUser | null>;
 
 let jwksDomain: string | undefined;
 let jwks: ReturnType<typeof createRemoteJWKSet> | undefined;
+let appSessionLookup: AppSessionLookup = defaultAppSessionLookup;
 
 function accessIssuer(teamDomain: string): string {
 	return `https://${teamDomain}`;
@@ -76,6 +79,54 @@ async function resolveIdentity(db: Db, kind: IdentityKind, value: string): Promi
 async function roleForUser(db: Db, userId: string): Promise<ArchiveRole | null> {
 	const [row] = await db.select().from(appUserRoles).where(eq(appUserRoles.userId, userId)).limit(1);
 	return isArchiveRole(row?.role) ? row.role : null;
+}
+
+async function defaultAppSessionLookup(request: Request): Promise<AppSessionUser | null> {
+	const { auth } = await import('$lib/server/auth');
+	const session = await auth.api.getSession({ headers: request.headers });
+	if (!session) return null;
+	return { id: session.user.id, email: session.user.email };
+}
+
+async function identityFromGithubLoginCache(db: Db, userId: string): Promise<ResolvedIdentity | null> {
+	const [cached] = await db.select().from(githubLoginCache).where(eq(githubLoginCache.userId, userId)).limit(1);
+	if (!cached) return null;
+	return resolveIdentity(db, 'github_login', cached.login);
+}
+
+export async function resolveFromAppSession(request: Request, db: Db): Promise<ArchivePrincipal | null> {
+	const sessionUser = await appSessionLookup(request);
+	if (!sessionUser) return null;
+
+	const directRole = await roleForUser(db, sessionUser.id);
+	if (directRole) {
+		return {
+			userId: sessionUser.id,
+			role: directRole,
+			identity: { kind: 'app_session', value: sessionUser.email },
+			authn: 'app_session',
+			email: sessionUser.email
+		};
+	}
+
+	const identity = await identityFromGithubLoginCache(db, sessionUser.id);
+	if (!identity) return null;
+	const role = await roleForUser(db, identity.userId);
+	if (!role) return null;
+	return {
+		userId: identity.userId,
+		role,
+		identity,
+		authn: 'app_session',
+		email: sessionUser.email
+	};
+}
+
+async function resolveIdentityFromAppSession(request: Request, db: Db): Promise<ArchiveResolvedIdentity | null> {
+	const sessionUser = await appSessionLookup(request);
+	if (!sessionUser) return null;
+	const identity = await identityFromGithubLoginCache(db, sessionUser.id);
+	return { login: identity?.value ?? sessionUser.email };
 }
 
 async function resolveFromServiceToken(request: Request, db: Db): Promise<ArchivePrincipal | null> {
@@ -187,6 +238,7 @@ async function resolveIdentityFromAccessJwt(request: Request, db: Db): Promise<A
 
 export async function resolveArchivePrincipal(request: Request, db: Db): Promise<ArchivePrincipal | null> {
 	return (
+		(await resolveFromAppSession(request, db)) ??
 		(await resolveFromServiceToken(request, db)) ??
 		(await resolveFromMcpAssertion(request, db)) ??
 		(await resolveFromAccessJwt(request, db))
@@ -195,6 +247,7 @@ export async function resolveArchivePrincipal(request: Request, db: Db): Promise
 
 export async function resolveArchiveIdentity(request: Request, db: Db): Promise<ArchiveResolvedIdentity | null> {
 	return (
+		(await resolveIdentityFromAppSession(request, db)) ??
 		(await resolveIdentityFromServiceToken(request, db)) ??
 		(await resolveIdentityFromAccessJwt(request, db))
 	);
@@ -212,4 +265,11 @@ export async function requireArchiveRole(
 	return principal;
 }
 
-export const archiveAuthzInternals = { roleForUser, hasOrgMembership, parseServiceTokens };
+export const archiveAuthzInternals = {
+	roleForUser,
+	hasOrgMembership,
+	parseServiceTokens,
+	setAppSessionLookupForTest(lookup: AppSessionLookup | null): void {
+		appSessionLookup = lookup ?? defaultAppSessionLookup;
+	}
+};

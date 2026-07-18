@@ -870,6 +870,14 @@ export const userIdentities = sqliteTable(
 	]
 );
 
+export const githubLoginCache = sqliteTable('github_login_cache', {
+	userId: text('user_id')
+		.primaryKey()
+		.references(() => user.id, { onDelete: 'cascade' }),
+	login: text('login').notNull(),
+	updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+});
+
 export const archiveRepositories = sqliteTable(
 	'archive_repositories',
 	{
@@ -1240,6 +1248,7 @@ export type NewChangeRequest = typeof changeRequests.$inferInsert;
 export type ChangeRequestReview = typeof changeRequestReviews.$inferSelect;
 export type NewChangeRequestReview = typeof changeRequestReviews.$inferInsert;
 export type UserIdentity = typeof userIdentities.$inferSelect;
+export type GithubLoginCache = typeof githubLoginCache.$inferSelect;
 export type ArchiveRepository = typeof archiveRepositories.$inferSelect;
 export type ArchiveBlob = typeof archiveBlobs.$inferSelect;
 export type SourceFile = typeof sourceFiles.$inferSelect;

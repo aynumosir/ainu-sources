@@ -10,8 +10,8 @@ export type ArchiveRole = (typeof ARCHIVE_ROLES)[number];
 export type ArchivePrincipal = {
 	userId: string;
 	role: ArchiveRole;
-	identity: { kind: 'access_sub' | 'github_login' | 'service_token'; value: string };
-	authn: 'access_jwt' | 'service_token' | 'mcp_assertion';
+	identity: { kind: 'access_sub' | 'github_login' | 'service_token' | 'app_session'; value: string };
+	authn: 'access_jwt' | 'service_token' | 'mcp_assertion' | 'app_session';
 	email?: string;
 };
 

@@ -11,10 +11,11 @@ import { env } from '$env/dynamic/private';
 import * as schema from '$lib/server/db/schema';
 import { user } from '$lib/server/db/auth.schema';
 import { recordArchiveEvent } from './audit';
-import { archiveAuthzInternals, resolveArchivePrincipal } from './authz';
+import { archiveAuthzInternals, resolveArchiveIdentity, resolveArchivePrincipal, resolveFromAppSession } from './authz';
 import { compareCursor, decodeCursor, encodeCursor } from './cursor';
 import { issueArchiveCsrfToken, requireArchiveMutationGuards, requireArchiveOrigin, verifyArchiveCsrfToken } from './csrf';
 import { hmacSha256Hex } from './crypto';
+import { captureGithubAccountEvent, rememberGithubProfileLogin } from './github-login-capture';
 import {
 	approveRevision,
 	capabilityExpiry,
@@ -82,6 +83,7 @@ const admin: ArchivePrincipal = {
 
 beforeEach(async () => {
 	for (const key of Object.keys(env)) delete env[key];
+	archiveAuthzInternals.setAppSessionLookupForTest(async () => null);
 	db = await makeDb();
 	env.ARCHIVE_CSRF_SECRET = 'csrf-secret';
 	await db.insert(user).values([
@@ -279,6 +281,131 @@ describe('archive DB flows', () => {
 		await expect(archiveAuthzInternals.roleForUser(db, 'reader')).resolves.toBe('archive_reader');
 		await expect(archiveAuthzInternals.roleForUser(db, 'reviewer')).resolves.toBeNull();
 		await expect(archiveAuthzInternals.roleForUser(db, 'missing')).resolves.toBeNull();
+	});
+
+	it('resolves app sessions from direct archive roles', async () => {
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'reader', email: 'reader@example.test' }));
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		const request = new Request('https://db.aynu.org/archive');
+		const principal = await resolveFromAppSession(request, db);
+		expect(principal).toMatchObject({
+			userId: 'reader',
+			role: 'archive_reader',
+			authn: 'app_session',
+			identity: { kind: 'app_session', value: 'reader@example.test' },
+			email: 'reader@example.test'
+		});
+	});
+
+	it('resolves app sessions through cached GitHub login claims owned by another archive user', async () => {
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'other', email: 'other@example.test' }));
+		await db.insert(schema.githubLoginCache).values({ userId: 'other', login: 'octocat' });
+		await db.insert(schema.userIdentities).values({ userId: 'reader', kind: 'github_login', value: 'octocat' });
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reviewer' });
+		const request = new Request('https://db.aynu.org/archive');
+		const principal = await resolveFromAppSession(request, db);
+		expect(principal).toMatchObject({
+			userId: 'reader',
+			role: 'archive_reviewer',
+			authn: 'app_session',
+			identity: { kind: 'github_login', value: 'octocat', userId: 'reader' },
+			email: 'other@example.test'
+		});
+	});
+
+	it('returns null for missing app sessions and unresolved app-session identities', async () => {
+		const request = new Request('https://db.aynu.org/archive');
+		await expect(resolveFromAppSession(request, db)).resolves.toBeNull();
+
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'other', email: 'other@example.test' }));
+		await expect(resolveFromAppSession(request, db)).resolves.toBeNull();
+
+		await db.insert(schema.githubLoginCache).values({ userId: 'other', login: 'missing-login' });
+		await expect(resolveFromAppSession(request, db)).resolves.toBeNull();
+	});
+
+	it('records GitHub login cache while preserving a pre-provisioned archive identity claim', async () => {
+		await db.insert(user).values([
+			{ id: 'synthetic-1', name: 'Synthetic User', email: 'synthetic@example.test' },
+			{ id: 'new-user-1', name: 'New User', email: 'new-user@example.test' }
+		]);
+		await db.insert(schema.userIdentities).values({ kind: 'github_login', value: 'octocat', userId: 'synthetic-1' });
+		await db.insert(schema.appUserRoles).values({ userId: 'synthetic-1', role: 'archive_reviewer' });
+
+		rememberGithubProfileLogin('gh-numeric-1', 'octocat');
+		await captureGithubAccountEvent(
+			{ id: 'acct-1', accountId: 'gh-numeric-1', providerId: 'github', userId: 'new-user-1' },
+			db
+		);
+
+		const [cached] = await db.select().from(schema.githubLoginCache).where(eq(schema.githubLoginCache.userId, 'new-user-1'));
+		expect(cached).toMatchObject({ userId: 'new-user-1', login: 'octocat' });
+		const identities = await db
+			.select()
+			.from(schema.userIdentities)
+			.where(and(eq(schema.userIdentities.kind, 'github_login'), eq(schema.userIdentities.value, 'octocat')));
+		expect(identities).toEqual([{ kind: 'github_login', value: 'octocat', userId: 'synthetic-1', createdAt: expect.any(Date) }]);
+		const [event] = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'github_login_claim_conflict'));
+		expect(event).toMatchObject({
+			entityType: 'user',
+			entityId: 'new-user-1',
+			eventType: 'github_login_claim_conflict',
+			actor: 'new-user-1',
+			details: { login: 'octocat', claimedBy: 'synthetic-1' }
+		});
+
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({
+			id: 'new-user-1',
+			email: 'new-user@example.test'
+		}));
+		const principal = await resolveFromAppSession(new Request('https://db.aynu.org/archive'), db);
+		expect(principal).toMatchObject({ userId: 'synthetic-1', role: 'archive_reviewer', authn: 'app_session' });
+		await expect(resolveArchiveIdentity(new Request('https://db.aynu.org/archive'), db)).resolves.toEqual({ login: 'octocat' });
+	});
+
+	it('keeps GitHub login capture idempotent for repeated OAuth completions', async () => {
+		rememberGithubProfileLogin('gh-numeric-reader', 'octocat');
+		await captureGithubAccountEvent(
+			{ id: 'acct-reader', accountId: 'gh-numeric-reader', providerId: 'github', userId: 'reader' },
+			db
+		);
+		rememberGithubProfileLogin('gh-numeric-reader', 'octocat');
+		await captureGithubAccountEvent(
+			{ id: 'acct-reader', accountId: 'gh-numeric-reader', providerId: 'github', userId: 'reader' },
+			db
+		);
+
+		const identities = await db
+			.select()
+			.from(schema.userIdentities)
+			.where(and(eq(schema.userIdentities.kind, 'github_login'), eq(schema.userIdentities.value, 'octocat')));
+		expect(identities).toHaveLength(1);
+		expect(identities[0].userId).toBe('reader');
+		const events = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'github_login_claim_conflict'));
+		expect(events).toHaveLength(0);
+	});
+
+	it('requires CSRF guards for app-session mutation principals', async () => {
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'reader', email: 'reader@example.test' }));
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		const headers = new Headers({
+			origin: 'https://archive.aynu.org',
+			'content-type': 'application/json'
+		});
+		await expect(
+			archiveMutationPrincipal(new Request('https://db.aynu.org/api/archive/review', { method: 'POST', headers }), 'archive_reader', db)
+		).rejects.toMatchObject({ status: 403 });
+
+		headers.set('x-archive-csrf', await issueArchiveCsrfToken('reader'));
+		await expect(
+			archiveMutationPrincipal(new Request('https://db.aynu.org/api/archive/review', { method: 'POST', headers }), 'archive_reader', db)
+		).resolves.toMatchObject({ userId: 'reader', authn: 'app_session' });
 	});
 
 	it('caps MCP assertion principals at archive_reader', async () => {

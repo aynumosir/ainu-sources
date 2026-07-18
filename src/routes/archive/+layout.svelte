@@ -41,6 +41,6 @@
 			{@render children()}
 		</main>
 	{:else}
-		<NoAccess login={data.login} />
+		<NoAccess login={data.login} hasAppSession={data.hasAppSession} signInHref={data.signInHref} />
 	{/if}
 </div>

@@ -34,6 +34,14 @@
 		<option value="light">Light</option>
 		<option value="dark">Dark</option>
 	</select>
+	<form method="POST" action="/account?/signout">
+		<button
+			type="submit"
+			class="h-8 rounded-md border border-[var(--archive-border)] bg-[var(--archive-surface)] px-2 text-[13px] text-[var(--archive-text)]"
+		>
+			Sign out
+		</button>
+	</form>
 	<div class="text-right">
 		<div class="text-[13px] font-medium text-[var(--archive-text)]">{principal.identity.value}</div>
 		<div class="text-[12px] text-[var(--archive-subtle)]">{principal.role.replace('archive_', '')}</div>
