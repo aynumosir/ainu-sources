@@ -94,7 +94,7 @@ export function parsePageSelector(value: string | null): number[] | null {
 	return [...pages].sort((a, b) => a - b);
 }
 
-const INGEST_BATCH_ROWS = 200;
+const INGEST_BATCH_ROWS = 500;
 
 export async function replaceOcrPages(
 	db: Db,
@@ -151,7 +151,11 @@ export async function activateOcrGeneration(
 				tokenRows.push(sql`(
 					${token.token}, ${revisionId}, ${variant}, ${page.page}, ${block}, ${token.position}, ${chunkId}, ${generation}
 				)`);
-				await flush(tokenRows, tokenStatement);
+				if (tokenRows.length >= INGEST_BATCH_ROWS) {
+					// Tokens reference their chunk, so pending chunks must land first.
+					await flush(chunkRows, chunkStatement, true);
+					await flush(tokenRows, tokenStatement, true);
+				}
 			}
 		}
 	}
