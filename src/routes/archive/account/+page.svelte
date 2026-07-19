@@ -2,7 +2,7 @@
 	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import { formatBytes } from '$lib/archive/format';
+	import { formatBytes, formatDateTime } from '$lib/archive/format';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
 	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import type { SubmitFunction } from '@sveltejs/kit';
@@ -75,7 +75,7 @@
 					<dt class="text-[var(--archive-subtle)]">Bytes used</dt>
 					<dd>{formatBytes(data.usage.bytesUsed)} / {formatBytes(data.usage.dailyByteLimit)}</dd>
 					<dt class="text-[var(--archive-subtle)]">Reset</dt>
-					<dd><time datetime={data.usage.resetAt}>{new Date(data.usage.resetAt).toLocaleString('en-US')}</time></dd>
+					<dd><time class="tnum" datetime={data.usage.resetAt}>{formatDateTime(data.usage.resetAt)}</time></dd>
 					<dt class="text-[var(--archive-subtle)]">Streams</dt>
 					<dd>{data.usage.activeStreams} / {data.usage.concurrentStreamLimit}</dd>
 				</dl>

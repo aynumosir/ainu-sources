@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { archiveFetch } from '$lib/archive/session.svelte';
-	import { formatBytes } from '$lib/archive/format';
+	import { formatBytes, formatDateTime } from '$lib/archive/format';
 	import BilingualLabel from './BilingualLabel.svelte';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
 
@@ -61,7 +61,7 @@
 						<p class="text-[15px] font-medium">{item.filename ?? item.title}</p>
 						<p class="text-[13px] text-[var(--archive-subtle)]">
 							{item.fileRole ?? 'file'} · {formatBytes(item.bytes)}
-							{#if item.submittedAt} · <time datetime={item.submittedAt}>{new Date(item.submittedAt).toLocaleString('en-US')}</time>{/if}
+							{#if item.submittedAt} · <time class="tnum" datetime={item.submittedAt}>{formatDateTime(item.submittedAt)}</time>{/if}
 						</p>
 					</div>
 					{#if item.canWithdraw}

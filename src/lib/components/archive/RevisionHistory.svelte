@@ -1,6 +1,7 @@
 <script lang="ts">
 	import BilingualLabel from './BilingualLabel.svelte';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { formatDateTime } from '$lib/archive/format';
 
 	type Revision = {
 		revisionId: string | null;
@@ -23,7 +24,7 @@
 				<li class="flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
 					<span class="tnum text-[var(--archive-text)]">rev {revision.revisionNo ?? '—'}</span>
 					<span>{revision.reviewStatus ?? 'unknown'}</span>
-					{#if revision.submittedAt}<time datetime={revision.submittedAt}>{new Date(revision.submittedAt).toLocaleString('en-US')}</time>{/if}
+					{#if revision.submittedAt}<time class="tnum" datetime={revision.submittedAt}>{formatDateTime(revision.submittedAt)}</time>{/if}
 				</li>
 			{/each}
 		</ol>
