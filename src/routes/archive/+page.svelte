@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import FilterBar from '$lib/components/archive/FilterBar.svelte';
 	import SourceCardGrid from '$lib/components/archive/SourceCardGrid.svelte';
 	import PaginationCursor from '$lib/components/archive/PaginationCursor.svelte';
@@ -7,6 +8,9 @@
 
 	let { data } = $props();
 </script>
+
+<ArchiveHead title="資料一覧 Library" />
+
 
 <div class="space-y-5">
 	<div class="archive-rule-dotted flex flex-col gap-2 pb-3 md:flex-row md:items-end md:justify-between">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import AdminUsersTable from '$lib/components/archive/AdminUsersTable.svelte';
 	import UnderConstruction from '$lib/components/archive/UnderConstruction.svelte';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
@@ -15,6 +16,9 @@
 		{ id: 'budgets', label: archiveLabels.budgetsEvents }
 	];
 </script>
+
+<ArchiveHead title="管理 Admin" />
+
 
 <div class="space-y-4">
 	<div class="archive-rule-dotted pb-3">

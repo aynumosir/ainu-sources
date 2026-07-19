@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import SourceHeader from '$lib/components/archive/SourceHeader.svelte';
 	import FileRow from '$lib/components/archive/FileRow.svelte';
 	import RevisionHistory from '$lib/components/archive/RevisionHistory.svelte';
@@ -11,6 +12,9 @@
 	const source = $derived(data.detail?.source);
 	const primaryFile = $derived(data.files.find((file) => file.revisionId) ?? null);
 </script>
+
+<ArchiveHead title={source?.title ?? source?.slug ?? '資料 Source'} />
+
 
 {#if source}
 	<div class="space-y-5">

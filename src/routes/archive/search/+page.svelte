@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import { highlightSnippet } from '$lib/archive/snippets';
 	import { formatYear } from '$lib/format';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
@@ -6,6 +7,9 @@
 
 	let { data } = $props();
 </script>
+
+<ArchiveHead title="検索 Search" />
+
 
 <div class="space-y-5">
 	<div class="archive-rule-dotted pb-3">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { formatBytes } from '$lib/archive/format';
@@ -25,6 +26,9 @@
 		};
 	};
 </script>
+
+<ArchiveHead title="アカウント Account" />
+
 
 {#if data.principal}
 	<div class="max-w-3xl space-y-5">
