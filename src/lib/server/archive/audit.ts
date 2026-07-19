@@ -9,6 +9,8 @@ type Conn = Db | Tx;
 
 export type ArchiveEventType =
 	| 'stream_opened'
+	| 'content_access_authorized'
+	| 'content_access_denied'
 	| 'upload_created'
 	| 'upload_completed'
 	| 'upload_verified'

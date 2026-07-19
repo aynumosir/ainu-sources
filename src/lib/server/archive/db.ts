@@ -4,6 +4,7 @@ import { env } from '$env/dynamic/private';
 import {
 	appUserRoles,
 	archiveBlobs,
+	archiveContentApiDailyUsage,
 	archiveRepositories,
 	archiveStreamDailyUsage,
 	archiveStreamLeases,
@@ -21,6 +22,7 @@ import type * as schema from '$lib/server/db/schema';
 import { recordArchiveEvent } from './audit';
 import { ArchiveHttpError } from './errors';
 import { decodeCursor, encodeCursor, type FileCursor } from './cursor';
+import { base64url, fromBase64url } from './crypto';
 import { archiveRoleAtLeast, isArchiveRole, iso, type ArchivePrincipal, type ArchiveRole } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
@@ -29,11 +31,22 @@ type Tx = Parameters<Parameters<Db['transaction']>[0]>[0];
 const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_UPLOAD_TTL_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_DAILY_BYTES = 5 * 1024 * 1024 * 1024;
+// Reading page images, linearized views, and OCR text gets a larger daily budget than whole-file downloads.
+const DEFAULT_DAILY_VIEW_BYTES = 20 * 1024 * 1024 * 1024;
 const DEFAULT_CONCURRENT_STREAMS = 3;
+const DEFAULT_TEXT_CALL_LIMIT = 1000;
+const DEFAULT_TEXT_PAGE_LIMIT = 10_000;
+const DEFAULT_SEARCH_CALL_LIMIT = 500;
+const DEFAULT_SEARCH_HIT_LIMIT = 10_000;
 const SOURCE_FILE_ROLES = ['scan', 'epub', 'supplement', 'derivative'] as const;
 const UPLOAD_SESSION_STATES = ['initiated', 'uploading', 'uploaded', 'finalizing', 'verified', 'failed', 'aborted', 'expired'] as const;
 type SourceFileRole = (typeof SOURCE_FILE_ROLES)[number];
 type UploadSessionState = (typeof UPLOAD_SESSION_STATES)[number];
+export type ArchiveBudgetKind = 'download' | 'view';
+export type CapabilityRedemptionRequest =
+	| { kind: 'full' }
+	| { kind: 'range_header'; rangeHeader: string | null };
+export type ArchiveFileSort = 'updated' | 'title' | 'year-desc' | 'year-asc';
 
 export type ArchiveAdminUser = {
 	userId: string;
@@ -85,14 +98,14 @@ function parseSourceFileRole(role: string | null | undefined): SourceFileRole | 
 	throw new ArchiveHttpError(400, 'invalid source file role');
 }
 
-function requireReviewReadable(principal: ArchivePrincipal, reviewStatus: string, submittedBy: string): void {
+export function requireReviewReadable(principal: ArchivePrincipal, reviewStatus: string, submittedBy: string): void {
 	if (reviewStatus === 'approved') return;
 	if (archiveRoleAtLeast(principal.role, 'archive_reviewer')) return;
 	if (principal.role === 'archive_contributor' && submittedBy === principal.userId && reviewStatus === 'pending') return;
 	throw new ArchiveHttpError(404, 'revision not found');
 }
 
-function requireAccessState(principal: ArchivePrincipal, accessState: string): void {
+export function requireAccessState(principal: ArchivePrincipal, accessState: string): void {
 	if (accessState === 'available') return;
 	if (accessState === 'embargoed' && archiveRoleAtLeast(principal.role, 'archive_reviewer')) return;
 	if (accessState === 'takedown' && principal.role === 'archive_admin') return;
@@ -1111,18 +1124,63 @@ export async function issueCapability(db: Db, revisionId: string, principal: Arc
 	return { ...row, bearer: jti, expiresAt: iso(row.expiresAt) };
 }
 
-export async function redeemCapability(db: Db, bearer: string, requestedBytes: number | 'all') {
+function parseCapabilityRedemption(
+	request: CapabilityRedemptionRequest
+):
+	| { ok: true; bytesSql: ReturnType<typeof sql>; detailsBytes: number | 'full' | 'range' }
+	| { ok: false; status: number; message: string } {
+	if (request.kind === 'full' || !request.rangeHeader) {
+		return { ok: true, bytesSql: sql`${capabilityTokens.maxBytes}`, detailsBytes: 'full' };
+	}
+	const m = /^bytes=(\d*)-(\d*)$/u.exec(request.rangeHeader.trim());
+	if (!m) return { ok: false, status: 416, message: 'invalid range' };
+	const [, rawStart, rawEnd] = m;
+	if (!rawStart && !rawEnd) return { ok: false, status: 416, message: 'invalid range' };
+	if (!rawStart) {
+		const suffix = Number(rawEnd);
+		if (!Number.isSafeInteger(suffix) || suffix <= 0) return { ok: false, status: 416, message: 'invalid range' };
+		return { ok: true, bytesSql: sql`min(${suffix}, ${capabilityTokens.maxBytes})`, detailsBytes: 'range' };
+	}
+	const start = Number(rawStart);
+	if (!Number.isSafeInteger(start) || start < 0) return { ok: false, status: 416, message: 'invalid range' };
+	if (!rawEnd) {
+		return {
+			ok: true,
+			bytesSql: sql`${capabilityTokens.maxBytes} - ${start}`,
+			detailsBytes: 'range'
+		};
+	}
+	const end = Number(rawEnd);
+	if (!Number.isSafeInteger(end) || end < start) return { ok: false, status: 416, message: 'invalid range' };
+	return {
+		ok: true,
+		bytesSql: sql`min(${end}, ${capabilityTokens.maxBytes} - 1) - ${start} + 1`,
+		detailsBytes: 'range'
+	};
+}
+
+function chargedBytesForRequest(request: CapabilityRedemptionRequest, maxBytes: number): number {
+	if (request.kind === 'full' || !request.rangeHeader) return maxBytes;
+	const m = /^bytes=(\d*)-(\d*)$/u.exec(request.rangeHeader.trim());
+	if (!m) throw new ArchiveHttpError(416, 'invalid range');
+	const [, rawStart, rawEnd] = m;
+	if (!rawStart && !rawEnd) throw new ArchiveHttpError(416, 'invalid range');
+	if (!rawStart) return Math.min(Number(rawEnd), maxBytes);
+	const start = Number(rawStart);
+	if (!rawEnd) return maxBytes - start;
+	return Math.min(Number(rawEnd), maxBytes - 1) - start + 1;
+}
+
+export async function redeemCapability(db: Db, bearer: string, request: CapabilityRedemptionRequest) {
 	if (!bearer) throw new ArchiveHttpError(401, 'invalid capability');
+	const parsed = parseCapabilityRedemption(request);
+	if (!parsed.ok) throw new ArchiveHttpError(parsed.status, parsed.message);
 	return db.transaction(async (tx) => {
 		const now = new Date();
-		const increment =
-			requestedBytes === 'all'
-				? sql`${capabilityTokens.maxBytes} - ${capabilityTokens.bytesServed}`
-				: sql`${requestedBytes}`;
 		const [reserved] = await tx
 			.update(capabilityTokens)
 			.set({
-				bytesServed: sql`${capabilityTokens.bytesServed} + ${increment}`,
+				bytesServed: sql`${capabilityTokens.bytesServed} + ${parsed.bytesSql}`,
 				redeemedAt: now
 			})
 			.where(
@@ -1130,7 +1188,8 @@ export async function redeemCapability(db: Db, bearer: string, requestedBytes: n
 					eq(capabilityTokens.jti, bearer),
 					isNull(capabilityTokens.revokedAt),
 					gt(capabilityTokens.expiresAt, now),
-					sql`${capabilityTokens.bytesServed} + ${increment} <= ${capabilityTokens.maxBytes}`
+					sql`${parsed.bytesSql} > 0`,
+					sql`${capabilityTokens.bytesServed} + ${parsed.bytesSql} <= ${capabilityTokens.maxBytes}`
 				)
 			)
 			.returning();
@@ -1141,15 +1200,13 @@ export async function redeemCapability(db: Db, bearer: string, requestedBytes: n
 			identity: { kind: 'service_token', value: 'capability' },
 			authn: 'service_token'
 		};
-		const revision = await getRevisionForContent(tx as unknown as Db, reserved.revisionId, principal);
-		await recordArchiveEvent(tx, {
-			entityType: 'capability_token',
-			entityId: reserved.jti,
-			eventType: 'capability_redeemed',
-			actor: reserved.userId,
-			details: { revision_id: reserved.revisionId, bytes: requestedBytes === 'all' ? reserved.maxBytes : requestedBytes }
-		});
-		return { token: reserved, revision };
+		return {
+			token: reserved,
+			principal,
+			revisionId: reserved.revisionId,
+			chargedBytes: chargedBytesForRequest(request, reserved.maxBytes),
+			redemptionKind: parsed.detailsBytes
+		};
 	});
 }
 
@@ -1157,52 +1214,139 @@ export async function reserveStreamQuota(
 	db: Db,
 	principal: ArchivePrincipal,
 	revisionId: string,
-	bytes: number
-): Promise<string> {
-	const dailyLimit = intEnv('ARCHIVE_DAILY_BYTE_LIMIT', DEFAULT_DAILY_BYTES);
+	bytes: number,
+	budgetKind: ArchiveBudgetKind = 'download'
+): Promise<{ leaseId: string | null; reserved: number; remaining: number; resetAt: string; budgetKind: ArchiveBudgetKind }> {
+	const dailyLimit =
+		budgetKind === 'download'
+			? intEnv('ARCHIVE_DAILY_BYTE_LIMIT', DEFAULT_DAILY_BYTES)
+			: intEnv('ARCHIVE_DAILY_VIEW_BYTE_LIMIT', DEFAULT_DAILY_VIEW_BYTES);
 	const concurrencyLimit = intEnv('ARCHIVE_CONCURRENT_STREAM_LIMIT', DEFAULT_CONCURRENT_STREAMS);
 	const now = new Date();
 	const day = now.toISOString().slice(0, 10);
+	const resetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)).toISOString();
 	return db.transaction(async (tx) => {
-		await tx.delete(archiveStreamLeases).where(lt(archiveStreamLeases.expiresAt, now));
-		const [{ count }] = await tx
-			.select({ count: sql<number>`count(*)` })
-			.from(archiveStreamLeases)
-			.where(eq(archiveStreamLeases.userId, principal.userId));
-		if (Number(count) >= concurrencyLimit) throw new ArchiveHttpError(429, 'concurrent stream limit reached');
+		if (budgetKind === 'download') {
+			await tx.delete(archiveStreamLeases).where(lt(archiveStreamLeases.expiresAt, now));
+			const [{ count }] = await tx
+				.select({ count: sql<number>`count(*)` })
+				.from(archiveStreamLeases)
+				.where(eq(archiveStreamLeases.userId, principal.userId));
+			if (Number(count) >= concurrencyLimit) {
+				throw new ArchiveHttpError(429, 'concurrent stream limit reached', { resetAt });
+			}
+		}
 		const [usage] = await tx
 			.select()
 			.from(archiveStreamDailyUsage)
-			.where(and(eq(archiveStreamDailyUsage.userId, principal.userId), eq(archiveStreamDailyUsage.day, day)))
+			.where(
+				and(
+					eq(archiveStreamDailyUsage.userId, principal.userId),
+					eq(archiveStreamDailyUsage.day, day),
+					eq(archiveStreamDailyUsage.budgetKind, budgetKind)
+				)
+			)
 			.limit(1);
-		if ((usage?.bytesReserved ?? 0) + bytes > dailyLimit) throw new ArchiveHttpError(429, 'daily byte budget exceeded');
+		const reserved = (usage?.bytesReserved ?? 0) + bytes;
+		if (reserved > dailyLimit) throw new ArchiveHttpError(429, 'daily byte budget exceeded', { resetAt });
 		if (usage) {
 			await tx
 				.update(archiveStreamDailyUsage)
-				.set({ bytesReserved: usage.bytesReserved + bytes, updatedAt: now })
-				.where(and(eq(archiveStreamDailyUsage.userId, principal.userId), eq(archiveStreamDailyUsage.day, day)));
+				.set({ bytesReserved: reserved, updatedAt: now })
+				.where(
+					and(
+						eq(archiveStreamDailyUsage.userId, principal.userId),
+						eq(archiveStreamDailyUsage.day, day),
+						eq(archiveStreamDailyUsage.budgetKind, budgetKind)
+					)
+				);
 		} else {
 			await tx.insert(archiveStreamDailyUsage).values({
 				userId: principal.userId,
 				day,
+				budgetKind,
 				bytesReserved: bytes,
 				updatedAt: now
 			});
 		}
-		const leaseId = uuid();
-		await tx.insert(archiveStreamLeases).values({
-			id: leaseId,
-			userId: principal.userId,
-			revisionId,
-			expiresAt: new Date(now.getTime() + 5 * 60 * 1000),
-			createdAt: now
-		});
-		return leaseId;
+		let leaseId: string | null = null;
+		if (budgetKind === 'download') {
+			leaseId = uuid();
+			await tx.insert(archiveStreamLeases).values({
+				id: leaseId,
+				userId: principal.userId,
+				revisionId,
+				expiresAt: new Date(now.getTime() + 5 * 60 * 1000),
+				createdAt: now
+			});
+		}
+		return { leaseId, reserved, remaining: dailyLimit - reserved, resetAt, budgetKind };
+	});
+}
+
+export async function reserveContentApiRate(
+	db: Db,
+	principal: ArchivePrincipal,
+	useKind: 'text' | 'search',
+	units: number
+): Promise<{ callsUsed: number; unitsUsed: number; resetAt: string }> {
+	const callLimit =
+		useKind === 'text'
+			? intEnv('ARCHIVE_DAILY_TEXT_CALL_LIMIT', DEFAULT_TEXT_CALL_LIMIT)
+			: intEnv('ARCHIVE_DAILY_SEARCH_CALL_LIMIT', DEFAULT_SEARCH_CALL_LIMIT);
+	const unitLimit =
+		useKind === 'text'
+			? intEnv('ARCHIVE_DAILY_TEXT_PAGE_LIMIT', DEFAULT_TEXT_PAGE_LIMIT)
+			: intEnv('ARCHIVE_DAILY_SEARCH_HIT_LIMIT', DEFAULT_SEARCH_HIT_LIMIT);
+	const now = new Date();
+	const day = now.toISOString().slice(0, 10);
+	const resetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)).toISOString();
+	const safeUnits = Number.isSafeInteger(units) && units > 0 ? units : 0;
+	return db.transaction(async (tx) => {
+		const [usage] = await tx
+			.select()
+			.from(archiveContentApiDailyUsage)
+			.where(
+				and(
+					eq(archiveContentApiDailyUsage.userId, principal.userId),
+					eq(archiveContentApiDailyUsage.day, day),
+					eq(archiveContentApiDailyUsage.useKind, useKind)
+				)
+			)
+			.limit(1);
+		const callsUsed = (usage?.calls ?? 0) + 1;
+		const unitsUsed = (usage?.units ?? 0) + safeUnits;
+		if (callsUsed > callLimit || unitsUsed > unitLimit) {
+			throw new ArchiveHttpError(429, `${useKind} API daily limit exceeded`, { resetAt });
+		}
+		if (usage) {
+			await tx
+				.update(archiveContentApiDailyUsage)
+				.set({ calls: callsUsed, units: unitsUsed, updatedAt: now })
+				.where(
+					and(
+						eq(archiveContentApiDailyUsage.userId, principal.userId),
+						eq(archiveContentApiDailyUsage.day, day),
+						eq(archiveContentApiDailyUsage.useKind, useKind)
+					)
+				);
+		} else {
+			await tx.insert(archiveContentApiDailyUsage).values({
+				userId: principal.userId,
+				day,
+				useKind,
+				calls: callsUsed,
+				units: unitsUsed,
+				updatedAt: now
+			});
+		}
+		return { callsUsed, unitsUsed, resetAt };
 	});
 }
 
 export async function getUsageSummary(db: Db, principal: ArchivePrincipal) {
 	const dailyLimit = intEnv('ARCHIVE_DAILY_BYTE_LIMIT', DEFAULT_DAILY_BYTES);
+	const dailyViewByteLimit = intEnv('ARCHIVE_DAILY_VIEW_BYTE_LIMIT', DEFAULT_DAILY_VIEW_BYTES);
 	const concurrencyLimit = intEnv('ARCHIVE_CONCURRENT_STREAM_LIMIT', DEFAULT_CONCURRENT_STREAMS);
 	const now = new Date();
 	const day = now.toISOString().slice(0, 10);
@@ -1211,8 +1355,31 @@ export async function getUsageSummary(db: Db, principal: ArchivePrincipal) {
 		const [usage] = await tx
 			.select()
 			.from(archiveStreamDailyUsage)
-			.where(and(eq(archiveStreamDailyUsage.userId, principal.userId), eq(archiveStreamDailyUsage.day, day)))
+			.where(
+				and(
+					eq(archiveStreamDailyUsage.userId, principal.userId),
+					eq(archiveStreamDailyUsage.day, day),
+					eq(archiveStreamDailyUsage.budgetKind, 'download')
+				)
+			)
 			.limit(1);
+		const [viewUsage] = await tx
+			.select()
+			.from(archiveStreamDailyUsage)
+			.where(
+				and(
+					eq(archiveStreamDailyUsage.userId, principal.userId),
+					eq(archiveStreamDailyUsage.day, day),
+					eq(archiveStreamDailyUsage.budgetKind, 'view')
+				)
+			)
+			.limit(1);
+		const apiUsage = await tx
+			.select()
+			.from(archiveContentApiDailyUsage)
+			.where(and(eq(archiveContentApiDailyUsage.userId, principal.userId), eq(archiveContentApiDailyUsage.day, day)));
+		const textUsage = apiUsage.find((row) => row.useKind === 'text');
+		const searchUsage = apiUsage.find((row) => row.useKind === 'search');
 		const [{ activeStreams }] = await tx
 			.select({ activeStreams: sql<number>`count(*)` })
 			.from(archiveStreamLeases)
@@ -1224,9 +1391,205 @@ export async function getUsageSummary(db: Db, principal: ArchivePrincipal) {
 			dailyByteLimit: dailyLimit,
 			resetAt: resetAt.toISOString(),
 			activeStreams: Number(activeStreams),
-			concurrentStreamLimit: concurrencyLimit
+			concurrentStreamLimit: concurrencyLimit,
+			viewBytesUsed: viewUsage?.bytesReserved ?? 0,
+			dailyViewByteLimit,
+			textCallsUsed: textUsage?.calls ?? 0,
+			dailyTextCallLimit: intEnv('ARCHIVE_DAILY_TEXT_CALL_LIMIT', DEFAULT_TEXT_CALL_LIMIT),
+			textPagesUsed: textUsage?.units ?? 0,
+			dailyTextPageLimit: intEnv('ARCHIVE_DAILY_TEXT_PAGE_LIMIT', DEFAULT_TEXT_PAGE_LIMIT),
+			searchCallsUsed: searchUsage?.calls ?? 0,
+			dailySearchCallLimit: intEnv('ARCHIVE_DAILY_SEARCH_CALL_LIMIT', DEFAULT_SEARCH_CALL_LIMIT),
+			searchHitsUsed: searchUsage?.units ?? 0,
+			dailySearchHitLimit: intEnv('ARCHIVE_DAILY_SEARCH_HIT_LIMIT', DEFAULT_SEARCH_HIT_LIMIT)
 		};
 	});
+}
+
+type ArchiveListCursor =
+	| { sort: 'updated'; updatedAt: string; id: string }
+	| { sort: 'title'; title: string; id: string }
+	| { sort: 'year-desc' | 'year-asc'; yearStart: number | null; id: string };
+
+function encodeArchiveListCursor(cursor: ArchiveListCursor): string {
+	return base64url(new TextEncoder().encode(JSON.stringify(cursor)));
+}
+
+function decodeArchiveListCursor(value: string | null, sort: ArchiveFileSort): ArchiveListCursor | null {
+	if (!value) return null;
+	try {
+		const parsed = JSON.parse(new TextDecoder().decode(fromBase64url(value))) as Record<string, unknown>;
+		if (parsed.sort !== sort || typeof parsed.id !== 'string') return null;
+		if (sort === 'updated') {
+			return typeof parsed.updatedAt === 'string' ? { sort, updatedAt: parsed.updatedAt, id: parsed.id } : null;
+		}
+		if (sort === 'title') {
+			return typeof parsed.title === 'string' ? { sort, title: parsed.title, id: parsed.id } : null;
+		}
+		if (typeof parsed.yearStart === 'number' || parsed.yearStart === null) return { sort, yearStart: parsed.yearStart, id: parsed.id };
+		return null;
+	} catch {
+		return null;
+	}
+}
+
+function likeNeedle(value: string): string {
+	return `%${value.toLocaleLowerCase().replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%`;
+}
+
+export async function listArchiveFiles(
+	db: Db,
+	input: {
+		text?: string;
+		dialect?: string;
+		decade?: number;
+		sort: ArchiveFileSort;
+		cursor?: string | null;
+		limit?: number;
+		principal: ArchivePrincipal;
+	}
+) {
+	const limit = Math.min(Math.max(input.limit ?? 50, 1), 100);
+	const cursor = decodeArchiveListCursor(input.cursor ?? null, input.sort);
+	if (input.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
+	const clauses = [eq(fileRevisions.reviewStatus, 'approved'), eq(fileRevisions.isCurrent, true)];
+	if (!archiveRoleAtLeast(input.principal.role, 'archive_reviewer')) {
+		clauses.push(eq(fileRevisions.accessState, 'available'), eq(sources.humanDownload, true));
+	} else if (input.principal.role !== 'archive_admin') {
+		clauses.push(or(eq(fileRevisions.accessState, 'available'), eq(fileRevisions.accessState, 'embargoed'))!);
+	}
+	if (input.text?.trim()) {
+		const needle = likeNeedle(input.text.trim());
+		clauses.push(
+			sql`(
+				lower(${sources.title}) like ${needle} escape '\\'
+				or lower(coalesce(${sources.titleEn}, '')) like ${needle} escape '\\'
+				or lower(coalesce(${sources.author}, '')) like ${needle} escape '\\'
+				or lower(coalesce(${sources.summary}, '')) like ${needle} escape '\\'
+			)`
+		);
+	}
+	if (input.dialect?.trim()) {
+		clauses.push(sql`lower(coalesce(${sources.dialect}, '')) like ${likeNeedle(input.dialect.trim())} escape '\\'`);
+	}
+	if (input.decade) {
+		clauses.push(gte(sources.yearStart, input.decade), lt(sources.yearStart, input.decade + 10));
+	}
+	if (cursor) {
+		if (cursor.sort === 'updated') {
+			const d = new Date(cursor.updatedAt);
+			if (Number.isNaN(d.getTime())) throw new ArchiveHttpError(400, 'invalid cursor');
+			clauses.push(or(gt(fileRevisions.reviewedAt, d), and(eq(fileRevisions.reviewedAt, d), gt(sourceFiles.id, cursor.id)))!);
+		} else if (cursor.sort === 'title') {
+			clauses.push(or(gt(sources.title, cursor.title), and(eq(sources.title, cursor.title), gt(sourceFiles.id, cursor.id)))!);
+		} else if (cursor.sort === 'year-desc') {
+			clauses.push(
+				cursor.yearStart == null
+					? and(isNull(sources.yearStart), gt(sourceFiles.id, cursor.id))!
+					: or(
+							lt(sources.yearStart, cursor.yearStart),
+							and(eq(sources.yearStart, cursor.yearStart), gt(sourceFiles.id, cursor.id)),
+							isNull(sources.yearStart)
+						)!
+			);
+		} else {
+			clauses.push(
+				cursor.yearStart == null
+					? and(isNull(sources.yearStart), gt(sourceFiles.id, cursor.id))!
+					: or(
+							gt(sources.yearStart, cursor.yearStart),
+							and(eq(sources.yearStart, cursor.yearStart), gt(sourceFiles.id, cursor.id)),
+							isNull(sources.yearStart)
+						)!
+			);
+		}
+	}
+
+	const orderBy =
+		input.sort === 'title'
+			? [asc(sources.title), asc(sourceFiles.id)]
+			: input.sort === 'year-desc'
+				? [sql`${sources.yearStart} is null`, desc(sources.yearStart), asc(sourceFiles.id)]
+				: input.sort === 'year-asc'
+					? [sql`${sources.yearStart} is null`, asc(sources.yearStart), asc(sourceFiles.id)]
+					: [asc(fileRevisions.reviewedAt), asc(sourceFiles.id)];
+
+	const rows = await db
+		.select({
+			fileId: sourceFiles.id,
+			sourceSlug: sources.slug,
+			role: sourceFiles.role,
+			checkoutPath: sourceFiles.checkoutPath,
+			sortOrder: sourceFiles.sortOrder,
+			revisionId: fileRevisions.id,
+			reviewedAt: fileRevisions.reviewedAt,
+			sha256: fileRevisions.blobSha256,
+			bytes: archiveBlobs.bytes,
+			mediaType: archiveBlobs.detectedMediaType,
+			sourceId: sources.id,
+			title: sources.title,
+			titleEn: sources.titleEn,
+			titleAin: sources.titleAin,
+			author: sources.author,
+			yearText: sources.yearText,
+			yearStart: sources.yearStart,
+			yearEnd: sources.yearEnd,
+			yearCertainty: sources.yearCertainty,
+			dialect: sources.dialect,
+			summary: sources.summary
+		})
+		.from(sourceFiles)
+		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
+		.innerJoin(fileRevisions, eq(fileRevisions.sourceFileId, sourceFiles.id))
+		.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
+		.where(and(...clauses))
+		.orderBy(...orderBy)
+		.limit(limit + 1);
+	const page = rows.slice(0, limit);
+	const last = page.at(-1);
+	let nextCursor: string | null = null;
+	if (rows.length > limit && last) {
+		nextCursor =
+			input.sort === 'title'
+				? encodeArchiveListCursor({ sort: 'title', title: last.title, id: last.fileId })
+				: input.sort === 'year-desc' || input.sort === 'year-asc'
+					? encodeArchiveListCursor({ sort: input.sort, yearStart: last.yearStart, id: last.fileId })
+					: last.reviewedAt
+						? encodeArchiveListCursor({ sort: 'updated', updatedAt: last.reviewedAt.toISOString(), id: last.fileId })
+						: null;
+	}
+	return {
+		items: page.map((row) => ({
+			file: {
+				fileId: row.fileId,
+				sourceSlug: row.sourceSlug,
+				role: row.role,
+				checkoutPath: row.checkoutPath,
+				sortOrder: row.sortOrder,
+				revisionId: row.revisionId,
+				reviewedAt: iso(row.reviewedAt),
+				sha256: row.sha256,
+				bytes: row.bytes,
+				mediaType: row.mediaType
+			},
+			source: {
+				id: row.sourceId,
+				slug: row.sourceSlug,
+				title: row.title,
+				titleEn: row.titleEn,
+				titleAin: row.titleAin,
+				author: row.author,
+				yearText: row.yearText,
+				yearStart: row.yearStart,
+				yearEnd: row.yearEnd,
+				yearCertainty: row.yearCertainty,
+				dialect: row.dialect,
+				summary: row.summary
+			},
+			coverage: null
+		})),
+		nextCursor
+	};
 }
 
 export async function listArchiveEvents(db: Db, cursorRaw: string | null, limit = 50) {

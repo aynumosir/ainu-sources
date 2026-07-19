@@ -1,13 +1,8 @@
 import type { RequestHandler } from './$types';
 import { db as defaultDb } from '$lib/server/db';
-import { getRevisionForContent } from '$lib/server/archive/db';
 import { dataplane, getArchiveFetcher } from '$lib/server/archive/dataplane';
+import { authorizeContent } from '$lib/server/archive/gateway';
 import { archivePrincipal, throwArchiveError } from '$lib/server/archive/route';
-
-// The data plane marks derivatives immutable for its internal callers. This
-// route serves copyrighted material to a browser under per-user
-// authorization, so caching policy is set here and never mirrored: a shared
-// cache must not outlive a role revocation or a takedown.
 const MIRRORED_HEADERS = [
 	'content-type',
 	'content-range',
@@ -20,7 +15,13 @@ export const GET: RequestHandler = async (event) => {
 	const db = routeDb(event.locals);
 	const principal = await archivePrincipal(event.request, 'archive_reader', db);
 	try {
-		await getRevisionForContent(db, event.params.id, principal);
+		const access = await authorizeContent(db, {
+			principal,
+			revisionId: event.params.id,
+			useKind: 'linearized',
+			rangeHeader: event.request.headers.get('range'),
+			ifRangeHeader: event.request.headers.get('if-range')
+		});
 		const headers = new Headers();
 		const range = event.request.headers.get('range');
 		if (range) headers.set('range', range);
@@ -31,9 +32,9 @@ export const GET: RequestHandler = async (event) => {
 			headers
 		);
 		const responseHeaders = new Headers({
-			'cache-control': 'private, no-store',
 			'referrer-policy': 'no-referrer'
 		});
+		if (access.cachePolicy.cacheControl) responseHeaders.set('cache-control', access.cachePolicy.cacheControl);
 		for (const name of MIRRORED_HEADERS) {
 			const value = upstream.headers.get(name);
 			if (value) responseHeaders.set(name, value);

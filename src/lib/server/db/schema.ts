@@ -1169,12 +1169,34 @@ export const archiveStreamDailyUsage = sqliteTable(
 			.notNull()
 			.references(() => user.id, { onDelete: 'cascade' }),
 		day: text('day').notNull(),
+		budgetKind: text('budget_kind').notNull().default('download'),
 		bytesReserved: integer('bytes_reserved').notNull().default(0),
 		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
 	},
 	(t) => [
-		primaryKey({ columns: [t.userId, t.day] }),
+		primaryKey({ columns: [t.userId, t.day, t.budgetKind] }),
+		check('archive_stream_daily_usage_budget_kind_check', sql`${t.budgetKind} in ('download', 'view')`),
 		check('archive_stream_daily_usage_bytes_check', sql`${t.bytesReserved} >= 0`)
+	]
+);
+
+export const archiveContentApiDailyUsage = sqliteTable(
+	'archive_content_api_daily_usage',
+	{
+		userId: text('user_id')
+			.notNull()
+			.references(() => user.id, { onDelete: 'cascade' }),
+		day: text('day').notNull(),
+		useKind: text('use_kind').notNull(),
+		calls: integer('calls').notNull().default(0),
+		units: integer('units').notNull().default(0),
+		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		primaryKey({ columns: [t.userId, t.day, t.useKind] }),
+		check('archive_content_api_daily_usage_use_kind_check', sql`${t.useKind} in ('text', 'search')`),
+		check('archive_content_api_daily_usage_calls_check', sql`${t.calls} >= 0`),
+		check('archive_content_api_daily_usage_units_check', sql`${t.units} >= 0`)
 	]
 );
 
@@ -1260,6 +1282,7 @@ export type UploadSession = typeof uploadSessions.$inferSelect;
 export type BlobOrigin = typeof blobOrigins.$inferSelect;
 export type CapabilityToken = typeof capabilityTokens.$inferSelect;
 export type ArchiveStreamDailyUsage = typeof archiveStreamDailyUsage.$inferSelect;
+export type ArchiveContentApiDailyUsage = typeof archiveContentApiDailyUsage.$inferSelect;
 export type ArchiveStreamLease = typeof archiveStreamLeases.$inferSelect;
 export type AppUserRole = typeof appUserRoles.$inferSelect;
 export type MigrationWatermark = typeof migrationWatermarks.$inferSelect;
