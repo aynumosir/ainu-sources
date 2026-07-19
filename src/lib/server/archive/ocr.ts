@@ -778,56 +778,26 @@ async function searchSoft(
 	// Exact forms are always included; fuzzy candidates share a first
 	// character with one of the query's alternatives, which covers the
 	// orthographic variation this mode exists for.
+	// Soft matching reads the chunk text directly rather than a per-token
+	// index. The corpus is small enough that candidate chunks can be narrowed
+	// in SQL and tokenized in memory, which keeps the mode working everywhere
+	// the text is indexed instead of waiting on a multi-million-row token
+	// table that this database cannot absorb without starving live reads.
 	const queryAlternatives = [...new Set(queryTokens.flatMap(({ token }) => expandNormalizedTokenAlternatives(token)))];
-	const initials = [...new Set(queryAlternatives.map((alternative) => [...alternative][0]).filter(Boolean))];
-	const exactClause = sql`t.token_norm in (${sql.join(queryAlternatives.map((alternative) => sql`${alternative}`), sql`, `)})`;
-	const fuzzyClause = initials.length
-		? sql`(length(t.token_norm) between ${minLength} and ${maxLength}
-			and substr(t.token_norm, 1, 1) in (${sql.join(initials.map((initial) => sql`${initial}`), sql`, `)}))`
-		: sql`0 = 1`;
-	const lexicon = await db.all<{ tokenNorm: string }>(sql`
-		select distinct t.token_norm as tokenNorm
-		from ocr_tokens t
-		inner join ocr_chunks c on c.chunk_id = t.chunk_id
-		inner join ocr_ingest_state state
-			on state.revision_id = c.revision_id
-			and state.variant = c.variant
-			and state.active_generation = c.ingest_generation
-		inner join file_revisions fr on fr.id = c.revision_id
-		inner join source_files sf on sf.id = fr.source_file_id
-		inner join sources src on src.id = sf.source_id
-		where (${exactClause} or ${fuzzyClause})
-			and ${visibility}
-			${variantClause}
-			${sourceClause}
-		order by length(t.token_norm), t.token_norm
-		limit ${SOFT_LEXICON_CAP + 1}
-	`);
-	const matchesByToken = new Map<string, SoftAlignment[]>();
-	for (const { tokenNorm } of lexicon.slice(0, SOFT_LEXICON_CAP)) {
-		const alignments: SoftAlignment[] = [];
-		for (const query of queryTokens) {
-			const alternatives = expandNormalizedTokenAlternatives(query.token);
-			const distance = Math.min(...alternatives.map((alternative) => damerauLevenshtein(alternative, tokenNorm, maxDistance)));
-			if (distance <= maxDistance) {
-				alignments.push({
-					query_token: query.token,
-					matched_token: tokenNorm,
-					score: 1 - distance / Math.max([...query.token].length, [...tokenNorm].length, 1)
-				});
-			}
-		}
-		if (alignments.length > 0) matchesByToken.set(tokenNorm, alignments);
+	// A distance-1 edit still shares one of the token's deletion variants, so
+	// substring probes on those variants retrieve fuzzy candidates cheaply.
+	const probes = [...new Set(queryAlternatives.flatMap((alternative) => {
+		const characters = [...alternative];
+		const deletions = characters.map((_, index) => characters.filter((_, i) => i !== index).join(''));
+		return [alternative, ...deletions].filter((probe) => [...probe].length >= 3);
+	}))].slice(0, 40);
+	if (probes.length === 0) {
+		return emptySearchResult('soft', SOFT_OCCURRENCE_CAP, false, { tolerance, maxDistance });
 	}
-	const matchedTokens = [...matchesByToken.keys()];
-	if (matchedTokens.length === 0) {
-		return emptySearchResult('soft', SOFT_OCCURRENCE_CAP, lexicon.length > SOFT_LEXICON_CAP, {
-			tolerance,
-			maxDistance
-		});
-	}
-	const matchedTokenBound = 400;
-	const boundTokens = matchedTokens.slice(0, matchedTokenBound);
+	const probeClause = sql.join(
+		probes.map((probe) => sql`c.text_norm like ${'%' + probe + '%'}`),
+		sql` or `
+	);
 	const occurrences = await db.all<SoftOccurrence>(sql`
 		select
 			c.chunk_id as chunkId,
@@ -838,7 +808,7 @@ async function searchSoft(
 			c.text,
 			c.text_norm as textNorm,
 			0 as rank,
-			t.token_norm as tokenNorm,
+			'' as tokenNorm,
 			src.slug as sourceSlug,
 			src.title as sourceTitle,
 			src.title_en as sourceTitleEn,
@@ -848,8 +818,7 @@ async function searchSoft(
 			src.year_start as sourceYearStart,
 			src.year_end as sourceYearEnd,
 			src.year_certainty as sourceYearCertainty
-		from ocr_tokens t
-		inner join ocr_chunks c on c.chunk_id = t.chunk_id
+		from ocr_chunks c
 		inner join ocr_ingest_state state
 			on state.revision_id = c.revision_id
 			and state.variant = c.variant
@@ -857,24 +826,39 @@ async function searchSoft(
 		inner join file_revisions fr on fr.id = c.revision_id
 		inner join source_files sf on sf.id = fr.source_file_id
 		inner join sources src on src.id = sf.source_id
-		where t.token_norm in (${sql.join(
-			boundTokens.map((token) => sql`${token}`),
-			sql`, `
-		)})
+		where (${probeClause})
 			and ${visibility}
 			${variantClause}
 			${sourceClause}
-		order by c.chunk_id, t.position
+		order by c.revision_id, c.page, c.block
 		limit ${SOFT_OCCURRENCE_CAP + 1}
 	`);
+	const alignmentsByChunk = new Map<string, Map<string, SoftAlignment>>();
+	for (const occurrence of occurrences.slice(0, SOFT_OCCURRENCE_CAP)) {
+		const best = new Map<string, SoftAlignment>();
+		const chunkTokens = new Set(tokenizeNormalizedText(occurrence.text).map(({ token }) => token));
+		for (const query of queryTokens) {
+			const alternatives = expandNormalizedTokenAlternatives(query.token);
+			for (const candidate of chunkTokens) {
+				const distance = Math.min(
+					...alternatives.map((alternative) => damerauLevenshtein(alternative, candidate, maxDistance))
+				);
+				if (distance > maxDistance) continue;
+				const score = 1 - distance / Math.max([...query.token].length, [...candidate].length, 1);
+				const previous = best.get(query.token);
+				if (!previous || previous.score < score) {
+					best.set(query.token, { query_token: query.token, matched_token: candidate, score });
+				}
+			}
+		}
+		if (best.size > 0) alignmentsByChunk.set(occurrence.chunkId, best);
+	}
+
 	const chunks = new Map<string, { hit: RankedChunk; alignments: Map<string, SoftAlignment> }>();
 	for (const occurrence of occurrences.slice(0, SOFT_OCCURRENCE_CAP)) {
-		const group = chunks.get(occurrence.chunkId) ?? { hit: occurrence, alignments: new Map<string, SoftAlignment>() };
-		for (const alignment of matchesByToken.get(occurrence.tokenNorm) ?? []) {
-			const previous = group.alignments.get(alignment.query_token);
-			if (!previous || previous.score < alignment.score) group.alignments.set(alignment.query_token, alignment);
-		}
-		chunks.set(occurrence.chunkId, group);
+		const alignments = alignmentsByChunk.get(occurrence.chunkId);
+		if (!alignments) continue;
+		chunks.set(occurrence.chunkId, { hit: occurrence, alignments });
 	}
 	const ranked = [...chunks.values()]
 		.filter((group) => group.alignments.size === queryTokens.length)
@@ -914,10 +898,7 @@ async function searchSoft(
 		nextCursor:
 			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
 		total: bounded.length,
-		truncated:
-			lexicon.length > SOFT_LEXICON_CAP ||
-			matchedTokens.length > matchedTokenBound ||
-			occurrences.length > SOFT_OCCURRENCE_CAP,
+		truncated: occurrences.length > SOFT_OCCURRENCE_CAP,
 		cap: SOFT_OCCURRENCE_CAP
 	};
 }
