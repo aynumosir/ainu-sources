@@ -45,10 +45,15 @@ async function loadOcrCoverage(revisionId: string): Promise<OcrCoverage[]> {
 			.from(revisionOcrCoverage)
 			.where(eq(revisionOcrCoverage.revisionId, revisionId)),
 		db.all<{ variant: string; pageCount: number }>(sql`
-			select variant, cast(count(distinct cast(page as integer)) as integer) as pageCount
-			from ocr_pages
-			where revision_id = ${revisionId}
-			group by variant
+			select c.variant as variant,
+				cast(count(distinct cast(c.page as integer)) as integer) as pageCount
+			from ocr_chunks c
+			inner join ocr_ingest_state s
+				on s.revision_id = c.revision_id
+				and s.variant = c.variant
+				and s.active_generation = c.ingest_generation
+			where c.revision_id = ${revisionId}
+			group by c.variant
 		`)
 	]);
 	const countByVariant = new Map(pageCounts.map((row) => [row.variant, Number(row.pageCount)]));
