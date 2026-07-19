@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page as pageState } from '$app/state';
 	import { onMount, untrack } from 'svelte';
+	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
 	import { archiveFetch, archiveSession } from '$lib/archive/session.svelte';
 	import { archiveUsage } from '$lib/archive/usage.svelte';
@@ -447,9 +448,7 @@
 	</div>
 {/snippet}
 
-<svelte:head>
-	<title>{data.source?.title ?? data.title} - archive reader</title>
-</svelte:head>
+<ArchiveHead title={metadataTitle} />
 
 {#if !data.accessDenied}
 	<div class="flex min-h-svh flex-col bg-[var(--archive-bg)] text-[var(--archive-text)]">
