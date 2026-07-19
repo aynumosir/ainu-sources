@@ -1,4 +1,7 @@
 <script lang="ts">
+	import BilingualLabel from './BilingualLabel.svelte';
+	import { archiveLabels } from '$lib/archive/bilingual-labels';
+
 	type Revision = {
 		revisionId: string | null;
 		revisionNo: number | null;
@@ -10,8 +13,10 @@
 	let { revisions }: { revisions: Revision[] } = $props();
 </script>
 
-<details class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
-	<summary class="cursor-pointer text-[15px] font-semibold">Revision history</summary>
+<details class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
+	<summary class="cursor-pointer text-[15px] font-semibold">
+		<BilingualLabel ja={archiveLabels.revisionHistory.ja} en={archiveLabels.revisionHistory.en} />
+	</summary>
 	{#if revisions.length}
 		<ol class="mt-3 space-y-2">
 			{#each revisions as revision, index (revision.revisionId ?? index)}

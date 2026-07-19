@@ -1,4 +1,7 @@
 <script lang="ts">
+	import BilingualLabel from './BilingualLabel.svelte';
+	import { archiveLabels } from '$lib/archive/bilingual-labels';
+
 	let { q = '' }: { q?: string } = $props();
 </script>
 
@@ -9,12 +12,12 @@
 		name="q"
 		value={q}
 		placeholder="Search OCR"
-		class="h-9 w-full rounded-md border border-[var(--archive-border)] bg-[var(--archive-surface)] px-3 text-[15px] text-[var(--archive-text)] placeholder:text-[var(--archive-subtle)] focus:border-[var(--archive-accent)] focus:ring-[var(--archive-accent)]"
+		class="h-9 w-full border border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)] placeholder:text-[var(--archive-subtle)] focus:border-[var(--archive-gilt)] focus:ring-[var(--archive-gilt)]"
 	/>
 	<button
 		type="submit"
-		class="h-9 rounded-md bg-[var(--archive-accent)] px-3 text-[13px] font-semibold text-white hover:opacity-90"
+		class="h-9 border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] [--archive-label-en-color:var(--archive-paper)]"
 	>
-		Search
+		<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} />
 	</button>
 </form>

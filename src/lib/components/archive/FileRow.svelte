@@ -1,5 +1,7 @@
 <script lang="ts">
 	import DownloadConfirm from './DownloadConfirm.svelte';
+	import BilingualLabel from './BilingualLabel.svelte';
+	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import { formatBytes, middleEllipsis } from '$lib/archive/format';
 
 	type FileRowData = {
@@ -20,13 +22,13 @@
 	const filename = $derived(file.label ?? file.checkoutPath?.split('/').at(-1) ?? `${sourceSlug}-${file.fileId}`);
 </script>
 
-<div class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
+<div class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
 	<div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
 		<div class="min-w-0">
 			<div class="flex flex-wrap items-center gap-2">
-				<span class="rounded bg-[var(--archive-muted)] px-1.5 py-0.5 text-[12px]">{file.role ?? 'file'}</span>
-				{#if file.reviewStatus}<span class="text-[12px] text-[var(--archive-subtle)]">{file.reviewStatus}</span>{/if}
-				{#if file.revisionNo}<span class="tnum text-[12px] text-[var(--archive-subtle)]">rev {file.revisionNo}</span>{/if}
+				<span class="archive-kicker bg-[var(--archive-muted)] px-1.5 py-0.5">{file.role ?? 'file'}</span>
+				{#if file.reviewStatus}<span class="text-[13px] text-[var(--archive-subtle)]">{file.reviewStatus}</span>{/if}
+				{#if file.revisionNo}<span class="tnum text-[13px] text-[var(--archive-subtle)]">rev {file.revisionNo}</span>{/if}
 			</div>
 			<h3 class="mt-2 break-words text-[15px] font-semibold">{filename}</h3>
 			<p class="mt-1 text-[13px] text-[var(--archive-subtle)]">{formatBytes(file.bytes)}{#if file.mediaType} · {file.mediaType}{/if}</p>
@@ -36,8 +38,12 @@
 		</div>
 		<div class="flex gap-2">
 			{#if file.revisionId}
-				<a href={`/archive/read/${sourceSlug}/${file.fileId}`} class="rounded-md border border-[var(--archive-border)] px-3 py-2 text-[13px]">Read</a>
-				<button type="button" onclick={() => download?.open()} class="rounded-md bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-white">Download</button>
+				<a href={`/archive/read/${sourceSlug}/${file.fileId}`} class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]">
+					<BilingualLabel ja={archiveLabels.read.ja} en={archiveLabels.read.en} />
+				</a>
+				<button type="button" onclick={() => download?.open()} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] [--archive-label-en-color:var(--archive-paper)]">
+					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} />
+				</button>
 			{:else}
 				<span class="text-[13px] text-[var(--archive-subtle)]">OCR unavailable for this file</span>
 			{/if}

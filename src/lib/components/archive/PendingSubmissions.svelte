@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { archiveFetch } from '$lib/archive/session.svelte';
 	import { formatBytes } from '$lib/archive/format';
+	import BilingualLabel from './BilingualLabel.svelte';
+	import { archiveLabels } from '$lib/archive/bilingual-labels';
 
 	type Pending = {
 		revisionId: string;
@@ -43,8 +45,13 @@
 	}
 </script>
 
-<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
-	<h2 class="text-[17px] font-semibold">Pending submissions</h2>
+<section class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
+	<BilingualLabel
+		tag="h2"
+		ja={archiveLabels.pendingSubmissions.ja}
+		en={archiveLabels.pendingSubmissions.en}
+		class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+	/>
 	{#if error}<p class="mt-2 text-[13px] text-[var(--archive-danger)]">{error}</p>{/if}
 	{#if items.length}
 		<ul class="mt-3 space-y-3">
@@ -62,7 +69,7 @@
 							type="button"
 							disabled={withdrawing === item.revisionId}
 							onclick={() => withdraw(item.revisionId)}
-							class="self-start rounded-md border border-[var(--archive-border)] px-3 py-2 text-[13px] disabled:opacity-60"
+							class="self-start border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)] disabled:opacity-60"
 						>
 							{withdrawing === item.revisionId ? 'Withdrawing' : 'Withdraw'}
 						</button>

@@ -1,5 +1,7 @@
 <script lang="ts">
 	import DownloadConfirm from './DownloadConfirm.svelte';
+	import BilingualLabel from './BilingualLabel.svelte';
+	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import { formatYear } from '$lib/format';
 	import type { Source } from '$lib/server/db/schema';
 
@@ -20,12 +22,12 @@
 	);
 </script>
 
-<header class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-5">
-	<a href="/archive" class="text-[13px] text-[var(--archive-subtle)] hover:text-[var(--archive-accent)]">← Library</a>
+<header class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5">
+	<a href="/archive" class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">← Library</a>
 	<div class="mt-3 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
 		<div class="flex min-w-0 gap-4">
 			{#if coverSrc && !coverFailed}
-				<div class="hidden aspect-[4/5] w-20 shrink-0 overflow-hidden rounded-md border border-[var(--archive-border)] bg-[var(--archive-muted)] sm:block">
+				<div class="hidden aspect-[4/5] w-20 shrink-0 overflow-hidden border border-[var(--archive-border)] bg-[var(--archive-bg)] sm:block">
 					<img
 						src={coverSrc}
 						alt=""
@@ -54,15 +56,17 @@
 		</div>
 		<div class="flex flex-wrap gap-2">
 			{#if primaryFile?.fileId}
-				<a href={`/archive/read/${source.slug}/${primaryFile.fileId}`} class="rounded-md bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-white">Read</a>
+				<a href={`/archive/read/${source.slug}/${primaryFile.fileId}`} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] [--archive-label-en-color:var(--archive-paper)]">
+					<BilingualLabel ja={archiveLabels.read.ja} en={archiveLabels.read.en} />
+				</a>
 			{/if}
 			{#if primaryFile?.revisionId}
 				<button
 					type="button"
 					onclick={() => download?.open()}
-					class="rounded-md border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold"
+					class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]"
 				>
-					Download
+					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} />
 				</button>
 			{/if}
 		</div>

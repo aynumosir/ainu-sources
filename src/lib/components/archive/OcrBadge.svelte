@@ -4,7 +4,7 @@
 </script>
 
 {#if coverage}
-	<span class="rounded-full bg-[var(--archive-accent-soft)] px-2 py-0.5 text-[12px] font-medium text-[var(--archive-accent)]">
+	<span class="bg-[var(--archive-accent-soft)] px-2 py-0.5 text-[13px] font-medium text-[var(--archive-gilt-text)]">
 		OCR {coverage.variant ?? coverage.status ?? 'available'}
 	</span>
 {/if}

@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { archiveFetch } from '$lib/archive/session.svelte';
+	import BilingualLabel from './BilingualLabel.svelte';
+	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import type { ArchiveRole } from '$lib/server/archive/types';
 
 	type AdminUser = {
@@ -104,10 +106,15 @@
 	}
 </script>
 
-<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
+<section class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
 	<div class="flex flex-wrap items-center justify-between gap-2">
 		<div>
-			<h2 class="text-[17px] font-semibold">Users</h2>
+			<BilingualLabel
+				tag="h2"
+				ja={archiveLabels.users.ja}
+				en={archiveLabels.users.en}
+				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+			/>
 			<p class="mt-1 text-[13px] text-[var(--archive-subtle)]">{users.length} archive users</p>
 		</div>
 	</div>
@@ -135,7 +142,7 @@
 									<select
 										id={`role-${user.userId}`}
 										bind:value={selectedRoles[user.userId]}
-										class="h-8 rounded-md border border-[var(--archive-border)] bg-[var(--archive-surface)] px-2 text-[13px] text-[var(--archive-text)]"
+										class="h-8 border border-[var(--archive-border)] bg-[var(--archive-panel)] px-2 text-[13px] text-[var(--archive-text)]"
 									>
 										<option value="">— none —</option>
 										{#each roles as role}
@@ -146,9 +153,13 @@
 										type="button"
 										disabled={saving === user.userId || roleFromValue(selectedRoles[user.userId]) === user.role}
 										onclick={() => save(user)}
-										class="h-8 rounded-md border border-[var(--archive-border)] px-3 text-[13px] font-medium disabled:opacity-60"
+										class="h-8 border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 text-[13px] font-medium hover:border-[var(--archive-gilt)] disabled:opacity-60"
 									>
-										{saving === user.userId ? 'Saving' : 'Save'}
+										{#if saving === user.userId}
+											Saving
+										{:else}
+											<BilingualLabel ja={archiveLabels.save.ja} en={archiveLabels.save.en} />
+										{/if}
 									</button>
 								</div>
 								{#if rowErrors[user.userId]}
@@ -168,6 +179,8 @@
 			</table>
 		</div>
 	{:else}
-		<p class="mt-3 text-[13px] text-[var(--archive-subtle)]">No users found.</p>
+		<div class="mt-3 text-[13px] text-[var(--archive-subtle)]">
+			<BilingualLabel ja={archiveLabels.noUsersFound.ja} en={archiveLabels.noUsersFound.en} />
+		</div>
 	{/if}
 </section>

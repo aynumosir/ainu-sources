@@ -1,5 +1,7 @@
 <script lang="ts">
 	import SourceCard from './SourceCard.svelte';
+	import BilingualLabel from './BilingualLabel.svelte';
+	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import type { Source } from '$lib/server/db/schema';
 
 	type Item = {
@@ -25,8 +27,12 @@
 		{/each}
 	</div>
 {:else}
-	<div class="rounded-lg border border-dashed border-[var(--archive-border)] bg-[var(--archive-surface)] p-10 text-center">
-		<p class="text-[17px] font-semibold">該当する資料がありません</p>
-		<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">no works match these filters</p>
+	<div class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-10 text-center">
+		<BilingualLabel
+			stacked
+			ja={archiveLabels.noWorks.ja}
+			en={archiveLabels.noWorks.en}
+			class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+		/>
 	</div>
 {/if}

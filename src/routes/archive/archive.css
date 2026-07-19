@@ -5,50 +5,82 @@
 	}
 	:root,
 	:root[data-archive-theme='light'] {
-		--archive-bg: #f7f6f2;
-		--archive-surface: #ffffff;
-		--archive-muted: #ece9e1;
-		--archive-border: #d8d3c7;
-		--archive-text: #20212a;
-		--archive-subtle: #666b7a;
-		--archive-accent: #39439a;
-		--archive-accent-soft: #e6e8ff;
+		color-scheme: light;
+		--archive-bg: #f6f0e4;
+		--archive-paper: #fff9ee;
+		--archive-surface: var(--archive-paper);
+		--archive-panel: #fbf3e6;
+		--archive-muted: #eee3d0;
+		--archive-border: #d8c8ad;
+		--archive-border-strong: #a89270;
+		--archive-text: #1f1b16;
+		--archive-text-soft: #4b4136;
+		--archive-subtle: #75695d;
+		--archive-faint-text: #6f6256;
+		--archive-gilt: #b88a32;
+		--archive-gilt-text: #835d16;
+		--archive-gilt-soft: #d5b36a;
+		--archive-accent: var(--archive-gilt);
+		--archive-accent-soft: var(--archive-gilt-soft);
 		--archive-good: #24785a;
 		--archive-warn: #9a6418;
 		--archive-danger: #b42332;
+		--archive-quarantine: #6b3fa0;
+		--font-archive-serif:
+			'Source Serif 4', 'Spectral', 'Noto Serif JP', ui-serif, Georgia, 'Times New Roman', serif;
+		--font-archive-jp: 'Shippori Mincho B1', 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
 		--font-archive-sans:
 			'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-		--font-archive-serif: 'Noto Serif JP', 'Source Serif 4', ui-serif, Georgia, 'Times New Roman', serif;
 		--font-archive-mono:
-			'IBM Plex Mono', 'SFMono-Regular', ui-monospace, 'Cascadia Code', Consolas, monospace;
+			'IBM Plex Mono', ui-monospace, 'SFMono-Regular', 'Cascadia Code', Consolas, monospace;
 	}
 	@media (prefers-color-scheme: dark) {
 		:root:not([data-archive-theme='light']) {
-			--archive-bg: #17181d;
-			--archive-surface: #20222a;
-			--archive-muted: #2c2f38;
-			--archive-border: #3b3f4b;
-			--archive-text: #f1f0ea;
-			--archive-subtle: #b7b8c2;
-			--archive-accent: #aeb6ff;
-			--archive-accent-soft: #2a2f60;
+			color-scheme: dark;
+			--archive-bg: #14110e;
+			--archive-paper: #1f1a15;
+			--archive-surface: var(--archive-paper);
+			--archive-panel: #252018;
+			--archive-muted: #2c251c;
+			--archive-border: #4a3d2c;
+			--archive-border-strong: #7d6746;
+			--archive-text: #f2eadc;
+			--archive-text-soft: #d2c4ad;
+			--archive-subtle: #a89982;
+			--archive-faint-text: #b5a58e;
+			--archive-gilt: #d1a64a;
+			--archive-gilt-text: #dfbd70;
+			--archive-gilt-soft: #e2c678;
+			--archive-accent: var(--archive-gilt);
+			--archive-accent-soft: var(--archive-gilt-soft);
 			--archive-good: #77c7a5;
-			--archive-warn: #e1b66f;
+			--archive-warn: #e8cb79;
 			--archive-danger: #ff8d98;
+			--archive-quarantine: #c9a7ff;
 		}
 	}
 	:root[data-archive-theme='dark'] {
-		--archive-bg: #17181d;
-		--archive-surface: #20222a;
-		--archive-muted: #2c2f38;
-		--archive-border: #3b3f4b;
-		--archive-text: #f1f0ea;
-		--archive-subtle: #b7b8c2;
-		--archive-accent: #aeb6ff;
-		--archive-accent-soft: #2a2f60;
+		color-scheme: dark;
+		--archive-bg: #14110e;
+		--archive-paper: #1f1a15;
+		--archive-surface: var(--archive-paper);
+		--archive-panel: #252018;
+		--archive-muted: #2c251c;
+		--archive-border: #4a3d2c;
+		--archive-border-strong: #7d6746;
+		--archive-text: #f2eadc;
+		--archive-text-soft: #d2c4ad;
+		--archive-subtle: #a89982;
+		--archive-faint-text: #b5a58e;
+		--archive-gilt: #d1a64a;
+		--archive-gilt-text: #dfbd70;
+		--archive-gilt-soft: #e2c678;
+		--archive-accent: var(--archive-gilt);
+		--archive-accent-soft: var(--archive-gilt-soft);
 		--archive-good: #77c7a5;
-		--archive-warn: #e1b66f;
+		--archive-warn: #e8cb79;
 		--archive-danger: #ff8d98;
+		--archive-quarantine: #c9a7ff;
 	}
 	.archive {
 		min-height: 100svh;
@@ -65,6 +97,23 @@
 	}
 	.archive-mono {
 		font-family: var(--font-archive-mono);
+	}
+	.archive-wordmark {
+		font-family: var(--font-archive-serif);
+		font-variant: small-caps;
+		letter-spacing: 0.03em;
+	}
+	.archive-kicker {
+		color: var(--archive-subtle);
+		font-family: var(--font-archive-sans);
+		font-size: 12px;
+		font-variant: small-caps;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+	.archive-rule-dotted {
+		border-bottom: 1px dotted var(--archive-border);
 	}
 	.archive .tnum {
 		font-variant-numeric: tabular-nums;
