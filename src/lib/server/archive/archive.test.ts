@@ -23,13 +23,15 @@ import {
 	getSourceFileById,
 	getUsageSummary,
 	issueCapability,
+	listArchiveUsers,
 	listFiles,
 	listPendingReview,
 	listSourceFiles,
 	listUploadSessions,
 	reconcileUploadFinalization,
 	redeemCapability,
-	rejectRevision
+	rejectRevision,
+	setArchiveUserRole
 } from './db';
 import { ArchiveHttpError } from './errors';
 import { renderManifest } from './manifest';
@@ -297,6 +299,27 @@ describe('archive DB flows', () => {
 		});
 	});
 
+	it('resolves the production owner app session from a direct archive_admin role', async () => {
+		const owner = {
+			id: 'UoIQf9NLeEV092FnQ51jDZqXtjLm5Ibm',
+			name: 'Owner',
+			email: 'mkpoli@mkpo.li'
+		};
+		await db.insert(user).values(owner);
+		await db.insert(schema.appUserRoles).values({ userId: owner.id, role: 'archive_admin' });
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: owner.id, email: owner.email }));
+
+		const principal = await resolveFromAppSession(new Request('https://db.aynu.org/archive'), db);
+
+		expect(principal).toMatchObject({
+			userId: owner.id,
+			role: 'archive_admin',
+			authn: 'app_session',
+			identity: { kind: 'app_session', value: owner.email },
+			email: owner.email
+		});
+	});
+
 	it('resolves app sessions through cached GitHub login claims owned by another archive user', async () => {
 		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'other', email: 'other@example.test' }));
 		await db.insert(schema.githubLoginCache).values({ userId: 'other', login: 'octocat' });
@@ -389,6 +412,123 @@ describe('archive DB flows', () => {
 			.from(schema.sourceLifecycleEvents)
 			.where(eq(schema.sourceLifecycleEvents.eventType, 'github_login_claim_conflict'));
 		expect(events).toHaveLength(0);
+	});
+
+	it('lists archive users with roles and merged login identities', async () => {
+		await db.insert(schema.appUserRoles).values([
+			{ userId: 'reader', role: 'archive_reader' },
+			{ userId: 'contributor', role: 'archive_contributor' },
+			{ userId: 'reviewer', role: 'editor' }
+		]);
+		await db.insert(schema.userIdentities).values([
+			{ userId: 'reader', kind: 'github_login', value: 'preprovisioned-reader' },
+			{ userId: 'reader', kind: 'service_token', value: 'reader-service' },
+			{ userId: 'contributor', kind: 'github_login', value: 'identity-contributor' }
+		]);
+		await db.insert(schema.githubLoginCache).values({ userId: 'contributor', login: 'cached-contributor' });
+
+		const rows = await listArchiveUsers(db);
+		const readerRow = rows.find((row) => row.userId === 'reader');
+		const contributorRow = rows.find((row) => row.userId === 'contributor');
+		const reviewerRow = rows.find((row) => row.userId === 'reviewer');
+
+		expect(readerRow).toMatchObject({
+			userId: 'reader',
+			name: 'Reader',
+			email: 'reader@example.test',
+			role: 'archive_reader',
+			login: 'preprovisioned-reader',
+			serviceToken: 'reader-service'
+		});
+		expect(readerRow?.roleUpdatedAt).toMatch(/Z$/u);
+		expect(contributorRow).toMatchObject({
+			role: 'archive_contributor',
+			login: 'cached-contributor',
+			serviceToken: null
+		});
+		expect(reviewerRow).toMatchObject({ role: null, login: null, serviceToken: null, roleUpdatedAt: null });
+	});
+
+	it('grants an archive role and audits the previous null role', async () => {
+		await expect(setArchiveUserRole(db, 'other', 'archive_reader', admin)).resolves.toEqual({
+			userId: 'other',
+			role: 'archive_reader'
+		});
+		const [role] = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'other'));
+		expect(role).toMatchObject({ userId: 'other', role: 'archive_reader' });
+		const [event] = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'archive_role_changed'));
+		expect(event).toMatchObject({
+			entityType: 'user',
+			entityId: 'other',
+			actor: 'admin',
+			details: { previousRole: null, newRole: 'archive_reader' }
+		});
+	});
+
+	it('changes an existing archive role and records previous and new roles', async () => {
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		await setArchiveUserRole(db, 'reader', 'archive_reviewer', admin);
+		const [role] = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'reader'));
+		expect(role.role).toBe('archive_reviewer');
+		const [event] = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'archive_role_changed'));
+		expect(event.details).toEqual({ previousRole: 'archive_reader', newRole: 'archive_reviewer' });
+	});
+
+	it('removes a role row without touching other user rows', async () => {
+		await db.insert(schema.appUserRoles).values([
+			{ userId: 'reader', role: 'archive_reader' },
+			{ userId: 'contributor', role: 'archive_contributor' }
+		]);
+		await setArchiveUserRole(db, 'reader', null, admin);
+		expect(await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'reader'))).toHaveLength(0);
+		expect(await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'contributor'))).toHaveLength(1);
+		const [event] = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'archive_role_changed'));
+		expect(event.details).toEqual({ previousRole: 'archive_reader', newRole: null });
+	});
+
+	it('returns 404 for a nonexistent archive role target user', async () => {
+		await expect(setArchiveUserRole(db, 'missing-user', 'archive_reader', admin)).rejects.toMatchObject({
+			status: 404
+		});
+	});
+
+	it('refuses to remove the last archive_admin without mutating or auditing', async () => {
+		await db.insert(schema.appUserRoles).values({ userId: 'admin', role: 'archive_admin' });
+		await expect(setArchiveUserRole(db, 'admin', null, admin)).rejects.toMatchObject({
+			status: 409,
+			message: 'cannot remove the last archive_admin'
+		});
+		const [role] = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'admin'));
+		expect(role.role).toBe('archive_admin');
+		expect(
+			await db
+				.select()
+				.from(schema.sourceLifecycleEvents)
+				.where(eq(schema.sourceLifecycleEvents.eventType, 'archive_role_changed'))
+		).toHaveLength(0);
+	});
+
+	it('allows admin demotion when another archive_admin exists', async () => {
+		await db.insert(schema.appUserRoles).values([
+			{ userId: 'admin', role: 'archive_admin' },
+			{ userId: 'reviewer', role: 'archive_admin' }
+		]);
+		await expect(setArchiveUserRole(db, 'admin', 'archive_reviewer', admin)).resolves.toEqual({
+			userId: 'admin',
+			role: 'archive_reviewer'
+		});
+		const rows = await db.select().from(schema.appUserRoles);
+		expect(rows.find((row) => row.userId === 'admin')?.role).toBe('archive_reviewer');
+		expect(rows.find((row) => row.userId === 'reviewer')?.role).toBe('archive_admin');
 	});
 
 	it('requires CSRF guards for app-session mutation principals', async () => {
@@ -564,6 +704,15 @@ describe('archive DB flows', () => {
 
 	it('ingests OCR pages, records preferred coverage, and searches visible text', async () => {
 		await seedRevision('approved');
+		await db
+			.update(schema.sources)
+			.set({
+				titleEn: 'Source One',
+				titleAin: 'Sine kampi',
+				author: 'Author One',
+				yearText: '1901'
+			})
+			.where(eq(schema.sources.id, 'source-1'));
 		const ainuRoot = await mkdtemp(join(tmpdir(), 'archive-ocr-'));
 		try {
 			const ocrDir = join(ainuRoot, 'ainu-grammar', 'books', 'ocr');
@@ -586,7 +735,14 @@ describe('archive DB flows', () => {
 			const result = await searchOcr(db, reader, { q: 'kamuy' });
 			expect(result.items).toHaveLength(1);
 			expect(result.items[0]).toMatchObject({
-				source: { slug: 'source-one', title: '資料一' },
+				source: {
+					slug: 'source-one',
+					title: '資料一',
+					titleEn: 'Source One',
+					titleAin: 'Sine kampi',
+					author: 'Author One',
+					yearText: '1901'
+				},
 				revisionId: 'rev-1',
 				page: 2,
 				variant: 'gemini'
@@ -594,6 +750,90 @@ describe('archive DB flows', () => {
 		} finally {
 			await rm(ainuRoot, { recursive: true, force: true });
 		}
+	});
+
+	it('includes source display metadata on each OCR hit', async () => {
+		await seedRevision('approved');
+		await db
+			.update(schema.sources)
+			.set({
+				titleEn: 'Source One',
+				titleAin: 'Sine kampi',
+				author: 'Author One',
+				yearStart: 1901,
+				yearCertainty: 'exact'
+			})
+			.where(eq(schema.sources.id, 'source-1'));
+		await db.insert(schema.sources).values({
+			id: 'source-2',
+			slug: 'source-two',
+			title: '資料二',
+			titleEn: 'Source Two',
+			titleAin: 'Tu kampi',
+			author: 'Author Two',
+			yearStart: 1902,
+			yearEnd: 1904,
+			yearCertainty: 'range',
+			category: 'primary',
+			type: 'book',
+			humanDownload: true
+		});
+		await db.insert(schema.sourceFiles).values({
+			id: 'file-2',
+			sourceId: 'source-2',
+			role: 'scan',
+			checkoutRepoId: 'repo-1',
+			checkoutPath: 'books/source-two.pdf',
+			createdBy: 'contributor'
+		});
+		await db.insert(schema.archiveBlobs).values({
+			sha256: 'b'.repeat(64),
+			bytes: 99,
+			detectedMediaType: 'application/pdf',
+			storageState: 'verified',
+			verifiedAt: new Date()
+		});
+		await db.insert(schema.fileRevisions).values({
+			id: 'rev-2',
+			sourceFileId: 'file-2',
+			revisionNo: 1,
+			blobSha256: 'b'.repeat(64),
+			originalFilename: 'source-two.pdf',
+			declaredMediaType: 'application/pdf',
+			artifactKind: 'original',
+			reviewStatus: 'approved',
+			isCurrent: true,
+			submittedBy: 'contributor',
+			submittedAt: new Date(2_000),
+			reviewedBy: 'reviewer',
+			reviewedAt: new Date(3_000)
+		});
+		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'metadata needle one' }]);
+		await replaceOcrPages(db, 'rev-2', 'gemini', [{ page: 1, text: 'metadata needle two' }]);
+
+		const result = await searchOcr(db, reader, { q: 'metadata', limit: 10 });
+		const sourcesByRevision = new Map(result.items.map((item) => [item.revisionId, item.source]));
+
+		expect(sourcesByRevision.get('rev-1')).toMatchObject({
+			slug: 'source-one',
+			title: '資料一',
+			titleEn: 'Source One',
+			titleAin: 'Sine kampi',
+			author: 'Author One',
+			yearStart: 1901,
+			yearEnd: null,
+			yearCertainty: 'exact'
+		});
+		expect(sourcesByRevision.get('rev-2')).toMatchObject({
+			slug: 'source-two',
+			title: '資料二',
+			titleEn: 'Source Two',
+			titleAin: 'Tu kampi',
+			author: 'Author Two',
+			yearStart: 1902,
+			yearEnd: 1904,
+			yearCertainty: 'range'
+		});
 	});
 
 	it('returns OCR snippet offsets against normalized text and total visible hits', async () => {
@@ -1271,6 +1511,115 @@ describe('archive API route handlers', () => {
 		).rejects.toMatchObject({ status: 403 });
 	});
 
+	it('enforces archive_admin on admin user GET and POST routes', async () => {
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'reader', email: 'reader@example.test' }));
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		const { GET } = await importRoute<typeof import('../../../routes/api/archive/admin/users/+server')>(
+			'../../../routes/api/archive/admin/users/+server'
+		);
+		const { POST } = await importRoute<typeof import('../../../routes/api/archive/admin/users/[userId]/role/+server')>(
+			'../../../routes/api/archive/admin/users/[userId]/role/+server'
+		);
+
+		await expect(
+			GET({
+				request: new Request('https://db.aynu.org/api/archive/admin/users'),
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({ status: 403 });
+
+		await expect(
+			POST({
+				request: new Request('https://db.aynu.org/api/archive/admin/users/other/role', {
+					method: 'POST',
+					headers: {
+						origin: 'https://archive.aynu.org',
+						'content-type': 'application/json',
+						'x-archive-csrf': await issueArchiveCsrfToken('reader')
+					},
+					body: JSON.stringify({ role: 'archive_reader' })
+				}),
+				params: { userId: 'other' },
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({ status: 403 });
+	});
+
+	it('enforces CSRF on admin user role POST route', async () => {
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'admin', email: 'admin@example.test' }));
+		await db.insert(schema.appUserRoles).values({ userId: 'admin', role: 'archive_admin' });
+		const { POST } = await importRoute<typeof import('../../../routes/api/archive/admin/users/[userId]/role/+server')>(
+			'../../../routes/api/archive/admin/users/[userId]/role/+server'
+		);
+		const base = {
+			method: 'POST',
+			headers: {
+				origin: 'https://archive.aynu.org',
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({ role: 'archive_reader' })
+		};
+
+		await expect(
+			POST({
+				request: new Request('https://db.aynu.org/api/archive/admin/users/reader/role', base),
+				params: { userId: 'reader' },
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({ status: 403 });
+
+		await expect(
+			POST({
+				request: new Request('https://db.aynu.org/api/archive/admin/users/reader/role', {
+					...base,
+					headers: {
+						...base.headers,
+						'x-archive-csrf': 'bad-token'
+					}
+				}),
+				params: { userId: 'reader' },
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({ status: 403 });
+	});
+
+	it('rejects service-token and MCP assertion principals on admin user role POST route', async () => {
+		const { POST } = await importRoute<typeof import('../../../routes/api/archive/admin/users/[userId]/role/+server')>(
+			'../../../routes/api/archive/admin/users/[userId]/role/+server'
+		);
+		const { mutation } = await seedServicePrincipal('admin', 'archive_admin', 'svc-admin-role');
+
+		await expect(
+			POST({
+				request: new Request('https://db.aynu.org/api/archive/admin/users/reader/role', {
+					method: 'POST',
+					headers: mutation,
+					body: JSON.stringify({ role: 'archive_reader' })
+				}),
+				params: { userId: 'reader' },
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({
+			status: 403,
+			body: { message: 'role changes require an app-session principal' }
+		});
+
+		env.ASSERTION_KEY_MCP = 'mcp-secret';
+		await db.insert(schema.userIdentities).values({ userId: 'reader', kind: 'github_login', value: 'octocat' });
+		const mcpHeaders = await buildMcpAssertionHeaders(env.ASSERTION_KEY_MCP, 'octocat', Math.floor(Date.now() / 1000), 'role-mcp-denial');
+		await expect(
+			POST({
+				request: new Request('https://db.aynu.org/api/archive/admin/users/reader/role', {
+					method: 'POST',
+					headers: mcpHeaders,
+					body: JSON.stringify({ role: 'archive_reader' })
+				}),
+				params: { userId: 'reader' },
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({ status: 403 });
+	});
+
 	it('lists archive repositories ordered by name', async () => {
 		const { auth } = await seedServicePrincipal('reader', 'archive_reader', 'svc-repos');
 		await db.insert(schema.archiveRepositories).values([
@@ -1292,5 +1641,109 @@ describe('archive API route handlers', () => {
 				{ id: 'repo-z', name: 'zeta', active: true }
 			]
 		});
+	});
+
+	it('enforces reader access and derivative width validation on page derivative routes', async () => {
+		await seedRevision('approved');
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'other', email: 'other@example.test' }));
+		const { GET } = await importRoute<typeof import('../../../routes/api/archive/revisions/[id]/pages/[page].webp/+server')>(
+			'../../../routes/api/archive/revisions/[id]/pages/[page].webp/+server'
+		);
+
+		await expect(
+			GET({
+				request: new Request('https://db.aynu.org/api/archive/revisions/rev-1/pages/1.webp'),
+				params: { id: 'rev-1', page: '1' },
+				locals: { archiveDb: db }
+			} as never)
+		).rejects.toMatchObject({ status: 403 });
+
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'reader', email: 'reader@example.test' }));
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		await expect(
+			GET({
+				request: new Request('https://db.aynu.org/api/archive/revisions/rev-1/pages/1.webp?w=999'),
+				params: { id: 'rev-1', page: '1' },
+				locals: { archiveDb: db },
+				platform: { env: { ARCHIVE: { async fetch() { return new Response(null); } } } }
+			} as never)
+		).rejects.toMatchObject({ status: 400 });
+	});
+
+	it('maps non-OK page derivative upstream responses to 404', async () => {
+		env.ASSERTION_KEY_SOURCES = 'assertion-secret';
+		await seedRevision('approved');
+		const { auth } = await seedServicePrincipal('reader', 'archive_reader', 'svc-page');
+		let captured: Request | null = null;
+		const fetcher = {
+			async fetch(input: RequestInfo | URL, init?: RequestInit) {
+				captured = input instanceof Request ? input : new Request(input, init);
+				return Response.json({ error: 'missing derivative' }, { status: 500 });
+			}
+		};
+		const { GET } = await importRoute<typeof import('../../../routes/api/archive/revisions/[id]/pages/[page].webp/+server')>(
+			'../../../routes/api/archive/revisions/[id]/pages/[page].webp/+server'
+		);
+
+		const response = await GET({
+			request: new Request('https://db.aynu.org/api/archive/revisions/rev-1/pages/1.webp?w=300', { headers: auth }),
+			params: { id: 'rev-1', page: '1' },
+			locals: { archiveDb: db },
+			platform: { env: { ARCHIVE: fetcher } }
+		} as never);
+
+		expect(response.status).toBe(404);
+		expect(captured).toBeInstanceOf(Request);
+		expect(new URL(captured!.url).pathname).toBe('/internal/derivatives/rev-1/pages/1');
+		expect(new URL(captured!.url).searchParams.get('w')).toBe('300');
+		expect(captured!.headers.get('x-archive-assertion')).toBeTruthy();
+		expect(captured!.headers.get('x-archive-signature')).toBeTruthy();
+	});
+
+	it('proxies linearized derivative range responses and mirrors dataplane headers', async () => {
+		env.ASSERTION_KEY_SOURCES = 'assertion-secret';
+		await seedRevision('approved');
+		const { auth } = await seedServicePrincipal('reader', 'archive_reader', 'svc-linearized');
+		let captured: Request | null = null;
+		const fetcher = {
+			async fetch(input: RequestInfo | URL, init?: RequestInit) {
+				captured = input instanceof Request ? input : new Request(input, init);
+				return new Response('pdf-bytes', {
+					status: 206,
+					headers: {
+						'content-type': 'application/pdf',
+						'content-range': 'bytes 0-8/100',
+						'content-length': '9',
+						'accept-ranges': 'bytes',
+						'etag': '"linearized"',
+						'cache-control': 'public, max-age=31536000, immutable'
+					}
+				});
+			}
+		};
+		const { GET } = await importRoute<typeof import('../../../routes/api/archive/revisions/[id]/linearized/+server')>(
+			'../../../routes/api/archive/revisions/[id]/linearized/+server'
+		);
+
+		const response = await GET({
+			request: new Request('https://db.aynu.org/api/archive/revisions/rev-1/linearized', {
+				headers: new Headers([...auth.entries(), ['range', 'bytes=0-8']])
+			}),
+			params: { id: 'rev-1' },
+			locals: { archiveDb: db },
+			platform: { env: { ARCHIVE: fetcher } }
+		} as never);
+
+		expect(response.status).toBe(206);
+		expect(await response.text()).toBe('pdf-bytes');
+		expect(response.headers.get('content-type')).toBe('application/pdf');
+		expect(response.headers.get('content-range')).toBe('bytes 0-8/100');
+		expect(response.headers.get('content-length')).toBe('9');
+		expect(response.headers.get('accept-ranges')).toBe('bytes');
+		expect(response.headers.get('etag')).toBe('"linearized"');
+		expect(response.headers.get('cache-control')).toBe('public, max-age=31536000, immutable');
+		expect(captured).toBeInstanceOf(Request);
+		expect(new URL(captured!.url).pathname).toBe('/internal/derivatives/rev-1/linearized');
+		expect(captured!.headers.get('range')).toBe('bytes=0-8');
 	});
 });

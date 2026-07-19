@@ -152,6 +152,13 @@ export async function searchOcr(
 			submittedBy: fileRevisions.submittedBy,
 			sourceSlug: sources.slug,
 			sourceTitle: sources.title,
+			sourceTitleEn: sources.titleEn,
+			sourceTitleAin: sources.titleAin,
+			sourceAuthor: sources.author,
+			sourceYearText: sources.yearText,
+			sourceYearStart: sources.yearStart,
+			sourceYearEnd: sources.yearEnd,
+			sourceYearCertainty: sources.yearCertainty,
 			humanDownload: sources.humanDownload
 		})
 		.from(fileRevisions)
@@ -175,7 +182,17 @@ export async function searchOcr(
 
 	return {
 		items: page.map(({ hit, meta }) => ({
-			source: { slug: meta.sourceSlug, title: meta.sourceTitle },
+			source: {
+				slug: meta.sourceSlug,
+				title: meta.sourceTitle,
+				titleEn: meta.sourceTitleEn,
+				titleAin: meta.sourceTitleAin,
+				author: meta.sourceAuthor,
+				yearText: meta.sourceYearText,
+				yearStart: meta.sourceYearStart,
+				yearEnd: meta.sourceYearEnd,
+				yearCertainty: meta.sourceYearCertainty
+			},
 			revisionId: hit.revisionId,
 			page: hit.page,
 			variant: hit.variant,

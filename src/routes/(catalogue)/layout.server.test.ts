@@ -100,4 +100,24 @@ describe('catalogue layout server load', () => {
 			hasArchiveAccess: true
 		});
 	});
+
+	it('returns archive access for signed-in archive admins', async () => {
+		const sessionUser = { id: 'archive-admin', name: 'Archive Admin', email: 'admin@example.test' };
+		await insertUser(sessionUser);
+		await db.insert(schema.appUserRoles).values({
+			userId: sessionUser.id,
+			role: 'archive_admin'
+		});
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({
+			id: sessionUser.id,
+			email: sessionUser.email
+		}));
+
+		const result = await load(eventFor(sessionUser));
+
+		expect(result).toMatchObject({
+			user: sessionUser,
+			hasArchiveAccess: true
+		});
+	});
 });

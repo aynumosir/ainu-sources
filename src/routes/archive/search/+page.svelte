@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { highlightSnippet } from '$lib/archive/snippets';
+	import { formatYear } from '$lib/format';
 
 	let { data } = $props();
 </script>
@@ -30,8 +31,20 @@
 			<ol class="space-y-3">
 				{#each data.result.items as item (item.revisionId + ':' + item.variant + ':' + item.page)}
 					<li class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
-						<div class="flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
-							<a href={`/archive/sources/${item.source.slug}`} class="font-medium text-[var(--archive-accent)]">{item.source.title}</a>
+						<div class="space-y-1">
+							<a href={`/archive/sources/${item.source.slug}`} class="archive-title font-medium text-[var(--archive-accent)]">{item.source.title}</a>
+							{#if item.source.titleEn && item.source.titleEn !== item.source.title}
+								<p class="text-[13px] text-[var(--archive-subtle)]">{item.source.titleEn}</p>
+							{/if}
+							{#if item.source.titleAin}
+								<p class="text-[13px] text-[var(--archive-subtle)]" lang="ain-Latn">{item.source.titleAin}</p>
+							{/if}
+							<div class="flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
+								{#if item.source.author}<span>{item.source.author}</span>{/if}
+								<span class="tnum">{formatYear(item.source)}</span>
+							</div>
+						</div>
+						<div class="mt-2 flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
 							<span>page {item.page}</span>
 							<span>{item.variant}</span>
 						</div>

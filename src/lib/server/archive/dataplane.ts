@@ -82,7 +82,15 @@ export const dataplane = {
 	headBlob(fetcher: ArchiveFetcher, actor: string, sha256: string, headers?: HeadersInit) {
 		return call(fetcher, `/internal/blobs/${sha256}`, actor, { method: 'HEAD', headers });
 	},
-	getRevisionPage(fetcher: ArchiveFetcher, actor: string, revisionId: string, page: number) {
-		return call(fetcher, `/internal/revisions/${revisionId}/pages/${page}.webp`, actor, { method: 'GET' });
+	getPageDerivative(fetcher: ArchiveFetcher, actor: string, revisionId: string, page: number, width: 300 | 1200) {
+		return call(fetcher, `/internal/derivatives/${encodeURIComponent(revisionId)}/pages/${page}?w=${width}`, actor, {
+			method: 'GET'
+		});
+	},
+	getLinearizedDerivative(fetcher: ArchiveFetcher, actor: string, revisionId: string, headers?: HeadersInit) {
+		return call(fetcher, `/internal/derivatives/${encodeURIComponent(revisionId)}/linearized`, actor, {
+			method: 'GET',
+			headers
+		});
 	}
 };

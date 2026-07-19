@@ -9,7 +9,7 @@
 
 	let failed = $state(false);
 	const initial = $derived(title.trim().slice(0, 1) || 'A');
-	const src = $derived(revisionId ? `/api/archive/revisions/${revisionId}/pages/1.webp` : null);
+	const src = $derived(revisionId ? `/api/archive/revisions/${revisionId}/pages/1.webp?w=300` : null);
 </script>
 
 <div class="flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-md border border-[var(--archive-border)] bg-[var(--archive-muted)]">

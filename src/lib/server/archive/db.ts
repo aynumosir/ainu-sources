@@ -9,16 +9,19 @@ import {
 	archiveStreamLeases,
 	capabilityTokens,
 	fileRevisions,
+	githubLoginCache,
 	sourceFiles,
 	sourceLifecycleEvents,
 	sources,
-	uploadSessions
+	uploadSessions,
+	user,
+	userIdentities
 } from '$lib/server/db/schema';
 import type * as schema from '$lib/server/db/schema';
 import { recordArchiveEvent } from './audit';
 import { ArchiveHttpError } from './errors';
 import { decodeCursor, encodeCursor, type FileCursor } from './cursor';
-import { archiveRoleAtLeast, iso, type ArchivePrincipal } from './types';
+import { archiveRoleAtLeast, isArchiveRole, iso, type ArchivePrincipal, type ArchiveRole } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
 type Tx = Parameters<Parameters<Db['transaction']>[0]>[0];
@@ -31,6 +34,16 @@ const SOURCE_FILE_ROLES = ['scan', 'epub', 'supplement', 'derivative'] as const;
 const UPLOAD_SESSION_STATES = ['initiated', 'uploading', 'uploaded', 'finalizing', 'verified', 'failed', 'aborted', 'expired'] as const;
 type SourceFileRole = (typeof SOURCE_FILE_ROLES)[number];
 type UploadSessionState = (typeof UPLOAD_SESSION_STATES)[number];
+
+export type ArchiveAdminUser = {
+	userId: string;
+	name: string;
+	email: string;
+	role: ArchiveRole | null;
+	roleUpdatedAt: string | null;
+	login: string | null;
+	serviceToken: string | null;
+};
 
 type FinalizeSuccessResult = {
 	sessionId: string;
@@ -308,6 +321,100 @@ export async function listArchiveRepositories(db: Db) {
 		.from(archiveRepositories)
 		.orderBy(asc(archiveRepositories.name));
 	return { repositories: rows };
+}
+
+export async function listArchiveUsers(db: Db): Promise<ArchiveAdminUser[]> {
+	const rows = await db
+		.select({
+			userId: user.id,
+			name: user.name,
+			email: user.email,
+			role: appUserRoles.role,
+			roleUpdatedAt: appUserRoles.updatedAt,
+			cachedLogin: githubLoginCache.login
+		})
+		.from(user)
+		.leftJoin(appUserRoles, eq(appUserRoles.userId, user.id))
+		.leftJoin(githubLoginCache, eq(githubLoginCache.userId, user.id))
+		.orderBy(asc(user.name), asc(user.email))
+		// Flat list sized for the current admin population; add cursoring if the archive user count grows past this.
+		.limit(200);
+	const identities = await db
+		.select({
+			userId: userIdentities.userId,
+			kind: userIdentities.kind,
+			value: userIdentities.value
+		})
+		.from(userIdentities)
+		.where(inArray(userIdentities.kind, ['github_login', 'service_token']));
+	const identityByUser = new Map<string, { githubLogin?: string; serviceToken?: string }>();
+	for (const identity of identities) {
+		const entry = identityByUser.get(identity.userId) ?? {};
+		if (identity.kind === 'github_login') entry.githubLogin = identity.value;
+		if (identity.kind === 'service_token') entry.serviceToken = identity.value;
+		identityByUser.set(identity.userId, entry);
+	}
+	return rows.map((row) => {
+		const identity = identityByUser.get(row.userId);
+		const role = isArchiveRole(row.role) ? row.role : null;
+		return {
+			userId: row.userId,
+			name: row.name,
+			email: row.email,
+			role,
+			roleUpdatedAt: role ? iso(row.roleUpdatedAt) : null,
+			login: row.cachedLogin ?? identity?.githubLogin ?? null,
+			serviceToken: identity?.serviceToken ?? null
+		};
+	});
+}
+
+export async function setArchiveUserRole(
+	db: Db,
+	targetUserId: string,
+	role: ArchiveRole | null,
+	principal: ArchivePrincipal
+): Promise<{ userId: string; role: ArchiveRole | null }> {
+	return db.transaction(async (tx) => {
+		const [target] = await tx.select({ id: user.id }).from(user).where(eq(user.id, targetUserId)).limit(1);
+		if (!target) throw new ArchiveHttpError(404, 'user not found');
+
+		const [current] = await tx
+			.select({ role: appUserRoles.role })
+			.from(appUserRoles)
+			.where(eq(appUserRoles.userId, targetUserId))
+			.limit(1);
+		const previousRole = isArchiveRole(current?.role) ? current.role : null;
+
+		if (previousRole === 'archive_admin' && role !== 'archive_admin') {
+			const [{ adminCount }] = await tx
+				.select({ adminCount: sql<number>`count(*)` })
+				.from(appUserRoles)
+				.where(eq(appUserRoles.role, 'archive_admin'));
+			if (Number(adminCount) === 1) throw new ArchiveHttpError(409, 'cannot remove the last archive_admin');
+		}
+
+		if (role === null) {
+			await tx.delete(appUserRoles).where(eq(appUserRoles.userId, targetUserId));
+		} else {
+			await tx
+				.insert(appUserRoles)
+				.values({ userId: targetUserId, role })
+				.onConflictDoUpdate({
+					target: appUserRoles.userId,
+					set: { role, updatedAt: new Date() }
+				});
+		}
+
+		await recordArchiveEvent(tx, {
+			entityType: 'user',
+			entityId: targetUserId,
+			eventType: 'archive_role_changed',
+			actor: principal.userId,
+			details: { previousRole, newRole: role }
+		});
+		return { userId: targetUserId, role };
+	});
 }
 
 export async function getSourceFileById(db: Db, fileId: string, principal: ArchivePrincipal) {

@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import { archiveUsage, type ArchiveUsage } from '$lib/archive/usage.svelte';
 	import { archiveSession, setArchiveTheme } from '$lib/archive/session.svelte';
 	import { formatBytes } from '$lib/archive/format';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import type { ArchivePrincipal } from '$lib/server/archive/types';
 
 	let {
@@ -18,6 +21,15 @@
 
 	const used = $derived(archiveUsage.value ? formatBytes(archiveUsage.value.bytesUsed) : 'no usage data');
 	const limit = $derived(archiveUsage.value ? formatBytes(archiveUsage.value.dailyByteLimit) : '');
+	const signOutEnhance: SubmitFunction = () => {
+		return async ({ result, update }) => {
+			if (result.type === 'success' || result.type === 'redirect') {
+				await goto('/archive', { invalidateAll: true });
+				return;
+			}
+			await update();
+		};
+	};
 </script>
 
 <div class="flex items-center gap-2">
@@ -34,15 +46,7 @@
 		<option value="light">Light</option>
 		<option value="dark">Dark</option>
 	</select>
-	{#if principal.role === 'archive_admin'}
-		<a
-			href="/archive/admin"
-			class="inline-flex h-8 items-center rounded-md border border-[var(--archive-border)] bg-[var(--archive-surface)] px-2 text-[13px] text-[var(--archive-text)]"
-		>
-			Admin
-		</a>
-	{/if}
-	<form method="POST" action="/account?/signout">
+	<form method="POST" action="/account?/signout" use:enhance={signOutEnhance}>
 		<button
 			type="submit"
 			class="h-8 rounded-md border border-[var(--archive-border)] bg-[var(--archive-surface)] px-2 text-[13px] text-[var(--archive-text)]"
