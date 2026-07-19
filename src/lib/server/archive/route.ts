@@ -9,6 +9,10 @@ import type { ArchivePrincipal, ArchiveRole } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
 
+export function archiveRouteDb(locals: App.Locals): Db {
+	return (locals as App.Locals & { archiveDb?: Db }).archiveDb ?? defaultDb;
+}
+
 export async function archivePrincipal(
 	request: Request,
 	minRole: ArchiveRole,

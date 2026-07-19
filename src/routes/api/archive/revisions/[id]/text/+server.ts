@@ -4,17 +4,18 @@
  */
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { db } from '$lib/server/db';
 import { authorizeContent } from '$lib/server/archive/gateway';
-import { getRevisionText, parsePageSelector } from '$lib/server/archive/ocr';
-import { archivePrincipal, throwArchiveError } from '$lib/server/archive/route';
+import { parsePageSelector } from '$lib/server/archive/ocr';
+import { archivePrincipal, archiveRouteDb, throwArchiveError } from '$lib/server/archive/route';
+import { getWorkspaceRevisionText } from '$lib/server/archive/workspace';
 
 function estimateTextPages(pages: string | null): number {
 	return parsePageSelector(pages)?.length ?? 50;
 }
 
-export const GET: RequestHandler = async ({ request, params, url }) => {
-	const principal = await archivePrincipal(request, 'archive_reader');
+export const GET: RequestHandler = async ({ request, params, url, locals }) => {
+	const db = archiveRouteDb(locals);
+	const principal = await archivePrincipal(request, 'archive_reader', db);
 	try {
 		const access = await authorizeContent(db, {
 			principal,
@@ -24,7 +25,7 @@ export const GET: RequestHandler = async ({ request, params, url }) => {
 			rateUnits: estimateTextPages(url.searchParams.get('pages'))
 		});
 		return json(
-			await getRevisionText(db, access.revision.id, access.revision.pageCount, {
+			await getWorkspaceRevisionText(db, access.revision.id, access.revision.pageCount, {
 				variant: url.searchParams.get('variant'),
 				pages: url.searchParams.get('pages'),
 				cursor: url.searchParams.get('cursor')
