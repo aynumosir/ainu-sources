@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, sql, type SQL } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import { env } from '$env/dynamic/private';
 import { appUserRoles } from '$lib/server/db/schema';
@@ -63,6 +63,7 @@ const VIEW_USE_KINDS = new Set<ArchiveContentUseKind>([
 	'mcp_image'
 ]);
 const PAGE_IMAGE_ESTIMATE_BYTES = 1024 * 1024;
+const DOWNLOAD_RIGHT_USE_KINDS = new Set<ArchiveContentUseKind>(['original', 'export', 'capability']);
 const SEARCH_REVISION = {
 	id: 'archive-search',
 	sourceFileId: 'archive-search',
@@ -96,6 +97,32 @@ function intEnv(name: string): number {
 
 function budgetKindFor(useKind: ArchiveContentUseKind): ArchiveBudgetKind {
 	return VIEW_USE_KINDS.has(useKind) ? 'view' : 'download';
+}
+
+function requiresDownloadRight(useKind: ArchiveContentUseKind): boolean {
+	return DOWNLOAD_RIGHT_USE_KINDS.has(useKind);
+}
+
+/**
+ * Visibility predicate for the `fr` file-revision and `src` source aliases used
+ * by archive search. Keeping it here makes ranked SQL and direct content reads
+ * apply the same review, current-revision, access-state, and representation rules.
+ */
+export function archiveSearchVisibilitySql(principal: ArchivePrincipal): SQL {
+	const reviewer = archiveRoleAtLeast(principal.role, 'archive_reviewer');
+	const review = reviewer
+		? sql`1 = 1`
+		: principal.role === 'archive_contributor'
+			? sql`(fr.review_status = 'approved' or (fr.review_status = 'pending' and fr.submitted_by = ${principal.userId}))`
+			: sql`fr.review_status = 'approved'`;
+	const current = reviewer ? sql`1 = 1` : sql`fr.is_current = 1`;
+	const access =
+		principal.role === 'archive_admin'
+			? sql`1 = 1`
+			: reviewer
+				? sql`fr.access_state <> 'takedown'`
+				: sql`fr.access_state = 'available'`;
+	return sql`(${review}) and (${current}) and (${access})`;
 }
 
 function cachePolicyFor(useKind: ArchiveContentUseKind): ArchiveCachePolicy {
@@ -161,11 +188,9 @@ export async function authorizeContent(db: Db, input: AuthorizeContentInput): Pr
 	try {
 		await checkFreshMembership(db, input.principal);
 		if (input.revisionId) {
-			revision = await getRevisionForContent(db, input.revisionId, input.principal);
-			// D17 will replace this with per-representation rights: text and page images are different permissions from whole-file download, and this simplification is deliberate for the current schema.
-			if (!revision.humanDownload && !archiveRoleAtLeast(input.principal.role, 'archive_reviewer')) {
-				throw new ArchiveHttpError(403, 'source rights do not allow human download');
-			}
+			revision = await getRevisionForContent(db, input.revisionId, input.principal, {
+				requireDownloadRight: requiresDownloadRight(input.useKind)
+			});
 		}
 		const requestedBytes = requestedBytesFor(input, revision);
 		if (input.useKind === 'text' || input.useKind === 'mcp_text') {

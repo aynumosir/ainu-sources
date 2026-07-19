@@ -10,7 +10,7 @@ import {
 	revisionOcrCoverage,
 	sourceFiles
 } from '../../src/lib/server/db/schema';
-import { replaceOcrPages, type OcrPageInput } from '../../src/lib/server/archive/ocr';
+import { activateOcrGeneration, type OcrPageInput } from '../../src/lib/server/archive/ocr';
 import { parseImporterCli, type ImporterRunOptions } from '../import/lib/run';
 import type { Db } from '../import/lib/entities';
 
@@ -82,20 +82,10 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 					.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.preferred, true)))
 					.limit(1);
 				const shouldPrefer = !preferred;
-				await replaceOcrPages(tx as unknown as Db, revision.id, parsed.variant, pages);
-				await tx
-					.insert(ocrIngestState)
-					.values({
-						revisionId: revision.id,
-						variant: parsed.variant,
-						contentHash,
-						pageCount: pages.length,
-						ingestedAt: now
-					})
-					.onConflictDoUpdate({
-						target: [ocrIngestState.revisionId, ocrIngestState.variant],
-						set: { contentHash, pageCount: pages.length, ingestedAt: now }
-					});
+				await activateOcrGeneration(tx as unknown as Db, revision.id, parsed.variant, pages, {
+					contentHash,
+					ingestedAt: now
+				});
 				const [coverage] = await tx
 					.select({ preferred: revisionOcrCoverage.preferred })
 					.from(revisionOcrCoverage)

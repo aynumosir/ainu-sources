@@ -1070,6 +1070,7 @@ export const ocrIngestState = sqliteTable(
 		variant: text('variant').notNull(),
 		contentHash: text('content_hash').notNull(),
 		pageCount: integer('page_count').notNull(),
+		activeGeneration: text('active_generation').notNull().default('legacy-0013'),
 		ingestedAt: integer('ingested_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
 	},
 	(t) => [

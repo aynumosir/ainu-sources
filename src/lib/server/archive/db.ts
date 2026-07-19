@@ -21,6 +21,7 @@ import {
 import type * as schema from '$lib/server/db/schema';
 import { recordArchiveEvent } from './audit';
 import { ArchiveHttpError } from './errors';
+import { DEPLOYED_SEARCH_MODES } from './search-modes';
 import { decodeCursor, encodeCursor, type FileCursor } from './cursor';
 import { base64url, fromBase64url } from './crypto';
 import { archiveRoleAtLeast, isArchiveRole, iso, type ArchivePrincipal, type ArchiveRole } from './types';
@@ -553,10 +554,15 @@ export async function getRevision(db: Db, id: string, principal: ArchivePrincipa
 	};
 }
 
-export async function getRevisionForContent(db: Db, id: string, principal: ArchivePrincipal) {
+export async function getRevisionForContent(
+	db: Db,
+	id: string,
+	principal: ArchivePrincipal,
+	opts: { requireDownloadRight?: boolean } = {}
+) {
 	const row = await getRevision(db, id, principal);
 	requireAccessState(principal, row.accessState);
-	if (!row.humanDownload && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
+	if (opts.requireDownloadRight !== false && !row.humanDownload && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
 		throw new ArchiveHttpError(403, 'source rights do not allow human download');
 	}
 	return row;
@@ -1437,6 +1443,7 @@ export async function getUsageSummary(db: Db, principal: ArchivePrincipal) {
 			.where(and(eq(archiveStreamLeases.userId, principal.userId), gt(archiveStreamLeases.expiresAt, now)));
 		const resetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
 		return {
+			search_modes: [...DEPLOYED_SEARCH_MODES],
 			date: day,
 			bytesUsed: usage?.bytesReserved ?? 0,
 			dailyByteLimit: dailyLimit,
