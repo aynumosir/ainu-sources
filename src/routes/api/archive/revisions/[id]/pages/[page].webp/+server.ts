@@ -37,9 +37,14 @@ export const GET: RequestHandler = async (event) => {
 		);
 		if (!upstream.ok) return new Response(null, { status: 404 });
 
+		// Page images are copyrighted material behind per-user authorization.
+		// A shared or public cache would keep serving them after a role is
+		// revoked or a revision is taken down, so caching stays private and
+		// short-lived even though the bytes themselves are immutable.
 		const headers = new Headers({
 			'content-type': 'image/webp',
-			'cache-control': 'public, max-age=31536000, immutable'
+			'cache-control': 'private, max-age=300, must-revalidate',
+			'referrer-policy': 'no-referrer'
 		});
 		for (const name of ['etag', 'content-length']) {
 			const value = upstream.headers.get(name);

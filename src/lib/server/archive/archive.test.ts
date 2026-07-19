@@ -1831,7 +1831,10 @@ describe('archive API route handlers', () => {
 		expect(response.headers.get('content-length')).toBe('9');
 		expect(response.headers.get('accept-ranges')).toBe('bytes');
 		expect(response.headers.get('etag')).toBe('"linearized"');
-		expect(response.headers.get('cache-control')).toBe('public, max-age=31536000, immutable');
+		// The dataplane's immutable header must never reach a browser: a shared
+		// cache would outlive role revocation and takedown.
+		expect(response.headers.get('cache-control')).toBe('private, no-store');
+		expect(response.headers.get('referrer-policy')).toBe('no-referrer');
 		expect(captured).toBeInstanceOf(Request);
 		expect(new URL(captured!.url).pathname).toBe('/internal/derivatives/rev-1/linearized');
 		expect(captured!.headers.get('range')).toBe('bytes=0-8');

@@ -4,13 +4,16 @@ import { getRevisionForContent } from '$lib/server/archive/db';
 import { dataplane, getArchiveFetcher } from '$lib/server/archive/dataplane';
 import { archivePrincipal, throwArchiveError } from '$lib/server/archive/route';
 
+// The data plane marks derivatives immutable for its internal callers. This
+// route serves copyrighted material to a browser under per-user
+// authorization, so caching policy is set here and never mirrored: a shared
+// cache must not outlive a role revocation or a takedown.
 const MIRRORED_HEADERS = [
 	'content-type',
 	'content-range',
 	'content-length',
 	'accept-ranges',
-	'etag',
-	'cache-control'
+	'etag'
 ] as const;
 
 export const GET: RequestHandler = async (event) => {
@@ -27,7 +30,10 @@ export const GET: RequestHandler = async (event) => {
 			event.params.id,
 			headers
 		);
-		const responseHeaders = new Headers();
+		const responseHeaders = new Headers({
+			'cache-control': 'private, no-store',
+			'referrer-policy': 'no-referrer'
+		});
 		for (const name of MIRRORED_HEADERS) {
 			const value = upstream.headers.get(name);
 			if (value) responseHeaders.set(name, value);
