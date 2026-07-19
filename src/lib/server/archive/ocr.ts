@@ -162,6 +162,79 @@ export async function activateOcrGeneration(
 	return generation;
 }
 
+/**
+ * Replace one page of the `edited` variant in the search index. The workspace
+ * calls this inside its save transaction so a corrected page is searchable
+ * immediately, rather than waiting for the next full ingest.
+ */
+export async function replaceEditedPageChunks(
+	db: RawSqlDb,
+	revisionId: string,
+	page: number,
+	text: string | null
+): Promise<void> {
+	const variant = 'edited';
+	const [state] = await db.all<{ generation: string; pageCount: number }>(sql`
+		select active_generation as generation, page_count as pageCount
+		from ocr_ingest_state
+		where revision_id = ${revisionId} and variant = ${variant}
+		limit 1
+	`);
+	const generation = state?.generation ?? crypto.randomUUID();
+	await db.run(sql`
+		delete from ocr_tokens
+		where revision_id = ${revisionId} and variant = ${variant}
+			and page = ${page} and ingest_generation = ${generation}
+	`);
+	await db.run(sql`
+		delete from ocr_chunks
+		where revision_id = ${revisionId} and variant = ${variant}
+			and page = ${page} and ingest_generation = ${generation}
+	`);
+	if (text != null) {
+		for (const [block, original] of splitPageBlocks(text).entries()) {
+			const blockText = original.normalize('NFC');
+			const textNorm = normalizeOcrText(blockText);
+			const chunkId = `${generation}:${page}:${block}`;
+			const checksum = await sha256Hex(blockText);
+			await db.run(sql`
+				insert into ocr_chunks (
+					chunk_id, revision_id, variant, page, block, text, text_norm,
+					checksum, normalization_version, ingest_generation
+				) values (
+					${chunkId}, ${revisionId}, ${variant}, ${page}, ${block}, ${blockText}, ${textNorm},
+					${checksum}, ${OCR_NORMALIZATION_VERSION}, ${generation}
+				)
+			`);
+			for (const token of tokenizeNormalizedText(blockText)) {
+				await db.run(sql`
+					insert into ocr_tokens (
+						token_norm, revision_id, variant, page, block, position, chunk_id, ingest_generation
+					) values (
+						${token.token}, ${revisionId}, ${variant}, ${page}, ${block}, ${token.position}, ${chunkId}, ${generation}
+					)
+				`);
+			}
+		}
+	}
+	const [{ maxPage = 0 } = { maxPage: 0 }] = await db.all<{ maxPage: number }>(sql`
+		select coalesce(max(page), 0) as maxPage
+		from ocr_chunks
+		where revision_id = ${revisionId} and variant = ${variant} and ingest_generation = ${generation}
+	`);
+	await db.run(sql`
+		insert into ocr_ingest_state (
+			revision_id, variant, content_hash, page_count, active_generation, ingested_at
+		) values (
+			${revisionId}, ${variant}, ${await sha256Hex(`workspace-edits:${revisionId}:${generation}`)}, ${maxPage}, ${generation}, ${new Date()}
+		)
+		on conflict (revision_id, variant) do update set
+			page_count = excluded.page_count,
+			active_generation = excluded.active_generation,
+			ingested_at = excluded.ingested_at
+	`);
+}
+
 export async function listOcrPages(db: RawSqlDb, revisionId: string, variant: string): Promise<OcrPageRow[]> {
 	return db.all<OcrPageRow>(sql`
 		select revisionId, variant, page, group_concat(text, char(10) || char(10)) as text
@@ -234,6 +307,20 @@ export async function searchOcr(
 	const variantClause = opts.variant?.trim()
 		? sql`and c.variant = ${opts.variant.trim()}`
 		: sql`and c.variant = coalesce(
+			-- A human edit supersedes machine OCR for that page, so an edited
+			-- chunk wins over the preferred machine variant page by page.
+			(
+				select 'edited'
+				from ocr_chunks edited_chunk
+				inner join ocr_ingest_state edited_state
+					on edited_state.revision_id = edited_chunk.revision_id
+					and edited_state.variant = edited_chunk.variant
+					and edited_state.active_generation = edited_chunk.ingest_generation
+				where edited_chunk.revision_id = c.revision_id
+					and edited_chunk.variant = 'edited'
+					and edited_chunk.page = c.page
+				limit 1
+			),
 			(
 				select coverage.variant
 				from revision_ocr_coverage coverage

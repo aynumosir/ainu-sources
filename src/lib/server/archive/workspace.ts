@@ -13,7 +13,7 @@ import type * as schema from '$lib/server/db/schema';
 import { base64url, fromBase64url } from './crypto';
 import { decodePageCursor, encodePageCursor } from './cursor';
 import { ArchiveHttpError } from './errors';
-import { parsePageSelector } from './ocr';
+import { parsePageSelector, replaceEditedPageChunks } from './ocr';
 import { iso, type ArchivePrincipal } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
@@ -69,10 +69,16 @@ function validateNote(note: string | null | undefined): string | null {
 
 async function machinePages(db: Conn, revisionId: string): Promise<MachinePage[]> {
 	return db.all<MachinePage>(sql`
-		select variant, cast(page as integer) as page, text
-		from ocr_pages
-		where revision_id = ${revisionId} and variant <> 'edited'
-		order by cast(page as integer), variant
+		select c.variant as variant, cast(c.page as integer) as page,
+			group_concat(c.text, char(10)) as text
+		from ocr_chunks c
+		join ocr_ingest_state s
+			on s.revision_id = c.revision_id
+			and s.variant = c.variant
+			and s.active_generation = c.ingest_generation
+		where c.revision_id = ${revisionId} and c.variant <> 'edited'
+		group by c.variant, c.page
+		order by cast(c.page as integer), c.variant
 	`);
 }
 
@@ -142,17 +148,7 @@ function conflictWith(head: EditHead | null): ArchiveHttpError {
 }
 
 async function replaceEditedSearchPage(db: Conn, revisionId: string, page: number, text: string | null): Promise<void> {
-	// TODO(ocr-chunks): Replace this ocr_pages write with the ocr_chunks generation-aware page replacement from migration 0013.
-	await db.run(sql`
-		delete from ocr_pages
-		where revision_id = ${revisionId} and variant = 'edited' and cast(page as integer) = ${page}
-	`);
-	if (text != null) {
-		await db.run(sql`
-			insert into ocr_pages (revision_id, variant, page, text)
-			values (${revisionId}, 'edited', ${page}, ${text})
-		`);
-	}
+	await replaceEditedPageChunks(db as never, revisionId, page, text);
 }
 
 async function ensureBase(tx: Tx, revisionId: string, page: number, base: PageEditBase): Promise<void> {
@@ -450,16 +446,21 @@ export async function getWorkspaceRevisionText(
 		};
 	}
 	const pageClause = selectedPages?.length
-		? sql`and cast(page as integer) in (${sql.join(selectedPages.map((page) => sql`${page}`), sql`, `)})`
+		? sql`and cast(c.page as integer) in (${sql.join(selectedPages.map((page) => sql`${page}`), sql`, `)})`
 		: sql``;
 	const rows = await db.all<{ page: number; text: string }>(sql`
-		select cast(page as integer) as page, text
-		from ocr_pages
-		where revision_id = ${revisionId}
-			and variant = ${requestedVariant}
-			and cast(page as integer) > ${cursorPage}
+		select cast(c.page as integer) as page, group_concat(c.text, char(10)) as text
+		from ocr_chunks c
+		join ocr_ingest_state s
+			on s.revision_id = c.revision_id
+			and s.variant = c.variant
+			and s.active_generation = c.ingest_generation
+		where c.revision_id = ${revisionId}
+			and c.variant = ${requestedVariant}
+			and cast(c.page as integer) > ${cursorPage}
 			${pageClause}
-		order by cast(page as integer)
+		group by c.page
+		order by cast(c.page as integer)
 		limit ${limit + 1}
 	`);
 	if (rows.length === 0) return ocrUnavailable(revisionId, pageCount);
