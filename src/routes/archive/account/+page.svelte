@@ -1,5 +1,10 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import { formatBytes } from '$lib/archive/format';
+	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
+	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 	let { data } = $props();
 
@@ -9,17 +14,38 @@
 		archive_reviewer: 'Review pending submissions and inspect pending archive material.',
 		archive_admin: 'Manage archive roles and administrative settings.'
 	};
+
+	const signOutEnhance: SubmitFunction = () => {
+		return async ({ result, update }) => {
+			if (result.type === 'success' || result.type === 'redirect') {
+				await goto('/archive', { invalidateAll: true });
+				return;
+			}
+			await update();
+		};
+	};
 </script>
 
 {#if data.principal}
 	<div class="max-w-3xl space-y-5">
-		<div>
-			<h1 class="text-[27px] font-semibold">Account</h1>
+		<div class="archive-rule-dotted pb-3">
+			<BilingualLabel
+				tag="h1"
+				stacked
+				ja={archiveLabels.account.ja}
+				en={archiveLabels.account.en}
+				class="text-[27px] font-semibold [--archive-label-en-size:21px]"
+			/>
 			<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">Archive identity and access limits.</p>
 		</div>
 
-		<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
-			<h2 class="text-[17px] font-semibold">Identity</h2>
+		<section class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
+			<BilingualLabel
+				tag="h2"
+				ja={archiveLabels.identity.ja}
+				en={archiveLabels.identity.en}
+				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+			/>
 			<dl class="mt-3 grid gap-2 text-[15px] sm:grid-cols-[10rem_1fr]">
 				<dt class="text-[var(--archive-subtle)]">Login</dt>
 				<dd>{data.principal.identity.value}</dd>
@@ -33,8 +59,13 @@
 			</dl>
 		</section>
 
-		<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
-			<h2 class="text-[17px] font-semibold">Usage</h2>
+		<section class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
+			<BilingualLabel
+				tag="h2"
+				ja={archiveLabels.usage.ja}
+				en={archiveLabels.usage.en}
+				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+			/>
 			{#if data.usage}
 				<dl class="mt-3 grid gap-2 text-[15px] sm:grid-cols-[10rem_1fr]">
 					<dt class="text-[var(--archive-subtle)]">Bytes used</dt>
@@ -50,32 +81,49 @@
 		</section>
 
 		{#if data.principal.role === 'archive_admin'}
-			<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
-				<h2 class="text-[17px] font-semibold">Administration</h2>
+			<section class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
+				<BilingualLabel
+					tag="h2"
+					ja={archiveLabels.administration.ja}
+					en={archiveLabels.administration.en}
+					class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+				/>
 				<p class="mt-2 text-[15px] leading-7 text-[var(--archive-subtle)]">
 					Manage archive roles and administrative settings.
 				</p>
-				<a href="/archive/admin" class="mt-3 inline-flex rounded-md border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold">
+				<a href="/archive/admin" class="mt-3 inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
 					Open admin
 				</a>
 			</section>
 		{/if}
 
-		<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
-			<h2 class="text-[17px] font-semibold">Audit</h2>
+		<section class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
+			<BilingualLabel
+				tag="h2"
+				ja={archiveLabels.audit.ja}
+				en={archiveLabels.audit.en}
+				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+			/>
 			<p class="mt-2 text-[15px] leading-7 text-[var(--archive-subtle)]">
 				Archive downloads and mutation actions are logged with your archive user id.
 			</p>
 		</section>
 
-		<section class="rounded-lg border border-[var(--archive-border)] bg-[var(--archive-surface)] p-4">
-			<h2 class="text-[17px] font-semibold">Sign out</h2>
+		<section class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
+			<BilingualLabel
+				tag="h2"
+				ja={archiveLabels.signOut.ja}
+				en={archiveLabels.signOut.en}
+				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+			/>
 			<p class="mt-2 text-[15px] text-[var(--archive-subtle)]">
-				Cloudflare Access manages this session.
+				End the app session for this archive.
 			</p>
-			<a href="/cdn-cgi/access/logout" class="mt-3 inline-flex rounded-md border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold">
-				Sign out of Access
-			</a>
+			<form method="POST" action="/account?/signout" use:enhance={signOutEnhance} class="mt-3">
+				<button type="submit" class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
+					<BilingualLabel ja={archiveLabels.signOut.ja} en={archiveLabels.signOut.en} />
+				</button>
+			</form>
 		</section>
 	</div>
 {/if}
