@@ -51,10 +51,10 @@
 				class="text-[17px] font-semibold"
 			/>
 			<dl class="mt-3 grid gap-2 text-[15px] sm:grid-cols-[10rem_1fr]">
-				<dt class="text-[var(--archive-subtle)]">Login</dt>
-				<dd>{data.principal.identity.value}</dd>
-				<dt class="text-[var(--archive-subtle)]">User id</dt>
-				<dd class="archive-mono break-all text-[13px]">{data.principal.userId}</dd>
+				<dt class="text-[var(--archive-subtle)]">Name</dt>
+				<dd>{data.displayName}</dd>
+				<dt class="text-[var(--archive-subtle)]">account id</dt>
+				<dd class="archive-mono break-all text-[12px] text-[var(--archive-subtle)]">{data.principal.identity.value}</dd>
 				<dt class="text-[var(--archive-subtle)]">Role</dt>
 				<dd>
 					<span class="font-medium">{data.principal.role}</span>

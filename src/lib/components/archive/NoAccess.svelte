@@ -28,9 +28,6 @@
 		<div class="w-full max-w-lg border border-[var(--archive-border)] bg-[var(--archive-paper)] p-8 text-center shadow-sm">
 			<a href="/archive" class="inline-block text-[var(--archive-text)]">
 				<span class="archive-wordmark block text-[21px]">aynumosir archive</span>
-				<span class="mt-1 block font-[var(--font-archive-jp)] text-[13px] text-[var(--archive-faint-text)]">
-					アイヌモシㇼ資料記録庫
-				</span>
 			</a>
 			{#if hasAppSession}
 				<BilingualLabel
