@@ -9,12 +9,25 @@
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import { formatBytes, middleEllipsis } from '$lib/archive/format';
 	import { centuryLabel, centuryOf, formatYear } from '$lib/format';
+	import {
+		chooseDefaultOcrVariant,
+		ocrEngineLabel,
+		textBearingVariants,
+		type OcrCoverage
+	} from '$lib/archive/ocr';
+	import OcrBadge from './OcrBadge.svelte';
 
 	type Sheet = 'pages' | 'about' | 'find' | null;
+	type ViewMode = 'image' | 'text' | 'side-by-side';
 	type ImageEntry =
 		| { status: 'loading'; src: null }
 		| { status: 'ready'; src: string }
 		| { status: 'missing'; src: null };
+	type TextEntry =
+		| { status: 'loading' }
+		| { status: 'ready'; text: string }
+		| { status: 'empty' }
+		| { status: 'error'; message: string };
 	type ArchiveWorkPerson = {
 		name: string;
 		slug: string;
@@ -25,6 +38,8 @@
 
 	const source = $derived(work.detail.source);
 	const pageCount = $derived(work.revision.pageCount);
+	const ocrCoverage = $derived<OcrCoverage[]>(work.ocr ?? []);
+	const textVariants = $derived(textBearingVariants(ocrCoverage));
 	const linkedAuthors = $derived(persons.filter((person) => person.role === 'author'));
 	const firstLinkedAuthor = $derived(linkedAuthors[0] ?? null);
 	const author = $derived(
@@ -44,6 +59,9 @@
 	let currentPage = $state(untrack(() => work.initialPage));
 	let pageField = $state(untrack(() => String(work.initialPage)));
 	let images = $state<Record<number, ImageEntry>>({});
+	let viewMode = $state<ViewMode>('image');
+	let selectedVariant = $state<string | null>(untrack(() => chooseDefaultOcrVariant(work.ocr ?? [])));
+	let textEntries = $state<Record<string, TextEntry>>({});
 	let imageNotice = $state<string | null>(null);
 	let copyStatus = $state<string | null>(null);
 	let sheet = $state<Sheet>(null);
@@ -65,6 +83,9 @@
 		Array.from({ length: Math.max(0, virtualEnd - virtualStart) }, (_, index) => virtualStart + index + 1)
 	);
 	const selectedImage = $derived(images[currentPage]);
+	const selectedCoverage = $derived(ocrCoverage.find((variant) => variant.variant === selectedVariant) ?? null);
+	const selectedText = $derived(selectedVariant ? textEntries[textKey(currentPage, selectedVariant)] : undefined);
+	const selectedVariantName = $derived(selectedCoverage ? displayVariantName(selectedCoverage) : selectedVariant ?? '');
 
 	onMount(() => {
 		if (thumbList) thumbViewport = thumbList.clientHeight;
@@ -89,6 +110,13 @@
 	$effect(() => {
 		const center = currentPage;
 		void loadImageWindow(center);
+	});
+
+	$effect(() => {
+		const page = currentPage;
+		const variant = selectedVariant;
+		const mode = viewMode;
+		if (variant && mode !== 'image') void loadText(page, variant);
 	});
 
 	function clampPage(value: number): number {
@@ -152,6 +180,47 @@
 		const src = URL.createObjectURL(await response.blob());
 		objectUrls.add(src);
 		images = { ...images, [page]: { status: 'ready', src } };
+	}
+
+	function textKey(page: number, variant: string): string {
+		return `${page}:${variant}`;
+	}
+
+	async function loadText(page: number, variant: string): Promise<void> {
+		const key = textKey(page, variant);
+		if (textEntries[key]) return;
+		textEntries = { ...textEntries, [key]: { status: 'loading' } };
+		try {
+			const query = new URLSearchParams({ pages: String(page), variant });
+			const response = await archiveFetch(`/api/archive/revisions/${work.revision.id}/text?${query}`);
+			if (!response.ok) throw new Error(`OCR text request failed (${response.status})`);
+			const body = await response.json() as {
+				error?: string;
+				pages?: Array<{ page: number; text: string }>;
+			};
+			const row = body.pages?.find((entry) => entry.page === page);
+			textEntries = { ...textEntries, [key]: row ? { status: 'ready', text: row.text } : { status: 'empty' } };
+		} catch (cause) {
+			textEntries = {
+				...textEntries,
+				[key]: { status: 'error', message: cause instanceof Error ? cause.message : 'OCR text failed to load.' }
+			};
+		}
+	}
+
+	function displayVariantName(coverage: OcrCoverage): string {
+		const engine = ocrEngineLabel(coverage);
+		return engine === coverage.variant ? engine : `${engine} · ${coverage.variant}`;
+	}
+
+	function selectTextVariant(variant: string): void {
+		if (!variant || variant === selectedVariant) return;
+		selectedVariant = variant;
+		const key = textKey(currentPage, variant);
+		const nextEntries = { ...textEntries };
+		delete nextEntries[key];
+		textEntries = nextEntries;
+		if (viewMode !== 'image') void loadText(currentPage, variant);
 	}
 
 	async function copyCitation(): Promise<void> {
@@ -275,6 +344,53 @@
 	{/if}
 {/snippet}
 
+{#snippet imagePage()}
+	{#if imageNotice}
+		<p class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[13px] text-[var(--archive-subtle)]">{imageNotice}</p>
+	{:else if selectedImage?.status === 'ready'}
+		<img src={selectedImage.src} alt={`Page ${currentPage} of ${source.title}`} class="max-h-[calc(100svh-14rem)] max-w-full border border-[var(--archive-border)] bg-white object-contain shadow-sm" />
+	{:else if selectedImage?.status === 'missing'}
+		<p class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-6 text-[13px] text-[var(--archive-subtle)]">Page image is unavailable.</p>
+	{:else}
+		<div class="h-[65svh] w-[min(70vw,40rem)] animate-pulse border border-[var(--archive-border)] bg-[var(--archive-paper)]" aria-label="Loading page image"></div>
+	{/if}
+{/snippet}
+
+{#snippet textPage()}
+	<section class="flex h-full min-h-[55svh] w-full min-w-0 flex-col bg-[var(--archive-paper)]">
+		<header class="flex flex-wrap items-center justify-between gap-2 border-b border-dotted border-[var(--archive-border)] px-4 py-3">
+			<p class="archive-kicker">OCR TEXT{#if selectedVariantName} · {selectedVariantName}{/if}</p>
+			{#if textVariants.length > 1}
+				<label class="flex items-center gap-2 text-[12px] text-[var(--archive-subtle)]">
+					<span>OCR version</span>
+					<select
+						value={selectedVariant ?? ''}
+						onchange={(event) => selectTextVariant(event.currentTarget.value)}
+						class="h-8 max-w-64 border border-[var(--archive-border)] bg-[var(--archive-panel)] px-2 text-[12px] text-[var(--archive-text)]"
+					>
+						{#each textVariants as variant (variant.variant)}
+							<option value={variant.variant}>{displayVariantName(variant)} · {variant.pageCount} pages</option>
+						{/each}
+					</select>
+				</label>
+			{/if}
+		</header>
+		<div class="min-h-0 flex-1 overflow-auto p-5">
+			{#if textVariants.length === 0}
+				<p class="grid min-h-[40svh] place-content-center text-center text-[13px] text-[var(--archive-subtle)]">本文なし / no text</p>
+			{:else if !selectedText || selectedText.status === 'loading'}
+				<p class="grid min-h-[40svh] place-content-center text-center text-[13px] text-[var(--archive-subtle)]">OCR本文を読み込んでいます… / Loading OCR text…</p>
+			{:else if selectedText.status === 'empty'}
+				<p class="grid min-h-[40svh] place-content-center text-center text-[13px] text-[var(--archive-subtle)]">このページには本文がありません / No text for this page.</p>
+			{:else if selectedText.status === 'error'}
+				<p class="grid min-h-[40svh] place-content-center text-center text-[13px] text-[var(--archive-danger)]" role="alert">{selectedText.message}</p>
+			{:else}
+				<pre class="whitespace-pre-wrap font-[var(--font-archive-serif)] text-[17px] leading-8 text-[var(--archive-text)]">{selectedText.text}</pre>
+			{/if}
+		</div>
+	</section>
+{/snippet}
+
 {#snippet aboutPanel()}
 	<div class="space-y-4 p-4">
 		<BilingualLabel tag="h2" ja="資料について" en="About this work" class="text-[17px] font-semibold" />
@@ -288,6 +404,25 @@
 				<BilingualLabel ja={archiveLabels.copyCitation.ja} en={archiveLabels.copyCitation.en} />
 			</button>
 			{#if copyStatus}<span class="ml-2 text-[12px] text-[var(--archive-good)]" role="status">{copyStatus}</span>{/if}
+		</section>
+
+		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
+			<h3 class="text-[15px] font-semibold">OCR</h3>
+			{#if ocrCoverage.length}
+				<ul class="mt-3 space-y-3 text-[13px]">
+					{#each ocrCoverage as variant (variant.variant)}
+						<li class="border-l-2 border-[var(--archive-border)] pl-3">
+							<p class="font-semibold">{displayVariantName(variant)}</p>
+							<p class="mt-1 text-[12px] text-[var(--archive-subtle)]">
+								variant {variant.variant}{#if variant.toolVersion} · version {variant.toolVersion}{/if}
+								· {variant.status} · <span class="tnum">{variant.pageCount} of {pageCount} pages</span>{#if variant.preferred} · preferred{/if}
+							</p>
+						</li>
+					{/each}
+				</ul>
+			{:else}
+				<p class="mt-2 text-[13px] text-[var(--archive-subtle)]">本文なし / no text</p>
+			{/if}
 		</section>
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
@@ -391,6 +526,7 @@
 					<span>·</span><span>{work.file.role ?? 'file'}</span>
 					<span>·</span><span class="tnum">page {currentPage} of {pageCount}</span>
 					<span>·</span><span class="tnum">{formatBytes(work.revision.bytes)}</span>
+					<span>·</span><OcrBadge coverage={ocrCoverage} />
 				</p>
 			</div>
 		</div>
@@ -402,7 +538,12 @@
 		</aside>
 
 		<section class="work-stage relative flex min-h-0 min-w-0 flex-col bg-[var(--archive-bg)]">
-			<div class="relative flex min-h-[55svh] flex-1 items-center justify-center overflow-auto p-4">
+			<div
+				class="relative flex min-h-[55svh] flex-1 overflow-auto"
+				class:items-center={viewMode !== 'side-by-side'}
+				class:justify-center={viewMode !== 'side-by-side'}
+				class:p-4={viewMode !== 'text'}
+			>
 				<button
 					type="button"
 					onclick={() => go(-1)}
@@ -410,14 +551,17 @@
 					aria-label="Previous page"
 					class="absolute left-3 top-1/2 z-10 h-12 w-9 -translate-y-1/2 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[21px] disabled:opacity-35"
 				>‹</button>
-				{#if imageNotice}
-					<p class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[13px] text-[var(--archive-subtle)]">{imageNotice}</p>
-				{:else if selectedImage?.status === 'ready'}
-					<img src={selectedImage.src} alt={`Page ${currentPage} of ${source.title}`} class="max-h-[calc(100svh-14rem)] max-w-full border border-[var(--archive-border)] bg-white object-contain shadow-sm" />
-				{:else if selectedImage?.status === 'missing'}
-					<p class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-6 text-[13px] text-[var(--archive-subtle)]">Page image is unavailable.</p>
+				{#if viewMode === 'image'}
+					{@render imagePage()}
+				{:else if viewMode === 'text'}
+					{@render textPage()}
 				{:else}
-					<div class="h-[65svh] w-[min(70vw,40rem)] animate-pulse border border-[var(--archive-border)] bg-[var(--archive-paper)]" aria-label="Loading page image"></div>
+					<div class="grid min-h-[55svh] w-full min-w-0 grid-cols-2">
+						<div class="flex min-h-0 min-w-0 items-center justify-center overflow-auto border-r border-[var(--archive-border)] p-4">
+							{@render imagePage()}
+						</div>
+						{@render textPage()}
+					</div>
 				{/if}
 				<button
 					type="button"
@@ -430,11 +574,31 @@
 
 			<div class="border-t border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-center">
 				<div class="inline-flex border border-[var(--archive-border)] text-[12px]">
-					<button type="button" aria-pressed="true" class="bg-[var(--archive-gilt)] px-3 py-1.5 text-[var(--archive-paper)]">Image</button>
-					<button type="button" disabled aria-describedby="text-view-reason" class="border-l border-[var(--archive-border)] px-3 py-1.5 text-[var(--archive-subtle)] opacity-55">Text</button>
-					<button type="button" disabled aria-describedby="text-view-reason" class="side-by-side-option border-l border-[var(--archive-border)] px-3 py-1.5 text-[var(--archive-subtle)] opacity-55">Side-by-side</button>
+					<button
+						type="button"
+						aria-pressed={viewMode === 'image'}
+						onclick={() => (viewMode = 'image')}
+						class="px-3 py-1.5"
+						class:bg-[var(--archive-gilt)]={viewMode === 'image'}
+						class:text-[var(--archive-paper)]={viewMode === 'image'}
+					>Image</button>
+					<button
+						type="button"
+						aria-pressed={viewMode === 'text'}
+						onclick={() => (viewMode = 'text')}
+						class="border-l border-[var(--archive-border)] px-3 py-1.5"
+						class:bg-[var(--archive-gilt)]={viewMode === 'text'}
+						class:text-[var(--archive-paper)]={viewMode === 'text'}
+					>Text</button>
+					<button
+						type="button"
+						aria-pressed={viewMode === 'side-by-side'}
+						onclick={() => (viewMode = 'side-by-side')}
+						class="side-by-side-option border-l border-[var(--archive-border)] px-3 py-1.5"
+						class:bg-[var(--archive-gilt)]={viewMode === 'side-by-side'}
+						class:text-[var(--archive-paper)]={viewMode === 'side-by-side'}
+					>Side-by-side</button>
 				</div>
-				<p id="text-view-reason" class="mt-1 text-[11px] text-[var(--archive-faint-text)]">OCR text is unavailable in this view.</p>
 			</div>
 		</section>
 

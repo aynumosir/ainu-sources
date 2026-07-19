@@ -7,7 +7,7 @@
 </script>
 
 <form action="/archive" method="get" class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3">
-	<div class="grid gap-3 md:grid-cols-[1.5fr_0.8fr_0.8fr_auto] md:items-end">
+	<div class="grid gap-3 md:grid-cols-[1.5fr_0.8fr_0.8fr_0.9fr_auto] md:items-end">
 		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
 			Text
 			<input name="q" value={filters.text ?? ''} class="mt-1 w-full border-[var(--archive-border)] bg-[var(--archive-panel)] text-[15px] text-[var(--archive-text)]" />
@@ -25,15 +25,19 @@
 				<option value="year-asc">Oldest</option>
 			</select>
 		</label>
+		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
+			Has OCR text
+			<select name="ocr" value={filters.ocr} class="mt-1 w-full border-[var(--archive-border)] bg-[var(--archive-panel)] text-[15px] text-[var(--archive-text)]">
+				<option value="any">Any</option>
+				<option value="with">With text</option>
+				<option value="without">Without text</option>
+			</select>
+		</label>
 		<div class="flex items-center gap-3">
-			<label class="flex items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
-				<input type="checkbox" name="searchable" value="1" checked={filters.searchableOnly} class="rounded border-[var(--archive-border)] text-[var(--archive-accent)]" />
-				Has OCR text
-			</label>
 			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.apply)} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]">
 				<BilingualLabel ja={archiveLabels.apply.ja} en={archiveLabels.apply.en} inverse />
 			</button>
-			<a href={archiveFilterHref('/archive', { searchableOnly: false, sort: 'updated' })} aria-label={bilingualAriaLabel(archiveLabels.clear)} class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
+			<a href={archiveFilterHref('/archive', { ocr: 'any', sort: 'updated' })} aria-label={bilingualAriaLabel(archiveLabels.clear)} class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
 				<BilingualLabel ja={archiveLabels.clear.ja} en={archiveLabels.clear.en} />
 			</a>
 		</div>

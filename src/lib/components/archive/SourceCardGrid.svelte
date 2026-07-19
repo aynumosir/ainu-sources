@@ -3,6 +3,7 @@
 	import BilingualLabel from './BilingualLabel.svelte';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import type { Source } from '$lib/server/db/schema';
+	import type { OcrCoverage } from '$lib/archive/ocr';
 
 	type Item = {
 		source: Source;
@@ -14,7 +15,7 @@
 			bytes: number | null;
 			mediaType: string | null;
 		};
-		coverage?: null;
+		coverage: OcrCoverage[];
 	};
 
 	let { items }: { items: Item[] } = $props();
