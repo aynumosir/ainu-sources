@@ -52,7 +52,7 @@ const SOFT_LEXICON_CAP = 2000;
 const SOFT_OCCURRENCE_CAP = 3000;
 // Candidate chunks scanned in memory per soft query. Each one is tokenized
 // and compared against the query, so this bounds the request's CPU cost.
-const SOFT_CHUNK_SCAN_CAP = 240;
+const SOFT_CHUNK_SCAN_CAP = 120;
 const SIMILAR_CANDIDATE_CAP = 500;
 
 export async function searchArchive(
@@ -795,8 +795,13 @@ async function searchSoft(
 	// return little, which is exactly the misspelling case they exist for.
 	const fuzzyProbes = [...new Set(queryAlternatives.flatMap((alternative) => {
 		const characters = [...alternative];
-		return characters.map((_, index) => characters.filter((_, i) => i !== index).join(''));
-	}))].filter((probe) => [...probe].length >= 3).slice(0, 12);
+		const deletions = characters.map((_, index) => characters.filter((_, i) => i !== index).join(''));
+		// A substitution in the middle leaves the ends intact, so the head and
+		// tail of the token retrieve candidates that deletion variants miss.
+		const head = characters.slice(0, 4).join('');
+		const tail = characters.slice(-4).join('');
+		return [...deletions, head, tail];
+	}))].filter((probe) => [...probe].length >= 3).slice(0, 14);
 	if (exactProbes.length === 0 && fuzzyProbes.length === 0) {
 		return emptySearchResult('soft', SOFT_OCCURRENCE_CAP, false, { tolerance, maxDistance });
 	}
