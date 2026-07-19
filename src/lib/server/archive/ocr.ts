@@ -755,6 +755,19 @@ async function searchSoft(
 	const visibility = archiveSearchVisibilitySql(principal);
 	const variantClause = searchVariantClause(opts.variant);
 	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
+	// Candidates must be narrowed in SQL, not sampled: ordering the whole
+	// vocabulary alphabetically and taking the first N silently drops every
+	// token that sorts later, so a query like "language" would never match.
+	// Exact forms are always included; fuzzy candidates share a first
+	// character with one of the query's alternatives, which covers the
+	// orthographic variation this mode exists for.
+	const queryAlternatives = [...new Set(queryTokens.flatMap(({ token }) => expandNormalizedTokenAlternatives(token)))];
+	const initials = [...new Set(queryAlternatives.map((alternative) => [...alternative][0]).filter(Boolean))];
+	const exactClause = sql`t.token_norm in (${sql.join(queryAlternatives.map((alternative) => sql`${alternative}`), sql`, `)})`;
+	const fuzzyClause = initials.length
+		? sql`(length(t.token_norm) between ${minLength} and ${maxLength}
+			and substr(t.token_norm, 1, 1) in (${sql.join(initials.map((initial) => sql`${initial}`), sql`, `)}))`
+		: sql`0 = 1`;
 	const lexicon = await db.all<{ tokenNorm: string }>(sql`
 		select distinct t.token_norm as tokenNorm
 		from ocr_tokens t
@@ -766,11 +779,11 @@ async function searchSoft(
 		inner join file_revisions fr on fr.id = c.revision_id
 		inner join source_files sf on sf.id = fr.source_file_id
 		inner join sources src on src.id = sf.source_id
-		where length(t.token_norm) between ${minLength} and ${maxLength}
+		where (${exactClause} or ${fuzzyClause})
 			and ${visibility}
 			${variantClause}
 			${sourceClause}
-		order by t.token_norm
+		order by length(t.token_norm), t.token_norm
 		limit ${SOFT_LEXICON_CAP + 1}
 	`);
 	const matchesByToken = new Map<string, SoftAlignment[]>();
