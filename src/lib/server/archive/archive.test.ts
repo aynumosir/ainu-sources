@@ -23,6 +23,7 @@ import {
 	getSourceFileById,
 	getUsageSummary,
 	issueCapability,
+	listArchiveFiles,
 	listArchiveUsers,
 	listFiles,
 	listPendingReview,
@@ -152,6 +153,58 @@ async function seedUploadSource(slug = 'source-one') {
 		category: 'primary',
 		type: 'book',
 		humanDownload: true
+	});
+}
+
+async function seedArchiveListRow(input: {
+	index: number;
+	title: string;
+	dialect?: string | null;
+	yearStart?: number | null;
+	summary?: string | null;
+	reviewedAt: Date;
+}) {
+	const hash = input.index.toString(16).padStart(64, '0').slice(0, 64);
+	await db.insert(schema.sources).values({
+		id: `list-source-${input.index}`,
+		slug: `list-source-${input.index}`,
+		title: input.title,
+		category: 'primary',
+		type: 'book',
+		dialect: input.dialect ?? null,
+		yearStart: input.yearStart ?? null,
+		summary: input.summary ?? null,
+		humanDownload: true
+	});
+	await db.insert(schema.sourceFiles).values({
+		id: `list-file-${input.index}`,
+		sourceId: `list-source-${input.index}`,
+		role: 'scan',
+		checkoutRepoId: 'repo-1',
+		checkoutPath: `books/list-${input.index}.pdf`,
+		createdBy: 'contributor'
+	});
+	await db.insert(schema.archiveBlobs).values({
+		sha256: hash,
+		bytes: 100 + input.index,
+		detectedMediaType: 'application/pdf',
+		storageState: 'verified',
+		verifiedAt: new Date()
+	});
+	await db.insert(schema.fileRevisions).values({
+		id: `list-rev-${input.index}`,
+		sourceFileId: `list-file-${input.index}`,
+		revisionNo: 1,
+		blobSha256: hash,
+		originalFilename: `list-${input.index}.pdf`,
+		declaredMediaType: 'application/pdf',
+		artifactKind: 'original',
+		reviewStatus: 'approved',
+		isCurrent: true,
+		submittedBy: 'contributor',
+		submittedAt: new Date(input.reviewedAt.getTime() - 100),
+		reviewedBy: 'reviewer',
+		reviewedAt: input.reviewedAt
 	});
 }
 
@@ -1468,6 +1521,87 @@ describe('archive DB flows', () => {
 			'rev-1',
 			'rev-2'
 		]);
+	});
+
+	it('returns full filtered archive file pages from SQL filters', async () => {
+		await seedRevision('approved');
+		await db.update(schema.sources).set({ title: 'Unmatched Early', yearStart: 1850 }).where(eq(schema.sources.id, 'source-1'));
+		await seedArchiveListRow({
+			index: 2,
+			title: 'Kamuy Alpha',
+			dialect: 'Hokkaido',
+			yearStart: 1901,
+			summary: 'ritual text',
+			reviewedAt: new Date(3_000)
+		});
+		await seedArchiveListRow({
+			index: 3,
+			title: 'Other Early',
+			dialect: 'Sakhalin',
+			yearStart: 1880,
+			summary: 'metadata',
+			reviewedAt: new Date(4_000)
+		});
+		await seedArchiveListRow({
+			index: 4,
+			title: 'Kamuy Beta',
+			dialect: 'Hokkaido',
+			yearStart: 1904,
+			summary: 'metadata',
+			reviewedAt: new Date(5_000)
+		});
+		await seedArchiveListRow({
+			index: 5,
+			title: 'Kamuy Gamma',
+			dialect: 'Hokkaido',
+			yearStart: 1908,
+			summary: 'metadata',
+			reviewedAt: new Date(6_000)
+		});
+
+		const first = await listArchiveFiles(db, {
+			text: 'kamuy',
+			dialect: 'hokkaido',
+			decade: 1900,
+			sort: 'updated',
+			limit: 2,
+			principal: reader
+		});
+		expect(first.items.map((item) => item.source.title)).toEqual(['Kamuy Alpha', 'Kamuy Beta']);
+		expect(first.nextCursor).toBeTruthy();
+		const second = await listArchiveFiles(db, {
+			text: 'kamuy',
+			dialect: 'hokkaido',
+			decade: 1900,
+			sort: 'updated',
+			cursor: first.nextCursor,
+			limit: 2,
+			principal: reader
+		});
+		expect(second.items.map((item) => item.source.title)).toEqual(['Kamuy Gamma']);
+	});
+
+	it('paginates archive file listings stably for every sort order', async () => {
+		await seedRevision('approved');
+		await db
+			.update(schema.sources)
+			.set({ title: 'Delta', yearStart: 1904 })
+			.where(eq(schema.sources.id, 'source-1'));
+		await db.update(schema.fileRevisions).set({ reviewedAt: new Date(4_000) }).where(eq(schema.fileRevisions.id, 'rev-1'));
+		await seedArchiveListRow({ index: 2, title: 'Alpha', yearStart: 1901, reviewedAt: new Date(2_000) });
+		await seedArchiveListRow({ index: 3, title: 'Charlie', yearStart: 1903, reviewedAt: new Date(3_000) });
+		await seedArchiveListRow({ index: 4, title: 'Bravo', yearStart: 1902, reviewedAt: new Date(5_000) });
+
+		async function titles(sort: 'updated' | 'title' | 'year-desc' | 'year-asc') {
+			const first = await listArchiveFiles(db, { sort, limit: 2, principal: reader });
+			const second = await listArchiveFiles(db, { sort, limit: 2, cursor: first.nextCursor, principal: reader });
+			return [...first.items, ...second.items].map((item) => item.source.title);
+		}
+
+		await expect(titles('updated')).resolves.toEqual(['Alpha', 'Charlie', 'Delta', 'Bravo']);
+		await expect(titles('title')).resolves.toEqual(['Alpha', 'Bravo', 'Charlie', 'Delta']);
+		await expect(titles('year-desc')).resolves.toEqual(['Delta', 'Charlie', 'Bravo', 'Alpha']);
+		await expect(titles('year-asc')).resolves.toEqual(['Alpha', 'Bravo', 'Charlie', 'Delta']);
 	});
 
 	it('resolves file ids to source metadata and current revisions', async () => {

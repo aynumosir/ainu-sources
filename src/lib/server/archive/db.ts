@@ -22,6 +22,7 @@ import type * as schema from '$lib/server/db/schema';
 import { recordArchiveEvent } from './audit';
 import { ArchiveHttpError } from './errors';
 import { decodeCursor, encodeCursor, type FileCursor } from './cursor';
+import { base64url, fromBase64url } from './crypto';
 import { archiveRoleAtLeast, isArchiveRole, iso, type ArchivePrincipal, type ArchiveRole } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
@@ -45,6 +46,7 @@ export type ArchiveBudgetKind = 'download' | 'view';
 export type CapabilityRedemptionRequest =
 	| { kind: 'full' }
 	| { kind: 'range_header'; rangeHeader: string | null };
+export type ArchiveFileSort = 'updated' | 'title' | 'year-desc' | 'year-asc';
 
 export type ArchiveAdminUser = {
 	userId: string;
@@ -1402,6 +1404,192 @@ export async function getUsageSummary(db: Db, principal: ArchivePrincipal) {
 			dailySearchHitLimit: intEnv('ARCHIVE_DAILY_SEARCH_HIT_LIMIT', DEFAULT_SEARCH_HIT_LIMIT)
 		};
 	});
+}
+
+type ArchiveListCursor =
+	| { sort: 'updated'; updatedAt: string; id: string }
+	| { sort: 'title'; title: string; id: string }
+	| { sort: 'year-desc' | 'year-asc'; yearStart: number | null; id: string };
+
+function encodeArchiveListCursor(cursor: ArchiveListCursor): string {
+	return base64url(new TextEncoder().encode(JSON.stringify(cursor)));
+}
+
+function decodeArchiveListCursor(value: string | null, sort: ArchiveFileSort): ArchiveListCursor | null {
+	if (!value) return null;
+	try {
+		const parsed = JSON.parse(new TextDecoder().decode(fromBase64url(value))) as Record<string, unknown>;
+		if (parsed.sort !== sort || typeof parsed.id !== 'string') return null;
+		if (sort === 'updated') {
+			return typeof parsed.updatedAt === 'string' ? { sort, updatedAt: parsed.updatedAt, id: parsed.id } : null;
+		}
+		if (sort === 'title') {
+			return typeof parsed.title === 'string' ? { sort, title: parsed.title, id: parsed.id } : null;
+		}
+		if (typeof parsed.yearStart === 'number' || parsed.yearStart === null) return { sort, yearStart: parsed.yearStart, id: parsed.id };
+		return null;
+	} catch {
+		return null;
+	}
+}
+
+function likeNeedle(value: string): string {
+	return `%${value.toLocaleLowerCase().replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%`;
+}
+
+export async function listArchiveFiles(
+	db: Db,
+	input: {
+		text?: string;
+		dialect?: string;
+		decade?: number;
+		sort: ArchiveFileSort;
+		cursor?: string | null;
+		limit?: number;
+		principal: ArchivePrincipal;
+	}
+) {
+	const limit = Math.min(Math.max(input.limit ?? 50, 1), 100);
+	const cursor = decodeArchiveListCursor(input.cursor ?? null, input.sort);
+	if (input.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
+	const clauses = [eq(fileRevisions.reviewStatus, 'approved'), eq(fileRevisions.isCurrent, true)];
+	if (!archiveRoleAtLeast(input.principal.role, 'archive_reviewer')) {
+		clauses.push(eq(fileRevisions.accessState, 'available'), eq(sources.humanDownload, true));
+	} else if (input.principal.role !== 'archive_admin') {
+		clauses.push(or(eq(fileRevisions.accessState, 'available'), eq(fileRevisions.accessState, 'embargoed'))!);
+	}
+	if (input.text?.trim()) {
+		const needle = likeNeedle(input.text.trim());
+		clauses.push(
+			sql`(
+				lower(${sources.title}) like ${needle} escape '\\'
+				or lower(coalesce(${sources.titleEn}, '')) like ${needle} escape '\\'
+				or lower(coalesce(${sources.author}, '')) like ${needle} escape '\\'
+				or lower(coalesce(${sources.summary}, '')) like ${needle} escape '\\'
+			)`
+		);
+	}
+	if (input.dialect?.trim()) {
+		clauses.push(sql`lower(coalesce(${sources.dialect}, '')) like ${likeNeedle(input.dialect.trim())} escape '\\'`);
+	}
+	if (input.decade) {
+		clauses.push(gte(sources.yearStart, input.decade), lt(sources.yearStart, input.decade + 10));
+	}
+	if (cursor) {
+		if (cursor.sort === 'updated') {
+			const d = new Date(cursor.updatedAt);
+			if (Number.isNaN(d.getTime())) throw new ArchiveHttpError(400, 'invalid cursor');
+			clauses.push(or(gt(fileRevisions.reviewedAt, d), and(eq(fileRevisions.reviewedAt, d), gt(sourceFiles.id, cursor.id)))!);
+		} else if (cursor.sort === 'title') {
+			clauses.push(or(gt(sources.title, cursor.title), and(eq(sources.title, cursor.title), gt(sourceFiles.id, cursor.id)))!);
+		} else if (cursor.sort === 'year-desc') {
+			clauses.push(
+				cursor.yearStart == null
+					? and(isNull(sources.yearStart), gt(sourceFiles.id, cursor.id))!
+					: or(
+							lt(sources.yearStart, cursor.yearStart),
+							and(eq(sources.yearStart, cursor.yearStart), gt(sourceFiles.id, cursor.id)),
+							isNull(sources.yearStart)
+						)!
+			);
+		} else {
+			clauses.push(
+				cursor.yearStart == null
+					? and(isNull(sources.yearStart), gt(sourceFiles.id, cursor.id))!
+					: or(
+							gt(sources.yearStart, cursor.yearStart),
+							and(eq(sources.yearStart, cursor.yearStart), gt(sourceFiles.id, cursor.id)),
+							isNull(sources.yearStart)
+						)!
+			);
+		}
+	}
+
+	const orderBy =
+		input.sort === 'title'
+			? [asc(sources.title), asc(sourceFiles.id)]
+			: input.sort === 'year-desc'
+				? [sql`${sources.yearStart} is null`, desc(sources.yearStart), asc(sourceFiles.id)]
+				: input.sort === 'year-asc'
+					? [sql`${sources.yearStart} is null`, asc(sources.yearStart), asc(sourceFiles.id)]
+					: [asc(fileRevisions.reviewedAt), asc(sourceFiles.id)];
+
+	const rows = await db
+		.select({
+			fileId: sourceFiles.id,
+			sourceSlug: sources.slug,
+			role: sourceFiles.role,
+			checkoutPath: sourceFiles.checkoutPath,
+			sortOrder: sourceFiles.sortOrder,
+			revisionId: fileRevisions.id,
+			reviewedAt: fileRevisions.reviewedAt,
+			sha256: fileRevisions.blobSha256,
+			bytes: archiveBlobs.bytes,
+			mediaType: archiveBlobs.detectedMediaType,
+			sourceId: sources.id,
+			title: sources.title,
+			titleEn: sources.titleEn,
+			titleAin: sources.titleAin,
+			author: sources.author,
+			yearText: sources.yearText,
+			yearStart: sources.yearStart,
+			yearEnd: sources.yearEnd,
+			yearCertainty: sources.yearCertainty,
+			dialect: sources.dialect,
+			summary: sources.summary
+		})
+		.from(sourceFiles)
+		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
+		.innerJoin(fileRevisions, eq(fileRevisions.sourceFileId, sourceFiles.id))
+		.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
+		.where(and(...clauses))
+		.orderBy(...orderBy)
+		.limit(limit + 1);
+	const page = rows.slice(0, limit);
+	const last = page.at(-1);
+	let nextCursor: string | null = null;
+	if (rows.length > limit && last) {
+		nextCursor =
+			input.sort === 'title'
+				? encodeArchiveListCursor({ sort: 'title', title: last.title, id: last.fileId })
+				: input.sort === 'year-desc' || input.sort === 'year-asc'
+					? encodeArchiveListCursor({ sort: input.sort, yearStart: last.yearStart, id: last.fileId })
+					: last.reviewedAt
+						? encodeArchiveListCursor({ sort: 'updated', updatedAt: last.reviewedAt.toISOString(), id: last.fileId })
+						: null;
+	}
+	return {
+		items: page.map((row) => ({
+			file: {
+				fileId: row.fileId,
+				sourceSlug: row.sourceSlug,
+				role: row.role,
+				checkoutPath: row.checkoutPath,
+				sortOrder: row.sortOrder,
+				revisionId: row.revisionId,
+				reviewedAt: iso(row.reviewedAt),
+				sha256: row.sha256,
+				bytes: row.bytes,
+				mediaType: row.mediaType
+			},
+			source: {
+				id: row.sourceId,
+				slug: row.sourceSlug,
+				title: row.title,
+				titleEn: row.titleEn,
+				titleAin: row.titleAin,
+				author: row.author,
+				yearText: row.yearText,
+				yearStart: row.yearStart,
+				yearEnd: row.yearEnd,
+				yearCertainty: row.yearCertainty,
+				dialect: row.dialect,
+				summary: row.summary
+			},
+			coverage: null
+		})),
+		nextCursor
+	};
 }
 
 export async function listArchiveEvents(db: Db, cursorRaw: string | null, limit = 50) {
