@@ -58,6 +58,7 @@ const SIMILAR_CANDIDATE_CAP = 30;
 // token of it against every candidate exceeds the request budget, so the
 // reference is truncated to a representative window.
 const SIMILAR_REFERENCE_TOKEN_CAP = 400;
+const SIMILAR_REFERENCE_CHAR_CAP = 4000;
 
 export async function searchArchive(
 	db: Db,
@@ -1035,8 +1036,10 @@ async function searchSimilar(
 		order by c.block
 	`);
 	if (referenceChunks.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
+	// Truncate the text before tokenizing: a whole-document reference can be an
+	// entire book, and tokenizing it in full is the expensive part.
 	const referenceSequence = referenceChunks
-		.flatMap((chunk) => tokenizeNormalizedText(chunk.text).map((t) => t.token))
+		.flatMap((chunk) => tokenizeNormalizedText(chunk.text.slice(0, SIMILAR_REFERENCE_CHAR_CAP)).map((t) => t.token))
 		.slice(0, SIMILAR_REFERENCE_TOKEN_CAP);
 	if (referenceSequence.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
 	const referenceNgrams = tokenNgrams(referenceSequence);
@@ -1104,7 +1107,9 @@ async function searchSimilar(
 	for (const candidate of boundedCandidates) {
 		sequences.set(
 			candidate.chunkId,
-			tokenizeNormalizedText(candidate.text).map((t) => t.token).slice(0, SIMILAR_REFERENCE_TOKEN_CAP)
+			tokenizeNormalizedText(candidate.text.slice(0, SIMILAR_REFERENCE_CHAR_CAP))
+				.map((t) => t.token)
+				.slice(0, SIMILAR_REFERENCE_TOKEN_CAP)
 		);
 	}
 	const ranked = [...sequences.entries()]
