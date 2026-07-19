@@ -53,7 +53,11 @@ const SOFT_OCCURRENCE_CAP = 3000;
 // Candidate chunks scanned in memory per soft query. Each one is tokenized
 // and compared against the query, so this bounds the request's CPU cost.
 const SOFT_CHUNK_SCAN_CAP = 90;
-const SIMILAR_CANDIDATE_CAP = 500;
+const SIMILAR_CANDIDATE_CAP = 60;
+// A whole-document reference (page 0) can be an entire book. Comparing every
+// token of it against every candidate exceeds the request budget, so the
+// reference is truncated to a representative window.
+const SIMILAR_REFERENCE_TOKEN_CAP = 400;
 
 export async function searchArchive(
 	db: Db,
@@ -1031,7 +1035,9 @@ async function searchSimilar(
 		order by c.block
 	`);
 	if (referenceChunks.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
-	const referenceSequence = referenceChunks.flatMap((chunk) => tokenizeNormalizedText(chunk.text).map((t) => t.token));
+	const referenceSequence = referenceChunks
+		.flatMap((chunk) => tokenizeNormalizedText(chunk.text).map((t) => t.token))
+		.slice(0, SIMILAR_REFERENCE_TOKEN_CAP);
 	if (referenceSequence.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
 	const referenceNgrams = tokenNgrams(referenceSequence);
 	const uniqueReferenceTokens = [...new Set(referenceSequence)];
@@ -1093,7 +1099,10 @@ async function searchSimilar(
 	const candidateByChunk = new Map(boundedCandidates.map((candidate) => [candidate.chunkId, candidate]));
 	const sequences = new Map<string, string[]>();
 	for (const candidate of boundedCandidates) {
-		sequences.set(candidate.chunkId, tokenizeNormalizedText(candidate.text).map((t) => t.token));
+		sequences.set(
+			candidate.chunkId,
+			tokenizeNormalizedText(candidate.text).map((t) => t.token).slice(0, SIMILAR_REFERENCE_TOKEN_CAP)
+		);
 	}
 	const ranked = [...sequences.entries()]
 		.map(([chunkId, sequence]) => {
