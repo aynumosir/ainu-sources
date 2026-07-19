@@ -1012,10 +1012,11 @@ async function searchSimilar(
 	if (opts.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
 	const visibility = archiveSearchVisibilitySql(principal);
 	const variantClause = searchVariantClause(opts.variant);
-	const referenceTokens = await db.all<{ tokenNorm: string }>(sql`
-		select t.token_norm as tokenNorm
-		from ocr_tokens t
-		inner join ocr_chunks c on c.chunk_id = t.chunk_id
+	// The token index is not populated; tokenizing the chunk text in memory
+	// keeps this mode working on the same data every other mode reads.
+	const referenceChunks = await db.all<{ text: string }>(sql`
+		select c.text as text
+		from ocr_chunks c
 		inner join ocr_ingest_state state
 			on state.revision_id = c.revision_id
 			and state.variant = c.variant
@@ -1024,29 +1025,39 @@ async function searchSimilar(
 		inner join source_files sf on sf.id = fr.source_file_id
 		inner join sources src on src.id = sf.source_id
 		where c.revision_id = ${revisionId}
-			and c.page = ${pageNumber}
+			and cast(c.page as integer) = ${pageNumber}
 			and ${visibility}
 			${variantClause}
-		order by c.block, t.position
+		order by c.block
 	`);
-	if (referenceTokens.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
-	const referenceSequence = referenceTokens.map((token) => token.tokenNorm);
+	if (referenceChunks.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
+	const referenceSequence = referenceChunks.flatMap((chunk) => tokenizeNormalizedText(chunk.text).map((t) => t.token));
+	if (referenceSequence.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
 	const referenceNgrams = tokenNgrams(referenceSequence);
 	const uniqueReferenceTokens = [...new Set(referenceSequence)];
 	const referenceTokenBound = 400;
 	const boundReferenceTokens = uniqueReferenceTokens.slice(0, referenceTokenBound);
 	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
+	const probeTokens = [...new Set(referenceSequence)]
+		.filter((token) => [...token].length >= 3)
+		.slice(0, 24);
+	if (probeTokens.length === 0) {
+		return emptySearchResult('similar', SIMILAR_CANDIDATE_CAP, false, {
+			reference: { revision: revisionId, page: pageNumber }
+		});
+	}
+	const probeQuery = probeTokens.map(escapeFtsLiteral).join(' OR ');
 	const candidates = await db.all<SimilarCandidate>(sql`
 		select
 			c.chunk_id as chunkId,
 			c.revision_id as revisionId,
 			c.variant,
-			c.page,
+			cast(c.page as integer) as page,
 			c.block,
 			c.text,
 			c.text_norm as textNorm,
 			0 as rank,
-			count(distinct t.token_norm) as sharedTokenCount,
+			0 as sharedTokenCount,
 			src.slug as sourceSlug,
 			src.title as sourceTitle,
 			src.title_en as sourceTitleEn,
@@ -1056,8 +1067,8 @@ async function searchSimilar(
 			src.year_start as sourceYearStart,
 			src.year_end as sourceYearEnd,
 			src.year_certainty as sourceYearCertainty
-		from ocr_tokens t
-		inner join ocr_chunks c on c.chunk_id = t.chunk_id
+		from ocr_chunks_fts
+		inner join ocr_chunks c on c.rowid = ocr_chunks_fts.rowid
 		inner join ocr_ingest_state state
 			on state.revision_id = c.revision_id
 			and state.variant = c.variant
@@ -1065,16 +1076,12 @@ async function searchSimilar(
 		inner join file_revisions fr on fr.id = c.revision_id
 		inner join source_files sf on sf.id = fr.source_file_id
 		inner join sources src on src.id = sf.source_id
-		where t.token_norm in (${sql.join(
-			boundReferenceTokens.map((token) => sql`${token}`),
-			sql`, `
-		)})
-			and not (c.revision_id = ${revisionId} and c.page = ${pageNumber})
+		where ocr_chunks_fts match ${probeQuery}
+			and not (c.revision_id = ${revisionId} and cast(c.page as integer) = ${pageNumber})
 			and ${visibility}
 			${variantClause}
 			${sourceClause}
-		group by c.chunk_id
-		order by sharedTokenCount desc, c.chunk_id
+		order by bm25(ocr_chunks_fts)
 		limit ${SIMILAR_CANDIDATE_CAP + 1}
 	`);
 	const boundedCandidates = candidates.slice(0, SIMILAR_CANDIDATE_CAP);
@@ -1084,20 +1091,9 @@ async function searchSimilar(
 		});
 	}
 	const candidateByChunk = new Map(boundedCandidates.map((candidate) => [candidate.chunkId, candidate]));
-	const candidateTokens = await db.all<{ chunkId: string; tokenNorm: string }>(sql`
-		select chunk_id as chunkId, token_norm as tokenNorm
-		from ocr_tokens
-		where chunk_id in (${sql.join(
-			boundedCandidates.map((candidate) => sql`${candidate.chunkId}`),
-			sql`, `
-		)})
-		order by chunk_id, position
-	`);
 	const sequences = new Map<string, string[]>();
-	for (const token of candidateTokens) {
-		const sequence = sequences.get(token.chunkId) ?? [];
-		sequence.push(token.tokenNorm);
-		sequences.set(token.chunkId, sequence);
+	for (const candidate of boundedCandidates) {
+		sequences.set(candidate.chunkId, tokenizeNormalizedText(candidate.text).map((t) => t.token));
 	}
 	const ranked = [...sequences.entries()]
 		.map(([chunkId, sequence]) => {
