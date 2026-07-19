@@ -53,7 +53,7 @@ const SOFT_OCCURRENCE_CAP = 3000;
 // Candidate chunks scanned in memory per soft query. Each one is tokenized
 // and compared against the query, so this bounds the request's CPU cost.
 const SOFT_CHUNK_SCAN_CAP = 90;
-const SIMILAR_CANDIDATE_CAP = 60;
+const SIMILAR_CANDIDATE_CAP = 30;
 // A whole-document reference (page 0) can be an entire book. Comparing every
 // token of it against every candidate exceeds the request budget, so the
 // reference is truncated to a representative window.
@@ -1044,9 +1044,12 @@ async function searchSimilar(
 	const referenceTokenBound = 400;
 	const boundReferenceTokens = uniqueReferenceTokens.slice(0, referenceTokenBound);
 	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
+	// Common short tokens have enormous posting lists; longer ones are rarer
+	// and retrieve a far smaller candidate set for the same recall.
 	const probeTokens = [...new Set(referenceSequence)]
-		.filter((token) => [...token].length >= 3)
-		.slice(0, 24);
+		.filter((token) => [...token].length >= 4)
+		.sort((a, b) => [...b].length - [...a].length)
+		.slice(0, 6);
 	if (probeTokens.length === 0) {
 		return emptySearchResult('similar', SIMILAR_CANDIDATE_CAP, false, {
 			reference: { revision: revisionId, page: pageNumber }
