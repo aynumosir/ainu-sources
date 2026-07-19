@@ -789,19 +789,22 @@ async function searchSoft(
 	const queryAlternatives = [...new Set(queryTokens.flatMap(({ token }) => expandNormalizedTokenAlternatives(token)))];
 	// A distance-1 edit still shares one of the token's deletion variants, so
 	// substring probes on those variants retrieve fuzzy candidates cheaply.
-	const probes = [...new Set(queryAlternatives.flatMap((alternative) => {
+	const exactProbes = queryAlternatives.filter((alternative) => [...alternative].length >= 3);
+	// Deletion variants retrieve near-misses, but for a common word their
+	// posting lists are enormous. They are only consulted when the exact forms
+	// return little, which is exactly the misspelling case they exist for.
+	const fuzzyProbes = [...new Set(queryAlternatives.flatMap((alternative) => {
 		const characters = [...alternative];
-		const deletions = characters.map((_, index) => characters.filter((_, i) => i !== index).join(''));
-		return [alternative, ...deletions].filter((probe) => [...probe].length >= 3);
-	}))].slice(0, 40);
-	if (probes.length === 0) {
+		return characters.map((_, index) => characters.filter((_, i) => i !== index).join(''));
+	}))].filter((probe) => [...probe].length >= 3).slice(0, 12);
+	if (exactProbes.length === 0 && fuzzyProbes.length === 0) {
 		return emptySearchResult('soft', SOFT_OCCURRENCE_CAP, false, { tolerance, maxDistance });
 	}
-	// Candidate retrieval goes through the FTS index rather than LIKE scans:
-	// a common word expands into many probes, and scanning the text column for
-	// each of them is slow enough to exhaust the request budget.
-	const probeQuery = probes.map(escapeFtsLiteral).join(' OR ');
-	const occurrences = await db.all<SoftOccurrence>(sql`
+
+	const retrieve = async (probeList: string[]): Promise<SoftOccurrence[]> => {
+		if (probeList.length === 0) return [];
+		const probeQuery = probeList.map(escapeFtsLiteral).join(' OR ');
+		return db.all<SoftOccurrence>(sql`
 		select
 			c.chunk_id as chunkId,
 			c.revision_id as revisionId,
@@ -837,6 +840,18 @@ async function searchSoft(
 		order by bm25(ocr_chunks_fts)
 		limit ${SOFT_CHUNK_SCAN_CAP + 1}
 	`);
+	};
+	const exactRows = await retrieve(exactProbes);
+	const occurrences = [...exactRows];
+	if (exactRows.length < SOFT_CHUNK_SCAN_CAP) {
+		const seen = new Set(exactRows.map((row) => row.chunkId));
+		for (const row of await retrieve(fuzzyProbes)) {
+			if (seen.has(row.chunkId)) continue;
+			seen.add(row.chunkId);
+			occurrences.push(row);
+			if (occurrences.length > SOFT_CHUNK_SCAN_CAP) break;
+		}
+	}
 	const alignmentsByChunk = new Map<string, Map<string, SoftAlignment>>();
 	for (const occurrence of occurrences.slice(0, SOFT_CHUNK_SCAN_CAP)) {
 		const best = new Map<string, SoftAlignment>();
