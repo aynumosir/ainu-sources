@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { createClient } from '@libsql/client';
 import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 import { migrate } from 'drizzle-orm/libsql/migrator';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 import { env } from '$env/dynamic/private';
 import * as schema from '$lib/server/db/schema';
 import { user } from '$lib/server/db/auth.schema';
@@ -39,7 +39,9 @@ import { ArchiveHttpError } from './errors';
 import { authorizeContent } from './gateway';
 import { renderManifest } from './manifest';
 import { verifyMcpAssertion } from './mcp-assertion';
-import { listOcrPages, replaceOcrPages, searchOcr } from './ocr';
+import { damerauLevenshtein, listOcrPages, replaceOcrPages, searchArchive, searchOcr } from './ocr';
+import { escapeFtsLiteral, expandNormalizedTokenAlternatives, normalizeOcrText } from './search-normalization';
+import { compileLinearRegex, extractRegexLiterals, parseRegexAst } from './linear-regex';
 import { buildRangeResponse, quotedSha256Etag } from './range';
 import { archiveMutationPrincipal, throwArchiveError } from './route';
 import { archiveRoleAtLeast, type ArchivePrincipal } from './types';
@@ -959,6 +961,125 @@ describe('archive DB flows', () => {
 		}
 	});
 
+	it('normalizes OCR text and preserves alternatives for lossy kana conversion', () => {
+		expect(normalizeOcrText("Āynu ’トゥ’ ka\u0301m")).toBe("aynu 'tu' kam");
+		expect(expandNormalizedTokenAlternatives('トゥ')).toEqual(expect.arrayContaining(['tu', 'tow']));
+		expect(expandNormalizedTokenAlternatives('tow')).toEqual(expect.arrayContaining(['tu', 'tow']));
+		expect(expandNormalizedTokenAlternatives('アイヌ')).toEqual(expect.arrayContaining(['ainu', 'aynu']));
+		expect(expandNormalizedTokenAlternatives('カムイ')).toEqual(expect.arrayContaining(['kamui', 'kamuy']));
+	});
+
+	it('quotes every FTS literal delimiter and operator character', () => {
+		expect(escapeFtsLiteral('kamuy OR "ape"')).toBe('"kamuy OR ""ape"""');
+	});
+
+	it('extracts branch-safe regex literals and evaluates with the linear matcher', () => {
+		const ast = parseRegexAst('^(kamuy|ape)[0-9]+$');
+		expect(extractRegexLiterals(ast)).toEqual(['kamuy', 'ape']);
+		expect(extractRegexLiterals(parseRegexAst('kamuy|.*'))).toEqual([]);
+		const matcher = compileLinearRegex(ast);
+		expect(matcher.find('kamuy12')).toEqual({ start: 0, end: 7 });
+		expect(matcher.find('xkamuy12')).toBeNull();
+	});
+
+	it('ranks adjacent transpositions at Damerau-Levenshtein distance one', () => {
+		expect(damerauLevenshtein('kamyu', 'kamuy', 1)).toBe(1);
+		expect(damerauLevenshtein('kamyu', 'ape', 1)).toBe(2);
+	});
+
+	it('activates a complete OCR generation and removes the superseded generation', async () => {
+		await seedRevision('approved');
+		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'old generation' }]);
+		const [oldState] = await db.select().from(schema.ocrIngestState);
+		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 2, text: 'new generation' }]);
+		const [newState] = await db.select().from(schema.ocrIngestState);
+		expect(newState.activeGeneration).not.toBe(oldState.activeGeneration);
+		expect(await listOcrPages(db, 'rev-1', 'gemini')).toEqual([
+			{ revisionId: 'rev-1', variant: 'gemini', page: 2, text: 'new generation' }
+		]);
+		const generations = await db.all<{ generation: string }>(sql`
+			select distinct ingest_generation as generation from ocr_chunks where revision_id = 'rev-1'
+		`);
+		expect(generations).toEqual([{ generation: newState.activeGeneration }]);
+	});
+
+	it('uses the preferred OCR variant and deduplicates matching blocks per revision page', async () => {
+		await seedRevision('approved');
+		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'kamuy first\n\nkamuy second' }]);
+		await replaceOcrPages(db, 'rev-1', 'tesseract', [{ page: 1, text: 'kamuy alternate' }]);
+		await db.insert(schema.revisionOcrCoverage).values([
+			{
+				revisionId: 'rev-1',
+				variant: 'gemini',
+				status: 'complete',
+				preferred: true,
+				measuredAt: new Date()
+			},
+			{
+				revisionId: 'rev-1',
+				variant: 'tesseract',
+				status: 'complete',
+				preferred: false,
+				measuredAt: new Date()
+			}
+		]);
+		const preferred = await searchOcr(db, reader, { q: 'kamuy' });
+		expect(preferred.items).toHaveLength(1);
+		expect(preferred.items[0].variant).toBe('gemini');
+		const selected = await searchOcr(db, reader, { q: 'kamuy', variant: 'tesseract' });
+		expect(selected.items).toHaveLength(1);
+		expect(selected.items[0].variant).toBe('tesseract');
+	});
+
+	it('searches regex, soft, similar, and unavailable semantic modes', async () => {
+		await seedRevision('approved');
+		await replaceOcrPages(db, 'rev-1', 'gemini', [
+			{ page: 1, text: 'kamuy aynu mosir ape tow' },
+			{ page: 2, text: 'kamuy aynu mosir cise' },
+			{ page: 3, text: 'unrelated passage' }
+		]);
+		const regex = await searchArchive(db, reader, { q: 'kamuy.*(ape|cise)', mode: 'regex' });
+		expect(regex).toMatchObject({ mode: 'regex', total: 2, truncated: false, cap: 500 });
+		const soft = await searchArchive(db, reader, {
+			q: 'kamyu',
+			mode: 'soft',
+			tolerance: 'normal'
+		});
+		expect(soft.items[0]).toMatchObject({
+			alignments: [{ query_token: 'kamyu', matched_token: 'kamuy', score: 0.8 }]
+		});
+		const lossy = await searchArchive(db, reader, {
+			q: 'トゥ',
+			mode: 'soft',
+			tolerance: 'strict'
+		});
+		expect(lossy.items[0]).toMatchObject({
+			alignments: [{ query_token: 'tu', matched_token: 'tow', score: 1 }]
+		});
+		const similar = await searchArchive(db, reader, { q: 'rev-1:1', mode: 'similar' });
+		expect(similar.items[0]).toMatchObject({ revision: 'rev-1', page: 2, block: 0 });
+		expect(similar.items[0] && 'score' in similar.items[0] ? similar.items[0].score : 0).toBeGreaterThan(0);
+		await expect(searchArchive(db, reader, { q: '.*', mode: 'regex' })).rejects.toMatchObject({
+			status: 400,
+			details: { position: 0, marker: '.*\n^' }
+		});
+		expect(await searchArchive(db, reader, { q: '', mode: 'semantic' })).toMatchObject({
+			mode: 'semantic',
+			enabled: false,
+			code: 'search_mode_not_enabled',
+			total: 0,
+			truncated: false
+		});
+	});
+
+	it('keeps readable OCR searchable when original-file download is disabled', async () => {
+		await seedRevision('approved');
+		await db.update(schema.sources).set({ humanDownload: false }).where(eq(schema.sources.id, 'source-1'));
+		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'searchable kamuy text' }]);
+		const result = await searchOcr(db, reader, { q: 'kamuy' });
+		expect(result.items).toHaveLength(1);
+	});
+
 	it('includes source display metadata on each OCR hit', async () => {
 		await seedRevision('approved');
 		await db
@@ -1085,6 +1206,8 @@ describe('archive DB flows', () => {
 		for (const offset of result.items[0].snippet.offsets) {
 			expect(result.items[0].snippet.text.slice(offset.start, offset.end).toLocaleLowerCase()).toBe('kamuy');
 		}
+		const capped = await searchOcr(db, reader, { q: 'kamuy', internalCap: 1 });
+		expect(capped).toMatchObject({ total: 1, truncated: true, cap: 1 });
 	});
 
 	it('lists upload sessions by active defaults, explicit state, owner, and admin all scope', async () => {
@@ -1182,7 +1305,8 @@ describe('archive DB flows', () => {
 			}
 		]);
 
-		await expect(getUsageSummary(db, reader)).resolves.toEqual({
+	await expect(getUsageSummary(db, reader)).resolves.toEqual({
+			search_modes: ['phrase', 'regex', 'soft', 'similar'],
 			date: day,
 			bytesUsed: 321,
 			dailyByteLimit: 1000,
@@ -1258,6 +1382,12 @@ describe('archive DB flows', () => {
 		await db.update(schema.sources).set({ humanDownload: false }).where(eq(schema.sources.id, 'source-1'));
 		await expect(
 			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'page_image' })
+		).resolves.toMatchObject({ decision: 'allow', quota: { budgetKind: 'view' } });
+		await expect(
+			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'text', requestedBytes: 0 })
+		).resolves.toMatchObject({ decision: 'allow', quota: { budgetKind: 'view' } });
+		await expect(
+			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'original', requestedBytes: 1 })
 		).rejects.toMatchObject({ status: 403, details: { auditId: expect.any(String) } });
 
 		await db.update(schema.sources).set({ humanDownload: true }).where(eq(schema.sources.id, 'source-1'));
@@ -1267,7 +1397,7 @@ describe('archive DB flows', () => {
 		).rejects.toMatchObject({ status: 429, details: { auditId: expect.any(String), resetAt: expect.any(String) } });
 
 		const events = await db.select().from(schema.sourceLifecycleEvents);
-		expect(events.filter((event) => event.eventType === 'content_access_authorized')).toHaveLength(1);
+		expect(events.filter((event) => event.eventType === 'content_access_authorized')).toHaveLength(3);
 		expect(events.filter((event) => event.eventType === 'content_access_denied')).toHaveLength(5);
 	});
 

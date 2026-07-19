@@ -2,7 +2,7 @@ import { base64url, fromBase64url } from './crypto';
 
 export type FileCursor = { updatedAt: string; id: string };
 export type PageCursor = { page: number };
-export type SearchCursor = { revisionId: string; variant: string; page: number };
+export type SearchCursor = { rank: number; chunkId: string };
 
 export function encodeCursor(cursor: FileCursor): string {
 	return base64url(new TextEncoder().encode(JSON.stringify(cursor)));
@@ -42,15 +42,10 @@ export function decodeSearchCursor(value: string | null): SearchCursor | null {
 	if (!value) return null;
 	try {
 		const parsed = JSON.parse(new TextDecoder().decode(fromBase64url(value))) as Partial<SearchCursor>;
-		if (
-			typeof parsed.revisionId !== 'string' ||
-			typeof parsed.variant !== 'string' ||
-			typeof parsed.page !== 'number' ||
-			!Number.isSafeInteger(parsed.page)
-		) {
+		if (typeof parsed.rank !== 'number' || !Number.isFinite(parsed.rank) || typeof parsed.chunkId !== 'string') {
 			return null;
 		}
-		return { revisionId: parsed.revisionId, variant: parsed.variant, page: parsed.page };
+		return { rank: parsed.rank, chunkId: parsed.chunkId };
 	} catch {
 		return null;
 	}

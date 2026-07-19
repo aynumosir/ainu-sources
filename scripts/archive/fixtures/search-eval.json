@@ -1,0 +1,162 @@
+{
+  "documents": [
+    {
+      "id": "shibatani-person",
+      "slug": "shibatani-person",
+      "title": "The Languages of Japan — aynu",
+      "author": "Masayoshi Shibatani",
+      "year": 1990,
+      "source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:79",
+      "text": "In the Ainu language, the word aynu means ‘person’."
+    },
+    {
+      "id": "ud-kana",
+      "slug": "ud-kana",
+      "title": "Universal Dependenciesによるアイヌ語テキストコーパス",
+      "author": "安岡孝一",
+      "year": 2021,
+      "source_ref": "articles/ocr/2021_安岡孝一_Universal Dependenciesによるアイヌ語テキストコーパス.gemini.txt:16",
+      "text": "イタカㇱ アワ ポンルㇷ゚ネアイヌ エネ イタキ"
+    },
+    {
+      "id": "uoi-ape",
+      "slug": "uoi-ape",
+      "title": "旭川採集アイヌ語動詞補遺集 — ape",
+      "author": "魚井一由",
+      "year": null,
+      "source_ref": "books/ocr/魚井一由『旭川採集アイヌ語動詞補遺集』.gemini.txt:50",
+      "text": "apekotukka < ape kotuk ka. sarki-toi apekotukka-a-an."
+    },
+    {
+      "id": "uoi-chise",
+      "slug": "uoi-chise",
+      "title": "旭川採集アイヌ語動詞補遺集 — chise",
+      "author": "魚井一由",
+      "year": null,
+      "source_ref": "books/ocr/魚井一由『旭川採集アイヌ語動詞補遺集』.gemini.txt:60",
+      "text": "poro chise chishireashi. アイヌの家には部屋の仕切りもまた襖もない。"
+    },
+    {
+      "id": "fukazawa-apostrophe",
+      "slug": "fukazawa-apostrophe",
+      "title": "加賀家文書におけるアイヌ語の文献学的研究",
+      "author": "深澤美香",
+      "year": 2017,
+      "source_ref": "articles/ocr/2017_深澤美香_加賀家文書におけるアイヌ語の文献学的研究.pdftotext.txt:3873",
+      "text": "シリヲヌマ シリヲヌマン 夕 sir’onuman 夕方になる"
+    },
+    {
+      "id": "shibatani-hokkaido",
+      "slug": "shibatani-hokkaido",
+      "title": "The Languages of Japan — Hokkaidō",
+      "author": "Masayoshi Shibatani",
+      "year": 1990,
+      "source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:75",
+      "text": "The Ainu are a people living on the northern Japanese island of Hokkaidō."
+    },
+    {
+      "id": "dal-hem",
+      "slug": "dal-hem",
+      "title": "The Development of Analytic Negatives in Sakhalin Ainu",
+      "author": "Elia Dal Corso",
+      "year": 2021,
+      "source_ref": "articles/ocr/2021_Dal Corso Elia_The Development of Analytic Negatives in Sakhalin Ainu.gemini.txt:101",
+      "text": "Hēm haunu. Hēm haw-nu."
+    },
+    {
+      "id": "shibatani-yukara",
+      "slug": "shibatani-yukara",
+      "title": "The Languages of Japan — yūkara",
+      "author": "Masayoshi Shibatani",
+      "year": 1990,
+      "source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:112",
+      "text": "forms are generally called yukar in Ainu and yūkara in the Japanese tradition"
+    },
+    {
+      "id": "fukuda-yay",
+      "slug": "fukuda-yay",
+      "title": "On the Morphological Structure of the Verbs in Saru Dialect of Ainu",
+      "author": "福田すゞ子",
+      "year": 1956,
+      "source_ref": "articles/ocr/1956_Fukuda Suzuko_ON THE MORPHOLOGICAL STRUCTURE OF THE VERBS IN SARU DIALECT OF AINU.gemini.txt:155",
+      "text": "yáykosiramsuye is a lexicalized verb form."
+    },
+    {
+      "id": "shibatani-kamuy",
+      "slug": "shibatani-kamuy",
+      "title": "The Languages of Japan — kamuy",
+      "author": "Masayoshi Shibatani",
+      "year": 1990,
+      "source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:103",
+      "text": "Kamuy also means ‘god’. Indeed, bears are thought to be words relating to gods."
+    },
+    {
+      "id": "ptaszynski-person",
+      "slug": "ptaszynski-person",
+      "title": "Part-of-speech tagger for Ainu language",
+      "author": "Michał Ptaszynski and Yoshio Momouchi",
+      "year": 2012,
+      "source_ref": "articles/ocr/2012_Ptaszynski Michal & Momouchi Yoshio_Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model.pdftotext.txt:72",
+      "text": "The word ainu in the Ainu language means a person."
+    }
+  ],
+  "queries": [
+    {
+      "id": "kana-ainu",
+      "q": "アイヌ",
+      "expected": ["shibatani-person", "ud-kana", "uoi-chise", "ptaszynski-person"]
+    },
+    {
+      "id": "latin-kana-phrase",
+      "q": "itakas awa",
+      "expected": ["ud-kana"]
+    },
+    {
+      "id": "kana-ape",
+      "q": "アペコトゥッカ",
+      "expected": ["uoi-ape"]
+    },
+    {
+      "id": "kana-chise",
+      "q": "ポロ チセ",
+      "expected": ["uoi-chise"]
+    },
+    {
+      "id": "apostrophe",
+      "q": "sir'onuman",
+      "expected": ["fukazawa-apostrophe"]
+    },
+    {
+      "id": "macron-hokkaido",
+      "q": "Hokkaido",
+      "expected": ["shibatani-hokkaido"]
+    },
+    {
+      "id": "macron-hem",
+      "q": "Hem",
+      "expected": ["dal-hem"]
+    },
+    {
+      "id": "macron-yukara",
+      "q": "yukara",
+      "expected": ["shibatani-yukara"]
+    },
+    {
+      "id": "acute-yay",
+      "q": "yaykosiramsuye",
+      "expected": ["fukuda-yay"]
+    },
+    {
+      "id": "lossy-kamuy",
+      "q": "カムイ",
+      "expected": ["shibatani-kamuy"]
+    }
+  ],
+  "similar_queries": [
+    {
+      "id": "parallel-person-definition",
+      "reference": "shibatani-person",
+      "expected": ["ptaszynski-person"]
+    }
+  ]
+}

@@ -1,22 +1,21 @@
-import { and, eq, inArray, sql } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
-import {
-	fileRevisions,
-	ocrIngestState,
-	revisionOcrCoverage,
-	sourceFiles,
-	sources
-} from '$lib/server/db/schema';
+import { ocrIngestState, revisionOcrCoverage } from '$lib/server/db/schema';
 import type * as schema from '$lib/server/db/schema';
 import { ArchiveHttpError } from './errors';
+import { decodePageCursor, decodeSearchCursor, encodePageCursor, encodeSearchCursor } from './cursor';
+import { archiveSearchVisibilitySql } from './gateway';
 import {
-	decodePageCursor,
-	decodeSearchCursor,
-	encodePageCursor,
-	encodeSearchCursor,
-	type SearchCursor
-} from './cursor';
-import { archiveRoleAtLeast, type ArchivePrincipal } from './types';
+	escapeFtsLiteral,
+	expandNormalizedTokenAlternatives,
+	literalPhraseAlternatives,
+	normalizeOcrText,
+	OCR_NORMALIZATION_VERSION,
+	tokenizeNormalizedText
+} from './search-normalization';
+import { compileLinearRegex, extractRegexLiterals, parseRegexAst, RegexSyntaxError } from './linear-regex';
+import type { SearchMode, SearchTolerance } from './search-modes';
+import type { ArchivePrincipal } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
 type RawSqlDb = Pick<Db, 'run' | 'all'>;
@@ -24,15 +23,56 @@ type RawSqlDb = Pick<Db, 'run' | 'all'>;
 export type OcrPageInput = { page: number; text: string };
 export type OcrPageRow = { revisionId: string; variant: string; page: number; text: string };
 
+type RankedChunk = {
+	chunkId: string;
+	revisionId: string;
+	variant: string;
+	page: number;
+	block: number;
+	text: string;
+	textNorm: string;
+	rank: number;
+	sourceSlug: string;
+	sourceTitle: string;
+	sourceTitleEn: string | null;
+	sourceTitleAin: string | null;
+	sourceAuthor: string | null;
+	sourceYearText: string | null;
+	sourceYearStart: number | null;
+	sourceYearEnd: number | null;
+	sourceYearCertainty: string | null;
+};
+
 const DEFAULT_TEXT_LIMIT = 50;
 const DEFAULT_SEARCH_LIMIT = 50;
-const SEARCH_INTERNAL_LIMIT = 1000;
+export const SEARCH_INTERNAL_CAP = 1000;
+const REGEX_CANDIDATE_CAP = 500;
+const REGEX_TIME_BUDGET_MS = 40;
+const SOFT_LEXICON_CAP = 2000;
+const SOFT_OCCURRENCE_CAP = 3000;
+const SIMILAR_CANDIDATE_CAP = 500;
 
-/**
- * Parses comma-separated page numbers and closed ranges, for example `0,2-4,9`.
- * Whitespace and reversed ranges are rejected so malformed selectors do not
- * silently broaden the result set.
- */
+export async function searchArchive(
+	db: Db,
+	principal: ArchivePrincipal,
+	opts: {
+		q: string;
+		mode: SearchMode;
+		tolerance?: SearchTolerance;
+		cursor?: string | null;
+		sourceSlug?: string | null;
+		variant?: string | null;
+		maxChars?: number;
+		limit?: number;
+	}
+) {
+	if (opts.mode === 'semantic') return semanticUnavailable();
+	if (opts.mode === 'regex') return searchRegex(db, principal, opts);
+	if (opts.mode === 'soft') return searchSoft(db, principal, opts);
+	if (opts.mode === 'similar') return searchSimilar(db, principal, opts);
+	return searchOcr(db, principal, opts);
+}
+
 export function parsePageSelector(value: string | null): number[] | null {
 	if (value == null || value === '') return null;
 	const pages = new Set<number>();
@@ -54,23 +94,89 @@ export function parsePageSelector(value: string | null): number[] | null {
 	return [...pages].sort((a, b) => a - b);
 }
 
-export async function replaceOcrPages(db: RawSqlDb, revisionId: string, variant: string, pages: OcrPageInput[]): Promise<void> {
-	// FTS5 virtual tables are outside Drizzle's table builder, so all ocr_pages
-	// writes stay behind this wrapper and use tagged raw SQL.
-	await db.run(sql`delete from ocr_pages where revision_id = ${revisionId} and variant = ${variant}`);
+export async function replaceOcrPages(
+	db: Db,
+	revisionId: string,
+	variant: string,
+	pages: OcrPageInput[],
+	opts: { contentHash?: string; ingestedAt?: Date } = {}
+): Promise<string> {
+	return db.transaction((tx) => activateOcrGeneration(tx as unknown as RawSqlDb, revisionId, variant, pages, opts));
+}
+
+export async function activateOcrGeneration(
+	db: RawSqlDb,
+	revisionId: string,
+	variant: string,
+	pages: OcrPageInput[],
+	opts: { contentHash?: string; ingestedAt?: Date } = {}
+): Promise<string> {
+	const generation = crypto.randomUUID();
 	for (const page of pages) {
-		await db.run(
-			sql`insert into ocr_pages (revision_id, variant, page, text) values (${revisionId}, ${variant}, ${page.page}, ${page.text})`
-		);
+		const blocks = splitPageBlocks(page.text);
+		for (const [block, original] of blocks.entries()) {
+			const text = original.normalize('NFC');
+			const textNorm = normalizeOcrText(text);
+			const chunkId = `${generation}:${page.page}:${block}`;
+			const checksum = await sha256Hex(text);
+			await db.run(sql`
+				insert into ocr_chunks (
+					chunk_id, revision_id, variant, page, block, text, text_norm,
+					checksum, normalization_version, ingest_generation
+				) values (
+					${chunkId}, ${revisionId}, ${variant}, ${page.page}, ${block}, ${text}, ${textNorm},
+					${checksum}, ${OCR_NORMALIZATION_VERSION}, ${generation}
+				)
+			`);
+			for (const token of tokenizeNormalizedText(text)) {
+				await db.run(sql`
+					insert into ocr_tokens (
+						token_norm, revision_id, variant, page, block, position, chunk_id, ingest_generation
+					) values (
+						${token.token}, ${revisionId}, ${variant}, ${page.page}, ${block}, ${token.position}, ${chunkId}, ${generation}
+					)
+				`);
+			}
+		}
 	}
+	const contentHash = opts.contentHash ?? (await sha256Hex(JSON.stringify(pages)));
+	const ingestedAt = opts.ingestedAt ?? new Date();
+	await db.run(sql`
+		insert into ocr_ingest_state (
+			revision_id, variant, content_hash, page_count, active_generation, ingested_at
+		) values (
+			${revisionId}, ${variant}, ${contentHash}, ${pages.length}, ${generation}, ${ingestedAt}
+		)
+		on conflict (revision_id, variant) do update set
+			content_hash = excluded.content_hash,
+			page_count = excluded.page_count,
+			active_generation = excluded.active_generation,
+			ingested_at = excluded.ingested_at
+	`);
+	await db.run(sql`
+		delete from ocr_chunks
+		where revision_id = ${revisionId}
+			and variant = ${variant}
+			and ingest_generation <> ${generation}
+	`);
+	return generation;
 }
 
 export async function listOcrPages(db: RawSqlDb, revisionId: string, variant: string): Promise<OcrPageRow[]> {
 	return db.all<OcrPageRow>(sql`
-		select revision_id as revisionId, variant, cast(page as integer) as page, text
-		from ocr_pages
-		where revision_id = ${revisionId} and variant = ${variant}
-		order by cast(page as integer)
+		select revisionId, variant, page, group_concat(text, char(10) || char(10)) as text
+		from (
+			select c.revision_id as revisionId, c.variant, c.page, c.block, c.text
+			from ocr_chunks c
+			inner join ocr_ingest_state state
+				on state.revision_id = c.revision_id
+				and state.variant = c.variant
+				and state.active_generation = c.ingest_generation
+			where c.revision_id = ${revisionId} and c.variant = ${variant}
+			order by c.page, c.block
+		)
+		group by revisionId, variant, page
+		order by page
 	`);
 }
 
@@ -83,128 +189,167 @@ export async function getRevisionText(
 	const selectedPages = parsePageSelector(opts.pages ?? null);
 	const cursor = decodePageCursor(opts.cursor ?? null);
 	if (opts.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
-	const variant = opts.variant?.trim() || (await preferredVariant(db, revisionId)) || (await firstVariantWithPages(db, revisionId));
+	const variant = opts.variant?.trim() || (await preferredVariant(db, revisionId)) || (await firstVariantWithChunks(db, revisionId));
 	if (!variant) return ocrUnavailable(revisionId, pageCount);
-
+	const rows = await listOcrPages(db, revisionId, variant);
+	const selected = rows.filter((row) => row.page > (cursor?.page ?? -1) && (!selectedPages || selectedPages.includes(row.page)));
+	if (selected.length === 0) return ocrUnavailable(revisionId, pageCount);
 	const limit = opts.limit ?? DEFAULT_TEXT_LIMIT;
-	const cursorPage = cursor?.page ?? -1;
-	const pageClause = selectedPages
-		? sql`and cast(page as integer) in (${sql.join(
-				selectedPages.map((page) => sql`${page}`),
-				sql`, `
-			)})`
-		: sql``;
-
-	// FTS5 virtual tables are queried through tagged raw SQL in this module.
-	const rows = await db.all<OcrPageRow>(sql`
-		select revision_id as revisionId, variant, cast(page as integer) as page, text
-		from ocr_pages
-		where revision_id = ${revisionId}
-			and variant = ${variant}
-			and cast(page as integer) > ${cursorPage}
-			${pageClause}
-		order by cast(page as integer)
-		limit ${limit + 1}
-	`);
-	if (rows.length === 0) return ocrUnavailable(revisionId, pageCount);
-	const page = rows.slice(0, limit);
+	const page = selected.slice(0, limit);
 	const last = page.at(-1);
 	return {
 		revisionId,
 		variant,
 		pages: page.map((row) => ({ page: row.page, text: row.text })),
-		nextCursor: rows.length > limit && last ? encodePageCursor({ page: last.page }) : null
+		nextCursor: selected.length > limit && last ? encodePageCursor({ page: last.page }) : null
 	};
 }
 
 export async function searchOcr(
 	db: Db,
 	principal: ArchivePrincipal,
-	opts: { q: string; cursor?: string | null; sourceSlug?: string | null; maxChars?: number; limit?: number }
+	opts: {
+		q: string;
+		cursor?: string | null;
+		sourceSlug?: string | null;
+		variant?: string | null;
+		maxChars?: number;
+		limit?: number;
+		internalCap?: number;
+	}
 ) {
 	const q = opts.q.trim();
 	if (!q) throw new ArchiveHttpError(400, 'q is required');
+	if ([...normalizeOcrText(q)].length < 3) throw new ArchiveHttpError(400, 'phrase queries require at least three characters');
 	const cursor = decodeSearchCursor(opts.cursor ?? null);
 	if (opts.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
+	const alternatives = literalPhraseAlternatives(q);
+	const internalCap = opts.internalCap ?? SEARCH_INTERNAL_CAP;
+	if (!Number.isSafeInteger(internalCap) || internalCap <= 0 || internalCap > SEARCH_INTERNAL_CAP) {
+		throw new ArchiveHttpError(400, 'invalid search cap');
+	}
+	const ftsQuery = alternatives.map(escapeFtsLiteral).join(' OR ');
+	const visibility = archiveSearchVisibilitySql(principal);
+	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
+	const variantClause = opts.variant?.trim()
+		? sql`and c.variant = ${opts.variant.trim()}`
+		: sql`and c.variant = coalesce(
+			(
+				select coverage.variant
+				from revision_ocr_coverage coverage
+				inner join ocr_ingest_state preferred_state
+					on preferred_state.revision_id = coverage.revision_id
+					and preferred_state.variant = coverage.variant
+				where coverage.revision_id = c.revision_id and coverage.preferred = 1
+				limit 1
+			),
+			(
+				select min(fallback.variant)
+				from ocr_ingest_state fallback
+				where fallback.revision_id = c.revision_id
+			)
+		)`;
 
-	let hits: OcrPageRow[];
+	let rows: RankedChunk[];
 	try {
-		// FTS5 MATCH is the narrow raw-SQL exception for archive OCR search.
-		hits = await db.all<OcrPageRow>(sql`
-			select revision_id as revisionId, variant, cast(page as integer) as page, text
-			from ocr_pages
-			where ocr_pages match ${q}
-			limit ${SEARCH_INTERNAL_LIMIT}
+		rows = await db.all<RankedChunk>(sql`
+			with matched as (
+				select
+					c.chunk_id as chunkId,
+					c.revision_id as revisionId,
+					c.variant,
+					cast(c.page as integer) as page,
+					cast(c.block as integer) as block,
+					c.text,
+					c.text_norm as textNorm,
+					bm25(ocr_chunks_fts) as rank,
+					src.slug as sourceSlug,
+					src.title as sourceTitle,
+					src.title_en as sourceTitleEn,
+					src.title_ain as sourceTitleAin,
+					src.author as sourceAuthor,
+					src.year_text as sourceYearText,
+					src.year_start as sourceYearStart,
+					src.year_end as sourceYearEnd,
+					src.year_certainty as sourceYearCertainty
+				from ocr_chunks_fts
+				inner join ocr_chunks c on c.rowid = ocr_chunks_fts.rowid
+				inner join ocr_ingest_state state
+					on state.revision_id = c.revision_id
+					and state.variant = c.variant
+					and state.active_generation = c.ingest_generation
+				inner join file_revisions fr on fr.id = c.revision_id
+				inner join source_files sf on sf.id = fr.source_file_id
+				inner join sources src on src.id = sf.source_id
+				where ocr_chunks_fts match ${ftsQuery}
+					and ${visibility}
+					${variantClause}
+					${sourceClause}
+			), deduplicated as (
+				select *, row_number() over (
+					partition by revisionId, page
+					order by rank, block, chunkId
+				) as pageRow
+				from matched
+			)
+			select
+				chunkId, revisionId, variant, page, block, text, textNorm, rank,
+				sourceSlug, sourceTitle, sourceTitleEn, sourceTitleAin, sourceAuthor,
+				sourceYearText, sourceYearStart, sourceYearEnd, sourceYearCertainty
+			from deduplicated
+			where pageRow = 1
+			order by rank, chunkId
+			limit ${internalCap + 1}
 		`);
-	} catch {
-		throw new ArchiveHttpError(400, 'invalid search query');
+	} catch (error) {
+		throw new ArchiveHttpError(500, 'search index query failed', { cause: error instanceof Error ? error.message : String(error) });
 	}
 
-	const revisionIds = [...new Set(hits.map((hit) => hit.revisionId))];
-	if (revisionIds.length === 0) return { items: [], nextCursor: null, total: 0 };
-	const sourceClause = opts.sourceSlug ? eq(sources.slug, opts.sourceSlug) : undefined;
-	const metaRows = await db
-		.select({
-			revisionId: fileRevisions.id,
-			reviewStatus: fileRevisions.reviewStatus,
-			accessState: fileRevisions.accessState,
-			isCurrent: fileRevisions.isCurrent,
-			submittedBy: fileRevisions.submittedBy,
-			sourceSlug: sources.slug,
-			sourceTitle: sources.title,
-			sourceTitleEn: sources.titleEn,
-			sourceTitleAin: sources.titleAin,
-			sourceAuthor: sources.author,
-			sourceYearText: sources.yearText,
-			sourceYearStart: sources.yearStart,
-			sourceYearEnd: sources.yearEnd,
-			sourceYearCertainty: sources.yearCertainty,
-			humanDownload: sources.humanDownload
-		})
-		.from(fileRevisions)
-		.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
-		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
-		.where(and(inArray(fileRevisions.id, revisionIds), sourceClause));
-
-	const metaByRevision = new Map(metaRows.map((row) => [row.revisionId, row]));
-	const visible = hits
-		.map((hit) => ({ hit, meta: metaByRevision.get(hit.revisionId) }))
-		.filter((entry): entry is { hit: OcrPageRow; meta: NonNullable<(typeof entry)['meta']> } => {
-			return !!entry.meta && canReadRevisionText(principal, entry.meta);
-		})
-		.sort((a, b) => compareSearchKey(a.hit, b.hit));
-
-	const afterCursor = cursor ? visible.filter((entry) => compareSearchKey(entry.hit, cursor) > 0) : visible;
+	const verified = rows.filter((row) => phraseMatches(row, alternatives));
+	const truncated = rows.length > internalCap;
+	const bounded = verified.slice(0, internalCap);
+	const afterCursor = cursor
+		? bounded.filter((row) => row.rank > cursor.rank || (row.rank === cursor.rank && row.chunkId > cursor.chunkId))
+		: bounded;
 	const limit = opts.limit ?? DEFAULT_SEARCH_LIMIT;
 	const page = afterCursor.slice(0, limit);
 	const last = page.at(-1);
 	const maxChars = opts.maxChars ?? 240;
-
 	return {
-		items: page.map(({ hit, meta }) => ({
-			source: {
-				slug: meta.sourceSlug,
-				title: meta.sourceTitle,
-				titleEn: meta.sourceTitleEn,
-				titleAin: meta.sourceTitleAin,
-				author: meta.sourceAuthor,
-				yearText: meta.sourceYearText,
-				yearStart: meta.sourceYearStart,
-				yearEnd: meta.sourceYearEnd,
-				yearCertainty: meta.sourceYearCertainty
-			},
-			revisionId: hit.revisionId,
-			page: hit.page,
-			variant: hit.variant,
-			// Offsets are measured against this normalized snippet text.
-			snippet: makeSnippet(hit.text, q, maxChars)
-		})),
-		nextCursor:
-			afterCursor.length > limit && last
-				? encodeSearchCursor({ revisionId: last.hit.revisionId, variant: last.hit.variant, page: last.hit.page })
-				: null,
-		// Accurate within SEARCH_INTERNAL_LIMIT; cap hits should be narrowed.
-		total: visible.length
+		mode: 'phrase' as const,
+		items: page.map((hit) => serializeHit(hit, q, maxChars)),
+		nextCursor: afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.rank, chunkId: last.chunkId }) : null,
+		total: bounded.length,
+		truncated,
+		cap: internalCap
+	};
+}
+
+function phraseMatches(row: RankedChunk, alternatives: string[]): boolean {
+	return alternatives.some((alternative) => row.text.includes(alternative) || row.textNorm.includes(normalizeOcrText(alternative)));
+}
+
+function serializeHit(hit: RankedChunk, query: string, maxChars: number) {
+	return {
+		source: {
+			slug: hit.sourceSlug,
+			title: hit.sourceTitle,
+			titleEn: hit.sourceTitleEn,
+			titleAin: hit.sourceTitleAin,
+			author: hit.sourceAuthor,
+			year: hit.sourceYearText ?? hit.sourceYearStart,
+			yearText: hit.sourceYearText,
+			yearStart: hit.sourceYearStart,
+			yearEnd: hit.sourceYearEnd,
+			yearCertainty: hit.sourceYearCertainty
+		},
+		revision: hit.revisionId,
+		revisionId: hit.revisionId,
+		page: hit.page,
+		block: hit.block,
+		variant: hit.variant,
+		rank: hit.rank,
+		snippet: makeSnippet(hit.text, query, maxChars)
 	};
 }
 
@@ -217,13 +362,18 @@ async function preferredVariant(db: Db, revisionId: string): Promise<string | nu
 	return row?.variant ?? null;
 }
 
-async function firstVariantWithPages(db: RawSqlDb, revisionId: string): Promise<string | null> {
+async function firstVariantWithChunks(db: RawSqlDb, revisionId: string): Promise<string | null> {
 	const [row] = await db.all<{ variant: string }>(sql`
-		select variant
-		from ocr_pages
-		where revision_id = ${revisionId}
-		group by variant
-		order by variant
+		select state.variant
+		from ocr_ingest_state state
+		where state.revision_id = ${revisionId}
+			and exists (
+				select 1 from ocr_chunks c
+				where c.revision_id = state.revision_id
+					and c.variant = state.variant
+					and c.ingest_generation = state.active_generation
+			)
+		order by state.variant
 		limit 1
 	`);
 	return row?.variant ?? null;
@@ -242,78 +392,612 @@ function ocrUnavailable(revisionId: string, pageCount: number | null) {
 	return { error: 'ocr_unavailable', alternatives: [], note: 'page count unavailable' };
 }
 
-function canReadRevisionText(
-	principal: ArchivePrincipal,
-	row: {
-		reviewStatus: string;
-		accessState: string;
-		isCurrent: boolean;
-		submittedBy: string;
-		humanDownload: boolean;
-	}
-): boolean {
-	if (row.reviewStatus !== 'approved') {
-		const ownPending =
-			principal.role === 'archive_contributor' && row.submittedBy === principal.userId && row.reviewStatus === 'pending';
-		if (!ownPending && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) return false;
-	}
-	if (!archiveRoleAtLeast(principal.role, 'archive_reviewer') && !row.isCurrent) return false;
-	if (row.accessState === 'embargoed' && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) return false;
-	if (row.accessState === 'takedown' && principal.role !== 'archive_admin') return false;
-	if (!row.humanDownload && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) return false;
-	return true;
+function splitPageBlocks(text: string): string[] {
+	const blocks = text.normalize('NFC').split(/\r?\n[\t ]*\r?\n+/u);
+	return blocks.length > 0 ? blocks : [''];
 }
 
-function compareSearchKey(left: SearchCursor, right: SearchCursor): number {
-	return left.revisionId.localeCompare(right.revisionId) || left.variant.localeCompare(right.variant) || left.page - right.page;
+async function sha256Hex(value: string): Promise<string> {
+	const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+	return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
-function makeSnippet(text: string, q: string, maxChars: number): { text: string; offsets: { start: number; end: number }[] } {
+function makeSnippet(text: string, query: string, maxChars: number): { text: string; offsets: { start: number; end: number }[] } {
 	const width = Math.min(Math.max(maxChars, 40), 1000);
-	const needle = firstSnippetNeedle(q);
-	const lowerText = text.toLocaleLowerCase();
-	const index = needle ? lowerText.indexOf(needle.toLocaleLowerCase()) : -1;
-	const start = index === -1 ? 0 : Math.max(0, index - Math.floor(width / 3));
-	const snippet = text.slice(start, start + width).replace(/\s+/gu, ' ').trim();
-	return { text: snippet, offsets: snippetOffsets(snippet, q) };
+	const ranges = matchOffsets(text, query);
+	const anchor = ranges[0]?.start ?? 0;
+	const start = Math.max(0, Math.min(anchor - Math.floor(width / 3), Math.max(0, text.length - width)));
+	const snippet = text.slice(start, start + width);
+	return {
+		text: snippet,
+		offsets: ranges
+			.filter((range) => range.end > start && range.start < start + snippet.length)
+			.map((range) => ({ start: Math.max(0, range.start - start), end: Math.min(snippet.length, range.end - start) }))
+	};
 }
 
-function firstSnippetNeedle(q: string): string | null {
-	return snippetTokens(q)[0] ?? null;
+function matchOffsets(text: string, query: string): { start: number; end: number }[] {
+	const raw = allSubstringOffsets(text, query.normalize('NFC'));
+	if (raw.length > 0) return raw;
+	const normalizedText = normalizeOcrText(text);
+	const normalizedQuery = normalizeOcrText(query);
+	const normalizedRanges = allSubstringOffsets(normalizedText, normalizedQuery);
+	if (normalizedRanges.length === 0) return [];
+	const boundaries = [0];
+	for (const char of text) boundaries.push(boundaries.at(-1)! + char.length);
+	const prefixLengths = boundaries.map((boundary) => normalizeOcrText(text.slice(0, boundary)).length);
+	return normalizedRanges.map((range) => ({
+		start: boundaryForNormalizedOffset(boundaries, prefixLengths, range.start, false),
+		end: boundaryForNormalizedOffset(boundaries, prefixLengths, range.end, true)
+	}));
 }
 
-function snippetTokens(q: string): string[] {
-	const tokens: string[] = [];
-	for (const token of q.split(/\s+/u)) {
-		const clean = token.replace(/^["'([{]+|["')\]}]+$/gu, '');
-		if (clean && !/^(and|or|not)$/iu.test(clean)) tokens.push(clean);
+function allSubstringOffsets(text: string, query: string): { start: number; end: number }[] {
+	if (!query) return [];
+	const offsets: { start: number; end: number }[] = [];
+	let index = text.indexOf(query);
+	while (index !== -1) {
+		offsets.push({ start: index, end: index + query.length });
+		index = text.indexOf(query, index + Math.max(query.length, 1));
 	}
-	return tokens;
+	return offsets;
 }
 
-function snippetOffsets(text: string, q: string): { start: number; end: number }[] {
-	const lowerText = text.toLocaleLowerCase();
-	const ranges = snippetTokens(q).flatMap((token) => {
-		const lowerToken = token.toLocaleLowerCase();
-		const hits: { start: number; end: number }[] = [];
-		let index = lowerText.indexOf(lowerToken);
-		while (index !== -1) {
-			hits.push({ start: index, end: index + token.length });
-			index = lowerText.indexOf(lowerToken, index + 1);
+function boundaryForNormalizedOffset(boundaries: number[], prefixLengths: number[], offset: number, end: boolean): number {
+	for (let index = 0; index < prefixLengths.length; index += 1) {
+		if (end ? prefixLengths[index] >= offset : prefixLengths[index] > offset) {
+			return boundaries[Math.max(0, end ? index : index - 1)];
 		}
-		return hits;
+	}
+	return boundaries.at(-1) ?? 0;
+}
+
+async function searchRegex(
+	db: Db,
+	principal: ArchivePrincipal,
+	opts: {
+		q: string;
+		cursor?: string | null;
+		sourceSlug?: string | null;
+		variant?: string | null;
+		maxChars?: number;
+		limit?: number;
+	}
+) {
+	const pattern = opts.q;
+	if (!pattern) throw new ArchiveHttpError(400, 'q is required');
+	let ast: ReturnType<typeof parseRegexAst>;
+	try {
+		ast = parseRegexAst(pattern);
+	} catch (error) {
+		if (error instanceof RegexSyntaxError) throw regexRequestError(error.message, pattern, error.position);
+		throw error;
+	}
+	const literals = extractRegexLiterals(ast);
+	if (literals.length === 0) {
+		throw regexRequestError('regex requires a literal run of at least three characters on every branch', pattern, 0);
+	}
+	const matcher = compileLinearRegex(ast);
+	const cursor = decodeSearchCursor(opts.cursor ?? null);
+	if (opts.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
+	const rows = await loadFtsChunks(db, principal, {
+		ftsQuery: literals.map(escapeFtsLiteral).join(' OR '),
+		sourceSlug: opts.sourceSlug,
+		variant: opts.variant,
+		limit: REGEX_CANDIDATE_CAP + 1
 	});
-	ranges.sort((a, b) => a.start - b.start || a.end - b.end);
-	const merged: { start: number; end: number }[] = [];
-	for (const range of ranges) {
-		const last = merged.at(-1);
-		if (!last || range.start > last.end) {
-			merged.push({ ...range });
-			continue;
+	let budgetBound = false;
+	const deadline = Date.now() + REGEX_TIME_BUDGET_MS;
+	const verified: Array<{ hit: RankedChunk; range: { start: number; end: number } }> = [];
+	for (const hit of rows.slice(0, REGEX_CANDIDATE_CAP)) {
+		try {
+			const range = matcher.find(hit.text, deadline);
+			if (range) verified.push({ hit, range });
+		} catch (error) {
+			if (error instanceof Error && error.message === 'regex time budget exceeded') {
+				budgetBound = true;
+				break;
+			}
+			throw error;
 		}
-		last.end = Math.max(last.end, range.end);
 	}
-	return merged;
+	const deduplicated = new Map<string, (typeof verified)[number]>();
+	for (const match of verified) {
+		const key = `${match.hit.revisionId}:${match.hit.page}`;
+		if (!deduplicated.has(key)) deduplicated.set(key, match);
+	}
+	const bounded = [...deduplicated.values()];
+	const afterCursor = cursor
+		? bounded.filter(({ hit }) => hit.rank > cursor.rank || (hit.rank === cursor.rank && hit.chunkId > cursor.chunkId))
+		: bounded;
+	const limit = opts.limit ?? DEFAULT_SEARCH_LIMIT;
+	const page = afterCursor.slice(0, limit);
+	const last = page.at(-1);
+	return {
+		mode: 'regex' as const,
+		items: page.map(({ hit, range }) => ({
+			...serializeHit(hit, pattern, opts.maxChars ?? 240),
+			snippet: makeSnippetForRanges(hit.text, [range], opts.maxChars ?? 240)
+		})),
+		nextCursor:
+			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
+		total: bounded.length,
+		truncated: rows.length > REGEX_CANDIDATE_CAP || budgetBound,
+		cap: REGEX_CANDIDATE_CAP,
+		timeBudgetMs: REGEX_TIME_BUDGET_MS
+	};
+}
+
+async function loadFtsChunks(
+	db: Db,
+	principal: ArchivePrincipal,
+	opts: { ftsQuery: string; sourceSlug?: string | null; variant?: string | null; limit: number }
+): Promise<RankedChunk[]> {
+	const visibility = archiveSearchVisibilitySql(principal);
+	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
+	const variantClause = searchVariantClause(opts.variant);
+	return db.all<RankedChunk>(sql`
+		select
+			c.chunk_id as chunkId,
+			c.revision_id as revisionId,
+			c.variant,
+			cast(c.page as integer) as page,
+			cast(c.block as integer) as block,
+			c.text,
+			c.text_norm as textNorm,
+			bm25(ocr_chunks_fts) as rank,
+			src.slug as sourceSlug,
+			src.title as sourceTitle,
+			src.title_en as sourceTitleEn,
+			src.title_ain as sourceTitleAin,
+			src.author as sourceAuthor,
+			src.year_text as sourceYearText,
+			src.year_start as sourceYearStart,
+			src.year_end as sourceYearEnd,
+			src.year_certainty as sourceYearCertainty
+		from ocr_chunks_fts
+		inner join ocr_chunks c on c.rowid = ocr_chunks_fts.rowid
+		inner join ocr_ingest_state state
+			on state.revision_id = c.revision_id
+			and state.variant = c.variant
+			and state.active_generation = c.ingest_generation
+		inner join file_revisions fr on fr.id = c.revision_id
+		inner join source_files sf on sf.id = fr.source_file_id
+		inner join sources src on src.id = sf.source_id
+		where ocr_chunks_fts match ${opts.ftsQuery}
+			and ${visibility}
+			${variantClause}
+			${sourceClause}
+		order by bm25(ocr_chunks_fts), c.chunk_id
+		limit ${opts.limit}
+	`);
+}
+
+function regexRequestError(message: string, pattern: string, position: number): ArchiveHttpError {
+	const safePosition = Math.max(0, Math.min(position, pattern.length));
+	return new ArchiveHttpError(400, message, {
+		position: safePosition,
+		marker: `${pattern}\n${' '.repeat(safePosition)}^`
+	});
+}
+
+function searchVariantClause(variant?: string | null) {
+	return variant?.trim()
+		? sql`and c.variant = ${variant.trim()}`
+		: sql`and c.variant = coalesce(
+			(
+				select coverage.variant
+				from revision_ocr_coverage coverage
+				inner join ocr_ingest_state preferred_state
+					on preferred_state.revision_id = coverage.revision_id
+					and preferred_state.variant = coverage.variant
+				where coverage.revision_id = c.revision_id and coverage.preferred = 1
+				limit 1
+			),
+			(select min(fallback.variant) from ocr_ingest_state fallback where fallback.revision_id = c.revision_id)
+		)`;
+}
+
+function makeSnippetForRanges(
+	text: string,
+	ranges: { start: number; end: number }[],
+	maxChars: number
+): { text: string; offsets: { start: number; end: number }[] } {
+	const width = Math.min(Math.max(maxChars, 40), 1000);
+	const anchor = ranges[0]?.start ?? 0;
+	const start = Math.max(0, Math.min(anchor - Math.floor(width / 3), Math.max(0, text.length - width)));
+	const snippet = text.slice(start, start + width);
+	return {
+		text: snippet,
+		offsets: ranges
+			.filter((range) => range.end > start && range.start < start + snippet.length)
+			.map((range) => ({ start: Math.max(0, range.start - start), end: Math.min(snippet.length, range.end - start) }))
+	};
+}
+
+type SoftOccurrence = RankedChunk & { tokenNorm: string };
+type SoftAlignment = { query_token: string; matched_token: string; score: number };
+
+async function searchSoft(
+	db: Db,
+	principal: ArchivePrincipal,
+	opts: {
+		q: string;
+		tolerance?: SearchTolerance;
+		cursor?: string | null;
+		sourceSlug?: string | null;
+		variant?: string | null;
+		maxChars?: number;
+		limit?: number;
+	}
+) {
+	const queryTokens = tokenizeNormalizedText(opts.q);
+	if (queryTokens.length === 0) throw new ArchiveHttpError(400, 'q must contain at least one searchable token');
+	if (queryTokens.length > 12) throw new ArchiveHttpError(400, 'soft search accepts at most 12 query tokens');
+	const tolerance = opts.tolerance ?? 'normal';
+	const maxDistance = { strict: 0, normal: 1, loose: 2 }[tolerance];
+	const cursor = decodeSearchCursor(opts.cursor ?? null);
+	if (opts.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
+	const alternativeLengths = queryTokens.flatMap(({ token }) =>
+		expandNormalizedTokenAlternatives(token).map((alternative) => [...alternative].length)
+	);
+	const minLength = Math.max(1, Math.min(...alternativeLengths) - maxDistance);
+	const maxLength = Math.max(...alternativeLengths) + maxDistance;
+	const visibility = archiveSearchVisibilitySql(principal);
+	const variantClause = searchVariantClause(opts.variant);
+	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
+	const lexicon = await db.all<{ tokenNorm: string }>(sql`
+		select distinct t.token_norm as tokenNorm
+		from ocr_tokens t
+		inner join ocr_chunks c on c.chunk_id = t.chunk_id
+		inner join ocr_ingest_state state
+			on state.revision_id = c.revision_id
+			and state.variant = c.variant
+			and state.active_generation = c.ingest_generation
+		inner join file_revisions fr on fr.id = c.revision_id
+		inner join source_files sf on sf.id = fr.source_file_id
+		inner join sources src on src.id = sf.source_id
+		where length(t.token_norm) between ${minLength} and ${maxLength}
+			and ${visibility}
+			${variantClause}
+			${sourceClause}
+		order by t.token_norm
+		limit ${SOFT_LEXICON_CAP + 1}
+	`);
+	const matchesByToken = new Map<string, SoftAlignment[]>();
+	for (const { tokenNorm } of lexicon.slice(0, SOFT_LEXICON_CAP)) {
+		const alignments: SoftAlignment[] = [];
+		for (const query of queryTokens) {
+			const alternatives = expandNormalizedTokenAlternatives(query.token);
+			const distance = Math.min(...alternatives.map((alternative) => damerauLevenshtein(alternative, tokenNorm, maxDistance)));
+			if (distance <= maxDistance) {
+				alignments.push({
+					query_token: query.token,
+					matched_token: tokenNorm,
+					score: 1 - distance / Math.max([...query.token].length, [...tokenNorm].length, 1)
+				});
+			}
+		}
+		if (alignments.length > 0) matchesByToken.set(tokenNorm, alignments);
+	}
+	const matchedTokens = [...matchesByToken.keys()];
+	if (matchedTokens.length === 0) {
+		return emptySearchResult('soft', SOFT_OCCURRENCE_CAP, lexicon.length > SOFT_LEXICON_CAP, {
+			tolerance,
+			maxDistance
+		});
+	}
+	const matchedTokenBound = 400;
+	const boundTokens = matchedTokens.slice(0, matchedTokenBound);
+	const occurrences = await db.all<SoftOccurrence>(sql`
+		select
+			c.chunk_id as chunkId,
+			c.revision_id as revisionId,
+			c.variant,
+			c.page,
+			c.block,
+			c.text,
+			c.text_norm as textNorm,
+			0 as rank,
+			t.token_norm as tokenNorm,
+			src.slug as sourceSlug,
+			src.title as sourceTitle,
+			src.title_en as sourceTitleEn,
+			src.title_ain as sourceTitleAin,
+			src.author as sourceAuthor,
+			src.year_text as sourceYearText,
+			src.year_start as sourceYearStart,
+			src.year_end as sourceYearEnd,
+			src.year_certainty as sourceYearCertainty
+		from ocr_tokens t
+		inner join ocr_chunks c on c.chunk_id = t.chunk_id
+		inner join ocr_ingest_state state
+			on state.revision_id = c.revision_id
+			and state.variant = c.variant
+			and state.active_generation = c.ingest_generation
+		inner join file_revisions fr on fr.id = c.revision_id
+		inner join source_files sf on sf.id = fr.source_file_id
+		inner join sources src on src.id = sf.source_id
+		where t.token_norm in (${sql.join(
+			boundTokens.map((token) => sql`${token}`),
+			sql`, `
+		)})
+			and ${visibility}
+			${variantClause}
+			${sourceClause}
+		order by c.chunk_id, t.position
+		limit ${SOFT_OCCURRENCE_CAP + 1}
+	`);
+	const chunks = new Map<string, { hit: RankedChunk; alignments: Map<string, SoftAlignment> }>();
+	for (const occurrence of occurrences.slice(0, SOFT_OCCURRENCE_CAP)) {
+		const group = chunks.get(occurrence.chunkId) ?? { hit: occurrence, alignments: new Map<string, SoftAlignment>() };
+		for (const alignment of matchesByToken.get(occurrence.tokenNorm) ?? []) {
+			const previous = group.alignments.get(alignment.query_token);
+			if (!previous || previous.score < alignment.score) group.alignments.set(alignment.query_token, alignment);
+		}
+		chunks.set(occurrence.chunkId, group);
+	}
+	const ranked = [...chunks.values()]
+		.filter((group) => group.alignments.size === queryTokens.length)
+		.map((group) => {
+			const alignments = [...group.alignments.values()];
+			const score = alignments.reduce((sum, alignment) => sum + alignment.score, 0) / alignments.length;
+			return { ...group, score, hit: { ...group.hit, rank: 1 - score } };
+		})
+		.sort((left, right) => left.hit.rank - right.hit.rank || left.hit.chunkId.localeCompare(right.hit.chunkId));
+	const deduplicated = new Map<string, (typeof ranked)[number]>();
+	for (const candidate of ranked) {
+		const key = `${candidate.hit.revisionId}:${candidate.hit.page}`;
+		if (!deduplicated.has(key)) deduplicated.set(key, candidate);
+	}
+	const bounded = [...deduplicated.values()];
+	const afterCursor = cursor
+		? bounded.filter(({ hit }) => hit.rank > cursor.rank || (hit.rank === cursor.rank && hit.chunkId > cursor.chunkId))
+		: bounded;
+	const limit = opts.limit ?? DEFAULT_SEARCH_LIMIT;
+	const page = afterCursor.slice(0, limit);
+	const last = page.at(-1);
+	const maxChars = opts.maxChars ?? 240;
+	return {
+		mode: 'soft' as const,
+		tolerance,
+		maxDistance,
+		items: page.map(({ hit, alignments, score }) => ({
+			...serializeHit(hit, opts.q, maxChars),
+			score,
+			alignments: [...alignments.values()],
+			snippet: makeSnippetForRanges(
+				hit.text,
+				[...alignments.values()].flatMap((alignment) => matchOffsets(hit.text, alignment.matched_token)),
+				maxChars
+			)
+		})),
+		nextCursor:
+			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
+		total: bounded.length,
+		truncated:
+			lexicon.length > SOFT_LEXICON_CAP ||
+			matchedTokens.length > matchedTokenBound ||
+			occurrences.length > SOFT_OCCURRENCE_CAP,
+		cap: SOFT_OCCURRENCE_CAP
+	};
+}
+
+export function damerauLevenshtein(left: string, right: string, bound = Number.POSITIVE_INFINITY): number {
+	const a = [...left];
+	const b = [...right];
+	if (Math.abs(a.length - b.length) > bound) return bound + 1;
+	let previousPrevious = new Array<number>(b.length + 1).fill(0);
+	let previous = Array.from({ length: b.length + 1 }, (_, index) => index);
+	for (let row = 1; row <= a.length; row += 1) {
+		const current = new Array<number>(b.length + 1).fill(0);
+		current[0] = row;
+		let rowMinimum = current[0];
+		for (let column = 1; column <= b.length; column += 1) {
+			const substitution = previous[column - 1] + (a[row - 1] === b[column - 1] ? 0 : 1);
+			current[column] = Math.min(previous[column] + 1, current[column - 1] + 1, substitution);
+			if (
+				row > 1 &&
+				column > 1 &&
+				a[row - 1] === b[column - 2] &&
+				a[row - 2] === b[column - 1]
+			) {
+				current[column] = Math.min(current[column], previousPrevious[column - 2] + 1);
+			}
+			rowMinimum = Math.min(rowMinimum, current[column]);
+		}
+		if (rowMinimum > bound) return bound + 1;
+		previousPrevious = previous;
+		previous = current;
+	}
+	return previous[b.length];
+}
+
+function emptySearchResult(mode: 'soft' | 'similar', cap: number, truncated: boolean, extra: Record<string, unknown> = {}) {
+	return { mode, items: [], nextCursor: null, total: 0, truncated, cap, ...extra };
+}
+
+type SimilarCandidate = RankedChunk & { sharedTokenCount: number };
+
+async function searchSimilar(
+	db: Db,
+	principal: ArchivePrincipal,
+	opts: {
+		q: string;
+		cursor?: string | null;
+		sourceSlug?: string | null;
+		variant?: string | null;
+		maxChars?: number;
+		limit?: number;
+	}
+) {
+	const reference = /^(.*):(\d+)$/u.exec(opts.q);
+	if (!reference || !reference[1]) {
+		throw new ArchiveHttpError(400, 'similar search q must be revision:page');
+	}
+	const revisionId = reference[1];
+	const pageNumber = Number(reference[2]);
+	if (!Number.isSafeInteger(pageNumber)) throw new ArchiveHttpError(400, 'similar search page is invalid');
+	const cursor = decodeSearchCursor(opts.cursor ?? null);
+	if (opts.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
+	const visibility = archiveSearchVisibilitySql(principal);
+	const variantClause = searchVariantClause(opts.variant);
+	const referenceTokens = await db.all<{ tokenNorm: string }>(sql`
+		select t.token_norm as tokenNorm
+		from ocr_tokens t
+		inner join ocr_chunks c on c.chunk_id = t.chunk_id
+		inner join ocr_ingest_state state
+			on state.revision_id = c.revision_id
+			and state.variant = c.variant
+			and state.active_generation = c.ingest_generation
+		inner join file_revisions fr on fr.id = c.revision_id
+		inner join source_files sf on sf.id = fr.source_file_id
+		inner join sources src on src.id = sf.source_id
+		where c.revision_id = ${revisionId}
+			and c.page = ${pageNumber}
+			and ${visibility}
+			${variantClause}
+		order by c.block, t.position
+	`);
+	if (referenceTokens.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
+	const referenceSequence = referenceTokens.map((token) => token.tokenNorm);
+	const referenceNgrams = tokenNgrams(referenceSequence);
+	const uniqueReferenceTokens = [...new Set(referenceSequence)];
+	const referenceTokenBound = 400;
+	const boundReferenceTokens = uniqueReferenceTokens.slice(0, referenceTokenBound);
+	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
+	const candidates = await db.all<SimilarCandidate>(sql`
+		select
+			c.chunk_id as chunkId,
+			c.revision_id as revisionId,
+			c.variant,
+			c.page,
+			c.block,
+			c.text,
+			c.text_norm as textNorm,
+			0 as rank,
+			count(distinct t.token_norm) as sharedTokenCount,
+			src.slug as sourceSlug,
+			src.title as sourceTitle,
+			src.title_en as sourceTitleEn,
+			src.title_ain as sourceTitleAin,
+			src.author as sourceAuthor,
+			src.year_text as sourceYearText,
+			src.year_start as sourceYearStart,
+			src.year_end as sourceYearEnd,
+			src.year_certainty as sourceYearCertainty
+		from ocr_tokens t
+		inner join ocr_chunks c on c.chunk_id = t.chunk_id
+		inner join ocr_ingest_state state
+			on state.revision_id = c.revision_id
+			and state.variant = c.variant
+			and state.active_generation = c.ingest_generation
+		inner join file_revisions fr on fr.id = c.revision_id
+		inner join source_files sf on sf.id = fr.source_file_id
+		inner join sources src on src.id = sf.source_id
+		where t.token_norm in (${sql.join(
+			boundReferenceTokens.map((token) => sql`${token}`),
+			sql`, `
+		)})
+			and not (c.revision_id = ${revisionId} and c.page = ${pageNumber})
+			and ${visibility}
+			${variantClause}
+			${sourceClause}
+		group by c.chunk_id
+		order by sharedTokenCount desc, c.chunk_id
+		limit ${SIMILAR_CANDIDATE_CAP + 1}
+	`);
+	const boundedCandidates = candidates.slice(0, SIMILAR_CANDIDATE_CAP);
+	if (boundedCandidates.length === 0) {
+		return emptySearchResult('similar', SIMILAR_CANDIDATE_CAP, candidates.length > SIMILAR_CANDIDATE_CAP, {
+			reference: { revision: revisionId, page: pageNumber }
+		});
+	}
+	const candidateByChunk = new Map(boundedCandidates.map((candidate) => [candidate.chunkId, candidate]));
+	const candidateTokens = await db.all<{ chunkId: string; tokenNorm: string }>(sql`
+		select chunk_id as chunkId, token_norm as tokenNorm
+		from ocr_tokens
+		where chunk_id in (${sql.join(
+			boundedCandidates.map((candidate) => sql`${candidate.chunkId}`),
+			sql`, `
+		)})
+		order by chunk_id, position
+	`);
+	const sequences = new Map<string, string[]>();
+	for (const token of candidateTokens) {
+		const sequence = sequences.get(token.chunkId) ?? [];
+		sequence.push(token.tokenNorm);
+		sequences.set(token.chunkId, sequence);
+	}
+	const ranked = [...sequences.entries()]
+		.map(([chunkId, sequence]) => {
+			const hit = candidateByChunk.get(chunkId)!;
+			const grams = tokenNgrams(sequence);
+			const shared = [...grams].filter((gram) => referenceNgrams.has(gram));
+			const union = new Set([...referenceNgrams, ...grams]).size;
+			const score = union === 0 ? 0 : shared.length / union;
+			const sharedTokens = [...new Set(sequence.filter((token) => uniqueReferenceTokens.includes(token)))];
+			return { hit: { ...hit, rank: -score }, score, shared, sharedTokens };
+		})
+		.filter((candidate) => candidate.shared.length > 0)
+		.sort((left, right) => left.hit.rank - right.hit.rank || left.hit.chunkId.localeCompare(right.hit.chunkId));
+	const deduplicated = new Map<string, (typeof ranked)[number]>();
+	for (const candidate of ranked) {
+		const key = `${candidate.hit.revisionId}:${candidate.hit.page}`;
+		if (!deduplicated.has(key)) deduplicated.set(key, candidate);
+	}
+	const bounded = [...deduplicated.values()];
+	const afterCursor = cursor
+		? bounded.filter(({ hit }) => hit.rank > cursor.rank || (hit.rank === cursor.rank && hit.chunkId > cursor.chunkId))
+		: bounded;
+	const limit = opts.limit ?? DEFAULT_SEARCH_LIMIT;
+	const page = afterCursor.slice(0, limit);
+	const last = page.at(-1);
+	const maxChars = opts.maxChars ?? 240;
+	return {
+		mode: 'similar' as const,
+		reference: { revision: revisionId, page: pageNumber },
+		items: page.map(({ hit, score, shared, sharedTokens }) => ({
+			...serializeHit(hit, sharedTokens.join(' '), maxChars),
+			score,
+			sharedNgrams: shared,
+			snippet: makeSnippetForRanges(
+				hit.text,
+				sharedTokens.flatMap((token) => matchOffsets(hit.text, token)),
+				maxChars
+			)
+		})),
+		nextCursor:
+			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
+		total: bounded.length,
+		truncated:
+			uniqueReferenceTokens.length > referenceTokenBound || candidates.length > SIMILAR_CANDIDATE_CAP,
+		cap: SIMILAR_CANDIDATE_CAP
+	};
+}
+
+function tokenNgrams(tokens: string[]): Set<string> {
+	if (tokens.length === 0) return new Set();
+	const width = Math.min(3, tokens.length);
+	const grams = new Set<string>();
+	for (let index = 0; index <= tokens.length - width; index += 1) {
+		grams.add(tokens.slice(index, index + width).join('\u001f'));
+	}
+	return grams;
+}
+
+function semanticUnavailable() {
+	return {
+		mode: 'semantic' as const,
+		enabled: false,
+		code: 'search_mode_not_enabled',
+		message: 'Semantic search is not enabled for this corpus.',
+		items: [],
+		nextCursor: null,
+		total: 0,
+		truncated: false,
+		cap: 0
+	};
 }
 
 export const ocrIngestTables = { ocrIngestState, revisionOcrCoverage };
