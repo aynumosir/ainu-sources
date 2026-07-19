@@ -94,7 +94,7 @@ export function parsePageSelector(value: string | null): number[] | null {
 	return [...pages].sort((a, b) => a - b);
 }
 
-const INGEST_BATCH_ROWS = 2000;
+const INGEST_BATCH_ROWS = 800;
 
 export async function replaceOcrPages(
 	db: Db,
@@ -123,10 +123,15 @@ export async function activateOcrGeneration(
 	// corpus ingest take hours; batching keeps it to minutes.
 	const chunkRows: SQL[] = [];
 	const tokenRows: SQL[] = [];
+	// A bulk backfill competes with live reads on the shared database. The
+	// pause is opt-in (INGEST_THROTTLE_MS) so a batch ingest can yield between
+	// writes; interactive saves leave it unset and pay nothing.
+	const throttleMs = Number(globalThis.process?.env?.INGEST_THROTTLE_MS ?? 0) || 0;
 	const flush = async (rows: SQL[], statement: (values: SQL) => SQL, force = false) => {
 		if (!rows.length || (!force && rows.length < INGEST_BATCH_ROWS)) return;
 		await db.run(statement(sql.join(rows, sql`, `)));
 		rows.length = 0;
+		if (throttleMs > 0) await new Promise((resolve) => setTimeout(resolve, throttleMs));
 	};
 	const chunkStatement = (values: SQL) => sql`
 		insert into ocr_chunks (
