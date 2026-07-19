@@ -589,9 +589,28 @@ describe('archive DB flows', () => {
 		expect(contributorRow).toMatchObject({
 			role: 'archive_contributor',
 			login: 'cached-contributor',
-			serviceToken: null
+			serviceToken: null,
+			kind: 'person'
 		});
 		expect(reviewerRow).toMatchObject({ role: null, login: null, serviceToken: null, roleUpdatedAt: null });
+	});
+
+	it('classifies archive users as person, system, and machine principals', async () => {
+		await db.insert(user).values([
+			{ id: 'migration', name: 'Migration', email: 'migration@example.test' },
+			{ id: 'synthetic', name: 'Synthetic', email: 'synthetic@archive.invalid' },
+			{ id: 'machine', name: 'Machine', email: 'machine@example.test' }
+		]);
+		await db.insert(schema.userIdentities).values([
+			{ userId: 'machine', kind: 'service_token', value: 'svc-machine' },
+			{ userId: 'synthetic', kind: 'service_token', value: 'svc-synthetic' }
+		]);
+
+		const rows = await listArchiveUsers(db);
+		expect(rows.find((row) => row.userId === 'other')?.kind).toBe('person');
+		expect(rows.find((row) => row.userId === 'migration')?.kind).toBe('system');
+		expect(rows.find((row) => row.userId === 'synthetic')?.kind).toBe('system');
+		expect(rows.find((row) => row.userId === 'machine')?.kind).toBe('machine');
 	});
 
 	it('grants an archive role and audits the previous null role', async () => {
@@ -644,6 +663,22 @@ describe('archive DB flows', () => {
 		await expect(setArchiveUserRole(db, 'missing-user', 'archive_reader', admin)).rejects.toMatchObject({
 			status: 404
 		});
+	});
+
+	it('refuses to change a system account role without mutating or auditing', async () => {
+		await db.insert(user).values({ id: 'migration', name: 'Migration', email: 'migration@migration.invalid' });
+
+		await expect(setArchiveUserRole(db, 'migration', 'archive_reader', admin)).rejects.toMatchObject({
+			status: 400,
+			message: 'cannot change role for a system account'
+		});
+		expect(await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'migration'))).toHaveLength(0);
+		expect(
+			await db
+				.select()
+				.from(schema.sourceLifecycleEvents)
+				.where(eq(schema.sourceLifecycleEvents.eventType, 'archive_role_changed'))
+		).toHaveLength(0);
 	});
 
 	it('refuses to remove the last archive_admin without mutating or auditing', async () => {
@@ -1985,6 +2020,55 @@ describe('archive API route handlers', () => {
 				locals: { archiveDb: db }
 			} as never)
 		).rejects.toMatchObject({ status: 403 });
+	});
+
+	it('returns admin user counts distinct from the total catalogue user rows', async () => {
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'admin', email: 'admin@example.test' }));
+		await db.insert(schema.appUserRoles).values([
+			{ userId: 'admin', role: 'archive_admin' },
+			{ userId: 'reader', role: 'archive_reader' }
+		]);
+		const { GET } = await importRoute<typeof import('../../../routes/api/archive/admin/users/+server')>(
+			'../../../routes/api/archive/admin/users/+server'
+		);
+
+		const response = await GET({
+			request: new Request('https://db.aynu.org/api/archive/admin/users'),
+			locals: { archiveDb: db }
+		} as never);
+		expect(response.status).toBe(200);
+		const body = (await response.json()) as { users: unknown[]; totalUsers: number; archiveUserCount: number };
+		expect(body.users).toHaveLength(5);
+		expect(body.totalUsers).toBe(5);
+		expect(body.archiveUserCount).toBe(2);
+	});
+
+	it('returns a warning when assigning a role to a machine principal', async () => {
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'admin', email: 'admin@example.test' }));
+		await db.insert(schema.appUserRoles).values({ userId: 'admin', role: 'archive_admin' });
+		await db.insert(schema.userIdentities).values({ userId: 'reader', kind: 'service_token', value: 'svc-reader-route' });
+		const { POST } = await importRoute<typeof import('../../../routes/api/archive/admin/users/[userId]/role/+server')>(
+			'../../../routes/api/archive/admin/users/[userId]/role/+server'
+		);
+
+		const response = await POST({
+			request: new Request('https://db.aynu.org/api/archive/admin/users/reader/role', {
+				method: 'POST',
+				headers: {
+					origin: 'https://archive.aynu.org',
+					'content-type': 'application/json',
+					'x-archive-csrf': await issueArchiveCsrfToken('admin')
+				},
+				body: JSON.stringify({ role: 'archive_reader' })
+			}),
+			params: { userId: 'reader' },
+			locals: { archiveDb: db }
+		} as never);
+		expect(response.status).toBe(200);
+		expect(await response.json()).toEqual({
+			user: { userId: 'reader', role: 'archive_reader' },
+			warning: 'target is a machine principal'
+		});
 	});
 
 	it('lists archive repositories ordered by name', async () => {

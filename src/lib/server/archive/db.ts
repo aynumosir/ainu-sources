@@ -47,6 +47,7 @@ export type CapabilityRedemptionRequest =
 	| { kind: 'full' }
 	| { kind: 'range_header'; rangeHeader: string | null };
 export type ArchiveFileSort = 'updated' | 'title' | 'year-desc' | 'year-asc';
+export type ArchiveUserKind = 'person' | 'system' | 'machine';
 
 export type ArchiveAdminUser = {
 	userId: string;
@@ -56,7 +57,10 @@ export type ArchiveAdminUser = {
 	roleUpdatedAt: string | null;
 	login: string | null;
 	serviceToken: string | null;
+	kind: ArchiveUserKind;
 };
+
+export const SYSTEM_USER_IDS = ['migration'] as const;
 
 type FinalizeSuccessResult = {
 	sessionId: string;
@@ -96,6 +100,23 @@ function parseSourceFileRole(role: string | null | undefined): SourceFileRole | 
 	if (role == null || role === '') return null;
 	if ((SOURCE_FILE_ROLES as readonly string[]).includes(role)) return role as SourceFileRole;
 	throw new ArchiveHttpError(400, 'invalid source file role');
+}
+
+function emailDomain(email: string): string | null {
+	const at = email.lastIndexOf('@');
+	if (at < 0) return null;
+	return email.slice(at + 1).trim().toLowerCase();
+}
+
+export function classifyArchiveUserKind(row: {
+	userId: string;
+	email: string;
+	serviceToken?: string | null;
+}): ArchiveUserKind {
+	const domain = emailDomain(row.email);
+	if ((SYSTEM_USER_IDS as readonly string[]).includes(row.userId) || domain?.endsWith('.invalid')) return 'system';
+	if (row.serviceToken) return 'machine';
+	return 'person';
 }
 
 export function requireReviewReadable(principal: ArchivePrincipal, reviewStatus: string, submittedBy: string): void {
@@ -377,9 +398,32 @@ export async function listArchiveUsers(db: Db): Promise<ArchiveAdminUser[]> {
 			role,
 			roleUpdatedAt: role ? iso(row.roleUpdatedAt) : null,
 			login: row.cachedLogin ?? identity?.githubLogin ?? null,
-			serviceToken: identity?.serviceToken ?? null
+			serviceToken: identity?.serviceToken ?? null,
+			kind: classifyArchiveUserKind({
+				userId: row.userId,
+				email: row.email,
+				serviceToken: identity?.serviceToken ?? null
+			})
 		};
 	});
+}
+
+export async function getArchiveUserKind(db: Db, userId: string): Promise<ArchiveUserKind> {
+	const [row] = await db
+		.select({
+			userId: user.id,
+			email: user.email,
+			serviceToken: userIdentities.value
+		})
+		.from(user)
+		.leftJoin(
+			userIdentities,
+			and(eq(userIdentities.userId, user.id), eq(userIdentities.kind, 'service_token'))
+		)
+		.where(eq(user.id, userId))
+		.limit(1);
+	if (!row) throw new ArchiveHttpError(404, 'user not found');
+	return classifyArchiveUserKind(row);
 }
 
 export async function setArchiveUserRole(
@@ -389,8 +433,15 @@ export async function setArchiveUserRole(
 	principal: ArchivePrincipal
 ): Promise<{ userId: string; role: ArchiveRole | null }> {
 	return db.transaction(async (tx) => {
-		const [target] = await tx.select({ id: user.id }).from(user).where(eq(user.id, targetUserId)).limit(1);
+		const [target] = await tx
+			.select({ id: user.id, email: user.email })
+			.from(user)
+			.where(eq(user.id, targetUserId))
+			.limit(1);
 		if (!target) throw new ArchiveHttpError(404, 'user not found');
+		if (classifyArchiveUserKind({ userId: target.id, email: target.email }) === 'system') {
+			throw new ArchiveHttpError(400, 'cannot change role for a system account');
+		}
 
 		const [current] = await tx
 			.select({ role: appUserRoles.role })
