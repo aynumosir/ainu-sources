@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ScanThumbnail from './ScanThumbnail.svelte';
 	import { formatBytes } from '$lib/archive/format';
+	import { formatArchiveLanguages } from '$lib/archive/languages';
 	import { formatYear } from '$lib/format';
 	import type { Source } from '$lib/server/db/schema';
 
@@ -16,6 +17,7 @@
 	let { item }: { item: { source: Source; file: ArchiveFile; coverage?: null } } = $props();
 	const source = $derived(item.source);
 	const file = $derived(item.file);
+	const languages = $derived(formatArchiveLanguages(source.languages));
 </script>
 
 <div class="relative border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3 transition hover:border-[var(--archive-gilt)]">
@@ -41,7 +43,8 @@
 	</div>
 	<p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-[var(--archive-subtle)]">
 		<span class="tnum">{formatYear(source)}</span>
-		{#if source.dialect}<span>{source.dialect}</span>{/if}
 	</p>
-	<p class="mt-1 text-[13px] text-[var(--archive-subtle)]">{formatBytes(file.bytes)}{#if file.mediaType} · {file.mediaType}{/if}</p>
+	<p class="mt-1 text-[13px] text-[var(--archive-subtle)]">
+		{formatBytes(file.bytes)}{#if languages} · {languages}{/if}
+	</p>
 </div>

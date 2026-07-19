@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, untrack } from 'svelte';
+	import { page as pageState } from '$app/state';
 	import ArchiveHead from './ArchiveHead.svelte';
 	import BilingualLabel from './BilingualLabel.svelte';
 	import PendingSubmissions from './PendingSubmissions.svelte';
@@ -14,17 +15,20 @@
 		| { status: 'loading'; src: null }
 		| { status: 'ready'; src: string }
 		| { status: 'missing'; src: null };
+	type ArchiveWorkPerson = {
+		name: string;
+		slug: string;
+		role: string;
+	};
 
-	let { work }: { work: any } = $props();
+	let { work, persons = [] }: { work: any; persons?: ArchiveWorkPerson[] } = $props();
 
 	const source = $derived(work.detail.source);
 	const pageCount = $derived(work.revision.pageCount);
+	const linkedAuthors = $derived(persons.filter((person) => person.role === 'author'));
+	const firstLinkedAuthor = $derived(linkedAuthors[0] ?? null);
 	const author = $derived(
-		source.author?.trim() ||
-		work.detail.persons
-			.filter((person: any) => person.role === 'author')
-			.map((person: any) => person.name)
-			.join(', ') ||
+		linkedAuthors.map((person) => person.name).join(', ') || source.author?.trim() ||
 		'not recorded'
 	);
 	const year = $derived(formatYear(source) === '—' ? 'not recorded' : formatYear(source));
@@ -47,7 +51,9 @@
 	let thumbList: HTMLElement | undefined = $state();
 	let thumbScrollTop = $state(0);
 	let thumbViewport = $state(640);
-	const citation = $derived(`${author}. ${source.title}. ${year}. aynumosir archive: page ${currentPage}.`);
+	const citation = $derived(
+		`${author}. ${source.title}. ${year}. aynumosir archive: page ${currentPage}.\n${pageState.url.origin}/archive/work/${encodeURIComponent(source.slug)}/p/${currentPage}`
+	);
 
 	const objectUrls = new Set<string>();
 	const THUMB_ROW_HEIGHT = 116;
@@ -256,6 +262,19 @@
 	</form>
 {/snippet}
 
+{#snippet authorNames()}
+	{#if linkedAuthors.length}
+		{#each linkedAuthors as person, index}
+			{#if index > 0}, {/if}<a
+				href={`/people/${encodeURIComponent(person.slug)}`}
+				class="text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+			>{person.name}</a>
+		{/each}
+	{:else}
+		{author}
+	{/if}
+{/snippet}
+
 {#snippet aboutPanel()}
 	<div class="space-y-4 p-4">
 		<BilingualLabel tag="h2" ja="資料について" en="About this work" class="text-[17px] font-semibold" />
@@ -263,7 +282,7 @@
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
 			<BilingualLabel tag="h3" ja={archiveLabels.citation.ja} en={archiveLabels.citation.en} class="text-[15px] font-semibold" />
 			<p class="mt-3 font-[var(--font-archive-serif)] text-[15px] leading-7">
-				{author}. <cite>{source.title}</cite>. {year}.<br />aynumosir archive: page <span class="tnum">{currentPage}</span>.
+				{@render authorNames()}. <cite>{source.title}</cite>. {year}.<br />aynumosir archive: page <span class="tnum">{currentPage}</span>.
 			</p>
 			<button type="button" onclick={copyCitation} class="mt-3 border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
 				<BilingualLabel ja={archiveLabels.copyCitation.ja} en={archiveLabels.copyCitation.en} />
@@ -274,6 +293,22 @@
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
 			<BilingualLabel tag="h3" ja="書誌詳細" en="Bibliographic detail" class="text-[15px] font-semibold" />
 			<dl class="mt-3 grid grid-cols-[7rem_minmax(0,1fr)] gap-x-3 gap-y-2 text-[13px]">
+				{#if persons.length}
+					<dt class="text-[var(--archive-subtle)]">People</dt>
+					<dd>
+						<ul class="space-y-1">
+							{#each persons as person}
+								<li>
+									<a
+										href={`/people/${encodeURIComponent(person.slug)}`}
+										class="text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+									>{person.name}</a>
+									<span class="text-[var(--archive-faint-text)]"> · {person.role}</span>
+								</li>
+							{/each}
+						</ul>
+					</dd>
+				{/if}
 				<dt class="text-[var(--archive-subtle)]">Dialect</dt><dd>{field(source.dialect)}</dd>
 				<dt class="text-[var(--archive-subtle)]">Era</dt><dd>{era}</dd>
 				<dt class="text-[var(--archive-subtle)]">Category</dt><dd>{field(source.category)}</dd>
@@ -284,6 +319,12 @@
 				<dt class="text-[var(--archive-subtle)]">Call number</dt><dd class="archive-mono break-all text-[12px]">{field(source.callNumber)}</dd>
 				<dt class="text-[var(--archive-subtle)]">Notes</dt><dd class="whitespace-pre-wrap">{field(source.notes)}</dd>
 			</dl>
+			<a
+				href={`/sources/${encodeURIComponent(source.slug)}`}
+				class="mt-4 inline-flex text-[13px] font-semibold text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+			>
+				目録で見る View in catalogue
+			</a>
 		</section>
 
 		<details class="border-t border-dotted border-[var(--archive-border)] pt-4">
@@ -338,7 +379,14 @@
 			<div class="min-w-0 flex-1">
 				<h1 class="archive-title truncate text-[19px] font-semibold">{source.title}</h1>
 				<p class="mt-1 flex flex-wrap gap-x-2 text-[13px] text-[var(--archive-subtle)]">
-					<span>{author}</span>
+					{#if firstLinkedAuthor}
+						<a
+							href={`/people/${encodeURIComponent(firstLinkedAuthor.slug)}`}
+							class="text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+						>{firstLinkedAuthor.name}</a>
+					{:else}
+						<span>{author}</span>
+					{/if}
 					<span>·</span><span class="tnum">{year}</span>
 					<span>·</span><span>{work.file.role ?? 'file'}</span>
 					<span>·</span><span class="tnum">page {currentPage} of {pageCount}</span>

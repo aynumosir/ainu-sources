@@ -437,9 +437,9 @@
 				<dd>{fileName}</dd>
 				<dt class="text-[var(--archive-subtle)]">Role</dt>
 				<dd>{data.file?.role ?? 'file'}</dd>
-				<dt class="text-[var(--archive-subtle)]"><BilingualLabel ja={archiveLabels.pageCount.ja} en={archiveLabels.pageCount.en} /></dt>
+				<dt class="text-[var(--archive-subtle)]">Pages</dt>
 				<dd class="tnum">{pageCount}</dd>
-				<dt class="text-[var(--archive-subtle)]"><BilingualLabel ja={archiveLabels.size.ja} en={archiveLabels.size.en} /></dt>
+				<dt class="text-[var(--archive-subtle)]">Size</dt>
 				<dd class="tnum">{formatBytes(data.revision.bytes)}</dd>
 				<dt class="text-[var(--archive-subtle)]"><BilingualLabel ja={archiveLabels.ocrAvailability.ja} en={archiveLabels.ocrAvailability.en} /></dt>
 				<dd>{ocrProbeLabel}</dd>
@@ -504,11 +504,11 @@
 					</button>
 					<button
 						type="button"
-						aria-label={bilingualAriaLabel(archiveLabels.pdfMode)}
+						aria-label="PDF"
 						onclick={() => setMode('pdf')}
 						class={`border-l border-[var(--archive-border)] px-2 py-1 ${mode === 'pdf' ? 'bg-[var(--archive-gilt)] text-[var(--archive-paper)]' : 'bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
 					>
-						<BilingualLabel ja={archiveLabels.pdfMode.ja} en={archiveLabels.pdfMode.en} inverse={mode === 'pdf'} />
+						PDF
 					</button>
 				</div>
 				<button
@@ -597,7 +597,7 @@
 						<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[15px] text-[var(--archive-subtle)]">{takedownNotice}</div>
 					{:else if mode === 'pdf'}
 						<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center">
-							<BilingualLabel ja={archiveLabels.pdfMode.ja} en={archiveLabels.pdfMode.en} class="text-[17px] font-semibold" />
+							<h2 class="text-[17px] font-semibold">PDF</h2>
 							<p class="mt-3 text-[15px] leading-7 text-[var(--archive-subtle)]">Continuous PDF view is unavailable. Use page image mode.</p>
 						</div>
 					{:else}
