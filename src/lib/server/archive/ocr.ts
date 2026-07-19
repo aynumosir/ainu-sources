@@ -50,6 +50,9 @@ const REGEX_CANDIDATE_CAP = 500;
 const REGEX_TIME_BUDGET_MS = 40;
 const SOFT_LEXICON_CAP = 2000;
 const SOFT_OCCURRENCE_CAP = 3000;
+// Candidate chunks scanned in memory per soft query. Each one is tokenized
+// and compared against the query, so this bounds the request's CPU cost.
+const SOFT_CHUNK_SCAN_CAP = 240;
 const SIMILAR_CANDIDATE_CAP = 500;
 
 export async function searchArchive(
@@ -831,15 +834,23 @@ async function searchSoft(
 			${variantClause}
 			${sourceClause}
 		order by c.revision_id, c.page, c.block
-		limit ${SOFT_OCCURRENCE_CAP + 1}
+		limit ${SOFT_CHUNK_SCAN_CAP + 1}
 	`);
 	const alignmentsByChunk = new Map<string, Map<string, SoftAlignment>>();
-	for (const occurrence of occurrences.slice(0, SOFT_OCCURRENCE_CAP)) {
+	for (const occurrence of occurrences.slice(0, SOFT_CHUNK_SCAN_CAP)) {
 		const best = new Map<string, SoftAlignment>();
 		const chunkTokens = new Set(tokenizeNormalizedText(occurrence.text).map(({ token }) => token));
 		for (const query of queryTokens) {
 			const alternatives = expandNormalizedTokenAlternatives(query.token);
+			const lengths = alternatives.map((alternative) => [...alternative].length);
+			const shortest = Math.min(...lengths) - maxDistance;
+			const longest = Math.max(...lengths) + maxDistance;
 			for (const candidate of chunkTokens) {
+				// Length is a cheap necessary condition for an edit distance
+				// within tolerance; checking it first avoids the expensive
+				// comparison for most of the page's vocabulary.
+				const candidateLength = candidate.length;
+				if (candidateLength < shortest || candidateLength > longest) continue;
 				const distance = Math.min(
 					...alternatives.map((alternative) => damerauLevenshtein(alternative, candidate, maxDistance))
 				);
@@ -849,6 +860,7 @@ async function searchSoft(
 				if (!previous || previous.score < score) {
 					best.set(query.token, { query_token: query.token, matched_token: candidate, score });
 				}
+				if (distance === 0) break;
 			}
 		}
 		if (best.size > 0) alignmentsByChunk.set(occurrence.chunkId, best);
@@ -898,7 +910,7 @@ async function searchSoft(
 		nextCursor:
 			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
 		total: bounded.length,
-		truncated: occurrences.length > SOFT_OCCURRENCE_CAP,
+		truncated: occurrences.length > SOFT_CHUNK_SCAN_CAP,
 		cap: SOFT_OCCURRENCE_CAP
 	};
 }
