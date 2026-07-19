@@ -2,7 +2,7 @@
 	import { highlightSnippet } from '$lib/archive/snippets';
 	import { formatYear } from '$lib/format';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 
 	let { data } = $props();
 </script>
@@ -14,7 +14,7 @@
 			stacked
 			ja={archiveLabels.search.ja}
 			en={archiveLabels.search.en}
-			class="text-[27px] font-semibold [--archive-label-en-size:21px]"
+			class="text-[27px] font-semibold"
 		/>
 		<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">Search OCR text visible to your archive role.</p>
 	</div>
@@ -29,8 +29,8 @@
 				Source slug
 				<input name="source_slug" value={data.sourceSlug} class="mt-1 w-full border-[var(--archive-border)] bg-[var(--archive-panel)] text-[15px] text-[var(--archive-text)]" />
 			</label>
-			<button type="submit" class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] [--archive-label-en-color:var(--archive-paper)]">
-				<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} />
+			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.search)} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]">
+				<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} inverse />
 			</button>
 		</div>
 	</form>
@@ -65,7 +65,7 @@
 						</p>
 						<div class="mt-3">
 							{#if item.fileId}
-								<a href={`/archive/read/${item.source.slug}/${item.fileId}?p=${item.page}`} class="text-[13px] font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
+								<a href={`/archive/read/${item.source.slug}/${item.fileId}?p=${item.page}`} aria-label={bilingualAriaLabel(archiveLabels.readPage)} class="text-[13px] font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
 									<BilingualLabel ja={archiveLabels.readPage.ja} en={archiveLabels.readPage.en} />
 								</a>
 							{:else}
@@ -78,6 +78,7 @@
 			{#if data.result.nextCursor}
 				<a
 					href={`/archive/search?q=${encodeURIComponent(data.q)}${data.sourceSlug ? `&source_slug=${encodeURIComponent(data.sourceSlug)}` : ''}&cursor=${encodeURIComponent(data.result.nextCursor)}`}
+					aria-label={bilingualAriaLabel(archiveLabels.loadMore)}
 					class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-4 py-2 text-[15px] font-medium hover:border-[var(--archive-gilt)]"
 				>
 					<BilingualLabel ja={archiveLabels.loadMore.ja} en={archiveLabels.loadMore.en} />
@@ -89,7 +90,7 @@
 					stacked
 					ja={archiveLabels.noHits.ja}
 					en={archiveLabels.noHits.en}
-					class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+					class="text-[17px] font-semibold"
 				/>
 				<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">
 					{#if data.searchableCount != null}across {data.searchableCount} approved current files{/if}

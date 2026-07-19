@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BilingualLabel from './BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 
 	let { q = '' }: { q?: string } = $props();
 </script>
@@ -16,8 +16,9 @@
 	/>
 	<button
 		type="submit"
-		class="h-9 border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] [--archive-label-en-color:var(--archive-paper)]"
+		aria-label={bilingualAriaLabel(archiveLabels.search)}
+		class="h-9 border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]"
 	>
-		<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} />
+		<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} inverse />
 	</button>
 </form>

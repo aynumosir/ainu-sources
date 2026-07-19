@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DownloadConfirm from './DownloadConfirm.svelte';
 	import BilingualLabel from './BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import { formatBytes, middleEllipsis } from '$lib/archive/format';
 
 	type FileRowData = {
@@ -38,11 +38,11 @@
 		</div>
 		<div class="flex gap-2">
 			{#if file.revisionId}
-				<a href={`/archive/read/${sourceSlug}/${file.fileId}`} class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]">
+				<a href={`/archive/read/${sourceSlug}/${file.fileId}`} aria-label={bilingualAriaLabel(archiveLabels.read)} class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]">
 					<BilingualLabel ja={archiveLabels.read.ja} en={archiveLabels.read.en} />
 				</a>
-				<button type="button" onclick={() => download?.open()} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] [--archive-label-en-color:var(--archive-paper)]">
-					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} />
+				<button type="button" aria-label={bilingualAriaLabel(archiveLabels.download)} onclick={() => download?.open()} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]">
+					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} inverse />
 				</button>
 			{:else}
 				<span class="text-[13px] text-[var(--archive-subtle)]">OCR unavailable for this file</span>

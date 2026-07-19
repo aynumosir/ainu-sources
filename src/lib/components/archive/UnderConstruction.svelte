@@ -27,7 +27,7 @@
 			stacked
 			ja={resolvedLabel.ja}
 			en={resolvedLabel.en}
-			class="text-[27px] font-semibold [--archive-label-en-size:21px]"
+			class="text-[27px] font-semibold"
 		/>
 	{:else}
 		<h1 class="text-[27px] font-semibold">{title}</h1>

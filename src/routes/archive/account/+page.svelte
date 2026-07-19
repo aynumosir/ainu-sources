@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { formatBytes } from '$lib/archive/format';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
 	let { data } = $props();
@@ -34,7 +34,7 @@
 				stacked
 				ja={archiveLabels.account.ja}
 				en={archiveLabels.account.en}
-				class="text-[27px] font-semibold [--archive-label-en-size:21px]"
+				class="text-[27px] font-semibold"
 			/>
 			<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">Archive identity and access limits.</p>
 		</div>
@@ -44,7 +44,7 @@
 				tag="h2"
 				ja={archiveLabels.identity.ja}
 				en={archiveLabels.identity.en}
-				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+				class="text-[17px] font-semibold"
 			/>
 			<dl class="mt-3 grid gap-2 text-[15px] sm:grid-cols-[10rem_1fr]">
 				<dt class="text-[var(--archive-subtle)]">Login</dt>
@@ -64,7 +64,7 @@
 				tag="h2"
 				ja={archiveLabels.usage.ja}
 				en={archiveLabels.usage.en}
-				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+				class="text-[17px] font-semibold"
 			/>
 			{#if data.usage}
 				<dl class="mt-3 grid gap-2 text-[15px] sm:grid-cols-[10rem_1fr]">
@@ -86,7 +86,7 @@
 					tag="h2"
 					ja={archiveLabels.administration.ja}
 					en={archiveLabels.administration.en}
-					class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+					class="text-[17px] font-semibold"
 				/>
 				<p class="mt-2 text-[15px] leading-7 text-[var(--archive-subtle)]">
 					Manage archive roles and administrative settings.
@@ -102,7 +102,7 @@
 				tag="h2"
 				ja={archiveLabels.audit.ja}
 				en={archiveLabels.audit.en}
-				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+				class="text-[17px] font-semibold"
 			/>
 			<p class="mt-2 text-[15px] leading-7 text-[var(--archive-subtle)]">
 				Archive downloads and mutation actions are logged with your archive user id.
@@ -114,13 +114,13 @@
 				tag="h2"
 				ja={archiveLabels.signOut.ja}
 				en={archiveLabels.signOut.en}
-				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+				class="text-[17px] font-semibold"
 			/>
 			<p class="mt-2 text-[15px] text-[var(--archive-subtle)]">
 				End the app session for this archive.
 			</p>
 			<form method="POST" action="/account?/signout" use:enhance={signOutEnhance} class="mt-3">
-				<button type="submit" class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
+				<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.signOut)} class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
 					<BilingualLabel ja={archiveLabels.signOut.ja} en={archiveLabels.signOut.en} />
 				</button>
 			</form>

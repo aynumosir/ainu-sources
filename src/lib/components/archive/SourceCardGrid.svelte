@@ -32,7 +32,7 @@
 			stacked
 			ja={archiveLabels.noWorks.ja}
 			en={archiveLabels.noWorks.en}
-			class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+			class="text-[17px] font-semibold"
 		/>
 	</div>
 {/if}

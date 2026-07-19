@@ -4,7 +4,8 @@
 	import UserMenu from './UserMenu.svelte';
 	import RoleGate from './RoleGate.svelte';
 	import BilingualLabel from './BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
+	import { archiveSession, setArchiveTheme } from '$lib/archive/session.svelte';
 	import type { ArchivePrincipal } from '$lib/server/archive/types';
 	import type { ArchiveUsage } from '$lib/archive/usage.svelte';
 
@@ -39,6 +40,13 @@
 		if (href === '/archive') return pathname === '/archive';
 		return pathname === href || pathname.startsWith(`${href}/`);
 	}
+
+	function cycleTheme(): void {
+		const next = archiveSession.theme === 'system' ? 'light' : archiveSession.theme === 'light' ? 'dark' : 'system';
+		setArchiveTheme(next);
+	}
+
+	const themeName = $derived(archiveSession.theme === 'system' ? 'system theme' : `${archiveSession.theme} theme`);
 </script>
 
 <header class="sticky top-0 z-40 border-b border-[var(--archive-border-strong)] bg-[var(--archive-paper)]">
@@ -67,10 +75,11 @@
 					{#if item.min}
 						<RoleGate role={principal.role} min={item.min}>
 							<a
-								class={`border-b px-1 pb-1 font-[var(--font-archive-serif)] font-semibold text-[var(--archive-subtle)] transition hover:border-[var(--archive-gilt)] hover:text-[var(--archive-text)] ${
+								class={`border-b px-1 pb-1 font-[var(--font-archive-serif)] font-semibold text-[var(--archive-subtle)] transition [font-variant:small-caps] hover:border-[var(--archive-gilt)] hover:text-[var(--archive-text)] ${
 									isCurrent(item.href) ? 'border-[var(--archive-gilt)] text-[var(--archive-text)]' : 'border-transparent'
 								}`}
 								href={item.href}
+								aria-label={bilingualAriaLabel(item.label)}
 							>
 								<BilingualLabel ja={item.label.ja} en={item.label.en} />
 								{#if item.badge && item.badge > 0}
@@ -80,16 +89,30 @@
 						</RoleGate>
 					{:else}
 						<a
-							class={`border-b px-1 pb-1 font-[var(--font-archive-serif)] font-semibold text-[var(--archive-subtle)] transition hover:border-[var(--archive-gilt)] hover:text-[var(--archive-text)] ${
+							class={`border-b px-1 pb-1 font-[var(--font-archive-serif)] font-semibold text-[var(--archive-subtle)] transition [font-variant:small-caps] hover:border-[var(--archive-gilt)] hover:text-[var(--archive-text)] ${
 								isCurrent(item.href) ? 'border-[var(--archive-gilt)] text-[var(--archive-text)]' : 'border-transparent'
 							}`}
 							href={item.href}
+							aria-label={bilingualAriaLabel(item.label)}
 						>
 							<BilingualLabel ja={item.label.ja} en={item.label.en} />
 						</a>
 					{/if}
 				{/each}
 			</nav>
+			<button
+				type="button"
+				aria-label={`Theme: ${themeName}. Change theme`}
+				title={`Theme: ${themeName}`}
+				onclick={cycleTheme}
+				class={`archive-theme-toggle flex h-8 w-8 items-center justify-center border text-[17px] leading-none transition hover:border-[var(--archive-gilt)] hover:text-[var(--archive-text)] ${
+					archiveSession.theme === 'system'
+						? 'border-[var(--archive-border)] bg-[var(--archive-paper)] text-[var(--archive-subtle)]'
+						: 'border-[var(--archive-gilt)] bg-[var(--archive-panel)] text-[var(--archive-gilt-text)]'
+				}`}
+			>
+				<span aria-hidden="true">◐</span>
+			</button>
 			<div class="hidden lg:block">
 				<UserMenu {principal} {usage} />
 			</div>

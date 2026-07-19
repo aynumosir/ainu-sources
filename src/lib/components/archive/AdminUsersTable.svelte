@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { archiveFetch } from '$lib/archive/session.svelte';
 	import BilingualLabel from './BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import type { ArchiveRole } from '$lib/server/archive/types';
 
 	type AdminUser = {
@@ -113,7 +113,7 @@
 				tag="h2"
 				ja={archiveLabels.users.ja}
 				en={archiveLabels.users.en}
-				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+				class="text-[17px] font-semibold"
 			/>
 			<p class="mt-1 text-[13px] text-[var(--archive-subtle)]">{users.length} archive users</p>
 		</div>
@@ -151,6 +151,7 @@
 									</select>
 									<button
 										type="button"
+										aria-label={bilingualAriaLabel(archiveLabels.save)}
 										disabled={saving === user.userId || roleFromValue(selectedRoles[user.userId]) === user.role}
 										onclick={() => save(user)}
 										class="h-8 border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 text-[13px] font-medium hover:border-[var(--archive-gilt)] disabled:opacity-60"

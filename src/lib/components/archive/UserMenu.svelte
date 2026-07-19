@@ -2,9 +2,8 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { archiveUsage, type ArchiveUsage } from '$lib/archive/usage.svelte';
-	import { archiveSession, setArchiveTheme } from '$lib/archive/session.svelte';
 	import { formatBytes } from '$lib/archive/format';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import BilingualLabel from './BilingualLabel.svelte';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import type { ArchivePrincipal } from '$lib/server/archive/types';
@@ -38,19 +37,10 @@
 	<span class="tnum hidden border border-[var(--archive-border)] bg-[var(--archive-panel)] px-2 py-1 text-[13px] text-[var(--archive-subtle)] sm:inline-flex">
 		{used}{#if limit} / {limit}{/if}
 	</span>
-	<select
-		aria-label="Theme"
-		value={archiveSession.theme}
-		onchange={(event) => setArchiveTheme(event.currentTarget.value as 'system' | 'light' | 'dark')}
-		class="h-8 border border-[var(--archive-border)] bg-[var(--archive-paper)] px-2 text-[13px] text-[var(--archive-text)]"
-	>
-		<option value="system">System</option>
-		<option value="light">Light</option>
-		<option value="dark">Dark</option>
-	</select>
 	<form method="POST" action="/account?/signout" use:enhance={signOutEnhance}>
 		<button
 			type="submit"
+			aria-label={bilingualAriaLabel(archiveLabels.signOut)}
 			class="h-8 border border-[var(--archive-border)] bg-[var(--archive-paper)] px-2 text-[13px] text-[var(--archive-text)] hover:border-[var(--archive-gilt)]"
 		>
 			<BilingualLabel ja={archiveLabels.signOut.ja} en={archiveLabels.signOut.en} />

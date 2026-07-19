@@ -50,7 +50,7 @@
 		tag="h2"
 		ja={archiveLabels.pendingSubmissions.ja}
 		en={archiveLabels.pendingSubmissions.en}
-		class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+		class="text-[17px] font-semibold"
 	/>
 	{#if error}<p class="mt-2 text-[13px] text-[var(--archive-danger)]">{error}</p>{/if}
 	{#if items.length}

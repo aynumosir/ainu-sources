@@ -5,11 +5,12 @@
 		tag = 'span',
 		stacked = false,
 		slash = false,
+		inverse = false,
 		class: className = ''
-	}: { ja: string; en: string; tag?: string; stacked?: boolean; slash?: boolean; class?: string } = $props();
+	}: { ja: string; en: string; tag?: string; stacked?: boolean; slash?: boolean; inverse?: boolean; class?: string } = $props();
 </script>
 
-<svelte:element this={tag} class={`archive-bilingual-label ${className}`} class:stacked class:slash>
+<svelte:element this={tag} class={`archive-bilingual-label ${className}`} class:stacked class:slash class:inverse>
 	<span class="ja">{ja}</span>
 	{#if slash}<span class="sep" aria-hidden="true">/</span>{/if}
 	<span class="en">{en}</span>
@@ -35,7 +36,12 @@
 	.sep {
 		color: var(--archive-label-en-color, var(--archive-subtle));
 		font-family: var(--font-archive-sans);
-		font-size: var(--archive-label-en-size, 13px);
+		font-size: var(--archive-label-en-size, 0.8em);
 		font-weight: 500;
+	}
+	.archive-bilingual-label.inverse .en,
+	.archive-bilingual-label.inverse .sep {
+		color: inherit;
+		opacity: 0.75;
 	}
 </style>

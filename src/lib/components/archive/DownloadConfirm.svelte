@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { formatBytes } from '$lib/archive/format';
 	import BilingualLabel from './BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 
 	type DownloadFile = {
 		revisionId: string;
@@ -28,7 +28,7 @@
 				tag="h2"
 				ja={archiveLabels.download.ja}
 				en={archiveLabels.download.en}
-				class="text-[21px] font-semibold [--archive-label-en-size:17px]"
+				class="text-[21px] font-semibold"
 			/>
 			<p class="mt-3 break-words text-[15px]">{file.filename}</p>
 			<p class="mt-1 text-[13px] text-[var(--archive-subtle)]">{formatBytes(file.bytes)}</p>
@@ -41,10 +41,11 @@
 					href={`/api/archive/revisions/${file.revisionId}/content?disposition=attachment`}
 					target="_blank"
 					rel="noreferrer"
-					class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] [--archive-label-en-color:var(--archive-paper)]"
+					aria-label={bilingualAriaLabel(archiveLabels.download)}
+					class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]"
 					onclick={close}
 				>
-					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} />
+					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} inverse />
 				</a>
 			</div>
 		</div>

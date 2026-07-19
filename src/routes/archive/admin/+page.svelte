@@ -2,7 +2,7 @@
 	import AdminUsersTable from '$lib/components/archive/AdminUsersTable.svelte';
 	import UnderConstruction from '$lib/components/archive/UnderConstruction.svelte';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 
 	type Tab = 'users' | 'orphans' | 'budgets';
 
@@ -23,7 +23,7 @@
 			stacked
 			ja={archiveLabels.admin.ja}
 			en={archiveLabels.admin.en}
-			class="text-[27px] font-semibold [--archive-label-en-size:21px]"
+			class="text-[27px] font-semibold"
 		/>
 		<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">Archive administration.</p>
 	</div>
@@ -33,6 +33,7 @@
 			{#each tabs as item}
 				<button
 					type="button"
+					aria-label={bilingualAriaLabel(item.label)}
 					onclick={() => (tab = item.id)}
 					class={`border-b-2 px-3 py-2 font-medium ${
 						tab === item.id

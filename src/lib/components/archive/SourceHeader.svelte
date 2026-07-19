@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DownloadConfirm from './DownloadConfirm.svelte';
 	import BilingualLabel from './BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import { formatYear } from '$lib/format';
 	import type { Source } from '$lib/server/db/schema';
 
@@ -56,13 +56,14 @@
 		</div>
 		<div class="flex flex-wrap gap-2">
 			{#if primaryFile?.fileId}
-				<a href={`/archive/read/${source.slug}/${primaryFile.fileId}`} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] [--archive-label-en-color:var(--archive-paper)]">
-					<BilingualLabel ja={archiveLabels.read.ja} en={archiveLabels.read.en} />
+				<a href={`/archive/read/${source.slug}/${primaryFile.fileId}`} aria-label={bilingualAriaLabel(archiveLabels.read)} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]">
+					<BilingualLabel ja={archiveLabels.read.ja} en={archiveLabels.read.en} inverse />
 				</a>
 			{/if}
 			{#if primaryFile?.revisionId}
 				<button
 					type="button"
+					aria-label={bilingualAriaLabel(archiveLabels.download)}
 					onclick={() => download?.open()}
 					class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]"
 				>

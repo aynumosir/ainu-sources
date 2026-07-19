@@ -1,3 +1,5 @@
+import { getLocale } from '$lib/paraglide/runtime';
+
 export const archiveLabels = {
 	library: { ja: '資料一覧', en: 'Library' },
 	search: { ja: '検索', en: 'Search' },
@@ -12,6 +14,16 @@ export const archiveLabels = {
 	approve: { ja: '承認', en: 'Approve' },
 	about: { ja: '書誌', en: 'About' },
 	read: { ja: '閲覧', en: 'Read' },
+	back: { ja: '戻る', en: 'Back' },
+	file: { ja: 'ファイル', en: 'File' },
+	imageMode: { ja: '画像', en: 'Image' },
+	pdfMode: { ja: 'PDF', en: 'PDF' },
+	textPanel: { ja: 'OCR本文', en: 'OCR text' },
+	citation: { ja: '引用', en: 'Citation' },
+	copyCitation: { ja: '引用をコピー', en: 'Copy citation' },
+	shortcuts: { ja: 'ショートカット', en: 'Shortcuts' },
+	previousPage: { ja: '前のページ', en: 'Previous page' },
+	nextPage: { ja: '次のページ', en: 'Next page' },
 	download: { ja: 'ダウンロード', en: 'Download' },
 	signIn: { ja: 'サインイン', en: 'Sign in' },
 	signOut: { ja: 'サインアウト', en: 'Sign out' },
@@ -41,3 +53,8 @@ export const archiveLabels = {
 } as const;
 
 export type ArchiveLabelKey = keyof typeof archiveLabels;
+export type BilingualLabelEntry = { ja: string; en: string };
+
+export function bilingualAriaLabel(entry: BilingualLabelEntry): string {
+	return getLocale() === 'ja' ? entry.ja : entry.en;
+}

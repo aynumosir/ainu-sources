@@ -118,4 +118,11 @@
 	.archive .tnum {
 		font-variant-numeric: tabular-nums;
 	}
+	.archive :is(input, select, textarea) {
+		accent-color: var(--archive-gilt);
+	}
+	.archive :is(input, select, textarea):focus {
+		border-color: var(--archive-gilt);
+		--tw-ring-color: var(--archive-gilt);
+	}
 }

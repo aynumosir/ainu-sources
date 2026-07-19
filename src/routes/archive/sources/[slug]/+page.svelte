@@ -21,7 +21,7 @@
 				tag="h2"
 				ja={archiveLabels.files.ja}
 				en={archiveLabels.files.en}
-				class="mb-3 text-[21px] font-semibold [--archive-label-en-size:17px]"
+				class="mb-3 text-[21px] font-semibold"
 			/>
 			{#if data.files.length}
 				<div class="space-y-3">
@@ -35,7 +35,6 @@
 						stacked
 						ja={archiveLabels.noArchiveFiles.ja}
 						en={archiveLabels.noArchiveFiles.en}
-						class="[--archive-label-en-size:13px]"
 					/>
 				</div>
 			{/if}
@@ -46,7 +45,7 @@
 				tag="h2"
 				ja={archiveLabels.ocrCoverage.ja}
 				en={archiveLabels.ocrCoverage.en}
-				class="text-[17px] font-semibold [--archive-label-en-size:15px]"
+				class="text-[17px] font-semibold"
 			/>
 			<p class="mt-2 text-[13px] text-[var(--archive-subtle)]">
 				OCR coverage data is not available from the phase 1 API.
