@@ -445,6 +445,40 @@ export async function getWorkspaceRevisionText(
 			nextCursor: rows.length > limit && last ? encodePageCursor({ page: last.page }) : null
 		};
 	}
+	// Text extracted without page structure lands on a single page-0 chunk.
+	// A per-page request would filter it out, leaving the reader with "no text"
+	// while whole-document text exists. Detect that shape and return it for any
+	// page, flagged as not page-aligned.
+	const [pageSpan] = await db.all<{ minPage: number; maxPage: number; total: number }>(sql`
+		select cast(min(c.page) as integer) as minPage,
+			cast(max(c.page) as integer) as maxPage,
+			count(*) as total
+		from ocr_chunks c
+		join ocr_ingest_state s
+			on s.revision_id = c.revision_id
+			and s.variant = c.variant
+			and s.active_generation = c.ingest_generation
+		where c.revision_id = ${revisionId} and c.variant = ${requestedVariant}
+	`);
+	if (pageSpan && Number(pageSpan.total) > 0 && Number(pageSpan.maxPage) === 0) {
+		if (cursor) return { revisionId, variant: requestedVariant, pages: [], nextCursor: null, wholeDocument: true };
+		const [whole] = await db.all<{ text: string }>(sql`
+			select group_concat(c.text, char(10)) as text
+			from ocr_chunks c
+			join ocr_ingest_state s
+				on s.revision_id = c.revision_id
+				and s.variant = c.variant
+				and s.active_generation = c.ingest_generation
+			where c.revision_id = ${revisionId} and c.variant = ${requestedVariant}
+		`);
+		return {
+			revisionId,
+			variant: requestedVariant,
+			wholeDocument: true,
+			pages: [{ page: 0, text: whole?.text ?? '' }],
+			nextCursor: null
+		};
+	}
 	const pageClause = selectedPages?.length
 		? sql`and cast(c.page as integer) in (${sql.join(selectedPages.map((page) => sql`${page}`), sql`, `)})`
 		: sql``;

@@ -279,9 +279,9 @@ export async function replaceEditedPageChunks(
 
 export async function listOcrPages(db: RawSqlDb, revisionId: string, variant: string): Promise<OcrPageRow[]> {
 	return db.all<OcrPageRow>(sql`
-		select revisionId, variant, page, group_concat(text, char(10) || char(10)) as text
+		select revisionId, variant, cast(page as integer) as page, group_concat(text, char(10) || char(10)) as text
 		from (
-			select c.revision_id as revisionId, c.variant, c.page, c.block, c.text
+			select c.revision_id as revisionId, c.variant, cast(c.page as integer) as page, c.block, c.text
 			from ocr_chunks c
 			inner join ocr_ingest_state state
 				on state.revision_id = c.revision_id
