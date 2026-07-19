@@ -25,7 +25,7 @@
 		| { status: 'missing'; src: null };
 	type TextEntry =
 		| { status: 'loading' }
-		| { status: 'ready'; text: string }
+		| { status: 'ready'; text: string; wholeDocument?: boolean }
 		| { status: 'empty' }
 		| { status: 'error'; message: string };
 	type ArchiveWorkPerson = {
@@ -196,10 +196,20 @@
 			if (!response.ok) throw new Error(`OCR text request failed (${response.status})`);
 			const body = await response.json() as {
 				error?: string;
+				wholeDocument?: boolean;
 				pages?: Array<{ page: number; text: string }>;
 			};
-			const row = body.pages?.find((entry) => entry.page === page);
-			textEntries = { ...textEntries, [key]: row ? { status: 'ready', text: row.text } : { status: 'empty' } };
+			// Whole-document text (extraction without page structure) is returned
+			// on page 0 and applies to the whole work, so it is shown on every page.
+			const row = body.wholeDocument
+				? body.pages?.[0]
+				: body.pages?.find((entry) => entry.page === page);
+			textEntries = {
+				...textEntries,
+				[key]: row
+					? { status: 'ready', text: row.text, wholeDocument: body.wholeDocument === true }
+					: { status: 'empty' }
+			};
 		} catch (cause) {
 			textEntries = {
 				...textEntries,
@@ -385,6 +395,9 @@
 			{:else if selectedText.status === 'error'}
 				<p class="grid min-h-[40svh] place-content-center text-center text-[13px] text-[var(--archive-danger)]" role="alert">{selectedText.message}</p>
 			{:else}
+				{#if selectedText.wholeDocument}
+					<p class="mb-3 border-b border-dotted border-[var(--archive-border)] pb-2 text-[12px] text-[var(--archive-subtle)]">全文（ページ非対応） / Full text — not aligned to this page</p>
+				{/if}
 				<pre class="whitespace-pre-wrap font-[var(--font-archive-serif)] text-[17px] leading-8 text-[var(--archive-text)]">{selectedText.text}</pre>
 			{/if}
 		</div>

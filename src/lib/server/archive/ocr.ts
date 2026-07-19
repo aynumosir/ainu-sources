@@ -307,6 +307,21 @@ export async function getRevisionText(
 	const variant = opts.variant?.trim() || (await preferredVariant(db, revisionId)) || (await firstVariantWithChunks(db, revisionId));
 	if (!variant) return ocrUnavailable(revisionId, pageCount);
 	const rows = await listOcrPages(db, revisionId, variant);
+	// Text extracted without page structure (most pdftotext variants) lands on
+	// a single page-0 chunk. A per-page request would filter it out, so the
+	// reader would show "no text" while whole-document text sits right there.
+	// Surface it for any page, flagged as not page-aligned.
+	const wholeDocument = rows.length > 0 && rows.every((row) => row.page === 0);
+	if (wholeDocument) {
+		if (cursor) return { revisionId, variant, pages: [], nextCursor: null, wholeDocument: true };
+		return {
+			revisionId,
+			variant,
+			wholeDocument: true,
+			pages: rows.map((row) => ({ page: row.page, text: row.text })),
+			nextCursor: null
+		};
+	}
 	const selected = rows.filter((row) => row.page > (cursor?.page ?? -1) && (!selectedPages || selectedPages.includes(row.page)));
 	if (selected.length === 0) return ocrUnavailable(revisionId, pageCount);
 	const limit = opts.limit ?? DEFAULT_TEXT_LIMIT;
