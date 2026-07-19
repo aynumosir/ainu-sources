@@ -31,9 +31,11 @@ import {
 	reconcileUploadFinalization,
 	redeemCapability,
 	rejectRevision,
+	reserveStreamQuota,
 	setArchiveUserRole
 } from './db';
 import { ArchiveHttpError } from './errors';
+import { authorizeContent } from './gateway';
 import { renderManifest } from './manifest';
 import { verifyMcpAssertion } from './mcp-assertion';
 import { listOcrPages, replaceOcrPages, searchOcr } from './ocr';
@@ -784,10 +786,37 @@ describe('archive DB flows', () => {
 		await seedRevision('approved');
 		const cap = await issueCapability(db, 'rev-1', reviewer, 120);
 		const attempts = await Promise.allSettled([
-			redeemCapability(db, cap.bearer, 'all'),
-			redeemCapability(db, cap.bearer, 'all')
+			redeemCapability(db, cap.bearer, { kind: 'full' }),
+			redeemCapability(db, cap.bearer, { kind: 'full' })
 		]);
 		expect(attempts.filter((r) => r.status === 'fulfilled')).toHaveLength(1);
+		const [token] = await db.select().from(schema.capabilityTokens).where(eq(schema.capabilityTokens.jti, cap.bearer));
+		expect(token.bytesServed).toBe(token.maxBytes);
+	});
+
+	it('rejects a second full capability redemption', async () => {
+		await seedRevision('approved');
+		const cap = await issueCapability(db, 'rev-1', reviewer, 120);
+		await expect(redeemCapability(db, cap.bearer, { kind: 'full' })).resolves.toMatchObject({
+			chargedBytes: 1234
+		});
+		await expect(redeemCapability(db, cap.bearer, { kind: 'full' })).rejects.toMatchObject({
+			status: 401
+		});
+	});
+
+	it('allows sequential capability ranges until the token byte budget is spent', async () => {
+		await seedRevision('approved');
+		const cap = await issueCapability(db, 'rev-1', reviewer, 120);
+		await expect(redeemCapability(db, cap.bearer, { kind: 'range_header', rangeHeader: 'bytes=0-616' })).resolves.toMatchObject({
+			chargedBytes: 617
+		});
+		await expect(redeemCapability(db, cap.bearer, { kind: 'range_header', rangeHeader: 'bytes=617-1233' })).resolves.toMatchObject({
+			chargedBytes: 617
+		});
+		await expect(redeemCapability(db, cap.bearer, { kind: 'range_header', rangeHeader: 'bytes=0-0' })).rejects.toMatchObject({
+			status: 401
+		});
 		const [token] = await db.select().from(schema.capabilityTokens).where(eq(schema.capabilityTokens.jti, cap.bearer));
 		expect(token.bytesServed).toBe(token.maxBytes);
 	});
@@ -1071,7 +1100,17 @@ describe('archive DB flows', () => {
 			dailyByteLimit: 1000,
 			resetAt,
 			activeStreams: 1,
-			concurrentStreamLimit: 5
+			concurrentStreamLimit: 5,
+			viewBytesUsed: 0,
+			dailyViewByteLimit: 20 * 1024 * 1024 * 1024,
+			textCallsUsed: 0,
+			dailyTextCallLimit: 1000,
+			textPagesUsed: 0,
+			dailyTextPageLimit: 10_000,
+			searchCallsUsed: 0,
+			dailySearchCallLimit: 500,
+			searchHitsUsed: 0,
+			dailySearchHitLimit: 10_000
 		});
 
 		env.ASSERTION_KEY_MCP = 'mcp-secret';
@@ -1087,6 +1126,110 @@ describe('archive DB flows', () => {
 				locals: { archiveDb: db }
 			} as never)
 		).rejects.toMatchObject({ status: 403 });
+	});
+
+	it('authorizes content through a single audited gateway for allow and deny paths', async () => {
+		await seedRevision('approved');
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		const sessionReader: ArchivePrincipal = {
+			...reader,
+			identity: { kind: 'app_session', value: 'reader@example.test' },
+			authn: 'app_session'
+		};
+
+		const allowed = await authorizeContent(db, {
+			principal: sessionReader,
+			revisionId: 'rev-1',
+			useKind: 'original',
+			requestedBytes: 10
+		});
+		expect(allowed).toMatchObject({
+			decision: 'allow',
+			quota: { budgetKind: 'download' },
+			cachePolicy: { cacheControl: 'private, no-store' }
+		});
+		expect(allowed.auditId).toBeTruthy();
+
+		await db.delete(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'reader'));
+		await expect(
+			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'page_image' })
+		).rejects.toMatchObject({ status: 403, details: { auditId: expect.any(String) } });
+
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		await db.update(schema.fileRevisions).set({ accessState: 'takedown' }).where(eq(schema.fileRevisions.id, 'rev-1'));
+		await expect(
+			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'text', requestedBytes: 0, rateUnits: 1 })
+		).rejects.toMatchObject({ status: 403, details: { auditId: expect.any(String) } });
+
+		await db.update(schema.fileRevisions).set({ accessState: 'embargoed' }).where(eq(schema.fileRevisions.id, 'rev-1'));
+		await expect(
+			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'original', requestedBytes: 1 })
+		).rejects.toMatchObject({ status: 403, details: { auditId: expect.any(String) } });
+
+		await db.update(schema.fileRevisions).set({ accessState: 'available' }).where(eq(schema.fileRevisions.id, 'rev-1'));
+		await db.update(schema.sources).set({ humanDownload: false }).where(eq(schema.sources.id, 'source-1'));
+		await expect(
+			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'page_image' })
+		).rejects.toMatchObject({ status: 403, details: { auditId: expect.any(String) } });
+
+		await db.update(schema.sources).set({ humanDownload: true }).where(eq(schema.sources.id, 'source-1'));
+		env.ARCHIVE_DAILY_BYTE_LIMIT = '10';
+		await expect(
+			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'original', requestedBytes: 11 })
+		).rejects.toMatchObject({ status: 429, details: { auditId: expect.any(String), resetAt: expect.any(String) } });
+
+		const events = await db.select().from(schema.sourceLifecycleEvents);
+		expect(events.filter((event) => event.eventType === 'content_access_authorized')).toHaveLength(1);
+		expect(events.filter((event) => event.eventType === 'content_access_denied')).toHaveLength(5);
+	});
+
+	it('keeps view-budget reads separate from download budget and stream leases', async () => {
+		env.ARCHIVE_DAILY_BYTE_LIMIT = '100';
+		env.ARCHIVE_DAILY_VIEW_BYTE_LIMIT = '1000';
+		env.ARCHIVE_CONCURRENT_STREAM_LIMIT = '1';
+		await seedRevision('approved');
+
+		await reserveStreamQuota(db, reader, 'rev-1', 100, 'view');
+		await reserveStreamQuota(db, reader, 'rev-1', 100, 'view');
+		await reserveStreamQuota(db, reader, 'rev-1', 100, 'download');
+		await expect(reserveStreamQuota(db, reader, 'rev-1', 1, 'download')).rejects.toMatchObject({ status: 429 });
+
+		const summary = await getUsageSummary(db, reader);
+		expect(summary.bytesUsed).toBe(100);
+		expect(summary.viewBytesUsed).toBe(200);
+		expect(summary.activeStreams).toBe(1);
+	});
+
+	it('enforces the view budget with reset details', async () => {
+		env.ARCHIVE_DAILY_VIEW_BYTE_LIMIT = '50';
+		await seedRevision('approved');
+		await reserveStreamQuota(db, reader, 'rev-1', 50, 'view');
+		await expect(reserveStreamQuota(db, reader, 'rev-1', 1, 'view')).rejects.toMatchObject({
+			status: 429,
+			details: { resetAt: expect.any(String) }
+		});
+	});
+
+	it('rate-limits MCP text counters while leaving under-limit principals unaffected', async () => {
+		env.ARCHIVE_DAILY_TEXT_CALL_LIMIT = '2';
+		env.ARCHIVE_DAILY_TEXT_PAGE_LIMIT = '3';
+		await seedRevision('approved');
+		const mcpReader: ArchivePrincipal = {
+			...reader,
+			identity: { kind: 'github_login', value: 'octocat' },
+			authn: 'mcp_assertion'
+		};
+		await authorizeContent(db, { principal: mcpReader, revisionId: 'rev-1', useKind: 'mcp_text', requestedBytes: 0, rateUnits: 1 });
+		await expect(
+			authorizeContent(db, { principal: mcpReader, revisionId: 'rev-1', useKind: 'mcp_text', requestedBytes: 0, rateUnits: 3 })
+		).rejects.toMatchObject({ status: 429, details: { resetAt: expect.any(String), auditId: expect.any(String) } });
+
+		await expect(
+			authorizeContent(db, { principal: reviewer, revisionId: 'rev-1', useKind: 'text', requestedBytes: 0, rateUnits: 1 })
+		).resolves.toMatchObject({ decision: 'allow' });
+		const summary = await getUsageSummary(db, reader);
+		expect(summary.textCallsUsed).toBe(1);
+		expect(summary.textPagesUsed).toBe(1);
 	});
 
 	it('returns the same pending-review total on subsequent pages', async () => {

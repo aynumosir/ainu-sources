@@ -7,14 +7,31 @@ import { db } from '$lib/server/db';
 import { bearerValue, throwArchiveError } from '$lib/server/archive/route';
 import { redeemCapability } from '$lib/server/archive/db';
 import { getArchiveFetcher } from '$lib/server/archive/dataplane';
+import { authorizeContent } from '$lib/server/archive/gateway';
 import { streamRevisionContent } from '$lib/server/archive/stream';
 
 async function handle(event: Parameters<RequestHandler>[0], method: 'GET' | 'HEAD'): Promise<Response> {
 	try {
 		const bearer = bearerValue(event.request);
 		const token = bearer === event.params.jti ? bearer : null;
-		const { revision } = await redeemCapability(db, token ?? '', 'all');
-		return streamRevisionContent(getArchiveFetcher(event.platform?.env), revision.submittedBy, event.request, revision, method);
+		const redemption = await redeemCapability(db, token ?? '', {
+			kind: 'range_header',
+			rangeHeader: event.request.headers.get('range')
+		});
+		const access = await authorizeContent(db, {
+			principal: redemption.principal,
+			revisionId: redemption.revisionId,
+			useKind: 'capability',
+			requestedBytes: redemption.chargedBytes
+		});
+		return streamRevisionContent(
+			getArchiveFetcher(event.platform?.env),
+			redemption.principal.userId,
+			event.request,
+			access.revision,
+			method,
+			access.cachePolicy
+		);
 	} catch (e) {
 		throwArchiveError(e);
 	}

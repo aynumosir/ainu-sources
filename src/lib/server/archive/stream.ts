@@ -1,5 +1,6 @@
 import { dataplane, type ArchiveFetcher } from './dataplane';
 import { contentDisposition } from './filenames';
+import type { ArchiveCachePolicy } from './gateway';
 import { buildRangeResponse, quotedSha256Etag } from './range';
 
 type RevisionContent = {
@@ -14,7 +15,8 @@ export async function streamRevisionContent(
 	actor: string,
 	request: Request,
 	revision: RevisionContent,
-	method: 'GET' | 'HEAD'
+	method: 'GET' | 'HEAD',
+	cachePolicy: ArchiveCachePolicy = { cacheControl: 'private, no-store' }
 ): Promise<Response> {
 	if (!revision.sha256) return new Response('revision has no blob', { status: 404 });
 	const etag = quotedSha256Etag(revision.sha256);
@@ -22,9 +24,9 @@ export async function streamRevisionContent(
 	const headers = new Headers({
 		'etag': etag,
 		'accept-ranges': 'bytes',
-		'cache-control': 'private, no-store',
 		'content-disposition': contentDisposition(new URL(request.url).searchParams.get('disposition'), revision.originalFilename)
 	});
+	if (cachePolicy.cacheControl) headers.set('cache-control', cachePolicy.cacheControl);
 	if (range.status === 416) {
 		headers.set('content-range', range.contentRange);
 		return new Response(null, { status: 416, headers });
