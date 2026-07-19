@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatBytes, middleEllipsis } from './format';
+import { formatBytes, formatDateTime, middleEllipsis } from './format';
 
 describe('formatBytes', () => {
 	it('formats byte counts using decimal units', () => {
@@ -22,5 +22,16 @@ describe('middleEllipsis', () => {
 
 	it('keeps short values unchanged', () => {
 		expect(middleEllipsis('abcdef', 4, 4)).toBe('abcdef');
+	});
+});
+
+describe('formatDateTime', () => {
+	it('formats dates with fixed-width local date and 24-hour time', () => {
+		expect(formatDateTime(new Date(2026, 6, 18, 16, 10, 49))).toBe('2026-07-18 16:10');
+	});
+
+	it('handles missing and invalid values', () => {
+		expect(formatDateTime(null)).toBe('—');
+		expect(formatDateTime('invalid')).toBe('—');
 	});
 });

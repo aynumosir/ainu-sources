@@ -6,7 +6,7 @@
 	import { archiveFetch, archiveSession } from '$lib/archive/session.svelte';
 	import { archiveUsage } from '$lib/archive/usage.svelte';
 	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
-	import { formatBytes } from '$lib/archive/format';
+	import { formatBytes, formatDateTime } from '$lib/archive/format';
 	import { formatYear } from '$lib/format';
 
 	type Mode = 'image' | 'pdf';
@@ -53,7 +53,7 @@
 	const sourceHref = $derived(`/archive/sources/${data.source?.slug ?? data.slug}`);
 	const pageHref = $derived(`/archive/read/${data.source?.slug ?? data.slug}/${data.file?.fileId ?? data.file}?p=${currentPage}`);
 	const citationText = $derived(`${data.source?.title ?? data.title}, scan p.${currentPage}\n${pageState.url.origin}${pageHref}`);
-	const resetTime = $derived(archiveUsage.value?.resetAt ? new Date(archiveUsage.value.resetAt).toLocaleString('en-US') : 'unknown');
+	const resetTime = $derived(archiveUsage.value?.resetAt ? formatDateTime(archiveUsage.value.resetAt) : 'unknown');
 	const selectedText = $derived(textCache[currentPage] ?? { status: 'idle' });
 	const metadataTitle = $derived(data.source?.title ?? data.title ?? archiveLabels.reader.en);
 	const readerAuthors = $derived(data.source?.authors?.length ? data.source.authors : data.source?.author ? [{ name: data.source.author, nameEn: null }] : []);
