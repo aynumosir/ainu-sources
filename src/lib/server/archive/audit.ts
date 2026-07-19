@@ -22,6 +22,7 @@ export type ArchiveEventType =
 	| 'capability_redeemed'
 	| 'membership_deactivated'
 	| 'archive_role_changed'
+	| 'org_membership_auto_grant'
 	| 'github_login_claim_conflict';
 
 export type ArchiveAuditInput = {

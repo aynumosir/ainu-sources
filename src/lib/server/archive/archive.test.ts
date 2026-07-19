@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -411,6 +411,96 @@ describe('archive DB flows', () => {
 			.select()
 			.from(schema.sourceLifecycleEvents)
 			.where(eq(schema.sourceLifecycleEvents.eventType, 'github_login_claim_conflict'));
+		expect(events).toHaveLength(0);
+	});
+
+	it('auto-grants contributor role for roleless public org members on GitHub login capture', async () => {
+		const fetchMock = vi.fn(async () => new Response(null, { status: 204 })) as unknown as typeof fetch;
+		rememberGithubProfileLogin('gh-numeric-other', 'public-member');
+		await captureGithubAccountEvent(
+			{ id: 'acct-other', accountId: 'gh-numeric-other', providerId: 'github', userId: 'other' },
+			db,
+			fetchMock
+		);
+
+		const [role] = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'other'));
+		expect(role).toMatchObject({ userId: 'other', role: 'archive_contributor' });
+		const [event] = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'org_membership_auto_grant'));
+		expect(event).toMatchObject({
+			entityType: 'user',
+			entityId: 'other',
+			eventType: 'org_membership_auto_grant',
+			actor: 'other',
+			details: { login: 'public-member', org: 'aynumosir' }
+		});
+	});
+
+	it('does not overwrite an existing role during GitHub org auto-grant', async () => {
+		await db.insert(schema.appUserRoles).values({ userId: 'other', role: 'archive_reviewer' });
+		const fetchMock = vi.fn(async () => new Response(null, { status: 204 })) as unknown as typeof fetch;
+		rememberGithubProfileLogin('gh-numeric-existing-role', 'public-member');
+		await captureGithubAccountEvent(
+			{ id: 'acct-existing-role', accountId: 'gh-numeric-existing-role', providerId: 'github', userId: 'other' },
+			db,
+			fetchMock
+		);
+
+		const [role] = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'other'));
+		expect(role.role).toBe('archive_reviewer');
+		const events = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'org_membership_auto_grant'));
+		expect(events).toHaveLength(0);
+	});
+
+	it('keeps login capture when the GitHub org check fails', async () => {
+		const fetchMock = vi.fn(async () => {
+			throw new Error('network down');
+		}) as unknown as typeof fetch;
+		rememberGithubProfileLogin('gh-numeric-failure', 'network-failure');
+		await expect(
+			captureGithubAccountEvent(
+				{ id: 'acct-failure', accountId: 'gh-numeric-failure', providerId: 'github', userId: 'other' },
+				db,
+				fetchMock
+			)
+		).resolves.toBeUndefined();
+
+		const roles = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'other'));
+		expect(roles).toHaveLength(0);
+		const [identity] = await db
+			.select()
+			.from(schema.userIdentities)
+			.where(and(eq(schema.userIdentities.kind, 'github_login'), eq(schema.userIdentities.value, 'network-failure')));
+		expect(identity).toMatchObject({ userId: 'other' });
+		const [cached] = await db.select().from(schema.githubLoginCache).where(eq(schema.githubLoginCache.userId, 'other'));
+		expect(cached).toMatchObject({ login: 'network-failure' });
+		const events = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'org_membership_auto_grant'));
+		expect(events).toHaveLength(0);
+	});
+
+	it('skips GitHub org auto-grant for non-member responses', async () => {
+		const fetchMock = vi.fn(async () => new Response(null, { status: 404 })) as unknown as typeof fetch;
+		rememberGithubProfileLogin('gh-numeric-non-member', 'non-member');
+		await captureGithubAccountEvent(
+			{ id: 'acct-non-member', accountId: 'gh-numeric-non-member', providerId: 'github', userId: 'other' },
+			db,
+			fetchMock
+		);
+
+		const roles = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'other'));
+		expect(roles).toHaveLength(0);
+		const events = await db
+			.select()
+			.from(schema.sourceLifecycleEvents)
+			.where(eq(schema.sourceLifecycleEvents.eventType, 'org_membership_auto_grant'));
 		expect(events).toHaveLength(0);
 	});
 
