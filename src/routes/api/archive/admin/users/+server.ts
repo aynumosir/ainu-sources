@@ -8,7 +8,12 @@ export const GET: RequestHandler = async ({ request, locals }) => {
 	const db = routeDb(locals);
 	await archivePrincipal(request, 'archive_admin', db);
 	try {
-		return json({ users: await listArchiveUsers(db) });
+		const users = await listArchiveUsers(db);
+		return json({
+			users,
+			totalUsers: users.length,
+			archiveUserCount: users.filter((user) => user.role !== null).length
+		});
 	} catch (e) {
 		throwArchiveError(e);
 	}
