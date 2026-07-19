@@ -52,7 +52,7 @@ const SOFT_LEXICON_CAP = 2000;
 const SOFT_OCCURRENCE_CAP = 3000;
 // Candidate chunks scanned in memory per soft query. Each one is tokenized
 // and compared against the query, so this bounds the request's CPU cost.
-const SOFT_CHUNK_SCAN_CAP = 120;
+const SOFT_CHUNK_SCAN_CAP = 90;
 const SIMILAR_CANDIDATE_CAP = 500;
 
 export async function searchArchive(
@@ -786,7 +786,9 @@ async function searchSoft(
 	// in SQL and tokenized in memory, which keeps the mode working everywhere
 	// the text is indexed instead of waiting on a multi-million-row token
 	// table that this database cannot absorb without starving live reads.
-	const queryAlternatives = [...new Set(queryTokens.flatMap(({ token }) => expandNormalizedTokenAlternatives(token)))];
+	// Kana expands to several romanizations; keeping every one multiplies the
+	// probe set and the candidate scan, so the list is bounded.
+	const queryAlternatives = [...new Set(queryTokens.flatMap(({ token }) => expandNormalizedTokenAlternatives(token)))].slice(0, 6);
 	// A distance-1 edit still shares one of the token's deletion variants, so
 	// substring probes on those variants retrieve fuzzy candidates cheaply.
 	const exactProbes = queryAlternatives.filter((alternative) => [...alternative].length >= 3);
