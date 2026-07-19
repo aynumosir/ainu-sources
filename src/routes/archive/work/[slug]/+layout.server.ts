@@ -14,7 +14,8 @@ export const load: LayoutServerLoad = async ({ request, locals, url }) => {
 			hasAppSession: !!locals.user,
 			signInHref: `/login?redirect=${encodeURIComponent(url.pathname + url.search)}`,
 			usage: null,
-			pendingCount: 0
+			pendingCount: 0,
+			displayName: null
 		};
 	}
 	const usage = principal.authn === 'mcp_assertion' ? null : await getUsageSummary(db, principal);
@@ -24,8 +25,10 @@ export const load: LayoutServerLoad = async ({ request, locals, url }) => {
 	return {
 		principal,
 		login: null,
-		displayName: archiveDisplayName(locals.user?.name, principal.email ?? locals.user?.email, principal.role),
+		hasAppSession: !!locals.user,
+		signInHref: `/login?redirect=${encodeURIComponent(url.pathname + url.search)}`,
 		usage,
-		pendingCount
+		pendingCount,
+		displayName: archiveDisplayName(locals.user?.name, principal.email ?? locals.user?.email, principal.role)
 	};
 };
