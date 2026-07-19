@@ -5,6 +5,7 @@ import { resolveArchivePrincipal } from '$lib/server/archive/authz';
 import { getRevision, getSourceFileById, listSourceFiles } from '$lib/server/archive/db';
 import { ArchiveHttpError } from '$lib/server/archive/errors';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
+import { getSourceDetail } from '$lib/server/queries';
 
 export const load: PageServerLoad = async ({ request, params, url }) => {
 	const principal = await resolveArchivePrincipal(request, db);
@@ -17,6 +18,7 @@ export const load: PageServerLoad = async ({ request, params, url }) => {
 		if (!sourceFile.currentRevisionId) error(404, 'file has no current revision');
 
 		const revision = await getRevision(db, sourceFile.currentRevisionId, principal);
+		const detail = await getSourceDetail(params.slug);
 		const siblings = await listSourceFiles(db, params.slug, principal);
 		const files = uniqueFiles(siblings).map((file) => ({
 			fileId: file.fileId,
@@ -46,7 +48,29 @@ export const load: PageServerLoad = async ({ request, params, url }) => {
 			},
 			source: {
 				slug: revision.sourceSlug,
-				title: revision.title
+				title: detail?.source.title ?? revision.title,
+				titleEn: detail?.source.titleEn ?? null,
+				titleAin: detail?.source.titleAin ?? null,
+				author: detail?.source.author ?? null,
+				yearText: detail?.source.yearText ?? null,
+				yearStart: detail?.source.yearStart ?? null,
+				yearEnd: detail?.source.yearEnd ?? null,
+				yearCertainty: detail?.source.yearCertainty ?? null,
+				dialect: detail?.source.dialect ?? null,
+				holdingInstitution: detail?.source.holdingInstitution ?? null,
+				callNumber: detail?.source.callNumber ?? null,
+				authors: (detail?.persons ?? [])
+					.filter((person) => person.role === 'author')
+					.map((person) => ({
+						name: person.name,
+						nameEn: person.nameEn
+					})),
+				publishers: (detail?.institutions ?? [])
+					.filter((institution) => institution.role === 'publisher')
+					.map((institution) => ({
+						name: institution.name,
+						nameEn: institution.nameEn
+					}))
 			},
 			revision: {
 				id: revision.id,

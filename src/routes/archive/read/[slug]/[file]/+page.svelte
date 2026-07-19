@@ -6,8 +6,10 @@
 	import { archiveUsage } from '$lib/archive/usage.svelte';
 	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import { formatBytes } from '$lib/archive/format';
+	import { formatYear } from '$lib/format';
 
 	type Mode = 'image' | 'pdf';
+	type OcrProbe = 'idle' | 'loading' | 'available' | 'unavailable' | 'error';
 	type TextEntry =
 		| { status: 'idle' | 'loading' }
 		| { status: 'ready'; text: string; variant: string }
@@ -21,6 +23,7 @@
 	let pageField = $state(untrack(() => String(currentPage)));
 	let mode = $state<Mode>('image');
 	let textPanelOpen = $state(false);
+	let metadataPanelOpen = $state(false);
 	let panelWidth = $state(360);
 	let imageLowSrc = $state<string | null>(null);
 	let imageHighSrc = $state<string | null>(null);
@@ -34,6 +37,7 @@
 	let findOpen = $state(false);
 	let findQuery = $state('');
 	let copyStatus = $state<string | null>(null);
+	let ocrProbe = $state<OcrProbe>('idle');
 	let textCache = $state<Record<number, TextEntry>>({});
 	let stageEl: HTMLElement | undefined = $state();
 	let dragStartX = 0;
@@ -50,10 +54,24 @@
 	const citationText = $derived(`${data.source?.title ?? data.title}, scan p.${currentPage}\n${pageState.url.origin}${pageHref}`);
 	const resetTime = $derived(archiveUsage.value?.resetAt ? new Date(archiveUsage.value.resetAt).toLocaleString('en-US') : 'unknown');
 	const selectedText = $derived(textCache[currentPage] ?? { status: 'idle' });
+	const metadataTitle = $derived(data.source?.title ?? data.title ?? archiveLabels.reader.en);
+	const readerAuthors = $derived(data.source?.authors?.length ? data.source.authors : data.source?.author ? [{ name: data.source.author, nameEn: null }] : []);
+	const readerPublishers = $derived(data.source?.publishers ?? []);
+	const fileName = $derived(data.file?.label ?? data.file?.checkoutPath?.split('/').at(-1) ?? data.file?.role ?? data.file?.fileId);
+	const ocrProbeLabel = $derived(
+		ocrProbe === 'available'
+			? 'OCR available'
+			: ocrProbe === 'unavailable'
+				? 'OCR unavailable'
+				: ocrProbe === 'error'
+					? 'OCR check failed'
+					: 'Checking OCR'
+	);
 
 	onMount(() => {
 		mounted = true;
 		restoreReaderState();
+		if (metadataPanelOpen) void loadOcrProbe();
 		const keydown = (event: KeyboardEvent) => handleShortcut(event);
 		window.addEventListener('keydown', keydown);
 		return () => {
@@ -84,10 +102,12 @@
 				page?: number;
 				mode?: Mode;
 				textPanelOpen?: boolean;
+				metadataPanelOpen?: boolean;
 				panelWidth?: number;
 			};
 			mode = saved.mode === 'pdf' || saved.mode === 'image' ? saved.mode : 'image';
 			textPanelOpen = !!saved.textPanelOpen;
+			metadataPanelOpen = !!saved.metadataPanelOpen;
 			if (Number.isFinite(saved.panelWidth)) panelWidth = clamp(Number(saved.panelWidth), 280, Math.floor(window.innerWidth * 0.5));
 			currentPage = clampPage(paramsPage ?? saved.page ?? data.initialPage ?? 1);
 		} catch {
@@ -102,6 +122,7 @@
 				page: currentPage,
 				mode,
 				textPanelOpen,
+				metadataPanelOpen,
 				panelWidth
 			})
 		);
@@ -225,6 +246,30 @@
 		if (textPanelOpen) void loadTextPages(currentPage);
 	}
 
+	function toggleMetadataPanel(): void {
+		metadataPanelOpen = !metadataPanelOpen;
+		if (metadataPanelOpen) void loadOcrProbe();
+	}
+
+	async function loadOcrProbe(): Promise<void> {
+		if (ocrProbe === 'loading' || ocrProbe === 'available' || ocrProbe === 'unavailable') return;
+		ocrProbe = 'loading';
+		const pages = [...new Set([1, currentPage, pageCount].filter((page) => page >= 1 && page <= pageCount))];
+		const response = await readerFetch(`/api/archive/revisions/${data.revision.id}/text?pages=${pages.join(',')}`);
+		if (response.status === 403 || response.status === 410 || response.status === 429) {
+			ocrProbe = 'error';
+			return;
+		}
+		if (!response.ok) {
+			ocrProbe = 'error';
+			return;
+		}
+		const body = (await response.json()) as
+			| { error: 'ocr_unavailable'; alternatives?: unknown[]; note?: string }
+			| { revisionId: string; variant: string; pages: { page: number; text: string }[]; nextCursor: string | null };
+		ocrProbe = 'error' in body || body.pages.length === 0 ? 'unavailable' : 'available';
+	}
+
 	async function copyCitation(): Promise<void> {
 		await navigator.clipboard.writeText(citationText);
 		copyStatus = 'Copied';
@@ -311,6 +356,97 @@
 	}
 </script>
 
+{#snippet metadataContent()}
+	<div class="space-y-5">
+		<div>
+			<p class="tnum text-[15px] text-[var(--archive-subtle)]">{formatYear(data.source)}</p>
+			<h2 class="archive-title mt-1 break-words text-[27px] font-semibold">{metadataTitle}</h2>
+			{#if data.source?.titleEn && data.source.titleEn !== data.source.title}
+				<p class="mt-1 text-[17px] text-[var(--archive-subtle)]">{data.source.titleEn}</p>
+			{/if}
+			{#if data.source?.titleAin}
+				<p class="mt-0.5 text-[15px] text-[var(--archive-subtle)]" lang="ain-Latn">{data.source.titleAin}</p>
+			{/if}
+		</div>
+
+		<dl class="grid gap-3 text-[13px]">
+			{#if readerAuthors.length}
+				<div>
+					<dt class="archive-kicker"><BilingualLabel ja={archiveLabels.author.ja} en={archiveLabels.author.en} /></dt>
+					<dd class="mt-1 space-y-2 text-[15px]">
+						{#each readerAuthors as author}
+							<div>
+								<p>{author.name}</p>
+								{#if author.nameEn && author.nameEn !== author.name}
+									<p class="text-[13px] text-[var(--archive-subtle)]">{author.nameEn}</p>
+								{/if}
+							</div>
+						{/each}
+					</dd>
+				</div>
+			{/if}
+			<div>
+				<dt class="archive-kicker"><BilingualLabel ja={archiveLabels.year.ja} en={archiveLabels.year.en} /></dt>
+				<dd class="tnum mt-1 text-[15px]">{formatYear(data.source)}</dd>
+			</div>
+			{#if readerPublishers.length}
+				<div>
+					<dt class="archive-kicker"><BilingualLabel ja={archiveLabels.publisher.ja} en={archiveLabels.publisher.en} /></dt>
+					<dd class="mt-1 space-y-2 text-[15px]">
+						{#each readerPublishers as publisher}
+							<div>
+								<p>{publisher.name}</p>
+								{#if publisher.nameEn && publisher.nameEn !== publisher.name}
+									<p class="text-[13px] text-[var(--archive-subtle)]">{publisher.nameEn}</p>
+								{/if}
+							</div>
+						{/each}
+					</dd>
+				</div>
+			{/if}
+			{#if data.source?.dialect}
+				<div>
+					<dt class="archive-kicker"><BilingualLabel ja={archiveLabels.dialect.ja} en={archiveLabels.dialect.en} /></dt>
+					<dd class="mt-1 text-[15px]">{data.source.dialect}</dd>
+				</div>
+			{/if}
+			{#if data.source?.holdingInstitution}
+				<div>
+					<dt class="archive-kicker"><BilingualLabel ja={archiveLabels.institution.ja} en={archiveLabels.institution.en} /></dt>
+					<dd class="mt-1 text-[15px]">{data.source.holdingInstitution}</dd>
+				</div>
+			{/if}
+			{#if data.source?.callNumber}
+				<div>
+					<dt class="archive-kicker"><BilingualLabel ja={archiveLabels.callNumber.ja} en={archiveLabels.callNumber.en} /></dt>
+					<dd class="archive-mono mt-1 break-all text-[13px]">{data.source.callNumber}</dd>
+				</div>
+			{/if}
+		</dl>
+
+		<div class="border-t border-dotted border-[var(--archive-border)] pt-4">
+			<BilingualLabel
+				tag="h3"
+				ja={archiveLabels.fileDetails.ja}
+				en={archiveLabels.fileDetails.en}
+				class="text-[15px] font-semibold"
+			/>
+			<dl class="mt-3 grid gap-2 text-[13px] sm:grid-cols-[8rem_1fr]">
+				<dt class="text-[var(--archive-subtle)]"><BilingualLabel ja={archiveLabels.file.ja} en={archiveLabels.file.en} /></dt>
+				<dd>{fileName}</dd>
+				<dt class="text-[var(--archive-subtle)]">Role</dt>
+				<dd>{data.file?.role ?? 'file'}</dd>
+				<dt class="text-[var(--archive-subtle)]"><BilingualLabel ja={archiveLabels.pageCount.ja} en={archiveLabels.pageCount.en} /></dt>
+				<dd class="tnum">{pageCount}</dd>
+				<dt class="text-[var(--archive-subtle)]"><BilingualLabel ja={archiveLabels.size.ja} en={archiveLabels.size.en} /></dt>
+				<dd class="tnum">{formatBytes(data.revision.bytes)}</dd>
+				<dt class="text-[var(--archive-subtle)]"><BilingualLabel ja={archiveLabels.ocrAvailability.ja} en={archiveLabels.ocrAvailability.en} /></dt>
+				<dd>{ocrProbeLabel}</dd>
+			</dl>
+		</div>
+	</div>
+{/snippet}
+
 <svelte:head>
 	<title>{data.source?.title ?? data.title} - archive reader</title>
 </svelte:head>
@@ -384,6 +520,15 @@
 				>
 					<BilingualLabel ja={archiveLabels.textPanel.ja} en={archiveLabels.textPanel.en} />
 				</button>
+				<button
+					type="button"
+					aria-label={bilingualAriaLabel(archiveLabels.metadataPanel)}
+					title={bilingualAriaLabel(archiveLabels.metadataPanel)}
+					onclick={toggleMetadataPanel}
+					class={`h-8 w-8 border text-[15px] font-semibold ${metadataPanelOpen ? 'border-[var(--archive-gilt)] bg-[var(--archive-panel)] text-[var(--archive-gilt-text)]' : 'border-[var(--archive-border)] bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
+				>
+					<span aria-hidden="true">i</span>
+				</button>
 				<div class="relative">
 					<button
 						type="button"
@@ -421,7 +566,21 @@
 			<p class="fixed right-3 top-14 z-40 border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] text-[var(--archive-text)] shadow-sm">{copyStatus}</p>
 		{/if}
 
-		<div class="reader-grid flex min-h-0 flex-1" style={`--reader-panel-width:${panelWidth}px`}>
+		<div class="reader-grid relative flex min-h-0 flex-1" style={`--reader-panel-width:${panelWidth}px`}>
+			{#if metadataPanelOpen}
+				<aside class="reader-metadata-panel hidden border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4 shadow-lg md:block">
+					<div class="mb-4 flex items-center justify-between gap-2 border-b border-dotted border-[var(--archive-border)] pb-2">
+						<BilingualLabel
+							tag="h2"
+							ja={archiveLabels.metadataPanel.ja}
+							en={archiveLabels.metadataPanel.en}
+							class="text-[17px] font-semibold"
+						/>
+						<button type="button" class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" onclick={() => (metadataPanelOpen = false)}>Close</button>
+					</div>
+					{@render metadataContent()}
+				</aside>
+			{/if}
 			<main class="relative min-w-0 flex-1" bind:this={stageEl}>
 				<div class="absolute inset-y-0 left-2 z-10 flex items-center">
 					<button type="button" aria-label={bilingualAriaLabel(archiveLabels.previousPage)} onclick={() => go(-1)} class="h-12 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[17px] hover:border-[var(--archive-gilt)]">‹</button>
@@ -544,9 +703,36 @@
 			</form>
 		</div>
 	{/if}
+
+	{#if metadataPanelOpen}
+		<div class="fixed inset-0 z-50 bg-black/35 p-3 md:hidden">
+			<button type="button" aria-label="Close metadata" class="absolute inset-0 h-full w-full" onclick={() => (metadataPanelOpen = false)}></button>
+			<aside class="reader-metadata-sheet relative ml-auto flex max-h-[85svh] w-full max-w-md flex-col border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4 shadow-lg">
+				<div class="mb-4 flex items-center justify-between gap-2 border-b border-dotted border-[var(--archive-border)] pb-2">
+					<BilingualLabel
+						tag="h2"
+						ja={archiveLabels.metadataPanel.ja}
+						en={archiveLabels.metadataPanel.en}
+						class="text-[17px] font-semibold"
+					/>
+					<button type="button" class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" onclick={() => (metadataPanelOpen = false)}>Close</button>
+				</div>
+				<div class="overflow-auto">
+					{@render metadataContent()}
+				</div>
+			</aside>
+		</div>
+	{/if}
 {/if}
 
 <style>
+	.reader-metadata-panel {
+		position: absolute;
+		inset: 1rem auto 1rem 1rem;
+		z-index: 20;
+		width: min(24rem, calc(100vw - 2rem));
+		overflow: auto;
+	}
 	.reader-text-panel {
 		width: var(--reader-panel-width);
 		max-width: 50vw;
