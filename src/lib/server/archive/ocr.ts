@@ -94,7 +94,7 @@ export function parsePageSelector(value: string | null): number[] | null {
 	return [...pages].sort((a, b) => a - b);
 }
 
-const INGEST_BATCH_ROWS = 500;
+const INGEST_BATCH_ROWS = 2000;
 
 export async function replaceOcrPages(
 	db: Db,
@@ -103,7 +103,11 @@ export async function replaceOcrPages(
 	pages: OcrPageInput[],
 	opts: { contentHash?: string; ingestedAt?: Date } = {}
 ): Promise<string> {
-	return db.transaction((tx) => activateOcrGeneration(tx as unknown as RawSqlDb, revisionId, variant, pages, opts));
+	// Rows are tagged with a fresh generation and are invisible to readers
+	// until the state row flips at the end, so this deliberately runs outside
+	// a transaction: holding a write lock across a whole work starves reads on
+	// the shared database.
+	return activateOcrGeneration(db as unknown as RawSqlDb, revisionId, variant, pages, opts);
 }
 
 export async function activateOcrGeneration(
@@ -147,9 +151,17 @@ export async function activateOcrGeneration(
 				${checksum}, ${OCR_NORMALIZATION_VERSION}, ${generation}
 			)`);
 			await flush(chunkRows, chunkStatement);
+			// One row per distinct token per chunk, at its first position: the
+			// index answers "does this chunk contain this token", so repeated
+			// words do not need repeated rows.
+			const firstPosition = new Map<string, number>();
 			for (const token of tokenizeNormalizedText(text)) {
+				if (firstPosition.has(token.token)) continue;
+				firstPosition.set(token.token, token.position);
+			}
+			for (const [tokenNorm, position] of firstPosition) {
 				tokenRows.push(sql`(
-					${token.token}, ${revisionId}, ${variant}, ${page.page}, ${block}, ${token.position}, ${chunkId}, ${generation}
+					${tokenNorm}, ${revisionId}, ${variant}, ${page.page}, ${block}, ${position}, ${chunkId}, ${generation}
 				)`);
 				if (tokenRows.length >= INGEST_BATCH_ROWS) {
 					// Tokens reference their chunk, so pending chunks must land first.
