@@ -28,7 +28,7 @@
 	<FilterBar filters={data.filters} />
 	{#if data.filters.searchableOnly}
 		<p class="border border-[var(--archive-border)] bg-[var(--archive-panel)] p-3 text-[13px] text-[var(--archive-subtle)]">
-			OCR coverage data is not available in phase 1, so searchable-only cannot be verified from this list.
+			OCR coverage data is unavailable, so the “has OCR text” filter cannot be verified from this list.
 		</p>
 	{/if}
 	<SourceCardGrid items={data.items} />

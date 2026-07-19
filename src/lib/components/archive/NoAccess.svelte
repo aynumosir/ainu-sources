@@ -47,8 +47,8 @@
 					This archive is a private collection for designated researchers. Ask an archive administrator to grant you access.
 				</p>
 				<form method="POST" action="/account?/signout" use:enhance={signOutEnhance} class="mt-5">
-					<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.signOut)} class="text-[13px] font-semibold text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4">
-						<BilingualLabel ja={archiveLabels.signOut.ja} en={archiveLabels.signOut.en} />
+					<button type="submit" aria-label="Sign out" class="text-[13px] font-semibold text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4">
+						Sign out
 					</button>
 				</form>
 			{:else}

@@ -1,22 +1,38 @@
-import { and, desc, eq } from 'drizzle-orm';
+import { and, asc, desc, eq } from 'drizzle-orm';
 import { db } from '$lib/server/db';
-import { archiveBlobs, fileRevisions, sourceFiles, sources } from '$lib/server/db/schema';
+import { archiveBlobs, fileRevisions, persons, sourceFiles, sourcePersons, sources } from '$lib/server/db/schema';
 import { getRevision, listSourceFiles } from '$lib/server/archive/db';
 import { archiveRoleAtLeast, type ArchivePrincipal } from '$lib/server/archive/types';
 import { getSourceDetail } from '$lib/server/queries';
 
-export async function loadArchiveWork(
-	slug: string,
-	principal: ArchivePrincipal,
-	requestedPage: number | null
-) {
+export type ArchiveWorkPerson = {
+	name: string;
+	slug: string;
+	role: string;
+};
+
+export async function loadArchiveWorkPersons(slug: string): Promise<ArchiveWorkPerson[]> {
+	return db
+		.select({
+			name: persons.name,
+			slug: persons.slug,
+			role: sourcePersons.role
+		})
+		.from(sourcePersons)
+		.innerJoin(persons, eq(sourcePersons.personId, persons.id))
+		.innerJoin(sources, eq(sourcePersons.sourceId, sources.id))
+		.where(eq(sources.slug, slug))
+		.orderBy(asc(sourcePersons.sortOrder));
+}
+
+export async function loadArchiveWork(slug: string, principal: ArchivePrincipal, requestedPage: number | null) {
 	const detail = await getSourceDetail(slug);
 	if (!detail) return null;
 
-	const rows = await listSourceFiles(db, slug, principal, { includeHistory: true });
-	const approved = rows.filter(
-		(row): row is typeof row & { revisionId: string } => row.reviewStatus === 'approved' && !!row.revisionId
-	);
+	const rows = await listSourceFiles(db, slug, principal, {
+		includeHistory: true
+	});
+	const approved = rows.filter((row): row is typeof row & { revisionId: string } => row.reviewStatus === 'approved' && !!row.revisionId);
 	const current =
 		approved.find((row) => row.role === 'scan' && row.isCurrent) ??
 		approved.find((row) => row.isCurrent) ??
@@ -27,11 +43,7 @@ export async function loadArchiveWork(
 	const revision = await getRevision(db, current.revisionId, principal);
 	const pageCount = Math.max(1, revision.pageCount ?? 1);
 	const initialPage = clampPage(requestedPage ?? 1, pageCount);
-	const pending = await pendingForSource(
-		slug,
-		principal.userId,
-		archiveRoleAtLeast(principal.role, 'archive_reviewer')
-	);
+	const pending = await pendingForSource(slug, principal.userId, archiveRoleAtLeast(principal.role, 'archive_reviewer'));
 
 	return {
 		detail,

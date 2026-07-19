@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { formatDateTime, middleEllipsis } from '$lib/archive/format';
+	import { formatDateTime } from '$lib/archive/format';
 	import { archiveFetch } from '$lib/archive/session.svelte';
+	import { archiveRoleLabel } from '$lib/archive/identity';
 	import BilingualLabel from './BilingualLabel.svelte';
 	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import type { ArchiveRole } from '$lib/server/archive/types';
@@ -48,16 +49,16 @@
 	}
 
 	function displayName(user: AdminUser): string {
-		return user.login ?? user.name ?? user.email;
+		const profileName = user.name?.trim();
+		if (profileName) return profileName;
+		const emailLocalPart = user.email?.trim().split('@', 1)[0]?.trim();
+		if (emailLocalPart) return emailLocalPart;
+		if (user.role) return archiveRoleLabel(user.role);
+		return rowKind(user) === 'machine' ? 'Machine' : 'Reader';
 	}
 
 	function rowKind(user: AdminUser): AdminUserKind {
 		return user.kind ?? (user.serviceToken ? 'machine' : 'person');
-	}
-
-	function tokenLabel(value: string): string {
-		const shortened = middleEllipsis(value, 6, 4);
-		return shortened === value ? `${value.slice(0, Math.max(1, Math.min(3, value.length)))}...` : shortened;
 	}
 
 	function kindLabel(kind: AdminUserKind): { ja: string; en: string } | null {
@@ -151,21 +152,9 @@
 									<p class="mt-1 break-all text-[12px] text-[var(--archive-subtle)]">{user.email}</p>
 								{/if}
 								<div class="mt-2 flex flex-wrap gap-1.5">
-									{#if user.login}
-										<span class="archive-mono inline-flex items-center gap-1 border border-[var(--archive-border)] bg-[var(--archive-panel)] px-1.5 py-0.5 text-[11px] text-[var(--archive-subtle)]">
-											<span class="font-[var(--font-archive-sans)]">github:</span>
-											{user.login}
-										</span>
-									{/if}
-									{#if user.serviceToken}
-										<span class="archive-mono inline-flex items-center gap-1 border border-[var(--archive-border)] bg-[var(--archive-panel)] px-1.5 py-0.5 text-[11px] text-[var(--archive-subtle)]">
-											<span class="font-[var(--font-archive-sans)]">token:</span>
-											{tokenLabel(user.serviceToken)}
-										</span>
-									{/if}
 									{#if rowKind(user) === 'machine'}
 										<span class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-muted)] px-1.5 py-0.5 text-[11px] font-medium text-[var(--archive-subtle)]">
-											<BilingualLabel ja={archiveLabels.machinePrincipal.ja} en={archiveLabels.machinePrincipal.en} />
+											machine
 										</span>
 									{/if}
 								</div>

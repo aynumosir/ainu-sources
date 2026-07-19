@@ -18,9 +18,7 @@ export const load: LayoutServerLoad = async ({ request, locals, url }) => {
 		};
 	}
 	const usage = principal.authn === 'mcp_assertion' ? null : await getUsageSummary(db, principal);
-	const pendingCount = archiveRoleAtLeast(principal.role, 'archive_reviewer')
-		? (await listPendingReview(db, null, 1)).total
-		: 0;
+	const pendingCount = archiveRoleAtLeast(principal.role, 'archive_reviewer') ? (await listPendingReview(db, null, 1)).total : 0;
 	return {
 		principal,
 		login: null,

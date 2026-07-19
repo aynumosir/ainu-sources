@@ -3,9 +3,7 @@ import { archiveDisplayName, archiveRoleLabel } from './identity';
 
 describe('archive identity labels', () => {
 	it('prefers a profile name', () => {
-		expect(archiveDisplayName('  Kayano Shigeru  ', 'kayano@example.test', 'archive_reader')).toBe(
-			'Kayano Shigeru'
-		);
+		expect(archiveDisplayName('  Kayano Shigeru  ', 'kayano@example.test', 'archive_reader')).toBe('Kayano Shigeru');
 	});
 
 	it('uses the email local part when the profile name is empty', () => {
