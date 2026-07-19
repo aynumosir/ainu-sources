@@ -134,6 +134,8 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 export function parseOcrFilename(filename: string): { stem: string; variant: string } | null {
 	const match = /^(.+)\.([^.]+)\.txt$/u.exec(filename);
 	if (!match) return null;
+	// Human variants are database-owned. Ingestion skips these reserved names so publication artifacts stay outside machine inputs.
+	if (['edited', 'manual', 'approved'].includes(match[2])) return null;
 	return { stem: match[1], variant: match[2] };
 }
 

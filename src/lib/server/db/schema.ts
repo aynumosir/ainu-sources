@@ -1080,6 +1080,90 @@ export const ocrIngestState = sqliteTable(
 	]
 );
 
+export const ocrPageEdits = sqliteTable(
+	'ocr_page_edits',
+	{
+		editId: text('edit_id').primaryKey().$defaultFn(uuid),
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'restrict' }),
+		page: integer('page').notNull(),
+		variant: text('variant').notNull(),
+		text: text('text').notNull(),
+		baseEditId: text('base_edit_id').references((): AnySQLiteColumn => ocrPageEdits.editId, {
+			onDelete: 'restrict'
+		}),
+		baseVariant: text('base_variant'),
+		note: text('note'),
+		author: text('author')
+			.notNull()
+			.references(() => user.id, { onDelete: 'restrict' }),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		index('ocr_page_edits_revision_page_created_idx').on(t.revisionId, t.page, t.createdAt),
+		index('ocr_page_edits_base_edit_idx').on(t.baseEditId),
+		check('ocr_page_edits_page_check', sql`${t.page} >= 0`),
+		check('ocr_page_edits_variant_check', sql`${t.variant} in ('edited', 'manual')`),
+		check(
+			'ocr_page_edits_base_check',
+			sql`(${t.baseEditId} is not null and ${t.baseVariant} is null) or (${t.baseEditId} is null and ${t.baseVariant} is not null)`
+		)
+	]
+);
+
+export const ocrPageState = sqliteTable(
+	'ocr_page_state',
+	{
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'restrict' }),
+		page: integer('page').notNull(),
+		currentEditId: text('current_edit_id').references(() => ocrPageEdits.editId, { onDelete: 'restrict' }),
+		status: text('status').notNull().default('machine'),
+		approver: text('approver').references(() => user.id, { onDelete: 'restrict' }),
+		approvedAt: integer('approved_at', { mode: 'timestamp_ms' })
+	},
+	(t) => [
+		primaryKey({ columns: [t.revisionId, t.page] }),
+		uniqueIndex('ocr_page_state_current_edit_idx').on(t.currentEditId),
+		check('ocr_page_state_page_check', sql`${t.page} >= 0`),
+		check('ocr_page_state_status_check', sql`${t.status} in ('machine', 'edited', 'approved')`),
+		check(
+			'ocr_page_state_value_check',
+			sql`(${t.status} = 'machine' and ${t.currentEditId} is null and ${t.approver} is null and ${t.approvedAt} is null) or (${t.status} = 'edited' and ${t.currentEditId} is not null and ${t.approver} is null and ${t.approvedAt} is null) or (${t.status} = 'approved' and ${t.currentEditId} is not null and ${t.approver} is not null and ${t.approvedAt} is not null)`
+		)
+	]
+);
+
+export const ocrPageEditEvents = sqliteTable(
+	'ocr_page_edit_events',
+	{
+		id: integer('id').primaryKey({ autoIncrement: true }),
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'restrict' }),
+		page: integer('page').notNull(),
+		kind: text('kind').notNull(),
+		editId: text('edit_id').references(() => ocrPageEdits.editId, { onDelete: 'restrict' }),
+		actor: text('actor')
+			.notNull()
+			.references(() => user.id, { onDelete: 'restrict' }),
+		note: text('note'),
+		baseEditId: text('base_edit_id').references(() => ocrPageEdits.editId, { onDelete: 'restrict' }),
+		restoredFrom: text('restored_from').references(() => ocrPageEdits.editId, { onDelete: 'restrict' }),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		index('ocr_page_edit_events_page_cursor_idx').on(t.revisionId, t.page, t.id),
+		check('ocr_page_edit_events_page_check', sql`${t.page} >= 0`),
+		check(
+			'ocr_page_edit_events_kind_check',
+			sql`${t.kind} in ('edit', 'approve', 'unapprove', 'demote', 'revert')`
+		)
+	]
+);
+
 export const uploadSessions = sqliteTable(
 	'upload_sessions',
 	{
@@ -1278,6 +1362,9 @@ export type FileRevision = typeof fileRevisions.$inferSelect;
 export type RevisionDerivation = typeof revisionDerivations.$inferSelect;
 export type RevisionOcrCoverage = typeof revisionOcrCoverage.$inferSelect;
 export type OcrIngestState = typeof ocrIngestState.$inferSelect;
+export type OcrPageEdit = typeof ocrPageEdits.$inferSelect;
+export type OcrPageState = typeof ocrPageState.$inferSelect;
+export type OcrPageEditEvent = typeof ocrPageEditEvents.$inferSelect;
 export type UploadSession = typeof uploadSessions.$inferSelect;
 export type BlobOrigin = typeof blobOrigins.$inferSelect;
 export type CapabilityToken = typeof capabilityTokens.$inferSelect;
