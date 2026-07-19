@@ -797,10 +797,10 @@ async function searchSoft(
 	if (probes.length === 0) {
 		return emptySearchResult('soft', SOFT_OCCURRENCE_CAP, false, { tolerance, maxDistance });
 	}
-	const probeClause = sql.join(
-		probes.map((probe) => sql`c.text_norm like ${'%' + probe + '%'}`),
-		sql` or `
-	);
+	// Candidate retrieval goes through the FTS index rather than LIKE scans:
+	// a common word expands into many probes, and scanning the text column for
+	// each of them is slow enough to exhaust the request budget.
+	const probeQuery = probes.map(escapeFtsLiteral).join(' OR ');
 	const occurrences = await db.all<SoftOccurrence>(sql`
 		select
 			c.chunk_id as chunkId,
@@ -821,7 +821,8 @@ async function searchSoft(
 			src.year_start as sourceYearStart,
 			src.year_end as sourceYearEnd,
 			src.year_certainty as sourceYearCertainty
-		from ocr_chunks c
+		from ocr_chunks_fts
+		inner join ocr_chunks c on c.rowid = ocr_chunks_fts.rowid
 		inner join ocr_ingest_state state
 			on state.revision_id = c.revision_id
 			and state.variant = c.variant
@@ -829,11 +830,11 @@ async function searchSoft(
 		inner join file_revisions fr on fr.id = c.revision_id
 		inner join source_files sf on sf.id = fr.source_file_id
 		inner join sources src on src.id = sf.source_id
-		where (${probeClause})
+		where ocr_chunks_fts match ${probeQuery}
 			and ${visibility}
 			${variantClause}
 			${sourceClause}
-		order by c.revision_id, c.page, c.block
+		order by bm25(ocr_chunks_fts)
 		limit ${SOFT_CHUNK_SCAN_CAP + 1}
 	`);
 	const alignmentsByChunk = new Map<string, Map<string, SoftAlignment>>();
