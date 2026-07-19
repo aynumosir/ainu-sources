@@ -1,10 +1,18 @@
 <script lang="ts">
-	type OcrCoverage = { status?: string; variant?: string; preferred?: boolean } | null;
-	let { coverage }: { coverage?: OcrCoverage } = $props();
+	import { summarizeOcrCoverage, type OcrCoverage } from '$lib/archive/ocr';
+
+	let { coverage = [] }: { coverage?: OcrCoverage[] } = $props();
+	const summary = $derived(summarizeOcrCoverage(coverage));
 </script>
 
-{#if coverage}
-	<span class="bg-[var(--archive-accent-soft)] px-2 py-0.5 text-[13px] font-medium text-[var(--archive-gilt-text)]">
-		OCR {coverage.variant ?? coverage.status ?? 'available'}
-	</span>
-{/if}
+<span
+	class={`whitespace-nowrap px-1.5 py-0.5 text-[12px] font-medium ${
+		summary.state === 'available'
+			? 'bg-[var(--archive-accent-soft)] text-[var(--archive-gilt-text)]'
+			: summary.state === 'partial'
+				? 'bg-[var(--archive-panel)] text-[var(--archive-warn)]'
+				: 'bg-[var(--archive-muted)] text-[var(--archive-subtle)]'
+	}`}
+>
+	{summary.label}
+</span>

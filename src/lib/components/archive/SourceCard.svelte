@@ -4,6 +4,8 @@
 	import { formatArchiveLanguages } from '$lib/archive/languages';
 	import { formatYear } from '$lib/format';
 	import type { Source } from '$lib/server/db/schema';
+	import OcrBadge from './OcrBadge.svelte';
+	import type { OcrCoverage } from '$lib/archive/ocr';
 
 	type ArchiveFile = {
 		fileId: string;
@@ -14,7 +16,7 @@
 		mediaType: string | null;
 	};
 
-	let { item }: { item: { source: Source; file: ArchiveFile; coverage?: null } } = $props();
+	let { item }: { item: { source: Source; file: ArchiveFile; coverage: OcrCoverage[] } } = $props();
 	const source = $derived(item.source);
 	const file = $derived(item.file);
 	const languages = $derived(formatArchiveLanguages(source.languages));
@@ -44,7 +46,9 @@
 	<p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-[var(--archive-subtle)]">
 		<span class="tnum">{formatYear(source)}</span>
 	</p>
-	<p class="mt-1 text-[13px] text-[var(--archive-subtle)]">
-		{formatBytes(file.bytes)}{#if languages} · {languages}{/if}
+	<p class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-[var(--archive-subtle)]">
+		<span>{formatBytes(file.bytes)}{#if file.mediaType} · {file.mediaType}{/if}{#if languages} · {languages}{/if}</span>
+		<span aria-hidden="true">·</span>
+		<OcrBadge coverage={item.coverage} />
 	</p>
 </div>
