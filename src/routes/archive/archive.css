@@ -126,3 +126,23 @@
 		--tw-ring-color: var(--archive-gilt);
 	}
 }
+
+/* Card titles clamp so one long title cannot make its card tower over the
+   others in the row; the full title stays available as a tooltip. */
+.archive .archive-clamp-1,
+.archive .archive-clamp-2 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	overflow-wrap: anywhere;
+}
+
+.archive .archive-clamp-1 {
+	-webkit-line-clamp: 1;
+	line-clamp: 1;
+}
+
+.archive .archive-clamp-2 {
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+}
