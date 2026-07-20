@@ -53,8 +53,7 @@
 		<span class="tnum ml-auto text-[12px] text-[var(--archive-subtle)]">{formatYear(source)}</span>
 	</div>
 	<p class="archive-meta mt-1.5 text-[12px] text-[var(--archive-subtle)]">
-		{#each metaParts as part, index (index)}
-			{#if index > 0}<span class="sep" aria-hidden="true">·</span>{/if}
+		{#each metaParts as part (part)}
 			<span>{part}</span>
 		{/each}
 	</p>

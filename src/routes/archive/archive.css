@@ -166,8 +166,9 @@
 	font-weight: 600;
 }
 
-/* Middle dots fall back to a CJK font and gain lopsided side bearings;
-   render them as their own spans in the sans face instead. */
+/* Middle dots fall back to a CJK font and gain lopsided side bearings, so the
+   separator is drawn in the sans face and carried by the item it precedes —
+   a dot never ends a wrapped line. */
 .archive .archive-meta {
 	display: flex;
 	flex-wrap: wrap;
@@ -176,7 +177,9 @@
 	row-gap: 0.15rem;
 }
 
-.archive .archive-meta > .sep {
+.archive .archive-meta > span + span::before {
+	content: '·';
+	margin-right: 0.4rem;
 	font-family: var(--font-archive-sans);
 	color: var(--archive-faint-text);
 }

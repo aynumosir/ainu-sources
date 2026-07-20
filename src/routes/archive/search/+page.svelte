@@ -55,8 +55,7 @@
 							{/if}
 						</div>
 						<p class="archive-meta tnum mt-1.5 text-[12px] text-[var(--archive-subtle)]">
-							{#each [item.wholeDocument ? '全文 whole document' : `p. ${item.page}`, item.variant, item.source.author, formatYear(item.source)].filter(Boolean) as part, index (index)}
-								{#if index > 0}<span class="sep" aria-hidden="true">·</span>{/if}
+							{#each [item.wholeDocument ? '全文 whole document' : `p. ${item.page}`, item.variant, item.source.author, formatYear(item.source)].filter(Boolean) as part (part)}
 								<span>{part}</span>
 							{/each}
 						</p>
