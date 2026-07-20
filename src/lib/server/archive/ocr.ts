@@ -1036,6 +1036,16 @@ async function searchSimilar(
 		order by c.block
 	`);
 	if (referenceChunks.length === 0) throw new ArchiveHttpError(404, 'reference page text is unavailable');
+	// A page-0 reference is whole-document text (extraction without page
+	// structure). "Passages similar to this entire book" is not a meaningful
+	// query, and answering it means comparing against the whole corpus, so it
+	// is refused plainly. Per-page text makes the mode work for these works.
+	if (pageNumber === 0) {
+		throw new ArchiveHttpError(
+			422,
+			'similar search needs page-level text; this work has whole-document text only'
+		);
+	}
 	// Truncate the text before tokenizing: a whole-document reference can be an
 	// entire book, and tokenizing it in full is the expensive part.
 	const referenceSequence = referenceChunks
