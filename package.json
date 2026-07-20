@@ -45,7 +45,9 @@
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio",
 		"auth:schema": "better-auth generate --config src/lib/server/auth.ts --output src/lib/server/db/auth.schema.ts --yes",
-		"archive:realign-pdf-text": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/realign-pdf-text.ts"
+		"archive:realign-pdf-text": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/realign-pdf-text.ts",
+		"archive:survey-text-layers": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/survey-text-layers.ts",
+		"archive:recognize-pages": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/recognize-pages.ts"
 	},
 	"devDependencies": {
 		"@better-auth/cli": "~1.4.21",

@@ -1047,6 +1047,15 @@ export const revisionOcrCoverage = sqliteTable(
 			.references(() => fileRevisions.id, { onDelete: 'cascade' }),
 		variant: text('variant').notNull(),
 		status: text('status').notNull(),
+		/**
+		 * Where the text came from, which decides how far it can be trusted.
+		 * `extracted` is the publisher's own text layer, `recognized` is read
+		 * from the image by a model, `converted` comes from a source document
+		 * in another format, `curated` is a human transcription, and `edited`
+		 * is a correction made in the workspace. Recognition is one source
+		 * among these, not the definition of the field.
+		 */
+		sourceKind: text('source_kind').notNull().default('recognized'),
 		tool: text('tool'),
 		toolVersion: text('tool_version'),
 		preferred: integer('preferred', { mode: 'boolean' }).notNull().default(false),
@@ -1057,7 +1066,11 @@ export const revisionOcrCoverage = sqliteTable(
 		uniqueIndex('revision_one_preferred_ocr_variant')
 			.on(t.revisionId)
 			.where(sql`${t.preferred} = 1`),
-		check('revision_ocr_coverage_status_check', sql`${t.status} in ('none', 'partial', 'complete')`)
+		check('revision_ocr_coverage_status_check', sql`${t.status} in ('none', 'partial', 'complete')`),
+		check(
+			'revision_ocr_coverage_source_kind_check',
+			sql`${t.sourceKind} in ('extracted', 'recognized', 'converted', 'curated', 'edited')`
+		)
 	]
 );
 

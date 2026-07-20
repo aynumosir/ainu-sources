@@ -14,7 +14,9 @@
 		chooseDefaultOcrVariant,
 		ocrEngineLabel,
 		textBearingVariants,
-		type OcrCoverage
+		TEXT_SOURCE_LABELS,
+		type OcrCoverage,
+		type TextSourceKind
 	} from '$lib/archive/ocr';
 	import OcrBadge from './OcrBadge.svelte';
 
@@ -229,7 +231,9 @@
 
 	function displayVariantName(coverage: OcrCoverage): string {
 		const engine = ocrEngineLabel(coverage);
-		return engine === coverage.variant ? engine : `${engine} · ${coverage.variant}`;
+		const source = TEXT_SOURCE_LABELS[(coverage.sourceKind ?? 'recognized') as TextSourceKind];
+		const tool = engine === coverage.variant ? engine : `${engine} · ${coverage.variant}`;
+		return `${source.ja} ${source.en} · ${tool}`;
 	}
 
 	function selectTextVariant(variant: string): void {
@@ -441,6 +445,9 @@
 						<li class="border-l-2 border-[var(--archive-border)] pl-3">
 							<p class="font-semibold">{displayVariantName(variant)}</p>
 							<p class="mt-1 text-[12px] text-[var(--archive-subtle)]">
+								{TEXT_SOURCE_LABELS[(variant.sourceKind ?? 'recognized') as TextSourceKind].note}
+							</p>
+							<p class="mt-1 text-[12px] text-[var(--archive-faint-text)]">
 								variant {variant.variant}{#if variant.toolVersion} · version {variant.toolVersion}{/if}
 								· {variant.status} · <span class="tnum">{variant.pageCount} of {pageCount} pages</span>{#if variant.preferred} · preferred{/if}
 							</p>

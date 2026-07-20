@@ -1,8 +1,40 @@
 export type OcrCoverageStatus = 'none' | 'partial' | 'complete';
 
+/** How a text variant came to exist. Recognition is one of these, not all. */
+export type TextSourceKind = 'extracted' | 'recognized' | 'converted' | 'curated' | 'edited';
+
+export const TEXT_SOURCE_LABELS: Record<TextSourceKind, { ja: string; en: string; note: string }> = {
+	extracted: {
+		ja: '本文レイヤー',
+		en: 'Publisher text',
+		note: '出版物に含まれる本文を取り出したもの。 Taken from text the file already carried.'
+	},
+	recognized: {
+		ja: '文字認識',
+		en: 'Recognized',
+		note: '画像から機械が読み取ったもの。誤りを含む。 Read from the page image by a machine; contains errors.'
+	},
+	converted: {
+		ja: '変換',
+		en: 'Converted',
+		note: '別形式の原資料から変換したもの。 Converted from a source document in another format.'
+	},
+	curated: {
+		ja: '校訂',
+		en: 'Curated',
+		note: '人手で校訂された本文。 Transcribed and checked by a person.'
+	},
+	edited: {
+		ja: '校正済み',
+		en: 'Corrected here',
+		note: 'この記録庫で人手により修正されたもの。 Corrected by hand in this archive.'
+	}
+};
+
 export type OcrCoverage = {
 	revisionId: string;
 	variant: string;
+	sourceKind?: TextSourceKind;
 	status: OcrCoverageStatus;
 	tool: string | null;
 	toolVersion: string | null;

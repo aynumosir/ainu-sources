@@ -21,6 +21,8 @@ import { createClient } from '@libsql/client';
 import { drizzle } from 'drizzle-orm/libsql';
 import { sql } from 'drizzle-orm';
 import { activateOcrGeneration, type OcrPageInput } from '../../src/lib/server/archive/ocr';
+import { revisionOcrCoverage } from '../../src/lib/server/db/schema';
+import { and, eq } from 'drizzle-orm';
 
 const PAGE_BREAK = '\f';
 
@@ -39,7 +41,28 @@ function requireEnv(name: string): string {
 	return value;
 }
 
-async function findCandidates(db: any): Promise<Candidate[]> {
+/**
+ * Two populations need the same treatment. Some revisions hold their text as
+ * one page-0 block; others were never ingested at all although the file
+ * carries a text layer. Both are answered by extracting the layer per page.
+ */
+async function findCandidates(db: any, mode: 'unaligned' | 'missing'): Promise<Candidate[]> {
+	if (mode === 'missing') {
+		return db.all<Candidate>(sql`
+			select fr.id as revisionId, 'pdftotext' as variant,
+				src.slug as slug, src.title as title,
+				cast(fr.page_count as integer) as pageCount,
+				fr.blob_sha256 as blobSha256
+			from file_revisions fr
+			join source_files sf on sf.id = fr.source_file_id
+			join sources src on src.id = sf.source_id
+			where fr.is_current = 1
+				-- Some file slots hold companion artefacts rather than the scan.
+				and fr.declared_media_type = 'application/pdf'
+				and not exists (select 1 from ocr_ingest_state s where s.revision_id = fr.id)
+			order by src.slug
+		`);
+	}
 	return db.all<Candidate>(sql`
 		select c.revision_id as revisionId, c.variant as variant,
 			src.slug as slug, src.title as title,
@@ -83,14 +106,49 @@ function extractPages(pdf: string): OcrPageInput[] {
 		.filter((page) => page.text.length > 0);
 }
 
+async function recordCoverage(db: any, revisionId: string, variant: string): Promise<void> {
+	const now = new Date();
+	const existing = await db
+		.select({ variant: revisionOcrCoverage.variant })
+		.from(revisionOcrCoverage)
+		.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, variant)))
+		.limit(1);
+	if (existing.length > 0) {
+		await db
+			.update(revisionOcrCoverage)
+			.set({ status: 'complete', tool: variant, measuredAt: now })
+			.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, variant)));
+		return;
+	}
+	const preferred = await db
+		.select({ variant: revisionOcrCoverage.variant })
+		.from(revisionOcrCoverage)
+		.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.preferred, true)))
+		.limit(1);
+	await db.insert(revisionOcrCoverage).values({
+		revisionId,
+		variant,
+		status: 'complete',
+		tool: variant,
+		toolVersion: null,
+		preferred: preferred.length === 0,
+		measuredAt: now
+	});
+}
+
 async function main() {
 	const dryRun = process.argv.includes('--dry-run');
+	const mode = process.argv.includes('--missing') ? 'missing' : 'unaligned';
 	const limit = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
 
 	const client = createClient({ url: requireEnv('DATABASE_URL'), authToken: process.env.DATABASE_AUTH_TOKEN });
 	const db = drizzle(client);
-	const candidates = (await findCandidates(db)).slice(0, limit);
-	console.log(`${candidates.length} revisions hold whole-document text`);
+	const candidates = (await findCandidates(db, mode)).slice(0, limit);
+	console.log(
+		mode === 'missing'
+			? `${candidates.length} revisions have no ingested text`
+			: `${candidates.length} revisions hold whole-document text`
+	);
 
 	const workDir = mkdtempSync(path.join(tmpdir(), 'realign-'));
 	let aligned = 0;
@@ -116,6 +174,7 @@ async function main() {
 					continue;
 				}
 				await activateOcrGeneration(db as never, candidate.revisionId, candidate.variant, pages);
+				await recordCoverage(db, candidate.revisionId, candidate.variant);
 				console.log(`aligned     ${label}: ${pages.length} pages`);
 				aligned += 1;
 			} catch (error) {
