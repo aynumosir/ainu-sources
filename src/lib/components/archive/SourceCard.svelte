@@ -25,9 +25,7 @@
 			? 'PDF'
 			: (file.mediaType?.split('/').at(-1)?.toUpperCase() ?? null)
 	);
-	const metaParts = $derived(
-		[format, formatBytes(file.bytes), ...languages].filter(Boolean) as string[]
-	);
+	const metaParts = $derived([format, formatBytes(file.bytes)].filter(Boolean) as string[]);
 </script>
 
 <div class="relative flex h-full flex-col border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3 transition hover:border-[var(--archive-gilt)]">
@@ -57,6 +55,13 @@
 			<span>{part}</span>
 		{/each}
 	</p>
+	{#if languages.length}
+		<p class="archive-meta text-[12px] text-[var(--archive-subtle)]">
+			{#each languages as language (language)}
+				<span>{language}</span>
+			{/each}
+		</p>
+	{/if}
 	<div class="mt-1.5">
 		<OcrBadge coverage={item.coverage} />
 	</div>
