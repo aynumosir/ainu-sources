@@ -438,7 +438,7 @@
 		</section>
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
-			<BilingualLabel tag="h3" ja="本文" en="OCR text" class="archive-h3" />
+			<BilingualLabel tag="h3" ja="本文" en="Text" class="archive-h3" />
 			{#if ocrCoverage.length}
 				<ul class="mt-3 space-y-3 text-[13px]">
 					{#each ocrCoverage as variant (variant.variant)}

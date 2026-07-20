@@ -74,11 +74,12 @@
 		</p>
 
 		<h3 class="archive-h3 mt-10">
-			<BilingualLabel ja="OCRエンジン" en="OCR engines" />
+			<BilingualLabel ja="本文の出所" en="Where the text came from" />
 		</h3>
 		<p class="mt-1 text-[13px] text-[var(--archive-faint-text)]">
-			Which tool produced the text matters when quoting it: pdftotext extracts text already present
-			in a PDF, while the others read the image.
+			Most of this collection was never read by a machine. pdftotext takes text the file already
+			carried, pandoc converts a source document, and only the rest is recognized from the page
+			image and carries recognition errors.
 		</p>
 		<table class="mt-3 w-full border-collapse text-[15px]">
 			<tbody>
