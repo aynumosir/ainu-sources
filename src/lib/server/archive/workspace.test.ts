@@ -121,6 +121,31 @@ beforeEach(async () => {
 	await seedRevision();
 });
 
+describe('whole-document text', () => {
+	it('refuses page-level edits when the text has no page boundaries', async () => {
+		// Replace the page-aligned machine text with a single page-0 block, the
+		// shape produced by extraction that carries no page structure.
+		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 0, text: 'the entire book' }]);
+
+		await expect(
+			savePageEdit(db, 'rev-1', 1, contributor, {
+				text: 'corrected page one',
+				base: { kind: 'variant', variant: 'manual' }
+			})
+		).rejects.toMatchObject({ status: 422 });
+	});
+
+	it('still allows editing the whole-document block itself', async () => {
+		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 0, text: 'the entire book' }]);
+
+		const saved = await savePageEdit(db, 'rev-1', 0, contributor, {
+			text: 'the entire book, corrected',
+			base: { kind: 'variant', variant: 'gemini' }
+		});
+		expect(saved.page).toBe(0);
+	});
+});
+
 describe('OCR page workspace ledger', () => {
 	it('rejects the second save from the same machine base with the current head and text', async () => {
 		const first = await savePageEdit(db, 'rev-1', 1, contributor, {

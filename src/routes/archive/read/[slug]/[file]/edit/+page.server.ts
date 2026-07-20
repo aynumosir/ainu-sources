@@ -6,6 +6,7 @@ import { getRevision, getSourceFileById, listSourceFiles } from '$lib/server/arc
 import { ArchiveHttpError } from '$lib/server/archive/errors';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
 import { getSourceDetail } from '$lib/server/queries';
+import { isWholeDocumentText } from '$lib/server/archive/workspace';
 
 export const load: PageServerLoad = async ({ request, params, url }) => {
 	const principal = await resolveArchivePrincipal(request, db);
@@ -30,8 +31,11 @@ export const load: PageServerLoad = async ({ request, params, url }) => {
 			bytes: file.bytes
 		}));
 		const pageCount = Math.max(1, revision.pageCount ?? 1);
+		// Text without page boundaries is edited as one document, so the editor
+		// opens on the single page-0 block instead of a page that does not exist.
+		const wholeDocument = await isWholeDocumentText(db, sourceFile.currentRevisionId);
 		const requestedPage = parsePage(url.searchParams.get('p'));
-		const initialPage = clampPage(requestedPage ?? 1, pageCount);
+		const initialPage = wholeDocument ? 0 : clampPage(requestedPage ?? 1, pageCount);
 
 		return {
 			accessDenied: false,
@@ -59,6 +63,7 @@ export const load: PageServerLoad = async ({ request, params, url }) => {
 			},
 			files,
 			initialPage,
+			wholeDocument,
 			role: principal.role
 		};
 	} catch (cause) {

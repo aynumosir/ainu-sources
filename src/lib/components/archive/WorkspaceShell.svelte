@@ -46,11 +46,12 @@
 		}>;
 	};
 
-	let { file, revision, source, initialPage, role }: {
+	let { file, revision, source, initialPage, wholeDocument = false, role }: {
 		file: { fileId: string; label?: string | null };
 		revision: { id: string; revisionNo: number; pageCount: number };
 		source: { slug: string; title: string };
 		initialPage: number;
+		wholeDocument?: boolean;
 		role: ArchiveRoleName;
 	} = $props();
 
@@ -197,6 +198,7 @@
 	}
 
 	function clampPage(page: number): number {
+		if (wholeDocument) return 0;
 		return Math.min(Math.max(1, page), pageCount);
 	}
 
@@ -668,14 +670,18 @@
 			<a href={readerHref} class="back-link">← <BilingualLabel ja={archiveLabels.reader.ja} en={archiveLabels.reader.en} /></a>
 			<h1 class="archive-title" title={source.title}>{source.title}</h1>
 			<a href={`https://db.aynu.org/sources/${source.slug}`} target="_blank" rel="noreferrer" class="catalogue-link">catalogue ↗</a>
-			<div class="page-nav">
-				<button type="button" aria-label="Previous page" onclick={() => goToPage(currentPage - 1)}>‹</button>
-				<form onsubmit={(event) => { event.preventDefault(); submitPageField(); }}>
-					<input id="workspace-page-field" inputmode="numeric" bind:value={pageField} aria-label="Page" />
-					<span>/ {pageCount}</span>
-				</form>
-				<button type="button" aria-label="Next page" onclick={() => goToPage(currentPage + 1)}>›</button>
-			</div>
+			{#if wholeDocument}
+				<p class="whole-document-note">全文 Whole document</p>
+			{:else}
+				<div class="page-nav">
+					<button type="button" aria-label="Previous page" onclick={() => goToPage(currentPage - 1)}>‹</button>
+					<form onsubmit={(event) => { event.preventDefault(); submitPageField(); }}>
+						<input id="workspace-page-field" inputmode="numeric" bind:value={pageField} aria-label="Page" />
+						<span>/ {pageCount}</span>
+					</form>
+					<button type="button" aria-label="Next page" onclick={() => goToPage(currentPage + 1)}>›</button>
+				</div>
+			{/if}
 			<button type="button" class="flip" title="Swap panes" aria-label="Swap scan and text panes" onclick={flipPanes}>⇄</button>
 			<div class="menu-wrap">
 				<button type="button" class="menu-button" aria-label="Workspace menu" onclick={() => (overflowOpen = !overflowOpen)}>⋯</button>
@@ -788,6 +794,13 @@
 	.back-link,
 	.catalogue-link { flex: none; color: var(--archive-gilt-text); font-size: 12px; }
 	h1 { min-width: 5rem; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 17px; font-weight: 650; }
+	.whole-document-note {
+		margin: 0;
+		font-size: 12px;
+		color: var(--archive-subtle);
+		white-space: nowrap;
+	}
+
 	.page-nav { display: flex; flex: none; align-items: center; border: 1px solid var(--archive-border); }
 	.page-nav button { width: 1.8rem; height: 1.9rem; color: var(--archive-subtle); }
 	.page-nav form { display: flex; align-items: center; border-inline: 1px solid var(--archive-border); padding-right: 0.35rem; font-size: 12px; color: var(--archive-subtle); }

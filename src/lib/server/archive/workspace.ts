@@ -82,6 +82,25 @@ async function machinePages(db: Conn, revisionId: string): Promise<MachinePage[]
 	`);
 }
 
+// Some works hold their OCR text as a single block at page 0 — extraction
+// without page structure. The reader shows that whole block while displaying
+// page 1, so a page-level edit saved there would claim to correct page 1 using
+// text that is the entire document. Editing is confined to page 0 for these.
+export async function isWholeDocumentText(db: Conn, revisionId: string): Promise<boolean> {
+	const rows = await machinePages(db, revisionId);
+	return rows.length > 0 && rows.every((row) => row.page === 0);
+}
+
+async function assertPageIsEditable(db: Conn, revisionId: string, page: number): Promise<void> {
+	if (page === 0) return;
+	if (await isWholeDocumentText(db, revisionId)) {
+		throw new ArchiveHttpError(
+			422,
+			'this work stores its text as one block without page boundaries; edit it as a whole document rather than per page'
+		);
+	}
+}
+
 async function preferredMachineVariant(db: Conn, revisionId: string): Promise<string | null> {
 	const [row] = await db
 		.select({ variant: revisionOcrCoverage.variant })
@@ -175,6 +194,7 @@ export async function savePageEdit(
 	opts: { now?: Date } = {}
 ) {
 	validatePage(page);
+	await assertPageIsEditable(db, revisionId, page);
 	const note = validateNote(input.note);
 	const now = opts.now ?? new Date();
 	return db.transaction(async (tx) => {
@@ -247,6 +267,7 @@ export async function approvePageEdit(
 	opts: { now?: Date } = {}
 ) {
 	validatePage(page);
+	await assertPageIsEditable(db, revisionId, page);
 	const now = opts.now ?? new Date();
 	return db.transaction(async (tx) => {
 		const [state] = await tx
@@ -288,6 +309,7 @@ export async function unapprovePageEdit(
 	opts: { now?: Date } = {}
 ) {
 	validatePage(page);
+	await assertPageIsEditable(db, revisionId, page);
 	const now = opts.now ?? new Date();
 	return db.transaction(async (tx) => {
 		const [state] = await tx
@@ -322,6 +344,7 @@ export async function revertPageToMachine(
 	opts: { now?: Date } = {}
 ): Promise<PageStatusRow> {
 	validatePage(page);
+	await assertPageIsEditable(db, revisionId, page);
 	const now = opts.now ?? new Date();
 	await db.transaction(async (tx) => {
 		const [state] = await tx

@@ -13,6 +13,7 @@
 		revision={data.revision}
 		source={data.source}
 		initialPage={data.initialPage}
+		wholeDocument={data.wholeDocument}
 		role={data.role}
 	/>
 {/if}
