@@ -1056,6 +1056,12 @@ export const revisionOcrCoverage = sqliteTable(
 		 * among these, not the definition of the field.
 		 */
 		sourceKind: text('source_kind').notNull().default('recognized'),
+		/**
+		 * Whether the text is good enough to read and quote. `sound` passed the
+		 * checks, `suspect` did not, `unassessed` has not been examined.
+		 */
+		reliability: text('reliability').notNull().default('unassessed'),
+		reliabilityNote: text('reliability_note'),
 		tool: text('tool'),
 		toolVersion: text('tool_version'),
 		preferred: integer('preferred', { mode: 'boolean' }).notNull().default(false),
@@ -1070,7 +1076,35 @@ export const revisionOcrCoverage = sqliteTable(
 		check(
 			'revision_ocr_coverage_source_kind_check',
 			sql`${t.sourceKind} in ('extracted', 'recognized', 'converted', 'curated', 'edited')`
+		),
+		check(
+			'revision_ocr_coverage_reliability_check',
+			sql`${t.reliability} in ('unassessed', 'sound', 'suspect')`
 		)
+	]
+);
+
+/**
+ * The page number a book prints on itself, where it could be read from the
+ * page's own text. Absent when the page carries no folio or when competing
+ * numbering made it ambiguous.
+ */
+export const revisionPageFolios = sqliteTable(
+	'revision_page_folios',
+	{
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'cascade' }),
+		page: integer('page').notNull(),
+		label: text('label').notNull(),
+		value: integer('value'),
+		/** The text variant the folio was read from. */
+		derivedFrom: text('derived_from').notNull(),
+		detectedAt: integer('detected_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		primaryKey({ columns: [t.revisionId, t.page] }),
+		check('revision_page_folios_page_check', sql`${t.page} >= 0`)
 	]
 );
 

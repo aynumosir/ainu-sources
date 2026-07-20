@@ -39,6 +39,8 @@ async function loadOcrCoverage(revisionId: string): Promise<OcrCoverage[]> {
 				variant: revisionOcrCoverage.variant,
 				status: revisionOcrCoverage.status,
 				sourceKind: revisionOcrCoverage.sourceKind,
+				reliability: revisionOcrCoverage.reliability,
+				reliabilityNote: revisionOcrCoverage.reliabilityNote,
 				tool: revisionOcrCoverage.tool,
 				toolVersion: revisionOcrCoverage.toolVersion,
 				preferred: revisionOcrCoverage.preferred

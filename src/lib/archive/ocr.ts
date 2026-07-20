@@ -35,6 +35,8 @@ export type OcrCoverage = {
 	revisionId: string;
 	variant: string;
 	sourceKind?: TextSourceKind;
+	reliability?: 'unassessed' | 'suspect';
+	reliabilityNote?: string | null;
 	status: OcrCoverageStatus;
 	tool: string | null;
 	toolVersion: string | null;
