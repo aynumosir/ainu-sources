@@ -136,7 +136,6 @@ export async function activateOcrGeneration(
 	// network round trip against the hosted database, which makes a full
 	// corpus ingest take hours; batching keeps it to minutes.
 	const chunkRows: SQL[] = [];
-	const tokenRows: SQL[] = [];
 	// A bulk backfill competes with live reads on the shared database. The
 	// pause is opt-in (INGEST_THROTTLE_MS) so a batch ingest can yield between
 	// writes; interactive saves leave it unset and pay nothing.
@@ -153,11 +152,6 @@ export async function activateOcrGeneration(
 			checksum, normalization_version, ingest_generation
 		) values ${values}
 	`;
-	const tokenStatement = (values: SQL) => sql`
-		insert into ocr_tokens (
-			token_norm, revision_id, variant, page, block, position, chunk_id, ingest_generation
-		) values ${values}
-	`;
 	for (const page of pages) {
 		const blocks = splitPageBlocks(page.text);
 		for (const [block, original] of blocks.entries()) {
@@ -170,28 +164,9 @@ export async function activateOcrGeneration(
 				${checksum}, ${OCR_NORMALIZATION_VERSION}, ${generation}
 			)`);
 			await flush(chunkRows, chunkStatement);
-			// One row per distinct token per chunk, at its first position: the
-			// index answers "does this chunk contain this token", so repeated
-			// words do not need repeated rows.
-			const firstPosition = new Map<string, number>();
-			for (const token of tokenizeNormalizedText(text)) {
-				if (firstPosition.has(token.token)) continue;
-				firstPosition.set(token.token, token.position);
-			}
-			for (const [tokenNorm, position] of firstPosition) {
-				tokenRows.push(sql`(
-					${tokenNorm}, ${revisionId}, ${variant}, ${page.page}, ${block}, ${position}, ${chunkId}, ${generation}
-				)`);
-				if (tokenRows.length >= INGEST_BATCH_ROWS) {
-					// Tokens reference their chunk, so pending chunks must land first.
-					await flush(chunkRows, chunkStatement, true);
-					await flush(tokenRows, tokenStatement, true);
-				}
-			}
 		}
 	}
 	await flush(chunkRows, chunkStatement, true);
-	await flush(tokenRows, tokenStatement, true);
 	const contentHash = opts.contentHash ?? (await sha256Hex(JSON.stringify(pages)));
 	const ingestedAt = opts.ingestedAt ?? new Date();
 	await db.run(sql`
@@ -235,11 +210,6 @@ export async function replaceEditedPageChunks(
 	`);
 	const generation = state?.generation ?? crypto.randomUUID();
 	await db.run(sql`
-		delete from ocr_tokens
-		where revision_id = ${revisionId} and variant = ${variant}
-			and page = ${page} and ingest_generation = ${generation}
-	`);
-	await db.run(sql`
 		delete from ocr_chunks
 		where revision_id = ${revisionId} and variant = ${variant}
 			and page = ${page} and ingest_generation = ${generation}
@@ -259,15 +229,6 @@ export async function replaceEditedPageChunks(
 					${checksum}, ${OCR_NORMALIZATION_VERSION}, ${generation}
 				)
 			`);
-			for (const token of tokenizeNormalizedText(blockText)) {
-				await db.run(sql`
-					insert into ocr_tokens (
-						token_norm, revision_id, variant, page, block, position, chunk_id, ingest_generation
-					) values (
-						${token.token}, ${revisionId}, ${variant}, ${page}, ${block}, ${token.position}, ${chunkId}, ${generation}
-					)
-				`);
-			}
 		}
 	}
 	const [{ maxPage = 0 } = { maxPage: 0 }] = await db.all<{ maxPage: number }>(sql`
