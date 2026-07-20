@@ -42,6 +42,17 @@ describe('printed folio detection', () => {
 		expect(detectFolios(roman).map((f) => f.value)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 	});
 
+	it('finds a folio set apart by the width of the page', () => {
+		// Layout-preserving extraction keeps the folio on the line beside it.
+		const pages = Array.from({ length: 9 }, (_, i) => ({
+			page: i + 1,
+			text: `${i + 64}        . クラシェニンニコフおよび S\n本文の続き`
+		}));
+		expect(detectFolios(pages).map((f) => f.label)).toEqual([
+			'64', '65', '66', '67', '68', '69', '70', '71', '72'
+		]);
+	});
+
 	it('refuses a page that two runs number differently', () => {
 		// A work whose pages carry both a folio and a numbered table column:
 		// two runs advance together, and neither can be trusted over the other.

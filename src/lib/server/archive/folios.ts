@@ -52,17 +52,26 @@ function candidates(text: string): { label: string; value: number }[] {
 	const edges = [...lines.slice(0, 3), ...lines.slice(-3)];
 	const found: { label: string; value: number }[] = [];
 	for (const line of edges) {
-		if (line.length > 24) continue;
-		const arabic = BARE_NUMBER.exec(line);
-		if (arabic) {
-			found.push({ label: arabic[1], value: Number(arabic[1]) });
-			continue;
+		if (line.length <= 24) {
+			const arabic = BARE_NUMBER.exec(line);
+			if (arabic) {
+				found.push({ label: arabic[1], value: Number(arabic[1]) });
+				continue;
+			}
+			const roman = ROMAN.exec(line);
+			if (roman) {
+				const value = romanValue(roman[1]);
+				if (value != null) found.push({ label: roman[1].toLowerCase(), value });
+				continue;
+			}
 		}
-		const roman = ROMAN.exec(line);
-		if (roman) {
-			const value = romanValue(roman[1]);
-			if (value != null) found.push({ label: roman[1].toLowerCase(), value });
-		}
+		// Layout-preserving extraction keeps a folio on the same line as the
+		// text beside it, separated by the width of the page. A number divided
+		// from the rest of the line by a wide gap is the same candidate.
+		const leading = /^(\d{1,4})\s{3,}\S/u.exec(line);
+		if (leading) found.push({ label: leading[1], value: Number(leading[1]) });
+		const trailing = /\S\s{3,}(\d{1,4})$/u.exec(line);
+		if (trailing) found.push({ label: trailing[1], value: Number(trailing[1]) });
 	}
 	return found;
 }
