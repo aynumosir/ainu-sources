@@ -451,7 +451,10 @@ export async function searchOcr(
 			limit ${internalCap + 1}
 		`);
 	} catch (error) {
-		throw new ArchiveHttpError(500, 'search index query failed', { cause: error instanceof Error ? error.message : String(error) });
+		// The driver's message can carry SQL, hostnames, and connection details.
+		// Log it server-side; the client gets the failure, not the internals.
+		console.error('archive search index query failed', error);
+		throw new ArchiveHttpError(500, 'search index query failed');
 	}
 
 	const verified = rows.filter((row) => phraseMatches(row, alternatives));
@@ -480,6 +483,9 @@ function phraseMatches(row: RankedChunk, alternatives: string[]): boolean {
 
 function serializeHit(hit: RankedChunk, query: string, maxChars: number) {
 	return {
+		// Page 0 means whole-document text with no page alignment; a citation
+		// must say so rather than claim a page that does not exist.
+		wholeDocument: hit.page === 0,
 		source: {
 			slug: hit.sourceSlug,
 			title: hit.sourceTitle,

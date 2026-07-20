@@ -59,7 +59,7 @@
 							</div>
 						</div>
 						<div class="mt-2 flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
-							<span>page {item.page}</span>
+							<span>{item.wholeDocument ? '全文（ページ非対応） / whole document' : `page ${item.page}`}</span>
 							<span>{item.variant}</span>
 						</div>
 						<p class="mt-3 text-[15px] leading-7">
@@ -69,7 +69,7 @@
 						</p>
 						<div class="mt-3">
 							{#if item.fileId}
-								<a href={`/archive/read/${item.source.slug}/${item.fileId}?p=${item.page}`} aria-label={bilingualAriaLabel(archiveLabels.readPage)} class="text-[13px] font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
+								<a href={`/archive/read/${item.source.slug}/${item.fileId}?p=${item.wholeDocument ? 1 : item.page}`} aria-label={bilingualAriaLabel(archiveLabels.readPage)} class="text-[13px] font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
 									<BilingualLabel ja={archiveLabels.readPage.ja} en={archiveLabels.readPage.en} />
 								</a>
 							{:else}

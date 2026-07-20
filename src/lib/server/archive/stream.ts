@@ -1,3 +1,4 @@
+import { ArchiveHttpError } from './errors';
 import { dataplane, type ArchiveFetcher } from './dataplane';
 import { contentDisposition } from './filenames';
 import type { ArchiveCachePolicy } from './gateway';
@@ -37,6 +38,13 @@ export async function streamRevisionContent(
 		method === 'HEAD'
 			? await dataplane.headBlob(fetcher, actor, revision.sha256, upstreamHeaders)
 			: await dataplane.getBlob(fetcher, actor, revision.sha256, upstreamHeaders);
+	// An upstream failure must never be dressed up as success with the
+	// database's byte length: the client would receive a truncated or empty
+	// body under a 200/206.
+	if (!upstream.ok) {
+		if (upstream.status === 404) throw new ArchiveHttpError(404, 'content is unavailable');
+		throw new ArchiveHttpError(502, 'content store is unavailable');
+	}
 	for (const name of ['content-type', 'last-modified']) {
 		const value = upstream.headers.get(name);
 		if (value) headers.set(name, value);
