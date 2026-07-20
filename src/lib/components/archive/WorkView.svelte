@@ -51,6 +51,14 @@
 	const era = $derived(
 		centuryOf(source.yearStart) == null ? 'not recorded' : centuryLabel(centuryOf(source.yearStart)!, 'en')
 	);
+	// Only confirmed transcriptions appear. Candidate links rest on title
+	// similarity alone, and showing them beside the scan would present a guess
+	// as the work's text.
+	const curatedTexts = $derived(
+		(work.detail?.links ?? []).filter(
+			(link: any) => link.type === 'transcription' && link.status === 'active'
+		)
+	);
 	const publishers = $derived(
 		work.detail.institutions
 			.filter((institution: any) => institution.role === 'publisher')
@@ -445,6 +453,31 @@
 				</p>
 			{/if}
 		</section>
+
+		{#if curatedTexts.length}
+			<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
+				<BilingualLabel tag="h3" ja="校訂テキスト" en="Curated text" class="archive-h3" />
+				<p class="mt-1 text-[12px] text-[var(--archive-faint-text)]">
+					人手で校訂・対訳された本文。引用にはOCRではなくこちらを。 / Human-edited text with
+					translation. Quote from this rather than from OCR.
+				</p>
+				<ul class="mt-3 space-y-2 text-[13px]">
+					{#each curatedTexts as link (link.id ?? link.url)}
+						<li>
+							<a
+								href={link.url}
+								target="_blank"
+								rel="noreferrer"
+								class="text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+							>{link.label ?? link.url} ↗</a>
+							{#if link.notes}
+								<p class="mt-0.5 text-[12px] text-[var(--archive-faint-text)]">{link.notes}</p>
+							{/if}
+						</li>
+					{/each}
+				</ul>
+			</section>
+		{/if}
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
 			<BilingualLabel tag="h3" ja="書誌詳細" en="Bibliographic detail" class="archive-h3" />
