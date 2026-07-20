@@ -25,6 +25,7 @@ import { revisionOcrCoverage } from '../../src/lib/server/db/schema';
 const VARIANT = 'gemini';
 const RENDER_DPI = 200;
 const CONCURRENCY = Number(process.env.RECOGNIZE_CONCURRENCY ?? 4);
+const RENDER_WINDOW = Number(process.env.RECOGNIZE_RENDER_WINDOW ?? 24);
 const MODEL = process.env.RECOGNIZE_MODEL ?? 'gemini-3-flash';
 
 const PROMPT = `Transcribe this scanned page exactly as printed.
@@ -107,34 +108,54 @@ async function recognizeWork(row: Row, cacheRoot: string, workDir: string): Prom
 	const cache = path.join(cacheRoot, row.revisionId);
 	mkdirSync(cache, { recursive: true });
 	const pdf = fetchBlob(row.blobSha256, workDir);
+	const info = execFileSync('pdfinfo', [pdf], { encoding: 'utf8' });
+	const total = Number(/^Pages:\s+(\d+)/m.exec(info)?.[1] ?? 0);
 	const renderDir = path.join(workDir, 'pages');
-	rmSync(renderDir, { recursive: true, force: true });
-	mkdirSync(renderDir, { recursive: true });
-	execFileSync('pdftoppm', ['-r', String(RENDER_DPI), '-png', pdf, path.join(renderDir, 'p')], { stdio: 'ignore' });
-	rmSync(pdf, { force: true });
-
-	const images = readdirSync(renderDir).filter((f) => f.endsWith('.png')).sort();
 	const pages: OcrPageInput[] = [];
-	let done = 0;
-	for (let start = 0; start < images.length; start += CONCURRENCY) {
-		const batch = images.slice(start, start + CONCURRENCY);
-		const results = await Promise.all(
-			batch.map(async (image, offset) => {
-				const pageNumber = start + offset + 1;
-				const cached = path.join(cache, `${pageNumber}.txt`);
-				if (existsSync(cached)) return { page: pageNumber, text: readFileSync(cached, 'utf8') };
-				const text = (await transcribe(path.join(renderDir, image))).trim();
-				writeFileSync(cached, text, 'utf8');
-				return { page: pageNumber, text };
-			})
-		);
-		for (const result of results) if (result.text.length > 0) pages.push(result);
-		done += batch.length;
-		if (done % 40 === 0 || done === images.length) {
-			console.log(`    ${row.slug}: ${done}/${images.length} pages`);
+
+	// Rendering a whole book before transcribing anything means minutes of
+	// silence and gigabytes of PNGs on disk. Pages are rendered a window at a
+	// time and discarded once read.
+	for (let first = 1; first <= total; first += RENDER_WINDOW) {
+		const last = Math.min(first + RENDER_WINDOW - 1, total);
+		const window = Array.from({ length: last - first + 1 }, (_, i) => first + i);
+		const missing = window.filter((n) => !existsSync(path.join(cache, `${n}.txt`)));
+		if (missing.length > 0) {
+			rmSync(renderDir, { recursive: true, force: true });
+			mkdirSync(renderDir, { recursive: true });
+			execFileSync(
+				'pdftoppm',
+				['-f', String(first), '-l', String(last), '-r', String(RENDER_DPI), '-png', pdf, path.join(renderDir, 'p')],
+				{ stdio: 'ignore' }
+			);
 		}
+		// pdftoppm names files by absolute page number, zero-padded to the
+		// width of the document's last page.
+		const rendered = new Map(
+			(missing.length > 0 ? readdirSync(renderDir).filter((f) => f.endsWith('.png')) : []).map((file) => [
+				Number(/p-?(\d+)\.png$/.exec(file)?.[1] ?? 0),
+				file
+			])
+		);
+		for (let start = 0; start < window.length; start += CONCURRENCY) {
+			const slice = window.slice(start, start + CONCURRENCY);
+			const results = await Promise.all(
+				slice.map(async (pageNumber) => {
+					const cached = path.join(cache, `${pageNumber}.txt`);
+					if (existsSync(cached)) return { page: pageNumber, text: readFileSync(cached, 'utf8') };
+					const image = rendered.get(pageNumber);
+					if (!image) return { page: pageNumber, text: '' };
+					const text = (await transcribe(path.join(renderDir, image))).trim();
+					writeFileSync(cached, text, 'utf8');
+					return { page: pageNumber, text };
+				})
+			);
+			for (const result of results) if (result.text.length > 0) pages.push(result);
+		}
+		console.log(`    ${row.slug}: ${last}/${total} pages`);
 	}
 	rmSync(renderDir, { recursive: true, force: true });
+	rmSync(pdf, { force: true });
 	return pages.sort((a, b) => a.page - b.page);
 }
 
