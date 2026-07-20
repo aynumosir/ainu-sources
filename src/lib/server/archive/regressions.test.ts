@@ -201,3 +201,14 @@ describe('upstream content failures', () => {
 		expect(response.status).toBe(404);
 	});
 });
+
+describe('page navigation', () => {
+	it('does not clamp a requested page when the count is unrecorded', async () => {
+		// A revision with no recorded page count used to send every request to
+		// page 1, so a citation for page 50 named the cover instead.
+		const { clampPageForTest } = await import('$lib/archive/work-data.server');
+		expect(clampPageForTest(50, null)).toBe(50);
+		expect(clampPageForTest(50, 30)).toBe(30);
+		expect(clampPageForTest(0, 30)).toBe(1);
+	});
+});

@@ -41,8 +41,12 @@ export async function loadArchiveWork(slug: string, principal: ArchivePrincipal,
 	if (!current) return { detail, unavailable: true as const };
 
 	const revision = await getRevision(db, current.revisionId, principal);
-	const pageCount = Math.max(1, revision.pageCount ?? 1);
-	const initialPage = clampPage(requestedPage ?? 1, pageCount);
+	// A revision whose page count was never recorded used to clamp every
+	// request to page 1, so a link to page 50 silently opened the cover and
+	// cited it as page 1. An unknown count now clamps nothing.
+	const recordedPageCount = revision.pageCount ?? null;
+	const pageCount = Math.max(1, recordedPageCount ?? 1);
+	const initialPage = clampPage(requestedPage ?? 1, recordedPageCount);
 	const pending = await pendingForSource(slug, principal.userId, archiveRoleAtLeast(principal.role, 'archive_reviewer'));
 
 	return {
@@ -90,8 +94,12 @@ export async function loadArchiveWork(slug: string, principal: ArchivePrincipal,
 	};
 }
 
-function clampPage(page: number, pageCount: number): number {
-	return Math.min(Math.max(1, page), pageCount);
+/** Exposed for tests: the clamp is easy to get wrong and hard to see fail. */
+export const clampPageForTest = (page: number, pageCount: number | null) => clampPage(page, pageCount);
+
+function clampPage(page: number, pageCount: number | null): number {
+	const atLeastFirst = Math.max(1, page);
+	return pageCount == null ? atLeastFirst : Math.min(atLeastFirst, pageCount);
 }
 
 async function pendingForSource(slug: string, userId: string, canSeeAll: boolean) {
