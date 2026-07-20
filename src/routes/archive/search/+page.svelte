@@ -90,7 +90,7 @@
 							{/if}
 						</div>
 						<p class="archive-meta tnum mt-1.5 text-[12px] text-[var(--archive-subtle)]">
-							{#each [item.wholeDocument ? '全文 whole document' : `p. ${item.page}`, item.variant, item.source.author, formatYear(item.source)].filter(Boolean) as part (part)}
+							{#each [item.wholeDocument ? '全文 whole document' : item.printedPage ? `p. ${item.printedPage}` : `scan p. ${item.page}`, item.variant, item.source.author, formatYear(item.source)].filter(Boolean) as part (part)}
 								<span>{part}</span>
 							{/each}
 						</p>

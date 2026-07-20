@@ -5,6 +5,7 @@ import { db } from '$lib/server/db';
 import { fileRevisions, sourceFiles } from '$lib/server/db/schema';
 import { resolveArchivePrincipal } from '$lib/server/archive/authz';
 import { searchArchive } from '$lib/server/archive/ocr';
+import { revisionPageFolios } from '$lib/server/db/schema';
 import { ArchiveHttpError } from '$lib/server/archive/errors';
 import { DEPLOYED_SEARCH_MODES, type SearchMode } from '$lib/server/archive/search-modes';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
@@ -48,6 +49,7 @@ export const load: PageServerLoad = async ({ request, url }) => {
 		}
 	}
 	const fileByRevision = await fileIdsForRevisions(result.items.map((item) => item.revisionId));
+	const folioByHit = await foliosForHits(result.items.map((item) => ({ revisionId: item.revisionId, page: item.page })));
 	const searchableCount = await approvedCurrentFileCount();
 	return {
 		accessDenied: false,
@@ -59,12 +61,31 @@ export const load: PageServerLoad = async ({ request, url }) => {
 			...result,
 			items: result.items.map((item) => ({
 				...item,
-				fileId: fileByRevision.get(item.revisionId) ?? null
+				fileId: fileByRevision.get(item.revisionId) ?? null,
+				printedPage: folioByHit.get(`${item.revisionId}:${item.page}`) ?? null
 			}))
 		},
 		searchableCount
 	};
 };
+
+/**
+ * The number the page prints on itself, for the hits on this results page. A
+ * result should name the page a reader would cite, not its position in a scan.
+ */
+async function foliosForHits(hits: { revisionId: string; page: number }[]) {
+	const revisionIds = [...new Set(hits.map((hit) => hit.revisionId))];
+	if (revisionIds.length === 0) return new Map<string, string>();
+	const rows = await db
+		.select({
+			revisionId: revisionPageFolios.revisionId,
+			page: revisionPageFolios.page,
+			label: revisionPageFolios.label
+		})
+		.from(revisionPageFolios)
+		.where(inArray(revisionPageFolios.revisionId, revisionIds));
+	return new Map(rows.map((row) => [`${row.revisionId}:${row.page}`, row.label]));
+}
 
 async function fileIdsForRevisions(revisionIds: string[]) {
 	if (revisionIds.length === 0) return new Map<string, string>();
