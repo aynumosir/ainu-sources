@@ -53,6 +53,12 @@ const SOFT_OCCURRENCE_CAP = 3000;
 // Candidate chunks scanned in memory per soft query. Each one is tokenized
 // and compared against the query, so this bounds the request's CPU cost.
 const SOFT_CHUNK_SCAN_CAP = 90;
+// Text extracted without page structure lands in a single chunk, and the
+// largest in this collection is a whole book of about 15 MB. Tokenizing that
+// is what made fuzzy search take tens of seconds, so each chunk contributes a
+// bounded prefix and the total scanned across a query is bounded too.
+const SOFT_CHUNK_CHAR_CAP = 120_000;
+const SOFT_TOTAL_CHAR_CAP = 1_200_000;
 const SIMILAR_CANDIDATE_CAP = 30;
 // A whole-document reference (page 0) can be an entire book. Comparing every
 // token of it against every candidate exceeds the request budget, so the
@@ -886,9 +892,18 @@ async function searchSoft(
 		}
 	}
 	const alignmentsByChunk = new Map<string, Map<string, SoftAlignment>>();
+	let scannedCharacters = 0;
+	let scanTruncated = false;
 	for (const occurrence of occurrences.slice(0, SOFT_CHUNK_SCAN_CAP)) {
+		if (scannedCharacters >= SOFT_TOTAL_CHAR_CAP) {
+			scanTruncated = true;
+			break;
+		}
+		const scanned = occurrence.text.slice(0, SOFT_CHUNK_CHAR_CAP);
+		if (scanned.length < occurrence.text.length) scanTruncated = true;
+		scannedCharacters += scanned.length;
 		const best = new Map<string, SoftAlignment>();
-		const chunkTokens = new Set(tokenizeNormalizedText(occurrence.text).map(({ token }) => token));
+		const chunkTokens = new Set(tokenizeNormalizedText(scanned).map(({ token }) => token));
 		for (const query of queryTokens) {
 			const alternatives = expandNormalizedTokenAlternatives(query.token);
 			const lengths = alternatives.map((alternative) => [...alternative].length);
@@ -959,7 +974,7 @@ async function searchSoft(
 		nextCursor:
 			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
 		total: bounded.length,
-		truncated: occurrences.length > SOFT_CHUNK_SCAN_CAP,
+		truncated: occurrences.length > SOFT_CHUNK_SCAN_CAP || scanTruncated,
 		cap: SOFT_OCCURRENCE_CAP
 	};
 }
