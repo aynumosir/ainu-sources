@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ScanThumbnail from './ScanThumbnail.svelte';
 	import { formatBytes } from '$lib/archive/format';
-	import { formatArchiveLanguages } from '$lib/archive/languages';
+	import { archiveLanguageNames } from '$lib/archive/languages';
 	import { formatYear } from '$lib/format';
 	import type { Source } from '$lib/server/db/schema';
 	import OcrBadge from './OcrBadge.svelte';
@@ -19,14 +19,14 @@
 	let { item }: { item: { source: Source; file: ArchiveFile; coverage: OcrCoverage[] } } = $props();
 	const source = $derived(item.source);
 	const file = $derived(item.file);
-	const languages = $derived(formatArchiveLanguages(source.languages));
+	const languages = $derived(archiveLanguageNames(source.languages));
 	const format = $derived(
 		file.mediaType === 'application/pdf'
 			? 'PDF'
 			: (file.mediaType?.split('/').at(-1)?.toUpperCase() ?? null)
 	);
 	const metaParts = $derived(
-		[format, formatBytes(file.bytes), languages].filter(Boolean) as string[]
+		[format, formatBytes(file.bytes), ...languages].filter(Boolean) as string[]
 	);
 </script>
 

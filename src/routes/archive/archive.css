@@ -177,6 +177,10 @@
 	row-gap: 0.15rem;
 }
 
+.archive .archive-meta > span {
+	white-space: nowrap;
+}
+
 .archive .archive-meta > span + span::before {
 	content: '·';
 	margin-right: 0.4rem;
