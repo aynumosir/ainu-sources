@@ -216,7 +216,7 @@
 			}
 			const body = await response.json() as { pages?: PageStatusRow[] };
 			statusRows = Array.isArray(body.pages) ? body.pages.filter(validStatusRow) : [];
-			fileNoOcr = statusRows.length === pageCount && statusRows.every((row) => row.status === 'none');
+			fileNoOcr = statusRows.length > 0 && statusRows.every((row) => row.status === 'none');
 			if ((loadStates[currentPage] === 'ready' || loadStates[currentPage] === 'empty') && !workspace.buffers[currentPage]?.dirty) {
 				void loadPageText(currentPage, true);
 			}
@@ -227,7 +227,7 @@
 
 	function validStatusRow(row: PageStatusRow): boolean {
 		return Number.isSafeInteger(row.page)
-			&& row.page >= 1
+			&& row.page >= (wholeDocument ? 0 : 1)
 			&& row.page <= pageCount
 			&& ['machine', 'edited', 'approved', 'none'].includes(row.status);
 	}
@@ -724,7 +724,7 @@
 		<div class:mobile-hidden={workspace.mobilePane !== 'scan'} class="scan-cell">
 			<ScanPane
 				revisionId={revision.id}
-				page={currentPage}
+				page={wholeDocument ? 1 : currentPage}
 				{pageCount}
 				onpage={goToPage}
 				onthumbnail={(src) => (scrubberThumbnail = src)}
