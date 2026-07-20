@@ -905,11 +905,14 @@ async function searchSoft(
 		limit ${SOFT_CHUNK_SCAN_CAP + 1}
 	`);
 	};
-	const exactRows = await retrieve(exactProbes);
+	// The fuzzy probes are what retrieve a variant spelling, so they run for
+	// almost every query. Issuing both retrievals together costs one round trip
+	// instead of two.
+	const [exactRows, fuzzyRows] = await Promise.all([retrieve(exactProbes), retrieve(fuzzyProbes)]);
 	const occurrences = [...exactRows];
 	if (exactRows.length < SOFT_CHUNK_SCAN_CAP) {
 		const seen = new Set(exactRows.map((row) => row.chunkId));
-		for (const row of await retrieve(fuzzyProbes)) {
+		for (const row of fuzzyRows) {
 			if (seen.has(row.chunkId)) continue;
 			seen.add(row.chunkId);
 			occurrences.push(row);
