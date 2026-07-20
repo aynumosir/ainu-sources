@@ -4,7 +4,7 @@ import { ArchiveHttpError } from '$lib/server/archive/errors';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
 import { loadArchiveWork, loadArchiveWorkPersons } from '$lib/archive/work-data.server';
 import { db } from '$lib/server/db';
-import { revisionOcrCoverage } from '$lib/server/db/schema';
+import { revisionPageFolios, revisionOcrCoverage } from '$lib/server/db/schema';
 import { eq, sql } from 'drizzle-orm';
 import type { OcrCoverage } from '$lib/archive/ocr';
 
@@ -18,7 +18,11 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 			loadArchiveWorkPersons(params.slug)
 		]);
 		const work = loadedWork && !loadedWork.unavailable
-			? { ...loadedWork, ocr: await loadOcrCoverage(loadedWork.revision.id) }
+			? {
+					...loadedWork,
+					ocr: await loadOcrCoverage(loadedWork.revision.id),
+					folios: await loadFolios(loadedWork.revision.id)
+				}
 			: loadedWork;
 		return {
 			accessDenied: false,
@@ -30,6 +34,18 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 		throw cause;
 	}
 };
+
+/**
+ * The number each page prints on itself, where it is known. Citations name this
+ * rather than the position in the scan, which front matter and plates offset.
+ */
+async function loadFolios(revisionId: string): Promise<Record<number, string>> {
+	const rows = await db
+		.select({ page: revisionPageFolios.page, label: revisionPageFolios.label })
+		.from(revisionPageFolios)
+		.where(eq(revisionPageFolios.revisionId, revisionId));
+	return Object.fromEntries(rows.map((row) => [row.page, row.label]));
+}
 
 async function loadOcrCoverage(revisionId: string): Promise<OcrCoverage[]> {
 	const [coverage, pageCounts] = await Promise.all([

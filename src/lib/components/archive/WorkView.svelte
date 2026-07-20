@@ -50,6 +50,14 @@
 		'not recorded'
 	);
 	const year = $derived(formatYear(source) === '—' ? 'not recorded' : formatYear(source));
+	const folios = $derived((work as { folios?: Record<number, string> }).folios ?? {});
+	const printedPage = $derived(folios[currentPage] ?? null);
+	// A citation should name the number printed on the page. Where the page
+	// carries none, the scan position is given and labelled as such, so a
+	// reader is never left to assume the two agree.
+	const citedPage = $derived(
+		printedPage ? `p. ${printedPage}` : `aynumosir archive: scan page ${currentPage}`
+	);
 	const era = $derived(
 		centuryOf(source.yearStart) == null ? 'not recorded' : centuryLabel(centuryOf(source.yearStart)!, 'en')
 	);
@@ -81,7 +89,7 @@
 	let thumbScrollTop = $state(0);
 	let thumbViewport = $state(640);
 	const citation = $derived(
-		`${author}. ${source.title}. ${year}. aynumosir archive: page ${currentPage}.\n${pageState.url.origin}/archive/work/${encodeURIComponent(source.slug)}/p/${currentPage}`
+		`${author}. ${source.title}. ${year}. ${citedPage}.\n${pageState.url.origin}/archive/work/${encodeURIComponent(source.slug)}/p/${currentPage}`
 	);
 
 	const objectUrls = new Set<string>();
@@ -429,7 +437,7 @@
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
 			<BilingualLabel tag="h3" ja={archiveLabels.citation.ja} en={archiveLabels.citation.en} class="archive-h3" />
 			<p class="mt-3 font-[var(--font-archive-serif)] text-[15px] leading-7">
-				{@render authorNames()}. <cite>{source.title}</cite>. {year}.<br />aynumosir archive: page <span class="tnum">{currentPage}</span>.
+				{@render authorNames()}. <cite>{source.title}</cite>. {year}.<br /><span class="tnum">{citedPage}</span>.
 			</p>
 			<button type="button" onclick={copyCitation} class="mt-3 border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
 				<BilingualLabel ja={archiveLabels.copyCitation.ja} en={archiveLabels.copyCitation.en} />
