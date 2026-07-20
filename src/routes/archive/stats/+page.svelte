@@ -50,10 +50,17 @@
 		</h2>
 		<p class="mt-2 text-[15px]">
 			Of {number(pagesScanned)} scanned pages, {number(pagesWithText)}
-			({percent(pagesWithText, pagesScanned)}%) have searchable text, covering
-			{number(stats.ocr.worksWithText)} of {number(stats.totals.works)} works.
+			({percent(pagesWithText, pagesScanned)}%) have text aligned to a page, covering
+			{number(stats.ocr.worksWithPageAlignedText)} of {number(stats.totals.works)} works.
 			{number(stats.ocr.worksWithoutRecordedText)} works have no recorded text.
 		</p>
+		{#if stats.ocr.worksWithWholeDocumentText}
+			<p class="mt-2 text-[15px]">
+				A further {number(stats.ocr.worksWithWholeDocumentText)} works are searchable but hold their
+				text as one block without page boundaries, so their pages are counted as lacking text here
+				and searching them returns the work rather than a page.
+			</p>
+		{/if}
 		<div class="mt-3 flex h-6 w-full overflow-hidden border border-[var(--archive-border)]">
 			<div
 				class="bg-[var(--archive-gilt)]"

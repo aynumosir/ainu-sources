@@ -255,6 +255,34 @@ async function seedCollection(): Promise<void> {
 }
 
 describe('archive collection statistics', () => {
+	it('counts whole-document text as a work, never as a scanned page', async () => {
+		await seedCollection();
+		// Page 0 is text extracted without page structure. Counting it as a page
+		// would report an entire book as one covered page.
+		await db.run(
+			`insert into ocr_chunks
+				(chunk_id, revision_id, variant, page, block, text, text_norm, checksum, normalization_version, ingest_generation)
+			values
+				('chunk-whole', 'revision-3', 'raw', 0, 0, 'whole book', 'whole book', '${hash(31)}', 1, 'generation-raw-3')`
+		);
+		await db.insert(schema.ocrIngestState).values([
+			{
+				revisionId: 'revision-3',
+				variant: 'raw',
+				contentHash: hash(31),
+				pageCount: 1,
+				activeGeneration: 'generation-raw-3',
+				ingestedAt: new Date(9_000)
+			}
+		]);
+		const stats = await getArchiveStats(db, 10_000);
+
+		expect(stats.ocr.worksWithText).toBe(3);
+		expect(stats.ocr.worksWithPageAlignedText).toBe(2);
+		expect(stats.ocr.worksWithWholeDocumentText).toBe(1);
+		expect(stats.ocr.pagesWithText).toBe(2);
+	});
+
 	it('returns aggregate shape with recorded coverage and freshness', async () => {
 		await seedCollection();
 		const stats = await getArchiveStats(db, 10_000);
@@ -273,6 +301,8 @@ describe('archive collection statistics', () => {
 			ocr: {
 				worksWithText: 2,
 				worksWithoutRecordedText: 1,
+				worksWithPageAlignedText: 2,
+				worksWithWholeDocumentText: 0,
 				pagesWithText: 2,
 				chunks: 4,
 				variants: [

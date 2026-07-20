@@ -49,6 +49,8 @@ export type ArchiveStats = {
 	ocr: {
 		worksWithText: number;
 		worksWithoutRecordedText: number;
+		worksWithPageAlignedText: number;
+		worksWithWholeDocumentText: number;
 		pagesWithText: number;
 		chunks: number;
 		variants: Array<{
@@ -102,6 +104,7 @@ type SummaryRow = {
 type OcrRow = {
 	worksWithText: number;
 	pagesWithText: number;
+	worksWithPageAlignedText: number;
 	chunks: number;
 	variant: string | null;
 	variantWorks: number | null;
@@ -207,7 +210,10 @@ async function readOcr(db: Db): Promise<OcrRow[]> {
 		), totals as (
 			select
 				count(distinct source_id) as worksWithText,
-				count(distinct revision_id || ':' || page) as pagesWithText,
+				count(distinct case when cast(page as integer) > 0
+					then revision_id || ':' || page end) as pagesWithText,
+				count(distinct case when cast(page as integer) > 0
+					then source_id end) as worksWithPageAlignedText,
 				count(distinct chunk_id) as chunks
 			from active_text
 		), variant_totals as (
@@ -227,6 +233,7 @@ async function readOcr(db: Db): Promise<OcrRow[]> {
 		select
 			totals.worksWithText,
 			totals.pagesWithText,
+			totals.worksWithPageAlignedText,
 			totals.chunks,
 			variant_totals.variant,
 			variant_totals.variantWorks,
@@ -358,9 +365,12 @@ function buildOcr(rows: OcrRow[], works: number): ArchiveStats['ocr'] {
 		if (row.engine != null) variant.engines.values.push({ engine: row.engine, works: numberValue(row.engineWorks) });
 	}
 	const worksWithText = numberValue(first?.worksWithText);
+	const worksWithPageAlignedText = numberValue(first?.worksWithPageAlignedText);
 	return {
 		worksWithText,
 		worksWithoutRecordedText: Math.max(works - worksWithText, 0),
+		worksWithPageAlignedText,
+		worksWithWholeDocumentText: Math.max(worksWithText - worksWithPageAlignedText, 0),
 		pagesWithText: numberValue(first?.pagesWithText),
 		chunks: numberValue(first?.chunks),
 		variants: [...variants.values()]
