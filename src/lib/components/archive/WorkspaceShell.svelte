@@ -65,6 +65,10 @@
 	let mounted = $state(false);
 	let pageField = $state(untrack(() => String(initialPage)));
 	let statusRows = $state<PageStatusRow[]>([]);
+	// loadPageText writes reactive state, and the effect that calls it reads that
+	// state, so a failed load would re-trigger itself forever. Attempts are
+	// recorded outside the reactive graph; a retry has to be asked for.
+	const attemptedLoads = new Set<string>();
 	let statusUnavailable = $state(false);
 	let statusError = $state<string | null>(null);
 	let fileNoOcr = $state(false);
@@ -237,6 +241,10 @@
 			loadStates = { ...loadStates, [page]: 'ready' };
 			return;
 		}
+		const attemptKey = `${page}:${requestedVariant ?? ''}`;
+		if (force) attemptedLoads.delete(attemptKey);
+		else if (attemptedLoads.has(attemptKey)) return;
+		attemptedLoads.add(attemptKey);
 		const row = statusFor(page);
 		const selected = requestedVariant ?? selectedVariants[page] ?? (row?.status !== 'none' ? row?.variant : null);
 		if (!force && selected && textRecords[textKey(page, selected)]) {
@@ -251,6 +259,14 @@
 			if (response.status === 404) {
 				loadStates = { ...loadStates, [page]: 'unavailable' };
 				loadMessages = { ...loadMessages, [page]: 'The page-text endpoint has not been deployed.' };
+				return;
+			}
+			if (response.status === 429) {
+				loadStates = { ...loadStates, [page]: 'error' };
+				loadMessages = {
+					...loadMessages,
+					[page]: '要求が多すぎます。少し待って再読み込みしてください。 / Too many requests — wait a moment and reload.'
+				};
 				return;
 			}
 			if (!response.ok) {
