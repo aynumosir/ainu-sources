@@ -415,8 +415,8 @@ export async function searchOcr(
 					c.variant,
 					cast(c.page as integer) as page,
 					cast(c.block as integer) as block,
-					c.text,
-					c.text_norm as textNorm,
+					${snippetWindowSql(alternatives)} as text,
+					'' as textNorm,
 					bm25(ocr_chunks_fts) as rank,
 					src.slug as sourceSlug,
 					src.title as sourceTitle,
@@ -437,6 +437,7 @@ export async function searchOcr(
 				inner join source_files sf on sf.id = fr.source_file_id
 				inner join sources src on src.id = sf.source_id
 				where ocr_chunks_fts match ${ftsQuery}
+					and (${phraseVerificationSql(alternatives)})
 					and ${visibility}
 					${variantClause}
 					${sourceClause}
@@ -463,7 +464,8 @@ export async function searchOcr(
 		throw new ArchiveHttpError(500, 'search index query failed');
 	}
 
-	const verified = rows.filter((row) => phraseMatches(row, alternatives));
+	// Verification now happens in SQL, so every row returned is a match.
+	const verified = rows;
 	const truncated = rows.length > internalCap;
 	const bounded = verified.slice(0, internalCap);
 	const afterCursor = cursor
@@ -481,6 +483,29 @@ export async function searchOcr(
 		truncated,
 		cap: internalCap
 	};
+}
+
+// A chunk holding a whole book runs to millions of characters. Shipping that
+// text to verify a match and to cut a 260-character snippet dominated every
+// query, so both happen in SQL: the match is verified with instr, and only a
+// window around the first occurrence is returned.
+const SNIPPET_WINDOW_BEFORE = 300;
+const SNIPPET_WINDOW_CHARS = 1400;
+
+function phraseVerificationSql(alternatives: string[]) {
+	const tests = alternatives.map(
+		(alternative) =>
+			sql`instr(c.text, ${alternative}) > 0 or instr(c.text_norm, ${normalizeOcrText(alternative)}) > 0`
+	);
+	return sql.join(tests, sql` or `);
+}
+
+function snippetWindowSql(alternatives: string[]) {
+	const positions = alternatives.map(
+		(alternative) => sql`nullif(instr(c.text, ${alternative}), 0)`
+	);
+	const firstMatch = sql`coalesce(${sql.join(positions, sql`, `)}, 1)`;
+	return sql`substr(c.text, max(1, ${firstMatch} - ${SNIPPET_WINDOW_BEFORE}), ${SNIPPET_WINDOW_CHARS})`;
 }
 
 function phraseMatches(row: RankedChunk, alternatives: string[]): boolean {
