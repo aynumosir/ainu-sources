@@ -85,7 +85,7 @@ async function transcribe(image: string): Promise<string> {
 			}
 		]
 	};
-	for (let attempt = 1; attempt <= 4; attempt += 1) {
+	for (let attempt = 1; attempt <= 6; attempt += 1) {
 		try {
 			const response = await fetch(`${process.env.PROXY_BASE ?? 'http://127.0.0.1:8317'}/v1/chat/completions`, {
 				method: 'POST',
@@ -97,8 +97,9 @@ async function transcribe(image: string): Promise<string> {
 			const json = await response.json();
 			return json.choices?.[0]?.message?.content ?? '';
 		} catch (error) {
-			if (attempt === 4) throw error;
-			await new Promise((r) => setTimeout(r, attempt * 4000));
+			if (attempt === 6) throw error;
+			// Upstream 429 and 503 are load, not refusal; back off and let it clear.
+			await new Promise((r) => setTimeout(r, attempt * attempt * 3000));
 		}
 	}
 	return '';
@@ -112,6 +113,7 @@ async function recognizeWork(row: Row, cacheRoot: string, workDir: string): Prom
 	const total = Number(/^Pages:\s+(\d+)/m.exec(info)?.[1] ?? 0);
 	const renderDir = path.join(workDir, 'pages');
 	const pages: OcrPageInput[] = [];
+	const failures: number[] = [];
 
 	// Rendering a whole book before transcribing anything means minutes of
 	// silence and gigabytes of PNGs on disk. Pages are rendered a window at a
@@ -145,9 +147,18 @@ async function recognizeWork(row: Row, cacheRoot: string, workDir: string): Prom
 					if (existsSync(cached)) return { page: pageNumber, text: readFileSync(cached, 'utf8') };
 					const image = rendered.get(pageNumber);
 					if (!image) return { page: pageNumber, text: '' };
-					const text = (await transcribe(path.join(renderDir, image))).trim();
-					writeFileSync(cached, text, 'utf8');
-					return { page: pageNumber, text };
+					try {
+						const text = (await transcribe(path.join(renderDir, image))).trim();
+						writeFileSync(cached, text, 'utf8');
+						return { page: pageNumber, text };
+					} catch (error) {
+						// One page that will not transcribe must not discard a
+						// book. The page is left uncached so a later run
+						// retries it, and the work continues without it.
+						failures.push(pageNumber);
+						console.error(`      page ${pageNumber}: ${(error as Error).message.slice(0, 60)}`);
+						return { page: pageNumber, text: '' };
+					}
 				})
 			);
 			for (const result of results) if (result.text.length > 0) pages.push(result);
@@ -156,6 +167,14 @@ async function recognizeWork(row: Row, cacheRoot: string, workDir: string): Prom
 	}
 	rmSync(renderDir, { recursive: true, force: true });
 	rmSync(pdf, { force: true });
+	// Ingesting a book with a tenth of its pages missing would present a gap as
+	// the whole text, so that case is refused and left for another run.
+	if (total > 0 && failures.length / total > 0.1) {
+		throw new Error(`${failures.length} of ${total} pages failed to transcribe`);
+	}
+	if (failures.length > 0) {
+		console.log(`    ${row.slug}: ${failures.length} pages could not be read and are absent`);
+	}
 	return pages.sort((a, b) => a.page - b.page);
 }
 
