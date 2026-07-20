@@ -6,6 +6,17 @@
 	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 
 	let { data } = $props();
+
+	// Each mode answers a different question; the hint says which, in the terms
+	// a reader would use, and names the input shape where it is not free text.
+	const MODES = [
+		{ value: 'phrase', ja: '語句', en: 'Phrase', hint: '語句をそのまま探す。 Finds the words as written.' },
+		{ value: 'soft', ja: '曖昧', en: 'Fuzzy', hint: '綴りの揺れを許容する（kamuy と kamui など）。 Tolerates spelling variation, and matches across Latin and katakana.' },
+		{ value: 'regex', ja: '正規表現', en: 'Regex', hint: '正規表現で探す。 Regular expression, e.g. kamuy?[ui].' },
+		{ value: 'similar', ja: '類似ページ', en: 'Similar pages', hint: 'あるページに似た本文を探す。入力は revision:page 形式。 Pages whose text resembles a given page; enter revision:page.' }
+	] as const;
+
+	const activeMode = $derived(MODES.find((mode) => mode.value === data.mode) ?? MODES[0]);
 </script>
 
 <ArchiveHead title="検索 Search" />
@@ -37,7 +48,31 @@
 				<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} compact />
 			</button>
 		</div>
+		<fieldset class="mt-3 border-t border-dotted border-[var(--archive-border)] pt-3">
+			<legend class="sr-only">検索方法 Search mode</legend>
+			<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+				{#each MODES as mode (mode.value)}
+					<label class="flex items-center gap-1.5 text-[13px]">
+						<input
+							type="radio"
+							name="mode"
+							value={mode.value}
+							checked={data.mode === mode.value}
+							class="accent-[var(--archive-gilt-text)]"
+						/>
+						<BilingualLabel ja={mode.ja} en={mode.en} />
+					</label>
+				{/each}
+			</div>
+			<p class="mt-2 text-[12px] text-[var(--archive-faint-text)]">{activeMode.hint}</p>
+		</fieldset>
 	</form>
+
+	{#if data.searchError}
+		<p class="border border-[var(--archive-border)] bg-[var(--archive-panel)] p-3 text-[13px] text-[var(--archive-warn)]" role="alert">
+			{data.searchError}
+		</p>
+	{/if}
 
 	{#if data.result}
 		{#if data.q && data.result.items.length}
