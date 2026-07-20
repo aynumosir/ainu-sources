@@ -45,7 +45,7 @@ export type OcrCoverage = {
 };
 
 export type OcrSummary = {
-	state: 'available' | 'partial' | 'none';
+	state: 'available' | 'partial' | 'unreadable' | 'none';
 	label: string;
 };
 
@@ -62,6 +62,11 @@ export function summarizeOcrCoverage(coverage: OcrCoverage[]): OcrSummary {
 	if (variants.length === 0) return { state: 'none', label: '本文なし / no text' };
 
 	const detail = variants.length === 1 ? ocrEngineLabel(variants[0]) : `${variants.length} versions`;
+	// Text that cannot be read is not text a reader can use, and saying "text
+	// available" of it sends someone to a page of fragments.
+	if (variants.every((variant) => variant.reliability === 'suspect')) {
+		return { state: 'unreadable', label: `読めない本文 / unreadable · ${detail}` };
+	}
 	if (variants.every((variant) => variant.status === 'partial')) {
 		return { state: 'partial', label: `一部 / partial · ${detail}` };
 	}

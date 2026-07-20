@@ -212,3 +212,24 @@ describe('page navigation', () => {
 		expect(clampPageForTest(0, 30)).toBe(1);
 	});
 });
+
+describe('unreadable text is not advertised as text', () => {
+	it('reports a suspect-only work as unreadable rather than available', async () => {
+		const { summarizeOcrCoverage } = await import('$lib/archive/ocr');
+		const suspect = {
+			revisionId: 'rev-1',
+			variant: 'pdftotext',
+			status: 'complete' as const,
+			reliability: 'suspect' as const,
+			preferred: true,
+			tool: 'pdftotext',
+			toolVersion: null,
+			pageCount: 185
+		};
+		expect(summarizeOcrCoverage([suspect]).state).toBe('unreadable');
+		// A readable variant alongside it restores the ordinary label.
+		expect(
+			summarizeOcrCoverage([suspect, { ...suspect, variant: 'gemini', reliability: 'unassessed' as const }]).state
+		).toBe('available');
+	});
+});

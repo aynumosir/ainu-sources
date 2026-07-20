@@ -458,7 +458,7 @@
 							{#if variant.reliability === 'suspect'}
 								<p class="mt-1 border border-[var(--archive-warn)] px-2 py-1 text-[12px] text-[var(--archive-warn)]">
 									読めない本文です。引用に使わないでください。 / This text is not readable and should not
-									be quoted{#if variant.reliabilityNote} — {variant.reliabilityNote}{/if}.
+									be quoted{#if variant.reliabilityNote} &mdash; {variant.reliabilityNote}{/if}.
 								</p>
 							{/if}
 							<p class="mt-1 text-[12px] text-[var(--archive-faint-text)]">
