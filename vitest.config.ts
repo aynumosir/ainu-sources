@@ -9,12 +9,14 @@ const r = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 // the imported source files resolve under plain vitest:
 //   - `$lib/paraglide/runtime` (generated at build time, absent in a fresh tree)
 //   - `$env/dynamic/private`   (SvelteKit-injected env, used by authz.ts)
+//   - `$app/server`            (SvelteKit request-event accessor, used by auth.ts)
 export default defineConfig({
 	resolve: {
 		alias: [
 			// Order matters: the specific stubs must precede the generic `$lib` map.
 			{ find: /^\$lib\/paraglide\/runtime$/, replacement: r('./test/stubs/paraglide-runtime.ts') },
 			{ find: /^\$env\/dynamic\/private$/, replacement: r('./test/stubs/env-dynamic-private.ts') },
+			{ find: /^\$app\/server$/, replacement: r('./test/stubs/app-server.ts') },
 			{ find: /^\$lib$/, replacement: r('./src/lib') },
 			{ find: /^\$lib\//, replacement: r('./src/lib/') }
 		]
