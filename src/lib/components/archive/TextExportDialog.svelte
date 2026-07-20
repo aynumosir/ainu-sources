@@ -69,7 +69,7 @@
 <dialog bind:this={dialog} class="w-full max-w-lg border border-[var(--archive-border)] bg-[var(--archive-paper)] p-0 text-[var(--archive-text)] backdrop:bg-black/45">
 	<form method="dialog" onsubmit={(event) => event.preventDefault()}>
 		<header>
-			<BilingualLabel tag="h2" ja={archiveLabels.exportText.ja} en={archiveLabels.exportText.en} class="text-[21px] font-semibold" />
+			<BilingualLabel tag="h2" ja={archiveLabels.exportText.ja} en={archiveLabels.exportText.en} class="archive-h2" />
 			<button type="button" onclick={close} aria-label="Close">×</button>
 		</header>
 		<div class="body">

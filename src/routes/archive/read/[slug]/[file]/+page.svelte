@@ -361,7 +361,7 @@
 	<div class="space-y-5">
 		<div>
 			<p class="tnum text-[15px] text-[var(--archive-subtle)]">{formatYear(data.source)}</p>
-			<h2 class="archive-title mt-1 break-words text-[27px] font-semibold">{metadataTitle}</h2>
+			<h2 class="archive-h1 mt-1 break-words">{metadataTitle}</h2>
 			{#if data.source?.titleEn && data.source.titleEn !== data.source.title}
 				<p class="mt-1 text-[17px] text-[var(--archive-subtle)]">{data.source.titleEn}</p>
 			{/if}

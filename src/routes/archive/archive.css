@@ -146,3 +146,22 @@
 	-webkit-line-clamp: 2;
 	line-clamp: 2;
 }
+
+/* One heading scale for every archive page. */
+.archive .archive-h1 {
+	font-family: var(--font-archive-serif);
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.archive .archive-h2 {
+	font-family: var(--font-archive-serif);
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.archive .archive-h3 {
+	font-size: 15px;
+	font-weight: 600;
+}

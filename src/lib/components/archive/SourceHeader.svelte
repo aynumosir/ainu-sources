@@ -41,7 +41,7 @@
 			{/if}
 			<div class="min-w-0">
 				<p class="tnum text-[15px] text-[var(--archive-subtle)]">{formatYear(source)}</p>
-				<h1 class="archive-title mt-1 text-[27px] font-semibold">{source.title}</h1>
+				<h1 class="archive-h1 mt-1">{source.title}</h1>
 				{#if source.titleEn && source.titleEn !== source.title}
 					<p class="mt-1 text-[17px] text-[var(--archive-subtle)]">{source.titleEn}</p>
 				{/if}

@@ -18,23 +18,23 @@
 			stacked
 			ja={archiveLabels.search.ja}
 			en={archiveLabels.search.en}
-			class="text-[27px] font-semibold"
+			class="archive-h1"
 		/>
 		<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">Search OCR text visible to your archive role.</p>
 	</div>
 
 	<form action="/archive/search" method="get" class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3">
-		<div class="grid gap-3 md:grid-cols-[1fr_16rem_auto] md:items-end">
+		<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_16rem_auto] lg:items-end">
 			<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
 				Query
-				<input name="q" value={data.q} class="mt-1 w-full border-[var(--archive-border)] bg-[var(--archive-panel)] text-[15px] text-[var(--archive-text)]" />
+				<input name="q" value={data.q} class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]" />
 			</label>
 			<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
-				Source slug
-				<input name="source_slug" value={data.sourceSlug} class="mt-1 w-full border-[var(--archive-border)] bg-[var(--archive-panel)] text-[15px] text-[var(--archive-text)]" />
+				資料 Work
+				<input name="source_slug" value={data.sourceSlug} placeholder="slug, e.g. 1996-kayano-ainu-jiten" class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]" />
 			</label>
-			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.search)} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]">
-				<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} inverse />
+			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.search)} class="h-10 border border-[var(--archive-gilt-text)] bg-[var(--archive-gilt-text)] px-4 text-[13px] font-semibold text-[var(--archive-paper)] hover:border-[var(--archive-gilt)] hover:bg-[var(--archive-gilt)]">
+				<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} compact />
 			</button>
 		</div>
 	</form>
@@ -53,24 +53,19 @@
 							{#if item.source.titleAin}
 								<p class="text-[13px] text-[var(--archive-subtle)]" lang="ain-Latn">{item.source.titleAin}</p>
 							{/if}
-							<div class="flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
-								{#if item.source.author}<span>{item.source.author}</span>{/if}
-								<span class="tnum">{formatYear(item.source)}</span>
-							</div>
 						</div>
-						<div class="mt-2 flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
-							<span>{item.wholeDocument ? '全文（ページ非対応） / whole document' : `page ${item.page}`}</span>
-							<span>{item.variant}</span>
-						</div>
+						<p class="mt-1.5 text-[12px] text-[var(--archive-subtle)]">
+							{item.wholeDocument ? '全文 whole document' : `p. ${item.page}`} · {item.variant}{#if item.source.author} · {item.source.author}{/if} · <span class="tnum">{formatYear(item.source)}</span>
+						</p>
 						<p class="mt-3 text-[15px] leading-7">
 							{#each highlightSnippet(item.snippet.text, item.snippet.offsets) as segment, index (index)}
-								{#if segment.highlighted}<mark class="bg-[var(--archive-accent-soft)] px-0.5 text-[var(--archive-text)]">{segment.text}</mark>{:else}{segment.text}{/if}
+								{#if segment.highlighted}<mark class="bg-transparent font-semibold text-[var(--archive-text)] underline decoration-[var(--archive-gilt)] decoration-2 underline-offset-2">{segment.text}</mark>{:else}{segment.text}{/if}
 							{/each}
 						</p>
 						<div class="mt-3">
 							{#if item.fileId}
 								<a href={`/archive/read/${item.source.slug}/${item.fileId}?p=${item.wholeDocument ? 1 : item.page}`} aria-label={bilingualAriaLabel(archiveLabels.readPage)} class="text-[13px] font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
-									<BilingualLabel ja={archiveLabels.readPage.ja} en={archiveLabels.readPage.en} />
+									<BilingualLabel ja={archiveLabels.readPage.ja} en={archiveLabels.readPage.en} compact />
 								</a>
 							{:else}
 								<span class="text-[13px] text-[var(--archive-subtle)]">Reader link unavailable for this hit.</span>

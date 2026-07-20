@@ -25,7 +25,7 @@
 				tag="h2"
 				ja={archiveLabels.files.ja}
 				en={archiveLabels.files.en}
-				class="mb-3 text-[21px] font-semibold"
+				class="archive-h2 mb-3"
 			/>
 			{#if data.files.length}
 				<div class="space-y-3">

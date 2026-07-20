@@ -20,7 +20,7 @@
 				stacked
 				ja={archiveLabels.library.ja}
 				en={archiveLabels.library.en}
-				class="text-[27px] font-semibold"
+				class="archive-h1"
 			/>
 			<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">Approved current files available in the restricted archive.</p>
 		</div>

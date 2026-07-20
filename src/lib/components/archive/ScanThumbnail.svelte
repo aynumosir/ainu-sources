@@ -17,7 +17,7 @@
 		<img
 			{src}
 			alt=""
-			class="h-full w-full object-cover"
+			class="h-full w-full bg-white object-contain p-1"
 			loading="lazy"
 			onerror={() => {
 				failed = true;

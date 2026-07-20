@@ -6,6 +6,7 @@
 	import PendingSubmissions from './PendingSubmissions.svelte';
 	import RevisionHistory from './RevisionHistory.svelte';
 	import { archiveFetch } from '$lib/archive/session.svelte';
+	import { formatArchiveLanguages } from '$lib/archive/languages';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import { formatBytes, middleEllipsis } from '$lib/archive/format';
 	import { centuryLabel, centuryOf, formatYear } from '$lib/format';
@@ -266,7 +267,7 @@
 {#snippet contentsPanel()}
 	<div class="flex h-full min-h-0 flex-col">
 		<div class="border-b border-dotted border-[var(--archive-border)] p-3">
-			<BilingualLabel tag="h2" ja="目次" en="Contents" class="text-[15px] font-semibold" />
+			<BilingualLabel tag="h2" ja="目次" en="Contents" class="archive-h3" />
 			<form
 				class="mt-3 flex items-center gap-2"
 				onsubmit={(event) => {
@@ -302,7 +303,7 @@
 							page === currentPage
 								? 'bg-[var(--archive-muted)] text-[var(--archive-text)]'
 								: 'bg-[var(--archive-paper)] text-[var(--archive-subtle)] hover:bg-[var(--archive-panel)]'
-						}`}
+						} ${page === currentPage ? 'shadow-[inset_3px_0_0_var(--archive-gilt)]' : ''}`}
 						style={`transform:translateY(${(page - 1) * THUMB_ROW_HEIGHT}px)`}
 					>
 						<span class="relative flex h-[96px] w-16 shrink-0 items-center justify-center overflow-hidden border border-[var(--archive-border)] bg-white">
@@ -314,7 +315,6 @@
 							/>
 						</span>
 						<span class="tnum pt-1 text-[12px]">p. {page}</span>
-						{#if page === currentPage}<span class="mt-1 h-2 w-2 rounded-full bg-[var(--archive-gilt)]" aria-hidden="true"></span>{/if}
 					</button>
 				{/each}
 			</div>
@@ -409,7 +409,7 @@
 		<BilingualLabel tag="h2" ja="資料について" en="About this work" class="text-[17px] font-semibold" />
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
-			<BilingualLabel tag="h3" ja={archiveLabels.citation.ja} en={archiveLabels.citation.en} class="text-[15px] font-semibold" />
+			<BilingualLabel tag="h3" ja={archiveLabels.citation.ja} en={archiveLabels.citation.en} class="archive-h3" />
 			<p class="mt-3 font-[var(--font-archive-serif)] text-[15px] leading-7">
 				{@render authorNames()}. <cite>{source.title}</cite>. {year}.<br />aynumosir archive: page <span class="tnum">{currentPage}</span>.
 			</p>
@@ -420,7 +420,7 @@
 		</section>
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
-			<h3 class="text-[15px] font-semibold">OCR</h3>
+			<BilingualLabel tag="h3" ja="本文" en="OCR text" class="archive-h3" />
 			{#if ocrCoverage.length}
 				<ul class="mt-3 space-y-3 text-[13px]">
 					{#each ocrCoverage as variant (variant.variant)}
@@ -434,13 +434,15 @@
 					{/each}
 				</ul>
 			{:else}
-				<p class="mt-2 text-[13px] text-[var(--archive-subtle)]">本文なし / no text</p>
+				<p class="mt-3 border border-dashed border-[var(--archive-border)] p-4 text-center text-[13px] text-[var(--archive-subtle)]">
+					本文なし / no text
+				</p>
 			{/if}
 		</section>
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
-			<BilingualLabel tag="h3" ja="書誌詳細" en="Bibliographic detail" class="text-[15px] font-semibold" />
-			<dl class="mt-3 grid grid-cols-[7rem_minmax(0,1fr)] gap-x-3 gap-y-2 text-[13px]">
+			<BilingualLabel tag="h3" ja="書誌詳細" en="Bibliographic detail" class="archive-h3" />
+			<dl class="mt-3 grid grid-cols-[8.5rem_minmax(0,1fr)] gap-x-3 gap-y-2 text-[13px]">
 				{#if persons.length}
 					<dt class="text-[var(--archive-subtle)]">People</dt>
 					<dd>
@@ -461,7 +463,7 @@
 				<dt class="text-[var(--archive-subtle)]">Era</dt><dd>{era}</dd>
 				<dt class="text-[var(--archive-subtle)]">Category</dt><dd>{field(source.category)}</dd>
 				<dt class="text-[var(--archive-subtle)]">Type</dt><dd>{field(source.type)}</dd>
-				<dt class="text-[var(--archive-subtle)]">Languages</dt><dd>{field(source.languages)}</dd>
+				<dt class="text-[var(--archive-subtle)]">Languages</dt><dd>{formatArchiveLanguages(source.languages) || field(source.languages)}</dd>
 				<dt class="text-[var(--archive-subtle)]">Publisher</dt><dd>{publishers}</dd>
 				<dt class="text-[var(--archive-subtle)]">Institution</dt><dd>{field(source.holdingInstitution)}</dd>
 				<dt class="text-[var(--archive-subtle)]">Call number</dt><dd class="archive-mono break-all text-[12px]">{field(source.callNumber)}</dd>
@@ -562,8 +564,8 @@
 					onclick={() => go(-1)}
 					disabled={currentPage <= 1}
 					aria-label="Previous page"
-					class="absolute left-3 top-1/2 z-10 h-12 w-9 -translate-y-1/2 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[21px] disabled:opacity-35"
-				>‹</button>
+					class="absolute left-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center border border-[var(--archive-border)] bg-[var(--archive-paper)] shadow-sm hover:border-[var(--archive-gilt)] disabled:opacity-25"
+				><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 				{#if viewMode === 'image'}
 					{@render imagePage()}
 				{:else if viewMode === 'text'}
@@ -581,34 +583,37 @@
 					onclick={() => go(1)}
 					disabled={currentPage >= pageCount}
 					aria-label="Next page"
-					class="absolute right-3 top-1/2 z-10 h-12 w-9 -translate-y-1/2 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[21px] disabled:opacity-35"
-				>›</button>
+					class="absolute right-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center border border-[var(--archive-border)] bg-[var(--archive-paper)] shadow-sm hover:border-[var(--archive-gilt)] disabled:opacity-25"
+				><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 			</div>
 
-			<div class="border-t border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-center">
+			<div class="border-t border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2">
 				<div class="inline-flex border border-[var(--archive-border)] text-[12px]">
 					<button
 						type="button"
+						hidden={!textVariants.length}
 						aria-pressed={viewMode === 'image'}
 						onclick={() => (viewMode = 'image')}
-						class="px-3 py-1.5"
-						class:bg-[var(--archive-gilt)]={viewMode === 'image'}
+						class="min-w-[5rem] px-3 py-1.5 text-center"
+						class:bg-[var(--archive-gilt-text)]={viewMode === 'image'}
 						class:text-[var(--archive-paper)]={viewMode === 'image'}
 					>Image</button>
 					<button
 						type="button"
+						hidden={!textVariants.length}
 						aria-pressed={viewMode === 'text'}
 						onclick={() => (viewMode = 'text')}
-						class="border-l border-[var(--archive-border)] px-3 py-1.5"
-						class:bg-[var(--archive-gilt)]={viewMode === 'text'}
+						class="min-w-[5rem] border-l border-[var(--archive-border)] px-3 py-1.5 text-center"
+						class:bg-[var(--archive-gilt-text)]={viewMode === 'text'}
 						class:text-[var(--archive-paper)]={viewMode === 'text'}
 					>Text</button>
 					<button
 						type="button"
+						hidden={!textVariants.length}
 						aria-pressed={viewMode === 'side-by-side'}
 						onclick={() => (viewMode = 'side-by-side')}
-						class="side-by-side-option border-l border-[var(--archive-border)] px-3 py-1.5"
-						class:bg-[var(--archive-gilt)]={viewMode === 'side-by-side'}
+						class="side-by-side-option min-w-[5rem] border-l border-[var(--archive-border)] px-3 py-1.5 text-center"
+						class:bg-[var(--archive-gilt-text)]={viewMode === 'side-by-side'}
 						class:text-[var(--archive-paper)]={viewMode === 'side-by-side'}
 					>Side-by-side</button>
 				</div>

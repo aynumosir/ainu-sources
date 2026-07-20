@@ -28,7 +28,7 @@
 				tag="h2"
 				ja={archiveLabels.download.ja}
 				en={archiveLabels.download.en}
-				class="text-[21px] font-semibold"
+				class="archive-h2"
 			/>
 			<p class="mt-3 break-words text-[15px]">{file.filename}</p>
 			<p class="mt-1 text-[13px] text-[var(--archive-subtle)]">{formatBytes(file.bytes)}</p>

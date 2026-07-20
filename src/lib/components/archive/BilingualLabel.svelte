@@ -6,14 +6,33 @@
 		stacked = false,
 		slash = false,
 		inverse = false,
+		compact = false,
 		class: className = ''
-	}: { ja: string; en: string; tag?: string; stacked?: boolean; slash?: boolean; inverse?: boolean; class?: string } = $props();
+	}: {
+		ja: string;
+		en: string;
+		tag?: string;
+		stacked?: boolean;
+		slash?: boolean;
+		inverse?: boolean;
+		compact?: boolean;
+		class?: string;
+	} = $props();
 </script>
 
-<svelte:element this={tag} class={`archive-bilingual-label ${className}`} class:stacked class:slash class:inverse>
+<svelte:element
+	this={tag}
+	class={`archive-bilingual-label ${className}`}
+	class:stacked
+	class:slash
+	class:inverse
+	title={compact ? en : undefined}
+>
 	<span class="ja">{ja}</span>
-	{#if slash}<span class="sep" aria-hidden="true">/</span>{/if}
-	<span class="en">{en}</span>
+	{#if !compact}
+		{#if slash}<span class="sep" aria-hidden="true">/</span>{/if}
+		<span class="en">{en}</span>
+	{/if}
 </svelte:element>
 
 <style>
@@ -36,8 +55,9 @@
 	.sep {
 		color: var(--archive-label-en-color, var(--archive-subtle));
 		font-family: var(--font-archive-sans);
-		font-size: var(--archive-label-en-size, 0.8em);
-		font-weight: 500;
+		font-size: var(--archive-label-en-size, 0.72em);
+		font-weight: 400;
+		letter-spacing: 0.02em;
 	}
 	.archive-bilingual-label.inverse .en,
 	.archive-bilingual-label.inverse .sep {

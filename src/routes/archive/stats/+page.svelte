@@ -20,8 +20,8 @@
 <ArchiveHead title="統計 Statistics" />
 
 {#if stats}
-	<section class="mx-auto w-full max-w-5xl">
-		<BilingualLabel tag="h1" stacked ja="統計" en="Statistics" class="text-[27px] font-semibold" />
+	<section class="w-full max-w-3xl">
+		<BilingualLabel tag="h1" stacked ja="統計" en="Statistics" class="archive-h1" />
 		<p class="mt-2 text-[15px] text-[var(--archive-subtle)]">
 			What this archive holds, and how much of it is searchable. Figures carry their denominators;
 			where a value was never recorded, it says so.
@@ -31,10 +31,10 @@
 		<div class="mt-8 grid grid-cols-2 gap-px border border-[var(--archive-border)] bg-[var(--archive-border)] sm:grid-cols-4">
 			{#each [['works', stats.totals.works, '資料 Works'], ['files', stats.totals.files, 'ファイル Files'], ['bytes', null, '容量 Stored'], ['pages', stats.pages.total, 'ページ Pages']] as [key, value, label] (key)}
 				<div class="bg-[var(--archive-paper)] p-4">
-					<div class="text-[21px] font-semibold tabular-nums">
+					<div class="archive-title text-[32px] font-semibold leading-none tabular-nums">
 						{key === 'bytes' ? formatBytes(stats.totals.deduplicatedBytes) : number(value)}
 					</div>
-					<div class="mt-1 text-[13px] text-[var(--archive-subtle)]">{label}</div>
+					<div class="archive-kicker mt-2 text-[var(--archive-subtle)]">{label}</div>
 				</div>
 			{/each}
 		</div>
@@ -45,7 +45,7 @@
 		</p>
 
 		<!-- Text coverage -->
-		<h2 class="mt-10 text-[21px] font-semibold">
+		<h2 class="archive-h2 mt-10">
 			<BilingualLabel ja="本文の網羅率" en="Text coverage" />
 		</h2>
 		<p class="mt-2 text-[15px]">
@@ -60,13 +60,13 @@
 				style={`width:${percent(pagesWithText, pagesScanned)}%`}
 				title={`${pagesWithText} pages with text`}
 			></div>
-			<div class="flex-1 bg-[var(--archive-bg)]" title={`${pagesWithoutText} pages without text`}></div>
+			<div class="flex-1 bg-[var(--archive-muted)]" title={`${pagesWithoutText} pages without text`}></div>
 		</div>
 		<p class="mt-2 text-[13px] text-[var(--archive-faint-text)]">
 			Search indexes {number(stats.ocr.chunks)} text chunks.
 		</p>
 
-		<h3 class="mt-6 text-[17px] font-semibold">
+		<h3 class="archive-h3 mt-10">
 			<BilingualLabel ja="OCRエンジン" en="OCR engines" />
 		</h3>
 		<p class="mt-1 text-[13px] text-[var(--archive-faint-text)]">
@@ -78,14 +78,14 @@
 				{#each stats.ocr.variants as variant (variant.variant)}
 					<tr class="border-b border-[var(--archive-border)]">
 						<td class="py-2 font-mono text-[13px]">{variant.variant}</td>
-						<td class="py-2 text-right tabular-nums">{number(variant.works)} works</td>
+						<td class="py-2 text-right tabular-nums">{number(variant.works)} {variant.works === 1 ? 'work' : 'works'}</td>
 					</tr>
 				{/each}
 			</tbody>
 		</table>
 
 		<!-- Era and category -->
-		<h2 class="mt-10 text-[21px] font-semibold">
+		<h2 class="archive-h2 mt-10">
 			<BilingualLabel ja="収蔵の内訳" en="What kind of collection" />
 		</h2>
 		<div class="mt-3 space-y-1">
@@ -118,7 +118,7 @@
 		</p>
 
 		<!-- Dialect: prose, deliberately not a chart -->
-		<h2 class="mt-10 text-[21px] font-semibold">
+		<h2 class="archive-h2 mt-10">
 			<BilingualLabel ja="方言" en="Dialect" />
 		</h2>
 		<p class="mt-2 text-[15px]">
@@ -134,7 +134,7 @@
 		</p>
 
 		<!-- Search -->
-		<h2 class="mt-10 text-[21px] font-semibold">
+		<h2 class="archive-h2 mt-10">
 			<BilingualLabel ja="検索" en="Search" />
 		</h2>
 		<p class="mt-2 text-[15px]">

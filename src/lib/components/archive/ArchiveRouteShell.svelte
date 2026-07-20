@@ -40,7 +40,7 @@
 						stacked
 						ja={archiveLabels.accessChanged.ja}
 						en={archiveLabels.accessChanged.en}
-						class="mt-6 text-[27px] font-semibold"
+						class="archive-h1 mt-6"
 					/>
 					<p class="mt-3 text-[15px] leading-7 text-[var(--archive-subtle)]">
 						Reload the archive to refresh your current role and session state.

@@ -27,7 +27,7 @@
 			stacked
 			ja={archiveLabels.admin.ja}
 			en={archiveLabels.admin.en}
-			class="text-[27px] font-semibold"
+			class="archive-h1"
 		/>
 		<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">Archive administration.</p>
 	</div>

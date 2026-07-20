@@ -27,10 +27,10 @@
 			stacked
 			ja={resolvedLabel.ja}
 			en={resolvedLabel.en}
-			class="text-[27px] font-semibold"
+			class="archive-h1"
 		/>
 	{:else}
-		<h1 class="text-[27px] font-semibold">{title}</h1>
+		<h1 class="archive-h1">{title}</h1>
 	{/if}
 	<p class="mt-3 text-[15px] text-[var(--archive-subtle)]">
 		<BilingualLabel ja={archiveLabels.underConstruction.ja} en={archiveLabels.underConstruction.en} />

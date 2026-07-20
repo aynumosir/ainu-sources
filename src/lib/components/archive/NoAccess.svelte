@@ -35,7 +35,7 @@
 					stacked
 					ja={archiveLabels.noRoleHeading.ja}
 					en={archiveLabels.noRoleHeading.en}
-					class="mt-6 text-[27px] font-semibold"
+					class="archive-h1 mt-6"
 				/>
 				{#if login}
 					<p class="mt-4 text-[15px] text-[var(--archive-subtle)]">
@@ -57,7 +57,7 @@
 					stacked
 					ja={archiveLabels.signInHeading.ja}
 					en={archiveLabels.signInHeading.en}
-					class="mt-6 text-[27px] font-semibold"
+					class="archive-h1 mt-6"
 				/>
 				<p class="mt-3 text-[15px] leading-7 text-[var(--archive-subtle)]">
 					This archive is a private research collection for designated researchers.

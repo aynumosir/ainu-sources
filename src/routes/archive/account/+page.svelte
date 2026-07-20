@@ -38,7 +38,7 @@
 				stacked
 				ja={archiveLabels.account.ja}
 				en={archiveLabels.account.en}
-				class="text-[27px] font-semibold"
+				class="archive-h1"
 			/>
 			<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">Archive identity and access limits.</p>
 		</div>

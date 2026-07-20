@@ -20,6 +20,11 @@
 	const source = $derived(item.source);
 	const file = $derived(item.file);
 	const languages = $derived(formatArchiveLanguages(source.languages));
+	const format = $derived(
+		file.mediaType === 'application/pdf'
+			? 'PDF'
+			: (file.mediaType?.split('/').at(-1)?.toUpperCase() ?? null)
+	);
 </script>
 
 <div class="relative flex h-full flex-col border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3 transition hover:border-[var(--archive-gilt)]">
@@ -37,18 +42,17 @@
 			<p class="archive-clamp-1 mt-0.5 text-[13px] text-[var(--archive-subtle)]" lang="ain-Latn" title={source.titleAin}>{source.titleAin}</p>
 		{/if}
 		{#if source.author}
-			<p class="mt-1 truncate text-[13px] text-[var(--archive-subtle)]">{source.author}</p>
+			<p class="archive-title mt-1 truncate text-[14px] italic text-[var(--archive-text-soft)]">{source.author}</p>
 		{/if}
 	</a>
 	<div class="mt-auto flex items-center gap-2 pt-3">
 		<span class="archive-kicker bg-[var(--archive-muted)] px-1.5 py-0.5">{file.role ?? 'file'}</span>
+		<span class="tnum ml-auto text-[12px] text-[var(--archive-subtle)]">{formatYear(source)}</span>
 	</div>
-	<p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-[var(--archive-subtle)]">
-		<span class="tnum">{formatYear(source)}</span>
+	<p class="mt-1.5 text-[12px] text-[var(--archive-subtle)]">
+		{#if format}{format} · {/if}{formatBytes(file.bytes)}{#if languages} · {languages}{/if}
 	</p>
-	<p class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-[var(--archive-subtle)]">
-		<span>{formatBytes(file.bytes)}{#if file.mediaType} · {file.mediaType}{/if}{#if languages} · {languages}{/if}</span>
-		<span aria-hidden="true">·</span>
+	<div class="mt-1.5">
 		<OcrBadge coverage={item.coverage} />
-	</p>
+	</div>
 </div>
