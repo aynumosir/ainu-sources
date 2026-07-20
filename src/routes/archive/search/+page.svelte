@@ -54,15 +54,11 @@
 								<p class="text-[13px] text-[var(--archive-subtle)]" lang="ain-Latn">{item.source.titleAin}</p>
 							{/if}
 						</div>
-						<p class="tnum mt-1.5 text-[12px] text-[var(--archive-subtle)]">
-							{[
-								item.wholeDocument ? '全文 whole document' : `p. ${item.page}`,
-								item.variant,
-								item.source.author,
-								formatYear(item.source)
-							]
-								.filter(Boolean)
-								.join(' · ')}
+						<p class="archive-meta tnum mt-1.5 text-[12px] text-[var(--archive-subtle)]">
+							{#each [item.wholeDocument ? '全文 whole document' : `p. ${item.page}`, item.variant, item.source.author, formatYear(item.source)].filter(Boolean) as part, index (index)}
+								{#if index > 0}<span class="sep" aria-hidden="true">·</span>{/if}
+								<span>{part}</span>
+							{/each}
 						</p>
 						<p class="mt-3 text-[15px] leading-7">
 							{#each highlightSnippet(item.snippet.text, item.snippet.offsets) as segment, index (index)}

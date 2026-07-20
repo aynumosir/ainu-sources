@@ -165,3 +165,18 @@
 	font-size: 15px;
 	font-weight: 600;
 }
+
+/* Middle dots fall back to a CJK font and gain lopsided side bearings;
+   render them as their own spans in the sans face instead. */
+.archive .archive-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	column-gap: 0.4rem;
+	row-gap: 0.15rem;
+}
+
+.archive .archive-meta > .sep {
+	font-family: var(--font-archive-sans);
+	color: var(--archive-faint-text);
+}

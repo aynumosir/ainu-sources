@@ -25,8 +25,8 @@
 			? 'PDF'
 			: (file.mediaType?.split('/').at(-1)?.toUpperCase() ?? null)
 	);
-	const metaLine = $derived(
-		[format, formatBytes(file.bytes), languages].filter(Boolean).join(' · ')
+	const metaParts = $derived(
+		[format, formatBytes(file.bytes), languages].filter(Boolean) as string[]
 	);
 </script>
 
@@ -52,7 +52,12 @@
 		<span class="archive-kicker bg-[var(--archive-muted)] px-1.5 py-0.5">{file.role ?? 'file'}</span>
 		<span class="tnum ml-auto text-[12px] text-[var(--archive-subtle)]">{formatYear(source)}</span>
 	</div>
-	<p class="mt-1.5 text-[12px] text-[var(--archive-subtle)]">{metaLine}</p>
+	<p class="archive-meta mt-1.5 text-[12px] text-[var(--archive-subtle)]">
+		{#each metaParts as part, index (index)}
+			{#if index > 0}<span class="sep" aria-hidden="true">·</span>{/if}
+			<span>{part}</span>
+		{/each}
+	</p>
 	<div class="mt-1.5">
 		<OcrBadge coverage={item.coverage} />
 	</div>
