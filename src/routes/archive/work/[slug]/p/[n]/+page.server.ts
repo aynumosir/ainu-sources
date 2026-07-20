@@ -6,7 +6,7 @@ import { loadArchiveWork, loadArchiveWorkPersons } from '$lib/archive/work-data.
 import { db } from '$lib/server/db';
 import { revisionOcrCoverage } from '$lib/server/db/schema';
 import { eq, sql } from 'drizzle-orm';
-import type { OcrCoverage } from '$lib/archive/ocr';
+import { loadPageFolios, loadTextCoverage } from '$lib/server/archive/work-text';
 
 export const load: PageServerLoad = async ({ parent, params }) => {
 	const layout = await parent();
@@ -20,7 +20,11 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 			loadArchiveWorkPersons(params.slug)
 		]);
 		const work = loadedWork && !loadedWork.unavailable
-			? { ...loadedWork, ocr: await loadOcrCoverage(loadedWork.revision.id) }
+			? {
+					...loadedWork,
+					ocr: await loadTextCoverage(loadedWork.revision.id),
+					folios: await loadPageFolios(loadedWork.revision.id)
+				}
 			: loadedWork;
 		return {
 			accessDenied: false,
@@ -33,38 +37,6 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 	}
 };
 
-async function loadOcrCoverage(revisionId: string): Promise<OcrCoverage[]> {
-	const [coverage, pageCounts] = await Promise.all([
-		db
-			.select({
-				revisionId: revisionOcrCoverage.revisionId,
-				variant: revisionOcrCoverage.variant,
-				status: revisionOcrCoverage.status,
-				tool: revisionOcrCoverage.tool,
-				toolVersion: revisionOcrCoverage.toolVersion,
-				preferred: revisionOcrCoverage.preferred
-			})
-			.from(revisionOcrCoverage)
-			.where(eq(revisionOcrCoverage.revisionId, revisionId)),
-		db.all<{ variant: string; pageCount: number }>(sql`
-			select c.variant as variant,
-				cast(count(distinct cast(c.page as integer)) as integer) as pageCount
-			from ocr_chunks c
-			inner join ocr_ingest_state s
-				on s.revision_id = c.revision_id
-				and s.variant = c.variant
-				and s.active_generation = c.ingest_generation
-			where c.revision_id = ${revisionId}
-			group by c.variant
-		`)
-	]);
-	const countByVariant = new Map(pageCounts.map((row) => [row.variant, Number(row.pageCount)]));
-	return coverage.map((row) => ({
-		...row,
-		status: row.status as OcrCoverage['status'],
-		pageCount: countByVariant.get(row.variant) ?? 0
-	}));
-}
 
 function parsePage(value: string): number | null {
 	if (!/^[1-9][0-9]*$/u.test(value)) return null;

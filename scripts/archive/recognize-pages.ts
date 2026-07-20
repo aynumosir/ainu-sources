@@ -169,7 +169,7 @@ async function recordCoverage(db: any, revisionId: string): Promise<void> {
 	if (existing.length > 0) {
 		await db
 			.update(revisionOcrCoverage)
-			.set({ status: 'complete', tool: VARIANT, toolVersion: MODEL, measuredAt: now })
+			.set({ status: 'complete', sourceKind: 'recognized', tool: VARIANT, toolVersion: MODEL, measuredAt: now })
 			.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, VARIANT)));
 		return;
 	}
@@ -182,6 +182,7 @@ async function recordCoverage(db: any, revisionId: string): Promise<void> {
 		revisionId,
 		variant: VARIANT,
 		status: 'complete',
+		sourceKind: 'recognized',
 		tool: VARIANT,
 		toolVersion: MODEL,
 		preferred: preferred.length === 0,

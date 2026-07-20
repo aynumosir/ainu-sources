@@ -116,7 +116,7 @@ async function recordCoverage(db: any, revisionId: string, variant: string): Pro
 	if (existing.length > 0) {
 		await db
 			.update(revisionOcrCoverage)
-			.set({ status: 'complete', tool: variant, measuredAt: now })
+			.set({ status: 'complete', tool: variant, sourceKind: 'extracted', measuredAt: now })
 			.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, variant)));
 		return;
 	}
@@ -129,6 +129,8 @@ async function recordCoverage(db: any, revisionId: string, variant: string): Pro
 		revisionId,
 		variant,
 		status: 'complete',
+		// This text was taken from the file, not read from the image.
+		sourceKind: 'extracted',
 		tool: variant,
 		toolVersion: null,
 		preferred: preferred.length === 0,
