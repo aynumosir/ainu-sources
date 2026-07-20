@@ -49,7 +49,7 @@
 			value={text}
 			{readonly}
 			spellcheck="false"
-			aria-label={`OCR text for scan page ${page}`}
+			aria-label={`Text for scan page ${page}`}
 			{placeholder}
 			oninput={(event) => ontext(event.currentTarget.value)}
 		></textarea>

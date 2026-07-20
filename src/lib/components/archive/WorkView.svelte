@@ -204,7 +204,7 @@
 		try {
 			const query = new URLSearchParams({ pages: String(page), variant });
 			const response = await archiveFetch(`/api/archive/revisions/${work.revision.id}/text?${query}`);
-			if (!response.ok) throw new Error(`OCR text request failed (${response.status})`);
+			if (!response.ok) throw new Error(`Text request failed (${response.status})`);
 			const body = await response.json() as {
 				error?: string;
 				wholeDocument?: boolean;
@@ -350,7 +350,7 @@
 	>
 		<BilingualLabel tag="h2" ja="資料内検索" en="Find in this work" class="text-[17px] font-semibold" />
 		<label class="mt-4 block text-[13px] text-[var(--archive-subtle)]">
-			Search OCR text
+			資料内の本文を検索 Search text in this work
 			<input bind:value={findQuery} class="mt-2 w-full border border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 py-2 text-[15px]" />
 		</label>
 		<button type="submit" class="mt-3 border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">
@@ -387,10 +387,10 @@
 {#snippet textPage()}
 	<section class="flex h-full min-h-[55svh] w-full min-w-0 flex-col bg-[var(--archive-paper)]">
 		<header class="flex flex-wrap items-center justify-between gap-2 border-b border-dotted border-[var(--archive-border)] px-4 py-3">
-			<p class="archive-kicker">OCR TEXT{#if selectedVariantName} · {selectedVariantName}{/if}</p>
+			<p class="archive-kicker">本文 TEXT{#if selectedVariantName} · {selectedVariantName}{/if}</p>
 			{#if textVariants.length > 1}
 				<label class="flex items-center gap-2 text-[12px] text-[var(--archive-subtle)]">
-					<span>OCR version</span>
+					<span>本文の版 Text version</span>
 					<select
 						value={selectedVariant ?? ''}
 						onchange={(event) => selectTextVariant(event.currentTarget.value)}
@@ -465,8 +465,8 @@
 			<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
 				<BilingualLabel tag="h3" ja="校訂テキスト" en="Curated text" class="archive-h3" />
 				<p class="mt-1 text-[12px] text-[var(--archive-faint-text)]">
-					人手で校訂・対訳された本文。引用にはOCRではなくこちらを。 / Human-edited text with
-					translation. Quote from this rather than from OCR.
+					人手で校訂・対訳された本文。引用には機械の読み取りではなくこちらを。 / Human-edited text with
+					translation. Quote from this rather than from a machine reading.
 				</p>
 				<ul class="mt-3 space-y-2 text-[13px]">
 					{#each curatedTexts as link (link.id ?? link.url)}

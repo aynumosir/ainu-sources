@@ -726,7 +726,7 @@
 	</header>
 
 	{#if fileNoOcr}
-		<p class="file-gap">この資料にはOCRテキストがありません — page images only; your transcription starts the text.</p>
+		<p class="file-gap">この資料には本文がありません — page images only; your transcription starts the text.</p>
 	{/if}
 	{#if statusUnavailable}
 		<p class="rollout-note">ページ状態マップはまだ利用できません / Page status map is not yet available.</p>

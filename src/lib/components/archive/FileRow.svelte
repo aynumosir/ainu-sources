@@ -45,7 +45,7 @@
 					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} inverse />
 				</button>
 			{:else}
-				<span class="text-[13px] text-[var(--archive-subtle)]">OCR unavailable for this file</span>
+				<span class="text-[13px] text-[var(--archive-subtle)]">text unavailable for this file</span>
 			{/if}
 		</div>
 	</div>

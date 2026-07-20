@@ -52,7 +52,7 @@
 	<div class="history-actions">
 		{#if canRevert}
 			{#if confirmRevert}
-				<span>機械OCRに戻しますか？ / Revert this page?</span>
+				<span>機械本文に戻しますか？ / Revert this page?</span>
 				<button type="button" onclick={onrevert}><BilingualLabel ja={archiveLabels.revertMachine.ja} en={archiveLabels.revertMachine.en} /></button>
 				<button type="button" onclick={() => (confirmRevert = false)}><BilingualLabel ja={archiveLabels.cancel.ja} en={archiveLabels.cancel.en} /></button>
 			{:else}

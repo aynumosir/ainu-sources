@@ -26,7 +26,7 @@
 			</select>
 		</label>
 		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
-			Has OCR text
+			本文の有無 Has text
 			<select name="ocr" value={filters.ocr} class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]">
 				<option value="any">Any</option>
 				<option value="with">With text</option>

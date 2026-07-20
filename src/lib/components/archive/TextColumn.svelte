@@ -100,7 +100,7 @@
 
 <section class="text-column">
 	<header class="kicker-row">
-		<p class="archive-kicker">OCR TEXT · P.{page}</p>
+		<p class="archive-kicker">本文 TEXT · P.{page}</p>
 		<div class="controls">
 			<VariantSwitcher {variants} {selected} disabled={loadState === 'loading'} onselect={onselect} />
 			<PageStatusChip {status} {manual} />
@@ -111,14 +111,14 @@
 	</header>
 
 	{#if loadState === 'loading' || loadState === 'idle'}
-		<div class="column-state">OCR本文を読み込んでいます… / Loading OCR text…</div>
+		<div class="column-state">本文を読み込んでいます… / Loading text…</div>
 	{:else if loadState === 'unavailable'}
 		<div class="column-state">
-			<p>OCR校訂APIはまだ利用できません / OCR editing is not yet available.</p>
+			<p>本文校訂APIはまだ利用できません / Text editing is not yet available.</p>
 			{#if loadMessage}<p>{loadMessage}</p>{/if}
 		</div>
 	{:else if loadState === 'error'}
-		<div class="column-state error" role="alert">{loadMessage ?? 'OCR text failed to load.'}</div>
+		<div class="column-state error" role="alert">{loadMessage ?? 'Text failed to load.'}</div>
 	{:else if historyOpen}
 		<EditHistoryPanel
 			entries={historyEntries}
@@ -137,7 +137,7 @@
 		/>
 	{:else}
 		{#if loadState === 'empty'}
-			<p class="gap-note">このページにはOCRがありません / No OCR on this page.</p>
+			<p class="gap-note">このページには本文がありません / No text on this page.</p>
 		{/if}
 		<PageTextEditor
 			{page}

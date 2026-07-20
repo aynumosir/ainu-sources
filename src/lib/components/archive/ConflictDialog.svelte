@@ -42,7 +42,7 @@
 
 {#if compareOpen}
 	<div class="compare-backdrop" role="presentation">
-		<div class="compare-sheet" role="dialog" aria-modal="true" aria-label="Compare conflicting OCR text">
+		<div class="compare-sheet" role="dialog" aria-modal="true" aria-label="Compare conflicting text">
 			<header>
 				<h2><BilingualLabel ja={archiveLabels.compare.ja} en={archiveLabels.compare.en} /></h2>
 				<button type="button" onclick={() => (compareOpen = false)}><BilingualLabel ja={archiveLabels.close.ja} en={archiveLabels.close.en} /></button>
