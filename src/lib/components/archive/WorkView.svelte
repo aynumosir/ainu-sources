@@ -322,6 +322,12 @@
 	</div>
 {/snippet}
 
+{#snippet val(text: string)}
+	{#if text === 'not recorded'}
+		<span class="italic text-[var(--archive-faint-text)]">not recorded</span>
+	{:else}{text}{/if}
+{/snippet}
+
 {#snippet findPanel()}
 	<form
 		class="p-4"
@@ -459,15 +465,15 @@
 						</ul>
 					</dd>
 				{/if}
-				<dt class="text-[var(--archive-subtle)]">Dialect</dt><dd>{field(source.dialect)}</dd>
-				<dt class="text-[var(--archive-subtle)]">Era</dt><dd>{era}</dd>
-				<dt class="text-[var(--archive-subtle)]">Category</dt><dd>{field(source.category)}</dd>
-				<dt class="text-[var(--archive-subtle)]">Type</dt><dd>{field(source.type)}</dd>
-				<dt class="text-[var(--archive-subtle)]">Languages</dt><dd>{formatArchiveLanguages(source.languages) || field(source.languages)}</dd>
-				<dt class="text-[var(--archive-subtle)]">Publisher</dt><dd>{publishers}</dd>
-				<dt class="text-[var(--archive-subtle)]">Institution</dt><dd>{field(source.holdingInstitution)}</dd>
-				<dt class="text-[var(--archive-subtle)]">Call number</dt><dd class="archive-mono break-all text-[12px]">{field(source.callNumber)}</dd>
-				<dt class="text-[var(--archive-subtle)]">Notes</dt><dd class="whitespace-pre-wrap">{field(source.notes)}</dd>
+				<dt class="text-[var(--archive-subtle)]">Dialect</dt><dd>{@render val(field(source.dialect))}</dd>
+				<dt class="text-[var(--archive-subtle)]">Era</dt><dd>{@render val(era)}</dd>
+				<dt class="text-[var(--archive-subtle)]">Category</dt><dd>{@render val(field(source.category))}</dd>
+				<dt class="text-[var(--archive-subtle)]">Type</dt><dd>{@render val(field(source.type))}</dd>
+				<dt class="text-[var(--archive-subtle)]">Languages</dt><dd>{@render val(formatArchiveLanguages(source.languages) || field(source.languages))}</dd>
+				<dt class="text-[var(--archive-subtle)]">Publisher</dt><dd>{@render val(publishers)}</dd>
+				<dt class="text-[var(--archive-subtle)]">Institution</dt><dd>{@render val(field(source.holdingInstitution))}</dd>
+				<dt class="text-[var(--archive-subtle)]">Call number</dt><dd class="archive-mono break-all text-[12px]">{@render val(field(source.callNumber))}</dd>
+				<dt class="text-[var(--archive-subtle)]">Notes</dt><dd class="whitespace-pre-wrap">{@render val(field(source.notes))}</dd>
 			</dl>
 			<a
 				href={`/sources/${encodeURIComponent(source.slug)}`}
@@ -587,11 +593,11 @@
 				><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 			</div>
 
+			{#if textVariants.length}
 			<div class="border-t border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2">
 				<div class="inline-flex border border-[var(--archive-border)] text-[12px]">
 					<button
 						type="button"
-						hidden={!textVariants.length}
 						aria-pressed={viewMode === 'image'}
 						onclick={() => (viewMode = 'image')}
 						class="min-w-[5rem] px-3 py-1.5 text-center"
@@ -600,7 +606,6 @@
 					>Image</button>
 					<button
 						type="button"
-						hidden={!textVariants.length}
 						aria-pressed={viewMode === 'text'}
 						onclick={() => (viewMode = 'text')}
 						class="min-w-[5rem] border-l border-[var(--archive-border)] px-3 py-1.5 text-center"
@@ -609,7 +614,6 @@
 					>Text</button>
 					<button
 						type="button"
-						hidden={!textVariants.length}
 						aria-pressed={viewMode === 'side-by-side'}
 						onclick={() => (viewMode = 'side-by-side')}
 						class="side-by-side-option min-w-[5rem] border-l border-[var(--archive-border)] px-3 py-1.5 text-center"
@@ -618,6 +622,7 @@
 					>Side-by-side</button>
 				</div>
 			</div>
+			{/if}
 		</section>
 
 		<aside class="work-about min-h-0 overflow-y-auto border-l border-[var(--archive-border)] bg-[var(--archive-paper)]">

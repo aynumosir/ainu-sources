@@ -25,6 +25,9 @@
 			? 'PDF'
 			: (file.mediaType?.split('/').at(-1)?.toUpperCase() ?? null)
 	);
+	const metaLine = $derived(
+		[format, formatBytes(file.bytes), languages].filter(Boolean).join(' · ')
+	);
 </script>
 
 <div class="relative flex h-full flex-col border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3 transition hover:border-[var(--archive-gilt)]">
@@ -49,9 +52,7 @@
 		<span class="archive-kicker bg-[var(--archive-muted)] px-1.5 py-0.5">{file.role ?? 'file'}</span>
 		<span class="tnum ml-auto text-[12px] text-[var(--archive-subtle)]">{formatYear(source)}</span>
 	</div>
-	<p class="mt-1.5 text-[12px] text-[var(--archive-subtle)]">
-		{#if format}{format} · {/if}{formatBytes(file.bytes)}{#if languages} · {languages}{/if}
-	</p>
+	<p class="mt-1.5 text-[12px] text-[var(--archive-subtle)]">{metaLine}</p>
 	<div class="mt-1.5">
 		<OcrBadge coverage={item.coverage} />
 	</div>
