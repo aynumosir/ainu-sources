@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chooseDefaultOcrVariant, summarizeOcrCoverage, type OcrCoverage } from './ocr';
+import { chooseDefaultOcrVariant, pickPreferredVariant, summarizeOcrCoverage, type OcrCoverage } from './ocr';
 
 const coverage = (overrides: Partial<OcrCoverage> = {}): OcrCoverage => ({
 	revisionId: 'revision-1',
@@ -59,6 +59,84 @@ describe('chooseDefaultOcrVariant', () => {
 				coverage({ variant: 'empty', status: 'none', preferred: true, pageCount: 0 }),
 				coverage({ variant: 'gemini', pageCount: 8 })
 			])
+		).toBe('gemini');
+	});
+});
+
+describe('pickPreferredVariant', () => {
+	it('returns null when the revision has no variants', () => {
+		expect(pickPreferredVariant([], null)).toBeNull();
+	});
+
+	it('ranks an unassessed variant above a suspect one', () => {
+		expect(
+			pickPreferredVariant(
+				[
+					{ variant: 'pdftotext', reliability: 'suspect' },
+					{ variant: 'gemini', reliability: 'unassessed' }
+				],
+				'pdftotext'
+			)
+		).toBe('gemini');
+	});
+
+	it('ranks a sound variant above an unassessed one', () => {
+		expect(
+			pickPreferredVariant(
+				[
+					{ variant: 'gemini', reliability: 'unassessed' },
+					{ variant: 'edited', reliability: 'sound' }
+				],
+				'gemini'
+			)
+		).toBe('edited');
+	});
+
+	it('keeps the current preferred variant within its tier', () => {
+		expect(
+			pickPreferredVariant(
+				[
+					{ variant: 'gemini', reliability: 'unassessed' },
+					{ variant: 'pdftotext', reliability: 'unassessed' }
+				],
+				'pdftotext'
+			)
+		).toBe('pdftotext');
+	});
+
+	it('breaks ties in input order', () => {
+		expect(
+			pickPreferredVariant(
+				[
+					{ variant: 'pdftotext', reliability: 'unassessed' },
+					{ variant: 'gemini', reliability: 'unassessed' }
+				],
+				null
+			)
+		).toBe('pdftotext');
+	});
+
+	it('picks the first ingested variant when every variant is suspect', () => {
+		expect(
+			pickPreferredVariant(
+				[
+					{ variant: 'pdftotext', reliability: 'suspect' },
+					{ variant: 'gemini', reliability: 'suspect' }
+				],
+				null
+			)
+		).toBe('pdftotext');
+	});
+
+	it('keeps the current preferred variant when every variant is suspect', () => {
+		expect(
+			pickPreferredVariant(
+				[
+					{ variant: 'pdftotext', reliability: 'suspect' },
+					{ variant: 'gemini', reliability: 'suspect' }
+				],
+				'gemini'
+			)
 		).toBe('gemini');
 	});
 });
