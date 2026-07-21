@@ -48,11 +48,11 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.ARCHIVE_R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.ARCHIVE_R2_SECRET_ACCESS_KEY }}
           REVISION: ${{ inputs.revision }}
-          LIMIT: ${{ inputs.limit || '10' }}
+          LIMIT: ${{ inputs.limit }}
         run: |
           args=()
           if [ -n "$REVISION" ]; then
             args+=(--revision "$REVISION")
           fi
-          args+=(--limit "$LIMIT")
+          args+=(--limit "${LIMIT:-10}")
           bun run archive:gen-derivatives -- "${args[@]}"
