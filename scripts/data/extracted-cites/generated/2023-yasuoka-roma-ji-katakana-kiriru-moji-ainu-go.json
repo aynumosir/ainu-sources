@@ -1,0 +1,36 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2023-yasuoka-roma-ji-katakana-kiriru-moji-ainu-go",
+    "title": "安岡孝一 ローマ字・カタカナ・キリル文字併用アイヌ語RoBERTa・DeBERTaモデルの開発",
+    "year": 2023,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 1,
+    "sourcePath": "articles/2023_安岡孝一_ローマ字・カタカナ・キリル文字併用アイヌ語RoBERTa・DeBERTaモデルの開発.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    }
+  ]
+}

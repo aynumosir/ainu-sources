@@ -1,0 +1,984 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2012-bugaeva-anna-southern-hokkaido-ainu",
+    "title": "Southern Hokkaido Ainu",
+    "author": "Bugaeva Anna",
+    "year": 2012,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "REFERENCES",
+    "referencePages": "scan pp. 23-26",
+    "referenceCount": 54,
+    "sourcePath": "articles/2012_Bugaeva Anna_Southern Hokkaido Ainu.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "John C. Batchelor"
+      ],
+      "year": 1905,
+      "yearText": "1905",
+      "title": "An Ainu-English-Japanese Dictionary",
+      "titleEn": "An Ainu-English-Japanese Dictionary",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "An Ainu-English-Japanese Dictionary"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Kyōsuke Kindaichi"
+      ],
+      "year": 1931,
+      "yearText": "1931",
+      "title": "Ainu jojishi Yūkara no kenkyū",
+      "titleEn": "Ainu jojishi Yūkara no kenkyū",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1931-kyosuke-kindaichi-ainu-jojishi-yukara-no-kenkyu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu jojishi Yūkara no kenkyū"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Kindaichi, Kyosuke"
+      ],
+      "year": 1933,
+      "yearText": "1933",
+      "title": "Gengo kenkyu",
+      "titleEn": "Gengo kenkyu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Gengo kenkyu"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Kindaichi"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ語法概説",
+      "titleEn": "An Outline of Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-kindaichi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "An Outline of Ainu Grammar"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Kyōsuke Kindaichi"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "Ainu gohō gaisetsu",
+      "titleEn": "Ainu gohō gaisetsu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-kyosuke-kindaichi-ainu-goho-gaisetsu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainu gohō gaisetsu"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Chiri, Mashiho"
+      ],
+      "year": 1942,
+      "yearText": "1942",
+      "title": "Ainu gohō kenkyū - karafuto hōgen-o chūshin to shite (Studies in Ainu grammar - with an emphasis on the Sakhalin dialect)",
+      "titleEn": "Ainu gohō kenkyū - karafuto hōgen-o chūshin to shite (Studies in Ainu grammar - with an emphasis on the Sakhalin dialect)",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1942-chiri-mashiho-ainu-goho-kenkyu-karafuto-hogen-o-chushin-to-shite",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu gohō kenkyū - karafuto hōgen-o chūshin to shite (Studies in Ainu grammar - with an emphasis on the Sakhalin dialect)"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Mashiho Chiri"
+      ],
+      "year": 1953,
+      "yearText": "1953",
+      "title": "Bunrui Ainugo jiten",
+      "titleEn": "Bunrui Ainugo jiten",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1953-mashiho-chiri-bunrui-ainugo-jiten",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Bunrui Ainugo jiten"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "平賀 サダ"
+      ],
+      "year": 1958,
+      "yearText": "1958",
+      "title": "アイヌ語音声資料",
+      "titleEn": "Ainu Audio Materials",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "ainu-audio-materials",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Audio Materials"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Ivar Lindquist"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "Indo-European features in the Ainu language",
+      "titleEn": "Indo-European features in the Ainu language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-ivar-lindquist-indo-european-features-in-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Indo-European features in the Ainu language"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "Ivar Lindquist"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "Indo-European features in the Ainu language ; with reference to the thesis of Pierre Naert",
+      "titleEn": "Indo-European features in the Ainu language ; with reference to the thesis of Pierre Naert",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-ivar-lindquist-indo-european-features-in-the-ainu-language-with-r",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Indo-European features in the Ainu language ; with reference to the thesis of Pierre Naert"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "Joseph M. Kitagawa"
+      ],
+      "year": 1963,
+      "yearText": "1963",
+      "title": "Ainu Creed and Cult",
+      "titleEn": "Ainu Creed and Cult",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1963-joseph-m-kitagawa-ainu-creed-and-cult",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Creed and Cult"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 1966,
+      "yearText": "1966",
+      "title": "Valency classes in Ainu",
+      "titleEn": "Valency classes in Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1966-bugaeva-anna-valency-classes-in-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Valency classes in Ainu"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "Hokkaido, Japan. Ainu Bunka Hozon Taisaku Kyōgikai"
+      ],
+      "year": 1970,
+      "yearText": "1970",
+      "title": "Ainu minzoku shi",
+      "titleEn": "Ainu minzoku shi",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1970-hokkaido-japan-ainu-bunka-hozon-taisaku-kyogikai-ainu-minzoku-shi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Ainu minzoku shi"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "Itsuhiko Kubodera"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "Ainu no mukashi banashi",
+      "titleEn": "Ainu no mukashi banashi",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-itsuhiko-kubodera-ainu-no-mukashi-banashi",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu no mukashi banashi"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "Asai, Tōru"
+      ],
+      "year": 1974,
+      "yearText": "1974",
+      "title": "Classification of dialects: cluster analysis of Ainu dialects",
+      "titleEn": "Classification of dialects: cluster analysis of Ainu dialects",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1974-asai-toru-classification-of-dialects-cluster-analysis-of-ain",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Classification of dialects: cluster analysis of Ainu dialects"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "Kyōko Murasaki"
+      ],
+      "year": 1976,
+      "yearText": "1976",
+      "title": "Karafuto Ainugo",
+      "titleEn": "Karafuto Ainugo",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1976-kyoko-murasaki-karafuto-ainugo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Karafuto Ainugo"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "Murasaki, Kyōko"
+      ],
+      "year": 1979,
+      "yearText": "1979",
+      "title": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
+      "titleEn": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1979-murasaki-kyoko-karafuto-ainugo-bunpo-hen-sakhalin-ainu-grammar-vo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "Hans A. Dettmer, James Patrie"
+      ],
+      "year": 1983,
+      "yearText": "1983",
+      "title": "The Genetic Relationship of the Ainu Language.",
+      "titleEn": "The Genetic Relationship of the Ainu Language.",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1983-hans-a-dettmer-the-genetic-relationship-of-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Genetic Relationship of the Ainu Language."
+    },
+    {
+      "n": 20,
+      "authors": [
+        "Waseda Daigaku. Gogaku Kyōiku Kenkyūjo"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "Ainugo nyūmon",
+      "titleEn": "Ainugo nyūmon",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-waseda-daigaku-gogaku-kyoiku-kenkyujo-ainugo-nyumon",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainugo nyūmon"
+    },
+    {
+      "n": 21,
+      "authors": [
+        "Kirsten Refsing"
+      ],
+      "year": 1987,
+      "yearText": "1987",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 22,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1988,
+      "yearText": "1988",
+      "title": "Ainugo (The Ainu language)",
+      "titleEn": "Ainugo (The Ainu language)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainugo (The Ainu language)"
+    },
+    {
+      "n": 23,
+      "authors": [
+        "Shichiro Murayama"
+      ],
+      "year": 1992,
+      "yearText": "1992",
+      "title": "Ainugo no kigen",
+      "titleEn": "Ainugo no kigen",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1992-shichiro-murayama-ainugo-no-kigen",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo no kigen"
+    },
+    {
+      "n": 24,
+      "authors": [
+        "Alexander Vovin"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "A reconstruction of proto-Ainu",
+      "titleEn": "A reconstruction of proto-Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-alexander-vovin-a-reconstruction-of-proto-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A reconstruction of proto-Ainu"
+    },
+    {
+      "n": 25,
+      "authors": [
+        "Alexander Vovin"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "Origins of the Ainu Language",
+      "titleEn": "Origins of the Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-alexander-vovin-origins-of-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Origins of the Ainu Language"
+    },
+    {
+      "n": 26,
+      "authors": [],
+      "year": 1994,
+      "yearText": "1994",
+      "title": "Some Aspects of Reflexivity in Ainu",
+      "titleEn": "Some Aspects of Reflexivity in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1994-x-some-aspects-of-reflexivity-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Some Aspects of Reflexivity in Ainu"
+    },
+    {
+      "n": 27,
+      "authors": [
+        "Kayano, Shigeru."
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Kayano Shigeru no Ainugo jiten",
+      "titleEn": "Kayano Shigeru no Ainugo jiten",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-kayano-shigeru-kayano-shigeru-no-ainugo-jiten",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Kayano Shigeru no Ainugo jiten"
+    },
+    {
+      "n": 28,
+      "authors": [
+        "Kirsten Refsing, Mikhail Mikhailovich Dobrotvorskiĭ, John C. Batchelor, Basil Hall Chamberlain, Bronisław Piłsudski, Johannes von Rozwadowski"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Early European Writings on the Ainu Language",
+      "titleEn": "Early European Writings on the Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-kirsten-refsing-early-european-writings-on-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Early European Writings on the Ainu Language"
+    },
+    {
+      "n": 29,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Ainugo jiten",
+      "titleEn": "Ainugo jiten",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-suzuko-tamura-ainugo-jiten",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainugo jiten"
+    },
+    {
+      "n": 30,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)",
+      "titleEn": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-tamura-suzuko-ainugo-saru-hogen-jiten-a-dictionary-of-the-saru-d",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)"
+    },
+    {
+      "n": 31,
+      "authors": [
+        "Honda, Katsuichi"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "Ainu minzoku",
+      "titleEn": "Ainu minzoku",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-honda-katsuichi-ainu-minzoku",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu minzoku"
+    },
+    {
+      "n": 32,
+      "authors": [
+        "Tatsumine Katayama"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "Nihongo to Ainugo",
+      "titleEn": "Nihongo to Ainugo",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-tatsumine-katayama-nihongo-to-ainugo",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Nihongo to Ainugo"
+    },
+    {
+      "n": 33,
+      "authors": [],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Ainu folk-lore",
+      "titleEn": "Ainu folk-lore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-ainu-folk-lore",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu folk-lore"
+    },
+    {
+      "n": 34,
+      "authors": [
+        "Kirsten Refsing"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Origins of the Ainu language : the Ainu Indo-European controversy",
+      "titleEn": "Origins of the Ainu language : the Ainu Indo-European controversy",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-kirsten-refsing-origins-of-the-ainu-language-the-ainu-indo-europea",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Origins of the Ainu language : the Ainu Indo-European controversy"
+    },
+    {
+      "n": 35,
+      "authors": [],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "Ainu: spirit of a northern people",
+      "titleEn": "Ainu: spirit of a northern people",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-x-ainu-spirit-of-a-northern-people",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu: spirit of a northern people"
+    },
+    {
+      "n": 36,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 37,
+      "authors": [
+        "Tomomi SATO"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu",
+      "titleEn": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-tomomi-sato-phonological-status-of-the-epenthetic-glides-in-th",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu"
+    },
+    {
+      "n": 38,
+      "authors": [
+        "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
+    },
+    {
+      "n": 39,
+      "authors": [],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "Japanese and Ainu",
+      "titleEn": "Japanese and Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-japanese-and-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Japanese and Ainu"
+    },
+    {
+      "n": 40,
+      "authors": [
+        "Alpatov, V. M, A. Ju. Bugaeva, V. P. Nedjalkov"
+      ],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "“Reciprocals and Sociatives in Ainu”",
+      "titleEn": "“Reciprocals and Sociatives in Ainu”",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-alpatov-v-m-reciprocals-and-sociatives-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "“Reciprocals and Sociatives in Ainu”"
+    },
+    {
+      "n": 41,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Speech report constructions in Ainu",
+      "titleEn": "Speech report constructions in Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-anna-bugaeva-speech-report-constructions-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Speech report constructions in Ainu"
+    },
+    {
+      "n": 42,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu"
+    },
+    {
+      "n": 43,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Ainugo bunpō no kiso",
+      "titleEn": "Ainugo bunpō no kiso",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainugo bunpō no kiso"
+    },
+    {
+      "n": 44,
+      "authors": [
+        "ブガエワ アンナ"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "\"Ainu causatives\"",
+      "titleEn": "\"Ainu causatives\"",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-x-ainu-causatives",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "\"Ainu causatives\""
+    },
+    {
+      "n": 45,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "Ainu applicatives in typological perspective",
+      "titleEn": "Ainu applicatives in typological perspective",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-anna-bugaeva-ainu-applicatives-in-typological-perspective",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainu applicatives in typological perspective"
+    },
+    {
+      "n": 46,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "\"Anticausative/causative verb alternation in Ainu\"",
+      "titleEn": "\"Anticausative/causative verb alternation in Ainu\"",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-bugaeva-anna-anticausative-causative-verb-alternation-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "\"Anticausative/causative verb alternation in Ainu\""
+    },
+    {
+      "n": 47,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "A diachronic study of the impersonal passive in Ainu",
+      "titleEn": "A diachronic study of the impersonal passive in Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-a-diachronic-study-of-the-impersonal-passive-in-ai",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A diachronic study of the impersonal passive in Ainu"
+    },
+    {
+      "n": 48,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Ditransitive constructions in Ainu",
+      "titleEn": "Ditransitive constructions in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-ditransitive-constructions-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ditransitive constructions in Ainu"
+    },
+    {
+      "n": 49,
+      "authors": [
+        "Sarah M. Strong"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Ainu Spirits Singing",
+      "titleEn": "Ainu Spirits Singing",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-sarah-m-strong-ainu-spirits-singing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu Spirits Singing"
+    },
+    {
+      "n": 50,
+      "authors": [
+        "Sarah M. Strong"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Chiri Yukie’s Ainu Shin’yōshū",
+      "titleEn": "Chiri Yukie’s Ainu Shin’yōshū",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-sarah-m-strong-chiri-yukies-ainu-shinyoshu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Chiri Yukie’s Ainu Shin’yōshū"
+    },
+    {
+      "n": 51,
+      "authors": [
+        "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Ainu Grammar",
+      "titleEn": "Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-basil-hall-chamberlain-ainu-grammar",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Grammar"
+    },
+    {
+      "n": 52,
+      "authors": [
+        "Edward Taylor, Basil Hall Chamberlain"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Folk Tales",
+      "titleEn": "Ainu Folk Tales",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-edward-taylor-ainu-folk-tales",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Ainu Folk Tales"
+    },
+    {
+      "n": 53,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 54,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    }
+  ]
+}

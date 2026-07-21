@@ -11,16 +11,25 @@
  * references are not in that graph, so their edges are extracted from the work's
  * printed reference list instead and resolved here BY SLUG.
  *
- * Input : scripts/data/extracted-cites/<citing-slug>.json (schema 'extracted-cites/v1').
- *         Each file carries a citingWork, the parsed references, and a citesEdges list
- *         of { from, to, type:'cites', confidence, ref } where from/to are source slugs.
+ * Input : JSON files below scripts/data/extracted-cites/ (schema 'extracted-cites/v1').
+ *         Each file carries a citingWork, the parsed references (each with a resolved
+ *         `match` slug + confidence), and a `verified` flag.
+ *           • verified: true  — a hand-checked list (e.g. the Tajima transcription).
+ *             Missing cited works are CREATED as bibliographic records; every edge is
+ *             `accepted` (the citation itself is certain even where the matched record
+ *             identity is not).
+ *           • verified: false — an automated sweep (scripts/sweep-references.ts). Edges
+ *             are drawn ONLY to sources that already exist; nothing is created from the
+ *             noisy OCR. A strong match (`probable`) is `accepted`; a weak one
+ *             (`candidate`) is written as a `candidate` edge for review.
  * Resolve: slug → source id over ACTIVE sources, with a slug_redirects fallback so an
  *          edge written against a retired slug still lands on the current source.
  * Upsert : existence-checked on (from, to, 'cites') — never a delete, never a wipe. A
  *          re-run over an unchanged file inserts zero rows. Direction is deterministic
  *          (citing → cited), so an exact check re-attaches the existing row.
- * Status : 'accepted' (source_relations default), origin 'extracted-cites',
- *          derivation 'reference-extraction'.
+ * Status : 'accepted' or 'candidate' per the rule above, origin 'extracted-cites',
+ *          derivation 'reference-extraction'. Only 'accepted' 'cites' edges feed the
+ *          public network / PageRank significance.
  *
  * Flags: --db file:/path (or DATABASE_URL) [--token T] [--dry-run].
  *
@@ -49,13 +58,6 @@ const ORIGIN = 'extracted-cites';
 const DERIVATION = 'reference-extraction';
 const uuid = () => crypto.randomUUID();
 
-interface CitesEdge {
-	from: string;
-	to: string;
-	type?: string;
-	confidence?: string;
-	ref?: number;
-}
 interface ReferenceMatch {
 	slug?: string | null;
 	confidence?: string;
@@ -83,6 +85,7 @@ interface ExtractedReference {
 }
 interface ExtractedFile {
 	schema?: string;
+	verified?: boolean;
 	citingWork?: {
 		slug?: string;
 		title?: string;
@@ -94,22 +97,35 @@ interface ExtractedFile {
 	};
 	extraction?: { referencePages?: string };
 	references?: ExtractedReference[];
-	citesEdges?: CitesEdge[];
 }
 
-/** Read every extracted-cites/*.json file, tagged with its filename for diagnostics. */
+/** Read every JSON dataset below extracted-cites/, tagged with its relative path. */
 function readFiles(): { file: string; data: ExtractedFile }[] {
 	if (!fs.existsSync(DATA_DIR)) return [];
-	return fs
-		.readdirSync(DATA_DIR)
-		.filter((f) => f.endsWith('.json'))
+	const files: string[] = [];
+	const visit = (dir: string) => {
+		for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+			const full = path.join(dir, entry.name);
+			if (entry.isDirectory()) visit(full);
+			else if (entry.name.endsWith('.json')) files.push(full);
+		}
+	};
+	visit(DATA_DIR);
+	return files
 		.sort()
-		.map((f) => ({ file: f, data: JSON.parse(fs.readFileSync(path.join(DATA_DIR, f), 'utf8')) as ExtractedFile }));
+		.map((full) => ({
+			file: path.relative(DATA_DIR, full),
+			data: JSON.parse(fs.readFileSync(full, 'utf8')) as ExtractedFile
+		}));
 }
 
-async function relationExists(db: Db, fromId: string, toId: string): Promise<boolean> {
+async function findRelation(
+	db: Db,
+	fromId: string,
+	toId: string
+): Promise<{ id: string; status: string | null } | undefined> {
 	const [hit] = await db
-		.select({ id: sourceRelations.id })
+		.select({ id: sourceRelations.id, status: sourceRelations.status })
 		.from(sourceRelations)
 		.where(
 			and(
@@ -119,7 +135,7 @@ async function relationExists(db: Db, fromId: string, toId: string): Promise<boo
 			)
 		)
 		.limit(1);
-	return !!hit;
+	return hit;
 }
 
 function slugPart(value: string): string {
@@ -139,9 +155,11 @@ function referenceSlug(ref: ExtractedReference): string {
 	return `${year}-${surname}-${title}`.slice(0, 60).replace(/-+$/u, '');
 }
 
-function resolvedReferenceSlug(ref: ExtractedReference): string {
+function resolvedReferenceSlug(ref: ExtractedReference, verified: boolean): string {
 	const confidence = ref.match?.confidence;
-	if (ref.match?.slug && (confidence === 'exact' || confidence === 'probable')) return ref.match.slug;
+	if (ref.match?.slug && (confidence === 'exact' || confidence === 'probable' || !verified)) {
+		return ref.match.slug;
+	}
 	return referenceSlug(ref);
 }
 
@@ -192,6 +210,7 @@ async function ensureCitingWork(
 	db: Db,
 	file: string,
 	data: ExtractedFile,
+	verified: boolean,
 	runId: string | null,
 	stats: StatusTally,
 	dryRun: boolean
@@ -199,7 +218,7 @@ async function ensureCitingWork(
 	const work = data.citingWork;
 	if (!work?.slug) return undefined;
 	const existing = await findSourceId(db, work.slug);
-	if (existing || dryRun) return existing;
+	if (existing || dryRun || !verified) return existing;
 	const result = await emitSource(
 		db,
 		{
@@ -236,13 +255,14 @@ async function ensureReference(
 	file: string,
 	citingSlug: string,
 	ref: ExtractedReference,
+	verified: boolean,
 	runId: string | null,
 	stats: StatusTally,
 	dryRun: boolean
 ): Promise<string | undefined> {
-	const slug = resolvedReferenceSlug(ref);
+	const slug = resolvedReferenceSlug(ref, verified);
 	const existing = await findSourceId(db, slug);
-	if (existing || dryRun) return existing;
+	if (existing || dryRun || !verified) return existing;
 	const confidence =
 		ref.match?.confidence === 'exact'
 			? 0.95
@@ -291,12 +311,13 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 
 	for (const { file, data } of files) {
 		if (data.schema !== 'extracted-cites/v1') throw new Error(`${file}: unsupported schema ${data.schema}`);
+		const verified = data.verified === true;
 		const citingSlug = data.citingWork?.slug;
 		if (!citingSlug) throw new Error(`${file}: citingWork.slug is required`);
-		const fromId = await ensureCitingWork(db, file, data, runId, sourceStats, DRY_RUN);
+		const fromId = await ensureCitingWork(db, file, data, verified, runId, sourceStats, DRY_RUN);
 		for (const ref of data.references ?? []) {
-			const targetSlug = resolvedReferenceSlug(ref);
-			const toId = await ensureReference(db, file, citingSlug, ref, runId, sourceStats, DRY_RUN);
+			const targetSlug = resolvedReferenceSlug(ref, verified);
+			const toId = await ensureReference(db, file, citingSlug, ref, verified, runId, sourceStats, DRY_RUN);
 			if (!fromId || !toId) {
 				stats.unresolved += 1;
 				if (!fromId) unresolvedSlugs.add(citingSlug);
@@ -304,7 +325,24 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 				continue;
 			}
 			if (fromId === toId) continue;
-			if (await relationExists(db, fromId, toId)) {
+			const desiredStatus =
+				verified || ref.match?.confidence === 'exact' || ref.match?.confidence === 'probable'
+					? PUBLIC_RELATION_STATUS
+					: 'candidate';
+			const desiredConfidence =
+				verified || ref.match?.confidence === 'exact'
+					? 1
+					: ref.match?.confidence === 'probable'
+						? 0.85
+						: 0.6;
+			const existingRelation = await findRelation(db, fromId, toId);
+			if (existingRelation) {
+				if (!DRY_RUN && desiredStatus === PUBLIC_RELATION_STATUS && existingRelation.status !== desiredStatus) {
+					await db
+						.update(sourceRelations)
+						.set({ status: desiredStatus, confidence: desiredConfidence })
+						.where(eq(sourceRelations.id, existingRelation.id));
+				}
 				stats.attached += 1;
 				continue;
 			}
@@ -315,16 +353,16 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 			await db.insert(sourceRelations).values({
 				id: uuid(),
 				fromSourceId: fromId,
-				toSourceId: toId,
-				type: 'cites',
-				notes: `Reference ${ref.n}; bibliography ${data.extraction?.referencePages ?? ''}`.trim(),
-				status: PUBLIC_RELATION_STATUS,
-				origin: ORIGIN,
-				derivation: DERIVATION,
-				observationId: null,
-				evidence: null,
-				confidence: null
-			});
+					toSourceId: toId,
+					type: 'cites',
+					notes: `Reference ${ref.n}; bibliography ${data.extraction?.referencePages ?? ''}`.trim(),
+					status: desiredStatus,
+					origin: ORIGIN,
+					derivation: DERIVATION,
+					observationId: null,
+					evidence: null,
+					confidence: desiredConfidence
+				});
 			stats.added += 1;
 		}
 	}

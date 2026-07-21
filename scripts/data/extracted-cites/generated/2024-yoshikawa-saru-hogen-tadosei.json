@@ -1,0 +1,205 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2024-yoshikawa-saru-hogen-tadosei",
+    "title": "吉川佳見 アイヌ語沙流方言における他動性",
+    "year": 2024,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 11,
+    "sourcePath": "articles/2024_吉川佳見_アイヌ語沙流方言における他動性.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [],
+      "year": 1977,
+      "yearText": "1977–2000",
+      "title": "アイヌ語口承文芸コーパス",
+      "titleEn": "NINJAL Ainu Folklore Corpus",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "ninjal-folklore-corpus",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語口承文芸コーパス"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "北海道ウタリ協会企画"
+      ],
+      "year": 1994,
+      "yearText": "1994",
+      "title": "アコㇿ イタㇰ = AKOR ITAK : アイヌ語テキスト",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1994-x-akor-itak",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アコㇿ イタㇰ = AKOR ITAK : アイヌ語テキスト"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "大谷洋一"
+      ],
+      "year": 2001,
+      "yearText": "2001",
+      "title": "松島トミさんの口承文芸(3)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2001-x-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "松島トミさんの口承文芸(3)"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "本田 優子"
+      ],
+      "year": 2001,
+      "yearText": "2001",
+      "title": "川上まつ子アイヌ語文例集",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2001-x-dvp0ka",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "川上まつ子アイヌ語文例集"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "千葉大学"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-2-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "中川裕, アンナ・ブガエワ, 小林美紀"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "アイヌ語口承文芸コーパス―音声・グロス付き―",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-x-1551bwg",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語口承文芸コーパス―音声・グロス付き―"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "大谷洋一"
+      ],
+      "year": 2019,
+      "yearText": "2019",
+      "title": "アイヌ口承文芸「散文説話」タンネサㇻの男",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2019-x-4b3zof",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ口承文芸「散文説話」タンネサㇻの男"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "アイヌ民族博物館"
+      ],
+      "yearText": "",
+      "title": "アイヌ民族博物館研究報告",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "nd-x-w4ycd9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ民族博物館研究報告"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2023-sato-ainu-go",
+    "title": "佐藤知己 アイヌ語",
+    "year": 2023,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 2,
+    "sourcePath": "articles/2023_佐藤知己_アイヌ語.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2023,
+      "yearText": "2023",
+      "title": "アイヌ語の動詞の結合価と3項動詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2023-x-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の動詞の結合価と3項動詞"
+    }
+  ]
+}

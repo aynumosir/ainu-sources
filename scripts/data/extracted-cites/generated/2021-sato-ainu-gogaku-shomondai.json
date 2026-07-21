@@ -1,0 +1,170 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2021-sato-ainu-gogaku-shomondai",
+    "title": "佐藤知己 アイヌ語学の諸問題：近年の議論と関連して",
+    "year": 2021,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 9,
+    "sourcePath": "articles/2021_佐藤知己_アイヌ語学の諸問題：近年の議論と関連して.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 1991,
+      "yearText": "1991",
+      "title": "アイヌ語千歳方言における自称詞と対称詞について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1991-x-1r7gism",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における自称詞と対称詞について"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "奥田, 統己"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "アイヌ語静内方言文脈つき語彙集",
+      "type": "wordlist",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-1h7k5eb",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語静内方言文脈つき語彙集"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語研究の諸問題",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-bugaeva-anna-b8h16x",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語研究の諸問題"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "奥田 統己"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語の人称表示における「目的格」の優勢",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-y90taa",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の人称表示における「目的格」の優勢"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "岸本, 宜久"
+      ],
+      "year": 2019,
+      "yearText": "2019",
+      "title": "アイヌ語の複雑述語の研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2019-x-kl5jf2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の複雑述語の研究"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "阪口諒"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語樺太方言におけるutaraの用法",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-utara",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語樺太方言におけるutaraの用法"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語千歳方言の位置名詞orの用法",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-or",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言の位置名詞orの用法"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "yearText": "",
+      "title": "古記録の言語学的分析に基づくアイヌ語史の検証",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "nd-x-3xp818",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "古記録の言語学的分析に基づくアイヌ語史の検証"
+    }
+  ]
+}

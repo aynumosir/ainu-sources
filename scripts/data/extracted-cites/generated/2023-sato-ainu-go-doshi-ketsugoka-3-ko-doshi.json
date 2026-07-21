@@ -1,0 +1,211 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2023-sato-ainu-go-doshi-ketsugoka-3-ko-doshi",
+    "title": "佐藤知己 アイヌ語の動詞の結合価と3項動詞",
+    "year": 2023,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 11,
+    "sourcePath": "articles/2023_佐藤知己_アイヌ語の動詞の結合価と3項動詞.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "福田 すず子"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語の動詞の構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-x-1c6njuk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語の動詞の構造"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 1979,
+      "yearText": "1979",
+      "title": "カラフトアイヌ語―文法篇―",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1979-x-1ldjihx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カラフトアイヌ語―文法篇―"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "中川 裕"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "アイヌ語のArity Calculation",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-arity-calculation",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語のArity Calculation"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "金成, まつ, 金田一, 京助"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "アイヌ叙事詩ユーカラ集",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-jqe5tq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ集"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Ditransitive constructions in Ainu",
+      "titleEn": "Ditransitive constructions in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-ditransitive-constructions-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ditransitive constructions in Ainu"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Handbook of the Ainu Language",
+      "titleEn": "Handbook of the Ainu Language",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-bugaeva",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Handbook of the Ainu Language"
+    }
+  ]
+}

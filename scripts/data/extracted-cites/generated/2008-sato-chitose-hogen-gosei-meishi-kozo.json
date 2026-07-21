@@ -1,0 +1,70 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2008-sato-chitose-hogen-gosei-meishi-kozo",
+    "title": "佐藤知己 アイヌ語千歳方言における合成名詞の構造",
+    "year": 2008,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献",
+    "referenceCount": 3,
+    "sourcePath": "articles/2008_佐藤知己_アイヌ語千歳方言における合成名詞の構造.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "切替英雄"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "アイヌ語の名詞句の構造と合成名詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-x-1e3o6yu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の名詞句の構造と合成名詞"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2005,
+      "yearText": "2005",
+      "title": "アイヌ語地名研究と言語学",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2005-x-e8m11m",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語地名研究と言語学"
+    }
+  ]
+}

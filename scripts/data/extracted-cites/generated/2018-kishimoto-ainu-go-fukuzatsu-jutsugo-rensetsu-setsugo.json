@@ -1,0 +1,155 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2018-kishimoto-ainu-go-fukuzatsu-jutsugo-rensetsu-setsugo",
+    "title": "岸本宜久 アイヌ語の複雑述語における連接と接合",
+    "year": 2018,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献",
+    "referenceCount": 8,
+    "sourcePath": "articles/2018_岸本宜久_アイヌ語の複雑述語における連接と接合.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-x-1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "田村 すゞ子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言における《…して…》",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-13w5bm1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言における《…して…》"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "田村 すず子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言における《…して…》の表現",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-9zmxzm",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言における《…して…》の表現"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語の受動文に関する一考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1tx7p2h",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の受動文に関する一考察"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "萱野, 茂, 平凡社"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "萱野茂のアイヌ神話集成",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-1v9r8sq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ神話集成"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "ブガエワ・アンナ"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "北海道南部のアイヌ語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-k7w34r",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "北海道南部のアイヌ語"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "岸本宜久"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "アイヌ語沙流方言における動詞の助動詞用法と制約",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-x-1ty12dd",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言における動詞の助動詞用法と制約"
+    }
+  ]
+}

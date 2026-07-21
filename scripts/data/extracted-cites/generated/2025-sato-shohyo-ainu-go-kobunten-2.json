@@ -1,0 +1,176 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2025-sato-shohyo-ainu-go-kobunten-2",
+    "title": "佐藤知己 書評：中川裕著『アイヌ語広文典』",
+    "year": 2025,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 9,
+    "sourcePath": "articles/2025_佐藤知己_書評：中川裕著『アイヌ語広文典』.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語研究の諸問題",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-bugaeva-anna-b8h16x",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語研究の諸問題"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語の合成語のアクセント規則とその例外について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-tck9su",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の合成語のアクセント規則とその例外について"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Anna Bugaeva, Tomomi Satō"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "A Kuril Ainu Glossary by Captain V. M. Golovnin (1811)",
+      "titleEn": "A Kuril Ainu Glossary by Captain V. M. Golovnin (1811)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-anna-bugaeva-a-kuril-ainu-glossary-by-captain-v-m-golovnin-1811",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A Kuril Ainu Glossary by Captain V. M. Golovnin (1811)"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語千歳方言におけるわたり音化とわたり音挿入について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-1bortd0",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言におけるわたり音化とわたり音挿入について"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Handbook of the Ainu Language",
+      "titleEn": "Handbook of the Ainu Language",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-bugaeva",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Handbook of the Ainu Language"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2023,
+      "yearText": "2023",
+      "title": "アイヌ語の抱合と結合価",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2023-x-1qdm7ox",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の抱合と結合価"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Sato Tomomi"
+      ],
+      "year": 2025,
+      "yearText": "2025",
+      "title": "Basic Sentence Structures in Ainu",
+      "titleEn": "Basic Sentence Structures in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2025-sato-tomomi-basic-sentence-structures-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Basic Sentence Structures in Ainu"
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2024-ryo-ainu-japanese-bi-directional-neural-machine",
+    "title": "Miyagawa So & Igarashi Ryo Ainu–Japanese Bi-directional Neural Machine Translation",
+    "year": 2024,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "References",
+    "referenceCount": 11,
+    "sourcePath": "articles/2024_Miyagawa So & Igarashi Ryo_Ainu–Japanese Bi-directional Neural Machine Translation.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Ainu folk-lore",
+      "titleEn": "Ainu folk-lore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-ainu-folk-lore",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu folk-lore"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "PTASZYNSKI Michal, NOWAKOWSKI Karol, MOMOUCHI Yoshio, MASUI Fumito"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language",
+      "titleEn": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-ptaszynski-michal-comparing-multiple-dictionaries-to-improve-part-of",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Senuma Hajime & Aizawa Akiko"
+      ],
+      "year": 2017,
+      "yearText": "2017",
+      "title": "Toward Universal Dependencies for Ainu",
+      "titleEn": "Toward Universal Dependencies for Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2017-senuma-hajime-aizawa-akiko-toward-universal-dependencies-for-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Toward Universal Dependencies for Ainu"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Ainu Grammar",
+      "titleEn": "Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-basil-hall-chamberlain-ainu-grammar",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Grammar"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Senuma Hajime & Aizawa Akiko"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Universal Dependencies for Ainu",
+      "titleEn": "Universal Dependencies for Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-senuma-hajime-aizawa-akiko-universal-dependencies-for-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Universal Dependencies for Ainu"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Karol Nowakowski, Michał Ptaszyński, Fumito Masui"
+      ],
+      "year": 2019,
+      "yearText": "2019",
+      "title": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language",
+      "titleEn": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2019-karol-nowakowski-mingmatch-a-fast-n-gram-model-for-word-segmentatio",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Karol Nowakowski, Michał Ptaszyński, Fumito Masui"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Towards Better Text Processing Tools for the Ainu Language",
+      "titleEn": "Towards Better Text Processing Tools for the Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-karol-nowakowski-towards-better-text-processing-tools-for-the-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Towards Better Text Processing Tools for the Ainu Language"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Matsuura Kohei et al"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language",
+      "titleEn": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-matsuura-kohei-et-al-speech-corpus-of-ainu-folklore-and-end-to-end-speech-recognition-for-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "Nowakowski Karol"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Development of a Digital Corpus and Core Language Technologies for the Ainu Language",
+      "titleEn": "Development of a Digital Corpus and Core Language Technologies for the Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-nowakowski-karol-development-of-a-digital-corpus-and-core-language-technologies-for-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Development of a Digital Corpus and Core Language Technologies for the Ainu Language"
+    }
+  ]
+}

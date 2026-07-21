@@ -1,0 +1,373 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
+    "title": "ブガエワアンナ・長崎郁編『アイヌ語研究の諸問題』",
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "References",
+    "referencePages": "scan pp. 14-118",
+    "referenceCount": 20,
+    "sourcePath": "books/2015_BugaevaNagasaki_AinugoKenkyu/ブガエワアンナ・長崎郁編『アイヌ語研究の諸問題』.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "平賀 サダ"
+      ],
+      "year": 1958,
+      "yearText": "1958",
+      "title": "アイヌ語音声資料",
+      "titleEn": "Ainu Audio Materials",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "ainu-audio-materials",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Audio Materials"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 1966,
+      "yearText": "1966",
+      "title": "Valency classes in Ainu",
+      "titleEn": "Valency classes in Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1966-bugaeva-anna-valency-classes-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Valency classes in Ainu"
+    },
+    {
+      "n": 3,
+      "authors": [],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "Ainugo onsei shiryō",
+      "titleEn": "Ainugo onsei shiryō",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-x-ainugo-onsei-shiryo",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainugo onsei shiryō"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Hideo Kirikae"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "The Structure of Noun Phrases and Compound Nouns in Ainu",
+      "titleEn": "The Structure of Noun Phrases and Compound Nouns in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-hideo-kirikae-the-structure-of-noun-phrases-and-compound-nouns-i",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Structure of Noun Phrases and Compound Nouns in Ainu"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Waseda Daigaku. Gogaku Kyōiku Kenkyūjo"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "Ainugo nyūmon",
+      "titleEn": "Ainugo nyūmon",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-waseda-daigaku-gogaku-kyoiku-kenkyujo-ainugo-nyumon",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainugo nyūmon"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1988,
+      "yearText": "1988",
+      "title": "Ainugo (The Ainu language)",
+      "titleEn": "Ainugo (The Ainu language)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo (The Ainu language)"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)",
+      "titleEn": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-tamura-suzuko-ainugo-saru-hogen-jiten-a-dictionary-of-the-saru-d",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Tatsumine Katayama"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "Nihongo to Ainugo",
+      "titleEn": "Nihongo to Ainugo",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-tatsumine-katayama-nihongo-to-ainugo",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Nihongo to Ainugo"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 10,
+      "authors": [],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "Japanese and Ainu",
+      "titleEn": "Japanese and Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-japanese-and-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Japanese and Ainu"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Ainugo bunpō no kiso",
+      "titleEn": "Ainugo bunpō no kiso",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo bunpō no kiso"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "Ainu applicatives in typological perspective",
+      "titleEn": "Ainu applicatives in typological perspective",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-anna-bugaeva-ainu-applicatives-in-typological-perspective",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu applicatives in typological perspective"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Ditransitive constructions in Ainu",
+      "titleEn": "Ditransitive constructions in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-ditransitive-constructions-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ditransitive constructions in Ainu"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "Southern Hokkaido Ainu",
+      "titleEn": "Southern Hokkaido Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-bugaeva-anna-southern-hokkaido-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Southern Hokkaido Ainu"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語研究の諸問題",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-bugaeva-anna-b8h16x",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語研究の諸問題"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "ブガエワ アンナ"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "Relative clauses and noun complements in Ainu.",
+      "titleEn": "Relative clauses and noun complements in Ainu.",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-relative-clauses-and-noun-complements-in-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Relative clauses and noun complements in Ainu."
+    },
+    {
+      "n": 18,
+      "authors": [
+        "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Ainu Grammar",
+      "titleEn": "Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-basil-hall-chamberlain-ainu-grammar",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Grammar"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 20,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    }
+  ]
+}

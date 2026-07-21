@@ -1,0 +1,177 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2009-murasaki-karafuto-ainu-go-sushi",
+    "title": "村崎恭子 樺太アイヌ語の数詞について",
+    "year": 2009,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 9,
+    "sourcePath": "articles/2009_村崎恭子_樺太アイヌ語の数詞について.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "John C. Batchelor"
+      ],
+      "year": 1905,
+      "yearText": "1905",
+      "title": "An Ainu-English-Japanese Dictionary",
+      "titleEn": "An Ainu-English-Japanese Dictionary",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "An Ainu-English-Japanese Dictionary"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Berthold Laufer"
+      ],
+      "year": 1917,
+      "yearText": "1917",
+      "title": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology",
+      "titleEn": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1917-berthold-laufer-the-vigesimal-and-decimal-systems-in-the-ainu-nume",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1935,
+      "yearText": "1935",
+      "title": "数詞から観たアイヌ民族",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1935-x-kzhgkk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "数詞から観たアイヌ民族"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1957,
+      "yearText": "1957",
+      "title": "アイヌ語における年長者層特殊語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1957-x-1ouspxs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における年長者層特殊語"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "村崎 恭子"
+      ],
+      "year": 1963,
+      "yearText": "1963",
+      "title": "千島アイヌ語絶滅の報告",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1963-x-1x5awvp",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "千島アイヌ語絶滅の報告"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "The Study of the Ainu Language",
+      "titleEn": "The Study of the Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Study of the Ainu Language"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    }
+  ]
+}

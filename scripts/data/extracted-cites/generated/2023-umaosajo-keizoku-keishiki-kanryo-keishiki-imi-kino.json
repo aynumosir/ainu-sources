@@ -1,0 +1,190 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2023-umaosajo-keizoku-keishiki-kanryo-keishiki-imi-kino",
+    "title": "馬長城 アイヌ語の継続形式＋完了形式の意味機能",
+    "year": 2023,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 10,
+    "sourcePath": "articles/2023_馬長城_アイヌ語の継続形式＋完了形式の意味機能.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1931,
+      "yearText": "1931",
+      "title": "アイヌユーカラ語法摘要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1931-x-11givjx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "アイヌ語千歳方言のアスペクト",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-mqzorq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言のアスペクト"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "アイヌ語千歳方言のアスペクト：kor an、wa an を中心として",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-kor-an-wa-an",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言のアスペクト：kor an、wa an を中心として"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "再びアイヌ語千歳方言のアスペクトについて",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-x-mqzorn",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "再びアイヌ語千歳方言のアスペクトについて"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "吉川佳見"
+      ],
+      "year": 2019,
+      "yearText": "2019",
+      "title": "アイヌ語の存在型アスペクト「kor an」「wa an」の意味範疇について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2019-x-kor-an-wa-an",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の存在型アスペクト「kor an」「wa an」の意味範疇について"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "吉川佳見"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語における完了表現があらわす証拠性",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-184yz2e",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における完了表現があらわす証拠性"
+    }
+  ]
+}

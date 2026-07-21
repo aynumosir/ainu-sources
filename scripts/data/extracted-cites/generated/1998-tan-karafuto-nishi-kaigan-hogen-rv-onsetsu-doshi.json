@@ -1,0 +1,139 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "1998-tan-karafuto-nishi-kaigan-hogen-rv-onsetsu-doshi",
+    "title": "丹菊逸治 アイヌ語樺太西海岸方言の-rV音節で終る動詞について",
+    "year": 1998,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "引用文献",
+    "referencePages": "scan pp. 13-13",
+    "referenceCount": 7,
+    "sourcePath": "articles/1998_丹菊逸治_アイヌ語樺太西海岸方言の-rV音節で終る動詞について.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1942,
+      "yearText": "1942",
+      "title": "アイヌ語法研究 : 樺太方言を中心として",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1942-x-3bat8z",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "古川 恭子"
+      ],
+      "year": 1967,
+      "yearText": "1967",
+      "title": "アイヌ語カラフトライチシカ方言シンタクス",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1967-x-17rttcz",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語カラフトライチシカ方言シンタクス"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 1979,
+      "yearText": "1979",
+      "title": "カラフトアイヌ語―文法篇―",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1979-x-1ldjihx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カラフトアイヌ語―文法篇―"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "村崎, 恭子"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "樺太アイヌ語口承資料",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-x-13fpcer",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ語口承資料"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "樺太アイヌ語口承資料１",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-x-1-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ語口承資料１"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "村崎恭子(編)"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "樺太アイヌ語口承資料（２）",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ語口承資料（２）"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    }
+  ]
+}

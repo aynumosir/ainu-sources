@@ -1,0 +1,55 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2014-bugaeva-anna-polysynthesis-in-ainu",
+    "title": "Polysynthesis in Ainu",
+    "author": "Bugaeva Anna",
+    "year": 2014,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "References",
+    "referenceCount": 2,
+    "sourcePath": "articles/2014_Bugaeva Anna_Polysynthesis in Ainu.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Kindaichi"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ語法概説",
+      "titleEn": "An Outline of Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-kindaichi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "An Outline of Ainu Grammar"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Ainu Grammar",
+      "titleEn": "Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-basil-hall-chamberlain-ainu-grammar",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Grammar"
+    }
+  ]
+}

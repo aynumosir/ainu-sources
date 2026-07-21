@@ -1,0 +1,122 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2013-yoshida-ainu-go-hihogo-meishi",
+    "title": "吉田恵理佳 アイヌ語の被抱合名詞に関する一考察",
+    "year": 2013,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 6,
+    "sourcePath": "articles/2013_吉田恵理佳_アイヌ語の被抱合名詞に関する一考察.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "白沢 ナベ"
+      ],
+      "year": 1988,
+      "yearText": "1988–1991",
+      "title": "アイヌ口承文芸テキスト集",
+      "titleEn": "Ainu Oral Literature Text Collection",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "ainu-oral-literature-texts",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ口承文芸テキスト集"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "中川裕"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "アイヌ口承文芸テキスト集3：白沢ナベ口述 トパットゥミから逃れたウライウシナイの少年",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2002-x-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ口承文芸テキスト集3：白沢ナベ口述 トパットゥミから逃れたウライウシナイの少年"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "藤山, ハル, 村崎, 恭子"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "ウェネネカイペ物語3編 : 樺太アイヌの民話 (ウチャシクマ)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-x-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "ウェネネカイペ物語3編 : 樺太アイヌの民話 (ウチャシクマ)"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "アイヌ語千歳方言における名詞抱合 : その種類と関連諸規則",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-x-1tzelgh",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における名詞抱合 : その種類と関連諸規則"
+    }
+  ]
+}

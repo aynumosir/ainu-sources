@@ -1,0 +1,54 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2014-ninjal-international-symposium-polysynthesis-world",
+    "title": "NINJAL International Symposium on Polysynthesis in the World's Languages",
+    "year": 2014,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "References",
+    "referenceCount": 2,
+    "sourcePath": "articles/2014_NINJAL_International Symposium on Polysynthesis in the World's Languages.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "NINJAL"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "International Symposium on Polysynthesis in the World's Languages",
+      "titleEn": "International Symposium on Polysynthesis in the World's Languages",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-ninjal-international-symposium-on-polysynthesis-in-the-worlds-languages",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "International Symposium on Polysynthesis in the World's Languages"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    }
+  ]
+}

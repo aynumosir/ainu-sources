@@ -1,0 +1,137 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2008-sato-ainu-go-kobunken-gengogakuteki-shomondai",
+    "title": "佐藤知己 アイヌ語古文献における言語学的諸問題",
+    "year": 2008,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 7,
+    "sourcePath": "articles/2008_佐藤知己_アイヌ語古文献における言語学的諸問題.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "天理大学付属天理図書館所蔵「松前ノ言」について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-1aq2pok",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "天理大学付属天理図書館所蔵「松前ノ言」について"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "天理大学付属天理図書館所蔵「松前ノ言」について(2)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-2-4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "天理大学付属天理図書館所蔵「松前ノ言」について(2)"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "彰考館旧蔵アイヌ語テキスト「蝦夷チヤランケ並浄瑠理言」について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-x-llwbdq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "彰考館旧蔵アイヌ語テキスト「蝦夷チヤランケ並浄瑠理言」について"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "酒田市立光丘文庫所蔵「蝦夷記」のアイヌ語について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-x-xj7q7i",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "酒田市立光丘文庫所蔵「蝦夷記」のアイヌ語について"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "佐藤, 知己"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "古文献によるアイヌ語諸方言の比較研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-b3hbt8",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "古文献によるアイヌ語諸方言の比較研究"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2005,
+      "yearText": "2005",
+      "title": "「申渡」のアイヌ語訳文に関する一考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2005-x-1fgbye6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "「申渡」のアイヌ語訳文に関する一考察"
+    }
+  ]
+}

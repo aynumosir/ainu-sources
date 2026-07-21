@@ -1,0 +1,244 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2015-takahashi-tokachi-hogen-1-ninsho-hokatsu-ninsho",
+    "title": "高橋靖以 アイヌ語十勝方言における1人称と包括人称について",
+    "year": 2015,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献",
+    "referenceCount": 13,
+    "sourcePath": "articles/2015_高橋靖以_アイヌ語十勝方言における1人称と包括人称について.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Kindaichi, Kyosuke"
+      ],
+      "year": 1933,
+      "yearText": "1933",
+      "title": "Gengo kenkyu",
+      "titleEn": "Gengo kenkyu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Gengo kenkyu"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "福田 すず子"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語の動詞の構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-x-1c6njuk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の動詞の構造"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "田村 すず子"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "アイヌ語石狩方言の人称代名詞と人称接辞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1971-x-9zl8g1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語石狩方言の人称代名詞と人称接辞"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "アイヌ語沙流方言の人称代名詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1971-x-zprizq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称代名詞"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言の人称の種類",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-1vec8pf",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称の種類"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Kirsten Refsing"
+      ],
+      "year": 1987,
+      "yearText": "1987",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "アイヌ文学における一人称体の問題",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-1jmvlmx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ文学における一人称体の問題"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "アイヌの神謡における叙述者の人称",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-x-5znhtd",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌの神謡における叙述者の人称"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "切替, 英雄"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "アイヌ口承文芸における一人称",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-x-a4sbrn",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ口承文芸における一人称"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "高橋靖以"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語十勝方言における1人称と包括人称について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語十勝方言における1人称と包括人称について"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    }
+  ]
+}
