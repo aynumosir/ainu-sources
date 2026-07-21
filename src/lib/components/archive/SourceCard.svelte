@@ -3,20 +3,10 @@
 	import { formatBytes } from '$lib/archive/format';
 	import { archiveLanguageNames } from '$lib/archive/languages';
 	import { formatYear } from '$lib/format';
-	import type { Source } from '$lib/server/db/schema';
+	import type { ArchiveLibraryItem } from '$lib/archive/library-item';
 	import OcrBadge from './OcrBadge.svelte';
-	import type { OcrCoverage } from '$lib/archive/ocr';
 
-	type ArchiveFile = {
-		fileId: string;
-		revisionId: string | null;
-		sourceSlug: string;
-		role: string | null;
-		bytes: number | null;
-		mediaType: string | null;
-	};
-
-	let { item }: { item: { source: Source; file: ArchiveFile; coverage: OcrCoverage[] } } = $props();
+	let { item }: { item: ArchiveLibraryItem } = $props();
 	const source = $derived(item.source);
 	const file = $derived(item.file);
 	const languages = $derived(archiveLanguageNames(source.languages));

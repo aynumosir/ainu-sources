@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gt, gte, inArray, isNull, lt, max, or, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, exists, gt, gte, inArray, isNull, lt, max, notExists, or, sql } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import { env } from '$env/dynamic/private';
 import {
@@ -11,6 +11,7 @@ import {
 	capabilityTokens,
 	fileRevisions,
 	githubLoginCache,
+	revisionOcrCoverage,
 	sourceFiles,
 	sourceLifecycleEvents,
 	sources,
@@ -1501,6 +1502,7 @@ export async function listArchiveFiles(
 		text?: string;
 		dialect?: string;
 		decade?: number;
+		ocr?: 'with' | 'without';
 		sort: ArchiveFileSort;
 		cursor?: string | null;
 		limit?: number;
@@ -1533,11 +1535,22 @@ export async function listArchiveFiles(
 	if (input.decade) {
 		clauses.push(gte(sources.yearStart, input.decade), lt(sources.yearStart, input.decade + 10));
 	}
+	if (input.ocr) {
+		// A revision has text when any of its coverage rows is not 'none'.
+		const hasText = sql`(select 1 from ${revisionOcrCoverage} where ${revisionOcrCoverage.revisionId} = ${fileRevisions.id} and ${revisionOcrCoverage.status} <> 'none')`;
+		clauses.push(input.ocr === 'with' ? exists(hasText) : notExists(hasText));
+	}
 	if (cursor) {
 		if (cursor.sort === 'updated') {
 			const d = new Date(cursor.updatedAt);
 			if (Number.isNaN(d.getTime())) throw new ArchiveHttpError(400, 'invalid cursor');
-			clauses.push(or(gt(fileRevisions.reviewedAt, d), and(eq(fileRevisions.reviewedAt, d), gt(sourceFiles.id, cursor.id)))!);
+			clauses.push(
+				or(
+					lt(fileRevisions.reviewedAt, d),
+					and(eq(fileRevisions.reviewedAt, d), gt(sourceFiles.id, cursor.id)),
+					isNull(fileRevisions.reviewedAt)
+				)!
+			);
 		} else if (cursor.sort === 'title') {
 			clauses.push(or(gt(sources.title, cursor.title), and(eq(sources.title, cursor.title), gt(sourceFiles.id, cursor.id)))!);
 		} else if (cursor.sort === 'year-desc') {
@@ -1570,7 +1583,7 @@ export async function listArchiveFiles(
 				? [sql`${sources.yearStart} is null`, desc(sources.yearStart), asc(sourceFiles.id)]
 				: input.sort === 'year-asc'
 					? [sql`${sources.yearStart} is null`, asc(sources.yearStart), asc(sourceFiles.id)]
-					: [asc(fileRevisions.reviewedAt), asc(sourceFiles.id)];
+					: [sql`${fileRevisions.reviewedAt} is null`, desc(fileRevisions.reviewedAt), asc(sourceFiles.id)];
 
 	const rows = await db
 		.select({
@@ -1594,6 +1607,7 @@ export async function listArchiveFiles(
 			yearEnd: sources.yearEnd,
 			yearCertainty: sources.yearCertainty,
 			dialect: sources.dialect,
+			languages: sources.languages,
 			summary: sources.summary
 		})
 		.from(sourceFiles)
@@ -1642,6 +1656,7 @@ export async function listArchiveFiles(
 				yearEnd: row.yearEnd,
 				yearCertainty: row.yearCertainty,
 				dialect: row.dialect,
+				languages: row.languages,
 				summary: row.summary
 			},
 			coverage: null
