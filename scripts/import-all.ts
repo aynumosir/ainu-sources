@@ -5,7 +5,7 @@
  * order, over ONE shared db handle, and DELETES NOTHING:
  *
  *   dictionaries → grammar → corpus → manual → academic → curated-biblio
- *                → relations → person-enrichment
+ *                → extracted-cites → relations → person-enrichment
  *
  * The order is load-bearing (Risk C): every source-observing feed runs before the
  * relations post-pass (which derives source→source edges from the sources that
@@ -45,6 +45,7 @@ import { run as importCorpus } from './import/corpus';
 import { run as importManual } from './import/manual';
 import { run as importAcademic } from './import/academic';
 import { run as importCuratedBiblio } from './import/curated-biblio';
+import { run as importExtractedCites } from './import/extracted-cites';
 import { run as importRelations } from './import/relations';
 import { run as importPersonEnrichment } from './import/person-enrichment';
 
@@ -60,6 +61,7 @@ const FEEDS: Feed[] = [
 	{ name: 'manual', run: importManual },
 	{ name: 'academic', run: importAcademic },
 	{ name: 'curated-biblio', run: importCuratedBiblio },
+	{ name: 'extracted-cites', run: importExtractedCites },
 	{ name: 'relations', run: importRelations },
 	{ name: 'person-enrichment', run: importPersonEnrichment }
 ];
