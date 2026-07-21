@@ -100,6 +100,27 @@
 		</div>
 	</header>
 
+	{#if data.archive}
+		<div class="mt-4 rounded-lg border border-stone-200 bg-stone-50 px-4 py-3">
+			{#if data.hasArchiveAccess}
+				<div class="flex flex-wrap items-center gap-3">
+					<a
+						href={`/archive/work/${s.slug}`}
+						class="rounded-md bg-brand-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-800"
+					>Read this work in the archive</a>
+					<span class="text-sm text-stone-600">
+						{data.archive.pageCount} pages{#if data.archive.hasText}, searchable text available{/if}
+					</span>
+				</div>
+			{:else}
+				<p class="text-sm text-stone-600">
+					Restricted archive: {data.archive.pageCount} pages{#if data.archive.hasText}, text available{/if}.
+					<a href="/login" class="font-medium text-brand-700 underline">Log in</a> to read.
+				</p>
+			{/if}
+		</div>
+	{/if}
+
 	<div class="mt-6 grid gap-10 md:grid-cols-[1fr_18rem]">
 		<div class="min-w-0 space-y-8">
 			{#if videos.length}

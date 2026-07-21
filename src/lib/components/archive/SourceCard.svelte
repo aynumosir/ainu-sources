@@ -49,6 +49,11 @@
 	<div class="mt-auto flex items-center gap-2 pt-3">
 		<span class="archive-kicker bg-[var(--archive-muted)] px-1.5 py-0.5">{file.role ?? 'file'}</span>
 		<span class="tnum ml-auto text-[12px] text-[var(--archive-subtle)]">{formatYear(source)}</span>
+		<a
+			href={`/sources/${encodeURIComponent(source.slug)}`}
+			class="relative z-10 text-[11px] text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-2 hover:text-[var(--archive-gilt)]"
+			aria-label="View in catalogue"
+		>catalogue ↗</a>
 	</div>
 	<p class="archive-meta mt-1.5 text-[12px] text-[var(--archive-subtle)]">
 		{#each metaParts as part (part)}
