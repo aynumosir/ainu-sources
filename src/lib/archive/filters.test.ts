@@ -34,6 +34,7 @@ describe('parseArchiveFilters', () => {
 		});
 		expect(parse('ocr=without').ocr).toBe('without');
 		expect(parse('ocr=unknown').ocr).toBe('any');
+		expect(parse('sort=significance').sort).toBe('significance');
 		expect(parse('sort=bogus').sort).toBe('updated');
 	});
 });
