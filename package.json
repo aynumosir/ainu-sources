@@ -50,7 +50,8 @@
 		"archive:recognize-pages": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/recognize-pages.ts",
 		"archive:detect-folios": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/detect-folios.ts",
 		"archive:assess-text-quality": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/assess-text-quality.ts",
-		"archive:refresh-significance": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/refresh-significance.ts"
+		"archive:refresh-significance": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/refresh-significance.ts",
+		"archive:gen-derivatives": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/gen-derivatives.ts"
 	},
 	"devDependencies": {
 		"@better-auth/cli": "~1.4.21",
