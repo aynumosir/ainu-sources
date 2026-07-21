@@ -2,23 +2,9 @@
 	import SourceCard from './SourceCard.svelte';
 	import BilingualLabel from './BilingualLabel.svelte';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
-	import type { Source } from '$lib/server/db/schema';
-	import type { OcrCoverage } from '$lib/archive/ocr';
+	import type { ArchiveLibraryItem } from '$lib/archive/library-item';
 
-	type Item = {
-		source: Source;
-		file: {
-			fileId: string;
-			revisionId: string | null;
-			sourceSlug: string;
-			role: string | null;
-			bytes: number | null;
-			mediaType: string | null;
-		};
-		coverage: OcrCoverage[];
-	};
-
-	let { items }: { items: Item[] } = $props();
+	let { items }: { items: ArchiveLibraryItem[] } = $props();
 </script>
 
 {#if items.length}

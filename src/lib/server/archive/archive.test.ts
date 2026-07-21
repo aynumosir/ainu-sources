@@ -1732,7 +1732,7 @@ describe('archive DB flows', () => {
 			limit: 2,
 			principal: reader
 		});
-		expect(first.items.map((item) => item.source.title)).toEqual(['Kamuy Alpha', 'Kamuy Beta']);
+		expect(first.items.map((item) => item.source.title)).toEqual(['Kamuy Gamma', 'Kamuy Beta']);
 		expect(first.nextCursor).toBeTruthy();
 		const second = await listArchiveFiles(db, {
 			text: 'kamuy',
@@ -1743,7 +1743,7 @@ describe('archive DB flows', () => {
 			limit: 2,
 			principal: reader
 		});
-		expect(second.items.map((item) => item.source.title)).toEqual(['Kamuy Gamma']);
+		expect(second.items.map((item) => item.source.title)).toEqual(['Kamuy Alpha']);
 	});
 
 	it('paginates archive file listings stably for every sort order', async () => {
@@ -1763,10 +1763,49 @@ describe('archive DB flows', () => {
 			return [...first.items, ...second.items].map((item) => item.source.title);
 		}
 
-		await expect(titles('updated')).resolves.toEqual(['Alpha', 'Charlie', 'Delta', 'Bravo']);
+		await expect(titles('updated')).resolves.toEqual(['Bravo', 'Delta', 'Charlie', 'Alpha']);
 		await expect(titles('title')).resolves.toEqual(['Alpha', 'Bravo', 'Charlie', 'Delta']);
 		await expect(titles('year-desc')).resolves.toEqual(['Delta', 'Charlie', 'Bravo', 'Alpha']);
 		await expect(titles('year-asc')).resolves.toEqual(['Alpha', 'Bravo', 'Charlie', 'Delta']);
+	});
+
+	it('filters archive files by text coverage exactly as the in-memory rule did', async () => {
+		await seedRevision('approved');
+		await db.update(schema.sources).set({ title: 'Plain One' }).where(eq(schema.sources.id, 'source-1'));
+		await seedArchiveListRow({ index: 2, title: 'Mixed Text', reviewedAt: new Date(2_000) });
+		await seedArchiveListRow({ index: 3, title: 'None Only', reviewedAt: new Date(3_000) });
+		await seedArchiveListRow({ index: 4, title: 'No Rows', reviewedAt: new Date(4_000) });
+		await seedArchiveListRow({ index: 5, title: 'Full Text', reviewedAt: new Date(5_000) });
+		await db.insert(schema.revisionOcrCoverage).values([
+			{ revisionId: 'list-rev-2', variant: 'gemini', status: 'none' },
+			{ revisionId: 'list-rev-2', variant: 'paddle', status: 'partial' },
+			{ revisionId: 'list-rev-3', variant: 'gemini', status: 'none' },
+			{ revisionId: 'list-rev-5', variant: 'gemini', status: 'complete' }
+		]);
+
+		const all = await listArchiveFiles(db, { sort: 'title', limit: 50, principal: reader });
+		const seededCoverage: Record<string, string[]> = {
+			'list-rev-2': ['none', 'partial'],
+			'list-rev-3': ['none'],
+			'list-rev-5': ['complete']
+		};
+		const inMemoryRule = (wantText: boolean) =>
+			all.items
+				.filter((item) => {
+					const hasText = (seededCoverage[item.file.revisionId ?? ''] ?? []).some((status) => status !== 'none');
+					return wantText ? hasText : !hasText;
+				})
+				.map((item) => item.file.revisionId);
+
+		const cases = [
+			['with', ['Full Text', 'Mixed Text']],
+			['without', ['No Rows', 'None Only', 'Plain One']]
+		] as const;
+		for (const [ocr, titles] of cases) {
+			const result = await listArchiveFiles(db, { ocr, sort: 'title', limit: 50, principal: reader });
+			expect(result.items.map((item) => item.source.title)).toEqual([...titles]);
+			expect(result.items.map((item) => item.file.revisionId)).toEqual(inMemoryRule(ocr === 'with'));
+		}
 	});
 
 	it('resolves file ids to source metadata and current revisions', async () => {
