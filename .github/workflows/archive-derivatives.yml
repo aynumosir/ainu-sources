@@ -13,27 +13,26 @@ on:
       limit:
         description: "Maximum revisions to process"
         required: false
-        default: "10"
-        type: string
+        default: 10
+        type: number
 
 concurrency:
   group: archive-derivatives
   cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   generate:
     name: Generate page images and linearized PDFs
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: ${{ secrets.ARCHIVE_DATABASE_URL }}
-      DATABASE_AUTH_TOKEN: ${{ secrets.ARCHIVE_DATABASE_AUTH_TOKEN }}
-      R2_BUCKET: ${{ secrets.ARCHIVE_R2_BUCKET }}
-      R2_ENDPOINT: ${{ secrets.ARCHIVE_R2_ENDPOINT }}
-      R2_ACCESS_KEY_ID: ${{ secrets.ARCHIVE_R2_ACCESS_KEY_ID }}
-      R2_SECRET_ACCESS_KEY: ${{ secrets.ARCHIVE_R2_SECRET_ACCESS_KEY }}
       DERIVATIVE_RENDER_WINDOW: "12"
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: oven-sh/setup-bun@v2
       - name: Install PDF/image tools
         run: |
@@ -41,10 +40,19 @@ jobs:
           sudo apt-get install -y poppler-utils imagemagick qpdf awscli
       - run: bun install --frozen-lockfile
       - name: Generate derivatives
+        env:
+          DATABASE_URL: ${{ secrets.ARCHIVE_DATABASE_URL }}
+          DATABASE_AUTH_TOKEN: ${{ secrets.ARCHIVE_DATABASE_AUTH_TOKEN }}
+          R2_BUCKET: ${{ secrets.ARCHIVE_R2_BUCKET }}
+          R2_ENDPOINT: ${{ secrets.ARCHIVE_R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.ARCHIVE_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.ARCHIVE_R2_SECRET_ACCESS_KEY }}
+          REVISION: ${{ inputs.revision }}
+          LIMIT: ${{ inputs.limit || '10' }}
         run: |
           args=()
-          if [ -n "${{ inputs.revision }}" ]; then
-            args+=(--revision "${{ inputs.revision }}")
+          if [ -n "$REVISION" ]; then
+            args+=(--revision "$REVISION")
           fi
-          args+=(--limit "${{ inputs.limit || '10' }}")
+          args+=(--limit "$LIMIT")
           bun run archive:gen-derivatives -- "${args[@]}"

@@ -63,6 +63,17 @@ function argValue(flag: string): string | undefined {
 }
 const hasFlag = (flag: string) => process.argv.includes(flag);
 
+/** Parse `--limit`: absent means no cap; anything that is not a positive,
+ *  finite integer is rejected so `done >= limit` always terminates the run. */
+function parseLimit(raw: string | undefined): number {
+  if (raw === undefined) return Infinity;
+  const value = Number(raw);
+  if (!Number.isInteger(value) || value <= 0) {
+    throw new Error(`--limit must be a positive integer, got "${raw}"`);
+  }
+  return value;
+}
+
 type Row = {
   revisionId: string;
   slug: string;
@@ -177,8 +188,11 @@ function pdfPageCount(pdf: string): number {
   return Number(/^Pages:\s+(\d+)/m.exec(info)?.[1] ?? 0);
 }
 
-async function pageCountFromRevision(row: Row): Promise<number | null> {
-  if (row.pageCount && row.pageCount > 0) return row.pageCount;
+/** Authoritative page count read from the source PDF in R2, or null when R2 is
+ *  unavailable or the count cannot be read. The DB `page_count` is not trusted
+ *  here: a stale low value would make the completeness check probe an earlier
+ *  page as the "last" page and wrongly skip missing real final-page images. */
+async function sourcePageCount(row: Row): Promise<number | null> {
   if (!r2Configured()) return null;
   const workDir = mkdtempSync(path.join(tmpdir(), "ainu-page-count-"));
   try {
@@ -192,18 +206,25 @@ async function pageCountFromRevision(row: Row): Promise<number | null> {
 }
 
 async function derivativesComplete(row: Row): Promise<boolean> {
-  const total = await pageCountFromRevision(row);
-  if (!total) return false;
-  return (
+  if (!r2Configured()) return false;
+  if (!row.pageCount || row.pageCount <= 0) return false;
+  // Cheap R2 probes first, keyed off the recorded page count. Only when the
+  // linearized PDF and both edge pages are present do we pay for a source
+  // download to confirm the recorded count is authoritative.
+  const cheapComplete =
     r2ObjectExists(linearizedKey(row.revisionId)) &&
     WIDTHS.every((w) =>
       r2ObjectExists(pageDerivativeKey(row.revisionId, 1, w)),
     ) &&
     WIDTHS.every((w) =>
-      r2ObjectExists(pageDerivativeKey(row.revisionId, total, w)),
-    ) &&
-    row.pageCount === total
-  );
+      r2ObjectExists(pageDerivativeKey(row.revisionId, row.pageCount!, w)),
+    );
+  if (!cheapComplete) return false;
+  const total = await sourcePageCount(row);
+  if (!total) return false;
+  // A mismatch means the recorded count is stale, so the "last page" probed
+  // above was not the real final page: treat the work as incomplete.
+  return total === row.pageCount;
 }
 
 /** Render one page to a size-capped WebP at each width, uploading each object
@@ -354,9 +375,7 @@ async function main(): Promise<void> {
   const dryRun = hasFlag("--dry-run");
   const assumeMissing = hasFlag("--assume-missing");
   const onlyRevision = argValue("--revision");
-  const limit = argValue("--limit")
-    ? Math.max(1, Number(argValue("--limit")))
-    : Infinity;
+  const limit = parseLimit(argValue("--limit"));
 
   const clauses = [
     eq(fileRevisions.reviewStatus, "approved"),
