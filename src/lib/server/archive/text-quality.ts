@@ -25,6 +25,8 @@
  * and is done separately.
  */
 
+import { sql, type SQL } from 'drizzle-orm';
+
 export type Reliability = 'unassessed' | 'suspect';
 export type QualityVerdict = { reliability: Reliability; note: string | null };
 export type QualitySample = { page: number; text: string };
@@ -77,4 +79,38 @@ export function assessTextQuality(samples: QualitySample[]): QualityVerdict {
 		}
 	}
 	return { reliability: 'unassessed', note: null };
+}
+
+/** A database handle that can run a raw query: a connection or a transaction. */
+export type SamplingDb = {
+	all: <T = Record<string, unknown>>(query: SQL) => Promise<T[]>;
+};
+
+/**
+ * Sample nine pages spread through a variant. The front matter of a book is
+ * often typeset differently from its body, so the pages are spread across the
+ * whole work.
+ */
+export async function sampleVariantPages(
+	db: SamplingDb,
+	revisionId: string,
+	variant: string
+): Promise<QualitySample[]> {
+	const rows = await db.all<{ page: number; text: string | null }>(sql`
+		with numbered as (
+			select cast(c.page as integer) as page,
+				group_concat(c.text, char(10)) as text,
+				row_number() over (order by cast(c.page as integer)) as rn,
+				count(*) over () as total
+			from ocr_chunks c
+			join ocr_ingest_state s on s.revision_id = c.revision_id
+				and s.variant = c.variant and s.active_generation = c.ingest_generation
+			where c.revision_id = ${revisionId} and c.variant = ${variant}
+			group by cast(c.page as integer)
+		)
+		select page, text from numbered
+		where rn % max(1, total / 9) = 0
+		limit 9
+	`);
+	return rows.map((row) => ({ page: row.page, text: row.text ?? '' }));
 }

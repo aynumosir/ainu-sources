@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { and, eq, isNotNull } from 'drizzle-orm';
+import { and, eq, isNotNull, ne, sql } from 'drizzle-orm';
 import {
 	fileRevisions,
 	ocrIngestState,
@@ -11,6 +11,12 @@ import {
 	sourceFiles
 } from '../../src/lib/server/db/schema';
 import { activateOcrGeneration, type OcrPageInput } from '../../src/lib/server/archive/ocr';
+import {
+	assessTextQuality,
+	sampleVariantPages,
+	type SamplingDb
+} from '../../src/lib/server/archive/text-quality';
+import { pickPreferredVariant } from '../../src/lib/archive/ocr';
 import { parseImporterCli, type ImporterRunOptions } from '../import/lib/run';
 import type { Db } from '../import/lib/entities';
 
@@ -76,12 +82,6 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 		if (!opts.dryRun) {
 			const now = opts.now ?? new Date();
 			await db.transaction(async (tx) => {
-				const [preferred] = await tx
-					.select({ revisionId: revisionOcrCoverage.revisionId })
-					.from(revisionOcrCoverage)
-					.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.preferred, true)))
-					.limit(1);
-				const shouldPrefer = !preferred;
 				await activateOcrGeneration(tx as unknown as Db, revision.id, parsed.variant, pages, {
 					contentHash,
 					ingestedAt: now
@@ -98,8 +98,7 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 							status: 'complete',
 							tool: parsed.variant,
 							toolVersion: null,
-							measuredAt: now,
-							...(shouldPrefer ? { preferred: true } : {})
+							measuredAt: now
 						})
 						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, parsed.variant)));
 				} else {
@@ -109,9 +108,63 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 						status: 'complete',
 						tool: parsed.variant,
 						toolVersion: null,
-						preferred: shouldPrefer,
 						measuredAt: now
 					});
+				}
+
+				const samples = await sampleVariantPages(tx as unknown as SamplingDb, revision.id, parsed.variant);
+				const verdict = assessTextQuality(samples);
+				if (verdict.reliability === 'suspect') {
+					// Sound is human-certified; the automated assessor does not downgrade it.
+					await tx
+						.update(revisionOcrCoverage)
+						.set({ reliability: 'suspect', reliabilityNote: verdict.note })
+						.where(
+							and(
+								eq(revisionOcrCoverage.revisionId, revision.id),
+								eq(revisionOcrCoverage.variant, parsed.variant),
+								ne(revisionOcrCoverage.reliability, 'sound')
+							)
+						);
+				} else {
+					// Clear a stale suspect verdict; sound and unassessed rows stay as they are.
+					await tx
+						.update(revisionOcrCoverage)
+						.set({ reliability: 'unassessed', reliabilityNote: null })
+						.where(
+							and(
+								eq(revisionOcrCoverage.revisionId, revision.id),
+								eq(revisionOcrCoverage.variant, parsed.variant),
+								eq(revisionOcrCoverage.reliability, 'suspect')
+							)
+						);
+				}
+
+				const coverageRows = await tx
+					.select({
+						variant: revisionOcrCoverage.variant,
+						reliability: revisionOcrCoverage.reliability,
+						preferred: revisionOcrCoverage.preferred
+					})
+					.from(revisionOcrCoverage)
+					.where(eq(revisionOcrCoverage.revisionId, revision.id))
+					.orderBy(sql`rowid`);
+				const pick = pickPreferredVariant(
+					coverageRows.map((row) => ({
+						variant: row.variant,
+						reliability: row.reliability as 'unassessed' | 'sound' | 'suspect'
+					})),
+					coverageRows.find((row) => row.preferred)?.variant ?? null
+				);
+				if (pick) {
+					await tx
+						.update(revisionOcrCoverage)
+						.set({ preferred: false })
+						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), ne(revisionOcrCoverage.variant, pick)));
+					await tx
+						.update(revisionOcrCoverage)
+						.set({ preferred: true })
+						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, pick)));
 				}
 			});
 		}
