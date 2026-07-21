@@ -19,7 +19,8 @@
  *   DATABASE_URL (+ DATABASE_AUTH_TOKEN for remote)
  *   R2_BUCKET, R2_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY
  *
- * Flags: --revision <id> (one revision), --limit N, --dry-run.
+ * Flags: --revision <id> (one revision), --limit N, --dry-run,
+ *        --assume-missing (skip R2 completeness probes; useful for CI smoke).
  */
 import { execFileSync } from "node:child_process";
 import {
@@ -62,12 +63,32 @@ function argValue(flag: string): string | undefined {
 }
 const hasFlag = (flag: string) => process.argv.includes(flag);
 
+/** Parse `--limit`: absent means no cap; anything that is not a positive,
+ *  finite integer is rejected so `done >= limit` always terminates the run. */
+function parseLimit(raw: string | undefined): number {
+  if (raw === undefined) return Infinity;
+  const value = Number(raw);
+  if (!Number.isInteger(value) || value <= 0) {
+    throw new Error(`--limit must be a positive integer, got "${raw}"`);
+  }
+  return value;
+}
+
 type Row = {
   revisionId: string;
   slug: string;
   blobSha256: string;
   pageCount: number | null;
 };
+
+function r2Configured(): boolean {
+  return [
+    "R2_BUCKET",
+    "R2_ENDPOINT",
+    "R2_ACCESS_KEY_ID",
+    "R2_SECRET_ACCESS_KEY",
+  ].every((name) => !!process.env[name]);
+}
 
 function r2Env(): NodeJS.ProcessEnv {
   return {
@@ -95,6 +116,7 @@ function linearizedKey(revisionId: string): string {
 }
 
 function r2ObjectExists(key: string): boolean {
+  if (!r2Configured()) return false;
   try {
     execFileSync(
       "aws",
@@ -117,6 +139,11 @@ function r2ObjectExists(key: string): boolean {
 }
 
 function r2Get(key: string, file: string): void {
+  if (!r2Configured()) {
+    throw new Error(
+      "R2 credentials are required unless --dry-run is used with --assume-missing",
+    );
+  }
   execFileSync(
     "aws",
     [
@@ -135,6 +162,7 @@ function r2Get(key: string, file: string): void {
 }
 
 function r2Put(key: string, file: string, contentType: string): void {
+  if (!r2Configured()) throw new Error("R2 credentials are required");
   execFileSync(
     "aws",
     [
@@ -158,6 +186,45 @@ function r2Put(key: string, file: string, contentType: string): void {
 function pdfPageCount(pdf: string): number {
   const info = execFileSync("pdfinfo", [pdf], { encoding: "utf8" });
   return Number(/^Pages:\s+(\d+)/m.exec(info)?.[1] ?? 0);
+}
+
+/** Authoritative page count read from the source PDF in R2, or null when R2 is
+ *  unavailable or the count cannot be read. The DB `page_count` is not trusted
+ *  here: a stale low value would make the completeness check probe an earlier
+ *  page as the "last" page and wrongly skip missing real final-page images. */
+async function sourcePageCount(row: Row): Promise<number | null> {
+  if (!r2Configured()) return null;
+  const workDir = mkdtempSync(path.join(tmpdir(), "ainu-page-count-"));
+  try {
+    const pdf = path.join(workDir, "source.pdf");
+    r2Get(blobKey(row.blobSha256), pdf);
+    const total = pdfPageCount(pdf);
+    return total > 0 ? total : null;
+  } finally {
+    rmSync(workDir, { recursive: true, force: true });
+  }
+}
+
+async function derivativesComplete(row: Row): Promise<boolean> {
+  if (!r2Configured()) return false;
+  if (!row.pageCount || row.pageCount <= 0) return false;
+  // Cheap R2 probes first, keyed off the recorded page count. Only when the
+  // linearized PDF and both edge pages are present do we pay for a source
+  // download to confirm the recorded count is authoritative.
+  const cheapComplete =
+    r2ObjectExists(linearizedKey(row.revisionId)) &&
+    WIDTHS.every((w) =>
+      r2ObjectExists(pageDerivativeKey(row.revisionId, 1, w)),
+    ) &&
+    WIDTHS.every((w) =>
+      r2ObjectExists(pageDerivativeKey(row.revisionId, row.pageCount!, w)),
+    );
+  if (!cheapComplete) return false;
+  const total = await sourcePageCount(row);
+  if (!total) return false;
+  // A mismatch means the recorded count is stale, so the "last page" probed
+  // above was not the real final page: treat the work as incomplete.
+  return total === row.pageCount;
 }
 
 /** Render one page to a size-capped WebP at each width, uploading each object
@@ -306,10 +373,9 @@ async function generateForRevision(
 async function main(): Promise<void> {
   requireEnv("DATABASE_URL");
   const dryRun = hasFlag("--dry-run");
+  const assumeMissing = hasFlag("--assume-missing");
   const onlyRevision = argValue("--revision");
-  const limit = argValue("--limit")
-    ? Math.max(1, Number(argValue("--limit")))
-    : Infinity;
+  const limit = parseLimit(argValue("--limit"));
 
   const clauses = [
     eq(fileRevisions.reviewStatus, "approved"),
@@ -340,15 +406,16 @@ async function main(): Promise<void> {
   try {
     for (const row of candidates) {
       if (done >= limit) break;
-      // Skip work whose derivatives already exist (linearized + first page
-      // at both widths); a resumed run re-enters an incomplete one.
-      const complete =
-        r2ObjectExists(linearizedKey(row.revisionId)) &&
-        WIDTHS.every((w) =>
-          r2ObjectExists(pageDerivativeKey(row.revisionId, 1, w)),
-        ) &&
-        row.pageCount != null;
+      // Skip only when the linearized PDF, first page, last page, and DB page
+      // count are all present. Checking the last page catches the most common
+      // interrupted-run case: page 1 exists but later pages do not.
+      const complete = !assumeMissing && (await derivativesComplete(row));
       if (complete && !onlyRevision) continue;
+      if (dryRun && assumeMissing) {
+        console.log(`  would generate ${row.slug} (${row.revisionId})`);
+        done += 1;
+        continue;
+      }
       await generateForRevision(row, workRoot, dryRun);
       done += 1;
     }
