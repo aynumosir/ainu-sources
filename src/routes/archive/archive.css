@@ -1,0 +1,189 @@
+@layer base {
+	body:has(.archive) {
+		background: var(--archive-bg);
+		color: var(--archive-text);
+	}
+	:root,
+	:root[data-archive-theme='light'] {
+		color-scheme: light;
+		--archive-bg: #f6f0e4;
+		--archive-paper: #fff9ee;
+		--archive-surface: var(--archive-paper);
+		--archive-panel: #fbf3e6;
+		--archive-muted: #eee3d0;
+		--archive-border: #d8c8ad;
+		--archive-border-strong: #a89270;
+		--archive-text: #1f1b16;
+		--archive-text-soft: #4b4136;
+		--archive-subtle: #75695d;
+		--archive-faint-text: #6f6256;
+		--archive-gilt: #b88a32;
+		--archive-gilt-text: #835d16;
+		--archive-gilt-soft: #d5b36a;
+		--archive-accent: var(--archive-gilt);
+		--archive-accent-soft: var(--archive-gilt-soft);
+		--archive-good: #24785a;
+		--archive-warn: #9a6418;
+		--archive-danger: #b42332;
+		--archive-quarantine: #6b3fa0;
+		--font-archive-serif:
+			'Source Serif 4', 'Spectral', 'Noto Serif JP', ui-serif, Georgia, 'Times New Roman', serif;
+		--font-archive-jp: 'Shippori Mincho B1', 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+		--font-archive-sans:
+			'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+		--font-archive-mono:
+			'IBM Plex Mono', ui-monospace, 'SFMono-Regular', 'Cascadia Code', Consolas, monospace;
+	}
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-archive-theme='light']) {
+			color-scheme: dark;
+			--archive-bg: #14110e;
+			--archive-paper: #1f1a15;
+			--archive-surface: var(--archive-paper);
+			--archive-panel: #252018;
+			--archive-muted: #2c251c;
+			--archive-border: #4a3d2c;
+			--archive-border-strong: #7d6746;
+			--archive-text: #f2eadc;
+			--archive-text-soft: #d2c4ad;
+			--archive-subtle: #a89982;
+			--archive-faint-text: #b5a58e;
+			--archive-gilt: #d1a64a;
+			--archive-gilt-text: #dfbd70;
+			--archive-gilt-soft: #e2c678;
+			--archive-accent: var(--archive-gilt);
+			--archive-accent-soft: var(--archive-gilt-soft);
+			--archive-good: #77c7a5;
+			--archive-warn: #e8cb79;
+			--archive-danger: #ff8d98;
+			--archive-quarantine: #c9a7ff;
+		}
+	}
+	:root[data-archive-theme='dark'] {
+		color-scheme: dark;
+		--archive-bg: #14110e;
+		--archive-paper: #1f1a15;
+		--archive-surface: var(--archive-paper);
+		--archive-panel: #252018;
+		--archive-muted: #2c251c;
+		--archive-border: #4a3d2c;
+		--archive-border-strong: #7d6746;
+		--archive-text: #f2eadc;
+		--archive-text-soft: #d2c4ad;
+		--archive-subtle: #a89982;
+		--archive-faint-text: #b5a58e;
+		--archive-gilt: #d1a64a;
+		--archive-gilt-text: #dfbd70;
+		--archive-gilt-soft: #e2c678;
+		--archive-accent: var(--archive-gilt);
+		--archive-accent-soft: var(--archive-gilt-soft);
+		--archive-good: #77c7a5;
+		--archive-warn: #e8cb79;
+		--archive-danger: #ff8d98;
+		--archive-quarantine: #c9a7ff;
+	}
+	.archive {
+		min-height: 100svh;
+		background: var(--archive-bg);
+		color: var(--archive-text);
+		font-family: var(--font-archive-sans);
+		font-size: 15px;
+	}
+	.archive-title {
+		font-family: var(--font-archive-serif);
+		line-height: 1.6;
+		word-break: break-word;
+		line-break: strict;
+	}
+	.archive-mono {
+		font-family: var(--font-archive-mono);
+	}
+	.archive-wordmark {
+		font-family: var(--font-archive-serif);
+		font-variant: small-caps;
+		letter-spacing: 0.03em;
+	}
+	.archive-kicker {
+		color: var(--archive-subtle);
+		font-family: var(--font-archive-sans);
+		font-size: 12px;
+		font-variant: small-caps;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+	.archive-rule-dotted {
+		border-bottom: 1px dotted var(--archive-border);
+	}
+	.archive .tnum {
+		font-variant-numeric: tabular-nums;
+	}
+	.archive :is(input, select, textarea) {
+		accent-color: var(--archive-gilt);
+	}
+	.archive :is(input, select, textarea):focus {
+		border-color: var(--archive-gilt);
+		--tw-ring-color: var(--archive-gilt);
+	}
+}
+
+/* Card titles clamp so one long title cannot make its card tower over the
+   others in the row; the full title stays available as a tooltip. */
+.archive .archive-clamp-1,
+.archive .archive-clamp-2 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	overflow-wrap: anywhere;
+}
+
+.archive .archive-clamp-1 {
+	-webkit-line-clamp: 1;
+	line-clamp: 1;
+}
+
+.archive .archive-clamp-2 {
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+}
+
+/* One heading scale for every archive page. */
+.archive .archive-h1 {
+	font-family: var(--font-archive-serif);
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.archive .archive-h2 {
+	font-family: var(--font-archive-serif);
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.archive .archive-h3 {
+	font-size: 15px;
+	font-weight: 600;
+}
+
+/* Middle dots fall back to a CJK font and gain lopsided side bearings, so the
+   separator is drawn in the sans face and carried by the item it precedes —
+   a dot never ends a wrapped line. */
+.archive .archive-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	column-gap: 0.4rem;
+	row-gap: 0.15rem;
+}
+
+.archive .archive-meta > span {
+	white-space: nowrap;
+}
+
+.archive .archive-meta > span + span::before {
+	content: '·';
+	margin-right: 0.4rem;
+	font-family: var(--font-archive-sans);
+	color: var(--archive-faint-text);
+}

@@ -4,6 +4,7 @@ import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { env } from '$env/dynamic/private';
 import { getRequestEvent } from '$app/server';
 import { db } from '$lib/server/db';
+import { captureGithubAccountEvent, rememberGithubProfileLogin } from '$lib/server/archive/github-login-capture';
 
 type Auth = ReturnType<typeof betterAuth>;
 
@@ -16,7 +17,17 @@ function build(): Auth {
 		socialProviders: {
 			github: {
 				clientId: env.GITHUB_CLIENT_ID,
-				clientSecret: env.GITHUB_CLIENT_SECRET
+				clientSecret: env.GITHUB_CLIENT_SECRET,
+				mapProfileToUser(profile) {
+					rememberGithubProfileLogin(String(profile.id), profile.login);
+					return {};
+				}
+			}
+		},
+		databaseHooks: {
+			account: {
+				create: { after: (account) => captureGithubAccountEvent(account) },
+				update: { after: (account) => captureGithubAccountEvent(account) }
 			}
 		},
 		plugins: [

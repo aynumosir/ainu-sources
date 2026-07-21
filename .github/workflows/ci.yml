@@ -15,3 +15,23 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ripgrep
       - name: Forbid destructive catalog writes in src/**
         run: bash scripts/ci-guards.sh
+
+  approved-ocr-snapshots:
+    name: Approved OCR snapshots
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.ARCHIVE_DATABASE_URL }}
+      DATABASE_AUTH_TOKEN: ${{ secrets.ARCHIVE_DATABASE_AUTH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - name: Require canonical database access for snapshot changes
+        run: |
+          if find . -type f -name '*.approved.snapshot.json' -print -quit | grep -q . && [ -z "$DATABASE_URL" ]; then
+            echo 'Approved OCR snapshots require ARCHIVE_DATABASE_URL in CI.' >&2
+            exit 1
+          fi
+      - name: Verify exported edits remain current and approved
+        if: ${{ env.DATABASE_URL != '' }}
+        run: bun run archive:verify-approved --root .

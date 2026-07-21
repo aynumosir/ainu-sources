@@ -5,7 +5,10 @@
 	import LanguageSwitcher from './LanguageSwitcher.svelte';
 	import SearchBox from './SearchBox.svelte';
 
-	let { user = null }: { user?: { name?: string } | null } = $props();
+	let {
+		user = null,
+		hasArchiveAccess = false
+	}: { user?: { name?: string } | null; hasArchiveAccess?: boolean } = $props();
 
 	let open = $state(false);
 
@@ -45,6 +48,14 @@
 					>{item.label()}</a
 				>
 			{/each}
+			{#if hasArchiveAccess}
+				<a
+					href="/archive"
+					aria-current={isActive('/archive') ? 'page' : undefined}
+					class="rounded-md px-2.5 py-1.5 text-sm font-medium text-stone-600 transition hover:bg-stone-100 hover:text-ink aria-[current=page]:bg-stone-100 aria-[current=page]:text-ink"
+					>{m.nav_archive()}</a
+				>
+			{/if}
 		</nav>
 
 		<div class="ml-auto hidden min-w-0 flex-1 justify-end lg:flex">
@@ -97,6 +108,15 @@
 						>{item.label()}</a
 					>
 				{/each}
+				{#if hasArchiveAccess}
+					<a
+						href="/archive"
+						onclick={() => (open = false)}
+						aria-current={isActive('/archive') ? 'page' : undefined}
+						class="rounded-md px-2 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100 aria-[current=page]:bg-stone-100"
+						>{m.nav_archive()}</a
+					>
+				{/if}
 				<a href={localizeHref('/places')} onclick={() => (open = false)} class="rounded-md px-2 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100">{m.nav_places()}</a>
 				<a href={localizeHref('/institutions')} onclick={() => (open = false)} class="rounded-md px-2 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100">{m.nav_institutions()}</a>
 			</nav>
