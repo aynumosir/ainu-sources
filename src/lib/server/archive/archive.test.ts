@@ -730,6 +730,18 @@ describe('archive DB flows', () => {
 		).resolves.toMatchObject({ userId: 'reader', authn: 'app_session' });
 	});
 
+	it('allows service-token mutation principals without browser CSRF', async () => {
+		const { auth } = await seedServicePrincipal('contributor', 'archive_contributor', 'svc-no-csrf');
+		auth.set('content-type', 'application/json');
+		await expect(
+			archiveMutationPrincipal(
+				new Request('https://db.aynu.org/api/archive/uploads', { method: 'POST', headers: auth }),
+				'archive_contributor',
+				db
+			)
+		).resolves.toMatchObject({ userId: 'contributor', authn: 'service_token' });
+	});
+
 	it('caps MCP assertion principals at archive_reader', async () => {
 		env.ASSERTION_KEY_MCP = 'mcp-secret';
 		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_admin' });

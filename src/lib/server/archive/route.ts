@@ -35,7 +35,9 @@ export async function archiveMutationPrincipal(
 		if (principal.authn === 'mcp_assertion') {
 			throw new ArchiveHttpError(403, 'assertion-authenticated principals cannot perform mutating actions');
 		}
-		await requireArchiveMutationGuards(request, principal.userId);
+		if (principal.authn !== 'service_token') {
+			await requireArchiveMutationGuards(request, principal.userId);
+		}
 		return principal;
 	} catch (e) {
 		throwArchiveError(e);
