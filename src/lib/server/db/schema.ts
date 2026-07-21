@@ -120,7 +120,11 @@ export const sources = sqliteTable(
 		normalizerVersion: integer('normalizer_version'),
 		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
 		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' }),
-		contentChangedAt: integer('content_changed_at', { mode: 'timestamp_ms' })
+		contentChangedAt: integer('content_changed_at', { mode: 'timestamp_ms' }),
+
+		// --- network ---
+		/** PageRank over the accepted cites graph, normalized so the top work is 1. null = never scored */
+		significance: real('significance')
 	},
 	(t) => [
 		uniqueIndex('sources_slug_idx').on(t.slug),
