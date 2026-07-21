@@ -5,6 +5,7 @@ import { db } from '$lib/server/db';
 import { fileRevisions, sourceFiles } from '$lib/server/db/schema';
 import { resolveArchivePrincipal } from '$lib/server/archive/authz';
 import { searchArchive } from '$lib/server/archive/ocr';
+import { listArchiveFiles } from '$lib/server/archive/db';
 import { revisionPageFolios } from '$lib/server/db/schema';
 import { ArchiveHttpError } from '$lib/server/archive/errors';
 import { DEPLOYED_SEARCH_MODES, type SearchMode } from '$lib/server/archive/search-modes';
@@ -22,6 +23,7 @@ export const load: PageServerLoad = async ({ request, url }) => {
 			searchError: null,
 			sourceSlug: url.searchParams.get('source_slug') ?? '',
 			result: null,
+			works: [],
 			searchableCount: null
 		};
 	if (!archiveRoleAtLeast(principal.role, 'archive_reader')) error(403, 'archive reader role required');
@@ -51,6 +53,11 @@ export const load: PageServerLoad = async ({ request, url }) => {
 	const fileByRevision = await fileIdsForRevisions(result.items.map((item) => item.revisionId));
 	const folioByHit = await foliosForHits(result.items.map((item) => ({ revisionId: item.revisionId, page: item.page })));
 	const searchableCount = await approvedCurrentFileCount();
+	// OCR search only covers works that carry recognised text, so metadata-only
+	// works (a title/author/summary but no OCR pages) are otherwise invisible in
+	// the archive. Match the same query against catalogue metadata so a search
+	// for e.g. an author name always surfaces the work itself.
+	const works = q && !sourceSlug ? await searchArchiveWorks(principal, q) : [];
 	return {
 		accessDenied: false,
 		q,
@@ -65,9 +72,30 @@ export const load: PageServerLoad = async ({ request, url }) => {
 				printedPage: folioByHit.get(`${item.revisionId}:${item.page}`) ?? null
 			}))
 		},
+		works,
 		searchableCount
 	};
 };
+
+/**
+ * Catalogue-metadata matches for the same query, so metadata-only works remain
+ * findable even when they have no OCR text. Collapses multiple files of one work
+ * to a single entry, keeping the first file id for a reader link.
+ */
+async function searchArchiveWorks(
+	principal: NonNullable<Awaited<ReturnType<typeof resolveArchivePrincipal>>>,
+	q: string
+) {
+	const { items } = await listArchiveFiles(db, { text: q, sort: 'title', limit: 50, principal });
+	const seen = new Set<string>();
+	const works: Array<{ slug: string; fileId: string; source: (typeof items)[number]['source'] }> = [];
+	for (const item of items) {
+		if (seen.has(item.source.slug)) continue;
+		seen.add(item.source.slug);
+		works.push({ slug: item.source.slug, fileId: item.file.fileId, source: item.source });
+	}
+	return works;
+}
 
 /**
  * The number the page prints on itself, for the hits on this results page. A

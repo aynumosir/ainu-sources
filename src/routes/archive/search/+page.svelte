@@ -74,6 +74,31 @@
 		</p>
 	{/if}
 
+	{#if data.q && data.works.length}
+		<section class="space-y-2">
+			<BilingualLabel
+				tag="h2"
+				ja="資料"
+				en="Matching works"
+				class="text-[15px] font-semibold [--archive-label-en-size:13px]"
+			/>
+			<ol class="space-y-2">
+				{#each data.works as work (work.slug)}
+					<li class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3">
+						<a href={`/archive/sources/${work.slug}`} class="archive-title font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">{work.source.title}</a>
+						{#if work.source.titleEn && work.source.titleEn !== work.source.title}
+							<p class="text-[13px] text-[var(--archive-subtle)]">{work.source.titleEn}</p>
+						{/if}
+						<div class="mt-1 flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
+							{#if work.source.author}<span>{work.source.author}</span>{/if}
+							<span class="tnum">{formatYear(work.source)}</span>
+						</div>
+					</li>
+				{/each}
+			</ol>
+		</section>
+	{/if}
+
 	{#if data.result}
 		{#if data.q && data.result.items.length}
 			<p class="text-[13px] text-[var(--archive-subtle)]">{data.result.total} hits</p>
@@ -129,7 +154,7 @@
 					class="text-[17px] font-semibold"
 				/>
 				<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">
-					{#if data.searchableCount != null}across {data.searchableCount} approved current files{/if}
+					{#if data.works.length}No OCR text matched; see the matching works above.{:else if data.searchableCount != null}across {data.searchableCount} approved current files{/if}
 				</p>
 			</div>
 		{:else}
