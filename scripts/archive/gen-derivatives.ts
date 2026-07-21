@@ -63,10 +63,13 @@ function argValue(flag: string): string | undefined {
 }
 const hasFlag = (flag: string) => process.argv.includes(flag);
 
-/** Parse `--limit`: absent means no cap; anything that is not a positive,
- *  finite integer is rejected so `done >= limit` always terminates the run. */
-function parseLimit(raw: string | undefined): number {
-  if (raw === undefined) return Infinity;
+/** Parse `--limit`. Absent means no cap. Accepted values are positive
+ *  integers, which keeps `done >= limit` well-defined. */
+function parseLimit(raw: string | undefined, provided = raw !== undefined): number {
+  if (raw === undefined) {
+    if (provided) throw new Error("--limit requires a value");
+    return Infinity;
+  }
   const value = Number(raw);
   if (!Number.isInteger(value) || value <= 0) {
     throw new Error(`--limit must be a positive integer, got "${raw}"`);
@@ -188,10 +191,9 @@ function pdfPageCount(pdf: string): number {
   return Number(/^Pages:\s+(\d+)/m.exec(info)?.[1] ?? 0);
 }
 
-/** Authoritative page count read from the source PDF in R2, or null when R2 is
- *  unavailable or the count cannot be read. The DB `page_count` is not trusted
- *  here: a stale low value would make the completeness check probe an earlier
- *  page as the "last" page and wrongly skip missing real final-page images. */
+/** Authoritative page count read from the source PDF in R2. A stale low DB
+ *  `page_count` can make the completeness check probe an earlier page as the
+ *  final page and wrongly skip missing final-page images. */
 async function sourcePageCount(row: Row): Promise<number | null> {
   if (!r2Configured()) return null;
   const workDir = mkdtempSync(path.join(tmpdir(), "ainu-page-count-"));
@@ -200,6 +202,8 @@ async function sourcePageCount(row: Row): Promise<number | null> {
     r2Get(blobKey(row.blobSha256), pdf);
     const total = pdfPageCount(pdf);
     return total > 0 ? total : null;
+  } catch {
+    return null;
   } finally {
     rmSync(workDir, { recursive: true, force: true });
   }
@@ -208,9 +212,8 @@ async function sourcePageCount(row: Row): Promise<number | null> {
 async function derivativesComplete(row: Row): Promise<boolean> {
   if (!r2Configured()) return false;
   if (!row.pageCount || row.pageCount <= 0) return false;
-  // Cheap R2 probes first, keyed off the recorded page count. Only when the
-  // linearized PDF and both edge pages are present do we pay for a source
-  // download to confirm the recorded count is authoritative.
+  // Cheap R2 probes first, keyed off the recorded page count. A source
+  // download follows when the linearized PDF and both edge pages are present.
   const cheapComplete =
     r2ObjectExists(linearizedKey(row.revisionId)) &&
     WIDTHS.every((w) =>
@@ -222,8 +225,8 @@ async function derivativesComplete(row: Row): Promise<boolean> {
   if (!cheapComplete) return false;
   const total = await sourcePageCount(row);
   if (!total) return false;
-  // A mismatch means the recorded count is stale, so the "last page" probed
-  // above was not the real final page: treat the work as incomplete.
+  // A mismatch means the recorded count is stale and the page probed above
+  // is not the real final page, so the work remains incomplete.
   return total === row.pageCount;
 }
 
@@ -375,7 +378,7 @@ async function main(): Promise<void> {
   const dryRun = hasFlag("--dry-run");
   const assumeMissing = hasFlag("--assume-missing");
   const onlyRevision = argValue("--revision");
-  const limit = parseLimit(argValue("--limit"));
+  const limit = parseLimit(argValue("--limit"), hasFlag("--limit"));
 
   const clauses = [
     eq(fileRevisions.reviewStatus, "approved"),
