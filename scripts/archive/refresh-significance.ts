@@ -32,9 +32,13 @@ async function main() {
 		.sort((a, b) => b.score - a.score);
 
 	if (!dryRun) {
-		for (const [id, score] of scores) {
-			await db.update(sources).set({ significance: score }).where(eq(sources.id, id));
-		}
+		// One atomic batch: per-row round trips against the remote database
+		// would stretch a refresh into thousands of requests.
+		await db.batch(
+			[...scores.entries()].map(([id, score]) =>
+				db.update(sources).set({ significance: score }).where(eq(sources.id, id))
+			)
+		);
 	}
 	console.log(`${dryRun ? 'would update' : 'updated'} ${scores.size} sources`);
 	console.log('\ntop 10:');
