@@ -1530,6 +1530,8 @@ export async function listArchiveFiles(
 			sql`(
 				lower(${sources.title}) like ${needle} escape '\\'
 				or lower(coalesce(${sources.titleEn}, '')) like ${needle} escape '\\'
+				or lower(coalesce(${sources.titleAin}, '')) like ${needle} escape '\\'
+				or lower(${sources.slug}) like ${needle} escape '\\'
 				or lower(coalesce(${sources.author}, '')) like ${needle} escape '\\'
 				or lower(coalesce(${sources.summary}, '')) like ${needle} escape '\\'
 			)`

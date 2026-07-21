@@ -19,7 +19,8 @@
  *   DATABASE_URL (+ DATABASE_AUTH_TOKEN for remote)
  *   R2_BUCKET, R2_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY
  *
- * Flags: --revision <id> (one revision), --limit N, --dry-run.
+ * Flags: --revision <id> (one revision), --limit N, --dry-run,
+ *        --assume-missing (skip R2 completeness probes; useful for CI smoke).
  */
 import { execFileSync } from "node:child_process";
 import {
@@ -69,6 +70,15 @@ type Row = {
   pageCount: number | null;
 };
 
+function r2Configured(): boolean {
+  return [
+    "R2_BUCKET",
+    "R2_ENDPOINT",
+    "R2_ACCESS_KEY_ID",
+    "R2_SECRET_ACCESS_KEY",
+  ].every((name) => !!process.env[name]);
+}
+
 function r2Env(): NodeJS.ProcessEnv {
   return {
     ...process.env,
@@ -95,6 +105,7 @@ function linearizedKey(revisionId: string): string {
 }
 
 function r2ObjectExists(key: string): boolean {
+  if (!r2Configured()) return false;
   try {
     execFileSync(
       "aws",
@@ -117,6 +128,11 @@ function r2ObjectExists(key: string): boolean {
 }
 
 function r2Get(key: string, file: string): void {
+  if (!r2Configured()) {
+    throw new Error(
+      "R2 credentials are required unless --dry-run is used with --assume-missing",
+    );
+  }
   execFileSync(
     "aws",
     [
@@ -135,6 +151,7 @@ function r2Get(key: string, file: string): void {
 }
 
 function r2Put(key: string, file: string, contentType: string): void {
+  if (!r2Configured()) throw new Error("R2 credentials are required");
   execFileSync(
     "aws",
     [
@@ -158,6 +175,35 @@ function r2Put(key: string, file: string, contentType: string): void {
 function pdfPageCount(pdf: string): number {
   const info = execFileSync("pdfinfo", [pdf], { encoding: "utf8" });
   return Number(/^Pages:\s+(\d+)/m.exec(info)?.[1] ?? 0);
+}
+
+async function pageCountFromRevision(row: Row): Promise<number | null> {
+  if (row.pageCount && row.pageCount > 0) return row.pageCount;
+  if (!r2Configured()) return null;
+  const workDir = mkdtempSync(path.join(tmpdir(), "ainu-page-count-"));
+  try {
+    const pdf = path.join(workDir, "source.pdf");
+    r2Get(blobKey(row.blobSha256), pdf);
+    const total = pdfPageCount(pdf);
+    return total > 0 ? total : null;
+  } finally {
+    rmSync(workDir, { recursive: true, force: true });
+  }
+}
+
+async function derivativesComplete(row: Row): Promise<boolean> {
+  const total = await pageCountFromRevision(row);
+  if (!total) return false;
+  return (
+    r2ObjectExists(linearizedKey(row.revisionId)) &&
+    WIDTHS.every((w) =>
+      r2ObjectExists(pageDerivativeKey(row.revisionId, 1, w)),
+    ) &&
+    WIDTHS.every((w) =>
+      r2ObjectExists(pageDerivativeKey(row.revisionId, total, w)),
+    ) &&
+    row.pageCount === total
+  );
 }
 
 /** Render one page to a size-capped WebP at each width, uploading each object
@@ -306,6 +352,7 @@ async function generateForRevision(
 async function main(): Promise<void> {
   requireEnv("DATABASE_URL");
   const dryRun = hasFlag("--dry-run");
+  const assumeMissing = hasFlag("--assume-missing");
   const onlyRevision = argValue("--revision");
   const limit = argValue("--limit")
     ? Math.max(1, Number(argValue("--limit")))
@@ -340,15 +387,16 @@ async function main(): Promise<void> {
   try {
     for (const row of candidates) {
       if (done >= limit) break;
-      // Skip work whose derivatives already exist (linearized + first page
-      // at both widths); a resumed run re-enters an incomplete one.
-      const complete =
-        r2ObjectExists(linearizedKey(row.revisionId)) &&
-        WIDTHS.every((w) =>
-          r2ObjectExists(pageDerivativeKey(row.revisionId, 1, w)),
-        ) &&
-        row.pageCount != null;
+      // Skip only when the linearized PDF, first page, last page, and DB page
+      // count are all present. Checking the last page catches the most common
+      // interrupted-run case: page 1 exists but later pages do not.
+      const complete = !assumeMissing && (await derivativesComplete(row));
       if (complete && !onlyRevision) continue;
+      if (dryRun && assumeMissing) {
+        console.log(`  would generate ${row.slug} (${row.revisionId})`);
+        done += 1;
+        continue;
+      }
       await generateForRevision(row, workRoot, dryRun);
       done += 1;
     }
