@@ -216,7 +216,23 @@ async function main() {
 
 	const client = createClient({ url: requireEnv('DATABASE_URL'), authToken: process.env.DATABASE_AUTH_TOKEN });
 	const db = drizzle(client);
-	const rows = (await db.all<Row>(sql`
+	const suspect = process.argv.includes('--suspect');
+	const rows = (await db.all<Row>(suspect ? sql`
+		select fr.id as revisionId, src.slug as slug, fr.blob_sha256 as blobSha256
+		from file_revisions fr
+		join source_files sf on sf.id = fr.source_file_id
+		join sources src on src.id = sf.source_id
+		join revision_ocr_coverage cov on cov.revision_id = fr.id and cov.preferred = 1
+		where fr.is_current = 1
+			and fr.declared_media_type = 'application/pdf'
+			and fr.blob_sha256 is not null
+			and cov.reliability = 'suspect'
+			and not exists (
+				select 1 from ocr_ingest_state s
+				where s.revision_id = fr.id and s.variant = 'gemini'
+			)
+		order by src.slug
+	` : sql`
 		select fr.id as revisionId, src.slug as slug, fr.blob_sha256 as blobSha256
 		from file_revisions fr
 		join source_files sf on sf.id = fr.source_file_id
@@ -227,7 +243,7 @@ async function main() {
 			and not exists (select 1 from ocr_ingest_state s where s.revision_id = fr.id)
 		order by src.slug
 	`)).slice(0, limit);
-	console.log(`${rows.length} revisions have no text of any kind`);
+	console.log(`${rows.length} revisions ${suspect ? 'with suspect text' : 'with no text of any kind'}`);
 
 	const workDir = mkdtempSync(path.join(tmpdir(), 'recognize-'));
 	let ingested = 0;
