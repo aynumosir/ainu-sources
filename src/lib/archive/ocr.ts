@@ -73,6 +73,31 @@ export function summarizeOcrCoverage(coverage: OcrCoverage[]): OcrSummary {
 	return { state: 'available', label: `本文あり / text · ${detail}` };
 }
 
+/** Reliability tiers, best first. Sound text outranks unexamined text, which outranks broken text. */
+const RELIABILITY_TIER: Record<'sound' | 'unassessed' | 'suspect', number> = {
+	sound: 0,
+	unassessed: 1,
+	suspect: 2
+};
+
+/**
+ * Choose which variant of a revision carries the preferred flag. The best
+ * non-empty reliability tier wins. Within a tier the current preferred variant
+ * stays, so the reader's default does not flip between variants the evidence
+ * considers equal; with no current preference the first row in input order
+ * (ingestion order) wins.
+ */
+export function pickPreferredVariant(
+	rows: Array<{ variant: string; reliability: 'unassessed' | 'sound' | 'suspect' }>,
+	currentPreferred: string | null
+): string | null {
+	if (rows.length === 0) return null;
+	const best = Math.min(...rows.map((row) => RELIABILITY_TIER[row.reliability]));
+	const tier = rows.filter((row) => RELIABILITY_TIER[row.reliability] === best);
+	if (currentPreferred && tier.some((row) => row.variant === currentPreferred)) return currentPreferred;
+	return tier[0].variant;
+}
+
 export function chooseDefaultOcrVariant(coverage: OcrCoverage[]): string | null {
 	const variants = textBearingVariants(coverage);
 	const preferred = variants.find((variant) => variant.preferred);
