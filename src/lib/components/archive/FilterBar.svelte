@@ -23,6 +23,7 @@
 				<option value="title">Title</option>
 				<option value="year-desc">Newest</option>
 				<option value="year-asc">Oldest</option>
+				<option value="significance">Significance</option>
 			</select>
 		</label>
 		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">

@@ -1808,6 +1808,26 @@ describe('archive DB flows', () => {
 		}
 	});
 
+	it('sorts archive files by significance with unscored works last', async () => {
+		await seedRevision('approved');
+		await db.update(schema.sources).set({ title: 'Zulu' }).where(eq(schema.sources.id, 'source-1'));
+		await seedArchiveListRow({ index: 2, title: 'Bravo', reviewedAt: new Date(2_000) });
+		await seedArchiveListRow({ index: 3, title: 'Alpha', reviewedAt: new Date(3_000) });
+		await seedArchiveListRow({ index: 4, title: 'Echo', reviewedAt: new Date(4_000) });
+		await seedArchiveListRow({ index: 5, title: 'Charlie', reviewedAt: new Date(5_000) });
+		await db.update(schema.sources).set({ significance: 0.5 }).where(eq(schema.sources.id, 'list-source-2'));
+		await db.update(schema.sources).set({ significance: 0.9 }).where(eq(schema.sources.id, 'list-source-3'));
+		await db.update(schema.sources).set({ significance: 0.2 }).where(eq(schema.sources.id, 'list-source-5'));
+
+		const first = await listArchiveFiles(db, { sort: 'significance', limit: 2, principal: reader });
+		const second = await listArchiveFiles(db, { sort: 'significance', limit: 2, cursor: first.nextCursor, principal: reader });
+		const third = await listArchiveFiles(db, { sort: 'significance', limit: 2, cursor: second.nextCursor, principal: reader });
+		expect(first.items.map((item) => item.source.title)).toEqual(['Alpha', 'Bravo']);
+		expect(second.items.map((item) => item.source.title)).toEqual(['Charlie', 'Zulu']);
+		expect(third.items.map((item) => item.source.title)).toEqual(['Echo']);
+		expect(third.nextCursor).toBeNull();
+	});
+
 	it('resolves file ids to source metadata and current revisions', async () => {
 		await seedRevision('approved');
 		await expect(getSourceFileById(db, 'file-1', reviewer)).resolves.toMatchObject({

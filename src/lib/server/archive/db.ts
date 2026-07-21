@@ -48,7 +48,7 @@ export type ArchiveBudgetKind = 'download' | 'view';
 export type CapabilityRedemptionRequest =
 	| { kind: 'full' }
 	| { kind: 'range_header'; rangeHeader: string | null };
-export type ArchiveFileSort = 'updated' | 'title' | 'year-desc' | 'year-asc';
+export type ArchiveFileSort = 'updated' | 'title' | 'year-desc' | 'year-asc' | 'significance';
 export type ArchiveUserKind = 'person' | 'system' | 'machine';
 
 export type ArchiveAdminUser = {
@@ -1468,7 +1468,8 @@ export async function getUsageSummary(db: Db, principal: ArchivePrincipal) {
 type ArchiveListCursor =
 	| { sort: 'updated'; updatedAt: string; id: string }
 	| { sort: 'title'; title: string; id: string }
-	| { sort: 'year-desc' | 'year-asc'; yearStart: number | null; id: string };
+	| { sort: 'year-desc' | 'year-asc'; yearStart: number | null; id: string }
+	| { sort: 'significance'; significance: number | null; id: string };
 
 function encodeArchiveListCursor(cursor: ArchiveListCursor): string {
 	return base64url(new TextEncoder().encode(JSON.stringify(cursor)));
@@ -1484,6 +1485,11 @@ function decodeArchiveListCursor(value: string | null, sort: ArchiveFileSort): A
 		}
 		if (sort === 'title') {
 			return typeof parsed.title === 'string' ? { sort, title: parsed.title, id: parsed.id } : null;
+		}
+		if (sort === 'significance') {
+			return typeof parsed.significance === 'number' || parsed.significance === null
+				? { sort, significance: parsed.significance, id: parsed.id }
+				: null;
 		}
 		if (typeof parsed.yearStart === 'number' || parsed.yearStart === null) return { sort, yearStart: parsed.yearStart, id: parsed.id };
 		return null;
@@ -1563,6 +1569,16 @@ export async function listArchiveFiles(
 							isNull(sources.yearStart)
 						)!
 			);
+		} else if (cursor.sort === 'significance') {
+			clauses.push(
+				cursor.significance == null
+					? and(isNull(sources.significance), gt(sourceFiles.id, cursor.id))!
+					: or(
+							lt(sources.significance, cursor.significance),
+							and(eq(sources.significance, cursor.significance), gt(sourceFiles.id, cursor.id)),
+							isNull(sources.significance)
+						)!
+			);
 		} else {
 			clauses.push(
 				cursor.yearStart == null
@@ -1583,7 +1599,9 @@ export async function listArchiveFiles(
 				? [sql`${sources.yearStart} is null`, desc(sources.yearStart), asc(sourceFiles.id)]
 				: input.sort === 'year-asc'
 					? [sql`${sources.yearStart} is null`, asc(sources.yearStart), asc(sourceFiles.id)]
-					: [sql`${fileRevisions.reviewedAt} is null`, desc(fileRevisions.reviewedAt), asc(sourceFiles.id)];
+					: input.sort === 'significance'
+						? [sql`${sources.significance} is null`, desc(sources.significance), asc(sourceFiles.id)]
+						: [sql`${fileRevisions.reviewedAt} is null`, desc(fileRevisions.reviewedAt), asc(sourceFiles.id)];
 
 	const rows = await db
 		.select({
@@ -1608,6 +1626,7 @@ export async function listArchiveFiles(
 			yearCertainty: sources.yearCertainty,
 			dialect: sources.dialect,
 			languages: sources.languages,
+			significance: sources.significance,
 			summary: sources.summary
 		})
 		.from(sourceFiles)
@@ -1626,9 +1645,11 @@ export async function listArchiveFiles(
 				? encodeArchiveListCursor({ sort: 'title', title: last.title, id: last.fileId })
 				: input.sort === 'year-desc' || input.sort === 'year-asc'
 					? encodeArchiveListCursor({ sort: input.sort, yearStart: last.yearStart, id: last.fileId })
-					: last.reviewedAt
-						? encodeArchiveListCursor({ sort: 'updated', updatedAt: last.reviewedAt.toISOString(), id: last.fileId })
-						: null;
+					: input.sort === 'significance'
+						? encodeArchiveListCursor({ sort: 'significance', significance: last.significance, id: last.fileId })
+						: last.reviewedAt
+							? encodeArchiveListCursor({ sort: 'updated', updatedAt: last.reviewedAt.toISOString(), id: last.fileId })
+							: null;
 	}
 	return {
 		items: page.map((row) => ({

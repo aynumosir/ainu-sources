@@ -54,6 +54,33 @@ function pageRank(ids: string[], out: Map<string, string[]>, d = 0.85, iters = 6
 	return pr;
 }
 
+/**
+ * PageRank over every active source, scored on the accepted 'cites' edges.
+ * Sources that touch no edge stay in the node set as dangling nodes and
+ * receive the uniform floor, so isolated works still sort below cited ones.
+ * Scores are normalized so the top work is exactly 1.
+ */
+export async function computeSourceSignificance(): Promise<Map<string, number>> {
+	const [rows, rawEdges] = await Promise.all([
+		db.select({ id: sources.id }).from(sources).where(activeSourcesOnly()),
+		db
+			.select({ f: sourceRelations.fromSourceId, t: sourceRelations.toSourceId })
+			.from(sourceRelations)
+			.where(and(eq(sourceRelations.type, 'cites'), publicRelationsOnly()))
+	]);
+	const activeIds = new Set(rows.map((r) => r.id));
+	const ids = [...activeIds];
+	if (!ids.length) return new Map();
+	const out = new Map<string, string[]>();
+	for (const e of rawEdges) {
+		if (!activeIds.has(e.f) || !activeIds.has(e.t)) continue;
+		(out.get(e.f) ?? out.set(e.f, []).get(e.f)!).push(e.t);
+	}
+	const pr = pageRank(ids, out);
+	const maxPr = Math.max(...ids.map((i) => pr.get(i) ?? 0), 1e-9);
+	return new Map(ids.map((i) => [i, (pr.get(i) ?? 0) / maxPr]));
+}
+
 export async function getCitationNetwork(): Promise<NetworkData> {
 	// Public graph = ACCEPTED 'cites' edges only (candidate/rejected/removed edges
 	// are invisible). No-op while every relation is 'accepted'.

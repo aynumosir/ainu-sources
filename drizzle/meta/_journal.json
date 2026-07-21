@@ -134,6 +134,13 @@
       "when": 1784516000000,
       "tag": "0018_text_reliability",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "6",
+      "when": 1784666323152,
+      "tag": "0019_left_viper",
+      "breakpoints": true
     }
   ]
 }

@@ -1,4 +1,4 @@
-export const ARCHIVE_SORTS = ['updated', 'title', 'year-desc', 'year-asc'] as const;
+export const ARCHIVE_SORTS = ['updated', 'title', 'year-desc', 'year-asc', 'significance'] as const;
 
 export type ArchiveSort = (typeof ARCHIVE_SORTS)[number];
 export type ArchiveOcrFilter = 'any' | 'with' | 'without';
