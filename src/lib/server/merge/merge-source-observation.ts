@@ -1517,34 +1517,41 @@ export async function reviewChangeRequest(
 		return { status: 'needs_evidence', reviewId, changeRequestId: crId };
 	}
 
-	// 2b. reject — CR rejected AND its observation rejected, in ONE atomic batch.
+	// 2b. reject — CR rejected AND its observation rejected. Split the batch so we can
+	// check the CR actually transitioned: if a concurrent apply already moved the CR
+	// to `applying`/`applied`, the CAS-guarded update touches 0 rows and we must NOT
+	// flip the observation (doing so would corrupt the append-only ledger).
 	if (review.verdict === 'reject') {
+		const decidedAt = new Date();
+		const crRes = await db
+			.update(changeRequests)
+			.set({
+				status: 'rejected',
+				decidedByActor: review.reviewerActor ?? null,
+				decidedAt,
+				updatedAt: decidedAt
+			})
+			.where(
+				and(
+					eq(changeRequests.id, crId),
+					inArray(changeRequests.status, ['open', 'needs_evidence', 'approved'])
+				)
+			);
+		if (rowsAffected(crRes) !== 1) {
+			throw new ChangeRequestStale(
+				`reject raced: change request ${crId} was already claimed by a concurrent apply`,
+				crId
+			);
+		}
 		const [cr] = await db
 			.select({ observationId: changeRequests.observationId })
 			.from(changeRequests)
 			.where(eq(changeRequests.id, crId))
 			.limit(1);
-		const decidedAt = new Date();
-		await db.batch([
-			db
-				.update(changeRequests)
-				.set({
-					status: 'rejected',
-					decidedByActor: review.reviewerActor ?? null,
-					decidedAt,
-					updatedAt: decidedAt
-				})
-				.where(
-					and(
-						eq(changeRequests.id, crId),
-						inArray(changeRequests.status, ['open', 'needs_evidence', 'approved'])
-					)
-				),
-			db
-				.update(sourceObservations)
-				.set({ status: 'rejected' })
-				.where(eq(sourceObservations.id, cr?.observationId ?? ''))
-		]);
+		await db
+			.update(sourceObservations)
+			.set({ status: 'rejected' })
+			.where(eq(sourceObservations.id, cr?.observationId ?? ''));
 		return { status: 'rejected', reviewId, changeRequestId: crId };
 	}
 
