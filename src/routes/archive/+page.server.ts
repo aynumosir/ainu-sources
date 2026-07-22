@@ -16,6 +16,10 @@ export const load: PageServerLoad = async ({ request, url }) => {
 	if (!principal) return { accessDenied: true, filters, items: [], nextCursor: null, params: '' };
 	if (!archiveRoleAtLeast(principal.role, 'archive_reader')) error(403, 'archive reader role required');
 
+	// Independent of the library listing below, so it can run alongside it
+	// rather than after.
+	const statsPromise = getArchiveStats(db);
+
 	const result = await listArchiveFiles(db, {
 		text: filters.text,
 		dialect: filters.dialect,
@@ -59,7 +63,7 @@ export const load: PageServerLoad = async ({ request, url }) => {
 
 	const params = new URLSearchParams(url.searchParams);
 	params.delete('cursor');
-	const stats = await getArchiveStats(db);
+	const stats = await statsPromise;
 	return {
 		accessDenied: false,
 		filters,
