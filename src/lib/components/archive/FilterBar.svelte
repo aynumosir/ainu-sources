@@ -1,12 +1,26 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { archiveFilterHref, type ArchiveFilters } from '$lib/archive/filters';
 	import BilingualLabel from './BilingualLabel.svelte';
 	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 
 	let { filters }: { filters: ArchiveFilters } = $props();
+
+	// The form only knows its own fields; without this, submitting it or
+	// clicking Clear would drop the view mode back to the cards default.
+	const view = $derived(page.url.searchParams.get('view'));
+	const clearHref = $derived.by(() => {
+		const href = archiveFilterHref('/archive', { ocr: 'any', sort: 'updated' });
+		if (!view) return href;
+		const [path, query] = href.split('?');
+		const params = new URLSearchParams(query);
+		params.set('view', view);
+		return `${path}?${params}`;
+	});
 </script>
 
 <form action="/archive" method="get" class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3">
+	{#if view}<input type="hidden" name="view" value={view} />{/if}
 	<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_0.8fr_0.9fr_auto] lg:items-end">
 		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
 			Text
@@ -38,7 +52,7 @@
 			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.apply)} class="h-10 border border-[var(--archive-gilt-text)] bg-[var(--archive-gilt-text)] px-4 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt)] hover:border-[var(--archive-gilt)]">
 				<BilingualLabel ja={archiveLabels.apply.ja} en={archiveLabels.apply.en} compact />
 			</button>
-			<a href={archiveFilterHref('/archive', { ocr: 'any', sort: 'updated' })} aria-label={bilingualAriaLabel(archiveLabels.clear)} class="flex h-10 items-center border border-[var(--archive-border)] px-3 text-[13px] font-semibold text-[var(--archive-subtle)] hover:border-[var(--archive-gilt)] hover:text-[var(--archive-gilt-text)]">
+			<a href={clearHref} aria-label={bilingualAriaLabel(archiveLabels.clear)} class="flex h-10 items-center border border-[var(--archive-border)] px-3 text-[13px] font-semibold text-[var(--archive-subtle)] hover:border-[var(--archive-gilt)] hover:text-[var(--archive-gilt-text)]">
 				<BilingualLabel ja={archiveLabels.clear.ja} en={archiveLabels.clear.en} compact />
 			</a>
 		</div>
