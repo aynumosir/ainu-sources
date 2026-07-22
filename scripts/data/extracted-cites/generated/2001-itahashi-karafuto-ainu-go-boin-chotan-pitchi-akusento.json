@@ -1,0 +1,70 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2001-itahashi-karafuto-ainu-go-boin-chotan-pitchi-akusento",
+    "title": "板橋義三 樺太アイヌ語の母音の長短と北海道アイヌ語のピッチアクセントとの史的関係1",
+    "year": 2001,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 3,
+    "sourcePath": "articles/2001_板橋義三_樺太アイヌ語の母音の長短と北海道アイヌ語のピッチアクセントとの史的関係1.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1957,
+      "yearText": "1957",
+      "title": "アイヌ語における年長者層特殊語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1957-x-1ouspxs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における年長者層特殊語"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ語諸方言の基礎語彙統計学的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-x-ot8fs9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語諸方言の基礎語彙統計学的研究"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    }
+  ]
+}

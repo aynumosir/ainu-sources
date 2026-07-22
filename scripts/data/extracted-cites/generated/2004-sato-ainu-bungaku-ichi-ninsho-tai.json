@@ -1,0 +1,69 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2004-sato-ainu-bungaku-ichi-ninsho-tai",
+    "title": "佐藤知己 アイヌ文学における一人称体の問題",
+    "year": 2004,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 3,
+    "sourcePath": "articles/2004_佐藤知己_アイヌ文学における一人称体の問題.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言の人称の種類",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-1vec8pf",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称の種類"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2001,
+      "yearText": "2001",
+      "title": "アイヌ語千歳方言の「第三類の動詞」の構造と機能",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2001-x-98ujg5",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言の「第三類の動詞」の構造と機能"
+    }
+  ]
+}

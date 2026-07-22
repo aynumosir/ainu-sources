@@ -1,0 +1,402 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2022-sakaguchi-karafuto-hogen-sushi-keisan",
+    "title": "阪口諒 アイヌ語樺太方言における数詞と計算",
+    "year": 2022,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 22,
+    "sourcePath": "articles/2022_阪口諒_アイヌ語樺太方言における数詞と計算.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "John C. Batchelor"
+      ],
+      "year": 1905,
+      "yearText": "1905",
+      "title": "An Ainu-English-Japanese Dictionary",
+      "titleEn": "An Ainu-English-Japanese Dictionary",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "An Ainu-English-Japanese Dictionary"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Yamabe, Yasunosuke (山辺安之助); ed. Kindaichi, Kyosuke (金田一京助)"
+      ],
+      "year": 1913,
+      "yearText": "1913",
+      "title": "あいぬ物語（附 あいぬ語大意及語彙）",
+      "titleEn": "Ainu Monogatari (Sakhalin Ainu autobiography, appended vocabulary)",
+      "type": "wordlist",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1913-yamabe-ainu-monogatari",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "あいぬ物語（附 あいぬ語大意及語彙）"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Berthold Laufer"
+      ],
+      "year": 1917,
+      "yearText": "1917",
+      "title": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology",
+      "titleEn": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1917-berthold-laufer-the-vigesimal-and-decimal-systems-in-the-ainu-nume",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1935,
+      "yearText": "1935",
+      "title": "数詞から観たアイヌ民族",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1935-x-kzhgkk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "数詞から観たアイヌ民族"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1942,
+      "yearText": "1942",
+      "title": "アイヌ語法研究 : 樺太方言を中心として",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1942-x-3bat8z",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1957,
+      "yearText": "1957",
+      "title": "アイヌ語における年長者層特殊語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1957-x-1ouspxs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における年長者層特殊語"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Fred C.C. Peng, Barron Brainerd"
+      ],
+      "year": 1970,
+      "yearText": "1970",
+      "title": "A grammar of Ainu number names",
+      "titleEn": "A grammar of Ainu number names",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1970-fred-c-c-peng-a-grammar-of-ainu-number-names",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A grammar of Ainu number names"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "村山, 七郎"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "北千島アイヌ語 : 文献学的研究",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1971-x-s2947h",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "北千島アイヌ語 : 文献学的研究"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "中川 裕"
+      ],
+      "year": 1988,
+      "yearText": "1988",
+      "title": "アイヌ語と接触した外国人--世界最初のアイヌ語記録者アンジェリス",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1988-x-1qddrpc",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語と接触した外国人--世界最初のアイヌ語記録者アンジェリス"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "相圭 朴"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "M.M. Dobrotvorskii, 寺田 吉孝"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語・ロシア語辞典-2-",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-m-m-dobrotvorskii-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語・ロシア語辞典-2-"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "魚井 一由｜廣田 徹"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "アイヌ語数詞体系に対する考察．－ドブロトゥヴォールスキーのアイヌ語辞典を基盤にして",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-kzhgjp",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語数詞体系に対する考察．－ドブロトゥヴォールスキーのアイヌ語辞典を基盤にして"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "The Study of the Ainu Language",
+      "titleEn": "The Study of the Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Study of the Ainu Language"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 2009,
+      "yearText": "2009",
+      "title": "樺太アイヌ語の数詞について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2009-x-m4867n",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ語の数詞について"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "寺田, 吉孝"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "M.M.ドブロトゥヴォールスキーのアイヌ語・ロシア語辞典(20)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-x-m-m-20",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "M.M.ドブロトゥヴォールスキーのアイヌ語・ロシア語辞典(20)"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 20,
+      "authors": [
+        "阪口 諒"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "ジョン・バチェラーの著作に含まれる樺太アイヌの口承文芸―ピウスツキ資料からの転載の実態―",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-d4vqt6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "ジョン・バチェラーの著作に含まれる樺太アイヌの口承文芸―ピウスツキ資料からの転載の実態―"
+    },
+    {
+      "n": 21,
+      "authors": [
+        "落合いずみ"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語の数詞再考：二十進法における下方算法から上方算法への切り替え",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-17dnw6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の数詞再考：二十進法における下方算法から上方算法への切り替え"
+    },
+    {
+      "n": 22,
+      "authors": [
+        "阪口諒"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "アイヌ語樺太方言における数詞と計算",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-x-bwl5i3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語樺太方言における数詞と計算"
+    }
+  ]
+}

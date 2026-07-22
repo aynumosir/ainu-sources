@@ -1,0 +1,245 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2006-nakagawa-ainunin-ainu-go-hyoki",
+    "title": "中川裕 アイヌ人によるアイヌ語表記への取り組み",
+    "year": 2006,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 13,
+    "sourcePath": "articles/2006_中川裕_アイヌ人によるアイヌ語表記への取り組み.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "千徳 太郎治"
+      ],
+      "year": 1906,
+      "yearText": "1906",
+      "title": "千徳太郎治のピウスツキ宛書簡",
+      "titleEn": "Sentoku Tarōji's Letters to Piłsudski",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "sentoku-pilsudski-letters",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "千徳太郎治のピウスツキ宛書簡"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "初桐 裕三"
+      ],
+      "year": 1953,
+      "yearText": "1953",
+      "title": "分類アイヌ語辞典植物篇",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1953-x-9zogj4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "分類アイヌ語辞典植物篇"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "萩中 美枝"
+      ],
+      "year": 1973,
+      "yearText": "1973",
+      "title": "アイヌ語のカナ表記についての試み",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1973-x-9zp9w9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語のカナ表記についての試み"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "アイヌ民族博物館"
+      ],
+      "year": 1994,
+      "yearText": "1994",
+      "title": "アイヌ民族博物館伝承記録",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1994-x-1tv3wk5",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ民族博物館伝承記録"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "切替英雄"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "アイヌによるアイヌ語表記",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-x-1ru16e0",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌによるアイヌ語表記"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "萱野, 茂, 平凡社"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "萱野茂のアイヌ神話集成",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-1v9r8sq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ神話集成"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "中川裕"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "アイヌ人によるアイヌ語表記への取り組み",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-19usgnh",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ人によるアイヌ語表記への取り組み"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "久保寺逸彦著"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語・日本語辞典稿",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-121ohxf",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語・日本語辞典稿"
+    }
+  ]
+}

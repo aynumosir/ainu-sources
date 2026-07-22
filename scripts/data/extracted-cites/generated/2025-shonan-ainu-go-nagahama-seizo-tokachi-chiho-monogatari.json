@@ -1,0 +1,189 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2025-shonan-ainu-go-nagahama-seizo-tokachi-chiho-monogatari",
+    "title": "湘南アイヌ語研究会『長濱清蔵のアイヌ語』",
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参考文献",
+    "referencePages": "scan pp. 171-196",
+    "referenceCount": 10,
+    "sourcePath": "books/2025_Shounan_NagahamaSeizoAinu/湘南アイヌ語研究会『長濱清蔵のアイヌ語』.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "久保田淳 [ほか編集]"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "口承文学(2) ; アイヌ文学",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-x-2-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "口承文学(2) ; アイヌ文学"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "中川裕, 中本ムツ子著"
+      ],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "カムイユカㇻでアイヌ語を学ぶ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-x-1ilpwbb",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カムイユカㇻでアイヌ語を学ぶ"
+    },
+    {
+      "n": 4,
+      "authors": [],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "ニューエクスプレスプラス アイヌ語",
+      "titleEn": "New Express Plus: Ainu",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "new-express-plus-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "ニューエクスプレスプラス アイヌ語"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "瀧口, 夕美"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "子どもとまなぶアイヌ語",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-1508d43",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "子どもとまなぶアイヌ語"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "北原,モコットゥナㇱ, 瀧口, 夕美, 小笠原, 小夜"
+      ],
+      "year": 2024,
+      "yearText": "2024",
+      "title": "ミンタㇻ３ アイヌ民族33のニュース",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2024-x-3-33",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "ミンタㇻ３ アイヌ民族33のニュース"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "大澤, 香"
+      ],
+      "year": 2024,
+      "yearText": "2024",
+      "title": "先住民族アイヌを学ぶ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2024-x-ghwox6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "先住民族アイヌを学ぶ"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "大澤香, 瀧口夕美, 石川康宏著"
+      ],
+      "year": 2024,
+      "yearText": "2024",
+      "title": "アイヌ語を話してみよう!",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2024-x-b06u1m",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語を話してみよう!"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "藤田, 護"
+      ],
+      "year": 2025,
+      "yearText": "2025",
+      "title": "津島佑子『「私」』におけるアイヌ神謡 : 触発され口承文学化する「私」の揺らぎと広がり",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2025-x-k6musq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "津島佑子『「私」』におけるアイヌ神謡 : 触発され口承文学化する「私」の揺らぎと広がり"
+    }
+  ]
+}

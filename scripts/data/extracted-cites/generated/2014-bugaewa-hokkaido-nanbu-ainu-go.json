@@ -1,0 +1,980 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2014-bugaewa-hokkaido-nanbu-ainu-go",
+    "title": "ブガエワ・アンナ 北海道南部のアイヌ語",
+    "year": 2014,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献",
+    "referenceCount": 55,
+    "sourcePath": "articles/2014_ブガエワ・アンナ_北海道南部のアイヌ語.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "John C. Batchelor"
+      ],
+      "year": 1905,
+      "yearText": "1905",
+      "title": "An Ainu-English-Japanese Dictionary",
+      "titleEn": "An Ainu-English-Japanese Dictionary",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "An Ainu-English-Japanese Dictionary"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1931,
+      "yearText": "1931",
+      "title": "アイヌユーカラ語法摘要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1931-x-11givjx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "福田 すず子"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語の動詞の構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-x-1c6njuk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語の動詞の構造"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Ivar Lindquist"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "Indo-European features in the Ainu language",
+      "titleEn": "Indo-European features in the Ainu language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-ivar-lindquist-indo-european-features-in-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Indo-European features in the Ainu language"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Ivar Lindquist"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "Indo-European features in the Ainu language ; with reference to the thesis of Pierre Naert",
+      "titleEn": "Indo-European features in the Ainu language ; with reference to the thesis of Pierre Naert",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-ivar-lindquist-indo-european-features-in-the-ainu-language-with-r",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Indo-European features in the Ainu language ; with reference to the thesis of Pierre Naert"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "久保寺, 逸彦"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ叙事詩神謡、聖伝の研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-x-1hv377u",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩神謡、聖伝の研究"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Joseph M. Kitagawa"
+      ],
+      "year": 1963,
+      "yearText": "1963",
+      "title": "Ainu Creed and Cult",
+      "titleEn": "Ainu Creed and Cult",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1963-joseph-m-kitagawa-ainu-creed-and-cult",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Creed and Cult"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "田村 すゞ子"
+      ],
+      "year": 1964,
+      "yearText": "1964",
+      "title": "アイヌ語沙流方言の名詞 その(1)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1964-x-1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言の名詞 その(1)"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 1966,
+      "yearText": "1966",
+      "title": "Valency classes in Ainu",
+      "titleEn": "Valency classes in Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1966-bugaeva-anna-valency-classes-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Valency classes in Ainu"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "田村 すゞ子"
+      ],
+      "year": 1966,
+      "yearText": "1966",
+      "title": "アイヌ語沙流方言の名詞 その(2)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1966-x-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言の名詞 その(2)"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言の人称の種類",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-1vec8pf",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称の種類"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "Asai, Tōru"
+      ],
+      "year": 1974,
+      "yearText": "1974",
+      "title": "Classification of dialects: cluster analysis of Ainu dialects",
+      "titleEn": "Classification of dialects: cluster analysis of Ainu dialects",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1974-asai-toru-classification-of-dialects-cluster-analysis-of-ain",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Classification of dialects: cluster analysis of Ainu dialects"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "久保寺逸彦(編著)"
+      ],
+      "year": 1977,
+      "yearText": "1977",
+      "title": "アイヌ叙事詩 神謡・聖伝の研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1977-x-4mbx9h",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ叙事詩 神謡・聖伝の研究"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "田村 すず子"
+      ],
+      "year": 1982,
+      "yearText": "1982",
+      "title": "アイヌ語沙流方言における上下を表す位置名詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1982-x-czbvix",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言における上下を表す位置名詞"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "Hans A. Dettmer, James Patrie"
+      ],
+      "year": 1983,
+      "yearText": "1983",
+      "title": "The Genetic Relationship of the Ainu Language.",
+      "titleEn": "The Genetic Relationship of the Ainu Language.",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1983-hans-a-dettmer-the-genetic-relationship-of-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Genetic Relationship of the Ainu Language."
+    },
+    {
+      "n": 17,
+      "authors": [
+        "Kirsten Refsing"
+      ],
+      "year": 1987,
+      "yearText": "1987",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "アイヌ民族博物館"
+      ],
+      "year": 1987,
+      "yearText": "1987",
+      "title": "アイヌ文化の基礎知識",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1987-x-1hdjdse",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ文化の基礎知識"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "Alexander Vovin"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "A reconstruction of proto-Ainu",
+      "titleEn": "A reconstruction of proto-Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-alexander-vovin-a-reconstruction-of-proto-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A reconstruction of proto-Ainu"
+    },
+    {
+      "n": 20,
+      "authors": [
+        "Alexander Vovin"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "Origins of the Ainu Language",
+      "titleEn": "Origins of the Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-alexander-vovin-origins-of-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Origins of the Ainu Language"
+    },
+    {
+      "n": 21,
+      "authors": [
+        "金成, まつ, 金田一, 京助"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "アイヌ叙事詩ユーカラ集",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-jqe5tq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ集"
+    },
+    {
+      "n": 22,
+      "authors": [],
+      "year": 1994,
+      "yearText": "1994",
+      "title": "Some Aspects of Reflexivity in Ainu",
+      "titleEn": "Some Aspects of Reflexivity in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1994-x-some-aspects-of-reflexivity-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Some Aspects of Reflexivity in Ainu"
+    },
+    {
+      "n": 23,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 24,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語の受動文に関する一考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1tx7p2h",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の受動文に関する一考察"
+    },
+    {
+      "n": 25,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 26,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 27,
+      "authors": [
+        "Kirsten Refsing, Mikhail Mikhailovich Dobrotvorskiĭ, John C. Batchelor, Basil Hall Chamberlain, Bronisław Piłsudski, Johannes von Rozwadowski"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Early European Writings on the Ainu Language",
+      "titleEn": "Early European Writings on the Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-kirsten-refsing-early-european-writings-on-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Early European Writings on the Ainu Language"
+    },
+    {
+      "n": 28,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 29,
+      "authors": [
+        "Honda, Katsuichi"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "Ainu minzoku",
+      "titleEn": "Ainu minzoku",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-honda-katsuichi-ainu-minzoku",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu minzoku"
+    },
+    {
+      "n": 30,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "エクスプレスアイヌ語",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-x-1fejzao",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "エクスプレスアイヌ語"
+    },
+    {
+      "n": 31,
+      "authors": [],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Ainu folk-lore",
+      "titleEn": "Ainu folk-lore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-ainu-folk-lore",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu folk-lore"
+    },
+    {
+      "n": 32,
+      "authors": [
+        "Kirsten Refsing"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Origins of the Ainu language : the Ainu Indo-European controversy",
+      "titleEn": "Origins of the Ainu language : the Ainu Indo-European controversy",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-kirsten-refsing-origins-of-the-ainu-language-the-ainu-indo-europea",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Origins of the Ainu language : the Ainu Indo-European controversy"
+    },
+    {
+      "n": 33,
+      "authors": [
+        "切替, 英雄"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "『アイヌ神謡集』辞典 : テキスト・文法解説付き",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-1a08let",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "『アイヌ神謡集』辞典 : テキスト・文法解説付き"
+    },
+    {
+      "n": 34,
+      "authors": [
+        "萱野, 茂, 平凡社"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "萱野茂のアイヌ神話集成",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-1v9r8sq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ神話集成"
+    },
+    {
+      "n": 35,
+      "authors": [],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "Ainu: spirit of a northern people",
+      "titleEn": "Ainu: spirit of a northern people",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-x-ainu-spirit-of-a-northern-people",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu: spirit of a northern people"
+    },
+    {
+      "n": 36,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 37,
+      "authors": [
+        "Kaizawa, Julie, 片山, 竜峯"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "「アイヌ神謡集」を読みとく",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-kaizawa-julie-gjwb9l",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "「アイヌ神謡集」を読みとく"
+    },
+    {
+      "n": 38,
+      "authors": [
+        "Tomomi SATO"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu",
+      "titleEn": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-tomomi-sato-phonological-status-of-the-epenthetic-glides-in-th",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu"
+    },
+    {
+      "n": 39,
+      "authors": [
+        "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
+    },
+    {
+      "n": 40,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "アイヌ文学における一人称体の問題",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-1jmvlmx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ文学における一人称体の問題"
+    },
+    {
+      "n": 41,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "アイヌ語千歳方言のアスペクト",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-mqzorq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言のアスペクト"
+    },
+    {
+      "n": 42,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "アイヌ語千歳方言のアスペクト：kor an、wa an を中心として",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-kor-an-wa-an",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言のアスペクト：kor an、wa an を中心として"
+    },
+    {
+      "n": 43,
+      "authors": [
+        "Alpatov, V. M, A. Ju. Bugaeva, V. P. Nedjalkov"
+      ],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "“Reciprocals and Sociatives in Ainu”",
+      "titleEn": "“Reciprocals and Sociatives in Ainu”",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-alpatov-v-m-reciprocals-and-sociatives-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "“Reciprocals and Sociatives in Ainu”"
+    },
+    {
+      "n": 44,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "再びアイヌ語千歳方言のアスペクトについて",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-x-mqzorn",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "再びアイヌ語千歳方言のアスペクトについて"
+    },
+    {
+      "n": 45,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Speech report constructions in Ainu",
+      "titleEn": "Speech report constructions in Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-anna-bugaeva-speech-report-constructions-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Speech report constructions in Ainu"
+    },
+    {
+      "n": 46,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu"
+    },
+    {
+      "n": 47,
+      "authors": [
+        "ブガエワ アンナ"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "\"Ainu causatives\"",
+      "titleEn": "\"Ainu causatives\"",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-x-ainu-causatives",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "\"Ainu causatives\""
+    },
+    {
+      "n": 48,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "Ainu applicatives in typological perspective",
+      "titleEn": "Ainu applicatives in typological perspective",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-anna-bugaeva-ainu-applicatives-in-typological-perspective",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu applicatives in typological perspective"
+    },
+    {
+      "n": 49,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "\"Anticausative/causative verb alternation in Ainu\"",
+      "titleEn": "\"Anticausative/causative verb alternation in Ainu\"",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-bugaeva-anna-anticausative-causative-verb-alternation-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "\"Anticausative/causative verb alternation in Ainu\""
+    },
+    {
+      "n": 50,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "A diachronic study of the impersonal passive in Ainu",
+      "titleEn": "A diachronic study of the impersonal passive in Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-a-diachronic-study-of-the-impersonal-passive-in-ai",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A diachronic study of the impersonal passive in Ainu"
+    },
+    {
+      "n": 51,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Ditransitive constructions in Ainu",
+      "titleEn": "Ditransitive constructions in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-ditransitive-constructions-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ditransitive constructions in Ainu"
+    },
+    {
+      "n": 52,
+      "authors": [
+        "Sarah M. Strong"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Ainu Spirits Singing",
+      "titleEn": "Ainu Spirits Singing",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-sarah-m-strong-ainu-spirits-singing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu Spirits Singing"
+    },
+    {
+      "n": 53,
+      "authors": [
+        "ブガエワ・アンナ"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "北海道南部のアイヌ語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-k7w34r",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "北海道南部のアイヌ語"
+    },
+    {
+      "n": 54,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 55,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "1995-sato-ainu-go-judo-bun",
+    "title": "佐藤知己 アイヌ語の受動文に関する一考察",
+    "year": 1995,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 4,
+    "sourcePath": "articles/1995_佐藤知己_アイヌ語の受動文に関する一考察.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1961,
+      "yearText": "1961",
+      "title": "アイヌ語カラフト方言の「人称接辞」について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1961-x-1tphr40",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語カラフト方言の「人称接辞」について"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言の人称の種類",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-1vec8pf",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称の種類"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 1991,
+      "yearText": "1991",
+      "title": "アイヌ語千歳方言における自称詞と対称詞について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1991-x-1r7gism",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における自称詞と対称詞について"
+    }
+  ]
+}

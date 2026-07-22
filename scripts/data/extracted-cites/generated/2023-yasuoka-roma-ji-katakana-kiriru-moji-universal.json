@@ -1,0 +1,296 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2023-yasuoka-roma-ji-katakana-kiriru-moji-universal",
+    "title": "安岡素子・安岡孝一 ローマ字・カタカナ・キリル文字によるアイヌ語Universal Dependenciesの可能性",
+    "year": 2023,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "文 献",
+    "referencePages": "scan pp. 13-15",
+    "referenceCount": 16,
+    "sourcePath": "articles/2023_安岡素子・安岡孝一_ローマ字・カタカナ・キリル文字によるアイヌ語Universal Dependenciesの可能性.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Kanazawa, Shozaburo"
+      ],
+      "year": 1898,
+      "yearText": "1898",
+      "title": "トピック別 アイヌ語会話辞典",
+      "titleEn": "Topical Dictionary of Conversational Ainu",
+      "type": "topical-dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1898-kanazawa-ninjal-topical-ainu-conversation-dictionary",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "トピック別 アイヌ語会話辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "M.M. Dobrotvorskii, 寺田 吉孝"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語・ロシア語辞典-2-",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-m-m-dobrotvorskii-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語・ロシア語辞典-2-"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Kaizawa, Julie, 片山, 竜峯"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "「アイヌ神謡集」を読みとく",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-kaizawa-julie-gjwb9l",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "「アイヌ神謡集」を読みとく"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "佐藤, 知己"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "知里幸恵「アイヌ神謡集」の難読個所と特異な言語事例をめぐって",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-1djf4br",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "知里幸恵「アイヌ神謡集」の難読個所と特異な言語事例をめぐって"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Internet applications for endangered languages: a talking dictionary of Ainu",
+      "titleEn": "Internet applications for endangered languages: a talking dictionary of Ainu",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-internet-applications-for-endangered-languages-a-t",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Internet applications for endangered languages: a talking dictionary of Ainu"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "深澤, 美香"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "加賀家文書のアイヌ語資料と加賀伝蔵",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-fvv6up",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "加賀家文書のアイヌ語資料と加賀伝蔵"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Senuma Hajime & Aizawa Akiko"
+      ],
+      "year": 2017,
+      "yearText": "2017",
+      "title": "Toward Universal Dependencies for Ainu",
+      "titleEn": "Toward Universal Dependencies for Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2017-senuma-hajime-aizawa-akiko-toward-universal-dependencies-for-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Toward Universal Dependencies for Ainu"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "Senuma Hajime & Aizawa Akiko"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Universal Dependencies for Ainu",
+      "titleEn": "Universal Dependencies for Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-senuma-hajime-aizawa-akiko-universal-dependencies-for-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Universal Dependencies for Ainu"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "寺田, 吉孝"
+      ],
+      "year": 2019,
+      "yearText": "2019",
+      "title": "M. M. ドブロトゥヴォールスキーのアイヌ語・ロシア語辞典（26）",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2019-x-m-m-26",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "M. M. ドブロトゥヴォールスキーのアイヌ語・ロシア語辞典（26）"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "安岡孝一"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "Universal Dependenciesによるアイヌ語テキストコーパス",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-universal-dependencies",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Universal Dependenciesによるアイヌ語テキストコーパス"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "安岡孝一"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語Universal Dependencies再考",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-universal-dependencies-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語Universal Dependencies再考"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "阪口諒"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "『アイヌ語ロシア語辞典』中のアイヌ語樺太方言テキスト",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-elbyru",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "『アイヌ語ロシア語辞典』中のアイヌ語樺太方言テキスト"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "国立アイヌ民族博物館, 立石, 信一, 佐々木, 史郎, 田村, 将人"
+      ],
+      "year": 2023,
+      "yearText": "2023",
+      "title": "ウアイヌコㇿコタンアカㇻウポポイのことばと歴史",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2023-x-p3cluz",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "ウアイヌコㇿコタンアカㇻウポポイのことばと歴史"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "深澤 美香"
+      ],
+      "year": 2023,
+      "yearText": "2023",
+      "title": "国立アイヌ民族博物館のアイヌ語による展示解説文と「私たち",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2023-x-1uaweqa",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "国立アイヌ民族博物館のアイヌ語による展示解説文と「私たち"
+    }
+  ]
+}

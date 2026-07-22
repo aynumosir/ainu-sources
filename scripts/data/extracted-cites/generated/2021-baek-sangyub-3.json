@@ -1,0 +1,139 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2021-baek-sangyub-3",
+    "title": "地域類型論的観点から見たサハリン地域に分布するウイルタ語、アイヌ語、ニヴフ語の定動詞における3人称標示と複数接辞の文法的類似性について",
+    "author": "Baek Sangyub",
+    "year": 2021,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 7,
+    "sourcePath": "articles/2021_Baek Sangyub_地域類型論的観点から見たサハリン地域に分布するウイルタ語、アイヌ語、ニヴフ語の定動詞における3人称標示と複数接辞の文法的類似性について.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1942,
+      "yearText": "1942",
+      "title": "アイヌ語法研究 : 樺太方言を中心として",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1942-x-3bat8z",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1961,
+      "yearText": "1961",
+      "title": "アイヌ語カラフト方言の「人称接辞」について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1961-x-1tphr40",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語カラフト方言の「人称接辞」について"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 1979,
+      "yearText": "1979",
+      "title": "カラフトアイヌ語―文法篇―",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1979-x-1ldjihx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カラフトアイヌ語―文法篇―"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Ekaterina Yu. Gruzdeva"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "The linguistic situation on Sakhalin Island",
+      "titleEn": "The linguistic situation on Sakhalin Island",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-ekaterina-yu-gruzdeva-the-linguistic-situation-on-sakhalin-island",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The linguistic situation on Sakhalin Island"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "伊達地方のアイヌ語方言の言語的特徴",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-x-54jq93",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "伊達地方のアイヌ語方言の言語的特徴"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "阪口諒"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語樺太方言における名詞複数接尾辞ahcinの用法",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-ahcin",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語樺太方言における名詞複数接尾辞ahcinの用法"
+    }
+  ]
+}

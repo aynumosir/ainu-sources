@@ -1,0 +1,125 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2021-yasuoka-universal-dependencies-ainu-go-tekisuto",
+    "title": "安岡孝一 Universal Dependenciesによるアイヌ語テキストコーパス",
+    "year": 2021,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参考文献",
+    "referencePages": "scan pp. 5-8",
+    "referenceCount": 6,
+    "sourcePath": "articles/2021_安岡孝一_Universal Dependenciesによるアイヌ語テキストコーパス.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "千徳 太郎治"
+      ],
+      "year": 1906,
+      "yearText": "1906",
+      "title": "千徳太郎治のピウスツキ宛書簡",
+      "titleEn": "Sentoku Tarōji's Letters to Piłsudski",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "sentoku-pilsudski-letters",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "千徳太郎治のピウスツキ宛書簡"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Kaizawa, Julie, 片山, 竜峯"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "「アイヌ神謡集」を読みとく",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-kaizawa-julie-gjwb9l",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "「アイヌ神謡集」を読みとく"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Senuma Hajime & Aizawa Akiko"
+      ],
+      "year": 2017,
+      "yearText": "2017",
+      "title": "Toward Universal Dependencies for Ainu",
+      "titleEn": "Toward Universal Dependencies for Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2017-senuma-hajime-aizawa-akiko-toward-universal-dependencies-for-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Toward Universal Dependencies for Ainu"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Senuma Hajime & Aizawa Akiko"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Universal Dependencies for Ainu",
+      "titleEn": "Universal Dependencies for Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-senuma-hajime-aizawa-akiko-universal-dependencies-for-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Universal Dependencies for Ainu"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "安岡孝一"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語Universal Dependencies再考",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-universal-dependencies-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語Universal Dependencies再考"
+    }
+  ]
+}

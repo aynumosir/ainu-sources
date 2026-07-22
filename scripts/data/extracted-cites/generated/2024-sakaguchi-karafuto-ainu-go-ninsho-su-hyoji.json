@@ -1,0 +1,1292 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2024-sakaguchi-karafuto-ainu-go-ninsho-su-hyoji",
+    "title": "阪口諒 樺太アイヌ語における人称と数の標示に関する研究",
+    "year": 2024,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 74,
+    "sourcePath": "articles/2024_阪口諒_樺太アイヌ語における人称と数の標示に関する研究.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金成 マツ"
+      ],
+      "year": 1867,
+      "yearText": "1867–1934",
+      "title": "アイヌ語・アイヌ文化研究の課題",
+      "titleEn": "Issues in Ainu Language & Culture Research (Chiba U.)",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "chiba-ainu-research-issues",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語・アイヌ文化研究の課題"
+    },
+    {
+      "n": 2,
+      "authors": [],
+      "year": 1903,
+      "yearText": "1903",
+      "title": "千葉大学大学院人文公共学府研究プロジェクト報告書",
+      "titleEn": "Chiba University Graduate Research Project Report",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "chiba-grad-report",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学大学院人文公共学府研究プロジェクト報告書"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "千徳 太郎治"
+      ],
+      "year": 1906,
+      "yearText": "1906",
+      "title": "千徳太郎治のピウスツキ宛書簡",
+      "titleEn": "Sentoku Tarōji's Letters to Piłsudski",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "sentoku-pilsudski-letters",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "千徳太郎治のピウスツキ宛書簡"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1913,
+      "yearText": "1913",
+      "title": "樺太アイヌ語大要｜樺太アイヌ語彙",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1913-x-11girem",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ語大要｜樺太アイヌ語彙"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1931,
+      "yearText": "1931",
+      "title": "アイヌユーカラ語法摘要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1931-x-11givjx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Kindaichi, Kyosuke"
+      ],
+      "year": 1933,
+      "yearText": "1933",
+      "title": "Gengo kenkyu",
+      "titleEn": "Gengo kenkyu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Gengo kenkyu"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1942,
+      "yearText": "1942",
+      "title": "アイヌ語法研究 : 樺太方言を中心として",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1942-x-3bat8z",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "福田 すず子"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語の動詞の構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-x-1c6njuk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の動詞の構造"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1957,
+      "yearText": "1957",
+      "title": "アイヌ語における年長者層特殊語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1957-x-1ouspxs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における年長者層特殊語"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ語諸方言の基礎語彙統計学的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-x-ot8fs9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語諸方言の基礎語彙統計学的研究"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1961,
+      "yearText": "1961",
+      "title": "アイヌ語カラフト方言の「人称接辞」について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1961-x-1tphr40",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語カラフト方言の「人称接辞」について"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "SHIRÔ HATTORI"
+      ],
+      "year": 1964,
+      "yearText": "1964",
+      "title": "A SPECIAL LANGUAGE OF THE OLDER GENERATIONS AMONG THE AINU",
+      "titleEn": "A SPECIAL LANGUAGE OF THE OLDER GENERATIONS AMONG THE AINU",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1964-shiro-hattori-a-special-language-of-the-older-generations-among",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A SPECIAL LANGUAGE OF THE OLDER GENERATIONS AMONG THE AINU"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "SHIRÔ HATTORI"
+      ],
+      "year": 1967,
+      "yearText": "1967",
+      "title": "PERSONAL AFFIXES IN THE SAKHALIN DIALECT OF AINU",
+      "titleEn": "PERSONAL AFFIXES IN THE SAKHALIN DIALECT OF AINU",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1967-shiro-hattori-personal-affixes-in-the-sakhalin-dialect-of-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "PERSONAL AFFIXES IN THE SAKHALIN DIALECT OF AINU"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "古川 恭子"
+      ],
+      "year": 1967,
+      "yearText": "1967",
+      "title": "アイヌ語カラフトライチシカ方言シンタクス",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1967-x-17rttcz",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語カラフトライチシカ方言シンタクス"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "Emiko Ohnuki-Tierney"
+      ],
+      "year": 1969,
+      "yearText": "1969",
+      "title": "Sakhalin Ainu folklore",
+      "titleEn": "Sakhalin Ainu folklore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1969-emiko-ohnuki-tierney-sakhalin-ainu-folklore",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Sakhalin Ainu folklore"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1969,
+      "yearText": "1969",
+      "title": "カラフト西海岸北部地名の共時論的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1969-x-sma98w",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カラフト西海岸北部地名の共時論的研究"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "肥部 四郎"
+      ],
+      "year": 1969,
+      "yearText": "1969",
+      "title": "アイヌ語の《大》《小》《太》《細》等々を表わす「形容詞」",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1969-x-9zmxzq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の《大》《小》《太》《細》等々を表わす「形容詞」"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "田村 すゞ子"
+      ],
+      "year": 1970,
+      "yearText": "1970",
+      "title": "アイヌ語石狩方言における人称接辞の主格・目的格接合",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1970-x-ocpkx2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語石狩方言における人称接辞の主格・目的格接合"
+    },
+    {
+      "n": 20,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "アイヌ語の《熱》《温》《冷》《寒》などを表わす〝形容詞〟",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1971-x-9zkoij",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の《熱》《温》《冷》《寒》などを表わす〝形容詞〟"
+    },
+    {
+      "n": 21,
+      "authors": [
+        "田村 すず子"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "アイヌ語石狩方言の人称代名詞と人称接辞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1971-x-9zl8g1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語石狩方言の人称代名詞と人称接辞"
+    },
+    {
+      "n": 22,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言の人称の種類",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-1vec8pf",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称の種類"
+    },
+    {
+      "n": 23,
+      "authors": [
+        "Kyōko Murasaki"
+      ],
+      "year": 1976,
+      "yearText": "1976",
+      "title": "Karafuto Ainugo",
+      "titleEn": "Karafuto Ainugo",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1976-kyoko-murasaki-karafuto-ainugo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Karafuto Ainugo"
+    },
+    {
+      "n": 24,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    },
+    {
+      "n": 25,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 1979,
+      "yearText": "1979",
+      "title": "カラフトアイヌ語―文法篇―",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1979-x-1ldjihx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カラフトアイヌ語―文法篇―"
+    },
+    {
+      "n": 26,
+      "authors": [],
+      "year": 1981,
+      "yearText": "1981",
+      "title": "アイヌ無形民俗文化財記録",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1981-x-1m6j1ia",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ無形民俗文化財記録"
+    },
+    {
+      "n": 27,
+      "authors": [
+        "Kirsten Refsing"
+      ],
+      "year": 1987,
+      "yearText": "1987",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 28,
+      "authors": [
+        "切替 英雄"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "アイヌ語の人称接語の不定人称形と一人称複数形",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-x-1bx8e2m",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の人称接語の不定人称形と一人称複数形"
+    },
+    {
+      "n": 29,
+      "authors": [
+        "北海道教育庁社会教育部文化課編"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "アイヌのくらしと言葉",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-x-1ow9h78",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌのくらしと言葉"
+    },
+    {
+      "n": 30,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 1991,
+      "yearText": "1991",
+      "title": "アイヌ語千歳方言における自称詞と対称詞について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1991-x-1r7gism",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における自称詞と対称詞について"
+    },
+    {
+      "n": 31,
+      "authors": [
+        "樺太アイヌ史研究会"
+      ],
+      "year": 1992,
+      "yearText": "1992",
+      "title": "対雁の碑 : 樺太アイヌ強制移住の歴史",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1992-x-1ddrqhe",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "対雁の碑 : 樺太アイヌ強制移住の歴史"
+    },
+    {
+      "n": 32,
+      "authors": [
+        "中川 裕"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "アイヌ語のArity Calculation",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-arity-calculation",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語のArity Calculation"
+    },
+    {
+      "n": 33,
+      "authors": [
+        "相圭 朴"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE"
+    },
+    {
+      "n": 34,
+      "authors": [
+        "北方言語研究者協議会, 大林, 太良, 中川, 裕, 村崎, 恭子, 萩中, 美枝, 大島, 稔, 谷本, 一之, 柳下, み咲, 片山, 竜峯, 荻原, 眞子, 池上, 二良, 笹間, 史子, 宮岡, 伯人, 福岡, イト子, 奥田, 統己, 伊藤, 静致, 村木, 美幸, 煎本, 孝, 切替, 英雄, 秋辺, 得平, 竹端, 瞭一, Krauss, Michael E., 佐藤, 知己"
+      ],
+      "year": 1994,
+      "yearText": "1994",
+      "title": "アイヌ語の集い : 知里真志保を継ぐ",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1994-x-1o2whei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の集い : 知里真志保を継ぐ"
+    },
+    {
+      "n": 35,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 36,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語の受動文に関する一考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1tx7p2h",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の受動文に関する一考察"
+    },
+    {
+      "n": 37,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 38,
+      "authors": [
+        "荻原, 眞子"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "北方諸民族の世界観 : アイヌとアムール・サハリン地域の神話・伝承",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-x-17pu272",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "北方諸民族の世界観 : アイヌとアムール・サハリン地域の神話・伝承"
+    },
+    {
+      "n": 39,
+      "authors": [],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Ainu folk-lore",
+      "titleEn": "Ainu folk-lore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-ainu-folk-lore",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu folk-lore"
+    },
+    {
+      "n": 40,
+      "authors": [
+        "釧路アイヌ文化懇話会[編]"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "アイヌ・モシリ : 幻のアイヌ語誌復刊",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-nf5skr",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ・モシリ : 幻のアイヌ語誌復刊"
+    },
+    {
+      "n": 41,
+      "authors": [
+        "宮岡, 伯人"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "少数民族言語資料の記録と保存-樺太アイヌ語とニヴフ語-",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-cvm11j",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "少数民族言語資料の記録と保存-樺太アイヌ語とニヴフ語-"
+    },
+    {
+      "n": 42,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 43,
+      "authors": [
+        "北原, 次郎太, 田村, 雅史, 丹菊, 逸治, 田村, すず子, 田村, 将人, 藤山, ハル, 北風, 磯吉, 徹辺, 重次郎, 山田, ハヨ"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "アイヌ語樺太・名寄・釧路方言の資料 : 田村すず子採録 : 藤山ハルさん・山田ハヨさん・北風磯吉さん・徹辺重次郎さんの口頭文芸・語彙・民族誌",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-x-5xlisb",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語樺太・名寄・釧路方言の資料 : 田村すず子採録 : 藤山ハルさん・山田ハヨさん・北風磯吉さん・徹辺重次郎さんの口頭文芸・語彙・民族誌"
+    },
+    {
+      "n": 44,
+      "authors": [
+        "アイヌ文化振興研究推進機構"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "樺太アイヌ民族誌 : 工芸に見る技と匠",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-g0o3ox",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ民族誌 : 工芸に見る技と匠"
+    },
+    {
+      "n": 45,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "The Study of the Ainu Language",
+      "titleEn": "The Study of the Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Study of the Ainu Language"
+    },
+    {
+      "n": 46,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu"
+    },
+    {
+      "n": 47,
+      "authors": [
+        "丹菊 逸治"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "アイヌ異類婚譚における「守護神」--ニブフ民族の伝承との比較から",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-x-ur8r3q",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ異類婚譚における「守護神」--ニブフ民族の伝承との比較から"
+    },
+    {
+      "n": 48,
+      "authors": [
+        "田村雅史"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "アイヌ語白糠方言の助動詞ci",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-x-ci",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語白糠方言の助動詞ci"
+    },
+    {
+      "n": 49,
+      "authors": [
+        "藤山, ハル, 村崎, 恭子"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "ウェネネカイペ物語3編 : 樺太アイヌの民話 (ウチャシクマ)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-x-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "ウェネネカイペ物語3編 : 樺太アイヌの民話 (ウチャシクマ)"
+    },
+    {
+      "n": 50,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Ditransitive constructions in Ainu",
+      "titleEn": "Ditransitive constructions in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-ditransitive-constructions-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ditransitive constructions in Ainu"
+    },
+    {
+      "n": 51,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "Southern Hokkaido Ainu",
+      "titleEn": "Southern Hokkaido Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-bugaeva-anna-southern-hokkaido-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Southern Hokkaido Ainu"
+    },
+    {
+      "n": 52,
+      "authors": [],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "アイヌ・先住民言語アーカイヴプロジェクト報告書",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-x-3vmnr8",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ・先住民言語アーカイヴプロジェクト報告書"
+    },
+    {
+      "n": 53,
+      "authors": [
+        "吉田恵理佳"
+      ],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "アイヌ語の被抱合名詞に関する一考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-x-p6pqi8",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の被抱合名詞に関する一考察"
+    },
+    {
+      "n": 54,
+      "authors": [
+        "高橋靖以"
+      ],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "アイヌ語十勝方言における証拠性と叙述類型",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-x-1rnv9ss",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言における証拠性と叙述類型"
+    },
+    {
+      "n": 55,
+      "authors": [
+        "ブガエワ・アンナ"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "北海道南部のアイヌ語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-k7w34r",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "北海道南部のアイヌ語"
+    },
+    {
+      "n": 56,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語研究の諸問題",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-bugaeva-anna-b8h16x",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語研究の諸問題"
+    },
+    {
+      "n": 57,
+      "authors": [
+        "奥田 統己"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語の人称表示における「目的格」の優勢",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-y90taa",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の人称表示における「目的格」の優勢"
+    },
+    {
+      "n": 58,
+      "authors": [
+        "小林美紀"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語動詞の結合価と項構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-1b5idq9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語動詞の結合価と項構造"
+    },
+    {
+      "n": 59,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
+      "titleEn": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-bugaeva-anna-on-the-innovative-nature-of-sakhalin-ainu-focusing-on-nominalization",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization"
+    },
+    {
+      "n": 60,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations",
+      "titleEn": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-bugaeva-anna-on-the-innovative-nature-of-sakhalin-ainu-focusing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations"
+    },
+    {
+      "n": 61,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "言語史の研究方法とアイヌ語史の諸問題",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-x-tck9so",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "言語史の研究方法とアイヌ語史の諸問題"
+    },
+    {
+      "n": 62,
+      "authors": [
+        "高橋, 靖以"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "アイヌ語十勝方言会話小辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-x-15skp81",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言会話小辞典"
+    },
+    {
+      "n": 63,
+      "authors": [
+        "阪口諒・ディクソンJ. M."
+      ],
+      "year": 2019,
+      "yearText": "2019",
+      "title": "「ツイシカリ・アイノ (対雁アイヌ) 」：J. M. ディクソン著、1982 年、東京",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2019-j-m-j-m-1982",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "「ツイシカリ・アイノ (対雁アイヌ) 」：J. M. ディクソン著、1982 年、東京"
+    },
+    {
+      "n": 64,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 65,
+      "authors": [
+        "久保寺逸彦著"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語・日本語辞典稿",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-121ohxf",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語・日本語辞典稿"
+    },
+    {
+      "n": 66,
+      "authors": [
+        "阪口諒"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語樺太方言におけるutaraの用法",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-utara",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語樺太方言におけるutaraの用法"
+    },
+    {
+      "n": 67,
+      "authors": [
+        "阪口諒"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語樺太方言における名詞複数接尾辞ahcinの用法",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-ahcin",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語樺太方言における名詞複数接尾辞ahcinの用法"
+    },
+    {
+      "n": 68,
+      "authors": [
+        "Tangiku, Itsuji"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "Differences between Karafuto and Hokkaido Ainu dialects",
+      "titleEn": "Differences between Karafuto and Hokkaido Ainu dialects",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-tangiku-itsuji-differences-between-karafuto-and-hokkaido-ainu-dia",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Differences between Karafuto and Hokkaido Ainu dialects"
+    },
+    {
+      "n": 69,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語学の諸問題：近年の議論と関連して",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-i5578m",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語学の諸問題：近年の議論と関連して"
+    },
+    {
+      "n": 70,
+      "authors": [
+        "阪口 諒"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語資料としての『あいぬ物語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-1jxsm4h",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語資料としての『あいぬ物語"
+    },
+    {
+      "n": 71,
+      "authors": [
+        "阪口諒"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "『アイヌ語ロシア語辞典』中のアイヌ語樺太方言テキスト",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-x-elbyru",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "『アイヌ語ロシア語辞典』中のアイヌ語樺太方言テキスト"
+    },
+    {
+      "n": 72,
+      "authors": [
+        "Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Handbook of the Ainu Language",
+      "titleEn": "Handbook of the Ainu Language",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-bugaeva",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Handbook of the Ainu Language"
+    },
+    {
+      "n": 73,
+      "authors": [
+        "Elia Dal Corso"
+      ],
+      "year": 2023,
+      "yearText": "2023",
+      "title": "On the object-individuation function of the East Sakhalin Ainu impersonal passive",
+      "titleEn": "On the object-individuation function of the East Sakhalin Ainu impersonal passive",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2023-elia-dal-corso-on-the-object-individuation-function-of-the-east-s",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "On the object-individuation function of the East Sakhalin Ainu impersonal passive"
+    },
+    {
+      "n": 74,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2023,
+      "yearText": "2023",
+      "title": "アイヌ語の動詞の結合価と3項動詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2023-x-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の動詞の結合価と3項動詞"
+    }
+  ]
+}

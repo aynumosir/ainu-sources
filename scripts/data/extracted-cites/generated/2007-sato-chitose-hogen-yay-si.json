@@ -1,0 +1,137 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2007-sato-chitose-hogen-yay-si",
+    "title": "佐藤知己 アイヌ語千歳方言の再帰接頭辞yay-とsi-について",
+    "year": 2007,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 7,
+    "sourcePath": "articles/2007_佐藤知己_アイヌ語千歳方言の再帰接頭辞yay-とsi-について.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1931,
+      "yearText": "1931",
+      "title": "アイヌユーカラ語法摘要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1931-x-11givjx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "福田 すず子"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語の動詞の構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-x-1c6njuk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語の動詞の構造"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "佐藤, 知己"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "知里幸恵「アイヌ神謡集」の難読個所と特異な言語事例をめぐって",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-1djf4br",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "知里幸恵「アイヌ神謡集」の難読個所と特異な言語事例をめぐって"
+    },
+    {
+      "n": 7,
+      "authors": [],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "アイヌ語研究の課題と展望",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-x-yp2g9w",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語研究の課題と展望"
+    }
+  ]
+}

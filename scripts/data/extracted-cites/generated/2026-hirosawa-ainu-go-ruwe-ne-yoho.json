@@ -1,0 +1,256 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2026-hirosawa-ainu-go-ruwe-ne-yoho",
+    "title": "廣澤 アイヌ語における証拠性表現の用法について：ruwe neの用法を中心に",
+    "year": 2026,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献",
+    "referenceCount": 14,
+    "sourcePath": "articles/2026_廣澤_アイヌ語における証拠性表現の用法について：ruwe neの用法を中心に.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [],
+      "year": 1903,
+      "yearText": "1903",
+      "title": "千葉大学大学院人文公共学府研究プロジェクト報告書",
+      "titleEn": "Chiba University Graduate Research Project Report",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "chiba-grad-report",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学大学院人文公共学府研究プロジェクト報告書"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1985,
+      "yearText": "1985",
+      "title": "ワテケさんの昔話 ： 沙流方言",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1985-tamura-suzuko-1vdmp8l",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "ワテケさんの昔話 ： 沙流方言"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "アイヌ民族博物館"
+      ],
+      "year": 1994,
+      "yearText": "1994",
+      "title": "アイヌ民族博物館伝承記録",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1994-x-1tv3wk5",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ民族博物館伝承記録"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "切替 英雄"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-2-5",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "高橋靖以"
+      ],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "アイヌ語十勝方言における証拠性と叙述類型",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-x-1rnv9ss",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言における証拠性と叙述類型"
+    },
+    {
+      "n": 8,
+      "authors": [],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "「北海道南部のアイヌ語」児島康弘、長崎郁訳",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-1ffyyju",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "「北海道南部のアイヌ語」児島康弘、長崎郁訳"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "ブガエワ・アンナ"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "北海道南部のアイヌ語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-k7w34r",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "北海道南部のアイヌ語"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "高橋靖以"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ語十勝方言における名詞化節の脱従属節化",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-b3e4yv",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言における名詞化節の脱従属節化"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "吉川佳見"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "アイヌ語の助動詞aanと証拠性",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-x-aan",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の助動詞aanと証拠性"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "高橋靖以"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "アイヌ語幌別方言における名詞化辞の文法化",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-x-1a0oho6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語幌別方言における名詞化辞の文法化"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "唐, 柏炎"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語における形式名詞の機能",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-19len83",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における形式名詞の機能"
+    }
+  ]
+}

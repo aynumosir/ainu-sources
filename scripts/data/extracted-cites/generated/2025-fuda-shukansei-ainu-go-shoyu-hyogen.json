@@ -1,0 +1,195 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2025-fuda-shukansei-ainu-go-shoyu-hyogen",
+    "title": "フダー・クラーラ 主観性から見たアイヌ語の所有表現の考察",
+    "year": 2025,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 10,
+    "sourcePath": "articles/2025_フダー・クラーラ_主観性から見たアイヌ語の所有表現の考察.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Ainu folk-lore",
+      "titleEn": "Ainu folk-lore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-ainu-folk-lore",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu folk-lore"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "勝信 井筒"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "The Ainu language : a linguistic introduction",
+      "titleEn": "The Ainu language : a linguistic introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-the-ainu-language-a-linguistic-introduction",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "The Ainu language : a linguistic introduction"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Nakagawa, Hiroshi, Bugaeva, Anna, Kobayashi, Miki"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "A Glossed Audio Corpus of Ainu Folklore",
+      "titleEn": "A Glossed Audio Corpus of Ainu Folklore",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-nakagawa-hiroshi-a-glossed-audio-corpus-of-ainu-folklore",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A Glossed Audio Corpus of Ainu Folklore"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "Appositive possession in Ainu and around the Pacific",
+      "titleEn": "Appositive possession in Ainu and around the Pacific",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-bugaeva-anna-appositive-possession-in-ainu-and-around-the-pacific",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Appositive possession in Ainu and around the Pacific"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Handbook of the Ainu Language",
+      "titleEn": "Handbook of the Ainu Language",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-bugaeva",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Handbook of the Ainu Language"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "フダー・クラーラ"
+      ],
+      "year": 2025,
+      "yearText": "2025",
+      "title": "主観性から見たアイヌ語の所有表現の考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2025-x-mgxtfp",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "主観性から見たアイヌ語の所有表現の考察"
+    }
+  ]
+}

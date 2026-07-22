@@ -19,6 +19,7 @@
 		type TextSourceKind
 	} from '$lib/archive/ocr';
 	import OcrBadge from './OcrBadge.svelte';
+	import CitationRelations from '$lib/components/CitationRelations.svelte';
 
 	type Sheet = 'pages' | 'about' | 'find' | null;
 	type ViewMode = 'image' | 'text' | 'side-by-side';
@@ -444,6 +445,8 @@
 			</button>
 			{#if copyStatus}<span class="ml-2 text-[12px] text-[var(--archive-good)]" role="status">{copyStatus}</span>{/if}
 		</section>
+
+		<CitationRelations related={work.detail.related ?? []} variant="archive" />
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
 			<BilingualLabel tag="h3" ja="本文" en="Text" class="archive-h3" />

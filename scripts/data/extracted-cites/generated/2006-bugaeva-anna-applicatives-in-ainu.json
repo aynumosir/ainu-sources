@@ -1,0 +1,74 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2006-bugaeva-anna-applicatives-in-ainu",
+    "title": "Applicatives in Ainu",
+    "author": "Bugaeva Anna",
+    "year": 2006,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "References",
+    "referencePages": "scan pp. 10-12",
+    "referenceCount": 3,
+    "sourcePath": "articles/2006_Bugaeva Anna_Applicatives in Ainu.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Kindaichi, Kyosuke"
+      ],
+      "year": 1933,
+      "yearText": "1933",
+      "title": "Gengo kenkyu",
+      "titleEn": "Gengo kenkyu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Gengo kenkyu"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "\"Direct and indirect speech in Ainu\"",
+      "titleEn": "\"Direct and indirect speech in Ainu\"",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-bugaeva-anna-direct-and-indirect-speech-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "\"Direct and indirect speech in Ainu\""
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2002-sato-ainu-go-shohogen-chosa-hokoku",
+    "title": "佐藤知己・宮岡伯人『アイヌ語諸方言調査報告』",
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参考文献",
+    "referencePages": "scan pp. 8-214",
+    "referenceCount": 4,
+    "sourcePath": "books/2002_SatoMiyaoka_DialectSurvey/佐藤知己・宮岡伯人『アイヌ語諸方言調査報告』.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ語諸方言の基礎語彙統計学的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-x-ot8fs9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語諸方言の基礎語彙統計学的研究"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "宮岡, 伯人"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "アイヌ語諸方言調査報告 1",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-1-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語諸方言調査報告 1"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "佐藤, 知己, 宮岡, 伯人"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "アイヌ語諸方言調査報告",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2002-x-4ghzqi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語諸方言調査報告"
+    }
+  ]
+}

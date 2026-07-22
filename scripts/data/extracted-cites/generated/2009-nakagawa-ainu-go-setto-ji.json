@@ -1,0 +1,36 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2009-nakagawa-ainu-go-setto-ji",
+    "title": "中川裕 アイヌ語の接頭辞度",
+    "year": 2009,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "引用文献",
+    "referencePages": "scan pp. 8-9",
+    "referenceCount": 1,
+    "sourcePath": "articles/2009_中川裕_アイヌ語の接頭辞度.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 1979,
+      "yearText": "1979",
+      "title": "カラフトアイヌ語―文法篇―",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1979-x-1ldjihx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カラフトアイヌ語―文法篇―"
+    }
+  ]
+}

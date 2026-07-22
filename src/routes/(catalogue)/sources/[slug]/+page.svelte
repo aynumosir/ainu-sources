@@ -7,6 +7,7 @@
 	import Badge from '$lib/components/Badge.svelte';
 	import SourceMap from '$lib/components/SourceMap.svelte';
 	import CiteBox from '$lib/components/CiteBox.svelte';
+	import CitationRelations from '$lib/components/CitationRelations.svelte';
 	import { formatYear, formatCount, asArray, youtubeId } from '$lib/format';
 	import { safeUrl } from '$lib/safe-url';
 	import {
@@ -45,6 +46,7 @@
 	const langs = $derived(asArray(s.languages));
 	const scripts = $derived(asArray(s.scripts));
 	const alt = $derived(asArray(s.altTitles));
+	const otherRelations = $derived(d.related.filter((item) => item.relation.type !== 'cites'));
 	// Any links that resolve to an embeddable YouTube video.
 	const videos = $derived(
 		d.links
@@ -208,6 +210,8 @@
 					<p class="mt-2 text-sm text-stone-500">{m.source_no_links()}</p>
 				{/if}
 			</section>
+
+			<CitationRelations related={d.related} />
 		</div>
 
 		<aside class="space-y-6 text-sm md:border-l md:border-stone-200 md:pl-6">
@@ -278,13 +282,13 @@
 				</div>
 			{/if}
 
-			{#if d.related.length}
+			{#if otherRelations.length}
 				<div>
 					<h2 class="font-sans text-xs font-semibold uppercase tracking-wide text-stone-400">
 						{m.source_related()}
 					</h2>
 					<ul class="mt-2 space-y-1">
-						{#each d.related as r (r.relation.id)}
+						{#each otherRelations as r (r.relation.id)}
 							<li>
 								<a href={localizeHref(`/sources/${r.source.slug}`)} class="link">{r.source.title}</a>
 								{#if r.source.yearStart}<span class="text-xs text-stone-400">({r.source.yearStart})</span

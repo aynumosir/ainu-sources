@@ -24,6 +24,8 @@
 		"import:curated-biblio": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/curated-biblio.ts",
 		"import:academic": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/academic.ts",
 		"import:relations": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/relations.ts",
+		"import:extracted-cites": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/extracted-cites.ts",
+		"sweep:references": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/sweep-references.ts",
 		"import:person-enrichment": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/person-enrichment.ts",
 		"import:all": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import-all.ts",
 		"archive:ingest-ocr": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/ingest-ocr.ts",

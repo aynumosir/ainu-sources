@@ -1,0 +1,197 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2021-elia-development-analytic-negatives-sakhalin-ainu",
+    "title": "Dal Corso Elia The Development of Analytic Negatives in Sakhalin Ainu",
+    "year": 2021,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "References",
+    "referencePages": "scan pp. 10-11",
+    "referenceCount": 10,
+    "sourcePath": "articles/2021_Dal Corso Elia_The Development of Analytic Negatives in Sakhalin Ainu.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "村山, 七郎"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "北千島アイヌ語 : 文献学的研究",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1971-x-s2947h",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "北千島アイヌ語 : 文献学的研究"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Kyōko Murasaki"
+      ],
+      "year": 1976,
+      "yearText": "1976",
+      "title": "Karafuto Ainugo",
+      "titleEn": "Karafuto Ainugo",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1976-kyoko-murasaki-karafuto-ainugo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Karafuto Ainugo"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1985,
+      "yearText": "1985",
+      "title": "ワテケさんの昔話 ： 沙流方言",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1985-tamura-suzuko-1vdmp8l",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "ワテケさんの昔話 ： 沙流方言"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Alexander Vovin"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "A reconstruction of proto-Ainu",
+      "titleEn": "A reconstruction of proto-Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-alexander-vovin-a-reconstruction-of-proto-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A reconstruction of proto-Ainu"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "相圭 朴"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "The Study of the Ainu Language",
+      "titleEn": "The Study of the Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Study of the Ainu Language"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "Elia Dal Corso"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "The language and folklore of West Sakhalin Ainu - A re-edition of Kyōko Murasaki's 'Karafuto Ainugo' with translation and grammatical notes",
+      "titleEn": "The language and folklore of West Sakhalin Ainu - A re-edition of Kyōko Murasaki's 'Karafuto Ainugo' with translation and grammatical notes",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-elia-dal-corso-the-language-and-folklore-of-west-sakhalin-ainu-a",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The language and folklore of West Sakhalin Ainu - A re-edition of Kyōko Murasaki's 'Karafuto Ainugo' with translation and grammatical notes"
+    }
+  ]
+}

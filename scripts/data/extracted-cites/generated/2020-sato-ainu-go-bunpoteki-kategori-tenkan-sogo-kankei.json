@@ -1,0 +1,107 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2020-sato-ainu-go-bunpoteki-kategori-tenkan-sogo-kankei",
+    "title": "佐藤知己 アイヌ語における文法的カテゴリーの転換について：語と句、動詞と名詞の相互関係をめぐって",
+    "year": 2020,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参考文献",
+    "referencePages": "scan pp. 12-13",
+    "referenceCount": 5,
+    "sourcePath": "articles/2020_佐藤知己_アイヌ語における文法的カテゴリーの転換について：語と句、動詞と名詞の相互関係をめぐって.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "切替英雄"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "アイヌ語の名詞句の構造と合成名詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-x-1e3o6yu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の名詞句の構造と合成名詞"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "アイヌ語千歳方言における合成名詞の構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-x-17h5l7n",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における合成名詞の構造"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    }
+  ]
+}

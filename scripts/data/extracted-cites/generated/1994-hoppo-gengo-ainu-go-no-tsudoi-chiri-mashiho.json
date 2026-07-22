@@ -1,0 +1,67 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "1994-hoppo-gengo-ainu-go-no-tsudoi-chiri-mashiho",
+    "title": "北方言語研究者協議会『アイヌ語の集い：知里真志保を継ぐ』",
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "文 献",
+    "referenceCount": 3,
+    "sourcePath": "books/1994_HoppoGengo_AinugoNoTsudoi/北方言語研究者協議会『アイヌ語の集い：知里真志保を継ぐ』.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [],
+      "year": 1893,
+      "yearText": "1893",
+      "title": "Yezo and the Ainu",
+      "titleEn": "Yezo and the Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1893-x-yezo-and-the-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Yezo and the Ainu"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "カムイト°ラノ協会"
+      ],
+      "year": 1987,
+      "yearText": "1987",
+      "title": "萱野茂 アイヌ語会話 初級編",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1987-x-m5h5ss",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂 アイヌ語会話 初級編"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "伊藤, 静致"
+      ],
+      "year": 1990,
+      "yearText": "1990",
+      "title": "網走湖と女満別のアイヌ語地名",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1990-x-1cn0pgm",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "網走湖と女満別のアイヌ語地名"
+    }
+  ]
+}

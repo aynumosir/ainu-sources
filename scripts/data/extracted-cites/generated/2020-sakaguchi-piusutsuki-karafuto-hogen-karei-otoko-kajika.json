@@ -1,0 +1,450 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2020-sakaguchi-piusutsuki-karafuto-hogen-karei-otoko-kajika",
+    "title": "阪口諒 ピウスツキ採集のアイヌ語樺太方言民話テキスト カレイ男とカジカ男",
+    "year": 2020,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 25,
+    "sourcePath": "articles/2020_阪口諒_ピウスツキ採集のアイヌ語樺太方言民話テキスト_カレイ男とカジカ男.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1911,
+      "yearText": "1911",
+      "title": "樺太アイヌの音韻組織",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1911-x-1kvlz13",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌの音韻組織"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1911,
+      "yearText": "1911",
+      "title": "樺太アイヌの音韻組織(三)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1911-x-1kvlzzu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌの音韻組織(三)"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1942,
+      "yearText": "1942",
+      "title": "アイヌ語法研究 : 樺太方言を中心として",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1942-x-3bat8z",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "James Marshall Plumer, Carl Etter"
+      ],
+      "year": 1950,
+      "yearText": "1950",
+      "title": "Ainu Folklore. Traditions and Culture of the Vanishing Aborigines of Japan",
+      "titleEn": "Ainu Folklore. Traditions and Culture of the Vanishing Aborigines of Japan",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1950-james-marshall-plumer-ainu-folklore-traditions-and-culture-of-the-vanish",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Ainu Folklore. Traditions and Culture of the Vanishing Aborigines of Japan"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Joseph Kitagawa"
+      ],
+      "year": 1950,
+      "yearText": "1950",
+      "title": "Ainu Folklore: Traditions and Culture of the Vanishing Aborigines of Japan. Carl Etter",
+      "titleEn": "Ainu Folklore: Traditions and Culture of the Vanishing Aborigines of Japan. Carl Etter",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1950-joseph-kitagawa-ainu-folklore-traditions-and-culture-of-the-vanish",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu Folklore: Traditions and Culture of the Vanishing Aborigines of Japan. Carl Etter"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ語諸方言の基礎語彙統計学的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-x-ot8fs9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語諸方言の基礎語彙統計学的研究"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Emiko Ohnuki-Tierney"
+      ],
+      "year": 1974,
+      "yearText": "1974",
+      "title": "Ainu of the Northwest Coast of Southern Sakhalin",
+      "titleEn": "Ainu of the Northwest Coast of Southern Sakhalin",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1974-emiko-ohnuki-tierney-ainu-of-the-northwest-coast-of-southern-sakhalin",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu of the Northwest Coast of Southern Sakhalin"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Emiko Ohnuki‐Tierney"
+      ],
+      "year": 1974,
+      "yearText": "1974",
+      "title": "The Ainu of the Northwest Coast of Southern Sakhalin",
+      "titleEn": "The Ainu of the Northwest Coast of Southern Sakhalin",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1974-emiko-ohnuki-tierney-the-ainu-of-the-northwest-coast-of-southern-sakhal",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu of the Northwest Coast of Southern Sakhalin"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 1979,
+      "yearText": "1979",
+      "title": "カラフトアイヌ語―文法篇―",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1979-x-1ldjihx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カラフトアイヌ語―文法篇―"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "村崎, 恭子"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "樺太アイヌ語口承資料",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-x-13fpcer",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ語口承資料"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "村崎恭子"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "樺太アイヌ語口承資料１",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-x-1-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ語口承資料１"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "相圭 朴"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE"
+    },
+    {
+      "n": 14,
+      "authors": [],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Ainu folk-lore",
+      "titleEn": "Ainu folk-lore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-ainu-folk-lore",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu folk-lore"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "ペテルブルグMAEコレクションのアイヌ語資料",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-mae",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "ペテルブルグMAEコレクションのアイヌ語資料"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "北海道教育庁生涯学習部文化課, 北海道教育委員会"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "アイヌ民俗文化財調査報告書. アイヌ生活技術伝承実態調査",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-1yolk0x",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ民俗文化財調査報告書. アイヌ生活技術伝承実態調査"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "宮岡, 伯人"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "少数民族言語資料の記録と保存-樺太アイヌ語とニヴフ語-",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-cvm11j",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "少数民族言語資料の記録と保存-樺太アイヌ語とニヴフ語-"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "丹菊 逸治"
+      ],
+      "year": 2001,
+      "yearText": "2001",
+      "title": "サハリンアイヌの散文説話tuytahについて",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2001-x-tuytah",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "サハリンアイヌの散文説話tuytahについて"
+    },
+    {
+      "n": 20,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "The Study of the Ainu Language",
+      "titleEn": "The Study of the Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Study of the Ainu Language"
+    },
+    {
+      "n": 21,
+      "authors": [
+        "丹菊 逸治"
+      ],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "サハリン口承文学の地域差",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-x-ur8r2t",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "サハリン口承文学の地域差"
+    },
+    {
+      "n": 22,
+      "authors": [
+        "阪口 諒"
+      ],
+      "year": 2019,
+      "yearText": "2019",
+      "title": "樺太アイヌのオイナ : B.ピウスツキとC.エッターによる英訳テキスト",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2019-x-b-c",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌのオイナ : B.ピウスツキとC.エッターによる英訳テキスト"
+    },
+    {
+      "n": 23,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 24,
+      "authors": [
+        "阪口諒"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "ピウスツキ採集のアイヌ語樺太方言民話テキスト_カレイ男とカジカ男",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-1jwy5cw",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "ピウスツキ採集のアイヌ語樺太方言民話テキスト_カレイ男とカジカ男"
+    },
+    {
+      "n": 25,
+      "authors": [
+        "北海道教育庁生涯学習部文化課"
+      ],
+      "yearText": "",
+      "title": "アイヌ生活技術伝承実態調査",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "nd-x-7jz0ym",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ生活技術伝承実態調査"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2009-azumi-ainu-go-nippon-go-taiyaku-deta-so-shitei",
+    "title": "安曇恭徳・桃内佳雄 階層的なアイヌ語・日本語対訳データの構成と層指定解析ツールの開発",
+    "year": 2009,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 4,
+    "sourcePath": "articles/2009_安曇恭徳・桃内佳雄_階層的なアイヌ語・日本語対訳データの構成と層指定解析ツールの開発.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "エクスプレスアイヌ語",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-x-1fejzao",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "エクスプレスアイヌ語"
+    },
+    {
+      "n": 4,
+      "authors": [],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "アイヌ語・日本語機械翻訳のための基礎的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2002-x-7fwxoa",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語・日本語機械翻訳のための基礎的研究"
+    }
+  ]
+}

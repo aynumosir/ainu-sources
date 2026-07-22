@@ -1,0 +1,194 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2021-anna-logophoric-speech-is-not-indirect",
+    "title": "Nikitina Tatiana & Bugaeva Anna Logophoric speech is not indirect",
+    "year": 2021,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "References",
+    "referenceCount": 10,
+    "sourcePath": "articles/2021_Nikitina Tatiana & Bugaeva Anna_Logophoric speech is not indirect.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "平賀 サダ"
+      ],
+      "year": 1958,
+      "yearText": "1958",
+      "title": "アイヌ語音声資料",
+      "titleEn": "Ainu Audio Materials",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "ainu-audio-materials",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Audio Materials"
+    },
+    {
+      "n": 2,
+      "authors": [],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "Ainugo onsei shiryō",
+      "titleEn": "Ainugo onsei shiryō",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-x-ainugo-onsei-shiryo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainugo onsei shiryō"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1988,
+      "yearText": "1988",
+      "title": "Ainugo (The Ainu language)",
+      "titleEn": "Ainugo (The Ainu language)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo (The Ainu language)"
+    },
+    {
+      "n": 4,
+      "authors": [],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Ainu folk-lore",
+      "titleEn": "Ainu folk-lore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-ainu-folk-lore",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu folk-lore"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Nakagawa, Hiroshi, Bugaeva, Anna, Kobayashi, Miki"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "A Glossed Audio Corpus of Ainu Folklore",
+      "titleEn": "A Glossed Audio Corpus of Ainu Folklore",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-nakagawa-hiroshi-a-glossed-audio-corpus-of-ainu-folklore",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "A Glossed Audio Corpus of Ainu Folklore"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "Nikitina Tatiana & Bugaeva Anna"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "Logophoric speech is not indirect",
+      "titleEn": "Logophoric speech is not indirect",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-nikitina-tatiana-bugaeva-anna-logophoric-speech-is-not-indirect",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Logophoric speech is not indirect"
+    }
+  ]
+}

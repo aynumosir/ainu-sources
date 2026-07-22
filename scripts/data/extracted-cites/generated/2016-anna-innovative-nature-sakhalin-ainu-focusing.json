@@ -1,0 +1,338 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2016-anna-innovative-nature-sakhalin-ainu-focusing",
+    "title": "Bugaeva Anna On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
+    "year": 2016,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "REFERENCES",
+    "referenceCount": 18,
+    "sourcePath": "articles/2016_Bugaeva Anna_On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Kanazawa, Shozaburo"
+      ],
+      "year": 1898,
+      "yearText": "1898",
+      "title": "トピック別 アイヌ語会話辞典",
+      "titleEn": "Topical Dictionary of Conversational Ainu",
+      "type": "topical-dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1898-kanazawa-ninjal-topical-ainu-conversation-dictionary",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Topical Dictionary of Conversational Ainu"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Kyōko Murasaki"
+      ],
+      "year": 1976,
+      "yearText": "1976",
+      "title": "Karafuto Ainugo",
+      "titleEn": "Karafuto Ainugo",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1976-kyoko-murasaki-karafuto-ainugo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Karafuto Ainugo"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Murasaki, Kyōko"
+      ],
+      "year": 1979,
+      "yearText": "1979",
+      "title": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
+      "titleEn": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1979-murasaki-kyoko-karafuto-ainugo-bunpo-hen-sakhalin-ainu-grammar-vo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Waseda Daigaku. Gogaku Kyōiku Kenkyūjo"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "Ainugo nyūmon",
+      "titleEn": "Ainugo nyūmon",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-waseda-daigaku-gogaku-kyoiku-kenkyujo-ainugo-nyumon",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainugo nyūmon"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1988,
+      "yearText": "1988",
+      "title": "Ainugo (The Ainu language)",
+      "titleEn": "Ainugo (The Ainu language)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo (The Ainu language)"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Tatsumine Katayama"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "Nihongo to Ainugo",
+      "titleEn": "Nihongo to Ainugo",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-tatsumine-katayama-nihongo-to-ainugo",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Nihongo to Ainugo"
+    },
+    {
+      "n": 8,
+      "authors": [],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "Ainu: spirit of a northern people",
+      "titleEn": "Ainu: spirit of a northern people",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-x-ainu-spirit-of-a-northern-people",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu: spirit of a northern people"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
+    },
+    {
+      "n": 11,
+      "authors": [],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "Japanese and Ainu",
+      "titleEn": "Japanese and Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-japanese-and-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Japanese and Ainu"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Ainugo bunpō no kiso",
+      "titleEn": "Ainugo bunpō no kiso",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo bunpō no kiso"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "Mermaid construction in Ainu",
+      "titleEn": "Mermaid construction in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-anna-bugaeva-mermaid-construction-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Mermaid construction in Ainu"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "Kyōko Murasaki"
+      ],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "Karafuto Ainugo reibunshū",
+      "titleEn": "Karafuto Ainugo reibunshū",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-kyoko-murasaki-karafuto-ainugo-reibunshu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Karafuto Ainugo reibunshū"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "BUGAEVA Anna, Endo, Shiho, Akasegawa, Shiro"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "A topical dictionary of conversational Ainu (English HP)",
+      "titleEn": "A topical dictionary of conversational Ainu (English HP)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-bugaeva-anna-a-topical-dictionary-of-conversational-ainu-englis",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A topical dictionary of conversational Ainu (English HP)"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Ainu Grammar",
+      "titleEn": "Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-basil-hall-chamberlain-ainu-grammar",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Grammar"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    }
+  ]
+}
