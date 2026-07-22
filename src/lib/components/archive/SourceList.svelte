@@ -4,8 +4,9 @@
 	import { formatBytes } from '$lib/archive/format';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import {
-		chooseDefaultOcrVariant,
+		chooseLibraryOcrVariant,
 		ocrEngineLabel,
+		ocrSealFor,
 		summarizeOcrCoverage
 	} from '$lib/archive/ocr';
 	import { formatYear } from '$lib/format';
@@ -15,15 +16,12 @@
 
 	function engineOf(item: ArchiveLibraryItem): string | null {
 		const coverage = item.coverage ?? [];
-		const variant = chooseDefaultOcrVariant(coverage);
+		const variant = chooseLibraryOcrVariant(coverage);
 		const row = coverage.find((c) => c.variant === variant);
 		return row ? ocrEngineLabel(row) : null;
 	}
-	function sealOf(item: ArchiveLibraryItem): { ch: string; cls: string } {
-		const state = summarizeOcrCoverage(item.coverage ?? []).state;
-		if (state === 'available') return { ch: '●', cls: 'is-good' };
-		if (state === 'unreadable') return { ch: '◐', cls: 'is-warn' };
-		return { ch: '○', cls: 'is-none' };
+	function summaryOf(item: ArchiveLibraryItem) {
+		return summarizeOcrCoverage(item.coverage ?? []);
 	}
 </script>
 
@@ -32,7 +30,8 @@
 		{#each items as item (item.file.fileId)}
 			{@const source = item.source}
 			{@const file = item.file}
-			{@const seal = sealOf(item)}
+			{@const summary = summaryOf(item)}
+			{@const seal = ocrSealFor(summary.state)}
 			{@const engine = engineOf(item)}
 			<li class="archive-list-row">
 				<a href={`/archive/work/${source.slug}`} class="archive-list-link" aria-label={`Read ${source.title}`}>
@@ -48,7 +47,7 @@
 					<span class="archive-list-author archive-title">{source.author ?? ''}</span>
 					<span class="archive-list-year tnum">{formatYear(source)}</span>
 					<span class="archive-list-size tnum">{formatBytes(file.bytes)}</span>
-					<span class={`archive-list-seal ${seal.cls}`} aria-hidden="true">{seal.ch}</span>
+					<span class={`archive-list-seal ${seal.className}`} role="img" aria-label={summary.label}>{seal.glyph}</span>
 					<span class="archive-list-text">
 						{#if engine}<span class="archive-card-engine">text: {engine}</span>{:else}<span class="archive-card-notext">no text</span>{/if}
 					</span>
@@ -164,11 +163,19 @@
 		font-size: 12px;
 		color: var(--archive-gilt-text);
 		opacity: 0;
+		pointer-events: none;
 		transition: opacity 0.15s ease;
 	}
 	.archive-list-row:hover .archive-list-catalogue,
 	.archive-list-catalogue:focus-visible {
 		opacity: 1;
+		pointer-events: auto;
+	}
+	@media (hover: none) {
+		.archive-list-catalogue {
+			opacity: 1;
+			pointer-events: auto;
+		}
 	}
 	@media (max-width: 760px) {
 		.archive-list-row {

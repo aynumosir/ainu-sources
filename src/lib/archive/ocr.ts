@@ -35,7 +35,7 @@ export type OcrCoverage = {
 	revisionId: string;
 	variant: string;
 	sourceKind?: TextSourceKind;
-	reliability?: 'unassessed' | 'suspect';
+	reliability?: 'unassessed' | 'sound' | 'suspect';
 	reliabilityNote?: string | null;
 	status: OcrCoverageStatus;
 	tool: string | null;
@@ -98,6 +98,15 @@ export function pickPreferredVariant(
 	return tier[0].variant;
 }
 
+export type OcrSeal = { glyph: '●' | '◐' | '○'; className: 'is-good' | 'is-warn' | 'is-none' };
+
+/** One glyph per coverage state, matching the bilingual legend the library shows beside it. */
+export function ocrSealFor(state: OcrSummary['state']): OcrSeal {
+	if (state === 'available') return { glyph: '●', className: 'is-good' };
+	if (state === 'partial' || state === 'unreadable') return { glyph: '◐', className: 'is-warn' };
+	return { glyph: '○', className: 'is-none' };
+}
+
 export function chooseDefaultOcrVariant(coverage: OcrCoverage[]): string | null {
 	const variants = textBearingVariants(coverage);
 	const preferred = variants.find((variant) => variant.preferred);
@@ -105,4 +114,21 @@ export function chooseDefaultOcrVariant(coverage: OcrCoverage[]): string | null 
 	return [...variants].sort(
 		(left, right) => right.pageCount - left.pageCount || left.variant.localeCompare(right.variant)
 	)[0]?.variant ?? null;
+}
+
+/**
+ * Same intent as chooseDefaultOcrVariant, for contexts that only have
+ * per-variant reliability, not real per-variant page counts (the library
+ * list, where fetching every variant's page count would cost one query per
+ * row). Falls back to the best reliability tier instead of the longest
+ * variant, via the same tie-break pickPreferredVariant uses for ingest.
+ */
+export function chooseLibraryOcrVariant(coverage: OcrCoverage[]): string | null {
+	const variants = textBearingVariants(coverage);
+	if (variants.length === 0) return null;
+	const preferred = variants.find((variant) => variant.preferred)?.variant ?? null;
+	return pickPreferredVariant(
+		variants.map((variant) => ({ variant: variant.variant, reliability: variant.reliability ?? 'unassessed' })),
+		preferred
+	);
 }

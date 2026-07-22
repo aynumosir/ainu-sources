@@ -187,3 +187,15 @@
 	font-family: var(--font-archive-sans);
 	color: var(--archive-faint-text);
 }
+
+/* Shared between the card and list library views, which each render this tag
+   from their own scoped styles. */
+.archive .archive-card-engine {
+	font-family: var(--font-archive-mono);
+	color: var(--archive-gilt-text);
+}
+
+.archive .archive-card-notext {
+	font-family: var(--font-archive-mono);
+	color: var(--archive-subtle);
+}

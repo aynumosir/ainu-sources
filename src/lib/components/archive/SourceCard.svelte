@@ -4,8 +4,9 @@
 	import { archiveLanguageNames } from '$lib/archive/languages';
 	import { formatYear } from '$lib/format';
 	import {
-		chooseDefaultOcrVariant,
+		chooseLibraryOcrVariant,
 		ocrEngineLabel,
+		ocrSealFor,
 		summarizeOcrCoverage
 	} from '$lib/archive/ocr';
 	import type { ArchiveLibraryItem } from '$lib/archive/library-item';
@@ -17,20 +18,10 @@
 	const languages = $derived(archiveLanguageNames(source.languages));
 
 	const summary = $derived(summarizeOcrCoverage(coverage));
-	const shownVariant = $derived(chooseDefaultOcrVariant(coverage));
+	const shownVariant = $derived(chooseLibraryOcrVariant(coverage));
 	const shownRow = $derived(coverage.find((c) => c.variant === shownVariant));
 	const engine = $derived(shownRow ? ocrEngineLabel(shownRow) : null);
-
-	const seal = $derived(
-		summary.state === 'available' ? '●' : summary.state === 'unreadable' ? '◐' : '○'
-	);
-	const sealClass = $derived(
-		summary.state === 'available'
-			? 'is-good'
-			: summary.state === 'unreadable'
-				? 'is-warn'
-				: 'is-none'
-	);
+	const seal = $derived(ocrSealFor(summary.state));
 
 	const metaParts = $derived(
 		[
@@ -48,7 +39,7 @@
 			<ScanThumbnail revisionId={file.revisionId} title={source.title} />
 		</div>
 		<div class="archive-card-body">
-			<span class={`archive-card-seal ${sealClass}`} aria-hidden="true">{seal}</span>
+			<span class={`archive-card-seal ${seal.className}`} role="img" aria-label={summary.label}>{seal.glyph}</span>
 			<h2 class="archive-title archive-clamp-2 text-[17px] font-semibold leading-snug text-[var(--archive-text)]">
 				{source.title}
 			</h2>
@@ -87,6 +78,7 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
+		height: 100%;
 		border: 1px solid var(--archive-border);
 		background: var(--archive-paper);
 		transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
@@ -98,6 +90,7 @@
 	}
 	.archive-card-link {
 		display: flex;
+		flex: 1;
 		gap: 0.85rem;
 		padding: 0.85rem;
 	}
@@ -167,14 +160,6 @@
 		align-items: baseline;
 		gap: 0.4rem;
 	}
-	.archive-card-engine {
-		font-family: var(--font-archive-mono);
-		color: var(--archive-gilt-text);
-	}
-	.archive-card-notext {
-		font-family: var(--font-archive-mono);
-		color: var(--archive-subtle);
-	}
 	.archive-card-lang {
 		font-variant: small-caps;
 		letter-spacing: 0.04em;
@@ -184,7 +169,7 @@
 		position: relative;
 		z-index: 2;
 		align-self: flex-end;
-		margin: 0 0.85rem 0.7rem;
+		margin: auto 0.85rem 0.7rem 0;
 		font-size: 11px;
 		color: var(--archive-gilt-text);
 		text-decoration: underline;
