@@ -93,7 +93,16 @@ export const archiveLabels = {
 	editText: { ja: '校訂を始める', en: 'Edit this text' },
 	policy: { ja: '翻刻・校訂方針', en: 'Transcription policy' },
 	previous: { ja: '前へ', en: 'Previous' },
-	next: { ja: '次へ', en: 'Next' }
+	next: { ja: '次へ', en: 'Next' },
+	cardsView: { ja: 'カード', en: 'Cards' },
+	listView: { ja: '一覧表', en: 'List' },
+	works: { ja: '資料', en: 'works' },
+	pages: { ja: 'ページ', en: 'pages' },
+	searchable: { ja: '検索可能', en: 'searchable' },
+	sealLegend: {
+		ja: '● 読める本文 · ◐ 機械抽出のみ（要確認） · ○ 本文なし',
+		en: '● readable text · ◐ machine extract, check · ○ no text'
+	}
 } as const;
 
 export type ArchiveLabelKey = keyof typeof archiveLabels;
