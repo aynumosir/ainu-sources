@@ -1,0 +1,89 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2008-momochi-ainu-shin-yoshu-denshika-deta",
+    "title": "桃内佳雄 研究ノート『アイヌ神謡集』の電子化データの構成と利用",
+    "year": 2008,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参考文献",
+    "referencePages": "scan pp. 14-14",
+    "referenceCount": 4,
+    "sourcePath": "articles/2008_桃内佳雄_研究ノート『アイヌ神謡集』の電子化データの構成と利用.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "切替, 英雄"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "『アイヌ神謡集』辞典 : テキスト・文法解説付き",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-1a08let",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "『アイヌ神謡集』辞典 : テキスト・文法解説付き"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Kaizawa, Julie, 片山, 竜峯"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "「アイヌ神謡集」を読みとく",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-kaizawa-julie-gjwb9l",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "「アイヌ神謡集」を読みとく"
+    }
+  ]
+}

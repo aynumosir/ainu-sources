@@ -1,0 +1,52 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2009-sato-ainu-go-joken-hyogen",
+    "title": "佐藤知己 アイヌ語の条件表現について",
+    "year": 2009,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 2,
+    "sourcePath": "articles/2009_佐藤知己_アイヌ語の条件表現について.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "Japanese and Ainu",
+      "titleEn": "Japanese and Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-japanese-and-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Japanese and Ainu"
+    }
+  ]
+}

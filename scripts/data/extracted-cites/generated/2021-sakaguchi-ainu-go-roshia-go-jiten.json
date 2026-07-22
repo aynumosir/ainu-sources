@@ -1,0 +1,158 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2021-sakaguchi-ainu-go-roshia-go-jiten",
+    "title": "阪口諒 アイヌ語ロシア語辞典のアイヌ語話者に関する情報",
+    "year": 2021,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 8,
+    "sourcePath": "articles/2021_阪口諒_アイヌ語ロシア語辞典のアイヌ語話者に関する情報.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "佐々木, 弘太郎"
+      ],
+      "year": 1969,
+      "yearText": "1969",
+      "title": "樺太アイヌ語地名小辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1969-x-ry0mju",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "樺太アイヌ語地名小辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1969,
+      "yearText": "1969",
+      "title": "カラフト西海岸北部地名の共時論的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1969-x-sma98w",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カラフト西海岸北部地名の共時論的研究"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Emiko Ohnuki-Tierney"
+      ],
+      "year": 1974,
+      "yearText": "1974",
+      "title": "Ainu of the Northwest Coast of Southern Sakhalin",
+      "titleEn": "Ainu of the Northwest Coast of Southern Sakhalin",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1974-emiko-ohnuki-tierney-ainu-of-the-northwest-coast-of-southern-sakhalin",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu of the Northwest Coast of Southern Sakhalin"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Emiko Ohnuki‐Tierney"
+      ],
+      "year": 1974,
+      "yearText": "1974",
+      "title": "The Ainu of the Northwest Coast of Southern Sakhalin",
+      "titleEn": "The Ainu of the Northwest Coast of Southern Sakhalin",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1974-emiko-ohnuki-tierney-the-ainu-of-the-northwest-coast-of-southern-sakhal",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu of the Northwest Coast of Southern Sakhalin"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "M.M. Dobrotvorskii, 寺田 吉孝"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語・ロシア語辞典-2-",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-m-m-dobrotvorskii-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語・ロシア語辞典-2-"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "寺田 吉孝"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語・ロシア語辞典(3)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-x-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語・ロシア語辞典(3)"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    }
+  ]
+}

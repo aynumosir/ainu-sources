@@ -58,6 +58,14 @@
 		font-size: var(--archive-label-en-size, 0.72em);
 		font-weight: 400;
 		letter-spacing: 0.02em;
+		/* CJK glyphs rest on the ideographic baseline, below the alphabetic one
+		   the flex row aligns to, so the Latin gloss floats high. Nudge it down;
+		   serif JA drops further and widens the gap, so it overrides this. */
+		transform: translateY(var(--archive-bilingual-en-shift, 0.06em));
+	}
+	.archive-bilingual-label.stacked .en,
+	.archive-bilingual-label.stacked .sep {
+		transform: none;
 	}
 	.archive-bilingual-label.inverse .en,
 	.archive-bilingual-label.inverse .sep {

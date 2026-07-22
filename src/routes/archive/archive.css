@@ -199,3 +199,10 @@
 	font-family: var(--font-archive-mono);
 	color: var(--archive-subtle);
 }
+
+/* Serif JA (nav, headings) carries a deeper ideographic drop than sans JA, so
+   the bilingual gloss needs a larger nudge there to sit on the line. */
+.archive nav .archive-bilingual-label:not(.stacked),
+.archive-bilingual-label:is(.archive-h1, .archive-h2):not(.stacked) {
+	--archive-bilingual-en-shift: 0.17em;
+}

@@ -1,0 +1,156 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2006-momochi-ainu-go-chimei-jidoka-kisoteki-kosatsu",
+    "title": "桃内佳雄 アイヌ語地名解析の自動化のための基礎的考察",
+    "year": 2006,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参考文献",
+    "referencePages": "scan pp. 18-18",
+    "referenceCount": 8,
+    "sourcePath": "articles/2006_桃内佳雄_アイヌ語地名解析の自動化のための基礎的考察.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "切替英雄"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "アイヌ語の名詞句の構造と合成名詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-x-1e3o6yu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の名詞句の構造と合成名詞"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "羽田野 正隆"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "アイヌ語地名の史料における出現頻度",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-x-smep1t",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語地名の史料における出現頻度"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "切替 英雄"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "頻出アイヌ語地名の形態論的構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-x-dhs2wh",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "頻出アイヌ語地名の形態論的構造"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "中川 裕"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "言語学がアイヌ語地名研究に寄与できること",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2002-x-9ggpbs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "言語学がアイヌ語地名研究に寄与できること"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "由良, 勇"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "上川郡内石狩川本支流アイヌ語地名解",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-x-gq1o9s",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "上川郡内石狩川本支流アイヌ語地名解"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "切替 英雄"
+      ],
+      "year": 2005,
+      "yearText": "2005",
+      "title": "山田秀三のアイヌ語地名研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2005-x-y85skk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "山田秀三のアイヌ語地名研究"
+    }
+  ]
+}

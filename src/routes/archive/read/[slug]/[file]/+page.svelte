@@ -634,10 +634,10 @@
 						<p class="archive-kicker">OCR text · p.{currentPage}</p>
 						<button type="button" class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" onclick={() => (textPanelOpen = false)}>Close</button>
 					</div>
-					<div class="mt-4 font-[var(--font-archive-serif)] text-[17px] leading-8">
+					<div class="mt-4 font-(family-name:--font-archive-serif) text-[17px] leading-8">
 						{#if selectedText.status === 'ready'}
 							<p class="archive-kicker mb-2">variant · {selectedText.variant}</p>
-							<pre class="whitespace-pre-wrap break-words font-[var(--font-archive-serif)]">{selectedText.text}</pre>
+							<pre class="whitespace-pre-wrap break-words font-(family-name:--font-archive-serif)">{selectedText.text}</pre>
 						{:else if selectedText.status === 'loading'}
 							<p class="text-[15px] text-[var(--archive-subtle)]">Loading OCR text...</p>
 						{:else if selectedText.status === 'unavailable'}

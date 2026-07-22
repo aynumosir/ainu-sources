@@ -1,0 +1,88 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2017-takahashi-shieki-setsubi-ji",
+    "title": "高橋靖以 アイヌ語幌別方言の使役接尾辞について",
+    "year": 2017,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献",
+    "referenceCount": 4,
+    "sourcePath": "articles/2017_高橋靖以_アイヌ語幌別方言の使役接尾辞について.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Asai, Tōru"
+      ],
+      "year": 1974,
+      "yearText": "1974",
+      "title": "Classification of dialects: cluster analysis of Ainu dialects",
+      "titleEn": "Classification of dialects: cluster analysis of Ainu dialects",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1974-asai-toru-classification-of-dialects-cluster-analysis-of-ain",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Classification of dialects: cluster analysis of Ainu dialects"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "金成, まつ, 金田一, 京助"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "アイヌ叙事詩ユーカラ集",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-jqe5tq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ集"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    }
+  ]
+}

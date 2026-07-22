@@ -1,0 +1,138 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2017-kobayashi-yutai-doshi-hasei-chofuku",
+    "title": "小林美紀 アイヌ語における有対動詞の派生と重複",
+    "year": 2017,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献",
+    "referenceCount": 7,
+    "sourcePath": "articles/2017_小林美紀_アイヌ語における有対動詞の派生と重複.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "奥田, 統己"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "アイヌ語静内方言文脈つき語彙集",
+      "type": "wordlist",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-1h7k5eb",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語静内方言文脈つき語彙集"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "奥田, 統己"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)",
+      "type": "wordlist",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-cd-rom",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "小林美紀"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ語鵡川方言の有対動詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-1f209hp",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語鵡川方言の有対動詞"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "小林 美紀"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語十勝方言における自他同形動詞に関する一考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-je5aun",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言における自他同形動詞に関する一考察"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "小林美紀"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語動詞の結合価と項構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-x-1b5idq9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語動詞の結合価と項構造"
+    }
+  ]
+}

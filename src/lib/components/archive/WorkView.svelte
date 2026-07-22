@@ -19,6 +19,7 @@
 		type TextSourceKind
 	} from '$lib/archive/ocr';
 	import OcrBadge from './OcrBadge.svelte';
+	import CitationRelations from '$lib/components/CitationRelations.svelte';
 
 	type Sheet = 'pages' | 'about' | 'find' | null;
 	type ViewMode = 'image' | 'text' | 'side-by-side';
@@ -424,7 +425,7 @@
 				{#if selectedText.wholeDocument}
 					<p class="mb-3 border-b border-dotted border-[var(--archive-border)] pb-2 text-[12px] text-[var(--archive-subtle)]">全文（ページ非対応） / Full text — not aligned to this page</p>
 				{/if}
-				<pre class="whitespace-pre-wrap font-[var(--font-archive-serif)] text-[17px] leading-8 text-[var(--archive-text)]">{selectedText.text}</pre>
+				<pre class="whitespace-pre-wrap font-(family-name:--font-archive-serif) text-[17px] leading-8 text-[var(--archive-text)]">{selectedText.text}</pre>
 			{/if}
 		</div>
 	</section>
@@ -436,7 +437,7 @@
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
 			<BilingualLabel tag="h3" ja={archiveLabels.citation.ja} en={archiveLabels.citation.en} class="archive-h3" />
-			<p class="mt-3 font-[var(--font-archive-serif)] text-[15px] leading-7">
+			<p class="mt-3 font-(family-name:--font-archive-serif) text-[15px] leading-7">
 				{@render authorNames()}. <cite>{source.title}</cite>. {year}.<br /><span class="tnum">{citedPage}</span>.
 			</p>
 			<button type="button" onclick={copyCitation} class="mt-3 border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
@@ -444,6 +445,8 @@
 			</button>
 			{#if copyStatus}<span class="ml-2 text-[12px] text-[var(--archive-good)]" role="status">{copyStatus}</span>{/if}
 		</section>
+
+		<CitationRelations related={work.detail.related ?? []} variant="archive" />
 
 		<section class="border-t border-dotted border-[var(--archive-border)] pt-4">
 			<BilingualLabel tag="h3" ja="本文" en="Text" class="archive-h3" />

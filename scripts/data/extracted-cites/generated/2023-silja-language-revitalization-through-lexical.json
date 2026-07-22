@@ -1,0 +1,359 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2023-silja-language-revitalization-through-lexical",
+    "title": "Ijas Silja Language revitalization through lexical modernization and neologism-coining in Ainu",
+    "year": 2023,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "References",
+    "referenceCount": 19,
+    "sourcePath": "articles/2023_Ijas Silja_Language revitalization through lexical modernization and neologism-coining in Ainu.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "John C. Batchelor"
+      ],
+      "year": 1903,
+      "yearText": "1903",
+      "title": "A grammar of the Ainu language",
+      "titleEn": "A grammar of the Ainu language",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1903-john-c-batchelor-a-grammar-of-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "A grammar of the Ainu language"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Kyōsuke Kindaichi"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "Ainugo kenkyū",
+      "titleEn": "Ainugo kenkyū",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-kyosuke-kindaichi-ainugo-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainugo kenkyū"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Itsuhiko Kubodera"
+      ],
+      "year": 1992,
+      "yearText": "1992",
+      "title": "Ainugo Nihongo jiten kō",
+      "titleEn": "Ainugo Nihongo jiten kō",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1992-itsuhiko-kubodera-ainugo-nihongo-jiten-ko",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Ainugo Nihongo jiten kō"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Ainugo jiten",
+      "titleEn": "Ainugo jiten",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-suzuko-tamura-ainugo-jiten",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainugo jiten"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Honda, Katsuichi"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "Ainu minzoku",
+      "titleEn": "Ainu minzoku",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-honda-katsuichi-ainu-minzoku",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu minzoku"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Kirsten Refsing"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "Lost Aryans? John Batchelor and the Colonization of the Ainu Language",
+      "titleEn": "Lost Aryans? John Batchelor and the Colonization of the Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-kirsten-refsing-lost-aryans-john-batchelor-and-the-colonization-of",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Lost Aryans? John Batchelor and the Colonization of the Ainu Language"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Ainugo bunpō no kiso",
+      "titleEn": "Ainugo bunpō no kiso",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo bunpō no kiso"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "Southern Hokkaido Ainu",
+      "titleEn": "Southern Hokkaido Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-bugaeva-anna-southern-hokkaido-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Southern Hokkaido Ainu"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "Katsunobu Izutsu"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "Ainu Languages: Correct, Good, and Less So",
+      "titleEn": "Ainu Languages: Correct, Good, and Less So",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-katsunobu-izutsu-ainu-languages-correct-good-and-less-so",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu Languages: Correct, Good, and Less So"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Ainu Grammar",
+      "titleEn": "Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-basil-hall-chamberlain-ainu-grammar",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Grammar"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "Jirota Kitahara"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Current status of Ainu cultural revitalization",
+      "titleEn": "Current status of Ainu cultural revitalization",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-jirota-kitahara-current-status-of-ainu-cultural-revitalization",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Current status of Ainu cultural revitalization"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "John Batchelor"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Ainu-English-Japanese Dictionary (including a Grammar of the Ainu Language)",
+      "titleEn": "Ainu-English-Japanese Dictionary (including a Grammar of the Ainu Language)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-john-batchelor-ainu-english-japanese-dictionary-including-a-gramm",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Ainu-English-Japanese Dictionary (including a Grammar of the Ainu Language)"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "坂田 美奈子"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "The National Ainu Museum",
+      "titleEn": "The National Ainu Museum",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-the-national-ainu-museum",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The National Ainu Museum"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Introduction"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Handbook of the Ainu Language",
+      "titleEn": "Handbook of the Ainu Language",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-bugaeva",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Handbook of the Ainu Language"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "Nakagawa, Hiroshi, Fukazawa, Mika"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Hokkaido Ainu dialects: Towards a classification of Ainu dialects",
+      "titleEn": "Hokkaido Ainu dialects: Towards a classification of Ainu dialects",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-nakagawa-hiroshi-hokkaido-ainu-dialects-towards-a-classification-of",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Hokkaido Ainu dialects: Towards a classification of Ainu dialects"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "イヤス シリヤ"
+      ],
+      "year": 2023,
+      "yearText": "2023",
+      "title": "語彙近代化と新語作りを通じての言語復興 : アイヌ語の語彙近代化の現状と今後の課題",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2023-x-s98y7m",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "語彙近代化と新語作りを通じての言語復興 : アイヌ語の語彙近代化の現状と今後の課題"
+    }
+  ]
+}

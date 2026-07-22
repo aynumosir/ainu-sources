@@ -1,0 +1,176 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2014-bugaewa-ainu-go-shieki-kobun-saikosatsu-2",
+    "title": "ブガエワ・アンナ アイヌ語使役構文に関する再考察",
+    "year": 2014,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 9,
+    "sourcePath": "articles/2014_ブガエワ・アンナ_アイヌ語使役構文に関する再考察.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一 京助"
+      ],
+      "year": 1931,
+      "yearText": "1931",
+      "title": "アイヌユーカラ語法摘要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1931-x-11givjx",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "福田 すず子"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語の動詞の構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-x-1c6njuk",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語の動詞の構造"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "Ditransitive constructions in Ainu",
+      "titleEn": "Ditransitive constructions in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-anna-bugaeva-ditransitive-constructions-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ditransitive constructions in Ainu"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "ブガエワ・アンナ"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ語使役構文に関する再考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-fygxef",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語使役構文に関する再考察"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Ainu Language"
+    }
+  ]
+}

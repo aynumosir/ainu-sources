@@ -1,0 +1,36 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2021-eric-noun-incorporation-polysynthesis",
+    "title": "Barrie Michael & Mathieu Éric Noun Incorporation and Polysynthesis",
+    "year": 2021,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "References",
+    "referenceCount": 1,
+    "sourcePath": "articles/2021_Barrie Michael & Mathieu Éric_Noun Incorporation and Polysynthesis.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Barrie Michael & Mathieu Éric"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "Noun Incorporation and Polysynthesis",
+      "titleEn": "Noun Incorporation and Polysynthesis",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-barrie-michael-mathieu-eric-noun-incorporation-and-polysynthesis",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Noun Incorporation and Polysynthesis"
+    }
+  ]
+}

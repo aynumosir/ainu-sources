@@ -1,0 +1,157 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2016-endo-nabesawa-genzo-ainu-go-kana-hyoki-taikei-2",
+    "title": "遠藤志保 鍋沢元蔵によるアイヌ語のカナ表記体系：国立民族学博物館所蔵筆録ノートから",
+    "year": 2016,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 8,
+    "sourcePath": "articles/2016_遠藤志保_鍋沢元蔵によるアイヌ語のカナ表記体系：国立民族学博物館所蔵筆録ノートから.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "切替英雄"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "アイヌによるアイヌ語表記",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-x-1ru16e0",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌによるアイヌ語表記"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "切替 英雄"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "アイヌ語十勝方言話者による仮名書きアイヌ語テキストの分析",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-1udv0r9",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言話者による仮名書きアイヌ語テキストの分析"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "釧路アイヌ文化懇話会[編]"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "アイヌ・モシリ : 幻のアイヌ語誌復刊",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-nf5skr",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ・モシリ : 幻のアイヌ語誌復刊"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "中川裕"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "アイヌ人によるアイヌ語表記への取り組み",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-19usgnh",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ人によるアイヌ語表記への取り組み"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "遠藤 志保"
+      ],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "アイヌ英雄叙事詩「ニタイパカイェ」の2種類のテキストに関する考察",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-x-2-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ英雄叙事詩「ニタイパカイェ」の2種類のテキストに関する考察"
+    }
+  ]
+}

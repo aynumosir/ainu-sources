@@ -1,0 +1,87 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2016-takahashi-tokachi-hogen-hitei-kozo",
+    "title": "高橋靖以 アイヌ語十勝方言の否定構造について",
+    "year": 2016,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献",
+    "referenceCount": 4,
+    "sourcePath": "articles/2016_高橋靖以_アイヌ語十勝方言の否定構造について.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "田村 すゞ子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言における《…して…》",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-13w5bm1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言における《…して…》"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "田村 すず子"
+      ],
+      "year": 1972,
+      "yearText": "1972",
+      "title": "アイヌ語沙流方言における《…して…》の表現",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1972-x-9zmxzm",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言における《…して…》の表現"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "高橋靖以"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "アイヌ語十勝方言の否定構造について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-x-1ahzs2r",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語十勝方言の否定構造について"
+    }
+  ]
+}

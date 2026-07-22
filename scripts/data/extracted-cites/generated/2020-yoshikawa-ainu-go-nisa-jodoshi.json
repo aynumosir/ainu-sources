@@ -1,0 +1,327 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2020-yoshikawa-ainu-go-nisa-jodoshi",
+    "title": "吉川佳見 アイヌ語の助動詞 nisa の用法についての一考察",
+    "year": 2020,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 18,
+    "sourcePath": "articles/2020_吉川佳見_アイヌ語の助動詞 nisa の用法についての一考察.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-x-fhxngs",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "久保寺, 逸彦"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ叙事詩神謡、聖伝の研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-x-1hv377u",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩神謡、聖伝の研究"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-x-1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "久保寺逸彦(編著)"
+      ],
+      "year": 1977,
+      "yearText": "1977",
+      "title": "アイヌ叙事詩 神謡・聖伝の研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1977-x-4mbx9h",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ叙事詩 神謡・聖伝の研究"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "久保寺, 逸彦"
+      ],
+      "year": 1992,
+      "yearText": "1992",
+      "title": "アイヌ語・日本語辞典稿 : 久保寺逸彦アイヌ語収録ノート調査報告書",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1992-x-1da8mcm",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語・日本語辞典稿 : 久保寺逸彦アイヌ語収録ノート調査報告書"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "金成, まつ, 金田一, 京助"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "アイヌ叙事詩ユーカラ集",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-x-jqe5tq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ集"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-x-1klo3z4",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "エクスプレスアイヌ語",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-x-1fejzao",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "エクスプレスアイヌ語"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "萱野, 茂, 平凡社"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "萱野茂のアイヌ神話集成",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-1v9r8sq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ神話集成"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "中本 ムツ子"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "CDエクスプレス アイヌ語",
+      "titleEn": "CD Express: Ainu",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "cd-express-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "CDエクスプレス アイヌ語"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "アイヌ語千歳方言のアスペクト",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-x-mqzorq",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言のアスペクト"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ語の文献学的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-x-1dlbz6p",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語の文献学的研究"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "吉川佳見"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "アイヌ語の助動詞aanと証拠性",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-x-aan",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の助動詞aanと証拠性"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "久保寺逸彦著"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語・日本語辞典稿",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-121ohxf",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語・日本語辞典稿"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "吉川佳見"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語における完了表現があらわす証拠性",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-184yz2e",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における完了表現があらわす証拠性"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "吉川佳見"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語の助動詞 nisa の用法についての一考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-x-nisa",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の助動詞 nisa の用法についての一考察"
+    }
+  ]
+}

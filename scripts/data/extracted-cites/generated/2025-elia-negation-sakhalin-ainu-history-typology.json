@@ -1,0 +1,54 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2025-elia-negation-sakhalin-ainu-history-typology",
+    "title": "Dal Corso Elia Negation in Sakhalin Ainu: History and Typology",
+    "year": 2025,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "REFERENCES",
+    "referenceCount": 2,
+    "sourcePath": "articles/2025_Dal Corso Elia_Negation in Sakhalin Ainu: History and Typology.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "by Kyoko Murasaki"
+      ],
+      "year": 1978,
+      "yearText": "1978",
+      "title": "Sakhalin Ainu",
+      "titleEn": "Sakhalin Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Sakhalin Ainu"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Dal Corso Elia"
+      ],
+      "year": 2025,
+      "yearText": "2025",
+      "title": "Negation in Sakhalin Ainu: History and Typology",
+      "titleEn": "Negation in Sakhalin Ainu: History and Typology",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2025-dal-corso-elia-negation-in-sakhalin-ainu-history-and-typology",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Negation in Sakhalin Ainu: History and Typology"
+    }
+  ]
+}

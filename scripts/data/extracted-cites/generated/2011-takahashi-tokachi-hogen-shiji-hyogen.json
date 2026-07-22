@@ -1,0 +1,52 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2011-takahashi-tokachi-hogen-shiji-hyogen",
+    "title": "高橋靖以 アイヌ語十勝方言の指示表現",
+    "year": 2011,
+    "type": "publication"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考文献",
+    "referenceCount": 2,
+    "sourcePath": "articles/2011_高橋靖以_アイヌ語十勝方言の指示表現.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "切替 英雄"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-x-2-5",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "奥田, 統己"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "アイヌ語静内方言文脈つき語彙集",
+      "type": "wordlist",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-x-1h7k5eb",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語静内方言文脈つき語彙集"
+    }
+  ]
+}
