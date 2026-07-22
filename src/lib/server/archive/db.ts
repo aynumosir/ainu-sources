@@ -1617,6 +1617,7 @@ export async function listArchiveFiles(
 			sha256: fileRevisions.blobSha256,
 			bytes: archiveBlobs.bytes,
 			mediaType: archiveBlobs.detectedMediaType,
+			pageCount: fileRevisions.pageCount,
 			sourceId: sources.id,
 			title: sources.title,
 			titleEn: sources.titleEn,
@@ -1665,7 +1666,8 @@ export async function listArchiveFiles(
 				reviewedAt: iso(row.reviewedAt),
 				sha256: row.sha256,
 				bytes: row.bytes,
-				mediaType: row.mediaType
+				mediaType: row.mediaType,
+				pageCount: row.pageCount
 			},
 			source: {
 				id: row.sourceId,

@@ -1,16 +1,20 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import SourceCard from './SourceCard.svelte';
 	import BilingualLabel from './BilingualLabel.svelte';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { reveal } from '$lib/archive/reveal.svelte';
 	import type { ArchiveLibraryItem } from '$lib/archive/library-item';
 
 	let { items }: { items: ArchiveLibraryItem[] } = $props();
 </script>
 
 {#if items.length}
-	<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-		{#each items as item (item.file.fileId)}
-			<SourceCard {item} />
+	<div class="archive-card-grid">
+		{#each items as item, i (item.file.fileId)}
+			<div class="h-full" use:reveal={Math.min(i, 8) * 45} out:fly={{ y: 8, duration: 180 }}>
+				<SourceCard {item} index={i} />
+			</div>
 		{/each}
 	</div>
 {:else}
@@ -23,3 +27,11 @@
 		/>
 	</div>
 {/if}
+
+<style>
+	.archive-card-grid {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	}
+</style>

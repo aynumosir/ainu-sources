@@ -188,6 +188,18 @@
 	color: var(--archive-faint-text);
 }
 
+/* Shared between the card and list library views, which each render this tag
+   from their own scoped styles. */
+.archive .archive-card-engine {
+	font-family: var(--font-archive-mono);
+	color: var(--archive-gilt-text);
+}
+
+.archive .archive-card-notext {
+	font-family: var(--font-archive-mono);
+	color: var(--archive-subtle);
+}
+
 /* Serif JA (nav, headings) carries a deeper ideographic drop than sans JA, so
    the bilingual gloss needs a larger nudge there to sit on the line. */
 .archive nav .archive-bilingual-label:not(.stacked),

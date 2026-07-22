@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { resolveArchivePrincipal } from '$lib/server/archive/authz';
 import { listArchiveFiles } from '$lib/server/archive/db';
+import { getArchiveStats } from '$lib/server/archive/stats';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
 import { parseArchiveFilters } from '$lib/archive/filters';
 import { revisionOcrCoverage } from '$lib/server/db/schema';
@@ -14,6 +15,10 @@ export const load: PageServerLoad = async ({ request, url }) => {
 	const principal = await resolveArchivePrincipal(request, db);
 	if (!principal) return { accessDenied: true, filters, items: [], nextCursor: null, params: '' };
 	if (!archiveRoleAtLeast(principal.role, 'archive_reader')) error(403, 'archive reader role required');
+
+	// Independent of the library listing below, so it can run alongside it
+	// rather than after.
+	const statsPromise = getArchiveStats(db);
 
 	const result = await listArchiveFiles(db, {
 		text: filters.text,
@@ -34,7 +39,8 @@ export const load: PageServerLoad = async ({ request, url }) => {
 					status: revisionOcrCoverage.status,
 					tool: revisionOcrCoverage.tool,
 					toolVersion: revisionOcrCoverage.toolVersion,
-					preferred: revisionOcrCoverage.preferred
+					preferred: revisionOcrCoverage.preferred,
+					reliability: revisionOcrCoverage.reliability
 				})
 				.from(revisionOcrCoverage)
 				.where(inArray(revisionOcrCoverage.revisionId, revisionIds))
@@ -42,7 +48,12 @@ export const load: PageServerLoad = async ({ request, url }) => {
 	const coverageByRevision = new Map<string, OcrCoverage[]>();
 	for (const row of coverageRows) {
 		const rows = coverageByRevision.get(row.revisionId) ?? [];
-		rows.push({ ...row, status: row.status as OcrCoverage['status'], pageCount: 0 });
+		rows.push({
+			...row,
+			status: row.status as OcrCoverage['status'],
+			reliability: (row.reliability ?? 'unassessed') as OcrCoverage['reliability'],
+			pageCount: 0
+		});
 		coverageByRevision.set(row.revisionId, rows);
 	}
 	const items = result.items.map((item) => ({
@@ -52,10 +63,12 @@ export const load: PageServerLoad = async ({ request, url }) => {
 
 	const params = new URLSearchParams(url.searchParams);
 	params.delete('cursor');
+	const stats = await statsPromise;
 	return {
 		accessDenied: false,
 		filters,
 		items,
+		stats,
 		nextCursor: result.nextCursor,
 		params: params.toString()
 	};
