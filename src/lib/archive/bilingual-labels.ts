@@ -96,6 +96,7 @@ export const archiveLabels = {
 	next: { ja: '次へ', en: 'Next' },
 	cardsView: { ja: 'カード', en: 'Cards' },
 	listView: { ja: '一覧表', en: 'List' },
+	collectionFacts: { ja: '収蔵状況', en: 'Collection' },
 	works: { ja: '資料', en: 'works' },
 	pages: { ja: 'ページ', en: 'pages' },
 	searchable: { ja: '検索可能', en: 'searchable' },

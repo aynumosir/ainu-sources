@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BilingualLabel from './BilingualLabel.svelte';
-	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
 	import type { ArchiveStats } from '$lib/server/archive/stats';
 
 	let { stats }: { stats: ArchiveStats } = $props();
@@ -9,12 +9,14 @@
 	const works = $derived(stats.totals.works);
 	const files = $derived(stats.totals.files);
 	const pages = $derived(stats.pages.total);
+	// pagesWithText counts pages on revisions that may lack a recorded page_count,
+	// so the ratio can run past 100% of the recorded total; clamp the display.
 	const searchablePct = $derived(
-		pages > 0 ? Math.round((stats.ocr.pagesWithText / pages) * 100) : 0
+		pages > 0 ? Math.min(100, Math.round((stats.ocr.pagesWithText / pages) * 100)) : 0
 	);
 </script>
 
-<ul class="archive-facts" aria-label="Collection">
+<ul class="archive-facts" aria-label={bilingualAriaLabel(archiveLabels.collectionFacts)}>
 	<li>
 		<span class="tnum archive-facts-num">{fmt(works)}</span>
 		<span class="archive-facts-label"><BilingualLabel ja={archiveLabels.works.ja} en={archiveLabels.works.en} /></span>

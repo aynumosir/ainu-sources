@@ -12,7 +12,7 @@
 {#if items.length}
 	<div class="archive-card-grid">
 		{#each items as item, i (item.file.fileId)}
-			<div use:reveal={Math.min(i, 8) * 45} out:fly={{ y: 8, duration: 180 }}>
+			<div class="h-full" use:reveal={Math.min(i, 8) * 45} out:fly={{ y: 8, duration: 180 }}>
 				<SourceCard {item} index={i} />
 			</div>
 		{/each}
