@@ -44,7 +44,7 @@
 		<nav class="ml-auto flex min-w-0 items-center gap-2 overflow-x-auto text-[13px] sm:ml-4 sm:gap-4" aria-label="Archive">
 			{#each navItems as item (item.href)}
 				<a
-					class={`shrink-0 border-b px-0.5 pb-1 font-[var(--font-archive-serif)] font-semibold text-[var(--archive-subtle)] transition hover:border-[var(--archive-gilt)] hover:text-[var(--archive-text)] ${
+					class={`shrink-0 border-b px-0.5 pb-1 font-(family-name:--font-archive-serif) font-semibold text-[var(--archive-subtle)] transition hover:border-[var(--archive-gilt)] hover:text-[var(--archive-text)] ${
 						isCurrent(item.section) ? 'border-[var(--archive-gilt)] text-[var(--archive-text)]' : 'border-transparent'
 					}`}
 					href={item.href}
