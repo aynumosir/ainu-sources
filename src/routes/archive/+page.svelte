@@ -10,10 +10,17 @@
 	import PaginationCursor from '$lib/components/archive/PaginationCursor.svelte';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
+	import { prefersReducedMotion } from '$lib/archive/motion';
 
 	let { data } = $props();
 
 	const view = $derived(page.url.searchParams.get('view') === 'list' ? 'list' : 'cards');
+	// prefersReducedMotion() reads matchMedia, which is undefined during SSR;
+	// $state settles this to the real value after the component mounts.
+	let fadeInMs = $state(220);
+	$effect(() => {
+		if (prefersReducedMotion()) fadeInMs = 0;
+	});
 </script>
 
 <ArchiveHead title="資料一覧 Library" />
@@ -44,11 +51,11 @@
 	<FilterBar filters={data.filters} />
 
 	{#if view === 'cards'}
-		<div in:fade={{ duration: 220 }} out:fade={{ duration: 160 }}>
+		<div in:fade={{ duration: fadeInMs }}>
 			<SourceCardGrid items={data.items} />
 		</div>
 	{:else}
-		<div in:fade={{ duration: 220 }} out:fade={{ duration: 160 }}>
+		<div in:fade={{ duration: fadeInMs }}>
 			<SourceList items={data.items} />
 		</div>
 	{/if}

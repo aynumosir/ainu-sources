@@ -1,3 +1,5 @@
+import { prefersReducedMotion } from './motion';
+
 /**
  * Reveal an element once it scrolls into view: it starts dimmed and a few
  * pixels low, then settles. The optional delay staggers a list of cards so a
@@ -5,9 +7,7 @@
  * immediately when IntersectionObserver is unavailable.
  */
 export function reveal(node: HTMLElement, delay = 0) {
-	const reduce =
-		typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-	if (reduce || typeof IntersectionObserver === 'undefined') {
+	if (prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
 		node.style.opacity = '1';
 		return {};
 	}
@@ -18,13 +18,14 @@ export function reveal(node: HTMLElement, delay = 0) {
 		node.style.opacity = '1';
 		node.style.transform = 'none';
 	};
+	let timeout: number | undefined;
 	const observer = new IntersectionObserver(
 		(entries) => {
 			for (const entry of entries) {
 				if (entry.isIntersecting) {
-					const id = window.setTimeout(settle, delay);
+					timeout = window.setTimeout(settle, delay);
 					observer.disconnect();
-					return () => window.clearTimeout(id);
+					return;
 				}
 			}
 		},
@@ -34,6 +35,7 @@ export function reveal(node: HTMLElement, delay = 0) {
 	return {
 		destroy() {
 			observer.disconnect();
+			if (timeout !== undefined) window.clearTimeout(timeout);
 		}
 	};
 }
