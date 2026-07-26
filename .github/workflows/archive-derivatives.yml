@@ -34,10 +34,33 @@ jobs:
         with:
           persist-credentials: false
       - uses: oven-sh/setup-bun@v2
-      - name: Install PDF/image tools
+      - name: Install PDF tools
+        # The AWS CLI ships with the runner image.
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils imagemagick qpdf awscli
+          sudo apt-get install -y poppler-utils qpdf
+      - name: Install ImageMagick
+        # Ubuntu 24.04 packages ImageMagick 6, whose binaries are named
+        # convert-im6.q16 and friends; the derivative script calls `magick`.
+        env:
+          IMAGEMAGICK_VERSION: "7.1.2-27"
+          IMAGEMAGICK_SHA256: b2feb70e39f0b3ae474a0bb1ce8123811cb82f7fb80275bfb4e74018fb6cabdd
+        working-directory: ${{ runner.temp }}
+        run: |
+          curl -fsSL --retry 3 --retry-delay 2 -o magick.AppImage \
+            "https://github.com/ImageMagick/ImageMagick/releases/download/${IMAGEMAGICK_VERSION}/ImageMagick-${IMAGEMAGICK_VERSION}-gcc-x86_64.AppImage"
+          echo "${IMAGEMAGICK_SHA256}  magick.AppImage" | sha256sum -c -
+          chmod +x magick.AppImage
+          # Extraction avoids the FUSE dependency an AppImage otherwise needs.
+          ./magick.AppImage --appimage-extract > /dev/null
+          sudo rm -rf /opt/imagemagick
+          sudo mv squashfs-root /opt/imagemagick
+          sudo ln -sf /opt/imagemagick/AppRun /usr/local/bin/magick
+          # A conversion exercises the WebP encoder the page images depend on,
+          # which `magick -version` alone leaves untested.
+          magick -size 4x4 xc:white -quality 82 -define webp:method=6 smoke.webp
+          magick identify smoke.webp
+          rm smoke.webp
       - run: bun install --frozen-lockfile
       - name: Generate derivatives
         env:
