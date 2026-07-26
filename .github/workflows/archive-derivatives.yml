@@ -47,15 +47,20 @@ jobs:
           IMAGEMAGICK_SHA256: b2feb70e39f0b3ae474a0bb1ce8123811cb82f7fb80275bfb4e74018fb6cabdd
         working-directory: ${{ runner.temp }}
         run: |
-          curl -fsSL -o magick.AppImage \
+          curl -fsSL --retry 3 --retry-delay 2 -o magick.AppImage \
             "https://github.com/ImageMagick/ImageMagick/releases/download/${IMAGEMAGICK_VERSION}/ImageMagick-${IMAGEMAGICK_VERSION}-gcc-x86_64.AppImage"
           echo "${IMAGEMAGICK_SHA256}  magick.AppImage" | sha256sum -c -
           chmod +x magick.AppImage
           # Extraction avoids the FUSE dependency an AppImage otherwise needs.
           ./magick.AppImage --appimage-extract > /dev/null
+          sudo rm -rf /opt/imagemagick
           sudo mv squashfs-root /opt/imagemagick
-          sudo ln -s /opt/imagemagick/AppRun /usr/local/bin/magick
-          magick -version
+          sudo ln -sf /opt/imagemagick/AppRun /usr/local/bin/magick
+          # A conversion exercises the WebP encoder the page images depend on,
+          # which `magick -version` alone leaves untested.
+          magick -size 4x4 xc:white -quality 82 -define webp:method=6 smoke.webp
+          magick identify smoke.webp
+          rm smoke.webp
       - run: bun install --frozen-lockfile
       - name: Generate derivatives
         env:
