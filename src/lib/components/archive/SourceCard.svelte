@@ -3,12 +3,7 @@
 	import { formatBytes } from '$lib/archive/format';
 	import { archiveLanguageNames } from '$lib/archive/languages';
 	import { formatYear } from '$lib/format';
-	import {
-		chooseLibraryOcrVariant,
-		ocrEngineLabel,
-		ocrSealFor,
-		summarizeOcrCoverage
-	} from '$lib/archive/ocr';
+	import { ocrSealFor, summarizeOcrCoverage } from '$lib/archive/ocr';
 	import type { ArchiveLibraryItem } from '$lib/archive/library-item';
 
 	let { item, index = 0 }: { item: ArchiveLibraryItem; index?: number } = $props();
@@ -17,11 +12,16 @@
 	const coverage = $derived(item.coverage ?? []);
 	const languages = $derived(archiveLanguageNames(source.languages));
 
+	// The seal already answers "can I read and quote this?" — the tool that
+	// produced the text (gemini vs pdftotext) is an implementation detail no
+	// reader needs to decide whether to open a work. What they do want at a
+	// glance: how the work is classified, and whether it names a dialect at
+	// all (dialect is recorded for only a handful of works in this
+	// collection, so it earns a chip only where it exists, never a
+	// "not recorded" placeholder repeated on every other card).
 	const summary = $derived(summarizeOcrCoverage(coverage));
-	const shownVariant = $derived(chooseLibraryOcrVariant(coverage));
-	const shownRow = $derived(coverage.find((c) => c.variant === shownVariant));
-	const engine = $derived(shownRow ? ocrEngineLabel(shownRow) : null);
 	const seal = $derived(ocrSealFor(summary.state));
+	const isPrimarySource = $derived(source.category === 'primary');
 
 	const metaParts = $derived(
 		[
@@ -55,10 +55,11 @@
 				{/each}
 			</p>
 			<p class="archive-card-tags mt-1.5 text-[11.5px]">
-				{#if engine}
-					<span class="archive-card-engine">text: {engine}</span>
-				{:else}
-					<span class="archive-card-notext">no text</span>
+				{#if isPrimarySource}
+					<span class="archive-card-primary">primary source</span>
+				{/if}
+				{#if source.dialect}
+					<span class="archive-card-dialect">{source.dialect}</span>
 				{/if}
 				{#each languages as language (language)}
 					<span class="archive-card-lang">{language}</span>
@@ -163,6 +164,16 @@
 	.archive-card-lang {
 		font-variant: small-caps;
 		letter-spacing: 0.04em;
+		color: var(--archive-subtle);
+	}
+	.archive-card-primary {
+		border: 1px solid var(--archive-gilt);
+		padding: 0.05rem 0.35rem;
+		font-variant: small-caps;
+		letter-spacing: 0.03em;
+		color: var(--archive-gilt-text);
+	}
+	.archive-card-dialect {
 		color: var(--archive-subtle);
 	}
 	.archive-card-catalogue {

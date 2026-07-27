@@ -3,23 +3,12 @@
 	import BilingualLabel from './BilingualLabel.svelte';
 	import { formatBytes } from '$lib/archive/format';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
-	import {
-		chooseLibraryOcrVariant,
-		ocrEngineLabel,
-		ocrSealFor,
-		summarizeOcrCoverage
-	} from '$lib/archive/ocr';
+	import { ocrSealFor, summarizeOcrCoverage } from '$lib/archive/ocr';
 	import { formatYear } from '$lib/format';
 	import type { ArchiveLibraryItem } from '$lib/archive/library-item';
 
 	let { items }: { items: ArchiveLibraryItem[] } = $props();
 
-	function engineOf(item: ArchiveLibraryItem): string | null {
-		const coverage = item.coverage ?? [];
-		const variant = chooseLibraryOcrVariant(coverage);
-		const row = coverage.find((c) => c.variant === variant);
-		return row ? ocrEngineLabel(row) : null;
-	}
 	function summaryOf(item: ArchiveLibraryItem) {
 		return summarizeOcrCoverage(item.coverage ?? []);
 	}
@@ -32,14 +21,18 @@
 			{@const file = item.file}
 			{@const summary = summaryOf(item)}
 			{@const seal = ocrSealFor(summary.state)}
-			{@const engine = engineOf(item)}
 			<li class="archive-list-row">
 				<a href={`/archive/work/${source.slug}`} class="archive-list-link" aria-label={`Read ${source.title}`}>
 					<span class="archive-list-thumb">
 						<ScanThumbnail revisionId={file.revisionId} title={source.title} />
 					</span>
 					<span class="archive-list-titles">
-						<span class="archive-title archive-clamp-1 text-[15px] font-semibold text-[var(--archive-text)]">{source.title}</span>
+						<span class="archive-title archive-clamp-1 text-[15px] font-semibold text-[var(--archive-text)]">
+							{source.title}
+							{#if source.category === 'primary'}
+								<span class="archive-list-primary">primary</span>
+							{/if}
+						</span>
 						{#if source.titleEn && source.titleEn !== source.title}
 							<span class="archive-clamp-1 text-[12px] text-[var(--archive-subtle)]">{source.titleEn}</span>
 						{/if}
@@ -48,9 +41,6 @@
 					<span class="archive-list-year tnum">{formatYear(source)}</span>
 					<span class="archive-list-size tnum">{formatBytes(file.bytes)}</span>
 					<span class={`archive-list-seal ${seal.className}`} role="img" aria-label={summary.label}>{seal.glyph}</span>
-					<span class="archive-list-text">
-						{#if engine}<span class="archive-card-engine">text: {engine}</span>{:else}<span class="archive-card-notext">no text</span>{/if}
-					</span>
 				</a>
 				<a
 					href={`/sources/${encodeURIComponent(source.slug)}`}
@@ -81,7 +71,7 @@
 	.archive-list-row {
 		position: relative;
 		display: grid;
-		grid-template-columns: 30px minmax(0, 1fr) auto auto auto auto auto;
+		grid-template-columns: 30px minmax(0, 1fr) auto auto auto auto;
 		align-items: center;
 		column-gap: 0.9rem;
 		border-bottom: 1px solid var(--archive-border);
@@ -151,9 +141,16 @@
 	.archive-list-seal.is-none {
 		color: var(--archive-border-strong);
 	}
-	.archive-list-text {
-		font-size: 11px;
-		white-space: nowrap;
+	.archive-list-primary {
+		margin-left: 0.4rem;
+		border: 1px solid var(--archive-gilt);
+		padding: 0 0.3rem;
+		font-family: var(--font-archive-sans);
+		font-size: 10px;
+		font-variant: small-caps;
+		font-weight: 600;
+		letter-spacing: 0.03em;
+		color: var(--archive-gilt-text);
 	}
 	.archive-list-catalogue {
 		position: absolute;
@@ -182,8 +179,7 @@
 			grid-template-columns: 30px minmax(0, 1fr) auto auto;
 		}
 		.archive-list-author,
-		.archive-list-size,
-		.archive-list-text {
+		.archive-list-size {
 			display: none;
 		}
 	}
