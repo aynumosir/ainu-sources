@@ -96,12 +96,14 @@
 		   (e.g. 比較表 → 比較 / 表), but on a run that mixes scripts with no
 		   space at all — a bare romanized morpheme glued to Japanese, e.g.
 		   "…助動詞aanと証拠性" — keep-all found no permitted break in the
-		   entire remaining string and let it overflow its box uncut. A rare
-		   ugly break beats an invisibly truncated title, so this stays at
-		   the default: normal wrapping between any two characters CSS is
-		   willing to break at, never a script- or dictionary-aware one. */
+		   entire remaining string and let it overflow its box uncut. Plain
+		   word-break:normal wraps that same title correctly, since a normal
+		   break is tried first and anywhere is only a last resort — it never
+		   fires for either real title tested, and only matters for a title
+		   that is one truly unbroken run with no break point at all, where
+		   the alternative is silent horizontal overflow. */
 		word-break: normal;
-		overflow-wrap: normal;
+		overflow-wrap: anywhere;
 		line-break: strict;
 	}
 	.archive-mono {
@@ -149,6 +151,10 @@
    of implying more text follows. */
 .archive .archive-clamp-1,
 .archive .archive-clamp-2 {
+	/* Both classes land on spans in the list view as well as on block
+	   elements in the card view; max-height/overflow do nothing on an
+	   inline box, so this forces one regardless of the host element. */
+	display: block;
 	overflow: hidden;
 }
 
