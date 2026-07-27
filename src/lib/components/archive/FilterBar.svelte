@@ -23,14 +23,14 @@
 	// Real decades present in the collection, oldest first, each with its
 	// work count — built from the same era buckets /stats already reports,
 	// so a researcher only ever picks a decade that actually has something
-	// in it. "pre-1900" collapses several sparse decades into one bucket,
-	// matching how the stats page already presents them.
+	// in it. The decade filter itself is a [decade, decade+10) range, which
+	// "pre-1900" (an open-ended bucket covering several sparse decades) does
+	// not fit; it is also, in this collection, a single work, so it is left
+	// off the list rather than forcing an unrelated filter shape to carry it.
 	const decadeOptions = $derived.by(() => {
 		const values = stats?.distribution.era.values ?? [];
 		return values
-			.filter((v) => v.value !== 'unspecified')
 			.map((v) => {
-				if (v.value === 'pre-1900') return { decade: 0, label: 'pre-1900', count: v.count };
 				const decade = Number.parseInt(v.value, 10);
 				return Number.isNaN(decade) ? null : { decade, label: v.value, count: v.count };
 			})
@@ -48,7 +48,14 @@
 		if (value && value !== 'any' && !(name === 'sort' && value === 'updated')) params.set(name, value);
 		else params.delete(name);
 		const qs = params.toString();
-		goto(qs ? `${page.url.pathname}?${qs}` : page.url.pathname, { keepFocus: true, noScroll: true });
+		// Replace, not push: each filter change stands in for the last one, so
+		// leaving the page after a run of instant filter changes is one Back
+		// press, not one per dropdown touched.
+		goto(qs ? `${page.url.pathname}?${qs}` : page.url.pathname, {
+			keepFocus: true,
+			noScroll: true,
+			replaceState: true
+		});
 	}
 </script>
 
