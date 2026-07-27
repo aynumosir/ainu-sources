@@ -92,7 +92,16 @@
 	.archive-title {
 		font-family: var(--font-archive-serif);
 		line-height: 1.6;
-		word-break: break-word;
+		/* keep-all looked like the fix for splitting a compound mid-word
+		   (e.g. 比較表 → 比較 / 表), but on a run that mixes scripts with no
+		   space at all — a bare romanized morpheme glued to Japanese, e.g.
+		   "…助動詞aanと証拠性" — keep-all found no permitted break in the
+		   entire remaining string and let it overflow its box uncut. A rare
+		   ugly break beats an invisibly truncated title, so this stays at
+		   the default: normal wrapping between any two characters CSS is
+		   willing to break at, never a script- or dictionary-aware one. */
+		word-break: normal;
+		overflow-wrap: normal;
 		line-break: strict;
 	}
 	.archive-mono {
@@ -128,23 +137,27 @@
 }
 
 /* Card titles clamp so one long title cannot make its card tower over the
-   others in the row; the full title stays available as a tooltip. */
+   others in the row; the full title stays available as a tooltip.
+   -webkit-line-clamp inserts its "…" by counting characters against the
+   box's pixel width, not by finding the nearest word boundary, so it slices
+   through a word as often as it lands between two — confirmed by checking
+   the underlying element: no ellipsis character is ever added to the DOM,
+   the box's rendered content is simply clipped wherever the line-counting
+   falls. A fixed height plus plain overflow clipping (no line-clamp, no
+   ellipsis glyph) draws the same number of lines without that mid-word
+   artifact — a title that doesn't fit is cut clean at the box edge instead
+   of implying more text follows. */
 .archive .archive-clamp-1,
 .archive .archive-clamp-2 {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
 	overflow: hidden;
-	overflow-wrap: anywhere;
 }
 
 .archive .archive-clamp-1 {
-	-webkit-line-clamp: 1;
-	line-clamp: 1;
+	max-height: 1lh;
 }
 
 .archive .archive-clamp-2 {
-	-webkit-line-clamp: 2;
-	line-clamp: 2;
+	max-height: 2lh;
 }
 
 /* One heading scale for every archive page. */
