@@ -85,6 +85,8 @@
 		--archive-warn: #e8cb79;
 		--archive-danger: #ff8d98;
 		--archive-quarantine: #c9a7ff;
+		--archive-stage: #090705;
+		--archive-stage-control: rgba(37, 32, 24, 0.88);
 	}
 	.archive {
 		min-height: 100svh;
