@@ -66,7 +66,14 @@
 				></span>
 			{/if}
 		</span>
-		<span aria-hidden="true" class="text-[11px] text-[var(--archive-subtle)]">⌄</span>
+		<svg
+			aria-hidden="true"
+			width="10"
+			height="10"
+			viewBox="0 0 16 16"
+			fill="none"
+			class="shrink-0 text-[var(--archive-subtle)]"
+		><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 	</summary>
 
 	<div class="absolute right-0 z-50 mt-3 w-64 border border-[var(--archive-border-strong)] bg-[var(--archive-paper)] p-4 shadow-lg">
