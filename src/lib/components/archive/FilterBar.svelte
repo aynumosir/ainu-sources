@@ -12,7 +12,7 @@
 	// clicking Clear would drop the view mode back to the cards default.
 	const view = $derived(page.url.searchParams.get('view'));
 	const clearHref = $derived.by(() => {
-		const href = archiveFilterHref('/archive', { ocr: 'any', sort: 'updated' });
+		const href = archiveFilterHref('/archive', { ocr: 'any', sort: 'significance' });
 		if (!view) return href;
 		const [path, query] = href.split('?');
 		const params = new URLSearchParams(query);
@@ -45,7 +45,7 @@
 	function navigateWith(name: string, value: string) {
 		const params = new URLSearchParams(page.url.searchParams);
 		params.delete('cursor');
-		if (value && value !== 'any' && !(name === 'sort' && value === 'updated')) params.set(name, value);
+		if (value && value !== 'any' && !(name === 'sort' && value === 'significance')) params.set(name, value);
 		else params.delete(name);
 		const qs = params.toString();
 		// Replace, not push: each filter change stands in for the last one, so
@@ -88,8 +88,8 @@
 				onchange={(e) => navigateWith('sort', e.currentTarget.value)}
 				class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]"
 			>
-				<option value="updated">Recently updated / 更新順</option>
 				<option value="significance">Significance / 重要度順</option>
+				<option value="updated">Recently updated / 更新順</option>
 				<option value="title">Title / タイトル順</option>
 				<option value="year-desc">Newest / 新しい順</option>
 				<option value="year-asc">Oldest / 古い順</option>
