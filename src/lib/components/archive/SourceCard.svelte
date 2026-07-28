@@ -58,6 +58,9 @@
 				{#if isPrimarySource}
 					<span class="archive-card-primary">primary source</span>
 				{/if}
+				{#if source.citationCount > 0}
+					<span class="archive-card-citations tnum">cited {source.citationCount}×</span>
+				{/if}
 				{#if source.dialect}
 					<span class="archive-card-dialect">{source.dialect}</span>
 				{/if}
@@ -175,6 +178,9 @@
 	}
 	.archive-card-dialect {
 		color: var(--archive-subtle);
+	}
+	.archive-card-citations {
+		color: var(--archive-gilt-text);
 	}
 	.archive-card-catalogue {
 		position: relative;
