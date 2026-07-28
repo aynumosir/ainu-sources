@@ -27,8 +27,10 @@
 						<ScanThumbnail revisionId={file.revisionId} title={source.title} />
 					</span>
 					<span class="archive-list-titles">
-						<span class="archive-title archive-clamp-1 text-[15px] font-semibold text-[var(--archive-text)]">
-							{source.title}
+						<span class="archive-list-title-row">
+							<span class="archive-title archive-clamp-1 text-[15px] font-semibold text-[var(--archive-text)]">
+								{source.title}
+							</span>
 							{#if source.category === 'primary'}
 								<span class="archive-list-primary">primary</span>
 							{/if}
@@ -114,6 +116,15 @@
 		flex-direction: column;
 		min-width: 0;
 	}
+	.archive-list-title-row {
+		display: flex;
+		align-items: baseline;
+		gap: 0.4rem;
+		min-width: 0;
+	}
+	.archive-list-title-row .archive-title {
+		min-width: 0;
+	}
 	.archive-list-author {
 		font-size: 13px;
 		font-style: italic;
@@ -142,7 +153,7 @@
 		color: var(--archive-border-strong);
 	}
 	.archive-list-primary {
-		margin-left: 0.4rem;
+		flex-shrink: 0;
 		border: 1px solid var(--archive-gilt);
 		padding: 0 0.3rem;
 		font-family: var(--font-archive-sans);
