@@ -48,7 +48,7 @@
 		</p>
 	</div>
 
-	<FilterBar filters={data.filters} />
+	<FilterBar filters={data.filters} stats={data.stats} />
 
 	{#if view === 'cards'}
 		<div in:fade={{ duration: fadeInMs }}>
