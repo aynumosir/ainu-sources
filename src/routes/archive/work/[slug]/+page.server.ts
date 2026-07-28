@@ -20,8 +20,13 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 		const work = loadedWork && !loadedWork.unavailable
 			? {
 					...loadedWork,
-					ocr: await loadTextCoverage(loadedWork.revision.id),
-					folios: await loadPageFolios(loadedWork.revision.id)
+					...(await (async () => {
+						const [ocr, folios] = await Promise.all([
+							loadTextCoverage(loadedWork.revision.id),
+							loadPageFolios(loadedWork.revision.id)
+						]);
+						return { ocr, folios };
+					})())
 				}
 			: loadedWork;
 		return {

@@ -26,12 +26,16 @@ export async function loadArchiveWorkPersons(slug: string): Promise<ArchiveWorkP
 }
 
 export async function loadArchiveWork(slug: string, principal: ArchivePrincipal, requestedPage: number | null) {
-	const detail = await getSourceDetail(slug);
+	// getSourceDetail, listSourceFiles, and pendingForSource each depend only
+	// on slug/principal, not on each other's results — only getRevision below
+	// needs a revisionId derived from listSourceFiles, so it stays sequential.
+	const [detail, rows, pending] = await Promise.all([
+		getSourceDetail(slug),
+		listSourceFiles(db, slug, principal, { includeHistory: true }),
+		pendingForSource(slug, principal.userId, archiveRoleAtLeast(principal.role, 'archive_reviewer'))
+	]);
 	if (!detail) return null;
 
-	const rows = await listSourceFiles(db, slug, principal, {
-		includeHistory: true
-	});
 	const approved = rows.filter((row): row is typeof row & { revisionId: string } => row.reviewStatus === 'approved' && !!row.revisionId);
 	const current =
 		approved.find((row) => row.role === 'scan' && row.isCurrent) ??
@@ -47,7 +51,6 @@ export async function loadArchiveWork(slug: string, principal: ArchivePrincipal,
 	const recordedPageCount = revision.pageCount ?? null;
 	const pageCount = Math.max(1, recordedPageCount ?? 1);
 	const initialPage = clampPage(requestedPage ?? 1, recordedPageCount);
-	const pending = await pendingForSource(slug, principal.userId, archiveRoleAtLeast(principal.role, 'archive_reviewer'));
 
 	return {
 		detail,
