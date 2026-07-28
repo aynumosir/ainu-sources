@@ -1628,6 +1628,7 @@ export async function listArchiveFiles(
 			yearEnd: sources.yearEnd,
 			yearCertainty: sources.yearCertainty,
 			dialect: sources.dialect,
+			category: sources.category,
 			languages: sources.languages,
 			significance: sources.significance,
 			summary: sources.summary
@@ -1681,7 +1682,9 @@ export async function listArchiveFiles(
 				yearEnd: row.yearEnd,
 				yearCertainty: row.yearCertainty,
 				dialect: row.dialect,
+				category: row.category,
 				languages: row.languages,
+				significance: row.significance,
 				summary: row.summary
 			},
 			coverage: null
