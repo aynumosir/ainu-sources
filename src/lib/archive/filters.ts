@@ -24,7 +24,7 @@ export function parseArchiveFilters(params: URLSearchParams): ArchiveFilters {
 		dialect,
 		decade: Number.isSafeInteger(decadeRaw) && decadeRaw > 0 ? decadeRaw : undefined,
 		ocr: ocr === 'with' || ocr === 'without' ? ocr : params.get('searchable') === '1' ? 'with' : 'any',
-		sort: sort && SORT_SET.has(sort) ? (sort as ArchiveSort) : 'updated'
+		sort: sort && SORT_SET.has(sort) ? (sort as ArchiveSort) : 'significance'
 	};
 }
 
@@ -34,7 +34,7 @@ export function archiveFiltersToParams(filters: ArchiveFilters): URLSearchParams
 	if (filters.dialect?.trim()) params.set('dialect', filters.dialect.trim());
 	if (filters.decade) params.set('decade', String(filters.decade));
 	if (filters.ocr !== 'any') params.set('ocr', filters.ocr);
-	if (filters.sort !== 'updated') params.set('sort', filters.sort);
+	if (filters.sort !== 'significance') params.set('sort', filters.sort);
 	return params;
 }
 

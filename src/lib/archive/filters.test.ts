@@ -10,7 +10,7 @@ describe('parseArchiveFilters', () => {
 			dialect: undefined,
 			decade: undefined,
 			ocr: 'any',
-			sort: 'updated'
+			sort: 'significance'
 		});
 	});
 
@@ -35,7 +35,7 @@ describe('parseArchiveFilters', () => {
 		expect(parse('ocr=without').ocr).toBe('without');
 		expect(parse('ocr=unknown').ocr).toBe('any');
 		expect(parse('sort=significance').sort).toBe('significance');
-		expect(parse('sort=bogus').sort).toBe('updated');
+		expect(parse('sort=bogus').sort).toBe('significance');
 	});
 });
 
@@ -51,17 +51,17 @@ describe('archiveFiltersToParams', () => {
 		expect(params.toString()).toBe('q=ainu&dialect=Saru&decade=1900&ocr=with&sort=title');
 	});
 
-	it('omits updated sort because it is the default', () => {
+	it('omits significance sort because it is the default', () => {
 		expect(
 			archiveFiltersToParams({
 				ocr: 'any',
-				sort: 'updated'
+				sort: 'significance'
 			}).toString()
 		).toBe('');
 	});
 
 	it('serializes the without-text state', () => {
-		expect(archiveFiltersToParams({ ocr: 'without', sort: 'updated' }).toString()).toBe('ocr=without');
+		expect(archiveFiltersToParams({ ocr: 'without', sort: 'significance' }).toString()).toBe('ocr=without');
 	});
 });
 
