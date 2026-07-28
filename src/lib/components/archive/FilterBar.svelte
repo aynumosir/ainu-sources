@@ -59,7 +59,7 @@
 	}
 </script>
 
-<form action="/archive" method="get" class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3">
+<form action="/archive" method="get" class="border-b border-[var(--archive-border)] pb-4">
 	{#if view}<input type="hidden" name="view" value={view} />{/if}
 	<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_0.8fr_0.9fr_auto] lg:items-end">
 		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">

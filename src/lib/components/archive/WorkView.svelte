@@ -385,11 +385,11 @@
 	{#if imageNotice}
 		<p class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[13px] text-[var(--archive-subtle)]">{imageNotice}</p>
 	{:else if selectedImage?.status === 'ready'}
-		<img src={selectedImage.src} alt={`Page ${currentPage} of ${source.title}`} class="max-h-[calc(100svh-14rem)] max-w-full border border-[var(--archive-border)] bg-white object-contain shadow-sm" />
+		<img src={selectedImage.src} alt={`Page ${currentPage} of ${source.title}`} class="max-h-[calc(100svh-14rem)] max-w-full bg-white object-contain shadow-[0_18px_45px_-12px_rgba(0,0,0,0.65)]" />
 	{:else if selectedImage?.status === 'missing'}
 		<p class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-6 text-[13px] text-[var(--archive-subtle)]">Page image is unavailable.</p>
 	{:else}
-		<div class="h-[65svh] w-[min(70vw,40rem)] animate-pulse border border-[var(--archive-border)] bg-[var(--archive-paper)]" aria-label="Loading page image"></div>
+		<div class="h-[65svh] w-[min(70vw,40rem)] animate-pulse bg-[color-mix(in_srgb,var(--archive-stage)_88%,white)]" aria-label="Loading page image"></div>
 	{/if}
 {/snippet}
 
@@ -459,7 +459,7 @@
 								{TEXT_SOURCE_LABELS[(variant.sourceKind ?? 'recognized') as TextSourceKind].note}
 							</p>
 							{#if variant.reliability === 'suspect'}
-								<p class="mt-1 border border-[var(--archive-warn)] px-2 py-1 text-[12px] text-[var(--archive-warn)]">
+								<p class="mt-1 border-l-2 border-[var(--archive-warn)] bg-[color-mix(in_srgb,var(--archive-warn)_10%,transparent)] py-1 pl-2.5 pr-2 text-[12px] text-[var(--archive-warn)]">
 									読めない本文です。引用に使わないでください。 / This text is not readable and should not
 									be quoted{#if variant.reliabilityNote} &mdash; {variant.reliabilityNote}{/if}.
 								</p>
@@ -617,7 +617,7 @@
 
 		<section class="work-stage relative flex min-h-0 min-w-0 flex-col bg-[var(--archive-bg)]">
 			<div
-				class="relative flex min-h-[55svh] flex-1 overflow-auto"
+				class="relative flex min-h-[55svh] flex-1 overflow-auto bg-[var(--archive-stage)]"
 				class:items-center={viewMode !== 'side-by-side'}
 				class:justify-center={viewMode !== 'side-by-side'}
 				class:p-4={viewMode !== 'text'}
@@ -627,7 +627,7 @@
 					onclick={() => go(-1)}
 					disabled={currentPage <= 1}
 					aria-label="Previous page"
-					class="absolute left-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center border border-[var(--archive-border)] bg-[var(--archive-paper)] shadow-sm hover:border-[var(--archive-gilt)] disabled:opacity-25"
+					class="absolute left-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center bg-[var(--archive-stage-control)] text-[var(--archive-text)] shadow-lg backdrop-blur hover:text-[var(--archive-gilt-text)] disabled:opacity-25"
 				><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 				{#if viewMode === 'image'}
 					{@render imagePage()}
@@ -635,7 +635,7 @@
 					{@render textPage()}
 				{:else}
 					<div class="grid min-h-[55svh] w-full min-w-0 grid-cols-2">
-						<div class="flex min-h-0 min-w-0 items-center justify-center overflow-auto border-r border-[var(--archive-border)] p-4">
+						<div class="flex min-h-0 min-w-0 items-center justify-center overflow-auto p-4">
 							{@render imagePage()}
 						</div>
 						{@render textPage()}
@@ -646,7 +646,7 @@
 					onclick={() => go(1)}
 					disabled={currentPage >= pageCount}
 					aria-label="Next page"
-					class="absolute right-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center border border-[var(--archive-border)] bg-[var(--archive-paper)] shadow-sm hover:border-[var(--archive-gilt)] disabled:opacity-25"
+					class="absolute right-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center bg-[var(--archive-stage-control)] text-[var(--archive-text)] shadow-lg backdrop-blur hover:text-[var(--archive-gilt-text)] disabled:opacity-25"
 				><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 			</div>
 

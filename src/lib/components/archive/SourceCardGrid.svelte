@@ -31,7 +31,7 @@
 <style>
 	.archive-card-grid {
 		display: grid;
-		gap: 1rem;
+		gap: 1.5rem;
 		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 	}
 </style>

@@ -26,6 +26,8 @@
 		--archive-warn: #9a6418;
 		--archive-danger: #b42332;
 		--archive-quarantine: #6b3fa0;
+		--archive-stage: #1c170f;
+		--archive-stage-control: rgba(255, 249, 238, 0.92);
 		--font-archive-serif:
 			'Source Serif 4', 'Spectral', 'Noto Serif JP', ui-serif, Georgia, 'Times New Roman', serif;
 		--font-archive-jp: 'Shippori Mincho B1', 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
@@ -57,6 +59,8 @@
 			--archive-warn: #e8cb79;
 			--archive-danger: #ff8d98;
 			--archive-quarantine: #c9a7ff;
+			--archive-stage: #090705;
+			--archive-stage-control: rgba(37, 32, 24, 0.88);
 		}
 	}
 	:root[data-archive-theme='dark'] {

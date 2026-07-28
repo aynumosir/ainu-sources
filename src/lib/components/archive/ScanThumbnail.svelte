@@ -12,7 +12,11 @@
 	const src = $derived(revisionId ? `/api/archive/revisions/${revisionId}/pages/1.webp?w=300` : null);
 </script>
 
-<div class="flex aspect-[4/5] w-full items-center justify-center overflow-hidden border border-[var(--archive-border)] bg-[var(--archive-bg)]">
+<div
+	class={`flex aspect-[4/5] w-full items-center justify-center overflow-hidden border border-[var(--archive-border)] ${
+		src && !failed ? 'bg-[var(--archive-bg)]' : 'archive-thumb-fallback'
+	}`}
+>
 	{#if src && !failed}
 		<img
 			{src}
@@ -24,6 +28,12 @@
 			}}
 		/>
 	{:else}
-		<span class="archive-title text-[27px] font-semibold text-[var(--archive-subtle)]">{initial}</span>
+		<span class="archive-title text-[27px] font-semibold text-[var(--archive-gilt-text)]">{initial}</span>
 	{/if}
 </div>
+
+<style>
+	.archive-thumb-fallback {
+		background: linear-gradient(155deg, var(--archive-panel), var(--archive-muted));
+	}
+</style>
