@@ -34,6 +34,9 @@
 							{#if source.category === 'primary'}
 								<span class="archive-list-primary">primary</span>
 							{/if}
+							{#if source.dialect}
+								<span class="archive-list-dialect">{source.dialect}</span>
+							{/if}
 						</span>
 						{#if source.titleEn && source.titleEn !== source.title}
 							<span class="archive-clamp-1 text-[12px] text-[var(--archive-subtle)]">{source.titleEn}</span>
@@ -162,6 +165,14 @@
 		font-weight: 600;
 		letter-spacing: 0.03em;
 		color: var(--archive-gilt-text);
+	}
+	.archive-list-dialect {
+		flex-shrink: 0;
+		font-family: var(--font-archive-sans);
+		font-size: 11px;
+		font-variant: small-caps;
+		letter-spacing: 0.03em;
+		color: var(--archive-subtle);
 	}
 	.archive-list-catalogue {
 		position: absolute;
