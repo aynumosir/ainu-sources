@@ -1,7 +1,6 @@
 export const ARCHIVE_ROLES = [
 	'archive_reader',
 	'archive_contributor',
-	'archive_reviewer',
 	'archive_admin'
 ] as const;
 
@@ -27,8 +26,7 @@ export type ArchiveEventEntityType = (typeof ARCHIVE_EVENT_ENTITY_TYPES)[number]
 const ROLE_RANK: Record<ArchiveRole, number> = {
 	archive_reader: 1,
 	archive_contributor: 2,
-	archive_reviewer: 3,
-	archive_admin: 4
+	archive_admin: 3
 };
 
 export function isArchiveRole(value: string | null | undefined): value is ArchiveRole {

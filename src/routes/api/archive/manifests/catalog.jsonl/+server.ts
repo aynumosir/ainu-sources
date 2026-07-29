@@ -1,6 +1,6 @@
 /**
  * GET /api/archive/manifests/catalog.jsonl — generate the all-repository
- * archive manifest from approved current revisions.
+ * archive manifest from current revisions.
  */
 import type { RequestHandler } from './$types';
 import { db } from '$lib/server/db';

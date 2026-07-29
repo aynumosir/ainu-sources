@@ -78,7 +78,7 @@ export type ArchiveStats = {
 	search: { enabledModes: string[] };
 	freshness: {
 		mostRecentIngestAt: string | null;
-		mostRecentApprovedRevision: { id: string; approvedAt: string } | null;
+		mostRecentRevision: { id: string; submittedAt: string } | null;
 	};
 };
 
@@ -97,8 +97,8 @@ type SummaryRow = {
 	pageImageDerivatives: number;
 	linearizedDerivatives: number;
 	mostRecentIngestAt: number | null;
-	mostRecentApprovedRevisionId: string | null;
-	mostRecentApprovedRevisionAt: number | null;
+	mostRecentRevisionId: string | null;
+	mostRecentRevisionAt: number | null;
 };
 
 type OcrRow = {
@@ -142,13 +142,11 @@ async function readSummary(db: Db): Promise<SummaryRow> {
 			left join archive_blobs ab
 				on ab.sha256 = fr.blob_sha256
 				and ab.storage_state <> 'deleted'
-			where fr.review_status <> 'expunged'
 		), recorded_derivatives as (
 			select rd.parent_revision_id, derived.artifact_kind
 			from revision_derivations rd
 			inner join file_revisions derived on derived.id = rd.derived_revision_id
-			where derived.review_status = 'approved'
-				and derived.access_state <> 'takedown'
+			where derived.access_state <> 'takedown'
 		)
 		select
 			(select count(distinct source_id) from source_files) as works,
@@ -174,11 +172,9 @@ async function readSummary(db: Db): Promise<SummaryRow> {
 					and rd.artifact_kind = 'linearized') as linearizedDerivatives,
 			(select max(ingested_at) from ocr_ingest_state) as mostRecentIngestAt,
 			(select id from file_revisions
-				where review_status = 'approved' and reviewed_at is not null
-				order by reviewed_at desc, id desc limit 1) as mostRecentApprovedRevisionId,
-			(select reviewed_at from file_revisions
-				where review_status = 'approved' and reviewed_at is not null
-				order by reviewed_at desc, id desc limit 1) as mostRecentApprovedRevisionAt
+				order by submitted_at desc, id desc limit 1) as mostRecentRevisionId,
+			(select submitted_at from file_revisions
+				order by submitted_at desc, id desc limit 1) as mostRecentRevisionAt
 	`);
 	if (!row) throw new Error('archive statistics summary query returned no row');
 	return row;
@@ -426,12 +422,12 @@ async function queryArchiveStats(db: Db): Promise<ArchiveStats> {
 		search: { enabledModes: [...DEPLOYED_SEARCH_MODES] },
 		freshness: {
 			mostRecentIngestAt: isoTimestamp(summary.mostRecentIngestAt),
-			mostRecentApprovedRevision:
-				summary.mostRecentApprovedRevisionId == null || summary.mostRecentApprovedRevisionAt == null
+			mostRecentRevision:
+				summary.mostRecentRevisionId == null || summary.mostRecentRevisionAt == null
 					? null
 					: {
-							id: summary.mostRecentApprovedRevisionId,
-							approvedAt: isoTimestamp(summary.mostRecentApprovedRevisionAt)!
+							id: summary.mostRecentRevisionId,
+							submittedAt: isoTimestamp(summary.mostRecentRevisionAt)!
 						}
 		}
 	};

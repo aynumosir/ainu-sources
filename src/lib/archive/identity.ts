@@ -3,7 +3,6 @@ import type { ArchiveRoleName } from './roles';
 const ROLE_LABELS: Record<ArchiveRoleName, string> = {
 	archive_reader: 'Reader',
 	archive_contributor: 'Contributor',
-	archive_reviewer: 'Reviewer',
 	archive_admin: 'Administrator'
 };
 

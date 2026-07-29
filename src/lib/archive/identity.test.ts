@@ -7,7 +7,7 @@ describe('archive identity labels', () => {
 	});
 
 	it('uses the email local part when the profile name is empty', () => {
-		expect(archiveDisplayName(' ', 'kayano@example.test', 'archive_reviewer')).toBe('kayano');
+		expect(archiveDisplayName(' ', 'kayano@example.test', 'archive_admin')).toBe('kayano');
 	});
 
 	it('falls back to the role label without consulting an identity id', () => {

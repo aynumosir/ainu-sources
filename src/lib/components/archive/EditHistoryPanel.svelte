@@ -9,26 +9,21 @@
 		unavailable = false,
 		error = null,
 		canRevert = false,
-		canUnapprove = false,
 		onview,
 		onrestore,
-		onrevert,
-		onunapprove
+		onrevert
 	}: {
 		entries: EditLogEntry[];
 		loading?: boolean;
 		unavailable?: boolean;
 		error?: string | null;
 		canRevert?: boolean;
-		canUnapprove?: boolean;
 		onview: (entry: EditLogEntry) => void;
 		onrestore: (entry: EditLogEntry) => void;
 		onrevert: () => void;
-		onunapprove: () => void;
 	} = $props();
 
 	let confirmRevert = $state(false);
-	let confirmUnapprove = $state(false);
 
 	function eventLabel(kind: EditLogEntry['kind']): string {
 		return kind === 'edit'
@@ -57,15 +52,6 @@
 				<button type="button" onclick={() => (confirmRevert = false)}><BilingualLabel ja={archiveLabels.cancel.ja} en={archiveLabels.cancel.en} /></button>
 			{:else}
 				<button type="button" onclick={() => (confirmRevert = true)}><BilingualLabel ja={archiveLabels.revertMachine.ja} en={archiveLabels.revertMachine.en} /></button>
-			{/if}
-		{/if}
-		{#if canUnapprove}
-			{#if confirmUnapprove}
-				<span>承認を取り消しますか？ / Withdraw approval?</span>
-				<button type="button" onclick={onunapprove}><BilingualLabel ja={archiveLabels.unapprove.ja} en={archiveLabels.unapprove.en} /></button>
-				<button type="button" onclick={() => (confirmUnapprove = false)}><BilingualLabel ja={archiveLabels.cancel.ja} en={archiveLabels.cancel.en} /></button>
-			{:else}
-				<button type="button" onclick={() => (confirmUnapprove = true)}><BilingualLabel ja={archiveLabels.unapprove.ja} en={archiveLabels.unapprove.en} /></button>
 			{/if}
 		{/if}
 	</div>

@@ -1,8 +1,7 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { resolveArchivePrincipal } from './authz';
-import { getUsageSummary, listPendingReview } from './db';
-import { archiveRoleAtLeast } from './types';
+import { getUsageSummary } from './db';
 import { archiveDisplayName } from '$lib/archive/identity';
 import type { ArchiveUsage } from '$lib/archive/usage.svelte';
 import type { ArchivePrincipal } from './types';
@@ -14,7 +13,6 @@ export type ArchiveLayoutData =
 			hasAppSession: boolean;
 			signInHref: string;
 			usage: null;
-			pendingCount: 0;
 			displayName: null;
 		}
 	| {
@@ -23,7 +21,6 @@ export type ArchiveLayoutData =
 			hasAppSession: boolean;
 			signInHref: string;
 			usage: ArchiveUsage;
-			pendingCount: number;
 			displayName: string;
 		};
 
@@ -56,21 +53,16 @@ async function computeArchiveLayoutData(event: RequestEvent): Promise<ArchiveLay
 			hasAppSession: !!locals.user,
 			signInHref: `/login?redirect=${encodeURIComponent(url.pathname + url.search)}`,
 			usage: null,
-			pendingCount: 0,
 			displayName: null
 		};
 	}
-	const [usage, pendingReview] = await Promise.all([
-		principal.authn === 'mcp_assertion' ? null : getUsageSummary(db, principal),
-		archiveRoleAtLeast(principal.role, 'archive_reviewer') ? listPendingReview(db, null, 1) : null
-	]);
+	const usage = principal.authn === 'mcp_assertion' ? null : await getUsageSummary(db, principal);
 	return {
 		principal,
 		login: null,
 		hasAppSession: !!locals.user,
 		signInHref: `/login?redirect=${encodeURIComponent(url.pathname + url.search)}`,
 		usage,
-		pendingCount: pendingReview?.total ?? 0,
 		displayName: archiveDisplayName(locals.user?.name, principal.email ?? locals.user?.email, principal.role)
 	};
 }

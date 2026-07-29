@@ -38,7 +38,7 @@ const contributor: ArchivePrincipal = {
 };
 const reviewer: ArchivePrincipal = {
 	userId: 'reviewer',
-	role: 'archive_reviewer',
+	role: 'archive_admin',
 	identity: { kind: 'github_login', value: 'reviewer' },
 	authn: 'access_jwt'
 };
@@ -97,11 +97,8 @@ async function seedRevision(): Promise<void> {
 		declaredMediaType: 'application/pdf',
 		artifactKind: 'original',
 		pageCount: 3,
-		reviewStatus: 'approved',
 		isCurrent: true,
-		submittedBy: 'contributor',
-		reviewedBy: 'reviewer',
-		reviewedAt: new Date()
+		submittedBy: 'contributor'
 	});
 	await db.insert(schema.revisionOcrCoverage).values({
 		revisionId: 'rev-1',

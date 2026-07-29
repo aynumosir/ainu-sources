@@ -43,7 +43,6 @@ function snapshotId(bodyWithoutSnapshot: string): string {
 
 export async function renderManifest(db: Db, repoName?: string): Promise<{ body: string; etag: string }> {
 	const clauses = [
-		eq(fileRevisions.reviewStatus, 'approved'),
 		eq(fileRevisions.isCurrent, true),
 		eq(fileRevisions.accessState, 'available'),
 		eq(archiveBlobs.storageState, 'verified')

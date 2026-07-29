@@ -10,9 +10,8 @@
 	let { data } = $props();
 
 	const descriptions = {
-		archive_reader: 'Read approved archive files and search OCR text.',
-		archive_contributor: 'Read approved files and submit replacement files for review.',
-		archive_reviewer: 'Review pending submissions and inspect pending archive material.',
+		archive_reader: 'Read current archive files and search OCR text.',
+		archive_contributor: 'Read current files and upload replacement files.',
 		archive_admin: 'Manage archive roles and administrative settings.'
 	};
 

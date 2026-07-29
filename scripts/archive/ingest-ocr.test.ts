@@ -88,7 +88,6 @@ async function seedRevision(stem: string): Promise<string> {
 			originalFilename: `${stem}.pdf`,
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'original',
-			reviewStatus: 'approved',
 			isCurrent: true,
 			submittedBy: 'user-test'
 		})

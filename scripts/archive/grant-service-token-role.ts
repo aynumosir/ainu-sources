@@ -42,7 +42,7 @@ if (!serviceTokenId) {
 }
 
 const role = argValue('--role')?.trim() ?? 'archive_contributor';
-const allowedRoles = new Set(['archive_reader', 'archive_contributor', 'archive_reviewer', 'archive_admin']);
+const allowedRoles = new Set(['archive_reader', 'archive_contributor', 'archive_admin']);
 if (!allowedRoles.has(role)) {
 	console.error(`✗ Invalid archive role: ${role}`);
 	process.exit(1);

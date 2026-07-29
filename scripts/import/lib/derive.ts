@@ -326,17 +326,17 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		// Romaji for prominent kanji-only authors (established readings; some given
 		// names best-effort). Keyed by despaced kanji — getPerson looks these up.
 		伊藤せいち: { nameEn: 'Itō Seichi' }, 大友幸男: { nameEn: 'Ōtomo Yukio' },
-		高橋靖以: { nameEn: 'Takahashi Yasui' }, 鏡味明克: { nameEn: 'Kagami Akikatsu' },
+		高橋靖以: { nameEn: 'Takahashi Yasui' },
 		井筒勝信: { nameEn: 'Izutsu Katsunobu' }, 清水清次郎: { nameEn: 'Shimizu Seijirō' },
 		吉原克己: { nameEn: 'Yoshihara Katsumi' }, 村上啓司: { nameEn: 'Murakami Keiji' },
 		榊原正文: { nameEn: 'Sakakibara Masafumi' }, 佐藤直太郎: { nameEn: 'Satō Naotarō' },
-		吉田巌: { nameEn: 'Yoshida Iwao' }, 落合いずみ: { nameEn: 'Ochiai Izumi' },
-		古原敏弘: { nameEn: 'Furuhara Toshihiro' }, 岸本宜久: { nameEn: 'Kishimoto Nobuhisa' },
+		吉田巌: { nameEn: 'Yoshida Iwao' },
+		古原敏弘: { nameEn: 'Furuhara Toshihiro' },
 		鳴海日出志: { nameEn: 'Narumi Hideshi' }, 平隆一: { nameEn: 'Taira Ryūichi' },
 		久保寺逸彦: { nameEn: 'Kubodera Itsuhiko', wikidata: 'Q11368989' }, 秋山秀敏: { nameEn: 'Akiyama Hidetoshi' },
-		甲地利恵: { nameEn: 'Katchi Rie' }, 加藤鉄三郎: { nameEn: 'Katō Tetsusaburō' },
+		加藤鉄三郎: { nameEn: 'Katō Tetsusaburō' },
 		福田吉次郎: { nameEn: 'Fukuda Kichijirō' }, 三好勲: { nameEn: 'Miyoshi Isao' },
-		田村雅史: { nameEn: 'Tamura Masashi' }, 大谷洋一: { nameEn: 'Ōtani Yōichi' },
+		田村雅史: { nameEn: 'Tamura Masashi' },
 		後藤利雄: { nameEn: 'Gotō Toshio' }, 萩中美枝: { nameEn: 'Haginaka Mie' },
 		留目政治: { nameEn: 'Todome Seiji' }, 其田良雄: { nameEn: 'Sonota Yoshio' },
 		鬼春人: { nameEn: 'Oni Haruto' }, 西鶴定嘉: { nameEn: 'Saikaku Sadayoshi' },
@@ -354,7 +354,7 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		大出あや子: { nameEn: 'Ōide Ayako' }, 福田友之: { nameEn: 'Fukuda Tomoyuki' },
 		佐賀彩美: { nameEn: 'Saga Ayami' }, 伊藤公平: { nameEn: 'Itō Kōhei' },
 		中野良宣: { nameEn: 'Nakano Yoshinobu' }, 渡辺茂: { nameEn: 'Watanabe Shigeru' },
-		石田肇: { nameEn: 'Ishida Hajime' }, 井上拓也: { nameEn: 'Inoue Takuya' },
+		石田肇: { nameEn: 'Ishida Hajime' },
 		大島稔: { nameEn: 'Ōshima Minoru' },
 		成田修一: { nameEn: 'Narita Shūichi' }, 女鹿潤哉: { nameEn: 'Mega Jun’ya' },
 		片山龍峯: { nameEn: 'Katayama Tatsumine' }, 菅泰雄: { nameEn: 'Suga Yasuo' },
@@ -424,7 +424,7 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		遠藤匡俊: { nameEn: 'Endō Masatoshi' }, 加藤百一: { nameEn: 'Katō Hyakuichi' },
 		藤田護: { nameEn: 'Fujita Mamoru', researchmap: 'mfujita1023' },
 		大喜多紀明: { nameEn: 'Ōkita Noriaki', researchmap: 'utari' }, オオギタノリアキ: { nameEn: 'Ōkita Noriaki' },
-		徳田貞一: { nameEn: 'Tokuda Sadakazu' }, 上野昌之: { nameEn: 'Ueno Masayuki' },
+		徳田貞一: { nameEn: 'Tokuda Sadakazu' },
 		美山治: { nameEn: 'Miyama Osamu' }, 河野廣道: { nameEn: 'Kōno Hiromichi' },
 		佐藤昌彦: { nameEn: 'Satō Masahiko' },
 		石田收藏: { nameEn: 'Ishida Shūzō' }, 石田収藏: { nameEn: 'Ishida Shūzō' },
@@ -436,7 +436,7 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		杉山壽榮男: { nameEn: 'Sugiyama Sueo' },
 		松名隆: { nameEn: 'Matsuna Takashi' }, マツナタカシ: { nameEn: 'Matsuna Takashi' },
 		小野米一: { nameEn: 'Ono Yoneichi' },
-		板橋義三: { nameEn: 'Itabashi Yoshizō' }, イタバシヨシゾウ: { nameEn: 'Itabashi Yoshizō' },
+		イタバシヨシゾウ: { nameEn: 'Itabashi Yoshizō' },
 		津曲敏郎: { nameEn: 'Tsumagari Toshirō' }, ヌルミユッシ: { nameEn: 'Jussi Nurmi' },
 		煎本孝: { nameEn: 'Irimoto Takashi' }, 馬場裕美: { nameEn: 'Baba Yumi' },
 		關政則: { nameEn: 'Seki Masanori' }, 関政則: { nameEn: 'Seki Masanori' },
@@ -1080,4 +1080,3 @@ export function venueTagSlugs(venue: string | null | undefined): string[] {
 	if (/口承文[芸藝]|口頭文芸|説話文学|説話・伝承学/.test(venue)) out.push('oral-literature');
 	return out;
 }
-

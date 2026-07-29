@@ -74,11 +74,9 @@ async function seed(): Promise<void> {
 		declaredMediaType: 'application/pdf',
 		artifactKind: 'original',
 		pageCount: 12,
-		reviewStatus: 'approved',
 		isCurrent: true,
 		submittedBy: 'reader',
-		reviewedBy: 'reader',
-		reviewedAt: new Date()
+		submittedAt: new Date()
 	});
 	await db.insert(schema.revisionOcrCoverage).values({
 		revisionId: 'rev-1',

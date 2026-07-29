@@ -1,6 +1,6 @@
 /**
  * GET /api/archive/manifests/<repo>.jsonl — generate one repository manifest
- * from approved current revisions for that checkout repository.
+ * from current revisions for that checkout repository.
  */
 import type { RequestHandler } from './$types';
 import { db } from '$lib/server/db';

@@ -11,7 +11,6 @@
 		checkoutPath: string | null;
 		revisionId: string | null;
 		revisionNo: number | null;
-		reviewStatus: string | null;
 		sha256: string | null;
 		bytes: number | null;
 		mediaType: string | null;
@@ -27,7 +26,6 @@
 		<div class="min-w-0">
 			<div class="flex flex-wrap items-center gap-2">
 				<span class="archive-kicker bg-[var(--archive-muted)] px-1.5 py-0.5">{file.role ?? 'file'}</span>
-				{#if file.reviewStatus}<span class="text-[13px] text-[var(--archive-subtle)]">{file.reviewStatus}</span>{/if}
 				{#if file.revisionNo}<span class="tnum text-[13px] text-[var(--archive-subtle)]">rev {file.revisionNo}</span>{/if}
 			</div>
 			<h3 class="mt-2 break-words text-[15px] font-semibold">{filename}</h3>

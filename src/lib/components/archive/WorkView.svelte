@@ -3,7 +3,6 @@
 	import { page as pageState } from '$app/state';
 	import ArchiveHead from './ArchiveHead.svelte';
 	import BilingualLabel from './BilingualLabel.svelte';
-	import PendingSubmissions from './PendingSubmissions.svelte';
 	import RevisionHistory from './RevisionHistory.svelte';
 	import { archiveFetch } from '$lib/archive/session.svelte';
 	import { formatArchiveLanguages } from '$lib/archive/languages';
@@ -53,6 +52,8 @@
 	const textVariants = $derived(textBearingVariants(ocrCoverage));
 	const linkedAuthors = $derived(persons.filter((person) => person.role === 'author'));
 	const firstLinkedAuthor = $derived(linkedAuthors[0] ?? null);
+	let currentPage = $state(untrack(() => work.initialPage));
+	let pageField = $state(untrack(() => String(work.initialPage)));
 	const author = $derived(
 		linkedAuthors.map((person) => person.name).join(', ') || source.author?.trim() ||
 		'not recorded'
@@ -83,8 +84,6 @@
 			.map((institution: any) => institution.name)
 			.join(', ') || 'not recorded'
 	);
-	let currentPage = $state(untrack(() => work.initialPage));
-	let pageField = $state(untrack(() => String(work.initialPage)));
 	let images = $state<Record<number, ImageEntry>>({});
 	let viewMode = $state<ViewMode>('image');
 	let selectedVariant = $state<string | null>(untrack(() => chooseDefaultOcrVariant(work.ocr ?? [])));
@@ -605,7 +604,6 @@
 		</details>
 
 		<RevisionHistory revisions={work.revisions} />
-		{#if work.pending.length}<PendingSubmissions items={work.pending} />{/if}
 	</div>
 {/snippet}
 

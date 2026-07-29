@@ -12,7 +12,7 @@ import {
 } from './db';
 import { ArchiveHttpError } from './errors';
 import { buildRangeResponse, quotedSha256Etag } from './range';
-import { archiveRoleAtLeast, isArchiveRole, type ArchivePrincipal } from './types';
+import { isArchiveRole, type ArchivePrincipal } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
 type RevisionForContent = Awaited<ReturnType<typeof getRevisionForContent>>;
@@ -79,14 +79,10 @@ const SEARCH_REVISION = {
 	detectedMediaType: 'application/json',
 	originalFilename: 'archive-search.json',
 	pageCount: null,
-	reviewStatus: 'approved',
 	accessState: 'available',
 	isCurrent: true,
 	submittedBy: 'archive-search',
 	submittedAt: null,
-	reviewedBy: null,
-	reviewedAt: null,
-	reviewNote: null,
 	humanDownload: true
 } as RevisionForContent;
 
@@ -106,23 +102,15 @@ function requiresDownloadRight(useKind: ArchiveContentUseKind): boolean {
 /**
  * Visibility predicate for the `fr` file-revision and `src` source aliases used
  * by archive search. Keeping it here makes ranked SQL and direct content reads
- * apply the same review, current-revision, access-state, and representation rules.
+ * apply the same current-revision, access-state, and representation rules.
  */
 export function archiveSearchVisibilitySql(principal: ArchivePrincipal): SQL {
-	const reviewer = archiveRoleAtLeast(principal.role, 'archive_reviewer');
-	const review = reviewer
-		? sql`1 = 1`
-		: principal.role === 'archive_contributor'
-			? sql`(fr.review_status = 'approved' or (fr.review_status = 'pending' and fr.submitted_by = ${principal.userId}))`
-			: sql`fr.review_status = 'approved'`;
-	const current = reviewer ? sql`1 = 1` : sql`fr.is_current = 1`;
+	const current = sql`fr.is_current = 1`;
 	const access =
 		principal.role === 'archive_admin'
 			? sql`1 = 1`
-			: reviewer
-				? sql`fr.access_state <> 'takedown'`
-				: sql`fr.access_state = 'available'`;
-	return sql`(${review}) and (${current}) and (${access})`;
+			: sql`fr.access_state = 'available'`;
+	return sql`(${current}) and (${access})`;
 }
 
 function cachePolicyFor(useKind: ArchiveContentUseKind): ArchiveCachePolicy {

@@ -1,6 +1,6 @@
 /**
  * GET /api/archive/files/<fileId> — resolve a file slot to its source and
- * current/pending revision ids.
+ * current revision id.
  *
  * This dedicated lookup keeps /api/archive/revisions/<id>/text keyed by a
  * revision id. Accepting file_id on that text route would make the path

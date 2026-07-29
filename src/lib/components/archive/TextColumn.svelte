@@ -2,7 +2,6 @@
 	import type { EditBuffer, EditHead, EditLogEntry, OcrVariant, PageText, PageStatus } from '$lib/archive/workspace';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import BilingualLabel from './BilingualLabel.svelte';
-	import ApproveButton from './ApproveButton.svelte';
 	import ConflictDialog from './ConflictDialog.svelte';
 	import EditHistoryPanel from './EditHistoryPanel.svelte';
 	import PageStatusChip from './PageStatusChip.svelte';
@@ -20,7 +19,6 @@
 		selected,
 		buffer = null,
 		canEdit,
-		canApprove,
 		saving,
 		saveError = null,
 		note,
@@ -31,17 +29,14 @@
 		historyLoading,
 		historyUnavailable,
 		historyError = null,
-		operationBusy = false,
 		onselect,
 		onstartedit,
 		ontext,
 		onnote,
 		onsave,
-		onapprove,
 		onhistoryopen,
 		onrestore,
 		onrevert,
-		onunapprove,
 		onconflictnote,
 		onusemine,
 		onusetheirs
@@ -54,7 +49,6 @@
 		selected: string | null;
 		buffer?: EditBuffer | null;
 		canEdit: boolean;
-		canApprove: boolean;
 		saving: boolean;
 		saveError?: string | null;
 		note: string;
@@ -65,17 +59,14 @@
 		historyLoading: boolean;
 		historyUnavailable: boolean;
 		historyError?: string | null;
-		operationBusy?: boolean;
 		onselect: (variant: string) => void;
 		onstartedit: () => void;
 		ontext: (text: string) => void;
 		onnote: (note: string) => void;
 		onsave: () => void;
-		onapprove: () => void;
 		onhistoryopen: () => void;
 		onrestore: (entry: EditLogEntry) => void;
 		onrevert: () => void;
-		onunapprove: () => void;
 		onconflictnote: (note: string) => void;
 		onusemine: () => void;
 		onusetheirs: () => void;
@@ -90,7 +81,6 @@
 	const displayedText = $derived(buffer?.text ?? record?.text ?? '');
 	const readOnly = $derived(!canEdit || !isEditableVariant);
 	const canRevert = $derived(canEdit && (record?.status === 'edited' || record?.status === 'approved'));
-	const canUnapprove = $derived(canApprove && record?.status === 'approved');
 
 	function toggleHistory(): void {
 		historyOpen = !historyOpen;
@@ -126,14 +116,12 @@
 			unavailable={historyUnavailable}
 			error={historyError}
 			{canRevert}
-			{canUnapprove}
 			onview={(entry) => (viewedEntry = entry)}
 			onrestore={(entry) => {
 				onrestore(entry);
 				historyOpen = false;
 			}}
 			onrevert={onrevert}
-			onunapprove={onunapprove}
 		/>
 	{:else}
 		{#if loadState === 'empty'}
@@ -165,11 +153,6 @@
 				ontheirs={onusetheirs}
 			/>
 		{/if}
-		{#if canApprove && isEditableVariant}
-			<div class="review-row">
-				<ApproveButton editId={buffer?.dirty ? null : record?.editId ?? null} approved={status === 'approved'} busy={operationBusy} onapprove={onapprove} />
-			</div>
-		{/if}
 	{/if}
 </section>
 
@@ -194,7 +177,6 @@
 	.column-state { display: grid; min-height: 18rem; flex: 1; place-content: center; gap: 0.4rem; padding: 2rem; text-align: center; color: var(--archive-subtle); }
 	.column-state.error { color: var(--archive-danger); }
 	.gap-note { border-bottom: 1px dotted var(--archive-border); padding: 0.45rem 0.8rem; font-size: 12px; color: var(--archive-warn); }
-	.review-row { display: flex; justify-content: flex-end; border-top: 1px dotted var(--archive-border); background: var(--archive-panel); padding: 0.55rem 0.8rem; }
 	.view-backdrop { position: fixed; inset: 0; z-index: 75; display: flex; align-items: center; justify-content: center; background: rgb(0 0 0 / 48%); padding: 1rem; }
 	.view-sheet { width: min(48rem, 100%); max-height: calc(100svh - 2rem); overflow: auto; border: 1px solid var(--archive-border); background: var(--archive-paper); }
 	.view-backdrop header { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px dotted var(--archive-border); padding: 0.8rem 1rem; font-size: 13px; }

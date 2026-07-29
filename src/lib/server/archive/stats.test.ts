@@ -120,12 +120,9 @@ async function seedCollection(): Promise<void> {
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'original',
 			pageCount: 12,
-			reviewStatus: 'approved',
 			isCurrent: true,
 			submittedBy: 'contributor',
-			submittedAt: new Date(1_000),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(2_000)
+			submittedAt: new Date(2_000)
 		},
 		{
 			id: 'revision-1-old',
@@ -136,12 +133,9 @@ async function seedCollection(): Promise<void> {
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'original',
 			pageCount: 10,
-			reviewStatus: 'approved',
 			isCurrent: false,
 			submittedBy: 'contributor',
-			submittedAt: new Date(700),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(800)
+			submittedAt: new Date(800)
 		},
 		{
 			id: 'revision-2',
@@ -152,12 +146,9 @@ async function seedCollection(): Promise<void> {
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'original',
 			pageCount: null,
-			reviewStatus: 'approved',
 			isCurrent: true,
 			submittedBy: 'contributor',
-			submittedAt: new Date(2_000),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(3_000)
+			submittedAt: new Date(3_000)
 		},
 		{
 			id: 'revision-3',
@@ -168,12 +159,9 @@ async function seedCollection(): Promise<void> {
 			declaredMediaType: 'image/tiff',
 			artifactKind: 'original',
 			pageCount: 3,
-			reviewStatus: 'approved',
 			isCurrent: true,
 			submittedBy: 'contributor',
-			submittedAt: new Date(3_000),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(4_000)
+			submittedAt: new Date(4_000)
 		},
 		{
 			id: 'revision-pages',
@@ -184,12 +172,9 @@ async function seedCollection(): Promise<void> {
 			declaredMediaType: 'application/zip',
 			artifactKind: 'page_images',
 			pageCount: 12,
-			reviewStatus: 'approved',
 			isCurrent: false,
 			submittedBy: 'contributor',
-			submittedAt: new Date(3_500),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(4_500)
+			submittedAt: new Date(4_500)
 		},
 		{
 			id: 'revision-linearized',
@@ -200,12 +185,9 @@ async function seedCollection(): Promise<void> {
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'linearized',
 			pageCount: 12,
-			reviewStatus: 'approved',
 			isCurrent: false,
 			submittedBy: 'contributor',
-			submittedAt: new Date(4_000),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(5_000)
+			submittedAt: new Date(5_000)
 		}
 	]);
 	await db.insert(schema.revisionDerivations).values([
@@ -330,9 +312,9 @@ describe('archive collection statistics', () => {
 			search: { enabledModes: ['phrase', 'regex', 'soft', 'similar'] },
 			freshness: {
 				mostRecentIngestAt: new Date(8_000).toISOString(),
-				mostRecentApprovedRevision: {
+				mostRecentRevision: {
 					id: 'revision-linearized',
-					approvedAt: new Date(5_000).toISOString()
+					submittedAt: new Date(5_000).toISOString()
 				}
 			}
 		});

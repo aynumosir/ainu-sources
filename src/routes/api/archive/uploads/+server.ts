@@ -1,6 +1,6 @@
 /**
  * GET /api/archive/uploads lists resumable upload sessions. POST creates an
- * upload session or a deduplicated pending revision for an already verified blob.
+ * upload session or a deduplicated current revision for an already verified blob.
  */
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
