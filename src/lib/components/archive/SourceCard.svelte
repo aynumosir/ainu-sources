@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ScanThumbnail from './ScanThumbnail.svelte';
 	import { formatBytes } from '$lib/archive/format';
-	import { archiveLanguageNames } from '$lib/archive/languages';
+	import { archiveCardLanguages } from '$lib/archive/languages';
 	import { formatYear } from '$lib/format';
 	import { ocrSealFor, summarizeOcrCoverage } from '$lib/archive/ocr';
 	import type { ArchiveLibraryItem } from '$lib/archive/library-item';
@@ -10,7 +10,7 @@
 	const source = $derived(item.source);
 	const file = $derived(item.file);
 	const coverage = $derived(item.coverage ?? []);
-	const languages = $derived(archiveLanguageNames(source.languages));
+	const languages = $derived(archiveCardLanguages(source.languages));
 
 	// The seal already answers "can I read and quote this?" — the tool that
 	// produced the text (gemini vs pdftotext) is an implementation detail no

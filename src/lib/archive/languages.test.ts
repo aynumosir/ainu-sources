@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatArchiveLanguages } from './languages';
+import { archiveCardLanguages, formatArchiveLanguages } from './languages';
 
 describe('formatArchiveLanguages', () => {
 	it('uses readable names for common archive languages', () => {
@@ -15,5 +15,25 @@ describe('formatArchiveLanguages', () => {
 	it('renders no marker for missing languages', () => {
 		expect(formatArchiveLanguages(null)).toBe('');
 		expect(formatArchiveLanguages([])).toBe('');
+	});
+});
+
+describe('archiveCardLanguages', () => {
+	it('drops Ainu since every work in the collection has it', () => {
+		expect(archiveCardLanguages(['ain', 'jpn'])).toEqual(['日本語 Japanese']);
+		expect(archiveCardLanguages(['ain', 'eng'])).toEqual(['English']);
+	});
+
+	it('renders nothing when Ainu is the only recorded language', () => {
+		expect(archiveCardLanguages(['ain'])).toEqual([]);
+	});
+
+	it('keeps non-Ainu languages untouched', () => {
+		expect(archiveCardLanguages(['jpn', 'rus'])).toEqual(['日本語 Japanese', 'Русский Russian']);
+	});
+
+	it('renders no marker for missing languages', () => {
+		expect(archiveCardLanguages(null)).toEqual([]);
+		expect(archiveCardLanguages([])).toEqual([]);
 	});
 });
