@@ -14,6 +14,7 @@ import {
 	revisionOcrCoverage,
 	sourceFiles,
 	sourceLifecycleEvents,
+	sourceRelations,
 	sources,
 	uploadSessions,
 	user,
@@ -1631,6 +1632,12 @@ export async function listArchiveFiles(
 			category: sources.category,
 			languages: sources.languages,
 			significance: sources.significance,
+			citationCount: sql<number>`(
+				select count(*) from ${sourceRelations}
+				where ${sourceRelations.toSourceId} = ${sources.id}
+				and ${sourceRelations.type} = 'cites'
+				and ${sourceRelations.status} = 'accepted'
+			)`,
 			summary: sources.summary
 		})
 		.from(sourceFiles)
@@ -1685,6 +1692,7 @@ export async function listArchiveFiles(
 				category: row.category,
 				languages: row.languages,
 				significance: row.significance,
+				citationCount: row.citationCount,
 				summary: row.summary
 			},
 			coverage: null

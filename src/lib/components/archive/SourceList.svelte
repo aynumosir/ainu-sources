@@ -34,6 +34,9 @@
 							{#if source.category === 'primary'}
 								<span class="archive-list-primary">primary</span>
 							{/if}
+							{#if source.citationCount > 0}
+								<span class="archive-list-citations tnum">cited {source.citationCount}×</span>
+							{/if}
 							{#if source.dialect}
 								<span class="archive-list-dialect">{source.dialect}</span>
 							{/if}
@@ -173,6 +176,13 @@
 		font-variant: small-caps;
 		letter-spacing: 0.03em;
 		color: var(--archive-subtle);
+	}
+	.archive-list-citations {
+		flex-shrink: 0;
+		font-family: var(--font-archive-sans);
+		font-size: 11px;
+		letter-spacing: 0.02em;
+		color: var(--archive-gilt-text);
 	}
 	.archive-list-catalogue {
 		position: absolute;
