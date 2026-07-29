@@ -17,7 +17,9 @@
  *           • verified: true  — a hand-checked list (e.g. the Tajima transcription).
  *             Missing cited works are CREATED as bibliographic records; every edge is
  *             `accepted` (the citation itself is certain even where the matched record
- *             identity is not).
+ *             identity is not). A reference marked `ainuRelated: false` is the author's
+ *             general-linguistics reading; it is skipped, keeping the catalogue to Ainu
+ *             scholarship and PageRank to the works Ainu studies cites among itself.
  *           • verified: false — an automated sweep (scripts/sweep-references.ts). Edges
  *             are drawn ONLY to sources that already exist; nothing is created from the
  *             noisy OCR. A strong match (`probable`) is `accepted`; a weak one
@@ -38,6 +40,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { and, eq } from 'drizzle-orm';
 import {
 	openRun,
@@ -53,7 +56,7 @@ import { sources, sourceRelations, slugRedirects } from '../../src/lib/server/db
 import { ACTIVE_SOURCE_STATUS, PUBLIC_RELATION_STATUS } from '../../src/lib/server/visibility';
 import type { Db } from './lib/entities';
 
-const DATA_DIR = path.join(import.meta.dir, '..', 'data', 'extracted-cites');
+const DATA_DIR = fileURLToPath(new URL('../data/extracted-cites', import.meta.url));
 const ORIGIN = 'extracted-cites';
 const DERIVATION = 'reference-extraction';
 const uuid = () => crypto.randomUUID();
@@ -100,8 +103,8 @@ interface ExtractedFile {
 }
 
 /** Read every JSON dataset below extracted-cites/, tagged with its relative path. */
-function readFiles(): { file: string; data: ExtractedFile }[] {
-	if (!fs.existsSync(DATA_DIR)) return [];
+function readFiles(dataDir: string = DATA_DIR): { file: string; data: ExtractedFile }[] {
+	if (!fs.existsSync(dataDir)) return [];
 	const files: string[] = [];
 	const visit = (dir: string) => {
 		for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -110,11 +113,11 @@ function readFiles(): { file: string; data: ExtractedFile }[] {
 			else if (entry.name.endsWith('.json')) files.push(full);
 		}
 	};
-	visit(DATA_DIR);
+	visit(dataDir);
 	return files
 		.sort()
 		.map((full) => ({
-			file: path.relative(DATA_DIR, full),
+			file: path.relative(dataDir, full),
 			data: JSON.parse(fs.readFileSync(full, 'utf8')) as ExtractedFile
 		}));
 }
@@ -263,6 +266,11 @@ async function ensureReference(
 	const slug = resolvedReferenceSlug(ref, verified);
 	const existing = await findSourceId(db, slug);
 	if (existing || dryRun || !verified) return existing;
+	// A hand-checked bibliography lists the general-linguistics literature its
+	// author drew on alongside the Ainu works. `ainuRelated: false` marks the
+	// former; this catalogue holds Ainu scholarship, so those references are read
+	// but never minted as records, and the edge to them is left undrawn.
+	if (ref.ainuRelated === false) return undefined;
 	const confidence =
 		ref.match?.confidence === 'exact'
 			? 0.95
@@ -293,13 +301,17 @@ async function ensureReference(
 	return result.sourceId ?? undefined;
 }
 
-export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<ImporterSummary> {
+export async function run(
+	db: Db,
+	opts: ImporterRunOptions & { dataDir?: string } = {}
+): Promise<ImporterSummary> {
 	const DRY_RUN = opts.dryRun ?? false;
+	const dataDir = opts.dataDir ?? DATA_DIR;
 	console.log(`${DRY_RUN ? '[DRY-RUN] ' : ''}import:extracted-cites`);
 
-	const files = readFiles();
+	const files = readFiles(dataDir);
 	if (files.length === 0) {
-		console.warn(`  ! no files in ${DATA_DIR}`);
+		console.warn(`  ! no files in ${dataDir}`);
 		return summary(0, 0, 0, 0);
 	}
 
