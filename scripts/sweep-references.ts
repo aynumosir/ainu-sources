@@ -30,11 +30,102 @@ import { openDb } from './import/lib/entities';
 import { sources } from '../src/lib/server/db/schema';
 import { ACTIVE_SOURCE_STATUS } from '../src/lib/server/visibility';
 
-const REFERENCE_HEADING =
-	/^\s*(references|bibliography|works\s+cited|literature\s+cited|reference\s+list|参考文献|引用文献|主要参考文献|参照文献|文\s*献|литература|список\s+литературы|библиография|literaturverzeichnis|références)\s*$/imu;
-const TERMINAL_HEADING =
-	/^\s*(appendix|appendices|index|about\s+the\s+author|author\s+biography|付録|附録|索引|著者紹介)\s*$/imu;
 const GENERATED_SCHEMA = 'extracted-cites/v1';
+/** What ends a reference section. Indexes and appendices list names and years too. */
+const TERMINAL_CORE =
+	/(?:appendix|appendices|index(?:\s+of\s+(?:authors|names|subjects))?|author\s+index|name\s+index|subject\s+index|about\s+the\s+author|author\s+biograph(?:y|ies)|acknowledge?ments?|付録|附録|索引|人名索引|事項索引|語彙索引|著者紹介|著者略歴|あとがき|後記|初出一覧|謝辞)/iu;
+// A part label — Appendix A, 索引 2 — never a run of letters, so "Indexing the
+// corpus" cannot be read as a closing heading.
+const TERMINAL_TAIL = /(?:[a-z](?![a-z])|[0-9０-９]+|一覧|表)/iu;
+
+// A heading line survives only if the WHOLE line is a heading — prose that merely
+// mentions 参考文献 must not open a reference section. Printed headings carry
+// decoration the anchor would otherwise reject, so each line is stripped down
+// first and the whole-line test applied to what remains:
+//   参　考　文　献   ·  【参考文献】  ·  〇参考文献  ·  8. 参考文献
+//   参考文献・ウェブサイト  ·  参照・参考文献  ·  Sources and References
+//   644    参照・参考文献        (a running head, page number and all)
+const HEADING_CORE =
+	/(?:参考文献|引用文献|参照文献|参考図書|参考資料|引用資料|references?|bibliograph(?:y|ie)|works\s+(?:cited|consulted)|literature\s+cited|reference\s+list|list\s+of\s+references|further\s+reading|литература|список\s+литературы|библиография|literaturverzeichnis|références)/iu;
+// Entry-shaped forms. A bibliographic survey of Ainu studies prints lines like
+// "1985 文献目録" as content, and the folio stripper would reduce those to a bare
+// heading, so they qualify only when nothing was stripped from the line.
+const HEADING_CORE_WEAK = /(?:文献目録|文献一覧|文献表|文献)/u;
+/** Qualifiers printed before the heading: 主要参考文献, Selected Bibliography. */
+const HEADING_PREFIX = /(?:主要|主な|おもな|引用|参照|参考|注|selected|primary|main)/iu;
+/** Items a heading is compounded with: 参考文献・ウェブサイト, 参考文献一覧. */
+const HEADING_TAIL =
+	/(?:一覧|リスト|目録|表|参照|資料|図書|ウェブサイト|web\s*サイト|サイト|url|notes?|cited|consulted|reading|and\s+sources|sources|источники)/iu;
+const HEADING_SEPARATOR = /\s*(?:[・、,&＆/／]|および|と|and)?\s*/iu;
+/** Leading section numbering: 8. · 8．· 3.2 · 第8章 · II. · (3) */
+const LEADING_NUMBER = /^\s*(?:第\s*[0-9０-９一二三四五六七八九十]+\s*[章節部]|[(（]?[0-9０-９]+(?:[.．][0-9０-９]+)*[)）]?|[ivxIVX]+(?=\s*[.．、:：]))\s*[.．、:：]?\s*/u;
+/** Decoration around a heading: brackets and bullets. */
+const LEADING_MARK = /^[\s　【〔〈《「『（(\[〇○●◆◇■□▲△※＊*#･・~-]+/u;
+const TRAILING_MARK = /[\s　】〕〉》」』）)\]：:・~。．.、,-]+$/u;
+// An explanatory note appended to the heading — 参照文献(参照ウェブサイトを含む).
+// Anchored at end of line: a mid-line parenthesis belongs to prose, and stripping
+// from it would reduce a numbered citation such as 文献(3)によると… to bare 文献.
+const TRAILING_NOTE = /[（(][^（）()]*[）)]?[\s　]*$/u;
+
+/**
+ * Reduce a printed heading to bare vocabulary: drop a running head's page number,
+ * section numbering, brackets and bullets, a trailing parenthetical note, and the
+ * inter-character spacing that 参　考　文　献 is typeset with.
+ */
+function normalizeHeadingLine(line: string): { value: string; folioStripped: boolean } {
+	let value = line.normalize('NFKC').trim();
+	// A running head carries the folio: "644    参照・参考文献" (either side).
+	const withoutFolio = value.replace(/^\s*\d{1,4}\s+/u, '').replace(/\s+\d{1,4}\s*$/u, '');
+	const folioStripped = withoutFolio !== value;
+	// Brackets first, then numbering: 【8. 参考文献】 wears both.
+	value = withoutFolio.replace(LEADING_MARK, '').replace(TRAILING_MARK, '');
+	value = value.replace(LEADING_NUMBER, '').replace(LEADING_MARK, '');
+	value = value.replace(TRAILING_NOTE, '').replace(TRAILING_MARK, '');
+	// 参 考 文 献 → 参考文献, while "works cited" keeps its single space.
+	value = value.replace(/(?<=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}])[\s　]+(?=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}])/gu, '');
+	return { value: value.replace(/[\s　]+/gu, ' ').trim(), folioStripped };
+}
+
+/** `^(qualifier sep)* core (sep (qualifier|core))*$` over the vocabulary above. */
+function wholeLinePattern(core: RegExp): RegExp {
+	const sep = HEADING_SEPARATOR.source;
+	const qualifier = `(?:${HEADING_PREFIX.source}|${HEADING_TAIL.source})`;
+	return new RegExp(
+		`^(?:${qualifier}${sep})*${core.source}(?:${sep}(?:${qualifier}|${core.source}))*$`,
+		'iu'
+	);
+}
+
+/**
+ * True when the line is a bibliography heading and nothing else. The reduced line
+ * must be built entirely from heading vocabulary, its qualifiers, and the items a
+ * heading is compounded with, so a sentence mentioning 参考文献 is rejected.
+ */
+export function isReferenceHeading(line: string): boolean {
+	const { value, folioStripped } = normalizeHeadingLine(line);
+	if (!value || value.length > 40) return false;
+	if (wholeLinePattern(HEADING_CORE).test(value)) return true;
+	// Bare 文献 qualifies only as printed: allowing it after a folio strip would
+	// promote a bibliography entry such as "1985 文献" into a section heading.
+	return !folioStripped && wholeLinePattern(HEADING_CORE_WEAK).test(value);
+}
+
+/**
+ * True when the line ends the reference section. Read through the same reduction
+ * as an opening heading, so 【索引】 and `第9章 索引` and a folio-bearing `Appendix A`
+ * all close it — an index or appendix left inside the section supplies names, years
+ * and titles that would match as citations.
+ */
+export function isTerminalHeading(line: string): boolean {
+	const { value } = normalizeHeadingLine(line);
+	if (!value || value.length > 40) return false;
+	const sep = HEADING_SEPARATOR.source;
+	const whole = new RegExp(
+		`^${TERMINAL_CORE.source}(?:${sep}(?:${TERMINAL_CORE.source}|${TERMINAL_TAIL.source}))*$`,
+		'iu'
+	);
+	return whole.test(value);
+}
 
 interface ManifestRow {
 	path: string;
@@ -92,23 +183,67 @@ export function normalizeText(value: string): string {
 
 export function extractReferenceSection(text: string): ReferenceSection | null {
 	const lines = text.split(/\r?\n/u);
-	let start = -1;
-	let heading = '';
+	const hits: { index: number; heading: string; key: string }[] = [];
 	for (let index = 0; index < lines.length; index++) {
-		if (REFERENCE_HEADING.test(lines[index])) {
-			start = index + 1;
-			heading = lines[index].trim();
+		if (isReferenceHeading(lines[index])) {
+			hits.push({
+				index,
+				heading: lines[index].trim(),
+				// Case-folded: a running head printed Bibliography on its first page and
+				// BIBLIOGRAPHY thereafter is one heading, and splitting the key would open
+				// the section on its second page and lose the first page's references.
+				key: normalizeHeadingLine(lines[index]).value.toLowerCase()
+			});
 		}
 	}
-	if (start < 0) return null;
+	if (hits.length === 0) return null;
+	// The last hit is normally the right one: a heading named in the table of
+	// contents precedes the section it points at. A heading printed as a running
+	// head is the exception — it recurs at page intervals through the bibliography,
+	// so its last occurrence is the final page while the section opens at its first.
+	//
+	// What separates the two is page geometry. A running head recurs once per page,
+	// so consecutive hits of the SAME heading land a page of OCR lines apart; a
+	// table-of-contents entry sits far from the section it points at, and a heading
+	// repeated within a few lines is a duplicate rather than a page header. Hits are
+	// therefore grouped into runs only when spaced like pages.
+	//
+	// The longest run wins, with the latest as tiebreak. Taking simply the latest
+	// would hand the section to a lone qualifying heading in an afterword — a
+	// further-reading list in a postface is ordinary in Japanese academic books —
+	// and lose the whole bibliography behind it.
+	const PAGE_MIN = 15;
+	const PAGE_MAX = 120;
+	const runs: (typeof hits)[] = [];
+	for (const hit of hits) {
+		const current = runs[runs.length - 1];
+		const previous = current?.[current.length - 1];
+		const gap = previous ? hit.index - previous.index : Infinity;
+		if (previous && previous.key === hit.key && gap >= PAGE_MIN && gap <= PAGE_MAX) {
+			current!.push(hit);
+		} else {
+			runs.push([hit]);
+		}
+	}
+	const best = runs.reduce((a, b) => (b.length >= a.length ? b : a));
+	const chosen = best[0];
+	const start = chosen.index + 1;
+	const heading = chosen.heading;
 	let end = lines.length;
 	for (let index = start + 3; index < lines.length; index++) {
-		if (TERMINAL_HEADING.test(lines[index])) {
+		if (isTerminalHeading(lines[index])) {
 			end = index;
 			break;
 		}
 	}
-	const section = lines.slice(start, end).join('\n').trim().slice(0, 120_000);
+	// Drop the running heads and folios that fall between pages of the bibliography.
+	// They sit mid-entry, and since normalization keeps digits and kanji, a title
+	// broken across a page break would otherwise read as
+	// "…towarduniversal644参考文献dependenciesforainu…" and match nothing.
+	const body = lines
+		.slice(start, end)
+		.filter((line) => !isReferenceHeading(line) && !/^[\s　]*\d{1,4}[\s　]*$/u.test(line));
+	const section = body.join('\n').trim().slice(0, 120_000);
 	return section.length >= 40 ? { heading, text: section } : null;
 }
 
@@ -228,7 +363,7 @@ function scanPageRange(variantDir: string): string | undefined {
 	for (const name of pages) {
 		const text = fs.readFileSync(path.join(variantDir, name), 'utf8');
 		const number = Number(name.match(/\d+/u)?.[0]);
-		if (REFERENCE_HEADING.test(text) && first === undefined) first = number;
+		if (first === undefined && text.split(/\r?\n/u).some(isReferenceHeading)) first = number;
 		if (first !== undefined) last = number;
 	}
 	return first === undefined || last === undefined ? undefined : `scan pp. ${first}-${last}`;
