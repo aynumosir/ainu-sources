@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2022-sakaguchi-karafuto-hogen-sushi-keisan",
-    "title": "阪口諒 アイヌ語樺太方言における数詞と計算",
+    "title": "アイヌ語樺太方言における数詞と計算",
+    "author": "阪口諒",
     "year": 2022,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 22,
+    "referenceCount": 23,
     "sourcePath": "articles/2022_阪口諒_アイヌ語樺太方言における数詞と計算.pdf"
   },
   "references": [
@@ -26,7 +27,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
+        "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -62,7 +63,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1917-berthold-laufer-the-vigesimal-and-decimal-systems-in-the-ainu-nume",
+        "slug": "1917-laufer-vigesimal-decimal-systems-ainu-numerals",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -79,7 +80,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1935-x-kzhgkk",
+        "slug": "1935-kindaichi-sushi-ainu-minzoku",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -88,17 +89,18 @@
     {
       "n": 5,
       "authors": [
-        "知里, 真志保"
+        "Chiri"
       ],
       "year": 1942,
       "yearText": "1942",
       "title": "アイヌ語法研究 : 樺太方言を中心として",
-      "type": "article",
+      "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
+      "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1942-x-3bat8z",
+        "slug": "1942-chiri",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
     },
@@ -113,7 +115,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1957-x-1ouspxs",
+        "slug": "1957-hattori-ainu-go-nenchosha-so-tokushu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -148,7 +150,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1971-x-s2947h",
+        "slug": "1971-murayama-kita-chishima-ainu-go-bunkengakuteki-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -183,7 +185,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1988-x-1qddrpc",
+        "slug": "1988-nakagawa-ainu-go-anje-risu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -201,7 +203,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -263,6 +265,23 @@
     {
       "n": 15,
       "authors": [
+        "萱野, 茂"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "noainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 16,
+      "authors": [
         "魚井 一由｜廣田 徹"
       ],
       "year": 2004,
@@ -271,29 +290,11 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-kzhgjp",
+        "slug": "2004-uoi-ainu-go-sushi-doburotuvorusuki-jiten",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語数詞体系に対する考察．－ドブロトゥヴォールスキーのアイヌ語辞典を基盤にして"
-    },
-    {
-      "n": 16,
-      "authors": [
-        "Tomomi Satō"
-      ],
-      "year": 2006,
-      "yearText": "2006",
-      "title": "The Study of the Ainu Language",
-      "titleEn": "The Study of the Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Study of the Ainu Language"
     },
     {
       "n": 17,
@@ -306,7 +307,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2009-x-m4867n",
+        "slug": "2009-murasaki-karafuto-ainu-go-sushi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -315,7 +316,7 @@
     {
       "n": 18,
       "authors": [
-        "寺田, 吉孝"
+        "寺田, 吉孝, 安田, 節彦, ТЭРАДА, Йоситака, ЯСУДА, Сэцухико"
       ],
       "year": 2016,
       "yearText": "2016",
@@ -323,7 +324,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-m-m-20",
+        "slug": "2016-terada-ainu-go-roshia-go-jiten-20",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -354,15 +355,15 @@
       ],
       "year": 2020,
       "yearText": "2020",
-      "title": "ジョン・バチェラーの著作に含まれる樺太アイヌの口承文芸―ピウスツキ資料からの転載の実態―",
+      "title": "ジョン・バチェラーの著作に含まれる樺太アイヌの口承文芸 : ピウスツキ資料からの転載の実態",
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-x-d4vqt6",
+        "slug": "2020-sakaguchi-karafuto-ainu-kosho-bungei-piusutsuki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "ジョン・バチェラーの著作に含まれる樺太アイヌの口承文芸―ピウスツキ資料からの転載の実態―"
+      "matchedTitle": "ジョン・バチェラーの著作に含まれる樺太アイヌの口承文芸 : ピウスツキ資料からの転載の実態"
     },
     {
       "n": 21,
@@ -375,7 +376,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-x-17dnw6",
+        "slug": "2021-ochiai-ainu-go-sushi-kaho-sanpo-joho-sanpo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -384,7 +385,7 @@
     {
       "n": 22,
       "authors": [
-        "阪口諒"
+        "阪口, 諒"
       ],
       "year": 2022,
       "yearText": "2022",
@@ -392,11 +393,26 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2022-x-bwl5i3",
+        "slug": "ainu-niokeru-to-2",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語樺太方言における数詞と計算"
+    },
+    {
+      "n": 23,
+      "authors": [
+        "山辺, 安之助"
+      ],
+      "title": "あいぬ物語 : 附・あいぬ語大意及語彙",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-ainu-3",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "あいぬ物語 : 附・あいぬ語大意及語彙"
     }
   ]
 }

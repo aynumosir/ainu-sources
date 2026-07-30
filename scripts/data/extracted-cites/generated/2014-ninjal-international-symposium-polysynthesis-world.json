@@ -3,37 +3,90 @@
   "verified": false,
   "citingWork": {
     "slug": "2014-ninjal-international-symposium-polysynthesis-world",
-    "title": "NINJAL International Symposium on Polysynthesis in the World's Languages",
+    "title": "International Symposium on Polysynthesis in the World's Languages",
+    "author": "NINJAL",
     "year": 2014,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "References",
-    "referenceCount": 2,
+    "referenceCount": 5,
     "sourcePath": "articles/2014_NINJAL_International Symposium on Polysynthesis in the World's Languages.pdf"
   },
   "references": [
     {
       "n": 1,
       "authors": [
-        "NINJAL"
+        "Kindaichi, Kyosuke"
       ],
-      "year": 2014,
-      "yearText": "2014",
-      "title": "International Symposium on Polysynthesis in the World's Languages",
-      "titleEn": "International Symposium on Polysynthesis in the World's Languages",
-      "type": "article",
+      "year": 1933,
+      "yearText": "1933",
+      "title": "Gengo kenkyu",
+      "titleEn": "Gengo kenkyu",
+      "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-ninjal-international-symposium-on-polysynthesis-in-the-worlds-languages",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
       },
-      "matchedTitle": "International Symposium on Polysynthesis in the World's Languages"
+      "matchedTitle": "Gengo kenkyu"
     },
     {
       "n": 2,
+      "authors": [
+        "Kindaichi"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ語法概説",
+      "titleEn": "An Outline of Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-kindaichi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "An Outline of Ainu Grammar"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Honda, Katsuichi"
+      ],
+      "year": 1997,
+      "yearText": "1997",
+      "title": "Ainu minzoku",
+      "titleEn": "Ainu minzoku",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1997-honda-katsuichi-ainu-minzoku",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu minzoku"
+    },
+    {
+      "n": 4,
+      "authors": [],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "Japanese and Ainu",
+      "titleEn": "Japanese and Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2006-anon-japanese-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Japanese and Ainu"
+    },
+    {
+      "n": 5,
       "authors": [
         "Anna Bugaeva"
       ],

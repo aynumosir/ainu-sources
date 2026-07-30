@@ -3,19 +3,37 @@
   "verified": false,
   "citingWork": {
     "slug": "2023-sato-ainu-go",
-    "title": "佐藤知己 アイヌ語",
+    "title": "アイヌ語",
+    "author": "佐藤知己",
     "year": 2023,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 2,
+    "referenceCount": 14,
     "sourcePath": "articles/2023_佐藤知己_アイヌ語.pdf"
   },
   "references": [
     {
       "n": 1,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 2,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -33,7 +51,178 @@
       "matchedTitle": "アイヌ語沙流方言辞典"
     },
     {
-      "n": 2,
+      "n": 3,
+      "authors": [
+        "佐藤, 知己"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "古文献によるアイヌ語諸方言の比較研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-sato-ainu-go-shohogen-hikaku-kenkyu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "古文献によるアイヌ語諸方言の比較研究"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "アイヌ語千歳方言における名詞抱合 : その種類と関連諸規則",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-sato-chitose-hogen-meishi-hogo-shurui-kanren",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における名詞抱合 : その種類と関連諸規則"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "アイヌ語の現状と復興",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-sato-ainu-go-genjo-fukko",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の現状と復興"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "A Classification of the Types of Noun Incorporation in Ainu and its Implication fo Morphosyntactic Typology",
+      "titleEn": "A Classification of the Types of Noun Incorporation in Ainu and its Implication fo Morphosyntactic Typology",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-sato-classification-types-noun-incorporation-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A Classification of the Types of Noun Incorporation in Ainu and its Implication fo Morphosyntactic Typology"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "言語史の研究方法とアイヌ語史の諸問題",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2016-sato-ainu-goshi-shomondai",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "言語史の研究方法とアイヌ語史の諸問題"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語における文法的カテゴリーの転換について：語と句、動詞と名詞の相互関係をめぐって",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-sato-ainu-go-bunpoteki-kategori-tenkan-sogo-kankei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における文法的カテゴリーの転換について：語と句、動詞と名詞の相互関係をめぐって"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語千歳方言におけるわたり音化とわたり音挿入について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-sato-chitose-hogen-watari-onka-watari-oto-sonyu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言におけるわたり音化とわたり音挿入について"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "名詞所属形を用いたアイヌ語の所有構造について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-sato-meishi-shozokukei-ainu-go-shoyu-kozo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "名詞所属形を用いたアイヌ語の所有構造について"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語千歳方言の位置名詞orの用法",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-sato-chitose-hogen-ichi-meishi-or",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言の位置名詞orの用法"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-sato-ainu-go-fukko-kadai",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題"
+    },
+    {
+      "n": 13,
       "authors": [
         "佐藤知己"
       ],
@@ -43,11 +232,27 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2023-x-3",
+        "slug": "2023-sato-ainu-go-doshi-ketsugoka-3-ko-doshi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の動詞の結合価と3項動詞"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "yearText": "",
+      "title": "古文献によるアイヌ語史の構築",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "sato-kobunken-ainu-goshi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "古文献によるアイヌ語史の構築"
     }
   ]
 }

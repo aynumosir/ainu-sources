@@ -3,19 +3,38 @@
   "verified": false,
   "citingWork": {
     "slug": "2020-karol-development-digital-corpus-core-language",
-    "title": "Nowakowski Karol Development of a Digital Corpus and Core Language Technologies for the Ainu Language",
+    "title": "Development of a Digital Corpus and Core Language Technologies for the Ainu Language",
+    "author": "Nowakowski Karol",
     "year": 2020,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "Bibliography",
-    "referenceCount": 38,
+    "referenceCount": 39,
     "sourcePath": "articles/2020_Nowakowski Karol_Development of a Digital Corpus and Core Language Technologies for the Ainu Language.pdf"
   },
   "references": [
     {
       "n": 1,
+      "authors": [
+        "Batchelor, John"
+      ],
+      "year": 1897,
+      "yearText": "1897",
+      "title": "Ashiri Aeuitaknup Oma Kambi",
+      "titleEn": "The New Testament in Ainu",
+      "type": "scripture",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1897-batchelor-ashiri-aeuitaknup-oma-kambi",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ashiri Aeuitaknup Oma Kambi"
+    },
+    {
+      "n": 2,
       "authors": [
         "Kanazawa, Shozaburo"
       ],
@@ -26,14 +45,14 @@
       "type": "topical-dictionary",
       "ainuRelated": true,
       "match": {
-        "slug": "1898-kanazawa-ninjal-topical-ainu-conversation-dictionary",
+        "slug": "1898-kanazawa-topical-dictionary-conversational-ainu",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Topical Dictionary of Conversational Ainu"
     },
     {
-      "n": 2,
+      "n": 3,
       "authors": [
         "John C. Batchelor"
       ],
@@ -44,14 +63,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
+        "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "An Ainu-English-Japanese Dictionary"
     },
     {
-      "n": 3,
+      "n": 4,
       "authors": [
         "Kyōsuke Kindaichi"
       ],
@@ -69,7 +88,7 @@
       "matchedTitle": "Ainu jojishi Yūkara no kenkyū"
     },
     {
-      "n": 4,
+      "n": 5,
       "authors": [
         "Mashiho Chiri"
       ],
@@ -87,7 +106,7 @@
       "matchedTitle": "Bunrui Ainugo jiten"
     },
     {
-      "n": 5,
+      "n": 6,
       "authors": [
         "Shirō Hattori"
       ],
@@ -105,7 +124,7 @@
       "matchedTitle": "Ainugo hōgen jiten"
     },
     {
-      "n": 6,
+      "n": 7,
       "authors": [
         "Shōzaburō Kanazawa"
       ],
@@ -123,7 +142,7 @@
       "matchedTitle": "Ainugo kaiwa jiten"
     },
     {
-      "n": 7,
+      "n": 8,
       "authors": [
         "Kyōko Murasaki"
       ],
@@ -141,7 +160,7 @@
       "matchedTitle": "Karafuto Ainugo"
     },
     {
-      "n": 8,
+      "n": 9,
       "authors": [
         "by Kyoko Murasaki"
       ],
@@ -159,7 +178,7 @@
       "matchedTitle": "Sakhalin Ainu"
     },
     {
-      "n": 9,
+      "n": 10,
       "authors": [
         "Waseda Daigaku. Gogaku Kyōiku Kenkyūjo"
       ],
@@ -170,14 +189,32 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-waseda-daigaku-gogaku-kyoiku-kenkyujo-ainugo-nyumon",
+        "slug": "1984-kenkyujo-ainugo-nyumon",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Ainugo nyūmon"
     },
     {
-      "n": 10,
+      "n": 11,
+      "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 12,
       "authors": [
         "Kirsten Refsing"
       ],
@@ -188,14 +225,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
-      "n": 11,
+      "n": 13,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -213,7 +250,7 @@
       "matchedTitle": "Ainugo (The Ainu language)"
     },
     {
-      "n": 12,
+      "n": 14,
       "authors": [
         "Kayano, Shigeru."
       ],
@@ -231,7 +268,7 @@
       "matchedTitle": "Kayano Shigeru no Ainugo jiten"
     },
     {
-      "n": 13,
+      "n": 15,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -249,7 +286,7 @@
       "matchedTitle": "Ainugo jiten"
     },
     {
-      "n": 14,
+      "n": 16,
       "authors": [
         "Honda, Katsuichi"
       ],
@@ -267,23 +304,7 @@
       "matchedTitle": "Ainu minzoku"
     },
     {
-      "n": 15,
-      "authors": [],
-      "year": 1998,
-      "yearText": "1998",
-      "title": "Ainu folk-lore",
-      "titleEn": "Ainu folk-lore",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1998-x-ainu-folk-lore",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu folk-lore"
-    },
-    {
-      "n": 16,
+      "n": 17,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -295,13 +316,13 @@
       "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 17,
+      "n": 18,
       "authors": [
         "Tomomi Satō"
       ],
@@ -319,7 +340,7 @@
       "matchedTitle": "Ainugo bunpō no kiso"
     },
     {
-      "n": 18,
+      "n": 19,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -330,14 +351,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-anna-bugaeva-internet-applications-for-endangered-languages-a-t",
+        "slug": "2011-bugaeva-internet-applications-endangered-languages",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Internet applications for endangered languages: a talking dictionary of Ainu"
     },
     {
-      "n": 19,
+      "n": 20,
       "authors": [
         "Kylie Martin"
       ],
@@ -348,14 +369,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-kylie-martin-aynu-itak-on-the-road-to-ainu-language-revitalizat",
+        "slug": "2011-martin-aynu-itak-road-ainu-language",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Aynu itak : on the road to Ainu language revitalization"
     },
     {
-      "n": 20,
+      "n": 21,
       "authors": [
         "Bugaeva Anna"
       ],
@@ -368,12 +389,12 @@
       "match": {
         "slug": "2012-bugaeva-anna-southern-hokkaido-ainu",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Southern Hokkaido Ainu"
     },
     {
-      "n": 21,
+      "n": 22,
       "authors": [
         "Michał Ptaszyński, Yoshio Momouchi"
       ],
@@ -384,14 +405,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2012-micha-ptaszynski-post-al-part-of-speech-t-agger-for-ainu-language",
+        "slug": "2012-micha-post-al-part-of-speech-t-agger-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "POST-AL: Part-of-Speech T agger for Ainu Language"
     },
     {
-      "n": 22,
+      "n": 23,
       "authors": [
         "Ptaszynski Michal & Momouchi Yoshio"
       ],
@@ -402,14 +423,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2012-ptaszynski-michal-momouchi-yoshio-part-of-speech-tagger-for-ainu-language-based-on-higher-order-hidden-markov-model",
+        "slug": "2012-yoshio-part-of-speech-tagger-ainu-language-based",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model"
     },
     {
-      "n": 23,
+      "n": 24,
       "authors": [
         "Michał Ptaszyński, Mukaichi Kazuki, Yoshio Momouchi"
       ],
@@ -420,14 +441,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-micha-ptaszynski-nlp-for-endangered-languages-morphology-analysis-t",
+        "slug": "2013-micha-nlp-endangered-languages-morphology-analysis",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "NLP for Endangered Languages: Morphology Analysis, Translation Support and Shallow Parsing of Ainu Language"
     },
     {
-      "n": 24,
+      "n": 25,
       "authors": [
         "Katsunobu Izutsu"
       ],
@@ -438,14 +459,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-katsunobu-izutsu-ainu-languages-correct-good-and-less-so",
+        "slug": "2016-izutsu-ainu-languages-correct-good-less",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Ainu Languages: Correct, Good, and Less So"
     },
     {
-      "n": 25,
+      "n": 26,
       "authors": [
         "Nakagawa, Hiroshi, Bugaeva, Anna, Kobayashi, Miki"
       ],
@@ -456,14 +477,14 @@
       "type": "corpus-text",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-nakagawa-hiroshi-a-glossed-audio-corpus-of-ainu-folklore",
+        "slug": "2016-nakagawa-glossed-audio-corpus-ainu-folklore",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "A Glossed Audio Corpus of Ainu Folklore"
     },
     {
-      "n": 26,
+      "n": 27,
       "authors": [
         "PTASZYNSKI Michal, NOWAKOWSKI Karol, MOMOUCHI Yoshio, MASUI Fumito"
       ],
@@ -474,14 +495,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-ptaszynski-michal-comparing-multiple-dictionaries-to-improve-part-of",
+        "slug": "2016-ptaszynski-comparing-multiple-dictionaries-improve-part",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language"
     },
     {
-      "n": 27,
+      "n": 28,
       "authors": [
         "Senuma Hajime & Aizawa Akiko"
       ],
@@ -492,14 +513,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2017-senuma-hajime-aizawa-akiko-toward-universal-dependencies-for-ainu",
+        "slug": "2017-akiko-toward-universal-dependencies-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Toward Universal Dependencies for Ainu"
     },
     {
-      "n": 28,
+      "n": 29,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -511,13 +532,13 @@
       "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "Ainu Grammar"
     },
     {
-      "n": 29,
+      "n": 30,
       "authors": [
         "Bugaeva, Anna"
       ],
@@ -528,14 +549,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-bugaeva-anna-ainu-complex-predicates-with-reference-to-japanese",
+        "slug": "2018-bugaeva-ainu-complex-predicates-reference-japanese",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Ainu complex predicates with reference to Japanese"
     },
     {
-      "n": 30,
+      "n": 31,
       "authors": [
         "Nowakowski Karol"
       ],
@@ -546,14 +567,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-nowakowski-karol-a-proposal-for-a-unified-corpus-of-the-ainu-language",
+        "slug": "2018-karol-proposal-unified-corpus-ainu-language",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "A proposal for a unified corpus of the Ainu language"
     },
     {
-      "n": 31,
+      "n": 32,
       "authors": [
         "Senuma Hajime & Aizawa Akiko"
       ],
@@ -564,14 +585,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-senuma-hajime-aizawa-akiko-universal-dependencies-for-ainu",
+        "slug": "2018-akiko-universal-dependencies-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Universal Dependencies for Ainu"
     },
     {
-      "n": 32,
+      "n": 33,
       "authors": [
         "Karol Nowakowski, Michał Ptaszyński, Fumito Masui"
       ],
@@ -582,14 +603,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2019-karol-nowakowski-mingmatch-a-fast-n-gram-model-for-word-segmentatio",
+        "slug": "2019-karol-mingmatch-fast-n-gram-model-word",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language"
     },
     {
-      "n": 33,
+      "n": 34,
       "authors": [
         "Karol Nowakowski, Michał Ptaszyński, Fumito Masui, Yoshio Momouchi"
       ],
@@ -600,14 +621,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2019-karol-nowakowski-improving-basic-natural-language-processing-tools",
+        "slug": "2019-karol-improving-basic-natural-language-processing",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Improving Basic Natural Language Processing Tools for the Ainu Language"
     },
     {
-      "n": 34,
+      "n": 35,
       "authors": [
         "Nowakowski Karol"
       ],
@@ -618,14 +639,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2019-nowakowski-karol-applying-support-vector-machines-to-pos-tagging-of-the-ainu-language",
+        "slug": "2019-karol-applying-support-vector-machines-pos",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Applying Support Vector Machines to POS tagging of the Ainu Language"
     },
     {
-      "n": 35,
+      "n": 36,
       "authors": [
         "Karol Nowakowski, Michał Ptaszyński, Fumito Masui"
       ],
@@ -636,14 +657,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-karol-nowakowski-towards-better-text-processing-tools-for-the-ainu",
+        "slug": "2020-karol-towards-better-text-processing-tools",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Towards Better Text Processing Tools for the Ainu Language"
     },
     {
-      "n": 36,
+      "n": 37,
       "authors": [
         "Matsuura Kohei et al"
       ],
@@ -654,14 +675,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-matsuura-kohei-et-al-speech-corpus-of-ainu-folklore-and-end-to-end-speech-recognition-for-ainu-language",
+        "slug": "2020-al-speech-corpus-ainu-folklore-end-to-end",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language"
     },
     {
-      "n": 37,
+      "n": 38,
       "authors": [
         "National Cancer Institute"
       ],
@@ -674,12 +695,12 @@
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "probable",
-        "note": "Title match; corroborated by author"
+        "note": "Title match; corroborated by year"
       },
       "matchedTitle": "Ainu Language"
     },
     {
-      "n": 38,
+      "n": 39,
       "authors": [
         "Anna Bugaeva"
       ],

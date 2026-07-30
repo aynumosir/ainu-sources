@@ -3,38 +3,21 @@
   "verified": false,
   "citingWork": {
     "slug": "2012-yoshio-part-of-speech-tagger-ainu-language-based",
-    "title": "Ptaszynski Michal & Momouchi Yoshio Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model",
+    "title": "Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model",
+    "author": "Ptaszynski Michal & Momouchi Yoshio",
     "year": 2012,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
     "referenceHeading": "References",
     "referencePages": "scan pp. 7-7",
-    "referenceCount": 20,
+    "referenceCount": 14,
     "sourcePath": "articles/2012_Ptaszynski Michal & Momouchi Yoshio_Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model.pdf"
   },
   "references": [
     {
       "n": 1,
-      "authors": [
-        "John C. Batchelor"
-      ],
-      "year": 1903,
-      "yearText": "1903",
-      "title": "A grammar of the Ainu language",
-      "titleEn": "A grammar of the Ainu language",
-      "type": "grammar",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1903-john-c-batchelor-a-grammar-of-the-ainu-language",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "A grammar of the Ainu language"
-    },
-    {
-      "n": 2,
       "authors": [
         "Batchelor, John"
       ],
@@ -52,25 +35,7 @@
       "matchedTitle": "An Ainu-English-Japanese Dictionary (including A Grammar of the Ainu Language)"
     },
     {
-      "n": 3,
-      "authors": [
-        "John C. Batchelor"
-      ],
-      "year": 1905,
-      "yearText": "1905",
-      "title": "An Ainu-English-Japanese Dictionary",
-      "titleEn": "An Ainu-English-Japanese Dictionary",
-      "type": "dictionary",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "An Ainu-English-Japanese Dictionary"
-    },
-    {
-      "n": 4,
+      "n": 2,
       "authors": [
         "Kindaichi"
       ],
@@ -82,13 +47,13 @@
       "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "An Outline of Ainu Grammar"
     },
     {
-      "n": 5,
+      "n": 3,
       "authors": [
         "Mashiho Chiri"
       ],
@@ -101,48 +66,12 @@
       "match": {
         "slug": "1953-mashiho-chiri-bunrui-ainugo-jiten",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Bunrui Ainugo jiten"
     },
     {
-      "n": 6,
-      "authors": [
-        "Kyōko Murasaki"
-      ],
-      "year": 1976,
-      "yearText": "1976",
-      "title": "Karafuto Ainugo",
-      "titleEn": "Karafuto Ainugo",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1976-kyoko-murasaki-karafuto-ainugo",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "Karafuto Ainugo"
-    },
-    {
-      "n": 7,
-      "authors": [
-        "by Kyoko Murasaki"
-      ],
-      "year": 1978,
-      "yearText": "1978",
-      "title": "Sakhalin Ainu",
-      "titleEn": "Sakhalin Ainu",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "Sakhalin Ainu"
-    },
-    {
-      "n": 8,
+      "n": 4,
       "authors": [
         "Murasaki, Kyōko"
       ],
@@ -153,14 +82,32 @@
       "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1979-murasaki-kyoko-karafuto-ainugo-bunpo-hen-sakhalin-ainu-grammar-vo",
+        "slug": "1979-murasaki-karafuto-ainugo-bunpo-hen-sakhalin-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)"
     },
     {
-      "n": 9,
+      "n": 5,
+      "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 6,
       "authors": [
         "Kirsten Refsing"
       ],
@@ -171,14 +118,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
-      "n": 10,
+      "n": 7,
       "authors": [
         "相圭 朴"
       ],
@@ -189,14 +136,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE"
     },
     {
-      "n": 11,
+      "n": 8,
       "authors": [
         "Kayano, Shigeru."
       ],
@@ -214,25 +161,7 @@
       "matchedTitle": "Kayano Shigeru no Ainugo jiten"
     },
     {
-      "n": 12,
-      "authors": [
-        "Suzuko Tamura"
-      ],
-      "year": 1996,
-      "yearText": "1996",
-      "title": "Ainugo jiten",
-      "titleEn": "Ainugo jiten",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1996-suzuko-tamura-ainugo-jiten",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainugo jiten"
-    },
-    {
-      "n": 13,
+      "n": 9,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -244,13 +173,13 @@
       "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 14,
+      "n": 10,
       "authors": [
         "Hiroshi Echizen‐ya, Kenji Araki, Yoshio Momouchi, Koji Tochinai"
       ],
@@ -261,32 +190,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-hiroshi-echizen-ya-acquisition-of-word-translations-using-local-focus",
+        "slug": "2004-hiroshi-acquisition-word-translations-using-local",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Acquisition of Word Translations Using Local Focus-Based Learning in Ainu-Japanese Parallel Corpora"
     },
     {
-      "n": 15,
-      "authors": [
-        "Tomomi Satō"
-      ],
-      "year": 2006,
-      "yearText": "2006",
-      "title": "The Study of the Ainu Language",
-      "titleEn": "The Study of the Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Study of the Ainu Language"
-    },
-    {
-      "n": 16,
+      "n": 11,
       "authors": [
         "Tomomi Satō"
       ],
@@ -304,7 +215,7 @@
       "matchedTitle": "Ainugo bunpō no kiso"
     },
     {
-      "n": 17,
+      "n": 12,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -315,14 +226,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-anna-bugaeva-internet-applications-for-endangered-languages-a-t",
+        "slug": "2011-bugaeva-internet-applications-endangered-languages",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Internet applications for endangered languages: a talking dictionary of Ainu"
     },
     {
-      "n": 18,
+      "n": 13,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -340,40 +251,22 @@
       "matchedTitle": "Ainu Grammar"
     },
     {
-      "n": 19,
+      "n": 14,
       "authors": [
-        "John Batchelor"
+        "John C. Batchelor"
       ],
       "year": 2018,
       "yearText": "2018",
-      "title": "Ainu-English-Japanese Dictionary (including a Grammar of the Ainu Language)",
-      "titleEn": "Ainu-English-Japanese Dictionary (including a Grammar of the Ainu Language)",
+      "title": "An Ainu-English-Japanese Dictionary : Including a Grammar of the Ainu Language",
+      "titleEn": "An Ainu-English-Japanese Dictionary : Including a Grammar of the Ainu Language",
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-john-batchelor-ainu-english-japanese-dictionary-including-a-gramm",
+        "slug": "an-ainu-english-japanese-dictionary-including-a-grammar-of",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
-      "matchedTitle": "Ainu-English-Japanese Dictionary (including a Grammar of the Ainu Language)"
-    },
-    {
-      "n": 20,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "Ainu Language"
+      "matchedTitle": "An Ainu-English-Japanese Dictionary : Including a Grammar of the Ainu Language"
     }
   ]
 }

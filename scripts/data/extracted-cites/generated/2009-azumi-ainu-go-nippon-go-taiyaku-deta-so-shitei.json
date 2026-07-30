@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2009-azumi-ainu-go-nippon-go-taiyaku-deta-so-shitei",
-    "title": "安曇恭徳・桃内佳雄 階層的なアイヌ語・日本語対訳データの構成と層指定解析ツールの開発",
+    "title": "階層的なアイヌ語・日本語対訳データの構成と層指定解析ツールの開発",
+    "author": "安曇恭徳・桃内佳雄",
     "year": 2009,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -61,7 +62,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-1fejzao",
+        "slug": "1997-nakagawa-ekusupuresu-ainu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -76,7 +77,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2002-x-7fwxoa",
+        "slug": "2002-anon-ainu-go-nippon-go-kikai-hon-yaku",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },

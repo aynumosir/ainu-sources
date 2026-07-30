@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2021-sato-ainu-gogaku-shomondai",
-    "title": "佐藤知己 アイヌ語学の諸問題：近年の議論と関連して",
+    "title": "アイヌ語学の諸問題：近年の議論と関連して",
+    "author": "佐藤知己",
     "year": 2021,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 9,
+    "referenceCount": 10,
     "sourcePath": "articles/2021_佐藤知己_アイヌ語学の諸問題：近年の議論と関連して.pdf"
   },
   "references": [
@@ -25,7 +26,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -42,7 +43,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1991-x-1r7gism",
+        "slug": "1991-sato-chitose-hogen-jisho-shi-taisho-shi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -59,7 +60,7 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "1999-x-1h7k5eb",
+        "slug": "1999-okuda-shizunai-hogen-bunmyakutsuki-goishu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -68,15 +69,15 @@
     {
       "n": 4,
       "authors": [
-        "Bugaeva, Anna"
+        "Bugaeva, Anna, 長崎, 郁"
       ],
       "year": 2015,
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
-      "type": "book",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-bugaeva-anna-b8h16x",
+        "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -93,7 +94,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-y90taa",
+        "slug": "2015-okuda-ainu-go-ninsho-hyoji-mokuteki-kaku",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -110,7 +111,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2019-x-kl5jf2",
+        "slug": "2019-kishimoto-ainu-go-fukuzatsu-jutsugo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -127,7 +128,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-x-utara",
+        "slug": "2020-sakaguchi-karafuto-hogen-utara-yoho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -144,7 +145,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-x-or",
+        "slug": "2021-sato-chitose-hogen-ichi-meishi-or",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -160,11 +161,26 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "nd-x-3xp818",
+        "slug": "sato-kokiroku-ainu-goshi",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "古記録の言語学的分析に基づくアイヌ語史の検証"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
     }
   ]
 }

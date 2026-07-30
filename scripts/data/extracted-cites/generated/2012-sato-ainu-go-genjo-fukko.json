@@ -1,0 +1,155 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2012-sato-ainu-go-genjo-fukko",
+    "title": "アイヌ語の現状と復興",
+    "author": "佐藤知己",
+    "year": 2012,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参    照     文    献",
+    "referenceCount": 8,
+    "sourcePath": "articles/2012_佐藤知己_アイヌ語の現状と復興.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "北海道立アイヌ民族文化研究センター"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "アイヌ語千歳方言の再帰接頭辞yay-とsi-について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-sato-chitose-hogen-yay-si",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言の再帰接頭辞yay-とsi-について"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "アイヌ語千歳方言における合成名詞の構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-sato-chitose-hogen-gosei-meishi-kozo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における合成名詞の構造"
+    },
+    {
+      "n": 5,
+      "authors": [],
+      "year": 2009,
+      "yearText": "2009",
+      "title": "アイヌの人々とアイヌ語の今",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2009-anon-ainu-hitobito-ainu-go",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌの人々とアイヌ語の今"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "小内, 透, 北海道大学アイヌ・先住民研究センター, 山崎, 幸治, 野崎, 剛毅, 中村, 康利, 品川, ひろみ, 小野寺, 理佳(社会学), 櫻井, 義秀, 常本, 照樹"
+      ],
+      "year": 2010,
+      "yearText": "2010",
+      "title": "現代アイヌの生活と意識",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2010-ainu-gendai-ainu-seikatsu-ishiki",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "現代アイヌの生活と意識"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "アイヌ語千歳方言における名詞抱合 : その種類と関連諸規則",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-sato-chitose-hogen-meishi-hogo-shurui-kanren",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における名詞抱合 : その種類と関連諸規則"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "National Cancer Institute"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "Ainu Language",
+      "titleEn": "Ainu Language",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-national-cancer-institute-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Language"
+    }
+  ]
+}

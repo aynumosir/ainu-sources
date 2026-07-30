@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2020-elia-interaction-relativization-noun",
-    "title": "Dal Corso Elia The Interaction of Relativization and Noun Incorporation in Southern Hokkaidō Ainu",
+    "title": "The Interaction of Relativization and Noun Incorporation in Southern Hokkaidō Ainu",
+    "author": "Dal Corso Elia",
     "year": 2020,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -44,9 +45,9 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1974-asai-toru-classification-of-dialects-cluster-analysis-of-ain",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "Classification of dialects: cluster analysis of Ainu dialects"
     },
@@ -70,24 +71,6 @@
     },
     {
       "n": 4,
-      "authors": [
-        "by Kyoko Murasaki"
-      ],
-      "year": 1978,
-      "yearText": "1978",
-      "title": "Sakhalin Ainu",
-      "titleEn": "Sakhalin Ainu",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Sakhalin Ainu"
-    },
-    {
-      "n": 5,
       "authors": [],
       "year": 1984,
       "yearText": "1984",
@@ -96,14 +79,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-x-ainugo-onsei-shiryo",
+        "slug": "1984-anon-ainugo-onsei-shiryo",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "Ainugo onsei shiryō"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -113,11 +96,29 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1985-tamura-suzuko-1vdmp8l",
+        "slug": "1985-tamura-wa-teke-mukashibanashi-saru-hogen",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "ワテケさんの昔話 ： 沙流方言"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "ワテケさんの昔話 ： 沙流方言"
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
       "n": 7,
@@ -131,7 +132,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -168,8 +169,8 @@
       "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "The Ainu Language"
     },
@@ -182,10 +183,10 @@
       "yearText": "2004",
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
-      "type": "book",
+      "type": "thesis",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -203,7 +204,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-anna-bugaeva-a-diachronic-study-of-the-impersonal-passive-in-ai",
+        "slug": "2011-bugaeva-diachronic-study-impersonal-passive-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -220,26 +221,26 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-x-13",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "slug": "2013-nakagawa-shirasawa-nabe-uepekere-chisekorokamui",
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集13 白沢ナベ口述 ウエペケレ チセコロカムイの怒り"
     },
     {
       "n": 13,
       "authors": [
-        "Bugaeva, Anna"
+        "Bugaeva, Anna, 長崎, 郁"
       ],
       "year": 2015,
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
-      "type": "book",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-bugaeva-anna-b8h16x",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "アイヌ語研究の諸問題"
     },
@@ -255,7 +256,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-relative-clauses-and-noun-complements-in-ainu",
+        "slug": "2015-bugaewa-relative-clauses-noun-complements-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -263,24 +264,6 @@
     },
     {
       "n": 15,
-      "authors": [
-        "Bugaeva Anna"
-      ],
-      "year": 2016,
-      "yearText": "2016",
-      "title": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
-      "titleEn": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2016-bugaeva-anna-on-the-innovative-nature-of-sakhalin-ainu-focusing-on-nominalization",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization"
-    },
-    {
-      "n": 16,
       "authors": [
         "Bugaeva, Anna"
       ],
@@ -291,14 +274,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-bugaeva-anna-on-the-innovative-nature-of-sakhalin-ainu-focusing",
+        "slug": "2016-bugaeva-innovative-nature-sakhalin-ainu-focusing",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations"
     },
     {
-      "n": 17,
+      "n": 16,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -316,7 +299,7 @@
       "matchedTitle": "Ainu Grammar"
     },
     {
-      "n": 18,
+      "n": 17,
       "authors": [
         "Dal Corso Elia"
       ],
@@ -327,32 +310,32 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-dal-corso-elia-ainu-evidentiality-a-semantico-pragmatic-analysis-and-a-morphosyntactic-account",
+        "slug": "2018-elia-ainu-evidentiality-semantico-pragmatic",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Ainu Evidentiality: A semantico-pragmatic analysis and a morphosyntactic account"
     },
     {
-      "n": 19,
+      "n": 18,
       "authors": [
-        "Dal Corso Elia"
+        "Elia Dal Corso"
       ],
       "year": 2020,
       "yearText": "2020",
       "title": "The Interaction of Relativization and Noun Incorporation in Southern Hokkaidō Ainu",
       "titleEn": "The Interaction of Relativization and Noun Incorporation in Southern Hokkaidō Ainu",
-      "type": "article",
+      "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-dal-corso-elia-the-interaction-of-relativization-and-noun-incorporation-in-southern-hokkaido-ainu",
+        "slug": "the-interaction-of-relativization-and-noun-incorporation-in",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Interaction of Relativization and Noun Incorporation in Southern Hokkaidō Ainu"
     },
     {
-      "n": 20,
+      "n": 19,
       "authors": [
         "National Cancer Institute"
       ],
@@ -368,6 +351,20 @@
         "note": "Title match"
       },
       "matchedTitle": "Ainu Language"
+    },
+    {
+      "n": 20,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
     }
   ]
 }

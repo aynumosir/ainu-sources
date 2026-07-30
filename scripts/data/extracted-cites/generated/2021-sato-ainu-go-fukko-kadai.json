@@ -1,0 +1,105 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2021-sato-ainu-go-fukko-kadai",
+    "title": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題",
+    "author": "佐藤知己",
+    "year": 2021,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "【参考文献】",
+    "referenceCount": 5,
+    "sourcePath": "articles/2021_佐藤知己_国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "切替英雄"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "アイヌ語の名詞句の構造と合成名詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-kirikae-ainu-go-meishi-ku-kozo-gosei-meishi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の名詞句の構造と合成名詞"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-niokeruainu-no-mini-suru-na-to-no",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "佐藤, 知己"
+      ],
+      "yearText": "",
+      "title": "アイヌ語の復興とアイヌ語研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "sato-ainu-go-no-fukko-ainu-go-kenkyu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語の復興とアイヌ語研究"
+    }
+  ]
+}

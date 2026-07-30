@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2021-sakaguchi-aino-minwa-pananpe-penanpe",
-    "title": "阪口諒 チェンバレン『アイノ民話』中のパナンペ・ペナンペ譚",
+    "title": "チェンバレン『アイノ民話』中のパナンペ・ペナンペ譚",
+    "author": "阪口諒",
     "year": 2021,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 27,
+    "referenceCount": 23,
     "sourcePath": "articles/2021_阪口諒_チェンバレン『アイノ民話』中のパナンペ・ペナンペ譚.pdf"
   },
   "references": [
@@ -80,7 +81,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
+        "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -97,7 +98,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1935-x-9zkih1",
+        "slug": "1935-kindaichi-chenbaren-ainu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -114,7 +115,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1948-x-14gu648",
+        "slug": "1948-kindaichi-riku-n-betsu-no-okina-ainu-mukashibanashi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -122,6 +123,24 @@
     },
     {
       "n": 7,
+      "authors": [
+        "Carl Etter"
+      ],
+      "year": 1949,
+      "yearText": "1949",
+      "title": "Ainu Folklore",
+      "titleEn": "Ainu Folklore",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1949-carl-etter-ainu-folklore",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainu Folklore"
+    },
+    {
+      "n": 8,
       "authors": [
         "James Marshall Plumer, Carl Etter"
       ],
@@ -132,31 +151,31 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1950-james-marshall-plumer-ainu-folklore-traditions-and-culture-of-the-vanish",
+        "slug": "1950-james-ainu-folklore-traditions-culture-vanishing",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Ainu Folklore. Traditions and Culture of the Vanishing Aborigines of Japan"
     },
     {
-      "n": 8,
+      "n": 9,
       "authors": [
-        "知里 真志保"
+        "知里, 真志保"
       ],
       "year": 1955,
       "yearText": "1955",
-      "title": "アイヌの散文物語．－川下の者の昔話",
+      "title": "アイヌの散文物語 : 川下の者の昔話",
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1955-x-sm8pw3",
+        "slug": "1955-chiri-sanbun-monogatari-kawashimo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌの散文物語．－川下の者の昔話"
+      "matchedTitle": "アイヌの散文物語 : 川下の者の昔話"
     },
     {
-      "n": 9,
+      "n": 10,
       "authors": [
         "杉村キナラブック他"
       ],
@@ -166,40 +185,24 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1969-x-1maduxk",
+        "slug": "1969-kinarabukku-yukarashu",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "キナラブック・ユーカラ集"
     },
     {
-      "n": 10,
-      "authors": [],
-      "year": 1977,
-      "yearText": "1977–2000",
-      "title": "アイヌ語口承文芸コーパス",
-      "titleEn": "NINJAL Ainu Folklore Corpus",
-      "type": "corpus-text",
-      "ainuRelated": true,
-      "match": {
-        "slug": "ninjal-folklore-corpus",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "アイヌ語口承文芸コーパス"
-    },
-    {
       "n": 11,
       "authors": [
-        "佐々木, 利和"
+        "佐々木, 利和, 山田, 秀三"
       ],
       "year": 1988,
       "yearText": "1988",
       "title": "アイヌ語地名資料集成",
-      "type": "book",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1988-x-wmrnas",
+        "slug": "1988-suke-ainu-go-chimei-shiryo-shusei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -208,40 +211,22 @@
     {
       "n": 12,
       "authors": [
-        "白沢 ナベ"
-      ],
-      "year": 1988,
-      "yearText": "1988–1991",
-      "title": "アイヌ口承文芸テキスト集",
-      "titleEn": "Ainu Oral Literature Text Collection",
-      "type": "corpus-text",
-      "ainuRelated": true,
-      "match": {
-        "slug": "ainu-oral-literature-texts",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "アイヌ口承文芸テキスト集"
-    },
-    {
-      "n": 13,
-      "authors": [
         "山田, 秀三"
       ],
       "year": 1993,
       "yearText": "1993",
       "title": "東北・アイヌ語地名の研究",
-      "type": "book",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-1dye2lf",
+        "slug": "1993-yamada-tohoku-ainu-go-chimei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "東北・アイヌ語地名の研究"
     },
     {
-      "n": 14,
+      "n": 13,
       "authors": [
         "相圭 朴"
       ],
@@ -252,14 +237,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE"
     },
     {
-      "n": 15,
+      "n": 14,
       "authors": [],
       "year": 1998,
       "yearText": "1998",
@@ -268,14 +253,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-ainu-folk-lore",
+        "slug": "ainu-folk-lore",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Ainu folk-lore"
     },
     {
-      "n": 16,
+      "n": 15,
       "authors": [
         "釧路アイヌ文化懇話会[編]"
       ],
@@ -285,50 +270,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-nf5skr",
+        "slug": "1998-ainu-ainu-moshiri-maboroshi-ainu-goshi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ・モシリ : 幻のアイヌ語誌復刊"
     },
     {
-      "n": 17,
-      "authors": [
-        "Suzuko Tamura"
-      ],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "The Ainu Language",
-      "titleEn": "The Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Ainu Language"
-    },
-    {
-      "n": 18,
-      "authors": [
-        "Tomomi Satō"
-      ],
-      "year": 2006,
-      "yearText": "2006",
-      "title": "The Study of the Ainu Language",
-      "titleEn": "The Study of the Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Study of the Ainu Language"
-    },
-    {
-      "n": 19,
+      "n": 16,
       "authors": [
         "John Batchelor"
       ],
@@ -346,7 +295,7 @@
       "matchedTitle": "Specimens of Ainu Folklore"
     },
     {
-      "n": 20,
+      "n": 17,
       "authors": [
         "田村雅史"
       ],
@@ -356,14 +305,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2009-x-sri1oi",
+        "slug": "2009-tamura-yon-taku-yae-suzume",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "四宅ヤエさんの口承文芸テキスト おへそから出たスズメのしっぽ"
     },
     {
-      "n": 21,
+      "n": 18,
       "authors": [
         "中川裕"
       ],
@@ -373,14 +322,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2010-x-10",
+        "slug": "2010-nakagawa-shirasawa-nabe-penanpe-kane-no-koinu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集10 白沢ナベ口述 ペナンペ金の子犬を授かる"
     },
     {
-      "n": 22,
+      "n": 19,
       "authors": [
         "大谷洋一"
       ],
@@ -390,14 +339,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-x-izc670",
+        "slug": "2011-oya-mamahaha-korosare-kaketa-ane-sukutta-imoto",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "和人の散文説話：継母から殺されかけた姉を救った妹"
     },
     {
-      "n": 23,
+      "n": 20,
       "authors": [
         "中川裕, アンナ・ブガエワ, 小林美紀"
       ],
@@ -407,32 +356,14 @@
       "type": "corpus-text",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-1551bwg",
+        "slug": "2016-anna-ainu-go-kosho-bungei-kopasu-onsei",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語口承文芸コーパス―音声・グロス付き―"
     },
     {
-      "n": 24,
-      "authors": [
-        "John Batchelor"
-      ],
-      "year": 2018,
-      "yearText": "2018",
-      "title": "The Ainu and Their Folk-lor",
-      "titleEn": "The Ainu and Their Folk-lor",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2018-john-batchelor-the-ainu-and-their-folk-lor",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "The Ainu and Their Folk-lor"
-    },
-    {
-      "n": 25,
+      "n": 21,
       "authors": [
         "Edward Taylor, Basil Hall Chamberlain"
       ],
@@ -450,25 +381,7 @@
       "matchedTitle": "Ainu Folk Tales"
     },
     {
-      "n": 26,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 27,
+      "n": 22,
       "authors": [
         "小谷 凱宣, 佐々木 利和, 西元 豊弘, 石田 肇, 岡田 宏明, 大林 太良"
       ],
@@ -477,11 +390,25 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "nd-x-1fs1mbt",
+        "slug": "otani-ainu-bunka-keisei-hen-yo",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ文化の形成と変容"
+    },
+    {
+      "n": 23,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
     }
   ]
 }

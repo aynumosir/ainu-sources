@@ -3,36 +3,20 @@
   "verified": false,
   "citingWork": {
     "slug": "2016-takahashi-tokachi-hogen-hitei-kozo",
-    "title": "高橋靖以 アイヌ語十勝方言の否定構造について",
+    "title": "アイヌ語十勝方言の否定構造について",
+    "author": "高橋靖以",
     "year": 2016,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参照文献",
-    "referenceCount": 4,
+    "referenceCount": 3,
     "sourcePath": "articles/2016_高橋靖以_アイヌ語十勝方言の否定構造について.pdf"
   },
   "references": [
     {
       "n": 1,
-      "authors": [
-        "田村 すゞ子"
-      ],
-      "year": 1972,
-      "yearText": "1972",
-      "title": "アイヌ語沙流方言における《…して…》",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1972-x-13w5bm1",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語沙流方言における《…して…》"
-    },
-    {
-      "n": 2,
       "authors": [
         "田村 すず子"
       ],
@@ -42,14 +26,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1972-x-9zmxzm",
+        "slug": "1972-tamura-saru-hogen-2",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語沙流方言における《…して…》の表現"
     },
     {
-      "n": 3,
+      "n": 2,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -67,9 +51,9 @@
       "matchedTitle": "アイヌ語沙流方言辞典"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
-        "高橋靖以"
+        "高橋, 靖以"
       ],
       "year": 2016,
       "yearText": "2016",
@@ -77,7 +61,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-1ahzs2r",
+        "slug": "ainu-no-nitsuite",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },

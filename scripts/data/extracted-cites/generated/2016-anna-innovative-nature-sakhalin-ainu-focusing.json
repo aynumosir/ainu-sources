@@ -3,37 +3,20 @@
   "verified": false,
   "citingWork": {
     "slug": "2016-anna-innovative-nature-sakhalin-ainu-focusing",
-    "title": "Bugaeva Anna On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
+    "title": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
+    "author": "Bugaeva Anna",
     "year": 2016,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "REFERENCES",
-    "referenceCount": 18,
+    "referenceCount": 17,
     "sourcePath": "articles/2016_Bugaeva Anna_On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization.pdf"
   },
   "references": [
     {
       "n": 1,
-      "authors": [
-        "Kanazawa, Shozaburo"
-      ],
-      "year": 1898,
-      "yearText": "1898",
-      "title": "トピック別 アイヌ語会話辞典",
-      "titleEn": "Topical Dictionary of Conversational Ainu",
-      "type": "topical-dictionary",
-      "ainuRelated": true,
-      "match": {
-        "slug": "1898-kanazawa-ninjal-topical-ainu-conversation-dictionary",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Topical Dictionary of Conversational Ainu"
-    },
-    {
-      "n": 2,
       "authors": [
         "Kyōko Murasaki"
       ],
@@ -51,7 +34,7 @@
       "matchedTitle": "Karafuto Ainugo"
     },
     {
-      "n": 3,
+      "n": 2,
       "authors": [
         "by Kyoko Murasaki"
       ],
@@ -69,7 +52,7 @@
       "matchedTitle": "Sakhalin Ainu"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "Murasaki, Kyōko"
       ],
@@ -80,14 +63,14 @@
       "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1979-murasaki-kyoko-karafuto-ainugo-bunpo-hen-sakhalin-ainu-grammar-vo",
+        "slug": "1979-murasaki-karafuto-ainugo-bunpo-hen-sakhalin-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "Waseda Daigaku. Gogaku Kyōiku Kenkyūjo"
       ],
@@ -98,14 +81,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-waseda-daigaku-gogaku-kyoiku-kenkyujo-ainugo-nyumon",
+        "slug": "1984-kenkyujo-ainugo-nyumon",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Ainugo nyūmon"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -123,7 +106,7 @@
       "matchedTitle": "Ainugo (The Ainu language)"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
         "Tatsumine Katayama"
       ],
@@ -141,23 +124,7 @@
       "matchedTitle": "Nihongo to Ainugo"
     },
     {
-      "n": 8,
-      "authors": [],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "Ainu: spirit of a northern people",
-      "titleEn": "Ainu: spirit of a northern people",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2000-x-ainu-spirit-of-a-northern-people",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu: spirit of a northern people"
-    },
-    {
-      "n": 9,
+      "n": 7,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -175,7 +142,25 @@
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 10,
+      "n": 8,
+      "authors": [
+        "Katarina Sjoberg, William W. Fitzhugh, Chisato O. Dubreuil"
+      ],
+      "year": 2001,
+      "yearText": "2001",
+      "title": "Ainu: Spirit of a Northern People",
+      "titleEn": "Ainu: Spirit of a Northern People",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2001-katarina-sjoberg-ainu-spirit-of-a-northern-people",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Ainu: Spirit of a Northern People"
+    },
+    {
+      "n": 9,
       "authors": [
         "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
       ],
@@ -183,17 +168,17 @@
       "yearText": "2004",
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
-      "type": "book",
+      "type": "thesis",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
     },
     {
-      "n": 11,
+      "n": 10,
       "authors": [],
       "year": 2006,
       "yearText": "2006",
@@ -202,14 +187,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-japanese-and-ainu",
+        "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Japanese and Ainu"
     },
     {
-      "n": 12,
+      "n": 11,
       "authors": [
         "Tomomi Satō"
       ],
@@ -227,7 +212,7 @@
       "matchedTitle": "Ainugo bunpō no kiso"
     },
     {
-      "n": 13,
+      "n": 12,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -245,7 +230,7 @@
       "matchedTitle": "Mermaid construction in Ainu"
     },
     {
-      "n": 14,
+      "n": 13,
       "authors": [
         "Kyōko Murasaki"
       ],
@@ -263,7 +248,7 @@
       "matchedTitle": "Karafuto Ainugo reibunshū"
     },
     {
-      "n": 15,
+      "n": 14,
       "authors": [
         "BUGAEVA Anna, Endo, Shiho, Akasegawa, Shiro"
       ],
@@ -274,14 +259,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-bugaeva-anna-a-topical-dictionary-of-conversational-ainu-englis",
+        "slug": "2015-bugaeva-topical-dictionary-conversational-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "A topical dictionary of conversational Ainu (English HP)"
     },
     {
-      "n": 16,
+      "n": 15,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -299,7 +284,7 @@
       "matchedTitle": "Ainu Grammar"
     },
     {
-      "n": 17,
+      "n": 16,
       "authors": [
         "National Cancer Institute"
       ],
@@ -317,7 +302,7 @@
       "matchedTitle": "Ainu Language"
     },
     {
-      "n": 18,
+      "n": 17,
       "authors": [
         "Anna Bugaeva"
       ],

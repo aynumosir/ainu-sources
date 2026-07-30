@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2021-deokhyun-some-evidence-origin-ainu-antipassive",
-    "title": "Nam Deokhyun Some evidence for the origin of the Ainu antipassive prefix i-",
+    "title": "Some evidence for the origin of the Ainu antipassive prefix i-",
+    "author": "Nam Deokhyun",
     "year": 2021,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -35,6 +36,23 @@
     {
       "n": 2,
       "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語入門 : とくに地名研究者のために",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-chiri-ainu-go-nyumon-chimei-kenkyu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語入門 : とくに地名研究者のために"
+    },
+    {
+      "n": 3,
+      "authors": [
         "平賀 サダ"
       ],
       "year": 1958,
@@ -51,7 +69,7 @@
       "matchedTitle": "Ainu Audio Materials"
     },
     {
-      "n": 3,
+      "n": 4,
       "authors": [
         "Hokkaido, Japan. Ainu Bunka Hozon Taisaku Kyōgikai"
       ],
@@ -62,14 +80,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1970-hokkaido-japan-ainu-bunka-hozon-taisaku-kyogikai-ainu-minzoku-shi",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
+        "slug": "1970-hokkaido-ainu-minzoku-shi",
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "Ainu minzoku shi"
     },
     {
-      "n": 4,
+      "n": 5,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -80,14 +98,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1971-suzuko-tamura-personal-pronouns-in-the-saru-dialect-of-ainu",
+        "slug": "1971-tamura-personal-pronouns-saru-dialect-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Personal Pronouns in the Saru Dialect of Ainu"
     },
     {
-      "n": 5,
+      "n": 6,
       "authors": [
         "田村すゞ子"
       ],
@@ -97,14 +115,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1971-x-zprizq",
+        "slug": "1971-tamura-saru-hogen-ninsho-dai-meishi",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語沙流方言の人称代名詞"
     },
     {
-      "n": 6,
+      "n": 7,
       "authors": [
         "Kyōko Murasaki"
       ],
@@ -122,7 +140,7 @@
       "matchedTitle": "Karafuto Ainugo"
     },
     {
-      "n": 7,
+      "n": 8,
       "authors": [
         "by Kyoko Murasaki"
       ],
@@ -134,13 +152,13 @@
       "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
-        "confidence": "candidate",
-        "note": "Title match"
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Sakhalin Ainu"
     },
     {
-      "n": 8,
+      "n": 9,
       "authors": [
         "村崎恭子"
       ],
@@ -150,14 +168,14 @@
       "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1979-x-1ldjihx",
+        "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "カラフトアイヌ語―文法篇―"
     },
     {
-      "n": 9,
+      "n": 10,
       "authors": [
         "中川 裕"
       ],
@@ -167,14 +185,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1983-x-z9dx1g",
+        "slug": "1983-nakagawa-ainu-go-basho-hyogen-shozokukei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の場所表現と名詞の所属形"
     },
     {
-      "n": 10,
+      "n": 11,
       "authors": [],
       "year": 1984,
       "yearText": "1984",
@@ -183,14 +201,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-x-ainugo-onsei-shiryo",
+        "slug": "1984-anon-ainugo-onsei-shiryo",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Ainugo onsei shiryō"
     },
     {
-      "n": 11,
+      "n": 12,
       "authors": [
         "Waseda Daigaku. Gogaku Kyōiku Kenkyūjo"
       ],
@@ -201,14 +219,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-waseda-daigaku-gogaku-kyoiku-kenkyujo-ainugo-nyumon",
+        "slug": "1984-kenkyujo-ainugo-nyumon",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Ainugo nyūmon"
     },
     {
-      "n": 12,
+      "n": 13,
       "authors": [
         "知里, 真志保"
       ],
@@ -218,14 +236,32 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1985-x-1fccruj",
+        "slug": "ainu-tokuni-notameni",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語入門 : とくに地名研究者のために"
     },
     {
-      "n": 13,
+      "n": 14,
+      "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 15,
       "authors": [
         "Kirsten Refsing"
       ],
@@ -236,14 +272,32 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
-      "n": 14,
+      "n": 16,
+      "authors": [
+        "Shibatani"
+      ],
+      "year": 1990,
+      "yearText": "1990",
+      "title": "Shibatani（1990）",
+      "titleEn": "The Languages of Japan (Cambridge Language Surveys)",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1990-shibatani",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Languages of Japan (Cambridge Language Surveys)"
+    },
+    {
+      "n": 17,
       "authors": [],
       "year": 1997,
       "yearText": "1997",
@@ -252,32 +306,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-ainu-literature",
+        "slug": "1997-anon-ainu-literature",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Ainu Literature"
     },
     {
-      "n": 15,
-      "authors": [
-        "Honda, Katsuichi"
-      ],
-      "year": 1997,
-      "yearText": "1997",
-      "title": "Ainu minzoku",
-      "titleEn": "Ainu minzoku",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1997-honda-katsuichi-ainu-minzoku",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu minzoku"
-    },
-    {
-      "n": 16,
+      "n": 18,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -289,13 +325,13 @@
       "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 17,
+      "n": 19,
       "authors": [
         "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
       ],
@@ -303,17 +339,17 @@
       "yearText": "2004",
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
-      "type": "book",
+      "type": "thesis",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
     },
     {
-      "n": 18,
+      "n": 20,
       "authors": [
         "Tomomi Satō"
       ],
@@ -331,7 +367,7 @@
       "matchedTitle": "Ainugo bunpō no kiso"
     },
     {
-      "n": 19,
+      "n": 21,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -342,14 +378,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2010-anna-bugaeva-ainu-applicatives-in-typological-perspective",
+        "slug": "2010-bugaeva-ainu-applicatives-typological-perspective",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Ainu applicatives in typological perspective"
     },
     {
-      "n": 20,
+      "n": 22,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -360,14 +396,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-anna-bugaeva-a-diachronic-study-of-the-impersonal-passive-in-ai",
+        "slug": "2011-bugaeva-diachronic-study-impersonal-passive-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "A diachronic study of the impersonal passive in Ainu"
     },
     {
-      "n": 21,
+      "n": 23,
       "authors": [
         "Hans Dieter Ölschleger"
       ],
@@ -385,7 +421,7 @@
       "matchedTitle": "Ainu Ethnography"
     },
     {
-      "n": 22,
+      "n": 24,
       "authors": [
         "Bugaeva Anna"
       ],
@@ -403,25 +439,7 @@
       "matchedTitle": "Polysynthesis in Ainu"
     },
     {
-      "n": 23,
-      "authors": [
-        "Bugaeva Anna"
-      ],
-      "year": 2016,
-      "yearText": "2016",
-      "title": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
-      "titleEn": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2016-bugaeva-anna-on-the-innovative-nature-of-sakhalin-ainu-focusing-on-nominalization",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization"
-    },
-    {
-      "n": 24,
+      "n": 25,
       "authors": [
         "Bugaeva, Anna"
       ],
@@ -432,14 +450,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-bugaeva-anna-on-the-innovative-nature-of-sakhalin-ainu-focusing",
+        "slug": "2016-bugaeva-innovative-nature-sakhalin-ainu-focusing",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations"
     },
     {
-      "n": 25,
+      "n": 26,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -450,14 +468,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2017-anna-bugaeva-noun-modifying-clause-constructions-in-ainu",
+        "slug": "2017-bugaeva-noun-modifying-clause-constructions-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Noun-modifying clause constructions in Ainu"
     },
     {
-      "n": 26,
+      "n": 27,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -475,24 +493,6 @@
       "matchedTitle": "Ainu Grammar"
     },
     {
-      "n": 27,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
       "n": 28,
       "authors": [
         "Anna Bugaeva"
@@ -504,7 +504,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-anna-bugaeva-unspecified-participant-a-case-of-antipassive-in-a",
+        "slug": "2021-bugaeva-unspecified-participant-case-antipassive-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -513,7 +513,7 @@
     {
       "n": 29,
       "authors": [
-        "Nam Deokhyun"
+        "南 德鉉"
       ],
       "year": 2021,
       "yearText": "2021",
@@ -522,7 +522,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-nam-deokhyun-some-evidence-for-the-origin-of-the-ainu-antipassive-prefix-i",
+        "slug": "some-evidence-for-the-origin-of-the-ainu-antipassive-prefix",
         "confidence": "candidate",
         "note": "Title match"
       },

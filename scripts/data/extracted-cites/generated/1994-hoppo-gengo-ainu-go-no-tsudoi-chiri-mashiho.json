@@ -3,8 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "1994-hoppo-gengo-ainu-go-no-tsudoi-chiri-mashiho",
-    "title": "北方言語研究者協議会『アイヌ語の集い：知里真志保を継ぐ』",
-    "type": "publication"
+    "title": "アイヌ語の集い : 知里真志保を継ぐ",
+    "author": "北方言語研究者協議会",
+    "year": 1994,
+    "type": "book"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -23,7 +25,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1893-x-yezo-and-the-ainu",
+        "slug": "1893-anon-yezo-ainu",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -40,9 +42,9 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-x-m5h5ss",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "slug": "1987-kamu-ito-rano-kyokai-ainu-go-kaiwa-shokyu-hen",
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "萱野茂 アイヌ語会話 初級編"
     },
@@ -57,9 +59,9 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1990-x-1cn0pgm",
+        "slug": "1990-ito-abashiriko-memanbetsu-ainu-go-chimei",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "網走湖と女満別のアイヌ語地名"
     }

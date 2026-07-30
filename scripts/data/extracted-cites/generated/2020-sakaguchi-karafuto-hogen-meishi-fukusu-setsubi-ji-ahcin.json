@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2020-sakaguchi-karafuto-hogen-meishi-fukusu-setsubi-ji-ahcin",
-    "title": "阪口諒 アイヌ語樺太方言における名詞複数接尾辞ahcinの用法",
+    "title": "アイヌ語樺太方言における名詞複数接尾辞ahcinの用法",
+    "author": "阪口諒",
     "year": 2020,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 12,
+    "referenceCount": 9,
     "sourcePath": "articles/2020_阪口諒_アイヌ語樺太方言における名詞複数接尾辞ahcinの用法.pdf"
   },
   "references": [
@@ -25,7 +26,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1913-x-11girem",
+        "slug": "1913-kindaichi-karafuto-ainu-go-taiyo-karafuto-ainu-goi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -34,17 +35,18 @@
     {
       "n": 2,
       "authors": [
-        "知里, 真志保"
+        "Chiri"
       ],
       "year": 1942,
       "yearText": "1942",
       "title": "アイヌ語法研究 : 樺太方言を中心として",
-      "type": "article",
+      "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
+      "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1942-x-3bat8z",
+        "slug": "1942-chiri",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
     },
@@ -59,7 +61,7 @@
       "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1979-x-1ldjihx",
+        "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -77,7 +79,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -122,25 +124,7 @@
     {
       "n": 7,
       "authors": [
-        "Suzuko Tamura"
-      ],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "The Ainu Language",
-      "titleEn": "The Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Ainu Language"
-    },
-    {
-      "n": 8,
-      "authors": [
-        "北原, 次郎太, 田村, 雅史, 丹菊, 逸治, 田村, すず子, 田村, 将人, 藤山, ハル, 北風, 磯吉, 徹辺, 重次郎, 山田, ハヨ"
+        "北原, 次郎太, 田村, 雅史, 田村, 将人, 丹菊, 逸治, 田村, すず子, 藤山, ハル, 山田, ハヨ, 北風, 磯吉, 徹辺, 重次郎"
       ],
       "year": 2003,
       "yearText": "2003",
@@ -148,32 +132,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2003-x-5xlisb",
+        "slug": "2003-haru-karafuto-nayoro-kushiro-hogen-tamura-suzuko",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語樺太・名寄・釧路方言の資料 : 田村すず子採録 : 藤山ハルさん・山田ハヨさん・北風磯吉さん・徹辺重次郎さんの口頭文芸・語彙・民族誌"
     },
     {
-      "n": 9,
-      "authors": [
-        "Tomomi Satō"
-      ],
-      "year": 2006,
-      "yearText": "2006",
-      "title": "The Study of the Ainu Language",
-      "titleEn": "The Study of the Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
-      },
-      "matchedTitle": "The Study of the Ainu Language"
-    },
-    {
-      "n": 10,
+      "n": 8,
       "authors": [
         "高橋靖以"
       ],
@@ -183,46 +149,28 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-x-1rnv9ss",
+        "slug": "2013-takahashi-tokachi-hogen-shokosei-jojutsu-ruikei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語十勝方言における証拠性と叙述類型"
     },
     {
-      "n": 11,
+      "n": 9,
       "authors": [
-        "National Cancer Institute"
+        "阪口, 諒"
       ],
       "year": 2020,
       "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
+      "title": "アイヌ語樺太方言における名詞複数接尾辞 : ahcinの用法",
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 12,
-      "authors": [
-        "阪口諒"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "アイヌ語樺太方言における名詞複数接尾辞ahcinの用法",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-x-ahcin",
+        "slug": "ainu-niokeru-ahcin-no",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
-      "matchedTitle": "アイヌ語樺太方言における名詞複数接尾辞ahcinの用法"
+      "matchedTitle": "アイヌ語樺太方言における名詞複数接尾辞 : ahcinの用法"
     }
   ]
 }

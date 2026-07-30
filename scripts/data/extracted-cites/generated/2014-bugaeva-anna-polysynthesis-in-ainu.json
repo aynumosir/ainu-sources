@@ -11,7 +11,7 @@
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "References",
-    "referenceCount": 2,
+    "referenceCount": 1,
     "sourcePath": "articles/2014_Bugaeva Anna_Polysynthesis in Ainu.pdf"
   },
   "references": [
@@ -32,24 +32,6 @@
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "An Outline of Ainu Grammar"
-    },
-    {
-      "n": 2,
-      "authors": [
-        "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
-      ],
-      "year": 2018,
-      "yearText": "2018",
-      "title": "Ainu Grammar",
-      "titleEn": "Ainu Grammar",
-      "type": "grammar",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2018-basil-hall-chamberlain-ainu-grammar",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Grammar"
     }
   ]
 }

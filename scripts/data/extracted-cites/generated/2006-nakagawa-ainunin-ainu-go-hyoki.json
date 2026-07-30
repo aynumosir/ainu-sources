@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2006-nakagawa-ainunin-ainu-go-hyoki",
-    "title": "中川裕 アイヌ人によるアイヌ語表記への取り組み",
+    "title": "アイヌ人によるアイヌ語表記への取り組み",
+    "author": "中川裕",
     "year": 2006,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -43,7 +44,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1953-x-9zogj4",
+        "slug": "1953-hatsu-ainu-go-jiten-shokubutsu-hen",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -60,7 +61,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1973-x-9zp9w9",
+        "slug": "1973-haginaka-ainu-go-kana-hyoki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -77,7 +78,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1994-x-1tv3wk5",
+        "slug": "1994-ainu-minzoku-ainu-minzoku-hakubutsukan-densho-kiroku",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -148,7 +149,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-1ru16e0",
+        "slug": "1997-kirikae-ainu-go-hyoki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -165,7 +166,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1v9r8sq",
+        "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -192,42 +193,24 @@
     {
       "n": 11,
       "authors": [
-        "中川裕"
+        "萱野, 茂"
       ],
-      "year": 2006,
-      "yearText": "2006",
-      "title": "アイヌ人によるアイヌ語表記への取り組み",
-      "type": "article",
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-19usgnh",
+        "slug": "noainu",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
-      "matchedTitle": "アイヌ人によるアイヌ語表記への取り組み"
+      "matchedTitle": "萱野茂のアイヌ語辞典"
     },
     {
       "n": 12,
       "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 13,
-      "authors": [
-        "久保寺逸彦著"
+        "久保寺, 逸彦"
       ],
       "year": 2020,
       "yearText": "2020",
@@ -235,11 +218,25 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-x-121ohxf",
+        "slug": "2020-kubodera-ainu-go-nippon-go-jitenko",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語・日本語辞典稿"
+    },
+    {
+      "n": 13,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",
         "note": "Title match"
       },
-      "matchedTitle": "アイヌ語・日本語辞典稿"
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
     }
   ]
 }

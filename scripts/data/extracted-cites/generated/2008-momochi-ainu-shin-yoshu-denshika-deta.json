@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2008-momochi-ainu-shin-yoshu-denshika-deta",
-    "title": "桃内佳雄 研究ノート『アイヌ神謡集』の電子化データの構成と利用",
+    "title": "研究ノート『アイヌ神謡集』の電子化データの構成と利用",
+    "author": "桃内佳雄",
     "year": 2008,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
@@ -62,7 +63,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1a08let",
+        "slug": "1998-kirikae-ainu-shin-yoshu-tekisuto-bunpo-kaisetsu",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -71,7 +72,7 @@
     {
       "n": 4,
       "authors": [
-        "Kaizawa, Julie, 片山, 竜峯"
+        "片山, 竜峯, Kaizawa, Julie"
       ],
       "year": 2003,
       "yearText": "2003",
@@ -79,9 +80,9 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2003-kaizawa-julie-gjwb9l",
+        "slug": "2003-kaizawa-ainu-shin-yoshu",
         "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "「アイヌ神謡集」を読みとく"
     }

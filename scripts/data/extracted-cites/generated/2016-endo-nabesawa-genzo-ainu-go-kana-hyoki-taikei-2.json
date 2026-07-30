@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2016-endo-nabesawa-genzo-ainu-go-kana-hyoki-taikei-2",
-    "title": "遠藤志保 鍋沢元蔵によるアイヌ語のカナ表記体系：国立民族学博物館所蔵筆録ノートから",
+    "title": "鍋沢元蔵によるアイヌ語のカナ表記体系：国立民族学博物館所蔵筆録ノートから",
+    "author": "遠藤志保",
     "year": 2016,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 8,
+    "referenceCount": 10,
     "sourcePath": "articles/2016_遠藤志保_鍋沢元蔵によるアイヌ語のカナ表記体系：国立民族学博物館所蔵筆録ノートから.pdf"
   },
   "references": [
@@ -79,7 +80,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-1ru16e0",
+        "slug": "1997-kirikae-ainu-go-hyoki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -96,7 +97,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1udv0r9",
+        "slug": "1998-kirikae-tokachi-hogen-kanagaki-ainu-go-tekisuto",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -113,7 +114,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-nf5skr",
+        "slug": "1998-ainu-ainu-moshiri-maboroshi-ainu-goshi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -121,6 +122,23 @@
     },
     {
       "n": 7,
+      "authors": [
+        "萱野, 茂"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "noainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 8,
       "authors": [
         "中川裕"
       ],
@@ -130,16 +148,16 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-19usgnh",
+        "slug": "2006-nakagawa-ainunin-ainu-go-hyoki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ人によるアイヌ語表記への取り組み"
     },
     {
-      "n": 8,
+      "n": 9,
       "authors": [
-        "遠藤 志保"
+        "遠藤, 志保"
       ],
       "year": 2013,
       "yearText": "2013",
@@ -147,11 +165,25 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-x-2-3",
+        "slug": "2013-endo-nitaipakae-tekisuto",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ英雄叙事詩「ニタイパカイェ」の2種類のテキストに関する考察"
+    },
+    {
+      "n": 10,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
     }
   ]
 }

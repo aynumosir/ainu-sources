@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2023-sato-ainu-go-doshi-ketsugoka-3-ko-doshi",
-    "title": "佐藤知己 アイヌ語の動詞の結合価と3項動詞",
+    "title": "アイヌ語の動詞の結合価と3項動詞",
+    "author": "佐藤知己",
     "year": 2023,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 11,
+    "referenceCount": 10,
     "sourcePath": "articles/2023_佐藤知己_アイヌ語の動詞の結合価と3項動詞.pdf"
   },
   "references": [
@@ -25,7 +26,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -42,7 +43,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1956-x-1c6njuk",
+        "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -59,7 +60,7 @@
       "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1979-x-1ldjihx",
+        "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -76,7 +77,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-arity-calculation",
+        "slug": "1993-nakagawa-ainu-go-arity-calculation",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -93,7 +94,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-jqe5tq",
+        "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -138,24 +139,6 @@
     {
       "n": 8,
       "authors": [
-        "Suzuko Tamura"
-      ],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "The Ainu Language",
-      "titleEn": "The Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Ainu Language"
-    },
-    {
-      "n": 9,
-      "authors": [
         "Anna Bugaeva"
       ],
       "year": 2011,
@@ -172,25 +155,7 @@
       "matchedTitle": "Ditransitive constructions in Ainu"
     },
     {
-      "n": 10,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 11,
+      "n": 9,
       "authors": [
         "Bugaeva"
       ],
@@ -206,6 +171,21 @@
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Handbook of the Ainu Language"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
     }
   ]
 }

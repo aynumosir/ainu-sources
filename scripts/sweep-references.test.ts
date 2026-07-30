@@ -347,3 +347,38 @@ describe('extractReferenceSection page furniture', () => {
 		expect(result?.text).toContain('page 0 real bibliography entry');
 	});
 });
+
+describe('corroboration window', () => {
+	it('does not let a neighbouring entry corroborate a title', () => {
+		const catalogue = [
+			source('2000-tamura-ainu-language', 'The Ainu Language', 'Tamura, Suzuko', 2000)
+		];
+		// Batchelor's printed title contains Tamura's, and Tamura's year and surname
+		// appear only in the NEXT entry, well past one entry's width.
+		const matches = findCatalogueMatches(
+			[
+				'Batchelor, John. 1887. A Grammar of the Ainu Language. Tokyo: Yushodo.',
+				'Vovin, Alexander. 1993. A Reconstruction of Proto-Ainu. Leiden: Brill.',
+				'Tamura, Suzuko. 2000. Ainugo no sekai. Tokyo: Yoshikawa.'
+			].join(' '),
+			catalogue,
+			'citing-work'
+		);
+		expect(matches).toHaveLength(1);
+		expect(matches[0].confidence).toBe('candidate');
+		expect(matches[0].corroboration).toEqual([]);
+	});
+
+	it('still corroborates from the entry the title belongs to', () => {
+		const catalogue = [
+			source('2000-tamura-ainu-language', 'The Ainu Language', 'Tamura, Suzuko', 2000)
+		];
+		const matches = findCatalogueMatches(
+			'Tamura, Suzuko. 2000. The Ainu Language. Tokyo: Sanseido.',
+			catalogue,
+			'citing-work'
+		);
+		expect(matches[0].confidence).toBe('probable');
+		expect(matches[0].corroboration).toEqual(expect.arrayContaining(['year', 'author']));
+	});
+});

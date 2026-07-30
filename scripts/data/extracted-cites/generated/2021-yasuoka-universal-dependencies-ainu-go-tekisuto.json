@@ -3,15 +3,16 @@
   "verified": false,
   "citingWork": {
     "slug": "2021-yasuoka-universal-dependencies-ainu-go-tekisuto",
-    "title": "安岡孝一 Universal Dependenciesによるアイヌ語テキストコーパス",
+    "title": "Universal Dependenciesによるアイヌ語テキストコーパス",
+    "author": "安岡孝一",
     "year": 2021,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
     "referenceHeading": "参考文献",
     "referencePages": "scan pp. 5-8",
-    "referenceCount": 6,
+    "referenceCount": 7,
     "sourcePath": "articles/2021_安岡孝一_Universal Dependenciesによるアイヌ語テキストコーパス.pdf"
   },
   "references": [
@@ -54,7 +55,7 @@
     {
       "n": 3,
       "authors": [
-        "Kaizawa, Julie, 片山, 竜峯"
+        "片山, 竜峯, Kaizawa, Julie"
       ],
       "year": 2003,
       "yearText": "2003",
@@ -62,9 +63,9 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2003-kaizawa-julie-gjwb9l",
+        "slug": "2003-kaizawa-ainu-shin-yoshu",
         "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "「アイヌ神謡集」を読みとく"
     },
@@ -80,7 +81,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2017-senuma-hajime-aizawa-akiko-toward-universal-dependencies-for-ainu",
+        "slug": "2017-akiko-toward-universal-dependencies-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -98,7 +99,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-senuma-hajime-aizawa-akiko-universal-dependencies-for-ainu",
+        "slug": "2018-akiko-universal-dependencies-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -115,11 +116,25 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-x-universal-dependencies-2",
+        "slug": "2021-yasuoka-ainu-go-universal-dependencies",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語Universal Dependencies再考"
+    },
+    {
+      "n": 7,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
     }
   ]
 }

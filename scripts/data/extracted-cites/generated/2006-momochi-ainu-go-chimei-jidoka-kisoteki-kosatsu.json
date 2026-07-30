@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2006-momochi-ainu-go-chimei-jidoka-kisoteki-kosatsu",
-    "title": "桃内佳雄 アイヌ語地名解析の自動化のための基礎的考察",
+    "title": "アイヌ語地名解析の自動化のための基礎的考察",
+    "author": "桃内佳雄",
     "year": 2006,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
@@ -26,7 +27,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-x-1e3o6yu",
+        "slug": "1984-kirikae-ainu-go-meishi-ku-kozo-gosei-meishi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -43,7 +44,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1989-x-smep1t",
+        "slug": "1989-hatano-ainu-go-chimei-shutsugen-hindo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -60,7 +61,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1995-x-1klo3z4",
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -95,7 +96,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2000-x-dhs2wh",
+        "slug": "2000-kirikae-ainu-go-chimei-keitai-ronteki-kozo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -112,7 +113,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2002-x-9ggpbs",
+        "slug": "2002-nakagawa-ainu-go-chimei-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -126,10 +127,10 @@
       "year": 2004,
       "yearText": "2004",
       "title": "上川郡内石狩川本支流アイヌ語地名解",
-      "type": "book",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-gq1o9s",
+        "slug": "2004-yura-kamikawa-gun-ishikari-kawa-ainu-go-chimei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -146,7 +147,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2005-x-y85skk",
+        "slug": "2005-kirikae-yamada-hidezo-ainu-go-chimei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },

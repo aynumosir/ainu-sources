@@ -3,15 +3,16 @@
   "verified": false,
   "citingWork": {
     "slug": "2016-kishimoto-saru-hogen-doshi-jodoshi-yoho-seiyaku",
-    "title": "岸本宜久 アイヌ語沙流方言における動詞の助動詞用法と制約",
+    "title": "アイヌ語沙流方言における動詞の助動詞用法と制約",
+    "author": "岸本宜久",
     "year": 2016,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
     "referenceHeading": "参照文献",
     "referencePages": "scan pp. 21-23",
-    "referenceCount": 18,
+    "referenceCount": 17,
     "sourcePath": "articles/2016_岸本宜久_アイヌ語沙流方言における動詞の助動詞用法と制約.pdf"
   },
   "references": [
@@ -26,7 +27,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1931-x-11givjy",
+        "slug": "1931-kindaichi-yukara-itadorimaru",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -34,23 +35,6 @@
     },
     {
       "n": 2,
-      "authors": [
-        "金田一 京助"
-      ],
-      "year": 1931,
-      "yearText": "1931",
-      "title": "アイヌユーカラ語法摘要",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1931-x-11givjx",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌユーカラ語法摘要"
-    },
-    {
-      "n": 3,
       "authors": [
         "金田一, 京助"
       ],
@@ -60,31 +44,32 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩ユーカラ"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
-        "知里, 真志保"
+        "Chiri"
       ],
       "year": 1942,
       "yearText": "1942",
       "title": "アイヌ語法研究 : 樺太方言を中心として",
-      "type": "article",
+      "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
+      "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1942-x-3bat8z",
+        "slug": "1942-chiri",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "久保寺, 逸彦"
       ],
@@ -94,14 +79,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-1hv377u",
+        "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩神謡、聖伝の研究"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "田村すゞ子"
       ],
@@ -111,28 +96,46 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-1",
+        "slug": "1960-tamura-saru-hogen-jodoshi-hokoku",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
-        "久保寺逸彦(編著)"
+        "久保寺, 逸彦"
       ],
       "year": 1977,
       "yearText": "1977",
-      "title": "アイヌ叙事詩 神謡・聖伝の研究",
-      "type": "article",
+      "title": "アイヌ叙事詩神謡・聖伝の研究",
+      "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1977-x-4mbx9h",
+        "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌ叙事詩 神謡・聖伝の研究"
+      "matchedTitle": "アイヌ叙事詩神謡・聖伝の研究"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
       "n": 8,
@@ -146,7 +149,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -199,7 +202,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1v9r8sq",
+        "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -212,70 +215,35 @@
       ],
       "year": 1999,
       "yearText": "1999",
-      "title": "アイヌ語静内方言文脈つき語彙集",
-      "type": "wordlist",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1999-x-1h7k5eb",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語静内方言文脈つき語彙集"
-    },
-    {
-      "n": 13,
-      "authors": [
-        "奥田, 統己"
-      ],
-      "year": 1999,
-      "yearText": "1999",
       "title": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)",
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "1999-x-cd-rom",
+        "slug": "1999-okuda-shizunai-hogen-goishu-cd-rom",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)"
     },
     {
-      "n": 14,
+      "n": 13,
       "authors": [
-        "Suzuko Tamura"
-      ],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "The Ainu Language",
-      "titleEn": "The Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Ainu Language"
-    },
-    {
-      "n": 15,
-      "authors": [
-        "Bugaeva, Anna"
+        "Bugaeva, Anna, 長崎, 郁"
       ],
       "year": 2015,
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
-      "type": "book",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-bugaeva-anna-b8h16x",
+        "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語研究の諸問題"
     },
     {
-      "n": 16,
+      "n": 14,
       "authors": [
         "小林美紀"
       ],
@@ -285,16 +253,16 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-v-v",
+        "slug": "2015-kobayashi-ainu-go-v-vgata-ichi-ko-doshi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語におけるV-V型の一項動詞"
     },
     {
-      "n": 17,
+      "n": 15,
       "authors": [
-        "岸本宜久"
+        "岸本, 宜久"
       ],
       "year": 2016,
       "yearText": "2016",
@@ -302,29 +270,40 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-1ty12dd",
+        "slug": "ainu-niokeru-no-to",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語沙流方言における動詞の助動詞用法と制約"
     },
     {
-      "n": 18,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
+      "n": 16,
+      "authors": [],
+      "yearText": "",
+      "title": "アイヌユーカラ語法摘要",
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
+        "slug": "anon-yukara-goho-tekiyo",
         "confidence": "candidate",
         "note": "Title match"
       },
-      "matchedTitle": "Ainu Language"
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
     }
   ]
 }

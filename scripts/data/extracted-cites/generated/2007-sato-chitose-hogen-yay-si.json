@@ -3,36 +3,20 @@
   "verified": false,
   "citingWork": {
     "slug": "2007-sato-chitose-hogen-yay-si",
-    "title": "佐藤知己 アイヌ語千歳方言の再帰接頭辞yay-とsi-について",
+    "title": "アイヌ語千歳方言の再帰接頭辞yay-とsi-について",
+    "author": "佐藤知己",
     "year": 2007,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 7,
+    "referenceCount": 8,
     "sourcePath": "articles/2007_佐藤知己_アイヌ語千歳方言の再帰接頭辞yay-とsi-について.pdf"
   },
   "references": [
     {
       "n": 1,
-      "authors": [
-        "金田一 京助"
-      ],
-      "year": 1931,
-      "yearText": "1931",
-      "title": "アイヌユーカラ語法摘要",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1931-x-11givjx",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌユーカラ語法摘要"
-    },
-    {
-      "n": 2,
       "authors": [
         "金田一, 京助"
       ],
@@ -42,14 +26,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩ユーカラ"
     },
     {
-      "n": 3,
+      "n": 2,
       "authors": [
         "福田 すず子"
       ],
@@ -59,14 +43,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1956-x-1c6njuk",
+        "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語の動詞の構造"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "Nakagawa, Hiroshi"
       ],
@@ -84,7 +68,7 @@
       "matchedTitle": "アイヌ語千歳方言辞典"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -102,7 +86,7 @@
       "matchedTitle": "アイヌ語沙流方言辞典"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "佐藤, 知己"
       ],
@@ -112,14 +96,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-1djf4br",
+        "slug": "2004-sato-ainu-shin-yoshu-nandoku-kasho-tokui-na-gengo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "知里幸恵「アイヌ神謡集」の難読個所と特異な言語事例をめぐって"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [],
       "year": 2007,
       "yearText": "2007",
@@ -127,11 +111,40 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2007-x-yp2g9w",
+        "slug": "2007-anon-ainu-go-kenkyu-kadai-tenbo",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "アイヌ語研究の課題と展望"
+    },
+    {
+      "n": 7,
+      "authors": [],
+      "yearText": "",
+      "title": "アイヌユーカラ語法摘要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-yukara-goho-tekiyo",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
     }
   ]
 }

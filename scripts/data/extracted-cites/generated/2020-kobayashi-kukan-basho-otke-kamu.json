@@ -1,0 +1,106 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2020-kobayashi-kukan-basho-otke-kamu",
+    "title": "空間・場所を項とするアイヌ語動詞の結合価を増やす操作について：otke と kamu を例として",
+    "author": "小林美紀",
+    "year": 2020,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参照文献・参照ウェブサイト",
+    "referencePages": "scan pp. 6-8",
+    "referenceCount": 5,
+    "sourcePath": "articles/2020_小林美紀_空間・場所を項とするアイヌ語動詞の結合価を増やす操作について：otke と kamu を例として.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "カムイユカラでアイヌ語を学ぶ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-nakagawa-kamu-iyukara-ainu-go",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カムイユカラでアイヌ語を学ぶ"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "千葉大学"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-chiba-daigaku-hozon-keisho-akaibuka-dai2-nenji",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "小林美紀"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語動詞の結合価と項構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-kobayashi-ainu-go-doshi-ketsugoka-ko-kozo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語動詞の結合価と項構造"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "小林, 美紀"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "アイヌ語動詞の結合価と項構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-no-to-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語動詞の結合価と項構造"
+    }
+  ]
+}

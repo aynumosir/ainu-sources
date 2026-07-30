@@ -1,0 +1,235 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2015-anna-equivalent-standard-comparison",
+    "title": "An equivalent of the standard of comparison relativization in Ainu",
+    "author": "Bugaeva Anna",
+    "year": 2015,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "Sources and References",
+    "referencePages": "scan pp. 18-21",
+    "referenceCount": 12,
+    "sourcePath": "articles/2015_Bugaeva Anna_An equivalent of the standard of comparison relativization in Ainu.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "平賀 サダ"
+      ],
+      "year": 1958,
+      "yearText": "1958",
+      "title": "アイヌ語音声資料",
+      "titleEn": "Ainu Audio Materials",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "ainu-audio-materials",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Audio Materials"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Waseda Daigaku. Gogaku Kyōiku Kenkyūjo"
+      ],
+      "year": 1984,
+      "yearText": "1984",
+      "title": "Ainugo nyūmon",
+      "titleEn": "Ainugo nyūmon",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1984-kenkyujo-ainugo-nyumon",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainugo nyūmon"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1988,
+      "yearText": "1988",
+      "title": "Ainugo (The Ainu language)",
+      "titleEn": "Ainugo (The Ainu language)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Ainugo (The Ainu language)"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)",
+      "titleEn": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-tamura-ainugo-saru-hogen-jiten-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "Suzuko Tamura"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "The Ainu Language",
+      "titleEn": "The Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-suzuko-tamura-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Ainu Language"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
+      ],
+      "year": 2004,
+      "yearText": "2004",
+      "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
+      "type": "thesis",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Tomomi Satō"
+      ],
+      "year": 2008,
+      "yearText": "2008",
+      "title": "Ainugo bunpō no kiso",
+      "titleEn": "Ainugo bunpō no kiso",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Ainugo bunpō no kiso"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Bugaeva Anna"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "Southern Hokkaido Ainu",
+      "titleEn": "Southern Hokkaido Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-bugaeva-anna-southern-hokkaido-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Southern Hokkaido Ainu"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "An equivalent of the standard of comparison relativization in Ainu",
+      "titleEn": "An equivalent of the standard of comparison relativization in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "an-equivalent-of-the-standard-of-comparison-relativization",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "An equivalent of the standard of comparison relativization in Ainu"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "ブガエワ, アンナ"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語における比較対象相当の関係節構文",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-bugaewa-ainu-go-hikaku-taisho-kankei-setsu-kobun",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における比較対象相当の関係節構文"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "Ainu Grammar",
+      "titleEn": "Ainu Grammar",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-basil-hall-chamberlain-ainu-grammar",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Ainu Grammar"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    }
+  ]
+}

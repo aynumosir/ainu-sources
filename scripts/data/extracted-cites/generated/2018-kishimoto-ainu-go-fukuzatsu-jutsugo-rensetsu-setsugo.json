@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2018-kishimoto-ainu-go-fukuzatsu-jutsugo-rensetsu-setsugo",
-    "title": "岸本宜久 アイヌ語の複雑述語における連接と接合",
+    "title": "アイヌ語の複雑述語における連接と接合",
+    "author": "岸本宜久",
     "year": 2018,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参照文献",
-    "referenceCount": 8,
+    "referenceCount": 7,
     "sourcePath": "articles/2018_岸本宜久_アイヌ語の複雑述語における連接と接合.pdf"
   },
   "references": [
@@ -25,7 +26,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-1",
+        "slug": "1960-tamura-saru-hogen-jodoshi-hokoku",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -33,23 +34,6 @@
     },
     {
       "n": 2,
-      "authors": [
-        "田村 すゞ子"
-      ],
-      "year": 1972,
-      "yearText": "1972",
-      "title": "アイヌ語沙流方言における《…して…》",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1972-x-13w5bm1",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語沙流方言における《…して…》"
-    },
-    {
-      "n": 3,
       "authors": [
         "田村 すず子"
       ],
@@ -59,14 +43,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1972-x-9zmxzm",
+        "slug": "1972-tamura-saru-hogen-2",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語沙流方言における《…して…》の表現"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "佐藤知己"
       ],
@@ -76,14 +60,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1995-x-1tx7p2h",
+        "slug": "1995-sato-ainu-go-judo-bun",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の受動文に関する一考察"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -101,7 +85,7 @@
       "matchedTitle": "アイヌ語沙流方言辞典"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "萱野, 茂, 平凡社"
       ],
@@ -111,14 +95,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1v9r8sq",
+        "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "萱野茂のアイヌ神話集成"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
         "ブガエワ・アンナ"
       ],
@@ -128,14 +112,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-k7w34r",
+        "slug": "2014-bugaewa-hokkaido-nanbu-ainu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "北海道南部のアイヌ語"
     },
     {
-      "n": 8,
+      "n": 7,
       "authors": [
         "岸本宜久"
       ],
@@ -145,7 +129,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-1ty12dd",
+        "slug": "2016-kishimoto-saru-hogen-doshi-jodoshi-yoho-seiyaku",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },

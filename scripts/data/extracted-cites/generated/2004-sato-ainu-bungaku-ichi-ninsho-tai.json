@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2004-sato-ainu-bungaku-ichi-ninsho-tai",
-    "title": "佐藤知己 アイヌ文学における一人称体の問題",
+    "title": "アイヌ文学における一人称体の問題",
+    "author": "佐藤知己",
     "year": 2004,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 3,
+    "referenceCount": 5,
     "sourcePath": "articles/2004_佐藤知己_アイヌ文学における一人称体の問題.pdf"
   },
   "references": [
@@ -25,7 +26,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -33,6 +34,23 @@
     },
     {
       "n": 2,
+      "authors": [
+        "田村 すゞ子"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "アイヌ語沙流方言の人称の種類",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-no-no",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称の種類"
+    },
+    {
+      "n": 3,
       "authors": [
         "田村すゞ子"
       ],
@@ -42,14 +60,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1972-x-1vec8pf",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "slug": "1972-tamura-saru-hogen-ninsho-shurui",
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "アイヌ語沙流方言の人称の種類"
     },
     {
-      "n": 3,
+      "n": 4,
       "authors": [
         "佐藤 知己"
       ],
@@ -59,11 +77,26 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2001-x-98ujg5",
+        "slug": "2001-sato-chitose-hogen-daisanrui-no-doshi-kozo-kino",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語千歳方言の「第三類の動詞」の構造と機能"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
     }
   ]
 }

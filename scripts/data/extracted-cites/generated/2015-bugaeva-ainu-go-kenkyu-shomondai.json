@@ -3,14 +3,16 @@
   "verified": false,
   "citingWork": {
     "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
-    "title": "ブガエワアンナ・長崎郁編『アイヌ語研究の諸問題』",
-    "type": "publication"
+    "title": "アイヌ語研究の諸問題",
+    "author": "Bugaeva, Anna, 長崎, 郁",
+    "year": 2015,
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
     "referenceHeading": "References",
     "referencePages": "scan pp. 14-118",
-    "referenceCount": 20,
+    "referenceCount": 18,
     "sourcePath": "books/2015_BugaevaNagasaki_AinugoKenkyu/ブガエワアンナ・長崎郁編『アイヌ語研究の諸問題』.pdf"
   },
   "references": [
@@ -60,7 +62,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-x-ainugo-onsei-shiryo",
+        "slug": "1984-anon-ainugo-onsei-shiryo",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -78,7 +80,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-hideo-kirikae-the-structure-of-noun-phrases-and-compound-nouns-i",
+        "slug": "1984-kirikae-structure-noun-phrases-compound-nouns",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -96,7 +98,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-waseda-daigaku-gogaku-kyoiku-kenkyujo-ainugo-nyumon",
+        "slug": "1984-kenkyujo-ainugo-nyumon",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -132,7 +134,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1996-tamura-suzuko-ainugo-saru-hogen-jiten-a-dictionary-of-the-saru-d",
+        "slug": "1996-tamura-ainugo-saru-hogen-jiten-dictionary",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -184,7 +186,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-japanese-and-ainu",
+        "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -202,7 +204,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "slug": "2008-anna-reported-discourse-logophoricity-southern",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -238,7 +240,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2010-anna-bugaeva-ainu-applicatives-in-typological-perspective",
+        "slug": "2010-bugaeva-ainu-applicatives-typological-perspective",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -283,23 +285,6 @@
     {
       "n": 16,
       "authors": [
-        "Bugaeva, Anna"
-      ],
-      "year": 2015,
-      "yearText": "2015",
-      "title": "アイヌ語研究の諸問題",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2015-bugaeva-anna-b8h16x",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語研究の諸問題"
-    },
-    {
-      "n": 17,
-      "authors": [
         "ブガエワ アンナ"
       ],
       "year": 2015,
@@ -309,14 +294,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-relative-clauses-and-noun-complements-in-ainu",
+        "slug": "2015-bugaewa-relative-clauses-noun-complements-ainu",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Relative clauses and noun complements in Ainu."
     },
     {
-      "n": 18,
+      "n": 17,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -334,25 +319,7 @@
       "matchedTitle": "Ainu Grammar"
     },
     {
-      "n": 19,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 20,
+      "n": 18,
       "authors": [
         "Anna Bugaeva"
       ],

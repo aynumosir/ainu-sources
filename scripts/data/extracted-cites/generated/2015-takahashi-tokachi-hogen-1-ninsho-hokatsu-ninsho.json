@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2015-takahashi-tokachi-hogen-1-ninsho-hokatsu-ninsho",
-    "title": "高橋靖以 アイヌ語十勝方言における1人称と包括人称について",
+    "title": "アイヌ語十勝方言における1人称と包括人称について",
+    "author": "高橋靖以",
     "year": 2015,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -43,7 +44,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1956-x-1c6njuk",
+        "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -51,6 +52,23 @@
     },
     {
       "n": 3,
+      "authors": [
+        "田村 すゞ子"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "アイヌ語沙流方言の人称の種類",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-no-no",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称の種類"
+    },
+    {
+      "n": 4,
       "authors": [
         "田村 すず子"
       ],
@@ -60,14 +78,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1971-x-9zl8g1",
+        "slug": "1971-tamura-ishikari-hogen-ninsho-dai-meishi-ninsho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語石狩方言の人称代名詞と人称接辞"
     },
     {
-      "n": 4,
+      "n": 5,
       "authors": [
         "田村すゞ子"
       ],
@@ -77,14 +95,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1971-x-zprizq",
+        "slug": "1971-tamura-saru-hogen-ninsho-dai-meishi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語沙流方言の人称代名詞"
     },
     {
-      "n": 5,
+      "n": 6,
       "authors": [
         "田村すゞ子"
       ],
@@ -94,14 +112,32 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1972-x-1vec8pf",
+        "slug": "1972-tamura-saru-hogen-ninsho-shurui",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語沙流方言の人称の種類"
     },
     {
-      "n": 6,
+      "n": 7,
+      "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 8,
       "authors": [
         "Kirsten Refsing"
       ],
@@ -112,32 +148,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
-      "n": 7,
-      "authors": [
-        "Suzuko Tamura"
-      ],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "The Ainu Language",
-      "titleEn": "The Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Ainu Language"
-    },
-    {
-      "n": 8,
+      "n": 9,
       "authors": [
         "佐藤知己"
       ],
@@ -147,14 +165,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-1jmvlmx",
+        "slug": "2004-sato-ainu-bungaku-ichi-ninsho-tai",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ文学における一人称体の問題"
     },
     {
-      "n": 9,
+      "n": 10,
       "authors": [
         "Bugaeva Anna"
       ],
@@ -165,14 +183,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "slug": "2008-anna-reported-discourse-logophoricity-southern",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu"
     },
     {
-      "n": 10,
+      "n": 11,
       "authors": [
         "中川, 裕"
       ],
@@ -182,16 +200,16 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-x-5znhtd",
+        "slug": "2011-nakagawa-ainu-shin-yo-jojutsusha-ninsho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌの神謡における叙述者の人称"
     },
     {
-      "n": 11,
+      "n": 12,
       "authors": [
-        "切替, 英雄"
+        "英雄 切替, Hideo Kirikae"
       ],
       "year": 2012,
       "yearText": "2012",
@@ -199,16 +217,16 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2012-x-a4sbrn",
+        "slug": "2012-hideo-ainu-kosho-bungei-ichi-ninsho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸における一人称"
     },
     {
-      "n": 12,
+      "n": 13,
       "authors": [
-        "高橋靖以"
+        "高橋, 靖以"
       ],
       "year": 2015,
       "yearText": "2015",
@@ -216,29 +234,11 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-1",
+        "slug": "ainu-niokeru-1-to-nitsuite",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語十勝方言における1人称と包括人称について"
-    },
-    {
-      "n": 13,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
     }
   ]
 }

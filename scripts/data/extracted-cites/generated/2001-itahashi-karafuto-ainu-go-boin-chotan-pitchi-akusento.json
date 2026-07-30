@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2001-itahashi-karafuto-ainu-go-boin-chotan-pitchi-akusento",
-    "title": "板橋義三 樺太アイヌ語の母音の長短と北海道アイヌ語のピッチアクセントとの史的関係1",
+    "title": "樺太アイヌ語の母音の長短と北海道アイヌ語のピッチアクセントとの史的関係1",
+    "author": "板橋義三",
     "year": 2001,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -25,7 +26,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1957-x-1ouspxs",
+        "slug": "1957-hattori-ainu-go-nenchosha-so-tokushu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -42,7 +43,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-ot8fs9",
+        "slug": "1960-hattori-ainu-go-shohogen-kiso-goi-tokeigakuteki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },

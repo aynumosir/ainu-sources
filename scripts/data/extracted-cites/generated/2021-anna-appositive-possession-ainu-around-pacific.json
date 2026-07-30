@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2021-anna-appositive-possession-ainu-around-pacific",
-    "title": "Bugaeva Anna Appositive possession in Ainu and around the Pacific",
+    "title": "Appositive possession in Ainu and around the Pacific",
+    "author": "Bugaeva Anna",
     "year": 2021,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "References",
-    "referenceCount": 12,
+    "referenceCount": 10,
     "sourcePath": "articles/2021_Bugaeva Anna_Appositive possession in Ainu and around the Pacific.pdf"
   },
   "references": [
@@ -42,7 +43,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-x-ainugo-onsei-shiryo",
+        "slug": "1984-anon-ainugo-onsei-shiryo",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -78,7 +79,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1996-tamura-suzuko-ainugo-saru-hogen-jiten-a-dictionary-of-the-saru-d",
+        "slug": "1996-tamura-ainugo-saru-hogen-jiten-dictionary",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -86,22 +87,6 @@
     },
     {
       "n": 5,
-      "authors": [],
-      "year": 1998,
-      "yearText": "1998",
-      "title": "Ainu folk-lore",
-      "titleEn": "Ainu folk-lore",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1998-x-ainu-folk-lore",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu folk-lore"
-    },
-    {
-      "n": 6,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -119,7 +104,7 @@
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
         "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
       ],
@@ -127,17 +112,17 @@
       "yearText": "2004",
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
-      "type": "book",
+      "type": "thesis",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
     },
     {
-      "n": 8,
+      "n": 7,
       "authors": [
         "Tomomi Satō"
       ],
@@ -155,7 +140,7 @@
       "matchedTitle": "Ainugo bunpō no kiso"
     },
     {
-      "n": 9,
+      "n": 8,
       "authors": [
         "Bugaeva Anna"
       ],
@@ -173,7 +158,7 @@
       "matchedTitle": "Southern Hokkaido Ainu"
     },
     {
-      "n": 10,
+      "n": 9,
       "authors": [
         "Nakagawa, Hiroshi, Bugaeva, Anna, Kobayashi, Miki"
       ],
@@ -184,14 +169,14 @@
       "type": "corpus-text",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-nakagawa-hiroshi-a-glossed-audio-corpus-of-ainu-folklore",
+        "slug": "2016-nakagawa-glossed-audio-corpus-ainu-folklore",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "A Glossed Audio Corpus of Ainu Folklore"
     },
     {
-      "n": 11,
+      "n": 10,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -207,24 +192,6 @@
         "note": "Title match"
       },
       "matchedTitle": "Ainu Grammar"
-    },
-    {
-      "n": 12,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
     }
   ]
 }

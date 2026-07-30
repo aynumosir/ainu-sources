@@ -1,0 +1,107 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2018-yoshikawa-ainu-go-aan-shokosei",
+    "title": "アイヌ語の助動詞aanと証拠性",
+    "author": "吉川佳見",
+    "year": 2018,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "〇参考文献",
+    "referenceCount": 5,
+    "sourcePath": "articles/2018_吉川佳見_アイヌ語の助動詞aanと証拠性.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "萱野, 茂"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "noainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "ブガエワ・アンナ"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "北海道南部のアイヌ語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-bugaewa-hokkaido-nanbu-ainu-go",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "北海道南部のアイヌ語"
+    }
+  ]
+}
