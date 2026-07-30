@@ -33,8 +33,10 @@ import { ACTIVE_SOURCE_STATUS } from '../src/lib/server/visibility';
 const GENERATED_SCHEMA = 'extracted-cites/v1';
 /** What ends a reference section. Indexes and appendices list names and years too. */
 const TERMINAL_CORE =
-	/(?:appendix|appendices|index|about\s+the\s+author|author\s+biograph(?:y|ies)|付録|附録|索引|人名索引|事項索引|著者紹介|著者略歴)/iu;
-const TERMINAL_TAIL = /(?:[a-z]|[0-9０-９]+|一覧|表)/iu;
+	/(?:appendix|appendices|index(?:\s+of\s+(?:authors|names|subjects))?|author\s+index|name\s+index|subject\s+index|about\s+the\s+author|author\s+biograph(?:y|ies)|acknowledge?ments?|付録|附録|索引|人名索引|事項索引|語彙索引|著者紹介|著者略歴|あとがき|後記|初出一覧|謝辞)/iu;
+// A part label — Appendix A, 索引 2 — never a run of letters, so "Indexing the
+// corpus" cannot be read as a closing heading.
+const TERMINAL_TAIL = /(?:[a-z](?![a-z])|[0-9０-９]+|一覧|表)/iu;
 
 // A heading line survives only if the WHOLE line is a heading — prose that merely
 // mentions 参考文献 must not open a reference section. Printed headings carry
@@ -56,7 +58,7 @@ const HEADING_TAIL =
 	/(?:一覧|リスト|目録|表|参照|資料|図書|ウェブサイト|web\s*サイト|サイト|url|notes?|cited|consulted|reading|and\s+sources|sources|источники)/iu;
 const HEADING_SEPARATOR = /\s*(?:[・、,&＆/／]|および|と|and)?\s*/iu;
 /** Leading section numbering: 8. · 8．· 3.2 · 第8章 · II. · (3) */
-const LEADING_NUMBER = /^\s*(?:第\s*[0-9０-９一二三四五六七八九十]+\s*[章節部]|[(（]?[0-9０-９]+(?:[.．][0-9０-９]+)*[)）]?|[ivxIVX]+)\s*[.．、:：]?\s*/u;
+const LEADING_NUMBER = /^\s*(?:第\s*[0-9０-９一二三四五六七八九十]+\s*[章節部]|[(（]?[0-9０-９]+(?:[.．][0-9０-９]+)*[)）]?|[ivxIVX]+(?=\s*[.．、:：]))\s*[.．、:：]?\s*/u;
 /** Decoration around a heading: brackets and bullets. */
 const LEADING_MARK = /^[\s　【〔〈《「『（(\[〇○●◆◇■□▲△※＊*#･・~-]+/u;
 const TRAILING_MARK = /[\s　】〕〉》」』）)\]：:・~。．.、,-]+$/u;
