@@ -134,7 +134,11 @@ export const sources = sqliteTable(
 		index('sources_year_idx').on(t.yearStart),
 		index('sources_status_idx').on(t.status),
 		index('sources_merged_into_idx').on(t.mergedIntoSourceId),
-		index('sources_content_hash_idx').on(t.contentHash)
+		index('sources_content_hash_idx').on(t.contentHash),
+		// Catalog sort orders — without these, sort=title/significance on
+		// /archive fall back to a filesort over the whole joined result.
+		index('sources_title_idx').on(t.title),
+		index('sources_significance_idx').on(t.significance)
 	]
 );
 
@@ -987,6 +991,10 @@ export const fileRevisions = sqliteTable(
 			.on(t.sourceFileId)
 			.where(sql`${t.reviewStatus} = 'pending'`),
 		index('file_revisions_blob').on(t.blobSha256),
+		// Every archive catalog query filters on this pair; without it, the
+		// two partial unique indexes above (each scoped to one sourceFileId)
+		// don't help a query scanning across all sources.
+		index('file_revisions_review_status_current_idx').on(t.reviewStatus, t.isCurrent),
 		check('file_revisions_revision_no_check', sql`${t.revisionNo} > 0`),
 		check(
 			'file_revisions_artifact_kind_check',

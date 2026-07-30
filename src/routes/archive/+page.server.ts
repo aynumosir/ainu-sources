@@ -1,7 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
-import { resolveArchivePrincipal } from '$lib/server/archive/authz';
 import { listArchiveFiles } from '$lib/server/archive/db';
 import { getArchiveStats } from '$lib/server/archive/stats';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
@@ -10,9 +9,12 @@ import { revisionOcrCoverage } from '$lib/server/db/schema';
 import { inArray } from 'drizzle-orm';
 import type { OcrCoverage } from '$lib/archive/ocr';
 
-export const load: PageServerLoad = async ({ request, url }) => {
+export const load: PageServerLoad = async ({ url, parent }) => {
 	const filters = parseArchiveFilters(url.searchParams);
-	const principal = await resolveArchivePrincipal(request, db);
+	// The layout above already resolved the principal for this request —
+	// re-resolving it here duplicated a full session round trip on every
+	// catalog page load.
+	const { principal } = await parent();
 	if (!principal) return { accessDenied: true, filters, items: [], nextCursor: null, params: '' };
 	if (!archiveRoleAtLeast(principal.role, 'archive_reader')) error(403, 'archive reader role required');
 

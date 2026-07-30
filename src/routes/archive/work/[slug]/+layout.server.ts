@@ -1,32 +1,11 @@
 import type { LayoutServerLoad } from './$types';
-import { db } from '$lib/server/db';
-import { resolveArchivePrincipal } from '$lib/server/archive/authz';
-import { getUsageSummary, listPendingReview } from '$lib/server/archive/db';
-import { archiveRoleAtLeast } from '$lib/server/archive/types';
-import { archiveDisplayName } from '$lib/archive/identity';
+import { resolveArchiveLayoutData } from '$lib/server/archive/layout-data';
 
-export const load: LayoutServerLoad = async ({ request, locals, url }) => {
-	const principal = await resolveArchivePrincipal(request, db);
-	if (!principal) {
-		return {
-			principal: null,
-			login: locals.user?.name?.trim() || locals.user?.email || null,
-			hasAppSession: !!locals.user,
-			signInHref: `/login?redirect=${encodeURIComponent(url.pathname + url.search)}`,
-			usage: null,
-			pendingCount: 0,
-			displayName: null
-		};
-	}
-	const usage = principal.authn === 'mcp_assertion' ? null : await getUsageSummary(db, principal);
-	const pendingCount = archiveRoleAtLeast(principal.role, 'archive_reviewer') ? (await listPendingReview(db, null, 1)).total : 0;
-	return {
-		principal,
-		login: null,
-		hasAppSession: !!locals.user,
-		signInHref: `/login?redirect=${encodeURIComponent(url.pathname + url.search)}`,
-		usage,
-		pendingCount,
-		displayName: archiveDisplayName(locals.user?.name, principal.email ?? locals.user?.email, principal.role)
-	};
-};
+// The +layout@ reset below replaces the rendered component tree, not the
+// load-data chain, so /archive/+layout.server.ts still runs for this route —
+// but SvelteKit's generated parent() typing for a layout nested two levels
+// under a directory with no +layout.server.ts of its own (archive/work/) does
+// not resolve through to it, so this can't just read it via parent(). Sharing
+// the same per-request-cached resolver keeps the actual session/DB lookups
+// down to one regardless.
+export const load: LayoutServerLoad = (event) => resolveArchiveLayoutData(event);
