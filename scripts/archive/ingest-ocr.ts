@@ -50,7 +50,6 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 		skippedNoMatch: 0,
 		skippedNoRevision: 0
 	};
-	const sourcesToMeasure = new Set<string>();
 
 	for (const filePath of files) {
 		const parsed = parseOcrFilename(path.basename(filePath));
@@ -168,16 +167,14 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 						.set({ preferred: true })
 						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, pick)));
 				}
+
+				// Inside the transaction, so a crash never records the file's
+				// content hash while leaving the work's stored composition
+				// stale — the unchanged-file branch would then skip it forever.
+				await refreshSourceTextComposition(tx as unknown as Db, sourceFile.sourceId, opts.now ?? new Date());
 			});
 		}
 		summary.ingested += 1;
-		sourcesToMeasure.add(sourceFile.sourceId);
-	}
-
-	if (!opts.dryRun) {
-		for (const sourceId of sourcesToMeasure) {
-			await refreshSourceTextComposition(db, sourceId, opts.now);
-		}
 	}
 
 	return summary;

@@ -90,9 +90,30 @@ describe('measureLanguageComposition', () => {
 		expect(r.shares.every((s) => ['ain', 'jpn', 'und'].includes(s.lang))).toBe(true);
 	});
 
-	it('measures nothing on empty or symbol-only text', () => {
+	it('keeps an attested Ainu headword Ainu on its English gloss line', () => {
+		const r = measureLanguageComposition([
+			{ text: 'kamuy: the god, a bear; used of deities in general' }
+		]);
+		expect(share(r, 'ain')).toBeGreaterThan(0.1);
+		expect(share(r, 'eng')).toBeGreaterThan(0.7);
+	});
+
+	it('reads romanized Japanese as Japanese, never as Ainu', () => {
+		const r = measureLanguageComposition([
+			{ text: 'Tamura Suzuko 1988 Ainugo no doshi no kozo. Tokyo: Hosei Daigaku.' }
+		]);
+		expect(share(r, 'ain')).toBe(0);
+	});
+
+	it('refuses to let a known fragment speak for unknown text', () => {
+		const r = measureLanguageComposition([{ text: `the ${'ẑẑẑẑẑ '.repeat(10)}` }]);
+		expect(share(r, 'und')).toBeGreaterThan(0.9);
+	});
+
+	it('measures nothing on empty, symbol-only, or kana-mark-only text', () => {
 		expect(measureLanguageComposition([{ text: '' }]).chars).toBe(0);
 		expect(measureLanguageComposition([{ text: '12 34 --- § ¶' }]).chars).toBe(0);
+		expect(measureLanguageComposition([{ text: 'ーーーー ーー ゛゜' }]).chars).toBe(0);
 	});
 });
 
@@ -193,6 +214,23 @@ describe('refreshSourceTextComposition', () => {
 		expect(share(stored!, 'ain')).toBeGreaterThan(0.2);
 		const [row] = await db.select().from(schema.sources).where(eq(schema.sources.id, 'source-1'));
 		expect(row.textComposition).toEqual(stored);
+	});
+
+	it('falls back to a variant with text when the preferred variant has none', async () => {
+		const db = await makeDb();
+		await seedWork(db);
+		await replaceOcrPages(db, 'rev-1', 'gemini', [
+			{ page: 1, text: 'sirokani pe ran ran piskan konkani pe ran ran piskan' }
+		]);
+		await db.insert(schema.revisionOcrCoverage).values({
+			revisionId: 'rev-1',
+			variant: 'pdftotext',
+			status: 'none',
+			preferred: true
+		});
+		const stored = await refreshSourceTextComposition(db, 'source-1');
+		expect(stored).not.toBeNull();
+		expect(stored!.inputs).toEqual([{ revisionId: 'rev-1', variant: 'gemini' }]);
 	});
 
 	it('clears a stored measurement when the work no longer has text', async () => {

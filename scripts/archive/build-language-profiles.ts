@@ -15,9 +15,19 @@
  *   small-kana convention use.
  * - jpn/kana — katakana runs from the corpora's Japanese translations, plus
  *   katakana runs on hiragana-and-kanji lines of the archive's own OCR text.
+ * - jpn/latn — the translations' kana romanized to Hepburn. Bibliographies
+ *   and personal names put Japanese into Latin letters, where its syllable
+ *   shapes coincide with Ainu's; the romaji profile separates them by what
+ *   Ainu spelling never contains — voiced stops, geminates, long ou.
  * - eng — Latin runs of OCR lines that carry English function words and no
  *   Japanese script, so interlinear Ainu example lines stay out of the
  *   English sample even when they are pure ASCII.
+ *
+ * Besides the trigram profiles, the output carries the well-attested Ainu
+ * Latin vocabulary (frequency and length floors below). Romanized Japanese
+ * scores as Ainu-like on trigrams alone — the syllable shapes coincide — so
+ * a single word may only outvote its line where the word itself is attested
+ * Ainu.
  *
  * Deterministic over its inputs; rerun after the corpora change materially.
  */
@@ -43,6 +53,10 @@ const OUT_PATH = path.resolve(SCRIPT_DIR, '../../src/lib/server/archive/language
 
 /** Grams kept per class: enough to cover each language's common sequences without bloating the bundle. */
 const TOP_GRAMS = 5000;
+/** A word enters the attested-Ainu lexicon with at least this many corpus occurrences… */
+const LEXICON_MIN_COUNT = 50;
+/** …and this many characters — shorter forms collide with too many languages. */
+const LEXICON_MIN_LENGTH = 4;
 
 /**
  * Words frequent in English prose and absent from Ainu — 'to', 'a', or 'an'
@@ -61,6 +75,70 @@ const SMALL_KANA_UPSIZE: Record<string, string> = {
 
 function upsizeSmallKana(text: string): string {
 	return [...text].map((c) => SMALL_KANA_UPSIZE[c] ?? c).join('');
+}
+
+const KANA_ROMAJI: Record<string, string> = {
+	ア: 'a', イ: 'i', ウ: 'u', エ: 'e', オ: 'o',
+	カ: 'ka', キ: 'ki', ク: 'ku', ケ: 'ke', コ: 'ko',
+	ガ: 'ga', ギ: 'gi', グ: 'gu', ゲ: 'ge', ゴ: 'go',
+	サ: 'sa', シ: 'shi', ス: 'su', セ: 'se', ソ: 'so',
+	ザ: 'za', ジ: 'ji', ズ: 'zu', ゼ: 'ze', ゾ: 'zo',
+	タ: 'ta', チ: 'chi', ツ: 'tsu', テ: 'te', ト: 'to',
+	ダ: 'da', ヂ: 'ji', ヅ: 'zu', デ: 'de', ド: 'do',
+	ナ: 'na', ニ: 'ni', ヌ: 'nu', ネ: 'ne', ノ: 'no',
+	ハ: 'ha', ヒ: 'hi', フ: 'fu', ヘ: 'he', ホ: 'ho',
+	バ: 'ba', ビ: 'bi', ブ: 'bu', ベ: 'be', ボ: 'bo',
+	パ: 'pa', ピ: 'pi', プ: 'pu', ペ: 'pe', ポ: 'po',
+	マ: 'ma', ミ: 'mi', ム: 'mu', メ: 'me', モ: 'mo',
+	ヤ: 'ya', ユ: 'yu', ヨ: 'yo',
+	ラ: 'ra', リ: 'ri', ル: 'ru', レ: 're', ロ: 'ro',
+	ワ: 'wa', ヲ: 'o', ヴ: 'vu',
+	ァ: 'a', ィ: 'i', ゥ: 'u', ェ: 'e', ォ: 'o'
+};
+const ROMAJI_DIGRAPH_SECOND: Record<string, string> = { ャ: 'ya', ュ: 'yu', ョ: 'yo' };
+
+/**
+ * Hepburn romanization of a kana run, enough for trigram statistics: digraph
+ * palatals, geminates, syllabic n, and ー as a repeat of the last vowel.
+ */
+function romanizeKana(run: string): string {
+	const kata = [...run.normalize('NFKC')].map((c) => {
+		const code = c.codePointAt(0)!;
+		return code >= 0x3041 && code <= 0x3096 ? String.fromCodePoint(code + 0x60) : c;
+	});
+	let out = '';
+	let geminate = false;
+	for (let i = 0; i < kata.length; i += 1) {
+		const c = kata[i];
+		if (c === 'ッ') {
+			geminate = true;
+			continue;
+		}
+		if (c === 'ン') {
+			out += 'n';
+			continue;
+		}
+		if (c === 'ー') {
+			const vowel = out.match(/[aeiou](?=[^aeiou]*$)/u)?.[0];
+			if (vowel) out += vowel;
+			continue;
+		}
+		let syllable = KANA_ROMAJI[c];
+		if (!syllable) continue;
+		const next = ROMAJI_DIGRAPH_SECOND[kata[i + 1] ?? ''];
+		if (next && syllable.endsWith('i')) {
+			const head = syllable.slice(0, -1);
+			syllable =
+				head === 'sh' || head === 'ch' || head === 'j' ? head + next.slice(1) : head + next;
+			i += 1;
+		}
+		if (geminate) {
+			out += syllable[0] === 'c' ? 't' : syllable[0];
+			geminate = false;
+		}
+		out += syllable;
+	}
+	return out;
 }
 
 class GramCounter {
@@ -107,7 +185,9 @@ async function main() {
 	const ainLatn = new GramCounter();
 	const ainKana = new GramCounter();
 	const jpnKana = new GramCounter();
+	const jpnLatn = new GramCounter();
 	const eng = new GramCounter();
+	const ALL_KANA_RUN = /[\p{Script=Hiragana}\p{Script=Katakana}ー]+/gu;
 
 	// Ainu: Latin runs of corpus records; the kana profile converts each
 	// distinct word once, weighted by its corpus frequency.
@@ -124,6 +204,10 @@ async function main() {
 		if (translation) {
 			const runs = runsOf(translation.normalize('NFKC'), KANA_RUN);
 			if (runs.length > 0) jpnKana.addUnit(canonicalKana(pooledUnit(runs)));
+			const romaji = runsOf(translation.normalize('NFKC'), ALL_KANA_RUN)
+				.map((run) => romanizeKana(run))
+				.filter(Boolean);
+			if (romaji.length > 0) jpnLatn.addUnit(pooledUnit(romaji));
 		}
 	}
 	for (const [word, count] of ainVocab) {
@@ -156,24 +240,38 @@ async function main() {
 		eng.addUnit(pooledUnit(latnRuns));
 	}
 
+	const classes = [
+		['ain/latn', ainLatn],
+		['ain/kana', ainKana],
+		['jpn/kana', jpnKana],
+		['jpn/latn', jpnLatn],
+		['eng/latn', eng]
+	] as const;
+	// An empty class would make every comparison against it NaN at scoring
+	// time; refuse to write a profile that cannot score.
+	for (const [name, counter] of classes) {
+		if (counter.total === 0) throw new Error(`${name} counted no grams — check AINU_ROOT inputs`);
+	}
+	const lexicon = [...ainVocab.entries()]
+		.filter(([word, count]) => count >= LEXICON_MIN_COUNT && [...word].length >= LEXICON_MIN_LENGTH)
+		.map(([word]) => word)
+		.sort();
+
 	const out = {
 		version: 1,
 		channels: {
 			kana: { ain: ainKana.toProfile(), jpn: jpnKana.toProfile() },
-			latn: { ain: ainLatn.toProfile(), eng: eng.toProfile() }
-		}
+			latn: { ain: ainLatn.toProfile(), eng: eng.toProfile(), jpn: jpnLatn.toProfile() }
+		},
+		lexicon: { ainLatn: lexicon }
 	};
 	await fs.writeFile(OUT_PATH, `${JSON.stringify(out)}\n`);
-	for (const [name, counter] of [
-		['ain/latn', ainLatn],
-		['ain/kana', ainKana],
-		['jpn/kana', jpnKana],
-		['eng/latn', eng]
-	] as const) {
+	for (const [name, counter] of classes) {
 		console.log(
 			`${name}: ${counter.total} grams counted, ${Math.min(counter.grams.size, TOP_GRAMS)} kept`
 		);
 	}
+	console.log(`lexicon ain/latn: ${lexicon.length} words`);
 	console.log(`wrote ${path.relative(process.cwd(), OUT_PATH)}`);
 }
 

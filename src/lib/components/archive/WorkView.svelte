@@ -43,6 +43,11 @@
 
 	const source = $derived(work.detail.source);
 	const textShares = $derived(displayShares(source.textComposition));
+	// The share of the text the measurement could not name. Rendered as empty
+	// track, so the bar never shows a fully classified work that is not one.
+	const textResidue = $derived(
+		Math.max(0, 1 - textShares.reduce((sum, s) => sum + s.share, 0))
+	);
 	const pageCount = $derived(work.revision.pageCount);
 	const ocrCoverage = $derived<OcrCoverage[]>(work.ocr ?? []);
 	const textVariants = $derived(textBearingVariants(ocrCoverage));
@@ -536,6 +541,9 @@
 							{#each textShares as s (s.lang)}
 								<span class="archive-composition-seg" data-lang={s.lang} style={`flex-grow: ${Math.max(s.share * 1000, 1)}`}></span>
 							{/each}
+							{#if textResidue >= 0.01}
+								<span class="archive-composition-rest" style={`flex-grow: ${textResidue * 1000}`}></span>
+							{/if}
 						</span>
 						<span class="tnum block text-[12.5px]">
 							{#each textShares as s (s.lang)}
@@ -786,7 +794,8 @@
 	.archive-composition-seg {
 		background: var(--archive-faint-text);
 	}
-	.archive-composition-seg + .archive-composition-seg {
+	.archive-composition-seg + .archive-composition-seg,
+	.archive-composition-seg + .archive-composition-rest {
 		margin-left: 1px;
 	}
 	.archive-composition-seg[data-lang='ain'] {
