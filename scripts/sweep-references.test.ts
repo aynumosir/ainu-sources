@@ -92,7 +92,19 @@ describe('isReferenceHeading', () => {
 		'参照・参考文献',
 		'644         参照・参考文献',
 		'文献目録',
-		'Literaturverzeichnis'
+		'文献',
+		'Literaturverzeichnis',
+		// qualifiers the original whole-line regex carried, or printed alongside
+		'主要参考文献',
+		'引用・参考文献',
+		'参考・引用文献',
+		'引用・参照文献',
+		'参照文献・参照ウェブサイト',
+		'参考文献一覧',
+		'参照文献(参照ウェブサイトを含む)',
+		'3.2 参考文献',
+		'References Cited',
+		'Bibliographie'
 	];
 	for (const line of accepted) {
 		it(`accepts ${JSON.stringify(line)}`, () => expect(isReferenceHeading(line)).toBe(true));
@@ -107,7 +119,17 @@ describe('isReferenceHeading', () => {
 		'26)の Bibliography にあげられていないし， B        .Pil',
 		'',
 		'Introduction',
-		'第3章 動詞'
+		'第3章 動詞',
+		// A numbered citation in running prose. Stripping from the first parenthesis
+		// would reduce these to bare 文献, and three of them in one body would open
+		// the "bibliography" at the first prose citation.
+		'文献(3)によると、この語は連体形をとる',
+		'文献(1)を参照',
+		// A bibliography entry, not a heading: the folio stripper must not promote it.
+		'1985 文献',
+		'文献学入門',
+		'この参考文献',
+		'参考文献について'
 	];
 	for (const line of rejected) {
 		it(`rejects ${JSON.stringify(line.slice(0, 28))}`, () =>
@@ -134,12 +156,40 @@ describe('extractReferenceSection heading choice', () => {
 
 	it('opens at the FIRST occurrence when the heading is a running head', () => {
 		const lines = ['body'];
-		// the same heading printed atop each page of the bibliography
+		// the same heading printed atop each page of the bibliography, a page of OCR
+		// lines apart, which is what marks it as a header rather than a duplicate
 		for (let page = 0; page < 4; page++) {
-			lines.push(`64${page}         参照・参考文献`, `entry for page ${page}`, 'more of that entry');
+			lines.push(`64${page}         参照・参考文献`);
+			lines.push(`entry for page ${page}`);
+			for (let line = 0; line < 30; line++) lines.push(`reference entry ${page}-${line}`);
 		}
 		const result = extractReferenceSection(lines.join('\n'));
 		expect(result?.text).toContain('entry for page 0');
 		expect(result?.text).toContain('entry for page 3');
+	});
+
+	it('takes the last chapter when each chapter carries its own bibliography', () => {
+		const lines: string[] = [];
+		for (let chapter = 1; chapter <= 3; chapter++) {
+			lines.push(`第${chapter}章`);
+			for (let i = 0; i < 200; i++) lines.push(`chapter ${chapter} body line ${i}`);
+			lines.push('参考文献', `bibliography of chapter ${chapter}`, 'a second entry here');
+		}
+		const result = extractReferenceSection(lines.join('\n'));
+		expect(result?.text).toContain('bibliography of chapter 3');
+		expect(result?.text).not.toContain('chapter 2 body line');
+	});
+
+	it('does not pick a table-of-contents line just because a running head follows', () => {
+		// TOC entry, then the real section, then one running-head page: three hits of
+		// the same heading, but only the last two are contiguous.
+		const lines = ['Contents', '参考文献 ... 120'];
+		for (let i = 0; i < 200; i++) lines.push(`body line ${i}`);
+		lines.push('参考文献', 'first bibliography page', 'entry two');
+		for (let i = 0; i < 30; i++) lines.push(`reference entry ${i}`);
+		lines.push('121  参考文献', 'second bibliography page');
+		const result = extractReferenceSection(lines.join('\n'));
+		expect(result?.text).toContain('first bibliography page');
+		expect(result?.text).not.toContain('body line');
 	});
 });
