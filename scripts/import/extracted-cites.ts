@@ -32,8 +32,21 @@
  * Status : 'accepted' or 'candidate' per the rule above, origin 'extracted-cites',
  *          derivation 'reference-extraction'. Only 'accepted' 'cites' edges feed the
  *          public network / PageRank significance.
+ * Reconcile: the datasets are the whole truth for `origin='extracted-cites'`, so a run
+ *          is a full replacement of what this feed asserts. An edge it no longer
+ *          asserts is withdrawn (status 'removed', never deleted), and one it now
+ *          asserts more weakly is demoted from 'accepted' to 'candidate'. Without
+ *          this, a matcher correction could add edges but never take one back, so a
+ *          false citation stayed public once written. Edges from other producers
+ *          (the OpenAlex tail carries no origin) are never touched.
+ *          One known limit: a single row holds one origin, so an edge that both this
+ *          feed and OpenAlex assert is withdrawn when only this feed drops it.
+ *          Distinguishing that needs per-producer observations rather than one row.
  *
- * Flags: --db file:/path (or DATABASE_URL) [--token T] [--dry-run].
+ * Flags: --db file:/path (or DATABASE_URL) [--token T] [--dry-run]
+ *        [--allow-mass-withdrawal] to proceed when a run would withdraw most of the
+ *        feed, which otherwise aborts — an empty or half-populated data directory
+ *        would silently erase the citation network.
  *
  * Run:  DATABASE_URL=file:/tmp/clone.db bun run import:extracted-cites --dry-run
  *       DATABASE_URL=file:/tmp/clone.db bun run import:extracted-cites
@@ -41,7 +54,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, inArray } from 'drizzle-orm';
 import {
 	openRun,
 	closeRun,
@@ -301,9 +314,95 @@ async function ensureReference(
 	return result.sourceId ?? undefined;
 }
 
+/** Status of an edge this feed no longer asserts. Removal is a status, never a delete. */
+const WITHDRAWN_STATUS = 'removed';
+/**
+ * Abort rather than withdraw more than this share of the feed's live edges. A run over
+ * an empty or half-copied data directory looks exactly like "every citation retracted",
+ * and that must not be a silent outcome.
+ */
+const MASS_WITHDRAWAL_SHARE = 0.34;
+
+interface Reconciliation {
+	withdrawn: number;
+	demoted: number;
+	aborted: boolean;
+}
+
+/**
+ * Bring the feed's live edges into line with what the datasets assert: withdraw the
+ * ones they have stopped asserting, and demote the ones they now assert only as
+ * candidates. `asserted` maps `fromId\ttoId` to the status this run wants.
+ */
+async function reconcile(
+	db: Db,
+	asserted: Map<string, string>,
+	dryRun: boolean,
+	allowMassWithdrawal: boolean
+): Promise<Reconciliation> {
+	const live = await db
+		.select({
+			id: sourceRelations.id,
+			fromSourceId: sourceRelations.fromSourceId,
+			toSourceId: sourceRelations.toSourceId,
+			status: sourceRelations.status
+		})
+		.from(sourceRelations)
+		.where(
+			and(
+				eq(sourceRelations.type, 'cites'),
+				eq(sourceRelations.origin, ORIGIN),
+				inArray(sourceRelations.status, [PUBLIC_RELATION_STATUS, 'candidate'])
+			)
+		);
+
+	const stale: string[] = [];
+	const demote: string[] = [];
+	for (const relation of live) {
+		const want = asserted.get(`${relation.fromSourceId}\t${relation.toSourceId}`);
+		if (want === undefined) stale.push(relation.id);
+		else if (want === 'candidate' && relation.status === PUBLIC_RELATION_STATUS) demote.push(relation.id);
+	}
+
+	if (
+		live.length > 0 &&
+		stale.length / live.length > MASS_WITHDRAWAL_SHARE &&
+		!allowMassWithdrawal
+	) {
+		console.warn(
+			`  ! refusing to withdraw ${stale.length} of ${live.length} ${ORIGIN} edges` +
+				` (over ${Math.round(MASS_WITHDRAWAL_SHARE * 100)}%). Check that the dataset` +
+				` directory is complete, then re-run with --allow-mass-withdrawal.`
+		);
+		return { withdrawn: 0, demoted: 0, aborted: true };
+	}
+
+	if (!dryRun) {
+		for (const batch of chunk(stale, 200)) {
+			await db
+				.update(sourceRelations)
+				.set({ status: WITHDRAWN_STATUS })
+				.where(inArray(sourceRelations.id, batch));
+		}
+		for (const batch of chunk(demote, 200)) {
+			await db
+				.update(sourceRelations)
+				.set({ status: 'candidate', confidence: 0.6 })
+				.where(inArray(sourceRelations.id, batch));
+		}
+	}
+	return { withdrawn: stale.length, demoted: demote.length, aborted: false };
+}
+
+function chunk<T>(items: T[], size: number): T[][] {
+	const out: T[][] = [];
+	for (let index = 0; index < items.length; index += size) out.push(items.slice(index, index + size));
+	return out;
+}
+
 export async function run(
 	db: Db,
-	opts: ImporterRunOptions & { dataDir?: string } = {}
+	opts: ImporterRunOptions & { dataDir?: string; allowMassWithdrawal?: boolean } = {}
 ): Promise<ImporterSummary> {
 	const DRY_RUN = opts.dryRun ?? false;
 	const dataDir = opts.dataDir ?? DATA_DIR;
@@ -318,6 +417,9 @@ export async function run(
 	const stats = { attached: 0, added: 0, skippedConfidence: 0, unresolved: 0 };
 	const sourceStats: StatusTally = { applied: 0, noop: 0, candidate: 0, conflict: 0, other: 0 };
 	const unresolvedSlugs = new Set<string>();
+	// Every edge these datasets assert, and how strongly. Reconciliation below reads it
+	// as the complete statement of what this feed currently claims.
+	const asserted = new Map<string, string>();
 
 	const runId = DRY_RUN ? null : await openRun(db, { origin: ORIGIN, mode: 'full', collectorVersion: 'import-extracted-cites@1' });
 
@@ -347,6 +449,9 @@ export async function run(
 					: ref.match?.confidence === 'probable'
 						? 0.85
 						: 0.6;
+			// The strongest assertion wins when a bibliography lists a work twice.
+			const key = `${fromId}\t${toId}`;
+			if (asserted.get(key) !== PUBLIC_RELATION_STATUS) asserted.set(key, desiredStatus);
 			const existingRelation = await findRelation(db, fromId, toId);
 			if (existingRelation) {
 				if (!DRY_RUN && desiredStatus === PUBLIC_RELATION_STATUS && existingRelation.status !== desiredStatus) {
@@ -379,10 +484,22 @@ export async function run(
 		}
 	}
 
-	if (runId) await closeRun(db, runId, { status: 'completed', summary: { ...stats, files: files.length } });
+	const reconciliation = await reconcile(
+		db,
+		asserted,
+		DRY_RUN,
+		opts.allowMassWithdrawal ?? false
+	);
+
+	if (runId)
+		await closeRun(db, runId, {
+			status: reconciliation.aborted ? 'partial' : 'completed',
+			summary: { ...stats, files: files.length, ...reconciliation }
+		});
 
 	console.log(
 		`${DRY_RUN ? '[DRY-RUN] ' : ''}done: ${files.length} file(s) → +${stats.added} added / ${stats.attached} attached` +
+			` / ${reconciliation.withdrawn} withdrawn / ${reconciliation.demoted} demoted` +
 			` (${stats.skippedConfidence} below confidence, ${stats.unresolved} unresolved endpoints)`
 	);
 	if (unresolvedSlugs.size) console.log(`  unresolved slugs: ${[...unresolvedSlugs].sort().join(', ')}`);
@@ -392,7 +509,13 @@ export async function run(
 	result.candidate += sourceStats.candidate;
 	result.conflict += sourceStats.conflict;
 	result.other += sourceStats.other;
-	result.detail = { ...result.detail, sourceObservations: sourceStats };
+	result.detail = {
+		...result.detail,
+		sourceObservations: sourceStats,
+		withdrawn: reconciliation.withdrawn,
+		demoted: reconciliation.demoted,
+		withdrawalBlocked: reconciliation.aborted
+	};
 	return result;
 }
 
@@ -411,7 +534,7 @@ function summary(added: number, attached: number, skipped: number, unresolved: n
 
 if (import.meta.main) {
 	const { db, opts } = parseImporterCli();
-	run(db, opts)
+	run(db, { ...opts, allowMassWithdrawal: process.argv.includes('--allow-mass-withdrawal') })
 		.then(() => process.exit(0))
 		.catch((err) => {
 			console.error('\n✗ import:extracted-cites failed:', err);

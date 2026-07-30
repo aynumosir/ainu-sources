@@ -70,24 +70,41 @@ async function makeDb(): Promise<Db> {
 	return db;
 }
 
-/** Write one verified dataset to a temp dir and import it. */
-async function importFixture(db: Db, references: unknown[]) {
+/** Write one dataset to a temp dir and import it. */
+async function importFixture(
+	db: Db,
+	references: unknown[],
+	opts: { verified?: boolean; allowMassWithdrawal?: boolean } = {}
+) {
 	const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'extracted-cites-'));
 	fs.writeFileSync(
 		path.join(dir, 'fixture.json'),
 		JSON.stringify({
 			schema: 'extracted-cites/v1',
-			verified: true,
+			verified: opts.verified ?? true,
 			citingWork: { slug: 'citing-work', title: 'Citing work', year: 1992 },
 			references
 		})
 	);
 	try {
-		return await run(db, { dataDir: dir });
+		return await run(db, { dataDir: dir, allowMassWithdrawal: opts.allowMassWithdrawal });
 	} finally {
 		fs.rmSync(dir, { recursive: true, force: true });
 	}
 }
+
+const relationRows = async (db: Db) =>
+	(
+		await db
+			.select({
+				slug: schema.sources.slug,
+				status: schema.sourceRelations.status,
+				origin: schema.sourceRelations.origin
+			})
+			.from(schema.sourceRelations)
+			.innerJoin(schema.sources, eq(schema.sourceRelations.toSourceId, schema.sources.id))
+			.where(eq(schema.sourceRelations.type, 'cites'))
+	).sort((a, b) => a.slug.localeCompare(b.slug));
 
 const citedSlugs = async (db: Db) =>
 	(
@@ -151,5 +168,97 @@ describe('extracted-cites importer', () => {
 			}
 		]);
 		expect(await citedSlugs(db)).toEqual(['1979-dixon-ergativity']);
+	});
+});
+
+describe('extracted-cites reconciliation', () => {
+	let db: Db;
+	const ref = (n: number, slug: string, confidence = 'probable') => ({
+		n,
+		authors: ['Someone'],
+		year: 1990 + n,
+		title: `Title ${n}`,
+		ainuRelated: true,
+		match: { slug, confidence }
+	});
+
+	beforeEach(async () => {
+		db = await makeDb();
+		await db.insert(schema.sources).values([
+			{ slug: 'citing-work', title: 'Citing work', type: 'publication' },
+			{ slug: 'cited-a', title: 'Cited A', type: 'publication' },
+			{ slug: 'cited-b', title: 'Cited B', type: 'publication' },
+			{ slug: 'cited-c', title: 'Cited C', type: 'publication' }
+		]);
+	});
+
+	it('withdraws an edge the datasets no longer assert', async () => {
+		await importFixture(db, [ref(1, 'cited-a'), ref(2, 'cited-b'), ref(3, 'cited-c')], {
+			verified: false
+		});
+		expect((await relationRows(db)).map((r) => [r.slug, r.status])).toEqual([
+			['cited-a', 'accepted'],
+			['cited-b', 'accepted'],
+			['cited-c', 'accepted']
+		]);
+
+		// cited-b's reference is gone from the regenerated dataset
+		const summary = await importFixture(db, [ref(1, 'cited-a'), ref(3, 'cited-c')], {
+			verified: false
+		});
+		expect(summary.detail).toMatchObject({ withdrawn: 1 });
+		expect((await relationRows(db)).map((r) => [r.slug, r.status])).toEqual([
+			['cited-a', 'accepted'],
+			['cited-b', 'removed'],
+			['cited-c', 'accepted']
+		]);
+	});
+
+	it('demotes an edge the datasets now assert only as a candidate', async () => {
+		await importFixture(db, [ref(1, 'cited-a'), ref(2, 'cited-b')], { verified: false });
+		await importFixture(db, [ref(1, 'cited-a'), ref(2, 'cited-b', 'candidate')], {
+			verified: false
+		});
+		const byslug = Object.fromEntries((await relationRows(db)).map((r) => [r.slug, r.status]));
+		expect(byslug['cited-a']).toBe('accepted');
+		expect(byslug['cited-b']).toBe('candidate');
+	});
+
+	it('leaves another producer’s edges alone', async () => {
+		const [citing] = await db
+			.select({ id: schema.sources.id })
+			.from(schema.sources)
+			.where(eq(schema.sources.slug, 'citing-work'));
+		const [other] = await db
+			.select({ id: schema.sources.id })
+			.from(schema.sources)
+			.where(eq(schema.sources.slug, 'cited-c'));
+		await db.insert(schema.sourceRelations).values({
+			id: crypto.randomUUID(),
+			fromSourceId: citing.id,
+			toSourceId: other.id,
+			type: 'cites',
+			status: 'accepted',
+			origin: null
+		});
+		await importFixture(db, [ref(1, 'cited-a')], { verified: false });
+		const untouched = (await relationRows(db)).find((r) => r.origin === null);
+		expect(untouched?.status).toBe('accepted');
+	});
+
+	it('refuses a mass withdrawal unless it is asked for explicitly', async () => {
+		await importFixture(db, [ref(1, 'cited-a'), ref(2, 'cited-b'), ref(3, 'cited-c')], {
+			verified: false
+		});
+		// A dataset directory reduced to one reference would retract two of three edges.
+		const blocked = await importFixture(db, [ref(1, 'cited-a')], { verified: false });
+		expect(blocked.detail).toMatchObject({ withdrawn: 0 });
+		expect((await relationRows(db)).filter((r) => r.status === 'accepted')).toHaveLength(3);
+
+		const forced = await importFixture(db, [ref(1, 'cited-a')], {
+			verified: false,
+			allowMassWithdrawal: true
+		});
+		expect(forced.detail).toMatchObject({ withdrawn: 2 });
 	});
 });
