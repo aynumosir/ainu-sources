@@ -30,11 +30,63 @@ import { openDb } from './import/lib/entities';
 import { sources } from '../src/lib/server/db/schema';
 import { ACTIVE_SOURCE_STATUS } from '../src/lib/server/visibility';
 
-const REFERENCE_HEADING =
-	/^\s*(references|bibliography|works\s+cited|literature\s+cited|reference\s+list|参考文献|引用文献|主要参考文献|参照文献|文\s*献|литература|список\s+литературы|библиография|literaturverzeichnis|références)\s*$/imu;
 const TERMINAL_HEADING =
 	/^\s*(appendix|appendices|index|about\s+the\s+author|author\s+biography|付録|附録|索引|著者紹介)\s*$/imu;
 const GENERATED_SCHEMA = 'extracted-cites/v1';
+
+// A heading line survives only if the WHOLE line is a heading — prose that merely
+// mentions 参考文献 must not open a reference section. Printed headings carry
+// decoration the anchor would otherwise reject, so each line is stripped down
+// first and the whole-line test applied to what remains:
+//   参　考　文　献   ·  【参考文献】  ·  〇参考文献  ·  8. 参考文献
+//   参考文献・ウェブサイト  ·  参照・参考文献  ·  Sources and References
+//   644    参照・参考文献        (a running head, page number and all)
+/** The heading itself. One of these must be present for a line to qualify. */
+const HEADING_WORD =
+	/(?:参考文献|引用文献|参照文献|参考資料|引用資料|文献目録|文献一覧|references?|bibliography|works\s+(?:cited|consulted)|literature\s+cited|reference\s+list|литература|список\s+литературы|библиография|literaturverzeichnis|références|文献)/iu;
+/** Items a heading may be compounded with: 参考文献・ウェブサイト, 参照・参考文献. */
+const HEADING_TAIL = /(?:参照|資料|ウェブサイト|web\s*サイト|サイト|url|and\s+sources|sources)/iu;
+const HEADING_SEPARATOR = /\s*(?:[・、,&＆]|および|and)\s*/iu;
+/** Leading section numbering: 8. · 8．· 第8章 · II. · (3) */
+const LEADING_NUMBER = /^\s*(?:第\s*[0-9０-９一二三四五六七八九十]+\s*[章節部]|[(（]?[0-9０-９]+[)）]?|[ivxIVX]+)\s*[.．、:：]?\s*/u;
+/** Decoration around a heading: brackets, bullets, and a trailing explanatory note. */
+const LEADING_MARK = /^[\s　【〔〈《「『（(\[〇○●◆◇■□▲△※＊*#･・~-]+/u;
+const TRAILING_MARK = /[\s　】〕〉》」』）)\]：:・~-]+$/u;
+const TRAILING_NOTE = /[（(].*$/su;
+
+/**
+ * Reduce a printed heading to bare vocabulary: drop a running head's page number,
+ * section numbering, brackets and bullets, a trailing parenthetical note, and the
+ * inter-character spacing that 参　考　文　献 is typeset with.
+ */
+function normalizeHeadingLine(line: string): string {
+	let value = line.normalize('NFKC').trim();
+	// A running head carries the folio: "644    参照・参考文献" (either side).
+	value = value.replace(/^\s*\d{1,4}\s+/u, '').replace(/\s+\d{1,4}\s*$/u, '');
+	value = value.replace(LEADING_NUMBER, '');
+	value = value.replace(LEADING_MARK, '').replace(TRAILING_MARK, '');
+	value = value.replace(TRAILING_NOTE, '');
+	// 参 考 文 献 → 参考文献, while "works cited" keeps its single space.
+	value = value.replace(/(?<=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}])[\s　]+(?=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}])/gu, '');
+	return value.replace(/[\s　]+/gu, ' ').trim();
+}
+
+/**
+ * True when the line is a bibliography heading and nothing else. The normalized
+ * line must be built entirely from heading vocabulary and the items a heading is
+ * compounded with, so a sentence mentioning 参考文献 is rejected.
+ */
+export function isReferenceHeading(line: string): boolean {
+	const value = normalizeHeadingLine(line);
+	if (!value || value.length > 40) return false;
+	if (!HEADING_WORD.test(value)) return false;
+	const whole = new RegExp(
+		`^(?:${HEADING_TAIL.source}${HEADING_SEPARATOR.source})*${HEADING_WORD.source}` +
+			`(?:${HEADING_SEPARATOR.source}(?:${HEADING_WORD.source}|${HEADING_TAIL.source}))*$`,
+		'iu'
+	);
+	return whole.test(value);
+}
 
 interface ManifestRow {
 	path: string;
@@ -92,15 +144,26 @@ export function normalizeText(value: string): string {
 
 export function extractReferenceSection(text: string): ReferenceSection | null {
 	const lines = text.split(/\r?\n/u);
-	let start = -1;
-	let heading = '';
+	const hits: { index: number; heading: string; key: string }[] = [];
 	for (let index = 0; index < lines.length; index++) {
-		if (REFERENCE_HEADING.test(lines[index])) {
-			start = index + 1;
-			heading = lines[index].trim();
+		if (isReferenceHeading(lines[index])) {
+			hits.push({ index, heading: lines[index].trim(), key: normalizeHeadingLine(lines[index]) });
 		}
 	}
-	if (start < 0) return null;
+	if (hits.length === 0) return null;
+	// The last hit is normally the right one: a heading named in the table of
+	// contents precedes the section it points at. A heading printed as a running
+	// head is the exception — it repeats on every page of the bibliography, so its
+	// LAST occurrence is the final page and its first is where the section opens.
+	const occurrences = new Map<string, number>();
+	for (const hit of hits) occurrences.set(hit.key, (occurrences.get(hit.key) ?? 0) + 1);
+	const last = hits[hits.length - 1];
+	const chosen =
+		(occurrences.get(last.key) ?? 0) >= 3
+			? hits.find((hit) => hit.key === last.key)!
+			: last;
+	const start = chosen.index + 1;
+	const heading = chosen.heading;
 	let end = lines.length;
 	for (let index = start + 3; index < lines.length; index++) {
 		if (TERMINAL_HEADING.test(lines[index])) {
@@ -228,7 +291,7 @@ function scanPageRange(variantDir: string): string | undefined {
 	for (const name of pages) {
 		const text = fs.readFileSync(path.join(variantDir, name), 'utf8');
 		const number = Number(name.match(/\d+/u)?.[0]);
-		if (REFERENCE_HEADING.test(text) && first === undefined) first = number;
+		if (first === undefined && text.split(/\r?\n/u).some(isReferenceHeading)) first = number;
 		if (first !== undefined) last = number;
 	}
 	return first === undefined || last === undefined ? undefined : `scan pp. ${first}-${last}`;
