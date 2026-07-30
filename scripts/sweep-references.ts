@@ -146,40 +146,50 @@ function authorKeys(author: string | null): string[] {
 }
 
 function matchOne(sectionNormalized: string, source: CatalogueSource): CatalogueMatch | null {
+	// Every occurrence of every alias that appears. A title cited in its own right
+	// may ALSO appear inside a longer title elsewhere in the same bibliography, and
+	// a work cited under one alias may be nested under another, so stopping at the
+	// first alias to hit would discard the occurrence that stands alone.
+	const spans: { at: number; length: number }[] = [];
+	let matchedTitle: string | undefined;
 	for (const alias of titleAliases(source)) {
-		const index = sectionNormalized.indexOf(alias.normalized);
-		if (index < 0) continue;
-		// Every occurrence, because a title cited in its own right may ALSO appear
-		// inside a longer title elsewhere in the same bibliography.
-		const spans: { at: number; length: number }[] = [];
-		for (let at = index; at >= 0; at = sectionNormalized.indexOf(alias.normalized, at + 1)) {
+		let hit = false;
+		for (
+			let at = sectionNormalized.indexOf(alias.normalized);
+			at >= 0;
+			at = sectionNormalized.indexOf(alias.normalized, at + 1)
+		) {
 			spans.push({ at, length: alias.normalized.length });
+			hit = true;
 		}
-		// Corroborate each occurrence on its own window and keep the best. Reading
-		// only the first would judge the work by a neighbouring entry's year and
-		// author whenever that occurrence is the one sitting inside a longer title.
-		const keys = authorKeys(source.author);
-		let corroboration: ('year' | 'author')[] = [];
-		for (const span of spans) {
-			const window = sectionNormalized.slice(
-				Math.max(0, span.at - 180),
-				Math.min(sectionNormalized.length, span.at + span.length + 180)
-			);
-			const found: ('year' | 'author')[] = [];
-			if (source.yearStart && window.includes(String(source.yearStart))) found.push('year');
-			if (keys.some((key) => window.includes(key))) found.push('author');
-			if (found.length > corroboration.length) corroboration = found;
-			if (corroboration.length === 2) break;
-		}
-		return {
-			source,
-			confidence: corroboration.length ? 'probable' : 'candidate',
-			matchedTitle: alias.display,
-			corroboration,
-			spans
-		};
+		// Aliases come longest-first, so the first one to appear names the match.
+		if (hit && matchedTitle === undefined) matchedTitle = alias.display;
 	}
-	return null;
+	if (matchedTitle === undefined) return null;
+	spans.sort((a, b) => a.at - b.at || b.length - a.length);
+	// Corroborate each occurrence on its own window and keep the best. Reading only
+	// the first would judge the work by a neighbouring entry's year and author
+	// whenever that occurrence is the one sitting inside a longer title.
+	const keys = authorKeys(source.author);
+	let corroboration: ('year' | 'author')[] = [];
+	for (const span of spans) {
+		const window = sectionNormalized.slice(
+			Math.max(0, span.at - 180),
+			Math.min(sectionNormalized.length, span.at + span.length + 180)
+		);
+		const found: ('year' | 'author')[] = [];
+		if (source.yearStart && window.includes(String(source.yearStart))) found.push('year');
+		if (keys.some((key) => window.includes(key))) found.push('author');
+		if (found.length > corroboration.length) corroboration = found;
+		if (corroboration.length === 2) break;
+	}
+	return {
+		source,
+		confidence: corroboration.length ? 'probable' : 'candidate',
+		matchedTitle,
+		corroboration,
+		spans
+	};
 }
 
 /**

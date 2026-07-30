@@ -135,3 +135,40 @@ Ignored
 		expect(matches.map((m) => m.source.slug)).toContain('2000-tamura-ainu-language');
 	});
 });
+
+describe('reference sweep — alias coverage', () => {
+	const withAliases = (
+		slug: string,
+		title: string,
+		altTitles: string[],
+		author: string,
+		yearStart: number
+	) => ({ ...source(slug, title, author, yearStart), altTitles });
+
+	it('keeps a work whose second alias is cited on its own', () => {
+		// The first alias to hit is nested inside the longer work; the alternate title
+		// is an independent citation further down.
+		const catalogue = [
+			withAliases(
+				'2018-senuma-ud',
+				'Universal Dependencies for Ainu',
+				['Ainu Dependency Treebank Report'],
+				'Senuma, Hajime',
+				2018
+			),
+			source('2017-senuma-toward', 'Toward Universal Dependencies for Ainu', 'Senuma, Hajime', 2017)
+		];
+		const matches = findCatalogueMatches(
+			[
+				'Senuma, Hajime. 2017. Toward Universal Dependencies for Ainu. LREC.',
+				'Senuma, Hajime. 2018. Ainu Dependency Treebank Report. LREC.'
+			].join(' '),
+			catalogue,
+			'citing-work'
+		);
+		expect(matches.map((m) => m.source.slug).sort()).toEqual([
+			'2017-senuma-toward',
+			'2018-senuma-ud'
+		]);
+	});
+});
