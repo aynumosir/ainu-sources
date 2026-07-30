@@ -17,6 +17,14 @@
  * Probable matches become accepted citation edges. Candidate matches are stored
  * as candidate edges, outside the public network and PageRank calculation.
  *
+ * Ordering: where two catalogue records hold the same work, the sweep picks between
+ * them partly on `sources.significance` — the PageRank over the edges this sweep
+ * itself feeds. Output therefore depends on when that score was last refreshed, so
+ * run `archive:refresh-significance` BEFORE a sweep whose result you intend to
+ * compare against an earlier one. Measured, the dependency moves 2 edges in 1,598
+ * across a refresh; ranking on record properties instead was tried and picks worse
+ * records, so the score stays and the ordering is documented rather than removed.
+ *
  * Run:
  *   DATABASE_URL=file:./local.db bun run sweep:references
  *
@@ -378,11 +386,25 @@ function duplicateKey(match: CatalogueMatch): string {
 	return `${match.source.yearStart ?? 'nd'}\t${normalizeText(match.source.title)}`;
 }
 
+/** Choose between two catalogue records held for the same work. */
 function matchRank(match: CatalogueMatch): number {
 	const confidence = match.confidence === 'probable' ? 1_000_000 : 0;
+	// Which of two records for one work the rest of the catalogue already treats as
+	// the real one. This reads `significance`, the PageRank over the very edges this
+	// sweep feeds, so a refresh between runs can change the winner — see the header
+	// note on running the refresh before the sweep. Substitutes were measured and
+	// were worse: ranking by slug picks the shorter stub over
+	// 1996-tamura-ainu-saru-dialect-dictionary, and ranking by metadata richness
+	// picks corpus-derived records that carry an entry count over the bibliographic
+	// record a citation actually means.
 	const significance = Math.round((match.source.significance ?? 0) * 100_000);
 	const stubPenalty = /[（(]\d{4}[）)]$/u.test(match.source.title) ? -10_000 : 0;
 	return confidence + significance + stubPenalty + normalizeText(match.matchedTitle).length;
+}
+
+/** Deterministic order for records nothing above separates. */
+function tieBreak(a: CatalogueMatch, b: CatalogueMatch): number {
+	return a.source.slug.localeCompare(b.source.slug);
 }
 
 export function findCatalogueMatches(
@@ -399,7 +421,12 @@ export function findCatalogueMatches(
 		if (!match) continue;
 		const key = duplicateKey(match);
 		const previous = byWork.get(key);
-		if (!previous || matchRank(match) > matchRank(previous)) byWork.set(key, match);
+		if (!previous) {
+			byWork.set(key, match);
+			continue;
+		}
+		const better = matchRank(match) - matchRank(previous) || tieBreak(previous, match);
+		if (better > 0) byWork.set(key, match);
 	}
 	return withoutSubsumedMatches([...byWork.values()]).sort((a, b) => {
 		const ay = a.source.yearStart ?? 9999;

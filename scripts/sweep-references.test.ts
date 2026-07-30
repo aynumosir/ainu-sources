@@ -382,3 +382,16 @@ describe('corroboration window', () => {
 		expect(matches[0].corroboration).toEqual(expect.arrayContaining(['year', 'author']));
 	});
 });
+
+describe('duplicate record choice', () => {
+	it('picks the same record whichever order the catalogue arrives in', () => {
+		// Two records for one work, identical in everything the rank reads.
+		const a = source('1996-tamura-a', 'アイヌ語沙流方言辞典', 'Tamura, Suzuko', 1996);
+		const b = source('1996-tamura-b', 'アイヌ語沙流方言辞典', 'Tamura, Suzuko', 1996);
+		const text = '田村すず子 1996 アイヌ語沙流方言辞典 東京: 草風館';
+		const forward = findCatalogueMatches(text, [a, b], 'citing-work');
+		const reversed = findCatalogueMatches(text, [b, a], 'citing-work');
+		expect(forward).toHaveLength(1);
+		expect(reversed.map((m) => m.source.slug)).toEqual(forward.map((m) => m.source.slug));
+	});
+});
