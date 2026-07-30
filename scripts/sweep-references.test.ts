@@ -99,4 +99,39 @@ Ignored
 			'2018-senuma-ud'
 		]);
 	});
+
+	it('corroborates the occurrence that stands alone, not merely the first', () => {
+		const catalogue = [
+			source('1887-batchelor-grammar', 'A Grammar of the Ainu Language', 'Batchelor, John', 1887),
+			source('2000-tamura-ainu-language', 'The Ainu Language', 'Tamura, Suzuko', 2000)
+		];
+		// Tamura's title occurs first inside Batchelor's, then on its own further on.
+		const matches = findCatalogueMatches(
+			[
+				'Batchelor, John. 1887. A Grammar of the Ainu Language. Tokyo.',
+				'x'.repeat(400),
+				'Tamura, Suzuko. 2000. The Ainu Language. Tokyo: Sanseido.'
+			].join(' '),
+			catalogue,
+			'citing-work'
+		);
+		const tamura = matches.find((m) => m.source.slug === '2000-tamura-ainu-language');
+		expect(tamura).toBeDefined();
+		expect(tamura!.confidence).toBe('probable');
+		expect(tamura!.corroboration).toEqual(expect.arrayContaining(['year', 'author']));
+	});
+
+	it('does not let an uncorroborated host displace a corroborated match', () => {
+		const catalogue = [
+			// the host title is present, but neither its year nor its author is nearby
+			source('1990-host', 'Studies on The Ainu Language and Culture', 'Nobody, X.', 1990),
+			source('2000-tamura-ainu-language', 'The Ainu Language', 'Tamura, Suzuko', 2000)
+		];
+		const matches = findCatalogueMatches(
+			'Tamura, Suzuko. 2000. Studies on The Ainu Language and Culture.',
+			catalogue,
+			'citing-work'
+		);
+		expect(matches.map((m) => m.source.slug)).toContain('2000-tamura-ainu-language');
+	});
 });

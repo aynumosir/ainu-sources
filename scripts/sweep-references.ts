@@ -155,13 +155,22 @@ function matchOne(sectionNormalized: string, source: CatalogueSource): Catalogue
 		for (let at = index; at >= 0; at = sectionNormalized.indexOf(alias.normalized, at + 1)) {
 			spans.push({ at, length: alias.normalized.length });
 		}
-		const window = sectionNormalized.slice(
-			Math.max(0, index - 180),
-			Math.min(sectionNormalized.length, index + alias.normalized.length + 180)
-		);
-		const corroboration: ('year' | 'author')[] = [];
-		if (source.yearStart && window.includes(String(source.yearStart))) corroboration.push('year');
-		if (authorKeys(source.author).some((key) => window.includes(key))) corroboration.push('author');
+		// Corroborate each occurrence on its own window and keep the best. Reading
+		// only the first would judge the work by a neighbouring entry's year and
+		// author whenever that occurrence is the one sitting inside a longer title.
+		const keys = authorKeys(source.author);
+		let corroboration: ('year' | 'author')[] = [];
+		for (const span of spans) {
+			const window = sectionNormalized.slice(
+				Math.max(0, span.at - 180),
+				Math.min(sectionNormalized.length, span.at + span.length + 180)
+			);
+			const found: ('year' | 'author')[] = [];
+			if (source.yearStart && window.includes(String(source.yearStart))) found.push('year');
+			if (keys.some((key) => window.includes(key))) found.push('author');
+			if (found.length > corroboration.length) corroboration = found;
+			if (corroboration.length === 2) break;
+		}
 		return {
 			source,
 			confidence: corroboration.length ? 'probable' : 'candidate',
@@ -189,6 +198,10 @@ function withoutSubsumedMatches(matches: CatalogueMatch[]): CatalogueMatch[] {
 				!matches.some(
 					(other) =>
 						other !== match &&
+						// An uncorroborated host never becomes an edge of its own, so letting
+						// it displace a corroborated match would drop a citation and record
+						// nothing in its place.
+						!(other.confidence === 'candidate' && match.confidence === 'probable') &&
 						other.spans.some(
 							(host) =>
 								host.length > span.length &&
