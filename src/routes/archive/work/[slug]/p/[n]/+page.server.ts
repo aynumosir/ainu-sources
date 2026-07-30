@@ -19,13 +19,20 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 			loadArchiveWork(params.slug, layout.principal, requestedPage),
 			loadArchiveWorkPersons(params.slug)
 		]);
-		const work = loadedWork && !loadedWork.unavailable
-			? {
-					...loadedWork,
-					ocr: await loadTextCoverage(loadedWork.revision.id),
-					folios: await loadPageFolios(loadedWork.revision.id)
-				}
-			: loadedWork;
+		// Both need the revision id, so neither can join the batch above — but they do
+		// not need each other. Awaiting them in turn spent a whole database round trip
+		// waiting, and on these pages nearly all of the time is round trips: measured
+		// on production, a request spends about 4% of its wall clock on CPU.
+		const work =
+			loadedWork && !loadedWork.unavailable
+				? await (async () => {
+						const [ocr, folios] = await Promise.all([
+							loadTextCoverage(loadedWork.revision.id),
+							loadPageFolios(loadedWork.revision.id)
+						]);
+						return { ...loadedWork, ocr, folios };
+					})()
+				: loadedWork;
 		return {
 			accessDenied: false,
 			work,
