@@ -500,7 +500,7 @@ function serializeHit(hit: RankedChunk, query: string, maxChars: number) {
 	};
 }
 
-async function preferredVariant(db: Db, revisionId: string): Promise<string | null> {
+export async function preferredVariant(db: Db, revisionId: string): Promise<string | null> {
 	const [row] = await db
 		.select({ variant: revisionOcrCoverage.variant })
 		.from(revisionOcrCoverage)
@@ -509,7 +509,7 @@ async function preferredVariant(db: Db, revisionId: string): Promise<string | nu
 	return row?.variant ?? null;
 }
 
-async function firstVariantWithChunks(db: RawSqlDb, revisionId: string): Promise<string | null> {
+export async function firstVariantWithChunks(db: RawSqlDb, revisionId: string): Promise<string | null> {
 	const [row] = await db.all<{ variant: string }>(sql`
 		select state.variant
 		from ocr_ingest_state state

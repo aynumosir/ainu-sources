@@ -11,6 +11,7 @@ import {
 	sourceFiles
 } from '../../src/lib/server/db/schema';
 import { activateOcrGeneration, type OcrPageInput } from '../../src/lib/server/archive/ocr';
+import { refreshSourceTextComposition } from '../../src/lib/server/archive/language-composition';
 import {
 	assessTextQuality,
 	sampleVariantPages,
@@ -35,7 +36,7 @@ export interface IngestOcrSummary {
 	skippedNoRevision: number;
 }
 
-type SourceFileRow = { id: string; checkoutPath: string };
+type SourceFileRow = { id: string; sourceId: string; checkoutPath: string };
 type CurrentRevisionRow = { id: string; sourceFileId: string };
 
 export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestOcrSummary> {
@@ -166,6 +167,11 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 						.set({ preferred: true })
 						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, pick)));
 				}
+
+				// Inside the transaction, so a crash never records the file's
+				// content hash while leaving the work's stored composition
+				// stale — the unchanged-file branch would then skip it forever.
+				await refreshSourceTextComposition(tx as unknown as Db, sourceFile.sourceId, opts.now ?? new Date());
 			});
 		}
 		summary.ingested += 1;
@@ -216,13 +222,17 @@ async function collectOcrFiles(grammarDir: string, limit: number): Promise<strin
 
 async function sourceFilesByCheckoutStem(db: Db): Promise<Map<string, SourceFileRow>> {
 	const rows = await db
-		.select({ id: sourceFiles.id, checkoutPath: sourceFiles.checkoutPath })
+		.select({ id: sourceFiles.id, sourceId: sourceFiles.sourceId, checkoutPath: sourceFiles.checkoutPath })
 		.from(sourceFiles)
 		.where(isNotNull(sourceFiles.checkoutPath));
 	const out = new Map<string, SourceFileRow>();
 	for (const row of rows) {
 		if (!row.checkoutPath) continue;
-		out.set(stemFromCheckoutPath(row.checkoutPath), { id: row.id, checkoutPath: row.checkoutPath });
+		out.set(stemFromCheckoutPath(row.checkoutPath), {
+			id: row.id,
+			sourceId: row.sourceId,
+			checkoutPath: row.checkoutPath
+		});
 	}
 	return out;
 }

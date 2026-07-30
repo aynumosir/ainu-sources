@@ -12,6 +12,7 @@ import {
 import { sql } from 'drizzle-orm';
 import { user } from './auth.schema';
 import type { SourceDiff } from '../merge/diff';
+import type { SourceTextComposition } from '$lib/archive/text-composition';
 
 /**
  * アイヌ語文献資料データベース — data model
@@ -64,6 +65,14 @@ export const sources = sqliteTable(
 		// --- linguistic metadata ---
 		languages: text('languages', { mode: 'json' }).$type<string[]>(), // ISO-ish: ain, jpn, rus, eng, lat...
 		scripts: text('scripts', { mode: 'json' }).$type<string[]>(), // kana, latn, cyrl, kanji
+		/**
+		 * Measured language composition of the work's text — how much of it is
+		 * Ainu, Japanese, English… by classified character mass, refreshed from
+		 * the current revisions' text (server/archive/language-composition).
+		 * null = the work has no measurable text. Distinct from `languages`,
+		 * the curated bibliographic record.
+		 */
+		textComposition: text('text_composition', { mode: 'json' }).$type<SourceTextComposition>(),
 
 		// --- holdings ---
 		holdingInstitution: text('holding_institution'),

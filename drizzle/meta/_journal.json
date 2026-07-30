@@ -148,6 +148,13 @@
       "when": 1785241287400,
       "tag": "0020_aromatic_hiroim",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "6",
+      "when": 1785397102294,
+      "tag": "0021_text_composition",
+      "breakpoints": true
     }
   ]
 }
