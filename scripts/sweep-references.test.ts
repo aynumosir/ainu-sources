@@ -3,6 +3,7 @@ import {
 	extractReferenceSection,
 	findCatalogueMatches,
 	isReferenceHeading,
+	isTerminalHeading,
 	normalizeText
 } from './sweep-references';
 
@@ -191,5 +192,28 @@ describe('extractReferenceSection heading choice', () => {
 		const result = extractReferenceSection(lines.join('\n'));
 		expect(result?.text).toContain('first bibliography page');
 		expect(result?.text).not.toContain('body line');
+	});
+});
+
+describe('isTerminalHeading', () => {
+	for (const line of ['Appendix', 'Appendix A', '【索引】', '第9章 索引', '索引', '120  索引', '人名索引'])
+		it(`closes on ${JSON.stringify(line)}`, () => expect(isTerminalHeading(line)).toBe(true));
+	for (const line of ['参考文献', 'body text', 'Indexing the corpus'])
+		it(`does not close on ${JSON.stringify(line)}`, () =>
+			expect(isTerminalHeading(line)).toBe(false));
+});
+
+describe('extractReferenceSection case folding', () => {
+	it('treats Bibliography and BIBLIOGRAPHY as one running head', () => {
+		// The Nowakowski dissertation prints the heading mixed-case on its first
+		// bibliography page and upper-case on the rest.
+		const lines = ['body', 'Bibliography', 'reference one, the first entry'];
+		for (let i = 0; i < 30; i++) lines.push(`entry ${i}`);
+		for (let page = 0; page < 3; page++) {
+			lines.push('BIBLIOGRAPHY');
+			for (let i = 0; i < 30; i++) lines.push(`later entry ${page}-${i}`);
+		}
+		const result = extractReferenceSection(lines.join('\n'));
+		expect(result?.text).toContain('reference one, the first entry');
 	});
 });

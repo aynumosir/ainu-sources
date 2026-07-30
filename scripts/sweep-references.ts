@@ -30,9 +30,11 @@ import { openDb } from './import/lib/entities';
 import { sources } from '../src/lib/server/db/schema';
 import { ACTIVE_SOURCE_STATUS } from '../src/lib/server/visibility';
 
-const TERMINAL_HEADING =
-	/^\s*(appendix|appendices|index|about\s+the\s+author|author\s+biography|付録|附録|索引|著者紹介)\s*$/imu;
 const GENERATED_SCHEMA = 'extracted-cites/v1';
+/** What ends a reference section. Indexes and appendices list names and years too. */
+const TERMINAL_CORE =
+	/(?:appendix|appendices|index|about\s+the\s+author|author\s+biograph(?:y|ies)|付録|附録|索引|人名索引|事項索引|著者紹介|著者略歴)/iu;
+const TERMINAL_TAIL = /(?:[a-z]|[0-9０-９]+|一覧|表)/iu;
 
 // A heading line survives only if the WHOLE line is a heading — prose that merely
 // mentions 参考文献 must not open a reference section. Printed headings carry
@@ -47,12 +49,12 @@ const GENERATED_SCHEMA = 'extracted-cites/v1';
 const HEADING_CORE =
 	/(?:参考文献|引用文献|参照文献|参考図書|参考資料|引用資料|文献目録|文献一覧|文献表|references?|bibliograph(?:y|ie)|works\s+(?:cited|consulted)|literature\s+cited|reference\s+list|литература|список\s+литературы|библиография|literaturverzeichnis|références)/iu;
 const HEADING_CORE_WEAK = /(?:文献)/u;
-/** Qualifiers printed before the heading: 主要参考文献, 引用・参考文献. */
-const HEADING_PREFIX = /(?:主要|主な|おもな|引用|参照|参考|注)/u;
+/** Qualifiers printed before the heading: 主要参考文献, Selected Bibliography. */
+const HEADING_PREFIX = /(?:主要|主な|おもな|引用|参照|参考|注|selected|primary|main)/iu;
 /** Items a heading is compounded with: 参考文献・ウェブサイト, 参考文献一覧. */
 const HEADING_TAIL =
 	/(?:一覧|リスト|目録|表|参照|資料|図書|ウェブサイト|web\s*サイト|サイト|url|notes?|cited|consulted|and\s+sources|sources)/iu;
-const HEADING_SEPARATOR = /\s*(?:[・、,&＆]|および|と|and)?\s*/iu;
+const HEADING_SEPARATOR = /\s*(?:[・、,&＆/／]|および|と|and)?\s*/iu;
 /** Leading section numbering: 8. · 8．· 3.2 · 第8章 · II. · (3) */
 const LEADING_NUMBER = /^\s*(?:第\s*[0-9０-９一二三四五六七八九十]+\s*[章節部]|[(（]?[0-9０-９]+(?:[.．][0-9０-９]+)*[)）]?|[ivxIVX]+)\s*[.．、:：]?\s*/u;
 /** Decoration around a heading: brackets and bullets. */
@@ -73,9 +75,10 @@ function normalizeHeadingLine(line: string): { value: string; folioStripped: boo
 	// A running head carries the folio: "644    参照・参考文献" (either side).
 	const withoutFolio = value.replace(/^\s*\d{1,4}\s+/u, '').replace(/\s+\d{1,4}\s*$/u, '');
 	const folioStripped = withoutFolio !== value;
-	value = withoutFolio.replace(LEADING_NUMBER, '');
-	value = value.replace(LEADING_MARK, '').replace(TRAILING_MARK, '');
-	value = value.replace(TRAILING_NOTE, '');
+	// Brackets first, then numbering: 【8. 参考文献】 wears both.
+	value = withoutFolio.replace(LEADING_MARK, '').replace(TRAILING_MARK, '');
+	value = value.replace(LEADING_NUMBER, '').replace(LEADING_MARK, '');
+	value = value.replace(TRAILING_NOTE, '').replace(TRAILING_MARK, '');
 	// 参 考 文 献 → 参考文献, while "works cited" keeps its single space.
 	value = value.replace(/(?<=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}])[\s　]+(?=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}])/gu, '');
 	return { value: value.replace(/[\s　]+/gu, ' ').trim(), folioStripped };
@@ -103,6 +106,23 @@ export function isReferenceHeading(line: string): boolean {
 	// Bare 文献 qualifies only as printed: allowing it after a folio strip would
 	// promote a bibliography entry such as "1985 文献" into a section heading.
 	return !folioStripped && wholeLinePattern(HEADING_CORE_WEAK).test(value);
+}
+
+/**
+ * True when the line ends the reference section. Read through the same reduction
+ * as an opening heading, so 【索引】 and `第9章 索引` and a folio-bearing `Appendix A`
+ * all close it — an index or appendix left inside the section supplies names, years
+ * and titles that would match as citations.
+ */
+export function isTerminalHeading(line: string): boolean {
+	const { value } = normalizeHeadingLine(line);
+	if (!value || value.length > 40) return false;
+	const sep = HEADING_SEPARATOR.source;
+	const whole = new RegExp(
+		`^${TERMINAL_CORE.source}(?:${sep}(?:${TERMINAL_CORE.source}|${TERMINAL_TAIL.source}))*$`,
+		'iu'
+	);
+	return whole.test(value);
 }
 
 interface ManifestRow {
@@ -167,7 +187,10 @@ export function extractReferenceSection(text: string): ReferenceSection | null {
 			hits.push({
 				index,
 				heading: lines[index].trim(),
-				key: normalizeHeadingLine(lines[index]).value
+				// Case-folded: a running head printed Bibliography on its first page and
+				// BIBLIOGRAPHY thereafter is one heading, and splitting the key would open
+				// the section on its second page and lose the first page's references.
+				key: normalizeHeadingLine(lines[index]).value.toLowerCase()
 			});
 		}
 	}
@@ -202,7 +225,7 @@ export function extractReferenceSection(text: string): ReferenceSection | null {
 	const heading = chosen.heading;
 	let end = lines.length;
 	for (let index = start + 3; index < lines.length; index++) {
-		if (TERMINAL_HEADING.test(lines[index])) {
+		if (isTerminalHeading(lines[index])) {
 			end = index;
 			break;
 		}
