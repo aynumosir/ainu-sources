@@ -279,11 +279,16 @@ async function ensureReference(
 	const slug = resolvedReferenceSlug(ref, verified);
 	const existing = await findSourceId(db, slug);
 	if (existing || dryRun || !verified) return existing;
-	// A hand-checked bibliography lists the general-linguistics literature its
-	// author drew on alongside the Ainu works. `ainuRelated: false` marks the
-	// former; this catalogue holds Ainu scholarship, so those references are read
-	// but never minted as records, and the edge to them is left undrawn.
-	if (ref.ainuRelated === false) return undefined;
+	// A hand-checked bibliography lists the general-linguistics literature its author
+	// drew on alongside the Ainu works. `ainuRelated: false` marks the former; this
+	// catalogue holds Ainu scholarship, so those references are read but never minted
+	// as records, and the edge to them is left undrawn.
+	//
+	// Only a hand-checked file carries that judgement. The test names `verified`
+	// rather than relying on the early return above to have filtered the swept files,
+	// so promoting one of them to `verified: true` cannot silently discard its
+	// references on the strength of a field no human set.
+	if (verified && ref.ainuRelated === false) return undefined;
 	const confidence =
 		ref.match?.confidence === 'exact'
 			? 0.95

@@ -26,7 +26,6 @@
       "title": "Pilsudski（1912）",
       "titleEn": "Materials for the Study of the Ainu Language and Folklore (Cracow 1912)",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1912-pilsudski",
         "confidence": "probable",
@@ -44,7 +43,6 @@
       "title": "アイヌ語法研究 : 樺太方言を中心として",
       "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1942-chiri",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "yearText": "1957",
       "title": "アイヌ語における年長者層特殊語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1957-hattori-ainu-go-nenchosha-so-tokushu-go",
         "confidence": "probable",
@@ -78,7 +75,6 @@
       "yearText": "1961",
       "title": "アイヌ語カラフト方言の「人称接辞」について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1961-hattori-karafuto-hogen-ninsho-setsuji",
         "confidence": "probable",
@@ -95,7 +91,6 @@
       "yearText": "1971",
       "title": "樺太アイヌ語テキスト．－タライカ方言民話",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-furukawa-karafuto-ainu-go-tara-ika-hogen-minwa",
         "confidence": "probable",
@@ -112,7 +107,6 @@
       "yearText": "1979",
       "title": "カラフトアイヌ語―文法篇―",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "yearText": "1989",
       "title": "樺太アイヌ語口承資料１",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1989-murasaki-karafuto-ainu-go-kosho-shiryo",
         "confidence": "probable",
@@ -147,7 +140,6 @@
       "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "probable",
@@ -165,7 +157,6 @@
       "title": "Early European Writings on the Ainu Language",
       "titleEn": "Early European Writings on the Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-kirsten-early-european-writings-ainu-language",
         "confidence": "probable",
@@ -183,7 +174,6 @@
       "title": "Materials for the Study of the Ainu Language and Folklore (Cracow 1912)",
       "titleEn": "Materials for the Study of the Ainu Language and Folklore (Cracow 1912)",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "materials-for-the-study-of-the-ainu-language-and-folklore",
         "confidence": "candidate",
@@ -200,7 +190,6 @@
       "yearText": "2001",
       "title": "少数民族言語資料の記録と保存 : 樺太アイヌ語とニヴフ語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-murasaki-shosu-minzoku-gengo-shiryo-ainu-go-nivufu-go",
         "confidence": "probable",
@@ -217,7 +206,6 @@
       "yearText": "2003",
       "title": "アイヌ語樺太・名寄・釧路方言の資料 : 田村すず子採録 : 藤山ハルさん・山田ハヨさん・北風磯吉さん・徹辺重次郎さんの口頭文芸・語彙・民族誌",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-haru-karafuto-nayoro-kushiro-hogen-tamura-suzuko",
         "confidence": "probable",
@@ -234,7 +222,6 @@
       "yearText": "2025",
       "title": "エンチウ(樺太アイヌ)語会話入門 = First step for the Sakhalin Ainu language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2025-murasaki-en-chi-u-karafuto-ainu-first-step",
         "confidence": "probable",

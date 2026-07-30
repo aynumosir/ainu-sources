@@ -25,7 +25,6 @@
       "title": "トピック別 アイヌ語会話辞典",
       "titleEn": "Topical Dictionary of Conversational Ainu",
       "type": "topical-dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1898-kanazawa-topical-dictionary-conversational-ainu",
         "confidence": "candidate",
@@ -41,7 +40,6 @@
       "title": "千葉大学大学院人文公共学府研究プロジェクト報告書",
       "titleEn": "Chiba University Graduate Research Project Report",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "chiba-grad-report",
         "confidence": "candidate",
@@ -59,7 +57,6 @@
       "title": "千徳太郎治のピウスツキ宛書簡",
       "titleEn": "Sentoku Tarōji's Letters to Piłsudski",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "sentoku-pilsudski-letters",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "title": "浅井タケ昔話全集 I, II",
       "titleEn": "Asai Take Folktale Collection I, II",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "asai-take-folktales",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "yearText": "1991",
       "title": "サダモさんのユーカラ. 1 ： 村焼き国焼き ： 村焼き国焼き1",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1991-tamura-suzuko-1-1",
         "confidence": "probable",
@@ -111,7 +106,6 @@
       "yearText": "1994",
       "title": "アコㇿ イタㇰ = AKOR ITAK : アイヌ語テキスト",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1994-hokkaido-utari-akoro-itak-akor-itak",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -145,7 +138,6 @@
       "title": "アイヌ語鵡川方言日本語‐アイヌ語辞典",
       "titleEn": "Mukawa Dialect Japanese–Ainu Dictionary",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "mukawa-dialect-dictionary-corpus",
         "confidence": "candidate",
@@ -162,7 +154,6 @@
       "yearText": "1997",
       "title": "アイヌによるアイヌ語表記",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-kirikae-ainu-go-hyoki",
         "confidence": "probable",
@@ -179,7 +170,6 @@
       "yearText": "1998",
       "title": "アイヌ語ラジオ講座テキスト",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-rajio-tekisuto",
         "confidence": "candidate",
@@ -195,7 +185,6 @@
       "title": "アイヌ語ラジオ講座テキスト",
       "titleEn": "Ainu Radio Course Texts",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "ainu-radio-course",
         "confidence": "candidate",
@@ -213,7 +202,6 @@
       "title": "アイヌ語鵡川方言日本語‐アイヌ語辞典",
       "titleEn": "Mukawa Dialect Japanese-Ainu Dictionary",
       "type": "japanese-ainu-dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "2002-chiba-mukawa-dialect-japanese-ainu-dictionary",
         "confidence": "probable",
@@ -230,7 +218,6 @@
       "yearText": "2002",
       "title": "アイヌ口承文芸テキスト集3：白沢ナベ口述 トパットゥミから逃れたウライウシナイの少年",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2002-nakagawa-shirasawa-nabe-topattumi-uraiushinai-shonen",
         "confidence": "probable",
@@ -247,7 +234,6 @@
       "yearText": "2002",
       "title": "再帰チェーンリンク型学習を用いたアイヌ語-日本語間の対訳辞書の自動構築について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2002-kato-saiki-chen-rinkugata-gakushu-ainu-go-nippon-2",
         "confidence": "probable",
@@ -264,7 +250,6 @@
       "yearText": "2003",
       "title": "「アイヌ神謡集」を読みとく",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-kaizawa-ainu-shin-yoshu",
         "confidence": "probable",
@@ -281,7 +266,6 @@
       "yearText": "2004",
       "title": "松島トミさんの口承文芸(6)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-oya-matsushima-tomi-kosho-bungei",
         "confidence": "probable",
@@ -298,7 +282,6 @@
       "yearText": "2005",
       "title": "ネコに殺されそうになった友人を助けた男の話",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2005-oya-neko-korosare-so-yujin-tasuketa",
         "confidence": "probable",
@@ -315,7 +298,6 @@
       "yearText": "2005",
       "title": "アイヌ語-日本語対訳コーパスを対象とした局所着目型学習による対訳語の自動抽出",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2005-echizen-ainu-go-nippon-go-taiyaku-kopasu-kyokusho",
         "confidence": "probable",
@@ -332,7 +314,6 @@
       "yearText": "2006",
       "title": "アイヌ人によるアイヌ語表記への取り組み",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-nakagawa-ainunin-ainu-go-hyoki",
         "confidence": "probable",
@@ -349,7 +330,6 @@
       "yearText": "2006",
       "title": "小川シゲノさんの口承文芸",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-oya-ogawa-shige-no-kosho-bungei",
         "confidence": "probable",
@@ -366,7 +346,6 @@
       "yearText": "2006",
       "title": "アイヌ語地名解析の自動化のための基礎的考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-momochi-ainu-go-chimei-jidoka-kisoteki-kosatsu",
         "confidence": "probable",
@@ -382,7 +361,6 @@
       "title": "カムイユカㇻを聞いてアイヌ語を学ぶ",
       "titleEn": "Learning Ainu by Listening to Kamuy Yukar",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "learning-ainu-through-kamuy-yukar",
         "confidence": "candidate",
@@ -399,7 +377,6 @@
       "yearText": "2007",
       "title": "アイヌ語学習・教育用資料の電算化・集積・公開を可能にする情報ネットワーク構築のための基礎研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-o-nisuru-nettowaku-notameno",
         "confidence": "probable",
@@ -416,7 +393,6 @@
       "yearText": "2008",
       "title": "研究ノート『アイヌ神謡集』の電子化データの構成と利用",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-momochi-ainu-shin-yoshu-denshika-deta",
         "confidence": "probable",
@@ -433,7 +409,6 @@
       "yearText": "2009",
       "title": "アイヌ語虻田方言の英雄叙事詩(yukar)テキストとその言語的特徴",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2009-sato-abuta-hogen-yukar-gengoteki-tokucho",
         "confidence": "probable",
@@ -450,7 +425,6 @@
       "yearText": "2009",
       "title": "階層的なアイヌ語・日本語対訳データの構成と層指定解析ツールの開発",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2009-azumi-ainu-go-nippon-go-taiyaku-deta-so-shitei",
         "confidence": "probable",
@@ -468,7 +442,6 @@
       "title": "Ainu applicatives in typological perspective",
       "titleEn": "Ainu applicatives in typological perspective",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-bugaeva-ainu-applicatives-typological-perspective",
         "confidence": "probable",
@@ -485,7 +458,6 @@
       "yearText": "2010",
       "title": "アイヌ語学習・教育用資料の電算化・集積・公開を可能にする情報ネットワーク構築のための基礎研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-izutsu-ainu-go-densanka-shuseki-kokai",
         "confidence": "probable",
@@ -502,7 +474,6 @@
       "yearText": "2010",
       "title": "アイヌ語虻田方言の英雄叙事詩（yukar）テキストとその言語的特徴(2)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-sato-abuta-hogen-yukar-tekisuto-gengoteki-tokucho",
         "confidence": "probable",
@@ -518,7 +489,6 @@
       "title": "アイヌ語教材テキスト",
       "titleEn": "Ainu Language Teaching Materials",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "ainu-teaching-materials",
         "confidence": "candidate",
@@ -535,7 +505,6 @@
       "yearText": "2011",
       "title": "和人の散文説話：継母から殺されかけた姉を救った妹",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-oya-mamahaha-korosare-kaketa-ane-sukutta-imoto",
         "confidence": "probable",
@@ -553,7 +522,6 @@
       "title": "Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model",
       "titleEn": "Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-yoshio-part-of-speech-tagger-ainu-language-based",
         "confidence": "probable",
@@ -570,7 +538,6 @@
       "yearText": "2012",
       "title": "アイヌ語の現状と復興",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-sato-ainu-go-genjo-fukko",
         "confidence": "probable",
@@ -586,7 +553,6 @@
       "title": "ニューエクスプレスプラス アイヌ語",
       "titleEn": "New Express Plus: Ainu",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "new-express-plus-ainu",
         "confidence": "candidate",
@@ -603,7 +569,6 @@
       "yearText": "2013",
       "title": "危機的な状況にある言語・方言の保存・継承に係る取組等の実態に関する調査研究事業(アイヌ語) : 平成24年度文化庁委託調査事業",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-gayman-jeffry-24",
         "confidence": "probable",
@@ -620,7 +585,6 @@
       "yearText": "2014",
       "title": "北海道南部のアイヌ語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-bugaewa-hokkaido-nanbu-ainu-go",
         "confidence": "probable",
@@ -637,7 +601,6 @@
       "yearText": "2015",
       "title": "アイヌ口承文芸テキスト集 (14) 白沢ナベ口述 ウエペケㇾ 和人の殿様にもらわれた男の子",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-nakagawa-shirasawa-nabe-wajin-no-tonosama",
         "confidence": "probable",
@@ -654,7 +617,6 @@
       "yearText": "2016",
       "title": "アイヌ語口承文芸コーパス―音声・グロス付き―",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-anna-ainu-go-kosho-bungei-kopasu-onsei",
         "confidence": "probable",
@@ -672,7 +634,6 @@
       "title": "Toward Universal Dependencies for Ainu",
       "titleEn": "Toward Universal Dependencies for Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2017-akiko-toward-universal-dependencies-ainu",
         "confidence": "probable",
@@ -689,7 +650,6 @@
       "yearText": "2017",
       "title": "アイヌ語の複雑述語における連接と接合",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-niokeru-to",
         "confidence": "probable",
@@ -706,7 +666,6 @@
       "yearText": "2017",
       "title": "加賀家文書におけるアイヌ語の文献学的研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2017-fukazawa-kagaka-bunsho-ainu-go",
         "confidence": "probable",
@@ -724,7 +683,6 @@
       "title": "A proposal for a unified corpus of the Ainu language",
       "titleEn": "A proposal for a unified corpus of the Ainu language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-karol-proposal-unified-corpus-ainu-language",
         "confidence": "probable",
@@ -742,7 +700,6 @@
       "title": "Universal Dependencies for Ainu",
       "titleEn": "Universal Dependencies for Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-akiko-universal-dependencies-ainu",
         "confidence": "probable",
@@ -759,7 +716,6 @@
       "yearText": "2018",
       "title": "アイヌ語の助動詞aanと証拠性",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-yoshikawa-ainu-go-aan-shokosei",
         "confidence": "probable",
@@ -776,7 +732,6 @@
       "yearText": "2018",
       "title": "アイヌ語の複雑述語における連接と接合",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-kishimoto-ainu-go-fukuzatsu-jutsugo-rensetsu-setsugo",
         "confidence": "probable",
@@ -793,7 +748,6 @@
       "yearText": "2018",
       "title": "首都圏におけるアイヌ語教育の現状",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-watanabe-shutoken-ainu-go-kyoiku",
         "confidence": "probable",
@@ -811,7 +765,6 @@
       "title": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language",
       "titleEn": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-karol-mingmatch-fast-n-gram-model-word",
         "confidence": "probable",
@@ -829,7 +782,6 @@
       "title": "Improving Basic Natural Language Processing Tools for the Ainu Language",
       "titleEn": "Improving Basic Natural Language Processing Tools for the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-karol-improving-basic-natural-language-processing",
         "confidence": "probable",
@@ -847,7 +799,6 @@
       "title": "Applying Support Vector Machines to POS tagging of the Ainu Language",
       "titleEn": "Applying Support Vector Machines to POS tagging of the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-karol-applying-support-vector-machines-pos",
         "confidence": "probable",
@@ -864,7 +815,6 @@
       "yearText": "2019",
       "title": "アイヌ語の存在型アスペクト「kor an」「wa an」の意味範疇について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-yoshikawa-sonzaigata-asupekuto-kor-an-wa-an",
         "confidence": "probable",
@@ -882,7 +832,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "probable",
@@ -900,7 +849,6 @@
       "title": "Development of a Digital Corpus and Core Language Technologies for the Ainu Language",
       "titleEn": "Development of a Digital Corpus and Core Language Technologies for the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-karol-development-digital-corpus-core-language",
         "confidence": "probable",
@@ -917,7 +865,6 @@
       "yearText": "2020",
       "title": "アイヌ語における存在型アスペクト形式",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-yoshikawa-ainu-go-sonzaigata-asupekuto-keishiki",
         "confidence": "probable",
@@ -934,7 +881,6 @@
       "yearText": "2021",
       "title": "ニューエクスプレスプラス アイヌ語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "nyuekusupuresupurasu-ainu",
         "confidence": "probable",
@@ -945,15 +891,14 @@
     {
       "n": 55,
       "authors": [
-        "佐藤知己"
+        "佐藤 知己"
       ],
       "year": 2021,
       "yearText": "2021",
       "title": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
-        "slug": "2021-sato-ainu-go-fukko-kadai",
+        "slug": "ainu-niokeruainu-no-mini-suru-na-to-no",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -969,7 +914,6 @@
       "title": "ニューエクスプレス・スペシャル 日本語の隣人たち I+II",
       "titleEn": "New Express Special: Neighbors of Japanese I+II",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "new-express-special-neighbors",
         "confidence": "probable",
@@ -986,7 +930,6 @@
       "yearText": "2021",
       "title": "アイヌ語における存在型アスペクト形式",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-niokeru-asupekuto",
         "confidence": "probable",
@@ -1003,7 +946,6 @@
       "yearText": "2021",
       "title": "Universal Dependenciesによるアイヌ語テキストコーパス",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-yasuoka-universal-dependencies-ainu-go-tekisuto",
         "confidence": "probable",
@@ -1020,7 +962,6 @@
       "yearText": "2021",
       "title": "アイヌ語Universal Dependencies再考",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-yasuoka-ainu-go-universal-dependencies",
         "confidence": "probable",
@@ -1037,7 +978,6 @@
       "yearText": "2021",
       "title": "金成マツ筆録ノートのアイヌ語口承文学テクストの原文対訳及び解釈 : 金田一京助宛ノート散文説話「金の煙草入れ (konkani tampakop) 」",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-fujita-kannari-matsu-konkani-tampakop",
         "confidence": "probable",
@@ -1054,7 +994,6 @@
       "yearText": "2021",
       "title": "『アイヌ語ロシア語辞典』中のアイヌ語樺太方言テキスト",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-sakaguchi-ainu-go-roshia-go-jiten-karafuto-hogen",
         "confidence": "probable",
@@ -1071,7 +1010,6 @@
       "yearText": "2022",
       "title": "「北海道大学キャンパスガイドマップ」のアイヌ語併記作業について : 翻訳と脱植民地化に関する議論をめぐって",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-mokottunashi-hokkaido-daigaku-kyanpasu-gaido-mappu",
         "confidence": "probable",
@@ -1088,7 +1026,6 @@
       "yearText": "2022",
       "title": "AIによるアイヌ語の自動処理：実現したこと、期待されること、やるべきでないこと",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-okuda-ainu-go-jido-shori-jitsugen-kitai",
         "confidence": "probable",
@@ -1106,7 +1043,6 @@
       "title": "Machine Translation for Highly Low-Resource Language: A Case Study of Ainu, a Critically Endangered Indigenous Language in Northern Japan",
       "titleEn": "Machine Translation for Highly Low-Resource Language: A Case Study of Ainu, a Critically Endangered Indigenous Language in Northern Japan",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2023-miyagawa-machine-translation-highly-low-resource",
         "confidence": "probable",
@@ -1123,7 +1059,6 @@
       "yearText": "2023",
       "title": "カムイユカㇻを聞いてアイヌ語を学ぶ",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "kamuiyuka-o-iteainu-o-bu",
         "confidence": "probable",
@@ -1140,7 +1075,6 @@
       "yearText": "2023",
       "title": "アイヌ語の動詞の結合価と3項動詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2023-sato-ainu-go-doshi-ketsugoka-3-ko-doshi",
         "confidence": "probable",
@@ -1157,7 +1091,6 @@
       "yearText": "2023",
       "title": "ローマ字・カタカナ・キリル文字併用アイヌ語RoBERTa・DeBERTaモデルの開発",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2023-yasuoka-roma-ji-katakana-kiriru-moji-ainu-go",
         "confidence": "probable",
@@ -1174,7 +1107,6 @@
       "yearText": "2023",
       "title": "『蝦夷島奇觀』における漢訳アイヌ語について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2023-yasuoka-ezoto-ki-kan-kan-yaku-ainu-go",
         "confidence": "probable",
@@ -1192,7 +1124,6 @@
       "title": "Enhancing Neural Machine Translation for Ainu-Japanese: A Comprehensive Study on the Impact of Domain and Dialect Integration",
       "titleEn": "Enhancing Neural Machine Translation for Ainu-Japanese: A Comprehensive Study on the Impact of Domain and Dialect Integration",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2024-ryo-enhancing-neural-machine-translation-ainu",
         "confidence": "probable",
@@ -1210,7 +1141,6 @@
       "title": "Ainu–Japanese Bi-directional Neural Machine Translation: A Step Towards Linguistic Preservation of Ainu, An Under-Resourced Indigenous Language in Japan",
       "titleEn": "Ainu–Japanese Bi-directional Neural Machine Translation: A Step Towards Linguistic Preservation of Ainu, An Under-Resourced Indigenous Language in Japan",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2024-miyagawa-ainu-japanese-bi-directional-neural-machine",
         "confidence": "probable",
@@ -1227,7 +1157,6 @@
       "yearText": "2024",
       "title": "アイヌ語テキストに対するルールベース処理の限界",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2024-u-ainu-go-tekisuto-ruru-besu-shori-genkai",
         "confidence": "probable",
@@ -1241,7 +1170,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

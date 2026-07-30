@@ -552,7 +552,11 @@ async function main() {
 				title: match.source.title,
 				titleEn: match.source.titleEn ?? undefined,
 				type: match.source.type,
-				ainuRelated: Boolean(match.source.region),
+				// `ainuRelated` is deliberately absent. It records whether a work belongs in
+				// this Ainu-focused catalogue — a curation judgement the sweep does not make,
+				// since all it reports is that a catalogued title occurs in a bibliography.
+				// The field previously carried `Boolean(source.region)`, a geographic column
+				// null on most records, and so marked catalogued Ainu scholarship unrelated.
 				match: {
 					slug: match.source.slug,
 					confidence: match.confidence,

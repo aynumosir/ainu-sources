@@ -26,7 +26,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "yearText": "2007",
       "title": "カムイユカラでアイヌ語を学ぶ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2007-nakagawa-kamu-iyukara-ainu-go",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "yearText": "2015",
       "title": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-chiba-daigaku-hozon-keisho-akaibuka-dai2-nenji",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "yearText": "2015",
       "title": "アイヌ語動詞の結合価と項構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-kobayashi-ainu-go-doshi-ketsugoka-ko-kozo",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "yearText": "2016",
       "title": "アイヌ語動詞の結合価と項構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-to-2",
         "confidence": "probable",

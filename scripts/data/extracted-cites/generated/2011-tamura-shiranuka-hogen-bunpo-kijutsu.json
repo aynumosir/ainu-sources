@@ -24,7 +24,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "title": "アイヌ・英・和辭典 第四版",
       "titleEn": "An Ainu-English-Japanese Dictionary, 4th edition (Batchelor 1938)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "title": "アイヌ語法研究 : 樺太方言を中心として",
       "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1942-chiri",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "yearText": "1944",
       "title": "虎杖丸の曲 : アイヌ叙事詩",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1944-kindaichi-itadorimaru-joji-shi",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "yearText": "1956",
       "title": "アイヌ語入門 : とくに地名研究者のために",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1956-chiri-ainu-go-nyumon-chimei-kenkyu",
         "confidence": "probable",
@@ -111,7 +106,6 @@
       "yearText": "1956",
       "title": "アイヌ語の動詞の構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
@@ -128,7 +122,6 @@
       "yearText": "1960",
       "title": "アイヌ叙事詩神謡、聖伝の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
@@ -145,7 +138,6 @@
       "yearText": "1960",
       "title": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-tamura-saru-hogen-jodoshi-hokoku",
         "confidence": "probable",
@@ -162,7 +154,6 @@
       "yearText": "1961",
       "title": "アイヌ語沙流方言の副助詞と終助詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1961-tamura-saru-hogen-fukujoshi-shujoshi",
         "confidence": "probable",
@@ -179,7 +170,6 @@
       "yearText": "1964",
       "title": "アイヌ語沙流方言の名詞 その(1)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1964-tamura-saru-hogen-meishi-1",
         "confidence": "probable",
@@ -196,7 +186,6 @@
       "yearText": "1966",
       "title": "アイヌ語沙流方言の名詞 その(2)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1966-tamura-saru-hogen-meishi-2",
         "confidence": "probable",
@@ -213,7 +202,6 @@
       "yearText": "1971",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-no",
         "confidence": "probable",
@@ -230,7 +218,6 @@
       "yearText": "1971",
       "title": "アイヌ語石狩方言の人称代名詞と人称接辞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-tamura-ishikari-hogen-ninsho-dai-meishi-ninsho",
         "confidence": "probable",
@@ -247,7 +234,6 @@
       "yearText": "1971",
       "title": "アイヌ語沙流方言の人称代名詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-tamura-saru-hogen-ninsho-dai-meishi",
         "confidence": "probable",
@@ -264,7 +250,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言におけるCikiの用法",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-ciki-yoho",
         "confidence": "candidate",
@@ -281,7 +266,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言における《…して…》の表現",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-2",
         "confidence": "probable",
@@ -298,7 +282,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-ninsho-shurui",
         "confidence": "probable",
@@ -316,7 +299,6 @@
       "title": "Classification of dialects: cluster analysis of Ainu dialects",
       "titleEn": "Classification of dialects: cluster analysis of Ainu dialects",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "probable",
@@ -333,7 +315,6 @@
       "yearText": "1974",
       "title": "アイヌ語沙流方言における動詞接尾辞-noおよび-nuについて",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1974-tamura-saru-hogen-doshi-setsubi-ji-no-nu",
         "confidence": "probable",
@@ -350,7 +331,6 @@
       "yearText": "1977",
       "title": "アイヌ叙事詩神謡・聖伝の研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
@@ -367,7 +347,6 @@
       "yearText": "1979",
       "title": "カラフトアイヌ語―文法篇―",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
@@ -384,7 +363,6 @@
       "yearText": "1982",
       "title": "アイヌ語地名の研究 : 山田秀三著作集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no",
         "confidence": "probable",
@@ -401,7 +379,6 @@
       "yearText": "1982",
       "title": "アイヌ語沙流方言における上下を表す位置名詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1982-tamura-saru-hogen-joge-ichi-meishi",
         "confidence": "probable",
@@ -418,7 +395,6 @@
       "yearText": "1983",
       "title": "アイヌ語地名の研究 : 山田秀三著作集",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1983-yamada-ainu-go-chimei-yamada-hidezo-chosakushu",
         "confidence": "probable",
@@ -435,7 +411,6 @@
       "yearText": "1984",
       "title": "アイヌ語の名詞句の構造と合成名詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1984-kirikae-ainu-go-meishi-ku-kozo-gosei-meishi",
         "confidence": "probable",
@@ -452,7 +427,6 @@
       "yearText": "1985",
       "title": "アイヌ語入門 : とくに地名研究者のために",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-tokuni-notameni",
         "confidence": "probable",
@@ -470,7 +444,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -488,7 +461,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -505,7 +477,6 @@
       "yearText": "1987",
       "title": "アイヌ語の人称接辞--とくにa-をめぐって",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1987-nakagawa-ninsho-setsuji-a",
         "confidence": "probable",
@@ -522,7 +493,6 @@
       "yearText": "1989",
       "title": "北海道あいぬ方言語彙集成",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1989-yoshida-ainu-hogen-goi-shusei",
         "confidence": "probable",
@@ -539,7 +509,6 @@
       "yearText": "1989",
       "title": "日本語とアイヌ語における連体修飾と文の名詞化",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1989-okuda-nippon-go-ainu-go-rentai-shushoku-bun-no",
         "confidence": "probable",
@@ -556,7 +525,6 @@
       "yearText": "1990",
       "title": "キナラブック口伝アイヌ民話全集",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1990-kinarabukku-kinarabukku-kuden-ainu-minwa-zenshu",
         "confidence": "probable",
@@ -573,7 +541,6 @@
       "yearText": "1993",
       "title": "アイヌ叙事詩ユーカラ集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
@@ -591,7 +558,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -608,7 +574,6 @@
       "yearText": "1995",
       "title": "アイヌ語の受動文に関する一考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-sato-ainu-go-judo-bun",
         "confidence": "probable",
@@ -625,7 +590,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -642,7 +606,6 @@
       "yearText": "1995",
       "title": "アイヌ語静内方言の接続助詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-okuda-shizunai-hogen-setsuzoku-joshi",
         "confidence": "probable",
@@ -660,7 +623,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "probable",
@@ -678,7 +640,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -693,7 +654,6 @@
       "yearText": "1996",
       "title": "言語地理学によるアイヌ語の史的研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-anon-gengo-chirigaku-ainu-go",
         "confidence": "probable",
@@ -710,7 +670,6 @@
       "yearText": "1997",
       "title": "アイヌ語静内方言の副助詞と終助詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-okuda-shizunai-hogen-fukujoshi-shujoshi",
         "confidence": "probable",
@@ -727,7 +686,6 @@
       "yearText": "1997",
       "title": "四宅ヤエ媼伝承・アイヌの神々の物語(第13話)視力の衰えたウサギの神の物語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-fujimura-yon-taku-yae-o-densho-ainu-no-kamigami-no",
         "confidence": "probable",
@@ -744,7 +702,6 @@
       "yearText": "1998",
       "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no-2",
         "confidence": "probable",
@@ -761,7 +718,6 @@
       "yearText": "1998",
       "title": "『アイヌ神謡集』辞典 : テキスト・文法解説付き",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kirikae-ainu-shin-yoshu-tekisuto-bunpo-kaisetsu",
         "confidence": "candidate",
@@ -778,7 +734,6 @@
       "yearText": "1998",
       "title": "萱野茂のアイヌ神話集成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
@@ -795,7 +750,6 @@
       "yearText": "1998",
       "title": "四宅ヤエ媼伝承・アイヌの神々の物語(第14話)人間にいたずらしたことで体を小さくされたマツモムシの神の物語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-fujimura-yon-taku-yae-o-densho-matsumo-mushi-no-kami",
         "confidence": "probable",
@@ -812,7 +766,6 @@
       "yearText": "1999",
       "title": "アイヌ語静内方言の格助詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-okuda-shizunai-hogen-kaku-joshi",
         "confidence": "probable",
@@ -829,7 +782,6 @@
       "yearText": "1999",
       "title": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-okuda-shizunai-hogen-goishu-cd-rom",
         "confidence": "probable",
@@ -846,7 +798,6 @@
       "yearText": "2000",
       "title": "頻出アイヌ語地名の形態論的構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-kirikae-ainu-go-chimei-keitai-ronteki-kozo",
         "confidence": "probable",
@@ -864,7 +815,6 @@
       "title": "A Basic Vocabulary of the Samani Dialect of Ainu",
       "titleEn": "A Basic Vocabulary of the Samani Dialect of Ainu",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "2002-sato-basic-vocabulary-samani-dialect-ainu",
         "confidence": "probable",
@@ -881,7 +831,6 @@
       "yearText": "2002",
       "title": "アイヌ語千歳方言におけるkaneの用法",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2002-sato-chitose-hogen-kane-yoho",
         "confidence": "probable",
@@ -898,7 +847,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -915,7 +863,6 @@
       "yearText": "2003",
       "title": "アイヌ語樺太・名寄・釧路方言の資料 : 田村すず子採録 : 藤山ハルさん・山田ハヨさん・北風磯吉さん・徹辺重次郎さんの口頭文芸・語彙・民族誌",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-haru-karafuto-nayoro-kushiro-hogen-tamura-suzuko",
         "confidence": "probable",
@@ -932,7 +879,6 @@
       "yearText": "2003",
       "title": "アイヌ語沙流方言に於ける名詞の所属形と場所 : 所属形の機能に関する一考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-tamura-saru-hogen-shozokukei-basho",
         "confidence": "probable",
@@ -949,7 +895,6 @@
       "yearText": "2004",
       "title": "アイヌ文学における一人称体の問題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-sato-ainu-bungaku-ichi-ninsho-tai",
         "confidence": "probable",
@@ -966,7 +911,6 @@
       "yearText": "2005",
       "title": "アイヌ語地名研究と言語学",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2005-sato-ainu-go-chimei-kenkyu",
         "confidence": "probable",
@@ -981,7 +925,6 @@
       "yearText": "2005",
       "title": "アイヌ語帯広方言の資料 田村すゞ子採録 広野ハルさんの基礎語彙調査資料",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2005-anon-obihiro-hogen-tamura-suzuko-hirono-haru-kiso",
         "confidence": "probable",
@@ -998,7 +941,6 @@
       "yearText": "2006",
       "title": "アイヌ語千歳方言のアスペクト：kor an、wa an を中心として",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-sato-chitose-hogen-asupekuto-kor-an-wa-an",
         "confidence": "probable",
@@ -1015,7 +957,6 @@
       "yearText": "2006",
       "title": "アイヌ語十勝方言の基礎語彙集 : 本別町・沢井トメノのアイヌ語",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-sawai-tokachi-hogen-kiso-goishu-honbetsu-machi",
         "confidence": "probable",
@@ -1033,7 +974,6 @@
       "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
       "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-anna-reported-discourse-logophoricity-southern",
         "confidence": "probable",
@@ -1050,7 +990,6 @@
       "yearText": "2008",
       "title": "アイヌ語十勝方言の接続助詞wa,tek,ahinneについて",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-sawai-tokachi-hogen-setsuzoku-joshi-wa-tek",
         "confidence": "probable",
@@ -1067,7 +1006,6 @@
       "yearText": "2009",
       "title": "アイヌ語虻田方言の英雄叙事詩(yukar)テキストとその言語的特徴",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2009-sato-abuta-hogen-yukar-gengoteki-tokucho",
         "confidence": "probable",
@@ -1084,7 +1022,6 @@
       "yearText": "2010",
       "title": "アイヌ語白糠方言の助動詞ci",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-tamura-shiranuka-hogen-jodoshi-ci",
         "confidence": "probable",
@@ -1101,7 +1038,6 @@
       "yearText": "2020",
       "title": "アイヌ語・日本語辞典稿",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-kubodera-ainu-go-nippon-go-jitenko",
         "confidence": "probable",
@@ -1119,7 +1055,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",
@@ -1133,7 +1068,6 @@
       "yearText": "",
       "title": "アイヌユーカラ語法摘要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-yukara-goho-tekiyo",
         "confidence": "candidate",
@@ -1147,7 +1081,6 @@
       "yearText": "",
       "title": "アイヌ民俗文化財口承文芸シリーズ",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-ainu-kosho-bungei-shirizu",
         "confidence": "candidate",
@@ -1161,7 +1094,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",
@@ -1176,7 +1108,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

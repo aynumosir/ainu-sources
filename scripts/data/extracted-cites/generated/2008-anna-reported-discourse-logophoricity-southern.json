@@ -25,7 +25,6 @@
       "title": "An Ainu-English-Japanese Dictionary",
       "titleEn": "An Ainu-English-Japanese Dictionary",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "Gengo kenkyu",
       "titleEn": "Gengo kenkyu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
         "confidence": "candidate",
@@ -61,7 +59,6 @@
       "title": "アイヌ語法概説",
       "titleEn": "An Outline of Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi",
         "confidence": "probable",
@@ -79,7 +76,6 @@
       "title": "Karafuto Ainugo",
       "titleEn": "Karafuto Ainugo",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1976-kyoko-murasaki-karafuto-ainugo",
         "confidence": "probable",
@@ -97,7 +93,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "probable",
@@ -115,7 +110,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -133,7 +127,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -151,7 +144,6 @@
       "title": "Ainugo (The Ainu language)",
       "titleEn": "Ainugo (The Ainu language)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
         "confidence": "probable",
@@ -167,7 +159,6 @@
       "title": "Ainu Literature",
       "titleEn": "Ainu Literature",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-anon-ainu-literature",
         "confidence": "candidate",
@@ -185,7 +176,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -203,7 +193,6 @@
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "type": "thesis",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
@@ -221,7 +210,6 @@
       "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
       "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "reported-discourse-and-logophoricity-in-southern-hokkaido",
         "confidence": "probable",
@@ -238,7 +226,6 @@
       "yearText": "2008",
       "title": "アイヌ語南北海道方言における引用とロゴフォリック性",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-bugaewa-minami-hokkaido-hogen-in-yo-rogoforikkusei",
         "confidence": "probable",
@@ -256,7 +243,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "candidate",

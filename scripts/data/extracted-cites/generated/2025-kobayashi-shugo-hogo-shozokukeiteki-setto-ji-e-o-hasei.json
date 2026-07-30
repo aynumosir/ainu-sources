@@ -24,7 +24,6 @@
       "yearText": "1960",
       "title": "アイヌ叙事詩神謡、聖伝の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1977",
       "title": "アイヌ叙事詩神謡・聖伝の研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "candidate",
@@ -112,7 +107,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "yearText": "1997",
       "title": "アイヌ語の特徴と現状",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-sato-ainu-go-tokucho-genjo",
         "confidence": "probable",
@@ -146,7 +139,6 @@
       "yearText": "1999",
       "title": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-okuda-shizunai-hogen-goishu-cd-rom",
         "confidence": "probable",
@@ -163,7 +155,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -180,7 +171,6 @@
       "yearText": "2009",
       "title": "アイヌ語の接頭辞e-とo-に関する考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2009-kobayashi-setto-ji-e-o",
         "confidence": "probable",
@@ -195,7 +185,6 @@
       "yearText": "2012",
       "title": "アイヌ語千歳方言における抱合の種類とその諸制約",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-anon-chitose-hogen-hogo-shurui-seiyaku",
         "confidence": "probable",
@@ -212,7 +201,6 @@
       "yearText": "2015",
       "title": "アイヌ語動詞の結合価と項構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-kobayashi-ainu-go-doshi-ketsugoka-ko-kozo",
         "confidence": "probable",
@@ -229,7 +217,6 @@
       "yearText": "2016",
       "title": "アイヌ語動詞の結合価と項構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-to-2",
         "confidence": "probable",
@@ -247,7 +234,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "probable",
@@ -264,7 +250,6 @@
       "yearText": "2024",
       "title": "アイヌ語動詞にあらわれるtaと充当接頭辞について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2024-kobayashi-ainu-go-doshi-ta-setto-ji",
         "confidence": "probable",

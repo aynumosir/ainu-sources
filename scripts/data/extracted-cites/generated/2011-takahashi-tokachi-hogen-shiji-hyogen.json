@@ -24,7 +24,6 @@
       "yearText": "1998",
       "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no-2",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1999",
       "title": "アイヌ語静内方言文脈つき語彙集",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-okuda-shizunai-hogen-bunmyakutsuki-goishu",
         "confidence": "probable",

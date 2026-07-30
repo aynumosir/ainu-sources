@@ -26,7 +26,6 @@
       "title": "An Ainu-English-Japanese Dictionary",
       "titleEn": "An Ainu-English-Japanese Dictionary",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
@@ -44,7 +43,6 @@
       "title": "Ainu jojishi Yūkara no kenkyū",
       "titleEn": "Ainu jojishi Yūkara no kenkyū",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1931-kyosuke-kindaichi-ainu-jojishi-yukara-no-kenkyu",
         "confidence": "candidate",
@@ -62,7 +60,6 @@
       "title": "Gengo kenkyu",
       "titleEn": "Gengo kenkyu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
         "confidence": "candidate",
@@ -80,7 +77,6 @@
       "title": "アイヌ語法概説",
       "titleEn": "An Outline of Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi",
         "confidence": "probable",
@@ -98,7 +94,6 @@
       "title": "Ainu gohō gaisetsu",
       "titleEn": "Ainu gohō gaisetsu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kyosuke-kindaichi-ainu-goho-gaisetsu",
         "confidence": "probable",
@@ -116,7 +111,6 @@
       "title": "Ainu gohō kenkyū - karafuto hōgen-o chūshin to shite (Studies in Ainu grammar - with an emphasis on the Sakhalin dialect)",
       "titleEn": "Ainu gohō kenkyū - karafuto hōgen-o chūshin to shite (Studies in Ainu grammar - with an emphasis on the Sakhalin dialect)",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1942-chiri-ainu-goho-kenkyu-karafuto",
         "confidence": "probable",
@@ -134,7 +128,6 @@
       "title": "Ainu Folklore",
       "titleEn": "Ainu Folklore",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1949-carl-etter-ainu-folklore",
         "confidence": "candidate",
@@ -152,7 +145,6 @@
       "title": "Bunrui Ainugo jiten",
       "titleEn": "Bunrui Ainugo jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1953-mashiho-chiri-bunrui-ainugo-jiten",
         "confidence": "probable",
@@ -170,7 +162,6 @@
       "title": "アイヌ語音声資料",
       "titleEn": "Ainu Audio Materials",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "ainu-audio-materials",
         "confidence": "candidate",
@@ -188,7 +179,6 @@
       "title": "Indo-European features in the Ainu language ; with reference to the thesis of Pierre Naert",
       "titleEn": "Indo-European features in the Ainu language ; with reference to the thesis of Pierre Naert",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-lindquist-indo-european-features-ainu-language-2",
         "confidence": "probable",
@@ -206,7 +196,6 @@
       "title": "Ainu Creed and Cult",
       "titleEn": "Ainu Creed and Cult",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1963-joseph-m-kitagawa-ainu-creed-and-cult",
         "confidence": "candidate",
@@ -224,7 +213,6 @@
       "title": "Valency classes in Ainu",
       "titleEn": "Valency classes in Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1966-bugaeva-anna-valency-classes-in-ainu",
         "confidence": "candidate",
@@ -242,7 +230,6 @@
       "title": "Ainu minzoku shi",
       "titleEn": "Ainu minzoku shi",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1970-hokkaido-ainu-minzoku-shi",
         "confidence": "candidate",
@@ -260,7 +247,6 @@
       "title": "Ainu no mukashi banashi",
       "titleEn": "Ainu no mukashi banashi",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-itsuhiko-kubodera-ainu-no-mukashi-banashi",
         "confidence": "candidate",
@@ -278,7 +264,6 @@
       "title": "Classification of dialects: cluster analysis of Ainu dialects",
       "titleEn": "Classification of dialects: cluster analysis of Ainu dialects",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "probable",
@@ -296,7 +281,6 @@
       "title": "Karafuto Ainugo",
       "titleEn": "Karafuto Ainugo",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1976-kyoko-murasaki-karafuto-ainugo",
         "confidence": "probable",
@@ -314,7 +298,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "probable",
@@ -332,7 +315,6 @@
       "title": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
       "titleEn": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainugo-bunpo-hen-sakhalin-ainu",
         "confidence": "probable",
@@ -350,7 +332,6 @@
       "title": "The genetic relationship of the Ainu language",
       "titleEn": "The genetic relationship of the Ainu language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1982-patrie-genetic-relationship-ainu-language",
         "confidence": "probable",
@@ -368,7 +349,6 @@
       "title": "The Genetic Relationship of the Ainu Language.",
       "titleEn": "The Genetic Relationship of the Ainu Language.",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-genetic-relationship-of-the-ainu-language",
         "confidence": "probable",
@@ -386,7 +366,6 @@
       "title": "Ainugo nyūmon",
       "titleEn": "Ainugo nyūmon",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1984-kenkyujo-ainugo-nyumon",
         "confidence": "candidate",
@@ -404,7 +383,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -422,7 +400,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -440,7 +417,6 @@
       "title": "Ainugo (The Ainu language)",
       "titleEn": "Ainugo (The Ainu language)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
         "confidence": "probable",
@@ -458,7 +434,6 @@
       "title": "Ainugo no kigen",
       "titleEn": "Ainugo no kigen",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1992-shichiro-murayama-ainugo-no-kigen",
         "confidence": "probable",
@@ -476,7 +451,6 @@
       "title": "A reconstruction of proto-Ainu",
       "titleEn": "A reconstruction of proto-Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-alexander-vovin-a-reconstruction-of-proto-ainu",
         "confidence": "probable",
@@ -494,7 +468,6 @@
       "title": "Origins of the Ainu Language",
       "titleEn": "Origins of the Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-alexander-vovin-origins-of-the-ainu-language",
         "confidence": "probable",
@@ -510,7 +483,6 @@
       "title": "Some Aspects of Reflexivity in Ainu",
       "titleEn": "Some Aspects of Reflexivity in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1994-anon-some-aspects-reflexivity-ainu",
         "confidence": "probable",
@@ -528,7 +500,6 @@
       "title": "Kayano Shigeru no Ainugo jiten",
       "titleEn": "Kayano Shigeru no Ainugo jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-kayano-shigeru-kayano-shigeru-no-ainugo-jiten",
         "confidence": "probable",
@@ -546,7 +517,6 @@
       "title": "Early European Writings on the Ainu Language",
       "titleEn": "Early European Writings on the Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-kirsten-early-european-writings-ainu-language",
         "confidence": "probable",
@@ -564,7 +534,6 @@
       "title": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)",
       "titleEn": "Ainugo Saru Hōgen Jiten (A dictionary of the Saru dialect of Ainu)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-tamura-ainugo-saru-hogen-jiten-dictionary",
         "confidence": "probable",
@@ -582,7 +551,6 @@
       "title": "Ainu minzoku",
       "titleEn": "Ainu minzoku",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-honda-katsuichi-ainu-minzoku",
         "confidence": "probable",
@@ -600,7 +568,6 @@
       "title": "Nihongo to Ainugo",
       "titleEn": "Nihongo to Ainugo",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-tatsumine-katayama-nihongo-to-ainugo",
         "confidence": "candidate",
@@ -616,7 +583,6 @@
       "title": "Ainu folk-lore",
       "titleEn": "Ainu folk-lore",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-folk-lore",
         "confidence": "candidate",
@@ -634,7 +600,6 @@
       "title": "Origins of the Ainu language : the Ainu Indo-European controversy",
       "titleEn": "Origins of the Ainu language : the Ainu Indo-European controversy",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-refsing-origins-ainu-language-ainu-indo-european",
         "confidence": "probable",
@@ -652,7 +617,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -670,7 +634,6 @@
       "title": "Ainu: Spirit of a Northern People",
       "titleEn": "Ainu: Spirit of a Northern People",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-katarina-sjoberg-ainu-spirit-of-a-northern-people",
         "confidence": "probable",
@@ -688,7 +651,6 @@
       "title": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu",
       "titleEn": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-sato-phonological-status-epenthetic-glides-chitose",
         "confidence": "probable",
@@ -706,7 +668,6 @@
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "type": "thesis",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
@@ -722,7 +683,6 @@
       "title": "Japanese and Ainu",
       "titleEn": "Japanese and Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",
@@ -740,7 +700,6 @@
       "title": "“Reciprocals and Sociatives in Ainu”",
       "titleEn": "“Reciprocals and Sociatives in Ainu”",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2007-alpatov-v-m-reciprocals-and-sociatives-in-ainu",
         "confidence": "probable",
@@ -758,7 +717,6 @@
       "title": "Speech report constructions in Ainu",
       "titleEn": "Speech report constructions in Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-anna-bugaeva-speech-report-constructions-in-ainu",
         "confidence": "probable",
@@ -776,7 +734,6 @@
       "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
       "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-anna-reported-discourse-logophoricity-southern",
         "confidence": "probable",
@@ -794,7 +751,6 @@
       "title": "Ainugo bunpō no kiso",
       "titleEn": "Ainugo bunpō no kiso",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
         "confidence": "probable",
@@ -812,7 +768,6 @@
       "title": "\"Ainu causatives\"",
       "titleEn": "\"Ainu causatives\"",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-bugaewa-ainu-causatives",
         "confidence": "probable",
@@ -830,7 +785,6 @@
       "title": "Ainu applicatives in typological perspective",
       "titleEn": "Ainu applicatives in typological perspective",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-bugaeva-ainu-applicatives-typological-perspective",
         "confidence": "probable",
@@ -848,7 +802,6 @@
       "title": "\"Anticausative/causative verb alternation in Ainu\"",
       "titleEn": "\"Anticausative/causative verb alternation in Ainu\"",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-bugaeva-anticausative-causative-verb-alternation-ainu",
         "confidence": "probable",
@@ -866,7 +819,6 @@
       "title": "A diachronic study of the impersonal passive in Ainu",
       "titleEn": "A diachronic study of the impersonal passive in Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-bugaeva-diachronic-study-impersonal-passive-ainu",
         "confidence": "probable",
@@ -884,7 +836,6 @@
       "title": "Ditransitive constructions in Ainu",
       "titleEn": "Ditransitive constructions in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-anna-bugaeva-ditransitive-constructions-in-ainu",
         "confidence": "probable",
@@ -902,7 +853,6 @@
       "title": "Ainu Spirits Singing",
       "titleEn": "Ainu Spirits Singing",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-sarah-m-strong-ainu-spirits-singing",
         "confidence": "probable",
@@ -920,7 +870,6 @@
       "title": "Chiri Yukie’s Ainu Shin’yōshū",
       "titleEn": "Chiri Yukie’s Ainu Shin’yōshū",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-sarah-m-strong-chiri-yukies-ainu-shinyoshu",
         "confidence": "probable",
@@ -936,7 +885,6 @@
       "title": "SOUTHERN HOKKAIDO AINU",
       "titleEn": "SOUTHERN HOKKAIDO AINU",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "southern-hokkaido-ainu",
         "confidence": "candidate",
@@ -954,7 +902,6 @@
       "title": "Ainu Spirits Singing. The Living World of Chiri Yukie'sAinu Shin'yōshū",
       "titleEn": "Ainu Spirits Singing. The Living World of Chiri Yukie'sAinu Shin'yōshū",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-spirits-singing-the-living-world-of-chiri-yukiesainu",
         "confidence": "candidate",
@@ -972,7 +919,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "candidate",
@@ -990,7 +936,6 @@
       "title": "Ainu Folk Tales",
       "titleEn": "Ainu Folk Tales",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-edward-taylor-ainu-folk-tales",
         "confidence": "candidate",
@@ -1008,7 +953,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "candidate",
@@ -1026,7 +970,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",

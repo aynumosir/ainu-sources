@@ -25,7 +25,6 @@
       "yearText": "1960",
       "title": "アイヌ語諸方言の基礎語彙統計学的研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-hattori-ainu-go-shohogen-kiso-goi-tokeigakuteki",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "yearText": "1999",
       "title": "アイヌ語諸方言調査報告 1",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-miyaoka-ainu-go-shohogen-chosa-hokoku-1",
         "confidence": "candidate",

@@ -262,3 +262,37 @@ describe('extracted-cites reconciliation', () => {
 		expect(forced.detail).toMatchObject({ withdrawn: 2 });
 	});
 });
+
+describe('extracted-cites ainuRelated scope', () => {
+	let db: Db;
+	beforeEach(async () => {
+		db = await makeDb();
+		await db
+			.insert(schema.sources)
+			.values({ slug: 'citing-work', title: 'Citing work', type: 'publication' });
+	});
+
+	it('does not apply the curation flag to sweep output', async () => {
+		// A swept file carrying ainuRelated: false — the shape the sweep used to emit
+		// for catalogued Ainu works — promoted to verified by a curator. The flag was
+		// never a human judgement, so it must not decide anything.
+		await db
+			.insert(schema.sources)
+			.values({ slug: '1956-chiri-ainugo-nyumon', title: 'アイヌ語入門', type: 'publication' });
+		await importFixture(
+			db,
+			[
+				{
+					n: 1,
+					authors: ['Chiri, Mashiho'],
+					year: 1956,
+					title: 'アイヌ語入門',
+					ainuRelated: false,
+					match: { slug: '1956-chiri-ainugo-nyumon', confidence: 'probable' }
+				}
+			],
+			{ verified: false }
+		);
+		expect(await citedSlugs(db)).toEqual(['1956-chiri-ainugo-nyumon']);
+	});
+});

@@ -24,7 +24,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1971",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-no",
         "confidence": "probable",
@@ -58,7 +56,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-ninsho-shurui",
         "confidence": "candidate",
@@ -75,7 +72,6 @@
       "yearText": "2001",
       "title": "アイヌ語千歳方言の「第三類の動詞」の構造と機能",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-sato-chitose-hogen-daisanrui-no-doshi-kozo-kino",
         "confidence": "probable",
@@ -90,7 +86,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

@@ -25,7 +25,6 @@
       "title": "Latino-Curilice",
       "titleEn": "Latino-Curilice (Latin-Kuril wordlist)",
       "type": "wordlist",
-      "ainuRelated": true,
       "match": {
         "slug": "1738-krasheninnikov-latino-curilice",
         "confidence": "candidate",
@@ -42,7 +41,6 @@
       "yearText": "1970",
       "title": "ロシア語におけるアイヌ語からの1借用語と地名calque",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1970-murayama-ainu-go-shakuyo-go-chimei-calque",
         "confidence": "candidate",

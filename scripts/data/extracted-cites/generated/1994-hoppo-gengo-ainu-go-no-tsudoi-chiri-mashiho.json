@@ -23,7 +23,6 @@
       "title": "Yezo and the Ainu",
       "titleEn": "Yezo and the Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1893-anon-yezo-ainu",
         "confidence": "candidate",
@@ -40,7 +39,6 @@
       "yearText": "1987",
       "title": "萱野茂 アイヌ語会話 初級編",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1987-kamu-ito-rano-kyokai-ainu-go-kaiwa-shokyu-hen",
         "confidence": "candidate",
@@ -57,7 +55,6 @@
       "yearText": "1990",
       "title": "網走湖と女満別のアイヌ語地名",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1990-ito-abashiriko-memanbetsu-ainu-go-chimei",
         "confidence": "probable",

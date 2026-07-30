@@ -26,7 +26,6 @@
       "title": "An Ainu-English-Japanese Dictionary (including A Grammar of the Ainu Language)",
       "titleEn": "An Ainu-English-Japanese Dictionary (Batchelor 1905)",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1905-batchelor-ainu-english-japanese-dictionary",
         "confidence": "probable",
@@ -44,7 +43,6 @@
       "title": "アイヌ語法概説",
       "titleEn": "An Outline of Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi",
         "confidence": "candidate",
@@ -62,7 +60,6 @@
       "title": "Bunrui Ainugo jiten",
       "titleEn": "Bunrui Ainugo jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1953-mashiho-chiri-bunrui-ainugo-jiten",
         "confidence": "probable",
@@ -80,7 +77,6 @@
       "title": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
       "titleEn": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainugo-bunpo-hen-sakhalin-ainu",
         "confidence": "probable",
@@ -98,7 +94,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -116,7 +111,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -134,7 +128,6 @@
       "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
@@ -152,7 +145,6 @@
       "title": "Kayano Shigeru no Ainugo jiten",
       "titleEn": "Kayano Shigeru no Ainugo jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-kayano-shigeru-kayano-shigeru-no-ainugo-jiten",
         "confidence": "probable",
@@ -170,7 +162,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -188,7 +179,6 @@
       "title": "Acquisition of Word Translations Using Local Focus-Based Learning in Ainu-Japanese Parallel Corpora",
       "titleEn": "Acquisition of Word Translations Using Local Focus-Based Learning in Ainu-Japanese Parallel Corpora",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-hiroshi-acquisition-word-translations-using-local",
         "confidence": "probable",
@@ -206,7 +196,6 @@
       "title": "Ainugo bunpō no kiso",
       "titleEn": "Ainugo bunpō no kiso",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
         "confidence": "probable",
@@ -224,7 +213,6 @@
       "title": "Internet applications for endangered languages: a talking dictionary of Ainu",
       "titleEn": "Internet applications for endangered languages: a talking dictionary of Ainu",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-bugaeva-internet-applications-endangered-languages",
         "confidence": "probable",
@@ -242,7 +230,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "candidate",
@@ -260,7 +247,6 @@
       "title": "An Ainu-English-Japanese Dictionary : Including a Grammar of the Ainu Language",
       "titleEn": "An Ainu-English-Japanese Dictionary : Including a Grammar of the Ainu Language",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "an-ainu-english-japanese-dictionary-including-a-grammar-of",
         "confidence": "probable",

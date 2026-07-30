@@ -25,7 +25,6 @@
       "yearText": "1996",
       "title": "アイヌ語沙流方言辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-2232e395",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "2003",
       "title": "局所着目方式によるアイヌ語-日本語名詞対訳語の抽出について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-echizen-kyokusho-chakumoku-hoshiki-ainu-go-nippon-go",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "2005",
       "title": "アイヌ語-日本語対訳コーパスを対象とした局所着目型学習による対訳語の自動抽出",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-kopasuo-toshita-niyoru-no",
         "confidence": "candidate",

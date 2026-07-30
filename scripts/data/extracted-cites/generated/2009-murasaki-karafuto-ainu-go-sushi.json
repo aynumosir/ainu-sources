@@ -25,7 +25,6 @@
       "title": "An Ainu-English-Japanese Dictionary",
       "titleEn": "An Ainu-English-Japanese Dictionary",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology",
       "titleEn": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1917-laufer-vigesimal-decimal-systems-ainu-numerals",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "yearText": "1935",
       "title": "数詞から観たアイヌ民族",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1935-kindaichi-sushi-ainu-minzoku",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "yearText": "1957",
       "title": "アイヌ語における年長者層特殊語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1957-hattori-ainu-go-nenchosha-so-tokushu-go",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "yearText": "1963",
       "title": "千島アイヌ語絶滅の報告",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1963-murasaki-chishima-ainu-go-zetsumetsu",
         "confidence": "probable",
@@ -112,7 +107,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "candidate",
@@ -130,7 +124,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -148,7 +141,6 @@
       "title": "The Study of the Ainu Language",
       "titleEn": "The Study of the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
         "confidence": "candidate",
@@ -166,7 +158,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "probable",

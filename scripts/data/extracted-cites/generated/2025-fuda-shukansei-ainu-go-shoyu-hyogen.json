@@ -25,7 +25,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "The Ainu language : a linguistic introduction",
       "titleEn": "The Ainu language : a linguistic introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-katsunobu-ainu-language-linguistic-introduction",
         "confidence": "probable",
@@ -79,7 +76,6 @@
       "title": "A Glossed Audio Corpus of Ainu Folklore",
       "titleEn": "A Glossed Audio Corpus of Ainu Folklore",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-nakagawa-glossed-audio-corpus-ainu-folklore",
         "confidence": "probable",
@@ -97,7 +93,6 @@
       "title": "Appositive possession in Ainu and around the Pacific",
       "titleEn": "Appositive possession in Ainu and around the Pacific",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-anna-appositive-possession-ainu-around-pacific",
         "confidence": "probable",
@@ -115,7 +110,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",
@@ -133,7 +127,6 @@
       "title": "Handbook of the Ainu Language",
       "titleEn": "Handbook of the Ainu Language",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-bugaeva",
         "confidence": "probable",
@@ -150,7 +143,6 @@
       "yearText": "2025",
       "title": "主観性から見たアイヌ語の所有表現の考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "kara-tainu-no-no",
         "confidence": "probable",

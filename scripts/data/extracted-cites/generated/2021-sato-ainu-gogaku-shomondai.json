@@ -24,7 +24,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1991",
       "title": "アイヌ語千歳方言における自称詞と対称詞について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1991-sato-chitose-hogen-jisho-shi-taisho-shi",
         "confidence": "probable",
@@ -58,7 +56,6 @@
       "yearText": "1999",
       "title": "アイヌ語静内方言文脈つき語彙集",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-okuda-shizunai-hogen-bunmyakutsuki-goishu",
         "confidence": "probable",
@@ -75,7 +72,6 @@
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
         "confidence": "probable",
@@ -92,7 +88,6 @@
       "yearText": "2015",
       "title": "アイヌ語の人称表示における「目的格」の優勢",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-okuda-ainu-go-ninsho-hyoji-mokuteki-kaku",
         "confidence": "probable",
@@ -109,7 +104,6 @@
       "yearText": "2019",
       "title": "アイヌ語の複雑述語の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-kishimoto-ainu-go-fukuzatsu-jutsugo",
         "confidence": "probable",
@@ -126,7 +120,6 @@
       "yearText": "2020",
       "title": "アイヌ語樺太方言におけるutaraの用法",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-sakaguchi-karafuto-hogen-utara-yoho",
         "confidence": "probable",
@@ -143,7 +136,6 @@
       "yearText": "2021",
       "title": "アイヌ語千歳方言の位置名詞orの用法",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-sato-chitose-hogen-ichi-meishi-or",
         "confidence": "probable",
@@ -159,7 +151,6 @@
       "yearText": "",
       "title": "古記録の言語学的分析に基づくアイヌ語史の検証",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "sato-kokiroku-ainu-goshi",
         "confidence": "probable",
@@ -174,7 +165,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

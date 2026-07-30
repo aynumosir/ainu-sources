@@ -24,7 +24,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言における《…して…》の表現",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-2",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "2016",
       "title": "アイヌ語十勝方言の否定構造について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-nitsuite",
         "confidence": "probable",

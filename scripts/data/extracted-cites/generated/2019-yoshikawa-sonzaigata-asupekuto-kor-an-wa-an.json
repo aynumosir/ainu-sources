@@ -24,7 +24,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "yearText": "1998",
       "title": "萱野茂のアイヌ神話集成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -112,7 +107,6 @@
       "title": "CDエクスプレス アイヌ語",
       "titleEn": "CD Express: Ainu",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "cd-express-ainu",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "yearText": "2004",
       "title": "アイヌ語十勝方言の助詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-takahashi-ainu-go-tokachi-hogen-joshi",
         "confidence": "probable",
@@ -146,7 +139,6 @@
       "yearText": "2006",
       "title": "アイヌ語千歳方言のアスペクト",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-sato-chitose-hogen-asupekuto",
         "confidence": "probable",
@@ -161,7 +153,6 @@
       "yearText": "2007",
       "title": "アイヌ語のアスペクトと日本語のアスペクトの対照",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2007-anon-ainu-go-asupekuto-nippon-go-asupekuto",
         "confidence": "probable",
@@ -178,7 +169,6 @@
       "yearText": "2015",
       "title": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-chiba-daigaku-hozon-keisho-akaibuka-dai2-nenji",
         "confidence": "probable",
@@ -195,7 +185,6 @@
       "yearText": "2018",
       "title": "アイヌ叙景詩鑑賞 : 押韻法を中心に",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-tan-ainu-jokei-shi-oin-ho",
         "confidence": "probable",

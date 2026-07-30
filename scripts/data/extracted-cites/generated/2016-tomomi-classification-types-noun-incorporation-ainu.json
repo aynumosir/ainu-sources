@@ -25,7 +25,6 @@
       "title": "Gengo kenkyu",
       "titleEn": "Gengo kenkyu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
         "confidence": "candidate",
@@ -42,7 +41,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "title": "Ainu minzoku",
       "titleEn": "Ainu minzoku",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-honda-katsuichi-ainu-minzoku",
         "confidence": "candidate",

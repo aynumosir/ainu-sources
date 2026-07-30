@@ -25,7 +25,6 @@
       "title": "The Ainu and their folk-lore",
       "titleEn": "The Ainu and their folk-lore",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1901-batchelor-john-the-ainu-and-their-folk-lore",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "Classification of dialects: cluster analysis of Ainu dialects",
       "titleEn": "Classification of dialects: cluster analysis of Ainu dialects",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "probable",
@@ -79,7 +76,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -97,7 +93,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -115,7 +110,6 @@
       "title": "A reconstruction of proto-Ainu",
       "titleEn": "A reconstruction of proto-Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-alexander-vovin-a-reconstruction-of-proto-ainu",
         "confidence": "probable",
@@ -133,7 +127,6 @@
       "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
@@ -151,7 +144,6 @@
       "title": "Early European Writings on the Ainu Language",
       "titleEn": "Early European Writings on the Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-kirsten-early-european-writings-ainu-language",
         "confidence": "probable",
@@ -167,7 +159,6 @@
       "title": "Ainu Literature",
       "titleEn": "Ainu Literature",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-anon-ainu-literature",
         "confidence": "probable",
@@ -185,7 +176,6 @@
       "title": "Origins of the Ainu language : the Ainu Indo-European controversy",
       "titleEn": "Origins of the Ainu language : the Ainu Indo-European controversy",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-refsing-origins-ainu-language-ainu-indo-european",
         "confidence": "probable",
@@ -203,7 +193,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -221,7 +210,6 @@
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "type": "thesis",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
@@ -239,7 +227,6 @@
       "title": "The Ainu language : a linguistic introduction",
       "titleEn": "The Ainu language : a linguistic introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-katsunobu-ainu-language-linguistic-introduction",
         "confidence": "probable",
@@ -255,7 +242,6 @@
       "title": "Japanese and Ainu",
       "titleEn": "Japanese and Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",
@@ -273,7 +259,6 @@
       "title": "Mermaid construction in Ainu",
       "titleEn": "Mermaid construction in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-anna-bugaeva-mermaid-construction-in-ainu",
         "confidence": "probable",
@@ -291,7 +276,6 @@
       "title": "Relative clauses and noun complements in Ainu.",
       "titleEn": "Relative clauses and noun complements in Ainu.",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-bugaewa-relative-clauses-noun-complements-ainu",
         "confidence": "probable",
@@ -309,7 +293,6 @@
       "title": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
       "titleEn": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-anna-innovative-nature-sakhalin-ainu-focusing",
         "confidence": "probable",
@@ -327,7 +310,6 @@
       "title": "Morphological alignment in Saru Ainu: A direct-inverse analysis",
       "titleEn": "Morphological alignment in Saru Ainu: A direct-inverse analysis",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-corso-morphological-alignment-saru-ainu-direct",
         "confidence": "probable",
@@ -345,7 +327,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "probable",
@@ -363,7 +344,6 @@
       "title": "Ainu Folk Tales",
       "titleEn": "Ainu Folk Tales",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-edward-taylor-ainu-folk-tales",
         "confidence": "candidate",
@@ -381,7 +361,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "candidate",

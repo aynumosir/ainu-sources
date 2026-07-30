@@ -25,7 +25,6 @@
       "title": "Ainugo kenkyū",
       "titleEn": "Ainugo kenkyū",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-kyosuke-kindaichi-ainugo-kenkyu",
         "confidence": "candidate",
@@ -43,7 +42,6 @@
       "title": "Classification of dialects: cluster analysis of Ainu dialects",
       "titleEn": "Classification of dialects: cluster analysis of Ainu dialects",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "candidate",
@@ -61,7 +59,6 @@
       "title": "Karafuto Ainugo",
       "titleEn": "Karafuto Ainugo",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1976-kyoko-murasaki-karafuto-ainugo",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "title": "Ainugo onsei shiryō",
       "titleEn": "Ainugo onsei shiryō",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1984-anon-ainugo-onsei-shiryo",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "yearText": "1985",
       "title": "ワテケさんの昔話 ： 沙流方言",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1985-tamura-wa-teke-mukashibanashi-saru-hogen",
         "confidence": "candidate",
@@ -112,7 +107,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -130,7 +124,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -148,7 +141,6 @@
       "title": "アイヌ口承文芸テキスト集",
       "titleEn": "Ainu Oral Literature Text Collection",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "ainu-oral-literature-texts",
         "confidence": "probable",
@@ -166,7 +158,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -184,7 +175,6 @@
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "type": "thesis",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
@@ -202,7 +192,6 @@
       "title": "A diachronic study of the impersonal passive in Ainu",
       "titleEn": "A diachronic study of the impersonal passive in Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-bugaeva-diachronic-study-impersonal-passive-ainu",
         "confidence": "probable",
@@ -219,7 +208,6 @@
       "yearText": "2013",
       "title": "アイヌ口承文芸テキスト集13 白沢ナベ口述 ウエペケレ チセコロカムイの怒り",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-nakagawa-shirasawa-nabe-uepekere-chisekorokamui",
         "confidence": "candidate",
@@ -236,7 +224,6 @@
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
         "confidence": "candidate",
@@ -254,7 +241,6 @@
       "title": "Relative clauses and noun complements in Ainu.",
       "titleEn": "Relative clauses and noun complements in Ainu.",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-bugaewa-relative-clauses-noun-complements-ainu",
         "confidence": "probable",
@@ -272,7 +258,6 @@
       "title": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations",
       "titleEn": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-bugaeva-innovative-nature-sakhalin-ainu-focusing",
         "confidence": "probable",
@@ -290,7 +275,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "candidate",
@@ -308,7 +292,6 @@
       "title": "Ainu Evidentiality: A semantico-pragmatic analysis and a morphosyntactic account",
       "titleEn": "Ainu Evidentiality: A semantico-pragmatic analysis and a morphosyntactic account",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-elia-ainu-evidentiality-semantico-pragmatic",
         "confidence": "probable",
@@ -326,7 +309,6 @@
       "title": "The Interaction of Relativization and Noun Incorporation in Southern Hokkaidō Ainu",
       "titleEn": "The Interaction of Relativization and Noun Incorporation in Southern Hokkaidō Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "the-interaction-of-relativization-and-noun-incorporation-in",
         "confidence": "probable",
@@ -344,7 +326,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "candidate",
@@ -358,7 +339,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

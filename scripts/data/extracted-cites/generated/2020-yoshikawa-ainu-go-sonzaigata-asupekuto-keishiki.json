@@ -24,7 +24,6 @@
       "yearText": "1960",
       "title": "アイヌ叙事詩神謡、聖伝の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1977",
       "title": "アイヌ叙事詩神謡・聖伝の研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "title": "アイヌ口承文芸テキスト集",
       "titleEn": "Ainu Oral Literature Text Collection",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "ainu-oral-literature-texts",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "1992",
       "title": "アイヌ語文字化資料から",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1992-nakagawa-ainu-go-mojika-shiryo",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "1992",
       "title": "アイヌ語日常会話集１ 凍ったミカン",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1992-kayano-ainu-go-nichijo-kaiwashu-kotta-mikan",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -127,7 +121,6 @@
       "yearText": "1997",
       "title": "小川シゲノから上田トシへの伝承",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
@@ -144,7 +137,6 @@
       "yearText": "1998",
       "title": "小川シゲノから上田トシへの伝承(2)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
@@ -161,7 +153,6 @@
       "yearText": "1998",
       "title": "萱野茂のアイヌ神話集成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
@@ -178,7 +169,6 @@
       "yearText": "1999",
       "title": "小川シゲノから上田トシへの伝承(3)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
@@ -195,7 +185,6 @@
       "yearText": "2000",
       "title": "アイヌ口承文芸テキスト集1：白沢ナベ口述 狼から逃れた娘",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-nakagawa-shirasawa-nabe-okami-nogareta-musume-1",
         "confidence": "probable",
@@ -212,7 +201,6 @@
       "yearText": "2000",
       "title": "松島トミさんの口承文芸(2)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-oya-matsushima-tomi-kosho-bungei-2",
         "confidence": "probable",
@@ -229,7 +217,6 @@
       "yearText": "2001",
       "title": "アイヌ口承文芸テキスト集2：白沢ナベ口述 主人を助けられなかった犬",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-nakagawa-shirasawa-nabe-shujin-wo-tasukerarenakatta",
         "confidence": "probable",
@@ -246,7 +233,6 @@
       "yearText": "2001",
       "title": "松島トミさんの口承文芸(3)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-oya-matsushima-tomi-kosho-bungei-3",
         "confidence": "probable",
@@ -263,7 +249,6 @@
       "yearText": "2001",
       "title": "川上まつ子アイヌ語文例集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-honda-kawakami-matsuko-ainu-go-bunreishu",
         "confidence": "probable",
@@ -280,7 +265,6 @@
       "yearText": "2001",
       "title": "アイヌ語沙流方言の音声資料１ ―近藤鏡二郎の録音テープに遺されたワテケさんの神謡",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-tamura-saru-hogen-onsei-shiryo-wa-teke-shin-yo",
         "confidence": "probable",
@@ -297,7 +281,6 @@
       "yearText": "2002",
       "title": "松島トミさんの口承文芸(4)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2002-oya-matsushima-tomi-kosho-bungei-4",
         "confidence": "probable",
@@ -314,7 +297,6 @@
       "yearText": "2003",
       "title": "アイヌ口承文芸テキスト集4：白沢ナベ口述 ナナカマドのイナウで伝染病の神を倒した",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-nakagawa-shirasawa-nabe-nanakamado-inau-densenbyo-no",
         "confidence": "probable",
@@ -331,7 +313,6 @@
       "yearText": "2003",
       "title": "松島トミさんの口承文芸(5)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-oya-matsushima-tomi-kosho-bungei",
         "confidence": "probable",
@@ -348,7 +329,6 @@
       "yearText": "2004",
       "title": "アイヌ口承文芸テキスト集5：白沢ナベ口述 ワウォリ：アオバトが生まれたわけ",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-nakagawa-shirasawa-nabe-waori-aobato",
         "confidence": "probable",
@@ -365,7 +345,6 @@
       "yearText": "2004",
       "title": "松島トミさんの口承文芸(6)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-oya-matsushima-tomi-kosho-bungei",
         "confidence": "probable",
@@ -382,7 +361,6 @@
       "yearText": "2005",
       "title": "アイヌ口承文芸テキスト集6：白沢ナベ口述 兄に殺されかけ、犬に救われた",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2005-nakagawa-shirasawa-nabe-ani-ni-korosare-kake-inu-ni",
         "confidence": "probable",
@@ -399,7 +377,6 @@
       "yearText": "2005",
       "title": "ネコに殺されそうになった友人を助けた男の話",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2005-oya-neko-korosare-so-yujin-tasuketa",
         "confidence": "probable",
@@ -416,7 +393,6 @@
       "yearText": "2006",
       "title": "アイヌ口承文芸テキスト集7 白沢ナベ口述 狼が人間の母親に虐待された",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-nakagawa-shirasawa-nabe-okami-ningen-hahaoya",
         "confidence": "probable",
@@ -433,7 +409,6 @@
       "yearText": "2006",
       "title": "小川シゲノさんの口承文芸",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-oya-ogawa-shige-no-kosho-bungei",
         "confidence": "probable",
@@ -450,7 +425,6 @@
       "yearText": "2009",
       "title": "アイヌ口承文芸テキスト集9 白沢ナベ口述 カニに手足が生えるわけ",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2009-nakagawa-shirasawa-nabe-kani-teashi",
         "confidence": "probable",
@@ -467,7 +441,6 @@
       "yearText": "2010",
       "title": "アイヌ口承文芸テキスト集10 白沢ナベ口述 ペナンペ金の子犬を授かる",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-nakagawa-shirasawa-nabe-penanpe-kane-no-koinu",
         "confidence": "probable",
@@ -484,7 +457,6 @@
       "yearText": "2011",
       "title": "アイヌ口承文芸テキスト集11 白沢ナベ口述 キネズミに妹をさらわれた男",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-nakagawa-shirasawa-nabe-kine-zumi-sarawareta-otoko",
         "confidence": "probable",
@@ -501,7 +473,6 @@
       "yearText": "2011",
       "title": "和人の散文説話：継母から殺されかけた姉を救った妹",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-oya-mamahaha-korosare-kaketa-ane-sukutta-imoto",
         "confidence": "probable",
@@ -518,7 +489,6 @@
       "yearText": "2012",
       "title": "アイヌ口承文芸テキスト集12 白沢ナベ口述 ユカㇻイルパイェ 敵の村の美女を妻に迎えたシヌタㇷ゚カウンクㇽ",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-nakagawa-shirasawa-nabe-yukarairupae-shinutafu",
         "confidence": "probable",
@@ -535,7 +505,6 @@
       "yearText": "2013",
       "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(2)",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-sato-ainu-go-chosa-shiryo-detabesuka-kisoteki",
         "confidence": "probable",
@@ -552,7 +521,6 @@
       "yearText": "2014",
       "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(3)",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-sato-ainu-go-chosa-shiryo-detabesuka-3",
         "confidence": "probable",
@@ -569,7 +537,6 @@
       "yearText": "2015",
       "title": "アイヌ口承文芸テキスト集 (14) 白沢ナベ口述 ウエペケㇾ 和人の殿様にもらわれた男の子",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-nakagawa-shirasawa-nabe-wajin-no-tonosama",
         "confidence": "probable",
@@ -586,7 +553,6 @@
       "yearText": "2015",
       "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(4)",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-sato-ainu-go-chosa-shiryo-detabesuka-4",
         "confidence": "probable",
@@ -603,7 +569,6 @@
       "yearText": "2015",
       "title": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-chiba-daigaku-hozon-keisho-akaibuka-dai2-nenji",
         "confidence": "probable",
@@ -620,7 +585,6 @@
       "yearText": "2015",
       "title": "カムイの散文説話：白キツネ兄弟の物語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-oya-kamui-shiro-kitsune-kyodai",
         "confidence": "probable",
@@ -637,7 +601,6 @@
       "yearText": "2016",
       "title": "アイヌ語口承文芸コーパス―音声・グロス付き―",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-anna-ainu-go-kosho-bungei-kopasu-onsei",
         "confidence": "probable",
@@ -654,7 +617,6 @@
       "yearText": "2016",
       "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(5)",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-sato-ainu-go-chosa-shiryo-detabesuka-5",
         "confidence": "probable",
@@ -671,7 +633,6 @@
       "yearText": "2016",
       "title": "アイヌ口承文芸「散文説話」ー河童に助けられた男の物語ー",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-oya-sanbun-setsuwa-kappa-tasukerareta-otoko",
         "confidence": "probable",
@@ -688,7 +649,6 @@
       "yearText": "2017",
       "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(6)",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2017-sato-ainu-go-chosa-shiryo-detabesuka",
         "confidence": "probable",
@@ -705,7 +665,6 @@
       "yearText": "2017",
       "title": "アイヌ口承文芸「散文説話」ー山の神と沖の神の子を身ごもった女の物語ー",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2017-oya-sanbun-setsuwa-yamanokami-oki-no-kami-onna",
         "confidence": "probable",
@@ -722,7 +681,6 @@
       "yearText": "2018",
       "title": "アイヌ口承文芸テキスト集 17：白沢ナベ口述 カムイユカㇻ アテヤテンナ：六つ首の狐",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-nabe-shirasawa-nabe-kamu-iyukara-ateyatenna",
         "confidence": "probable",
@@ -739,7 +697,6 @@
       "yearText": "2018",
       "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(7)",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-sato-ainu-go-chosa-shiryo-detabesuka-7",
         "confidence": "probable",
@@ -756,7 +713,6 @@
       "yearText": "2018",
       "title": "アイヌ口承文芸「散文説話」ー人間の女に惚れたフリを殺した男ー",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-oya-sanbun-setsuwa-ningen-no-onna-furi-wo",
         "confidence": "probable",
@@ -773,7 +729,6 @@
       "yearText": "2019",
       "title": "アイヌ口承文芸テキスト集18：白沢ナベ口述 カムイユカㇻ ソレイパソレ：和人の若殿の物語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-nabe-shirasawa-nabe-kamu-iyukara-soreipasore",
         "confidence": "probable",
@@ -790,7 +745,6 @@
       "yearText": "2019",
       "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(8)",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-sato-ainu-go-chosa-shiryo-detabesuka-8",
         "confidence": "probable",
@@ -807,7 +761,6 @@
       "yearText": "2019",
       "title": "アイヌ口承文芸「散文説話」－タンネサﾗの男ー",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-oya-sanbun-setsuwa",
         "confidence": "probable",
@@ -824,7 +777,6 @@
       "yearText": "2025",
       "title": "アイヌ語調査資料のデータベース化に関する基礎的研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2025-sato-ainu-go-chosa-shiryo-detabesuka",
         "confidence": "probable",
@@ -840,7 +792,6 @@
       "yearText": "",
       "title": "アイヌ民族博物館研究報告",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-minzoku-ainu-minzoku-hakubutsukan-kenkyu-hokoku",
         "confidence": "probable",
@@ -854,7 +805,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

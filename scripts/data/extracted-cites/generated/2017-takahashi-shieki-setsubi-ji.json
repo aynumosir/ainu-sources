@@ -25,7 +25,6 @@
       "title": "Classification of dialects: cluster analysis of Ainu dialects",
       "titleEn": "Classification of dialects: cluster analysis of Ainu dialects",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "1993",
       "title": "アイヌ叙事詩ユーカラ集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",

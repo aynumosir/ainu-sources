@@ -24,7 +24,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1956",
       "title": "アイヌ語の動詞の構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "yearText": "2004",
       "title": "知里幸恵「アイヌ神謡集」の難読個所と特異な言語事例をめぐって",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-sato-ainu-shin-yoshu-nandoku-kasho-tokui-na-gengo",
         "confidence": "probable",
@@ -109,7 +104,6 @@
       "yearText": "2007",
       "title": "アイヌ語研究の課題と展望",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2007-anon-ainu-go-kenkyu-kadai-tenbo",
         "confidence": "candidate",
@@ -123,7 +117,6 @@
       "yearText": "",
       "title": "アイヌユーカラ語法摘要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-yukara-goho-tekiyo",
         "confidence": "candidate",
@@ -138,7 +131,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

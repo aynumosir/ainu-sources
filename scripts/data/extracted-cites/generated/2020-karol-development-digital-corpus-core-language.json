@@ -25,7 +25,6 @@
       "title": "Ashiri Aeuitaknup Oma Kambi",
       "titleEn": "The New Testament in Ainu",
       "type": "scripture",
-      "ainuRelated": false,
       "match": {
         "slug": "1897-batchelor-ashiri-aeuitaknup-oma-kambi",
         "confidence": "candidate",
@@ -43,7 +42,6 @@
       "title": "トピック別 アイヌ語会話辞典",
       "titleEn": "Topical Dictionary of Conversational Ainu",
       "type": "topical-dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1898-kanazawa-topical-dictionary-conversational-ainu",
         "confidence": "candidate",
@@ -61,7 +59,6 @@
       "title": "An Ainu-English-Japanese Dictionary",
       "titleEn": "An Ainu-English-Japanese Dictionary",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
@@ -79,7 +76,6 @@
       "title": "Ainu jojishi Yūkara no kenkyū",
       "titleEn": "Ainu jojishi Yūkara no kenkyū",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1931-kyosuke-kindaichi-ainu-jojishi-yukara-no-kenkyu",
         "confidence": "probable",
@@ -97,7 +93,6 @@
       "title": "Bunrui Ainugo jiten",
       "titleEn": "Bunrui Ainugo jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1953-mashiho-chiri-bunrui-ainugo-jiten",
         "confidence": "probable",
@@ -115,7 +110,6 @@
       "title": "Ainugo hōgen jiten",
       "titleEn": "Ainugo hōgen jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1964-shiro-hattori-ainugo-hogen-jiten",
         "confidence": "probable",
@@ -133,7 +127,6 @@
       "title": "Ainugo kaiwa jiten",
       "titleEn": "Ainugo kaiwa jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1973-shozaburo-kanazawa-ainugo-kaiwa-jiten",
         "confidence": "probable",
@@ -151,7 +144,6 @@
       "title": "Karafuto Ainugo",
       "titleEn": "Karafuto Ainugo",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1976-kyoko-murasaki-karafuto-ainugo",
         "confidence": "probable",
@@ -169,7 +161,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "probable",
@@ -187,7 +178,6 @@
       "title": "Ainugo nyūmon",
       "titleEn": "Ainugo nyūmon",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1984-kenkyujo-ainugo-nyumon",
         "confidence": "candidate",
@@ -205,7 +195,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -223,7 +212,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -241,7 +229,6 @@
       "title": "Ainugo (The Ainu language)",
       "titleEn": "Ainugo (The Ainu language)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
         "confidence": "probable",
@@ -259,7 +246,6 @@
       "title": "Kayano Shigeru no Ainugo jiten",
       "titleEn": "Kayano Shigeru no Ainugo jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-kayano-shigeru-kayano-shigeru-no-ainugo-jiten",
         "confidence": "probable",
@@ -277,7 +263,6 @@
       "title": "Ainugo jiten",
       "titleEn": "Ainugo jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-suzuko-tamura-ainugo-jiten",
         "confidence": "probable",
@@ -295,7 +280,6 @@
       "title": "Ainu minzoku",
       "titleEn": "Ainu minzoku",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-honda-katsuichi-ainu-minzoku",
         "confidence": "candidate",
@@ -313,7 +297,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -331,7 +314,6 @@
       "title": "Ainugo bunpō no kiso",
       "titleEn": "Ainugo bunpō no kiso",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
         "confidence": "probable",
@@ -349,7 +331,6 @@
       "title": "Internet applications for endangered languages: a talking dictionary of Ainu",
       "titleEn": "Internet applications for endangered languages: a talking dictionary of Ainu",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-bugaeva-internet-applications-endangered-languages",
         "confidence": "probable",
@@ -367,7 +348,6 @@
       "title": "Aynu itak : on the road to Ainu language revitalization",
       "titleEn": "Aynu itak : on the road to Ainu language revitalization",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-martin-aynu-itak-road-ainu-language",
         "confidence": "probable",
@@ -385,7 +365,6 @@
       "title": "Southern Hokkaido Ainu",
       "titleEn": "Southern Hokkaido Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-bugaeva-anna-southern-hokkaido-ainu",
         "confidence": "probable",
@@ -403,7 +382,6 @@
       "title": "POST-AL: Part-of-Speech T agger for Ainu Language",
       "titleEn": "POST-AL: Part-of-Speech T agger for Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-micha-post-al-part-of-speech-t-agger-ainu",
         "confidence": "probable",
@@ -421,7 +399,6 @@
       "title": "Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model",
       "titleEn": "Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-yoshio-part-of-speech-tagger-ainu-language-based",
         "confidence": "probable",
@@ -439,7 +416,6 @@
       "title": "NLP for Endangered Languages: Morphology Analysis, Translation Support and Shallow Parsing of Ainu Language",
       "titleEn": "NLP for Endangered Languages: Morphology Analysis, Translation Support and Shallow Parsing of Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-micha-nlp-endangered-languages-morphology-analysis",
         "confidence": "probable",
@@ -457,7 +433,6 @@
       "title": "Ainu Languages: Correct, Good, and Less So",
       "titleEn": "Ainu Languages: Correct, Good, and Less So",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-izutsu-ainu-languages-correct-good-less",
         "confidence": "probable",
@@ -475,7 +450,6 @@
       "title": "A Glossed Audio Corpus of Ainu Folklore",
       "titleEn": "A Glossed Audio Corpus of Ainu Folklore",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-nakagawa-glossed-audio-corpus-ainu-folklore",
         "confidence": "probable",
@@ -493,7 +467,6 @@
       "title": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language",
       "titleEn": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-ptaszynski-comparing-multiple-dictionaries-improve-part",
         "confidence": "probable",
@@ -511,7 +484,6 @@
       "title": "Toward Universal Dependencies for Ainu",
       "titleEn": "Toward Universal Dependencies for Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2017-akiko-toward-universal-dependencies-ainu",
         "confidence": "probable",
@@ -529,7 +501,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "candidate",
@@ -547,7 +518,6 @@
       "title": "Ainu complex predicates with reference to Japanese",
       "titleEn": "Ainu complex predicates with reference to Japanese",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-bugaeva-ainu-complex-predicates-reference-japanese",
         "confidence": "probable",
@@ -565,7 +535,6 @@
       "title": "A proposal for a unified corpus of the Ainu language",
       "titleEn": "A proposal for a unified corpus of the Ainu language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-karol-proposal-unified-corpus-ainu-language",
         "confidence": "probable",
@@ -583,7 +552,6 @@
       "title": "Universal Dependencies for Ainu",
       "titleEn": "Universal Dependencies for Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-akiko-universal-dependencies-ainu",
         "confidence": "probable",
@@ -601,7 +569,6 @@
       "title": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language",
       "titleEn": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-karol-mingmatch-fast-n-gram-model-word",
         "confidence": "probable",
@@ -619,7 +586,6 @@
       "title": "Improving Basic Natural Language Processing Tools for the Ainu Language",
       "titleEn": "Improving Basic Natural Language Processing Tools for the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-karol-improving-basic-natural-language-processing",
         "confidence": "probable",
@@ -637,7 +603,6 @@
       "title": "Applying Support Vector Machines to POS tagging of the Ainu Language",
       "titleEn": "Applying Support Vector Machines to POS tagging of the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-karol-applying-support-vector-machines-pos",
         "confidence": "probable",
@@ -655,7 +620,6 @@
       "title": "Towards Better Text Processing Tools for the Ainu Language",
       "titleEn": "Towards Better Text Processing Tools for the Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-karol-towards-better-text-processing-tools",
         "confidence": "probable",
@@ -673,7 +637,6 @@
       "title": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language",
       "titleEn": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-al-speech-corpus-ainu-folklore-end-to-end",
         "confidence": "probable",
@@ -691,7 +654,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "probable",
@@ -709,7 +671,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",

@@ -23,7 +23,6 @@
       "title": "千葉大学大学院人文公共学府研究プロジェクト報告書",
       "titleEn": "Chiba University Graduate Research Project Report",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "chiba-grad-report",
         "confidence": "candidate",
@@ -40,7 +39,6 @@
       "yearText": "1985",
       "title": "ワテケさんの昔話 ： 沙流方言",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1985-tamura-wa-teke-mukashibanashi-saru-hogen",
         "confidence": "probable",
@@ -57,7 +55,6 @@
       "yearText": "1994",
       "title": "アイヌ民族博物館伝承記録",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1994-ainu-minzoku-ainu-minzoku-hakubutsukan-densho-kiroku",
         "confidence": "probable",
@@ -75,7 +72,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -92,7 +88,6 @@
       "yearText": "1998",
       "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no-2",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "candidate",
@@ -127,7 +121,6 @@
       "yearText": "2013",
       "title": "アイヌ語十勝方言における証拠性と叙述類型",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-takahashi-tokachi-hogen-shokosei-jojutsu-ruikei",
         "confidence": "probable",
@@ -142,7 +135,6 @@
       "yearText": "2014",
       "title": "「北海道南部のアイヌ語」児島康弘、長崎郁訳",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-anon-hokkaido-nanbu-ainu-go",
         "confidence": "probable",
@@ -159,7 +151,6 @@
       "yearText": "2014",
       "title": "アイヌ語十勝方言における名詞化節の脱従属節化",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-takahashi-tokachi-hogen-meishika-setsu-datsujuzoku",
         "confidence": "probable",
@@ -176,7 +167,6 @@
       "yearText": "2018",
       "title": "アイヌ語の助動詞aanと証拠性",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-yoshikawa-ainu-go-aan-shokosei",
         "confidence": "probable",
@@ -193,7 +183,6 @@
       "yearText": "2018",
       "title": "アイヌ語幌別方言における名詞化辞の文法化",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-takahashi-horobetsu-hogen-meishika-ji-bunpoka",
         "confidence": "probable",
@@ -211,7 +200,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "candidate",
@@ -228,7 +216,6 @@
       "yearText": "2020",
       "title": "アイヌ語における形式名詞の機能",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-to-ainu-go-keishiki-meishi-kino",
         "confidence": "probable",
@@ -242,7 +229,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

@@ -24,7 +24,6 @@
       "yearText": "1971",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-no",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-ninsho-shurui",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -95,7 +91,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -112,7 +107,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -130,7 +124,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -147,7 +140,6 @@
       "yearText": "1998",
       "title": "アイヌ語静内方言の母音間の/w/、/y/および/'/について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-okuda-shizunai-hogen-boinkan-w-y",
         "confidence": "probable",
@@ -165,7 +157,6 @@
       "title": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu",
       "titleEn": "Phonological Status of the Epenthetic Glides in the Chitose Dialect of Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-sato-phonological-status-epenthetic-glides-chitose",
         "confidence": "probable",
@@ -179,7 +170,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

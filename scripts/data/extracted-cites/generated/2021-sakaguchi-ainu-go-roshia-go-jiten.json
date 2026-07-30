@@ -24,7 +24,6 @@
       "yearText": "1969",
       "title": "樺太アイヌ語地名小辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1969-suke-karafuto-ainu-go-chimei-shojiten",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1969",
       "title": "カラフト西海岸北部地名の共時論的研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1969-hattori-karafuto-nishi-kaigan-hokubu-chimei",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "title": "The Ainu of the Northwest Coast of Southern Sakhalin",
       "titleEn": "The Ainu of the Northwest Coast of Southern Sakhalin",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1974-tierney-ainu-northwest-coast-southern-sakhalin",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "1995",
       "title": "アイヌ語・ロシア語辞典-2-",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-m-m-dobrotvorskii-2",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "1996",
       "title": "アイヌ語・ロシア語辞典(3)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-terada-ainu-go-roshia-go-jiten-3",
         "confidence": "probable",
@@ -111,7 +106,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "candidate",
@@ -129,7 +123,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "candidate",

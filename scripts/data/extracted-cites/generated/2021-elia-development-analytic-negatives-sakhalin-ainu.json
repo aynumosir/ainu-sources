@@ -25,7 +25,6 @@
       "yearText": "1971",
       "title": "北千島アイヌ語 : 文献学的研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-murayama-kita-chishima-ainu-go-bunkengakuteki-kenkyu",
         "confidence": "candidate",
@@ -43,7 +42,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "yearText": "1985",
       "title": "ワテケさんの昔話 ： 沙流方言",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1985-tamura-wa-teke-mukashibanashi-saru-hogen",
         "confidence": "probable",
@@ -78,7 +75,6 @@
       "title": "A reconstruction of proto-Ainu",
       "titleEn": "A reconstruction of proto-Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-alexander-vovin-a-reconstruction-of-proto-ainu",
         "confidence": "probable",
@@ -96,7 +92,6 @@
       "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
@@ -114,7 +109,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -132,7 +126,6 @@
       "title": "The Study of the Ainu Language",
       "titleEn": "The Study of the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
         "confidence": "probable",
@@ -150,7 +143,6 @@
       "title": "The language and folklore of West Sakhalin Ainu - A re-edition of Kyōko Murasaki's 'Karafuto Ainugo' with translation and grammatical notes",
       "titleEn": "The language and folklore of West Sakhalin Ainu - A re-edition of Kyōko Murasaki's 'Karafuto Ainugo' with translation and grammatical notes",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-corso-language-folklore-west-sakhalin-ainu",
         "confidence": "probable",

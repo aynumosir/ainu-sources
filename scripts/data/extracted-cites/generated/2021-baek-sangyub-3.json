@@ -24,7 +24,6 @@
       "yearText": "1942",
       "title": "アイヌ語法研究 : 樺太方言を中心として",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-o-toshite",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1961",
       "title": "アイヌ語カラフト方言の「人称接辞」について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1961-hattori-karafuto-hogen-ninsho-setsuji",
         "confidence": "probable",
@@ -58,7 +56,6 @@
       "yearText": "1979",
       "title": "カラフトアイヌ語―文法篇―",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "title": "Shibatani（1990）",
       "titleEn": "The Languages of Japan (Cambridge Language Surveys)",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1990-shibatani",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -111,7 +106,6 @@
       "title": "The linguistic situation on Sakhalin Island",
       "titleEn": "The linguistic situation on Sakhalin Island",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-gruzdeva-linguistic-situation-sakhalin-island",
         "confidence": "probable",
@@ -128,7 +122,6 @@
       "yearText": "2008",
       "title": "伊達地方のアイヌ語方言の言語的特徴",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-sato-date-chiho-ainu-go-hogen-gengoteki-tokucho",
         "confidence": "probable",
@@ -145,7 +138,6 @@
       "yearText": "2020",
       "title": "アイヌ語樺太方言における名詞複数接尾辞ahcinの用法",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-sakaguchi-karafuto-hogen-meishi-fukusu-setsubi-ji-ahcin",
         "confidence": "probable",
@@ -162,7 +154,6 @@
       "yearText": "2021",
       "title": "地域類型論的観点から見たサハリン地域に分布するウイルタ語、アイヌ語、ニヴフ語の定動詞における3人称標示と複数接辞の文法的類似性について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "kara-tasaharin-ni-suruiruta-ainu-nivufu-no-niokeru-3-to-no",
         "confidence": "probable",
