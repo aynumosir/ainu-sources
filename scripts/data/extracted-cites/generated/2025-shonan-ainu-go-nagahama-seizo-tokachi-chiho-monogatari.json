@@ -25,7 +25,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "1996",
       "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(1)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "1997",
       "title": "口承文学(2) ; アイヌ文学",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-kubota-kosho-bungaku-ainu-bungaku",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "1998",
       "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no-2",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "2004",
       "title": "アイヌ語十勝方言の助詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-takahashi-ainu-go-tokachi-hogen-joshi",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "yearText": "2005",
       "title": "アイヌ語十勝方言の人称接辞 'a-, 'an- の出現条件と例外的事例について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2005-sawai-tokachi-hogen-ninsho-setsuji-shutsugen-joken",
         "confidence": "probable",
@@ -127,7 +121,6 @@
       "yearText": "2011",
       "title": "アイヌ語白糠方言の文法記述",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-tamura-shiranuka-hogen-bunpo-kijutsu",
         "confidence": "probable",
@@ -144,7 +137,6 @@
       "yearText": "2012",
       "title": "アイヌ口承文芸における一人称",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-hideo-ainu-kosho-bungei-ichi-ninsho",
         "confidence": "probable",
@@ -161,7 +153,6 @@
       "yearText": "2018",
       "title": "アイヌ語十勝方言文法概説",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-takahashi-ainu-go-tokachi-hogen-bunpo-gaisetsu",
         "confidence": "probable",

@@ -25,7 +25,6 @@
       "yearText": "1956",
       "title": "アイヌ語の動詞の構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "yearText": "2014",
       "title": "アイヌ語使役交替動詞対データ",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-bugaeva-ainu-go-shieki-kotai-doshi",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "yearText": "2014",
       "title": "アイヌ語使役構文に関する再考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-bugaewa-ainu-go-shieki-kobun-saikosatsu-2",
         "confidence": "probable",

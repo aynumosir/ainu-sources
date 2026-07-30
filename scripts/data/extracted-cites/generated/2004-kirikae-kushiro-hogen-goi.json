@@ -25,7 +25,6 @@
       "yearText": "1942",
       "title": "アイヌ語法研究 : 樺太方言を中心として",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-o-toshite",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "1955",
       "title": "アイヌの散文物語 : 川下の者の昔話",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1955-chiri-sanbun-monogatari-kawashimo",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "1956",
       "title": "アイヌ語入門 : とくに地名研究者のために",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1956-chiri-ainu-go-nyumon-chimei-kenkyu",
         "confidence": "candidate",
@@ -76,7 +73,6 @@
       "yearText": "1960",
       "title": "アイヌに伝承される歌舞詞曲に関する調査研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-chiri-ainu-kabu-shi-kyoku-chosa-kenkyu",
         "confidence": "candidate",
@@ -93,7 +89,6 @@
       "yearText": "1985",
       "title": "アイヌ語入門 : とくに地名研究者のために",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-tokuni-notameni",
         "confidence": "candidate",
@@ -110,7 +105,6 @@
       "yearText": "1989",
       "title": "アイヌのくらしと言葉",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1989-hokkaido-kyoikucho-ainu-kotoba",
         "confidence": "candidate",
@@ -127,7 +121,6 @@
       "yearText": "1989",
       "title": "北海道あいぬ方言語彙集成",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1989-yoshida-ainu-hogen-goi-shusei",
         "confidence": "probable",
@@ -145,7 +138,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "probable",
@@ -163,7 +155,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -180,7 +171,6 @@
       "yearText": "2000",
       "title": "旭川採集アイヌ語動詞集",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-asahikawa-shi-asahikawa-ainu-go-doshishu",
         "confidence": "candidate",
@@ -197,7 +187,6 @@
       "yearText": "2002",
       "title": "「アイヌ・モシリ」 : 山本多助作品集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2002-ainu-ainu-moshiri-yamamoto-tasuke-sakuhinshu",
         "confidence": "probable",
@@ -214,7 +203,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -231,7 +219,6 @@
       "yearText": "2020",
       "title": "アイヌ語・日本語辞典稿",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-kubodera-ainu-go-nippon-go-jitenko",
         "confidence": "probable",

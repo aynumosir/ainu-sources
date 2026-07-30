@@ -24,7 +24,6 @@
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "2015",
       "title": "アイヌ語の合成語のアクセント規則とその例外について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-sato-ainu-go-gosei-go-akusento-kisoku-reigai",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "title": "A Kuril Ainu Glossary by Captain V. M. Golovnin (1811)",
       "titleEn": "A Kuril Ainu Glossary by Captain V. M. Golovnin (1811)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-anna-kuril-ainu-glossary-captain-v",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "2021",
       "title": "アイヌ語千歳方言におけるわたり音化とわたり音挿入について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-sato-chitose-hogen-watari-onka-watari-oto-sonyu",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "title": "Handbook of the Ainu Language",
       "titleEn": "Handbook of the Ainu Language",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-bugaeva",
         "confidence": "probable",
@@ -111,7 +106,6 @@
       "yearText": "2023",
       "title": "アイヌ語の抱合と結合価",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2023-sato-ainu-go-hogo-ketsugoka",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "title": "Basic Sentence Structures in Ainu",
       "titleEn": "Basic Sentence Structures in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2025-sato-tomomi-basic-sentence-structures-in-ainu",
         "confidence": "probable",

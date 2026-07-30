@@ -25,7 +25,6 @@
       "title": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language",
       "titleEn": "Comparing Multiple Dictionaries to Improve Part-of-Speech Tagging of Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-ptaszynski-comparing-multiple-dictionaries-improve-part",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "Toward Universal Dependencies for Ainu",
       "titleEn": "Toward Universal Dependencies for Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2017-akiko-toward-universal-dependencies-ainu",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "candidate",
@@ -79,7 +76,6 @@
       "title": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language",
       "titleEn": "MiNgMatch—A Fast N-gram Model for Word Segmentation of the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-karol-mingmatch-fast-n-gram-model-word",
         "confidence": "probable",
@@ -97,7 +93,6 @@
       "title": "Towards Better Text Processing Tools for the Ainu Language",
       "titleEn": "Towards Better Text Processing Tools for the Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-karol-towards-better-text-processing-tools",
         "confidence": "probable",
@@ -115,7 +110,6 @@
       "title": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language",
       "titleEn": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-al-speech-corpus-ainu-folklore-end-to-end",
         "confidence": "probable",
@@ -133,7 +127,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "probable",
@@ -151,7 +144,6 @@
       "title": "Development of a Digital Corpus and Core Language Technologies for the Ainu Language",
       "titleEn": "Development of a Digital Corpus and Core Language Technologies for the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-karol-development-digital-corpus-core-language",
         "confidence": "probable",

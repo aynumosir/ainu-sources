@@ -25,7 +25,6 @@
       "title": "千徳太郎治のピウスツキ宛書簡",
       "titleEn": "Sentoku Tarōji's Letters to Piłsudski",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "sentoku-pilsudski-letters",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "1953",
       "title": "分類アイヌ語辞典植物篇",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1953-hatsu-ainu-go-jiten-shokubutsu-hen",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "1973",
       "title": "アイヌ語のカナ表記についての試み",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1973-haginaka-ainu-go-kana-hyoki",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "1994",
       "title": "アイヌ民族博物館伝承記録",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1994-ainu-minzoku-ainu-minzoku-hakubutsukan-densho-kiroku",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -112,7 +107,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "probable",
@@ -130,7 +124,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -147,7 +140,6 @@
       "yearText": "1997",
       "title": "アイヌによるアイヌ語表記",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-kirikae-ainu-go-hyoki",
         "confidence": "probable",
@@ -164,7 +156,6 @@
       "yearText": "1998",
       "title": "萱野茂のアイヌ神話集成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
@@ -182,7 +173,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -199,7 +189,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -216,7 +205,6 @@
       "yearText": "2020",
       "title": "アイヌ語・日本語辞典稿",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-kubodera-ainu-go-nippon-go-jitenko",
         "confidence": "probable",
@@ -230,7 +218,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

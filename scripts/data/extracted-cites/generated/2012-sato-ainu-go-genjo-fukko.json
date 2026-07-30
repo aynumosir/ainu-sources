@@ -24,7 +24,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "candidate",
@@ -59,7 +57,6 @@
       "yearText": "2007",
       "title": "アイヌ語千歳方言の再帰接頭辞yay-とsi-について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2007-sato-chitose-hogen-yay-si",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "2008",
       "title": "アイヌ語千歳方言における合成名詞の構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-sato-chitose-hogen-gosei-meishi-kozo",
         "confidence": "probable",
@@ -91,7 +87,6 @@
       "yearText": "2009",
       "title": "アイヌの人々とアイヌ語の今",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2009-anon-ainu-hitobito-ainu-go",
         "confidence": "probable",
@@ -108,7 +103,6 @@
       "yearText": "2010",
       "title": "現代アイヌの生活と意識",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-ainu-gendai-ainu-seikatsu-ishiki",
         "confidence": "probable",
@@ -125,7 +119,6 @@
       "yearText": "2012",
       "title": "アイヌ語千歳方言における名詞抱合 : その種類と関連諸規則",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-sato-chitose-hogen-meishi-hogo-shurui-kanren",
         "confidence": "probable",
@@ -143,7 +136,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "candidate",

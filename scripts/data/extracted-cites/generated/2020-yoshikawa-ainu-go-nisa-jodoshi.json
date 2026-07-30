@@ -24,7 +24,6 @@
       "yearText": "1960",
       "title": "アイヌ叙事詩神謡、聖伝の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1960",
       "title": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-tamura-saru-hogen-jodoshi-hokoku",
         "confidence": "probable",
@@ -58,7 +56,6 @@
       "yearText": "1977",
       "title": "アイヌ叙事詩神謡・聖伝の研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
@@ -75,7 +72,6 @@
       "yearText": "1992",
       "title": "アイヌ語・日本語辞典稿 : 久保寺逸彦アイヌ語収録ノート調査報告書",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1992-kubodera-ainu-go-nippon-go-jitenko-kubodera-itsuhiko",
         "confidence": "probable",
@@ -92,7 +88,6 @@
       "yearText": "1993",
       "title": "アイヌ叙事詩ユーカラ集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -127,7 +121,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -145,7 +138,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "probable",
@@ -162,7 +154,6 @@
       "yearText": "1998",
       "title": "萱野茂のアイヌ神話集成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
@@ -179,7 +170,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -197,7 +187,6 @@
       "title": "CDエクスプレス アイヌ語",
       "titleEn": "CD Express: Ainu",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "cd-express-ainu",
         "confidence": "probable",
@@ -214,7 +203,6 @@
       "yearText": "2006",
       "title": "アイヌ語千歳方言のアスペクト",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-sato-chitose-hogen-asupekuto",
         "confidence": "probable",
@@ -231,7 +219,6 @@
       "yearText": "2014",
       "title": "アイヌ語の文献学的研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-nakagawa-ainu-go-bunkengakuteki-kenkyu",
         "confidence": "candidate",
@@ -248,7 +235,6 @@
       "yearText": "2018",
       "title": "アイヌ語の助動詞aanと証拠性",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-yoshikawa-ainu-go-aan-shokosei",
         "confidence": "probable",
@@ -265,7 +251,6 @@
       "yearText": "2020",
       "title": "アイヌ語の助動詞 nisa の用法についての一考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-nisa-no-nitsuiteno",
         "confidence": "probable",
@@ -282,7 +267,6 @@
       "yearText": "2020",
       "title": "アイヌ語における完了表現があらわす証拠性",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-yoshikawa-ainu-go-kanryo-hyogen-shokosei",
         "confidence": "probable",

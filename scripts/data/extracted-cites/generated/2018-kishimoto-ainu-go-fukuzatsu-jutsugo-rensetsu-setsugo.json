@@ -24,7 +24,6 @@
       "yearText": "1960",
       "title": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-tamura-saru-hogen-jodoshi-hokoku",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言における《…して…》の表現",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-2",
         "confidence": "probable",
@@ -58,7 +56,6 @@
       "yearText": "1995",
       "title": "アイヌ語の受動文に関する一考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-sato-ainu-go-judo-bun",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "1998",
       "title": "萱野茂のアイヌ神話集成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "yearText": "2014",
       "title": "北海道南部のアイヌ語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-bugaewa-hokkaido-nanbu-ainu-go",
         "confidence": "probable",
@@ -127,7 +121,6 @@
       "yearText": "2016",
       "title": "アイヌ語沙流方言における動詞の助動詞用法と制約",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-kishimoto-saru-hogen-doshi-jodoshi-yoho-seiyaku",
         "confidence": "probable",

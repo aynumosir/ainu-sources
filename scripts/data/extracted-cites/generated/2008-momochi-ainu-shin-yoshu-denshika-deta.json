@@ -26,7 +26,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -44,7 +43,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "yearText": "1998",
       "title": "『アイヌ神謡集』辞典 : テキスト・文法解説付き",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kirikae-ainu-shin-yoshu-tekisuto-bunpo-kaisetsu",
         "confidence": "probable",
@@ -78,7 +75,6 @@
       "yearText": "2003",
       "title": "「アイヌ神謡集」を読みとく",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-kaizawa-ainu-shin-yoshu",
         "confidence": "probable",

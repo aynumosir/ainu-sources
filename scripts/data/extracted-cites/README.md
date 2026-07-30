@@ -18,7 +18,9 @@ significance PageRank (`bun run archive:refresh-significance`) can see them.
 - `references[]` — one entry per printed reference, numbered from 1:
   - bibliographic fields (`authors`, `year`, `title`, `container`, `volume`,
     `pages`, `publisher`, `place`, `type`, …);
-  - `ainuRelated` — whether the work belongs in this Ainu-focused catalogue;
+  - `ainuRelated` — whether the work belongs in this Ainu-focused catalogue. It is
+    a curation judgement, so only a hand-checked file carries it; sweep output
+    leaves it unset;
   - `match` — the resolved catalogue record: `{ slug, confidence, note }` with
     confidence `exact` | `probable` | `candidate` | `none`.
 - `citesEdges[]` — the resolved citing → cited edges, mirroring the `match`
@@ -27,7 +29,9 @@ significance PageRank (`bun run archive:refresh-significance`) can see them.
 ## Confidence and what the importer does
 
 - Hand-checked files create missing bibliographic records, then write accepted
-  citation edges.
+  citation edges. A reference marked `ainuRelated: false` is the author's
+  general-linguistics reading: no record is created for it, and no edge is drawn
+  unless the work is already catalogued.
 - Generated files link existing source records. `probable` matches become accepted
   edges; `candidate` matches remain candidate edges for review.
 

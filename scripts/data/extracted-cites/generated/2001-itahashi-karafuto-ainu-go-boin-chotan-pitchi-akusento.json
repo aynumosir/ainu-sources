@@ -24,7 +24,6 @@
       "yearText": "1957",
       "title": "アイヌ語における年長者層特殊語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1957-hattori-ainu-go-nenchosha-so-tokushu-go",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1960",
       "title": "アイヌ語諸方言の基礎語彙統計学的研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-hattori-ainu-go-shohogen-kiso-goi-tokeigakuteki",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "candidate",

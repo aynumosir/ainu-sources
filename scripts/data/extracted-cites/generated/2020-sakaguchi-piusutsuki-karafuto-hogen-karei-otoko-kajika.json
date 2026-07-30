@@ -24,7 +24,6 @@
       "yearText": "1911",
       "title": "樺太アイヌの音韻組織",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1911-kindaichi-karafuto-ainu-on-in-soshiki",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1911",
       "title": "樺太アイヌの音韻組織(三)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1911-kindaichi-karafuto-ainu-on-in-soshiki-san",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "title": "アイヌ語法研究 : 樺太方言を中心として",
       "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1942-chiri",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "title": "Ainu Folklore. Traditions and Culture of the Vanishing Aborigines of Japan",
       "titleEn": "Ainu Folklore. Traditions and Culture of the Vanishing Aborigines of Japan",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1950-james-ainu-folklore-traditions-culture-vanishing",
         "confidence": "probable",
@@ -95,7 +91,6 @@
       "title": "Ainu Folklore: Traditions and Culture of the Vanishing Aborigines of Japan. Carl Etter",
       "titleEn": "Ainu Folklore: Traditions and Culture of the Vanishing Aborigines of Japan. Carl Etter",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1950-kitagawa-ainu-folklore-traditions-culture-vanishing",
         "confidence": "probable",
@@ -112,7 +107,6 @@
       "yearText": "1960",
       "title": "アイヌ語諸方言の基礎語彙統計学的研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-hattori-ainu-go-shohogen-kiso-goi-tokeigakuteki",
         "confidence": "probable",
@@ -130,7 +124,6 @@
       "title": "The Ainu of the Northwest Coast of Southern Sakhalin",
       "titleEn": "The Ainu of the Northwest Coast of Southern Sakhalin",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1974-tierney-ainu-northwest-coast-southern-sakhalin",
         "confidence": "probable",
@@ -148,7 +141,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "probable",
@@ -165,7 +157,6 @@
       "yearText": "1979",
       "title": "カラフトアイヌ語―文法篇―",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
@@ -182,7 +173,6 @@
       "yearText": "1989",
       "title": "樺太アイヌ語口承資料１",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1989-murasaki-karafuto-ainu-go-kosho-shiryo",
         "confidence": "probable",
@@ -200,7 +190,6 @@
       "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
@@ -217,7 +206,6 @@
       "yearText": "1998",
       "title": "ペテルブルグMAEコレクションのアイヌ語資料",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-nakagawa-peteruburugu-mae-korekushon-ainu-go-shiryo",
         "confidence": "probable",
@@ -234,7 +222,6 @@
       "yearText": "1999",
       "title": "アイヌ民俗文化財調査報告書. アイヌ生活技術伝承実態調査",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-hokkaido-kyoikucho-ainu-seikatsu-gijutsu-densho-jittai",
         "confidence": "probable",
@@ -251,7 +238,6 @@
       "yearText": "2001",
       "title": "サハリンアイヌの散文説話tuytahについて",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-tan-saharin-ainu-tuytah",
         "confidence": "probable",
@@ -268,7 +254,6 @@
       "yearText": "2001",
       "title": "少数民族言語資料の記録と保存 : 樺太アイヌ語とニヴフ語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-murasaki-shosu-minzoku-gengo-shiryo-ainu-go-nivufu-go",
         "confidence": "probable",
@@ -285,7 +270,6 @@
       "yearText": "2013",
       "title": "サハリン口承文学の地域差",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-tan-saharin-kosho-bungaku-chiki-sa",
         "confidence": "probable",
@@ -302,7 +286,6 @@
       "yearText": "2019",
       "title": "樺太アイヌのオイナ : B.ピウスツキとC.エッターによる英訳テキスト",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2019-sakaguchi-karafuto-ainu-oi-na-b-piusutsuki-c-etta",
         "confidence": "probable",
@@ -319,7 +302,6 @@
       "yearText": "2020",
       "title": "ピウスツキ採集のアイヌ語樺太方言民話テキスト : 「カレイ男とカジカ男」",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "piusutsuki-noainu-tekisuto-karei-tokajika",
         "confidence": "probable",
@@ -333,7 +315,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

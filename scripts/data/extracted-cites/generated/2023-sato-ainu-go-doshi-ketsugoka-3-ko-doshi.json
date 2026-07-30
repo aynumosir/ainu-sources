@@ -24,7 +24,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1956",
       "title": "アイヌ語の動詞の構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
@@ -58,7 +56,6 @@
       "yearText": "1979",
       "title": "カラフトアイヌ語―文法篇―",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
@@ -75,7 +72,6 @@
       "yearText": "1993",
       "title": "アイヌ語のArity Calculation",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-nakagawa-ainu-go-arity-calculation",
         "confidence": "probable",
@@ -92,7 +88,6 @@
       "yearText": "1993",
       "title": "アイヌ叙事詩ユーカラ集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -128,7 +122,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -146,7 +139,6 @@
       "title": "Ditransitive constructions in Ainu",
       "titleEn": "Ditransitive constructions in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-anna-bugaeva-ditransitive-constructions-in-ainu",
         "confidence": "probable",
@@ -164,7 +156,6 @@
       "title": "Handbook of the Ainu Language",
       "titleEn": "Handbook of the Ainu Language",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-bugaeva",
         "confidence": "probable",
@@ -179,7 +170,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

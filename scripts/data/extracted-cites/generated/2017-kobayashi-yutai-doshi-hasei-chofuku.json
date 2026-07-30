@@ -24,7 +24,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "1999",
       "title": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-okuda-shizunai-hogen-goishu-cd-rom",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "2014",
       "title": "アイヌ語鵡川方言の有対動詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-kobayashi-mukawa-hogen-yutai-doshi",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "2015",
       "title": "アイヌ語十勝方言における自他同形動詞に関する一考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-kobayashi-tokachi-hogen-jita-dokei-doshi",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "yearText": "2015",
       "title": "アイヌ語動詞の結合価と項構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-kobayashi-ainu-go-doshi-ketsugoka-ko-kozo",
         "confidence": "probable",
@@ -127,7 +121,6 @@
       "yearText": "2016",
       "title": "アイヌ語動詞の結合価と項構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-to-2",
         "confidence": "probable",
@@ -141,7 +134,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",
@@ -156,7 +148,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

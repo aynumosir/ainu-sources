@@ -24,7 +24,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1998",
       "title": "天理大学付属天理図書館所蔵「松前ノ言」について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-sato-masaki-no-gen",
         "confidence": "probable",
@@ -58,7 +56,6 @@
       "yearText": "1999",
       "title": "天理大学付属天理図書館所蔵「松前ノ言」について(2)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-sato-masaki-no-gen-2",
         "confidence": "candidate",
@@ -75,7 +72,6 @@
       "yearText": "2003",
       "title": "彰考館旧蔵アイヌ語テキスト「蝦夷チヤランケ並浄瑠理言」について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-sato-shokokan-chiya-ranke-kiyoshi-gen",
         "confidence": "probable",
@@ -92,7 +88,6 @@
       "yearText": "2003",
       "title": "酒田市立光丘文庫所蔵「蝦夷記」のアイヌ語について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-sato-sakata-shiritsu-mitsuoka-bunko-ezoki-ainu-go",
         "confidence": "probable",
@@ -109,7 +104,6 @@
       "yearText": "2004",
       "title": "古文献によるアイヌ語諸方言の比較研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-sato-ainu-go-shohogen-hikaku-kenkyu",
         "confidence": "probable",
@@ -126,7 +120,6 @@
       "yearText": "2005",
       "title": "「申渡」のアイヌ語訳文に関する一考察",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2005-sato-moshiwatashi-ainu-go-yakubun",
         "confidence": "probable",

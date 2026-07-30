@@ -25,7 +25,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "title": "Japanese and Ainu",
       "titleEn": "Japanese and Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",

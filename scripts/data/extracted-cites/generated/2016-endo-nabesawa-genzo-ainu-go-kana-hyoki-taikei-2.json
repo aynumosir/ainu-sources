@@ -25,7 +25,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -78,7 +75,6 @@
       "yearText": "1997",
       "title": "アイヌによるアイヌ語表記",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-kirikae-ainu-go-hyoki",
         "confidence": "probable",
@@ -95,7 +91,6 @@
       "yearText": "1998",
       "title": "アイヌ語十勝方言話者による仮名書きアイヌ語テキストの分析",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kirikae-tokachi-hogen-kanagaki-ainu-go-tekisuto",
         "confidence": "probable",
@@ -112,7 +107,6 @@
       "yearText": "1998",
       "title": "アイヌ・モシリ : 幻のアイヌ語誌復刊",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-ainu-ainu-moshiri-maboroshi-ainu-goshi",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -146,7 +139,6 @@
       "yearText": "2006",
       "title": "アイヌ人によるアイヌ語表記への取り組み",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-nakagawa-ainunin-ainu-go-hyoki",
         "confidence": "probable",
@@ -163,7 +155,6 @@
       "yearText": "2013",
       "title": "アイヌ英雄叙事詩「ニタイパカイェ」の2種類のテキストに関する考察",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-endo-nitaipakae-tekisuto",
         "confidence": "probable",
@@ -177,7 +168,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

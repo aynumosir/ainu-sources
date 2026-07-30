@@ -25,7 +25,6 @@
       "yearText": "1931",
       "title": "アイヌユーカラ虎杖丸の曲",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1931-kindaichi-yukara-itadorimaru",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "title": "アイヌ語法研究 : 樺太方言を中心として",
       "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1942-chiri",
         "confidence": "probable",
@@ -77,7 +74,6 @@
       "yearText": "1960",
       "title": "アイヌ叙事詩神謡、聖伝の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "yearText": "1960",
       "title": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-tamura-saru-hogen-jodoshi-hokoku",
         "confidence": "probable",
@@ -111,7 +106,6 @@
       "yearText": "1977",
       "title": "アイヌ叙事詩神謡・聖伝の研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -147,7 +140,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -165,7 +157,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -183,7 +174,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -200,7 +190,6 @@
       "yearText": "1998",
       "title": "萱野茂のアイヌ神話集成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
@@ -217,7 +206,6 @@
       "yearText": "1999",
       "title": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-okuda-shizunai-hogen-goishu-cd-rom",
         "confidence": "probable",
@@ -234,7 +222,6 @@
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
         "confidence": "probable",
@@ -251,7 +238,6 @@
       "yearText": "2015",
       "title": "アイヌ語におけるV-V型の一項動詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-kobayashi-ainu-go-v-vgata-ichi-ko-doshi",
         "confidence": "probable",
@@ -268,7 +254,6 @@
       "yearText": "2016",
       "title": "アイヌ語沙流方言における動詞の助動詞用法と制約",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-niokeru-no-to",
         "confidence": "probable",
@@ -282,7 +267,6 @@
       "yearText": "",
       "title": "アイヌユーカラ語法摘要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-yukara-goho-tekiyo",
         "confidence": "candidate",
@@ -297,7 +281,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

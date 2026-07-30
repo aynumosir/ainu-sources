@@ -24,7 +24,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "2004",
       "title": "古文献によるアイヌ語諸方言の比較研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-sato-ainu-go-shohogen-hikaku-kenkyu",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "2012",
       "title": "アイヌ語千歳方言における名詞抱合 : その種類と関連諸規則",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-sato-chitose-hogen-meishi-hogo-shurui-kanren",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "2012",
       "title": "アイヌ語の現状と復興",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-sato-ainu-go-genjo-fukko",
         "confidence": "probable",
@@ -111,7 +106,6 @@
       "title": "A Classification of the Types of Noun Incorporation in Ainu and its Implication fo Morphosyntactic Typology",
       "titleEn": "A Classification of the Types of Noun Incorporation in Ainu and its Implication fo Morphosyntactic Typology",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-sato-classification-types-noun-incorporation-ainu",
         "confidence": "probable",
@@ -128,7 +122,6 @@
       "yearText": "2016",
       "title": "言語史の研究方法とアイヌ語史の諸問題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-sato-ainu-goshi-shomondai",
         "confidence": "probable",
@@ -145,7 +138,6 @@
       "yearText": "2020",
       "title": "アイヌ語における文法的カテゴリーの転換について：語と句、動詞と名詞の相互関係をめぐって",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-sato-ainu-go-bunpoteki-kategori-tenkan-sogo-kankei",
         "confidence": "probable",
@@ -162,7 +154,6 @@
       "yearText": "2021",
       "title": "アイヌ語千歳方言におけるわたり音化とわたり音挿入について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-sato-chitose-hogen-watari-onka-watari-oto-sonyu",
         "confidence": "probable",
@@ -179,7 +170,6 @@
       "yearText": "2021",
       "title": "名詞所属形を用いたアイヌ語の所有構造について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-sato-meishi-shozokukei-ainu-go-shoyu-kozo",
         "confidence": "probable",
@@ -190,19 +180,18 @@
     {
       "n": 11,
       "authors": [
-        "佐藤知己"
+        "佐藤 知己"
       ],
       "year": 2021,
       "yearText": "2021",
-      "title": "アイヌ語千歳方言の位置名詞orの用法",
+      "title": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
-        "slug": "2021-sato-chitose-hogen-ichi-meishi-or",
+        "slug": "ainu-niokeruainu-no-mini-suru-na-to-no",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌ語千歳方言の位置名詞orの用法"
+      "matchedTitle": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題"
     },
     {
       "n": 12,
@@ -211,15 +200,14 @@
       ],
       "year": 2021,
       "yearText": "2021",
-      "title": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題",
+      "title": "アイヌ語千歳方言の位置名詞orの用法",
       "type": "article",
-      "ainuRelated": false,
       "match": {
-        "slug": "2021-sato-ainu-go-fukko-kadai",
+        "slug": "2021-sato-chitose-hogen-ichi-meishi-or",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "国立アイヌ民族博物館におけるアイヌ語復興の試みに関する簡潔な報告と今後の課題"
+      "matchedTitle": "アイヌ語千歳方言の位置名詞orの用法"
     },
     {
       "n": 13,
@@ -230,7 +218,6 @@
       "yearText": "2023",
       "title": "アイヌ語の動詞の結合価と3項動詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2023-sato-ainu-go-doshi-ketsugoka-3-ko-doshi",
         "confidence": "probable",
@@ -246,7 +233,6 @@
       "yearText": "",
       "title": "古文献によるアイヌ語史の構築",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "sato-kobunken-ainu-goshi",
         "confidence": "probable",

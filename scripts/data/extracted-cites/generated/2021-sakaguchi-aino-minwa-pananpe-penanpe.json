@@ -25,7 +25,6 @@
       "title": "Aino folk-tales",
       "titleEn": "Aino folk-tales",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1888-chamberlain-basil-hall-aino-folk-tales",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "The Ainu and their folk-lore",
       "titleEn": "The Ainu and their folk-lore",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1901-batchelor-john-the-ainu-and-their-folk-lore",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "A grammar of the Ainu language",
       "titleEn": "A grammar of the Ainu language",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1903-john-c-batchelor-a-grammar-of-the-ainu-language",
         "confidence": "probable",
@@ -79,7 +76,6 @@
       "title": "An Ainu-English-Japanese Dictionary",
       "titleEn": "An Ainu-English-Japanese Dictionary",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
@@ -96,7 +92,6 @@
       "yearText": "1935",
       "title": "チェンバレン先生とアイヌ語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1935-kindaichi-chenbaren-ainu-go",
         "confidence": "probable",
@@ -113,7 +108,6 @@
       "yearText": "1948",
       "title": "りくんべつの翁 : アイヌの昔話",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1948-kindaichi-riku-n-betsu-no-okina-ainu-mukashibanashi",
         "confidence": "probable",
@@ -131,7 +125,6 @@
       "title": "Ainu Folklore",
       "titleEn": "Ainu Folklore",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1949-carl-etter-ainu-folklore",
         "confidence": "probable",
@@ -149,7 +142,6 @@
       "title": "Ainu Folklore. Traditions and Culture of the Vanishing Aborigines of Japan",
       "titleEn": "Ainu Folklore. Traditions and Culture of the Vanishing Aborigines of Japan",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1950-james-ainu-folklore-traditions-culture-vanishing",
         "confidence": "probable",
@@ -166,7 +158,6 @@
       "yearText": "1955",
       "title": "アイヌの散文物語 : 川下の者の昔話",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1955-chiri-sanbun-monogatari-kawashimo",
         "confidence": "probable",
@@ -183,7 +174,6 @@
       "yearText": "1969",
       "title": "キナラブック・ユーカラ集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1969-kinarabukku-yukarashu",
         "confidence": "probable",
@@ -200,7 +190,6 @@
       "yearText": "1988",
       "title": "アイヌ語地名資料集成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1988-suke-ainu-go-chimei-shiryo-shusei",
         "confidence": "probable",
@@ -217,7 +206,6 @@
       "yearText": "1993",
       "title": "東北・アイヌ語地名の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-yamada-tohoku-ainu-go-chimei",
         "confidence": "probable",
@@ -235,7 +223,6 @@
       "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
@@ -251,7 +238,6 @@
       "title": "Ainu folk-lore",
       "titleEn": "Ainu folk-lore",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-folk-lore",
         "confidence": "candidate",
@@ -268,7 +254,6 @@
       "yearText": "1998",
       "title": "アイヌ・モシリ : 幻のアイヌ語誌復刊",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-ainu-ainu-moshiri-maboroshi-ainu-goshi",
         "confidence": "probable",
@@ -286,7 +271,6 @@
       "title": "Specimens of Ainu Folklore",
       "titleEn": "Specimens of Ainu Folklore",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-john-batchelor-specimens-of-ainu-folklore",
         "confidence": "probable",
@@ -303,7 +287,6 @@
       "yearText": "2009",
       "title": "四宅ヤエさんの口承文芸テキスト おへそから出たスズメのしっぽ",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2009-tamura-yon-taku-yae-suzume",
         "confidence": "probable",
@@ -320,7 +303,6 @@
       "yearText": "2010",
       "title": "アイヌ口承文芸テキスト集10 白沢ナベ口述 ペナンペ金の子犬を授かる",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-nakagawa-shirasawa-nabe-penanpe-kane-no-koinu",
         "confidence": "probable",
@@ -337,7 +319,6 @@
       "yearText": "2011",
       "title": "和人の散文説話：継母から殺されかけた姉を救った妹",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-oya-mamahaha-korosare-kaketa-ane-sukutta-imoto",
         "confidence": "probable",
@@ -354,7 +335,6 @@
       "yearText": "2016",
       "title": "アイヌ語口承文芸コーパス―音声・グロス付き―",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-anna-ainu-go-kosho-bungei-kopasu-onsei",
         "confidence": "probable",
@@ -372,7 +352,6 @@
       "title": "Ainu Folk Tales",
       "titleEn": "Ainu Folk Tales",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-edward-taylor-ainu-folk-tales",
         "confidence": "probable",
@@ -388,7 +367,6 @@
       "yearText": "",
       "title": "アイヌ文化の形成と変容",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "otani-ainu-bunka-keisei-hen-yo",
         "confidence": "probable",
@@ -402,7 +380,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

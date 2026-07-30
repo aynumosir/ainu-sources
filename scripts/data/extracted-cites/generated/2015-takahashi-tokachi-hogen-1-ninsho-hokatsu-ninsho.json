@@ -25,7 +25,6 @@
       "title": "Gengo kenkyu",
       "titleEn": "Gengo kenkyu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
         "confidence": "candidate",
@@ -42,7 +41,6 @@
       "yearText": "1956",
       "title": "アイヌ語の動詞の構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "1971",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-no",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "1971",
       "title": "アイヌ語石狩方言の人称代名詞と人称接辞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-tamura-ishikari-hogen-ninsho-dai-meishi-ninsho",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "1971",
       "title": "アイヌ語沙流方言の人称代名詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-tamura-saru-hogen-ninsho-dai-meishi",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-ninsho-shurui",
         "confidence": "probable",
@@ -128,7 +122,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -146,7 +139,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -163,7 +155,6 @@
       "yearText": "2004",
       "title": "アイヌ文学における一人称体の問題",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-sato-ainu-bungaku-ichi-ninsho-tai",
         "confidence": "probable",
@@ -181,7 +172,6 @@
       "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
       "titleEn": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-anna-reported-discourse-logophoricity-southern",
         "confidence": "probable",
@@ -198,7 +188,6 @@
       "yearText": "2011",
       "title": "アイヌの神謡における叙述者の人称",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-nakagawa-ainu-shin-yo-jojutsusha-ninsho",
         "confidence": "probable",
@@ -215,7 +204,6 @@
       "yearText": "2012",
       "title": "アイヌ口承文芸における一人称",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-hideo-ainu-kosho-bungei-ichi-ninsho",
         "confidence": "probable",
@@ -232,7 +220,6 @@
       "yearText": "2015",
       "title": "アイヌ語十勝方言における1人称と包括人称について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-niokeru-1-to-nitsuite",
         "confidence": "probable",

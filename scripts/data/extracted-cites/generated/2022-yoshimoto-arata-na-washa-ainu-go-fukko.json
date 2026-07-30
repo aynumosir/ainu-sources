@@ -25,7 +25,6 @@
       "yearText": "1988",
       "title": "二風谷アイヌ語教室広報紙",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1988-ainu-nifu-tani-ainu-go-kyoshitsu-2",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "2012",
       "title": "アイヌ民族とアイヌ語学習 : 先住民族の言語権の視点から",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-ueno-ainu-minzoku-ainu-go-gakushu-gengoken",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "2012",
       "title": "アイヌ語の現状と復興",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-sato-ainu-go-genjo-fukko",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "2014",
       "title": "アイヌ民族の言語復興と歴史教育の研究 : 教育から考える先住民族とエンパワーメント",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-ueno-ainu-minzoku-gengo-fukko-rekishi-kyoiku",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "2014",
       "title": "アイヌ民族・先住民族教育の現在",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-nippon-shakai-ainu-minzoku-senju-minzoku-kyoiku",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "yearText": "2014",
       "title": "博物館におけるアイヌ文化の伝承者育成",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-wakazono-ainu-bunka-denshosha-ikusei",
         "confidence": "probable",
@@ -127,7 +121,6 @@
       "yearText": "2018",
       "title": "首都圏におけるアイヌ語教育の現状",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-watanabe-shutoken-ainu-go-kyoiku",
         "confidence": "probable",
@@ -144,7 +137,6 @@
       "yearText": "2020",
       "title": "アイヌ文化伝承者育成事業の実践例と課題の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-ueno-ainu-bunka-denshosha-ikusei-jigyo",
         "confidence": "probable",
@@ -161,7 +153,6 @@
       "yearText": "2020",
       "title": "アイヌ語復興のこれまでとこれから",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-tan-ainu-go-fukko",
         "confidence": "probable",
@@ -178,7 +169,6 @@
       "yearText": "2021",
       "title": "アイヌ語復興の可能性としての「言語の巣」",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-nozaki-ainu-go-fukko-gengo-no-su",
         "confidence": "probable",
@@ -195,7 +185,6 @@
       "yearText": "2022",
       "title": "新たな話者たちによるアイヌ語復興 : 北海道平取町二風谷を事例に",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-yoshimoto-ainu-go-fukko-biratori-machi-nifu-tani",
         "confidence": "probable",
@@ -209,7 +198,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

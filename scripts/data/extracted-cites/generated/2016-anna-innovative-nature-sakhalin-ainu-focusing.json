@@ -25,7 +25,6 @@
       "title": "Karafuto Ainugo",
       "titleEn": "Karafuto Ainugo",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1976-kyoko-murasaki-karafuto-ainugo",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
       "titleEn": "Karafuto Ainugo: Bunpō-hen (Sakhalin Ainu: Grammar Volume)",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainugo-bunpo-hen-sakhalin-ainu",
         "confidence": "probable",
@@ -79,7 +76,6 @@
       "title": "Ainugo nyūmon",
       "titleEn": "Ainugo nyūmon",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1984-kenkyujo-ainugo-nyumon",
         "confidence": "candidate",
@@ -97,7 +93,6 @@
       "title": "Ainugo (The Ainu language)",
       "titleEn": "Ainugo (The Ainu language)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1988-tamura-suzuko-ainugo-the-ainu-language",
         "confidence": "probable",
@@ -115,7 +110,6 @@
       "title": "Nihongo to Ainugo",
       "titleEn": "Nihongo to Ainugo",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-tatsumine-katayama-nihongo-to-ainugo",
         "confidence": "candidate",
@@ -133,7 +127,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -151,7 +144,6 @@
       "title": "Ainu: Spirit of a Northern People",
       "titleEn": "Ainu: Spirit of a Northern People",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2001-katarina-sjoberg-ainu-spirit-of-a-northern-people",
         "confidence": "probable",
@@ -169,7 +161,6 @@
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "type": "thesis",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
@@ -185,7 +176,6 @@
       "title": "Japanese and Ainu",
       "titleEn": "Japanese and Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",
@@ -203,7 +193,6 @@
       "title": "Ainugo bunpō no kiso",
       "titleEn": "Ainugo bunpō no kiso",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
         "confidence": "probable",
@@ -221,7 +210,6 @@
       "title": "Mermaid construction in Ainu",
       "titleEn": "Mermaid construction in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-anna-bugaeva-mermaid-construction-in-ainu",
         "confidence": "probable",
@@ -239,7 +227,6 @@
       "title": "Karafuto Ainugo reibunshū",
       "titleEn": "Karafuto Ainugo reibunshū",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-kyoko-murasaki-karafuto-ainugo-reibunshu",
         "confidence": "probable",
@@ -257,7 +244,6 @@
       "title": "A topical dictionary of conversational Ainu (English HP)",
       "titleEn": "A topical dictionary of conversational Ainu (English HP)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2015-bugaeva-topical-dictionary-conversational-ainu",
         "confidence": "probable",
@@ -275,7 +261,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "candidate",
@@ -293,7 +278,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "candidate",
@@ -311,7 +295,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",

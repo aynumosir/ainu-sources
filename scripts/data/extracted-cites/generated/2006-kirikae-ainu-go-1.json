@@ -25,7 +25,6 @@
       "title": "An Ainu-English-Japanese Dictionary",
       "titleEn": "An Ainu-English-Japanese Dictionary",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "1935",
       "title": "数詞から観たアイヌ民族",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1935-kindaichi-sushi-ainu-minzoku",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "1960",
       "title": "アイヌ叙事詩神謡、聖伝の研究",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
@@ -93,7 +89,6 @@
       "yearText": "1977",
       "title": "アイヌ叙事詩神謡・聖伝の研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
@@ -110,7 +105,6 @@
       "yearText": "1979",
       "title": "カラフトアイヌ語―文法篇―",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
@@ -127,7 +121,6 @@
       "yearText": "1993",
       "title": "アイヌ叙事詩ユーカラ集",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
@@ -145,7 +138,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -163,7 +155,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -180,7 +171,6 @@
       "yearText": "2006",
       "title": "アイヌ語の1を示す数詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-1-o-su",
         "confidence": "candidate",
@@ -197,7 +187,6 @@
       "yearText": "2020",
       "title": "アイヌ語・日本語辞典稿",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-kubodera-ainu-go-nippon-go-jitenko",
         "confidence": "probable",
@@ -215,7 +204,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",
@@ -230,7 +218,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

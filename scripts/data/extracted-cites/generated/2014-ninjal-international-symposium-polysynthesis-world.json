@@ -25,7 +25,6 @@
       "title": "Gengo kenkyu",
       "titleEn": "Gengo kenkyu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
         "confidence": "candidate",
@@ -43,7 +42,6 @@
       "title": "アイヌ語法概説",
       "titleEn": "An Outline of Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "Ainu minzoku",
       "titleEn": "Ainu minzoku",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-honda-katsuichi-ainu-minzoku",
         "confidence": "candidate",
@@ -77,7 +74,6 @@
       "title": "Japanese and Ainu",
       "titleEn": "Japanese and Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",
@@ -95,7 +91,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",

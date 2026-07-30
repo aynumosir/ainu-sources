@@ -24,7 +24,6 @@
       "yearText": "1936",
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
@@ -41,7 +40,6 @@
       "yearText": "1961",
       "title": "アイヌ語カラフト方言の「人称接辞」について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1961-hattori-karafuto-hogen-ninsho-setsuji",
         "confidence": "probable",
@@ -58,7 +56,6 @@
       "yearText": "1971",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-no-no",
         "confidence": "probable",
@@ -75,7 +72,6 @@
       "yearText": "1972",
       "title": "アイヌ語沙流方言の人称の種類",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1972-tamura-saru-hogen-ninsho-shurui",
         "confidence": "candidate",
@@ -92,7 +88,6 @@
       "yearText": "1991",
       "title": "アイヌ語千歳方言における自称詞と対称詞について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1991-sato-chitose-hogen-jisho-shi-taisho-shi",
         "confidence": "probable",
@@ -107,7 +102,6 @@
       ],
       "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-yukara-6",
         "confidence": "probable",

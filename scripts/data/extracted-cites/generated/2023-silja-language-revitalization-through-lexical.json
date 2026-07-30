@@ -25,7 +25,6 @@
       "title": "Ainugo kenkyū",
       "titleEn": "Ainugo kenkyū",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1960-kyosuke-kindaichi-ainugo-kenkyu",
         "confidence": "candidate",
@@ -43,7 +42,6 @@
       "title": "Ainugo Nihongo jiten kō",
       "titleEn": "Ainugo Nihongo jiten kō",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1992-itsuhiko-kubodera-ainugo-nihongo-jiten-ko",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "Ainugo jiten",
       "titleEn": "Ainugo jiten",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-suzuko-tamura-ainugo-jiten",
         "confidence": "candidate",
@@ -79,7 +76,6 @@
       "title": "Ainu minzoku",
       "titleEn": "Ainu minzoku",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-honda-katsuichi-ainu-minzoku",
         "confidence": "candidate",
@@ -97,7 +93,6 @@
       "title": "Lost Aryans? John Batchelor and the Colonization of the Ainu Language",
       "titleEn": "Lost Aryans? John Batchelor and the Colonization of the Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-refsing-lost-aryans-john-batchelor-colonization",
         "confidence": "probable",
@@ -115,7 +110,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -133,7 +127,6 @@
       "title": "Ainugo bunpō no kiso",
       "titleEn": "Ainugo bunpō no kiso",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
         "confidence": "probable",
@@ -151,7 +144,6 @@
       "title": "Southern Hokkaido Ainu",
       "titleEn": "Southern Hokkaido Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2012-bugaeva-anna-southern-hokkaido-ainu",
         "confidence": "probable",
@@ -169,7 +161,6 @@
       "title": "Ainu Languages: Correct, Good, and Less So",
       "titleEn": "Ainu Languages: Correct, Good, and Less So",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-izutsu-ainu-languages-correct-good-less",
         "confidence": "probable",
@@ -187,7 +178,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "candidate",
@@ -205,7 +195,6 @@
       "title": "Current status of Ainu cultural revitalization",
       "titleEn": "Current status of Ainu cultural revitalization",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-kitahara-current-status-ainu-cultural-revitalization",
         "confidence": "probable",
@@ -223,7 +212,6 @@
       "title": "Ainu-English-Japanese Dictionary (including a Grammar of the Ainu Language)",
       "titleEn": "Ainu-English-Japanese Dictionary (including a Grammar of the Ainu Language)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-batchelor-ainu-english-japanese-dictionary-including",
         "confidence": "probable",
@@ -241,7 +229,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "candidate",
@@ -259,7 +246,6 @@
       "title": "The National Ainu Museum",
       "titleEn": "The National Ainu Museum",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-sakata-national-ainu-museum",
         "confidence": "candidate",
@@ -277,7 +263,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",
@@ -295,7 +280,6 @@
       "title": "Handbook of the Ainu Language",
       "titleEn": "Handbook of the Ainu Language",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-bugaeva",
         "confidence": "probable",
@@ -313,7 +297,6 @@
       "title": "Hokkaido Ainu dialects: Towards a classification of Ainu dialects",
       "titleEn": "Hokkaido Ainu dialects: Towards a classification of Ainu dialects",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-nakagawa-hokkaido-ainu-dialects-towards-classification",
         "confidence": "probable",

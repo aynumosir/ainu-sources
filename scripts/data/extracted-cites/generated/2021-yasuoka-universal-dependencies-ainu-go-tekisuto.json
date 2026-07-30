@@ -26,7 +26,6 @@
       "title": "千徳太郎治のピウスツキ宛書簡",
       "titleEn": "Sentoku Tarōji's Letters to Piłsudski",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "sentoku-pilsudski-letters",
         "confidence": "probable",
@@ -44,7 +43,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "yearText": "2003",
       "title": "「アイヌ神謡集」を読みとく",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2003-kaizawa-ainu-shin-yoshu",
         "confidence": "probable",
@@ -79,7 +76,6 @@
       "title": "Toward Universal Dependencies for Ainu",
       "titleEn": "Toward Universal Dependencies for Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2017-akiko-toward-universal-dependencies-ainu",
         "confidence": "probable",
@@ -97,7 +93,6 @@
       "title": "Universal Dependencies for Ainu",
       "titleEn": "Universal Dependencies for Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-akiko-universal-dependencies-ainu",
         "confidence": "probable",
@@ -114,7 +109,6 @@
       "yearText": "2021",
       "title": "アイヌ語Universal Dependencies再考",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-yasuoka-ainu-go-universal-dependencies",
         "confidence": "probable",
@@ -128,7 +122,6 @@
       "title": "千葉大学ユーラシア言語文化論集",
       "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
       "type": "corpus-text",
-      "ainuRelated": false,
       "match": {
         "slug": "anon-journal-chiba-university-eurasian-society",
         "confidence": "candidate",

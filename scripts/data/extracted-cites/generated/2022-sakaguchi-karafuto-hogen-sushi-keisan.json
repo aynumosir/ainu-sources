@@ -25,7 +25,6 @@
       "title": "An Ainu-English-Japanese Dictionary",
       "titleEn": "An Ainu-English-Japanese Dictionary",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "あいぬ物語（附 あいぬ語大意及語彙）",
       "titleEn": "Ainu Monogatari (Sakhalin Ainu autobiography, appended vocabulary)",
       "type": "wordlist",
-      "ainuRelated": true,
       "match": {
         "slug": "1913-yamabe-ainu-monogatari",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology",
       "titleEn": "The Vigesimal and Decimal Systems in the Ainu Numerals: With Some Remarks on Ainu Phonology",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1917-laufer-vigesimal-decimal-systems-ainu-numerals",
         "confidence": "probable",
@@ -78,7 +75,6 @@
       "yearText": "1935",
       "title": "数詞から観たアイヌ民族",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1935-kindaichi-sushi-ainu-minzoku",
         "confidence": "probable",
@@ -96,7 +92,6 @@
       "title": "アイヌ語法研究 : 樺太方言を中心として",
       "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1942-chiri",
         "confidence": "probable",
@@ -113,7 +108,6 @@
       "yearText": "1957",
       "title": "アイヌ語における年長者層特殊語",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1957-hattori-ainu-go-nenchosha-so-tokushu-go",
         "confidence": "probable",
@@ -131,7 +125,6 @@
       "title": "A grammar of Ainu number names",
       "titleEn": "A grammar of Ainu number names",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1970-fred-c-c-peng-a-grammar-of-ainu-number-names",
         "confidence": "probable",
@@ -148,7 +141,6 @@
       "yearText": "1971",
       "title": "北千島アイヌ語 : 文献学的研究",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-murayama-kita-chishima-ainu-go-bunkengakuteki-kenkyu",
         "confidence": "probable",
@@ -166,7 +158,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "candidate",
@@ -183,7 +174,6 @@
       "yearText": "1988",
       "title": "アイヌ語と接触した外国人--世界最初のアイヌ語記録者アンジェリス",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1988-nakagawa-ainu-go-anje-risu",
         "confidence": "probable",
@@ -201,7 +191,6 @@
       "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
@@ -218,7 +207,6 @@
       "yearText": "1995",
       "title": "アイヌ語・ロシア語辞典-2-",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-m-m-dobrotvorskii-2",
         "confidence": "probable",
@@ -236,7 +224,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "probable",
@@ -254,7 +241,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "candidate",
@@ -271,7 +257,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -288,7 +273,6 @@
       "yearText": "2004",
       "title": "アイヌ語数詞体系に対する考察．－ドブロトゥヴォールスキーのアイヌ語辞典を基盤にして",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-uoi-ainu-go-sushi-doburotuvorusuki-jiten",
         "confidence": "probable",
@@ -305,7 +289,6 @@
       "yearText": "2009",
       "title": "樺太アイヌ語の数詞について",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2009-murasaki-karafuto-ainu-go-sushi",
         "confidence": "probable",
@@ -322,7 +305,6 @@
       "yearText": "2016",
       "title": "M.M.ドブロトゥヴォールスキーのアイヌ語・ロシア語辞典(20)",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-terada-ainu-go-roshia-go-jiten-20",
         "confidence": "probable",
@@ -340,7 +322,6 @@
       "title": "Ainu Language",
       "titleEn": "Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-national-cancer-institute-ainu-language",
         "confidence": "probable",
@@ -357,7 +338,6 @@
       "yearText": "2020",
       "title": "ジョン・バチェラーの著作に含まれる樺太アイヌの口承文芸 : ピウスツキ資料からの転載の実態",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-sakaguchi-karafuto-ainu-kosho-bungei-piusutsuki",
         "confidence": "probable",
@@ -374,7 +354,6 @@
       "yearText": "2021",
       "title": "アイヌ語の数詞再考：二十進法における下方算法から上方算法への切り替え",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-ochiai-ainu-go-sushi-kaho-sanpo-joho-sanpo",
         "confidence": "probable",
@@ -391,7 +370,6 @@
       "yearText": "2022",
       "title": "アイヌ語樺太方言における数詞と計算",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-niokeru-to-2",
         "confidence": "probable",
@@ -406,7 +384,6 @@
       ],
       "title": "あいぬ物語 : 附・あいぬ語大意及語彙",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-ainu-3",
         "confidence": "probable",

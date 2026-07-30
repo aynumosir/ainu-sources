@@ -25,7 +25,6 @@
       "yearText": "1995",
       "title": "北海道立アイヌ民族文化研究センター研究紀要",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "1997",
       "title": "小川シゲノから上田トシへの伝承",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
@@ -59,7 +57,6 @@
       "yearText": "1998",
       "title": "小川シゲノから上田トシへの伝承(2)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
@@ -76,7 +73,6 @@
       "yearText": "1999",
       "title": "小川シゲノから上田トシへの伝承(3)",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
@@ -94,7 +90,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "candidate",
@@ -112,7 +107,6 @@
       "title": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language",
       "titleEn": "Speech Corpus of Ainu Folklore and End-to-end Speech Recognition for Ainu Language",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2020-al-speech-corpus-ainu-folklore-end-to-end",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "yearText": "2021",
       "title": "アイヌ民話アーカイブに対する音声認識",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-matsura-ainu-minwa-akaibu-onsei-ninshiki",
         "confidence": "probable",

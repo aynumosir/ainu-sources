@@ -25,7 +25,6 @@
       "title": "Ainu gohō gaisetsu",
       "titleEn": "Ainu gohō gaisetsu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1936-kyosuke-kindaichi-ainu-goho-gaisetsu",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "yearText": "1956",
       "title": "アイヌ語入門 : とくに地名研究者のために",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1956-chiri-ainu-go-nyumon-chimei-kenkyu",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "title": "アイヌ語音声資料",
       "titleEn": "Ainu Audio Materials",
       "type": "corpus-text",
-      "ainuRelated": true,
       "match": {
         "slug": "ainu-audio-materials",
         "confidence": "candidate",
@@ -78,7 +75,6 @@
       "title": "Ainu minzoku shi",
       "titleEn": "Ainu minzoku shi",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1970-hokkaido-ainu-minzoku-shi",
         "confidence": "candidate",
@@ -96,7 +92,6 @@
       "title": "Personal Pronouns in the Saru Dialect of Ainu",
       "titleEn": "Personal Pronouns in the Saru Dialect of Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-tamura-personal-pronouns-saru-dialect-ainu",
         "confidence": "probable",
@@ -113,7 +108,6 @@
       "yearText": "1971",
       "title": "アイヌ語沙流方言の人称代名詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1971-tamura-saru-hogen-ninsho-dai-meishi",
         "confidence": "probable",
@@ -131,7 +125,6 @@
       "title": "Karafuto Ainugo",
       "titleEn": "Karafuto Ainugo",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1976-kyoko-murasaki-karafuto-ainugo",
         "confidence": "probable",
@@ -149,7 +142,6 @@
       "title": "Sakhalin Ainu",
       "titleEn": "Sakhalin Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1978-by-kyoko-murasaki-sakhalin-ainu",
         "confidence": "probable",
@@ -166,7 +158,6 @@
       "yearText": "1979",
       "title": "カラフトアイヌ語―文法篇―",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1979-murasaki-karafuto-ainu-go-bunpo-hen",
         "confidence": "probable",
@@ -183,7 +174,6 @@
       "yearText": "1983",
       "title": "アイヌ語の場所表現と名詞の所属形",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1983-nakagawa-ainu-go-basho-hyogen-shozokukei",
         "confidence": "probable",
@@ -199,7 +189,6 @@
       "title": "Ainugo onsei shiryō",
       "titleEn": "Ainugo onsei shiryō",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1984-anon-ainugo-onsei-shiryo",
         "confidence": "candidate",
@@ -217,7 +206,6 @@
       "title": "Ainugo nyūmon",
       "titleEn": "Ainugo nyūmon",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1984-kenkyujo-ainugo-nyumon",
         "confidence": "candidate",
@@ -234,7 +222,6 @@
       "yearText": "1985",
       "title": "アイヌ語入門 : とくに地名研究者のために",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-tokuni-notameni",
         "confidence": "probable",
@@ -252,7 +239,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1986-refsing",
         "confidence": "probable",
@@ -270,7 +256,6 @@
       "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
@@ -288,7 +273,6 @@
       "title": "Shibatani（1990）",
       "titleEn": "The Languages of Japan (Cambridge Language Surveys)",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1990-shibatani",
         "confidence": "probable",
@@ -304,7 +288,6 @@
       "title": "Ainu Literature",
       "titleEn": "Ainu Literature",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1997-anon-ainu-literature",
         "confidence": "candidate",
@@ -322,7 +305,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "probable",
@@ -340,7 +322,6 @@
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "type": "thesis",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
@@ -358,7 +339,6 @@
       "title": "Ainugo bunpō no kiso",
       "titleEn": "Ainugo bunpō no kiso",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-tomomi-sato-ainugo-bunpo-no-kiso",
         "confidence": "probable",
@@ -376,7 +356,6 @@
       "title": "Ainu applicatives in typological perspective",
       "titleEn": "Ainu applicatives in typological perspective",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2010-bugaeva-ainu-applicatives-typological-perspective",
         "confidence": "probable",
@@ -394,7 +373,6 @@
       "title": "A diachronic study of the impersonal passive in Ainu",
       "titleEn": "A diachronic study of the impersonal passive in Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2011-bugaeva-diachronic-study-impersonal-passive-ainu",
         "confidence": "probable",
@@ -412,7 +390,6 @@
       "title": "Ainu Ethnography",
       "titleEn": "Ainu Ethnography",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2013-hans-dieter-olschleger-ainu-ethnography",
         "confidence": "candidate",
@@ -430,7 +407,6 @@
       "title": "Polysynthesis in Ainu",
       "titleEn": "Polysynthesis in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2014-bugaeva-anna-polysynthesis-in-ainu",
         "confidence": "probable",
@@ -448,7 +424,6 @@
       "title": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations",
       "titleEn": "On the innovative nature of Sakhalin Ainu: focusing on nominalizations",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2016-bugaeva-innovative-nature-sakhalin-ainu-focusing",
         "confidence": "probable",
@@ -466,7 +441,6 @@
       "title": "Noun-modifying clause constructions in Ainu",
       "titleEn": "Noun-modifying clause constructions in Ainu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2017-bugaeva-noun-modifying-clause-constructions-ainu",
         "confidence": "probable",
@@ -484,7 +458,6 @@
       "title": "Ainu Grammar",
       "titleEn": "Ainu Grammar",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "2018-basil-hall-chamberlain-ainu-grammar",
         "confidence": "probable",
@@ -502,7 +475,6 @@
       "title": "Unspecified participant: A case of antipassive in Ainu",
       "titleEn": "Unspecified participant: A case of antipassive in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2021-bugaeva-unspecified-participant-case-antipassive-ainu",
         "confidence": "probable",
@@ -520,7 +492,6 @@
       "title": "Some evidence for the origin of the Ainu antipassive prefix i-",
       "titleEn": "Some evidence for the origin of the Ainu antipassive prefix i-",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "some-evidence-for-the-origin-of-the-ainu-antipassive-prefix",
         "confidence": "candidate",
@@ -538,7 +509,6 @@
       "title": "Introduction",
       "titleEn": "Introduction",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2022-anna-bugaeva-introduction",
         "confidence": "candidate",

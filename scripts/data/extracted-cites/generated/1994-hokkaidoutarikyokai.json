@@ -24,7 +24,6 @@
       "yearText": "1942",
       "title": "アイヌ語法研究 : 樺太方言を中心として",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "ainu-o-toshite",
         "confidence": "probable",
@@ -42,7 +41,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -60,7 +58,6 @@
       "title": "萱野茂のアイヌ語辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-kayano-kayanos-ainu-dictionary",
         "confidence": "probable",
@@ -78,7 +75,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
@@ -95,7 +91,6 @@
       "yearText": "1998",
       "title": "アイヌ語北海道東部方言教本",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1998-tome-ainu-go-hokkaido-tobu-hogen",
         "confidence": "probable",
@@ -112,7 +107,6 @@
       "yearText": "1999",
       "title": "アイヌ語静内方言文脈つき語彙集",
       "type": "wordlist",
-      "ainuRelated": false,
       "match": {
         "slug": "1999-okuda-shizunai-hogen-bunmyakutsuki-goishu",
         "confidence": "probable",
@@ -129,7 +123,6 @@
       "yearText": "2002",
       "title": "萱野茂のアイヌ語辞典",
       "type": "dictionary",
-      "ainuRelated": false,
       "match": {
         "slug": "noainu",
         "confidence": "probable",
@@ -146,7 +139,6 @@
       "yearText": "2004",
       "title": "アイヌ語様似方言辞典",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "2004-komatsu-samani-hogen-jiten",
         "confidence": "probable",

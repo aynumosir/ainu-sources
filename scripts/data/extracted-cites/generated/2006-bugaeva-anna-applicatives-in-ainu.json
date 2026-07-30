@@ -26,7 +26,6 @@
       "title": "Gengo kenkyu",
       "titleEn": "Gengo kenkyu",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "1933-kindaichi-kyosuke-gengo-kenkyu",
         "confidence": "candidate",
@@ -44,7 +43,6 @@
       "title": "アイヌ語沙流方言辞典",
       "titleEn": "A Dictionary of the Saru Dialect of Ainu",
       "type": "grammar",
-      "ainuRelated": false,
       "match": {
         "slug": "1996-tamura",
         "confidence": "probable",
@@ -62,7 +60,6 @@
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "type": "thesis",
-      "ainuRelated": false,
       "match": {
         "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
@@ -80,7 +77,6 @@
       "title": "Applicatives in Ainu",
       "titleEn": "Applicatives in Ainu",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "applicatives-in-ainu",
         "confidence": "probable",
@@ -98,7 +94,6 @@
       "title": "\"Direct and indirect speech in Ainu\"",
       "titleEn": "\"Direct and indirect speech in Ainu\"",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2006-bugaeva-anna-direct-and-indirect-speech-in-ainu",
         "confidence": "probable",

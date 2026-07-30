@@ -25,7 +25,6 @@
       "yearText": "1984",
       "title": "アイヌ語の名詞句の構造と合成名詞",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "1984-kirikae-ainu-go-meishi-ku-kozo-gosei-meishi",
         "confidence": "probable",
@@ -43,7 +42,6 @@
       "title": "アイヌ語千歳方言辞典",
       "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
       "match": {
         "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
         "confidence": "probable",
@@ -61,7 +59,6 @@
       "title": "The Ainu Language",
       "titleEn": "The Ainu Language",
       "type": "book",
-      "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
         "confidence": "candidate",
@@ -78,7 +75,6 @@
       "yearText": "2008",
       "title": "アイヌ語千歳方言における合成名詞の構造",
       "type": "article",
-      "ainuRelated": false,
       "match": {
         "slug": "2008-sato-chitose-hogen-gosei-meishi-kozo",
         "confidence": "probable",
