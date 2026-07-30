@@ -3,54 +3,37 @@
   "verified": false,
   "citingWork": {
     "slug": "2025-sato-shohyo-ainu-go-kobunten-2",
-    "title": "佐藤知己 書評：中川裕著『アイヌ語広文典』",
+    "title": "書評：中川裕著『アイヌ語広文典』",
+    "author": "佐藤知己",
     "year": 2025,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 9,
+    "referenceCount": 7,
     "sourcePath": "articles/2025_佐藤知己_書評：中川裕著『アイヌ語広文典』.pdf"
   },
   "references": [
     {
       "n": 1,
       "authors": [
-        "Suzuko Tamura"
-      ],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "The Ainu Language",
-      "titleEn": "The Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Ainu Language"
-    },
-    {
-      "n": 2,
-      "authors": [
-        "Bugaeva, Anna"
+        "Bugaeva, Anna, 長崎, 郁"
       ],
       "year": 2015,
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
-      "type": "book",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-bugaeva-anna-b8h16x",
+        "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語研究の諸問題"
     },
     {
-      "n": 3,
+      "n": 2,
       "authors": [
         "佐藤 知己"
       ],
@@ -60,32 +43,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-tck9su",
+        "slug": "2015-sato-ainu-go-gosei-go-akusento-kisoku-reigai",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の合成語のアクセント規則とその例外について"
     },
     {
-      "n": 4,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 5,
+      "n": 3,
       "authors": [
         "Anna Bugaeva, Tomomi Satō"
       ],
@@ -96,14 +61,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-anna-bugaeva-a-kuril-ainu-glossary-by-captain-v-m-golovnin-1811",
+        "slug": "2021-anna-kuril-ainu-glossary-captain-v",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "A Kuril Ainu Glossary by Captain V. M. Golovnin (1811)"
     },
     {
-      "n": 6,
+      "n": 4,
       "authors": [
         "佐藤 知己"
       ],
@@ -113,14 +78,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-x-1bortd0",
+        "slug": "2021-sato-chitose-hogen-watari-onka-watari-oto-sonyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語千歳方言におけるわたり音化とわたり音挿入について"
     },
     {
-      "n": 7,
+      "n": 5,
       "authors": [
         "Bugaeva"
       ],
@@ -138,7 +103,7 @@
       "matchedTitle": "Handbook of the Ainu Language"
     },
     {
-      "n": 8,
+      "n": 6,
       "authors": [
         "佐藤 知己"
       ],
@@ -148,14 +113,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2023-x-1qdm7ox",
+        "slug": "2023-sato-ainu-go-hogo-ketsugoka",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の抱合と結合価"
     },
     {
-      "n": 9,
+      "n": 7,
       "authors": [
         "Sato Tomomi"
       ],

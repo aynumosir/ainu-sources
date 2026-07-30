@@ -1,0 +1,243 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2004-kirikae-kushiro-hogen-goi",
+    "title": "アイヌ語釧路方言語彙",
+    "author": "切替, 英雄",
+    "year": 2004,
+    "type": "book"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "8. 参考文献",
+    "referencePages": "scan pp. 4-110",
+    "referenceCount": 13,
+    "sourcePath": "books/2004_Kirikae_KushiroVocabulary/切替英雄編『アイヌ語釧路方言語彙』.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1942,
+      "yearText": "1942",
+      "title": "アイヌ語法研究 : 樺太方言を中心として",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-o-toshite",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1955,
+      "yearText": "1955",
+      "title": "アイヌの散文物語 : 川下の者の昔話",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1955-chiri-sanbun-monogatari-kawashimo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌの散文物語 : 川下の者の昔話"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語入門 : とくに地名研究者のために",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-chiri-ainu-go-nyumon-chimei-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語入門 : とくに地名研究者のために"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌに伝承される歌舞詞曲に関する調査研究",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-chiri-ainu-kabu-shi-kyoku-chosa-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌに伝承される歌舞詞曲に関する調査研究"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1985,
+      "yearText": "1985",
+      "title": "アイヌ語入門 : とくに地名研究者のために",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-tokuni-notameni",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語入門 : とくに地名研究者のために"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "北海道教育庁社会教育部文化課, 北海道教育庁生涯学習部文化課"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "アイヌのくらしと言葉",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-hokkaido-kyoikucho-ainu-kotoba",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌのくらしと言葉"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "吉田, 巌"
+      ],
+      "year": 1989,
+      "yearText": "1989",
+      "title": "北海道あいぬ方言語彙集成",
+      "type": "wordlist",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1989-yoshida-ainu-hogen-goi-shusei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "北海道あいぬ方言語彙集成"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "旭川市博物館"
+      ],
+      "year": 2000,
+      "yearText": "2000",
+      "title": "旭川採集アイヌ語動詞集",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2000-asahikawa-shi-asahikawa-ainu-go-doshishu",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "旭川採集アイヌ語動詞集"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "浦田, 遊, 釧路アイヌ語の会, 山本, 多助"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "「アイヌ・モシリ」 : 山本多助作品集",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2002-ainu-ainu-moshiri-yamamoto-tasuke-sakuhinshu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "「アイヌ・モシリ」 : 山本多助作品集"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "萱野, 茂"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "noainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "久保寺, 逸彦"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語・日本語辞典稿",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-kubodera-ainu-go-nippon-go-jitenko",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語・日本語辞典稿"
+    }
+  ]
+}

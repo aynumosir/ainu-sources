@@ -1,0 +1,448 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2014-itahashi-ainu-go-nippon-go-chiki-gengogaku-tsuji",
+    "title": "アイヌ語・日本語の形成過程の解明に向けての研究 : 地域言語学、言語類型論、通時言語学を基盤にした学際的アプローチ",
+    "author": "板橋, 義三",
+    "year": 2014,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参考文献",
+    "referencePages": "scan pp. 17-314",
+    "referenceCount": 25,
+    "sourcePath": "books/2014_Itahashi_JapaneseFormation/板橋義三『アイヌ語・日本語の形成過程の解明に向けた研究』.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "John Batchelor"
+      ],
+      "year": 1925,
+      "yearText": "1925",
+      "title": "The pit-dwellers of Hokkaido and Ainu place-names considered",
+      "titleEn": "The pit-dwellers of Hokkaido and Ainu place-names considered",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1925-batchelor-pit-dwellers-hokkaido-ainu-place-names",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The pit-dwellers of Hokkaido and Ainu place-names considered"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1957,
+      "yearText": "1957",
+      "title": "アイヌ語における年長者層特殊語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1957-hattori-ainu-go-nenchosha-so-tokushu-go",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語における年長者層特殊語"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ語諸方言の基礎語彙統計学的研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-hattori-ainu-go-shohogen-kiso-goi-tokeigakuteki",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語諸方言の基礎語彙統計学的研究"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "服部 四郎"
+      ],
+      "year": 1961,
+      "yearText": "1961",
+      "title": "アイヌ語カラフト方言の「人称接辞」について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1961-hattori-karafuto-hogen-ninsho-setsuji",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語カラフト方言の「人称接辞」について"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "田村すゞ子"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "アイヌ語沙流方言の人称代名詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1971-tamura-saru-hogen-ninsho-dai-meishi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称代名詞"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "Patrie, James, 1950-"
+      ],
+      "year": 1982,
+      "yearText": "1982",
+      "title": "The genetic relationship of the Ainu language",
+      "titleEn": "The genetic relationship of the Ainu language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1982-patrie-genetic-relationship-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The genetic relationship of the Ainu language"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Hans A. Dettmer, James Patrie"
+      ],
+      "year": 1983,
+      "yearText": "1983",
+      "title": "The Genetic Relationship of the Ainu Language.",
+      "titleEn": "The Genetic Relationship of the Ainu Language.",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "the-genetic-relationship-of-the-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Genetic Relationship of the Ainu Language."
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Kirsten Refsing"
+      ],
+      "year": 1987,
+      "yearText": "1987",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 1991,
+      "yearText": "1991",
+      "title": "アイヌ語千歳方言における自称詞と対称詞について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1991-sato-chitose-hogen-jisho-shi-taisho-shi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語千歳方言における自称詞と対称詞について"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "Alexander Vovin"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "A reconstruction of proto-Ainu",
+      "titleEn": "A reconstruction of proto-Ainu",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-alexander-vovin-a-reconstruction-of-proto-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A reconstruction of proto-Ainu"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "Alexander Vovin"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "Origins of the Ainu Language",
+      "titleEn": "Origins of the Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-alexander-vovin-origins-of-the-ainu-language",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Origins of the Ainu Language"
+    },
+    {
+      "n": 13,
+      "authors": [
+        "山田, 秀三"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "東北・アイヌ語地名の研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-yamada-tohoku-ainu-go-chimei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "東北・アイヌ語地名の研究"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "相圭 朴"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "titleEn": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-aikei-materials-study-ainu-language-folklore",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "西鶴, 定嘉"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "東北六県アイヌ語地名辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1995-saikaku-tohoku-roku-ken-ainu-go-chimei-jiten",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "東北六県アイヌ語地名辞典"
+    },
+    {
+      "n": 16,
+      "authors": [],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "Some Morphological Parallels between Ainu and Austronesian",
+      "titleEn": "Some Morphological Parallels between Ainu and Austronesian",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-anon-some-morphological-parallels-between-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "Some Morphological Parallels between Ainu and Austronesian"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "板橋 義三"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "アイヌ語の接辞i/siと古代日本語の接辞、名詞i/siの同源性について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-itahashi-ainu-go-i-si-meishi-i-si-dogensei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の接辞i/siと古代日本語の接辞、名詞i/siの同源性について"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "天理大学付属天理図書館所蔵「松前ノ言」について(2)",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-sato-masaki-no-gen-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "天理大学付属天理図書館所蔵「松前ノ言」について(2)"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "日本語とアイヌ語の史的関係",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-nakagawa-nippon-go-ainu-go-shiteki-kankei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "日本語とアイヌ語の史的関係"
+    },
+    {
+      "n": 20,
+      "authors": [
+        "小泉 保"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "裏日本縄文語とアイヌ語",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-koizumi-ura-nippon-jomon-go-ainu-go",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "裏日本縄文語とアイヌ語"
+    },
+    {
+      "n": 21,
+      "authors": [
+        "板橋 義三"
+      ],
+      "year": 2005,
+      "yearText": "2005",
+      "title": "アイヌ語の人称接辞体系の形成について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2005-itahashi-ainu-go-ninsho-setsuji-taikei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の人称接辞体系の形成について"
+    },
+    {
+      "n": 22,
+      "authors": [
+        "鏡味 明克"
+      ],
+      "year": 2013,
+      "yearText": "2013",
+      "title": "アイヌ語地名研究の俗説・定説・補説",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2013-kagami-ainu-go-chimei-kenkyu-zokusetsu-teisetsu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語地名研究の俗説・定説・補説"
+    },
+    {
+      "n": 23,
+      "authors": [
+        "佐藤 知巳, 田村 すず子, 村崎 恭子, 中畠 孝幸, 菅 泰雄, 尾崎 喜光"
+      ],
+      "yearText": "",
+      "title": "日本語アイヌ語二重言語話者の音声の収集と研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "sato-nippon-go-ainu-go-ni-ju-gengo-washa",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "日本語アイヌ語二重言語話者の音声の収集と研究"
+    },
+    {
+      "n": 24,
+      "authors": [
+        "小野 米一"
+      ],
+      "yearText": "",
+      "title": "アイヌ語話者の日本語北海道方言についての研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ono-ainu-go-washa-nippon-go-hokkaido-hogen",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語話者の日本語北海道方言についての研究"
+    },
+    {
+      "n": 25,
+      "authors": [
+        "山田秀三"
+      ],
+      "title": "アイヌ語地名の研究1",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "xxxx-yamada-ainu-go-chimei-no-kenkyu-1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語地名の研究1"
+    }
+  ]
+}

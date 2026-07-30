@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2026-hirosawa-ainu-go-ruwe-ne-yoho",
-    "title": "廣澤 アイヌ語における証拠性表現の用法について：ruwe neの用法を中心に",
+    "title": "アイヌ語における証拠性表現の用法について：ruwe neの用法を中心に",
+    "author": "廣澤",
     "year": 2026,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -41,7 +42,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1985-tamura-suzuko-1vdmp8l",
+        "slug": "1985-tamura-wa-teke-mukashibanashi-saru-hogen",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -58,7 +59,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1994-x-1tv3wk5",
+        "slug": "1994-ainu-minzoku-ainu-minzoku-hakubutsukan-densho-kiroku",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -93,7 +94,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-2-5",
+        "slug": "1998-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no-2",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -128,7 +129,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-x-1rnv9ss",
+        "slug": "2013-takahashi-tokachi-hogen-shokosei-jojutsu-ruikei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -143,7 +144,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-1ffyyju",
+        "slug": "2014-anon-hokkaido-nanbu-ainu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -151,23 +152,6 @@
     },
     {
       "n": 9,
-      "authors": [
-        "ブガエワ・アンナ"
-      ],
-      "year": 2014,
-      "yearText": "2014",
-      "title": "北海道南部のアイヌ語",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2014-x-k7w34r",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "北海道南部のアイヌ語"
-    },
-    {
-      "n": 10,
       "authors": [
         "高橋靖以"
       ],
@@ -177,14 +161,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-b3e4yv",
+        "slug": "2014-takahashi-tokachi-hogen-meishika-setsu-datsujuzoku",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語十勝方言における名詞化節の脱従属節化"
     },
     {
-      "n": 11,
+      "n": 10,
       "authors": [
         "吉川佳見"
       ],
@@ -194,14 +178,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-x-aan",
+        "slug": "2018-yoshikawa-ainu-go-aan-shokosei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の助動詞aanと証拠性"
     },
     {
-      "n": 12,
+      "n": 11,
       "authors": [
         "高橋靖以"
       ],
@@ -211,14 +195,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-x-1a0oho6",
+        "slug": "2018-takahashi-horobetsu-hogen-meishika-ji-bunpoka",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語幌別方言における名詞化辞の文法化"
     },
     {
-      "n": 13,
+      "n": 12,
       "authors": [
         "National Cancer Institute"
       ],
@@ -236,7 +220,7 @@
       "matchedTitle": "Ainu Language"
     },
     {
-      "n": 14,
+      "n": 13,
       "authors": [
         "唐, 柏炎"
       ],
@@ -246,11 +230,25 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-x-19len83",
+        "slug": "2020-to-ainu-go-keishiki-meishi-kino",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語における形式名詞の機能"
+    },
+    {
+      "n": 14,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
     }
   ]
 }

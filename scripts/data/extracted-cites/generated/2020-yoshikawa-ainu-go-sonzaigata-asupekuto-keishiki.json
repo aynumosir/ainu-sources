@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2020-yoshikawa-ainu-go-sonzaigata-asupekuto-keishiki",
-    "title": "吉川佳見 アイヌ語における存在型アスペクト形式",
+    "title": "アイヌ語における存在型アスペクト形式",
+    "author": "吉川佳見",
     "year": 2020,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
-    "referenceHeading": "参考文献",
-    "referenceCount": 83,
+    "referenceHeading": "■文献",
+    "referenceCount": 50,
     "sourcePath": "articles/2020_吉川佳見_アイヌ語における存在型アスペクト形式.pdf"
   },
   "references": [
@@ -25,7 +26,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-1hv377u",
+        "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -34,107 +35,22 @@
     {
       "n": 2,
       "authors": [
-        "田村すゞ子"
-      ],
-      "year": 1960,
-      "yearText": "1960",
-      "title": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1960-x-1",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
-      },
-      "matchedTitle": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1"
-    },
-    {
-      "n": 3,
-      "authors": [
-        "田村 すゞ子"
-      ],
-      "year": 1972,
-      "yearText": "1972",
-      "title": "アイヌ語沙流方言における《…して…》",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1972-x-13w5bm1",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語沙流方言における《…して…》"
-    },
-    {
-      "n": 4,
-      "authors": [
-        "田村 すず子"
-      ],
-      "year": 1972,
-      "yearText": "1972",
-      "title": "アイヌ語沙流方言における《…して…》の表現",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1972-x-9zmxzm",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語沙流方言における《…して…》の表現"
-    },
-    {
-      "n": 5,
-      "authors": [],
-      "year": 1977,
-      "yearText": "1977–2000",
-      "title": "アイヌ語口承文芸コーパス",
-      "titleEn": "NINJAL Ainu Folklore Corpus",
-      "type": "corpus-text",
-      "ainuRelated": true,
-      "match": {
-        "slug": "ninjal-folklore-corpus",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "アイヌ語口承文芸コーパス"
-    },
-    {
-      "n": 6,
-      "authors": [
-        "久保寺逸彦(編著)"
+        "久保寺, 逸彦"
       ],
       "year": 1977,
       "yearText": "1977",
-      "title": "アイヌ叙事詩 神謡・聖伝の研究",
-      "type": "article",
+      "title": "アイヌ叙事詩神謡・聖伝の研究",
+      "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1977-x-4mbx9h",
+        "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌ叙事詩 神謡・聖伝の研究"
+      "matchedTitle": "アイヌ叙事詩神謡・聖伝の研究"
     },
     {
-      "n": 7,
-      "authors": [
-        "Kirsten Refsing"
-      ],
-      "year": 1987,
-      "yearText": "1987",
-      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
-      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
-    },
-    {
-      "n": 8,
+      "n": 3,
       "authors": [
         "白沢 ナベ"
       ],
@@ -152,7 +68,7 @@
       "matchedTitle": "アイヌ口承文芸テキスト集"
     },
     {
-      "n": 9,
+      "n": 4,
       "authors": [
         "中川 裕"
       ],
@@ -162,14 +78,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1992-x-19gvfq6",
+        "slug": "1992-nakagawa-ainu-go-mojika-shiryo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語文字化資料から"
     },
     {
-      "n": 10,
+      "n": 5,
       "authors": [
         "萱野茂(監修)萱野茂、上田トシ(話者)"
       ],
@@ -179,49 +95,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1992-x-1",
+        "slug": "1992-kayano-ainu-go-nichijo-kaiwashu-kotta-mikan",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語日常会話集１ 凍ったミカン"
     },
     {
-      "n": 11,
-      "authors": [
-        "Nakagawa, Hiroshi"
-      ],
-      "year": 1995,
-      "yearText": "1995",
-      "title": "アイヌ語千歳方言辞典",
-      "titleEn": "",
-      "type": "dictionary",
-      "ainuRelated": true,
-      "match": {
-        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
-      },
-      "matchedTitle": "アイヌ語千歳方言辞典"
-    },
-    {
-      "n": 12,
-      "authors": [
-        "中川, 裕"
-      ],
-      "year": 1995,
-      "yearText": "1995",
-      "title": "アイヌ語をフィールドワークする",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1995-x-1dic28n",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語をフィールドワークする"
-    },
-    {
-      "n": 13,
+      "n": 6,
       "authors": [
         "北海道立アイヌ民族文化研究センター"
       ],
@@ -231,84 +112,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1995-x-1klo3z4",
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
     },
     {
-      "n": 14,
-      "authors": [
-        "奥田 統己"
-      ],
-      "year": 1995,
-      "yearText": "1995",
-      "title": "アイヌ語静内方言の接続助詞",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1995-x-1kktuh8",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語静内方言の接続助詞"
-    },
-    {
-      "n": 15,
-      "authors": [
-        "Kayano, Shigeru"
-      ],
-      "year": 1996,
-      "yearText": "1996",
-      "title": "萱野茂のアイヌ語辞典",
-      "titleEn": "",
-      "type": "dictionary",
-      "ainuRelated": true,
-      "match": {
-        "slug": "1996-kayano-kayanos-ainu-dictionary",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
-      },
-      "matchedTitle": "萱野茂のアイヌ語辞典"
-    },
-    {
-      "n": 16,
-      "authors": [
-        "Tamura, Suzuko"
-      ],
-      "year": 1996,
-      "yearText": "1996",
-      "title": "アイヌ語沙流方言辞典",
-      "titleEn": "",
-      "type": "dictionary",
-      "ainuRelated": true,
-      "match": {
-        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
-      },
-      "matchedTitle": "アイヌ語沙流方言辞典"
-    },
-    {
-      "n": 17,
-      "authors": [
-        "中川, 裕"
-      ],
-      "year": 1997,
-      "yearText": "1997",
-      "title": "エクスプレスアイヌ語",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1997-x-1fejzao",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "エクスプレスアイヌ語"
-    },
-    {
-      "n": 18,
+      "n": 7,
       "authors": [
         "大谷洋一"
       ],
@@ -318,14 +129,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-1dpa3vc",
+        "slug": "1997-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "小川シゲノから上田トシへの伝承"
     },
     {
-      "n": 19,
+      "n": 8,
       "authors": [
         "大谷洋一"
       ],
@@ -335,14 +146,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-2",
+        "slug": "1998-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "小川シゲノから上田トシへの伝承(2)"
     },
     {
-      "n": 20,
+      "n": 9,
       "authors": [
         "萱野, 茂, 平凡社"
       ],
@@ -352,14 +163,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1v9r8sq",
+        "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "萱野茂のアイヌ神話集成"
     },
     {
-      "n": 21,
+      "n": 10,
       "authors": [
         "大谷洋一"
       ],
@@ -369,66 +180,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1999-x-3",
+        "slug": "1999-oya-ogawa-shige-no-ueda-toshi-densho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "小川シゲノから上田トシへの伝承(3)"
     },
     {
-      "n": 22,
-      "authors": [
-        "奥田, 統己"
-      ],
-      "year": 1999,
-      "yearText": "1999",
-      "title": "アイヌ語静内方言文脈つき語彙集",
-      "type": "wordlist",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1999-x-1h7k5eb",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語静内方言文脈つき語彙集"
-    },
-    {
-      "n": 23,
-      "authors": [
-        "奥田, 統己"
-      ],
-      "year": 1999,
-      "yearText": "1999",
-      "title": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)",
-      "type": "wordlist",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1999-x-cd-rom",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)"
-    },
-    {
-      "n": 24,
-      "authors": [
-        "Suzuko Tamura"
-      ],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "The Ainu Language",
-      "titleEn": "The Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Ainu Language"
-    },
-    {
-      "n": 25,
+      "n": 11,
       "authors": [
         "中川裕"
       ],
@@ -438,14 +197,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2000-x-1",
+        "slug": "2000-nakagawa-shirasawa-nabe-okami-nogareta-musume-1",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集1：白沢ナベ口述 狼から逃れた娘"
     },
     {
-      "n": 26,
+      "n": 12,
       "authors": [
         "大谷洋一"
       ],
@@ -455,14 +214,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2000-x-2",
+        "slug": "2000-oya-matsushima-tomi-kosho-bungei-2",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "松島トミさんの口承文芸(2)"
     },
     {
-      "n": 27,
+      "n": 13,
       "authors": [
         "中川裕"
       ],
@@ -472,14 +231,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2001-x-2",
+        "slug": "2001-nakagawa-shirasawa-nabe-shujin-wo-tasukerarenakatta",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集2：白沢ナベ口述 主人を助けられなかった犬"
     },
     {
-      "n": 28,
+      "n": 14,
       "authors": [
         "大谷洋一"
       ],
@@ -489,14 +248,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2001-x-3",
+        "slug": "2001-oya-matsushima-tomi-kosho-bungei-3",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "松島トミさんの口承文芸(3)"
     },
     {
-      "n": 29,
+      "n": 15,
       "authors": [
         "本田 優子"
       ],
@@ -506,14 +265,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2001-x-dvp0ka",
+        "slug": "2001-honda-kawakami-matsuko-ainu-go-bunreishu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "川上まつ子アイヌ語文例集"
     },
     {
-      "n": 30,
+      "n": 16,
       "authors": [
         "田村すず子(編)"
       ],
@@ -523,31 +282,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2001-x-1-3",
+        "slug": "2001-tamura-saru-hogen-onsei-shiryo-wa-teke-shin-yo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語沙流方言の音声資料１ ―近藤鏡二郎の録音テープに遺されたワテケさんの神謡"
     },
     {
-      "n": 31,
-      "authors": [
-        "佐藤 知己"
-      ],
-      "year": 2002,
-      "yearText": "2002",
-      "title": "アイヌ語千歳方言におけるkaneの用法",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2002-x-kane",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語千歳方言におけるkaneの用法"
-    },
-    {
-      "n": 32,
+      "n": 17,
       "authors": [
         "大谷洋一"
       ],
@@ -557,14 +299,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2002-x-4",
+        "slug": "2002-oya-matsushima-tomi-kosho-bungei-4",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "松島トミさんの口承文芸(4)"
     },
     {
-      "n": 33,
+      "n": 18,
       "authors": [
         "中川裕"
       ],
@@ -574,14 +316,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2003-x-4",
+        "slug": "2003-nakagawa-shirasawa-nabe-nanakamado-inau-densenbyo-no",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集4：白沢ナベ口述 ナナカマドのイナウで伝染病の神を倒した"
     },
     {
-      "n": 34,
+      "n": 19,
       "authors": [
         "大谷洋一"
       ],
@@ -591,14 +333,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2003-x-5",
+        "slug": "2003-oya-matsushima-tomi-kosho-bungei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "松島トミさんの口承文芸(5)"
     },
     {
-      "n": 35,
+      "n": 20,
       "authors": [
         "中川裕"
       ],
@@ -608,32 +350,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-5",
+        "slug": "2004-nakagawa-shirasawa-nabe-waori-aobato",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集5：白沢ナベ口述 ワウォリ：アオバトが生まれたわけ"
     },
     {
-      "n": 36,
-      "authors": [
-        "中本 ムツ子"
-      ],
-      "year": 2004,
-      "yearText": "2004",
-      "title": "CDエクスプレス アイヌ語",
-      "titleEn": "CD Express: Ainu",
-      "type": "corpus-text",
-      "ainuRelated": true,
-      "match": {
-        "slug": "cd-express-ainu",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "CDエクスプレス アイヌ語"
-    },
-    {
-      "n": 37,
+      "n": 21,
       "authors": [
         "大谷洋一"
       ],
@@ -643,31 +367,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-6",
+        "slug": "2004-oya-matsushima-tomi-kosho-bungei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "松島トミさんの口承文芸(6)"
     },
     {
-      "n": 38,
-      "authors": [
-        "高橋, 靖以"
-      ],
-      "year": 2004,
-      "yearText": "2004",
-      "title": "アイヌ語十勝方言の助詞",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2004-x-lr63u",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語十勝方言の助詞"
-    },
-    {
-      "n": 39,
+      "n": 22,
       "authors": [
         "中川裕"
       ],
@@ -677,14 +384,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2005-x-6",
+        "slug": "2005-nakagawa-shirasawa-nabe-ani-ni-korosare-kake-inu-ni",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集6：白沢ナベ口述 兄に殺されかけ、犬に救われた"
     },
     {
-      "n": 40,
+      "n": 23,
       "authors": [
         "大谷洋一"
       ],
@@ -694,14 +401,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2005-x-nv0p7d",
+        "slug": "2005-oya-neko-korosare-so-yujin-tasuketa",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "ネコに殺されそうになった友人を助けた男の話"
     },
     {
-      "n": 41,
+      "n": 24,
       "authors": [
         "中川裕"
       ],
@@ -711,31 +418,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-7",
+        "slug": "2006-nakagawa-shirasawa-nabe-okami-ningen-hahaoya",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集7 白沢ナベ口述 狼が人間の母親に虐待された"
     },
     {
-      "n": 42,
-      "authors": [
-        "佐藤 知己"
-      ],
-      "year": 2006,
-      "yearText": "2006",
-      "title": "アイヌ語千歳方言のアスペクト",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2006-x-mqzorq",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語千歳方言のアスペクト"
-    },
-    {
-      "n": 43,
+      "n": 25,
       "authors": [
         "大谷洋一"
       ],
@@ -745,114 +435,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-k3gnfy",
+        "slug": "2006-oya-ogawa-shige-no-kosho-bungei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "小川シゲノさんの口承文芸"
     },
     {
-      "n": 44,
-      "authors": [],
-      "year": 2007,
-      "yearText": "2007",
-      "title": "アイヌ語のアスペクトと日本語のアスペクトの対照",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2007-x-1qt0i8f",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
-      },
-      "matchedTitle": "アイヌ語のアスペクトと日本語のアスペクトの対照"
-    },
-    {
-      "n": 45,
-      "authors": [
-        "佐藤 知己"
-      ],
-      "year": 2007,
-      "yearText": "2007",
-      "title": "アイヌ語のアスペクトと日本語のアスペクトの対",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2007-x-mqzoro",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語のアスペクトと日本語のアスペクトの対"
-    },
-    {
-      "n": 46,
-      "authors": [
-        "佐藤 知己"
-      ],
-      "year": 2007,
-      "yearText": "2007",
-      "title": "再びアイヌ語千歳方言のアスペクトについて",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2007-x-mqzorn",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "再びアイヌ語千歳方言のアスペクトについて"
-    },
-    {
-      "n": 47,
-      "authors": [
-        "佐藤 知己"
-      ],
-      "year": 2007,
-      "yearText": "2007",
-      "title": "再びアイヌ語千歳方言のアスペクトについて--特に完了を表す形式をめぐって",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2007-x-zgzvh4",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "再びアイヌ語千歳方言のアスペクトについて--特に完了を表す形式をめぐって"
-    },
-    {
-      "n": 48,
-      "authors": [
-        "井筒 勝信"
-      ],
-      "year": 2008,
-      "yearText": "2008",
-      "title": "「想定の範囲内」からの消失と「予想外」の存在・出現:アイヌ語の驚嘆性(mirativity)表現とその主な概念化",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2008-x-mirativity",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "「想定の範囲内」からの消失と「予想外」の存在・出現:アイヌ語の驚嘆性(mirativity)表現とその主な概念化"
-    },
-    {
-      "n": 49,
-      "authors": [
-        "井筒勝信編"
-      ],
-      "year": 2008,
-      "yearText": "2008",
-      "title": "アイヌ語学と現代の言語理論",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2008-x-1qm186p",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語学と現代の言語理論"
-    },
-    {
-      "n": 50,
+      "n": 26,
       "authors": [
         "中川裕"
       ],
@@ -862,14 +452,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2009-x-9",
+        "slug": "2009-nakagawa-shirasawa-nabe-kani-teashi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集9 白沢ナベ口述 カニに手足が生えるわけ"
     },
     {
-      "n": 51,
+      "n": 27,
       "authors": [
         "中川裕"
       ],
@@ -879,14 +469,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2010-x-10",
+        "slug": "2010-nakagawa-shirasawa-nabe-penanpe-kane-no-koinu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集10 白沢ナベ口述 ペナンペ金の子犬を授かる"
     },
     {
-      "n": 52,
+      "n": 28,
       "authors": [
         "中川裕"
       ],
@@ -896,14 +486,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-x-11",
+        "slug": "2011-nakagawa-shirasawa-nabe-kine-zumi-sarawareta-otoko",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集11 白沢ナベ口述 キネズミに妹をさらわれた男"
     },
     {
-      "n": 53,
+      "n": 29,
       "authors": [
         "大谷洋一"
       ],
@@ -913,14 +503,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-x-izc670",
+        "slug": "2011-oya-mamahaha-korosare-kaketa-ane-sukutta-imoto",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "和人の散文説話：継母から殺されかけた姉を救った妹"
     },
     {
-      "n": 54,
+      "n": 30,
       "authors": [
         "中川裕"
       ],
@@ -930,14 +520,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2012-x-12",
+        "slug": "2012-nakagawa-shirasawa-nabe-yukarairupae-shinutafu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集12 白沢ナベ口述 ユカㇻイルパイェ 敵の村の美女を妻に迎えたシヌタㇷ゚カウンクㇽ"
     },
     {
-      "n": 55,
+      "n": 31,
       "authors": [
         "佐藤 知己"
       ],
@@ -947,65 +537,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-x-2-2",
+        "slug": "2013-sato-ainu-go-chosa-shiryo-detabesuka-kisoteki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究(2)"
     },
     {
-      "n": 56,
-      "authors": [
-        "佐藤, 知己"
-      ],
-      "year": 2013,
-      "yearText": "2013",
-      "title": "アイヌ語調査資料のデータベース化に関する基礎的研究",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2013-x-15enfo6",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究"
-    },
-    {
-      "n": 57,
-      "authors": [
-        "ブガエワ・アンナ"
-      ],
-      "year": 2014,
-      "yearText": "2014",
-      "title": "北海道南部のアイヌ語",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2014-x-k7w34r",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "北海道南部のアイヌ語"
-    },
-    {
-      "n": 58,
-      "authors": [
-        "中川, 裕"
-      ],
-      "year": 2014,
-      "yearText": "2014",
-      "title": "アイヌ語の文献学的研究",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2014-x-1dlbz6p",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
-      },
-      "matchedTitle": "アイヌ語の文献学的研究"
-    },
-    {
-      "n": 59,
+      "n": 32,
       "authors": [
         "佐藤 知己"
       ],
@@ -1015,14 +554,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-3",
+        "slug": "2014-sato-ainu-go-chosa-shiryo-detabesuka-3",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究(3)"
     },
     {
-      "n": 60,
+      "n": 33,
       "authors": [
         "中川裕"
       ],
@@ -1032,14 +571,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-14",
+        "slug": "2015-nakagawa-shirasawa-nabe-wajin-no-tonosama",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集 (14) 白沢ナベ口述 ウエペケㇾ 和人の殿様にもらわれた男の子"
     },
     {
-      "n": 61,
+      "n": 34,
       "authors": [
         "佐藤 知己"
       ],
@@ -1049,14 +588,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-4",
+        "slug": "2015-sato-ainu-go-chosa-shiryo-detabesuka-4",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究(4)"
     },
     {
-      "n": 62,
+      "n": 35,
       "authors": [
         "千葉大学"
       ],
@@ -1066,14 +605,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-2-2",
+        "slug": "2015-chiba-daigaku-hozon-keisho-akaibuka-dai2-nenji",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書"
     },
     {
-      "n": 63,
+      "n": 36,
       "authors": [
         "大谷洋一"
       ],
@@ -1083,14 +622,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-1ooyyhx",
+        "slug": "2015-oya-kamui-shiro-kitsune-kyodai",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "カムイの散文説話：白キツネ兄弟の物語"
     },
     {
-      "n": 64,
+      "n": 37,
       "authors": [
         "中川裕, アンナ・ブガエワ, 小林美紀"
       ],
@@ -1100,14 +639,14 @@
       "type": "corpus-text",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-1551bwg",
+        "slug": "2016-anna-ainu-go-kosho-bungei-kopasu-onsei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語口承文芸コーパス―音声・グロス付き―"
     },
     {
-      "n": 65,
+      "n": 38,
       "authors": [
         "佐藤 知己"
       ],
@@ -1117,31 +656,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-5",
+        "slug": "2016-sato-ainu-go-chosa-shiryo-detabesuka-5",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究(5)"
     },
     {
-      "n": 66,
-      "authors": [
-        "吉川, 佳見"
-      ],
-      "year": 2016,
-      "yearText": "2016",
-      "title": "アイヌ語のアスペクト的表現「kor an」「wa an」をめぐる問題について",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2016-x-kor-an-wa-an",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語のアスペクト的表現「kor an」「wa an」をめぐる問題について"
-    },
-    {
-      "n": 67,
+      "n": 39,
       "authors": [
         "大谷 洋一"
       ],
@@ -1151,14 +673,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-1bbf5a2",
+        "slug": "2016-oya-sanbun-setsuwa-kappa-tasukerareta-otoko",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸「散文説話」ー河童に助けられた男の物語ー"
     },
     {
-      "n": 68,
+      "n": 40,
       "authors": [
         "佐藤知己"
       ],
@@ -1168,14 +690,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2017-x-6",
+        "slug": "2017-sato-ainu-go-chosa-shiryo-detabesuka",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究(6)"
     },
     {
-      "n": 69,
+      "n": 41,
       "authors": [
         "大谷 洋一"
       ],
@@ -1185,14 +707,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2017-x-1bbf5as",
+        "slug": "2017-oya-sanbun-setsuwa-yamanokami-oki-no-kami-onna",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸「散文説話」ー山の神と沖の神の子を身ごもった女の物語ー"
     },
     {
-      "n": 70,
+      "n": 42,
       "authors": [
         "中川裕・白沢ナベ"
       ],
@@ -1202,14 +724,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-x-17",
+        "slug": "2018-nabe-shirasawa-nabe-kamu-iyukara-ateyatenna",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集 17：白沢ナベ口述 カムイユカㇻ アテヤテンナ：六つ首の狐"
     },
     {
-      "n": 71,
+      "n": 43,
       "authors": [
         "佐藤知己"
       ],
@@ -1219,31 +741,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-x-7",
+        "slug": "2018-sato-ainu-go-chosa-shiryo-detabesuka-7",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究(7)"
     },
     {
-      "n": 72,
-      "authors": [
-        "吉川佳見"
-      ],
-      "year": 2018,
-      "yearText": "2018",
-      "title": "アイヌ語の助動詞aanと証拠性",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2018-x-aan",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語の助動詞aanと証拠性"
-    },
-    {
-      "n": 73,
+      "n": 44,
       "authors": [
         "大谷 洋一"
       ],
@@ -1253,31 +758,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-x-9j7n84",
+        "slug": "2018-oya-sanbun-setsuwa-ningen-no-onna-furi-wo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸「散文説話」ー人間の女に惚れたフリを殺した男ー"
     },
     {
-      "n": 74,
-      "authors": [
-        "高橋, 靖以"
-      ],
-      "year": 2018,
-      "yearText": "2018",
-      "title": "アイヌ語十勝方言文法概説",
-      "type": "grammar",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2018-x-s4xwce",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語十勝方言文法概説"
-    },
-    {
-      "n": 75,
+      "n": 45,
       "authors": [
         "中川裕・白沢ナベ"
       ],
@@ -1287,14 +775,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2019-x-18",
+        "slug": "2019-nabe-shirasawa-nabe-kamu-iyukara-soreipasore",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸テキスト集18：白沢ナベ口述 カムイユカㇻ ソレイパソレ：和人の若殿の物語"
     },
     {
-      "n": 76,
+      "n": 46,
       "authors": [
         "佐藤 知己"
       ],
@@ -1304,48 +792,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2019-x-8",
+        "slug": "2019-sato-ainu-go-chosa-shiryo-detabesuka-8",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究(8)"
     },
     {
-      "n": 77,
-      "authors": [
-        "吉川佳見"
-      ],
-      "year": 2019,
-      "yearText": "2019",
-      "title": "アイヌ語の存在型アスペクト「kor an」「wa an」の意味範疇について",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2019-x-kor-an-wa-an",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語の存在型アスペクト「kor an」「wa an」の意味範疇について"
-    },
-    {
-      "n": 78,
-      "authors": [
-        "大谷 洋一"
-      ],
-      "year": 2019,
-      "yearText": "2019",
-      "title": "アイヌ口承文芸「散文説話」 : タンネサラの男",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2019-x-1mljk2h",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ口承文芸「散文説話」 : タンネサラの男"
-    },
-    {
-      "n": 79,
+      "n": 47,
       "authors": [
         "大谷 洋一"
       ],
@@ -1355,66 +809,31 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2019-x-149b2me",
+        "slug": "2019-oya-sanbun-setsuwa",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ口承文芸「散文説話」－タンネサﾗの男ー"
     },
     {
-      "n": 80,
+      "n": 48,
       "authors": [
-        "National Cancer Institute"
+        "佐藤, 知己"
       ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
+      "year": 2025,
+      "yearText": "2025",
+      "title": "アイヌ語調査資料のデータベース化に関する基礎的研究",
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 81,
-      "authors": [
-        "久保寺逸彦著"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "アイヌ語・日本語辞典稿",
-      "type": "dictionary",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-x-121ohxf",
+        "slug": "2025-sato-ainu-go-chosa-shiryo-detabesuka",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
-      "matchedTitle": "アイヌ語・日本語辞典稿"
+      "matchedTitle": "アイヌ語調査資料のデータベース化に関する基礎的研究"
     },
     {
-      "n": 82,
-      "authors": [
-        "吉川佳見"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "アイヌ語における完了表現があらわす証拠性",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-x-184yz2e",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語における完了表現があらわす証拠性"
-    },
-    {
-      "n": 83,
+      "n": 49,
       "authors": [
         "アイヌ民族博物館"
       ],
@@ -1423,11 +842,25 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "nd-x-w4ycd9",
+        "slug": "ainu-minzoku-ainu-minzoku-hakubutsukan-kenkyu-hokoku",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ民族博物館研究報告"
+    },
+    {
+      "n": 50,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
     }
   ]
 }

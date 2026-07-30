@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2021-sakaguchi-ainu-go-roshia-go-jiten",
-    "title": "阪口諒 アイヌ語ロシア語辞典のアイヌ語話者に関する情報",
+    "title": "アイヌ語ロシア語辞典のアイヌ語話者に関する情報",
+    "author": "阪口諒",
     "year": 2021,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 8,
+    "referenceCount": 7,
     "sourcePath": "articles/2021_阪口諒_アイヌ語ロシア語辞典のアイヌ語話者に関する情報.pdf"
   },
   "references": [
@@ -25,7 +26,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1969-x-ry0mju",
+        "slug": "1969-suke-karafuto-ainu-go-chimei-shojiten",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -42,7 +43,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1969-x-sma98w",
+        "slug": "1969-hattori-karafuto-nishi-kaigan-hokubu-chimei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -50,24 +51,6 @@
     },
     {
       "n": 3,
-      "authors": [
-        "Emiko Ohnuki-Tierney"
-      ],
-      "year": 1974,
-      "yearText": "1974",
-      "title": "Ainu of the Northwest Coast of Southern Sakhalin",
-      "titleEn": "Ainu of the Northwest Coast of Southern Sakhalin",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1974-emiko-ohnuki-tierney-ainu-of-the-northwest-coast-of-southern-sakhalin",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "Ainu of the Northwest Coast of Southern Sakhalin"
-    },
-    {
-      "n": 4,
       "authors": [
         "Emiko Ohnuki‐Tierney"
       ],
@@ -78,14 +61,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1974-emiko-ohnuki-tierney-the-ainu-of-the-northwest-coast-of-southern-sakhal",
+        "slug": "1974-tierney-ainu-northwest-coast-southern-sakhalin",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "The Ainu of the Northwest Coast of Southern Sakhalin"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "M.M. Dobrotvorskii, 寺田 吉孝"
       ],
@@ -102,7 +85,7 @@
       "matchedTitle": "アイヌ語・ロシア語辞典-2-"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "寺田 吉孝"
       ],
@@ -112,14 +95,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1996-x-3",
+        "slug": "1996-terada-ainu-go-roshia-go-jiten-3",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語・ロシア語辞典(3)"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -137,7 +120,7 @@
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 8,
+      "n": 7,
       "authors": [
         "National Cancer Institute"
       ],

@@ -1,0 +1,71 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2005-echizen-ainu-go-nippon-go-taiyaku-kopasu-kyokusho",
+    "title": "アイヌ語-日本語対訳コーパスを対象とした局所着目型学習による対訳語の自動抽出",
+    "author": "越前谷博",
+    "year": 2005,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "参　考　文　献",
+    "referencePages": "scan pp. 22-24",
+    "referenceCount": 3,
+    "sourcePath": "articles/2005_越前谷博_アイヌ語-日本語対訳コーパスを対象とした局所着目型学習による対訳語の自動抽出.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "田村, すず子"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-2232e395",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "越前谷 博, 桃内 佳雄, 栃内 香次"
+      ],
+      "year": 2003,
+      "yearText": "2003",
+      "title": "局所着目方式によるアイヌ語-日本語名詞対訳語の抽出について",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2003-echizen-kyokusho-chakumoku-hoshiki-ainu-go-nippon-go",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "局所着目方式によるアイヌ語-日本語名詞対訳語の抽出について"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "越前谷, 博, 荒木, 健治, 桃内, 佳雄"
+      ],
+      "year": 2005,
+      "yearText": "2005",
+      "title": "アイヌ語-日本語対訳コーパスを対象とした局所着目型学習による対訳語の自動抽出",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-kopasuo-toshita-niyoru-no",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語-日本語対訳コーパスを対象とした局所着目型学習による対訳語の自動抽出"
+    }
+  ]
+}

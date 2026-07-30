@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2009-sato-ainu-go-joken-hyogen",
-    "title": "佐藤知己 アイヌ語の条件表現について",
+    "title": "アイヌ語の条件表現について",
+    "author": "佐藤知己",
     "year": 2009,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -42,7 +43,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-japanese-and-ainu",
+        "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",
         "note": "Title match"
       },

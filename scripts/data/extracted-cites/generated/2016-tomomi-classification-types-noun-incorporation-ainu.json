@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2016-tomomi-classification-types-noun-incorporation-ainu",
-    "title": "Sato Tomomi A Classification of the Types of Noun Incorporation in Ainu and Its Implications for Morphosyntactic Typology",
+    "title": "A Classification of the Types of Noun Incorporation in Ainu and Its Implications for Morphosyntactic Typology",
+    "author": "Sato Tomomi",
     "year": 2016,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -43,7 +44,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1995-x-1klo3z4",
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },

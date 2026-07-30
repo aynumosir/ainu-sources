@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2018-elia-ainu-evidentiality-semantico-pragmatic",
-    "title": "Dal Corso Elia Ainu Evidentiality: A semantico-pragmatic analysis and a morphosyntactic account",
+    "title": "Ainu Evidentiality: A semantico-pragmatic analysis and a morphosyntactic account",
+    "author": "Dal Corso Elia",
     "year": 2018,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "Bibliography",
-    "referenceCount": 24,
+    "referenceCount": 21,
     "sourcePath": "articles/2018_Dal Corso Elia_Ainu Evidentiality: A semantico-pragmatic analysis and a morphosyntactic account.pdf"
   },
   "references": [
@@ -44,7 +45,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1974-asai-toru-classification-of-dialects-cluster-analysis-of-ain",
+        "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -71,6 +72,24 @@
     {
       "n": 4,
       "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 5,
+      "authors": [
         "Kirsten Refsing"
       ],
       "year": 1987,
@@ -80,14 +99,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
-      "n": 5,
+      "n": 6,
       "authors": [
         "Alexander Vovin"
       ],
@@ -105,24 +124,6 @@
       "matchedTitle": "A reconstruction of proto-Ainu"
     },
     {
-      "n": 6,
-      "authors": [
-        "Alexander Vovin"
-      ],
-      "year": 1993,
-      "yearText": "1993",
-      "title": "Origins of the Ainu Language",
-      "titleEn": "Origins of the Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1993-alexander-vovin-origins-of-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Origins of the Ainu Language"
-    },
-    {
       "n": 7,
       "authors": [
         "相圭 朴"
@@ -134,7 +135,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -152,7 +153,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1996-kirsten-refsing-early-european-writings-on-the-ainu-language",
+        "slug": "1996-kirsten-early-european-writings-ainu-language",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -168,7 +169,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-ainu-literature",
+        "slug": "1997-anon-ainu-literature",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -186,7 +187,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-kirsten-refsing-origins-of-the-ainu-language-the-ainu-indo-europea",
+        "slug": "1998-refsing-origins-ainu-language-ainu-indo-european",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -205,8 +206,8 @@
       "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "The Ainu Language"
     },
@@ -219,10 +220,10 @@
       "yearText": "2004",
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
-      "type": "book",
+      "type": "thesis",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -240,7 +241,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-the-ainu-language-a-linguistic-introduction",
+        "slug": "2004-katsunobu-ainu-language-linguistic-introduction",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -256,7 +257,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-japanese-and-ainu",
+        "slug": "2006-anon-japanese-ainu",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -264,24 +265,6 @@
     },
     {
       "n": 15,
-      "authors": [
-        "Tomomi Satō"
-      ],
-      "year": 2006,
-      "yearText": "2006",
-      "title": "The Study of the Ainu Language",
-      "titleEn": "The Study of the Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Study of the Ainu Language"
-    },
-    {
-      "n": 16,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -299,7 +282,7 @@
       "matchedTitle": "Mermaid construction in Ainu"
     },
     {
-      "n": 17,
+      "n": 16,
       "authors": [
         "ブガエワ アンナ"
       ],
@@ -310,14 +293,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-relative-clauses-and-noun-complements-in-ainu",
+        "slug": "2015-bugaewa-relative-clauses-noun-complements-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "Relative clauses and noun complements in Ainu."
     },
     {
-      "n": 18,
+      "n": 17,
       "authors": [
         "Bugaeva Anna"
       ],
@@ -328,14 +311,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-bugaeva-anna-on-the-innovative-nature-of-sakhalin-ainu-focusing-on-nominalization",
+        "slug": "2016-anna-innovative-nature-sakhalin-ainu-focusing",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "On the Innovative Nature of Sakhalin Ainu Focusing on Nominalization"
     },
     {
-      "n": 19,
+      "n": 18,
       "authors": [
         "Elia Dal Corso"
       ],
@@ -346,14 +329,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-elia-dal-corso-morphological-alignment-in-saru-ainu-a-direct-inve",
+        "slug": "2016-corso-morphological-alignment-saru-ainu-direct",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Morphological alignment in Saru Ainu: A direct-inverse analysis"
     },
     {
-      "n": 20,
+      "n": 19,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -371,25 +354,7 @@
       "matchedTitle": "Ainu Grammar"
     },
     {
-      "n": 21,
-      "authors": [
-        "John Batchelor"
-      ],
-      "year": 2018,
-      "yearText": "2018",
-      "title": "The Ainu and Their Folk-lor",
-      "titleEn": "The Ainu and Their Folk-lor",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2018-john-batchelor-the-ainu-and-their-folk-lor",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "The Ainu and Their Folk-lor"
-    },
-    {
-      "n": 22,
+      "n": 20,
       "authors": [
         "Edward Taylor, Basil Hall Chamberlain"
       ],
@@ -407,7 +372,7 @@
       "matchedTitle": "Ainu Folk Tales"
     },
     {
-      "n": 23,
+      "n": 21,
       "authors": [
         "National Cancer Institute"
       ],
@@ -423,24 +388,6 @@
         "note": "Title match"
       },
       "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 24,
-      "authors": [
-        "Anna Bugaeva"
-      ],
-      "year": 2022,
-      "yearText": "2022",
-      "title": "Introduction",
-      "titleEn": "Introduction",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2022-anna-bugaeva-introduction",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Introduction"
     }
   ]
 }

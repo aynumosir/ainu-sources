@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2014-bugaewa-ainu-go-shieki-kobun-saikosatsu-2",
-    "title": "ブガエワ・アンナ アイヌ語使役構文に関する再考察",
+    "title": "アイヌ語使役構文に関する再考察",
+    "author": "ブガエワ・アンナ",
     "year": 2014,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -17,23 +18,6 @@
     {
       "n": 1,
       "authors": [
-        "金田一 京助"
-      ],
-      "year": 1931,
-      "yearText": "1931",
-      "title": "アイヌユーカラ語法摘要",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1931-x-11givjx",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌユーカラ語法摘要"
-    },
-    {
-      "n": 2,
-      "authors": [
         "金田一, 京助"
       ],
       "year": 1936,
@@ -42,14 +26,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩ユーカラ"
     },
     {
-      "n": 3,
+      "n": 2,
       "authors": [
         "福田 すず子"
       ],
@@ -59,14 +43,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1956-x-1c6njuk",
+        "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語の動詞の構造"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "Nakagawa, Hiroshi"
       ],
@@ -84,7 +68,7 @@
       "matchedTitle": "アイヌ語千歳方言辞典"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -97,12 +81,12 @@
       "match": {
         "slug": "1996-tamura-ainu-saru-dialect-dictionary",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語沙流方言辞典"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -120,7 +104,7 @@
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -138,9 +122,9 @@
       "matchedTitle": "Ditransitive constructions in Ainu"
     },
     {
-      "n": 8,
+      "n": 7,
       "authors": [
-        "ブガエワ・アンナ"
+        "ブガエワ, アンナ"
       ],
       "year": 2014,
       "yearText": "2014",
@@ -148,29 +132,40 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-fygxef",
+        "slug": "ainu-ni-suru-2",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語使役構文に関する再考察"
     },
     {
-      "n": 9,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
+      "n": 8,
+      "authors": [],
+      "yearText": "",
+      "title": "アイヌユーカラ語法摘要",
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
+        "slug": "anon-yukara-goho-tekiyo",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
-      "matchedTitle": "Ainu Language"
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
     }
   ]
 }

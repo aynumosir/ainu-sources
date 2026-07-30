@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2018-takahashi-horobetsu-hogen-meishika-ji-bunpoka",
-    "title": "高橋靖以 アイヌ語幌別方言における名詞化辞の文法化",
+    "title": "アイヌ語幌別方言における名詞化辞の文法化",
+    "author": "高橋靖以",
     "year": 2018,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -25,7 +26,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -33,6 +34,24 @@
     },
     {
       "n": 2,
+      "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 3,
       "authors": [
         "Kirsten Refsing"
       ],
@@ -43,14 +62,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
-      "n": 3,
+      "n": 4,
       "authors": [
         "金成, まつ, 金田一, 京助"
       ],
@@ -60,47 +79,26 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-jqe5tq",
+        "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩ユーカラ集"
     },
     {
-      "n": 4,
+      "n": 5,
       "authors": [
-        "Suzuko Tamura"
+        "金田一, 京助"
       ],
-      "year": 2000,
-      "yearText": "2000",
-      "title": "The Ainu Language",
-      "titleEn": "The Ainu Language",
+      "title": "アイヌ叙事詩ユーカラ",
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
       },
-      "matchedTitle": "The Ainu Language"
-    },
-    {
-      "n": 5,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
     }
   ]
 }

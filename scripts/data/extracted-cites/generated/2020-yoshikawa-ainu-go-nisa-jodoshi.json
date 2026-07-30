@@ -3,36 +3,20 @@
   "verified": false,
   "citingWork": {
     "slug": "2020-yoshikawa-ainu-go-nisa-jodoshi",
-    "title": "吉川佳見 アイヌ語の助動詞 nisa の用法についての一考察",
+    "title": "アイヌ語の助動詞 nisa の用法についての一考察",
+    "author": "吉川佳見",
     "year": 2020,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 18,
+    "referenceCount": 16,
     "sourcePath": "articles/2020_吉川佳見_アイヌ語の助動詞 nisa の用法についての一考察.pdf"
   },
   "references": [
     {
       "n": 1,
-      "authors": [
-        "金田一, 京助"
-      ],
-      "year": 1936,
-      "yearText": "1936",
-      "title": "アイヌ叙事詩ユーカラ",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1936-x-fhxngs",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "アイヌ叙事詩ユーカラ"
-    },
-    {
-      "n": 2,
       "authors": [
         "久保寺, 逸彦"
       ],
@@ -42,14 +26,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-1hv377u",
+        "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩神謡、聖伝の研究"
     },
     {
-      "n": 3,
+      "n": 2,
       "authors": [
         "田村すゞ子"
       ],
@@ -59,33 +43,33 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-1",
+        "slug": "1960-tamura-saru-hogen-jodoshi-hokoku",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語沙流方言の助動詞：アイヌ語の助詞についての報告その1"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
-        "久保寺逸彦(編著)"
+        "久保寺, 逸彦"
       ],
       "year": 1977,
       "yearText": "1977",
-      "title": "アイヌ叙事詩 神謡・聖伝の研究",
-      "type": "article",
+      "title": "アイヌ叙事詩神謡・聖伝の研究",
+      "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1977-x-4mbx9h",
+        "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌ叙事詩 神謡・聖伝の研究"
+      "matchedTitle": "アイヌ叙事詩神謡・聖伝の研究"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
-        "久保寺, 逸彦"
+        "久保寺, 逸彦, 北海道教育委員会"
       ],
       "year": 1992,
       "yearText": "1992",
@@ -93,14 +77,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1992-x-1da8mcm",
+        "slug": "1992-kubodera-ainu-go-nippon-go-jitenko-kubodera-itsuhiko",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語・日本語辞典稿 : 久保寺逸彦アイヌ語収録ノート調査報告書"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "金成, まつ, 金田一, 京助"
       ],
@@ -110,14 +94,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-jqe5tq",
+        "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ叙事詩ユーカラ集"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
         "Nakagawa, Hiroshi"
       ],
@@ -135,7 +119,7 @@
       "matchedTitle": "アイヌ語千歳方言辞典"
     },
     {
-      "n": 8,
+      "n": 7,
       "authors": [
         "北海道立アイヌ民族文化研究センター"
       ],
@@ -145,14 +129,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1995-x-1klo3z4",
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
     },
     {
-      "n": 9,
+      "n": 8,
       "authors": [
         "Kayano, Shigeru"
       ],
@@ -170,24 +154,7 @@
       "matchedTitle": "萱野茂のアイヌ語辞典"
     },
     {
-      "n": 10,
-      "authors": [
-        "中川, 裕"
-      ],
-      "year": 1997,
-      "yearText": "1997",
-      "title": "エクスプレスアイヌ語",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1997-x-1fejzao",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "エクスプレスアイヌ語"
-    },
-    {
-      "n": 11,
+      "n": 9,
       "authors": [
         "萱野, 茂, 平凡社"
       ],
@@ -197,14 +164,31 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1v9r8sq",
+        "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "萱野茂のアイヌ神話集成"
     },
     {
-      "n": 12,
+      "n": 10,
+      "authors": [
+        "萱野, 茂"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "noainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 11,
       "authors": [
         "中本 ムツ子"
       ],
@@ -222,7 +206,7 @@
       "matchedTitle": "CDエクスプレス アイヌ語"
     },
     {
-      "n": 13,
+      "n": 12,
       "authors": [
         "佐藤 知己"
       ],
@@ -232,14 +216,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-mqzorq",
+        "slug": "2006-sato-chitose-hogen-asupekuto",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語千歳方言のアスペクト"
     },
     {
-      "n": 14,
+      "n": 13,
       "authors": [
         "中川, 裕"
       ],
@@ -249,14 +233,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-1dlbz6p",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
+        "slug": "2014-nakagawa-ainu-go-bunkengakuteki-kenkyu",
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "アイヌ語の文献学的研究"
     },
     {
-      "n": 15,
+      "n": 14,
       "authors": [
         "吉川佳見"
       ],
@@ -266,31 +250,31 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-x-aan",
+        "slug": "2018-yoshikawa-ainu-go-aan-shokosei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の助動詞aanと証拠性"
     },
     {
-      "n": 16,
+      "n": 15,
       "authors": [
-        "久保寺逸彦著"
+        "吉川, 佳見"
       ],
       "year": 2020,
       "yearText": "2020",
-      "title": "アイヌ語・日本語辞典稿",
-      "type": "dictionary",
+      "title": "アイヌ語の助動詞 nisa の用法についての一考察",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-x-121ohxf",
-        "confidence": "candidate",
-        "note": "Title match"
+        "slug": "ainu-no-nisa-no-nitsuiteno",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌ語・日本語辞典稿"
+      "matchedTitle": "アイヌ語の助動詞 nisa の用法についての一考察"
     },
     {
-      "n": 17,
+      "n": 16,
       "authors": [
         "吉川佳見"
       ],
@@ -300,28 +284,11 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-x-184yz2e",
+        "slug": "2020-yoshikawa-ainu-go-kanryo-hyogen-shokosei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語における完了表現があらわす証拠性"
-    },
-    {
-      "n": 18,
-      "authors": [
-        "吉川佳見"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "アイヌ語の助動詞 nisa の用法についての一考察",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-x-nisa",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語の助動詞 nisa の用法についての一考察"
     }
   ]
 }

@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2023-yasuoka-roma-ji-katakana-kiriru-moji-ainu-go",
-    "title": "安岡孝一 ローマ字・カタカナ・キリル文字併用アイヌ語RoBERTa・DeBERTaモデルの開発",
+    "title": "ローマ字・カタカナ・キリル文字併用アイヌ語RoBERTa・DeBERTaモデルの開発",
+    "author": "安岡孝一",
     "year": 2023,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",

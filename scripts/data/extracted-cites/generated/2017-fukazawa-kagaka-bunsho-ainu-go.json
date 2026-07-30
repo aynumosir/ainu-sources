@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2017-fukazawa-kagaka-bunsho-ainu-go",
-    "title": "深澤美香 加賀家文書におけるアイヌ語の文献学的研究",
+    "title": "加賀家文書におけるアイヌ語の文献学的研究",
+    "author": "深澤美香",
     "year": 2017,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 90,
+    "referenceCount": 95,
     "sourcePath": "articles/2017_深澤美香_加賀家文書におけるアイヌ語の文献学的研究.pdf"
   },
   "references": [
@@ -35,23 +36,6 @@
     {
       "n": 2,
       "authors": [
-        "金田一 京助"
-      ],
-      "year": 1931,
-      "yearText": "1931",
-      "title": "アイヌユーカラ語法摘要",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1931-x-11givjx",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌユーカラ語法摘要"
-    },
-    {
-      "n": 3,
-      "authors": [
         "Kindaichi, Kyosuke"
       ],
       "year": 1933,
@@ -68,7 +52,7 @@
       "matchedTitle": "Gengo kenkyu"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "金田一, 京助"
       ],
@@ -78,14 +62,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩ユーカラ"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "Batchelor, John"
       ],
@@ -103,21 +87,39 @@
       "matchedTitle": "アイヌ・英・和辭典 第四版"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
-        "知里, 真志保"
+        "Chiri"
       ],
       "year": 1942,
       "yearText": "1942",
       "title": "アイヌ語法研究 : 樺太方言を中心として",
-      "type": "article",
+      "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
+      "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1942-x-3bat8z",
+        "slug": "1942-chiri",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "知里, 真志保"
+      ],
+      "year": 1956,
+      "yearText": "1956",
+      "title": "アイヌ語入門 : とくに地名研究者のために",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1956-chiri-ainu-go-nyumon-chimei-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+      "matchedTitle": "アイヌ語入門 : とくに地名研究者のために"
     },
     {
       "n": 7,
@@ -130,7 +132,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1957-x-1ouspxs",
+        "slug": "1957-hattori-ainu-go-nenchosha-so-tokushu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -147,7 +149,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-ot8fs9",
+        "slug": "1960-hattori-ainu-go-shohogen-kiso-goi-tokeigakuteki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -164,7 +166,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1961-x-1i63u7o",
+        "slug": "1961-tamura-saru-hogen-fukujoshi-shujoshi",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -181,7 +183,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1961-x-sm9fvw",
+        "slug": "1961-chiri-nippon-go-ainu-go-kankei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -189,6 +191,23 @@
     },
     {
       "n": 11,
+      "authors": [
+        "田村 すゞ子"
+      ],
+      "year": 1971,
+      "yearText": "1971",
+      "title": "アイヌ語沙流方言の人称の種類",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-no-no",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語沙流方言の人称の種類"
+    },
+    {
+      "n": 12,
       "authors": [
         "田村すゞ子"
       ],
@@ -198,14 +217,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1971-x-zprizq",
+        "slug": "1971-tamura-saru-hogen-ninsho-dai-meishi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語沙流方言の人称代名詞"
     },
     {
-      "n": 12,
+      "n": 13,
       "authors": [
         "田村すゞ子"
       ],
@@ -215,14 +234,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1972-x-1vec8pf",
+        "slug": "1972-tamura-saru-hogen-ninsho-shurui",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語沙流方言の人称の種類"
     },
     {
-      "n": 13,
+      "n": 14,
       "authors": [
         "著者？｜金田一 京助(解説)｜成田 修一(撰)"
       ],
@@ -232,14 +251,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1972-x-17cnwcb",
+        "slug": "1972-chosha-matsumae",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "松前の言．－ゑそことはの事"
     },
     {
-      "n": 14,
+      "n": 15,
       "authors": [
         "Asai, Tōru"
       ],
@@ -250,14 +269,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1974-asai-toru-classification-of-dialects-cluster-analysis-of-ain",
+        "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Classification of dialects: cluster analysis of Ainu dialects"
     },
     {
-      "n": 15,
+      "n": 16,
       "authors": [
         "I. Roger Yoshino, Fred C. C. Peng, Peter Geiser"
       ],
@@ -275,7 +294,7 @@
       "matchedTitle": "The Ainu: The Past in the Present."
     },
     {
-      "n": 16,
+      "n": 17,
       "authors": [
         "知里, 真志保"
       ],
@@ -285,16 +304,16 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1985-x-1fccruj",
+        "slug": "ainu-tokuni-notameni",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語入門 : とくに地名研究者のために"
     },
     {
-      "n": 17,
+      "n": 18,
       "authors": [
-        "吉田巌"
+        "吉田, 巌"
       ],
       "year": 1989,
       "yearText": "1989",
@@ -302,14 +321,14 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "1989-x-c7q5bu",
+        "slug": "1989-yoshida-ainu-hogen-goi-shusei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "北海道あいぬ方言語彙集成"
     },
     {
-      "n": 18,
+      "n": 19,
       "authors": [
         "田中 聖子"
       ],
@@ -319,16 +338,16 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1989-x-9zqniu",
+        "slug": "1989-tanaka-ainu-go-kana-hyoki-hensen",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の仮名表記の変遷"
     },
     {
-      "n": 19,
+      "n": 20,
       "authors": [
-        "大塚, 一美, 杉村, キナラブック, 中川, 裕"
+        "杉村, キナラブック, 中川, 裕, 大塚, 一美"
       ],
       "year": 1990,
       "yearText": "1990",
@@ -336,14 +355,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1990-x-8wk51x",
+        "slug": "1990-kinarabukku-kinarabukku-kuden-ainu-minwa-zenshu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "キナラブック口伝アイヌ民話全集"
     },
     {
-      "n": 20,
+      "n": 21,
       "authors": [
         "佐藤 知己"
       ],
@@ -353,14 +372,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1991-x-1r7gism",
+        "slug": "1991-sato-chitose-hogen-jisho-shi-taisho-shi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語千歳方言における自称詞と対称詞について"
     },
     {
-      "n": 21,
+      "n": 22,
       "authors": [
         "相圭 朴"
       ],
@@ -371,14 +390,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-materials-for-the-study-of-the-ainu-language-and-f",
+        "slug": "1993-aikei-materials-study-ainu-language-folklore",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Materials for the study of THE AINU LANGUAGE AND FOLKLORE"
     },
     {
-      "n": 22,
+      "n": 23,
       "authors": [],
       "year": 1994,
       "yearText": "1994",
@@ -387,14 +406,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1994-x-pa-ca-correspondence-between-ainu-dialects-a-lingu",
+        "slug": "1994-anon-pa-ca-correspondence-between-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "pa/ca Correspondence between Ainu Dialects : A Linguistic-Geographical Study"
     },
     {
-      "n": 23,
+      "n": 24,
       "authors": [
         "アイヌ民族博物館"
       ],
@@ -404,16 +423,16 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1994-x-1tv3wk5",
+        "slug": "1994-ainu-minzoku-ainu-minzoku-hakubutsukan-densho-kiroku",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ民族博物館伝承記録"
     },
     {
-      "n": 24,
+      "n": 25,
       "authors": [
-        "北海道ウタリ協会企画"
+        "北海道ウタリ協会"
       ],
       "year": 1994,
       "yearText": "1994",
@@ -421,14 +440,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1994-x-akor-itak",
+        "slug": "1994-hokkaido-utari-akoro-itak-akor-itak",
         "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アコㇿ イタㇰ = AKOR ITAK : アイヌ語テキスト"
     },
     {
-      "n": 25,
+      "n": 26,
       "authors": [
         "Nakagawa, Hiroshi"
       ],
@@ -446,7 +465,7 @@
       "matchedTitle": "アイヌ語千歳方言辞典"
     },
     {
-      "n": 26,
+      "n": 27,
       "authors": [
         "佐藤知己"
       ],
@@ -456,14 +475,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1995-x-1tx7p2h",
+        "slug": "1995-sato-ainu-go-judo-bun",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語の受動文に関する一考察"
     },
     {
-      "n": 27,
+      "n": 28,
       "authors": [
         "北海道立アイヌ民族文化研究センター"
       ],
@@ -473,14 +492,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1995-x-1klo3z4",
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
-        "note": "Title match; corroborated by author"
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
     },
     {
-      "n": 28,
+      "n": 29,
       "authors": [
         "Kayano, Shigeru"
       ],
@@ -498,7 +517,25 @@
       "matchedTitle": "萱野茂のアイヌ語辞典"
     },
     {
-      "n": 29,
+      "n": 30,
+      "authors": [
+        "Kirsten Refsing, Mikhail Mikhailovich Dobrotvorskiĭ, John C. Batchelor, Basil Hall Chamberlain, Bronisław Piłsudski, Johannes von Rozwadowski"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "Early European Writings on the Ainu Language",
+      "titleEn": "Early European Writings on the Ainu Language",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-kirsten-early-european-writings-ainu-language",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "Early European Writings on the Ainu Language"
+    },
+    {
+      "n": 31,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -516,7 +553,7 @@
       "matchedTitle": "アイヌ語沙流方言辞典"
     },
     {
-      "n": 30,
+      "n": 32,
       "authors": [],
       "year": 1996,
       "yearText": "1996–2002",
@@ -532,25 +569,7 @@
       "matchedTitle": "アイヌ語鵡川方言日本語‐アイヌ語辞典"
     },
     {
-      "n": 31,
-      "authors": [
-        "Kirsten Refsing, Mikhail Mikhailovich Dobrotvorskiĭ, John C. Batchelor, Basil Hall Chamberlain, Bronisław Piłsudski, Johannes von Rozwadowski"
-      ],
-      "year": 1996,
-      "yearText": "1996",
-      "title": "Early European Writings on the Ainu Language",
-      "titleEn": "Early European Writings on the Ainu Language",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1996-kirsten-refsing-early-european-writings-on-the-ainu-language",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "Early European Writings on the Ainu Language"
-    },
-    {
-      "n": 32,
+      "n": 33,
       "authors": [
         "切替 英雄"
       ],
@@ -560,14 +579,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1996-x-1-2",
+        "slug": "1996-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(1)"
     },
     {
-      "n": 33,
+      "n": 34,
       "authors": [
         "豊原,熙司"
       ],
@@ -577,14 +596,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1996-x-1jodohl",
+        "slug": "1996-toyohara-nemuro-ainu-go-meiji-jidai",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "根室地方で採録されたアイヌ語 明治時代以後"
     },
     {
-      "n": 34,
+      "n": 35,
       "authors": [],
       "year": 1996,
       "yearText": "1996",
@@ -592,14 +611,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1996-x-16vxf6h",
+        "slug": "1996-anon-gengo-chirigaku-ainu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "言語地理学によるアイヌ語の史的研究"
     },
     {
-      "n": 35,
+      "n": 36,
       "authors": [
         "奥田 統己"
       ],
@@ -609,14 +628,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-1kktuhz",
+        "slug": "1997-okuda-shizunai-hogen-fukujoshi-shujoshi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語静内方言の副助詞と終助詞"
     },
     {
-      "n": 36,
+      "n": 37,
       "authors": [
         "佐藤 知己"
       ],
@@ -626,14 +645,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1aq2pok",
+        "slug": "1998-sato-masaki-no-gen",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "天理大学付属天理図書館所蔵「松前ノ言」について"
     },
     {
-      "n": 37,
+      "n": 38,
       "authors": [
         "切替 英雄"
       ],
@@ -643,14 +662,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-2-5",
+        "slug": "1998-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no-2",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)"
     },
     {
-      "n": 38,
+      "n": 39,
       "authors": [
         "奥田, 統己"
       ],
@@ -660,31 +679,31 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-w-y",
+        "slug": "1998-okuda-shizunai-hogen-boinkan-w-y",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語静内方言の母音間の/w/、/y/および/'/について"
     },
     {
-      "n": 39,
+      "n": 40,
       "authors": [
-        "田村, すず子, 片山, 竜峯, 志賀, 雪湖"
+        "田村, すゞ子, 片山, 竜峯, 志賀, 雪湖"
       ],
       "year": 1998,
       "yearText": "1998",
       "title": "アイヌ語北海道南部方言",
-      "type": "article",
+      "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-4gnrmh",
+        "slug": "1998-tamura-ainu-go-hokkaido-nanbu-hogen",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語北海道南部方言"
     },
     {
-      "n": 40,
+      "n": 41,
       "authors": [
         "白石, 英才"
       ],
@@ -694,14 +713,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-tmbkd2",
+        "slug": "1998-shiraishi-koboin-han-boinka-watari-oto-sonyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語高母音の半母音化とわたり音挿入 : 最適性理論による分析"
     },
     {
-      "n": 41,
+      "n": 42,
       "authors": [
         "佐藤 知己"
       ],
@@ -711,28 +730,11 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1999-x-2-4",
+        "slug": "1999-sato-masaki-no-gen-2",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "天理大学付属天理図書館所蔵「松前ノ言」について(2)"
-    },
-    {
-      "n": 42,
-      "authors": [
-        "奥田, 統己"
-      ],
-      "year": 1999,
-      "yearText": "1999",
-      "title": "アイヌ語静内方言文脈つき語彙集",
-      "type": "wordlist",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1999-x-1h7k5eb",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語静内方言文脈つき語彙集"
     },
     {
       "n": 43,
@@ -745,7 +747,7 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "1999-x-cd-rom",
+        "slug": "1999-okuda-shizunai-hogen-goishu-cd-rom",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -764,8 +766,8 @@
       "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "confidence": "candidate",
+        "note": "Title match"
       },
       "matchedTitle": "The Ainu Language"
     },
@@ -780,7 +782,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2001-x-qzck1q",
+        "slug": "2001-sawai-tokachi-hogen-shinzoku-meisho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -807,6 +809,23 @@
     {
       "n": 47,
       "authors": [
+        "萱野, 茂"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "noainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 48,
+      "authors": [
         "中川, 裕"
       ],
       "year": 2003,
@@ -815,14 +834,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2003-x-y78mz4",
+        "slug": "2003-nakagawa-nippon-go-ainu-go-shiteki-kankei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "日本語とアイヌ語の史的関係"
     },
     {
-      "n": 48,
+      "n": 49,
       "authors": [
         "佐藤, 知己"
       ],
@@ -832,14 +851,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-b3hbt8",
+        "slug": "2004-sato-ainu-go-shohogen-hikaku-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "古文献によるアイヌ語諸方言の比較研究"
     },
     {
-      "n": 49,
+      "n": 50,
       "authors": [
         "切替, 英雄"
       ],
@@ -849,14 +868,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-eqmii5",
+        "slug": "2004-kirikae-kushiro-hogen-goi",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語釧路方言語彙"
     },
     {
-      "n": 50,
+      "n": 51,
       "authors": [
         "小松, 和弘"
       ],
@@ -864,16 +883,16 @@
       "yearText": "2004",
       "title": "アイヌ語様似方言辞典",
       "type": "dictionary",
-      "ainuRelated": false,
+      "ainuRelated": true,
       "match": {
-        "slug": "2004-x-1m2c51q",
+        "slug": "2004-komatsu-samani-hogen-jiten",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語様似方言辞典"
     },
     {
-      "n": 51,
+      "n": 52,
       "authors": [
         "中川 裕"
       ],
@@ -883,14 +902,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2005-x-l02a2u",
+        "slug": "2005-nakagawa-ainu-go-nippon-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語にくわわった日本語"
     },
     {
-      "n": 52,
+      "n": 53,
       "authors": [
         "佐藤 知己"
       ],
@@ -900,29 +919,11 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2005-x-1fgbye6",
+        "slug": "2005-sato-moshiwatashi-ainu-go-yakubun",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "「申渡」のアイヌ語訳文に関する一考察"
-    },
-    {
-      "n": 53,
-      "authors": [
-        "Tomomi Satō"
-      ],
-      "year": 2006,
-      "yearText": "2006",
-      "title": "The Study of the Ainu Language",
-      "titleEn": "The Study of the Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2006-tomomi-sato-the-study-of-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "The Study of the Ainu Language"
     },
     {
       "n": 54,
@@ -935,7 +936,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-19usgnh",
+        "slug": "2006-nakagawa-ainunin-ainu-go-hyoki",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -952,7 +953,7 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "2006-x-io810x",
+        "slug": "2006-sawai-tokachi-hogen-kiso-goishu-honbetsu-machi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -970,7 +971,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
+        "slug": "2008-anna-reported-discourse-logophoricity-southern",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -987,7 +988,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2008-x-54q4b0",
+        "slug": "2008-sato-ainu-go-kobunken-gengogakuteki-shomondai",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1004,7 +1005,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2009-x-18",
+        "slug": "2009-sato-18-seiki-zenhan-ainu-go-shiryo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1022,7 +1023,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2010-anna-bugaeva-ainu-applicatives-in-typological-perspective",
+        "slug": "2010-bugaeva-ainu-applicatives-typological-perspective",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1039,7 +1040,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-x-5znhtd",
+        "slug": "2011-nakagawa-ainu-shin-yo-jojutsusha-ninsho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1056,7 +1057,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-x-14rk2yf",
+        "slug": "2011-tamura-shiranuka-hogen-bunpo-kijutsu",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -1092,7 +1093,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2012-fukazawa-mika-the-distribution-and-interpretation-of-words-for-p",
+        "slug": "2012-fukazawa-distribution-interpretation-words-parents",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1101,7 +1102,7 @@
     {
       "n": 64,
       "authors": [
-        "佐藤, 知己, SATO, Tomomi"
+        "佐藤 知己"
       ],
       "year": 2012,
       "yearText": "2012",
@@ -1109,7 +1110,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2012-x-kj53uv",
+        "slug": "2012-sato-ikegami-ni-ryo-ainu-go-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1126,7 +1127,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2012-x-1hnzlod",
+        "slug": "2012-sato-ainu-go-genjo-fukko",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1144,7 +1145,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-fukazawa-mika-the-distribution-of-interrogative-or-indefinite-ro",
+        "slug": "2013-fukazawa-distribution-interrogative-indefinite-roots",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1161,7 +1162,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-x-14s5x9g",
+        "slug": "2013-suke-ainushi-yo-reki-sho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1178,7 +1179,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2013-x-1",
+        "slug": "2013-fukazawa-kagaka-bunsho-kiku-no-kanzashi-ezo-tsuji",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1196,7 +1197,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-fukazawa-mika-the-mystery-of-the-phonological-distribution-ca-an",
+        "slug": "2014-fukazawa-mystery-phonological-distribution-ca-pa",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1213,7 +1214,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-k7w34r",
+        "slug": "2014-bugaewa-hokkaido-nanbu-ainu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1230,7 +1231,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-1dlbz6p",
+        "slug": "2014-nakagawa-ainu-go-bunkengakuteki-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1247,7 +1248,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-1704",
+        "slug": "2014-sato-sora-nen-shonin-ha",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1264,7 +1265,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-1f209hp",
+        "slug": "2014-kobayashi-mukawa-hogen-yutai-doshi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1281,7 +1282,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-1t0a0wf",
+        "slug": "2014-fukazawa-kagaka-bunsho-kiku-no-kanzashi-midaregami",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1298,7 +1299,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-1ua4r3k",
+        "slug": "2014-fukazawa-kagaka-bunsho-doto-ainu-go",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1315,7 +1316,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-2",
+        "slug": "2014-fukazawa-kagaka-bunsho-gakko-orai-ebisu-kaisho-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1332,7 +1333,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-o59lug",
+        "slug": "2014-takahashi-ainu-go-tokachi-hogen-reibunshu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1341,15 +1342,15 @@
     {
       "n": 78,
       "authors": [
-        "Bugaeva, Anna"
+        "Bugaeva, Anna, 長崎, 郁"
       ],
       "year": 2015,
       "yearText": "2015",
       "title": "アイヌ語研究の諸問題",
-      "type": "book",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-bugaeva-anna-b8h16x",
+        "slug": "2015-bugaeva-ainu-go-kenkyu-shomondai",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -1366,7 +1367,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-2-2",
+        "slug": "2015-chiba-daigaku-hozon-keisho-akaibuka-dai2-nenji",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1383,7 +1384,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-1b5idq9",
+        "slug": "2015-kobayashi-ainu-go-doshi-ketsugoka-ko-kozo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1400,7 +1401,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-1960",
+        "slug": "2015-ono-tokei-kagakuteki-ainu-go-hogen-shuken-ron",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1417,7 +1418,7 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "2015-x-17wrl8h",
+        "slug": "2015-fukazawa-kanazawaka-bunsho-ainu-go-goishu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -1425,6 +1426,23 @@
     },
     {
       "n": 83,
+      "authors": [
+        "小林, 美紀"
+      ],
+      "year": 2016,
+      "yearText": "2016",
+      "title": "アイヌ語動詞の結合価と項構造",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-no-to-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語動詞の結合価と項構造"
+    },
+    {
+      "n": 84,
       "authors": [
         "深澤 美香"
       ],
@@ -1434,14 +1452,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-1t0a0w9",
+        "slug": "2016-fukazawa-kagaka-bunsho-ezo-go-moshio-kusa-goshaku-hon",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "加賀家文書「［蝦夷語和解］」 : 蝦夷通辞・加賀伝蔵による『藻汐草』の語釈本"
     },
     {
-      "n": 84,
+      "n": 85,
       "authors": [
         "深澤美香"
       ],
@@ -1451,14 +1469,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-x-3",
+        "slug": "2016-fukazawa-kagaka-bunsho-chiya-korube-kyukon-nandai",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "加賀家文書翻刻・現代語訳 3 「チヤコルベ」：蝦夷通辞が記録したアイヌの求婚難題説話"
     },
     {
-      "n": 85,
+      "n": 86,
       "authors": [
         "National Cancer Institute"
       ],
@@ -1476,9 +1494,9 @@
       "matchedTitle": "Ainu Language"
     },
     {
-      "n": 86,
+      "n": 87,
       "authors": [
-        "久保寺逸彦著"
+        "久保寺, 逸彦"
       ],
       "year": 2020,
       "yearText": "2020",
@@ -1486,14 +1504,42 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-x-121ohxf",
-        "confidence": "candidate",
-        "note": "Title match"
+        "slug": "2020-kubodera-ainu-go-nippon-go-jitenko",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語・日本語辞典稿"
     },
     {
-      "n": 87,
+      "n": 88,
+      "authors": [],
+      "yearText": "",
+      "title": "アイヌユーカラ語法摘要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-yukara-goho-tekiyo",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 89,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
+    },
+    {
+      "n": 90,
       "authors": [
         "佐藤 知己"
       ],
@@ -1502,14 +1548,29 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "nd-x-2xbw22",
+        "slug": "sato-kobunken-ainu-goshi",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "古文献によるアイヌ語史の構築"
     },
     {
-      "n": 88,
+      "n": 91,
+      "authors": [
+        "山田秀三"
+      ],
+      "title": "アイヌ語地名の研究1",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "xxxx-yamada-ainu-go-chimei-no-kenkyu-1",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語地名の研究1"
+    },
+    {
+      "n": 92,
       "authors": [
         "成田修一"
       ],
@@ -1518,14 +1579,14 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "nd-x-12a0yoz",
+        "slug": "narita-edo-jidai-ezo-goishu-ezo-goshu",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "江戸時代の蝦夷語彙集概観および「蝦夷語集」の表記について"
     },
     {
-      "n": 89,
+      "n": 93,
       "authors": [
         "成田修一編"
       ],
@@ -1534,14 +1595,29 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "nd-x-14407b1",
+        "slug": "narita-kinsei-ezo-goi-hensan",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "近世の蝦夷語彙 : 近世に於ける蝦夷語彙集類の編纂"
     },
     {
-      "n": 90,
+      "n": 94,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 95,
       "authors": [
         "金田一京助[著]"
       ],
@@ -1550,7 +1626,7 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "nd-x-j4zhhp",
+        "slug": "kindaichi-shiboruto-sensei-ainu-gogaku",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },

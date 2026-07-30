@@ -3,14 +3,15 @@
   "verified": false,
   "citingWork": {
     "slug": "2025-fuda-shukansei-ainu-go-shoyu-hyogen",
-    "title": "フダー・クラーラ 主観性から見たアイヌ語の所有表現の考察",
+    "title": "主観性から見たアイヌ語の所有表現の考察",
+    "author": "フダー・クラーラ",
     "year": 2025,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 10,
+    "referenceCount": 8,
     "sourcePath": "articles/2025_フダー・クラーラ_主観性から見たアイヌ語の所有表現の考察.pdf"
   },
   "references": [
@@ -34,22 +35,6 @@
     },
     {
       "n": 2,
-      "authors": [],
-      "year": 1998,
-      "yearText": "1998",
-      "title": "Ainu folk-lore",
-      "titleEn": "Ainu folk-lore",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1998-x-ainu-folk-lore",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu folk-lore"
-    },
-    {
-      "n": 3,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -61,13 +46,13 @@
       "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "勝信 井筒"
       ],
@@ -78,14 +63,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-the-ainu-language-a-linguistic-introduction",
+        "slug": "2004-katsunobu-ainu-language-linguistic-introduction",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "The Ainu language : a linguistic introduction"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "Nakagawa, Hiroshi, Bugaeva, Anna, Kobayashi, Miki"
       ],
@@ -96,32 +81,14 @@
       "type": "corpus-text",
       "ainuRelated": false,
       "match": {
-        "slug": "2016-nakagawa-hiroshi-a-glossed-audio-corpus-of-ainu-folklore",
+        "slug": "2016-nakagawa-glossed-audio-corpus-ainu-folklore",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "A Glossed Audio Corpus of Ainu Folklore"
     },
     {
-      "n": 6,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
-    },
-    {
-      "n": 7,
+      "n": 5,
       "authors": [
         "Bugaeva Anna"
       ],
@@ -132,14 +99,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-bugaeva-anna-appositive-possession-in-ainu-and-around-the-pacific",
+        "slug": "2021-anna-appositive-possession-ainu-around-pacific",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Appositive possession in Ainu and around the Pacific"
     },
     {
-      "n": 8,
+      "n": 6,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -157,7 +124,7 @@
       "matchedTitle": "Introduction"
     },
     {
-      "n": 9,
+      "n": 7,
       "authors": [
         "Bugaeva"
       ],
@@ -175,9 +142,9 @@
       "matchedTitle": "Handbook of the Ainu Language"
     },
     {
-      "n": 10,
+      "n": 8,
       "authors": [
-        "フダー・クラーラ"
+        "フダー クラーラ"
       ],
       "year": 2025,
       "yearText": "2025",
@@ -185,7 +152,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2025-x-mgxtfp",
+        "slug": "kara-tainu-no-no",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },

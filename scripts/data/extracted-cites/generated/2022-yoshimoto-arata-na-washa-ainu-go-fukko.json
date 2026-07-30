@@ -1,0 +1,221 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2022-yoshimoto-arata-na-washa-ainu-go-fukko",
+    "title": "新たな話者たちによるアイヌ語復興",
+    "author": "吉本裕子",
+    "year": 2022,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
+    "referenceHeading": "引用・参照文献",
+    "referencePages": "scan pp. 35-38",
+    "referenceCount": 12,
+    "sourcePath": "articles/2022_吉本裕子_新たな話者たちによるアイヌ語復興.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "二風谷アイヌ語教室, 平取町二風谷アイヌ語教室"
+      ],
+      "year": 1988,
+      "yearText": "1988",
+      "title": "二風谷アイヌ語教室広報紙",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1988-ainu-nifu-tani-ainu-go-kyoshitsu-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "二風谷アイヌ語教室広報紙"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "上野, 昌之"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "アイヌ民族とアイヌ語学習 : 先住民族の言語権の視点から",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-ueno-ainu-minzoku-ainu-go-gakushu-gengoken",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ民族とアイヌ語学習 : 先住民族の言語権の視点から"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "佐藤知己"
+      ],
+      "year": 2012,
+      "yearText": "2012",
+      "title": "アイヌ語の現状と復興",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2012-sato-ainu-go-genjo-fukko",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の現状と復興"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "上野 昌之"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ民族の言語復興と歴史教育の研究 : 教育から考える先住民族とエンパワーメント",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-ueno-ainu-minzoku-gengo-fukko-rekishi-kyoiku",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ民族の言語復興と歴史教育の研究 : 教育から考える先住民族とエンパワーメント"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "日本社会教育学会年報編集委員会, 野元 弘幸, 清水 裕二, 上野 昌之, 一盛 真, 島崎 直美, 若園 雄志郎, 野口 扶美子, 淀野 順子, 田中 治彦, 山城 千秋, 廣瀬 隆人, 広瀬 健一郎, 藤村 好美, 紅 桂蘭, 前田 耕司"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ民族・先住民族教育の現在",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-nippon-shakai-ainu-minzoku-senju-minzoku-kyoiku",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ民族・先住民族教育の現在"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "若園 雄志郎"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "博物館におけるアイヌ文化の伝承者育成",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-wakazono-ainu-bunka-denshosha-ikusei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "博物館におけるアイヌ文化の伝承者育成"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "渡邊 香織"
+      ],
+      "year": 2018,
+      "yearText": "2018",
+      "title": "首都圏におけるアイヌ語教育の現状",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2018-watanabe-shutoken-ainu-go-kyoiku",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "首都圏におけるアイヌ語教育の現状"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "上野 昌之"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ文化伝承者育成事業の実践例と課題の研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-ueno-ainu-bunka-denshosha-ikusei-jigyo",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ文化伝承者育成事業の実践例と課題の研究"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "丹菊 逸治"
+      ],
+      "year": 2020,
+      "yearText": "2020",
+      "title": "アイヌ語復興のこれまでとこれから",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2020-tan-ainu-go-fukko",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語復興のこれまでとこれから"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "野崎 剛毅"
+      ],
+      "year": 2021,
+      "yearText": "2021",
+      "title": "アイヌ語復興の可能性としての「言語の巣」",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2021-nozaki-ainu-go-fukko-gengo-no-su",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語復興の可能性としての「言語の巣」"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "吉本 裕子"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "新たな話者たちによるアイヌ語復興 : 北海道平取町二風谷を事例に",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-yoshimoto-ainu-go-fukko-biratori-machi-nifu-tani",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "新たな話者たちによるアイヌ語復興 : 北海道平取町二風谷を事例に"
+    },
+    {
+      "n": 12,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
+    }
+  ]
+}

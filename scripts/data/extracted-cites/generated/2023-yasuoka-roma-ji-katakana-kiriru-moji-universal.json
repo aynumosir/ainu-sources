@@ -3,15 +3,16 @@
   "verified": false,
   "citingWork": {
     "slug": "2023-yasuoka-roma-ji-katakana-kiriru-moji-universal",
-    "title": "安岡素子・安岡孝一 ローマ字・カタカナ・キリル文字によるアイヌ語Universal Dependenciesの可能性",
+    "title": "ローマ字・カタカナ・キリル文字によるアイヌ語Universal Dependenciesの可能性",
+    "author": "安岡素子・安岡孝一",
     "year": 2023,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
     "referenceHeading": "文 献",
     "referencePages": "scan pp. 13-15",
-    "referenceCount": 16,
+    "referenceCount": 15,
     "sourcePath": "articles/2023_安岡素子・安岡孝一_ローマ字・カタカナ・キリル文字によるアイヌ語Universal Dependenciesの可能性.pdf"
   },
   "references": [
@@ -27,7 +28,7 @@
       "type": "topical-dictionary",
       "ainuRelated": true,
       "match": {
-        "slug": "1898-kanazawa-ninjal-topical-ainu-conversation-dictionary",
+        "slug": "1898-kanazawa-topical-dictionary-conversational-ainu",
         "confidence": "candidate",
         "note": "Title match"
       },
@@ -35,23 +36,6 @@
     },
     {
       "n": 2,
-      "authors": [
-        "M.M. Dobrotvorskii, 寺田 吉孝"
-      ],
-      "year": 1995,
-      "yearText": "1995",
-      "title": "アイヌ語・ロシア語辞典-2-",
-      "type": "dictionary",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1995-m-m-dobrotvorskii-2",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "アイヌ語・ロシア語辞典-2-"
-    },
-    {
-      "n": 3,
       "authors": [
         "北海道立アイヌ民族文化研究センター"
       ],
@@ -61,14 +45,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1995-x-1klo3z4",
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -86,9 +70,9 @@
       "matchedTitle": "アイヌ語沙流方言辞典"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
-        "Kaizawa, Julie, 片山, 竜峯"
+        "片山, 竜峯, Kaizawa, Julie"
       ],
       "year": 2003,
       "yearText": "2003",
@@ -96,14 +80,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2003-kaizawa-julie-gjwb9l",
+        "slug": "2003-kaizawa-ainu-shin-yoshu",
         "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "「アイヌ神謡集」を読みとく"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
         "佐藤, 知己"
       ],
@@ -113,14 +97,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-1djf4br",
+        "slug": "2004-sato-ainu-shin-yoshu-nandoku-kasho-tokui-na-gengo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "知里幸恵「アイヌ神謡集」の難読個所と特異な言語事例をめぐって"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
         "Anna Bugaeva"
       ],
@@ -131,14 +115,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2011-anna-bugaeva-internet-applications-for-endangered-languages-a-t",
+        "slug": "2011-bugaeva-internet-applications-endangered-languages",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Internet applications for endangered languages: a talking dictionary of Ainu"
     },
     {
-      "n": 8,
+      "n": 7,
       "authors": [
         "深澤, 美香"
       ],
@@ -148,14 +132,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2014-x-fvv6up",
+        "slug": "2014-fukazawa-kagaka-bunsho-ainu-go-shiryo-kaga-denzo",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "加賀家文書のアイヌ語資料と加賀伝蔵"
     },
     {
-      "n": 9,
+      "n": 8,
       "authors": [
         "Senuma Hajime & Aizawa Akiko"
       ],
@@ -166,14 +150,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2017-senuma-hajime-aizawa-akiko-toward-universal-dependencies-for-ainu",
+        "slug": "2017-akiko-toward-universal-dependencies-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Toward Universal Dependencies for Ainu"
     },
     {
-      "n": 10,
+      "n": 9,
       "authors": [
         "Senuma Hajime & Aizawa Akiko"
       ],
@@ -184,16 +168,16 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2018-senuma-hajime-aizawa-akiko-universal-dependencies-for-ainu",
+        "slug": "2018-akiko-universal-dependencies-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Universal Dependencies for Ainu"
     },
     {
-      "n": 11,
+      "n": 10,
       "authors": [
-        "寺田, 吉孝"
+        "寺田, 吉孝, ТЭРАДА, Йоситака, 安田, 節彦, ЯСУДА, Сэцухико"
       ],
       "year": 2019,
       "yearText": "2019",
@@ -201,14 +185,14 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2019-x-m-m-26",
+        "slug": "2019-terada-doburotuvorusuki-ainu-go-roshia-go-jiten-26",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "M. M. ドブロトゥヴォールスキーのアイヌ語・ロシア語辞典（26）"
     },
     {
-      "n": 12,
+      "n": 11,
       "authors": [
         "安岡孝一"
       ],
@@ -218,14 +202,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-x-universal-dependencies",
+        "slug": "2021-yasuoka-universal-dependencies-ainu-go-tekisuto",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Universal Dependenciesによるアイヌ語テキストコーパス"
     },
     {
-      "n": 13,
+      "n": 12,
       "authors": [
         "安岡孝一"
       ],
@@ -235,14 +219,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-x-universal-dependencies-2",
+        "slug": "2021-yasuoka-ainu-go-universal-dependencies",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "アイヌ語Universal Dependencies再考"
     },
     {
-      "n": 14,
+      "n": 13,
       "authors": [
         "阪口諒"
       ],
@@ -252,14 +236,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-x-elbyru",
+        "slug": "2021-sakaguchi-ainu-go-roshia-go-jiten-karafuto-hogen",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "『アイヌ語ロシア語辞典』中のアイヌ語樺太方言テキスト"
     },
     {
-      "n": 15,
+      "n": 14,
       "authors": [
         "国立アイヌ民族博物館, 立石, 信一, 佐々木, 史郎, 田村, 将人"
       ],
@@ -269,14 +253,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "2023-x-p3cluz",
+        "slug": "2023-kokuritsu-ainu-uainukoro-kotan-akara-popoi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "ウアイヌコㇿコタンアカㇻウポポイのことばと歴史"
     },
     {
-      "n": 16,
+      "n": 15,
       "authors": [
         "深澤 美香"
       ],
@@ -286,7 +270,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2023-x-1uaweqa",
+        "slug": "2023-fukazawa-ainu-go-tenji-kaisetsu-bun-watakushitachi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },

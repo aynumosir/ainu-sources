@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2006-yamaguchi-dobutsu-meisho-ainu-go-gosei-meishi",
-    "title": "山口伸樹 動物名称から見るアイヌ語合成名詞の諸特徴",
+    "title": "動物名称から見るアイヌ語合成名詞の諸特徴",
+    "author": "山口伸樹",
     "year": 2006,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
@@ -26,7 +27,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-x-1e3o6yu",
+        "slug": "1984-kirikae-ainu-go-meishi-ku-kozo-gosei-meishi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -78,7 +79,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "nd-x-1dn4eee",
+        "slug": "nakagawa-jidosei-tadosei-ainu-go-doshi",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },

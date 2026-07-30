@@ -280,7 +280,23 @@ function authorKeys(author: string | null): string[] {
 	return [...new Set(chunks.map(normalizeText).filter((value) => value.length >= 2))];
 }
 
-function matchOne(sectionNormalized: string, source: CatalogueSource): CatalogueMatch | null {
+/**
+ * How far either side of a matched title to look for its author and year.
+ *
+ * Normalization strips every space and mark, so this counts bare letters and digits.
+ * Measured over the held bibliographies by the spacing between consecutive year
+ * tokens, one entry runs a median of 47 such characters (p75 88). A window that
+ * spans several entries reads a NEIGHBOUR's author or year as corroboration, which
+ * is how "The Ainu Language" — matched inside Batchelor's printed "A Grammar of the
+ * Ainu Language" — was promoted to a public edge credited to Tamura 2000.
+ */
+const CORROBORATION_WINDOW = 60;
+
+function matchOne(
+	sectionNormalized: string,
+	source: CatalogueSource,
+	corroborationWindow = CORROBORATION_WINDOW
+): CatalogueMatch | null {
 	// Every occurrence of every alias that appears. A title cited in its own right
 	// may ALSO appear inside a longer title elsewhere in the same bibliography, and
 	// a work cited under one alias may be nested under another, so stopping at the
@@ -309,8 +325,8 @@ function matchOne(sectionNormalized: string, source: CatalogueSource): Catalogue
 	let corroboration: ('year' | 'author')[] = [];
 	for (const span of spans) {
 		const window = sectionNormalized.slice(
-			Math.max(0, span.at - 180),
-			Math.min(sectionNormalized.length, span.at + span.length + 180)
+			Math.max(0, span.at - corroborationWindow),
+			Math.min(sectionNormalized.length, span.at + span.length + corroborationWindow)
 		);
 		const found: ('year' | 'author')[] = [];
 		if (source.yearStart && window.includes(String(source.yearStart))) found.push('year');
@@ -372,13 +388,14 @@ function matchRank(match: CatalogueMatch): number {
 export function findCatalogueMatches(
 	referenceText: string,
 	catalogue: CatalogueSource[],
-	citingSlug: string
+	citingSlug: string,
+	corroborationWindow = CORROBORATION_WINDOW
 ): CatalogueMatch[] {
 	const sectionNormalized = normalizeText(referenceText);
 	const byWork = new Map<string, CatalogueMatch>();
 	for (const source of catalogue) {
 		if (source.slug === citingSlug) continue;
-		const match = matchOne(sectionNormalized, source);
+		const match = matchOne(sectionNormalized, source, corroborationWindow);
 		if (!match) continue;
 		const key = duplicateKey(match);
 		const previous = byWork.get(key);

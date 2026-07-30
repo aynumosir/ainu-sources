@@ -1,0 +1,525 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "2015-kobayashi-ainu-go-doshi-ketsugoka-ko-kozo",
+    "title": "アイヌ語動詞の結合価と項構造",
+    "author": "小林美紀",
+    "year": 2015,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参照文献(参照ウェブサイトを含む)",
+    "referenceCount": 30,
+    "sourcePath": "articles/2015_小林美紀_アイヌ語動詞の結合価と項構造.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "year": 1936,
+      "yearText": "1936",
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1936-kindaichi-yukara",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "Chiri"
+      ],
+      "year": 1942,
+      "yearText": "1942",
+      "title": "アイヌ語法研究 : 樺太方言を中心として",
+      "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1942-chiri",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
+    },
+    {
+      "n": 3,
+      "authors": [
+        "久保寺, 逸彦"
+      ],
+      "year": 1960,
+      "yearText": "1960",
+      "title": "アイヌ叙事詩神謡、聖伝の研究",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩神謡、聖伝の研究"
+    },
+    {
+      "n": 4,
+      "authors": [
+        "久保寺, 逸彦"
+      ],
+      "year": 1977,
+      "yearText": "1977",
+      "title": "アイヌ叙事詩神謡・聖伝の研究",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ叙事詩神謡・聖伝の研究"
+    },
+    {
+      "n": 5,
+      "authors": [
+        "中川 裕"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "アイヌ語のArity Calculation",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-nakagawa-ainu-go-arity-calculation",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語のArity Calculation"
+    },
+    {
+      "n": 6,
+      "authors": [
+        "金成, まつ, 金田一, 京助"
+      ],
+      "year": 1993,
+      "yearText": "1993",
+      "title": "アイヌ叙事詩ユーカラ集",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1993-kannari-yukarashu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ集"
+    },
+    {
+      "n": 7,
+      "authors": [
+        "Nakagawa, Hiroshi"
+      ],
+      "year": 1995,
+      "yearText": "1995",
+      "title": "アイヌ語千歳方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語千歳方言辞典"
+    },
+    {
+      "n": 8,
+      "authors": [
+        "Kayano, Shigeru"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "萱野茂のアイヌ語辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-kayano-kayanos-ainu-dictionary",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 9,
+      "authors": [
+        "Tamura, Suzuko"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "",
+      "type": "dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語沙流方言辞典"
+    },
+    {
+      "n": 10,
+      "authors": [],
+      "year": 1996,
+      "yearText": "1996–2002",
+      "title": "アイヌ語鵡川方言日本語‐アイヌ語辞典",
+      "titleEn": "Mukawa Dialect Japanese–Ainu Dictionary",
+      "type": "corpus-text",
+      "ainuRelated": true,
+      "match": {
+        "slug": "mukawa-dialect-dictionary-corpus",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ語鵡川方言日本語‐アイヌ語辞典"
+    },
+    {
+      "n": 11,
+      "authors": [
+        "萱野, 茂, 平凡社"
+      ],
+      "year": 1998,
+      "yearText": "1998",
+      "title": "萱野茂のアイヌ神話集成",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ神話集成"
+    },
+    {
+      "n": 12,
+      "authors": [
+        "奥田, 統己"
+      ],
+      "year": 1999,
+      "yearText": "1999",
+      "title": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)",
+      "type": "wordlist",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1999-okuda-shizunai-hogen-goishu-cd-rom",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語静内方言文脈つき語彙集(CD-ROMつき)"
+    },
+    {
+      "n": 13,
+      "authors": [],
+      "year": 2001,
+      "yearText": "2001",
+      "title": "トゥムンチ ペンチャイ、オコッコ ペンチャイ―アイヌ語千歳方言叙事詩テキスト―",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2001-anon-tumunchi-pen-chai-okokko-chitose-hogen",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "トゥムンチ ペンチャイ、オコッコ ペンチャイ―アイヌ語千歳方言叙事詩テキスト―"
+    },
+    {
+      "n": 14,
+      "authors": [
+        "本田 優子"
+      ],
+      "year": 2001,
+      "yearText": "2001",
+      "title": "川上まつ子アイヌ語文例集",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2001-honda-kawakami-matsuko-ainu-go-bunreishu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "川上まつ子アイヌ語文例集"
+    },
+    {
+      "n": 15,
+      "authors": [
+        "Chiba, Nobue"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "アイヌ語鵡川方言日本語‐アイヌ語辞典",
+      "titleEn": "Mukawa Dialect Japanese-Ainu Dictionary",
+      "type": "japanese-ainu-dictionary",
+      "ainuRelated": true,
+      "match": {
+        "slug": "2002-chiba-mukawa-dialect-japanese-ainu-dictionary",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ語鵡川方言日本語‐アイヌ語辞典"
+    },
+    {
+      "n": 16,
+      "authors": [
+        "萱野, 茂"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "noainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 17,
+      "authors": [
+        "佐藤 知己"
+      ],
+      "year": 2005,
+      "yearText": "2005",
+      "title": "アイヌ語地名研究と言語学",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2005-sato-ainu-go-chimei-kenkyu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語地名研究と言語学"
+    },
+    {
+      "n": 18,
+      "authors": [
+        "中川, 裕"
+      ],
+      "year": 2007,
+      "yearText": "2007",
+      "title": "カムイユカラでアイヌ語を学ぶ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2007-nakagawa-kamu-iyukara-ainu-go",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "カムイユカラでアイヌ語を学ぶ"
+    },
+    {
+      "n": 19,
+      "authors": [
+        "小林, 美紀"
+      ],
+      "year": 2009,
+      "yearText": "2009",
+      "title": "アイヌ語の接頭辞e-とo-に関する考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2009-kobayashi-setto-ji-e-o",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の接頭辞e-とo-に関する考察"
+    },
+    {
+      "n": 20,
+      "authors": [
+        "奥田 統己"
+      ],
+      "year": 2011,
+      "yearText": "2011",
+      "title": "アイヌ語の使役と逆使役概観－日本語との対照から－",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2011-okuda-shieki-gyaku-shieki-nippon-go",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の使役と逆使役概観－日本語との対照から－"
+    },
+    {
+      "n": 21,
+      "authors": [
+        "Bugaeva, Anna"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ語使役交替動詞対データ",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-bugaeva-ainu-go-shieki-kotai-doshi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year"
+      },
+      "matchedTitle": "アイヌ語使役交替動詞対データ"
+    },
+    {
+      "n": 22,
+      "authors": [
+        "ブガエワ・アンナ"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ語使役構文に関する再考察",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-bugaewa-ainu-go-shieki-kobun-saikosatsu-2",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語使役構文に関する再考察"
+    },
+    {
+      "n": 23,
+      "authors": [
+        "小林美紀"
+      ],
+      "year": 2014,
+      "yearText": "2014",
+      "title": "アイヌ語鵡川方言の有対動詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2014-kobayashi-mukawa-hogen-yutai-doshi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語鵡川方言の有対動詞"
+    },
+    {
+      "n": 24,
+      "authors": [
+        "千葉大学"
+      ],
+      "year": 2015,
+      "yearText": "2015",
+      "title": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2015-chiba-daigaku-hozon-keisho-akaibuka-dai2-nenji",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語の保存・継承に必要なアーカイブ化に関する調査研究事業 : 第2年次 (北海道沙流郡平取町) 調査研究報告書"
+    },
+    {
+      "n": 25,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "Introduction",
+      "titleEn": "Introduction",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-anna-bugaeva-introduction",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Introduction"
+    },
+    {
+      "n": 26,
+      "authors": [
+        "アイヌ民族文化財団編"
+      ],
+      "year": 2022,
+      "yearText": "2022",
+      "title": "アイヌ関連総合研究等助成事業研究報告",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "2022-ainu-minzoku-bunka-ainu-kenkyu-hokoku",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌ関連総合研究等助成事業研究報告"
+    },
+    {
+      "n": 27,
+      "authors": [
+        "アイヌ民族博物館"
+      ],
+      "yearText": "",
+      "title": "アイヌ民族博物館研究報告",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-minzoku-ainu-minzoku-hakubutsukan-kenkyu-hokoku",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ民族博物館研究報告"
+    },
+    {
+      "n": 28,
+      "authors": [],
+      "title": "千葉大学ユーラシア言語文化論集",
+      "titleEn": "Journal of Chiba University Eurasian Society (Ainu text collection)",
+      "type": "corpus-text",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-journal-chiba-university-eurasian-society",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "千葉大学ユーラシア言語文化論集"
+    },
+    {
+      "n": 29,
+      "authors": [
+        "中川, 裕"
+      ],
+      "yearText": "",
+      "title": "自動性・他動性とアイヌ語の動詞",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "nakagawa-jidosei-tadosei-ainu-go-doshi",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "自動性・他動性とアイヌ語の動詞"
+    },
+    {
+      "n": 30,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
+    }
+  ]
+}

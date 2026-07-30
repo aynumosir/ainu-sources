@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2008-anna-reported-discourse-logophoricity-southern",
-    "title": "Bugaeva Anna Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+    "title": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu",
+    "author": "Bugaeva Anna",
     "year": 2008,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -26,7 +27,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1905-john-c-batchelor-an-ainu-english-japanese-dictionary",
+        "slug": "1905-batchelor-ainu-english-japanese-dictionary-2",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -107,6 +108,24 @@
     {
       "n": 6,
       "authors": [
+        "Refsing"
+      ],
+      "year": 1986,
+      "yearText": "1986",
+      "title": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "titleEn": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1986-refsing",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
+    },
+    {
+      "n": 7,
+      "authors": [
         "Kirsten Refsing"
       ],
       "year": 1987,
@@ -116,14 +135,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1987-kirsten-refsing-the-ainu-language-the-morphology-and-syntax-of-the",
+        "slug": "the-ainu-language-the-morphology-and-syntax-of-the-shizunai",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "The Ainu Language: The Morphology and Syntax of the Shizunai Dialect"
     },
     {
-      "n": 7,
+      "n": 8,
       "authors": [
         "Tamura, Suzuko"
       ],
@@ -141,7 +160,7 @@
       "matchedTitle": "Ainugo (The Ainu language)"
     },
     {
-      "n": 8,
+      "n": 9,
       "authors": [],
       "year": 1997,
       "yearText": "1997",
@@ -150,14 +169,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-ainu-literature",
+        "slug": "1997-anon-ainu-literature",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "Ainu Literature"
     },
     {
-      "n": 9,
+      "n": 10,
       "authors": [
         "Suzuko Tamura"
       ],
@@ -169,13 +188,13 @@
       "ainuRelated": false,
       "match": {
         "slug": "2000-suzuko-tamura-the-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "The Ainu Language"
     },
     {
-      "n": 10,
+      "n": 11,
       "authors": [
         "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
       ],
@@ -183,19 +202,19 @@
       "yearText": "2004",
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
-      "type": "book",
+      "type": "thesis",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
     },
     {
-      "n": 11,
+      "n": 12,
       "authors": [
-        "Bugaeva Anna"
+        "Anna Bugaeva"
       ],
       "year": 2008,
       "yearText": "2008",
@@ -204,14 +223,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2008-bugaeva-anna-reported-discourse-and-logophoricity-in-southern-hokkaido-dialects-of-ainu",
-        "confidence": "candidate",
-        "note": "Title match"
+        "slug": "reported-discourse-and-logophoricity-in-southern-hokkaido",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Reported Discourse and Logophoricity in Southern Hokkaido Dialects of Ainu"
     },
     {
-      "n": 12,
+      "n": 13,
       "authors": [
         "ブガエワ アンナ"
       ],
@@ -221,14 +240,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2008-x-1f2m90i",
+        "slug": "2008-bugaewa-minami-hokkaido-hogen-in-yo-rogoforikkusei",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語南北海道方言における引用とロゴフォリック性"
     },
     {
-      "n": 13,
+      "n": 14,
       "authors": [
         "Basil Hall Chamberlain, Joseph Cowen Professor of English Literature John Batchelor"
       ],
@@ -244,24 +263,6 @@
         "note": "Title match"
       },
       "matchedTitle": "Ainu Grammar"
-    },
-    {
-      "n": 14,
-      "authors": [
-        "National Cancer Institute"
-      ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "Ainu Language"
     }
   ]
 }

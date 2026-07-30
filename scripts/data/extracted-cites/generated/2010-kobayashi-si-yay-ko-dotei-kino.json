@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2010-kobayashi-si-yay-ko-dotei-kino",
-    "title": "小林美紀 アイヌ語の動詞接頭辞si-とyay-の項同定機能",
+    "title": "アイヌ語の動詞接頭辞si-とyay-の項同定機能",
+    "author": "小林美紀",
     "year": 2010,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -17,17 +18,18 @@
     {
       "n": 1,
       "authors": [
-        "知里, 真志保"
+        "Chiri"
       ],
       "year": 1942,
       "yearText": "1942",
       "title": "アイヌ語法研究 : 樺太方言を中心として",
-      "type": "article",
+      "titleEn": "A Study of Ainu Grammar: Focusing on the Sakhalin Dialect",
+      "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "1942-x-3bat8z",
+        "slug": "1942-chiri",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by year"
       },
       "matchedTitle": "アイヌ語法研究 : 樺太方言を中心として"
     },
@@ -42,7 +44,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1956-x-1c6njuk",
+        "slug": "1956-fukuda-ainu-go-doshi-kozo",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -59,28 +61,28 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-1hv377u",
+        "slug": "1960-kubodera-ainu-joji-shi-shin-yo-seiden",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩神謡、聖伝の研究"
     },
     {
       "n": 4,
       "authors": [
-        "久保寺逸彦(編著)"
+        "久保寺, 逸彦"
       ],
       "year": 1977,
       "yearText": "1977",
-      "title": "アイヌ叙事詩 神謡・聖伝の研究",
-      "type": "article",
+      "title": "アイヌ叙事詩神謡・聖伝の研究",
+      "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1977-x-4mbx9h",
+        "slug": "1977-kubodera-shin-yo-seiden-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌ叙事詩 神謡・聖伝の研究"
+      "matchedTitle": "アイヌ叙事詩神謡・聖伝の研究"
     },
     {
       "n": 5,
@@ -91,7 +93,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1985-x-1z09ygf",
+        "slug": "1985-anon-ainu-go-hasei-doshi",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
@@ -126,7 +128,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1v9r8sq",
+        "slug": "1998-kayano-kayano-shigeru-ainu-shinwa-shusei",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -135,7 +137,7 @@
     {
       "n": 8,
       "authors": [
-        "久保寺逸彦著"
+        "久保寺, 逸彦"
       ],
       "year": 2020,
       "yearText": "2020",
@@ -143,9 +145,9 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-x-121ohxf",
-        "confidence": "candidate",
-        "note": "Title match"
+        "slug": "2020-kubodera-ainu-go-nippon-go-jitenko",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語・日本語辞典稿"
     }

@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2011-takahashi-tokachi-hogen-shiji-hyogen",
-    "title": "高橋靖以 アイヌ語十勝方言の指示表現",
+    "title": "アイヌ語十勝方言の指示表現",
+    "author": "高橋靖以",
     "year": 2011,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -25,7 +26,7 @@
       "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-2-5",
+        "slug": "1998-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no-2",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -42,7 +43,7 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "1999-x-1h7k5eb",
+        "slug": "1999-okuda-shizunai-hogen-bunmyakutsuki-goishu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },

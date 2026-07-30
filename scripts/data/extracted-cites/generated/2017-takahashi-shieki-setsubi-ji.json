@@ -3,36 +3,20 @@
   "verified": false,
   "citingWork": {
     "slug": "2017-takahashi-shieki-setsubi-ji",
-    "title": "高橋靖以 アイヌ語幌別方言の使役接尾辞について",
+    "title": "アイヌ語幌別方言の使役接尾辞について",
+    "author": "高橋靖以",
     "year": 2017,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参照文献",
-    "referenceCount": 4,
+    "referenceCount": 3,
     "sourcePath": "articles/2017_高橋靖以_アイヌ語幌別方言の使役接尾辞について.pdf"
   },
   "references": [
     {
       "n": 1,
-      "authors": [
-        "金田一, 京助"
-      ],
-      "year": 1936,
-      "yearText": "1936",
-      "title": "アイヌ叙事詩ユーカラ",
-      "type": "book",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1936-x-fhxngs",
-        "confidence": "probable",
-        "note": "Title match; corroborated by author"
-      },
-      "matchedTitle": "アイヌ叙事詩ユーカラ"
-    },
-    {
-      "n": 2,
       "authors": [
         "Asai, Tōru"
       ],
@@ -43,14 +27,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1974-asai-toru-classification-of-dialects-cluster-analysis-of-ain",
+        "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
       "matchedTitle": "Classification of dialects: cluster analysis of Ainu dialects"
     },
     {
-      "n": 3,
+      "n": 2,
       "authors": [
         "金成, まつ, 金田一, 京助"
       ],
@@ -60,14 +44,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1993-x-jqe5tq",
+        "slug": "1993-kannari-yukarashu",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩ユーカラ集"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "Anna Bugaeva"
       ],

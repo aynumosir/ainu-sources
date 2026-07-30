@@ -3,7 +3,7 @@
   "verified": false,
   "citingWork": {
     "slug": "1994-hokkaidoutarikyokai",
-    "title": "Hokkaido Utari Kyokai（1994）",
+    "title": "アコロイタク : アイヌ語テキスト 1",
     "author": "Hokkaido Utari Kyokai",
     "year": 1994,
     "type": "grammar"
@@ -11,7 +11,7 @@
   "extraction": {
     "textSource": "OCR variant pdftotext",
     "referenceHeading": "参考文献",
-    "referenceCount": 7,
+    "referenceCount": 8,
     "sourcePath": "books/1994_HokkaidoUtariKyokai/北海道ウタリ協会『アコㇿイタㇰ：テキストアイヌ語会話』.pdf"
   },
   "references": [
@@ -26,7 +26,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1942-x-3bat8z",
+        "slug": "ainu-o-toshite",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
@@ -97,7 +97,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1998-x-1qtbdod",
+        "slug": "1998-tome-ainu-go-hokkaido-tobu-hogen",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -114,7 +114,7 @@
       "type": "wordlist",
       "ainuRelated": false,
       "match": {
-        "slug": "1999-x-1h7k5eb",
+        "slug": "1999-okuda-shizunai-hogen-bunmyakutsuki-goishu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -123,15 +123,32 @@
     {
       "n": 7,
       "authors": [
+        "萱野, 茂"
+      ],
+      "year": 2002,
+      "yearText": "2002",
+      "title": "萱野茂のアイヌ語辞典",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "noainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "萱野茂のアイヌ語辞典"
+    },
+    {
+      "n": 8,
+      "authors": [
         "小松, 和弘"
       ],
       "year": 2004,
       "yearText": "2004",
       "title": "アイヌ語様似方言辞典",
       "type": "dictionary",
-      "ainuRelated": false,
+      "ainuRelated": true,
       "match": {
-        "slug": "2004-x-1m2c51q",
+        "slug": "2004-komatsu-samani-hogen-jiten",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },

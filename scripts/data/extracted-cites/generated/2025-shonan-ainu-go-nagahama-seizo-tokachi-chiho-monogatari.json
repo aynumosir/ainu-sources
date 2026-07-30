@@ -3,37 +3,55 @@
   "verified": false,
   "citingWork": {
     "slug": "2025-shonan-ainu-go-nagahama-seizo-tokachi-chiho-monogatari",
-    "title": "湘南アイヌ語研究会『長濱清蔵のアイヌ語』",
-    "type": "publication"
+    "title": "長濱清蔵のアイヌ語 : 十勝地方の物語",
+    "author": "湘南アイヌ語研究会, 藤田, 護, ラテンアメリカ研究, 瀧口, 夕美, 中川, 裕",
+    "year": 2025,
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
     "referenceHeading": "参考文献",
     "referencePages": "scan pp. 171-196",
-    "referenceCount": 10,
+    "referenceCount": 9,
     "sourcePath": "books/2025_Shounan_NagahamaSeizoAinu/湘南アイヌ語研究会『長濱清蔵のアイヌ語』.pdf"
   },
   "references": [
     {
       "n": 1,
       "authors": [
-        "Nakagawa, Hiroshi"
+        "北海道立アイヌ民族文化研究センター"
       ],
       "year": 1995,
       "yearText": "1995",
-      "title": "アイヌ語千歳方言辞典",
-      "titleEn": "",
-      "type": "dictionary",
-      "ainuRelated": true,
+      "title": "北海道立アイヌ民族文化研究センター研究紀要",
+      "type": "article",
+      "ainuRelated": false,
       "match": {
-        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "slug": "1995-hokkaidoritsu-ainu-ainu-minzoku-bunka-kenkyu-senta",
         "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "note": "Title match; corroborated by author"
       },
-      "matchedTitle": "アイヌ語千歳方言辞典"
+      "matchedTitle": "北海道立アイヌ民族文化研究センター研究紀要"
     },
     {
       "n": 2,
+      "authors": [
+        "切替 英雄"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(1)",
+      "type": "dictionary",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(1)"
+    },
+    {
+      "n": 3,
       "authors": [
         "久保田淳 [ほか編集]"
       ],
@@ -43,147 +61,113 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1997-x-2-2",
+        "slug": "1997-kubota-kosho-bungaku-ainu-bungaku",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "口承文学(2) ; アイヌ文学"
     },
     {
-      "n": 3,
+      "n": 4,
       "authors": [
-        "中川裕, 中本ムツ子著"
+        "切替 英雄"
       ],
-      "year": 2007,
-      "yearText": "2007",
-      "title": "カムイユカㇻでアイヌ語を学ぶ",
-      "type": "book",
+      "year": 1998,
+      "yearText": "1998",
+      "title": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)",
+      "type": "dictionary",
       "ainuRelated": false,
       "match": {
-        "slug": "2007-x-1ilpwbb",
+        "slug": "1998-kirikae-tokachi-hogen-shima-wo-hite-oyogu-otasu-no-2",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "カムイユカㇻでアイヌ語を学ぶ"
-    },
-    {
-      "n": 4,
-      "authors": [],
-      "year": 2013,
-      "yearText": "2013",
-      "title": "ニューエクスプレスプラス アイヌ語",
-      "titleEn": "New Express Plus: Ainu",
-      "type": "corpus-text",
-      "ainuRelated": true,
-      "match": {
-        "slug": "new-express-plus-ainu",
-        "confidence": "candidate",
-        "note": "Title match"
-      },
-      "matchedTitle": "ニューエクスプレスプラス アイヌ語"
+      "matchedTitle": "アイヌ語十勝方言による昔話「島を引いて泳ぐオタスの少年の物語」の辞典と文法(2)"
     },
     {
       "n": 5,
       "authors": [
-        "National Cancer Institute"
+        "高橋, 靖以"
       ],
-      "year": 2020,
-      "yearText": "2020",
-      "title": "Ainu Language",
-      "titleEn": "Ainu Language",
+      "year": 2004,
+      "yearText": "2004",
+      "title": "アイヌ語十勝方言の助詞",
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2020-national-cancer-institute-ainu-language",
+        "slug": "2004-takahashi-ainu-go-tokachi-hogen-joshi",
         "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "Ainu Language"
+      "matchedTitle": "アイヌ語十勝方言の助詞"
     },
     {
       "n": 6,
       "authors": [
-        "瀧口, 夕美"
+        "澤井 春美"
       ],
-      "year": 2021,
-      "yearText": "2021",
-      "title": "子どもとまなぶアイヌ語",
-      "type": "book",
+      "year": 2005,
+      "yearText": "2005",
+      "title": "アイヌ語十勝方言の人称接辞 'a-, 'an- の出現条件と例外的事例について",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2021-x-1508d43",
+        "slug": "2005-sawai-tokachi-hogen-ninsho-setsuji-shutsugen-joken",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "子どもとまなぶアイヌ語"
+      "matchedTitle": "アイヌ語十勝方言の人称接辞 'a-, 'an- の出現条件と例外的事例について"
     },
     {
       "n": 7,
       "authors": [
-        "北原,モコットゥナㇱ, 瀧口, 夕美, 小笠原, 小夜"
+        "田村雅史"
       ],
-      "year": 2024,
-      "yearText": "2024",
-      "title": "ミンタㇻ３ アイヌ民族33のニュース",
-      "type": "book",
+      "year": 2011,
+      "yearText": "2011",
+      "title": "アイヌ語白糠方言の文法記述",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2024-x-3-33",
+        "slug": "2011-tamura-shiranuka-hogen-bunpo-kijutsu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "ミンタㇻ３ アイヌ民族33のニュース"
+      "matchedTitle": "アイヌ語白糠方言の文法記述"
     },
     {
       "n": 8,
       "authors": [
-        "大澤, 香"
+        "英雄 切替, Hideo Kirikae"
       ],
-      "year": 2024,
-      "yearText": "2024",
-      "title": "先住民族アイヌを学ぶ",
-      "type": "book",
+      "year": 2012,
+      "yearText": "2012",
+      "title": "アイヌ口承文芸における一人称",
+      "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2024-x-ghwox6",
+        "slug": "2012-hideo-ainu-kosho-bungei-ichi-ninsho",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "先住民族アイヌを学ぶ"
+      "matchedTitle": "アイヌ口承文芸における一人称"
     },
     {
       "n": 9,
       "authors": [
-        "大澤香, 瀧口夕美, 石川康宏著"
+        "高橋, 靖以"
       ],
-      "year": 2024,
-      "yearText": "2024",
-      "title": "アイヌ語を話してみよう!",
-      "type": "book",
+      "year": 2018,
+      "yearText": "2018",
+      "title": "アイヌ語十勝方言文法概説",
+      "type": "grammar",
       "ainuRelated": false,
       "match": {
-        "slug": "2024-x-b06u1m",
+        "slug": "2018-takahashi-ainu-go-tokachi-hogen-bunpo-gaisetsu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
-      "matchedTitle": "アイヌ語を話してみよう!"
-    },
-    {
-      "n": 10,
-      "authors": [
-        "藤田, 護"
-      ],
-      "year": 2025,
-      "yearText": "2025",
-      "title": "津島佑子『「私」』におけるアイヌ神謡 : 触発され口承文学化する「私」の揺らぎと広がり",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2025-x-k6musq",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "津島佑子『「私」』におけるアイヌ神謡 : 触発され口承文学化する「私」の揺らぎと広がり"
+      "matchedTitle": "アイヌ語十勝方言文法概説"
     }
   ]
 }

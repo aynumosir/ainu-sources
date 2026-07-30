@@ -1,0 +1,54 @@
+{
+  "schema": "extracted-cites/v1",
+  "verified": false,
+  "citingWork": {
+    "slug": "1971-murayama-kita-chishima-ainu-go",
+    "title": "北千島アイヌ語",
+    "author": "村山七郎",
+    "year": 1971,
+    "type": "article"
+  },
+  "extraction": {
+    "textSource": "OCR variant pdftotext",
+    "referenceHeading": "参考・引用文献",
+    "referenceCount": 2,
+    "sourcePath": "books/1971_Murayama_KitaChishimaAinugo/村山七郎『北千島アイヌ語』.pdf"
+  },
+  "references": [
+    {
+      "n": 1,
+      "authors": [
+        "Krasheninnikov, Stepan P. (С. П. Крашенинников)"
+      ],
+      "year": 1738,
+      "yearText": "1738",
+      "title": "Latino-Curilice",
+      "titleEn": "Latino-Curilice (Latin-Kuril wordlist)",
+      "type": "wordlist",
+      "ainuRelated": true,
+      "match": {
+        "slug": "1738-krasheninnikov-latino-curilice",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "Latino-Curilice"
+    },
+    {
+      "n": 2,
+      "authors": [
+        "村山 七郎"
+      ],
+      "year": 1970,
+      "yearText": "1970",
+      "title": "ロシア語におけるアイヌ語からの1借用語と地名calque",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1970-murayama-ainu-go-shakuyo-go-chimei-calque",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "ロシア語におけるアイヌ語からの1借用語と地名calque"
+    }
+  ]
+}

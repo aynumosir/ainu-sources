@@ -12,7 +12,7 @@
     "textSource": "OCR variant openrouter_google_gemini-3-flash-preview",
     "referenceHeading": "References",
     "referencePages": "scan pp. 10-12",
-    "referenceCount": 3,
+    "referenceCount": 5,
     "sourcePath": "articles/2006_Bugaeva Anna_Applicatives in Ainu.pdf"
   },
   "references": [
@@ -37,23 +37,59 @@
     {
       "n": 2,
       "authors": [
+        "Tamura"
+      ],
+      "year": 1996,
+      "yearText": "1996",
+      "title": "アイヌ語沙流方言辞典",
+      "titleEn": "A Dictionary of the Saru Dialect of Ainu",
+      "type": "grammar",
+      "ainuRelated": false,
+      "match": {
+        "slug": "1996-tamura",
+        "confidence": "probable",
+        "note": "Title match; corroborated by year + author"
+      },
+      "matchedTitle": "A Dictionary of the Saru Dialect of Ainu"
+    },
+    {
+      "n": 3,
+      "authors": [
         "Anna Bugaeva, 知己 佐藤, 「環太平洋の言語」環北太平洋班"
       ],
       "year": 2004,
       "yearText": "2004",
       "title": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
       "titleEn": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda",
-      "type": "book",
+      "type": "thesis",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-anna-bugaeva-grammar-and-folklore-texts-of-the-chitose-dialect",
+        "slug": "2004-anna-grammar-folklore-texts-chitose-dialect",
         "confidence": "probable",
         "note": "Title match; corroborated by year"
       },
       "matchedTitle": "Grammar and folklore texts of the Chitose dialect of Ainu : Idiolect of Ito Oda"
     },
     {
-      "n": 3,
+      "n": 4,
+      "authors": [
+        "Anna Bugaeva"
+      ],
+      "year": 2006,
+      "yearText": "2006",
+      "title": "Applicatives in Ainu",
+      "titleEn": "Applicatives in Ainu",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "applicatives-in-ainu",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "Applicatives in Ainu"
+    },
+    {
+      "n": 5,
       "authors": [
         "Bugaeva, Anna"
       ],
@@ -66,7 +102,7 @@
       "match": {
         "slug": "2006-bugaeva-anna-direct-and-indirect-speech-in-ainu",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "\"Direct and indirect speech in Ainu\""
     }

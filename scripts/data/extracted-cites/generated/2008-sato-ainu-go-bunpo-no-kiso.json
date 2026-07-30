@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2008-sato-ainu-go-bunpo-no-kiso",
-    "title": "佐藤知己 アイヌ語文法の基礎",
+    "title": "アイヌ語文法の基礎",
+    "author": "佐藤知己",
     "year": 2008,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -17,23 +18,6 @@
     {
       "n": 1,
       "authors": [
-        "金田一 京助"
-      ],
-      "year": 1931,
-      "yearText": "1931",
-      "title": "アイヌユーカラ語法摘要",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "1931-x-11givjx",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌユーカラ語法摘要"
-    },
-    {
-      "n": 2,
-      "authors": [
         "金田一, 京助"
       ],
       "year": 1936,
@@ -42,14 +26,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1936-x-fhxngs",
+        "slug": "1936-kindaichi-yukara",
         "confidence": "probable",
         "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ叙事詩ユーカラ"
     },
     {
-      "n": 3,
+      "n": 2,
       "authors": [
         "服部 四郎"
       ],
@@ -59,14 +43,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1960-x-ot8fs9",
+        "slug": "1960-hattori-ainu-go-shohogen-kiso-goi-tokeigakuteki",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語諸方言の基礎語彙統計学的研究"
     },
     {
-      "n": 4,
+      "n": 3,
       "authors": [
         "Asai, Tōru"
       ],
@@ -77,14 +61,14 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1974-asai-toru-classification-of-dialects-cluster-analysis-of-ain",
+        "slug": "1974-asai-classification-dialects-cluster-analysis-ainu",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "Classification of dialects: cluster analysis of Ainu dialects"
     },
     {
-      "n": 5,
+      "n": 4,
       "authors": [
         "切替英雄"
       ],
@@ -94,50 +78,48 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-x-1e3o6yu",
+        "slug": "1984-kirikae-ainu-go-meishi-ku-kozo-gosei-meishi",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語の名詞句の構造と合成名詞"
     },
     {
-      "n": 6,
+      "n": 5,
       "authors": [
-        "Nakagawa, Hiroshi"
+        "中川, 裕"
       ],
       "year": 1995,
       "yearText": "1995",
       "title": "アイヌ語千歳方言辞典",
-      "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
+      "ainuRelated": false,
       "match": {
-        "slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+        "slug": "ainu-7aa1e770",
         "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語千歳方言辞典"
     },
     {
-      "n": 7,
+      "n": 6,
       "authors": [
-        "Tamura, Suzuko"
+        "田村, すず子"
       ],
       "year": 1996,
       "yearText": "1996",
       "title": "アイヌ語沙流方言辞典",
-      "titleEn": "",
       "type": "dictionary",
-      "ainuRelated": true,
+      "ainuRelated": false,
       "match": {
-        "slug": "1996-tamura-ainu-saru-dialect-dictionary",
+        "slug": "ainu-2232e395",
         "confidence": "probable",
-        "note": "Title match; corroborated by year"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "アイヌ語沙流方言辞典"
     },
     {
-      "n": 8,
+      "n": 7,
       "authors": [
         "宮岡, 伯人"
       ],
@@ -147,31 +129,14 @@
       "type": "book",
       "ainuRelated": false,
       "match": {
-        "slug": "1999-x-1-2",
+        "slug": "1999-miyaoka-ainu-go-shohogen-chosa-hokoku-1",
         "confidence": "candidate",
         "note": "Title match"
       },
       "matchedTitle": "アイヌ語諸方言調査報告 1"
     },
     {
-      "n": 9,
-      "authors": [
-        "佐藤, 知己, 宮岡, 伯人"
-      ],
-      "year": 2002,
-      "yearText": "2002",
-      "title": "アイヌ語諸方言調査報告",
-      "type": "article",
-      "ainuRelated": false,
-      "match": {
-        "slug": "2002-x-4ghzqi",
-        "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
-      },
-      "matchedTitle": "アイヌ語諸方言調査報告"
-    },
-    {
-      "n": 10,
+      "n": 8,
       "authors": [
         "佐藤, 知己"
       ],
@@ -181,11 +146,40 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2004-x-b3hbt8",
+        "slug": "2004-sato-ainu-go-shohogen-hikaku-kenkyu",
         "confidence": "probable",
-        "note": "Title match; corroborated by year + author"
+        "note": "Title match; corroborated by author"
       },
       "matchedTitle": "古文献によるアイヌ語諸方言の比較研究"
+    },
+    {
+      "n": 9,
+      "authors": [],
+      "yearText": "",
+      "title": "アイヌユーカラ語法摘要",
+      "type": "article",
+      "ainuRelated": false,
+      "match": {
+        "slug": "anon-yukara-goho-tekiyo",
+        "confidence": "candidate",
+        "note": "Title match"
+      },
+      "matchedTitle": "アイヌユーカラ語法摘要"
+    },
+    {
+      "n": 10,
+      "authors": [
+        "金田一, 京助"
+      ],
+      "title": "アイヌ叙事詩ユーカラ",
+      "type": "book",
+      "ainuRelated": false,
+      "match": {
+        "slug": "ainu-yukara-6",
+        "confidence": "probable",
+        "note": "Title match; corroborated by author"
+      },
+      "matchedTitle": "アイヌ叙事詩ユーカラ"
     }
   ]
 }

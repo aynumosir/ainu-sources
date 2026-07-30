@@ -3,9 +3,10 @@
   "verified": false,
   "citingWork": {
     "slug": "2008-sato-chitose-hogen-gosei-meishi-kozo",
-    "title": "佐藤知己 アイヌ語千歳方言における合成名詞の構造",
+    "title": "アイヌ語千歳方言における合成名詞の構造",
+    "author": "佐藤知己",
     "year": 2008,
-    "type": "publication"
+    "type": "article"
   },
   "extraction": {
     "textSource": "OCR variant pdftotext",
@@ -25,7 +26,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "1984-x-1e3o6yu",
+        "slug": "1984-kirikae-ainu-go-meishi-ku-kozo-gosei-meishi",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
@@ -60,7 +61,7 @@
       "type": "article",
       "ainuRelated": false,
       "match": {
-        "slug": "2005-x-e8m11m",
+        "slug": "2005-sato-ainu-go-chimei-kenkyu",
         "confidence": "probable",
         "note": "Title match; corroborated by year + author"
       },
