@@ -67,4 +67,36 @@ Ignored
 		expect(matches[0].confidence).toBe('probable');
 		expect(matches[0].corroboration).toContain('year');
 	});
+
+	it('credits the longer reference when one title contains another', () => {
+		const catalogue = [
+			source('1887-batchelor-grammar', 'A Grammar of the Ainu Language', 'Batchelor, John', 1887),
+			source('2000-tamura-ainu-language', 'The Ainu Language', 'Tamura, Suzuko', 2000)
+		];
+		const matches = findCatalogueMatches(
+			'Batchelor, John. 1887. A Grammar of the Ainu Language. In Chamberlain, B. H. 2000.',
+			catalogue,
+			'citing-work'
+		);
+		expect(matches.map((m) => m.source.slug)).toEqual(['1887-batchelor-grammar']);
+	});
+
+	it('keeps the shorter work when it is also cited on its own', () => {
+		const catalogue = [
+			source('2017-senuma-toward', 'Toward Universal Dependencies for Ainu', 'Senuma, Hajime', 2017),
+			source('2018-senuma-ud', 'Universal Dependencies for Ainu', 'Senuma, Hajime', 2018)
+		];
+		const matches = findCatalogueMatches(
+			[
+				'Senuma, Hajime. 2017. Toward Universal Dependencies for Ainu. LREC.',
+				'Senuma, Hajime. 2018. Universal Dependencies for Ainu. LREC.'
+			].join('\n'),
+			catalogue,
+			'citing-work'
+		);
+		expect(matches.map((m) => m.source.slug).sort()).toEqual([
+			'2017-senuma-toward',
+			'2018-senuma-ud'
+		]);
+	});
 });

@@ -7,6 +7,8 @@
  * The sweep is deliberately conservative:
  *   • it searches only text after a bibliography/reference heading;
  *   • a catalogue title/alternate title must occur as a normalized substring;
+ *   • a title that only ever occurs inside a longer matched title is dropped, so
+ *     the longer reference keeps the edge its own text earned;
  *   • year or author corroboration makes a match `probable`;
  *   • title-only matches remain `candidate`;
  *   • no new source record is proposed from OCR.
@@ -74,6 +76,8 @@ export interface CatalogueMatch {
 	confidence: 'probable' | 'candidate';
 	matchedTitle: string;
 	corroboration: ('year' | 'author')[];
+	/** Where the matched title occurs in the normalized reference text. */
+	spans: { at: number; length: number }[];
 }
 
 function argValue(flag: string): string | undefined {
@@ -145,6 +149,12 @@ function matchOne(sectionNormalized: string, source: CatalogueSource): Catalogue
 	for (const alias of titleAliases(source)) {
 		const index = sectionNormalized.indexOf(alias.normalized);
 		if (index < 0) continue;
+		// Every occurrence, because a title cited in its own right may ALSO appear
+		// inside a longer title elsewhere in the same bibliography.
+		const spans: { at: number; length: number }[] = [];
+		for (let at = index; at >= 0; at = sectionNormalized.indexOf(alias.normalized, at + 1)) {
+			spans.push({ at, length: alias.normalized.length });
+		}
 		const window = sectionNormalized.slice(
 			Math.max(0, index - 180),
 			Math.min(sectionNormalized.length, index + alias.normalized.length + 180)
@@ -156,10 +166,38 @@ function matchOne(sectionNormalized: string, source: CatalogueSource): Catalogue
 			source,
 			confidence: corroboration.length ? 'probable' : 'candidate',
 			matchedTitle: alias.display,
-			corroboration
+			corroboration,
+			spans
 		};
 	}
 	return null;
+}
+
+/**
+ * Drop a match whose title only ever occurs inside a longer matched title. A
+ * short title is a substring of longer ones — "The Ainu Language" sits inside
+ * Batchelor's "A Grammar of the Ainu Language", and "Universal Dependencies for
+ * Ainu" inside "Toward Universal Dependencies for Ainu" — and crediting the
+ * shorter work for the longer one's reference invents a citation. A match
+ * survives on any single occurrence that stands on its own, so a work genuinely
+ * cited elsewhere in the same bibliography keeps its edge.
+ */
+function withoutSubsumedMatches(matches: CatalogueMatch[]): CatalogueMatch[] {
+	return matches.filter((match) =>
+		match.spans.some(
+			(span) =>
+				!matches.some(
+					(other) =>
+						other !== match &&
+						other.spans.some(
+							(host) =>
+								host.length > span.length &&
+								host.at <= span.at &&
+								host.at + host.length >= span.at + span.length
+						)
+				)
+		)
+	);
 }
 
 function duplicateKey(match: CatalogueMatch): string {
@@ -188,7 +226,7 @@ export function findCatalogueMatches(
 		const previous = byWork.get(key);
 		if (!previous || matchRank(match) > matchRank(previous)) byWork.set(key, match);
 	}
-	return [...byWork.values()].sort((a, b) => {
+	return withoutSubsumedMatches([...byWork.values()]).sort((a, b) => {
 		const ay = a.source.yearStart ?? 9999;
 		const by = b.source.yearStart ?? 9999;
 		return ay - by || a.source.author?.localeCompare(b.source.author ?? '') || a.source.title.localeCompare(b.source.title);
