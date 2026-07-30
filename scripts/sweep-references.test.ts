@@ -217,3 +217,29 @@ describe('extractReferenceSection case folding', () => {
 		expect(result?.text).toContain('reference one, the first entry');
 	});
 });
+
+describe('extractReferenceSection page furniture', () => {
+	it('removes running heads and folios so a title spanning a page break matches', () => {
+		const lines = ['body', '644  参考文献', 'Senuma, Hajime. 2017. Toward Universal'];
+		for (let i = 0; i < 30; i++) lines.push(`filler entry ${i}`);
+		lines.push('645', '646  参考文献', 'Dependencies for Ainu. LREC.');
+		for (let i = 0; i < 30; i++) lines.push(`more filler ${i}`);
+		const result = extractReferenceSection(lines.join('\n'));
+		expect(result?.text).not.toMatch(/参考文献/u);
+		expect(result?.text).not.toMatch(/^[\s　]*\d{1,4}[\s　]*$/mu);
+		expect(result?.text).toContain('Toward Universal');
+	});
+
+	it('keeps the real bibliography when an afterword carries a further-reading heading', () => {
+		const lines = ['参考文献'];
+		for (let page = 0; page < 4; page++) {
+			lines.push(`page ${page} real bibliography entry`);
+			for (let i = 0; i < 30; i++) lines.push(`entry ${page}-${i}`);
+			lines.push(`12${page}  参考文献`);
+		}
+		for (let i = 0; i < 50; i++) lines.push(`afterword prose ${i}`);
+		lines.push('参考文献', 'a single further-reading item in the postface');
+		const result = extractReferenceSection(lines.join('\n'));
+		expect(result?.text).toContain('page 0 real bibliography entry');
+	});
+});
