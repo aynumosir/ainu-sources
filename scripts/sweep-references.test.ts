@@ -69,6 +69,110 @@ Ignored
 		expect(matches[0].confidence).toBe('probable');
 		expect(matches[0].corroboration).toContain('year');
 	});
+
+	it('credits the longer reference when one title contains another', () => {
+		const catalogue = [
+			source('1887-batchelor-grammar', 'A Grammar of the Ainu Language', 'Batchelor, John', 1887),
+			source('2000-tamura-ainu-language', 'The Ainu Language', 'Tamura, Suzuko', 2000)
+		];
+		const matches = findCatalogueMatches(
+			'Batchelor, John. 1887. A Grammar of the Ainu Language. In Chamberlain, B. H. 2000.',
+			catalogue,
+			'citing-work'
+		);
+		expect(matches.map((m) => m.source.slug)).toEqual(['1887-batchelor-grammar']);
+	});
+
+	it('keeps the shorter work when it is also cited on its own', () => {
+		const catalogue = [
+			source('2017-senuma-toward', 'Toward Universal Dependencies for Ainu', 'Senuma, Hajime', 2017),
+			source('2018-senuma-ud', 'Universal Dependencies for Ainu', 'Senuma, Hajime', 2018)
+		];
+		const matches = findCatalogueMatches(
+			[
+				'Senuma, Hajime. 2017. Toward Universal Dependencies for Ainu. LREC.',
+				'Senuma, Hajime. 2018. Universal Dependencies for Ainu. LREC.'
+			].join('\n'),
+			catalogue,
+			'citing-work'
+		);
+		expect(matches.map((m) => m.source.slug).sort()).toEqual([
+			'2017-senuma-toward',
+			'2018-senuma-ud'
+		]);
+	});
+
+	it('corroborates the occurrence that stands alone, not merely the first', () => {
+		const catalogue = [
+			source('1887-batchelor-grammar', 'A Grammar of the Ainu Language', 'Batchelor, John', 1887),
+			source('2000-tamura-ainu-language', 'The Ainu Language', 'Tamura, Suzuko', 2000)
+		];
+		// Tamura's title occurs first inside Batchelor's, then on its own further on.
+		const matches = findCatalogueMatches(
+			[
+				'Batchelor, John. 1887. A Grammar of the Ainu Language. Tokyo.',
+				'x'.repeat(400),
+				'Tamura, Suzuko. 2000. The Ainu Language. Tokyo: Sanseido.'
+			].join(' '),
+			catalogue,
+			'citing-work'
+		);
+		const tamura = matches.find((m) => m.source.slug === '2000-tamura-ainu-language');
+		expect(tamura).toBeDefined();
+		expect(tamura!.confidence).toBe('probable');
+		expect(tamura!.corroboration).toEqual(expect.arrayContaining(['year', 'author']));
+	});
+
+	it('does not let an uncorroborated host displace a corroborated match', () => {
+		const catalogue = [
+			// the host title is present, but neither its year nor its author is nearby
+			source('1990-host', 'Studies on The Ainu Language and Culture', 'Nobody, X.', 1990),
+			source('2000-tamura-ainu-language', 'The Ainu Language', 'Tamura, Suzuko', 2000)
+		];
+		const matches = findCatalogueMatches(
+			'Tamura, Suzuko. 2000. Studies on The Ainu Language and Culture.',
+			catalogue,
+			'citing-work'
+		);
+		expect(matches.map((m) => m.source.slug)).toContain('2000-tamura-ainu-language');
+	});
+});
+
+describe('reference sweep — alias coverage', () => {
+	const withAliases = (
+		slug: string,
+		title: string,
+		altTitles: string[],
+		author: string,
+		yearStart: number
+	) => ({ ...source(slug, title, author, yearStart), altTitles });
+
+	it('keeps a work whose second alias is cited on its own', () => {
+		// The first alias to hit is nested inside the longer work; the alternate title
+		// is an independent citation further down.
+		const catalogue = [
+			withAliases(
+				'2018-senuma-ud',
+				'Universal Dependencies for Ainu',
+				['Ainu Dependency Treebank Report'],
+				'Senuma, Hajime',
+				2018
+			),
+			source('2017-senuma-toward', 'Toward Universal Dependencies for Ainu', 'Senuma, Hajime', 2017)
+		];
+		const matches = findCatalogueMatches(
+			[
+				'Senuma, Hajime. 2017. Toward Universal Dependencies for Ainu. LREC.',
+				'Senuma, Hajime. 2018. Ainu Dependency Treebank Report. LREC.'
+			].join(' '),
+			catalogue,
+			'citing-work'
+		);
+		expect(matches.map((m) => m.source.slug).sort()).toEqual([
+			'2017-senuma-toward',
+			'2018-senuma-ud'
+		]);
+	});
 });
 
 describe('isReferenceHeading', () => {

@@ -7,6 +7,8 @@
  * The sweep is deliberately conservative:
  *   • it searches only text after a bibliography/reference heading;
  *   • a catalogue title/alternate title must occur as a normalized substring;
+ *   • a title that only ever occurs inside a longer matched title is dropped, so
+ *     the longer reference keeps the edge its own text earned;
  *   • year or author corroboration makes a match `probable`;
  *   • title-only matches remain `candidate`;
  *   • no new source record is proposed from OCR.
@@ -165,6 +167,8 @@ export interface CatalogueMatch {
 	confidence: 'probable' | 'candidate';
 	matchedTitle: string;
 	corroboration: ('year' | 'author')[];
+	/** Where the matched title occurs in the normalized reference text. */
+	spans: { at: number; length: number }[];
 }
 
 function argValue(flag: string): string | undefined {
@@ -277,24 +281,81 @@ function authorKeys(author: string | null): string[] {
 }
 
 function matchOne(sectionNormalized: string, source: CatalogueSource): CatalogueMatch | null {
+	// Every occurrence of every alias that appears. A title cited in its own right
+	// may ALSO appear inside a longer title elsewhere in the same bibliography, and
+	// a work cited under one alias may be nested under another, so stopping at the
+	// first alias to hit would discard the occurrence that stands alone.
+	const spans: { at: number; length: number }[] = [];
+	let matchedTitle: string | undefined;
 	for (const alias of titleAliases(source)) {
-		const index = sectionNormalized.indexOf(alias.normalized);
-		if (index < 0) continue;
-		const window = sectionNormalized.slice(
-			Math.max(0, index - 180),
-			Math.min(sectionNormalized.length, index + alias.normalized.length + 180)
-		);
-		const corroboration: ('year' | 'author')[] = [];
-		if (source.yearStart && window.includes(String(source.yearStart))) corroboration.push('year');
-		if (authorKeys(source.author).some((key) => window.includes(key))) corroboration.push('author');
-		return {
-			source,
-			confidence: corroboration.length ? 'probable' : 'candidate',
-			matchedTitle: alias.display,
-			corroboration
-		};
+		let hit = false;
+		for (
+			let at = sectionNormalized.indexOf(alias.normalized);
+			at >= 0;
+			at = sectionNormalized.indexOf(alias.normalized, at + 1)
+		) {
+			spans.push({ at, length: alias.normalized.length });
+			hit = true;
+		}
+		// Aliases come longest-first, so the first one to appear names the match.
+		if (hit && matchedTitle === undefined) matchedTitle = alias.display;
 	}
-	return null;
+	if (matchedTitle === undefined) return null;
+	spans.sort((a, b) => a.at - b.at || b.length - a.length);
+	// Corroborate each occurrence on its own window and keep the best. Reading only
+	// the first would judge the work by a neighbouring entry's year and author
+	// whenever that occurrence is the one sitting inside a longer title.
+	const keys = authorKeys(source.author);
+	let corroboration: ('year' | 'author')[] = [];
+	for (const span of spans) {
+		const window = sectionNormalized.slice(
+			Math.max(0, span.at - 180),
+			Math.min(sectionNormalized.length, span.at + span.length + 180)
+		);
+		const found: ('year' | 'author')[] = [];
+		if (source.yearStart && window.includes(String(source.yearStart))) found.push('year');
+		if (keys.some((key) => window.includes(key))) found.push('author');
+		if (found.length > corroboration.length) corroboration = found;
+		if (corroboration.length === 2) break;
+	}
+	return {
+		source,
+		confidence: corroboration.length ? 'probable' : 'candidate',
+		matchedTitle,
+		corroboration,
+		spans
+	};
+}
+
+/**
+ * Drop a match whose title only ever occurs inside a longer matched title. A
+ * short title is a substring of longer ones — "The Ainu Language" sits inside
+ * Batchelor's "A Grammar of the Ainu Language", and "Universal Dependencies for
+ * Ainu" inside "Toward Universal Dependencies for Ainu" — and crediting the
+ * shorter work for the longer one's reference invents a citation. A match
+ * survives on any single occurrence that stands on its own, so a work genuinely
+ * cited elsewhere in the same bibliography keeps its edge.
+ */
+function withoutSubsumedMatches(matches: CatalogueMatch[]): CatalogueMatch[] {
+	return matches.filter((match) =>
+		match.spans.some(
+			(span) =>
+				!matches.some(
+					(other) =>
+						other !== match &&
+						// An uncorroborated host never becomes an edge of its own, so letting
+						// it displace a corroborated match would drop a citation and record
+						// nothing in its place.
+						!(other.confidence === 'candidate' && match.confidence === 'probable') &&
+						other.spans.some(
+							(host) =>
+								host.length > span.length &&
+								host.at <= span.at &&
+								host.at + host.length >= span.at + span.length
+						)
+				)
+		)
+	);
 }
 
 function duplicateKey(match: CatalogueMatch): string {
@@ -323,7 +384,7 @@ export function findCatalogueMatches(
 		const previous = byWork.get(key);
 		if (!previous || matchRank(match) > matchRank(previous)) byWork.set(key, match);
 	}
-	return [...byWork.values()].sort((a, b) => {
+	return withoutSubsumedMatches([...byWork.values()]).sort((a, b) => {
 		const ay = a.source.yearStart ?? 9999;
 		const by = b.source.yearStart ?? 9999;
 		return ay - by || a.source.author?.localeCompare(b.source.author ?? '') || a.source.title.localeCompare(b.source.title);
