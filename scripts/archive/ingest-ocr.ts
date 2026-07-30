@@ -11,6 +11,7 @@ import {
 	sourceFiles
 } from '../../src/lib/server/db/schema';
 import { activateOcrGeneration, type OcrPageInput } from '../../src/lib/server/archive/ocr';
+import { refreshSourceTextComposition } from '../../src/lib/server/archive/language-composition';
 import {
 	assessTextQuality,
 	sampleVariantPages,
@@ -35,7 +36,7 @@ export interface IngestOcrSummary {
 	skippedNoRevision: number;
 }
 
-type SourceFileRow = { id: string; checkoutPath: string };
+type SourceFileRow = { id: string; sourceId: string; checkoutPath: string };
 type CurrentRevisionRow = { id: string; sourceFileId: string };
 
 export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestOcrSummary> {
@@ -49,6 +50,7 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 		skippedNoMatch: 0,
 		skippedNoRevision: 0
 	};
+	const sourcesToMeasure = new Set<string>();
 
 	for (const filePath of files) {
 		const parsed = parseOcrFilename(path.basename(filePath));
@@ -169,6 +171,13 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 			});
 		}
 		summary.ingested += 1;
+		sourcesToMeasure.add(sourceFile.sourceId);
+	}
+
+	if (!opts.dryRun) {
+		for (const sourceId of sourcesToMeasure) {
+			await refreshSourceTextComposition(db, sourceId, opts.now);
+		}
 	}
 
 	return summary;
@@ -216,13 +225,17 @@ async function collectOcrFiles(grammarDir: string, limit: number): Promise<strin
 
 async function sourceFilesByCheckoutStem(db: Db): Promise<Map<string, SourceFileRow>> {
 	const rows = await db
-		.select({ id: sourceFiles.id, checkoutPath: sourceFiles.checkoutPath })
+		.select({ id: sourceFiles.id, sourceId: sourceFiles.sourceId, checkoutPath: sourceFiles.checkoutPath })
 		.from(sourceFiles)
 		.where(isNotNull(sourceFiles.checkoutPath));
 	const out = new Map<string, SourceFileRow>();
 	for (const row of rows) {
 		if (!row.checkoutPath) continue;
-		out.set(stemFromCheckoutPath(row.checkoutPath), { id: row.id, checkoutPath: row.checkoutPath });
+		out.set(stemFromCheckoutPath(row.checkoutPath), {
+			id: row.id,
+			sourceId: row.sourceId,
+			checkoutPath: row.checkoutPath
+		});
 	}
 	return out;
 }

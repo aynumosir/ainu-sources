@@ -2,6 +2,7 @@
 	import ScanThumbnail from './ScanThumbnail.svelte';
 	import { formatBytes } from '$lib/archive/format';
 	import { archiveCardLanguages } from '$lib/archive/languages';
+	import { compositionLanguageName, displayShares, formatShare } from '$lib/archive/text-composition';
 	import { formatYear } from '$lib/format';
 	import { ocrSealFor, summarizeOcrCoverage } from '$lib/archive/ocr';
 	import type { ArchiveLibraryItem } from '$lib/archive/library-item';
@@ -10,7 +11,11 @@
 	const source = $derived(item.source);
 	const file = $derived(item.file);
 	const coverage = $derived(item.coverage ?? []);
-	const languages = $derived(archiveCardLanguages(source.languages));
+	// Measured text composition outranks the curated tag list: 「アイヌ語 42%」
+	// tells one card apart from another where a bare tag cannot. Works whose
+	// text is unmeasured keep the tags.
+	const measured = $derived(displayShares(source.textComposition));
+	const languages = $derived(measured.length ? [] : archiveCardLanguages(source.languages));
 
 	// The seal already answers "can I read and quote this?" — the tool that
 	// produced the text (gemini vs pdftotext) is an implementation detail no
@@ -64,6 +69,9 @@
 				{#if source.dialect}
 					<span class="archive-card-dialect">{source.dialect}</span>
 				{/if}
+				{#each measured as s (s.lang)}
+					<span class="archive-card-lang tnum">{compositionLanguageName(s.lang)} {formatShare(s.share)}</span>
+				{/each}
 				{#each languages as language (language)}
 					<span class="archive-card-lang">{language}</span>
 				{/each}

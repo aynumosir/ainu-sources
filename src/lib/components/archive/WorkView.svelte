@@ -7,6 +7,7 @@
 	import RevisionHistory from './RevisionHistory.svelte';
 	import { archiveFetch } from '$lib/archive/session.svelte';
 	import { formatArchiveLanguages } from '$lib/archive/languages';
+	import { compositionLanguageName, displayShares, formatShare } from '$lib/archive/text-composition';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
 	import { formatBytes, middleEllipsis } from '$lib/archive/format';
 	import { centuryLabel, centuryOf, formatYear } from '$lib/format';
@@ -41,6 +42,7 @@
 	let { work, persons = [] }: { work: any; persons?: ArchiveWorkPerson[] } = $props();
 
 	const source = $derived(work.detail.source);
+	const textShares = $derived(displayShares(source.textComposition));
 	const pageCount = $derived(work.revision.pageCount);
 	const ocrCoverage = $derived<OcrCoverage[]>(work.ocr ?? []);
 	const textVariants = $derived(textBearingVariants(ocrCoverage));
@@ -527,6 +529,22 @@
 				<dt class="text-[var(--archive-subtle)]">Category</dt><dd>{@render val(field(source.category))}</dd>
 				<dt class="text-[var(--archive-subtle)]">Type</dt><dd>{@render val(field(source.type))}</dd>
 				<dt class="text-[var(--archive-subtle)]">Languages</dt><dd>{@render val(formatArchiveLanguages(source.languages) || field(source.languages))}</dd>
+				{#if textShares.length}
+					<dt class="text-[var(--archive-subtle)]">Text composition</dt>
+					<dd>
+						<span class="archive-composition-bar" role="img" aria-label={textShares.map((s) => `${compositionLanguageName(s.lang)} ${formatShare(s.share)}`).join(', ')}>
+							{#each textShares as s (s.lang)}
+								<span class="archive-composition-seg" data-lang={s.lang} style={`flex-grow: ${Math.max(s.share * 1000, 1)}`}></span>
+							{/each}
+						</span>
+						<span class="tnum block text-[12.5px]">
+							{#each textShares as s (s.lang)}
+								<span class="mr-2 inline-block whitespace-nowrap">{compositionLanguageName(s.lang)} {formatShare(s.share)}</span>
+							{/each}
+						</span>
+						<span class="block text-[11.5px] text-[var(--archive-faint-text)]">measured over the digitized text</span>
+					</dd>
+				{/if}
 				<dt class="text-[var(--archive-subtle)]">Publisher</dt><dd>{@render val(publishers)}</dd>
 				<dt class="text-[var(--archive-subtle)]">Institution</dt><dd>{@render val(field(source.holdingInstitution))}</dd>
 				<dt class="text-[var(--archive-subtle)]">Call number</dt><dd class="archive-mono break-all text-[12px]">{@render val(field(source.callNumber))}</dd>
@@ -755,5 +773,29 @@
 		.work-header > div {
 			gap: 0.6rem;
 		}
+	}
+	.archive-composition-bar {
+		display: flex;
+		height: 5px;
+		max-width: 16rem;
+		margin: 0.2rem 0 0.35rem;
+		overflow: hidden;
+		border-radius: 2px;
+		background: var(--archive-muted);
+	}
+	.archive-composition-seg {
+		background: var(--archive-faint-text);
+	}
+	.archive-composition-seg + .archive-composition-seg {
+		margin-left: 1px;
+	}
+	.archive-composition-seg[data-lang='ain'] {
+		background: var(--archive-gilt);
+	}
+	.archive-composition-seg[data-lang='jpn'] {
+		background: var(--archive-border-strong);
+	}
+	.archive-composition-seg[data-lang='eng'] {
+		background: var(--archive-subtle);
 	}
 </style>

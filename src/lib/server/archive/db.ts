@@ -1631,6 +1631,7 @@ export async function listArchiveFiles(
 			dialect: sources.dialect,
 			category: sources.category,
 			languages: sources.languages,
+			textComposition: sources.textComposition,
 			significance: sources.significance,
 			citationCount: sql<number>`(
 				select count(*) from ${sourceRelations}
@@ -1691,6 +1692,7 @@ export async function listArchiveFiles(
 				dialect: row.dialect,
 				category: row.category,
 				languages: row.languages,
+				textComposition: row.textComposition,
 				significance: row.significance,
 				citationCount: row.citationCount,
 				summary: row.summary
