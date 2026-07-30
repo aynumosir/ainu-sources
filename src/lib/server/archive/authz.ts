@@ -94,8 +94,30 @@ async function identityFromGithubLoginCache(db: Db, userId: string): Promise<Res
 	return resolveIdentity(db, 'github_login', cached.login);
 }
 
+// One catalogue page asks who the visitor is three times over: `hooks.server.ts`
+// puts the session on `locals`, the catalogue layout resolves a principal from it,
+// and the page load resolves one again. Each ran its own `auth.api.getSession` with
+// the same headers, so an anonymous request — most of the traffic — paid three
+// database round trips to be told three times that nobody is signed in. Measured on
+// production, a request spends about 4% of its wall clock on CPU and the rest
+// waiting, so a round trip removed is latency removed.
+//
+// Keying on the Request gives one entry per in-flight request with no lifecycle to
+// manage: the map drops it once the request is collected. Caching the promise rather
+// than the value means concurrent callers share a lookup instead of racing.
+let sessionByRequest = new WeakMap<Request, Promise<AppSessionUser | null>>();
+
+function lookupAppSession(request: Request): Promise<AppSessionUser | null> {
+	let pending = sessionByRequest.get(request);
+	if (!pending) {
+		pending = appSessionLookup(request);
+		sessionByRequest.set(request, pending);
+	}
+	return pending;
+}
+
 export async function resolveFromAppSession(request: Request, db: Db): Promise<ArchivePrincipal | null> {
-	const sessionUser = await appSessionLookup(request);
+	const sessionUser = await lookupAppSession(request);
 	if (!sessionUser) return null;
 
 	const directRole = await roleForUser(db, sessionUser.id);
@@ -271,5 +293,8 @@ export const archiveAuthzInternals = {
 	parseServiceTokens,
 	setAppSessionLookupForTest(lookup: AppSessionLookup | null): void {
 		appSessionLookup = lookup ?? defaultAppSessionLookup;
+		// Swapping the lookup has to invalidate what the old one already answered,
+		// or a test reusing one Request would keep reading the previous result.
+		sessionByRequest = new WeakMap();
 	}
 };

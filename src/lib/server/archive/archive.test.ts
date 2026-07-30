@@ -342,6 +342,26 @@ describe('archive DB flows', () => {
 		await expect(archiveAuthzInternals.roleForUser(db, 'missing')).resolves.toBeNull();
 	});
 
+	it('looks the session up once however many callers ask within a request', async () => {
+		// A catalogue page resolves a principal in the layout and again in the page
+		// load, handing over the same Request each time; the session behind it cannot
+		// change mid-request.
+		let lookups = 0;
+		archiveAuthzInternals.setAppSessionLookupForTest(async () => {
+			lookups += 1;
+			return { id: 'reader', email: 'reader@example.test' };
+		});
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
+		const request = new Request('https://db.aynu.org/sources/x');
+		await Promise.all([resolveFromAppSession(request, db), resolveFromAppSession(request, db)]);
+		await resolveFromAppSession(request, db);
+		expect(lookups).toBe(1);
+
+		// A different request is a different visitor.
+		await resolveFromAppSession(new Request('https://db.aynu.org/sources/y'), db);
+		expect(lookups).toBe(2);
+	});
+
 	it('resolves app sessions from direct archive roles', async () => {
 		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'reader', email: 'reader@example.test' }));
 		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
