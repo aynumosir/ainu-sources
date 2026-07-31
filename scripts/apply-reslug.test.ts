@@ -9,7 +9,7 @@ import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 import { migrate } from 'drizzle-orm/libsql/migrator';
 import { eq } from 'drizzle-orm';
 import * as schema from '../src/lib/server/db/schema';
-import { parseReslugTsv, runReslug, SLUG_RE } from './apply-reslug';
+import { parseReslugTsv, runReslug, applyUndo, SLUG_RE } from './apply-reslug';
 
 const MIGRATIONS = fileURLToPath(new URL('../drizzle', import.meta.url));
 type Db = LibSQLDatabase<typeof schema>;
@@ -185,5 +185,113 @@ describe('runReslug', () => {
 		const stats = await runReslug(db, rows, { apply: true, ...quiet });
 		expect(stats.missing).toBe(1);
 		expect(await db.select().from(schema.slugRedirects)).toEqual([]);
+	});
+});
+
+// ---------------------------------------------------------------------------
+// undo: reversing a rename the tool itself applied
+// ---------------------------------------------------------------------------
+
+describe('runReslug --undo', () => {
+	const forward = (from: string, to: string) => parseReslugTsv(tsv(`${from}\t${to}`)).rows;
+
+	it('restores the slug and removes the redirect the rename created', async () => {
+		const id = await seedSource('ainu-14');
+		await runReslug(db, forward('ainu-14', '1990-tamura-renshu-hen-14'), { apply: true, ...quiet });
+		expect(await slugOf(id)).toBe('1990-tamura-renshu-hen-14');
+
+		const stats = await runReslug(db, forward('1990-tamura-renshu-hen-14', 'ainu-14'), {
+			apply: true,
+			undo: true,
+			...quiet
+		});
+		expect(stats.applied).toBe(1);
+		expect(stats.refused).toBe(0);
+		expect(await slugOf(id)).toBe('ainu-14');
+		expect(await db.select().from(schema.slugRedirects)).toEqual([]);
+
+		const revs = await db.select().from(schema.sourceRevisions);
+		expect(revs).toHaveLength(2);
+		expect(revs[1].summary).toBe(
+			'slug rename undone: 1990-tamura-renshu-hen-14 → ainu-14 (re-slug 2026-07)'
+		);
+	});
+
+	it('leaves the rename re-appliable after an undo', async () => {
+		const id = await seedSource('ainu-14');
+		await runReslug(db, forward('ainu-14', '1990-tamura-renshu-hen-14'), { apply: true, ...quiet });
+		await runReslug(db, forward('1990-tamura-renshu-hen-14', 'ainu-14'), {
+			apply: true,
+			undo: true,
+			...quiet
+		});
+		const again = await runReslug(db, forward('ainu-14', '1990-tamura-renshu-hen-14'), {
+			apply: true,
+			...quiet
+		});
+		expect(again.applied).toBe(1);
+		expect(again.refused).toBe(0);
+		expect(await slugOf(id)).toBe('1990-tamura-renshu-hen-14');
+	});
+
+	it('plan mode writes nothing', async () => {
+		const id = await seedSource('ainu-14');
+		await runReslug(db, forward('ainu-14', '1990-tamura-renshu-hen-14'), { apply: true, ...quiet });
+		const stats = await runReslug(db, forward('1990-tamura-renshu-hen-14', 'ainu-14'), {
+			apply: false,
+			undo: true,
+			...quiet
+		});
+		expect(stats.applied).toBe(1); // would undo
+		expect(await slugOf(id)).toBe('1990-tamura-renshu-hen-14');
+		expect(await db.select().from(schema.slugRedirects)).toHaveLength(1);
+	});
+
+	it('refuses to undo onto a slug retired by a different source', async () => {
+		const a = await seedSource('shared-old');
+		await runReslug(db, forward('shared-old', 'a-renamed'), { apply: true, ...quiet });
+		const b = await seedSource('b-current');
+
+		const stats = await runReslug(db, forward('b-current', 'shared-old'), {
+			apply: true,
+			undo: true,
+			...quiet
+		});
+		expect(stats.applied).toBe(0);
+		expect(stats.refused).toBe(1);
+		expect(await slugOf(b)).toBe('b-current');
+		expect(await slugOf(a)).toBe('a-renamed');
+		const redirects = await db.select().from(schema.slugRedirects);
+		expect(redirects).toHaveLength(1);
+		expect(redirects[0].sourceId).toBe(a);
+	});
+
+	it('deletes only the redirect belonging to the source being restored', async () => {
+		// The decide guard requires the redirect to point at this source; the
+		// write must agree, so a redirect owned by another source survives.
+		const other = await seedSource('other-current');
+		await runReslug(db, parseReslugTsv(tsv('other-current\tother-renamed')).rows, {
+			apply: true,
+			...quiet
+		});
+		const mine = await seedSource('mine-current');
+
+		await applyUndo(db, mine, 'mine-current', 'other-current');
+
+		const redirects = await db.select().from(schema.slugRedirects);
+		expect(redirects).toHaveLength(1);
+		expect(redirects[0].oldSlug).toBe('other-current');
+		expect(redirects[0].sourceId).toBe(other);
+	});
+
+	it('refuses when there is no redirect to undo', async () => {
+		await seedSource('never-renamed');
+		const stats = await runReslug(db, forward('never-renamed', 'something-else'), {
+			apply: true,
+			undo: true,
+			...quiet
+		});
+		expect(stats.applied).toBe(0);
+		expect(stats.refused).toBe(1);
 	});
 });
