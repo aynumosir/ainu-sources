@@ -9,7 +9,7 @@ import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 import { migrate } from 'drizzle-orm/libsql/migrator';
 import { eq } from 'drizzle-orm';
 import * as schema from '../src/lib/server/db/schema';
-import { parseReslugTsv, runReslug, SLUG_RE } from './apply-reslug';
+import { parseReslugTsv, runReslug, applyUndo, SLUG_RE } from './apply-reslug';
 
 const MIGRATIONS = fileURLToPath(new URL('../drizzle', import.meta.url));
 type Db = LibSQLDatabase<typeof schema>;
@@ -264,6 +264,24 @@ describe('runReslug --undo', () => {
 		const redirects = await db.select().from(schema.slugRedirects);
 		expect(redirects).toHaveLength(1);
 		expect(redirects[0].sourceId).toBe(a);
+	});
+
+	it('deletes only the redirect belonging to the source being restored', async () => {
+		// The decide guard requires the redirect to point at this source; the
+		// write must agree, so a redirect owned by another source survives.
+		const other = await seedSource('other-current');
+		await runReslug(db, parseReslugTsv(tsv('other-current\tother-renamed')).rows, {
+			apply: true,
+			...quiet
+		});
+		const mine = await seedSource('mine-current');
+
+		await applyUndo(db, mine, 'mine-current', 'other-current');
+
+		const redirects = await db.select().from(schema.slugRedirects);
+		expect(redirects).toHaveLength(1);
+		expect(redirects[0].oldSlug).toBe('other-current');
+		expect(redirects[0].sourceId).toBe(other);
 	});
 
 	it('refuses when there is no redirect to undo', async () => {

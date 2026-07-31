@@ -34,7 +34,7 @@
 import { readFileSync } from 'node:fs';
 import { createClient } from '@libsql/client';
 import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import * as schema from '../src/lib/server/db/schema';
 
 const { sources, slugRedirects, sourceRevisions, sourceLinks, sourceTags, tags } = schema;
@@ -292,7 +292,11 @@ export async function applyUndo(
 			.update(sources)
 			.set({ slug: restoredSlug, updatedAt: undoneAt })
 			.where(eq(sources.id, sourceId)),
-		db.delete(slugRedirects).where(eq(slugRedirects.oldSlug, restoredSlug)),
+		db
+			.delete(slugRedirects)
+			.where(
+				and(eq(slugRedirects.oldSlug, restoredSlug), eq(slugRedirects.sourceId, sourceId))
+			),
 		db.insert(sourceRevisions).values({
 			sourceId,
 			userId: null,
