@@ -161,6 +161,55 @@ export async function decideRename(db: Db, row: ReslugRow): Promise<Decision> {
 	return { kind: 'apply', sourceId: src.id };
 }
 
+/** Decide a reversal of an earlier rename, i.e. a row written back-to-front:
+ *  `oldSlug` is the slug the source carries now, `newSlug` the one it carried
+ *  before. `decideRename` cannot serve this case — the forward rename left its
+ *  own redirect behind, so the target always trips the retired-slug refusal and
+ *  the tool blocks its own rollback.
+ *
+ *  A reversal is legitimate only when the retired slug still points at the very
+ *  source being renamed back. That check is what stops an undo from stealing a
+ *  slug since retired by, or reassigned to, some other record. */
+export async function decideUndo(db: Db, row: ReslugRow): Promise<Decision> {
+	const { oldSlug, newSlug } = row;
+	if (!SLUG_RE.test(newSlug))
+		return { kind: 'refused', reason: `new_slug "${newSlug}" fails ${SLUG_RE}` };
+	if (oldSlug === newSlug)
+		return { kind: 'refused', reason: 'old_slug and new_slug are identical' };
+
+	const [src] = await db
+		.select({ id: sources.id })
+		.from(sources)
+		.where(eq(sources.slug, oldSlug))
+		.limit(1);
+	if (!src) return { kind: 'missing' };
+
+	const [live] = await db
+		.select({ id: sources.id })
+		.from(sources)
+		.where(eq(sources.slug, newSlug))
+		.limit(1);
+	if (live) return { kind: 'refused', reason: `new_slug "${newSlug}" is already a live slug` };
+
+	const [redir] = await db
+		.select({ sourceId: slugRedirects.sourceId })
+		.from(slugRedirects)
+		.where(eq(slugRedirects.oldSlug, newSlug))
+		.limit(1);
+	if (!redir)
+		return {
+			kind: 'refused',
+			reason: `no redirect from "${newSlug}" — nothing to undo (use a forward rename)`
+		};
+	if (redir.sourceId !== src.id)
+		return {
+			kind: 'refused',
+			reason: `redirect "${newSlug}" points at a different source — undoing would steal it`
+		};
+
+	return { kind: 'apply', sourceId: src.id };
+}
+
 export const RESLUG_TAG = 're-slug 2026-07';
 
 /** The three writes of one rename, atomically. The snapshot parts are read
@@ -206,6 +255,55 @@ export async function applyRename(
 	]);
 }
 
+/** The reversal, atomically: restore the slug and drop the redirect the forward
+ *  rename created, so the source ends exactly as it began.
+ *
+ *  No redirect is minted for the slug being abandoned. An undo asserts the
+ *  rename should not have happened, and leaving one behind would make that
+ *  rename un-re-appliable — its target would by then be a retired slug. The
+ *  cost is real and worth stating: a link that captured the interim slug during
+ *  the window stops resolving. */
+export async function applyUndo(
+	db: Db,
+	sourceId: string,
+	currentSlug: string,
+	restoredSlug: string
+): Promise<void> {
+	const [srcRows, links, tagRows] = await db.batch([
+		db.select().from(sources).where(eq(sources.id, sourceId)).limit(1),
+		db.select().from(sourceLinks).where(eq(sourceLinks.sourceId, sourceId)),
+		db
+			.select({ name: tags.name })
+			.from(sourceTags)
+			.innerJoin(tags, eq(sourceTags.tagId, tags.id))
+			.where(eq(sourceTags.sourceId, sourceId))
+	]);
+	const src = srcRows[0];
+	if (!src) throw new Error(`source ${sourceId} vanished between decide and apply`);
+
+	const undoneAt = new Date();
+	const snapshot = {
+		source: { ...src, slug: restoredSlug, updatedAt: undoneAt },
+		links,
+		tags: tagRows.map((t) => t.name)
+	};
+	await db.batch([
+		db
+			.update(sources)
+			.set({ slug: restoredSlug, updatedAt: undoneAt })
+			.where(eq(sources.id, sourceId)),
+		db.delete(slugRedirects).where(eq(slugRedirects.oldSlug, restoredSlug)),
+		db.insert(sourceRevisions).values({
+			sourceId,
+			userId: null,
+			userName: 'apply-reslug',
+			summary: `slug rename undone: ${currentSlug} → ${restoredSlug} (${RESLUG_TAG})`,
+			action: 'update',
+			snapshot
+		})
+	]);
+}
+
 export interface RunStats {
 	applicable: number;
 	applied: number; // (or would-apply, in plan mode)
@@ -218,7 +316,7 @@ export interface RunStats {
 export async function runReslug(
 	db: Db,
 	rows: ReslugRow[],
-	opts: { apply: boolean; log?: (msg: string) => void }
+	opts: { apply: boolean; undo?: boolean; log?: (msg: string) => void }
 ): Promise<RunStats> {
 	const log = opts.log ?? console.log;
 	const stats: RunStats = {
@@ -230,11 +328,14 @@ export async function runReslug(
 		refused: 0
 	};
 	for (const row of rows) {
-		const d = await decideRename(db, row);
+		const d = opts.undo ? await decideUndo(db, row) : await decideRename(db, row);
 		const at = `line ${row.line}: ${row.oldSlug} → ${row.newSlug}`;
 		switch (d.kind) {
 			case 'apply':
-				if (opts.apply) await applyRename(db, d.sourceId, row.oldSlug, row.newSlug);
+				if (opts.apply)
+					opts.undo
+						? await applyUndo(db, d.sourceId, row.oldSlug, row.newSlug)
+						: await applyRename(db, d.sourceId, row.oldSlug, row.newSlug);
 				stats.applied++;
 				log(`${opts.apply ? 'APPLIED' : 'WOULD APPLY'}  ${at}`);
 				break;
@@ -266,9 +367,13 @@ export async function runReslug(
 async function main(): Promise<void> {
 	const args = process.argv.slice(2);
 	const apply = args.includes('--apply');
-	const files = args.filter((a) => a !== '--apply' && a !== '--plan');
+	const undo = args.includes('--undo');
+	const files = args.filter((a) => !a.startsWith('--'));
 	if (files.length !== 1) {
-		console.error('usage: bun scripts/apply-reslug.ts <renames.tsv> [--plan|--apply]');
+		console.error(
+			'usage: bun scripts/apply-reslug.ts <renames.tsv> [--plan|--apply] [--undo]\n' +
+				'       --undo reverses rows written back-to-front (old_slug = the current slug)'
+		);
 		process.exit(1);
 	}
 
@@ -284,8 +389,11 @@ async function main(): Promise<void> {
 	const parsed = parseReslugTsv(readFileSync(files[0], 'utf8'));
 	for (const e of parsed.errors) console.error(`✗ TSV ${e}`);
 
-	console.log(`${apply ? '== APPLY ==' : '== PLAN (no writes; pass --apply to write) =='}`);
-	const stats = await runReslug(db, parsed.rows, { apply });
+	const mode = undo ? 'UNDO' : 'RESLUG';
+	console.log(
+		`${apply ? `== ${mode} APPLY ==` : `== ${mode} PLAN (no writes; pass --apply to write) ==`}`
+	);
+	const stats = await runReslug(db, parsed.rows, { apply, undo });
 
 	console.log('\n--- stats ---');
 	console.log(`rows without a proposed new_slug (skipped): ${parsed.emptyNew}`);
