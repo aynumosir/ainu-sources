@@ -3,7 +3,6 @@
 	import SourceHeader from '$lib/components/archive/SourceHeader.svelte';
 	import FileRow from '$lib/components/archive/FileRow.svelte';
 	import RevisionHistory from '$lib/components/archive/RevisionHistory.svelte';
-	import PendingSubmissions from '$lib/components/archive/PendingSubmissions.svelte';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
 	import { archiveLabels } from '$lib/archive/bilingual-labels';
 
@@ -56,7 +55,6 @@
 			</p>
 		</section>
 
-		<PendingSubmissions items={data.pending} />
 		<RevisionHistory revisions={data.revisions} />
 	</div>
 {/if}

@@ -1,11 +1,11 @@
 #!/usr/bin/env bun
 /**
- * Generate reading derivatives for approved PDF scan revisions.
+ * Generate reading derivatives for current PDF scan revisions.
  *
  * The reader and the page-image endpoint serve pre-rendered objects out of R2
  * under `derivatives/<revision>/…`; nothing produces them at upload time, so a
- * freshly approved scan shows "page image unavailable" until this runs. This
- * script closes that gap: for every approved, current, PDF scan revision that
+ * freshly uploaded scan shows "page image unavailable" until this runs. This
+ * script closes that gap: for every current PDF scan revision that
  * is missing its derivatives it renders each page to size-capped WebP at the
  * two widths the reader requests (300 and 1200), writes a linearized PDF, and
  * records the page count on the revision.
@@ -381,7 +381,6 @@ async function main(): Promise<void> {
   const limit = parseLimit(argValue("--limit"), hasFlag("--limit"));
 
   const clauses = [
-    eq(fileRevisions.reviewStatus, "approved"),
     eq(fileRevisions.isCurrent, true),
     eq(sourceFiles.role, "scan"),
     eq(archiveBlobs.detectedMediaType, "application/pdf"),
@@ -402,7 +401,7 @@ async function main(): Promise<void> {
     .where(and(...clauses));
 
   const candidates = rows.filter((row): row is Row => !!row.blobSha256);
-  console.log(`${candidates.length} approved PDF scan revision(s) to consider`);
+  console.log(`${candidates.length} current PDF scan revision(s) to consider`);
 
   const workRoot = mkdtempSync(path.join(tmpdir(), "ainu-derivatives-"));
   let done = 0;

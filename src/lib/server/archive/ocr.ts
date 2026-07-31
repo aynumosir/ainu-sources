@@ -1,4 +1,4 @@
-import { and, eq, sql } from 'drizzle-orm';
+import { and, eq, sql, type SQL } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import { ocrIngestState, revisionOcrCoverage } from '$lib/server/db/schema';
 import type * as schema from '$lib/server/db/schema';

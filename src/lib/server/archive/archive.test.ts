@@ -17,7 +17,6 @@ import { issueArchiveCsrfToken, requireArchiveMutationGuards, requireArchiveOrig
 import { hmacSha256Hex } from './crypto';
 import { captureGithubAccountEvent, rememberGithubProfileLogin } from './github-login-capture';
 import {
-	approveRevision,
 	capabilityExpiry,
 	createUploadSession,
 	getSourceFileById,
@@ -26,12 +25,10 @@ import {
 	listArchiveFiles,
 	listArchiveUsers,
 	listFiles,
-	listPendingReview,
 	listSourceFiles,
 	listUploadSessions,
 	reconcileUploadFinalization,
 	redeemCapability,
-	rejectRevision,
 	reserveStreamQuota,
 	setArchiveUserRole
 } from './db';
@@ -65,7 +62,7 @@ let db: Db;
 const sha = 'a'.repeat(64);
 const reviewer: ArchivePrincipal = {
 	userId: 'reviewer',
-	role: 'archive_reviewer',
+	role: 'archive_admin',
 	identity: { kind: 'github_login', value: 'reviewer' },
 	authn: 'access_jwt'
 };
@@ -102,7 +99,7 @@ beforeEach(async () => {
 	]);
 });
 
-async function seedRevision(status: 'pending' | 'approved' = 'pending', media = 'application/pdf') {
+async function seedRevision(isCurrent = true, media = 'application/pdf') {
 	await db.insert(schema.sources).values({
 		id: 'source-1',
 		slug: 'source-one',
@@ -138,12 +135,9 @@ async function seedRevision(status: 'pending' | 'approved' = 'pending', media = 
 		declaredMediaType: 'application/pdf',
 		artifactKind: 'original',
 		pageCount: 12,
-		reviewStatus: status,
-		isCurrent: status === 'approved',
+		isCurrent,
 		submittedBy: 'contributor',
-		submittedAt: new Date(1_000),
-		reviewedBy: status === 'approved' ? 'reviewer' : null,
-		reviewedAt: status === 'approved' ? new Date(2_000) : null
+		submittedAt: new Date(1_000)
 	});
 }
 
@@ -164,7 +158,7 @@ async function seedArchiveListRow(input: {
 	dialect?: string | null;
 	yearStart?: number | null;
 	summary?: string | null;
-	reviewedAt: Date;
+	submittedAt: Date;
 }) {
 	const hash = input.index.toString(16).padStart(64, '0').slice(0, 64);
 	await db.insert(schema.sources).values({
@@ -201,12 +195,9 @@ async function seedArchiveListRow(input: {
 		originalFilename: `list-${input.index}.pdf`,
 		declaredMediaType: 'application/pdf',
 		artifactKind: 'original',
-		reviewStatus: 'approved',
 		isCurrent: true,
 		submittedBy: 'contributor',
-		submittedAt: new Date(input.reviewedAt.getTime() - 100),
-		reviewedBy: 'reviewer',
-		reviewedAt: input.reviewedAt
+		submittedAt: input.submittedAt
 	});
 }
 
@@ -255,9 +246,9 @@ function bytesToBase64(bytes: Uint8Array): string {
 
 describe('archive pure helpers', () => {
 	it('orders archive roles without granting site roles', () => {
-		expect(archiveRoleAtLeast('archive_reviewer', 'archive_reader')).toBe(true);
-		expect(archiveRoleAtLeast('archive_reader', 'archive_reviewer')).toBe(false);
-		expect(archiveRoleAtLeast('archive_admin', 'archive_reviewer')).toBe(true);
+		expect(archiveRoleAtLeast('archive_contributor', 'archive_reader')).toBe(true);
+		expect(archiveRoleAtLeast('archive_reader', 'archive_contributor')).toBe(false);
+		expect(archiveRoleAtLeast('archive_admin', 'archive_contributor')).toBe(true);
 	});
 
 	it('round-trips cursors and preserves ordering comparisons', () => {
@@ -401,12 +392,12 @@ describe('archive DB flows', () => {
 		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'other', email: 'other@example.test' }));
 		await db.insert(schema.githubLoginCache).values({ userId: 'other', login: 'octocat' });
 		await db.insert(schema.userIdentities).values({ userId: 'reader', kind: 'github_login', value: 'octocat' });
-		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reviewer' });
+		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_admin' });
 		const request = new Request('https://db.aynu.org/archive');
 		const principal = await resolveFromAppSession(request, db);
 		expect(principal).toMatchObject({
 			userId: 'reader',
-			role: 'archive_reviewer',
+			role: 'archive_admin',
 			authn: 'app_session',
 			identity: { kind: 'github_login', value: 'octocat', userId: 'reader' },
 			email: 'other@example.test'
@@ -430,7 +421,7 @@ describe('archive DB flows', () => {
 			{ id: 'new-user-1', name: 'New User', email: 'new-user@example.test' }
 		]);
 		await db.insert(schema.userIdentities).values({ kind: 'github_login', value: 'octocat', userId: 'synthetic-1' });
-		await db.insert(schema.appUserRoles).values({ userId: 'synthetic-1', role: 'archive_reviewer' });
+		await db.insert(schema.appUserRoles).values({ userId: 'synthetic-1', role: 'archive_admin' });
 
 		rememberGithubProfileLogin('gh-numeric-1', 'octocat');
 		await captureGithubAccountEvent(
@@ -462,7 +453,7 @@ describe('archive DB flows', () => {
 			email: 'new-user@example.test'
 		}));
 		const principal = await resolveFromAppSession(new Request('https://db.aynu.org/archive'), db);
-		expect(principal).toMatchObject({ userId: 'synthetic-1', role: 'archive_reviewer', authn: 'app_session' });
+		expect(principal).toMatchObject({ userId: 'synthetic-1', role: 'archive_admin', authn: 'app_session' });
 		await expect(resolveArchiveIdentity(new Request('https://db.aynu.org/archive'), db)).resolves.toEqual({ login: 'octocat' });
 	});
 
@@ -516,7 +507,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('does not overwrite an existing role during GitHub org auto-grant', async () => {
-		await db.insert(schema.appUserRoles).values({ userId: 'other', role: 'archive_reviewer' });
+		await db.insert(schema.appUserRoles).values({ userId: 'other', role: 'archive_admin' });
 		const fetchMock = vi.fn(async () => new Response(null, { status: 204 })) as unknown as typeof fetch;
 		rememberGithubProfileLogin('gh-numeric-existing-role', 'public-member');
 		await captureGithubAccountEvent(
@@ -526,7 +517,7 @@ describe('archive DB flows', () => {
 		);
 
 		const [role] = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'other'));
-		expect(role.role).toBe('archive_reviewer');
+		expect(role.role).toBe('archive_admin');
 		const events = await db
 			.select()
 			.from(schema.sourceLifecycleEvents)
@@ -656,14 +647,14 @@ describe('archive DB flows', () => {
 
 	it('changes an existing archive role and records previous and new roles', async () => {
 		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
-		await setArchiveUserRole(db, 'reader', 'archive_reviewer', admin);
+		await setArchiveUserRole(db, 'reader', 'archive_contributor', admin);
 		const [role] = await db.select().from(schema.appUserRoles).where(eq(schema.appUserRoles.userId, 'reader'));
-		expect(role.role).toBe('archive_reviewer');
+		expect(role.role).toBe('archive_contributor');
 		const [event] = await db
 			.select()
 			.from(schema.sourceLifecycleEvents)
 			.where(eq(schema.sourceLifecycleEvents.eventType, 'archive_role_changed'));
-		expect(event.details).toEqual({ previousRole: 'archive_reader', newRole: 'archive_reviewer' });
+		expect(event.details).toEqual({ previousRole: 'archive_reader', newRole: 'archive_contributor' });
 	});
 
 	it('removes a role row without touching other user rows', async () => {
@@ -724,12 +715,12 @@ describe('archive DB flows', () => {
 			{ userId: 'admin', role: 'archive_admin' },
 			{ userId: 'reviewer', role: 'archive_admin' }
 		]);
-		await expect(setArchiveUserRole(db, 'admin', 'archive_reviewer', admin)).resolves.toEqual({
+		await expect(setArchiveUserRole(db, 'admin', 'archive_contributor', admin)).resolves.toEqual({
 			userId: 'admin',
-			role: 'archive_reviewer'
+			role: 'archive_contributor'
 		});
 		const rows = await db.select().from(schema.appUserRoles);
-		expect(rows.find((row) => row.userId === 'admin')?.role).toBe('archive_reviewer');
+		expect(rows.find((row) => row.userId === 'admin')?.role).toBe('archive_contributor');
 		expect(rows.find((row) => row.userId === 'reviewer')?.role).toBe('archive_admin');
 	});
 
@@ -741,12 +732,12 @@ describe('archive DB flows', () => {
 			'content-type': 'application/json'
 		});
 		await expect(
-			archiveMutationPrincipal(new Request('https://db.aynu.org/api/archive/review', { method: 'POST', headers }), 'archive_reader', db)
+			archiveMutationPrincipal(new Request('https://db.aynu.org/api/archive/files', { method: 'POST', headers }), 'archive_reader', db)
 		).rejects.toMatchObject({ status: 403 });
 
 		headers.set('x-archive-csrf', await issueArchiveCsrfToken('reader'));
 		await expect(
-			archiveMutationPrincipal(new Request('https://db.aynu.org/api/archive/review', { method: 'POST', headers }), 'archive_reader', db)
+			archiveMutationPrincipal(new Request('https://db.aynu.org/api/archive/files', { method: 'POST', headers }), 'archive_reader', db)
 		).resolves.toMatchObject({ userId: 'reader', authn: 'app_session' });
 	});
 
@@ -776,12 +767,12 @@ describe('archive DB flows', () => {
 		env.ASSERTION_KEY_MCP = 'mcp-secret';
 		await db.insert(schema.userIdentities).values({ userId: 'reader', kind: 'github_login', value: 'octocat' });
 		const headers = await buildMcpAssertionHeaders(env.ASSERTION_KEY_MCP, 'octocat', Math.floor(Date.now() / 1000), 'mutation-denial');
-		const request = new Request('https://db.aynu.org/api/archive/review', { method: 'POST', headers });
+		const request = new Request('https://db.aynu.org/api/archive/files', { method: 'POST', headers });
 		await expect(archiveMutationPrincipal(request, 'archive_reader', db)).rejects.toMatchObject({ status: 403 });
 	});
 
 	it('rejects MCP assertion principals for capability issuance', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await expect(
 			issueCapability(db, 'rev-1', {
 				userId: 'contributor',
@@ -815,8 +806,8 @@ describe('archive DB flows', () => {
 		expect((await db.select().from(schema.uploadSessions)).length).toBe(1);
 	});
 
-	it('reconciles verified finalize results into a blob and pending revision once', async () => {
-		await seedUploadSource();
+	it('reconciles a verified finalize result into the only current revision once', async () => {
+		await seedRevision();
 		const created = await createUploadSession(db, contributor, {
 			sourceSlug: 'source-one',
 			role: 'scan',
@@ -840,18 +831,18 @@ describe('archive DB flows', () => {
 		expect(upload.state).toBe('verified');
 		expect(await db.select().from(schema.archiveBlobs).where(eq(schema.archiveBlobs.sha256, result.sha256))).toHaveLength(1);
 		const revisions = await db.select().from(schema.fileRevisions).where(eq(schema.fileRevisions.sourceFileId, created.sourceFile.id));
-		expect(revisions).toHaveLength(1);
-		expect(revisions[0]).toMatchObject({
-			revisionNo: 1,
+		expect(revisions).toHaveLength(2);
+		expect(revisions.find((revision) => revision.id === 'rev-1')).toMatchObject({ isCurrent: false });
+		expect(revisions.find((revision) => revision.id !== 'rev-1')).toMatchObject({
+			revisionNo: 2,
 			blobSha256: result.sha256,
-			originalFilename: 'bbbbbbbbbbbb.pdf',
-			reviewStatus: 'pending',
-			isCurrent: false
+			originalFilename: '資料一.pdf',
+			isCurrent: true
 		});
 
 		await reconcileUploadFinalization(db, created.session.id, contributor, { status: 200, body: result });
 		expect(await db.select().from(schema.archiveBlobs).where(eq(schema.archiveBlobs.sha256, result.sha256))).toHaveLength(1);
-		expect(await db.select().from(schema.fileRevisions).where(eq(schema.fileRevisions.sourceFileId, created.sourceFile.id))).toHaveLength(1);
+		expect(await db.select().from(schema.fileRevisions).where(eq(schema.fileRevisions.sourceFileId, created.sourceFile.id))).toHaveLength(2);
 	});
 
 	it('reconciles quarantined finalize results into a failed upload session', async () => {
@@ -883,29 +874,8 @@ describe('archive DB flows', () => {
 		expect(session).toMatchObject({ state: 'failed', errorCode: result.reason });
 	});
 
-	it('approves a pending revision transactionally', async () => {
-		await seedRevision('pending');
-		const approved = await approveRevision(db, 'rev-1', reviewer);
-		expect(approved.reviewStatus).toBe('approved');
-		expect(approved.isCurrent).toBe(true);
-		const events = await db.select().from(schema.sourceLifecycleEvents);
-		expect(events.some((e) => e.eventType === 'revision_approved' && e.entityId === 'rev-1')).toBe(true);
-	});
-
-	it('rejects invalid approval states', async () => {
-		await seedRevision('approved');
-		await expect(approveRevision(db, 'rev-1', reviewer)).rejects.toThrow('revision already decided');
-	});
-
-	it('rejects reviewer-is-submitter and media-type mismatch approvals', async () => {
-		await seedRevision('pending');
-		await expect(approveRevision(db, 'rev-1', { ...reviewer, userId: 'contributor' })).rejects.toThrow('reviewer must differ');
-		await db.update(schema.archiveBlobs).set({ detectedMediaType: 'application/zip' }).where(eq(schema.archiveBlobs.sha256, sha));
-		await expect(approveRevision(db, 'rev-1', reviewer)).rejects.toThrow('media type');
-	});
-
 	it('atomically caps capability redemption', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		const cap = await issueCapability(db, 'rev-1', reviewer, 120);
 		const attempts = await Promise.allSettled([
 			redeemCapability(db, cap.bearer, { kind: 'full' }),
@@ -917,7 +887,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('rejects a second full capability redemption', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		const cap = await issueCapability(db, 'rev-1', reviewer, 120);
 		await expect(redeemCapability(db, cap.bearer, { kind: 'full' })).resolves.toMatchObject({
 			chargedBytes: 1234
@@ -928,7 +898,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('allows sequential capability ranges until the token byte budget is spent', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		const cap = await issueCapability(db, 'rev-1', reviewer, 120);
 		await expect(redeemCapability(db, cap.bearer, { kind: 'range_header', rangeHeader: 'bytes=0-616' })).resolves.toMatchObject({
 			chargedBytes: 617
@@ -944,7 +914,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('ingests OCR pages, records preferred coverage, and searches visible text', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db
 			.update(schema.sources)
 			.set({
@@ -1020,7 +990,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('activates a complete OCR generation and removes the superseded generation', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'old generation' }]);
 		const [oldState] = await db.select().from(schema.ocrIngestState);
 		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 2, text: 'new generation' }]);
@@ -1036,7 +1006,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('uses the preferred OCR variant and deduplicates matching blocks per revision page', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'kamuy first\n\nkamuy second' }]);
 		await replaceOcrPages(db, 'rev-1', 'tesseract', [{ page: 1, text: 'kamuy alternate' }]);
 		await db.insert(schema.revisionOcrCoverage).values([
@@ -1064,7 +1034,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('searches regex, soft, similar, and unavailable semantic modes', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await replaceOcrPages(db, 'rev-1', 'gemini', [
 			{ page: 1, text: 'kamuy aynu mosir ape tow' },
 			{ page: 2, text: 'kamuy aynu mosir cise' },
@@ -1105,7 +1075,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('keeps readable OCR searchable when original-file download is disabled', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db.update(schema.sources).set({ humanDownload: false }).where(eq(schema.sources.id, 'source-1'));
 		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'searchable kamuy text' }]);
 		const result = await searchOcr(db, reader, { q: 'kamuy' });
@@ -1113,7 +1083,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('includes source display metadata on each OCR hit', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db
 			.update(schema.sources)
 			.set({
@@ -1161,12 +1131,9 @@ describe('archive DB flows', () => {
 			originalFilename: 'source-two.pdf',
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'original',
-			reviewStatus: 'approved',
 			isCurrent: true,
 			submittedBy: 'contributor',
-			submittedAt: new Date(2_000),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(3_000)
+			submittedAt: new Date(3_000)
 		});
 		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'metadata needle one' }]);
 		await replaceOcrPages(db, 'rev-2', 'gemini', [{ page: 1, text: 'metadata needle two' }]);
@@ -1197,7 +1164,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('returns OCR snippet offsets against normalized text and total visible hits', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db.insert(schema.sourceFiles).values({
 			id: 'file-2',
 			sourceId: 'source-1',
@@ -1221,12 +1188,9 @@ describe('archive DB flows', () => {
 			originalFilename: 'supplement.pdf',
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'original',
-			reviewStatus: 'approved',
 			isCurrent: true,
 			submittedBy: 'contributor',
-			submittedAt: new Date(2_000),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(3_000)
+			submittedAt: new Date(3_000)
 		});
 		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'alpha   Kamuy\nbeta kamuy gamma' }]);
 		await replaceOcrPages(db, 'rev-2', 'gemini', [{ page: 1, text: 'delta kamuy epsilon' }]);
@@ -1278,39 +1242,10 @@ describe('archive DB flows', () => {
 		await expect(listUploadSessions(db, contributor, { states: ['bogus'] })).rejects.toMatchObject({ status: 400 });
 	});
 
-	it('carries decided revision details on approve and reject conflicts', async () => {
-		await seedRevision('pending');
-		const approved = await approveRevision(db, 'rev-1', reviewer);
-		const expected = {
-			review_status: 'approved',
-			reviewed_by: 'reviewer',
-			reviewed_at: approved.reviewedAt?.toISOString(),
-			review_note: null
-		};
-		await expect(approveRevision(db, 'rev-1', reviewer)).rejects.toMatchObject({
-			status: 409,
-			details: expected
-		});
-		let thrown: unknown;
-		try {
-			await rejectRevision(db, 'rev-1', reviewer, 'second decision');
-		} catch (e) {
-			try {
-				throwArchiveError(e);
-			} catch (routeError) {
-				thrown = routeError;
-			}
-		}
-		expect(thrown).toMatchObject({
-			status: 409,
-			body: { message: 'revision already decided', ...expected }
-		});
-	});
-
 	it('returns usage summary counts and denies MCP assertion callers at the route', async () => {
 		env.ARCHIVE_DAILY_BYTE_LIMIT = '1000';
 		env.ARCHIVE_CONCURRENT_STREAM_LIMIT = '5';
-		await seedRevision('approved');
+		await seedRevision();
 		const now = new Date();
 		const day = now.toISOString().slice(0, 10);
 		const resetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)).toISOString();
@@ -1373,7 +1308,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('authorizes content through a single audited gateway for allow and deny paths', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db.insert(schema.appUserRoles).values({ userId: 'reader', role: 'archive_reader' });
 		const sessionReader: ArchivePrincipal = {
 			...reader,
@@ -1437,7 +1372,7 @@ describe('archive DB flows', () => {
 		env.ARCHIVE_DAILY_BYTE_LIMIT = '100';
 		env.ARCHIVE_DAILY_VIEW_BYTE_LIMIT = '1000';
 		env.ARCHIVE_CONCURRENT_STREAM_LIMIT = '1';
-		await seedRevision('approved');
+		await seedRevision();
 
 		await reserveStreamQuota(db, reader, 'rev-1', 100, 'view');
 		await reserveStreamQuota(db, reader, 'rev-1', 100, 'view');
@@ -1452,7 +1387,7 @@ describe('archive DB flows', () => {
 
 	it('enforces the view budget with reset details', async () => {
 		env.ARCHIVE_DAILY_VIEW_BYTE_LIMIT = '50';
-		await seedRevision('approved');
+		await seedRevision();
 		await reserveStreamQuota(db, reader, 'rev-1', 50, 'view');
 		await expect(reserveStreamQuota(db, reader, 'rev-1', 1, 'view')).rejects.toMatchObject({
 			status: 429,
@@ -1463,7 +1398,7 @@ describe('archive DB flows', () => {
 	it('rate-limits MCP text counters while leaving under-limit principals unaffected', async () => {
 		env.ARCHIVE_DAILY_TEXT_CALL_LIMIT = '2';
 		env.ARCHIVE_DAILY_TEXT_PAGE_LIMIT = '3';
-		await seedRevision('approved');
+		await seedRevision();
 		const mcpReader: ArchivePrincipal = {
 			...reader,
 			identity: { kind: 'github_login', value: 'octocat' },
@@ -1480,147 +1415,6 @@ describe('archive DB flows', () => {
 		const summary = await getUsageSummary(db, reader);
 		expect(summary.textCallsUsed).toBe(1);
 		expect(summary.textPagesUsed).toBe(1);
-	});
-
-	it('returns the same pending-review total on subsequent pages', async () => {
-		await seedRevision('pending');
-		for (let index = 2; index <= 4; index += 1) {
-			const hash = String(index).repeat(64);
-			await db.insert(schema.sourceFiles).values({
-				id: `file-${index}`,
-				sourceId: 'source-1',
-				role: index === 2 ? 'epub' : index === 3 ? 'supplement' : 'derivative',
-				checkoutRepoId: 'repo-1',
-				checkoutPath: `books/${index}.pdf`,
-				createdBy: 'contributor'
-			});
-			await db.insert(schema.archiveBlobs).values({
-				sha256: hash,
-				bytes: index,
-				detectedMediaType: 'application/pdf',
-				storageState: 'verified',
-				verifiedAt: new Date()
-			});
-			await db.insert(schema.fileRevisions).values({
-				id: `rev-${index}`,
-				sourceFileId: `file-${index}`,
-				revisionNo: 1,
-				blobSha256: hash,
-				originalFilename: `${index}.pdf`,
-				declaredMediaType: 'application/pdf',
-				artifactKind: 'original',
-				reviewStatus: 'pending',
-				isCurrent: false,
-				submittedBy: 'contributor',
-				submittedAt: new Date(1_000 + index)
-			});
-		}
-
-		const first = await listPendingReview(db, null, 2);
-		expect(first.total).toBe(4);
-		expect(first.nextCursor).toBeTruthy();
-		const second = await listPendingReview(db, first.nextCursor, 2);
-		expect(second.total).toBe(4);
-		expect(second.items).toHaveLength(2);
-	});
-
-	it('returns full review card context only when include full is requested', async () => {
-		await seedRevision('approved');
-		await db.update(schema.fileRevisions).set({ id: 'rev-current' }).where(eq(schema.fileRevisions.id, 'rev-1'));
-		await db.insert(schema.archiveBlobs).values([
-			{
-				sha256: 'b'.repeat(64),
-				bytes: 200,
-				detectedMediaType: 'application/pdf',
-				storageState: 'verified',
-				verifiedAt: new Date()
-			},
-			{
-				sha256: 'c'.repeat(64),
-				bytes: 300,
-				detectedMediaType: 'application/pdf',
-				storageState: 'verified',
-				verifiedAt: new Date()
-			}
-		]);
-		await db.insert(schema.fileRevisions).values([
-			{
-				id: 'rev-rejected',
-				sourceFileId: 'file-1',
-				revisionNo: 2,
-				blobSha256: 'b'.repeat(64),
-				originalFilename: 'old.pdf',
-				declaredMediaType: 'application/pdf',
-				artifactKind: 'original',
-				reviewStatus: 'rejected',
-				isCurrent: false,
-				submittedBy: 'contributor',
-				submittedAt: new Date(2_000),
-				reviewedBy: 'reviewer',
-				reviewedAt: new Date(3_000),
-				reviewNote: 'bad scan'
-			},
-			{
-				id: 'rev-pending',
-				sourceFileId: 'file-1',
-				revisionNo: 3,
-				blobSha256: 'c'.repeat(64),
-				originalFilename: 'new.pdf',
-				declaredMediaType: 'application/pdf',
-				artifactKind: 'original',
-				reviewStatus: 'pending',
-				isCurrent: false,
-				submittedBy: 'contributor',
-				submittedAt: new Date(4_000)
-			}
-		]);
-		await db.insert(schema.sourceFiles).values({
-			id: 'file-2',
-			sourceId: 'source-1',
-			role: 'supplement',
-			checkoutRepoId: 'repo-1',
-			checkoutPath: 'books/duplicate.pdf'
-		});
-		await db.insert(schema.fileRevisions).values({
-			id: 'rev-duplicate',
-			sourceFileId: 'file-2',
-			revisionNo: 1,
-			blobSha256: 'c'.repeat(64),
-			originalFilename: 'duplicate.pdf',
-			declaredMediaType: 'application/pdf',
-			artifactKind: 'original',
-			reviewStatus: 'approved',
-			isCurrent: true,
-			submittedBy: 'contributor',
-			submittedAt: new Date(5_000),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(6_000)
-		});
-
-		const light = await listPendingReview(db, null, 10);
-		expect(light.items[0]).toMatchObject({ revisionId: 'rev-pending', exactDuplicates: [] });
-		expect(light.items[0]).not.toHaveProperty('currentRevisionSummary');
-		const full = await listPendingReview(db, null, 10, { include: 'full' });
-		expect(full.items[0]).toMatchObject({
-			revisionId: 'rev-pending',
-			currentRevision: 'rev-current',
-			currentRevisionSummary: {
-				id: 'rev-current',
-				revisionNo: 1,
-				bytes: 1234,
-				sha256: sha
-			},
-			exactDuplicates: [
-				{
-					revisionId: 'rev-duplicate',
-					sourceFileId: 'file-2',
-					sourceSlug: 'source-one',
-					reviewStatus: 'approved'
-				}
-			]
-		});
-		const fullItem = full.items[0] as (typeof full.items)[number] & { priorRevisions: { id: string }[] };
-		expect(fullItem.priorRevisions.map((row) => row.id)).toEqual(['rev-rejected', 'rev-current']);
 	});
 
 	it('deduplicates verified upload creates and lets quarantined hashes create sessions', async () => {
@@ -1657,7 +1451,7 @@ describe('archive DB flows', () => {
 		if (deduplicated.kind !== 'deduplicated') throw new Error('expected deduplicated revision');
 		expect(deduplicated.revision).toMatchObject({
 			blobSha256: 'd'.repeat(64),
-			reviewStatus: 'pending',
+			isCurrent: true,
 			originalFilename: 'existing.pdf'
 		});
 		expect(await db.select().from(schema.uploadSessions)).toHaveLength(0);
@@ -1674,15 +1468,15 @@ describe('archive DB flows', () => {
 	});
 
 	it('validates source file role filters', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await expect(listSourceFiles(db, 'source-one', reviewer, { role: 'bad-role' })).rejects.toMatchObject({
 			status: 400
 		});
 		await expect(listFiles(db, null, null, 50, { role: 'bad-role' })).rejects.toMatchObject({ status: 400 });
 	});
 
-	it('includes approved revision history only when requested', async () => {
-		await seedRevision('approved');
+	it('includes revision history only when requested', async () => {
+		await seedRevision();
 		await db.update(schema.fileRevisions).set({ isCurrent: false }).where(eq(schema.fileRevisions.id, 'rev-1'));
 		await db.insert(schema.archiveBlobs).values({
 			sha256: 'b'.repeat(64),
@@ -1700,12 +1494,9 @@ describe('archive DB flows', () => {
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'original',
 			pageCount: 12,
-			reviewStatus: 'approved',
 			isCurrent: true,
 			submittedBy: 'contributor',
-			submittedAt: new Date(3_000),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date(4_000)
+			submittedAt: new Date(4_000)
 		});
 
 		expect((await listSourceFiles(db, 'source-one', reviewer)).map((row) => row.revisionId)).toEqual(['rev-2']);
@@ -1721,7 +1512,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('returns full filtered archive file pages from SQL filters', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db.update(schema.sources).set({ title: 'Unmatched Early', yearStart: 1850 }).where(eq(schema.sources.id, 'source-1'));
 		await seedArchiveListRow({
 			index: 2,
@@ -1729,7 +1520,7 @@ describe('archive DB flows', () => {
 			dialect: 'Hokkaido',
 			yearStart: 1901,
 			summary: 'ritual text',
-			reviewedAt: new Date(3_000)
+			submittedAt: new Date(3_000)
 		});
 		await seedArchiveListRow({
 			index: 3,
@@ -1737,7 +1528,7 @@ describe('archive DB flows', () => {
 			dialect: 'Sakhalin',
 			yearStart: 1880,
 			summary: 'metadata',
-			reviewedAt: new Date(4_000)
+			submittedAt: new Date(4_000)
 		});
 		await seedArchiveListRow({
 			index: 4,
@@ -1745,7 +1536,7 @@ describe('archive DB flows', () => {
 			dialect: 'Hokkaido',
 			yearStart: 1904,
 			summary: 'metadata',
-			reviewedAt: new Date(5_000)
+			submittedAt: new Date(5_000)
 		});
 		await seedArchiveListRow({
 			index: 5,
@@ -1753,7 +1544,7 @@ describe('archive DB flows', () => {
 			dialect: 'Hokkaido',
 			yearStart: 1908,
 			summary: 'metadata',
-			reviewedAt: new Date(6_000)
+			submittedAt: new Date(6_000)
 		});
 
 		const first = await listArchiveFiles(db, {
@@ -1779,15 +1570,15 @@ describe('archive DB flows', () => {
 	});
 
 	it('paginates archive file listings stably for every sort order', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db
 			.update(schema.sources)
 			.set({ title: 'Delta', yearStart: 1904 })
 			.where(eq(schema.sources.id, 'source-1'));
-		await db.update(schema.fileRevisions).set({ reviewedAt: new Date(4_000) }).where(eq(schema.fileRevisions.id, 'rev-1'));
-		await seedArchiveListRow({ index: 2, title: 'Alpha', yearStart: 1901, reviewedAt: new Date(2_000) });
-		await seedArchiveListRow({ index: 3, title: 'Charlie', yearStart: 1903, reviewedAt: new Date(3_000) });
-		await seedArchiveListRow({ index: 4, title: 'Bravo', yearStart: 1902, reviewedAt: new Date(5_000) });
+		await db.update(schema.fileRevisions).set({ submittedAt: new Date(4_000) }).where(eq(schema.fileRevisions.id, 'rev-1'));
+		await seedArchiveListRow({ index: 2, title: 'Alpha', yearStart: 1901, submittedAt: new Date(2_000) });
+		await seedArchiveListRow({ index: 3, title: 'Charlie', yearStart: 1903, submittedAt: new Date(3_000) });
+		await seedArchiveListRow({ index: 4, title: 'Bravo', yearStart: 1902, submittedAt: new Date(5_000) });
 
 		async function titles(sort: 'updated' | 'title' | 'year-desc' | 'year-asc') {
 			const first = await listArchiveFiles(db, { sort, limit: 2, principal: reader });
@@ -1802,12 +1593,12 @@ describe('archive DB flows', () => {
 	});
 
 	it('filters archive files by text coverage exactly as the in-memory rule did', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db.update(schema.sources).set({ title: 'Plain One' }).where(eq(schema.sources.id, 'source-1'));
-		await seedArchiveListRow({ index: 2, title: 'Mixed Text', reviewedAt: new Date(2_000) });
-		await seedArchiveListRow({ index: 3, title: 'None Only', reviewedAt: new Date(3_000) });
-		await seedArchiveListRow({ index: 4, title: 'No Rows', reviewedAt: new Date(4_000) });
-		await seedArchiveListRow({ index: 5, title: 'Full Text', reviewedAt: new Date(5_000) });
+		await seedArchiveListRow({ index: 2, title: 'Mixed Text', submittedAt: new Date(2_000) });
+		await seedArchiveListRow({ index: 3, title: 'None Only', submittedAt: new Date(3_000) });
+		await seedArchiveListRow({ index: 4, title: 'No Rows', submittedAt: new Date(4_000) });
+		await seedArchiveListRow({ index: 5, title: 'Full Text', submittedAt: new Date(5_000) });
 		await db.insert(schema.revisionOcrCoverage).values([
 			{ revisionId: 'list-rev-2', variant: 'gemini', status: 'none' },
 			{ revisionId: 'list-rev-2', variant: 'paddle', status: 'partial' },
@@ -1841,12 +1632,12 @@ describe('archive DB flows', () => {
 	});
 
 	it('sorts archive files by significance with unscored works last', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db.update(schema.sources).set({ title: 'Zulu' }).where(eq(schema.sources.id, 'source-1'));
-		await seedArchiveListRow({ index: 2, title: 'Bravo', reviewedAt: new Date(2_000) });
-		await seedArchiveListRow({ index: 3, title: 'Alpha', reviewedAt: new Date(3_000) });
-		await seedArchiveListRow({ index: 4, title: 'Echo', reviewedAt: new Date(4_000) });
-		await seedArchiveListRow({ index: 5, title: 'Charlie', reviewedAt: new Date(5_000) });
+		await seedArchiveListRow({ index: 2, title: 'Bravo', submittedAt: new Date(2_000) });
+		await seedArchiveListRow({ index: 3, title: 'Alpha', submittedAt: new Date(3_000) });
+		await seedArchiveListRow({ index: 4, title: 'Echo', submittedAt: new Date(4_000) });
+		await seedArchiveListRow({ index: 5, title: 'Charlie', submittedAt: new Date(5_000) });
 		await db.update(schema.sources).set({ significance: 0.5 }).where(eq(schema.sources.id, 'list-source-2'));
 		await db.update(schema.sources).set({ significance: 0.9 }).where(eq(schema.sources.id, 'list-source-3'));
 		await db.update(schema.sources).set({ significance: 0.2 }).where(eq(schema.sources.id, 'list-source-5'));
@@ -1861,20 +1652,19 @@ describe('archive DB flows', () => {
 	});
 
 	it('resolves file ids to source metadata and current revisions', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await expect(getSourceFileById(db, 'file-1', reviewer)).resolves.toMatchObject({
 			fileId: 'file-1',
 			sourceId: 'source-1',
 			sourceSlug: 'source-one',
 			role: 'scan',
 			checkoutPath: 'books/資料一.pdf',
-			currentRevisionId: 'rev-1',
-			pendingRevisionId: null
+			currentRevisionId: 'rev-1'
 		});
 	});
 
 	it('returns null currentRevisionId for file ids without a current revision', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db.insert(schema.sourceFiles).values({
 			id: 'file-empty',
 			sourceId: 'source-1',
@@ -1885,8 +1675,7 @@ describe('archive DB flows', () => {
 		});
 		await expect(getSourceFileById(db, 'file-empty', reviewer)).resolves.toMatchObject({
 			fileId: 'file-empty',
-			currentRevisionId: null,
-			pendingRevisionId: null
+			currentRevisionId: null
 		});
 	});
 
@@ -1915,7 +1704,7 @@ describe('archive DB flows', () => {
 	});
 
 	it('renders manifest JSONL with field order and UTF-8 path sorting', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		await db.insert(schema.sourceFiles).values({
 			id: 'file-2',
 			sourceId: 'source-1',
@@ -1940,12 +1729,9 @@ describe('archive DB flows', () => {
 			declaredMediaType: 'application/pdf',
 			artifactKind: 'original',
 			pageCount: 1,
-			reviewStatus: 'approved',
 			isCurrent: true,
 			submittedBy: 'contributor',
-			submittedAt: new Date(),
-			reviewedBy: 'reviewer',
-			reviewedAt: new Date()
+			submittedAt: new Date()
 		});
 		const { body } = await renderManifest(db, 'books');
 		const lines = body.trim().split('\n');
@@ -2057,7 +1843,7 @@ describe('archive API route handlers', () => {
 		expect(payload).toMatchObject({ deduplicated: true, fileId: expect.any(String), revisionId: expect.any(String) });
 		expect(await db.select().from(schema.uploadSessions)).toHaveLength(0);
 		const [revision] = await db.select().from(schema.fileRevisions).where(eq(schema.fileRevisions.id, payload.revisionId));
-		expect(revision).toMatchObject({ blobSha256: '9'.repeat(64), reviewStatus: 'pending' });
+		expect(revision).toMatchObject({ blobSha256: '9'.repeat(64), isCurrent: true });
 	});
 
 	it('marks the session failed when dataplane multipart create fails', async () => {
@@ -2316,7 +2102,7 @@ describe('archive API route handlers', () => {
 	});
 
 	it('enforces reader access and derivative width validation on page derivative routes', async () => {
-		await seedRevision('approved');
+		await seedRevision();
 		archiveAuthzInternals.setAppSessionLookupForTest(async () => ({ id: 'other', email: 'other@example.test' }));
 		const { GET } = await importRoute<typeof import('../../../routes/api/archive/revisions/[id]/pages/[page].webp/+server')>(
 			'../../../routes/api/archive/revisions/[id]/pages/[page].webp/+server'
@@ -2344,7 +2130,7 @@ describe('archive API route handlers', () => {
 
 	it('maps non-OK page derivative upstream responses to 404', async () => {
 		env.ASSERTION_KEY_SOURCES = 'assertion-secret';
-		await seedRevision('approved');
+		await seedRevision();
 		const { auth } = await seedServicePrincipal('reader', 'archive_reader', 'svc-page');
 		let captured: Request | null = null;
 		const fetcher = {
@@ -2374,7 +2160,7 @@ describe('archive API route handlers', () => {
 
 	it('proxies linearized derivative range responses and mirrors dataplane headers', async () => {
 		env.ASSERTION_KEY_SOURCES = 'assertion-secret';
-		await seedRevision('approved');
+		await seedRevision();
 		const { auth } = await seedServicePrincipal('reader', 'archive_reader', 'svc-linearized');
 		let captured: Request | null = null;
 		const fetcher = {

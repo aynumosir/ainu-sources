@@ -32,7 +32,9 @@
 			{#each [['works', stats.totals.works, '資料 Works'], ['files', stats.totals.files, 'ファイル Files'], ['bytes', null, '容量 Stored'], ['pages', stats.pages.total, 'ページ Pages']] as [key, value, label] (key)}
 				<div class="bg-[var(--archive-paper)] p-4">
 					<div class="archive-title text-[32px] font-semibold leading-none tabular-nums">
-						{key === 'bytes' ? formatBytes(stats.totals.deduplicatedBytes) : number(value)}
+						{key === 'bytes'
+							? formatBytes(stats.totals.deduplicatedBytes)
+							: number(typeof value === 'number' ? value : null)}
 					</div>
 					<div class="archive-kicker mt-2 text-[var(--archive-subtle)]">{label}</div>
 				</div>

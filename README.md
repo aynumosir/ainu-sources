@@ -133,7 +133,3 @@ src/
 scripts/import-all.ts   idempotent merge-engine seed (`bun run seed`; ETL from the data repos)
 messages/{en,ja,ru}.json
 ```
-
-> Note: `bun run check` reports 2 type errors inside the generated
-> `src/lib/paraglide/server.js` (a known `@cloudflare/workers-types` global-`Request`
-> vs DOM-`Request` clash in generated code). They do not affect `vite build` or runtime.

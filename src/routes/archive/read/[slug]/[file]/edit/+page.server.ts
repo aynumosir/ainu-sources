@@ -58,7 +58,6 @@ export const load: PageServerLoad = async ({ request, params, url }) => {
 				id: revision.id,
 				revisionNo: revision.revisionNo,
 				pageCount,
-				reviewStatus: revision.reviewStatus,
 				accessState: revision.accessState
 			},
 			files,
@@ -82,11 +81,10 @@ function clampPage(page: number, pageCount: number): number {
 	return Math.min(Math.max(1, page), pageCount);
 }
 
-function uniqueFiles<T extends { fileId: string; revisionId: string | null; reviewStatus: string | null }>(rows: T[]): T[] {
+function uniqueFiles<T extends { fileId: string; revisionId: string | null }>(rows: T[]): T[] {
 	const byId = new Map<string, T>();
 	for (const row of rows) {
-		const current = byId.get(row.fileId);
-		if (!current || (row.reviewStatus === 'approved' && current.reviewStatus !== 'approved')) byId.set(row.fileId, row);
+		if (!byId.has(row.fileId)) byId.set(row.fileId, row);
 	}
 	return [...byId.values()];
 }

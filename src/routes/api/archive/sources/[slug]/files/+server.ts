@@ -1,7 +1,7 @@
 /**
  * GET /api/archive/sources/<slug>/files — list archive file slots for one
- * source. Readers see approved current revisions; reviewers also see pending
- * material for review.
+ * source. Readers see current revisions
+ * archived material.
  */
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';

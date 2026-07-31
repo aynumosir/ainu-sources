@@ -6,7 +6,6 @@
 	type Revision = {
 		revisionId: string | null;
 		revisionNo: number | null;
-		reviewStatus: string | null;
 		submittedAt: string | null;
 		sha256: string | null;
 	};
@@ -23,7 +22,6 @@
 			{#each revisions as revision, index (revision.revisionId ?? index)}
 				<li class="flex flex-wrap items-center gap-2 text-[13px] text-[var(--archive-subtle)]">
 					<span class="tnum text-[var(--archive-text)]">rev {revision.revisionNo ?? '—'}</span>
-					<span>{revision.reviewStatus ?? 'unknown'}</span>
 					{#if revision.submittedAt}<time class="tnum" datetime={revision.submittedAt}>{formatDateTime(revision.submittedAt)}</time>{/if}
 				</li>
 			{/each}

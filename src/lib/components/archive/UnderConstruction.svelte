@@ -7,8 +7,6 @@
 	const titleLabels: Record<string, ArchiveLabelKey> = {
 		Upload: 'upload',
 		Uploads: 'uploads',
-		Review: 'review',
-		'Review detail': 'reviewDetail',
 		Reader: 'reader'
 	};
 

@@ -31,7 +31,14 @@ export const load: PageServerLoad = async ({ request, url }) => {
 	const sourceSlug = url.searchParams.get('source_slug')?.trim() || null;
 	// A malformed query for a given mode is the user's mistake to correct, so it
 	// is reported in the form rather than replacing the page with an error.
-	let result: Awaited<ReturnType<typeof searchArchive>> = { items: [], nextCursor: null, total: 0 };
+	let result: Awaited<ReturnType<typeof searchArchive>> = {
+		mode: 'phrase',
+		items: [],
+		nextCursor: null,
+		total: 0,
+		truncated: false,
+		cap: 0
+	};
 	let searchError: string | null = null;
 	if (q) {
 		try {
@@ -133,7 +140,7 @@ async function approvedCurrentFileCount() {
 		.select({ count: sql<number>`count(*)` })
 		.from(fileRevisions)
 		.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
-		.where(and(eq(fileRevisions.reviewStatus, 'approved'), eq(fileRevisions.isCurrent, true)));
+		.where(eq(fileRevisions.isCurrent, true));
 	return Number(row?.count ?? 0);
 }
 

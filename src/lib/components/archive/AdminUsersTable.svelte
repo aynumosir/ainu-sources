@@ -24,7 +24,6 @@
 	const roles: ArchiveRole[] = [
 		'archive_reader',
 		'archive_contributor',
-		'archive_reviewer',
 		'archive_admin'
 	];
 

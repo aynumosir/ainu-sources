@@ -154,12 +154,12 @@
 					class="text-[17px] font-semibold"
 				/>
 				<p class="mt-1 text-[15px] text-[var(--archive-subtle)]">
-					{#if data.works.length}No OCR text matched; see the matching works above.{:else if data.searchableCount != null}across {data.searchableCount} approved current files{/if}
+					{#if data.works.length}No OCR text matched; see the matching works above.{:else if data.searchableCount != null}across {data.searchableCount} current files{/if}
 				</p>
 			</div>
 		{:else}
 			<p class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4 text-[15px] text-[var(--archive-subtle)]">
-				{#if data.searchableCount != null}{data.searchableCount} approved current files can be searched when OCR pages exist.{:else}Searchable work count is unavailable.{/if}
+				{#if data.searchableCount != null}{data.searchableCount} current files can be searched when OCR pages exist.{:else}Searchable work count is unavailable.{/if}
 			</p>
 		{/if}
 	{/if}

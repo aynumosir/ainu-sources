@@ -1,8 +1,8 @@
-import { and, asc, desc, eq } from 'drizzle-orm';
+import { asc, eq } from 'drizzle-orm';
 import { db } from '$lib/server/db';
-import { archiveBlobs, fileRevisions, persons, sourceFiles, sourcePersons, sources } from '$lib/server/db/schema';
+import { persons, sourcePersons, sources } from '$lib/server/db/schema';
 import { getRevision, listSourceFiles } from '$lib/server/archive/db';
-import { archiveRoleAtLeast, type ArchivePrincipal } from '$lib/server/archive/types';
+import type { ArchivePrincipal } from '$lib/server/archive/types';
 import { getSourceDetail } from '$lib/server/queries';
 
 export type ArchiveWorkPerson = {
@@ -26,22 +26,19 @@ export async function loadArchiveWorkPersons(slug: string): Promise<ArchiveWorkP
 }
 
 export async function loadArchiveWork(slug: string, principal: ArchivePrincipal, requestedPage: number | null) {
-	// getSourceDetail, listSourceFiles, and pendingForSource each depend only
-	// on slug/principal, not on each other's results — only getRevision below
-	// needs a revisionId derived from listSourceFiles, so it stays sequential.
-	const [detail, rows, pending] = await Promise.all([
+	// getSourceDetail and listSourceFiles each depend only on slug/principal,
+	// not on each other's results — only getRevision below needs a revisionId
+	// derived from listSourceFiles, so it stays sequential.
+	const [detail, rows] = await Promise.all([
 		getSourceDetail(slug),
-		listSourceFiles(db, slug, principal, { includeHistory: true }),
-		pendingForSource(slug, principal.userId, archiveRoleAtLeast(principal.role, 'archive_reviewer'))
+		listSourceFiles(db, slug, principal, { includeHistory: true })
 	]);
 	if (!detail) return null;
 
-	const approved = rows.filter((row): row is typeof row & { revisionId: string } => row.reviewStatus === 'approved' && !!row.revisionId);
+	const revisions = rows.filter((row): row is typeof row & { revisionId: string } => !!row.revisionId);
 	const current =
-		approved.find((row) => row.role === 'scan' && row.isCurrent) ??
-		approved.find((row) => row.isCurrent) ??
-		approved.find((row) => row.role === 'scan') ??
-		approved[0];
+		revisions.find((row) => row.role === 'scan' && row.isCurrent) ??
+		revisions.find((row) => row.isCurrent);
 	if (!current) return { detail, unavailable: true as const };
 
 	const revision = await getRevision(db, current.revisionId, principal);
@@ -51,7 +48,6 @@ export async function loadArchiveWork(slug: string, principal: ArchivePrincipal,
 	const recordedPageCount = revision.pageCount ?? null;
 	const pageCount = Math.max(1, recordedPageCount ?? 1);
 	const initialPage = clampPage(requestedPage ?? 1, recordedPageCount);
-
 	return {
 		detail,
 		unavailable: false as const,
@@ -71,7 +67,7 @@ export async function loadArchiveWork(slug: string, principal: ArchivePrincipal,
 			mediaType: revision.detectedMediaType,
 			originalFilename: revision.originalFilename
 		},
-		files: approved.map((row) => ({
+		files: revisions.filter((row) => row.isCurrent).map((row) => ({
 			fileId: row.fileId,
 			role: row.role,
 			label: row.label,
@@ -83,16 +79,13 @@ export async function loadArchiveWork(slug: string, principal: ArchivePrincipal,
 			sha256: row.sha256,
 			submittedAt: row.submittedAt?.toISOString() ?? null
 		})),
-		revisions: rows
-			.filter((row): row is typeof row & { revisionId: string } => !!row.revisionId)
+		revisions: revisions
 			.map((row) => ({
 				revisionId: row.revisionId,
 				revisionNo: row.revisionNo,
-				reviewStatus: row.reviewStatus,
 				submittedAt: row.submittedAt?.toISOString() ?? null,
 				sha256: row.sha256
 			})),
-		pending,
 		initialPage
 	};
 }
@@ -103,30 +96,4 @@ export const clampPageForTest = (page: number, pageCount: number | null) => clam
 function clampPage(page: number, pageCount: number | null): number {
 	const atLeastFirst = Math.max(1, page);
 	return pageCount == null ? atLeastFirst : Math.min(atLeastFirst, pageCount);
-}
-
-async function pendingForSource(slug: string, userId: string, canSeeAll: boolean) {
-	const clauses = [eq(sources.slug, slug), eq(fileRevisions.reviewStatus, 'pending')];
-	if (!canSeeAll) clauses.push(eq(fileRevisions.submittedBy, userId));
-	const rows = await db
-		.select({
-			revisionId: fileRevisions.id,
-			title: sources.title,
-			fileRole: sourceFiles.role,
-			filename: fileRevisions.originalFilename,
-			bytes: archiveBlobs.bytes,
-			submittedAt: fileRevisions.submittedAt,
-			uploader: fileRevisions.submittedBy
-		})
-		.from(fileRevisions)
-		.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
-		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
-		.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
-		.where(and(...clauses))
-		.orderBy(desc(fileRevisions.submittedAt));
-	return rows.map((row) => ({
-		...row,
-		submittedAt: row.submittedAt?.toISOString() ?? null,
-		canWithdraw: row.uploader === userId
-	}));
 }

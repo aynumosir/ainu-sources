@@ -1,5 +1,5 @@
 /**
- * GET /api/archive/files — cursor-paginated catalogue over approved current
+ * GET /api/archive/files — cursor-paginated catalogue over current
  * archive files across sources.
  */
 import { json } from '@sveltejs/kit';

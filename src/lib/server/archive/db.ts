@@ -26,7 +26,7 @@ import { ArchiveHttpError } from './errors';
 import { DEPLOYED_SEARCH_MODES } from './search-modes';
 import { decodeCursor, encodeCursor, type FileCursor } from './cursor';
 import { base64url, fromBase64url } from './crypto';
-import { archiveRoleAtLeast, isArchiveRole, iso, type ArchivePrincipal, type ArchiveRole } from './types';
+import { isArchiveRole, iso, type ArchivePrincipal, type ArchiveRole } from './types';
 
 type Db = LibSQLDatabase<typeof schema>;
 type Tx = Parameters<Parameters<Db['transaction']>[0]>[0];
@@ -122,16 +122,9 @@ export function classifyArchiveUserKind(row: {
 	return 'person';
 }
 
-export function requireReviewReadable(principal: ArchivePrincipal, reviewStatus: string, submittedBy: string): void {
-	if (reviewStatus === 'approved') return;
-	if (archiveRoleAtLeast(principal.role, 'archive_reviewer')) return;
-	if (principal.role === 'archive_contributor' && submittedBy === principal.userId && reviewStatus === 'pending') return;
-	throw new ArchiveHttpError(404, 'revision not found');
-}
-
 export function requireAccessState(principal: ArchivePrincipal, accessState: string): void {
 	if (accessState === 'available') return;
-	if (accessState === 'embargoed' && archiveRoleAtLeast(principal.role, 'archive_reviewer')) return;
+	if (accessState === 'embargoed' && principal.role === 'archive_admin') return;
 	if (accessState === 'takedown' && principal.role === 'archive_admin') return;
 	throw new ArchiveHttpError(403, 'revision is not readable');
 }
@@ -240,34 +233,16 @@ async function resolveUploadSourceFile(
 	return slot;
 }
 
-function alreadyDecidedDetails(row: {
-	reviewStatus: string;
-	reviewedBy: string | null;
-	reviewedAt: Date | null;
-	reviewNote: string | null;
-}): Record<string, unknown> {
-	return {
-		review_status: row.reviewStatus,
-		reviewed_by: row.reviewedBy,
-		reviewed_at: iso(row.reviewedAt),
-		review_note: row.reviewNote
-	};
-}
-
 export async function listSourceFiles(
 	db: Db,
 	slug: string,
-	principal: ArchivePrincipal,
+	_principal: ArchivePrincipal,
 	options: { role?: string | null; includeHistory?: boolean } = {}
 ) {
 	const role = parseSourceFileRole(options.role);
 	const revisionClause = options.includeHistory
-		? archiveRoleAtLeast(principal.role, 'archive_reviewer')
-			? or(eq(fileRevisions.reviewStatus, 'approved'), eq(fileRevisions.reviewStatus, 'pending'))
-			: eq(fileRevisions.reviewStatus, 'approved')
-		: archiveRoleAtLeast(principal.role, 'archive_reviewer')
-			? or(eq(fileRevisions.isCurrent, true), eq(fileRevisions.reviewStatus, 'pending'))
-			: eq(fileRevisions.isCurrent, true);
+		? undefined
+		: eq(fileRevisions.isCurrent, true);
 	const clauses = [eq(sources.slug, slug)];
 	if (role) clauses.push(eq(sourceFiles.role, role));
 	const rows = await db
@@ -279,7 +254,6 @@ export async function listSourceFiles(
 			sortOrder: sourceFiles.sortOrder,
 			revisionId: fileRevisions.id,
 			revisionNo: fileRevisions.revisionNo,
-			reviewStatus: fileRevisions.reviewStatus,
 			isCurrent: fileRevisions.isCurrent,
 			sha256: fileRevisions.blobSha256,
 			bytes: archiveBlobs.bytes,
@@ -290,7 +264,9 @@ export async function listSourceFiles(
 		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
 		.leftJoin(
 			fileRevisions,
-			and(eq(fileRevisions.sourceFileId, sourceFiles.id), revisionClause)
+			revisionClause
+				? and(eq(fileRevisions.sourceFileId, sourceFiles.id), revisionClause)
+				: eq(fileRevisions.sourceFileId, sourceFiles.id)
 		)
 		.leftJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
 		.where(and(...clauses))
@@ -309,13 +285,13 @@ export async function listFiles(
 	const updatedSince = updatedSinceRaw ? new Date(updatedSinceRaw) : null;
 	if (updatedSinceRaw && Number.isNaN(updatedSince?.getTime())) throw new ArchiveHttpError(400, 'invalid updated_since');
 	const role = parseSourceFileRole(options.role);
-	const clauses = [eq(fileRevisions.reviewStatus, 'approved')];
+	const clauses = [];
 	if (!options.includeHistory) clauses.push(eq(fileRevisions.isCurrent, true));
 	if (role) clauses.push(eq(sourceFiles.role, role));
-	if (updatedSince) clauses.push(gte(fileRevisions.reviewedAt, updatedSince));
+	if (updatedSince) clauses.push(gte(fileRevisions.submittedAt, updatedSince));
 	if (cursor) {
 		const d = new Date(cursor.updatedAt);
-		clauses.push(or(gt(fileRevisions.reviewedAt, d), and(eq(fileRevisions.reviewedAt, d), gt(sourceFiles.id, cursor.id)))!);
+		clauses.push(or(gt(fileRevisions.submittedAt, d), and(eq(fileRevisions.submittedAt, d), gt(sourceFiles.id, cursor.id)))!);
 	}
 	const rows = await db
 		.select({
@@ -325,7 +301,7 @@ export async function listFiles(
 			checkoutPath: sourceFiles.checkoutPath,
 			sortOrder: sourceFiles.sortOrder,
 			revisionId: fileRevisions.id,
-			reviewedAt: fileRevisions.reviewedAt,
+			submittedAt: fileRevisions.submittedAt,
 			sha256: fileRevisions.blobSha256,
 			bytes: archiveBlobs.bytes,
 			mediaType: archiveBlobs.detectedMediaType
@@ -334,16 +310,16 @@ export async function listFiles(
 		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
 		.innerJoin(fileRevisions, eq(fileRevisions.sourceFileId, sourceFiles.id))
 		.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
-		.where(and(...clauses))
-		.orderBy(asc(fileRevisions.reviewedAt), asc(sourceFiles.id))
+		.where(clauses.length ? and(...clauses) : undefined)
+		.orderBy(asc(fileRevisions.submittedAt), asc(sourceFiles.id))
 		.limit(limit + 1);
 	const page = rows.slice(0, limit);
 	const last = page.at(-1);
 	return {
-		items: page.map((r) => ({ ...r, reviewedAt: iso(r.reviewedAt) })),
+		items: page.map((r) => ({ ...r, submittedAt: iso(r.submittedAt) })),
 		nextCursor:
-			rows.length > limit && last?.reviewedAt
-				? encodeCursor(updatedCursor(last.reviewedAt, last.fileId))
+			rows.length > limit && last?.submittedAt
+				? encodeCursor(updatedCursor(last.submittedAt, last.fileId))
 				: null
 	};
 }
@@ -484,7 +460,7 @@ export async function setArchiveUserRole(
 	});
 }
 
-export async function getSourceFileById(db: Db, fileId: string, principal: ArchivePrincipal) {
+export async function getSourceFileById(db: Db, fileId: string, _principal: ArchivePrincipal) {
 	const [row] = await db
 		.select({
 			fileId: sourceFiles.id,
@@ -492,26 +468,18 @@ export async function getSourceFileById(db: Db, fileId: string, principal: Archi
 			sourceSlug: sources.slug,
 			role: sourceFiles.role,
 			checkoutPath: sourceFiles.checkoutPath,
-			currentRevisionId: sql<string | null>`(
-				select id from file_revisions cur
-				where cur.source_file_id = ${sourceFiles.id} and cur.is_current = 1
-				limit 1
-			)`,
-			pendingRevisionId: sql<string | null>`(
-				select id from file_revisions pending
-				where pending.source_file_id = ${sourceFiles.id} and pending.review_status = 'pending'
-				limit 1
-			)`
+				currentRevisionId: sql<string | null>`(
+					select id from file_revisions cur
+					where cur.source_file_id = ${sourceFiles.id} and cur.is_current = 1
+					limit 1
+				)`
 		})
 		.from(sourceFiles)
 		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
 		.where(eq(sourceFiles.id, fileId))
 		.limit(1);
 	if (!row) throw new ArchiveHttpError(404, 'file not found');
-	return {
-		...row,
-		pendingRevisionId: archiveRoleAtLeast(principal.role, 'archive_reviewer') ? row.pendingRevisionId : null
-	};
+	return row;
 }
 
 export async function getRevision(db: Db, id: string, principal: ArchivePrincipal) {
@@ -531,14 +499,10 @@ export async function getRevision(db: Db, id: string, principal: ArchivePrincipa
 			detectedMediaType: archiveBlobs.detectedMediaType,
 			originalFilename: fileRevisions.originalFilename,
 			pageCount: fileRevisions.pageCount,
-			reviewStatus: fileRevisions.reviewStatus,
 			accessState: fileRevisions.accessState,
 			isCurrent: fileRevisions.isCurrent,
 			submittedBy: fileRevisions.submittedBy,
 			submittedAt: fileRevisions.submittedAt,
-			reviewedBy: fileRevisions.reviewedBy,
-			reviewedAt: fileRevisions.reviewedAt,
-			reviewNote: fileRevisions.reviewNote,
 			humanDownload: sources.humanDownload
 		})
 		.from(fileRevisions)
@@ -548,11 +512,9 @@ export async function getRevision(db: Db, id: string, principal: ArchivePrincipa
 		.where(eq(fileRevisions.id, id))
 		.limit(1);
 	if (!row) throw new ArchiveHttpError(404, 'revision not found');
-	requireReviewReadable(principal, row.reviewStatus, row.submittedBy);
 	return {
 		...row,
-		submittedAt: iso(row.submittedAt),
-		reviewedAt: iso(row.reviewedAt)
+		submittedAt: iso(row.submittedAt)
 	};
 }
 
@@ -564,7 +526,7 @@ export async function getRevisionForContent(
 ) {
 	const row = await getRevision(db, id, principal);
 	requireAccessState(principal, row.accessState);
-	if (opts.requireDownloadRight !== false && !row.humanDownload && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
+	if (opts.requireDownloadRight !== false && !row.humanDownload && principal.role !== 'archive_admin') {
 		throw new ArchiveHttpError(403, 'source rights do not allow human download');
 	}
 	return row;
@@ -588,10 +550,11 @@ export async function createUploadSession(
 	const now = new Date();
 	return db.transaction(async (tx) => {
 		const slot = await resolveUploadSourceFile(tx, principal, input);
-		const [blob] = await tx.select().from(archiveBlobs).where(eq(archiveBlobs.sha256, input.sha256)).limit(1);
-		if (blob?.storageState === 'verified') {
-			const revisionNo = await nextRevisionNo(tx, slot.id);
-			const [revision] = await tx
+			const [blob] = await tx.select().from(archiveBlobs).where(eq(archiveBlobs.sha256, input.sha256)).limit(1);
+			if (blob?.storageState === 'verified') {
+				const revisionNo = await nextRevisionNo(tx, slot.id);
+				await tx.update(fileRevisions).set({ isCurrent: false }).where(eq(fileRevisions.sourceFileId, slot.id));
+				const [revision] = await tx
 				.insert(fileRevisions)
 				.values({
 					id: uuid(),
@@ -601,8 +564,7 @@ export async function createUploadSession(
 					originalFilename: originalFilenameFor(slot, input.sha256, input.declaredMediaType, input.checkoutPath),
 					declaredMediaType: input.declaredMediaType,
 					artifactKind: 'original',
-					reviewStatus: 'pending',
-					isCurrent: false,
+					isCurrent: true,
 					submittedBy: principal.userId,
 					submittedAt: now
 				})
@@ -676,7 +638,7 @@ export async function markUploadSessionFailed(db: Db, sessionId: string, errorCo
 export async function getUploadSession(db: Db, id: string, principal: ArchivePrincipal) {
 	const [row] = await db.select().from(uploadSessions).where(eq(uploadSessions.id, id)).limit(1);
 	if (!row) throw new ArchiveHttpError(404, 'upload not found');
-	if (row.submittedBy !== principal.userId && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
+	if (row.submittedBy !== principal.userId && principal.role !== 'archive_admin') {
 		throw new ArchiveHttpError(404, 'upload not found');
 	}
 	return serializeUploadSession(row);
@@ -724,7 +686,7 @@ export async function reconcileUploadFinalization(
 		return db.transaction(async (tx) => {
 			const [session] = await tx.select().from(uploadSessions).where(eq(uploadSessions.id, sessionId)).limit(1);
 			if (!session) throw new ArchiveHttpError(404, 'upload not found');
-			if (session.submittedBy !== principal.userId && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
+			if (session.submittedBy !== principal.userId && principal.role !== 'archive_admin') {
 				throw new ArchiveHttpError(404, 'upload not found');
 			}
 			if (session.state === 'verified') return serializeUploadSession(session);
@@ -753,6 +715,10 @@ export async function reconcileUploadFinalization(
 			// preserves a readable value for the required column until that field is
 			// added to the wire contract.
 			const originalFilename = originalFilenameFor(sourceFile, result.sha256, session.declaredMediaType);
+			await tx
+				.update(fileRevisions)
+				.set({ isCurrent: false })
+				.where(eq(fileRevisions.sourceFileId, session.sourceFileId));
 			await tx.insert(fileRevisions).values({
 				id: uuid(),
 				sourceFileId: session.sourceFileId,
@@ -761,8 +727,7 @@ export async function reconcileUploadFinalization(
 				originalFilename,
 				declaredMediaType: session.declaredMediaType,
 				artifactKind: 'original',
-				reviewStatus: 'pending',
-				isCurrent: false,
+				isCurrent: true,
 				submittedBy: session.submittedBy,
 				submittedAt: now
 			});
@@ -787,7 +752,7 @@ export async function reconcileUploadFinalization(
 	return db.transaction(async (tx) => {
 		const [session] = await tx.select().from(uploadSessions).where(eq(uploadSessions.id, sessionId)).limit(1);
 		if (!session) throw new ArchiveHttpError(404, 'upload not found');
-		if (session.submittedBy !== principal.userId && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
+		if (session.submittedBy !== principal.userId && principal.role !== 'archive_admin') {
 			throw new ArchiveHttpError(404, 'upload not found');
 		}
 		if (session.state === 'failed') return serializeUploadSession(session);
@@ -837,7 +802,7 @@ export async function abortUploadSession(db: Db, id: string, principal: ArchiveP
 	return db.transaction(async (tx) => {
 		const [row] = await tx.select().from(uploadSessions).where(eq(uploadSessions.id, id)).limit(1);
 		if (!row) throw new ArchiveHttpError(404, 'upload not found');
-		if (row.submittedBy !== principal.userId && !archiveRoleAtLeast(principal.role, 'archive_reviewer')) {
+		if (row.submittedBy !== principal.userId && principal.role !== 'archive_admin') {
 			throw new ArchiveHttpError(403, 'upload owner required');
 		}
 		const [updated] = await tx
@@ -855,299 +820,6 @@ export async function abortUploadSession(db: Db, id: string, principal: ArchiveP
 	});
 }
 
-export async function listPendingReview(db: Db, cursorRaw: string | null, limit = 50, options: { include?: 'full' } = {}) {
-	const cursor = decodeCursor(cursorRaw);
-	const clauses = [eq(fileRevisions.reviewStatus, 'pending')];
-	if (cursor) {
-		const d = new Date(cursor.updatedAt);
-		clauses.push(or(gt(fileRevisions.submittedAt, d), and(eq(fileRevisions.submittedAt, d), gt(fileRevisions.id, cursor.id)))!);
-	}
-	const [rows, [{ total }]] = await Promise.all([
-		db
-			.select({
-				revisionId: fileRevisions.id,
-				sourceFileId: fileRevisions.sourceFileId,
-				sourceSlug: sources.slug,
-				title: sources.title,
-				titleEn: sources.titleEn,
-				fileRole: sourceFiles.role,
-				checkoutPath: sourceFiles.checkoutPath,
-				uploader: fileRevisions.submittedBy,
-				submittedAt: fileRevisions.submittedAt,
-				filename: fileRevisions.originalFilename,
-				declaredMediaType: fileRevisions.declaredMediaType,
-				detectedMediaType: archiveBlobs.detectedMediaType,
-				bytes: archiveBlobs.bytes,
-				pageCount: fileRevisions.pageCount,
-				sha256: fileRevisions.blobSha256,
-				currentRevision: sql<string | null>`(
-					select id from file_revisions cur
-					where cur.source_file_id = ${sourceFiles.id} and cur.is_current = 1
-					limit 1
-				)`
-			})
-			.from(fileRevisions)
-			.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
-			.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
-			.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
-			.where(and(...clauses))
-			.orderBy(asc(fileRevisions.submittedAt), asc(fileRevisions.id))
-			.limit(limit + 1),
-		db
-			.select({ total: sql<number>`count(*)` })
-			.from(fileRevisions)
-			.where(eq(fileRevisions.reviewStatus, 'pending'))
-	]);
-	const page = rows.slice(0, limit);
-	const last = page.at(-1);
-	const full = options.include === 'full' ? await reviewFullPayload(db, page) : null;
-	return {
-		items: page.map((r) => {
-			const { sourceFileId, ...publicRow } = r;
-			const base = {
-				...publicRow,
-				submittedAt: iso(r.submittedAt),
-				exactDuplicates: full?.exactDuplicates.get(r.revisionId) ?? []
-			};
-			if (!full) return base;
-			return {
-				...base,
-				currentRevisionSummary: full.currentRevisionSummary.get(sourceFileId) ?? null,
-				priorRevisions: full.priorRevisions.get(r.revisionId) ?? []
-			};
-		}),
-		nextCursor:
-			rows.length > limit && last?.submittedAt
-				? encodeCursor({ updatedAt: last.submittedAt.toISOString(), id: last.revisionId })
-				: null,
-		total: Number(total)
-	};
-}
-
-async function reviewFullPayload(
-	db: Db,
-	page: {
-		revisionId: string;
-		sourceFileId: string;
-		sha256: string | null;
-	}[]
-) {
-	if (page.length === 0) {
-		return {
-			exactDuplicates: new Map<string, unknown[]>(),
-			currentRevisionSummary: new Map<string, unknown>(),
-			priorRevisions: new Map<string, unknown[]>()
-		};
-	}
-	const revisionIds = page.map((row) => row.revisionId);
-	const sourceFileIds = [...new Set(page.map((row) => row.sourceFileId))];
-	const sha256s = [...new Set(page.flatMap((row) => (row.sha256 ? [row.sha256] : [])))];
-	const [duplicateRows, currentRows, priorRows] = await Promise.all([
-		sha256s.length
-			? db
-					.select({
-						revisionId: fileRevisions.id,
-						sourceFileId: fileRevisions.sourceFileId,
-						sourceSlug: sources.slug,
-						reviewStatus: fileRevisions.reviewStatus,
-						sha256: fileRevisions.blobSha256
-					})
-					.from(fileRevisions)
-					.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
-					.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
-					.where(inArray(fileRevisions.blobSha256, sha256s))
-			: [],
-		db
-			.select({
-				id: fileRevisions.id,
-				sourceFileId: fileRevisions.sourceFileId,
-				revisionNo: fileRevisions.revisionNo,
-				submittedAt: fileRevisions.submittedAt,
-				reviewedAt: fileRevisions.reviewedAt,
-				bytes: archiveBlobs.bytes,
-				sha256: fileRevisions.blobSha256
-			})
-			.from(fileRevisions)
-			.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
-			.where(and(inArray(fileRevisions.sourceFileId, sourceFileIds), eq(fileRevisions.isCurrent, true))),
-		db
-			.select({
-				id: fileRevisions.id,
-				sourceFileId: fileRevisions.sourceFileId,
-				revisionNo: fileRevisions.revisionNo,
-				reviewStatus: fileRevisions.reviewStatus,
-				reviewedBy: fileRevisions.reviewedBy,
-				reviewedAt: fileRevisions.reviewedAt,
-				reviewNote: fileRevisions.reviewNote,
-				submittedAt: fileRevisions.submittedAt
-			})
-			.from(fileRevisions)
-			.where(inArray(fileRevisions.sourceFileId, sourceFileIds))
-			.orderBy(desc(fileRevisions.revisionNo))
-	]);
-	const pageByRevision = new Map(page.map((row) => [row.revisionId, row]));
-	const exactDuplicates = new Map<string, { revisionId: string; sourceFileId: string; sourceSlug: string; reviewStatus: string }[]>();
-	for (const row of page) exactDuplicates.set(row.revisionId, []);
-	for (const duplicate of duplicateRows) {
-		for (const row of page) {
-			if (duplicate.sha256 === row.sha256 && duplicate.revisionId !== row.revisionId) {
-				exactDuplicates.get(row.revisionId)?.push({
-					revisionId: duplicate.revisionId,
-					sourceFileId: duplicate.sourceFileId,
-					sourceSlug: duplicate.sourceSlug,
-					reviewStatus: duplicate.reviewStatus
-				});
-			}
-		}
-	}
-	const currentRevisionSummary = new Map(
-		currentRows.map((row) => [
-			row.sourceFileId,
-			{
-				id: row.id,
-				revisionNo: row.revisionNo,
-				submittedAt: iso(row.submittedAt),
-				reviewedAt: iso(row.reviewedAt),
-				bytes: row.bytes,
-				sha256: row.sha256
-			}
-		])
-	);
-	const priorRevisions = new Map<
-		string,
-		{
-			id: string;
-			revisionNo: number;
-			reviewStatus: string;
-			reviewedBy: string | null;
-			reviewedAt: string | null;
-			reviewNote: string | null;
-			submittedAt: string | null;
-		}[]
-	>();
-	for (const row of page) priorRevisions.set(row.revisionId, []);
-	for (const prior of priorRows) {
-		for (const [revisionId, row] of pageByRevision) {
-			if (prior.sourceFileId === row.sourceFileId && prior.id !== revisionId) {
-				priorRevisions.get(revisionId)?.push({
-					id: prior.id,
-					revisionNo: prior.revisionNo,
-					reviewStatus: prior.reviewStatus,
-					reviewedBy: prior.reviewedBy,
-					reviewedAt: iso(prior.reviewedAt),
-					reviewNote: prior.reviewNote,
-					submittedAt: iso(prior.submittedAt)
-				});
-			}
-		}
-	}
-	return { exactDuplicates, currentRevisionSummary, priorRevisions };
-}
-
-export async function approveRevision(db: Db, revisionId: string, principal: ArchivePrincipal) {
-	return db.transaction(async (tx) => {
-		const [row] = await tx
-			.select({
-				revisionId: fileRevisions.id,
-				sourceFileId: fileRevisions.sourceFileId,
-				submittedBy: fileRevisions.submittedBy,
-				reviewStatus: fileRevisions.reviewStatus,
-				reviewedBy: fileRevisions.reviewedBy,
-				reviewedAt: fileRevisions.reviewedAt,
-				reviewNote: fileRevisions.reviewNote,
-				declaredMediaType: fileRevisions.declaredMediaType,
-				detectedMediaType: archiveBlobs.detectedMediaType,
-				humanDownload: sources.humanDownload
-			})
-			.from(fileRevisions)
-			.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
-			.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
-			.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
-			.where(eq(fileRevisions.id, revisionId))
-			.limit(1);
-		if (!row) throw new ArchiveHttpError(404, 'revision not found');
-		if (row.reviewStatus !== 'pending') {
-			throw new ArchiveHttpError(409, 'revision already decided', alreadyDecidedDetails(row));
-		}
-		if (row.submittedBy === principal.userId) throw new ArchiveHttpError(403, 'reviewer must differ from submitter');
-		if (row.declaredMediaType !== row.detectedMediaType) throw new ArchiveHttpError(409, 'declared media type does not match detected media type');
-		if (!row.humanDownload) throw new ArchiveHttpError(403, 'source rights do not allow approval');
-		await tx.update(fileRevisions).set({ isCurrent: false }).where(eq(fileRevisions.sourceFileId, row.sourceFileId));
-		const [updated] = await tx
-			.update(fileRevisions)
-			.set({
-				reviewStatus: 'approved',
-				isCurrent: true,
-				reviewedBy: principal.userId,
-				reviewedAt: new Date()
-			})
-			.where(eq(fileRevisions.id, revisionId))
-			.returning();
-		await recordArchiveEvent(tx, {
-			entityType: 'file_revision',
-			entityId: revisionId,
-			eventType: 'revision_approved',
-			actor: principal.userId
-		});
-		return updated;
-	});
-}
-
-export async function rejectRevision(db: Db, revisionId: string, principal: ArchivePrincipal, note: string) {
-	if (!note.trim()) throw new ArchiveHttpError(400, 'review note is required');
-	return db.transaction(async (tx) => {
-		const [row] = await tx
-			.select({
-				reviewStatus: fileRevisions.reviewStatus,
-				reviewedBy: fileRevisions.reviewedBy,
-				reviewedAt: fileRevisions.reviewedAt,
-				reviewNote: fileRevisions.reviewNote
-			})
-			.from(fileRevisions)
-			.where(eq(fileRevisions.id, revisionId))
-			.limit(1);
-		if (!row) throw new ArchiveHttpError(404, 'revision not found');
-		if (row.reviewStatus !== 'pending') {
-			throw new ArchiveHttpError(409, 'revision already decided', alreadyDecidedDetails(row));
-		}
-		const [updated] = await tx
-			.update(fileRevisions)
-			.set({ reviewStatus: 'rejected', reviewedBy: principal.userId, reviewedAt: new Date(), reviewNote: note })
-			.where(eq(fileRevisions.id, revisionId))
-			.returning();
-		await recordArchiveEvent(tx, {
-			entityType: 'file_revision',
-			entityId: revisionId,
-			eventType: 'revision_rejected',
-			actor: principal.userId,
-			details: { note }
-		});
-		return updated;
-	});
-}
-
-export async function withdrawRevision(db: Db, revisionId: string, principal: ArchivePrincipal) {
-	const [updated] = await db
-		.update(fileRevisions)
-		.set({ reviewStatus: 'withdrawn' })
-		.where(
-			and(
-				eq(fileRevisions.id, revisionId),
-				eq(fileRevisions.reviewStatus, 'pending'),
-				eq(fileRevisions.submittedBy, principal.userId)
-			)
-		)
-		.returning();
-	if (!updated) throw new ArchiveHttpError(404, 'own pending revision not found');
-	await recordArchiveEvent(db, {
-		entityType: 'file_revision',
-		entityId: revisionId,
-		eventType: 'revision_withdrawn',
-		actor: principal.userId
-	});
-	return updated;
-}
-
 export function capabilityExpiry(requestedTtlSeconds: number | undefined, now = new Date()): Date {
 	const ttl = Math.min(Math.max(Number(requestedTtlSeconds) || 120, 1), 120);
 	return new Date(now.getTime() + ttl * 1000);
@@ -1158,7 +830,7 @@ export async function issueCapability(db: Db, revisionId: string, principal: Arc
 		throw new ArchiveHttpError(403, 'assertion-authenticated principals cannot issue capabilities');
 	}
 	const revision = await getRevisionForContent(db, revisionId, principal);
-	if (!archiveRoleAtLeast(principal.role, 'archive_reviewer') && revision.submittedBy !== principal.userId) {
+	if (principal.role !== 'archive_admin' && revision.submittedBy !== principal.userId) {
 		throw new ArchiveHttpError(403, 'capability issuance is not allowed');
 	}
 	const jti = uuid();
@@ -1519,11 +1191,9 @@ export async function listArchiveFiles(
 	const limit = Math.min(Math.max(input.limit ?? 50, 1), 100);
 	const cursor = decodeArchiveListCursor(input.cursor ?? null, input.sort);
 	if (input.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
-	const clauses = [eq(fileRevisions.reviewStatus, 'approved'), eq(fileRevisions.isCurrent, true)];
-	if (!archiveRoleAtLeast(input.principal.role, 'archive_reviewer')) {
+	const clauses = [eq(fileRevisions.isCurrent, true)];
+	if (input.principal.role !== 'archive_admin') {
 		clauses.push(eq(fileRevisions.accessState, 'available'), eq(sources.humanDownload, true));
-	} else if (input.principal.role !== 'archive_admin') {
-		clauses.push(or(eq(fileRevisions.accessState, 'available'), eq(fileRevisions.accessState, 'embargoed'))!);
 	}
 	if (input.text?.trim()) {
 		const needle = likeNeedle(input.text.trim());
@@ -1555,9 +1225,8 @@ export async function listArchiveFiles(
 			if (Number.isNaN(d.getTime())) throw new ArchiveHttpError(400, 'invalid cursor');
 			clauses.push(
 				or(
-					lt(fileRevisions.reviewedAt, d),
-					and(eq(fileRevisions.reviewedAt, d), gt(sourceFiles.id, cursor.id)),
-					isNull(fileRevisions.reviewedAt)
+					lt(fileRevisions.submittedAt, d),
+					and(eq(fileRevisions.submittedAt, d), gt(sourceFiles.id, cursor.id))
 				)!
 			);
 		} else if (cursor.sort === 'title') {
@@ -1604,7 +1273,7 @@ export async function listArchiveFiles(
 					? [sql`${sources.yearStart} is null`, asc(sources.yearStart), asc(sourceFiles.id)]
 					: input.sort === 'significance'
 						? [sql`${sources.significance} is null`, desc(sources.significance), asc(sourceFiles.id)]
-						: [sql`${fileRevisions.reviewedAt} is null`, desc(fileRevisions.reviewedAt), asc(sourceFiles.id)];
+						: [desc(fileRevisions.submittedAt), asc(sourceFiles.id)];
 
 	const rows = await db
 		.select({
@@ -1614,7 +1283,7 @@ export async function listArchiveFiles(
 			checkoutPath: sourceFiles.checkoutPath,
 			sortOrder: sourceFiles.sortOrder,
 			revisionId: fileRevisions.id,
-			reviewedAt: fileRevisions.reviewedAt,
+			submittedAt: fileRevisions.submittedAt,
 			sha256: fileRevisions.blobSha256,
 			bytes: archiveBlobs.bytes,
 			mediaType: archiveBlobs.detectedMediaType,
@@ -1659,9 +1328,7 @@ export async function listArchiveFiles(
 					? encodeArchiveListCursor({ sort: input.sort, yearStart: last.yearStart, id: last.fileId })
 					: input.sort === 'significance'
 						? encodeArchiveListCursor({ sort: 'significance', significance: last.significance, id: last.fileId })
-						: last.reviewedAt
-							? encodeArchiveListCursor({ sort: 'updated', updatedAt: last.reviewedAt.toISOString(), id: last.fileId })
-							: null;
+						: encodeArchiveListCursor({ sort: 'updated', updatedAt: last.submittedAt.toISOString(), id: last.fileId });
 	}
 	return {
 		items: page.map((row) => ({
@@ -1672,7 +1339,7 @@ export async function listArchiveFiles(
 				checkoutPath: row.checkoutPath,
 				sortOrder: row.sortOrder,
 				revisionId: row.revisionId,
-				reviewedAt: iso(row.reviewedAt),
+				submittedAt: iso(row.submittedAt),
 				sha256: row.sha256,
 				bytes: row.bytes,
 				mediaType: row.mediaType,

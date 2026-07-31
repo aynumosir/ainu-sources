@@ -107,7 +107,7 @@ async function seedFixture(db: Db, fixture: Fixture): Promise<void> {
 	await db.insert(user).values([
 		{ id: 'eval-reader', name: 'Evaluation Reader', email: 'eval-reader@example.test' },
 		{ id: 'eval-contributor', name: 'Evaluation Contributor', email: 'eval-contributor@example.test' },
-		{ id: 'eval-reviewer', name: 'Evaluation Reviewer', email: 'eval-reviewer@example.test' }
+			{ id: 'eval-admin', name: 'Evaluation Admin', email: 'eval-admin@example.test' }
 	]);
 	await db.insert(schema.archiveRepositories).values({ id: 'eval-repo', name: 'search-eval' });
 	for (const [index, document] of fixture.documents.entries()) {
@@ -147,12 +147,9 @@ async function seedFixture(db: Db, fixture: Fixture): Promise<void> {
 			declaredMediaType: 'text/plain',
 			artifactKind: 'original',
 			pageCount: 1,
-			reviewStatus: 'approved',
-			isCurrent: true,
-			submittedBy: 'eval-contributor',
-			submittedAt: new Date(0),
-			reviewedBy: 'eval-reviewer',
-			reviewedAt: new Date(1)
+				isCurrent: true,
+				submittedBy: 'eval-contributor',
+				submittedAt: new Date(0)
 		});
 		await replaceOcrPages(db, `rev-${document.id}`, 'fixture', [{ page: 0, text: document.text }]);
 	}

@@ -57,7 +57,6 @@
 
 	const workspace = new WorkspaceState(untrack(() => initialPage));
 	const canEdit = $derived(archiveRoleAtLeastClient(role, 'archive_contributor'));
-	const canApprove = $derived(archiveRoleAtLeastClient(role, 'archive_reviewer'));
 	const pageCount = $derived(Math.max(1, revision.pageCount));
 	const readerStorageKey = $derived(`archive-reader:${file.fileId}`);
 	const flipStorageKey = $derived(`archive-workspace:pane-order:${archiveSession.principal?.userId ?? 'anonymous'}`);
@@ -503,44 +502,6 @@
 		clearConflict(page);
 	}
 
-	async function approveCurrent(): Promise<void> {
-		const page = currentPage;
-		const record = currentRecord;
-		if (!record?.editId || operationBusy) return;
-		operationBusy = true;
-		operationMessage = null;
-		try {
-			const response = await archiveFetch(`/api/archive/revisions/${revision.id}/text/pages/${page}/approve`, {
-				method: 'POST',
-				headers: { 'content-type': 'application/json' },
-				body: JSON.stringify({ edit_id: record.editId })
-			});
-			if (response.status === 404) {
-				operationMessage = '承認機能はまだ利用できません / Approval is not yet available.';
-				return;
-			}
-			if (response.status === 409) {
-				operationMessage = '本文が更新されました。新しい本文を確認してください / The text changed; review the new head.';
-				delete textRecords[textKey(page, record.variant)];
-				textRecords = { ...textRecords };
-				await loadPageText(page, true, record.variant);
-				return;
-			}
-			if (!response.ok) {
-				operationMessage = await responseMessage(response, `Approval failed (${response.status}).`);
-				return;
-			}
-			setCurrentStatus('approved');
-			if (historyEntries[page]) void loadHistory(page, true);
-		} finally {
-			operationBusy = false;
-		}
-	}
-
-	async function unapproveCurrent(): Promise<void> {
-		await simplePost('unapprove', 'Approval withdrawal is not yet available.', () => setCurrentStatus('edited'));
-	}
-
 	async function revertCurrent(): Promise<void> {
 		const page = currentPage;
 		await simplePost('revert', 'Revert is not yet available.', async (response) => {
@@ -554,7 +515,7 @@
 		});
 	}
 
-	async function simplePost(action: 'unapprove' | 'revert', unavailable: string, success: (response: Response) => void | Promise<void>): Promise<void> {
+	async function simplePost(action: 'revert', unavailable: string, success: (response: Response) => void | Promise<void>): Promise<void> {
 		if (operationBusy) return;
 		operationBusy = true;
 		operationMessage = null;
@@ -573,14 +534,6 @@
 		} finally {
 			operationBusy = false;
 		}
-	}
-
-	function setCurrentStatus(status: PageStatus): void {
-		const record = currentRecord;
-		if (!record) return;
-		textRecords = { ...textRecords, [textKey(currentPage, record.variant)]: { ...record, status } };
-		upsertStatus({ page: currentPage, status, variant: record.variant, manual: record.manual, ...(record.editId ? { edit_id: record.editId } : {}) });
-		upsertVariant(currentPage, { name: record.variant, label: record.variant, kind: record.variant === 'manual' ? 'manual' : record.variant === 'edited' ? 'edited' : 'machine', status, manual: record.manual });
 	}
 
 	async function loadHistory(page: number, force = false): Promise<void> {
@@ -754,9 +707,8 @@
 				record={currentRecord}
 				variants={currentVariants}
 				selected={currentSelected}
-				buffer={currentBuffer}
-				{canEdit}
-				{canApprove}
+					buffer={currentBuffer}
+					{canEdit}
 				saving={savingPages[currentPage] ?? false}
 				saveError={saveErrors[currentPage] ?? null}
 				note={notes[currentPage] ?? ''}
@@ -767,17 +719,14 @@
 				historyLoading={historyLoading[currentPage] ?? false}
 				historyUnavailable={historyUnavailable[currentPage] ?? false}
 				historyError={historyErrors[currentPage] ?? null}
-				{operationBusy}
 				onselect={(variant) => void selectVariant(variant)}
 				onstartedit={startEditing}
 				ontext={updateCurrentText}
 				onnote={(note) => (notes = { ...notes, [currentPage]: note })}
 				onsave={() => void saveCurrent()}
-				onapprove={() => void approveCurrent()}
 				onhistoryopen={() => void loadHistory(currentPage)}
 				onrestore={restoreEntry}
 				onrevert={() => void revertCurrent()}
-				onunapprove={() => void unapproveCurrent()}
 				onconflictnote={(note) => (conflictNotes = { ...conflictNotes, [currentPage]: note })}
 				onusemine={() => void useMine()}
 				onusetheirs={useTheirs}

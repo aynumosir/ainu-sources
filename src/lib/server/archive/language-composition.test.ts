@@ -191,7 +191,6 @@ async function seedWork(db: Db) {
 		declaredMediaType: 'application/pdf',
 		artifactKind: 'original',
 		pageCount: 2,
-		reviewStatus: 'approved',
 		isCurrent: true,
 		submittedBy: 'contributor',
 		submittedAt: new Date(1_000)

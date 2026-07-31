@@ -980,30 +980,23 @@ export const fileRevisions = sqliteTable(
 		pageCount: integer('page_count'),
 		pageStart: integer('page_start'),
 		pageEnd: integer('page_end'),
-		reviewStatus: text('review_status').notNull(),
 		accessState: text('access_state').notNull().default('available'),
 		isCurrent: integer('is_current', { mode: 'boolean' }).notNull().default(false),
 		submittedBy: text('submitted_by')
 			.notNull()
 			.references(() => user.id),
-		submittedAt: integer('submitted_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
-		reviewedBy: text('reviewed_by').references(() => user.id, { onDelete: 'set null' }),
-		reviewedAt: integer('reviewed_at', { mode: 'timestamp_ms' }),
-		reviewNote: text('review_note')
+		submittedAt: integer('submitted_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
 	},
 	(t) => [
 		uniqueIndex('file_revisions_source_file_revision_idx').on(t.sourceFileId, t.revisionNo),
 		uniqueIndex('source_file_one_current_revision')
 			.on(t.sourceFileId)
 			.where(sql`${t.isCurrent} = 1`),
-		uniqueIndex('source_file_one_pending_revision')
-			.on(t.sourceFileId)
-			.where(sql`${t.reviewStatus} = 'pending'`),
 		index('file_revisions_blob').on(t.blobSha256),
-		// Every archive catalog query filters on this pair; without it, the
-		// two partial unique indexes above (each scoped to one sourceFileId)
-		// don't help a query scanning across all sources.
-		index('file_revisions_review_status_current_idx').on(t.reviewStatus, t.isCurrent),
+		// Every archive catalog query filters on the current-revision flag across
+		// all sources; without it, the two partial unique indexes above (each
+		// scoped to one sourceFileId) don't help a query scanning across sources.
+		index('file_revisions_current_idx').on(t.isCurrent),
 		check('file_revisions_revision_no_check', sql`${t.revisionNo} > 0`),
 		check(
 			'file_revisions_artifact_kind_check',
@@ -1013,28 +1006,12 @@ export const fileRevisions = sqliteTable(
 		check('file_revisions_page_start_check', sql`${t.pageStart} is null or ${t.pageStart} > 0`),
 		check('file_revisions_page_end_check', sql`${t.pageEnd} is null or ${t.pageEnd} > 0`),
 		check(
-			'file_revisions_review_status_check',
-			sql`${t.reviewStatus} in ('pending', 'approved', 'rejected', 'withdrawn', 'expunged')`
-		),
-		check(
 			'file_revisions_access_state_check',
 			sql`${t.accessState} in ('available', 'embargoed', 'takedown')`
 		),
 		check(
 			'file_revisions_page_range_check',
 			sql`(${t.pageStart} is null and ${t.pageEnd} is null) or (${t.pageStart} is not null and ${t.pageEnd} is not null and ${t.pageEnd} >= ${t.pageStart})`
-		),
-		check(
-			'file_revisions_review_pair_check',
-			sql`(${t.reviewedBy} is null and ${t.reviewedAt} is null) or (${t.reviewedBy} is not null and ${t.reviewedAt} is not null)`
-		),
-		check(
-			'file_revisions_current_review_status_check',
-			sql`${t.isCurrent} = 0 or ${t.reviewStatus} = 'approved'`
-		),
-		check(
-			'file_revisions_expunged_blob_check',
-			sql`(${t.reviewStatus} = 'expunged' and ${t.blobSha256} is null and ${t.isCurrent} = 0) or (${t.reviewStatus} <> 'expunged' and ${t.blobSha256} is not null)`
 		)
 	]
 );
