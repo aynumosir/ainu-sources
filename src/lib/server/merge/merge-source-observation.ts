@@ -19,6 +19,7 @@
 import { and, eq, inArray, lt, sql } from 'drizzle-orm';
 import type { BatchItem } from 'drizzle-orm/batch';
 import { slugify } from '$lib/format';
+import { slugHasContent } from '../slug-content';
 import {
 	sources,
 	sourceLinks,
@@ -1889,14 +1890,19 @@ async function buildSourceRow(
 		slug = args.explicitSlug;
 	} else {
 		// Transliterated derivation (kana→romaji, Cyrillic→Latin, diacritics folded;
-		// kanji spans skipped — see slugify). With ≥6 chars of real material the
-		// title IS the slug; with less (e.g. an all-kanji title) keep the uniqueness
-		// last-resort: a short id suffix instead of bare numbering.
+		// kanji spans skipped — see slugify). The title IS the slug when what
+		// survives names the work; otherwise the id is the only honest
+		// distinguisher.
+		//
+		// The test is content, not length: `ainu-14` is what 「アイヌ語入門 練習編14」
+		// leaves behind and it clears any character count. Numbering such a base
+		// is worse still — it answers a collision the base never earned, which is
+		// where noainu-2 and ainu-no-to-3 came from — so a base that names
+		// nothing skips ensureUniqueSlug entirely.
 		const base = slugify((f.titleEn as string) || titleStr);
-		slug =
-			base.replace(/-/g, '').length >= 6
-				? await ensureUniqueSlug(db, base)
-				: await ensureUniqueSlug(db, `${base ? `${base}-` : 'source-'}${id.slice(0, 8)}`);
+		slug = slugHasContent(base)
+			? await ensureUniqueSlug(db, base)
+			: `${base ? `${base}-` : 'source-'}${id.slice(0, 8)}`;
 	}
 
 	const now = new Date();
