@@ -77,7 +77,15 @@ describe('resolveSlug', () => {
 describe('explicitSlugError', () => {
 	it('accepts a fresh well-formed slug', async () => {
 		expect(await explicitSlugError(db, '1875-dobrotvorsky-dictionary')).toBeNull();
-		expect(await explicitSlugError(db, 'ab')).toBeNull(); // 2 chars is the minimum
+	});
+
+	it('rejects a well-formed slug that names nothing', async () => {
+		// The pattern admits two characters, which identify no work. The same
+		// check is what keeps ainu-14 and noainu-2 from being minted by hand.
+		expect(await explicitSlugError(db, 'ab')).toMatch(/names nothing/);
+		expect(await explicitSlugError(db, 'ainu-14')).toMatch(/names nothing/);
+		expect(await explicitSlugError(db, 'noainu-2')).toMatch(/names nothing/);
+		expect(await explicitSlugError(db, '1875-ainu')).toMatch(/names nothing/);
 	});
 
 	it('rejects a malformed slug (pattern)', async () => {
