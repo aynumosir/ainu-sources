@@ -107,6 +107,11 @@ function deriveEntry(e: CatalogEntry): {
 export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<ImporterSummary> {
 	const DRY_RUN = opts.dryRun ?? false;
 	const PLAN = opts.plan ?? false;
+	// The two report different things and only one branch can run; taking plan
+	// silently would make --dry-run mean something other than it says.
+	if (DRY_RUN && PLAN) {
+		throw new Error('--dry-run and --plan are mutually exclusive: pass one');
+	}
 	const planned = new Map<string, number>();
 	const LIMIT = opts.limit ?? Infinity;
 	if (!fs.existsSync(CATALOG_FILE)) {
@@ -133,14 +138,44 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 	 */
 	async function targetFor(slug: string | undefined): Promise<string | undefined> {
 		if (!slug) return undefined;
-		const [live] = await db.select({ id: sources.id }).from(sources).where(eq(sources.slug, slug)).limit(1);
-		if (live) return live.id;
-		const [red] = await db
-			.select({ id: slugRedirects.sourceId })
-			.from(slugRedirects)
-			.where(eq(slugRedirects.oldSlug, slug))
+		const [live] = await db
+			.select({ id: sources.id })
+			.from(sources)
+			.where(eq(sources.slug, slug))
 			.limit(1);
-		return red?.id;
+		const [red] = live
+			? [undefined]
+			: await db
+					.select({ id: slugRedirects.sourceId })
+					.from(slugRedirects)
+					.where(eq(slugRedirects.oldSlug, slug))
+					.limit(1);
+		return usable(live?.id ?? red?.id);
+	}
+
+	/**
+	 * A merged or soft-deleted record must never be handed to the engine as an
+	 * attach target: attaching would revive a record the catalogue has retired.
+	 * A merged one still points at its winner, so follow that; a soft-deleted
+	 * one has nowhere to go, and returning nothing lets ordinary identity
+	 * resolution decide.
+	 */
+	async function usable(id: string | undefined): Promise<string | undefined> {
+		const seen = new Set<string>();
+		let cur = id;
+		while (cur && !seen.has(cur)) {
+			seen.add(cur);
+			const [row] = await db
+				.select({ status: sources.status, winner: sources.mergedIntoSourceId })
+				.from(sources)
+				.where(eq(sources.id, cur))
+				.limit(1);
+			if (!row) return undefined;
+			if (row.status === 'soft_deleted') return undefined;
+			if (row.status !== 'merged') return cur;
+			cur = row.winner ?? undefined;
+		}
+		return undefined;
 	}
 
 	const seen = new Set<string>();
