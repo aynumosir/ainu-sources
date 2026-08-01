@@ -861,6 +861,8 @@ export function geoSubjectText(title: string | null | undefined): string {
 
 export interface CatalogEntry {
 	source_dir: string;
+	/** the db.aynu.org slug the folder's metadata.yaml names, when it has one */
+	source_slug?: string;
 	title: string;
 	title_en?: string;
 	type: string;

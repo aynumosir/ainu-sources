@@ -19,7 +19,9 @@
  * Derivation    : curated_assertion @ 0.8 (≤ the bootstrap band, so it never clobbers
  *                  a bootstrapped/editorial value; noop-by-valueHash regardless).
  *
- * Flags: --db file:/path (or DATABASE_URL) [--token T] [--dry-run] [--limit N].
+ * Flags: --db file:/path (or DATABASE_URL) [--token T] [--dry-run] [--plan] [--limit N].
+ *        --plan resolves each entry's identity against the database and reports
+ *        attach vs create, writing nothing; --dry-run stops before that.
  *
  * Run:  AINU_ROOT=~/projects/Ainu bun run import:dictionaries
  *       DATABASE_URL=file:/tmp/clone.db bun run import:dictionaries --dry-run
@@ -46,6 +48,10 @@ import {
 	type ImporterSummary
 } from './lib/run';
 import type { MergeInput } from '../../src/lib/server/merge';
+import { resolveIdentity } from '../../src/lib/server/merge/identity';
+import { normalizeIdentifier } from '../../src/lib/server/merge/normalize';
+import { eq } from 'drizzle-orm';
+import { sources, slugRedirects } from '../../src/lib/server/db/schema';
 
 const AINU_ROOT = process.env.AINU_ROOT ?? path.resolve(import.meta.dir, '../../..');
 const DICT_DIR = path.join(AINU_ROOT, 'ainu-dictionaries');
@@ -100,6 +106,8 @@ function deriveEntry(e: CatalogEntry): {
 
 export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<ImporterSummary> {
 	const DRY_RUN = opts.dryRun ?? false;
+	const PLAN = opts.plan ?? false;
+	const planned = new Map<string, number>();
 	const LIMIT = opts.limit ?? Infinity;
 	if (!fs.existsSync(CATALOG_FILE)) {
 		throw new Error(`catalog not found: ${CATALOG_FILE}\n  Set AINU_ROOT to the dir containing ainu-dictionaries/.`);
@@ -110,7 +118,30 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 		`${DRY_RUN ? '[DRY-RUN] ' : ''}import:dictionaries  (${entries.length}/${catalog.length} entries)`
 	);
 
-	const runId = DRY_RUN ? null : await openRun(db, { origin: ORIGIN, mode: 'full', collectorVersion: 'import-dictionaries@1' });
+	const runId = DRY_RUN || PLAN ? null : await openRun(db, { origin: ORIGIN, mode: 'full', collectorVersion: 'import-dictionaries@1' });
+
+	/**
+	 * The source a folder's catalogue slug points at.
+	 *
+	 * Identity normally runs off the `repo_path` identifier, which only records
+	 * seeded from here carry. A folder whose record was made another way — by
+	 * hand, through the API, or harvested from an external catalogue — has no
+	 * such identifier, and the engine then creates a SECOND source for it. The
+	 * folder's own `source_slug` already names the right record, so resolve it
+	 * (through a redirect if the slug has since been renamed) and hand the
+	 * engine a deterministic attach target.
+	 */
+	async function targetFor(slug: string | undefined): Promise<string | undefined> {
+		if (!slug) return undefined;
+		const [live] = await db.select({ id: sources.id }).from(sources).where(eq(sources.slug, slug)).limit(1);
+		if (live) return live.id;
+		const [red] = await db
+			.select({ id: slugRedirects.sourceId })
+			.from(slugRedirects)
+			.where(eq(slugRedirects.oldSlug, slug))
+			.limit(1);
+		return red?.id;
+	}
 
 	const seen = new Set<string>();
 	const stats = { applied: 0, noop: 0, created: 0, other: 0, persons: 0, places: 0, tags: 0 };
@@ -118,6 +149,23 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 	for (const e of entries) {
 		seen.add(e.source_dir);
 		const { fields, author, dialect } = deriveEntry(e);
+
+		if (PLAN) {
+			// Ask the engine what it WOULD do with this entry, writing nothing.
+			// --dry-run stops before identity resolution, so it cannot show that
+			// a folder is about to be created a second time rather than attached.
+			const decision = await resolveIdentity(db, {
+				identifiers: [
+					normalizeIdentifier({ kind: 'repo_path', value: `${ORIGIN}:${e.source_dir}` })
+				],
+				fields,
+				targetSourceId: await targetFor(e.source_slug)
+			});
+			planned.set(decision.action, (planned.get(decision.action) ?? 0) + 1);
+			const mark = decision.action === 'create' ? '! ' : '  ';
+			console.log(`${mark}${e.source_dir}: ${decision.action} (${decision.matchDecision})`);
+			continue;
+		}
 
 		if (DRY_RUN) {
 			console.log(`  ${e.source_dir}: ${Object.keys(fields).length} fields`);
@@ -132,6 +180,7 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 			evidence: 0,
 			fields,
 			identifiers: [{ kind: 'repo_path', value: `${ORIGIN}:${e.source_dir}` }],
+			targetSourceId: await targetFor(e.source_slug),
 			links: [],
 			presence: 'seen',
 			runId,
@@ -157,12 +206,20 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 	}
 
 	let drifted = 0;
-	if (!DRY_RUN) {
+	if (!DRY_RUN && !PLAN) {
 		drifted = await driftMissing(db, ORIGIN, seen, { derivation: DERIVATION, confidence: CONFIDENCE, runId });
 		await closeRun(db, runId!, {
 			status: 'completed',
 			summary: { ...stats, drifted, entries: entries.length }
 		});
+	}
+
+	if (PLAN) {
+		const parts = [...planned].map(([k, v]) => `${k}=${v}`).join(' ');
+		console.log(`[PLAN] would: ${parts || 'nothing'}`);
+		const creates = planned.get('create') ?? 0;
+		if (creates) console.log(`[PLAN] ${creates} folder(s) would be CREATED rather than attached`);
+		return summarize('dictionaries', stats, 0, { entries: entries.length });
 	}
 
 	console.log(
