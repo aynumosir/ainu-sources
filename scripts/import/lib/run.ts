@@ -39,6 +39,8 @@ export interface ImporterRunOptions {
 	dryRun?: boolean;
 	/** cap the number of upstream records processed (pass-through --limit). */
 	limit?: number;
+	/** resolve each record's identity and report attach/create, writing nothing. */
+	plan?: boolean;
 }
 
 /**
@@ -121,8 +123,9 @@ export function parseImporterCli(): { db: Db; opts: ImporterRunOptions } {
 		process.exit(1);
 	}
 	const dryRun = process.argv.includes('--dry-run');
+	const plan = process.argv.includes('--plan');
 	const limit = argValue('--limit') ? Number(argValue('--limit')) : Infinity;
-	return { db: openDb(url, authToken), opts: { dryRun, limit } };
+	return { db: openDb(url, authToken), opts: { dryRun, plan, limit } };
 }
 
 export interface OpenRunOpts {
