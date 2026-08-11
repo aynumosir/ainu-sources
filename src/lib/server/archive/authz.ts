@@ -3,6 +3,16 @@ import { createRemoteJWKSet, jwtVerify } from 'jose';
 import { and, eq } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import { env } from '$env/dynamic/private';
+// Imported statically, and it must stay that way. `import()` inside a request
+// handler defers module loading to whichever request reaches it first in a fresh
+// isolate; concurrent requests then await a module-load promise belonging to that
+// first request's I/O context, which their own context can never settle. The
+// runtime cancels them with "your Worker's code had hung and would never generate
+// a response". Every catalogue page resolves a session, so a cold isolate taking
+// simultaneous traffic returned 500 for a share of those requests. `auth` builds
+// itself lazily on first property access, so a static import still costs nothing
+// at startup and still leaves `vite build` free of auth secrets.
+import { auth } from '$lib/server/auth';
 import { appUserRoles, githubLoginCache, userIdentities } from '$lib/server/db/schema';
 import type * as schema from '$lib/server/db/schema';
 import { recordArchiveEvent } from './audit';
@@ -82,7 +92,6 @@ async function roleForUser(db: Db, userId: string): Promise<ArchiveRole | null> 
 }
 
 async function defaultAppSessionLookup(request: Request): Promise<AppSessionUser | null> {
-	const { auth } = await import('$lib/server/auth');
 	const session = await auth.api.getSession({ headers: request.headers });
 	if (!session) return null;
 	return { id: session.user.id, email: session.user.email };
