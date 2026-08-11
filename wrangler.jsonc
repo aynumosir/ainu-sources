@@ -7,23 +7,9 @@
 	"name": "ainu-sources",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2026-04-29",
-	/**
-	 * `no_handle_cross_request_promise_resolution` keeps route modules loadable
-	 * under concurrency. SvelteKit's generated server manifest reaches each of its
-	 * route modules through `__memo(() => import('./nodes/N.js'))`, which memoises
-	 * the module-load promise the first time a route is hit. In a fresh isolate that
-	 * first hit belongs to one request, and every request arriving at the same route
-	 * before the module finishes loading awaits a promise created in a context that
-	 * is not its own. Since compatibility date 2024-10-14 the runtime cancels those
-	 * continuations and reports "your Worker's code had hung and would never generate
-	 * a response", so a burst of traffic against a cold isolate returned 500 for a
-	 * share of its requests. The behaviour this restores is scoped to promises that
-	 * cross request contexts; the memoised imports carry no request state.
-	 */
 	"compatibility_flags": [
 		"nodejs_compat",
-		"nodejs_als",
-		"no_handle_cross_request_promise_resolution"
+		"nodejs_als"
 	],
 	"assets": {
 		"binding": "ASSETS",
