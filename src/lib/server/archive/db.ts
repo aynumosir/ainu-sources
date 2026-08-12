@@ -1,5 +1,6 @@
 import { and, asc, desc, eq, exists, gt, gte, inArray, isNull, lt, max, notExists, or, sql } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
+import { alias } from 'drizzle-orm/sqlite-core';
 import { env } from '$env/dynamic/private';
 import {
 	appUserRoles,
@@ -49,7 +50,7 @@ export type ArchiveBudgetKind = 'download' | 'view';
 export type CapabilityRedemptionRequest =
 	| { kind: 'full' }
 	| { kind: 'range_header'; rangeHeader: string | null };
-export type ArchiveFileSort = 'updated' | 'title' | 'year-desc' | 'year-asc' | 'significance';
+export type ArchiveWorkSort = 'updated' | 'title' | 'year-desc' | 'year-asc' | 'significance';
 export type ArchiveUserKind = 'person' | 'system' | 'machine';
 
 export type ArchiveAdminUser = {
@@ -1142,7 +1143,7 @@ function encodeArchiveListCursor(cursor: ArchiveListCursor): string {
 	return base64url(new TextEncoder().encode(JSON.stringify(cursor)));
 }
 
-function decodeArchiveListCursor(value: string | null, sort: ArchiveFileSort): ArchiveListCursor | null {
+function decodeArchiveListCursor(value: string | null, sort: ArchiveWorkSort): ArchiveListCursor | null {
 	if (!value) return null;
 	try {
 		const parsed = JSON.parse(new TextDecoder().decode(fromBase64url(value))) as Record<string, unknown>;
@@ -1169,14 +1170,39 @@ function likeNeedle(value: string): string {
 	return `%${value.toLocaleLowerCase().replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%`;
 }
 
-export async function listArchiveFiles(
+const pickFile = alias(sourceFiles, 'pick_file');
+const pickRevision = alias(fileRevisions, 'pick_revision');
+
+/**
+ * The one file of a work a reader would open. A work checked out into two
+ * repositories holds a file slot per repository, and a scan and its derivative
+ * are separate slots again, so a listing keyed on file slots shows the same
+ * book several times over. Scans come first, then whole-book substitutes, then
+ * the material that only accompanies them.
+ */
+function representativeFile(db: Db, principal: ArchivePrincipal) {
+	const reachable = principal.role === 'archive_admin' ? [] : [eq(pickRevision.accessState, 'available')];
+	return db
+		.select({ id: pickFile.id })
+		.from(pickFile)
+		.innerJoin(pickRevision, and(eq(pickRevision.sourceFileId, pickFile.id), eq(pickRevision.isCurrent, true)))
+		.where(and(eq(pickFile.sourceId, sources.id), ...reachable))
+		.orderBy(
+			sql`case ${pickFile.role} when 'scan' then 0 when 'epub' then 1 when 'supplement' then 2 else 3 end`,
+			asc(pickFile.sortOrder),
+			asc(pickFile.id)
+		)
+		.limit(1);
+}
+
+export async function listArchiveWorks(
 	db: Db,
 	input: {
 		text?: string;
 		dialect?: string;
 		decade?: number;
 		ocr?: 'with' | 'without';
-		sort: ArchiveFileSort;
+		sort: ArchiveWorkSort;
 		cursor?: string | null;
 		limit?: number;
 		principal: ArchivePrincipal;
@@ -1185,7 +1211,10 @@ export async function listArchiveFiles(
 	const limit = Math.min(Math.max(input.limit ?? 50, 1), 100);
 	const cursor = decodeArchiveListCursor(input.cursor ?? null, input.sort);
 	if (input.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
-	const clauses = [eq(fileRevisions.isCurrent, true)];
+	const clauses = [
+		eq(fileRevisions.isCurrent, true),
+		sql`${sourceFiles.id} = (${representativeFile(db, input.principal)})`
+	];
 	if (input.principal.role !== 'archive_admin') {
 		clauses.push(eq(fileRevisions.accessState, 'available'), eq(sources.humanDownload, true));
 	}

@@ -5,7 +5,7 @@ import { db } from '$lib/server/db';
 import { fileRevisions, sourceFiles } from '$lib/server/db/schema';
 import { resolveArchivePrincipal } from '$lib/server/archive/authz';
 import { searchArchive } from '$lib/server/archive/ocr';
-import { listArchiveFiles } from '$lib/server/archive/db';
+import { listArchiveWorks } from '$lib/server/archive/db';
 import { revisionPageFolios } from '$lib/server/db/schema';
 import { ArchiveHttpError } from '$lib/server/archive/errors';
 import { DEPLOYED_SEARCH_MODES, type SearchMode } from '$lib/server/archive/search-modes';
@@ -86,22 +86,14 @@ export const load: PageServerLoad = async ({ request, url }) => {
 
 /**
  * Catalogue-metadata matches for the same query, so metadata-only works remain
- * findable even when they have no OCR text. Collapses multiple files of one work
- * to a single entry, keeping the first file id for a reader link.
+ * findable even when they have no OCR text.
  */
 async function searchArchiveWorks(
 	principal: NonNullable<Awaited<ReturnType<typeof resolveArchivePrincipal>>>,
 	q: string
 ) {
-	const { items } = await listArchiveFiles(db, { text: q, sort: 'title', limit: 50, principal });
-	const seen = new Set<string>();
-	const works: Array<{ slug: string; fileId: string; source: (typeof items)[number]['source'] }> = [];
-	for (const item of items) {
-		if (seen.has(item.source.slug)) continue;
-		seen.add(item.source.slug);
-		works.push({ slug: item.source.slug, fileId: item.file.fileId, source: item.source });
-	}
-	return works;
+	const { items } = await listArchiveWorks(db, { text: q, sort: 'title', limit: 50, principal });
+	return items.map((item) => ({ slug: item.source.slug, fileId: item.file.fileId, source: item.source }));
 }
 
 /**

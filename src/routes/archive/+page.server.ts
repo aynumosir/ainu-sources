@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
-import { listArchiveFiles } from '$lib/server/archive/db';
+import { listArchiveWorks } from '$lib/server/archive/db';
 import { getArchiveStats } from '$lib/server/archive/stats';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
 import { parseArchiveFilters } from '$lib/archive/filters';
@@ -22,7 +22,7 @@ export const load: PageServerLoad = async ({ url, parent, platform }) => {
 	// rather than after.
 	const statsPromise = getArchiveStats(db, { platform });
 
-	const result = await listArchiveFiles(db, {
+	const result = await listArchiveWorks(db, {
 		text: filters.text,
 		dialect: filters.dialect,
 		decade: filters.decade,

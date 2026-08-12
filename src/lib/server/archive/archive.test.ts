@@ -22,7 +22,7 @@ import {
 	getSourceFileById,
 	getUsageSummary,
 	issueCapability,
-	listArchiveFiles,
+	listArchiveWorks,
 	listArchiveUsers,
 	listFiles,
 	listSourceFiles,
@@ -1511,7 +1511,7 @@ describe('archive DB flows', () => {
 		]);
 	});
 
-	it('returns full filtered archive file pages from SQL filters', async () => {
+	it('returns full filtered archive work pages from SQL filters', async () => {
 		await seedRevision();
 		await db.update(schema.sources).set({ title: 'Unmatched Early', yearStart: 1850 }).where(eq(schema.sources.id, 'source-1'));
 		await seedArchiveListRow({
@@ -1547,7 +1547,7 @@ describe('archive DB flows', () => {
 			submittedAt: new Date(6_000)
 		});
 
-		const first = await listArchiveFiles(db, {
+		const first = await listArchiveWorks(db, {
 			text: 'kamuy',
 			dialect: 'hokkaido',
 			decade: 1900,
@@ -1557,7 +1557,7 @@ describe('archive DB flows', () => {
 		});
 		expect(first.items.map((item) => item.source.title)).toEqual(['Kamuy Gamma', 'Kamuy Beta']);
 		expect(first.nextCursor).toBeTruthy();
-		const second = await listArchiveFiles(db, {
+		const second = await listArchiveWorks(db, {
 			text: 'kamuy',
 			dialect: 'hokkaido',
 			decade: 1900,
@@ -1569,7 +1569,93 @@ describe('archive DB flows', () => {
 		expect(second.items.map((item) => item.source.title)).toEqual(['Kamuy Alpha']);
 	});
 
-	it('paginates archive file listings stably for every sort order', async () => {
+	it('lists a work once however many file slots carry it', async () => {
+		await seedRevision();
+		await db.insert(schema.archiveRepositories).values({ id: 'repo-2', name: 'grammar' });
+		// The same book, checked out into a second repository, and a derivative
+		// of it alongside: three slots, one work, one card.
+		await db.insert(schema.sourceFiles).values([
+			{
+				id: 'file-1-grammar',
+				sourceId: 'source-1',
+				role: 'scan',
+				checkoutRepoId: 'repo-2',
+				checkoutPath: 'source-one/source.pdf',
+				sortOrder: 0,
+				createdBy: 'contributor'
+			},
+			{
+				id: 'file-1-bbox',
+				sourceId: 'source-1',
+				role: 'derivative',
+				checkoutRepoId: 'repo-2',
+				checkoutPath: 'source-one/bbox.xml',
+				sortOrder: 0,
+				createdBy: 'contributor'
+			}
+		]);
+		await db.insert(schema.fileRevisions).values([
+			{
+				id: 'rev-1-grammar',
+				sourceFileId: 'file-1-grammar',
+				revisionNo: 1,
+				blobSha256: sha,
+				originalFilename: 'source.pdf',
+				declaredMediaType: 'application/pdf',
+				artifactKind: 'original',
+				pageCount: 12,
+				isCurrent: true,
+				submittedBy: 'contributor',
+				submittedAt: new Date(2_000)
+			},
+			{
+				id: 'rev-1-bbox',
+				sourceFileId: 'file-1-bbox',
+				revisionNo: 1,
+				blobSha256: sha,
+				originalFilename: 'bbox.xml',
+				declaredMediaType: 'application/xml',
+				artifactKind: 'original',
+				isCurrent: true,
+				submittedBy: 'contributor',
+				submittedAt: new Date(3_000)
+			}
+		]);
+
+		const result = await listArchiveWorks(db, { sort: 'title', limit: 50, principal: reader });
+		expect(result.items.map((item) => item.source.slug)).toEqual(['source-one']);
+		expect(result.items[0].file.role).toBe('scan');
+	});
+
+	it('falls back to the reachable file when a work has no readable scan', async () => {
+		await seedRevision();
+		await db.insert(schema.sourceFiles).values({
+			id: 'file-1-epub',
+			sourceId: 'source-1',
+			role: 'epub',
+			checkoutRepoId: 'repo-1',
+			checkoutPath: 'books/資料一.epub',
+			createdBy: 'contributor'
+		});
+		await db.insert(schema.fileRevisions).values({
+			id: 'rev-1-epub',
+			sourceFileId: 'file-1-epub',
+			revisionNo: 1,
+			blobSha256: sha,
+			originalFilename: '資料一.epub',
+			declaredMediaType: 'application/epub+zip',
+			artifactKind: 'original',
+			isCurrent: true,
+			submittedBy: 'contributor',
+			submittedAt: new Date(2_000)
+		});
+		await db.update(schema.fileRevisions).set({ accessState: 'takedown' }).where(eq(schema.fileRevisions.id, 'rev-1'));
+
+		const result = await listArchiveWorks(db, { sort: 'title', limit: 50, principal: reader });
+		expect(result.items.map((item) => item.file.fileId)).toEqual(['file-1-epub']);
+	});
+
+	it('paginates archive work listings stably for every sort order', async () => {
 		await seedRevision();
 		await db
 			.update(schema.sources)
@@ -1581,8 +1667,8 @@ describe('archive DB flows', () => {
 		await seedArchiveListRow({ index: 4, title: 'Bravo', yearStart: 1902, submittedAt: new Date(5_000) });
 
 		async function titles(sort: 'updated' | 'title' | 'year-desc' | 'year-asc') {
-			const first = await listArchiveFiles(db, { sort, limit: 2, principal: reader });
-			const second = await listArchiveFiles(db, { sort, limit: 2, cursor: first.nextCursor, principal: reader });
+			const first = await listArchiveWorks(db, { sort, limit: 2, principal: reader });
+			const second = await listArchiveWorks(db, { sort, limit: 2, cursor: first.nextCursor, principal: reader });
 			return [...first.items, ...second.items].map((item) => item.source.title);
 		}
 
@@ -1592,7 +1678,7 @@ describe('archive DB flows', () => {
 		await expect(titles('year-asc')).resolves.toEqual(['Alpha', 'Bravo', 'Charlie', 'Delta']);
 	});
 
-	it('filters archive files by text coverage exactly as the in-memory rule did', async () => {
+	it('filters archive works by text coverage exactly as the in-memory rule did', async () => {
 		await seedRevision();
 		await db.update(schema.sources).set({ title: 'Plain One' }).where(eq(schema.sources.id, 'source-1'));
 		await seedArchiveListRow({ index: 2, title: 'Mixed Text', submittedAt: new Date(2_000) });
@@ -1606,7 +1692,7 @@ describe('archive DB flows', () => {
 			{ revisionId: 'list-rev-5', variant: 'gemini', status: 'complete' }
 		]);
 
-		const all = await listArchiveFiles(db, { sort: 'title', limit: 50, principal: reader });
+		const all = await listArchiveWorks(db, { sort: 'title', limit: 50, principal: reader });
 		const seededCoverage: Record<string, string[]> = {
 			'list-rev-2': ['none', 'partial'],
 			'list-rev-3': ['none'],
@@ -1625,13 +1711,13 @@ describe('archive DB flows', () => {
 			['without', ['No Rows', 'None Only', 'Plain One']]
 		] as const;
 		for (const [ocr, titles] of cases) {
-			const result = await listArchiveFiles(db, { ocr, sort: 'title', limit: 50, principal: reader });
+			const result = await listArchiveWorks(db, { ocr, sort: 'title', limit: 50, principal: reader });
 			expect(result.items.map((item) => item.source.title)).toEqual([...titles]);
 			expect(result.items.map((item) => item.file.revisionId)).toEqual(inMemoryRule(ocr === 'with'));
 		}
 	});
 
-	it('sorts archive files by significance with unscored works last', async () => {
+	it('sorts archive works by significance with unscored works last', async () => {
 		await seedRevision();
 		await db.update(schema.sources).set({ title: 'Zulu' }).where(eq(schema.sources.id, 'source-1'));
 		await seedArchiveListRow({ index: 2, title: 'Bravo', submittedAt: new Date(2_000) });
@@ -1642,9 +1728,9 @@ describe('archive DB flows', () => {
 		await db.update(schema.sources).set({ significance: 0.9 }).where(eq(schema.sources.id, 'list-source-3'));
 		await db.update(schema.sources).set({ significance: 0.2 }).where(eq(schema.sources.id, 'list-source-5'));
 
-		const first = await listArchiveFiles(db, { sort: 'significance', limit: 2, principal: reader });
-		const second = await listArchiveFiles(db, { sort: 'significance', limit: 2, cursor: first.nextCursor, principal: reader });
-		const third = await listArchiveFiles(db, { sort: 'significance', limit: 2, cursor: second.nextCursor, principal: reader });
+		const first = await listArchiveWorks(db, { sort: 'significance', limit: 2, principal: reader });
+		const second = await listArchiveWorks(db, { sort: 'significance', limit: 2, cursor: first.nextCursor, principal: reader });
+		const third = await listArchiveWorks(db, { sort: 'significance', limit: 2, cursor: second.nextCursor, principal: reader });
 		expect(first.items.map((item) => item.source.title)).toEqual(['Alpha', 'Bravo']);
 		expect(second.items.map((item) => item.source.title)).toEqual(['Charlie', 'Zulu']);
 		expect(third.items.map((item) => item.source.title)).toEqual(['Echo']);

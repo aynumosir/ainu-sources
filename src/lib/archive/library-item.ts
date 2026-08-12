@@ -1,9 +1,9 @@
-import type { listArchiveFiles } from '$lib/server/archive/db';
+import type { listArchiveWorks } from '$lib/server/archive/db';
 import type { OcrCoverage } from './ocr';
 
-/** One library card: an archive list row with its revision's OCR coverage resolved. */
+/** One library card: a work, the file a reader opens, and that file's OCR coverage. */
 export type ArchiveLibraryItem = Omit<
-	Awaited<ReturnType<typeof listArchiveFiles>>['items'][number],
+	Awaited<ReturnType<typeof listArchiveWorks>>['items'][number],
 	'coverage'
 > & {
 	coverage: OcrCoverage[];
