@@ -96,16 +96,20 @@ export function cacheKeyUrl(request: Request, url: URL): string {
  * `CacheStorage` does not declare, so the surface is named rather than depending on
  * ambient Workers types being in scope.
  */
-interface EdgeCache {
+export interface EdgeCache {
 	match(request: Request): Promise<Response | undefined>;
 	put(request: Request, response: Response): Promise<void>;
+}
+
+/** Absent outside Workers — `bun run dev` and the test suite simply skip caching. */
+export function edgeCache(platform: App.Platform | undefined): EdgeCache | undefined {
+	return (platform?.caches as { default?: EdgeCache } | undefined)?.default;
 }
 
 export const handleEdgeCache: Handle = async ({ event, resolve }) => {
 	if (!isCacheableRequest(event.request, event.url)) return resolve(event);
 
-	// Absent outside Workers — `bun run dev` and the test suite simply skip caching.
-	const cache = (event.platform?.caches as { default?: EdgeCache } | undefined)?.default;
+	const cache = edgeCache(event.platform);
 	if (!cache) return resolve(event);
 
 	const key = new Request(cacheKeyUrl(event.request, event.url), { method: 'GET' });

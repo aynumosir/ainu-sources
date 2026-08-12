@@ -257,7 +257,7 @@ describe('archive collection statistics', () => {
 				ingestedAt: new Date(9_000)
 			}
 		]);
-		const stats = await getArchiveStats(db, 10_000);
+		const stats = await getArchiveStats(db, { now: 10_000 });
 
 		expect(stats.ocr.worksWithText).toBe(3);
 		expect(stats.ocr.worksWithPageAlignedText).toBe(2);
@@ -267,7 +267,7 @@ describe('archive collection statistics', () => {
 
 	it('returns aggregate shape with recorded coverage and freshness', async () => {
 		await seedCollection();
-		const stats = await getArchiveStats(db, 10_000);
+		const stats = await getArchiveStats(db, { now: 10_000 });
 
 		expect(stats).toMatchObject({
 			totals: {
@@ -334,7 +334,7 @@ describe('archive collection statistics', () => {
 
 	it('reports missing dialect metadata as unspecified', async () => {
 		await seedCollection();
-		const dialect = (await getArchiveStats(db, 10_000)).distribution.dialect;
+		const dialect = (await getArchiveStats(db, { now: 10_000 })).distribution.dialect;
 
 		expect(dialect).toEqual({
 			unit: 'works',
@@ -378,11 +378,39 @@ describe('archive collection statistics', () => {
 		await seedCollection();
 		const all = vi.spyOn(db, 'all');
 
-		await getArchiveStats(db, 10_000);
-		await getArchiveStats(db, 69_999);
+		await getArchiveStats(db, { now: 10_000 });
+		await getArchiveStats(db, { now: 69_999 });
 		expect(all).toHaveBeenCalledTimes(3);
 
-		await getArchiveStats(db, 70_001);
+		await getArchiveStats(db, { now: 70_001 });
 		expect(all).toHaveBeenCalledTimes(6);
+	});
+
+	it('answers from the shared cache once the per-isolate entry has expired', async () => {
+		await seedCollection();
+		const store = new Map<string, Response>();
+		const platform = {
+			caches: {
+				default: {
+					match: async (request: Request) => store.get(request.url)?.clone(),
+					put: async (request: Request, response: Response) => void store.set(request.url, response)
+				}
+			},
+			ctx: { waitUntil: (promise: Promise<unknown>) => void promise }
+		} as unknown as App.Platform;
+		const all = vi.spyOn(db, 'all');
+
+		const first = await getArchiveStats(db, { now: 10_000, platform });
+		expect(all).toHaveBeenCalledTimes(3);
+
+		// Past the map's window, so this stands in for a request an isolate with
+		// no entry of its own picks up.
+		const second = await getArchiveStats(db, { now: 80_000, platform });
+		expect(all).toHaveBeenCalledTimes(3);
+		expect(second).toEqual(first);
+
+		// The stored entry states its own lifetime, which is what expires it.
+		const [stored] = [...store.values()];
+		expect(stored.headers.get('cache-control')).toBe('max-age=60');
 	});
 });

@@ -1,6 +1,7 @@
 import { sql } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import type * as schema from '$lib/server/db/schema';
+import { edgeCache, type EdgeCache } from '$lib/server/edge-cache';
 import { DEPLOYED_SEARCH_MODES } from './search-modes';
 
 type Db = LibSQLDatabase<typeof schema>;
@@ -120,7 +121,19 @@ type DistributionRow = {
 	count: number;
 };
 
+/**
+ * Two layers, each holding a value for CACHE_TTL_MS.
+ *
+ * The map lives in one isolate. Isolates are created and dropped far faster than
+ * the entry expires, so on its own it left most requests running the full query
+ * set — the aggregates below read the whole collection and are the slowest work
+ * a catalogue page does. The colo cache is shared by every isolate answering
+ * from that location, so the next reader through the same location skips them.
+ * These counts describe the collection and carry nothing about the viewer, so a
+ * single entry is correct for every archive reader.
+ */
 const cache = new WeakMap<Db, { expiresAt: number; value: ArchiveStats }>();
+const COLO_CACHE_KEY = 'https://archive.invalid/collection-stats';
 
 function numberValue(value: number | null | undefined): number {
 	return Number(value ?? 0);
@@ -437,10 +450,49 @@ async function queryArchiveStats(db: Db): Promise<ArchiveStats> {
 	};
 }
 
-export async function getArchiveStats(db: Db, now = Date.now()): Promise<ArchiveStats> {
+export async function getArchiveStats(
+	db: Db,
+	options: { now?: number; platform?: App.Platform } = {}
+): Promise<ArchiveStats> {
+	const now = options.now ?? Date.now();
 	const cached = cache.get(db);
 	if (cached && cached.expiresAt > now) return cached.value;
+
+	const colo = edgeCache(options.platform);
+	const hit = colo ? await readColoStats(colo) : null;
+	if (hit) {
+		cache.set(db, { expiresAt: now + CACHE_TTL_MS, value: hit });
+		return hit;
+	}
+
 	const value = await queryArchiveStats(db);
 	cache.set(db, { expiresAt: now + CACHE_TTL_MS, value });
+	if (colo) {
+		const write = colo.put(
+			new Request(COLO_CACHE_KEY),
+			// The colo cache decides freshness from this header, so an entry it
+			// hands back is already within the window and needs no timestamp of
+			// its own.
+			new Response(JSON.stringify(value), {
+				headers: {
+					'content-type': 'application/json',
+					'cache-control': `max-age=${Math.floor(CACHE_TTL_MS / 1000)}`
+				}
+			})
+		);
+		// Storing must not hold up the page; a failed write only costs the next
+		// reader the query set again.
+		if (options.platform?.ctx) options.platform.ctx.waitUntil(write);
+		else await write.catch(() => undefined);
+	}
 	return value;
+}
+
+async function readColoStats(colo: EdgeCache): Promise<ArchiveStats | null> {
+	try {
+		const response = await colo.match(new Request(COLO_CACHE_KEY));
+		return response ? ((await response.json()) as ArchiveStats) : null;
+	} catch {
+		return null;
+	}
 }

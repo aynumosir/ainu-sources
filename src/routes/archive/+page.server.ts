@@ -9,7 +9,7 @@ import { revisionOcrCoverage } from '$lib/server/db/schema';
 import { inArray } from 'drizzle-orm';
 import type { OcrCoverage } from '$lib/archive/ocr';
 
-export const load: PageServerLoad = async ({ url, parent }) => {
+export const load: PageServerLoad = async ({ url, parent, platform }) => {
 	const filters = parseArchiveFilters(url.searchParams);
 	// The layout above already resolved the principal for this request —
 	// re-resolving it here duplicated a full session round trip on every
@@ -20,7 +20,7 @@ export const load: PageServerLoad = async ({ url, parent }) => {
 
 	// Independent of the library listing below, so it can run alongside it
 	// rather than after.
-	const statsPromise = getArchiveStats(db);
+	const statsPromise = getArchiveStats(db, { platform });
 
 	const result = await listArchiveFiles(db, {
 		text: filters.text,
