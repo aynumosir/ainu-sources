@@ -169,6 +169,13 @@
       "when": 1786546427023,
       "tag": "0023_file_checkouts",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "6",
+      "when": 1786546459201,
+      "tag": "0024_one_file_per_work_role",
+      "breakpoints": true
     }
   ]
 }

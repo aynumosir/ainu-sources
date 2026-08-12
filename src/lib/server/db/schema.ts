@@ -955,6 +955,7 @@ export const sourceFiles = sqliteTable(
 		createdBy: text('created_by').references(() => user.id, { onDelete: 'set null' })
 	},
 	(t) => [
+		uniqueIndex('source_files_source_role_label_idx').on(t.sourceId, t.role, t.label),
 		index('source_files_source').on(t.sourceId),
 		check('source_files_role_check', sql`${t.role} in ('scan', 'epub', 'supplement', 'derivative')`)
 	]
