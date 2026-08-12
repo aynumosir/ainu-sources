@@ -1081,61 +1081,55 @@ export async function getUsageSummary(db: Db, principal: ArchivePrincipal) {
 	const concurrencyLimit = intEnv('ARCHIVE_CONCURRENT_STREAM_LIMIT', DEFAULT_CONCURRENT_STREAMS);
 	const now = new Date();
 	const day = now.toISOString().slice(0, 10);
-	return db.transaction(async (tx) => {
-		await tx.delete(archiveStreamLeases).where(lt(archiveStreamLeases.expiresAt, now));
-		const [usage] = await tx
+	// Read-only, and every layout under /archive asks for it, so the three
+	// reads go out together rather than one after another. Expired leases are
+	// swept by reserveArchiveStream, the path whose limit depends on the count
+	// being tight; here the expiry predicate already excludes them, so this
+	// stays off the write path.
+	const [byteUsage, apiUsage, [{ activeStreams }]] = await Promise.all([
+		db
 			.select()
 			.from(archiveStreamDailyUsage)
 			.where(
 				and(
 					eq(archiveStreamDailyUsage.userId, principal.userId),
 					eq(archiveStreamDailyUsage.day, day),
-					eq(archiveStreamDailyUsage.budgetKind, 'download')
+					inArray(archiveStreamDailyUsage.budgetKind, ['download', 'view'])
 				)
-			)
-			.limit(1);
-		const [viewUsage] = await tx
-			.select()
-			.from(archiveStreamDailyUsage)
-			.where(
-				and(
-					eq(archiveStreamDailyUsage.userId, principal.userId),
-					eq(archiveStreamDailyUsage.day, day),
-					eq(archiveStreamDailyUsage.budgetKind, 'view')
-				)
-			)
-			.limit(1);
-		const apiUsage = await tx
+			),
+		db
 			.select()
 			.from(archiveContentApiDailyUsage)
-			.where(and(eq(archiveContentApiDailyUsage.userId, principal.userId), eq(archiveContentApiDailyUsage.day, day)));
-		const textUsage = apiUsage.find((row) => row.useKind === 'text');
-		const searchUsage = apiUsage.find((row) => row.useKind === 'search');
-		const [{ activeStreams }] = await tx
+			.where(and(eq(archiveContentApiDailyUsage.userId, principal.userId), eq(archiveContentApiDailyUsage.day, day))),
+		db
 			.select({ activeStreams: sql<number>`count(*)` })
 			.from(archiveStreamLeases)
-			.where(and(eq(archiveStreamLeases.userId, principal.userId), gt(archiveStreamLeases.expiresAt, now)));
-		const resetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
-		return {
-			search_modes: [...DEPLOYED_SEARCH_MODES],
-			date: day,
-			bytesUsed: usage?.bytesReserved ?? 0,
-			dailyByteLimit: dailyLimit,
-			resetAt: resetAt.toISOString(),
-			activeStreams: Number(activeStreams),
-			concurrentStreamLimit: concurrencyLimit,
-			viewBytesUsed: viewUsage?.bytesReserved ?? 0,
-			dailyViewByteLimit,
-			textCallsUsed: textUsage?.calls ?? 0,
-			dailyTextCallLimit: intEnv('ARCHIVE_DAILY_TEXT_CALL_LIMIT', DEFAULT_TEXT_CALL_LIMIT),
-			textPagesUsed: textUsage?.units ?? 0,
-			dailyTextPageLimit: intEnv('ARCHIVE_DAILY_TEXT_PAGE_LIMIT', DEFAULT_TEXT_PAGE_LIMIT),
-			searchCallsUsed: searchUsage?.calls ?? 0,
-			dailySearchCallLimit: intEnv('ARCHIVE_DAILY_SEARCH_CALL_LIMIT', DEFAULT_SEARCH_CALL_LIMIT),
-			searchHitsUsed: searchUsage?.units ?? 0,
-			dailySearchHitLimit: intEnv('ARCHIVE_DAILY_SEARCH_HIT_LIMIT', DEFAULT_SEARCH_HIT_LIMIT)
-		};
-	});
+			.where(and(eq(archiveStreamLeases.userId, principal.userId), gt(archiveStreamLeases.expiresAt, now)))
+	]);
+	const usage = byteUsage.find((row) => row.budgetKind === 'download');
+	const viewUsage = byteUsage.find((row) => row.budgetKind === 'view');
+	const textUsage = apiUsage.find((row) => row.useKind === 'text');
+	const searchUsage = apiUsage.find((row) => row.useKind === 'search');
+	const resetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+	return {
+		search_modes: [...DEPLOYED_SEARCH_MODES],
+		date: day,
+		bytesUsed: usage?.bytesReserved ?? 0,
+		dailyByteLimit: dailyLimit,
+		resetAt: resetAt.toISOString(),
+		activeStreams: Number(activeStreams),
+		concurrentStreamLimit: concurrencyLimit,
+		viewBytesUsed: viewUsage?.bytesReserved ?? 0,
+		dailyViewByteLimit,
+		textCallsUsed: textUsage?.calls ?? 0,
+		dailyTextCallLimit: intEnv('ARCHIVE_DAILY_TEXT_CALL_LIMIT', DEFAULT_TEXT_CALL_LIMIT),
+		textPagesUsed: textUsage?.units ?? 0,
+		dailyTextPageLimit: intEnv('ARCHIVE_DAILY_TEXT_PAGE_LIMIT', DEFAULT_TEXT_PAGE_LIMIT),
+		searchCallsUsed: searchUsage?.calls ?? 0,
+		dailySearchCallLimit: intEnv('ARCHIVE_DAILY_SEARCH_CALL_LIMIT', DEFAULT_SEARCH_CALL_LIMIT),
+		searchHitsUsed: searchUsage?.units ?? 0,
+		dailySearchHitLimit: intEnv('ARCHIVE_DAILY_SEARCH_HIT_LIMIT', DEFAULT_SEARCH_HIT_LIMIT)
+	};
 }
 
 type ArchiveListCursor =
