@@ -5,16 +5,18 @@ import { listArchiveWorks } from '$lib/server/archive/db';
 import { getArchiveStats } from '$lib/server/archive/stats';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
 import { parseArchiveFilters } from '$lib/archive/filters';
+import { resolveArchivePrincipalOnce } from '$lib/server/archive/layout-data';
 import { revisionOcrCoverage } from '$lib/server/db/schema';
 import { inArray } from 'drizzle-orm';
 import type { OcrCoverage } from '$lib/archive/ocr';
 
-export const load: PageServerLoad = async ({ url, parent, platform }) => {
+export const load: PageServerLoad = async (event) => {
+	const { url, platform } = event;
 	const filters = parseArchiveFilters(url.searchParams);
-	// The layout above already resolved the principal for this request —
-	// re-resolving it here duplicated a full session round trip on every
-	// catalog page load.
-	const { principal } = await parent();
+	// Shares the layout's session lookup without waiting for the rest of what
+	// the layout gathers: taking this through `parent()` held every query below
+	// until the header's usage figures had come back, which none of them need.
+	const principal = await resolveArchivePrincipalOnce(event);
 	if (!principal) return { accessDenied: true, filters, items: [], nextCursor: null, params: '' };
 	if (!archiveRoleAtLeast(principal.role, 'archive_reader')) error(403, 'archive reader role required');
 

@@ -12,6 +12,7 @@ import * as schema from '$lib/server/db/schema';
 import { user } from '$lib/server/db/auth.schema';
 import { recordArchiveEvent } from './audit';
 import { archiveAuthzInternals, resolveArchiveIdentity, resolveArchivePrincipal, resolveFromAppSession } from './authz';
+import { resolveArchivePrincipalOnce } from './layout-data';
 import { compareCursor, decodeCursor, encodeCursor } from './cursor';
 import { issueArchiveCsrfToken, requireArchiveMutationGuards, requireArchiveOrigin, verifyArchiveCsrfToken } from './csrf';
 import { hmacSha256Hex } from './crypto';
@@ -351,6 +352,31 @@ describe('archive DB flows', () => {
 		// A different request is a different visitor.
 		await resolveFromAppSession(new Request('https://db.aynu.org/sources/y'), db);
 		expect(lookups).toBe(2);
+	});
+
+	it('hands one principal resolution to every load in a request', async () => {
+		// The archive layout and the catalogue page each need to know who is
+		// asking. Sharing this promise is what lets the page start its queries
+		// without waiting for the rest of what the layout gathers.
+		const eventFor = (locals: object) =>
+			({
+				request: new Request('https://db.aynu.org/archive'),
+				locals,
+				url: new URL('https://db.aynu.org/archive')
+			}) as unknown as Parameters<typeof resolveArchivePrincipalOnce>[0];
+
+		const event = eventFor({});
+		const first = resolveArchivePrincipalOnce(event);
+		expect(resolveArchivePrincipalOnce(event)).toBe(first);
+
+		// A separate request resolves on its own.
+		const other = eventFor({});
+		const second = resolveArchivePrincipalOnce(other);
+		expect(second).not.toBe(first);
+
+		// Settled rather than awaited: this module reaches for the configured
+		// database, which this suite does not stand up. Identity is the assertion.
+		await Promise.allSettled([first, second]);
 	});
 
 	it('resolves app sessions from direct archive roles', async () => {
