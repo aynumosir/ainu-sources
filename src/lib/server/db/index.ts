@@ -48,7 +48,28 @@ function connect(): DB {
 	// enforcement on the Worker therefore relies on the Turso server's per-connection
 	// default (libSQL enables foreign_keys by default) and is NOT guaranteed by this
 	// code. scripts/check-fk-enforcement.ts is the deploy gate that verifies it live.
-	const client = createWebClient({ url, authToken: env.DATABASE_AUTH_TOKEN });
+	//
+	// `concurrency: Infinity` removes the client's own query queue, and one Worker
+	// isolate cannot run without that. The client defaults to 20 in-flight queries
+	// (`@libsql/core` config.js: `Math.max(0, concurrency || 20)`) and enforces them
+	// with a single `promise-limit` semaphore built once per client
+	// (`@libsql/client` http.js), which every execute, batch and transaction passes
+	// through. One client serves the whole isolate, so that queue is shared by every
+	// request the isolate is handling at once. Past the cap, `promise-limit` parks a
+	// promise created in one request and later starts the query — and calls that
+	// promise's resolver — from inside the continuation of a different request's
+	// query. The waiting request ends up owning no I/O of its own, and once the
+	// request that adopted its query returns, the runtime cancels the orphaned
+	// continuation and reports the waiting one as "your Worker's code had hung and
+	// would never generate a response". A catalogue page runs four queries, so a few
+	// concurrent readers fill the cap; measured on production this cancelled about
+	// 13% of all requests and 30% of /sources requests under load. At Infinity the
+	// semaphore's queue branch is unreachable, so every query starts in its own
+	// caller's context. This bounds nothing that matters: per-request parallelism is
+	// whatever the load functions ask for either way, and only the cross-request
+	// coupling goes away. Note that the documented `concurrency: 0` does NOT disable
+	// the limiter — `0 || 20` restores the default.
+	const client = createWebClient({ url, authToken: env.DATABASE_AUTH_TOKEN, concurrency: Infinity });
 	return drizzle(client, { schema });
 }
 
