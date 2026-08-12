@@ -25,60 +25,73 @@ import type { Db } from '../import/lib/entities';
 
 const SCRIPT_DIR = (import.meta as ImportMeta & { dir?: string }).dir ?? path.dirname(fileURLToPath(import.meta.url));
 const AINU_ROOT = process.env.AINU_ROOT ?? path.resolve(SCRIPT_DIR, '../../..');
-// The repository whose committed OCR trees this script reads.
-const GRAMMAR_REPO = 'ainu-grammar';
 
 export interface IngestOcrOptions extends ImporterRunOptions {
 	ainuRoot: string;
-	/** The repository whose checkout paths name the text files being read. */
-	repoName?: string;
 	now?: Date;
 }
 
 export interface IngestOcrSummary {
 	ingested: number;
 	unchanged: number;
-	skippedNoMatch: number;
-	skippedNoRevision: number;
+	scansWithoutText: number;
+	conflicts: number;
 }
 
-type SourceFileRow = { id: string; sourceId: string; checkoutPath: string };
-type CurrentRevisionRow = { id: string; sourceFileId: string };
+type Checkout = { revisionId: string; sourceId: string; repo: string; path: string };
 
+/**
+ * Read every text file committed beside a scan into the archive's searchable text.
+ *
+ * A scan is checked out at `<repository>/<path>`, and its text sits next to it
+ * under the same name with the variant in place of the extension: `source.pdf`
+ * is read by `source.gemini.txt`. The checkout is the key, so a repository is
+ * free to name its files whatever suits it — the dozen works whose scan is
+ * called `source.pdf` stay distinct — and a file checked out by several
+ * repositories is read from whichever of them carries the text.
+ */
 export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestOcrSummary> {
-	const grammarDir = path.join(opts.ainuRoot, 'ainu-grammar');
-	const files = await collectOcrFiles(grammarDir, opts.limit ?? Infinity);
-	const fileByStem = await sourceFilesByCheckoutStem(db, opts.repoName ?? GRAMMAR_REPO);
-	const currentRevisionByFileId = await currentRevisionsByFileId(db);
+	const checkouts = await currentCheckouts(db);
 	const summary: IngestOcrSummary = {
 		ingested: 0,
 		unchanged: 0,
-		skippedNoMatch: 0,
-		skippedNoRevision: 0
+		scansWithoutText: 0,
+		conflicts: 0
 	};
 
-	for (const filePath of files) {
-		const parsed = parseOcrFilename(path.basename(filePath));
-		if (!parsed) continue;
-		const sourceFile = fileByStem.get(parsed.stem);
-		if (!sourceFile) {
-			console.warn(`skip no-match ${path.relative(grammarDir, filePath)}`);
-			summary.skippedNoMatch += 1;
-			continue;
+	// One text file per (revision, variant): a scan checked out by two
+	// repositories can carry a text file in each, and taking both would leave
+	// successive runs alternating between two texts for one variant.
+	const chosen = new Map<string, { checkout: Checkout; filePath: string; variant: string }>();
+	const revisionsWithText = new Set<string>();
+	for (const checkout of checkouts) {
+		for (const file of await siblingTextFiles(opts.ainuRoot, checkout)) {
+			if (chosen.size >= (opts.limit ?? Infinity)) break;
+			const key = `${checkout.revisionId}:${file.variant}`;
+			const existing = chosen.get(key);
+			if (existing) {
+				console.warn(
+					`skip conflict ${checkout.repo}/${file.path} — ${existing.checkout.repo}/${existing.filePath} already carries variant ${file.variant} for this scan`
+				);
+				summary.conflicts += 1;
+				continue;
+			}
+			chosen.set(key, { checkout, filePath: file.path, variant: file.variant });
+			revisionsWithText.add(checkout.revisionId);
 		}
-		const revision = currentRevisionByFileId.get(sourceFile.id);
-		if (!revision) {
-			console.warn(`skip no-revision ${path.relative(grammarDir, filePath)}`);
-			summary.skippedNoRevision += 1;
-			continue;
-		}
+	}
+	summary.scansWithoutText = new Set(
+		checkouts.filter((row) => !revisionsWithText.has(row.revisionId)).map((row) => row.revisionId)
+	).size;
 
-		const bytes = await fs.readFile(filePath);
+	for (const { checkout, filePath, variant } of chosen.values()) {
+		const revisionId = checkout.revisionId;
+		const bytes = await fs.readFile(path.join(opts.ainuRoot, checkout.repo, filePath));
 		const contentHash = createHash('sha256').update(bytes).digest('hex');
 		const [state] = await db
 			.select({ contentHash: ocrIngestState.contentHash })
 			.from(ocrIngestState)
-			.where(and(eq(ocrIngestState.revisionId, revision.id), eq(ocrIngestState.variant, parsed.variant)))
+			.where(and(eq(ocrIngestState.revisionId, revisionId), eq(ocrIngestState.variant, variant)))
 			.limit(1);
 		if (state?.contentHash === contentHash) {
 			summary.unchanged += 1;
@@ -89,37 +102,37 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 		if (!opts.dryRun) {
 			const now = opts.now ?? new Date();
 			await db.transaction(async (tx) => {
-				await activateOcrGeneration(tx as unknown as Db, revision.id, parsed.variant, pages, {
+				await activateOcrGeneration(tx as unknown as Db, revisionId, variant, pages, {
 					contentHash,
 					ingestedAt: now
 				});
 				const [coverage] = await tx
 					.select({ preferred: revisionOcrCoverage.preferred })
 					.from(revisionOcrCoverage)
-					.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, parsed.variant)))
+					.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, variant)))
 					.limit(1);
 				if (coverage) {
 					await tx
 						.update(revisionOcrCoverage)
 						.set({
 							status: 'complete',
-							tool: parsed.variant,
+							tool: variant,
 							toolVersion: null,
 							measuredAt: now
 						})
-						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, parsed.variant)));
+						.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, variant)));
 				} else {
 					await tx.insert(revisionOcrCoverage).values({
-						revisionId: revision.id,
-						variant: parsed.variant,
+						revisionId: revisionId,
+						variant: variant,
 						status: 'complete',
-						tool: parsed.variant,
+						tool: variant,
 						toolVersion: null,
 						measuredAt: now
 					});
 				}
 
-				const samples = await sampleVariantPages(tx as unknown as SamplingDb, revision.id, parsed.variant);
+				const samples = await sampleVariantPages(tx as unknown as SamplingDb, revisionId, variant);
 				const verdict = assessTextQuality(samples);
 				if (verdict.reliability === 'suspect') {
 					// Sound is human-certified; the automated assessor does not downgrade it.
@@ -128,8 +141,8 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 						.set({ reliability: 'suspect', reliabilityNote: verdict.note })
 						.where(
 							and(
-								eq(revisionOcrCoverage.revisionId, revision.id),
-								eq(revisionOcrCoverage.variant, parsed.variant),
+								eq(revisionOcrCoverage.revisionId, revisionId),
+								eq(revisionOcrCoverage.variant, variant),
 								ne(revisionOcrCoverage.reliability, 'sound')
 							)
 						);
@@ -140,8 +153,8 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 						.set({ reliability: 'unassessed', reliabilityNote: null })
 						.where(
 							and(
-								eq(revisionOcrCoverage.revisionId, revision.id),
-								eq(revisionOcrCoverage.variant, parsed.variant),
+								eq(revisionOcrCoverage.revisionId, revisionId),
+								eq(revisionOcrCoverage.variant, variant),
 								eq(revisionOcrCoverage.reliability, 'suspect')
 							)
 						);
@@ -154,7 +167,7 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 						preferred: revisionOcrCoverage.preferred
 					})
 					.from(revisionOcrCoverage)
-					.where(eq(revisionOcrCoverage.revisionId, revision.id))
+					.where(eq(revisionOcrCoverage.revisionId, revisionId))
 					.orderBy(sql`rowid`);
 				const pick = pickPreferredVariant(
 					coverageRows.map((row) => ({
@@ -167,17 +180,17 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 					await tx
 						.update(revisionOcrCoverage)
 						.set({ preferred: false })
-						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), ne(revisionOcrCoverage.variant, pick)));
+						.where(and(eq(revisionOcrCoverage.revisionId, revisionId), ne(revisionOcrCoverage.variant, pick)));
 					await tx
 						.update(revisionOcrCoverage)
 						.set({ preferred: true })
-						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, pick)));
+						.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, pick)));
 				}
 
 				// Inside the transaction, so a crash never records the file's
 				// content hash while leaving the work's stored composition
 				// stale — the unchanged-file branch would then skip it forever.
-				await refreshSourceTextComposition(tx as unknown as Db, sourceFile.sourceId, opts.now ?? new Date());
+				await refreshSourceTextComposition(tx as unknown as Db, checkout.sourceId, opts.now ?? new Date());
 			});
 		}
 		summary.ingested += 1;
@@ -206,59 +219,47 @@ export function parseOcrPages(text: string): OcrPageInput[] {
 	});
 }
 
-async function collectOcrFiles(grammarDir: string, limit: number): Promise<string[]> {
-	const out: string[] = [];
-	for (const subdir of ['books', 'articles']) {
-		const dir = path.join(grammarDir, subdir, 'ocr');
-		let entries: string[];
-		try {
-			entries = await fs.readdir(dir);
-		} catch (e) {
-			if ((e as NodeJS.ErrnoException).code === 'ENOENT') continue;
-			throw e;
-		}
-		for (const entry of entries) {
-			if (!entry.endsWith('.txt')) continue;
-			out.push(path.join(dir, entry));
-			if (out.length >= limit) return out;
-		}
+/** Text files sitting beside the scan, named after it, one per variant. */
+async function siblingTextFiles(
+	ainuRoot: string,
+	checkout: Checkout
+): Promise<Array<{ path: string; variant: string }>> {
+	const dir = path.dirname(checkout.path);
+	const scanName = path.basename(checkout.path);
+	const stem = scanName.slice(0, scanName.length - path.extname(scanName).length);
+	let entries: string[];
+	try {
+		entries = await fs.readdir(path.join(ainuRoot, checkout.repo, dir));
+	} catch (e) {
+		if ((e as NodeJS.ErrnoException).code === 'ENOENT') return [];
+		throw e;
+	}
+	const out: Array<{ path: string; variant: string }> = [];
+	for (const entry of entries.sort()) {
+		const parsed = parseOcrFilename(entry);
+		if (!parsed || parsed.stem !== stem) continue;
+		out.push({ path: path.join(dir, entry), variant: parsed.variant });
 	}
 	return out;
 }
 
-async function sourceFilesByCheckoutStem(db: Db, repoName: string): Promise<Map<string, SourceFileRow>> {
-	// Stems are only unique inside the repository whose text is being read.
-	// Every ainu-dictionaries path ends in `source.pdf`, so a map spanning
-	// repositories collapses each of them onto the stem `source` and hands
-	// grammar-side text to whichever of them was inserted last.
+/** Every checkout of every current scan revision, in a stable order. */
+async function currentCheckouts(db: Db): Promise<Checkout[]> {
 	const rows = await db
-		.select({ id: sourceFiles.id, sourceId: sourceFiles.sourceId, checkoutPath: fileCheckouts.path })
+		.select({
+			revisionId: fileRevisions.id,
+			sourceId: sourceFiles.sourceId,
+			repo: archiveRepositories.name,
+			path: fileCheckouts.path
+		})
 		.from(fileCheckouts)
 		.innerJoin(sourceFiles, eq(fileCheckouts.sourceFileId, sourceFiles.id))
 		.innerJoin(archiveRepositories, eq(fileCheckouts.repoId, archiveRepositories.id))
-		.where(eq(archiveRepositories.name, repoName));
-	const out = new Map<string, SourceFileRow>();
-	for (const row of rows) {
-		out.set(stemFromCheckoutPath(row.checkoutPath), {
-			id: row.id,
-			sourceId: row.sourceId,
-			checkoutPath: row.checkoutPath
-		});
-	}
-	return out;
-}
-
-async function currentRevisionsByFileId(db: Db): Promise<Map<string, CurrentRevisionRow>> {
-	const rows = await db
-		.select({ id: fileRevisions.id, sourceFileId: fileRevisions.sourceFileId })
-		.from(fileRevisions)
+		.innerJoin(fileRevisions, eq(fileRevisions.sourceFileId, sourceFiles.id))
 		.where(eq(fileRevisions.isCurrent, true));
-	return new Map(rows.map((row) => [row.sourceFileId, row]));
-}
-
-function stemFromCheckoutPath(checkoutPath: string): string {
-	const base = path.basename(checkoutPath);
-	return base.slice(0, base.length - path.extname(base).length);
+	return rows.sort((left, right) =>
+		`${left.repo}/${left.path}`.localeCompare(`${right.repo}/${right.path}`)
+	);
 }
 
 if (import.meta.main) {
@@ -266,7 +267,7 @@ if (import.meta.main) {
 	ingestOcr(db, { ainuRoot: AINU_ROOT, ...opts })
 		.then((summary) => {
 			console.log(
-				`archive:ingest-ocr ingested=${summary.ingested} unchanged=${summary.unchanged} skipped-no-match=${summary.skippedNoMatch} skipped-no-revision=${summary.skippedNoRevision}`
+				`archive:ingest-ocr ingested=${summary.ingested} unchanged=${summary.unchanged} scans-without-text=${summary.scansWithoutText} conflicts=${summary.conflicts}`
 			);
 		})
 		.catch((e) => {

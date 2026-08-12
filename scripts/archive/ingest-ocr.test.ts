@@ -40,7 +40,6 @@ beforeEach(async () => {
 	db = drizzle(client, { schema });
 	await migrate(db, { migrationsFolder: MIGRATIONS });
 	ainuRoot = path.join(tmpDir, 'root');
-	await fs.mkdir(path.join(ainuRoot, 'ainu-grammar/books/ocr'), { recursive: true });
 	await db.insert(schema.user).values({
 		id: 'user-test',
 		name: 'Test user',
@@ -53,19 +52,11 @@ afterEach(async () => {
 	await fs.rm(tmpDir, { recursive: true, force: true });
 });
 
-async function seedRevision(stem: string): Promise<string> {
+async function seedRevision(stem: string, checkouts: Array<[string, string]> = []): Promise<string> {
 	const [source] = await db
 		.insert(schema.sources)
 		.values({ slug: stem, title: `Title of ${stem}`, type: 'dictionary' })
 		.returning({ id: schema.sources.id });
-	await db
-		.insert(schema.archiveRepositories)
-		.values({ name: 'ainu-grammar' })
-		.onConflictDoNothing({ target: schema.archiveRepositories.name });
-	const [repo] = await db
-		.select({ id: schema.archiveRepositories.id })
-		.from(schema.archiveRepositories)
-		.where(eq(schema.archiveRepositories.name, 'ainu-grammar'));
 	const [file] = await db
 		.insert(schema.sourceFiles)
 		.values({
@@ -73,11 +64,15 @@ async function seedRevision(stem: string): Promise<string> {
 			role: 'scan'
 		})
 		.returning({ id: schema.sourceFiles.id });
-	await db.insert(schema.fileCheckouts).values({
-		sourceFileId: file.id,
-		repoId: repo.id,
-		path: `books/x/${stem}.pdf`
-	});
+	for (const [repoName, checkoutPath] of checkouts.length
+		? checkouts
+		: ([['ainu-grammar', `books/${stem}/${stem}.pdf`]] as Array<[string, string]>)) {
+		await db.insert(schema.fileCheckouts).values({
+			sourceFileId: file.id,
+			repoId: await repository(repoName),
+			path: checkoutPath
+		});
+	}
 	const blobSha256 = createHash('sha256').update(stem).digest('hex');
 	await db.insert(schema.archiveBlobs).values({
 		sha256: blobSha256,
@@ -102,8 +97,32 @@ async function seedRevision(stem: string): Promise<string> {
 	return revision.id;
 }
 
-async function writeVariant(stem: string, variant: string, document: string): Promise<void> {
-	await fs.writeFile(path.join(ainuRoot, `ainu-grammar/books/ocr/${stem}.${variant}.txt`), document);
+/** One repository row per name, created on first use. */
+async function repository(name: string): Promise<string> {
+	await db
+		.insert(schema.archiveRepositories)
+		.values({ name })
+		.onConflictDoNothing({ target: schema.archiveRepositories.name });
+	const [repo] = await db
+		.select({ id: schema.archiveRepositories.id })
+		.from(schema.archiveRepositories)
+		.where(eq(schema.archiveRepositories.name, name));
+	return repo.id;
+}
+
+/** Text beside the scan: the scan's name with the variant in place of the extension. */
+async function writeVariant(
+	stem: string,
+	variant: string,
+	document: string,
+	repoName = 'ainu-grammar',
+	checkoutPath = `books/${stem}/${stem}.pdf`
+): Promise<void> {
+	const dir = path.join(ainuRoot, repoName, path.dirname(checkoutPath));
+	await fs.mkdir(dir, { recursive: true });
+	const scanName = path.basename(checkoutPath);
+	const scanStem = scanName.slice(0, scanName.length - path.extname(scanName).length);
+	await fs.writeFile(path.join(dir, `${scanStem}.${variant}.txt`), document);
 }
 
 async function coverageFor(revisionId: string) {
@@ -171,6 +190,45 @@ describe('ingestOcr', () => {
 			reliability: 'unassessed',
 			preferred: true
 		});
+	});
+
+	it('reads text beside the scan in any repository and keeps same-named scans apart', async () => {
+		const first = await seedRevision('dictone', [['ainu-dictionaries', 'dictone/source.pdf']]);
+		const second = await seedRevision('dicttwo', [['ainu-dictionaries', 'dicttwo/source.pdf']]);
+		await writeVariant('dictone', 'gemini', ocrDocument(CLEAN_LINE, 3), 'ainu-dictionaries', 'dictone/source.pdf');
+		await writeVariant('dicttwo', 'gemini', ocrDocument(CLEAN_LINE, 5), 'ainu-dictionaries', 'dicttwo/source.pdf');
+
+		await ingestOcr(db, { ainuRoot, dryRun: false });
+
+		for (const [revisionId, pages] of [
+			[first, 3],
+			[second, 5]
+		] as const) {
+			expect(await coverageFor(revisionId)).toMatchObject([{ variant: 'gemini', status: 'complete' }]);
+			const rows = await db.all<{ n: number }>(sql`
+				select count(distinct page) as n from ocr_chunks where revision_id = ${revisionId}
+			`);
+			expect(Number(rows[0].n)).toBe(pages);
+		}
+	});
+
+	it('takes one text per variant when a scan is checked out by two repositories', async () => {
+		const revisionId = await seedRevision('twin', [
+			['ainu-grammar', 'books/twin/twin.pdf'],
+			['ainu-dictionaries', 'twin/source.pdf']
+		]);
+		await writeVariant('twin', 'gemini', ocrDocument(CLEAN_LINE, 3));
+		await writeVariant('twin', 'gemini', ocrDocument(CLEAN_LINE, 7), 'ainu-dictionaries', 'twin/source.pdf');
+
+		const summary = await ingestOcr(db, { ainuRoot, dryRun: false });
+
+		expect(summary.conflicts).toBe(1);
+		expect(await coverageFor(revisionId)).toMatchObject([{ variant: 'gemini', status: 'complete' }]);
+		const rows = await db.all<{ n: number }>(sql`
+			select count(distinct page) as n from ocr_chunks where revision_id = ${revisionId}
+		`);
+		// ainu-dictionaries sorts before ainu-grammar, so its file is the one read.
+		expect(Number(rows[0].n)).toBe(7);
 	});
 
 	it('does not downgrade a human-certified variant and promotes it', async () => {
