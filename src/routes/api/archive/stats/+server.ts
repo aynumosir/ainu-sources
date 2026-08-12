@@ -7,11 +7,11 @@ import { db as defaultDb } from '$lib/server/db';
 import { archivePrincipal, throwArchiveError } from '$lib/server/archive/route';
 import { getArchiveStats } from '$lib/server/archive/stats';
 
-export const GET: RequestHandler = async ({ request, locals }) => {
+export const GET: RequestHandler = async ({ request, locals, platform }) => {
 	const db = routeDb(locals);
 	await archivePrincipal(request, 'archive_reader', db);
 	try {
-		return json(await getArchiveStats(db), {
+		return json(await getArchiveStats(db, { platform }), {
 			headers: { 'cache-control': 'private, max-age=60' }
 		});
 	} catch (e) {

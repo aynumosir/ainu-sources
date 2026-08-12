@@ -20,11 +20,19 @@ function hash(index: number): string {
 	return index.toString(16).padStart(64, '0');
 }
 
+let dbUrl: string;
+
 async function makeDb(): Promise<Db> {
-	const client = createClient({ url: `file:/tmp/archive-stats-test-${crypto.randomUUID()}.db` });
+	dbUrl = `file:/tmp/archive-stats-test-${crypto.randomUUID()}.db`;
+	const client = createClient({ url: dbUrl });
 	const database = drizzle(client, { schema });
 	await migrate(database, { migrationsFolder: MIGRATIONS });
 	return database;
+}
+
+/** Another handle on the same data. The per-isolate memo is keyed by handle, so this is a cold isolate. */
+function coldIsolate(): Db {
+	return drizzle(createClient({ url: dbUrl }), { schema });
 }
 
 beforeEach(async () => {
@@ -257,7 +265,7 @@ describe('archive collection statistics', () => {
 				ingestedAt: new Date(9_000)
 			}
 		]);
-		const stats = await getArchiveStats(db, 10_000);
+		const stats = await getArchiveStats(db, { now: 10_000 });
 
 		expect(stats.ocr.worksWithText).toBe(3);
 		expect(stats.ocr.worksWithPageAlignedText).toBe(2);
@@ -267,7 +275,7 @@ describe('archive collection statistics', () => {
 
 	it('returns aggregate shape with recorded coverage and freshness', async () => {
 		await seedCollection();
-		const stats = await getArchiveStats(db, 10_000);
+		const stats = await getArchiveStats(db, { now: 10_000 });
 
 		expect(stats).toMatchObject({
 			totals: {
@@ -334,7 +342,7 @@ describe('archive collection statistics', () => {
 
 	it('reports missing dialect metadata as unspecified', async () => {
 		await seedCollection();
-		const dialect = (await getArchiveStats(db, 10_000)).distribution.dialect;
+		const dialect = (await getArchiveStats(db, { now: 10_000 })).distribution.dialect;
 
 		expect(dialect).toEqual({
 			unit: 'works',
@@ -378,11 +386,84 @@ describe('archive collection statistics', () => {
 		await seedCollection();
 		const all = vi.spyOn(db, 'all');
 
-		await getArchiveStats(db, 10_000);
-		await getArchiveStats(db, 69_999);
+		await getArchiveStats(db, { now: 10_000 });
+		await getArchiveStats(db, { now: 69_999 });
 		expect(all).toHaveBeenCalledTimes(3);
 
-		await getArchiveStats(db, 70_001);
+		await getArchiveStats(db, { now: 70_001 });
 		expect(all).toHaveBeenCalledTimes(6);
 	});
+
+	it('answers a cold isolate from the shared cache', async () => {
+		await seedCollection();
+		const colo = fakeColoCache();
+		const all = vi.spyOn(db, 'all');
+
+		colo.clock = 10_000;
+		const first = await getArchiveStats(db, { now: colo.clock, platform: colo.platform });
+		expect(all).toHaveBeenCalledTimes(3);
+		expect(colo.stored()?.headers.get('cache-control')).toBe('max-age=60');
+
+		const cold = coldIsolate();
+		const coldAll = vi.spyOn(cold, 'all');
+		colo.clock = 40_000;
+		const second = await getArchiveStats(cold, { now: colo.clock, platform: colo.platform });
+		expect(coldAll).not.toHaveBeenCalled();
+		expect(second).toEqual(first);
+	});
+
+	it('expires a value 60 seconds after it was computed, whichever layer served it', async () => {
+		await seedCollection();
+		const colo = fakeColoCache();
+		colo.clock = 10_000;
+		await getArchiveStats(db, { now: colo.clock, platform: colo.platform });
+
+		// Reads the shared entry 30 s in, so it inherits an expiry 30 s out —
+		// not a fresh 60 s of its own.
+		const cold = coldIsolate();
+		const coldAll = vi.spyOn(cold, 'all');
+		colo.clock = 40_000;
+		await getArchiveStats(cold, { now: colo.clock, platform: colo.platform });
+		expect(coldAll).not.toHaveBeenCalled();
+
+		colo.clock = 69_999;
+		await getArchiveStats(cold, { now: colo.clock, platform: colo.platform });
+		expect(coldAll).not.toHaveBeenCalled();
+
+		// Both layers let go at the same moment, so the aggregates run again.
+		colo.clock = 70_001;
+		await getArchiveStats(cold, { now: colo.clock, platform: colo.platform });
+		expect(coldAll).toHaveBeenCalledTimes(3);
+	});
 });
+
+/** Stands in for the colo cache, holding entries for exactly the max-age they carry. */
+function fakeColoCache() {
+	const store = new Map<string, { response: Response; expiresAt: number }>();
+	const state = {
+		clock: 0,
+		stored: () => [...store.values()][0]?.response,
+		platform: {} as App.Platform
+	};
+	state.platform = {
+		caches: {
+			default: {
+				match: async (request: Request) => {
+					const entry = store.get(request.url);
+					if (!entry) return undefined;
+					if (entry.expiresAt <= state.clock) {
+						store.delete(request.url);
+						return undefined;
+					}
+					return entry.response.clone();
+				},
+				put: async (request: Request, response: Response) => {
+					const maxAge = Number(/max-age=(\d+)/u.exec(response.headers.get('cache-control') ?? '')?.[1] ?? 0);
+					store.set(request.url, { response, expiresAt: state.clock + maxAge * 1000 });
+				}
+			}
+		},
+		ctx: { waitUntil: (promise: Promise<unknown>) => void promise }
+	} as unknown as App.Platform;
+	return state;
+}
