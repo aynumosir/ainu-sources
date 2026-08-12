@@ -122,7 +122,7 @@ type DistributionRow = {
 };
 
 /**
- * Two layers, each holding a value for CACHE_TTL_MS.
+ * Two layers in front of the aggregates, one CACHE_TTL_MS window between them.
  *
  * The map lives in one isolate. Isolates are created and dropped far faster than
  * the entry expires, so on its own it left most requests running the full query
@@ -131,9 +131,14 @@ type DistributionRow = {
  * from that location, so the next reader through the same location skips them.
  * These counts describe the collection and carry nothing about the viewer, so a
  * single entry is correct for every archive reader.
+ *
+ * A value is stamped with the moment it goes stale, and both layers honour that
+ * one moment, so the window belongs to the value rather than to whichever layer
+ * happened to hand it over.
  */
 const cache = new WeakMap<Db, { expiresAt: number; value: ArchiveStats }>();
 const COLO_CACHE_KEY = 'https://archive.invalid/collection-stats';
+const EXPIRES_AT_HEADER = 'x-stats-expires-at';
 
 function numberValue(value: number | null | undefined): number {
 	return Number(value ?? 0);
@@ -461,22 +466,27 @@ export async function getArchiveStats(
 	const colo = edgeCache(options.platform);
 	const hit = colo ? await readColoStats(colo) : null;
 	if (hit) {
-		cache.set(db, { expiresAt: now + CACHE_TTL_MS, value: hit });
-		return hit;
+		// The value keeps the expiry it was computed with. Taking a fresh window
+		// here instead would let a hit late in the shared entry's life carry the
+		// same numbers for another full CACHE_TTL_MS, so the oldest value a
+		// reader could see would be twice the stated age.
+		if (hit.expiresAt > now) cache.set(db, { expiresAt: hit.expiresAt, value: hit.value });
+		return hit.value;
 	}
 
+	const expiresAt = now + CACHE_TTL_MS;
 	const value = await queryArchiveStats(db);
-	cache.set(db, { expiresAt: now + CACHE_TTL_MS, value });
+	cache.set(db, { expiresAt, value });
 	if (colo) {
 		const write = colo.put(
 			new Request(COLO_CACHE_KEY),
-			// The colo cache decides freshness from this header, so an entry it
-			// hands back is already within the window and needs no timestamp of
-			// its own.
 			new Response(JSON.stringify(value), {
 				headers: {
 					'content-type': 'application/json',
-					'cache-control': `max-age=${Math.floor(CACHE_TTL_MS / 1000)}`
+					// The platform drops the entry on this; the stamp beside it
+					// carries the same moment to whichever isolate reads it back.
+					'cache-control': `max-age=${CACHE_TTL_MS / 1000}`,
+					[EXPIRES_AT_HEADER]: String(expiresAt)
 				}
 			})
 		);
@@ -488,10 +498,13 @@ export async function getArchiveStats(
 	return value;
 }
 
-async function readColoStats(colo: EdgeCache): Promise<ArchiveStats | null> {
+/** An entry with no readable stamp is still served, but never memoised. */
+async function readColoStats(colo: EdgeCache): Promise<{ value: ArchiveStats; expiresAt: number } | null> {
 	try {
 		const response = await colo.match(new Request(COLO_CACHE_KEY));
-		return response ? ((await response.json()) as ArchiveStats) : null;
+		if (!response) return null;
+		const stamp = Number(response.headers.get(EXPIRES_AT_HEADER));
+		return { value: (await response.json()) as ArchiveStats, expiresAt: Number.isFinite(stamp) ? stamp : 0 };
 	} catch {
 		return null;
 	}
