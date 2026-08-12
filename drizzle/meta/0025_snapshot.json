@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "0c0c5eda-e309-4523-bc67-f9cb872d10ca",
-  "prevId": "80937459-0e7a-4e07-a1d6-7e34963bc72c",
+  "id": "98a9d368-063a-478e-88c5-b09df812062e",
+  "prevId": "0c0c5eda-e309-4523-bc67-f9cb872d10ca",
   "tables": {
     "app_user_roles": {
       "name": "app_user_roles",
@@ -3114,6 +3114,15 @@
         }
       },
       "indexes": {
+        "source_files_source_role_label_idx": {
+          "name": "source_files_source_role_label_idx",
+          "columns": [
+            "source_id",
+            "role",
+            "label"
+          ],
+          "isUnique": true
+        },
         "source_files_source": {
           "name": "source_files_source",
           "columns": [

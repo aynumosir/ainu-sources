@@ -960,14 +960,14 @@ describe('archive DB flows', () => {
 			.where(eq(schema.sources.id, 'source-1'));
 		const ainuRoot = await mkdtemp(join(tmpdir(), 'archive-ocr-'));
 		try {
-			const ocrDir = join(ainuRoot, 'ainu-grammar', 'books', 'ocr');
-			await mkdir(ocrDir, { recursive: true });
+			const scanDir = join(ainuRoot, 'books', 'books');
+			await mkdir(scanDir, { recursive: true });
 			await writeFile(
-				join(ocrDir, '資料一.gemini.txt'),
+				join(scanDir, '資料一.gemini.txt'),
 				'--- page 1 ---\nfirst page text\n--- page 2 ---\nkamuy search target\n'
 			);
-			const summary = await ingestOcr(db, { ainuRoot, repoName: 'books', dryRun: false, now: new Date('2026-01-01T00:00:00.000Z') });
-			expect(summary).toMatchObject({ ingested: 1, unchanged: 0, skippedNoMatch: 0, skippedNoRevision: 0 });
+			const summary = await ingestOcr(db, { ainuRoot, dryRun: false, now: new Date('2026-01-01T00:00:00.000Z') });
+			expect(summary).toMatchObject({ ingested: 1, unchanged: 0, scansWithoutText: 0, conflicts: 0 });
 			expect(await listOcrPages(db, 'rev-1', 'gemini')).toEqual([
 				{ revisionId: 'rev-1', variant: 'gemini', page: 1, text: 'first page text' },
 				{ revisionId: 'rev-1', variant: 'gemini', page: 2, text: 'kamuy search target' }
@@ -1624,6 +1624,18 @@ describe('archive DB flows', () => {
 		const result = await listArchiveWorks(db, { sort: 'title', limit: 50, principal: reader });
 		expect(result.items.map((item) => item.source.slug)).toEqual(['source-one']);
 		expect(result.items[0].file.fileId).toBe('file-1');
+	});
+
+	it('refuses a second file of the same role for one work', async () => {
+		await seedRevision();
+		await expect(
+			db.insert(schema.sourceFiles).values({
+				id: 'file-1-again',
+				sourceId: 'source-1',
+				role: 'scan',
+				createdBy: 'contributor'
+			})
+		).rejects.toThrow();
 	});
 
 	it('lists the scan rather than a derivative kept beside it', async () => {

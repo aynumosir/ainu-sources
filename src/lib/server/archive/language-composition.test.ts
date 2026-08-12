@@ -263,13 +263,13 @@ describe('refreshSourceTextComposition', () => {
 		await seedWork(db);
 		const ainuRoot = await mkdtemp(join(tmpdir(), 'composition-ocr-'));
 		try {
-			const ocrDir = join(ainuRoot, 'ainu-grammar', 'books', 'ocr');
-			await mkdir(ocrDir, { recursive: true });
+			const scanDir = join(ainuRoot, 'books', 'books');
+			await mkdir(scanDir, { recursive: true });
 			await writeFile(
-				join(ocrDir, '資料一.gemini.txt'),
+				join(scanDir, '資料一.gemini.txt'),
 				'--- page 1 ---\nsirokani pe ran ran piskan konkani pe ran ran piskan\n'
 			);
-			await ingestOcr(db, { ainuRoot, repoName: 'books', dryRun: false, now: new Date('2026-01-01T00:00:00.000Z') });
+			await ingestOcr(db, { ainuRoot, dryRun: false, now: new Date('2026-01-01T00:00:00.000Z') });
 			const [row] = await db.select().from(schema.sources).where(eq(schema.sources.id, 'source-1'));
 			expect(row.textComposition).not.toBeNull();
 			expect(share(row.textComposition!, 'ain')).toBeGreaterThan(0.9);
