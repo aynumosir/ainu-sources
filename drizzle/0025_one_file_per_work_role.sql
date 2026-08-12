@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `source_files_source_role_label_idx` ON `source_files` (`source_id`,`role`,`label`);
