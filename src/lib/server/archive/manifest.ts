@@ -4,6 +4,7 @@ import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import {
 	archiveBlobs,
 	archiveRepositories,
+	fileCheckouts,
 	fileRevisions,
 	sourceFiles,
 	sources
@@ -48,9 +49,12 @@ export async function renderManifest(db: Db, repoName?: string): Promise<{ body:
 		eq(archiveBlobs.storageState, 'verified')
 	];
 	if (repoName) clauses.push(eq(archiveRepositories.name, repoName));
+	// One line per place a repository keeps a file, so a work that two
+	// repositories both check out appears in each of their manifests while
+	// remaining one file with one revision.
 	const rows = await db
 		.select({
-			path: sourceFiles.checkoutPath,
+			path: fileCheckouts.path,
 			sourceSlug: sources.slug,
 			fileId: sourceFiles.id,
 			revisionId: fileRevisions.id,
@@ -65,9 +69,10 @@ export async function renderManifest(db: Db, repoName?: string): Promise<{ body:
 		.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
 		.innerJoin(sources, eq(sourceFiles.sourceId, sources.id))
 		.innerJoin(archiveBlobs, eq(fileRevisions.blobSha256, archiveBlobs.sha256))
-		.innerJoin(archiveRepositories, eq(sourceFiles.checkoutRepoId, archiveRepositories.id))
+		.innerJoin(fileCheckouts, eq(fileCheckouts.sourceFileId, sourceFiles.id))
+		.innerJoin(archiveRepositories, eq(fileCheckouts.repoId, archiveRepositories.id))
 		.where(and(...clauses))
-		.orderBy(asc(sourceFiles.checkoutPath));
+		.orderBy(asc(fileCheckouts.path));
 	const base = rows
 		.filter((r): r is typeof r & { path: string; sha256: string } => !!r.path && !!r.sha256)
 		.sort((a, b) => utf8Compare(a.path, b.path))
