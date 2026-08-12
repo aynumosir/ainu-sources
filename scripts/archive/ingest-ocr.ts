@@ -3,8 +3,10 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { and, eq, isNotNull, ne, sql } from 'drizzle-orm';
+import { and, eq, ne, sql } from 'drizzle-orm';
 import {
+	archiveRepositories,
+	fileCheckouts,
 	fileRevisions,
 	ocrIngestState,
 	revisionOcrCoverage,
@@ -23,9 +25,13 @@ import type { Db } from '../import/lib/entities';
 
 const SCRIPT_DIR = (import.meta as ImportMeta & { dir?: string }).dir ?? path.dirname(fileURLToPath(import.meta.url));
 const AINU_ROOT = process.env.AINU_ROOT ?? path.resolve(SCRIPT_DIR, '../../..');
+// The repository whose committed OCR trees this script reads.
+const GRAMMAR_REPO = 'ainu-grammar';
 
 export interface IngestOcrOptions extends ImporterRunOptions {
 	ainuRoot: string;
+	/** The repository whose checkout paths name the text files being read. */
+	repoName?: string;
 	now?: Date;
 }
 
@@ -42,7 +48,7 @@ type CurrentRevisionRow = { id: string; sourceFileId: string };
 export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestOcrSummary> {
 	const grammarDir = path.join(opts.ainuRoot, 'ainu-grammar');
 	const files = await collectOcrFiles(grammarDir, opts.limit ?? Infinity);
-	const fileByStem = await sourceFilesByCheckoutStem(db);
+	const fileByStem = await sourceFilesByCheckoutStem(db, opts.repoName ?? GRAMMAR_REPO);
 	const currentRevisionByFileId = await currentRevisionsByFileId(db);
 	const summary: IngestOcrSummary = {
 		ingested: 0,
@@ -220,14 +226,19 @@ async function collectOcrFiles(grammarDir: string, limit: number): Promise<strin
 	return out;
 }
 
-async function sourceFilesByCheckoutStem(db: Db): Promise<Map<string, SourceFileRow>> {
+async function sourceFilesByCheckoutStem(db: Db, repoName: string): Promise<Map<string, SourceFileRow>> {
+	// Stems are only unique inside the repository whose text is being read.
+	// Every ainu-dictionaries path ends in `source.pdf`, so a map spanning
+	// repositories collapses each of them onto the stem `source` and hands
+	// grammar-side text to whichever of them was inserted last.
 	const rows = await db
-		.select({ id: sourceFiles.id, sourceId: sourceFiles.sourceId, checkoutPath: sourceFiles.checkoutPath })
-		.from(sourceFiles)
-		.where(isNotNull(sourceFiles.checkoutPath));
+		.select({ id: sourceFiles.id, sourceId: sourceFiles.sourceId, checkoutPath: fileCheckouts.path })
+		.from(fileCheckouts)
+		.innerJoin(sourceFiles, eq(fileCheckouts.sourceFileId, sourceFiles.id))
+		.innerJoin(archiveRepositories, eq(fileCheckouts.repoId, archiveRepositories.id))
+		.where(eq(archiveRepositories.name, repoName));
 	const out = new Map<string, SourceFileRow>();
 	for (const row of rows) {
-		if (!row.checkoutPath) continue;
 		out.set(stemFromCheckoutPath(row.checkoutPath), {
 			id: row.id,
 			sourceId: row.sourceId,

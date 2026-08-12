@@ -937,6 +937,10 @@ export const archiveBlobs = sqliteTable(
 	]
 );
 
+// A file of a work — its scan, its epub, a supplement — identified by what it
+// is rather than by where a repository keeps it. Where it lands in a working
+// tree is one or more `file_checkouts` rows, so a book that two repositories
+// both check out stays one file with one revision history and one OCR result.
 export const sourceFiles = sqliteTable(
 	'source_files',
 	{
@@ -945,21 +949,38 @@ export const sourceFiles = sqliteTable(
 			.notNull()
 			.references(() => sources.id, { onDelete: 'restrict' }),
 		role: text('role').notNull(),
-		label: text('label'),
-		checkoutRepoId: text('checkout_repo_id').references(() => archiveRepositories.id),
-		checkoutPath: text('checkout_path'),
+		label: text('label').notNull().default(''),
 		sortOrder: integer('sort_order').notNull().default(0),
 		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
 		createdBy: text('created_by').references(() => user.id, { onDelete: 'set null' })
 	},
 	(t) => [
-		uniqueIndex('source_files_checkout_idx').on(t.checkoutRepoId, t.checkoutPath),
 		index('source_files_source').on(t.sourceId),
-		check('source_files_role_check', sql`${t.role} in ('scan', 'epub', 'supplement', 'derivative')`),
-		check(
-			'source_files_checkout_pair_check',
-			sql`(${t.checkoutRepoId} is null and ${t.checkoutPath} is null) or (${t.checkoutRepoId} is not null and ${t.checkoutPath} is not null)`
-		)
+		check('source_files_role_check', sql`${t.role} in ('scan', 'epub', 'supplement', 'derivative')`)
+	]
+);
+
+export const fileCheckouts = sqliteTable(
+	'file_checkouts',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		sourceFileId: text('source_file_id')
+			.notNull()
+			.references(() => sourceFiles.id, { onDelete: 'cascade' }),
+		repoId: text('repo_id')
+			.notNull()
+			.references(() => archiveRepositories.id, { onDelete: 'restrict' }),
+		path: text('path').notNull(),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
+		createdBy: text('created_by').references(() => user.id, { onDelete: 'set null' })
+	},
+	(t) => [
+		uniqueIndex('file_checkouts_repo_path_idx').on(t.repoId, t.path),
+		// One place per working tree. Two paths in one repository would have
+		// `archive pull` write the same bytes twice and leave the text lying
+		// beside each copy with two files to belong to.
+		uniqueIndex('file_checkouts_file_repo_idx').on(t.sourceFileId, t.repoId),
+		index('file_checkouts_repo').on(t.repoId)
 	]
 );
 
