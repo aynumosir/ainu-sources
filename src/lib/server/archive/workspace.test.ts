@@ -77,9 +77,13 @@ async function seedRevision(): Promise<void> {
 		id: 'file-1',
 		sourceId: 'source-1',
 		role: 'scan',
-		checkoutRepoId: 'repo-1',
-		checkoutPath: 'books/source-one.pdf',
 		createdBy: 'contributor'
+	});
+	await db.insert(schema.fileCheckouts).values({
+		id: 'checkout-file-1',
+		sourceFileId: 'file-1',
+		repoId: 'repo-1',
+		path: 'books/source-one.pdf'
 	});
 	await db.insert(schema.archiveBlobs).values({
 		sha256: 'a'.repeat(64),

@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, exists, gt, gte, inArray, isNull, lt, max, notExists, or, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, exists, gt, gte, inArray, isNull, lt, max, notExists, or, sql, type SQL } from 'drizzle-orm';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import { alias } from 'drizzle-orm/sqlite-core';
 import { env } from '$env/dynamic/private';
@@ -10,6 +10,7 @@ import {
 	archiveStreamDailyUsage,
 	archiveStreamLeases,
 	capabilityTokens,
+	fileCheckouts,
 	fileRevisions,
 	githubLoginCache,
 	revisionOcrCoverage,
@@ -166,13 +167,13 @@ function isFinalizeMismatchResult(value: unknown): value is FinalizeMismatchResu
 }
 
 function originalFilenameFor(
-	sourceFile: Pick<schema.SourceFile, 'label' | 'checkoutPath'>,
+	sourceFile: Pick<schema.SourceFile, 'label'>,
 	sha256: string,
 	declaredMediaType: string,
 	checkoutPath?: string | null
 ): string {
-	if (sourceFile.label?.trim()) return sourceFile.label.trim();
-	const path = checkoutPath?.trim() || sourceFile.checkoutPath?.trim();
+	if (sourceFile.label.trim()) return sourceFile.label.trim();
+	const path = checkoutPath?.trim();
 	if (path) {
 		const name = path.split(/[\\/]/u).filter(Boolean).at(-1);
 		if (name) return name;
@@ -213,10 +214,15 @@ async function resolveUploadSourceFile(
 		if (!repo) throw new ArchiveHttpError(400, 'checkout repository not found');
 		repoId = repo.id;
 	}
+	// An upload names a work and a role, never a label, so it resolves the
+	// unlabelled file of that role. A labelled one — the second volume, a map
+	// sheet — is a different file and is not what this upload replaces.
 	let [slot] = await tx
 		.select()
 		.from(sourceFiles)
-		.where(and(eq(sourceFiles.sourceId, source.id), eq(sourceFiles.role, input.role)))
+		.where(
+			and(eq(sourceFiles.sourceId, source.id), eq(sourceFiles.role, input.role), eq(sourceFiles.label, ''))
+		)
 		.limit(1);
 	if (!slot) {
 		[slot] = await tx
@@ -225,14 +231,64 @@ async function resolveUploadSourceFile(
 				id: uuid(),
 				sourceId: source.id,
 				role: input.role,
-				checkoutRepoId: repoId,
-				checkoutPath: input.checkoutPath ?? null,
 				createdBy: principal.userId
 			})
 			.returning();
 	}
+	if (repoId && input.checkoutPath) {
+		await attachCheckout(tx, principal, { sourceFileId: slot.id, repoId, path: input.checkoutPath });
+	}
 	return slot;
 }
+
+/**
+ * Records that a repository's working tree keeps this file at this path. The
+ * same path in the same repository can only name one file, so an upload that
+ * repeats a path either confirms the file already there or is refused as a
+ * collision with a different one.
+ */
+async function attachCheckout(
+	tx: Tx,
+	principal: ArchivePrincipal,
+	input: { sourceFileId: string; repoId: string; path: string }
+): Promise<void> {
+	const [existing] = await tx
+		.select()
+		.from(fileCheckouts)
+		.where(and(eq(fileCheckouts.repoId, input.repoId), eq(fileCheckouts.path, input.path)))
+		.limit(1);
+	if (existing) {
+		if (existing.sourceFileId !== input.sourceFileId) {
+			throw new ArchiveHttpError(409, 'checkout path already belongs to another file');
+		}
+		return;
+	}
+	await tx.insert(fileCheckouts).values({
+		id: uuid(),
+		sourceFileId: input.sourceFileId,
+		repoId: input.repoId,
+		path: input.path,
+		createdBy: principal.userId
+	});
+}
+
+/**
+ * Where a working tree keeps this file. One file can sit in several
+ * repositories; the first path by name is the one that names it on screen.
+ *
+ * Written out with table names rather than interpolated columns: inside a `sql`
+ * template drizzle renders a column bare, so `${fileCheckouts.sourceFileId} =
+ * ${sourceFiles.id}` becomes `source_file_id = id` and, since file_checkouts
+ * has an id of its own, matches nothing while raising no error. Only a query
+ * that already joins gets its columns qualified, which makes the bug appear and
+ * disappear with the shape of the caller.
+ */
+const CHECKOUT_PATH = sql<string | null>`(
+	select fc.path from file_checkouts fc
+	where fc.source_file_id = source_files.id
+	order by fc.path
+	limit 1
+)`;
 
 export async function listSourceFiles(
 	db: Db,
@@ -251,7 +307,7 @@ export async function listSourceFiles(
 			fileId: sourceFiles.id,
 			role: sourceFiles.role,
 			label: sourceFiles.label,
-			checkoutPath: sourceFiles.checkoutPath,
+			checkoutPath: CHECKOUT_PATH,
 			sortOrder: sourceFiles.sortOrder,
 			revisionId: fileRevisions.id,
 			revisionNo: fileRevisions.revisionNo,
@@ -299,7 +355,7 @@ export async function listFiles(
 			fileId: sourceFiles.id,
 			sourceSlug: sources.slug,
 			role: sourceFiles.role,
-			checkoutPath: sourceFiles.checkoutPath,
+			checkoutPath: CHECKOUT_PATH,
 			sortOrder: sourceFiles.sortOrder,
 			revisionId: fileRevisions.id,
 			submittedAt: fileRevisions.submittedAt,
@@ -468,7 +524,7 @@ export async function getSourceFileById(db: Db, fileId: string, _principal: Arch
 			sourceId: sourceFiles.sourceId,
 			sourceSlug: sources.slug,
 			role: sourceFiles.role,
-			checkoutPath: sourceFiles.checkoutPath,
+			checkoutPath: CHECKOUT_PATH,
 				currentRevisionId: sql<string | null>`(
 					select id from file_revisions cur
 					where cur.source_file_id = ${sourceFiles.id} and cur.is_current = 1
@@ -492,7 +548,7 @@ export async function getRevision(db: Db, id: string, principal: ArchivePrincipa
 			sourceId: sources.id,
 			title: sources.title,
 			role: sourceFiles.role,
-			checkoutPath: sourceFiles.checkoutPath,
+			checkoutPath: CHECKOUT_PATH,
 			revisionNo: fileRevisions.revisionNo,
 			sha256: fileRevisions.blobSha256,
 			bytes: archiveBlobs.bytes,
@@ -693,7 +749,7 @@ export async function reconcileUploadFinalization(
 			if (session.state === 'verified') return serializeUploadSession(session);
 
 			const [sourceFile] = await tx
-				.select({ label: sourceFiles.label, checkoutPath: sourceFiles.checkoutPath })
+				.select({ label: sourceFiles.label, checkoutPath: CHECKOUT_PATH })
 				.from(sourceFiles)
 				.where(eq(sourceFiles.id, session.sourceFileId))
 				.limit(1);
@@ -715,7 +771,12 @@ export async function reconcileUploadFinalization(
 			// Upload creation does not carry a browser filename yet. This fallback
 			// preserves a readable value for the required column until that field is
 			// added to the wire contract.
-			const originalFilename = originalFilenameFor(sourceFile, result.sha256, session.declaredMediaType);
+			const originalFilename = originalFilenameFor(
+				sourceFile,
+				result.sha256,
+				session.declaredMediaType,
+				sourceFile.checkoutPath
+			);
 			await tx
 				.update(fileRevisions)
 				.set({ isCurrent: false })
@@ -1213,7 +1274,7 @@ export async function listArchiveWorks(
 	if (input.cursor && !cursor) throw new ArchiveHttpError(400, 'invalid cursor');
 	const clauses = [
 		eq(fileRevisions.isCurrent, true),
-		sql`${sourceFiles.id} = (${representativeFile(db, input.principal)})`
+		sql`source_files.id = (${representativeFile(db, input.principal)})`
 	];
 	if (input.principal.role !== 'archive_admin') {
 		clauses.push(eq(fileRevisions.accessState, 'available'), eq(sources.humanDownload, true));
@@ -1303,7 +1364,7 @@ export async function listArchiveWorks(
 			fileId: sourceFiles.id,
 			sourceSlug: sources.slug,
 			role: sourceFiles.role,
-			checkoutPath: sourceFiles.checkoutPath,
+			checkoutPath: CHECKOUT_PATH,
 			sortOrder: sourceFiles.sortOrder,
 			revisionId: fileRevisions.id,
 			submittedAt: fileRevisions.submittedAt,

@@ -169,6 +169,13 @@
       "when": 1786545461995,
       "tag": "0023_archive_ocr_stats_index",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "6",
+      "when": 1786546427023,
+      "tag": "0024_file_checkouts",
+      "breakpoints": true
     }
   ]
 }

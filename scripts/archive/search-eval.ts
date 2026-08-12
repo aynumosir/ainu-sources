@@ -126,8 +126,13 @@ async function seedFixture(db: Db, fixture: Fixture): Promise<void> {
 			id: `file-${document.id}`,
 			sourceId: `source-${document.id}`,
 			role: 'scan',
-			checkoutRepoId: 'eval-repo',
-			checkoutPath: `${document.source_ref.split(':')[0]}#${document.id}`,
+			createdBy: 'eval-contributor'
+		});
+		await db.insert(schema.fileCheckouts).values({
+			id: `checkout-${document.id}`,
+			sourceFileId: `file-${document.id}`,
+			repoId: 'eval-repo',
+			path: `${document.source_ref.split(':')[0]}#${document.id}`,
 			createdBy: 'eval-contributor'
 		});
 		await db.insert(schema.archiveBlobs).values({
