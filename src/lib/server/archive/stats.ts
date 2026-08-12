@@ -184,7 +184,11 @@ async function readOcr(db: Db): Promise<OcrRow[]> {
 	return db.all<OcrRow>(sql`
 		with archive_works as (
 			select distinct source_id from source_files
-		), active_text as (
+		), active_text as materialized (
+			-- Three aggregates below read this set. Without the hint SQLite
+			-- re-runs the join once per reader, tripling the scan of the chunk
+			-- table; ocr_chunks_nonempty_text_idx makes each scan cheap, and
+			-- materializing spends one temporary table to avoid repeating it.
 			select
 				c.revision_id,
 				c.variant,
