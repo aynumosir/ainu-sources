@@ -32,6 +32,7 @@ export type ArchiveLayoutData =
 // load function for one request, means the actual session/DB lookups still
 // happen exactly once regardless of how many layouts ask for it.
 const CACHE_KEY = Symbol('archiveLayoutData');
+const PRINCIPAL_KEY = Symbol('archivePrincipal');
 
 export function resolveArchiveLayoutData(event: RequestEvent): Promise<ArchiveLayoutData> {
 	const locals = event.locals as Record<symbol, Promise<ArchiveLayoutData> | undefined>;
@@ -43,9 +44,28 @@ export function resolveArchiveLayoutData(event: RequestEvent): Promise<ArchiveLa
 	return cached;
 }
 
+/**
+ * Just the caller's identity, memoised on the same request object.
+ *
+ * A page that needs to know who is asking, and nothing else, can take this
+ * instead of the bundle above. Waiting on the bundle would also mean waiting on
+ * the usage figures the header shows, which no catalogue query depends on — and
+ * a page reached through `parent()` cannot start until they arrive. Both callers
+ * share this one promise, so the session lookup still happens once per request.
+ */
+export function resolveArchivePrincipalOnce(event: RequestEvent): Promise<ArchivePrincipal | null> {
+	const locals = event.locals as Record<symbol, Promise<ArchivePrincipal | null> | undefined>;
+	let cached = locals[PRINCIPAL_KEY];
+	if (!cached) {
+		cached = resolveArchivePrincipal(event.request, db);
+		locals[PRINCIPAL_KEY] = cached;
+	}
+	return cached;
+}
+
 async function computeArchiveLayoutData(event: RequestEvent): Promise<ArchiveLayoutData> {
-	const { request, locals, url } = event;
-	const principal = await resolveArchivePrincipal(request, db);
+	const { locals, url } = event;
+	const principal = await resolveArchivePrincipalOnce(event);
 	if (!principal) {
 		return {
 			principal: null,
