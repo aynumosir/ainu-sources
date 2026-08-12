@@ -58,19 +58,26 @@ async function seedRevision(stem: string): Promise<string> {
 		.insert(schema.sources)
 		.values({ slug: stem, title: `Title of ${stem}`, type: 'dictionary' })
 		.returning({ id: schema.sources.id });
-	const [repo] = await db
+	await db
 		.insert(schema.archiveRepositories)
-		.values({ name: `repo-${stem}` })
-		.returning({ id: schema.archiveRepositories.id });
+		.values({ name: 'ainu-grammar' })
+		.onConflictDoNothing({ target: schema.archiveRepositories.name });
+	const [repo] = await db
+		.select({ id: schema.archiveRepositories.id })
+		.from(schema.archiveRepositories)
+		.where(eq(schema.archiveRepositories.name, 'ainu-grammar'));
 	const [file] = await db
 		.insert(schema.sourceFiles)
 		.values({
 			sourceId: source.id,
-			role: 'scan',
-			checkoutRepoId: repo.id,
-			checkoutPath: `books/x/${stem}.pdf`
+			role: 'scan'
 		})
 		.returning({ id: schema.sourceFiles.id });
+	await db.insert(schema.fileCheckouts).values({
+		sourceFileId: file.id,
+		repoId: repo.id,
+		path: `books/x/${stem}.pdf`
+	});
 	const blobSha256 = createHash('sha256').update(stem).digest('hex');
 	await db.insert(schema.archiveBlobs).values({
 		sha256: blobSha256,

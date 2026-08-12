@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import type { Dirent } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 import {
 	fileRevisions,
 	ocrPageEdits,
@@ -71,7 +71,14 @@ export async function exportApprovedSnapshot(
 			revisionId: fileRevisions.id,
 			revisionNo: fileRevisions.revisionNo,
 			fileId: sourceFiles.id,
-			checkoutPath: sourceFiles.checkoutPath,
+			// Text artifacts are laid out beside one checkout of the file; a file
+			// kept by several repositories uses the first of its paths by name.
+			checkoutPath: sql<string | null>`(
+				select fc.path from file_checkouts fc
+				where fc.source_file_id = source_files.id
+				order by fc.path
+				limit 1
+			)`,
 			sourceSlug: sources.slug
 		})
 		.from(fileRevisions)

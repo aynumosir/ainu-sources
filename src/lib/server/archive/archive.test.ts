@@ -113,10 +113,14 @@ async function seedRevision(isCurrent = true, media = 'application/pdf') {
 		id: 'file-1',
 		sourceId: 'source-1',
 		role: 'scan',
-		checkoutRepoId: 'repo-1',
-		checkoutPath: 'books/資料一.pdf',
 		sortOrder: 10,
 		createdBy: 'contributor'
+	});
+	await db.insert(schema.fileCheckouts).values({
+		id: 'checkout-file-1',
+		sourceFileId: 'file-1',
+		repoId: 'repo-1',
+		path: 'books/資料一.pdf'
 	});
 	await db.insert(schema.archiveBlobs).values({
 		sha256: sha,
@@ -176,9 +180,13 @@ async function seedArchiveListRow(input: {
 		id: `list-file-${input.index}`,
 		sourceId: `list-source-${input.index}`,
 		role: 'scan',
-		checkoutRepoId: 'repo-1',
-		checkoutPath: `books/list-${input.index}.pdf`,
 		createdBy: 'contributor'
+	});
+	await db.insert(schema.fileCheckouts).values({
+		id: `checkout-list-file-${input.index}`,
+		sourceFileId: `list-file-${input.index}`,
+		repoId: 'repo-1',
+		path: `books/list-${input.index}.pdf`
 	});
 	await db.insert(schema.archiveBlobs).values({
 		sha256: hash,
@@ -932,7 +940,7 @@ describe('archive DB flows', () => {
 				join(ocrDir, '資料一.gemini.txt'),
 				'--- page 1 ---\nfirst page text\n--- page 2 ---\nkamuy search target\n'
 			);
-			const summary = await ingestOcr(db, { ainuRoot, dryRun: false, now: new Date('2026-01-01T00:00:00.000Z') });
+			const summary = await ingestOcr(db, { ainuRoot, repoName: 'books', dryRun: false, now: new Date('2026-01-01T00:00:00.000Z') });
 			expect(summary).toMatchObject({ ingested: 1, unchanged: 0, skippedNoMatch: 0, skippedNoRevision: 0 });
 			expect(await listOcrPages(db, 'rev-1', 'gemini')).toEqual([
 				{ revisionId: 'rev-1', variant: 'gemini', page: 1, text: 'first page text' },
@@ -1112,9 +1120,13 @@ describe('archive DB flows', () => {
 			id: 'file-2',
 			sourceId: 'source-2',
 			role: 'scan',
-			checkoutRepoId: 'repo-1',
-			checkoutPath: 'books/source-two.pdf',
 			createdBy: 'contributor'
+		});
+		await db.insert(schema.fileCheckouts).values({
+			id: 'checkout-file-2',
+			sourceFileId: 'file-2',
+			repoId: 'repo-1',
+			path: 'books/source-two.pdf'
 		});
 		await db.insert(schema.archiveBlobs).values({
 			sha256: 'b'.repeat(64),
@@ -1169,9 +1181,13 @@ describe('archive DB flows', () => {
 			id: 'file-2',
 			sourceId: 'source-1',
 			role: 'supplement',
-			checkoutRepoId: 'repo-1',
-			checkoutPath: 'books/supplement.pdf',
 			createdBy: 'contributor'
+		});
+		await db.insert(schema.fileCheckouts).values({
+			id: 'checkout-file-2',
+			sourceFileId: 'file-2',
+			repoId: 'repo-1',
+			path: 'books/supplement.pdf'
 		});
 		await db.insert(schema.archiveBlobs).values({
 			sha256: 'b'.repeat(64),
@@ -1569,62 +1585,62 @@ describe('archive DB flows', () => {
 		expect(second.items.map((item) => item.source.title)).toEqual(['Kamuy Alpha']);
 	});
 
-	it('lists a work once however many file slots carry it', async () => {
+	it('lists a work once when two repositories keep the same file', async () => {
 		await seedRevision();
 		await db.insert(schema.archiveRepositories).values({ id: 'repo-2', name: 'grammar' });
-		// The same book, checked out into a second repository, and a derivative
-		// of it alongside: three slots, one work, one card.
-		await db.insert(schema.sourceFiles).values([
-			{
-				id: 'file-1-grammar',
-				sourceId: 'source-1',
-				role: 'scan',
-				checkoutRepoId: 'repo-2',
-				checkoutPath: 'source-one/source.pdf',
-				sortOrder: 0,
-				createdBy: 'contributor'
-			},
-			{
-				id: 'file-1-bbox',
-				sourceId: 'source-1',
-				role: 'derivative',
-				checkoutRepoId: 'repo-2',
-				checkoutPath: 'source-one/bbox.xml',
-				sortOrder: 0,
-				createdBy: 'contributor'
-			}
-		]);
-		await db.insert(schema.fileRevisions).values([
-			{
-				id: 'rev-1-grammar',
-				sourceFileId: 'file-1-grammar',
-				revisionNo: 1,
-				blobSha256: sha,
-				originalFilename: 'source.pdf',
-				declaredMediaType: 'application/pdf',
-				artifactKind: 'original',
-				pageCount: 12,
-				isCurrent: true,
-				submittedBy: 'contributor',
-				submittedAt: new Date(2_000)
-			},
-			{
-				id: 'rev-1-bbox',
-				sourceFileId: 'file-1-bbox',
-				revisionNo: 1,
-				blobSha256: sha,
-				originalFilename: 'bbox.xml',
-				declaredMediaType: 'application/xml',
-				artifactKind: 'original',
-				isCurrent: true,
-				submittedBy: 'contributor',
-				submittedAt: new Date(3_000)
-			}
-		]);
+		await db.insert(schema.fileCheckouts).values({
+			id: 'checkout-file-1-grammar',
+			sourceFileId: 'file-1',
+			repoId: 'repo-2',
+			path: 'source-one/source.pdf'
+		});
 
 		const result = await listArchiveWorks(db, { sort: 'title', limit: 50, principal: reader });
 		expect(result.items.map((item) => item.source.slug)).toEqual(['source-one']);
-		expect(result.items[0].file.role).toBe('scan');
+		expect(result.items[0].file.fileId).toBe('file-1');
+	});
+
+	it('refuses a second file of the same role for one work', async () => {
+		await seedRevision();
+		await expect(
+			db.insert(schema.sourceFiles).values({
+				id: 'file-1-again',
+				sourceId: 'source-1',
+				role: 'scan',
+				createdBy: 'contributor'
+			})
+		).rejects.toThrow();
+	});
+
+	it('lists the scan rather than a derivative kept beside it', async () => {
+		await seedRevision();
+		await db.insert(schema.sourceFiles).values({
+			id: 'file-1-bbox',
+			sourceId: 'source-1',
+			role: 'derivative',
+			createdBy: 'contributor'
+		});
+		await db.insert(schema.fileCheckouts).values({
+			id: 'checkout-file-1-bbox',
+			sourceFileId: 'file-1-bbox',
+			repoId: 'repo-1',
+			path: 'books/資料一.bbox.xml'
+		});
+		await db.insert(schema.fileRevisions).values({
+			id: 'rev-1-bbox',
+			sourceFileId: 'file-1-bbox',
+			revisionNo: 1,
+			blobSha256: sha,
+			originalFilename: '資料一.bbox.xml',
+			declaredMediaType: 'application/xml',
+			artifactKind: 'bbox',
+			isCurrent: true,
+			submittedBy: 'contributor',
+			submittedAt: new Date(3_000)
+		});
+
+		const result = await listArchiveWorks(db, { sort: 'title', limit: 50, principal: reader });
+		expect(result.items.map((item) => item.file.fileId)).toEqual(['file-1']);
 	});
 
 	it('falls back to the reachable file when a work has no readable scan', async () => {
@@ -1633,9 +1649,13 @@ describe('archive DB flows', () => {
 			id: 'file-1-epub',
 			sourceId: 'source-1',
 			role: 'epub',
-			checkoutRepoId: 'repo-1',
-			checkoutPath: 'books/資料一.epub',
 			createdBy: 'contributor'
+		});
+		await db.insert(schema.fileCheckouts).values({
+			id: 'checkout-file-1-epub',
+			sourceFileId: 'file-1-epub',
+			repoId: 'repo-1',
+			path: 'books/資料一.epub'
 		});
 		await db.insert(schema.fileRevisions).values({
 			id: 'rev-1-epub',
@@ -1755,9 +1775,13 @@ describe('archive DB flows', () => {
 			id: 'file-empty',
 			sourceId: 'source-1',
 			role: 'supplement',
-			checkoutRepoId: 'repo-1',
-			checkoutPath: 'books/補遺.pdf',
 			sortOrder: 20
+		});
+		await db.insert(schema.fileCheckouts).values({
+			id: 'checkout-file-empty',
+			sourceFileId: 'file-empty',
+			repoId: 'repo-1',
+			path: 'books/補遺.pdf'
 		});
 		await expect(getSourceFileById(db, 'file-empty', reviewer)).resolves.toMatchObject({
 			fileId: 'file-empty',
@@ -1794,10 +1818,14 @@ describe('archive DB flows', () => {
 		await db.insert(schema.sourceFiles).values({
 			id: 'file-2',
 			sourceId: 'source-1',
-			role: 'scan',
-			checkoutRepoId: 'repo-1',
-			checkoutPath: 'books/A.pdf',
+			role: 'supplement',
 			sortOrder: 20
+		});
+		await db.insert(schema.fileCheckouts).values({
+			id: 'checkout-file-2',
+			sourceFileId: 'file-2',
+			repoId: 'repo-1',
+			path: 'books/A.pdf'
 		});
 		await db.insert(schema.archiveBlobs).values({
 			sha256: 'b'.repeat(64),
