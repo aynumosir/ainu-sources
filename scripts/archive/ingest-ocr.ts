@@ -37,13 +37,15 @@ export interface IngestOcrSummary {
 }
 
 type SourceFileRow = { id: string; sourceId: string; checkoutPath: string };
-type CurrentRevisionRow = { id: string; sourceFileId: string };
+type CurrentRevisionRow = { id: string; sourceFileId: string; blobSha256: string | null };
 
 export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestOcrSummary> {
 	const grammarDir = path.join(opts.ainuRoot, 'ainu-grammar');
 	const files = await collectOcrFiles(grammarDir, opts.limit ?? Infinity);
 	const fileByStem = await sourceFilesByCheckoutStem(db);
+	const sourceFileById = await sourceFilesById(db);
 	const currentRevisionByFileId = await currentRevisionsByFileId(db);
+	const currentRevisionsByBlob = groupRevisionsByBlob(currentRevisionByFileId);
 	const summary: IngestOcrSummary = {
 		ingested: 0,
 		unchanged: 0,
@@ -69,115 +71,149 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 
 		const bytes = await fs.readFile(filePath);
 		const contentHash = createHash('sha256').update(bytes).digest('hex');
-		const [state] = await db
-			.select({ contentHash: ocrIngestState.contentHash })
-			.from(ocrIngestState)
-			.where(and(eq(ocrIngestState.revisionId, revision.id), eq(ocrIngestState.variant, parsed.variant)))
-			.limit(1);
-		if (state?.contentHash === contentHash) {
-			summary.unchanged += 1;
-			continue;
-		}
-
+		// The same scan is checked out by more than one repository, which gives
+		// it one file slot per repository over a single stored blob. Text read
+		// off those bytes describes every slot that holds them, so it is
+		// attached to each current revision of the blob rather than to the one
+		// slot whose checkout path carries the text file.
+		const targets =
+			(revision.blobSha256 ? currentRevisionsByBlob.get(revision.blobSha256) : null) ?? [revision];
 		const pages = parseOcrPages(bytes.toString('utf8'));
-		if (!opts.dryRun) {
-			const now = opts.now ?? new Date();
-			await db.transaction(async (tx) => {
-				await activateOcrGeneration(tx as unknown as Db, revision.id, parsed.variant, pages, {
-					contentHash,
-					ingestedAt: now
-				});
-				const [coverage] = await tx
-					.select({ preferred: revisionOcrCoverage.preferred })
-					.from(revisionOcrCoverage)
-					.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, parsed.variant)))
-					.limit(1);
-				if (coverage) {
-					await tx
-						.update(revisionOcrCoverage)
-						.set({
-							status: 'complete',
-							tool: parsed.variant,
-							toolVersion: null,
-							measuredAt: now
-						})
-						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, parsed.variant)));
-				} else {
-					await tx.insert(revisionOcrCoverage).values({
-						revisionId: revision.id,
-						variant: parsed.variant,
-						status: 'complete',
-						tool: parsed.variant,
-						toolVersion: null,
-						measuredAt: now
-					});
-				}
 
-				const samples = await sampleVariantPages(tx as unknown as SamplingDb, revision.id, parsed.variant);
-				const verdict = assessTextQuality(samples);
-				if (verdict.reliability === 'suspect') {
-					// Sound is human-certified; the automated assessor does not downgrade it.
-					await tx
-						.update(revisionOcrCoverage)
-						.set({ reliability: 'suspect', reliabilityNote: verdict.note })
-						.where(
-							and(
-								eq(revisionOcrCoverage.revisionId, revision.id),
-								eq(revisionOcrCoverage.variant, parsed.variant),
-								ne(revisionOcrCoverage.reliability, 'sound')
-							)
-						);
-				} else {
-					// Clear a stale suspect verdict; sound and unassessed rows stay as they are.
-					await tx
-						.update(revisionOcrCoverage)
-						.set({ reliability: 'unassessed', reliabilityNote: null })
-						.where(
-							and(
-								eq(revisionOcrCoverage.revisionId, revision.id),
-								eq(revisionOcrCoverage.variant, parsed.variant),
-								eq(revisionOcrCoverage.reliability, 'suspect')
-							)
-						);
-				}
+		for (const target of targets) {
+			const targetSourceFile = sourceFileById.get(target.sourceFileId) ?? sourceFile;
+			const [state] = await db
+				.select({ contentHash: ocrIngestState.contentHash })
+				.from(ocrIngestState)
+				.where(and(eq(ocrIngestState.revisionId, target.id), eq(ocrIngestState.variant, parsed.variant)))
+				.limit(1);
+			if (state?.contentHash === contentHash) {
+				summary.unchanged += 1;
+				continue;
+			}
 
-				const coverageRows = await tx
-					.select({
-						variant: revisionOcrCoverage.variant,
-						reliability: revisionOcrCoverage.reliability,
-						preferred: revisionOcrCoverage.preferred
-					})
-					.from(revisionOcrCoverage)
-					.where(eq(revisionOcrCoverage.revisionId, revision.id))
-					.orderBy(sql`rowid`);
-				const pick = pickPreferredVariant(
-					coverageRows.map((row) => ({
-						variant: row.variant,
-						reliability: row.reliability as 'unassessed' | 'sound' | 'suspect'
-					})),
-					coverageRows.find((row) => row.preferred)?.variant ?? null
-				);
-				if (pick) {
-					await tx
-						.update(revisionOcrCoverage)
-						.set({ preferred: false })
-						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), ne(revisionOcrCoverage.variant, pick)));
-					await tx
-						.update(revisionOcrCoverage)
-						.set({ preferred: true })
-						.where(and(eq(revisionOcrCoverage.revisionId, revision.id), eq(revisionOcrCoverage.variant, pick)));
-				}
-
-				// Inside the transaction, so a crash never records the file's
-				// content hash while leaving the work's stored composition
-				// stale — the unchanged-file branch would then skip it forever.
-				await refreshSourceTextComposition(tx as unknown as Db, sourceFile.sourceId, opts.now ?? new Date());
+			if (opts.dryRun) {
+				summary.ingested += 1;
+				continue;
+			}
+			await ingestIntoRevision(db, {
+				revisionId: target.id,
+				sourceId: targetSourceFile.sourceId,
+				variant: parsed.variant,
+				pages,
+				contentHash,
+				now: opts.now ?? new Date()
 			});
+			summary.ingested += 1;
 		}
-		summary.ingested += 1;
 	}
 
 	return summary;
+}
+
+async function ingestIntoRevision(
+	db: Db,
+	args: {
+		revisionId: string;
+		sourceId: string;
+		variant: string;
+		pages: OcrPageInput[];
+		contentHash: string;
+		now: Date;
+	}
+): Promise<void> {
+	const { revisionId, sourceId, variant, pages, contentHash, now } = args;
+	await db.transaction(async (tx) => {
+		await activateOcrGeneration(tx as unknown as Db, revisionId, variant, pages, {
+			contentHash,
+			ingestedAt: now
+		});
+		const [coverage] = await tx
+			.select({ preferred: revisionOcrCoverage.preferred })
+			.from(revisionOcrCoverage)
+			.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, variant)))
+			.limit(1);
+		if (coverage) {
+			await tx
+				.update(revisionOcrCoverage)
+				.set({
+					status: 'complete',
+					tool: variant,
+					toolVersion: null,
+					measuredAt: now
+				})
+				.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, variant)));
+		} else {
+			await tx.insert(revisionOcrCoverage).values({
+				revisionId,
+				variant,
+				status: 'complete',
+				tool: variant,
+				toolVersion: null,
+				measuredAt: now
+			});
+		}
+
+		const samples = await sampleVariantPages(tx as unknown as SamplingDb, revisionId, variant);
+		const verdict = assessTextQuality(samples);
+		if (verdict.reliability === 'suspect') {
+			// Sound is human-certified; the automated assessor does not downgrade it.
+			await tx
+				.update(revisionOcrCoverage)
+				.set({ reliability: 'suspect', reliabilityNote: verdict.note })
+				.where(
+					and(
+						eq(revisionOcrCoverage.revisionId, revisionId),
+						eq(revisionOcrCoverage.variant, variant),
+						ne(revisionOcrCoverage.reliability, 'sound')
+					)
+				);
+		} else {
+			// Clear a stale suspect verdict; sound and unassessed rows stay as they are.
+			await tx
+				.update(revisionOcrCoverage)
+				.set({ reliability: 'unassessed', reliabilityNote: null })
+				.where(
+					and(
+						eq(revisionOcrCoverage.revisionId, revisionId),
+						eq(revisionOcrCoverage.variant, variant),
+						eq(revisionOcrCoverage.reliability, 'suspect')
+					)
+				);
+		}
+
+		const coverageRows = await tx
+			.select({
+				variant: revisionOcrCoverage.variant,
+				reliability: revisionOcrCoverage.reliability,
+				preferred: revisionOcrCoverage.preferred
+			})
+			.from(revisionOcrCoverage)
+			.where(eq(revisionOcrCoverage.revisionId, revisionId))
+			.orderBy(sql`rowid`);
+		const pick = pickPreferredVariant(
+			coverageRows.map((row) => ({
+				variant: row.variant,
+				reliability: row.reliability as 'unassessed' | 'sound' | 'suspect'
+			})),
+			coverageRows.find((row) => row.preferred)?.variant ?? null
+		);
+		if (pick) {
+			await tx
+				.update(revisionOcrCoverage)
+				.set({ preferred: false })
+				.where(and(eq(revisionOcrCoverage.revisionId, revisionId), ne(revisionOcrCoverage.variant, pick)));
+			await tx
+				.update(revisionOcrCoverage)
+				.set({ preferred: true })
+				.where(and(eq(revisionOcrCoverage.revisionId, revisionId), eq(revisionOcrCoverage.variant, pick)));
+		}
+
+		// Inside the transaction, so a crash never records the file's
+		// content hash while leaving the work's stored composition
+		// stale — the unchanged-file branch would then skip it forever.
+		await refreshSourceTextComposition(tx as unknown as Db, sourceId, now);
+	});
 }
 
 export function parseOcrFilename(filename: string): { stem: string; variant: string } | null {
@@ -237,12 +273,36 @@ async function sourceFilesByCheckoutStem(db: Db): Promise<Map<string, SourceFile
 	return out;
 }
 
+async function sourceFilesById(db: Db): Promise<Map<string, SourceFileRow>> {
+	const rows = await db
+		.select({ id: sourceFiles.id, sourceId: sourceFiles.sourceId, checkoutPath: sourceFiles.checkoutPath })
+		.from(sourceFiles);
+	return new Map(
+		rows.map((row) => [row.id, { id: row.id, sourceId: row.sourceId, checkoutPath: row.checkoutPath ?? '' }])
+	);
+}
+
 async function currentRevisionsByFileId(db: Db): Promise<Map<string, CurrentRevisionRow>> {
 	const rows = await db
-		.select({ id: fileRevisions.id, sourceFileId: fileRevisions.sourceFileId })
+		.select({
+			id: fileRevisions.id,
+			sourceFileId: fileRevisions.sourceFileId,
+			blobSha256: fileRevisions.blobSha256
+		})
 		.from(fileRevisions)
 		.where(eq(fileRevisions.isCurrent, true));
 	return new Map(rows.map((row) => [row.sourceFileId, row]));
+}
+
+function groupRevisionsByBlob(byFileId: Map<string, CurrentRevisionRow>): Map<string, CurrentRevisionRow[]> {
+	const out = new Map<string, CurrentRevisionRow[]>();
+	for (const revision of byFileId.values()) {
+		if (!revision.blobSha256) continue;
+		const group = out.get(revision.blobSha256);
+		if (group) group.push(revision);
+		else out.set(revision.blobSha256, [revision]);
+	}
+	return out;
 }
 
 function stemFromCheckoutPath(checkoutPath: string): string {

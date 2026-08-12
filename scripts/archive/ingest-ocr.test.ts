@@ -54,6 +54,13 @@ afterEach(async () => {
 });
 
 async function seedRevision(stem: string): Promise<string> {
+	const seeded = await seedRevisionDetail(stem);
+	return seeded.revisionId;
+}
+
+async function seedRevisionDetail(
+	stem: string
+): Promise<{ revisionId: string; sourceId: string; blobSha256: string }> {
 	const [source] = await db
 		.insert(schema.sources)
 		.values({ slug: stem, title: `Title of ${stem}`, type: 'dictionary' })
@@ -79,6 +86,37 @@ async function seedRevision(stem: string): Promise<string> {
 		storageState: 'verified',
 		verifiedAt: new Date()
 	});
+	const [revision] = await db
+		.insert(schema.fileRevisions)
+		.values({
+			sourceFileId: file.id,
+			revisionNo: 1,
+			blobSha256,
+			originalFilename: `${stem}.pdf`,
+			declaredMediaType: 'application/pdf',
+			artifactKind: 'original',
+			isCurrent: true,
+			submittedBy: 'user-test'
+		})
+		.returning({ id: schema.fileRevisions.id });
+	return { revisionId: revision.id, sourceId: source.id, blobSha256 };
+}
+
+/** A second repository's checkout of the same stored bytes, as a second file slot. */
+async function seedSecondSlotOnSameBlob(sourceId: string, blobSha256: string, stem: string): Promise<string> {
+	const [repo] = await db
+		.insert(schema.archiveRepositories)
+		.values({ name: `repo-${stem}-second` })
+		.returning({ id: schema.archiveRepositories.id });
+	const [file] = await db
+		.insert(schema.sourceFiles)
+		.values({
+			sourceId,
+			role: 'scan',
+			checkoutRepoId: repo.id,
+			checkoutPath: `other/${stem}.pdf`
+		})
+		.returning({ id: schema.sourceFiles.id });
 	const [revision] = await db
 		.insert(schema.fileRevisions)
 		.values({
@@ -164,6 +202,23 @@ describe('ingestOcr', () => {
 			reliability: 'unassessed',
 			preferred: true
 		});
+	});
+
+	it('gives every current revision of the same blob the text read off those bytes', async () => {
+		const seeded = await seedRevisionDetail('sharedbook');
+		const secondRevisionId = await seedSecondSlotOnSameBlob(seeded.sourceId, seeded.blobSha256, 'sharedbook');
+		await writeVariant('sharedbook', 'pdftotext', ocrDocument(CLEAN_LINE, 3));
+
+		await ingestOcr(db, { ainuRoot, dryRun: false });
+
+		for (const revisionId of [seeded.revisionId, secondRevisionId]) {
+			const rows = await coverageFor(revisionId);
+			expect(rows).toMatchObject([{ variant: 'pdftotext', status: 'complete', preferred: true }]);
+			const pages = await db.all<{ n: number }>(sql`
+				select count(distinct page) as n from ocr_chunks where revision_id = ${revisionId}
+			`);
+			expect(Number(pages[0].n)).toBe(3);
+		}
 	});
 
 	it('does not downgrade a human-certified variant and promotes it', async () => {
