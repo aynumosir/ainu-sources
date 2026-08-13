@@ -35,3 +35,6 @@ jobs:
       - name: Verify exported edits remain current and approved
         if: ${{ env.DATABASE_URL != '' }}
         run: bun run archive:verify-approved --root .
+      - name: Check archive invariants
+        if: ${{ env.DATABASE_URL != '' }}
+        run: bun run archive:check

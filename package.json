@@ -30,6 +30,7 @@
 		"import:all": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import-all.ts",
 		"archive:ingest-ocr": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/ingest-ocr.ts",
 		"archive:export-approved": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/export-approved.ts",
+		"archive:check": "bun scripts/archive/check-invariants.ts",
 		"archive:verify-approved": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/verify-approved.ts",
 		"archive:search-eval": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/search-eval.ts",
 		"audit": "bun scripts/audit.ts",

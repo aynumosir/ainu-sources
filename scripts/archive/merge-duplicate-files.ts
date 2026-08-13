@@ -297,9 +297,11 @@ async function moveCheckouts(
 }
 
 /**
- * Chunks first and by hand: `ocr_chunks` rows removed by foreign-key cascade do
- * not fire the AFTER DELETE trigger that maintains the FTS index, which would
- * leave the index holding text whose rows are gone.
+ * Chunks first and by hand. Removing the revision would take them with it by
+ * foreign-key cascade, and whether that cascade fires the AFTER DELETE trigger
+ * maintaining the FTS index rests on `recursive_triggers`, a per-connection
+ * pragma this script does not set and the hosted database need not share.
+ * Deleting the rows outright fires the trigger under either setting.
  */
 async function removeFile(db: Db, file: FileRow): Promise<number> {
 	const revisions = (await db.all(sql`
