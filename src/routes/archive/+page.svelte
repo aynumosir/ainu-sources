@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import CollectionFacts from '$lib/components/archive/CollectionFacts.svelte';
@@ -21,6 +22,39 @@
 	$effect(() => {
 		if (prefersReducedMotion()) fadeInMs = 0;
 	});
+
+	// The server load only ever returns the current cursor page, so the list
+	// keeps scrolling by carrying earlier pages forward on the client. The
+	// carried items are keyed to the filter string: any filter, sort, or view
+	// change makes `earlier.params` stale and the list drops back to just the
+	// fresh page, with no effect-timing gap where old and new filters mix.
+	let earlier = $state<{ params: string; items: typeof data.items }>({ params: '', items: [] });
+	let loadingMore = $state(false);
+
+	const items = $derived.by(() => {
+		const carried = earlier.params === data.params ? earlier.items : [];
+		const seen = new Set(carried.map((item) => item.file.fileId));
+		return [...carried, ...data.items.filter((item) => !seen.has(item.file.fileId))];
+	});
+
+	async function loadMore(): Promise<void> {
+		if (!data.nextCursor || loadingMore) return;
+		loadingMore = true;
+		try {
+			earlier = { params: data.params, items };
+			const target = new URLSearchParams(data.params);
+			target.set('cursor', data.nextCursor);
+			// Replace, not push: Back should leave the catalogue, one batch is
+			// not a place a reader means to return to.
+			await goto(`${page.url.pathname}?${target}`, {
+				noScroll: true,
+				keepFocus: true,
+				replaceState: true
+			});
+		} finally {
+			loadingMore = false;
+		}
+	}
 </script>
 
 <ArchiveHead title="資料一覧 Library" />
@@ -52,15 +86,15 @@
 
 	{#if view === 'cards'}
 		<div in:fade={{ duration: fadeInMs }}>
-			<SourceCardGrid items={data.items} />
+			<SourceCardGrid {items} />
 		</div>
 	{:else}
 		<div in:fade={{ duration: fadeInMs }}>
-			<SourceList items={data.items} />
+			<SourceList {items} />
 		</div>
 	{/if}
 
-	<PaginationCursor nextCursor={data.nextCursor} params={data.params} />
+	<PaginationCursor nextCursor={data.nextCursor} params={data.params} busy={loadingMore} onLoadMore={loadMore} />
 </div>
 
 <style>
