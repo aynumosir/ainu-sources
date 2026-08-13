@@ -76,6 +76,8 @@ export type ArchiveStats = {
 		mediaType: ArchiveStatsDistribution;
 		size: ArchiveStatsDistribution;
 	};
+	/** Tags carried by at least one archive work, largest first. */
+	tags: Array<{ slug: string; name: string; nameEn: string | null; category: string; works: number }>;
 	search: { enabledModes: string[] };
 	freshness: {
 		mostRecentIngestAt: string | null;
@@ -137,7 +139,10 @@ type DistributionRow = {
  * happened to hand it over.
  */
 const cache = new WeakMap<Db, { expiresAt: number; value: ArchiveStats }>();
-const COLO_CACHE_KEY = 'https://archive.invalid/collection-stats';
+// The path carries the payload shape's version: a build reading a colo entry
+// written by an older build would otherwise render without the newer fields
+// for a full TTL after deploy.
+const COLO_CACHE_KEY = 'https://archive.invalid/collection-stats-v2';
 const EXPIRES_AT_HEADER = 'x-stats-expires-at';
 
 function numberValue(value: number | null | undefined): number {
@@ -395,10 +400,25 @@ function buildOcr(rows: OcrRow[], works: number): ArchiveStats['ocr'] {
 	};
 }
 
+type TagFacetRow = { slug: string; name: string; nameEn: string | null; category: string; works: number };
+
+async function readTagFacet(db: Db): Promise<TagFacetRow[]> {
+	return db.all<TagFacetRow>(sql`
+		select t.slug, t.name, t.name_en as nameEn, t.category, count(distinct st.source_id) as works
+		from tags t
+		inner join source_tags st on st.tag_id = t.id and coalesce(st.status, 'active') = 'active'
+		inner join (select distinct source_id from source_files) works on works.source_id = st.source_id
+		where t.status = 'active'
+		group by t.id
+		order by works desc, t.slug
+	`);
+}
+
 async function queryArchiveStats(db: Db): Promise<ArchiveStats> {
 	const summary = await readSummary(db);
 	const ocrRows = await readOcr(db);
 	const distributionRows = await readDistribution(db);
+	const tagRows = await readTagFacet(db);
 	const works = numberValue(summary.works);
 	const currentRevisions = numberValue(summary.currentRevisions);
 	const pageImageDerivatives = numberValue(summary.pageImageDerivatives);
@@ -441,6 +461,7 @@ async function queryArchiveStats(db: Db): Promise<ArchiveStats> {
 			mediaType: buildDistribution(distributionRows, 'mediaType', 'current_revisions'),
 			size: buildSizeDistribution(distributionRows)
 		},
+		tags: tagRows.map((row) => ({ ...row, works: numberValue(row.works) })),
 		search: { enabledModes: [...DEPLOYED_SEARCH_MODES] },
 		freshness: {
 			mostRecentIngestAt: isoTimestamp(summary.mostRecentIngestAt),

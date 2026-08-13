@@ -17,12 +17,15 @@ import {
 	sourceFiles,
 	sourceLifecycleEvents,
 	sourceRelations,
+	sourceTags,
 	sources,
+	tags,
 	uploadSessions,
 	user,
 	userIdentities
 } from '$lib/server/db/schema';
 import type * as schema from '$lib/server/db/schema';
+import { COMPOSITION_MIN_CHARS } from '$lib/archive/text-composition';
 import { recordArchiveEvent } from './audit';
 import { ArchiveHttpError } from './errors';
 import { DEPLOYED_SEARCH_MODES } from './search-modes';
@@ -1262,6 +1265,9 @@ export async function listArchiveWorks(
 		text?: string;
 		dialect?: string;
 		decade?: number;
+		category?: string;
+		tag?: string;
+		lang?: string;
 		ocr?: 'with' | 'without';
 		sort: ArchiveWorkSort;
 		cursor?: string | null;
@@ -1297,6 +1303,36 @@ export async function listArchiveWorks(
 	}
 	if (input.decade) {
 		clauses.push(gte(sources.yearStart, input.decade), lt(sources.yearStart, input.decade + 10));
+	}
+	if (input.category?.trim()) {
+		clauses.push(eq(sources.category, input.category.trim()));
+	}
+	if (input.tag?.trim()) {
+		clauses.push(
+			exists(
+				sql`(select 1 from ${sourceTags}
+					inner join ${tags} on ${tags.id} = ${sourceTags.tagId}
+					where ${sourceTags.sourceId} = ${sources.id}
+					and ${tags.slug} = ${input.tag.trim()}
+					and coalesce(${sourceTags.status}, 'active') = 'active')`
+			)
+		);
+	}
+	if (input.lang?.trim()) {
+		// Matches the shares a reader sees on the card (displayShares): a named
+		// language carrying at least 1% of a measurement large enough to mean
+		// something. Filtering below what the card shows would surface works
+		// whose cards do not visibly explain why they matched.
+		clauses.push(
+			sql`(
+				json_extract(${sources.textComposition}, '$.chars') >= ${COMPOSITION_MIN_CHARS}
+				and exists (
+					select 1 from json_each(json_extract(${sources.textComposition}, '$.shares')) as share
+					where json_extract(share.value, '$.lang') = ${input.lang.trim()}
+					and json_extract(share.value, '$.share') >= 0.01
+				)
+			)`
+		);
 	}
 	if (input.ocr) {
 		// A revision has text when any of its coverage rows is not 'none'.
