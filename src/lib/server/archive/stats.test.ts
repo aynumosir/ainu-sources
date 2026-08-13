@@ -382,16 +382,16 @@ describe('archive collection statistics', () => {
 		expect(await response.json()).toMatchObject({ totals: { works: 3 } });
 	});
 
-	it('bounds the cached query set to three statements', async () => {
+	it('bounds the cached query set to four statements', async () => {
 		await seedCollection();
 		const all = vi.spyOn(db, 'all');
 
 		await getArchiveStats(db, { now: 10_000 });
 		await getArchiveStats(db, { now: 69_999 });
-		expect(all).toHaveBeenCalledTimes(3);
+		expect(all).toHaveBeenCalledTimes(4);
 
 		await getArchiveStats(db, { now: 70_001 });
-		expect(all).toHaveBeenCalledTimes(6);
+		expect(all).toHaveBeenCalledTimes(8);
 	});
 
 	it('answers a cold isolate from the shared cache', async () => {
@@ -401,7 +401,7 @@ describe('archive collection statistics', () => {
 
 		colo.clock = 10_000;
 		const first = await getArchiveStats(db, { now: colo.clock, platform: colo.platform });
-		expect(all).toHaveBeenCalledTimes(3);
+		expect(all).toHaveBeenCalledTimes(4);
 		expect(colo.stored()?.headers.get('cache-control')).toBe('max-age=60');
 
 		const cold = coldIsolate();
@@ -433,7 +433,7 @@ describe('archive collection statistics', () => {
 		// Both layers let go at the same moment, so the aggregates run again.
 		colo.clock = 70_001;
 		await getArchiveStats(cold, { now: colo.clock, platform: colo.platform });
-		expect(coldAll).toHaveBeenCalledTimes(3);
+		expect(coldAll).toHaveBeenCalledTimes(4);
 	});
 });
 

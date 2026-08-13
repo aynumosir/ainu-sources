@@ -163,6 +163,8 @@ async function seedArchiveListRow(input: {
 	dialect?: string | null;
 	yearStart?: number | null;
 	summary?: string | null;
+	category?: string;
+	textComposition?: import('$lib/archive/text-composition').SourceTextComposition;
 	submittedAt: Date;
 }) {
 	const hash = input.index.toString(16).padStart(64, '0').slice(0, 64);
@@ -170,11 +172,12 @@ async function seedArchiveListRow(input: {
 		id: `list-source-${input.index}`,
 		slug: `list-source-${input.index}`,
 		title: input.title,
-		category: 'primary',
+		category: input.category ?? 'primary',
 		type: 'book',
 		dialect: input.dialect ?? null,
 		yearStart: input.yearStart ?? null,
 		summary: input.summary ?? null,
+		textComposition: input.textComposition ?? null,
 		humanDownload: true
 	});
 	await db.insert(schema.sourceFiles).values({
@@ -1609,6 +1612,53 @@ describe('archive DB flows', () => {
 			principal: reader
 		});
 		expect(second.items.map((item) => item.source.title)).toEqual(['Kamuy Alpha']);
+	});
+
+	it('filters works by category, tag, and text language', async () => {
+		await db.insert(schema.archiveRepositories).values({ id: 'repo-1', name: 'books' });
+		const composition = (lang: string, share: number): import('$lib/archive/text-composition').SourceTextComposition => ({
+			version: 1,
+			method: 'test',
+			inputs: [],
+			measuredAt: 0,
+			chars: 10_000,
+			shares: [
+				{ lang, share, chars: Math.round(10_000 * share) },
+				{ lang: 'jpn', share: 1 - share, chars: Math.round(10_000 * (1 - share)) }
+			]
+		});
+		await seedArchiveListRow({
+			index: 11,
+			title: 'Yukar Collection',
+			category: 'corpus',
+			textComposition: composition('ain', 0.8),
+			submittedAt: new Date(1_000)
+		});
+		await seedArchiveListRow({
+			index: 12,
+			title: 'Grammar Survey',
+			category: 'secondary',
+			textComposition: composition('eng', 0.6),
+			submittedAt: new Date(2_000)
+		});
+		await db.insert(schema.tags).values({ id: 'tag-folktale', slug: 'folktale', name: '昔話', nameEn: 'Folktale', category: 'genre' });
+		await db.insert(schema.sourceTags).values({ id: 'st-1', sourceId: 'list-source-11', tagId: 'tag-folktale' });
+
+		const byCategory = await listArchiveWorks(db, { category: 'corpus', sort: 'title', limit: 50, principal: reader });
+		expect(byCategory.items.map((item) => item.source.title)).toEqual(['Yukar Collection']);
+
+		const byTag = await listArchiveWorks(db, { tag: 'folktale', sort: 'title', limit: 50, principal: reader });
+		expect(byTag.items.map((item) => item.source.title)).toEqual(['Yukar Collection']);
+
+		const byLang = await listArchiveWorks(db, { lang: 'eng', sort: 'title', limit: 50, principal: reader });
+		expect(byLang.items.map((item) => item.source.title)).toEqual(['Grammar Survey']);
+
+		// jpn appears in both compositions above the 1% floor, so both works match.
+		const byShared = await listArchiveWorks(db, { lang: 'jpn', sort: 'title', limit: 50, principal: reader });
+		expect(byShared.items.map((item) => item.source.title)).toEqual(['Grammar Survey', 'Yukar Collection']);
+
+		const byRussian = await listArchiveWorks(db, { lang: 'rus', sort: 'title', limit: 50, principal: reader });
+		expect(byRussian.items).toEqual([]);
 	});
 
 	it('lists a work once when two repositories keep the same file', async () => {

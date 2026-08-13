@@ -38,10 +38,27 @@
 			.sort((a, b) => a.decade - b.decade);
 	});
 
-	// Sort/decade/OCR narrow results the moment they're changed — a
-	// researcher expects a dropdown to act immediately, the way a sort does
-	// on any modern catalogue. Only free-text search waits for Apply/Enter,
-	// since reloading on every keystroke would be its own kind of broken.
+	const CATEGORY_OPTION_LABELS: Record<string, string> = {
+		primary: 'Primary / 一次資料',
+		secondary: 'Secondary / 二次資料',
+		corpus: 'Corpus / コーパス',
+		tool: 'Tool / ツール'
+	};
+	const categoryOptions = $derived(stats?.distribution.category.values ?? []);
+	const dialectOptions = $derived(stats?.distribution.dialect.values ?? []);
+	const tagOptions = $derived(stats?.tags ?? []);
+
+	const LANG_OPTIONS = [
+		{ value: 'ain', label: 'Ainu / アイヌ語' },
+		{ value: 'jpn', label: 'Japanese / 日本語' },
+		{ value: 'eng', label: 'English / 英語' },
+		{ value: 'rus', label: 'Russian / ロシア語' }
+	] as const;
+
+	// Every dropdown narrows results the moment it's changed — a researcher
+	// expects a dropdown to act immediately, the way a sort does on any
+	// modern catalogue. Only free-text search waits for Apply/Enter, since
+	// reloading on every keystroke would be its own kind of broken.
 	function navigateWith(name: string, value: string) {
 		const params = new URLSearchParams(page.url.searchParams);
 		params.delete('cursor');
@@ -61,10 +78,68 @@
 
 <form action="/archive" method="get" class="border-b border-[var(--archive-border)] pb-4">
 	{#if view}<input type="hidden" name="view" value={view} />{/if}
-	<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_0.8fr_0.9fr_auto] lg:items-end">
-		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
+	<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:items-end">
+		<label class="block text-[13px] font-medium text-[var(--archive-subtle)] lg:col-span-2">
 			<BilingualLabel ja="キーワード" en="Keyword" />
 			<input name="q" value={filters.text ?? ''} class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]" />
+		</label>
+		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
+			<BilingualLabel ja="分類" en="Category" />
+			<select
+				name="category"
+				value={filters.category ?? ''}
+				onchange={(e) => navigateWith('category', e.currentTarget.value)}
+				class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]"
+			>
+				<option value="">All / すべて</option>
+				{#each categoryOptions as opt (opt.value)}
+					<option value={opt.value}>{CATEGORY_OPTION_LABELS[opt.value] ?? opt.value} ({opt.count})</option>
+				{/each}
+			</select>
+		</label>
+		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
+			<BilingualLabel ja="タグ" en="Tag" />
+			<select
+				name="tag"
+				value={filters.tag ?? ''}
+				onchange={(e) => navigateWith('tag', e.currentTarget.value)}
+				disabled={tagOptions.length === 0}
+				class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)] disabled:opacity-50"
+			>
+				<option value="">All / すべて</option>
+				{#each tagOptions as opt (opt.slug)}
+					<option value={opt.slug}>{opt.name}{opt.nameEn && opt.nameEn !== opt.name ? ` / ${opt.nameEn}` : ''} ({opt.works})</option>
+				{/each}
+			</select>
+		</label>
+		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
+			<BilingualLabel ja="方言" en="Dialect" />
+			<select
+				name="dialect"
+				value={filters.dialect ?? ''}
+				onchange={(e) => navigateWith('dialect', e.currentTarget.value)}
+				disabled={dialectOptions.length === 0}
+				class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)] disabled:opacity-50"
+			>
+				<option value="">All / すべて</option>
+				{#each dialectOptions as opt (opt.value)}
+					<option value={opt.value}>{opt.value} ({opt.count})</option>
+				{/each}
+			</select>
+		</label>
+		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
+			<BilingualLabel ja="本文言語" en="Text language" />
+			<select
+				name="lang"
+				value={filters.lang ?? ''}
+				onchange={(e) => navigateWith('lang', e.currentTarget.value)}
+				class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]"
+			>
+				<option value="">All / すべて</option>
+				{#each LANG_OPTIONS as opt (opt.value)}
+					<option value={opt.value}>{opt.label}</option>
+				{/each}
+			</select>
 		</label>
 		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
 			<BilingualLabel ja="年代" en="Decade" />
@@ -108,7 +183,7 @@
 				<option value="without">Without text / なし</option>
 			</select>
 		</label>
-		<div class="flex items-center gap-2 sm:col-span-2 lg:col-span-1">
+		<div class="flex items-center gap-2 sm:col-span-2 lg:col-span-3 lg:justify-end">
 			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.apply)} class="h-10 border border-[var(--archive-gilt-text)] bg-[var(--archive-gilt-text)] px-4 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt)] hover:border-[var(--archive-gilt)]">
 				<BilingualLabel ja={archiveLabels.apply.ja} en={archiveLabels.apply.en} compact />
 			</button>
