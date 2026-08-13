@@ -53,7 +53,12 @@ export SOURCES_ENABLE_PROPOSE=true
 export AINU_ROOT="${AINU_ROOT:-$HOME/projects/Ainu}"
 timeout -k 60 10800 bun run import:all
 
-# 3. Data PR when the index moved.
+# 3. Verify: referential integrity, catalogue invariants, count monotonicity
+#    against the previous run's snapshot. A failure aborts before the data PR.
+bun scripts/check-fk-enforcement.ts
+bun scripts/verify-consistency.ts
+
+# 4. Data PR when the index moved.
 if git diff --quiet -- scripts/data/academic-index.json scripts/data/citation-edges.json; then
 	echo "index unchanged — no data PR"
 	exit 0
