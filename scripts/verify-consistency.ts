@@ -95,7 +95,8 @@ const TRACKED = [
 
 const counts: Record<string, number> = {};
 for (const t of TRACKED) counts[t] = await n(`SELECT COUNT(*) c FROM ${t}`);
-const proposed = await n(`SELECT COUNT(*) c FROM change_requests WHERE status = 'proposed'`);
+const open = await n(`SELECT COUNT(*) c FROM change_requests WHERE status IN ('open', 'proposed')`);
+const needsEvidence = await n(`SELECT COUNT(*) c FROM change_requests WHERE status = 'needs_evidence'`);
 
 let previous: { at?: string; counts?: Record<string, number> } = {};
 if (fs.existsSync(STATE_FILE)) {
@@ -118,7 +119,7 @@ for (const t of TRACKED) {
 // ── report ──────────────────────────────────────────────────────────────────
 console.log(`consistency check → ${url.split('?')[0]}`);
 console.table(counts);
-console.log(`review queue: ${proposed} proposed change request(s)`);
+console.log(`review queue: ${open} open, ${needsEvidence} awaiting evidence`);
 for (const w of warnings) console.warn(`! ${w}`);
 if (failures.length) {
 	for (const f of failures) console.error(`FAIL ${f}`);
