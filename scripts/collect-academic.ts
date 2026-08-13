@@ -40,14 +40,58 @@ export interface AcademicRecord {
 
 const stripTags = (s: string): string => s.replace(/<[^>]+>/g, '');
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * fetch with retry + backoff on 429/5xx/network errors. An unattended collect
+ * spans thousands of requests over many hosts; one transient rate limit must
+ * not kill the run. Honors Retry-After when the server sends one; other error
+ * statuses return to the caller unchanged.
+ */
+async function fetchRetry(url: string | URL, init?: RequestInit, tries = 6): Promise<Response> {
+	let last: Response | null = null;
+	for (let i = 0; i < tries; i++) {
+		let res: Response | null = null;
+		try {
+			res = await fetch(url, init);
+		} catch (e) {
+			if (i === tries - 1) throw e;
+		}
+		if (res && (res.ok || (res.status < 500 && res.status !== 429))) return res;
+		last = res;
+		const retryAfter = Number(res?.headers.get('retry-after'));
+		const base = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 1000 * 2 ** i;
+		// A Retry-After measured in minutes-to-hours (e.g. OpenAlex's daily
+		// budget, which resets at midnight UTC) won't clear within this run —
+		// fail fast and let the next scheduled run pick the service up again.
+		if (base > 300_000) return res!;
+		await sleep(Math.min(base, 60_000) + Math.random() * 500);
+	}
+	return last!;
+}
+
+/**
+ * Run one collector; a dead or rate-limited service yields [] instead of
+ * killing the rest of the collect. `refresh()`'s union keeps that service's
+ * records from the previous index, so a skipped collector loses nothing.
+ */
+async function guard<T>(name: string, fn: () => Promise<T[]>): Promise<T[]> {
+	try {
+		return await fn();
+	} catch (e) {
+		console.warn(`  ! ${name} FAILED — skipped this run: ${e instanceof Error ? e.message : e}`);
+		return [];
+	}
+}
+
 async function htext(url: string): Promise<string> {
-	const res = await fetch(url, { headers: { 'User-Agent': UA } });
+	const res = await fetchRetry(url, { headers: { 'User-Agent': UA } });
 	if (!res.ok) throw new Error(`${res.status} ${url}`);
 	return res.text();
 }
 
 async function jget(url: string): Promise<any> {
-	const res = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'application/json' } });
+	const res = await fetchRetry(url, { headers: { 'User-Agent': UA, Accept: 'application/json' } });
 	if (!res.ok) throw new Error(`${res.status} ${url}`);
 	return res.json();
 }
@@ -535,7 +579,7 @@ export async function collectNDL(): Promise<AcademicRecord[]> {
 			`&dpid=iss-ndl-opac&cnt=200&idx=${idx}`;
 		let xml: string;
 		try {
-			xml = await (await fetch(url, { headers: { 'User-Agent': UA, Accept: 'application/xml' } })).text();
+			xml = await (await fetchRetry(url, { headers: { 'User-Agent': UA, Accept: 'application/xml' } })).text();
 		} catch {
 			break;
 		}
@@ -595,7 +639,7 @@ export async function collectCyberLeninka(): Promise<AcademicRecord[]> {
 		for (let from = 0; from < 400; from += 100) {
 			let data: any;
 			try {
-				const res = await fetch('https://cyberleninka.ru/api/search', {
+				const res = await fetchRetry('https://cyberleninka.ru/api/search', {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
 					body: JSON.stringify({ mode: 'articles', q, size: 100, from })
@@ -796,7 +840,7 @@ export async function collectSGU(): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	let text: string;
 	try {
-		const ab = await (await fetch(SGU_URL, { headers: { 'User-Agent': UA } })).arrayBuffer();
+		const ab = await (await fetchRetry(SGU_URL, { headers: { 'User-Agent': UA } })).arrayBuffer();
 		text = new TextDecoder('iso-2022-jp').decode(ab);
 	} catch {
 		return out;
@@ -878,7 +922,7 @@ export async function collectHonkoku(): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	let docs: any[];
 	try {
-		const res = await fetch(HONKOKU_FS, {
+		const res = await fetchRetry(HONKOKU_FS, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
 			body: JSON.stringify({
@@ -1751,23 +1795,23 @@ export async function collectExtra(): Promise<void> {
 	console.log(`Existing index: ${existing.length} records`);
 
 	console.log('Collecting J-STAGE…');
-	const jstage = await collectJStage();
+	const jstage = await guard('jstage', collectJStage);
 	console.log('Collecting CiNii Books…');
-	const ciniiBooks = await collectCiNiiBooks();
+	const ciniiBooks = await guard('cinii-books', collectCiNiiBooks);
 	console.log('Collecting IRDB…');
-	const irdb = await collectIRDB();
+	const irdb = await guard('irdb', collectIRDB);
 	console.log('Collecting Crossref chapters…');
-	const crChap = await collectCrossrefChapters();
+	const crChap = await guard('crossref-chapters', collectCrossrefChapters);
 	console.log('Collecting Glottolog…');
-	const glotto = await collectGlottolog();
+	const glotto = await guard('glottolog', collectGlottolog);
 	console.log('Collecting OpenAlex extra…');
-	const oaExtra = await collectOpenAlexExtra();
+	const oaExtra = await guard('openalex-extra', collectOpenAlexExtra);
 	console.log('Collecting researchmap (individual researchers)…');
-	const rmap = await collectResearchmap(RESEARCHMAP_PERMALINKS);
+	const rmap = await guard('researchmap', () => collectResearchmap(RESEARCHMAP_PERMALINKS));
 	console.log('Collecting Internet Archive (digitized historical books)…');
-	const ia = await collectInternetArchive();
+	const ia = await guard('internet-archive', collectInternetArchive);
 	console.log('Collecting NDL Digital Collections (IIIF)…');
-	const ndldig = await collectNDLDigital();
+	const ndldig = await guard('ndl-digital', collectNDLDigital);
 
 	// Dedup against the existing index (DOI + normalized title) and each other.
 	const seenDoi = new Set<string>();
@@ -1817,14 +1861,14 @@ export async function collectExtra(): Promise<void> {
 async function main() {
 	if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 	console.log('Collecting OpenAlex (Ainu × Linguistics)…');
-	const openalex = await collectOpenAlex();
+	const openalex = await guard('openalex', collectOpenAlex);
 	console.log('Collecting OpenAlex (native-script CJK linguistics)…');
-	const openalexNative = await collectOpenAlexNative();
+	const openalexNative = await guard('openalex-native', collectOpenAlexNative);
 	console.log('Chaining OpenAlex citations (bibliographies of found works)…');
 	const seedIds = [...openalex, ...openalexNative]
 		.map((r) => r.externalId)
 		.filter((id) => /^W\d+$/.test(id));
-	const openalexChained = await collectOpenAlexChained(seedIds);
+	const openalexChained = await guard('openalex-chained', () => collectOpenAlexChained(seedIds));
 	console.log('Chaining OpenAlex forward citations (works that cite found works)…');
 	const forwardSeeds = [
 		...new Set([
@@ -1832,31 +1876,31 @@ async function main() {
 			...openalexChained.map((r) => r.externalId).filter((id) => /^W\d+$/.test(id))
 		])
 	];
-	const openalexForward = await collectOpenAlexForwardChained(forwardSeeds);
+	const openalexForward = await guard('openalex-forward', () => collectOpenAlexForwardChained(forwardSeeds));
 	console.log('Collecting Crossref (Ainu-titled)…');
-	const crossref = await collectCrossref();
+	const crossref = await guard('crossref', collectCrossref);
 	console.log('Collecting CiNii Research (アイヌ語)…');
-	const cinii = await collectCiNii();
+	const cinii = await guard('cinii', collectCiNii);
 	console.log('Collecting Open Library (books)…');
-	const openlibrary = await collectOpenLibrary();
+	const openlibrary = await guard('openlibrary', collectOpenLibrary);
 	console.log('Collecting NDL book catalog (アイヌ語)…');
-	const ndl = await collectNDL();
+	const ndl = await guard('ndl', collectNDL);
 	console.log('Collecting CyberLeninka (Russian)…');
-	const cyberleninka = await collectCyberLeninka();
+	const cyberleninka = await guard('cyberleninka', collectCyberLeninka);
 	console.log('Collecting Hosei TOGO (アイヌ語地名/アイヌ語)…');
-	const togo = await collectTOGO();
+	const togo = await guard('togo', collectTOGO);
 	console.log('Collecting Hokudai hoppodb (Edo Ainu-language sources)…');
-	const hoppodb = await collectHoppoDB();
+	const hoppodb = await guard('hoppodb', collectHoppoDB);
 	console.log('Collecting SGU curated bibliography…');
-	const sgu = await collectSGU();
+	const sgu = await guard('sgu', collectSGU);
 	console.log('Collecting Honkoku transcription project (みんなで翻刻)…');
-	const honkoku = await collectHonkoku();
+	const honkoku = await guard('honkoku', collectHonkoku);
 	console.log('Collecting NIJL Kokusho IIIF (蝦夷 materials)…');
-	const kokusho = await collectKokusho();
+	const kokusho = await guard('kokusho', collectKokusho);
 	console.log('Collecting Hugging Face (Ainu models)…');
-	const huggingface = await collectHuggingFace();
+	const huggingface = await guard('huggingface', collectHuggingFace);
 	console.log('Collecting Qiita (アイヌ語 articles)…');
-	const qiita = await collectQiita();
+	const qiita = await guard('qiita', collectQiita);
 
 	// Merge with cross-source dedup: DOI-bearing records first (OpenAlex,
 	// Crossref), then articles (CiNii), then books (Open Library, NDL). Same
@@ -1910,14 +1954,96 @@ async function main() {
 	);
 }
 
+/**
+ * Full periodic re-collect that never shrinks the index. `main()` rebuilds the
+ * file from the keyword collectors only, so the records that exist solely in
+ * the `extra` collectors (J-STAGE, IRDB, CiNii Books, researchmap, Glottolog,
+ * Internet Archive, NDL Digital, Crossref chapters, OpenAlex extra) would be
+ * dropped by a bare run — and per-query relevance jitter can lose a record one
+ * run and refind it the next. So: snapshot the current index, run `main()`,
+ * union the fresh result with the snapshot, then run the extra collectors and
+ * rebuild the citation graph over the final index.
+ *
+ * Union priority: link-bearing records (both sides, keyed source+externalId,
+ * fresh first), then DOI-bearing (fresh before old, so a DOI record never loses
+ * a title collision to a DOI-less duplicate), then the rest. Link-bearing
+ * records bypass the DOI/title gate, as in `main()`/`collectExtra()` — the
+ * importer grafts their links onto the matching original instead of forking.
+ */
+export async function refresh(): Promise<void> {
+	if (!fs.existsSync(OUT_FILE)) throw new Error('academic-index.json missing — run a full collect first');
+	const before: AcademicRecord[] = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
+	console.log(`Refresh: existing index ${before.length} records\n`);
+
+	await main();
+	const fresh: AcademicRecord[] = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
+
+	const isLink = (r: AcademicRecord) => Boolean(r.links?.length || r.pdf);
+	const linkKey = (r: AcademicRecord) => `${r.source}\t${r.externalId}`;
+	const seenLink = new Set<string>();
+	const seenDoi = new Set<string>();
+	const seenTitle = new Set<string>();
+	const union: AcademicRecord[] = [];
+	const ordered = [
+		...fresh.filter(isLink),
+		...before.filter(isLink),
+		...fresh.filter((r) => !isLink(r) && r.doi),
+		...before.filter((r) => !isLink(r) && r.doi),
+		...fresh.filter((r) => !isLink(r) && !r.doi),
+		...before.filter((r) => !isLink(r) && !r.doi)
+	];
+	for (const r of ordered) {
+		if (isLink(r)) {
+			const k = linkKey(r);
+			if (seenLink.has(k)) continue;
+			seenLink.add(k);
+			union.push(r);
+			continue;
+		}
+		const d = r.doi?.toLowerCase() ?? null;
+		const t = normTitle(r.title);
+		if ((d && seenDoi.has(d)) || (t && seenTitle.has(t))) continue;
+		if (d) seenDoi.add(d);
+		if (t) seenTitle.add(t);
+		union.push(r);
+	}
+	fs.writeFileSync(OUT_FILE, JSON.stringify(union, null, 2));
+	console.log(`\nUnion: fresh ${fresh.length} ∪ existing ${before.length} → ${union.length}\n`);
+
+	await collectExtra();
+	// Rebuild the graph over the final index; on failure (e.g. OpenAlex budget
+	// exhausted) the committed edges file stays as it was.
+	await writeCitationEdges().catch((e) => console.warn('  ! citation edges failed:', e?.message ?? e));
+
+	const after: AcademicRecord[] = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
+	const beforeKeys = new Set<string>();
+	for (const r of before) {
+		if (isLink(r)) beforeKeys.add(linkKey(r));
+		if (r.doi) beforeKeys.add(r.doi.toLowerCase());
+		const t = normTitle(r.title);
+		if (t) beforeKeys.add(t);
+	}
+	const added = after.filter((r) =>
+		isLink(r)
+			? !beforeKeys.has(linkKey(r))
+			: !(r.doi && beforeKeys.has(r.doi.toLowerCase())) && !beforeKeys.has(normTitle(r.title))
+	);
+	console.log(`\nRefresh complete: ${before.length} → ${after.length} records (${added.length} not in the previous index)`);
+	for (const r of added.slice(0, 40)) console.log(`  + [${r.source}] ${r.title}${r.year ? ` (${r.year})` : ''}`);
+	if (added.length > 40) console.log(`  … and ${added.length - 40} more`);
+}
+
 if (import.meta.main) {
 	// `bun collect-academic.ts edges` refreshes only the citation graph; `… extra`
-	// runs only the new collectors and merges them in; no args runs everything.
+	// runs only the new collectors and merges them in; `… refresh` re-collects
+	// everything and unions with the existing index; no args runs everything.
 	const task = process.argv.includes('edges')
 		? writeCitationEdges()
 		: process.argv.includes('extra')
 			? collectExtra()
-			: main();
+			: process.argv.includes('refresh')
+				? refresh()
+				: main();
 	task.catch((e) => {
 		console.error(e);
 		process.exit(1);
