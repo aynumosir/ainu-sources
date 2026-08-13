@@ -5,11 +5,11 @@
  * edges FROM the sources that already exist and upserts them into `source_relations`.
  *
  * The merge-engine-era replacement for seed.ts's `buildSameWorkRelations` + the
- * `seedAcademic` citation-graph tail. It reproduces BOTH, VERBATIM:
+ * `seedAcademic` citation-graph tail:
  *
  *   1. Same-work clustering (seed.ts `buildSameWorkRelations`): group every source
  *      by `coreKey(title)` (volume/part/holding-suffix-stripped, derive.ts) and, for
- *      each ≥2-distinct-title, ≤30-member cluster, classify every title pair:
+ *      each ≤30-member cluster, classify every DISTINCT-title pair by seed's rules:
  *        • substring + DIFFERENT year + neither carries a part marker → `edition-of`
  *          (newer → older; oldest = the original work),
  *        • substring + SAME year + neither part-marked → `duplicate-of`
@@ -19,6 +19,20 @@
  *      The PART_MARKER_RE / hasPartMarker / authAgree guards are reproduced exactly —
  *      without the part-marker guard the substring rule matches every installment
  *      against its bare base title and inflates editions ~14→53 false pairs.
+ *
+ *      IDENTICAL-title pairs get their own, more conservative classification.
+ *      Seed skipped all-identical clusters (under the wipe-seed, index dedup
+ *      meant identical-title records could not coexist in the DB); the merge
+ *      engine keeps them side by side — candidate forks, cross-feed twins,
+ *      approved review entries — several hundred unlinked pairs by 2026-08.
+ *      Same year → `duplicate-of`; different years + agreeing authors →
+ *      `edition-of` (reprints); a missing year + agreeing authors →
+ *      `same-work`; neither year nor author supporting the pair → NO edge,
+ *      because two unrelated works can share a generic title (地名 papers by
+ *      different hands). Links are cheap to revert; that is why they may be
+ *      emitted at lower confidence than any merge would need (the same reason
+ *      OCLC clusters records far below its auto-merge threshold), but a
+ *      no-signal pair stays unlinked.
  *
  *   2. Citation edges (seed.ts `seedAcademic` tail): read scripts/data/citation-edges.json
  *      (OpenAlex-attested A→B citations, ~228), map each endpoint's OpenAlex work id to
@@ -87,6 +101,29 @@ function authAgree(a: string, b: string): boolean {
 		y = norm(b);
 	return !!x && !!y && (x === y || x.includes(y) || y.includes(x));
 }
+// Order-insensitive author agreement, usable as a GATE for identical-title
+// pairs: harvest feeds emit the same person as "Batchelor, John" / "John C.
+// Batchelor" / "田村, すず子" / "Suzuko Tamura", which the concatenating
+// authAgree cannot see through. Tokens are compared as sets; agreement =
+// authAgree OR the smaller token set overlapping the larger by ≥ half.
+function authTokensAgree(a: string, b: string): boolean {
+	if (authAgree(a, b)) return true;
+	const tokens = (s: string) =>
+		new Set(
+			(s || '')
+				.normalize('NFKC')
+				.toLowerCase()
+				.split(/[\s　,;，；・/／|｜&]+/)
+				.map((t) => t.replace(/[^\p{L}\p{N}]/gu, ''))
+				.filter((t) => t.length > 1)
+		);
+	const x = tokens(a),
+		y = tokens(b);
+	if (!x.size || !y.size) return false;
+	let shared = 0;
+	for (const t of x) if (y.has(t)) shared++;
+	return shared >= Math.ceil(Math.min(x.size, y.size) / 2);
+}
 
 /** A source row as far as relation derivation cares. */
 interface SourceLite {
@@ -107,10 +144,12 @@ interface Edge {
 }
 
 /**
- * seed.ts `buildSameWorkRelations`, reproduced VERBATIM over the DB's ACTIVE sources
- * (= seed's `sourceRows`). Sources are iterated in a fixed id order so a new cluster's
- * pairing is deterministic across runs; the classification (edition/duplicate/same)
- * depends only on title/year/author, never on order, so it matches the bootstrap.
+ * seed.ts `buildSameWorkRelations` over the DB's ACTIVE sources (= seed's
+ * `sourceRows`): distinct-title pairs keep seed's rules verbatim; identical-title
+ * pairs (impossible under the wipe-seed, common under the merge engine) get the
+ * conservative classification described in the header. Sources are iterated in a
+ * fixed id order so a new cluster's pairing is deterministic across runs; the
+ * classification depends only on title/year/author, never on order.
  */
 function buildSameWorkEdges(rows: SourceLite[]): Edge[] {
 	const byCore = new Map<string, SourceLite[]>();
@@ -124,9 +163,12 @@ function buildSameWorkEdges(rows: SourceLite[]): Edge[] {
 	let same = 0,
 		editions = 0,
 		dups = 0;
+	let idDups = 0,
+		idEditions = 0,
+		idSame = 0,
+		idSkipped = 0;
 	for (const cluster of byCore.values()) {
 		if (cluster.length < 2) continue;
-		if (new Set(cluster.map((s) => s.title)).size < 2) continue; // identical titles ⇒ not a part series
 		if (cluster.length > 30) continue; // pathological (a too-generic core title) — skip
 		for (let i = 0; i < cluster.length; i++)
 			for (let j = i + 1; j < cluster.length; j++) {
@@ -136,9 +178,36 @@ function buildSameWorkEdges(rows: SourceLite[]): Edge[] {
 					tb = b.title;
 				const na = normTitle(ta),
 					nb = normTitle(tb);
-				const substr = na.includes(nb) || nb.includes(na);
 				const ya = a.yearStart,
 					yb = b.yearStart;
+				if (na === nb) {
+					// IDENTICAL titles. Seed skipped these clusters outright — under
+					// the wipe-seed, index-level title dedup meant identical-title
+					// records could not coexist. Under the merge engine they do
+					// (candidate forks, cross-feed twins, approved review entries),
+					// so classify them, conservatively: a link is cheap to revert,
+					// but linking two unrelated works that merely share a generic
+					// title (e.g. two 地名 papers by different authors) is noise —
+					// when neither the year nor the author supports the pair, emit
+					// nothing.
+					if (ya != null && yb != null && ya === yb) {
+						const note = authAgree(a.author ?? '', b.author ?? '') ? 'author-confirmed' : null;
+						edges.push({ fromSourceId: a.id, toSourceId: b.id, type: 'duplicate-of', notes: note, bidirectional: true });
+						idDups++;
+					} else if (ya != null && yb != null && authTokensAgree(a.author ?? '', b.author ?? '')) {
+						const [from, to] = ya > yb ? [a, b] : [b, a]; // newest points at the original
+						edges.push({ fromSourceId: from.id, toSourceId: to.id, type: 'edition-of', notes: null, bidirectional: false });
+						idEditions++;
+					} else if ((ya == null || yb == null) && authTokensAgree(a.author ?? '', b.author ?? '')) {
+						edges.push({ fromSourceId: a.id, toSourceId: b.id, type: 'same-work', notes: null, bidirectional: true });
+						idSame++;
+					} else {
+						idSkipped++;
+					}
+					continue;
+				}
+				// DISTINCT titles within one core key — seed.ts rules, verbatim.
+				const substr = na.includes(nb) || nb.includes(na);
 				if (!hasPartMarker(ta) && !hasPartMarker(tb) && substr && ya != null && yb != null && ya !== yb) {
 					const [from, to] = ya > yb ? [a, b] : [b, a]; // newer cites older; oldest = original
 					edges.push({ fromSourceId: from.id, toSourceId: to.id, type: 'edition-of', notes: null, bidirectional: false });
@@ -154,6 +223,9 @@ function buildSameWorkEdges(rows: SourceLite[]): Edge[] {
 			}
 	}
 	console.log(`  coreKey clusters: same-work ${same}, edition-of ${editions}, duplicate-of ${dups}`);
+	console.log(
+		`  identical-title pairs: duplicate-of ${idDups}, edition-of ${idEditions}, same-work ${idSame}, skipped ${idSkipped}`
+	);
 	return edges;
 }
 
