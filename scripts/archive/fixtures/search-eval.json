@@ -1,162 +1,555 @@
 {
-  "documents": [
-    {
-      "id": "shibatani-person",
-      "slug": "shibatani-person",
-      "title": "The Languages of Japan — aynu",
-      "author": "Masayoshi Shibatani",
-      "year": 1990,
-      "source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:79",
-      "text": "In the Ainu language, the word aynu means ‘person’."
-    },
-    {
-      "id": "ud-kana",
-      "slug": "ud-kana",
-      "title": "Universal Dependenciesによるアイヌ語テキストコーパス",
-      "author": "安岡孝一",
-      "year": 2021,
-      "source_ref": "articles/ocr/2021_安岡孝一_Universal Dependenciesによるアイヌ語テキストコーパス.gemini.txt:16",
-      "text": "イタカㇱ アワ ポンルㇷ゚ネアイヌ エネ イタキ"
-    },
-    {
-      "id": "uoi-ape",
-      "slug": "uoi-ape",
-      "title": "旭川採集アイヌ語動詞補遺集 — ape",
-      "author": "魚井一由",
-      "year": null,
-      "source_ref": "books/ocr/魚井一由『旭川採集アイヌ語動詞補遺集』.gemini.txt:50",
-      "text": "apekotukka < ape kotuk ka. sarki-toi apekotukka-a-an."
-    },
-    {
-      "id": "uoi-chise",
-      "slug": "uoi-chise",
-      "title": "旭川採集アイヌ語動詞補遺集 — chise",
-      "author": "魚井一由",
-      "year": null,
-      "source_ref": "books/ocr/魚井一由『旭川採集アイヌ語動詞補遺集』.gemini.txt:60",
-      "text": "poro chise chishireashi. アイヌの家には部屋の仕切りもまた襖もない。"
-    },
-    {
-      "id": "fukazawa-apostrophe",
-      "slug": "fukazawa-apostrophe",
-      "title": "加賀家文書におけるアイヌ語の文献学的研究",
-      "author": "深澤美香",
-      "year": 2017,
-      "source_ref": "articles/ocr/2017_深澤美香_加賀家文書におけるアイヌ語の文献学的研究.pdftotext.txt:3873",
-      "text": "シリヲヌマ シリヲヌマン 夕 sir’onuman 夕方になる"
-    },
-    {
-      "id": "shibatani-hokkaido",
-      "slug": "shibatani-hokkaido",
-      "title": "The Languages of Japan — Hokkaidō",
-      "author": "Masayoshi Shibatani",
-      "year": 1990,
-      "source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:75",
-      "text": "The Ainu are a people living on the northern Japanese island of Hokkaidō."
-    },
-    {
-      "id": "dal-hem",
-      "slug": "dal-hem",
-      "title": "The Development of Analytic Negatives in Sakhalin Ainu",
-      "author": "Elia Dal Corso",
-      "year": 2021,
-      "source_ref": "articles/ocr/2021_Dal Corso Elia_The Development of Analytic Negatives in Sakhalin Ainu.gemini.txt:101",
-      "text": "Hēm haunu. Hēm haw-nu."
-    },
-    {
-      "id": "shibatani-yukara",
-      "slug": "shibatani-yukara",
-      "title": "The Languages of Japan — yūkara",
-      "author": "Masayoshi Shibatani",
-      "year": 1990,
-      "source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:112",
-      "text": "forms are generally called yukar in Ainu and yūkara in the Japanese tradition"
-    },
-    {
-      "id": "fukuda-yay",
-      "slug": "fukuda-yay",
-      "title": "On the Morphological Structure of the Verbs in Saru Dialect of Ainu",
-      "author": "福田すゞ子",
-      "year": 1956,
-      "source_ref": "articles/ocr/1956_Fukuda Suzuko_ON THE MORPHOLOGICAL STRUCTURE OF THE VERBS IN SARU DIALECT OF AINU.gemini.txt:155",
-      "text": "yáykosiramsuye is a lexicalized verb form."
-    },
-    {
-      "id": "shibatani-kamuy",
-      "slug": "shibatani-kamuy",
-      "title": "The Languages of Japan — kamuy",
-      "author": "Masayoshi Shibatani",
-      "year": 1990,
-      "source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:103",
-      "text": "Kamuy also means ‘god’. Indeed, bears are thought to be words relating to gods."
-    },
-    {
-      "id": "ptaszynski-person",
-      "slug": "ptaszynski-person",
-      "title": "Part-of-speech tagger for Ainu language",
-      "author": "Michał Ptaszynski and Yoshio Momouchi",
-      "year": 2012,
-      "source_ref": "articles/ocr/2012_Ptaszynski Michal & Momouchi Yoshio_Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model.pdftotext.txt:72",
-      "text": "The word ainu in the Ainu language means a person."
-    }
-  ],
-  "queries": [
-    {
-      "id": "kana-ainu",
-      "q": "アイヌ",
-      "expected": ["shibatani-person", "ud-kana", "uoi-chise", "ptaszynski-person"]
-    },
-    {
-      "id": "latin-kana-phrase",
-      "q": "itakas awa",
-      "expected": ["ud-kana"]
-    },
-    {
-      "id": "kana-ape",
-      "q": "アペコトゥッカ",
-      "expected": ["uoi-ape"]
-    },
-    {
-      "id": "kana-chise",
-      "q": "ポロ チセ",
-      "expected": ["uoi-chise"]
-    },
-    {
-      "id": "apostrophe",
-      "q": "sir'onuman",
-      "expected": ["fukazawa-apostrophe"]
-    },
-    {
-      "id": "macron-hokkaido",
-      "q": "Hokkaido",
-      "expected": ["shibatani-hokkaido"]
-    },
-    {
-      "id": "macron-hem",
-      "q": "Hem",
-      "expected": ["dal-hem"]
-    },
-    {
-      "id": "macron-yukara",
-      "q": "yukara",
-      "expected": ["shibatani-yukara"]
-    },
-    {
-      "id": "acute-yay",
-      "q": "yaykosiramsuye",
-      "expected": ["fukuda-yay"]
-    },
-    {
-      "id": "lossy-kamuy",
-      "q": "カムイ",
-      "expected": ["shibatani-kamuy"]
-    }
-  ],
-  "similar_queries": [
-    {
-      "id": "parallel-person-definition",
-      "reference": "shibatani-person",
-      "expected": ["ptaszynski-person"]
-    }
-  ]
+	"documents": [
+		{
+			"id": "shibatani-person",
+			"slug": "shibatani-person",
+			"title": "The Languages of Japan — aynu",
+			"author": "Masayoshi Shibatani",
+			"year": 1990,
+			"source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:79",
+			"pages": [
+				{
+					"page": 1,
+					"text": "In the Ainu language, the word aynu means ‘person’."
+				}
+			]
+		},
+		{
+			"id": "ud-kana",
+			"slug": "ud-kana",
+			"title": "Universal Dependenciesによるアイヌ語テキストコーパス",
+			"author": "安岡孝一",
+			"year": 2021,
+			"source_ref": "articles/ocr/2021_安岡孝一_Universal Dependenciesによるアイヌ語テキストコーパス.gemini.txt:16",
+			"pages": [
+				{
+					"page": 1,
+					"text": "イタカㇱ アワ ポンルㇷ゚ネアイヌ エネ イタキ"
+				}
+			]
+		},
+		{
+			"id": "uoi-ape",
+			"slug": "uoi-ape",
+			"title": "旭川採集アイヌ語動詞補遺集 — ape",
+			"author": "魚井一由",
+			"year": null,
+			"source_ref": "books/ocr/魚井一由『旭川採集アイヌ語動詞補遺集』.gemini.txt:50",
+			"pages": [
+				{
+					"page": 1,
+					"text": "apekotukka < ape kotuk ka. sarki-toi apekotukka-a-an."
+				}
+			]
+		},
+		{
+			"id": "uoi-chise",
+			"slug": "uoi-chise",
+			"title": "旭川採集アイヌ語動詞補遺集 — chise",
+			"author": "魚井一由",
+			"year": null,
+			"source_ref": "books/ocr/魚井一由『旭川採集アイヌ語動詞補遺集』.gemini.txt:60",
+			"pages": [
+				{
+					"page": 1,
+					"text": "poro chise chishireashi. アイヌの家には部屋の仕切りもまた襖もない。"
+				}
+			]
+		},
+		{
+			"id": "fukazawa-apostrophe",
+			"slug": "fukazawa-apostrophe",
+			"title": "加賀家文書におけるアイヌ語の文献学的研究",
+			"author": "深澤美香",
+			"year": 2017,
+			"source_ref": "articles/ocr/2017_深澤美香_加賀家文書におけるアイヌ語の文献学的研究.pdftotext.txt:3873",
+			"pages": [
+				{
+					"page": 1,
+					"text": "シリヲヌマ シリヲヌマン 夕 sir’onuman 夕方になる"
+				}
+			]
+		},
+		{
+			"id": "shibatani-hokkaido",
+			"slug": "shibatani-hokkaido",
+			"title": "The Languages of Japan — Hokkaidō",
+			"author": "Masayoshi Shibatani",
+			"year": 1990,
+			"source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:75",
+			"pages": [
+				{
+					"page": 1,
+					"text": "The Ainu are a people living on the northern Japanese island of Hokkaidō."
+				}
+			]
+		},
+		{
+			"id": "dal-hem",
+			"slug": "dal-hem",
+			"title": "The Development of Analytic Negatives in Sakhalin Ainu",
+			"author": "Elia Dal Corso",
+			"year": 2021,
+			"source_ref": "articles/ocr/2021_Dal Corso Elia_The Development of Analytic Negatives in Sakhalin Ainu.gemini.txt:101",
+			"pages": [
+				{
+					"page": 1,
+					"text": "Hēm haunu. Hēm haw-nu."
+				}
+			]
+		},
+		{
+			"id": "shibatani-yukara",
+			"slug": "shibatani-yukara",
+			"title": "The Languages of Japan — yūkara",
+			"author": "Masayoshi Shibatani",
+			"year": 1990,
+			"source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:112",
+			"pages": [
+				{
+					"page": 1,
+					"text": "forms are generally called yukar in Ainu and yūkara in the Japanese tradition"
+				}
+			]
+		},
+		{
+			"id": "fukuda-yay",
+			"slug": "fukuda-yay",
+			"title": "On the Morphological Structure of the Verbs in Saru Dialect of Ainu",
+			"author": "福田すゞ子",
+			"year": 1956,
+			"source_ref": "articles/ocr/1956_Fukuda Suzuko_ON THE MORPHOLOGICAL STRUCTURE OF THE VERBS IN SARU DIALECT OF AINU.gemini.txt:155",
+			"pages": [
+				{
+					"page": 1,
+					"text": "yáykosiramsuye is a lexicalized verb form."
+				}
+			]
+		},
+		{
+			"id": "shibatani-kamuy",
+			"slug": "shibatani-kamuy",
+			"title": "The Languages of Japan — kamuy",
+			"author": "Masayoshi Shibatani",
+			"year": 1990,
+			"source_ref": "books/ocr/Shibatani Masayoshi - The Languages of Japan.gemini.txt:103",
+			"pages": [
+				{
+					"page": 1,
+					"text": "Kamuy also means ‘god’. Indeed, bears are thought to be words relating to gods."
+				}
+			]
+		},
+		{
+			"id": "ptaszynski-person",
+			"slug": "ptaszynski-person",
+			"title": "Part-of-speech tagger for Ainu language",
+			"author": "Michał Ptaszynski and Yoshio Momouchi",
+			"year": 2012,
+			"source_ref": "articles/ocr/2012_Ptaszynski Michal & Momouchi Yoshio_Part-of-speech tagger for Ainu language based on higher order Hidden Markov Model.pdftotext.txt:72",
+			"pages": [
+				{
+					"page": 1,
+					"text": "The word ainu in the Ainu language means a person."
+				}
+			]
+		},
+		{
+			"id": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+			"slug": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+			"title": "アイヌ・英・和辭典 第四版",
+			"author": "John Batchelor",
+			"year": 1938,
+			"source_ref": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+			"pages": [
+				{
+					"page": 120,
+					"text": "Enum-kina                                 DICTIONARY                                          120\n  They are eaten raw. Syn: Hotoki-                 degree of intensity is to be gathered\n  maimai. Imakomai.                                from the context. Syn: Kereroshke.\nEnum-kina,      オホバコ.     n.  Plant              Enupkushish, エヌプクシシ,為事\n  エヌムキナ              tain.     Plantago mа-        ハ開ク事好マヌ, vi. To dislike to\nEnumo-kina,          jor   L. var. asiatica       do or hear.\n  エヌモキナ              Deene,      L.       Syn:   Enushima, エヌシマ、驚ク、vi. To be\n  Erum-kina.                                       surprised.\nEnumnoya, エヌムノヤ, ヤマガラ 2.                         Enushkari, エヌシカリ、ク. v.i. To\n  Japanese tit. Parus varius, T. and S.            be surprised at. To be amazed.\n Syn: Numnoya-chip.                              Enushup, エヌシュプ、腫レタ、膨張セ\nEnumnumge, エヌムヌムゲ, 豊カナル                             .    adj. Swollen.\n adj. Plentiful. Abundant.                       Enutomom, エヌトモム,見ル. v.t. To\nEnumocha, エヌモチヤ、モモ.n. Vac-                        look at       or   into.   To stare at.          To\n  cinium Vitis-idaea. L. Crow-berry.              look at carefully.\n                                                                   As:-Hoka noshike\n  The name means \"bearer of edible                 enutomom, \"to look into the fire (as\n  balls\" (berries). Like the Aekarip the           in deep thought).\" Syn: Enitomom.\n  fruit is extremely juicy and delicious.        Eochiketa, エオチケタ、同時=.                            adv.\n  The whole plant is called Enumoka-              At the same time.\n  ni, i.e. \" ball bearing tree.\" It is also      Eochayaige, エオチャヤイゲ、繁茂スル\n  called Inumocha-ni, i.e. \"plant which           v.i. To stand and spread out thickly\n  bears special berries,\" the initiali            as branches of trees.\n  being intensive.   The berries are             Eochish,       エオチン,         立腹ス,          .i.    To\n  sometimes    mashed and the juice                become angry.\n  pressed out, mixed with water and              Eochiwe, エオチウェニ投ゲツケ\n  taken as drink.                                  n. v.t. To throw anything to. (It\nEnun, エヌン,何處.                  adj.    Where"
+				},
+				{
+					"page": 250,
+					"text": "250\nKi                                            DICTIONARY\n                                                             Kik, キク,打ツ,叩ク.                      v.t.     To strike.\nKi, キ,事為、例セバ、キホプニ, 急\n                                                              To knock.    To beat. To hit.\n  キテ起キ上ル v.t. To do anything.\n                                                             Kikararip, キカラリプ, 梁.                        n.    A joist.\n  To accomplish. To act. To achieve.\n                                                              A beam.\n When preceding               another verb ki has\n                                                             Ki-kat, キカツ、才能.                n.    Ability. Syn:\n the sense of \"hurry,\" \"severity\" or\n                                                              Mondum.\n     \"urging\" in it. Thus:--Ki hopuni,\n                                                             Kike, キケ,鲍屑.                    Shavings.\n     \"to get up in a hurry.\" Syn: Kara.\n                                                                                   n.\n     Iki.                                                    Kike-chinoye-inau, キケチノイェイナ\nKi-abe-gusu, キアベグス、然レドモ                                       ウ,幣名. n. A kind of fetish with\n  adv. Yet. Although. Syn: Yakka.                             curled shavings attached.\nKi-ai, キアイ, 光線,       ,反射. n. A                                             キケパラセイナウ\n                                                             Kikeparase-inau,\n                  Reflection.\n     blaze. A ray of light.\n                                                              幣名.22. Kind of fetish having the\nKiai-ush, キアイウショ閃メク vi. To                                     shavings spread out.\n                                                             Kiketa, キケタト        モ、ナンドモ. post.\n sparkle. To blaze.\nKiapa, キアパ,       n.                Millet.    Syn:            Although. Syn: Yakka.\n                                                             Kike-ush, キケウシリカケノ付キタ\n                          .\n     Piapa.\n                                                                n. adj. Having shavings attached.\nKi-be, キべ、行ヒシ事、出来事"
+				}
+			]
+		},
+		{
+			"id": "1875-dobrotvorsky-ainu-russian-dictionary",
+			"slug": "1875-dobrotvorsky-ainu-russian-dictionary",
+			"title": "Аинско-русскій словарь",
+			"author": "М. М. Добротворскій",
+			"year": 1875,
+			"source_ref": "1875-dobrotvorsky-ainu-russian-dictionary",
+			"pages": [
+				{
+					"page": 100,
+					"text": "А р и (а р е ) онасй. G. поздній вечеръ; время послѣ\n           арионуманъ. Синон. äuacmama или ари анаськйта.\n       Арионрманъ. С. ранній вечеръ; время послѣ заката.\n       Арипъ. Мос. кровля дома.\n      Арирамби. Геогр. Шм. мысъ къ югу отъ Вендвес-\n           сана.\n      А р и -ш и т . Мое. одноглазый, кривой.\n      А ри-ш іуй. Мос. одинъ разъ, однажды ( ^ л . L \\) f ) .\n      Аркай. Геогр. Шм. Гиляцкая деревня и рѣка въ\n           заливѣ Жонкьеръ къ сѣв. отъ Дуэ.\n 390. Аркей. Геогр. Ш р. Гиляцкое селеніе (къ сѣверу отъ\n           Дуй), изъ котораго идетъ дорога на р. Томо во\n          внутрь Сахалина. У Глена аркай-во (во— посе-\n          леніе).\n      А рки (Arkee). Брот.- иди сюда.\n    ѵ А рм у (Ärmuh). Ланг. Кур. мышь.\n      Аро. Мос. частичка, о значеніи которой см. арщ\n         частичка означающая начало.\n      Аро-байкарутуши. Мос. начало весны (буквально:\n          участвующій въ первой веснѣ), или аробайкарууси.\n      Арошнепъ. Мос. первый. Аро - шнепъ - ни. Мос.\n          (;?* 3- і- ö Ÿ), первый.\n      Арраванъ (Arrawan). Брот. семь.\n      Арроконай. Геогр. Шм. рѣка къ югу отъ Ктаузи.\n      А рт усь. С. Аинскій халатъ.\n          —       m p à , ткать*(платье).\n      А ру. Мос. облупать.\n      Аруамбе. Кл. Мац. семь.\n400. Аруакуампе. Кр. семьдесятъ.\n      Apyànz. Кр. Ланг. Кур. семь.\n     А р ув Ы , сокращеніе арувампе, apyeàm , семь.\n          —      сневйно, тысяча четыреста,\n     Арувамбе. Бальб. Сах. семь.\n     Арувамби. Дав. семь. Бальб. М ац. Кл, Сах. Ланг.\n                    Юж. Сах.\n                    игашима ѳамби. Дав.-семнадцать.\n            —       игашима хоцъ. Дав., двадцать семь.\n     Арувймпе, семь.\n           —        шйсьма асйснего, сто семь,\n           —        шйсъма ш м т (или edntno), семнадцать.\n           —        тасъма сневано, двѣсти семь и т. д."
+				},
+				{
+					"page": 200,
+					"text": "Ейскета (каскита), сокр. каскетъ, ка. С. поверх­\n        ность, верхъ, крыша. Прил. наружный. Нар. свер­\n         ху. Жвани — оровано, надъ нами сверху, съ на­\n        шей -крыши. ВерхЬмъ.\n      Еасорагі. Гл. спасать (утопающаго) Син. укаорай.\n      Еаспи. Геогр. Шм. см касьпу. Еаспо. Гл. см. касьпу..\n      Еаспутци. Геогр. Шм. см. касьпу. Еаспуци. Бр.\n2700. Еассамай. Страл. человѣкъ.\n      Eacÿena (касрфпа). Гл. растоптать, раздавить но­\n         гами.\n      Ейсума. С. кремень, этим. см. карашюма.\n      Еасшюма. Дав. кремень.\n      Ейськепъ. С. лопата.\n      Еасшу. Геогр. рѣчка и Айнское селеніе въ 50 вер­\n         стахъ къ сѣверу отъ Мануи.\n      ЕасіЬ, или кастъ, касюх. С. большая плоская ложка\n         для выниманія изъ котла. Лонъ^ — , ложка (сто­\n         ловая).\n      ЕааЬхпа ( касувпа). Гл. наступать ногами.\n      Еасгіхпу. С. черпакъ съ отверстіемъ на днѣ. Лоро\n         — , пот — , большой,— маленькій черпакъ.\n      Each. С. соломенна,я шляпа для праздниковъ.\n      Eâma. С. мячъ.— Мос. къ, въ направленіи къ, вдоль,\n         отъ Яп. ката, сторона. Пред. на, по. Атрй — ,\n         на морѣ, по морю (ѣхать). Еймпе ката нуйёхе-\n         макЬ, записалъ на бумагѣ. Вйхка ката, на водѣ.\n         С. клубокъ (нитокъ). Бал. Сах. земля. Omà к4та\n         кой Анке, прибой выбросилъ на берегъ (селедку).\n2710. Еатаму. Мос. названіе растенія.\n      Eamacâxz. Прил. больной, хворый.\n      Еатйсьну. Прил. здоровый, не больной.\n      Еато-увенъ. Дав. безпорядокъ. Мос. катоуэт, не­\n         правильность, безпорядокъ.\n      Eâmy (кату Мос.). С. видъ, наружность, лице,\n             тетива. Мос. мѣра, образъ (Maajjj), манера,\n             правильность, порядокъ, видъ, форма вещи.\n        — вемпе, обезобразить.\n        — вснтэх. Пт. обезображенный.\n        — венъ. Прил. безобразный, уродливый.\n        —■ вет-ни, кривое дерево. ,"
+				}
+			]
+		},
+		{
+			"id": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+			"slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+			"title": "アイヌ語千歳方言辞典",
+			"author": "中川裕",
+			"year": 1995,
+			"source_ref": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+			"pages": [
+				{
+					"page": 100,
+					"text": "エシテンマッカカリレ esitemmakkakarire 【動2】 杖の先をついてから前に進み、杖をまたぐるりと回して自分の前につく；老人が杖をついてゆっくり歩いてくるときの動作。アペフチ apehuci「火の女神」が人間の姿をして出てくる時に、このような動作をしながらやってくる。<e-「〜について」si-「自分の」tem「腕」mak「後ろ」ka「?」kar「回る」-re「〜させる」。\n　リゥトゥンナ　ソㇺパヌ　クワノ/リゥトゥンナ　ウフイ　クワ　エシテンマッカカリレ　カネ／リゥトゥンナ　ソイ　エンパ　ワ　RITTUNNA sompanu kuwa／RITTUNNA uhuy kuwa esitemmakkakarire kane／RITTUNNA soyenpa wa （火の女神が）三角の杖、燃える杖をぐるりと回してつきながら表に出てきた［N9003041.KY］\nエシナ esina 【動2】 〜を隠す。〜を秘密にする。\n　ヤイコタン　オロ　エシナ　アナㇰ　エアイカㇷ゚　クス　yaykotan or esina anak eaykap kusu　自分の村を隠すこともできないので［N9003061.FN］\nエシナ esna 【動1】 くしゃみをする。\n　オㇺケオㇺケ　エシナエシナ　コㇿ　アン　ハウェ　アシ　ワ　クス　omkeomke esnaesna kor an hawe as wa kusu （訪問を知らせるため表で）咳をしたりくしゃみをしたりする声がするので［N8808291.YR］\nエシピネ esipine 【動2】 （単）エシピンパ esipinpa（複）。〜を身にまとう（北海道方言：まかなう）；→シピネ sipine。\nエシピンパ esipinpa 【動2】 （複）〜を身にまとう（北海道方言：まかなう）；→シピネ sipine。\nエシㇼ esir 【副】 さっき。\n　ネㇷ゚　カ　エ=ヌカㇻ　ペコㇿ　エヤイヌ　シㇼ、エシㇼ　ワノ　エイキ　シㇼ　コヤモㇰテ　nep ka e=nukar pekor e=yaynu sir, esir wano e=iki sir k=oyamokte　何かを見ているような気がしている様子を、お前がさっきからしているのが気になるよ［N9209251.FN］\nエシㇼカウン esirkaun 【副】 地面の上に。地上に；<e-「〜の頭」sirka「地面」un「〜についている」。\n　エトゥポㇰ　アコシナ　テㇰ　ヒネ　エシㇼカウン　テㇾケアナクス　etupok a=kosina tek hine esirkaun terke=an akusu　棟木の先端に（赤ん坊を）さっとくくりつけ、床の上に飛び降りると［N8710301.KY］\nエシㇼキㇰ esirkik 【動2】 〜を激しく叩きつける；<e-「〜で以て」sir「あたり」kik「〜を叩く」。\nエシㇼキッキㇰ esirkikkik　同上（反復）。\n　リゥトゥンナ　イタㇰ　キ　キ　コㇿ／リゥトゥンナ　ピッ　エシㇼキㇰ　フミ／リゥトゥンナ　タクナタㇻ／リゥトゥンナ　リムナタㇻ　RITTUNNA itak ki ki kor／RITTUNNA pit esirkik humi／"
+				},
+				{
+					"page": 220,
+					"text": "アプス　ワ　san ka ta kitpu ka kam ka a=tuypatuypa wa a=yanke wa a=anu wa　棚の上に\n　脂身やら肉やら、切り刻んで上げておいて（この話では、カラスのカムイに分け与え\n　るためにサンを作ったことになっている）〔N9010012.UP〕\nサンケ　sanke¹　【動２】（単）サㇷ゚テ　sapte（投）。\n　①山手から浜手へ下ろす。\n　②前へ出す。\n　③しまっていたものを取り出す。\n　①ペッ　カムイ　ピㇼカ　ワッカ　サンケ　ヤㇰネ　チェㇷ゚　ネ　ヤッカ　ネㇷ゚　アエ\n　プ　ネ　ヤッカ　ポロンノ　ヘメシパ　ナ　pet kamuy pirka wakka sanke yakne cep ne\n　yakka nep aep ne yakka poronno hemespa na　川の神がきれいな水を下ろせば、魚であれ、\n　他の食べ物（となる動物たち）であれ、たくさん上がってくるのだよ〔N9309282.FN〕\n　②チㇷ゚　サンケ　フミ　アㇱ　ワ　クス　cip sanke humi as wa kusu　舟を出す音が聞こ\n　えたので〔N8710302.UP〕\n　③アセ　シト　アサンケ　ヒネ　a=se sito a=sanke hine　背負っていた団子を出して\n　〔N9211271.UP〕\n　ルㇷ゚ネ　サランペ　ノカン　サランペ　サㇷ゚テ　ワ　rupne sarampe nokan sarampe sapte\n　wa　大きな布、小さな布を出して〔N9103081.UP〕\nサンケ　sanke²　【連体】前の。前方の。山から見て海に近いほうの；サンケ　マサㇻ\n　sanke masar「前方の（海に近い方の）砂浜」。〈反〉マクン　makun。\n　サンケ　イウォㇿ　アカマ　ワ　トゥイマ　イウォㇿ　オㇿ　アオパイェ　ヒネ\n　sanke iwor a=kama wa tuyma iwor or a=opaye hine　（山奥のではないほうの）手前の狩\n　場を通り越して、遠くの狩場に行って〔N8806182.UP〕\nサンケニマㇰ　sankenimak　【名】前歯；＜sanke［前の］nimak［歯］。ハンケニマㇰ\n　hankenimakとも。\nサンシントコ　sansintoko　【名】祭りの席でロルンプヤㇻ　rorunpuyar「神窓」の真前\n　に据えられ、酒をそこから酌み出すためのシントコ。\n　オロワ　サンシントコ　ピㇱカニケ　アチヌイㇽケ　orowa sansintoko piskanike\n　a=cinuyurke　そして、サンシントコのそばに仁王立ちになった〔N9306021.YR〕\nサンペ　sampe　【名】①心臓。胃。肝。\n　②心。精神\n　（エ）サンペケセコシトゥリリ　（エ）サンペパケコシトゥリリ　(e-)sampe-kese-\n　kosituri　(e-)sampe-pake-kosituri（〜を食べて）胆の下端が伸び伸びし、胆の上端\n　が伸び伸びした（飢えていたところに食物を口にして、気分がよくなることを表わす\n　常套句）。\n　①サンペ　ケセ　トㇰセ　カネ　サンペ　パケ　トㇰセ　カネ　sampe kese tokse kane\n　sampe pake tokse kane　心臓の下端が鼓動を打ち、心臓の上端が鼓動を打った"
+				}
+			]
+		},
+		{
+			"id": "2024-nakagawa-ainugo-kobunten-comprehensive-grammar-ainu",
+			"slug": "2024-nakagawa-ainugo-kobunten-comprehensive-grammar-ainu",
+			"title": "アイヌ語広文典",
+			"author": "中川裕",
+			"year": 2024,
+			"source_ref": "2024-nakagawa-ainugo-kobunten-comprehensive-grammar-ainu",
+			"pages": [
+				{
+					"page": 150,
+					"text": "kusu (沙流）\n  ｢そばにいる人たちに（盃を） 差しのべたが､そこにいる連中も受け取I)たがらな\n  かつたので」（諸幹全体）\n  これらを見ると、61)のturiは針を一回突き出す動作を表すのに対し、62) -64)は\n継続・反復といった動作を表していることがわかる。62)のtutturiは二人が録斤機\nにlhlかってかわるがわる顔を突き出して、声を吹き込んでいることを言っており、\n動作の反復を表している。63)のtuririは盃に酒をついで差し出してひっこめない\nでいると、相手は仕方なくそれを受け取るという、動作の結果の持続を表す場面で\nあI)、64)のturituriは、周I)にいる人たちに次々に杯を差し{IIすのだが、誰もそ\nれを受け取らないという、動作の反復を表す例である。\n  a)b)の語根ないし語幹の一部の重複は、原則的にV/-pa型の動詞に限られるが、\nc)の語幹全体の重複はV/-pa型には限られず、いろいろな動訶に見られる。\n65) soy ta soyne=an wa, rerakar=an kor apkasapkaS=an kor an=an akusu (沙流）\n  「外に出て、風にあたりながら歩き続けていると」apkas「歩く」\n66) cise k()r kamuy tono, a=teke a=kikkik akusu ek hi kusu (沙流）\n  「家の主人である殿様が、私が手をばんばんと叩くとやってきたので」kik「～を\n  叩く」\n  なお、重複形の中には､tuye「～を切る、～を切I)落とす」に対してtuytuye「箕\nで～をふるう」､nukar「～を見る」に対してnukannukar「～の面倒を見る」のよ\nうに、形の上では重複形だが、動作の継続とか反復とかという意味上の対応をして\nいないものもある。\n②樺太方言の動詞接尾辞- (a) hci\n  樺太方言には-(a)hci (アニワ湾岸を含む東南部の方言では- (a) hsi)という動詞\n接尾辞があり、村崎（1979:51-52）では人称接辞のひとつとして次のような場合に\n用いられると説明されている。"
+				},
+				{
+					"page": 300,
+					"text": "「川へ持って下って水につける」\n438) an=teke uk wa/ casi oske ne cise oske ne/ un=tura wa/ aun ki wa (釧路\n       八重1999:45）\n  「私の手を取って／館の中へ家の中へ／私たちを連れて／入って」\n439) inumpe kamiasi kanto or ene sonkoaniyar na. (石狩：大塚1990:163)\n  「炉縁の化け物が犬に向かって伝言を送ったのだ」\n  ただし、石狩地方では(e) neも用いられるが、「～に向かって」を表すにはekota\nという後置副訶が用いられる傾向が強い。\n440) Asibecu pakno kesto iwan cup,   AIq<O ekota apkas a ine (石狩：砂沢\n       1983:178）\n  「芦別まで毎日6か月、学校へ歩いて（通って)」\n  これらは、道東で使われる、eから、ne >ene >en >unと変化してできたもの\nと思われる。さらに言えば、道束の、eは全道的に使われる転成格の、e「～に（な\nる)」と同じ錯源であり、転成格、eは動訶、e「～になる」が動詞としての機能を\n失って格助詞化したものと思われる（中川1982)。\n92．3     関連表現"
+				}
+			]
+		},
+		{
+			"id": "2015-segawa-ainu-gaku-nyumon",
+			"slug": "2015-segawa-ainu-gaku-nyumon",
+			"title": "アイヌ学入門",
+			"author": "瀬川拓郎",
+			"year": 2015,
+			"source_ref": "2015-segawa-ainu-gaku-nyumon",
+			"pages": [
+				{
+					"page": 80,
+					"text": "――越国守（こしのくにのかみ）の阿倍比羅夫（あべのひらふ）が渡島（わたりしま）（北海道）へ遠征して粛慎（あしはせ）（オホーツク人）を討ち、戦利品\n　として生きたヒグマ二頭とヒグマの毛皮七〇枚を天皇に奉った（六五八年）。\n――ヒグマの毛皮七〇枚を高麗の使人をもてなすのに用いた（六五九年）。\n――天皇が皇太子や王卿四八人にヒグマとカモシカの毛皮を下賜した（六八五年）。\n　などとあり、古代の日本では北海道のヒグマの毛皮を珍重していたことがわかります。\n農耕集落である中半入遺跡で北海道のものと同じ石器がみつかるのは、東北北部に進出\nした古墳社会の人びとも、みずから毛皮生産をおこなうようになり、そのために、アイヌ\nから皮なめしや独自の狩猟技術を導入したことを示しているのではないでしょうか。\n　たとえば、先の『日本書紀』六八五年記事で天皇が諸王卿に下賜したのは、北海道のヒ\nグマの毛皮と、北海道には生息しないカモシカの毛皮でした。この二つがセットになって\nいたのは、東北北部の人びとが、アイヌから入手したヒグマの毛皮と、みずから狩猟・加\n工したカモシカの毛皮を、あわせて中央にもたらしていたからではないか、と考えてみた\nくなるところです。\n　そして、東北北部の古墳社会 of 農民のなかで、このような商業狩猟に季節的に従事する\nようになった人びとの末裔が、マタギだったのではないかとおもわれるのです。\n　マタギは、猟で山のなかにいるあいだ、マタギ言葉という特別な言葉を用いました。そ\n81　第一章 縄文――万年の伝統を継ぐ"
+				},
+				{
+					"page": 140,
+					"text": "北千島アイヌ\nシコタン島に移住した北千島アイヌ（1888年）。北海道大学附属図書館編1992\n『明治大正期の北海道』北海道大学図書刊行会。\n近代まで伝承されていた小人伝説の基\n基本的なモティーフは、このタイプなので\nす。\nモデルは北千島アイヌ\n初期の小人伝説である『勢州船北海漂\n着記』では、小人の特徴がいくつかのべ\nられていました。実は、この特徴は北千\n島アイヌの特徴そのものといえるのです\n（以下では、北海道とカムチャッカのあいだに連\nなる千島列島を、エトロフ島以南を南千島、ウ\nルップ島以北を北千島とよぶことにします）。\n小人が小人島から渡ってくる理由は、\n土器づくりの粘土を調達することでした\nが、北千島アイヌも江戸時代まで土器づ\nくりをおこなっていました。\n143   第三章 伝説——古代ローマからアイヌへ"
+				}
+			]
+		}
+	],
+	"queries": [
+		{
+			"id": "kana-ainu",
+			"kind": "normalization",
+			"q": "アイヌ",
+			"expected": [
+				{
+					"slug": "shibatani-person"
+				},
+				{
+					"slug": "ud-kana"
+				},
+				{
+					"slug": "uoi-chise"
+				},
+				{
+					"slug": "ptaszynski-person"
+				}
+			]
+		},
+		{
+			"id": "latin-kana-phrase",
+			"kind": "normalization",
+			"q": "itakas awa",
+			"expected": [
+				{
+					"slug": "ud-kana"
+				}
+			]
+		},
+		{
+			"id": "kana-ape",
+			"kind": "normalization",
+			"q": "アペコトゥッカ",
+			"expected": [
+				{
+					"slug": "uoi-ape"
+				}
+			]
+		},
+		{
+			"id": "kana-chise",
+			"kind": "normalization",
+			"q": "ポロ チセ",
+			"expected": [
+				{
+					"slug": "uoi-chise"
+				}
+			]
+		},
+		{
+			"id": "apostrophe",
+			"kind": "normalization",
+			"q": "sir'onuman",
+			"expected": [
+				{
+					"slug": "fukazawa-apostrophe"
+				}
+			]
+		},
+		{
+			"id": "macron-hokkaido",
+			"kind": "normalization",
+			"q": "Hokkaido",
+			"expected": [
+				{
+					"slug": "shibatani-hokkaido"
+				}
+			]
+		},
+		{
+			"id": "macron-hem",
+			"kind": "normalization",
+			"q": "Hem",
+			"expected": [
+				{
+					"slug": "dal-hem"
+				}
+			]
+		},
+		{
+			"id": "macron-yukara",
+			"kind": "normalization",
+			"q": "yukara",
+			"expected": [
+				{
+					"slug": "shibatani-yukara"
+				}
+			]
+		},
+		{
+			"id": "acute-yay",
+			"kind": "normalization",
+			"q": "yaykosiramsuye",
+			"expected": [
+				{
+					"slug": "fukuda-yay"
+				}
+			]
+		},
+		{
+			"id": "lossy-kamuy",
+			"kind": "normalization",
+			"q": "カムイ",
+			"expected": [
+				{
+					"slug": "shibatani-kamuy"
+				}
+			]
+		},
+		{
+			"id": "gold-latin-headword",
+			"kind": "exact",
+			"q": "esitemmakkakarire",
+			"expected": [
+				{
+					"slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+					"page": 100
+				}
+			]
+		},
+		{
+			"id": "gold-latin-hyphen",
+			"kind": "exact",
+			"q": "Kikeparase-inau",
+			"expected": [
+				{
+					"slug": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+					"page": 250
+				}
+			]
+		},
+		{
+			"id": "gold-latin-phrase",
+			"kind": "exact",
+			"q": "sanke iwor",
+			"expected": [
+				{
+					"slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+					"page": 220
+				}
+			]
+		},
+		{
+			"id": "gold-cyrillic-phrase",
+			"kind": "exact",
+			"q": "Аинскій халатъ",
+			"expected": [
+				{
+					"slug": "1875-dobrotvorsky-ainu-russian-dictionary",
+					"page": 100
+				}
+			]
+		},
+		{
+			"id": "gold-reduplication",
+			"kind": "exact",
+			"q": "tuytuye",
+			"expected": [
+				{
+					"slug": "2024-nakagawa-ainugo-kobunten-comprehensive-grammar-ainu",
+					"page": 150
+				}
+			]
+		},
+		{
+			"id": "gold-ja-phrase",
+			"kind": "exact",
+			"q": "小人伝説",
+			"expected": [
+				{
+					"slug": "2015-segawa-ainu-gaku-nyumon",
+					"page": 140
+				}
+			]
+		},
+		{
+			"id": "gold-ja-gloss",
+			"kind": "exact",
+			"q": "くしゃみ",
+			"expected": [
+				{
+					"slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+					"page": 100
+				}
+			]
+		},
+		{
+			"id": "gold-kana-for-latin",
+			"kind": "variant",
+			"q": "ヌㇺノヤチㇷ゚",
+			"expected": [
+				{
+					"slug": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+					"page": 120
+				}
+			]
+		},
+		{
+			"id": "gold-small-kana",
+			"kind": "variant",
+			"q": "サンケニマク",
+			"expected": [
+				{
+					"slug": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+					"page": 220
+				}
+			]
+		},
+		{
+			"id": "gold-spacing",
+			"kind": "variant",
+			"q": "kike parase inau",
+			"expected": [
+				{
+					"slug": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+					"page": 250
+				}
+			]
+		},
+		{
+			"id": "gold-historical-kana",
+			"kind": "variant",
+			"q": "オオバコ",
+			"expected": [
+				{
+					"slug": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+					"page": 120
+				}
+			]
+		},
+		{
+			"id": "gold-ocr-split",
+			"kind": "variant",
+			"q": "plantain",
+			"expected": [
+				{
+					"slug": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+					"page": 120
+				}
+			]
+		},
+		{
+			"id": "gold-hiragana-gloss",
+			"kind": "variant",
+			"q": "驚く",
+			"expected": [
+				{
+					"slug": "1938-batchelor-ainu-english-japanese-dictionary-4ed",
+					"page": 120
+				}
+			]
+		},
+		{
+			"id": "gold-ja-concept",
+			"kind": "crosslingual",
+			"q": "クマの毛皮の交易",
+			"expected": [
+				{
+					"slug": "2015-segawa-ainu-gaku-nyumon",
+					"page": 80
+				}
+			]
+		},
+		{
+			"id": "gold-en-to-ja",
+			"kind": "crosslingual",
+			"q": "bear fur trade ancient Japan",
+			"expected": [
+				{
+					"slug": "2015-segawa-ainu-gaku-nyumon",
+					"page": 80
+				}
+			]
+		},
+		{
+			"id": "gold-ja-to-ru",
+			"kind": "crosslingual",
+			"q": "アイヌ語の数詞 七",
+			"expected": [
+				{
+					"slug": "1875-dobrotvorsky-ainu-russian-dictionary",
+					"page": 100
+				}
+			]
+		},
+		{
+			"id": "gold-grammar-concept",
+			"kind": "crosslingual",
+			"q": "動詞の重複 反復",
+			"expected": [
+				{
+					"slug": "2024-nakagawa-ainugo-kobunten-comprehensive-grammar-ainu",
+					"page": 150
+				}
+			]
+		}
+	],
+	"similar_queries": [
+		{
+			"id": "parallel-person-definition",
+			"reference": "shibatani-person",
+			"expected": [
+				"ptaszynski-person"
+			]
+		}
+	]
 }
