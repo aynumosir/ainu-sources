@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import {
-	cacheKeyUrl,
 	handleEdgeCache,
 	hasSessionCookie,
 	isCacheablePath,
@@ -151,7 +150,7 @@ describe('handleEdgeCache', () => {
 		const first = await runWith('https://db.aynu.org/sources/x');
 		expect(first.resolved).toBe(1);
 		expect(first.cache.store.size).toBe(1);
-		expect(first.response.headers.get('cache-control')).toContain('s-maxage=300');
+		expect(first.response.headers.get('cache-control')).toBe('public, max-age=300');
 		expect(first.response.headers.get('vary')).toContain('Cookie');
 		await expect(first.response.text()).resolves.toBe('page');
 	});
@@ -190,40 +189,55 @@ describe('handleEdgeCache', () => {
 	});
 });
 
-describe('cacheKeyUrl', () => {
-	const key = (url: string, headers?: Record<string, string>) =>
-		cacheKeyUrl(new Request(url, { headers }), new URL(url));
+describe('the cache key', () => {
+	const keyOf = async (url: string, headers?: Record<string, string>) => {
+		const store = new Map<string, Response>();
+		const waited: Promise<unknown>[] = [];
+		await handleEdgeCache({
+			event: {
+				request: new Request(url, { method: 'GET', headers }),
+				url: new URL(url),
+				platform: {
+					caches: {
+						default: {
+							match: async (key: Request) => store.get(key.url)?.clone(),
+							put: async (key: Request, response: Response) => void store.set(key.url, response)
+						}
+					},
+					ctx: { waitUntil: (p: Promise<unknown>) => waited.push(p) }
+				}
+			},
+			resolve: async () => new Response('page', { status: 200 })
+		} as never);
+		await Promise.all(waited);
+		return [...store.keys()];
+	};
 
-	it('keys a locale-prefixed path on the URL, since the path fixes the language', () => {
-		expect(key('https://db.aynu.org/ja/sources/x')).toBe('https://db.aynu.org/ja/sources/x');
-		expect(key('https://db.aynu.org/ja/sources/x', { 'accept-language': 'en' })).toBe(
+	it('keys on the URL alone, since the path is what fixes the language', async () => {
+		await expect(keyOf('https://db.aynu.org/ja/sources/x')).resolves.toEqual([
 			'https://db.aynu.org/ja/sources/x'
-		);
+		]);
 	});
 
-	it('separates visitors whose language differs on an unprefixed path', () => {
-		// /sources renders per Accept-Language, so these two must not share an entry.
-		const en = key('https://db.aynu.org/sources/x', { 'accept-language': 'en-US,en' });
-		const ja = key('https://db.aynu.org/sources/x', { 'accept-language': 'ja-JP,ja' });
-		expect(en).not.toBe(ja);
+	it('shares one entry across visitors whose Accept-Language differs', async () => {
+		// Every URL matches one of paraglide's urlPatterns and `en` is the unprefixed
+		// one, so `url` resolves the locale before `preferredLanguage` is reached and
+		// /sources/x is English for all of them. Splitting on the header would shard
+		// the cache per browser and never hit.
+		const en = await keyOf('https://db.aynu.org/sources/x', { 'accept-language': 'en-US,en' });
+		const ja = await keyOf('https://db.aynu.org/sources/x', { 'accept-language': 'ja-JP,ja' });
+		expect(en).toEqual(ja);
 	});
 
-	it('separates visitors whose locale cookie differs', () => {
-		const a = key('https://db.aynu.org/sources/x', { cookie: 'PARAGLIDE_LOCALE=ja' });
-		const b = key('https://db.aynu.org/sources/x', { cookie: 'PARAGLIDE_LOCALE=ru' });
-		expect(a).not.toBe(b);
+	it('shares one entry across visitors whose locale cookie differs', async () => {
+		const a = await keyOf('https://db.aynu.org/sources/x', { cookie: 'PARAGLIDE_LOCALE=ja' });
+		const b = await keyOf('https://db.aynu.org/sources/x', { cookie: 'PARAGLIDE_LOCALE=ru' });
+		expect(a).toEqual(b);
 	});
 
-	it('shares one entry between visitors asking identically', () => {
-		const headers = { 'accept-language': 'en-US,en', cookie: 'theme=dark' };
-		expect(key('https://db.aynu.org/sources/x', headers)).toBe(
-			key('https://db.aynu.org/sources/x', headers)
-		);
-	});
-
-	it('keeps query strings apart', () => {
-		expect(key('https://db.aynu.org/sources?types=book')).not.toBe(
-			key('https://db.aynu.org/sources?types=article')
-		);
+	it('keeps query strings apart', async () => {
+		const book = await keyOf('https://db.aynu.org/sources?types=book');
+		const article = await keyOf('https://db.aynu.org/sources?types=article');
+		expect(book).not.toEqual(article);
 	});
 });

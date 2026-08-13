@@ -70,28 +70,6 @@ export function isCacheableRequest(request: Request, url: URL): boolean {
 }
 
 /**
- * The cache key.
- *
- * The URL alone is not enough. Paraglide resolves the locale by
- * `['url', 'cookie', 'preferredLanguage', 'baseLocale']`, so a path carrying a
- * locale prefix renders one way for everyone — but `/sources` renders in whichever
- * language the visitor's locale cookie or `Accept-Language` asks for. Keying those
- * on the URL would hand a Japanese page to an English reader.
- *
- * A prefixed path therefore keys on the URL; an unprefixed one folds in the two
- * headers that decide its language, verbatim, so identical inputs share an entry and
- * differing ones cannot collide. Prefixed URLs are the common case and stay dense.
- */
-export function cacheKeyUrl(request: Request, url: URL): string {
-	if (LOCALE_PREFIX.test(url.pathname)) return url.toString();
-	const cookie = /(?:^|;\s*)PARAGLIDE_LOCALE=([^;]*)/u.exec(request.headers.get('cookie') ?? '')?.[1] ?? '';
-	const accept = request.headers.get('accept-language') ?? '';
-	const key = new URL(url.toString());
-	key.searchParams.set('__locale', `${cookie}|${accept}`);
-	return key.toString();
-}
-
-/**
  * The two methods used here. `caches.default` is a Workers extension that the DOM's
  * `CacheStorage` does not declare, so the surface is named rather than depending on
  * ambient Workers types being in scope.
@@ -112,7 +90,12 @@ export const handleEdgeCache: Handle = async ({ event, resolve }) => {
 	const cache = edgeCache(event.platform);
 	if (!cache) return resolve(event);
 
-	const key = new Request(cacheKeyUrl(event.request, event.url), { method: 'GET' });
+	// The URL is the whole key. Locale comes from the path and nothing else: every URL
+	// matches one of paraglide's `urlPatterns`, with `en` mapped to the unprefixed form,
+	// so the `url` strategy always resolves before `cookie` or `preferredLanguage` is
+	// consulted. `/sources` renders English for every visitor whatever their
+	// `Accept-Language` or `PARAGLIDE_LOCALE` says.
+	const key = new Request(event.url.toString(), { method: 'GET' });
 	const hit = await cache.match(key);
 	if (hit) return hit;
 
@@ -120,9 +103,15 @@ export const handleEdgeCache: Handle = async ({ event, resolve }) => {
 	if (response.status !== 200) return response;
 
 	const cacheable = new Response(response.body, response);
-	cacheable.headers.set('cache-control', `public, max-age=0, s-maxage=${EDGE_TTL_SECONDS}`);
-	// A shared cache in front of this must not hand an anonymous copy to a signed-in
-	// reader; the guard above already routes them past, and this says so out loud.
+	// `max-age=0` reads as "do not store" to the Cache API, and `put()` resolves to
+	// undefined whether or not it stored, so asking for it that way discarded every
+	// entry in silence and made this whole path a per-request cost with no hit.
+	cacheable.headers.set('cache-control', `public, max-age=${EDGE_TTL_SECONDS}`);
+	// Load-bearing, not decoration. The adapter's own worker entry stores any response
+	// carrying `cache-control` into `caches.default` under the bare request, and reads
+	// that store before this hook runs. Without `Vary: Cookie` a signed-in reader's
+	// request would match the anonymous entry there and be served a page that reports
+	// no archive access — the guard at the top of this hook never gets to see it.
 	cacheable.headers.append('vary', 'Cookie');
 	event.platform?.ctx?.waitUntil(cache.put(key, cacheable.clone()));
 	return cacheable;
