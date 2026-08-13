@@ -89,8 +89,11 @@
 		{#if s.author}<p class="mt-2 text-stone-700">{s.author}</p>{/if}
 
 		<div class="mt-4 flex flex-wrap items-center gap-2 text-sm">
+			<!-- Signed out, this answers with a redirect to a sign-in URL carrying the
+			     path, so following it earns a crawler one dead login URL per source. -->
 			<a
 				href={localizeHref(`/sources/${s.slug}/edit`)}
+				rel="nofollow"
 				class="rounded-md bg-brand-700 px-3 py-1.5 font-medium text-white hover:bg-brand-800"
 				>{m.source_edit()}</a
 			>
