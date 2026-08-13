@@ -63,7 +63,7 @@
 	{#if view}<input type="hidden" name="view" value={view} />{/if}
 	<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_0.8fr_0.9fr_auto] lg:items-end">
 		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
-			<BilingualLabel ja="本文検索" en="Text" />
+			<BilingualLabel ja="キーワード" en="Keyword" />
 			<input name="q" value={filters.text ?? ''} class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]" />
 		</label>
 		<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
