@@ -62,6 +62,7 @@ export const archiveLabels = {
 	underConstruction: { ja: 'このセクションは準備中です', en: 'This section is under construction.' },
 	loadMore: { ja: 'さらに表示', en: 'Load more' },
 	loading: { ja: '読み込み中', en: 'Loading' },
+	contents: { ja: '目次', en: 'Contents' },
 	readPage: { ja: 'ページを閲覧', en: 'Read page' },
 	noWorks: { ja: '該当する資料がありません', en: 'no works match these filters' },
 	noHits: { ja: '該当する資料がありません', en: 'no text matches this search' },

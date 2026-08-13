@@ -183,6 +183,13 @@
       "when": 1786546459201,
       "tag": "0025_one_file_per_work_role",
       "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "6",
+      "when": 1786624085674,
+      "tag": "0026_archive_revision_sections",
+      "breakpoints": true
     }
   ]
 }

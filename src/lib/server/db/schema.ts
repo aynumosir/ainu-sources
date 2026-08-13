@@ -1128,6 +1128,40 @@ export const revisionPageFolios = sqliteTable(
 	]
 );
 
+/**
+ * The table of contents of one scan: ordered sections with scan-page ranges.
+ * Structure belongs to a revision, since chapter boundaries sit at scan
+ * positions of one particular digitisation. `pageEnd` may be null when a
+ * section runs to the next section's start (or the end of the work).
+ */
+export const revisionSections = sqliteTable(
+	'revision_sections',
+	{
+		id: text('id').primaryKey().$defaultFn(uuid),
+		revisionId: text('revision_id')
+			.notNull()
+			.references(() => fileRevisions.id, { onDelete: 'cascade' }),
+		/** Reading order across the whole revision, 0-based. */
+		ord: integer('ord').notNull(),
+		/** 1 = top-level chapter; deeper levels nest by order. */
+		depth: integer('depth').notNull().default(1),
+		title: text('title').notNull(),
+		titleEn: text('title_en'),
+		pageStart: integer('page_start').notNull(),
+		pageEnd: integer('page_end'),
+		/** toc = parsed from a printed contents page; headings = detected in the page stream; curated = entered or corrected by hand. */
+		origin: text('origin').notNull().default('curated'),
+		confidence: real('confidence'),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [
+		uniqueIndex('revision_sections_order_idx').on(t.revisionId, t.ord),
+		check('revision_sections_page_check', sql`${t.pageStart} >= 1`),
+		check('revision_sections_depth_check', sql`${t.depth} >= 1`),
+		check('revision_sections_origin_check', sql`${t.origin} in ('toc', 'headings', 'curated')`)
+	]
+);
+
 export const ocrIngestState = sqliteTable(
 	'ocr_ingest_state',
 	{
