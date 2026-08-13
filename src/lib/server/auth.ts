@@ -48,3 +48,19 @@ export const auth: Auth = new Proxy({} as Auth, {
 		return typeof value === 'function' ? (value as (...a: unknown[]) => unknown).bind(instance) : value;
 	}
 });
+
+/**
+ * Settle the shared `$context` promise better-auth creates the moment the
+ * instance is first touched — the promise every API call awaits, owned by
+ * whichever caller triggers construction. On Cloudflare Workers a promise
+ * chain owned by a finished request has its continuations canceled (the hang
+ * documented in `$lib/server/db`); construction on the installed versions
+ * performs no I/O and settles within its own microtask drain, so the server
+ * `init` hook calling this at isolate startup is what keeps that true when a
+ * future better-auth version awaits real I/O during init. `$context` is an
+ * undocumented `$`-prefixed field, so the access lives here beside the proxy
+ * it reaches through.
+ */
+export async function settleAuthContext(): Promise<void> {
+	await auth.$context;
+}
