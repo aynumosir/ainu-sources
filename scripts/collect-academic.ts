@@ -347,6 +347,16 @@ export async function writeCitationEdges(): Promise<number> {
 	const oaIds = recs.filter((r) => r.source === 'openalex').map((r) => r.externalId);
 	console.log(`Building citation graph from ${oaIds.length} OpenAlex works in the index…`);
 	const edges = await collectCitationEdges(oaIds);
+	// The graph derives from an append-only index, so it only legitimately grows
+	// or holds roughly steady. An empty or sharply smaller result means OpenAlex
+	// failed part-way (e.g. its daily budget ran out) — keep the committed graph.
+	const existing: unknown[] = fs.existsSync(EDGES_FILE) ? JSON.parse(fs.readFileSync(EDGES_FILE, 'utf8')) : [];
+	if (existing.length > edges.length && (edges.length === 0 || edges.length < existing.length / 2)) {
+		console.warn(
+			`  ! citation graph came back with ${edges.length} edges (have ${existing.length}) — keeping the existing file`
+		);
+		return existing.length;
+	}
 	fs.writeFileSync(EDGES_FILE, JSON.stringify(edges, null, 2));
 	console.log(`Wrote ${edges.length} citation edges → ${path.relative(process.cwd(), EDGES_FILE)}`);
 	return edges.length;
@@ -652,10 +662,13 @@ export async function collectCyberLeninka(): Promise<AcademicRecord[]> {
 			if (!arts.length) break;
 			for (const a of arts) {
 				const title = String(a.name ?? '').replace(/<\/?b>/g, '').trim();
-				// Drop Tajik titles: Tajik-only Cyrillic (Ҳ/Ӣ/Ӯ/Ҷ/Ғ/Қ) or таджик — they
-				// slip in via "Айнӣ" (Sadriddin Aini, the Tajik writer) matching "айн".
+				// Drop Tajik titles: Tajik-only Cyrillic (Ҳ/Ӣ/Ӯ/Ҷ/Ғ/Қ) or таджик —
+				// Sadriddin Aini's "Айнӣ" otherwise slips in.
 				if (!title || /[ҲҳӢӣӮӯҶҷҒғҚқ]|таджик/i.test(title)) continue;
-				if (!/айн/i.test(title)) continue;
+				// Match the ethnonym as a word stem (айнский/айны/айнов/айну/…),
+				// never a bare substring: /айн/ also lives inside тайна, случайный,
+				// Айн Рэнд, об Айне, and Aini's russified Айни.
+				if (!/(?<![а-яёa-z])айн(ск|ов|ы|у|ам|ами|ах)/i.test(title)) continue;
 				// Require a language/linguistics/folklore marker — the broad queries
 				// otherwise admit Ainu material-culture papers (айнского меча…).
 				if (!/язык|лингв|лексик|топоним|фольклор|диалект|граммати|фонетик|фонолог|словар|речь|\bтекст|устн|сказани|эпос|глагол|морфолог|синтакс|письмен|наречи|говор|перевод/i.test(title))
@@ -1978,35 +1991,74 @@ export async function refresh(): Promise<void> {
 	await main();
 	const fresh: AcademicRecord[] = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
 
-	const isLink = (r: AcademicRecord) => Boolean(r.links?.length || r.pdf);
+	// Reconcile fresh against existing, record identity first. A fresh record
+	// that collides with an existing one (same DOI, else same normalized title):
+	//   - same source            → fresh supersedes (upstream update, id rotation)
+	//   - existing has no DOI,
+	//     fresh does             → fresh supersedes (a DOI record never loses a
+	//                              title collision to a DOI-less duplicate)
+	//   - otherwise              → the existing record keeps its identity — its
+	//                              externalId anchors citation edges and stable
+	//                              source identifiers (e.g. OpenAlex W-ids must
+	//                              not be displaced by a Crossref twin of the
+	//                              same work when OpenAlex is rate-limited)
+	// Whichever side wins, an open-access pdf/url only the loser had is grafted
+	// onto the winner. Link-bearing records (typed links[]: Honkoku, Kokusho,
+	// IA witnesses) live outside this: they are keyed source+externalId, fresh
+	// copy replacing old, and never collapse by DOI/title — the importer grafts
+	// them onto the matching original instead.
+	const isLink = (r: AcademicRecord) => Boolean(r.links?.length);
 	const linkKey = (r: AcademicRecord) => `${r.source}\t${r.externalId}`;
-	const seenLink = new Set<string>();
-	const seenDoi = new Set<string>();
-	const seenTitle = new Set<string>();
-	const union: AcademicRecord[] = [];
-	const ordered = [
-		...fresh.filter(isLink),
-		...before.filter(isLink),
-		...fresh.filter((r) => !isLink(r) && r.doi),
-		...before.filter((r) => !isLink(r) && r.doi),
-		...fresh.filter((r) => !isLink(r) && !r.doi),
-		...before.filter((r) => !isLink(r) && !r.doi)
-	];
-	for (const r of ordered) {
-		if (isLink(r)) {
-			const k = linkKey(r);
-			if (seenLink.has(k)) continue;
-			seenLink.add(k);
-			union.push(r);
+	const graft = (winner: AcademicRecord, loser: AcademicRecord) => {
+		if (loser.pdf && !winner.pdf) winner.pdf = loser.pdf;
+		if (loser.url && !winner.url) winner.url = loser.url;
+	};
+
+	const oldByDoi = new Map<string, AcademicRecord>();
+	const oldByTitle = new Map<string, AcademicRecord>();
+	for (const r of before) {
+		if (isLink(r)) continue;
+		if (r.doi && !oldByDoi.has(r.doi.toLowerCase())) oldByDoi.set(r.doi.toLowerCase(), r);
+		const t = normTitle(r.title);
+		if (t && !oldByTitle.has(t)) oldByTitle.set(t, r);
+	}
+
+	const winnerFor = new Map<AcademicRecord, AcademicRecord>(); // old record → its resolved form
+	const freshLinks = new Map<string, AcademicRecord>();
+	const additions: AcademicRecord[] = [];
+	for (const f of fresh) {
+		if (isLink(f)) {
+			freshLinks.set(linkKey(f), f);
 			continue;
 		}
-		const d = r.doi?.toLowerCase() ?? null;
-		const t = normTitle(r.title);
-		if ((d && seenDoi.has(d)) || (t && seenTitle.has(t))) continue;
-		if (d) seenDoi.add(d);
-		if (t) seenTitle.add(t);
-		union.push(r);
+		const hit =
+			(f.doi && oldByDoi.get(f.doi.toLowerCase())) || oldByTitle.get(normTitle(f.title)) || null;
+		if (!hit) {
+			additions.push(f);
+			continue;
+		}
+		const winner = winnerFor.get(hit) ?? hit;
+		if (winner === hit && (hit.source === f.source || (!hit.doi && f.doi))) {
+			graft(f, hit);
+			winnerFor.set(hit, f);
+		} else {
+			graft(winner, f);
+		}
 	}
+
+	const union: AcademicRecord[] = [];
+	const usedLinkKeys = new Set<string>();
+	for (const r of before) {
+		if (isLink(r)) {
+			const k = linkKey(r);
+			usedLinkKeys.add(k);
+			union.push(freshLinks.get(k) ?? r);
+		} else {
+			union.push(winnerFor.get(r) ?? r);
+		}
+	}
+	for (const [k, r] of freshLinks) if (!usedLinkKeys.has(k)) union.push(r);
+	union.push(...additions);
 	fs.writeFileSync(OUT_FILE, JSON.stringify(union, null, 2));
 	console.log(`\nUnion: fresh ${fresh.length} ∪ existing ${before.length} → ${union.length}\n`);
 
