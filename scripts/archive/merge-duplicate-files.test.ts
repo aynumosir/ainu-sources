@@ -113,6 +113,45 @@ async function insertChunks(
 	}
 }
 
+/** The same scan, held a second time by the dataset extracted from that book. */
+async function secondRecordClaimingTheSameScan() {
+	await mergeDuplicateFiles(db, { apply: true });   // collapse the two-repository pair first
+	await db.insert(schema.sources).values({
+		id: 'dataset',
+		slug: 'work-one-comparison',
+		title: 'Work One, comparison table',
+		type: 'comparative-wordlist',
+		humanDownload: true
+	});
+	await db.insert(schema.sourceFiles).values({ id: 'dataset-scan', sourceId: 'dataset', role: 'scan' });
+	await db.insert(schema.archiveRepositories).values({ id: 'repo-c', name: 'repo-c' });
+	await db.insert(schema.fileCheckouts).values({
+		id: 'co-dataset',
+		sourceFileId: 'dataset-scan',
+		repoId: 'repo-c',
+		path: 'dataset/source.pdf'
+	});
+	await db.insert(schema.fileRevisions).values({
+		id: 'rev-dataset',
+		sourceFileId: 'dataset-scan',
+		revisionNo: 1,
+		blobSha256: 'a'.repeat(64),
+		originalFilename: 'source.pdf',
+		declaredMediaType: 'application/pdf',
+		artifactKind: 'original',
+		isCurrent: true,
+		submittedBy: 'u1'
+	});
+	await db.insert(schema.ocrIngestState).values({
+		revisionId: 'rev-dataset',
+		variant: 'gemini',
+		contentHash: 'd'.repeat(64),
+		pageCount: 1,
+		activeGeneration: 'gen-dataset'
+	});
+	await insertChunks('rev-dataset', 'gen-dataset', [{ page: 1, block: 0, text: 'held twice' }]);
+}
+
 describe('mergeDuplicateFiles', () => {
 	it('reports the plan and writes nothing without --apply', async () => {
 		const summary = await mergeDuplicateFiles(db, { apply: false });
@@ -163,6 +202,28 @@ describe('mergeDuplicateFiles', () => {
 			select count(*) as n from ocr_chunks_fts where ocr_chunks_fts match 'kamuy'
 		`);
 		expect(Number(hits[0].n)).toBe(1);
+	});
+
+	it('leaves a scan two records both claim alone until one is named', async () => {
+		await secondRecordClaimingTheSameScan();
+
+		const summary = await mergeDuplicateFiles(db, { apply: true });
+
+		expect(summary).toMatchObject({ groups: 0, filesRemoved: 0 });
+		const files = await db.select().from(schema.sourceFiles);
+		expect(files.map((file) => file.sourceId).sort()).toEqual(['dataset', 'src']);
+	});
+
+	it('gives the scan to the record named by --adopt and moves the richer text under it', async () => {
+		await secondRecordClaimingTheSameScan();
+
+		await mergeDuplicateFiles(db, { apply: true, adopt: ['work-one'] });
+
+		const files = await db.select().from(schema.sourceFiles);
+		expect(files).toHaveLength(1);
+		expect(files[0]).toMatchObject({ id: 'rich', sourceId: 'src' });
+		const checkouts = await db.select().from(schema.fileCheckouts).orderBy(schema.fileCheckouts.path);
+		expect(checkouts.map((row) => row.path)).toEqual(['a/source.pdf', 'books/source.pdf', 'dataset/source.pdf']);
 	});
 
 	it('refuses a group where either side carries human page edits', async () => {

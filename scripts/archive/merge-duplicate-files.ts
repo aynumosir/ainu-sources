@@ -16,6 +16,11 @@
  * A group where either side carries human page edits is reported and left
  * alone: choosing between two hand-corrected texts is not a script's decision.
  *
+ * The same scan can also sit under two catalogue records — a book and the
+ * dataset extracted from it, each holding the whole PDF. Which record the scan
+ * belongs to is a bibliographic judgement, so those are reported and left alone
+ * until `--adopt <slug>` names the record that keeps it.
+ *
  * Connection: DATABASE_URL (+ DATABASE_AUTH_TOKEN for remote), or --db/--token.
  * Writes nothing without --apply.
  */
@@ -48,7 +53,10 @@ export interface MergeSummary {
 	chunksRemoved: number;
 }
 
-export async function mergeDuplicateFiles(db: Db, opts: { apply: boolean }): Promise<MergeSummary> {
+export async function mergeDuplicateFiles(
+	db: Db,
+	opts: { apply: boolean; adopt?: string[] }
+): Promise<MergeSummary> {
 	const summary: MergeSummary = {
 		groups: 0,
 		merged: 0,
@@ -58,7 +66,7 @@ export async function mergeDuplicateFiles(db: Db, opts: { apply: boolean }): Pro
 		filesRemoved: 0,
 		chunksRemoved: 0
 	};
-	for (const group of await findGroups(db)) {
+	for (const group of [...(await findGroups(db)), ...(await findSharedBlobGroups(db, opts.adopt ?? []))]) {
 		summary.groups += 1;
 		const [keep, ...drop] = group.files;
 		const header = `${group.slug} [${group.role}${group.label ? ` ${group.label}` : ''}]`;
@@ -79,15 +87,77 @@ export async function mergeDuplicateFiles(db: Db, opts: { apply: boolean }): Pro
 			for (const path of moved.collided) console.log(`    checkout dropped (repo already holds this file): ${path}`);
 			if (opts.apply) {
 				summary.chunksRemoved += await removeFile(db, loser);
-				await refreshSourceTextComposition(db, group.sourceId, new Date());
+				await refreshSourceTextComposition(db, loser.sourceId, new Date());
 			} else {
 				summary.chunksRemoved += loser.chunks;
 			}
 			summary.filesRemoved += 1;
 		}
+		if (opts.apply && keep.sourceId !== group.sourceId) {
+			// The richest text sat under the record giving the scan up, so the file
+			// itself moves to the record that keeps it.
+			await db.run(sql`update source_files set source_id = ${group.sourceId} where id = ${keep.fileId}`);
+		}
+		if (opts.apply) await refreshSourceTextComposition(db, group.sourceId, new Date());
 		summary.merged += 1;
 	}
 	return summary;
+}
+
+/**
+ * One blob held as the current revision of files under different records. A
+ * book and a dataset extracted from it are separate works, so nothing here can
+ * decide which of them the scan belongs to — `--adopt <slug>` says.
+ */
+async function findSharedBlobGroups(db: Db, adopt: string[]): Promise<Group[]> {
+	const rows = (await db.all(sql`
+		select
+			sf.id as fileId, sf.source_id as sourceId, s.slug as slug, sf.role as role,
+			coalesce(sf.label, '') as label, fr.id as revisionId, fr.blob_sha256 as blob,
+			(select count(*) from ocr_chunks oc where oc.revision_id = fr.id) as chunks,
+			(select count(*) from revision_page_folios f where f.revision_id = fr.id) as folios,
+			(select count(*) from ocr_page_edits e where e.revision_id = fr.id)
+				+ (select count(*) from ocr_page_state st where st.revision_id = fr.id) as edits
+		from source_files sf
+		join sources s on s.id = sf.source_id
+		join file_revisions fr on fr.source_file_id = sf.id and fr.is_current = 1
+		where fr.blob_sha256 in (
+			select fr2.blob_sha256 from file_revisions fr2
+			join source_files sf2 on sf2.id = fr2.source_file_id
+			where fr2.is_current = 1
+			group by fr2.blob_sha256
+			having count(distinct sf2.source_id) > 1
+		)
+		order by fr.blob_sha256, chunks desc, folios desc, sf.id asc
+	`)) as unknown as Array<FileRow & { blob: string }>;
+	const byBlob = new Map<string, Array<FileRow & { blob: string }>>();
+	for (const row of rows) {
+		const group = byBlob.get(row.blob) ?? [];
+		group.push({ ...row, chunks: Number(row.chunks), folios: Number(row.folios), edits: Number(row.edits) });
+		byBlob.set(row.blob, group);
+	}
+	const groups: Group[] = [];
+	for (const [blob, files] of byBlob) {
+		const held = files.map((file) => file.slug);
+		const chosen = files.find((file) => adopt.includes(file.slug));
+		if (!chosen) {
+			console.log(
+				`one scan under ${held.length} records: ${held.join(', ')} (blob ${blob.slice(0, 12)})\n` +
+					`  left alone — name the record that keeps it with --adopt <slug>`
+			);
+			continue;
+		}
+		// The richest text still wins, as everywhere else here; adoption decides
+		// which record it ends up under, and the file moves there if it has to.
+		groups.push({
+			slug: chosen.slug,
+			sourceId: chosen.sourceId,
+			role: chosen.role,
+			label: chosen.label,
+			files: [...files].sort((a, b) => b.chunks - a.chunks || b.folios - a.folios || (a.fileId < b.fileId ? -1 : 1))
+		});
+	}
+	return groups;
 }
 
 async function findGroups(db: Db): Promise<Group[]> {
@@ -255,7 +325,10 @@ async function removeFile(db: Db, file: FileRow): Promise<number> {
 if (import.meta.main) {
 	const { db } = parseImporterCli();
 	const apply = process.argv.includes('--apply');
-	mergeDuplicateFiles(db, { apply })
+	const adopt = process.argv.flatMap((arg, i) =>
+		arg === '--adopt' ? [process.argv[i + 1]] : arg.startsWith('--adopt=') ? [arg.slice('--adopt='.length)] : []
+	).filter(Boolean);
+	mergeDuplicateFiles(db, { apply, adopt })
 		.then((summary) => {
 			console.log(
 				`\n${apply ? 'merged' : 'would merge'}: groups=${summary.groups} merged=${summary.merged} skipped=${summary.skipped} ` +
