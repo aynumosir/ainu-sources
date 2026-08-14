@@ -18,9 +18,15 @@ export const load: PageServerLoad = async ({ request, params, url }) => {
 		if (sourceFile.sourceSlug !== params.slug) error(404, 'file not found for source');
 		if (!sourceFile.currentRevisionId) error(404, 'file has no current revision');
 
-		const revision = await getRevision(db, sourceFile.currentRevisionId, principal);
-		const detail = await getSourceDetail(params.slug);
-		const siblings = await listSourceFiles(db, params.slug, principal);
+		// The work's bibliography and its sibling files key off the slug alone, so
+		// they travel with the revision lookup rather than behind it. The table of
+		// contents waits for `getRevision`, which is where a principal's access to
+		// this revision is decided — one hop for the gate, one for what it opens.
+		const [revision, detail, siblings] = await Promise.all([
+			getRevision(db, sourceFile.currentRevisionId, principal),
+			getSourceDetail(params.slug),
+			listSourceFiles(db, params.slug, principal)
+		]);
 		const sections = await loadRevisionSections(revision.id);
 		const files = uniqueFiles(siblings).map((file) => ({
 			fileId: file.fileId,
