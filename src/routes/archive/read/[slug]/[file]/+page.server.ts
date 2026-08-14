@@ -4,6 +4,7 @@ import { db } from '$lib/server/db';
 import { resolveArchivePrincipal } from '$lib/server/archive/authz';
 import { getRevision, getSourceFileById, listSourceFiles } from '$lib/server/archive/db';
 import { ArchiveHttpError } from '$lib/server/archive/errors';
+import { loadRevisionSections } from '$lib/server/archive/sections';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
 import { getSourceDetail } from '$lib/server/queries';
 
@@ -20,6 +21,7 @@ export const load: PageServerLoad = async ({ request, params, url }) => {
 		const revision = await getRevision(db, sourceFile.currentRevisionId, principal);
 		const detail = await getSourceDetail(params.slug);
 		const siblings = await listSourceFiles(db, params.slug, principal);
+		const sections = await loadRevisionSections(revision.id);
 		const files = uniqueFiles(siblings).map((file) => ({
 			fileId: file.fileId,
 			role: file.role,
@@ -82,6 +84,7 @@ export const load: PageServerLoad = async ({ request, params, url }) => {
 				detectedMediaType: revision.detectedMediaType
 			},
 			files,
+			sections,
 			initialPage
 		};
 	} catch (e) {

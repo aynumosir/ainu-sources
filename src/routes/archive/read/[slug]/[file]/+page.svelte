@@ -49,6 +49,17 @@
 	const imageCache = new Map<string, string>();
 
 	const pageCount = $derived(data.revision?.pageCount ?? 1);
+	const sections = $derived((data.sections ?? []) as Array<{ ord: number; depth: number; title: string; pageStart: number }>);
+	// The section the open page falls in: the last one starting at or before
+	// it. Keeps the contents dropdown following along as the reader pages.
+	const currentSectionOrd = $derived.by(() => {
+		let current: number | '' = '';
+		for (const section of sections) {
+			if (section.pageStart <= currentPage) current = section.ord;
+			else break;
+		}
+		return current;
+	});
 	const storageKey = $derived(`archive-reader:${data.file?.fileId ?? 'unknown'}`);
 	const sourceHref = $derived(`/archive/sources/${data.source?.slug ?? data.slug}`);
 	const pageHref = $derived(`/archive/read/${data.source?.slug ?? data.slug}/${data.file?.fileId ?? data.file}?p=${currentPage}`);
@@ -155,6 +166,12 @@
 
 	function jumpToField(): void {
 		currentPage = clampPage(Number(pageField) || currentPage);
+	}
+
+	function jumpToSection(value: string): void {
+		if (value === '') return;
+		const section = sections.find((candidate) => candidate.ord === Number(value));
+		if (section) currentPage = clampPage(section.pageStart);
 	}
 
 	function setMode(nextMode: Mode): void {
@@ -493,6 +510,19 @@
 					/>
 					<span class="tnum text-[13px] text-[var(--archive-subtle)]">/ {pageCount}</span>
 				</form>
+				{#if sections.length}
+					<select
+						value={currentSectionOrd}
+						onchange={(event) => jumpToSection(event.currentTarget.value)}
+						aria-label={bilingualAriaLabel(archiveLabels.contents)}
+						class="h-8 max-w-[16rem] border border-[var(--archive-border)] bg-[var(--archive-panel)] px-2 text-[13px] text-[var(--archive-text)]"
+					>
+						<option value="">目次 Contents</option>
+						{#each sections as section (section.ord)}
+							<option value={section.ord}>{'　'.repeat(section.depth - 1)}{section.title} · p.{section.pageStart}</option>
+						{/each}
+					</select>
+				{/if}
 				<div class="flex border border-[var(--archive-border)] text-[13px]">
 					<button
 						type="button"

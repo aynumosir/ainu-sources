@@ -33,6 +33,7 @@
 		"archive:check": "bun scripts/archive/check-invariants.ts",
 		"archive:verify-approved": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/verify-approved.ts",
 		"archive:search-eval": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/search-eval.ts",
+		"archive:ingest-sections": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/ingest-sections.ts",
 		"audit": "bun scripts/audit.ts",
 		"reslug": "bun scripts/apply-reslug.ts",
 		"review:proposals": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/review-proposals.ts",
