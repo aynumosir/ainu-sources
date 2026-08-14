@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "40346caf-1876-4475-8917-ded80dfb2bd1",
+  "id": "23a817f4-7d13-45f4-962f-4884f319e349",
   "prevId": "98a9d368-063a-478e-88c5-b09df812062e",
   "tables": {
     "app_user_roles": {
@@ -2827,6 +2827,10 @@
         "revision_sections_page_check": {
           "name": "revision_sections_page_check",
           "value": "\"revision_sections\".\"page_start\" >= 1"
+        },
+        "revision_sections_page_range_check": {
+          "name": "revision_sections_page_range_check",
+          "value": "\"revision_sections\".\"page_end\" is null or \"revision_sections\".\"page_end\" >= \"revision_sections\".\"page_start\""
         },
         "revision_sections_depth_check": {
           "name": "revision_sections_depth_check",

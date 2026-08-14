@@ -60,6 +60,9 @@ export async function ingestSections(db: Db, file: SectionsFile): Promise<{ inse
 		};
 	});
 	for (const [index, row] of rows.entries()) {
+		if (row.pageEnd !== null && row.pageEnd < row.pageStart) {
+			throw new Error(`section "${row.title}" ends on page ${row.pageEnd} before it starts on page ${row.pageStart}`);
+		}
 		const previous = rows[index - 1];
 		if (previous && row.pageStart < previous.pageStart) {
 			throw new Error(`sections out of reading order: "${row.title}" starts before "${previous.title}"`);

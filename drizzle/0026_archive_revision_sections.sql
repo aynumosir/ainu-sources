@@ -12,6 +12,7 @@ CREATE TABLE `revision_sections` (
 	`created_at` integer NOT NULL,
 	FOREIGN KEY (`revision_id`) REFERENCES `file_revisions`(`id`) ON UPDATE no action ON DELETE cascade,
 	CONSTRAINT "revision_sections_page_check" CHECK("revision_sections"."page_start" >= 1),
+	CONSTRAINT "revision_sections_page_range_check" CHECK("revision_sections"."page_end" is null or "revision_sections"."page_end" >= "revision_sections"."page_start"),
 	CONSTRAINT "revision_sections_depth_check" CHECK("revision_sections"."depth" >= 1),
 	CONSTRAINT "revision_sections_origin_check" CHECK("revision_sections"."origin" in ('toc', 'headings', 'curated'))
 );

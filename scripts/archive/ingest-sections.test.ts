@@ -83,6 +83,41 @@ describe('ingest-sections', () => {
 		).rejects.toThrow(/no detected folio for printed page 55/);
 	});
 
+	it('refuses a section that ends before it starts, keeping prior sections intact', async () => {
+		await ingestSections(db, {
+			revisionId: 'rev-1',
+			pages: 'scan',
+			origin: 'curated',
+			sections: [{ title: 'Kept', pageStart: 1, pageEnd: 40 }]
+		});
+		await expect(
+			ingestSections(db, {
+				revisionId: 'rev-1',
+				pages: 'scan',
+				origin: 'curated',
+				sections: [{ title: '逆転', pageStart: 50, pageEnd: 40 }]
+			})
+		).rejects.toThrow(/ends on page 40 before it starts on page 50/);
+		const rows = await db
+			.select({ title: schema.revisionSections.title, pageEnd: schema.revisionSections.pageEnd })
+			.from(schema.revisionSections)
+			.where(eq(schema.revisionSections.revisionId, 'rev-1'));
+		expect(rows).toEqual([{ title: 'Kept', pageEnd: 40 }]);
+	});
+
+	it('rejects an inverted page range at the database as well', async () => {
+		await expect(
+			db.insert(schema.revisionSections).values({
+				revisionId: 'rev-1',
+				ord: 0,
+				title: '逆転',
+				pageStart: 50,
+				pageEnd: 40,
+				origin: 'curated'
+			})
+		).rejects.toThrow();
+	});
+
 	it('refuses sections out of reading order', async () => {
 		await expect(
 			ingestSections(db, {

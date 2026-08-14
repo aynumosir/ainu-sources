@@ -1157,6 +1157,7 @@ export const revisionSections = sqliteTable(
 	(t) => [
 		uniqueIndex('revision_sections_order_idx').on(t.revisionId, t.ord),
 		check('revision_sections_page_check', sql`${t.pageStart} >= 1`),
+		check('revision_sections_page_range_check', sql`${t.pageEnd} is null or ${t.pageEnd} >= ${t.pageStart}`),
 		check('revision_sections_depth_check', sql`${t.depth} >= 1`),
 		check('revision_sections_origin_check', sql`${t.origin} in ('toc', 'headings', 'curated')`)
 	]
