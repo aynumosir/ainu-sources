@@ -759,6 +759,7 @@ export async function collectTOGO(): Promise<AcademicRecord[]> {
 				}
 				if (!title || title.length < 2) continue;
 				if (!TOGO_LING_RE.test(`${title} ${venue ?? ''}`)) continue; // linguistics-only
+				title = matchBracketWidths(title);
 				seen.add(extId);
 				out.push({
 					source: 'togo',
@@ -1166,9 +1167,14 @@ const decodeEntities = (s: string): string =>
 		.replace(/&apos;/g, "'")
 		.replace(/&amp;/g, '&')
 		.trim();
+// Close a full-width bracket with its half-width twin (or vice versa) — an
+// upstream typo (会話I(2）, （和・アイヌ語辞典)) that leaves the pair unbalanced.
+const matchBracketWidths = (s: string): string =>
+	s.replace(/（([^（）()]*)\)/g, '（$1）').replace(/\(([^（）()]*)）/g, '（$1）');
 // Decode entities/CDATA FIRST, then strip real tags — otherwise stripTags eats
 // a whole <![CDATA[…]]> block (no '>' inside) and the text vanishes.
-const cleanText = (s: string | null | undefined): string => stripTags(decodeEntities(String(s ?? ''))).replace(/\s+/g, ' ').trim();
+const cleanText = (s: string | null | undefined): string =>
+	matchBracketWidths(stripTags(decodeEntities(String(s ?? ''))).replace(/\s+/g, ' ')).trim();
 
 // --- J-STAGE — Japanese journal & 紀要 articles (service=3, full-text) -------
 // 1,490 hits for アイヌ語; every record carries a prism:doi. Full-text search
@@ -1635,6 +1641,23 @@ export const RESEARCHMAP_PERMALINKS = [
 export async function collectResearchmap(permalinks: string[]): Promise<AcademicRecord[]> {
 	const out: AcademicRecord[] = [];
 	const seen = new Set<string>();
+	// researchmap users often paste a title fully wrapped in 「」/『』 — drop that
+	// wrapper, but only when the outer pair really encloses the whole title.
+	// Bare ^「/」$ stripping beheaded every title whose outer bracket pairs with
+	// a mid-title mate: 「タンダンヤ-アデレード宣言」 : … lost its opener,
+	// …展示解説文と「私たち」 its closer.
+	const unwrapQuotedTitle = (s: string): string => {
+		const PAIRS: Record<string, string> = { '「': '」', '『': '』' };
+		const close = PAIRS[s[0]];
+		if (!close || !s.endsWith(close) || s.length < 3) return s;
+		const inner = s.slice(1, -1);
+		let depth = 0;
+		for (const ch of inner) {
+			if (ch === s[0]) depth++;
+			else if (ch === close && --depth < 0) return s; // outer pair not a wrapper
+		}
+		return depth === 0 ? inner.trim() : s;
+	};
 	const titleOf = (it: any): { ja: string; en: string } => {
 		const t = it.paper_title ?? it.book_title ?? it.misc_title ?? it.presentation_title ?? it.title;
 		if (typeof t === 'string') return { ja: t, en: '' };
@@ -1650,7 +1673,7 @@ export async function collectResearchmap(permalinks: string[]): Promise<Academic
 			}
 			for (const it of data.items ?? []) {
 				const { ja: titleJa, en: titleEn } = titleOf(it);
-				const title = (titleJa || titleEn).replace(/^[『「]|[』」]$/g, '').trim();
+				const title = unwrapQuotedTitle((titleJa || titleEn).trim());
 				if (!title) continue;
 				// Ainu scope. These are all verified Ainu researchers, so also accept
 				// works titled 北方言語/北海道周辺言語/蝦夷 (Ainu-inclusive typology that
