@@ -1158,10 +1158,12 @@ const xmlFirst = (block: string, tag: string): string | null => {
 const decodeEntities = (s: string): string =>
 	s
 		.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+		.replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+		.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
 		.replace(/&lt;/g, '<')
 		.replace(/&gt;/g, '>')
 		.replace(/&quot;/g, '"')
-		.replace(/&#39;|&apos;/g, "'")
+		.replace(/&apos;/g, "'")
 		.replace(/&amp;/g, '&')
 		.trim();
 // Decode entities/CDATA FIRST, then strip real tags — otherwise stripTags eats
