@@ -49,7 +49,8 @@
 	const imageCache = new Map<string, string>();
 
 	const pageCount = $derived(data.revision?.pageCount ?? 1);
-	const sections = $derived((data.sections ?? []) as Array<{ ord: number; depth: number; title: string; pageStart: number }>);
+	type Section = { ord: number; depth: number; title: string; titleEn: string | null; pageStart: number };
+	const sections = $derived((data.sections ?? []) as Section[]);
 	// The section the open page falls in: the last one starting at or before
 	// it. Keeps the contents dropdown following along as the reader pages.
 	const currentSectionOrd = $derived.by(() => {
@@ -172,6 +173,15 @@
 		if (value === '') return;
 		const section = sections.find((candidate) => candidate.ord === Number(value));
 		if (section) currentPage = clampPage(section.pageStart);
+	}
+
+	// An <option> holds text, so the gloss that BilingualLabel lays out in flex
+	// is spelled out here. A section whose English title repeats the Japanese one
+	// shows it once, the rule the work's own title follows further down the page.
+	function sectionLabel(section: { title: string; titleEn: string | null }): string {
+		return section.titleEn && section.titleEn !== section.title
+			? `${section.title} ${section.titleEn}`
+			: section.title;
 	}
 
 	function setMode(nextMode: Mode): void {
@@ -517,9 +527,9 @@
 						aria-label={bilingualAriaLabel(archiveLabels.contents)}
 						class="h-8 max-w-[16rem] border border-[var(--archive-border)] bg-[var(--archive-panel)] px-2 text-[13px] text-[var(--archive-text)]"
 					>
-						<option value="">目次 Contents</option>
+						<option value="">{archiveLabels.contents.ja} {archiveLabels.contents.en}</option>
 						{#each sections as section (section.ord)}
-							<option value={section.ord}>{'　'.repeat(section.depth - 1)}{section.title} · p.{section.pageStart}</option>
+							<option value={section.ord}>{'　'.repeat(section.depth - 1)}p.{section.pageStart} · {sectionLabel(section)}</option>
 						{/each}
 					</select>
 				{/if}
