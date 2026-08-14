@@ -15,6 +15,7 @@ import hashlib
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 import torch
@@ -64,10 +65,35 @@ if manifest_path.exists():
 else:
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = os.environ.get("EMBED_DEVICE") or ("cuda" if torch.cuda.is_available() else "cpu")
+batch_size = int(os.environ.get("EMBED_BATCH_SIZE", BATCH_SIZE))
 model = SentenceTransformer("BAAI/bge-m3", device=device)
 model.max_seq_length = MAX_SEQ_TOKENS
-print(f"device={device} chunks={len(records)} window={MAX_SEQ_TOKENS}", file=sys.stderr)
+print(f"device={device} batch={batch_size} chunks={len(records)} window={MAX_SEQ_TOKENS}", file=sys.stderr)
+
+
+def encode(texts: list[str]) -> list:
+    """Encode a shard, backing off when the GPU is short of memory.
+
+    A desktop GPU is shared: another program can claim most of the card
+    mid-run, and the batch that was comfortable a minute ago then fails. Each
+    failure halves the batch and waits for the other program to settle, so a
+    long backfill rides out the squeeze instead of dying at shard 23.
+    """
+    size = batch_size
+    for attempt in range(6):
+        try:
+            return model.encode(texts, batch_size=size, normalize_embeddings=True, show_progress_bar=False)
+        except (torch.cuda.OutOfMemoryError, RuntimeError) as error:
+            if device != "cuda" or "CUDA" not in str(error) and "memory" not in str(error):
+                raise
+            torch.cuda.empty_cache()
+            size = max(1, size // 2)
+            wait = 15 * (attempt + 1)
+            print(f"  GPU busy ({str(error).splitlines()[0][:80]}); retrying at batch {size} in {wait}s", file=sys.stderr)
+            time.sleep(wait)
+    raise SystemExit("the GPU stayed unavailable across six attempts; rerun with EMBED_DEVICE=cpu to finish on CPU")
+
 
 for shard_index in range(0, len(records), SHARD_SIZE):
     shard = records[shard_index : shard_index + SHARD_SIZE]
@@ -75,12 +101,7 @@ for shard_index in range(0, len(records), SHARD_SIZE):
     if RESUME and shard_path.exists():
         print(f"{shard_path.name}: kept", file=sys.stderr)
         continue
-    vectors = model.encode(
-        [record["text"] for record in shard],
-        batch_size=BATCH_SIZE,
-        normalize_embeddings=True,
-        show_progress_bar=False,
-    )
+    vectors = encode([record["text"] for record in shard])
     partial_path = shard_path.with_suffix(".ndjson.partial")
     with partial_path.open("w", encoding="utf-8") as f:
         for record, vector in zip(shard, vectors):
