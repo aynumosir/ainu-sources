@@ -95582,7 +95582,7 @@
   {
     "source": "internetarchive",
     "externalId": "1f8118e3-111c-4ff7-9d7b-33646658c72f",
-    "doi": null,
+    "doi": "10.30687/978-88-6969-585-8",
     "title": "Materials and Methods of Analysis for the Study of the Ainu Language: Southern Hokkaidō and Sakhalin Varieties",
     "year": 2022,
     "type": "book",
@@ -95599,16 +95599,52 @@
         "type": "fulltext",
         "url": "https://archive.org/details/1f8118e3-111c-4ff7-9d7b-33646658c72f",
         "label": "Internet Archive (full text)"
-      },
-      {
-        "type": "fulltext",
-        "url": "https://archive.org/details/9b55d0c0-0406-410b-a537-8f2877e099e1",
-        "label": "Internet Archive (full text, another scan)"
-      },
+      }
+    ]
+  },
+  {
+    "source": "internetarchive",
+    "externalId": "285ac6d7-1d9c-407f-9ea1-0a28aa7d8798",
+    "doi": "10.30687/978-88-6969-861-3",
+    "title": "Materials and Methods of Analysis for the Study of the Ainu Language: Southern Hokkaidō and Sakhalin Varieties",
+    "year": 2024,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "Elia Dal Corso"
+    ],
+    "venue": null,
+    "url": "https://archive.org/details/285ac6d7-1d9c-407f-9ea1-0a28aa7d8798",
+    "pdf": null,
+    "links": [
       {
         "type": "fulltext",
         "url": "https://archive.org/details/285ac6d7-1d9c-407f-9ea1-0a28aa7d8798",
-        "label": "Internet Archive (full text, another scan)"
+        "label": "Internet Archive (full text)"
+      }
+    ]
+  },
+  {
+    "source": "internetarchive",
+    "externalId": "9b55d0c0-0406-410b-a537-8f2877e099e1",
+    "doi": "10.30687/978-88-6969-862-0",
+    "title": "Materials and Methods of Analysis for the Study of the Ainu Language: Southern Hokkaidō and Sakhalin",
+    "year": 2025,
+    "type": "book",
+    "rawType": "book",
+    "language": null,
+    "authors": [
+      "Elia Dal Corso"
+    ],
+    "venue": null,
+    "url": "https://archive.org/details/9b55d0c0-0406-410b-a537-8f2877e099e1",
+    "pdf": null,
+    "links": [
+      {
+        "type": "fulltext",
+        "url": "https://archive.org/details/9b55d0c0-0406-410b-a537-8f2877e099e1",
+        "label": "Internet Archive (full text)"
       }
     ]
   },
