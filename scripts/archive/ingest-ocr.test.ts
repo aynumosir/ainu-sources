@@ -15,7 +15,7 @@ import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 import { migrate } from 'drizzle-orm/libsql/migrator';
 import { and, eq, sql } from 'drizzle-orm';
 import * as schema from '../../src/lib/server/db/schema';
-import { ingestOcr } from './ingest-ocr';
+import { ingestOcr, variantOfSiblingText } from './ingest-ocr';
 
 const MIGRATIONS = fileURLToPath(new URL('../../drizzle', import.meta.url));
 type Db = LibSQLDatabase<typeof schema>;
@@ -137,6 +137,28 @@ async function coverageFor(revisionId: string) {
 		.where(eq(schema.revisionOcrCoverage.revisionId, revisionId))
 		.orderBy(sql`rowid`);
 }
+
+describe('variantOfSiblingText', () => {
+	const stem = 'Complex_predicate_formation_in_Ainu';
+
+	it('keeps a variant named after a model version, dots and all', () => {
+		expect(variantOfSiblingText(`${stem}.gpt-5.4.txt`, stem)).toBe('gpt-5.4');
+		expect(variantOfSiblingText(`${stem}.gemini-3.1-pro.txt`, stem)).toBe('gemini-3.1-pro');
+	});
+
+	it('reads the plain case and rejects what belongs to another scan', () => {
+		expect(variantOfSiblingText(`${stem}.pdftotext.txt`, stem)).toBe('pdftotext');
+		expect(variantOfSiblingText('Another_work.pdftotext.txt', stem)).toBeNull();
+		expect(variantOfSiblingText(`${stem}.pdf`, stem)).toBeNull();
+		expect(variantOfSiblingText(`${stem}..txt`, stem)).toBeNull();
+	});
+
+	it('leaves the database-owned variants to the database', () => {
+		for (const reserved of ['edited', 'manual', 'approved']) {
+			expect(variantOfSiblingText(`${stem}.${reserved}.txt`, stem)).toBeNull();
+		}
+	});
+});
 
 describe('ingestOcr', () => {
 	it('records a single clean variant as complete, unassessed, preferred', async () => {

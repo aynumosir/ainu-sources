@@ -199,12 +199,21 @@ export async function ingestOcr(db: Db, opts: IngestOcrOptions): Promise<IngestO
 	return summary;
 }
 
-export function parseOcrFilename(filename: string): { stem: string; variant: string } | null {
-	const match = /^(.+)\.([^.]+)\.txt$/u.exec(filename);
-	if (!match) return null;
+/**
+ * The variant a text file beside a scan carries, or null if it names something
+ * else. Read against the scan's own name rather than by splitting on dots:
+ * engines are named after model versions — `gpt-5.4`, `gemini-3.1` — and a rule
+ * that took the last dotted segment read those as the variant `4`, leaving the
+ * transcription on disk and the work with no text at all.
+ */
+export function variantOfSiblingText(filename: string, stem: string): string | null {
+	const prefix = `${stem}.`;
+	if (!filename.startsWith(prefix) || !filename.endsWith('.txt')) return null;
+	const variant = filename.slice(prefix.length, -'.txt'.length);
+	if (!variant) return null;
 	// Human variants are database-owned. Ingestion skips these reserved names so publication artifacts stay outside machine inputs.
-	if (['edited', 'manual', 'approved'].includes(match[2])) return null;
-	return { stem: match[1], variant: match[2] };
+	if (['edited', 'manual', 'approved'].includes(variant)) return null;
+	return variant;
 }
 
 export function parseOcrPages(text: string): OcrPageInput[] {
@@ -236,9 +245,9 @@ async function siblingTextFiles(
 	}
 	const out: Array<{ path: string; variant: string }> = [];
 	for (const entry of entries.sort()) {
-		const parsed = parseOcrFilename(entry);
-		if (!parsed || parsed.stem !== stem) continue;
-		out.push({ path: path.join(dir, entry), variant: parsed.variant });
+		const variant = variantOfSiblingText(entry, stem);
+		if (!variant) continue;
+		out.push({ path: path.join(dir, entry), variant });
 	}
 	return out;
 }
