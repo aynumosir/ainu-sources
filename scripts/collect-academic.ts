@@ -429,7 +429,9 @@ export async function collectCrossref(): Promise<AcademicRecord[]> {
 		}
 		const items = data.message?.items ?? [];
 		for (const w of items) {
-			const title = (w.title?.[0] ?? '').trim();
+			// Crossref titles arrive with raw entities (&amp;) and stray markup —
+			// run them through the same decode+strip the XML collectors use.
+			const title = cleanText(w.title?.[0] ?? '');
 			// DOIs are case-insensitive — normalize before dedup so 10.x/AbC == 10.x/abc.
 			const doiNorm = w.DOI ? String(w.DOI).trim().toLowerCase() : '';
 			if (!/ainu/i.test(title) || !doiNorm || seen.has(doiNorm)) continue; // title precision + dedup
