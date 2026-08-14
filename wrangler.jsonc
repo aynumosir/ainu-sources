@@ -38,6 +38,14 @@
 	},
 	"services": [
 		{ "binding": "ARCHIVE", "service": "ainu-archive" }
+	],
+	/**
+	 * Semantic search: bge-m3 embeds the query at request time; the Vectorize
+	 * index holds one vector per OCR chunk, keyed by chunk id.
+	 */
+	"ai": { "binding": "AI" },
+	"vectorize": [
+		{ "binding": "ARCHIVE_VECTORS", "index_name": "archive-ocr" }
 	]
 	/**
 	 * Smart Placement

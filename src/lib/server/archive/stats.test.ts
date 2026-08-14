@@ -317,7 +317,7 @@ describe('archive collection statistics', () => {
 				pageImages: { withRecordedDerivative: 1, withoutRecordedDerivative: 2 },
 				linearizedPdf: { withRecordedDerivative: 1, withoutRecordedDerivative: 2 }
 			},
-			search: { enabledModes: ['phrase', 'regex', 'soft', 'similar'] },
+			search: { enabledModes: ['phrase', 'regex', 'soft', 'similar', 'semantic'] },
 			freshness: {
 				mostRecentIngestAt: new Date(8_000).toISOString(),
 				mostRecentRevision: {

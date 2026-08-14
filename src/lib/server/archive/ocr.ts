@@ -16,6 +16,7 @@ import {
 import { compileLinearRegex, extractRegexLiterals, parseRegexAst, RegexSyntaxError } from './linear-regex';
 import type { SearchMode, SearchTolerance } from './search-modes';
 import type { ArchivePrincipal } from './types';
+import type { ArchiveVectorBackend } from './vector';
 
 type Db = LibSQLDatabase<typeof schema>;
 type RawSqlDb = Pick<Db, 'run' | 'all'>;
@@ -78,9 +79,12 @@ export async function searchArchive(
 		variant?: string | null;
 		maxChars?: number;
 		limit?: number;
+		vector?: ArchiveVectorBackend;
 	}
 ) {
-	if (opts.mode === 'semantic') return semanticUnavailable();
+	if (opts.mode === 'semantic') {
+		return opts.vector ? searchSemantic(db, principal, { ...opts, vector: opts.vector }) : semanticUnavailable();
+	}
 	if (opts.mode === 'regex') return searchRegex(db, principal, opts);
 	if (opts.mode === 'soft') return searchSoft(db, principal, opts);
 	if (opts.mode === 'similar') return searchSimilar(db, principal, opts);
@@ -333,38 +337,7 @@ export async function searchOcr(
 	const ftsQuery = alternatives.map(escapeFtsLiteral).join(' OR ');
 	const visibility = archiveSearchVisibilitySql(principal);
 	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
-	const variantClause = opts.variant?.trim()
-		? sql`and c.variant = ${opts.variant.trim()}`
-		: sql`and c.variant = coalesce(
-			-- A human edit supersedes machine OCR for that page, so an edited
-			-- chunk wins over the preferred machine variant page by page.
-			(
-				select 'edited'
-				from ocr_chunks edited_chunk
-				inner join ocr_ingest_state edited_state
-					on edited_state.revision_id = edited_chunk.revision_id
-					and edited_state.variant = edited_chunk.variant
-					and edited_state.active_generation = edited_chunk.ingest_generation
-				where edited_chunk.revision_id = c.revision_id
-					and edited_chunk.variant = 'edited'
-					and edited_chunk.page = c.page
-				limit 1
-			),
-			(
-				select coverage.variant
-				from revision_ocr_coverage coverage
-				inner join ocr_ingest_state preferred_state
-					on preferred_state.revision_id = coverage.revision_id
-					and preferred_state.variant = coverage.variant
-				where coverage.revision_id = c.revision_id and coverage.preferred = 1
-				limit 1
-			),
-			(
-				select min(fallback.variant)
-				from ocr_ingest_state fallback
-				where fallback.revision_id = c.revision_id
-			)
-		)`;
+	const variantClause = variantSelectionSql(opts.variant);
 
 	let rows: RankedChunk[];
 	try {
@@ -444,6 +417,44 @@ export async function searchOcr(
 		truncated,
 		cap: internalCap
 	};
+}
+
+/**
+ * Which text variant of a page takes part in search: an explicit request
+ * wins; otherwise a human-edited page supersedes machine OCR, then the
+ * revision's preferred variant, then any variant it has. Fragments reference
+ * the chunk row as `c`.
+ */
+function variantSelectionSql(variant: string | null | undefined): SQL {
+	if (variant?.trim()) return sql`and c.variant = ${variant.trim()}`;
+	return sql`and c.variant = coalesce(
+		(
+			select 'edited'
+			from ocr_chunks edited_chunk
+			inner join ocr_ingest_state edited_state
+				on edited_state.revision_id = edited_chunk.revision_id
+				and edited_state.variant = edited_chunk.variant
+				and edited_state.active_generation = edited_chunk.ingest_generation
+			where edited_chunk.revision_id = c.revision_id
+				and edited_chunk.variant = 'edited'
+				and edited_chunk.page = c.page
+			limit 1
+		),
+		(
+			select coverage.variant
+			from revision_ocr_coverage coverage
+			inner join ocr_ingest_state preferred_state
+				on preferred_state.revision_id = coverage.revision_id
+				and preferred_state.variant = coverage.variant
+			where coverage.revision_id = c.revision_id and coverage.preferred = 1
+			limit 1
+		),
+		(
+			select min(fallback.variant)
+			from ocr_ingest_state fallback
+			where fallback.revision_id = c.revision_id
+		)
+	)`;
 }
 
 // A chunk holding a whole book runs to millions of characters. Shipping that
@@ -1187,6 +1198,103 @@ function tokenNgrams(tokens: string[]): Set<string> {
 		grams.add(tokens.slice(index, index + width).join('\u001f'));
 	}
 	return grams;
+}
+
+// The vector index is asked for more candidates than one result page holds:
+// access filtering, variant selection, and per-page deduplication all thin
+// the list after retrieval.
+const SEMANTIC_CANDIDATE_CAP = 60;
+
+async function searchSemantic(
+	db: Db,
+	principal: ArchivePrincipal,
+	opts: {
+		q: string;
+		sourceSlug?: string | null;
+		variant?: string | null;
+		maxChars?: number;
+		limit?: number;
+		vector: ArchiveVectorBackend;
+	}
+) {
+	const q = opts.q.trim();
+	if (!q) throw new ArchiveHttpError(400, 'empty query');
+	const embedding = await opts.vector.embedQuery(q);
+	const matches = await opts.vector.query(embedding, SEMANTIC_CANDIDATE_CAP);
+	if (matches.length === 0) {
+		return { mode: 'semantic' as const, items: [], nextCursor: null, total: 0, truncated: false, cap: SEMANTIC_CANDIDATE_CAP };
+	}
+	const scoreByChunk = new Map(matches.map((match) => [match.id, match.score]));
+
+	const visibility = archiveSearchVisibilitySql(principal);
+	const sourceClause = opts.sourceSlug ? sql`and src.slug = ${opts.sourceSlug}` : sql``;
+	const variantClause = variantSelectionSql(opts.variant);
+	const idList = sql.join(
+		matches.map((match) => sql`${match.id}`),
+		sql`, `
+	);
+	let rows: RankedChunk[];
+	try {
+		rows = await db.all<RankedChunk>(sql`
+			select
+				c.chunk_id as chunkId,
+				c.revision_id as revisionId,
+				c.variant,
+				cast(c.page as integer) as page,
+				cast(c.block as integer) as block,
+				substr(c.text, 1, ${SNIPPET_WINDOW_CHARS}) as text,
+				'' as textNorm,
+				0 as rank,
+				src.slug as sourceSlug,
+				src.title as sourceTitle,
+				src.title_en as sourceTitleEn,
+				src.title_ain as sourceTitleAin,
+				src.author as sourceAuthor,
+				src.year_text as sourceYearText,
+				src.year_start as sourceYearStart,
+				src.year_end as sourceYearEnd,
+				src.year_certainty as sourceYearCertainty
+			from ocr_chunks c
+			inner join ocr_ingest_state state
+				on state.revision_id = c.revision_id
+				and state.variant = c.variant
+				and state.active_generation = c.ingest_generation
+			inner join file_revisions fr on fr.id = c.revision_id
+			inner join source_files sf on sf.id = fr.source_file_id
+			inner join sources src on src.id = sf.source_id
+			where c.chunk_id in (${idList})
+				and ${visibility}
+				${variantClause}
+				${sourceClause}
+		`);
+	} catch (error) {
+		console.error('archive semantic search query failed', error);
+		throw new ArchiveHttpError(500, 'search index query failed');
+	}
+
+	// Closest first; the score is cosine similarity, unrelated to the bm25
+	// ranks the lexical modes carry, so it lives in `rank` for ordering only
+	// within this mode's own results.
+	const scored = rows
+		.map((row) => ({ ...row, rank: scoreByChunk.get(row.chunkId) ?? 0 }))
+		.sort((left, right) => right.rank - left.rank);
+	const bestPerPage = new Map<string, RankedChunk>();
+	for (const row of scored) {
+		const key = `${row.revisionId}:${row.page}`;
+		if (!bestPerPage.has(key)) bestPerPage.set(key, row);
+	}
+	const deduplicated = [...bestPerPage.values()];
+	const limit = opts.limit ?? DEFAULT_SEARCH_LIMIT;
+	const page = deduplicated.slice(0, limit);
+	const maxChars = opts.maxChars ?? 240;
+	return {
+		mode: 'semantic' as const,
+		items: page.map((hit) => serializeHit(hit, q, maxChars)),
+		nextCursor: null,
+		total: deduplicated.length,
+		truncated: matches.length === SEMANTIC_CANDIDATE_CAP,
+		cap: SEMANTIC_CANDIDATE_CAP
+	};
 }
 
 function semanticUnavailable() {
