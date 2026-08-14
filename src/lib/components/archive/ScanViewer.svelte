@@ -394,7 +394,7 @@
 	}
 </script>
 
-<div class="scan-viewer" bind:this={root} class:fullscreen>
+<div class="scan-viewer" bind:this={root}>
 	<!--
 		A pan-and-zoom canvas is an application region: it takes the pointer and
 		the arrow keys itself, so it carries a role, a tab stop and a spoken hint
@@ -623,6 +623,12 @@
 	.rail button.active {
 		border-color: var(--archive-gilt);
 		color: var(--archive-gilt-text);
+	}
+	.rail .rule {
+		width: 1px;
+		height: 1.1rem;
+		margin: 0 0.15rem;
+		background: var(--archive-border);
 	}
 	.rail svg {
 		width: 16px;
