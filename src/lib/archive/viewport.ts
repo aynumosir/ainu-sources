@@ -12,9 +12,9 @@ export type Point = { x: number; y: number };
 export type Rotation = 0 | 90 | 180 | 270;
 export type FitMode = 'page' | 'width';
 
-/** Ceiling on magnification past the image's own resolution. */
+/** Magnification a page of ordinary size reaches, in multiples of its own pixels. */
 const MAX_NATIVE_SCALE = 4;
-/** Ceiling relative to the fit-the-page scale, for stages smaller than a page. */
+/** Reach kept for a page far smaller than its stage, where 4× is barely a zoom. */
 const MAX_FIT_MULTIPLE = 8;
 
 export function clamp(value: number, min: number, max: number): number {
