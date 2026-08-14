@@ -72,6 +72,38 @@ describe('ingest-sections', () => {
 		]);
 	});
 
+	it('takes a verified scan override where folio resolution cannot reach', async () => {
+		await ingestSections(db, {
+			revisionId: 'rev-1',
+			pages: 'printed',
+			origin: 'toc',
+			sections: [
+				{ title: '序論', pageStart: 13 },
+				{ title: '無折丁の部扉', pageStart: 55, scanPageStart: 57 }
+			]
+		});
+		const rows = await db
+			.select({ title: schema.revisionSections.title, pageStart: schema.revisionSections.pageStart })
+			.from(schema.revisionSections)
+			.where(eq(schema.revisionSections.revisionId, 'rev-1'))
+			.orderBy(asc(schema.revisionSections.ord));
+		expect(rows).toEqual([
+			{ title: '序論', pageStart: 12 },
+			{ title: '無折丁の部扉', pageStart: 57 }
+		]);
+	});
+
+	it('rejects a scan override in a file already counting scan pages', async () => {
+		await expect(
+			ingestSections(db, {
+				revisionId: 'rev-1',
+				pages: 'scan',
+				origin: 'curated',
+				sections: [{ title: '重複指定', pageStart: 10, scanPageStart: 11 }]
+			})
+		).rejects.toThrow(/only a printed-pages file can use/);
+	});
+
 	it('refuses a printed page with no detected folio rather than guessing', async () => {
 		await expect(
 			ingestSections(db, {
