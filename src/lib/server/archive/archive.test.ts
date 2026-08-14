@@ -1111,6 +1111,39 @@ describe('archive DB flows', () => {
 		});
 	});
 
+	it('ranks semantic hits by vector score and drops ids without an active chunk', async () => {
+		await seedRevision();
+		await replaceOcrPages(db, 'rev-1', 'gemini', [
+			{ page: 1, text: 'kamuy aynu mosir ape tow' },
+			{ page: 2, text: 'kamuy aynu mosir cise' }
+		]);
+		const chunks = await db.all<{ chunkId: string; page: number }>(sql`
+			select chunk_id as chunkId, cast(page as integer) as page from ocr_chunks where revision_id = 'rev-1'
+		`);
+		const chunkForPage = (page: number) => chunks.find((chunk) => chunk.page === page)!.chunkId;
+		const queries: number[][] = [];
+		const result = await searchArchive(db, reader, {
+			q: '家の神様',
+			mode: 'semantic',
+			vector: {
+				embedQuery: async () => [0.1, 0.2, 0.3],
+				query: async (vector) => {
+					queries.push(vector);
+					return [
+						{ id: 'stale-chunk-of-replaced-generation', score: 0.99 },
+						{ id: chunkForPage(2), score: 0.9 },
+						{ id: chunkForPage(1), score: 0.5 }
+					];
+				}
+			}
+		});
+		expect(queries).toEqual([[0.1, 0.2, 0.3]]);
+		expect(result.mode).toBe('semantic');
+		expect(result.items.map((item) => item.page)).toEqual([2, 1]);
+		expect(result.items[0]).toMatchObject({ revisionId: 'rev-1', variant: 'gemini', rank: 0.9 });
+		expect(result.total).toBe(2);
+	});
+
 	it('keeps readable OCR searchable when original-file download is disabled', async () => {
 		await seedRevision();
 		await db.update(schema.sources).set({ humanDownload: false }).where(eq(schema.sources.id, 'source-1'));
@@ -1318,7 +1351,7 @@ describe('archive DB flows', () => {
 		]);
 
 	await expect(getUsageSummary(db, reader)).resolves.toEqual({
-			search_modes: ['phrase', 'regex', 'soft', 'similar'],
+			search_modes: ['phrase', 'regex', 'soft', 'similar', 'semantic'],
 			date: day,
 			bytesUsed: 321,
 			dailyByteLimit: 1000,

@@ -13,7 +13,8 @@
 		{ value: 'phrase', ja: '語句', en: 'Phrase', hint: '語句をそのまま探す。 Finds the words as written.' },
 		{ value: 'soft', ja: '曖昧', en: 'Fuzzy', hint: '綴りの揺れを許容する（kamuy と kamui など）。 Tolerates spelling variation, and matches across Latin and katakana.' },
 		{ value: 'regex', ja: '正規表現', en: 'Regex', hint: '正規表現で探す。 Regular expression, e.g. kamuy?[ui].' },
-		{ value: 'similar', ja: '類似ページ', en: 'Similar pages', hint: 'あるページに似た本文を探す。入力は revision:page 形式。 Pages whose text resembles a given page; enter revision:page.' }
+		{ value: 'similar', ja: '類似ページ', en: 'Similar pages', hint: 'あるページに似た本文を探す。入力は revision:page 形式。 Pages whose text resembles a given page; enter revision:page.' },
+		{ value: 'semantic', ja: '意味', en: 'Semantic', hint: '意味の近い本文を探す。言語をまたいで一致することがある。 Finds passages close in meaning; may match across languages.' }
 	] as const;
 
 	const activeMode = $derived(MODES.find((mode) => mode.value === data.mode) ?? MODES[0]);

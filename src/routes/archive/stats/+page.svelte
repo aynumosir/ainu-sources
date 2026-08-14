@@ -148,8 +148,8 @@
 			<BilingualLabel ja="検索" en="Search" />
 		</h2>
 		<p class="mt-2 text-[15px]">
-			Modes available: {stats.search.enabledModes.join(', ')}. Semantic search is not enabled for this
-			corpus. <a class="underline" href="/archive/search">検索する Search the archive</a>
+			Modes available: {stats.search.enabledModes.join(', ')}.
+			<a class="underline" href="/archive/search">検索する Search the archive</a>
 		</p>
 
 		{#if stats.freshness?.mostRecentIngestAt}

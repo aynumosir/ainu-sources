@@ -9,8 +9,9 @@ import { authorizeContent } from '$lib/server/archive/gateway';
 import { searchArchive } from '$lib/server/archive/ocr';
 import { archivePrincipal, throwArchiveError } from '$lib/server/archive/route';
 import type { SearchMode, SearchTolerance } from '$lib/server/archive/search-modes';
+import { archiveVectorBackend } from '$lib/server/archive/vector';
 
-export const GET: RequestHandler = async ({ request, url }) => {
+export const GET: RequestHandler = async ({ request, url, platform }) => {
 	const principal = await archivePrincipal(request, 'archive_reader');
 	try {
 		await authorizeContent(db, {
@@ -28,7 +29,8 @@ export const GET: RequestHandler = async ({ request, url }) => {
 				cursor: url.searchParams.get('cursor'),
 				sourceSlug: url.searchParams.get('source') ?? url.searchParams.get('source_slug'),
 				variant: url.searchParams.get('variant'),
-				maxChars: parseMaxChars(url.searchParams.get('max_chars'))
+				maxChars: parseMaxChars(url.searchParams.get('max_chars')),
+				vector: archiveVectorBackend(platform)
 			})
 		);
 	} catch (e) {

@@ -10,8 +10,9 @@ import { revisionPageFolios } from '$lib/server/db/schema';
 import { ArchiveHttpError } from '$lib/server/archive/errors';
 import { DEPLOYED_SEARCH_MODES, type SearchMode } from '$lib/server/archive/search-modes';
 import { archiveRoleAtLeast } from '$lib/server/archive/types';
+import { archiveVectorBackend } from '$lib/server/archive/vector';
 
-export const load: PageServerLoad = async ({ request, url }) => {
+export const load: PageServerLoad = async ({ request, url, platform }) => {
 	const principal = await resolveArchivePrincipal(request, db);
 	const q = url.searchParams.get('q')?.trim() ?? '';
 	const mode = parseMode(url.searchParams.get('mode'));
@@ -47,7 +48,8 @@ export const load: PageServerLoad = async ({ request, url }) => {
 				mode,
 				cursor: url.searchParams.get('cursor'),
 				sourceSlug,
-				maxChars: 260
+				maxChars: 260,
+				vector: archiveVectorBackend(platform)
 			});
 		} catch (err) {
 			if (err instanceof ArchiveHttpError && err.status >= 400 && err.status < 500) {
