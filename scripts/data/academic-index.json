@@ -1591,11 +1591,13 @@
     "externalId": "83b29132c6d01a596a847de5ba3b0b0d",
     "doi": null,
     "title": "蝦夷方言",
-    "year": null,
+    "year": 1792,
     "type": "book",
     "rawType": "honkoku-entry",
     "language": "ja",
-    "authors": [],
+    "authors": [
+      "上原熊次郎、阿部長三郎"
+    ],
     "venue": "Nationaal Museum van Wereldculturen (Rijksmuseum Volkenkunde, Leiden)",
     "url": null,
     "pdf": null,
@@ -11719,7 +11721,7 @@
     "source": "crossref",
     "externalId": "10.1017/s1557466013026211",
     "doi": "10.1017/s1557466013026211",
-    "title": "Indigenous at last! Ainu Grassroots Organizing and the Indigenous Peoples Summit in Ainu Mosir”",
+    "title": "Indigenous at last! Ainu Grassroots Organizing and the Indigenous Peoples Summit in Ainu Mosir",
     "year": 2013,
     "type": "article",
     "rawType": "journal-article",
@@ -25893,7 +25895,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.20776/S24332291-43-P85",
+    "externalId": "SAKAGUCHI_Ryo:33412131",
     "doi": "10.20776/S24332291-43-P85",
     "title": "樺太アイヌのトゥイタㇵ―B. ピウスツキによる英訳テキスト",
     "year": 2021,
@@ -25909,7 +25911,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.20776/S21857148-20-P169",
+    "externalId": "SAKAGUCHI_Ryo:18731524",
     "doi": "10.20776/S21857148-20-P169",
     "title": "陰部に歯のある女性の伝承 : サハリンの伝承を中心に",
     "year": 2018,
@@ -25926,7 +25928,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/bfhhs.165.l1",
+    "externalId": "ainlingsat:36654949",
     "doi": "10.14943/bfhhs.165.l1",
     "title": "アイヌ語学の諸問題 : 近年の議論と関連して",
     "year": 2021,
@@ -25942,7 +25944,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/bfhhs.171.l39",
+    "externalId": "ainlingsat:45897371",
     "doi": "10.14943/bfhhs.171.l39",
     "title": "研究ノート : 芥川龍之介と知里幸恵『アイヌ神謡集",
     "year": 2023,
@@ -25958,7 +25960,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.5281/zenodo.7118188",
+    "externalId": "mkfk:47695989",
     "doi": "10.5281/zenodo.7118188",
     "title": "Subgrouping of Ainu; ‘Rat’ in Ainu; ‘Chicken’ in Asian and African languages; ‘Chicken’ in Ainu; ‘Horse’ in Ainu; ‘Dog’ in Ainu; ‘Wolf’ in Ainu; ‘Bear’ in Asian and African languages; ‘Bear’ in Ainu",
     "year": 2024,
@@ -25974,7 +25976,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.5281/zenodo.10223731",
+    "externalId": "mkfk:47696013",
     "doi": "10.5281/zenodo.10223731",
     "title": "System of 'sibling' terms in Ainu; Alignment in Ainu; Numeral systems in Asian and African languages; Numeral systems in Ainu",
     "year": 2023,
@@ -25990,7 +25992,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.5281/zenodo.7754469",
+    "externalId": "mkfk:47696006",
     "doi": "10.5281/zenodo.7754469",
     "title": "'Wheat' in Ainu; 'Broomcorn millet' in Ainu; 'Foxtail millet' in Ainu; 'Barnyard millet' in Ainu; Stop series in Ainu",
     "year": 2023,
@@ -26006,7 +26008,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.5281/zenodo.8382130",
+    "externalId": "mkfk:47696017",
     "doi": "10.5281/zenodo.8382130",
     "title": "Tracking basic Ainu vocabulary: Updates and changes of geographical distributions",
     "year": 2023,
@@ -26022,7 +26024,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.5281/zenodo.6423601",
+    "externalId": "mkfk:47695575",
     "doi": "10.5281/zenodo.6423601",
     "title": "The mystery of the phonological distribution /ca/ and /pa/ in the Eastern-Western dialects of Ainu",
     "year": 2014,
@@ -26038,7 +26040,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.5281/zenodo.6423593",
+    "externalId": "mkfk:47683228",
     "doi": "10.5281/zenodo.6423593",
     "title": "The distribution of interrogative or indefinite roots in Ainu: hem & ne",
     "year": 2013,
@@ -26054,7 +26056,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.5281/zenodo.6423581",
+    "externalId": "mkfk:47682685",
     "doi": "10.5281/zenodo.6423581",
     "title": "The distribution and interpretation of words for parents ―'mother' and 'father' in Ainu dialects",
     "year": 2012,
@@ -26070,7 +26072,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.20776/s21857148-18-p151",
+    "externalId": "mkfk:47495023",
     "doi": "10.20776/s21857148-18-p151",
     "title": "加賀家文書 翻刻・現代語訳3「チャコルベ」：蝦夷通辞が記録したアイヌの求婚難題説話",
     "year": 2016,
@@ -26086,7 +26088,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/jbr.14.1",
+    "externalId": "osaka_taku:46105154",
     "doi": "10.14943/jbr.14.1",
     "title": "近代北海道における〈アイヌ〉の境界 ─ 松前地西在相沼内村に生まれたサモテの事例を中心として ─",
     "year": 2024,
@@ -26102,7 +26104,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/Jais.5.063",
+    "externalId": "1976:50620091",
     "doi": "10.14943/Jais.5.063",
     "title": "研究ノート アイヌ民族に関する教育の脱植民地化",
     "year": 2025,
@@ -26118,7 +26120,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/Jais.4.127",
+    "externalId": "1976:50620046",
     "doi": "10.14943/Jais.4.127",
     "title": "アイヌ民族の葬制・祖霊祭祀と遺骨の「再埋葬・慰霊」 : 民族誌・文学による検討",
     "year": 2024,
@@ -26134,7 +26136,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/Jais.2.103",
+    "externalId": "1976:39926318",
     "doi": "10.14943/Jais.2.103",
     "title": "アイヌ・和人への手紙（２）アイヌ・和人の当事者性 : 付A アイヌ文化の真正性 付B対談：アイデンティティ・当事者性について",
     "year": 2022,
@@ -26150,7 +26152,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/Jais.4.181",
+    "externalId": "1976:46369556",
     "doi": "10.14943/Jais.4.181",
     "title": "北海道大学におけるアイヌ民族に対する差別的言動を防止するための取組",
     "year": 2024,
@@ -26168,7 +26170,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.1093/oso/9780198856610.003.0007",
+    "externalId": "read0127694:36381824",
     "doi": "10.1093/oso/9780198856610.003.0007",
     "title": "Ainu: An urban-rural indigenous language of the North",
     "year": 2022,
@@ -26182,7 +26184,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.15021/00006108",
+    "externalId": "koji_yamasaki:32159881",
     "doi": "10.15021/00006108",
     "title": "在外アイヌ資料調査経験から（コメント）",
     "year": 2016,
@@ -26199,7 +26201,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.15021/00006109",
+    "externalId": "koji_yamasaki:32159880",
     "doi": "10.15021/00006109",
     "title": "Overseas Ainu Collections and Info-Forum Museum Project : Comment",
     "year": 2016,
@@ -26216,7 +26218,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/jbr.s.141",
+    "externalId": "koji_yamasaki:32159884",
     "doi": "10.14943/jbr.s.141",
     "title": "境界を展示する : 「アイヌと境界」展における試み",
     "year": 2014,
@@ -26232,7 +26234,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14890/jasca.2013.0_97",
+    "externalId": "koji_yamasaki:32159885",
     "doi": "10.14890/jasca.2013.0_97",
     "title": "映像をもちいた現代アイヌ文化展示の試み:「アイヌと境界」展を事例として",
     "year": 2013,
@@ -26248,7 +26250,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14890/jasca.2012.0.20.0",
+    "externalId": "koji_yamasaki:32159887",
     "doi": "10.14890/jasca.2012.0.20.0",
     "title": "アイヌ文化展示と文化人類学的課題",
     "year": 2012,
@@ -26264,7 +26266,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14890/jasca.2010.0.32.0",
+    "externalId": "koji_yamasaki:32159889",
     "doi": "10.14890/jasca.2010.0.32.0",
     "title": "アイヌ民族との協同による博物館展示",
     "year": 2010,
@@ -26280,7 +26282,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.20776/S21857148-27-P275",
+    "externalId": "mfujita1023:51834653",
     "doi": "10.20776/S21857148-27-P275",
     "title": "金成マツ筆録ノートのアイヌ語口承文学テクストの原文対訳及び解釈――金田一京助宛ノート散文説話「一人の頭の禿げた白いかさぶたがフケになっている女性がくにの上手からやって来るウエペケㇾ（sine esukopitce retar cima koeyanrasne menoko mosir pa wano ek uepeker）",
     "year": 2025,
@@ -26296,7 +26298,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.15002/00011515",
+    "externalId": "_retar:19310502",
     "doi": "10.15002/00011515",
     "title": "出稼ぎ和人の語る「蝦夷人介抱」--一八世紀後半蝦夷地におけるアイヌ-和人関係の実践",
     "year": 2005,
@@ -26312,7 +26314,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/jais.2.237",
+    "externalId": "_retar:37143641",
     "doi": "10.14943/jais.2.237",
     "title": "リチャード・シドル著、マーク・ウィンチェスター訳『アイヌ通史：「蝦夷」から先住民族へ』岩波書店、2021年",
     "year": 2022,
@@ -26328,7 +26330,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/jais.2.225",
+    "externalId": "_retar:37143640",
     "doi": "10.14943/jais.2.225",
     "title": "タンダンヤ-アデレード宣言」 : アイヌ史が先住民史となるための処方箋",
     "year": 2022,
@@ -26344,7 +26346,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14890/jasca.2008.0.84.0",
+    "externalId": "_retar:19310501",
     "doi": "10.14890/jasca.2008.0.84.0",
     "title": "過去を叙述する方法:前近代アイヌ‐和人関係史をめぐって",
     "year": 2008,
@@ -26360,7 +26362,7 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.11517/pjsai.jsai2017.0_1l15",
+    "externalId": "ptaszynski:37611956",
     "doi": "10.11517/pjsai.jsai2017.0_1l15",
     "title": "アイヌ語のトークン化を改善するための複数辞書の結合",
     "year": 2017,
@@ -27318,7 +27320,7 @@
     "rawType": "monograph",
     "language": null,
     "authors": [
-      "Vovin"
+      "Alexander Vovin"
     ],
     "venue": null,
     "url": "https://doi.org/10.1163/9789004644823",
@@ -28039,7 +28041,9 @@
     "type": "book",
     "rawType": "edited-book",
     "language": null,
-    "authors": [],
+    "authors": [
+      "Bronisław Piłsudski"
+    ],
     "venue": null,
     "url": "https://doi.org/10.1515/9783110818833",
     "pdf": null
@@ -95494,9 +95498,9 @@
   },
   {
     "source": "researchmap",
-    "externalId": "10.14943/Jais.6.031",
+    "externalId": "1976:54405025",
     "doi": "10.14943/Jais.6.031",
-    "title": "縄文」という呪文 : アイヌのアイデンティティ・文化搾取、歴史否定",
+    "title": "「縄文」という呪文 : アイヌのアイデンティティ・文化搾取、歴史否定",
     "year": 2026,
     "type": "article",
     "rawType": "published_papers",
@@ -95554,29 +95558,6 @@
   },
   {
     "source": "internetarchive",
-    "externalId": "9b55d0c0-0406-410b-a537-8f2877e099e1",
-    "doi": null,
-    "title": "Materials and Methods of Analysis for the Study of the Ainu Language: Southern Hokkaidō and Sakhalin",
-    "year": 2025,
-    "type": "book",
-    "rawType": "book",
-    "language": null,
-    "authors": [
-      "Elia Dal Corso"
-    ],
-    "venue": null,
-    "url": "https://archive.org/details/9b55d0c0-0406-410b-a537-8f2877e099e1",
-    "pdf": null,
-    "links": [
-      {
-        "type": "fulltext",
-        "url": "https://archive.org/details/9b55d0c0-0406-410b-a537-8f2877e099e1",
-        "label": "Internet Archive (full text)"
-      }
-    ]
-  },
-  {
-    "source": "internetarchive",
     "externalId": "febfe3be-0174-4c48-b9d8-16cabbb6576b",
     "doi": null,
     "title": "Philological and Linguistic Analysis Working Together: Exploring Language Diversity in Japan",
@@ -95618,29 +95599,16 @@
         "type": "fulltext",
         "url": "https://archive.org/details/1f8118e3-111c-4ff7-9d7b-33646658c72f",
         "label": "Internet Archive (full text)"
-      }
-    ]
-  },
-  {
-    "source": "internetarchive",
-    "externalId": "285ac6d7-1d9c-407f-9ea1-0a28aa7d8798",
-    "doi": null,
-    "title": "Materials and Methods of Analysis for the Study of the Ainu Language: Southern Hokkaidō and Sakhalin Varieties",
-    "year": 2024,
-    "type": "book",
-    "rawType": "book",
-    "language": null,
-    "authors": [
-      "Elia Dal Corso"
-    ],
-    "venue": null,
-    "url": "https://archive.org/details/285ac6d7-1d9c-407f-9ea1-0a28aa7d8798",
-    "pdf": null,
-    "links": [
+      },
+      {
+        "type": "fulltext",
+        "url": "https://archive.org/details/9b55d0c0-0406-410b-a537-8f2877e099e1",
+        "label": "Internet Archive (full text, another scan)"
+      },
       {
         "type": "fulltext",
         "url": "https://archive.org/details/285ac6d7-1d9c-407f-9ea1-0a28aa7d8798",
-        "label": "Internet Archive (full text)"
+        "label": "Internet Archive (full text, another scan)"
       }
     ]
   },
