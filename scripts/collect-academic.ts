@@ -1613,7 +1613,7 @@ export async function collectOpenAlexExtra(): Promise<AcademicRecord[]> {
 // permalink for; their works link to them as author at seed time.
 // Verified researchmap permalinks of Ainu-studies researchers (their non-Ainu
 // works are dropped by the title filter). Keep in sync with persons.researchmap.
-const RESEARCHMAP_PERMALINKS = [
+export const RESEARCHMAP_PERMALINKS = [
 	'SAKAGUCHI_Ryo', 'ainlingsat', 'read0064265', 'read0012388', 'read0144912',
 	'read0049566', 'read0021678', 'mkfk', 'osaka_taku', 'ono_yohei',
 	'tangikuitsuji', 'kobayashi_miki', 'y.yoshikawa', '1976', 'hacrc_hm',
@@ -1665,7 +1665,12 @@ export async function collectResearchmap(permalinks: string[]): Promise<Academic
 				const yr = it.publication_date ? Number(String(it.publication_date).slice(0, 4)) : null;
 				out.push({
 					source: 'researchmap',
-					externalId: cleanDoi || key,
+					// The researchmap-native id, never the DOI: the importer emits a
+					// researchmap-kind identifier from externalId, and the DOI already
+					// travels in its own field/identifier. (`key` keeps preferring the
+					// DOI for dedup so a co-authored paper listed on two profiles
+					// still collapses to one record.)
+					externalId: `${pl}:${it['rm:id'] ?? title}`,
 					doi: cleanDoi,
 					title,
 					year: Number.isFinite(yr) ? yr : null,
@@ -2012,6 +2017,11 @@ export async function refresh(): Promise<void> {
 	const graft = (winner: AcademicRecord, loser: AcademicRecord) => {
 		if (loser.pdf && !winner.pdf) winner.pdf = loser.pdf;
 		if (loser.url && !winner.url) winner.url = loser.url;
+		// A re-collect can come back poorer than what it replaces (a failed
+		// IIIF-manifest fetch, a source that stopped sending creators) — never
+		// let a supersede erase a year or an author list the index already had.
+		if (loser.year != null && winner.year == null) winner.year = loser.year;
+		if (loser.authors?.length && !winner.authors?.length) winner.authors = loser.authors;
 	};
 
 	const oldByDoi = new Map<string, AcademicRecord>();
