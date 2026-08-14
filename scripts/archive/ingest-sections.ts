@@ -32,6 +32,15 @@ export type SectionsFile = {
 		titleEn?: string;
 		pageStart: number;
 		pageEnd?: number;
+		/**
+		 * Verified scan position, for a printed-pages file only. Chapter and
+		 * part title leaves often print no folio, so folio resolution cannot
+		 * reach them; this records where the section's opening actually sits
+		 * in the scan, checked against the page text, while pageStart keeps
+		 * the number the printed contents page cites.
+		 */
+		scanPageStart?: number;
+		scanPageEnd?: number;
 	}>;
 };
 
@@ -43,11 +52,19 @@ export async function ingestSections(db: Db, file: SectionsFile): Promise<{ inse
 		.where(eq(schema.fileRevisions.id, file.revisionId));
 	if (revision.length === 0) throw new Error(`revision not found: ${file.revisionId}`);
 
+	if (file.pages === 'scan') {
+		const overridden = file.sections.find((section) => section.scanPageStart !== undefined || section.scanPageEnd !== undefined);
+		if (overridden) {
+			throw new Error(`"${overridden.title}" carries a scan override, which only a printed-pages file can use`);
+		}
+	}
 	const resolve = file.pages === 'printed' ? await folioResolver(db, file.revisionId, file.sections) : null;
 	const rows = file.sections.map((section, ord) => {
-		const pageStart = resolve ? resolve(section.pageStart, section.title) : section.pageStart;
+		const pageStart =
+			section.scanPageStart ?? (resolve ? resolve(section.pageStart, section.title) : section.pageStart);
 		const pageEnd =
-			section.pageEnd === undefined ? null : resolve ? resolve(section.pageEnd, section.title) : section.pageEnd;
+			section.scanPageEnd ??
+			(section.pageEnd === undefined ? null : resolve ? resolve(section.pageEnd, section.title) : section.pageEnd);
 		return {
 			revisionId: file.revisionId,
 			ord,
