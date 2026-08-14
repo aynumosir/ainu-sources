@@ -97,6 +97,21 @@ export const archiveLabels = {
 	works: { ja: '資料', en: 'works' },
 	pages: { ja: 'ページ', en: 'pages' },
 	searchable: { ja: '検索可能', en: 'searchable' },
+	viewerControls: { ja: '画像操作', en: 'Image controls' },
+	viewerHint: {
+		ja: 'ドラッグで移動、ホイールまたはピンチで拡大縮小',
+		en: 'Drag to pan, wheel or pinch to zoom'
+	},
+	zoomIn: { ja: '拡大', en: 'Zoom in' },
+	zoomOut: { ja: '縮小', en: 'Zoom out' },
+	zoomLevel: { ja: '表示倍率', en: 'Zoom level' },
+	fitPage: { ja: 'ページ全体', en: 'Fit page' },
+	fitWidth: { ja: '幅に合わせる', en: 'Fit width' },
+	actualSize: { ja: '原寸', en: 'Actual size' },
+	rotateLeft: { ja: '左に回転', en: 'Rotate left' },
+	rotateRight: { ja: '右に回転', en: 'Rotate right' },
+	fullscreen: { ja: '全画面', en: 'Full screen' },
+	exitFullscreen: { ja: '全画面を終了', en: 'Exit full screen' },
 	sealLegend: {
 		ja: '● 読める本文 · ◐ 機械抽出のみ（要確認） · ○ 本文なし',
 		en: '● readable text · ◐ machine extract, check · ○ no text'

@@ -3,6 +3,7 @@
 	import { onMount, untrack } from 'svelte';
 	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
+	import ScanViewer from '$lib/components/archive/ScanViewer.svelte';
 	import { archiveFetch, archiveSession } from '$lib/archive/session.svelte';
 	import { archiveUsage } from '$lib/archive/usage.svelte';
 	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
@@ -41,8 +42,6 @@
 	let ocrProbe = $state<OcrProbe>('idle');
 	let textCache = $state<Record<number, TextEntry>>({});
 	let stageEl: HTMLElement | undefined = $state();
-	let dragStartX = 0;
-	let dragStartY = 0;
 	let draggingPanel = false;
 
 	const objectUrls = new Set<string>();
@@ -329,9 +328,6 @@
 		} else if (event.key === '?') {
 			event.preventDefault();
 			shortcutHelpOpen = true;
-		} else if (event.key === 'f') {
-			event.preventDefault();
-			void stageEl?.requestFullscreen?.();
 		} else if (event.key === '/') {
 			event.preventDefault();
 			findOpen = true;
@@ -349,26 +345,6 @@
 		location.href = `/archive/search?q=${encodeURIComponent(findQuery.trim())}&source_slug=${encodeURIComponent(data.source.slug)}`;
 	}
 
-	function pointerDown(event: PointerEvent): void {
-		dragStartX = event.clientX;
-		dragStartY = event.clientY;
-	}
-
-	function pointerUp(event: PointerEvent): void {
-		const dx = event.clientX - dragStartX;
-		const dy = event.clientY - dragStartY;
-		if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) {
-			go(dx < 0 ? 1 : -1);
-			return;
-		}
-		const target = event.currentTarget instanceof HTMLElement ? event.currentTarget : null;
-		if (!target || Math.abs(dx) > 8 || Math.abs(dy) > 8) return;
-		const rect = target.getBoundingClientRect();
-		const x = event.clientX - rect.left;
-		if (x < rect.width / 3) go(-1);
-		if (x > (rect.width * 2) / 3) go(1);
-	}
-
 	function startPanelDrag(event: PointerEvent): void {
 		draggingPanel = true;
 		event.currentTarget instanceof HTMLElement && event.currentTarget.setPointerCapture(event.pointerId);
@@ -383,6 +359,16 @@
 		draggingPanel = false;
 	}
 </script>
+
+{#snippet imagePlaceholder()}
+	{#if imageMissing}
+		<div class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-8 text-center text-[15px] text-[var(--archive-subtle)]">
+			Page image is generating. Try this page again shortly.
+		</div>
+	{:else if imageLoading}
+		<div class="h-[70svh] w-[min(70vw,42rem)] animate-pulse border border-[var(--archive-border)] bg-[var(--archive-paper)]"></div>
+	{/if}
+{/snippet}
 
 {#snippet metadataContent()}
 	<div class="space-y-5">
@@ -627,34 +613,24 @@
 				<div class="absolute inset-y-0 right-2 z-10 flex items-center">
 					<button type="button" aria-label={bilingualAriaLabel(archiveLabels.nextPage)} onclick={() => go(1)} class="h-12 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[17px] hover:border-[var(--archive-gilt)]">›</button>
 				</div>
-				<section
-					role="application"
-					class="flex h-full min-h-[calc(100svh-4rem)] touch-pan-y items-center justify-center overflow-auto bg-[var(--archive-bg)] p-4"
-					onpointerdown={pointerDown}
-					onpointerup={pointerUp}
-				>
+				<section class="flex h-full min-h-[calc(100svh-4rem)] items-stretch justify-center overflow-hidden bg-[var(--archive-bg)]">
 					{#if takedownNotice}
-						<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[15px] text-[var(--archive-subtle)]">{takedownNotice}</div>
+						<div class="m-auto max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[15px] text-[var(--archive-subtle)]">{takedownNotice}</div>
 					{:else if mode === 'pdf'}
-						<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center">
+						<div class="m-auto max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center">
 							<h2 class="text-[17px] font-semibold">PDF</h2>
 							<p class="mt-3 text-[15px] leading-7 text-[var(--archive-subtle)]">Continuous PDF view is unavailable. Use page image mode.</p>
 						</div>
 					{:else}
-						<div class="relative max-h-full max-w-full">
-							{#if imageLowSrc && !imageHighSrc}
-								<img src={imageLowSrc} alt="" class="max-h-[calc(100svh-7rem)] max-w-full blur-sm" />
-							{/if}
-							{#if imageHighSrc}
-								<img src={imageHighSrc} alt={`Scan page ${currentPage}`} class="max-h-[calc(100svh-7rem)] max-w-full border border-[var(--archive-border)] bg-white shadow-sm" />
-							{:else if imageMissing}
-								<div class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-8 text-center text-[15px] text-[var(--archive-subtle)]">
-									Page image is generating. Try this page again shortly.
-								</div>
-							{:else if imageLoading}
-								<div class="h-[70svh] w-[min(70vw,42rem)] animate-pulse border border-[var(--archive-border)] bg-[var(--archive-paper)]"></div>
-							{/if}
-						</div>
+						<ScanViewer
+							src={imageHighSrc}
+							previewSrc={imageLowSrc}
+							alt={`Scan page ${currentPage}`}
+							resetKey={currentPage}
+							fullscreenTarget={stageEl}
+							onturn={(delta) => go(delta)}
+							fallback={imagePlaceholder}
+						/>
 					{/if}
 				</section>
 			</main>
@@ -714,6 +690,9 @@
 					<dt class="archive-mono">m</dt><dd>Toggle render mode</dd>
 					<dt class="archive-mono">c</dt><dd>Copy citation</dd>
 					<dt class="archive-mono">/</dt><dd>Open in-book search handoff</dd>
+					<dt class="archive-mono">+ −</dt><dd>Zoom the scan in or out</dd>
+					<dt class="archive-mono">0 / 1 / w</dt><dd>Fit page, actual size, fit width</dd>
+					<dt class="archive-mono">r / R</dt><dd>Rotate right or left</dd>
 					<dt class="archive-mono">f</dt><dd>Fullscreen stage</dd>
 					<dt class="archive-mono">?</dt><dd>Show this help</dd>
 				</dl>

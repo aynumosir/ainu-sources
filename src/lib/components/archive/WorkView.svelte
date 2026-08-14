@@ -19,6 +19,7 @@
 		type TextSourceKind
 	} from '$lib/archive/ocr';
 	import OcrBadge from './OcrBadge.svelte';
+	import ScanViewer from './ScanViewer.svelte';
 	import CitationRelations from '$lib/components/CitationRelations.svelte';
 
 	type Sheet = 'pages' | 'about' | 'find' | null;
@@ -93,6 +94,7 @@
 	let sheet = $state<Sheet>(null);
 	let findQuery = $state('');
 	let thumbList: HTMLElement | undefined = $state();
+	let stageEl: HTMLDivElement | undefined = $state();
 	let thumbScrollTop = $state(0);
 	let thumbViewport = $state(640);
 	const citation = $derived(
@@ -387,16 +389,28 @@
 	{/if}
 {/snippet}
 
-{#snippet imagePage()}
+{#snippet imagePlaceholder()}
 	{#if imageNotice}
 		<p class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[13px] text-[var(--archive-subtle)]">{imageNotice}</p>
-	{:else if selectedImage?.status === 'ready'}
-		<img src={selectedImage.src} alt={`Page ${currentPage} of ${source.title}`} class="max-h-[calc(100svh-14rem)] max-w-full bg-white object-contain shadow-[0_18px_45px_-12px_rgba(0,0,0,0.65)]" />
 	{:else if selectedImage?.status === 'missing'}
 		<p class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-6 text-[13px] text-[var(--archive-subtle)]">Page image is unavailable.</p>
 	{:else}
 		<div class="h-[65svh] w-[min(70vw,40rem)] animate-pulse bg-[color-mix(in_srgb,var(--archive-stage)_88%,white)]" aria-label="Loading page image"></div>
 	{/if}
+{/snippet}
+
+{#snippet imagePage()}
+	<ScanViewer
+		src={selectedImage?.status === 'ready' ? selectedImage.src : null}
+		previewSrc={selectedImage?.status === 'missing' || imageNotice
+			? null
+			: `/api/archive/revisions/${work.revision.id}/pages/${currentPage}.webp?w=300`}
+		alt={`Page ${currentPage} of ${source.title}`}
+		resetKey={currentPage}
+		fullscreenTarget={stageEl}
+		onturn={(delta) => go(delta)}
+		fallback={imagePlaceholder}
+	/>
 {/snippet}
 
 {#snippet textPage()}
@@ -641,10 +655,8 @@
 
 		<section class="work-stage relative flex min-h-0 min-w-0 flex-col bg-[var(--archive-bg)]">
 			<div
-				class="relative flex min-h-[55svh] flex-1 overflow-auto bg-[var(--archive-stage)]"
-				class:items-center={viewMode !== 'side-by-side'}
-				class:justify-center={viewMode !== 'side-by-side'}
-				class:p-4={viewMode !== 'text'}
+				class="relative flex min-h-[55svh] flex-1 overflow-hidden bg-[var(--archive-stage)]"
+				bind:this={stageEl}
 			>
 				<button
 					type="button"
@@ -659,7 +671,7 @@
 					{@render textPage()}
 				{:else}
 					<div class="grid min-h-[55svh] w-full min-w-0 grid-cols-2">
-						<div class="flex min-h-0 min-w-0 items-center justify-center overflow-auto p-4">
+						<div class="flex min-h-0 min-w-0">
 							{@render imagePage()}
 						</div>
 						{@render textPage()}
