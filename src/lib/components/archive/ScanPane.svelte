@@ -23,6 +23,8 @@
 		revisionId: string;
 		page: number;
 		pageCount: number;
+		/** Rects in fractions of the page's own size, drawn on the page itself:
+		 * they scale, pan and rotate with the scan rather than with the pane. */
 		boxes?: BboxOverlay;
 		overlay?: Snippet<[BboxOverlay | undefined]>;
 		onpage: (page: number) => void;
@@ -139,6 +141,7 @@
 		src={highSrc}
 		previewSrc={lowSrc}
 		alt={`Scan page ${page}`}
+		busy={loading}
 		resetKey={page}
 		fullscreenTarget={paneEl}
 		onturn={(delta) => onpage(page + delta)}

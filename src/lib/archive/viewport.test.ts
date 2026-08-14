@@ -88,6 +88,21 @@ describe('panBounds', () => {
 	});
 });
 
+describe('the top of a page fitted to the width', () => {
+	const topOf = (content: { width: number; height: number }) =>
+		panBounds(content, stage, fitScale(content, stage, 0, 'width'), 0).y;
+
+	it('sits further from the centre the taller the page is', () => {
+		expect(topOf({ width: 1200, height: 2400 })).toBeGreaterThan(
+			topOf({ width: 1200, height: 1500 })
+		);
+	});
+
+	it('is the centre for a page no taller than the stage', () => {
+		expect(topOf({ width: 1200, height: 600 })).toBe(0);
+	});
+});
+
 describe('clampOffset', () => {
 	it('holds the page inside its pan range', () => {
 		expect(clampOffset({ x: 900, y: -900 }, page, stage, 1, 0)).toEqual({ x: 200, y: -600 });

@@ -230,6 +230,9 @@
 		const low = await imageUrl(scanPage, 300);
 		if (scanPage !== currentPage) return;
 		imageLowSrc = low;
+		// The page being left goes with its own geometry: a scan of different
+		// proportions must not be stretched onto the incoming page's frame.
+		if (low) imageHighSrc = null;
 		const high = await imageUrl(scanPage, 1200);
 		if (scanPage !== currentPage) return;
 		imageHighSrc = high;
@@ -626,6 +629,7 @@
 							src={imageHighSrc}
 							previewSrc={imageLowSrc}
 							alt={`Scan page ${currentPage}`}
+							busy={imageLoading}
 							resetKey={currentPage}
 							fullscreenTarget={stageEl}
 							onturn={(delta) => go(delta)}
@@ -671,7 +675,7 @@
 
 	{#if quotaModalOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-			<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg">
+			<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-modal="true" aria-label="Archive stream limit reached">
 				<h2 class="text-[17px] font-semibold">Archive stream limit reached</h2>
 				<p class="mt-3 leading-7 text-[var(--archive-subtle)]">The daily byte budget or stream limit is exhausted. Reset time: {resetTime}.</p>
 				<button type="button" class="mt-4 border border-[var(--archive-border)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]" onclick={() => (quotaModalOpen = false)}>Close</button>
@@ -681,7 +685,7 @@
 
 	{#if shortcutHelpOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-			<div class="max-w-lg border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg">
+			<div class="max-w-lg border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-modal="true" aria-label={bilingualAriaLabel(archiveLabels.shortcuts)}>
 				<BilingualLabel tag="h2" ja={archiveLabels.shortcuts.ja} en={archiveLabels.shortcuts.en} class="text-[17px] font-semibold" />
 				<dl class="mt-4 grid grid-cols-[5rem_1fr] gap-2 text-[13px]">
 					<dt class="archive-mono">← → / k j</dt><dd>Previous or next page</dd>
@@ -702,7 +706,7 @@
 	{/if}
 
 	{#if findOpen}
-		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-label={bilingualAriaLabel(archiveLabels.search)}>
 			<form
 				class="w-full max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 shadow-lg"
 				onsubmit={(event) => {

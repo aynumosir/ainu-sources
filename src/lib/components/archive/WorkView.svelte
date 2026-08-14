@@ -402,10 +402,8 @@
 {#snippet imagePage()}
 	<ScanViewer
 		src={selectedImage?.status === 'ready' ? selectedImage.src : null}
-		previewSrc={selectedImage?.status === 'missing' || imageNotice
-			? null
-			: `/api/archive/revisions/${work.revision.id}/pages/${currentPage}.webp?w=300`}
 		alt={`Page ${currentPage} of ${source.title}`}
+		busy={selectedImage?.status === 'loading'}
 		resetKey={currentPage}
 		fullscreenTarget={stageEl}
 		onturn={(delta) => go(delta)}

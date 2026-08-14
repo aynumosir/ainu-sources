@@ -23,6 +23,7 @@
 		src,
 		previewSrc = null,
 		alt,
+		busy = false,
 		resetKey = null,
 		fullscreenTarget = undefined,
 		onturn = undefined,
@@ -34,6 +35,8 @@
 		/** Smaller derivative to paint until `src` decodes. */
 		previewSrc?: string | null;
 		alt: string;
+		/** True while a newer page is on its way and the old one is still up. */
+		busy?: boolean;
 		/** Changing this recentres the page — the page number, normally. */
 		resetKey?: unknown;
 		/** Element to send fullscreen, where the host wraps the viewer in its own chrome. */
@@ -47,8 +50,7 @@
 
 	/** Breathing room kept around a fitted page, in CSS pixels. */
 	const STAGE_MARGIN = 16;
-	/** Height the control rail occupies at the foot of the stage. */
-	const RAIL_BAND = 52;
+	const SMOOTH_MS = 200;
 	const BUTTON_ZOOM_STEP = 1.35;
 	const KEY_PAN_STEP = 64;
 	const SWIPE_DISTANCE = 54;
@@ -57,7 +59,10 @@
 
 	let root: HTMLDivElement | undefined = $state();
 	let stageEl: HTMLDivElement | undefined = $state();
+	let railEl: HTMLDivElement | undefined = $state();
 	let stage = $state<Size>({ width: 0, height: 0 });
+	/** Height the rail and its gap take from the foot of the stage, measured. */
+	let railBand = $state(52);
 	let content = $state<Size>({ width: 0, height: 0 });
 	let scale = $state(1);
 	let offset = $state<Point>({ x: 0, y: 0 });
@@ -66,7 +71,11 @@
 	let smooth = $state(false);
 	let fullscreen = $state(false);
 	let fullscreenAvailable = $state(false);
-	let measuredSharp = false;
+	let measuredSharp = $state(false);
+	let previewBroken = $state(false);
+	let pendingHome = true;
+	let smoothTimer: ReturnType<typeof setTimeout> | undefined;
+	const hintId = $props.id();
 
 	const pointers = new Map<number, Point>();
 	let drag = { x: 0, y: 0, offset: { x: 0, y: 0 } };
@@ -78,9 +87,10 @@
 	// rail sits in, so a fitted page is never covered by its own controls.
 	const view = $derived({
 		width: Math.max(0, stage.width - STAGE_MARGIN * 2),
-		height: Math.max(0, stage.height - STAGE_MARGIN * 2 - RAIL_BAND)
+		height: Math.max(0, stage.height - STAGE_MARGIN * 2 - railBand)
 	});
-	const viewShiftY = $derived(-RAIL_BAND / 2);
+	const viewShiftY = $derived(-railBand / 2);
+	const preview = $derived(previewBroken ? null : previewSrc);
 	const measured = $derived(content.width > 0 && stage.width > 0);
 	const bounds = $derived(scaleBounds(content, view, rotation));
 	const reach = $derived(panBounds(content, view, scale, rotation));
@@ -93,42 +103,84 @@
 	);
 
 	// Fit modes are a standing instruction, not a one-off: a resized stage, a
-	// quarter turn or a new page recomputes the scale they imply.
+	// quarter turn or a new page recomputes the scale they imply. The geometry is
+	// read whatever the mode, so a free-zoomed page is pulled back inside its new
+	// bounds when the stage changes under it.
 	$effect(() => {
+		const size = content;
+		const box = view;
+		const turned = rotation;
+		const limits = bounds;
 		if (!measured) return;
-		const fitted = mode === 'free' ? null : fitScale(content, view, rotation, mode);
+		const fitted = mode === 'free' ? null : clamp(fitScale(size, box, turned, mode), limits.min, limits.max);
 		untrack(() => {
 			if (fitted !== null) scale = fitted;
-			offset = clampOffset(offset, content, view, scale, rotation);
+			offset = clampOffset(offset, size, box, scale, turned);
 		});
 	});
 
 	// A page turn returns to the top of the scan and keeps the reader's zoom and
-	// orientation.
+	// orientation. The incoming page may be taller than the one leaving, so the
+	// top is found again once its own size is known.
 	$effect(() => {
 		void resetKey;
 		untrack(() => {
 			offset = homeOffset();
 			measuredSharp = false;
+			previewBroken = false;
+			pendingHome = true;
 		});
 	});
 
 	onMount(() => {
 		fullscreenAvailable = document.fullscreenEnabled;
-		const observer = new ResizeObserver(([entry]) => {
-			if (entry) stage = { width: entry.contentRect.width, height: entry.contentRect.height };
-		});
+		const observer = new ResizeObserver(() => measureStage());
 		if (stageEl) observer.observe(stageEl);
+		if (railEl) observer.observe(railEl);
+		measureStage();
 		const keydown = (event: KeyboardEvent) => handleKey(event);
-		const fullscreenChange = () => (fullscreen = document.fullscreenElement != null);
+		const fullscreenChange = () => (fullscreen = document.fullscreenElement === fullscreenHost());
+		// A pointer released outside the stage, on a browser that refused
+		// capture, would otherwise stay in the gesture for good.
+		const release = (event: PointerEvent) => {
+			if (!pointers.delete(event.pointerId)) return;
+			if (pointers.size === 0) pinched = false;
+		};
 		window.addEventListener('keydown', keydown);
+		window.addEventListener('pointerup', release);
+		window.addEventListener('pointercancel', release);
 		document.addEventListener('fullscreenchange', fullscreenChange);
 		return () => {
 			observer.disconnect();
+			clearTimeout(smoothTimer);
 			window.removeEventListener('keydown', keydown);
+			window.removeEventListener('pointerup', release);
+			window.removeEventListener('pointercancel', release);
 			document.removeEventListener('fullscreenchange', fullscreenChange);
 		};
 	});
+
+	function measureStage(): void {
+		if (!stageEl) return;
+		const box = stageEl.getBoundingClientRect();
+		stage = { width: box.width, height: box.height };
+		const rail = railEl?.getBoundingClientRect();
+		if (rail) railBand = Math.max(0, box.bottom - rail.top + STAGE_MARGIN / 2);
+	}
+
+	// A button, a key or a fit glides to its new position; a wheel, a drag and a
+	// pinch track the hand and end the moment one arrives.
+	function animate(): void {
+		if (prefersReducedMotion()) return;
+		clearTimeout(smoothTimer);
+		smooth = true;
+		smoothTimer = setTimeout(() => (smooth = false), SMOOTH_MS);
+	}
+
+	function stopAnimating(): void {
+		clearTimeout(smoothTimer);
+		smooth = false;
+	}
 
 	function measure(event: Event, sharp: boolean): void {
 		const image = event.currentTarget as HTMLImageElement;
@@ -140,6 +192,10 @@
 		if (mode === 'free' && content.width > 0) scale = scaleForNewContent(scale, content, next);
 		content = next;
 		if (sharp) measuredSharp = true;
+		if (pendingHome) {
+			offset = homeOffset();
+			if (sharp) pendingHome = false;
+		}
 	}
 
 	function anchorOf(point: { clientX: number; clientY: number }): Point {
@@ -151,18 +207,18 @@
 		};
 	}
 
-	function zoomTo(target: number, anchor: Point = { x: 0, y: 0 }, animate = false): void {
+	function zoomTo(target: number, anchor: Point = { x: 0, y: 0 }, animated = false): void {
 		if (!measured) return;
 		const next = clamp(target, bounds.min, bounds.max);
 		if (next === scale) return;
-		smooth = animate && !prefersReducedMotion();
+		if (animated) animate();
 		offset = clampOffset(offsetAfterZoom(offset, scale, next, anchor), content, view, next, rotation);
 		scale = next;
 		mode = 'free';
 	}
 
 	function fitTo(next: FitMode): void {
-		smooth = !prefersReducedMotion();
+		animate();
 		mode = next;
 		offset = homeOffset();
 	}
@@ -180,16 +236,23 @@
 	}
 
 	function turn(quarterTurns: number): void {
-		smooth = !prefersReducedMotion();
+		animate();
 		rotation = nextRotation(rotation, quarterTurns);
 		offset = { x: 0, y: 0 };
 	}
 
+	function fullscreenHost(): HTMLElement | undefined {
+		return fullscreenTarget ?? root;
+	}
+
 	async function toggleFullscreen(): Promise<void> {
-		const target = fullscreenTarget ?? root;
+		const target = fullscreenHost();
+		if (!target) return;
 		try {
-			if (document.fullscreenElement) await document.exitFullscreen();
-			else await target?.requestFullscreen();
+			// Only this viewer's own fullscreen is ended here; anything else on
+			// screen is swapped for it instead.
+			if (document.fullscreenElement === target) await document.exitFullscreen();
+			else await target.requestFullscreen();
 		} catch {
 			// A browser that refuses the request leaves the page as it is.
 		}
@@ -198,7 +261,7 @@
 	function wheel(event: WheelEvent): void {
 		if (!measured) return;
 		event.preventDefault();
-		smooth = false;
+		stopAnimating();
 		zoomTo(scale * wheelZoomFactor(event.deltaY, event.deltaMode), anchorOf(event));
 	}
 
@@ -228,7 +291,7 @@
 	function pointerMove(event: PointerEvent): void {
 		if (!pointers.has(event.pointerId)) return;
 		pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-		smooth = false;
+		stopAnimating();
 		if (pointers.size >= 2) {
 			pinchMove();
 			return;
@@ -266,7 +329,12 @@
 	function pointerUp(event: PointerEvent): void {
 		const start = tap;
 		pointers.delete(event.pointerId);
-		if (pointers.size > 0) return;
+		if (pointers.size > 0) {
+			// A pinch that loses a finger carries on as a drag from where the
+			// remaining one now is, rather than from where the gesture began.
+			rebaseDrag();
+			return;
+		}
 		// Lifting the last finger of a pinch travels far enough to read as a
 		// swipe, so a pinch ends the gesture rather than turning the page.
 		if (pinched) {
@@ -295,6 +363,12 @@
 	function pointerCancel(event: PointerEvent): void {
 		pointers.delete(event.pointerId);
 		if (pointers.size === 0) pinched = false;
+		else rebaseDrag();
+	}
+
+	function rebaseDrag(): void {
+		const [remaining] = [...pointers.values()];
+		if (remaining) drag = { x: remaining.x, y: remaining.y, offset: { ...offset } };
 	}
 
 	function pannableAcross(): boolean {
@@ -318,9 +392,15 @@
 	}
 
 	function handleKey(event: KeyboardEvent): void {
-		if (event.ctrlKey || event.metaKey || event.altKey) return;
+		if (event.ctrlKey || event.metaKey || event.altKey || event.defaultPrevented) return;
 		if (isTypingTarget(event.target)) return;
-		switch (event.key) {
+		// A pane switched away from is still mounted, and a dialog over the scan
+		// has the reader's attention; neither answers keys aimed elsewhere.
+		if (!onScreen() || modalOpen()) return;
+		// Lower-cased so caps lock cannot turn a page the wrong way; the shift
+		// key alone decides the direction.
+		const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+		switch (key) {
 			case '+':
 			case '=':
 				event.preventDefault();
@@ -345,13 +425,8 @@
 				return;
 			case 'r':
 				event.preventDefault();
-				turn(1);
+				turn(event.shiftKey ? -1 : 1);
 				return;
-			case 'R':
-				event.preventDefault();
-				turn(-1);
-				return;
-			case 'F':
 			case 'f':
 				event.preventDefault();
 				void toggleFullscreen();
@@ -381,8 +456,22 @@
 		if (next.x === offset.x && next.y === offset.y) return;
 		event.preventDefault();
 		event.stopPropagation();
-		smooth = !prefersReducedMotion();
+		animate();
 		offset = next;
+	}
+
+	// A pane the mobile tabs have switched away from is hidden with
+	// `visibility`, which is only reported when the CSS check is asked for.
+	function onScreen(): boolean {
+		if (!root) return false;
+		if (typeof root.checkVisibility === 'function') {
+			return root.checkVisibility({ checkVisibilityCSS: true });
+		}
+		return root.offsetParent !== null && getComputedStyle(root).visibility !== 'hidden';
+	}
+
+	function modalOpen(): boolean {
+		return document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]') !== null;
 	}
 
 	function isTypingTarget(target: EventTarget | null): boolean {
@@ -405,10 +494,12 @@
 	<div
 		class="stage"
 		class:grabbable={pannable}
+		class:free-scroll={!pannable}
 		bind:this={stageEl}
 		role="application"
 		tabindex="0"
-		aria-label={`${alt}. ${bilingualAriaLabel(archiveLabels.viewerHint)}`}
+		aria-label={alt}
+		aria-describedby={hintId}
 		onwheel={wheel}
 		onpointerdown={pointerDown}
 		onpointermove={pointerMove}
@@ -417,21 +508,40 @@
 		ondblclick={doubleClick}
 		onkeydown={stageKey}
 	>
-		<div class="canvas" class:smooth style={canvasStyle}>
-			{#if previewSrc}
-				<img class="layer" src={previewSrc} alt="" onload={(event) => measure(event, false)} />
+		<p class="hint" id={hintId}>{bilingualAriaLabel(archiveLabels.viewerHint)}</p>
+		<div class="canvas" class:smooth class:busy class:unmeasured={!measured} style={canvasStyle}>
+			{#if preview && !measuredSharp}
+				<img
+					class="layer"
+					src={preview}
+					alt=""
+					draggable="false"
+					onload={(event) => measure(event, false)}
+					onerror={() => (previewBroken = true)}
+				/>
 			{/if}
 			{#if src}
-				<img class="layer" {src} {alt} onload={(event) => measure(event, true)} />
+				<img
+					class="layer"
+					{src}
+					{alt}
+					draggable="false"
+					onload={(event) => measure(event, true)}
+				/>
 			{/if}
 			{#if overlay}{@render overlay()}{/if}
 		</div>
-		{#if fallback && !src && !previewSrc}
+		{#if fallback && !src && !preview}
 			<div class="fallback">{@render fallback()}</div>
 		{/if}
 	</div>
 
-	<div class="rail" role="toolbar" aria-label={bilingualAriaLabel(archiveLabels.viewerControls)}>
+	<div
+		class="rail"
+		bind:this={railEl}
+		role="group"
+		aria-label={bilingualAriaLabel(archiveLabels.viewerControls)}
+	>
 		<button
 			type="button"
 			onclick={() => zoomTo(scale / BUTTON_ZOOM_STEP, { x: 0, y: 0 }, true)}
@@ -441,8 +551,10 @@
 		>
 			<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8h9" /></svg>
 		</button>
-		<output class="tnum readout" aria-label={bilingualAriaLabel(archiveLabels.zoomLevel)}
-			>{percent}%</output
+		<output
+			class="tnum readout"
+			aria-live="off"
+			aria-label={`${bilingualAriaLabel(archiveLabels.zoomLevel)} ${percent}%`}>{percent}%</output
 		>
 		<button
 			type="button"
@@ -558,6 +670,19 @@
 		touch-action: none;
 		user-select: none;
 	}
+	/* Until the page is large enough to drag, a finger on the scan still
+	   scrolls the page it sits on; the swipe and the pinch are read here. */
+	.free-scroll {
+		touch-action: pan-y;
+	}
+	.hint {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
 	.stage:focus-visible {
 		outline: 2px solid var(--archive-gilt);
 		outline-offset: -2px;
@@ -575,9 +700,19 @@
 		transform-origin: center;
 		background: white;
 		box-shadow: 0 18px 45px -12px rgb(0 0 0 / 65%);
+		transition: opacity 140ms ease 180ms;
 	}
 	.canvas.smooth {
-		transition: transform 160ms ease-out;
+		transition: transform 160ms ease-out, opacity 140ms ease 180ms;
+	}
+	/* Nothing to draw yet: an unsized canvas would flash its paper and shadow
+	   as a dot in the middle of the stage. */
+	.canvas.unmeasured {
+		visibility: hidden;
+	}
+	/* A page still loading dims only if the wait is long enough to notice. */
+	.canvas.busy {
+		opacity: 0.45;
 	}
 	.layer {
 		position: absolute;
@@ -585,6 +720,9 @@
 		display: block;
 		width: 100%;
 		height: 100%;
+		object-fit: contain;
+		pointer-events: none;
+		-webkit-user-drag: none;
 	}
 	.fallback {
 		position: absolute;
