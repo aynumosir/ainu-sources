@@ -1,0 +1,20 @@
+{
+	"revisionId": "6e7a63ab-6303-535b-b8a5-25b97c7b2b88",
+	"pages": "scan",
+	"origin": "headings",
+	"note": "Titles follow the printed 目次 (scan pages 2–5); positions are the scan pages where each heading opens. Folio detection reached 17 pages of this scan and none of the chapter openings, and the offset between printed and scan pages drifts from 1 to 5 across the book.",
+	"sections": [
+		{ "title": "はじめに", "pageStart": 6 },
+		{ "title": "序章 アイヌとはどのような人びとか", "pageStart": 16 },
+		{ "title": "第一章 縄文――一万年の伝統を継ぐ", "pageStart": 66 },
+		{ "title": "第二章 交易――沈黙交易とエスニシティ", "pageStart": 100 },
+		{ "title": "第三章 伝説――古代ローマからアイヌへ", "pageStart": 132 },
+		{ "title": "第四章 呪術――行進する人びとと陰陽道", "pageStart": 162 },
+		{ "title": "第五章 疫病――アイヌの疱瘡神と蘇民将来", "pageStart": 188 },
+		{ "title": "第六章 祭祀――狩猟民と山の神の農耕儀礼", "pageStart": 212 },
+		{ "title": "第七章 黄金――アイヌは黄金の民だったか", "pageStart": 244 },
+		{ "title": "第八章 現代――アイヌとして生きる", "pageStart": 274 },
+		{ "title": "おわりに", "pageStart": 294 },
+		{ "title": "引用文献", "pageStart": 299 }
+	]
+}
