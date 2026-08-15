@@ -746,6 +746,10 @@
 				<dt>Ctrl/Cmd + ← →</dt><dd>Turn page from any control</dd>
 				<dt>Ctrl/Cmd + S</dt><dd>Save the current buffer</dd>
 				<dt>g</dt><dd>Focus page field</dd>
+				<dt>+ −</dt><dd>Zoom the scan in or out</dd>
+				<dt>0 / 1 / w</dt><dd>Fit page, actual size, fit width</dd>
+				<dt>r / R</dt><dd>Rotate right or left</dd>
+				<dt>f</dt><dd>Fullscreen scan</dd>
 				<dt>?</dt><dd>Open shortcut help</dd>
 			</dl>
 		</div>

@@ -3,6 +3,7 @@
 	import { onMount, untrack } from 'svelte';
 	import ArchiveHead from '$lib/components/archive/ArchiveHead.svelte';
 	import BilingualLabel from '$lib/components/archive/BilingualLabel.svelte';
+	import ScanViewer from '$lib/components/archive/ScanViewer.svelte';
 	import { archiveFetch, archiveSession } from '$lib/archive/session.svelte';
 	import { archiveUsage } from '$lib/archive/usage.svelte';
 	import { archiveLabels, bilingualAriaLabel } from '$lib/archive/bilingual-labels';
@@ -41,8 +42,6 @@
 	let ocrProbe = $state<OcrProbe>('idle');
 	let textCache = $state<Record<number, TextEntry>>({});
 	let stageEl: HTMLElement | undefined = $state();
-	let dragStartX = 0;
-	let dragStartY = 0;
 	let draggingPanel = false;
 
 	const objectUrls = new Set<string>();
@@ -231,10 +230,16 @@
 		const low = await imageUrl(scanPage, 300);
 		if (scanPage !== currentPage) return;
 		imageLowSrc = low;
+		// The page being left goes with its own geometry: a scan of different
+		// proportions must not be stretched onto the incoming page's frame.
+		if (low) imageHighSrc = null;
 		const high = await imageUrl(scanPage, 1200);
 		if (scanPage !== currentPage) return;
 		imageHighSrc = high;
-		imageMissing = !high;
+		// A page with only its small derivative is readable enough to show, and
+		// says so; nothing at all is what the missing-page notice is for.
+		imageMissing = !high && !low;
+		modeNotice = !high && low ? 'The full-resolution page image is still generating.' : null;
 		imageLoading = false;
 	}
 
@@ -329,9 +334,6 @@
 		} else if (event.key === '?') {
 			event.preventDefault();
 			shortcutHelpOpen = true;
-		} else if (event.key === 'f') {
-			event.preventDefault();
-			void stageEl?.requestFullscreen?.();
 		} else if (event.key === '/') {
 			event.preventDefault();
 			findOpen = true;
@@ -349,26 +351,6 @@
 		location.href = `/archive/search?q=${encodeURIComponent(findQuery.trim())}&source_slug=${encodeURIComponent(data.source.slug)}`;
 	}
 
-	function pointerDown(event: PointerEvent): void {
-		dragStartX = event.clientX;
-		dragStartY = event.clientY;
-	}
-
-	function pointerUp(event: PointerEvent): void {
-		const dx = event.clientX - dragStartX;
-		const dy = event.clientY - dragStartY;
-		if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) {
-			go(dx < 0 ? 1 : -1);
-			return;
-		}
-		const target = event.currentTarget instanceof HTMLElement ? event.currentTarget : null;
-		if (!target || Math.abs(dx) > 8 || Math.abs(dy) > 8) return;
-		const rect = target.getBoundingClientRect();
-		const x = event.clientX - rect.left;
-		if (x < rect.width / 3) go(-1);
-		if (x > (rect.width * 2) / 3) go(1);
-	}
-
 	function startPanelDrag(event: PointerEvent): void {
 		draggingPanel = true;
 		event.currentTarget instanceof HTMLElement && event.currentTarget.setPointerCapture(event.pointerId);
@@ -383,6 +365,16 @@
 		draggingPanel = false;
 	}
 </script>
+
+{#snippet imagePlaceholder()}
+	{#if imageMissing}
+		<div class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-8 text-center text-[15px] text-[var(--archive-subtle)]">
+			Page image is generating. Try this page again shortly.
+		</div>
+	{:else if imageLoading}
+		<div class="h-[70svh] w-[min(70vw,42rem)] animate-pulse border border-[var(--archive-border)] bg-[var(--archive-paper)]"></div>
+	{/if}
+{/snippet}
 
 {#snippet metadataContent()}
 	<div class="space-y-5">
@@ -627,34 +619,25 @@
 				<div class="absolute inset-y-0 right-2 z-10 flex items-center">
 					<button type="button" aria-label={bilingualAriaLabel(archiveLabels.nextPage)} onclick={() => go(1)} class="h-12 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[17px] hover:border-[var(--archive-gilt)]">›</button>
 				</div>
-				<section
-					role="application"
-					class="flex h-full min-h-[calc(100svh-4rem)] touch-pan-y items-center justify-center overflow-auto bg-[var(--archive-bg)] p-4"
-					onpointerdown={pointerDown}
-					onpointerup={pointerUp}
-				>
+				<section class="flex h-full min-h-[calc(100svh-4rem)] items-stretch justify-center overflow-hidden bg-[var(--archive-bg)]">
 					{#if takedownNotice}
-						<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[15px] text-[var(--archive-subtle)]">{takedownNotice}</div>
+						<div class="m-auto max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center text-[15px] text-[var(--archive-subtle)]">{takedownNotice}</div>
 					{:else if mode === 'pdf'}
-						<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center">
+						<div class="m-auto max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-center">
 							<h2 class="text-[17px] font-semibold">PDF</h2>
 							<p class="mt-3 text-[15px] leading-7 text-[var(--archive-subtle)]">Continuous PDF view is unavailable. Use page image mode.</p>
 						</div>
 					{:else}
-						<div class="relative max-h-full max-w-full">
-							{#if imageLowSrc && !imageHighSrc}
-								<img src={imageLowSrc} alt="" class="max-h-[calc(100svh-7rem)] max-w-full blur-sm" />
-							{/if}
-							{#if imageHighSrc}
-								<img src={imageHighSrc} alt={`Scan page ${currentPage}`} class="max-h-[calc(100svh-7rem)] max-w-full border border-[var(--archive-border)] bg-white shadow-sm" />
-							{:else if imageMissing}
-								<div class="border border-dashed border-[var(--archive-border)] bg-[var(--archive-paper)] p-8 text-center text-[15px] text-[var(--archive-subtle)]">
-									Page image is generating. Try this page again shortly.
-								</div>
-							{:else if imageLoading}
-								<div class="h-[70svh] w-[min(70vw,42rem)] animate-pulse border border-[var(--archive-border)] bg-[var(--archive-paper)]"></div>
-							{/if}
-						</div>
+						<ScanViewer
+							src={imageHighSrc}
+							previewSrc={imageLowSrc}
+							alt={`Scan page ${currentPage}`}
+							busy={imageLoading}
+							resetKey={currentPage}
+							fullscreenTarget={stageEl}
+							onturn={(delta) => go(delta)}
+							fallback={imagePlaceholder}
+						/>
 					{/if}
 				</section>
 			</main>
@@ -695,7 +678,7 @@
 
 	{#if quotaModalOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-			<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg">
+			<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-label="Archive stream limit reached">
 				<h2 class="text-[17px] font-semibold">Archive stream limit reached</h2>
 				<p class="mt-3 leading-7 text-[var(--archive-subtle)]">The daily byte budget or stream limit is exhausted. Reset time: {resetTime}.</p>
 				<button type="button" class="mt-4 border border-[var(--archive-border)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]" onclick={() => (quotaModalOpen = false)}>Close</button>
@@ -705,7 +688,7 @@
 
 	{#if shortcutHelpOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-			<div class="max-w-lg border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg">
+			<div class="max-w-lg border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-label={bilingualAriaLabel(archiveLabels.shortcuts)}>
 				<BilingualLabel tag="h2" ja={archiveLabels.shortcuts.ja} en={archiveLabels.shortcuts.en} class="text-[17px] font-semibold" />
 				<dl class="mt-4 grid grid-cols-[5rem_1fr] gap-2 text-[13px]">
 					<dt class="archive-mono">← → / k j</dt><dd>Previous or next page</dd>
@@ -714,6 +697,9 @@
 					<dt class="archive-mono">m</dt><dd>Toggle render mode</dd>
 					<dt class="archive-mono">c</dt><dd>Copy citation</dd>
 					<dt class="archive-mono">/</dt><dd>Open in-book search handoff</dd>
+					<dt class="archive-mono">+ −</dt><dd>Zoom the scan in or out</dd>
+					<dt class="archive-mono">0 / 1 / w</dt><dd>Fit page, actual size, fit width</dd>
+					<dt class="archive-mono">r / R</dt><dd>Rotate right or left</dd>
 					<dt class="archive-mono">f</dt><dd>Fullscreen stage</dd>
 					<dt class="archive-mono">?</dt><dd>Show this help</dd>
 				</dl>
@@ -724,22 +710,24 @@
 
 	{#if findOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-			<form
-				class="w-full max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 shadow-lg"
-				onsubmit={(event) => {
-					event.preventDefault();
-					submitFind();
-				}}
-			>
-				<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
-					Search this work
-					<input bind:value={findQuery} class="mt-2 w-full border border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 py-2 text-[15px] text-[var(--archive-text)]" />
-				</label>
-				<div class="mt-4 flex justify-end gap-2">
-					<button type="button" class="border border-[var(--archive-border)] px-3 py-2 text-[13px]" onclick={() => (findOpen = false)}>Cancel</button>
-					<button type="submit" class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">Search</button>
-				</div>
-			</form>
+			<div class="w-full max-w-md" role="dialog" aria-label={bilingualAriaLabel(archiveLabels.search)}>
+				<form
+					class="w-full border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 shadow-lg"
+					onsubmit={(event) => {
+						event.preventDefault();
+						submitFind();
+					}}
+				>
+					<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
+						Search this work
+						<input bind:value={findQuery} class="mt-2 w-full border border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 py-2 text-[15px] text-[var(--archive-text)]" />
+					</label>
+					<div class="mt-4 flex justify-end gap-2">
+						<button type="button" class="border border-[var(--archive-border)] px-3 py-2 text-[13px]" onclick={() => (findOpen = false)}>Cancel</button>
+						<button type="submit" class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">Search</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	{/if}
 
