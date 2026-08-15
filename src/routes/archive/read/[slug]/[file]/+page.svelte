@@ -236,7 +236,10 @@
 		const high = await imageUrl(scanPage, 1200);
 		if (scanPage !== currentPage) return;
 		imageHighSrc = high;
-		imageMissing = !high;
+		// A page with only its small derivative is readable enough to show, and
+		// says so; nothing at all is what the missing-page notice is for.
+		imageMissing = !high && !low;
+		modeNotice = !high && low ? 'The full-resolution page image is still generating.' : null;
 		imageLoading = false;
 	}
 
@@ -675,7 +678,7 @@
 
 	{#if quotaModalOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-			<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-modal="true" aria-label="Archive stream limit reached">
+			<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-label="Archive stream limit reached">
 				<h2 class="text-[17px] font-semibold">Archive stream limit reached</h2>
 				<p class="mt-3 leading-7 text-[var(--archive-subtle)]">The daily byte budget or stream limit is exhausted. Reset time: {resetTime}.</p>
 				<button type="button" class="mt-4 border border-[var(--archive-border)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]" onclick={() => (quotaModalOpen = false)}>Close</button>
@@ -685,7 +688,7 @@
 
 	{#if shortcutHelpOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-			<div class="max-w-lg border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-modal="true" aria-label={bilingualAriaLabel(archiveLabels.shortcuts)}>
+			<div class="max-w-lg border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-label={bilingualAriaLabel(archiveLabels.shortcuts)}>
 				<BilingualLabel tag="h2" ja={archiveLabels.shortcuts.ja} en={archiveLabels.shortcuts.en} class="text-[17px] font-semibold" />
 				<dl class="mt-4 grid grid-cols-[5rem_1fr] gap-2 text-[13px]">
 					<dt class="archive-mono">← → / k j</dt><dd>Previous or next page</dd>
@@ -706,23 +709,25 @@
 	{/if}
 
 	{#if findOpen}
-		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-label={bilingualAriaLabel(archiveLabels.search)}>
-			<form
-				class="w-full max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 shadow-lg"
-				onsubmit={(event) => {
-					event.preventDefault();
-					submitFind();
-				}}
-			>
-				<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
-					Search this work
-					<input bind:value={findQuery} class="mt-2 w-full border border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 py-2 text-[15px] text-[var(--archive-text)]" />
-				</label>
-				<div class="mt-4 flex justify-end gap-2">
-					<button type="button" class="border border-[var(--archive-border)] px-3 py-2 text-[13px]" onclick={() => (findOpen = false)}>Cancel</button>
-					<button type="submit" class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">Search</button>
-				</div>
-			</form>
+		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+			<div class="w-full max-w-md" role="dialog" aria-label={bilingualAriaLabel(archiveLabels.search)}>
+				<form
+					class="w-full border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 shadow-lg"
+					onsubmit={(event) => {
+						event.preventDefault();
+						submitFind();
+					}}
+				>
+					<label class="block text-[13px] font-medium text-[var(--archive-subtle)]">
+						Search this work
+						<input bind:value={findQuery} class="mt-2 w-full border border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 py-2 text-[15px] text-[var(--archive-text)]" />
+					</label>
+					<div class="mt-4 flex justify-end gap-2">
+						<button type="button" class="border border-[var(--archive-border)] px-3 py-2 text-[13px]" onclick={() => (findOpen = false)}>Cancel</button>
+						<button type="submit" class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">Search</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	{/if}
 

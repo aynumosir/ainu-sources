@@ -238,7 +238,7 @@
 	function turn(quarterTurns: number): void {
 		animate();
 		rotation = nextRotation(rotation, quarterTurns);
-		offset = { x: 0, y: 0 };
+		offset = homeOffset();
 	}
 
 	function fullscreenHost(): HTMLElement | undefined {
@@ -471,7 +471,7 @@
 	}
 
 	function modalOpen(): boolean {
-		return document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]') !== null;
+		return document.querySelector('dialog[open], [role="dialog"]') !== null;
 	}
 
 	function isTypingTarget(target: EventTarget | null): boolean {

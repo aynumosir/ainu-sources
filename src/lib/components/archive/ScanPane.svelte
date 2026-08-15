@@ -84,6 +84,10 @@
 		if (low) {
 			lowSrc = low;
 			highSrc = null;
+		} else {
+			// No preview for this page: the one on screen belongs to the page
+			// being left, and the sharp image of that page carries the wait.
+			lowSrc = null;
 		}
 		onthumbnail?.(low);
 		const high = await imageUrl(scanPage, 1200);
