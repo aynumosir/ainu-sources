@@ -161,6 +161,38 @@ describe('whole-document search results', () => {
 	});
 });
 
+describe('katakana hits for a romanized query', () => {
+	// A katakana page matches "itanki" only after normalization, and
+	// translating the match back to raw text normalized every prefix of the
+	// snippet window — quadratic work that a full results page of such hits
+	// pushed past the Worker CPU limit (Cloudflare error 1102 on
+	// /archive/search, 2026-08-17). One katakana window cost seconds of CPU,
+	// which is what both assertions below guard against.
+	it('answers a full page of normalized-only hits with correct highlights', async () => {
+		const pages = Array.from({ length: 55 }, (_, index) => ({
+			page: index + 1,
+			text: 'アイヌ イタンキ カムイ ヒト '.repeat(80).trim()
+		}));
+		await replaceOcrPages(db, 'rev-1', 'pdftotext', pages);
+		const principal = await readerPrincipal();
+
+		const started = Date.now();
+		const result = await searchArchive(db, principal, { q: 'itanki', mode: 'phrase' });
+		const elapsed = Date.now() - started;
+
+		expect(result.items).toHaveLength(50);
+		for (const item of result.items) {
+			expect(item.snippet.offsets.length).toBeGreaterThan(0);
+			for (const offset of item.snippet.offsets) {
+				expect(item.snippet.text.slice(offset.start, offset.end)).toContain('イタンキ');
+			}
+		}
+		// Workers are limited to 30 s of CPU per request; the assertion keeps a
+		// results page far under any per-request budget.
+		expect(elapsed).toBeLessThan(5_000);
+	});
+});
+
 describe('upstream content failures', () => {
 	const revision = {
 		id: 'rev-1',
