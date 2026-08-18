@@ -288,6 +288,12 @@ describe('archive pure helpers', () => {
 		const start = map.rawOffsetFor(index, false);
 		const end = map.rawOffsetFor(index + 'itanki'.length, true);
 		expect(text.slice(start, end)).toContain('イタンキ');
+		// A kana run converts as one unit, so a match inside its romanization
+		// spans the whole run rather than the exact kana behind those letters.
+		const run = buildNormalizedTextMap('イタンキ');
+		expect(run.normalized).toBe('itanki');
+		const tan = run.normalized.indexOf('tan');
+		expect('イタンキ'.slice(run.rawOffsetFor(tan, false), run.rawOffsetFor(tan + 3, true))).toBe('イタンキ');
 	});
 
 	it('keeps boundary invariants on surrogate pairs, lone surrogates, and empty text', () => {

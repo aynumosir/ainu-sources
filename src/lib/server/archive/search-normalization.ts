@@ -4,8 +4,6 @@ export const OCR_NORMALIZATION_VERSION = 1;
 
 const APOSTROPHES = /[\u0060\u00b4\u02b9\u02bc\u055a\u2018\u2019\u201b\uff07]/gu;
 const KANA_RUN = /[\p{Script_Extensions=Katakana}\p{Script_Extensions=Hiragana}\u3099\u309a\u30fb\u30fc]+/gu;
-// Same run grammar, sticky, for scanning text from a fixed offset.
-const KANA_RUN_AT = new RegExp(KANA_RUN.source, 'uy');
 const TOKEN = /[\p{L}\p{N}]+(?:['.][\p{L}\p{N}]+)*/gu;
 
 const LOSSY_LATIN_GROUPS = [
@@ -45,15 +43,15 @@ const kanaRunCache = new Map<string, string>();
 const codePointCache = new Map<string, string>();
 
 /** Kana conversion dominates normalization cost and runs repeat across any
- * real page, so converted runs are memoized with a hard size bound. */
-function convertKanaRun(run: string): string {
-	let converted = kanaRunCache.get(run);
-	if (converted === undefined) {
-		converted = convertKanaToLatn(run);
+ * real page, so each run's folded result is memoized with a hard size bound. */
+function normalizeKanaRun(run: string): string {
+	let normalized = kanaRunCache.get(run);
+	if (normalized === undefined) {
+		normalized = foldLatin(convertKanaToLatn(run));
 		if (kanaRunCache.size >= UNIT_CACHE_LIMIT) kanaRunCache.clear();
-		kanaRunCache.set(run, converted);
+		kanaRunCache.set(run, normalized);
 	}
-	return converted;
+	return normalized;
 }
 
 function foldCodePoint(char: string): string {
@@ -82,18 +80,20 @@ type NormalizedUnitEmitter = (piece: string, unitStart: number, unitEnd: number)
  * Walks the text in normalization units — a maximal kana run, or one code
  * point — and hands each unit's normalized piece to `emit` with its source
  * span. Both normalizeOcrText and buildNormalizedTextMap run on this scanner,
- * so their outputs cannot drift apart.
+ * so their outputs cannot drift apart. The sticky run matcher is created per
+ * call: a shared one would carry mutable lastIndex between invocations.
  */
 function scanNormalizedUnits(text: string, emit: NormalizedUnitEmitter): void {
+	const kanaRunAt = new RegExp(KANA_RUN.source, 'uy');
 	let index = 0;
 	while (index < text.length) {
-		KANA_RUN_AT.lastIndex = index;
-		const run = KANA_RUN_AT.exec(text);
+		kanaRunAt.lastIndex = index;
+		const run = kanaRunAt.exec(text);
 		let unit: string;
 		let piece: string;
 		if (run) {
 			unit = run[0];
-			piece = foldLatin(convertKanaRun(unit));
+			piece = normalizeKanaRun(unit);
 		} else {
 			// codePointAt keeps lone surrogates one UTF-16 unit long, so the
 			// final boundary always lands exactly on text.length.
