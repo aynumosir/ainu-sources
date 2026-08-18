@@ -6,6 +6,7 @@ import { ArchiveHttpError } from './errors';
 import { decodePageCursor, decodeSearchCursor, encodePageCursor, encodeSearchCursor } from './cursor';
 import { archiveSearchVisibilitySql } from './gateway';
 import {
+	buildNormalizedTextMap,
 	escapeFtsLiteral,
 	expandNormalizedTokenAlternatives,
 	literalPhraseAlternatives,
@@ -480,10 +481,6 @@ function snippetWindowSql(alternatives: string[]) {
 	return sql`substr(c.text, max(1, ${firstMatch} - ${SNIPPET_WINDOW_BEFORE}), ${SNIPPET_WINDOW_CHARS})`;
 }
 
-function phraseMatches(row: RankedChunk, alternatives: string[]): boolean {
-	return alternatives.some((alternative) => row.text.includes(alternative) || row.textNorm.includes(normalizeOcrText(alternative)));
-}
-
 function serializeHit(hit: RankedChunk, query: string, maxChars: number) {
 	return {
 		// Page 0 means whole-document text with no page alignment; a citation
@@ -575,19 +572,33 @@ function makeSnippet(text: string, query: string, maxChars: number): { text: str
 }
 
 function matchOffsets(text: string, query: string): { start: number; end: number }[] {
-	const raw = allSubstringOffsets(text, query.normalize('NFC'));
-	if (raw.length > 0) return raw;
-	const normalizedText = normalizeOcrText(text);
-	const normalizedQuery = normalizeOcrText(query);
-	const normalizedRanges = allSubstringOffsets(normalizedText, normalizedQuery);
-	if (normalizedRanges.length === 0) return [];
-	const boundaries = [0];
-	for (const char of text) boundaries.push(boundaries.at(-1)! + char.length);
-	const prefixLengths = boundaries.map((boundary) => normalizeOcrText(text.slice(0, boundary)).length);
-	return normalizedRanges.map((range) => ({
-		start: boundaryForNormalizedOffset(boundaries, prefixLengths, range.start, false),
-		end: boundaryForNormalizedOffset(boundaries, prefixLengths, range.end, true)
-	}));
+	return normalizedOffsetSearch(text).offsetsFor(query);
+}
+
+/**
+ * Offset lookup over one text for any number of queries. A query present in
+ * the raw text is found directly; one that only survives normalization (a
+ * katakana page matching a romanized query) is located in the normalized
+ * text and mapped back through its boundary table, which is built once per
+ * text and reused across the tokens of one hit.
+ */
+function normalizedOffsetSearch(text: string): { offsetsFor(query: string): { start: number; end: number }[] } {
+	let map: ReturnType<typeof buildNormalizedTextMap> | null = null;
+	return {
+		offsetsFor(query: string) {
+			const raw = allSubstringOffsets(text, query.normalize('NFC'));
+			if (raw.length > 0) return raw;
+			const normalizedQuery = normalizeOcrText(query);
+			if (!normalizedQuery) return [];
+			map ??= buildNormalizedTextMap(text);
+			const ranges = allSubstringOffsets(map.normalized, normalizedQuery);
+			if (ranges.length === 0) return [];
+			return ranges.map((range) => ({
+				start: map!.rawOffsetFor(range.start, false),
+				end: map!.rawOffsetFor(range.end, true)
+			}));
+		}
+	};
 }
 
 function allSubstringOffsets(text: string, query: string): { start: number; end: number }[] {
@@ -599,15 +610,6 @@ function allSubstringOffsets(text: string, query: string): { start: number; end:
 		index = text.indexOf(query, index + Math.max(query.length, 1));
 	}
 	return offsets;
-}
-
-function boundaryForNormalizedOffset(boundaries: number[], prefixLengths: number[], offset: number, end: boolean): number {
-	for (let index = 0; index < prefixLengths.length; index += 1) {
-		if (end ? prefixLengths[index] >= offset : prefixLengths[index] > offset) {
-			return boundaries[Math.max(0, end ? index : index - 1)];
-		}
-	}
-	return boundaries.at(-1) ?? 0;
 }
 
 async function searchRegex(
@@ -961,16 +963,19 @@ async function searchSoft(
 		mode: 'soft' as const,
 		tolerance,
 		maxDistance,
-		items: page.map(({ hit, alignments, score }) => ({
-			...serializeHit(hit, opts.q, maxChars),
-			score,
-			alignments: [...alignments.values()],
-			snippet: makeSnippetForRanges(
-				hit.text,
-				[...alignments.values()].flatMap((alignment) => matchOffsets(hit.text, alignment.matched_token)),
-				maxChars
-			)
-		})),
+		items: page.map(({ hit, alignments, score }) => {
+			const offsets = normalizedOffsetSearch(hit.text);
+			return {
+				...serializeHit(hit, opts.q, maxChars),
+				score,
+				alignments: [...alignments.values()],
+				snippet: makeSnippetForRanges(
+					hit.text,
+					[...alignments.values()].flatMap((alignment) => offsets.offsetsFor(alignment.matched_token)),
+					maxChars
+				)
+			};
+		}),
 		nextCursor:
 			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
 		total: bounded.length,
@@ -1171,16 +1176,24 @@ async function searchSimilar(
 	return {
 		mode: 'similar' as const,
 		reference: { revision: revisionId, page: pageNumber },
-		items: page.map(({ hit, score, shared, sharedTokens }) => ({
-			...serializeHit(hit, sharedTokens.join(' '), maxChars),
-			score,
-			sharedNgrams: shared,
-			snippet: makeSnippetForRanges(
-				hit.text,
-				sharedTokens.flatMap((token) => matchOffsets(hit.text, token)),
-				maxChars
-			)
-		})),
+		items: page.map(({ hit, score, shared, sharedTokens }) => {
+			// The score only read the first SIMILAR_REFERENCE_CHAR_CAP characters
+			// of each candidate; the snippet anchors on shared tokens from that
+			// same prefix, so a whole-document chunk does not get scanned in full
+			// for a highlight.
+			const snippetText = hit.text.slice(0, SIMILAR_REFERENCE_CHAR_CAP);
+			const offsets = normalizedOffsetSearch(snippetText);
+			return {
+				...serializeHit({ ...hit, text: snippetText }, sharedTokens.join(' '), maxChars),
+				score,
+				sharedNgrams: shared,
+				snippet: makeSnippetForRanges(
+					snippetText,
+					sharedTokens.flatMap((token) => offsets.offsetsFor(token)),
+					maxChars
+				)
+			};
+		}),
 		nextCursor:
 			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
 		total: bounded.length,

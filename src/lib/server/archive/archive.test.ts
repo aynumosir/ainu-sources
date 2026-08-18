@@ -38,7 +38,12 @@ import { authorizeContent } from './gateway';
 import { renderManifest } from './manifest';
 import { verifyMcpAssertion } from './mcp-assertion';
 import { damerauLevenshtein, listOcrPages, replaceOcrPages, searchArchive, searchOcr } from './ocr';
-import { escapeFtsLiteral, expandNormalizedTokenAlternatives, normalizeOcrText } from './search-normalization';
+import {
+	buildNormalizedTextMap,
+	escapeFtsLiteral,
+	expandNormalizedTokenAlternatives,
+	normalizeOcrText
+} from './search-normalization';
 import { compileLinearRegex, extractRegexLiterals, parseRegexAst } from './linear-regex';
 import { buildRangeResponse, quotedSha256Etag } from './range';
 import { archiveMutationPrincipal, throwArchiveError } from './route';
@@ -268,6 +273,45 @@ describe('archive pure helpers', () => {
 		const b = { updatedAt: '2026-01-01T00:00:00.000Z', id: 'b' };
 		expect(decodeCursor(encodeCursor(a))).toEqual(a);
 		expect(compareCursor(a, b)).toBeLessThan(0);
+	});
+
+	it('maps a normalized match back to the source-text unit that produced it', () => {
+		const text = "Āynu ’トゥ’ kám アイヌ イタンキ";
+		const map = buildNormalizedTextMap(text);
+		expect(map.normalized).toBe(normalizeOcrText(text));
+		expect(map.rawBoundaries.at(-1)).toBe(text.length);
+		for (let i = 1; i < map.prefixLengths.length; i += 1) {
+			expect(map.prefixLengths[i]).toBeGreaterThanOrEqual(map.prefixLengths[i - 1]);
+		}
+		const index = map.normalized.indexOf('itanki');
+		expect(index).toBeGreaterThanOrEqual(0);
+		const start = map.rawOffsetFor(index, false);
+		const end = map.rawOffsetFor(index + 'itanki'.length, true);
+		expect(text.slice(start, end)).toContain('イタンキ');
+	});
+
+	it('keeps boundary invariants on surrogate pairs, lone surrogates, and empty text', () => {
+		for (const text of ['アイヌ𠮷', 'アイヌ\uD800', '']) {
+			const map = buildNormalizedTextMap(text);
+			expect(map.rawBoundaries.at(-1)).toBe(text.length);
+			expect(map.normalized).toBe(normalizeOcrText(text));
+		}
+	});
+
+	it('normalizes the corpus scripts through kana conversion and mark folding', () => {
+		expect(normalizeOcrText('アイヌ イタンキ')).toBe('ainu itanki');
+		expect(normalizeOcrText('Айны')).toBe('аины');
+		expect(normalizeOcrText('Straße')).toBe('strasse');
+	});
+
+	it('builds the offset map over a long katakana window in linear time', () => {
+		// Quadratic prefix re-normalization at this size costs hours; a
+		// normalized-only results page has to stay far inside a request budget.
+		const text = 'アイヌ イタンキ カムイ ヒト '.repeat(6_000).slice(0, 120_000);
+		const started = Date.now();
+		const map = buildNormalizedTextMap(text);
+		expect(Date.now() - started).toBeLessThan(2_000);
+		expect(map.normalized).toContain('itanki');
 	});
 
 	it('parses byte ranges and returns 416 for malformed input', () => {
