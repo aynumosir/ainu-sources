@@ -305,6 +305,11 @@ describe('archive pure helpers', () => {
 		// Lowercasing is unit-local, so a word-final sigma folds to σ rather
 		// than the context-sensitive ς a whole-string fold would produce.
 		expect(normalizeOcrText('ΟΣ')).toBe('οσ');
+		// A decomposed dakuten converts to the composed kana, which the mark
+		// fold then reduces to its base — decomposed and precomposed input
+		// normalize identically.
+		expect(normalizeOcrText('\u30b9\u3099')).toBe('ス');
+		expect(normalizeOcrText('\u30ba')).toBe('ス');
 	});
 
 	it('builds the offset map over a long katakana window in linear time', () => {
