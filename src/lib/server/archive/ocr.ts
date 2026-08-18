@@ -481,7 +481,15 @@ function snippetWindowSql(alternatives: string[]) {
 	return sql`substr(c.text, max(1, ${firstMatch} - ${SNIPPET_WINDOW_BEFORE}), ${SNIPPET_WINDOW_CHARS})`;
 }
 
-function serializeHit(hit: RankedChunk, query: string, maxChars: number) {
+/** Metadata shared by every search mode, plus the snippet; modes that compute
+ * their own snippet offsets (regex, soft, similar) pass it in rather than
+ * having a phrase-style snippet built and thrown away. */
+function serializeHit(
+	hit: RankedChunk,
+	query: string,
+	maxChars: number,
+	snippet: ReturnType<typeof makeSnippet> = makeSnippet(hit.text, query, maxChars)
+) {
 	return {
 		// Page 0 means whole-document text with no page alignment; a citation
 		// must say so rather than claim a page that does not exist.
@@ -504,7 +512,7 @@ function serializeHit(hit: RankedChunk, query: string, maxChars: number) {
 		block: hit.block,
 		variant: hit.variant,
 		rank: hit.rank,
-		snippet: makeSnippet(hit.text, query, maxChars)
+		snippet
 	};
 }
 
@@ -676,8 +684,7 @@ async function searchRegex(
 	return {
 		mode: 'regex' as const,
 		items: page.map(({ hit, range }) => ({
-			...serializeHit(hit, pattern, opts.maxChars ?? 240),
-			snippet: makeSnippetForRanges(hit.text, [range], opts.maxChars ?? 240)
+			...serializeHit(hit, pattern, opts.maxChars ?? 240, makeSnippetForRanges(hit.text, [range], opts.maxChars ?? 240))
 		})),
 		nextCursor:
 			afterCursor.length > limit && last ? encodeSearchCursor({ rank: last.hit.rank, chunkId: last.hit.chunkId }) : null,
@@ -966,14 +973,18 @@ async function searchSoft(
 		items: page.map(({ hit, alignments, score }) => {
 			const offsets = normalizedOffsetSearch(hit.text);
 			return {
-				...serializeHit(hit, opts.q, maxChars),
+				...serializeHit(
+					hit,
+					opts.q,
+					maxChars,
+					makeSnippetForRanges(
+						hit.text,
+						[...alignments.values()].flatMap((alignment) => offsets.offsetsFor(alignment.matched_token)),
+						maxChars
+					)
+				),
 				score,
-				alignments: [...alignments.values()],
-				snippet: makeSnippetForRanges(
-					hit.text,
-					[...alignments.values()].flatMap((alignment) => offsets.offsetsFor(alignment.matched_token)),
-					maxChars
-				)
+				alignments: [...alignments.values()]
 			};
 		}),
 		nextCursor:
@@ -1184,14 +1195,18 @@ async function searchSimilar(
 			const snippetText = hit.text.slice(0, SIMILAR_REFERENCE_CHAR_CAP);
 			const offsets = normalizedOffsetSearch(snippetText);
 			return {
-				...serializeHit({ ...hit, text: snippetText }, sharedTokens.join(' '), maxChars),
+				...serializeHit(
+					{ ...hit, text: snippetText },
+					sharedTokens.join(' '),
+					maxChars,
+					makeSnippetForRanges(
+						snippetText,
+						sharedTokens.flatMap((token) => offsets.offsetsFor(token)),
+						maxChars
+					)
+				),
 				score,
-				sharedNgrams: shared,
-				snippet: makeSnippetForRanges(
-					snippetText,
-					sharedTokens.flatMap((token) => offsets.offsetsFor(token)),
-					maxChars
-				)
+				sharedNgrams: shared
 			};
 		}),
 		nextCursor:

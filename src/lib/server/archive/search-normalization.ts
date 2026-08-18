@@ -27,12 +27,17 @@ export type NormalizedToken = { token: string; position: number };
  * converted as a whole, every other code point is folded alone (apostrophe
  * variants, canonical marks, case, ß). The normalized text is exactly the
  * concatenation of the normalized units, which is what lets
- * {@link buildNormalizedTextMap} map offsets in one pass. Unicode composition
- * across unit boundaries never applies here: marks are folded away with their
- * base character, and no script in this corpus composes two base characters.
+ * {@link buildNormalizedTextMap} map offsets in one pass. Folding is unit-local
+ * by design: a Greek word-final sigma folds to σ rather than ς, and Hangul
+ * jamo stay decomposed, because both outcomes need context across units.
+ * Neither script occurs in this corpus.
  */
 export function normalizeOcrText(text: string): string {
-	return buildNormalizedTextMap(text).normalized;
+	let normalized = '';
+	scanNormalizedUnits(text, (piece) => {
+		normalized += piece;
+	});
+	return normalized;
 }
 
 const UNIT_CACHE_LIMIT = 8192;
@@ -71,11 +76,41 @@ function foldLatin(unit: string): string {
 		.replaceAll('ß', 'ss');
 }
 
+type NormalizedUnitEmitter = (piece: string, unitStart: number, unitEnd: number) => void;
+
+/**
+ * Walks the text in normalization units — a maximal kana run, or one code
+ * point — and hands each unit's normalized piece to `emit` with its source
+ * span. Both normalizeOcrText and buildNormalizedTextMap run on this scanner,
+ * so their outputs cannot drift apart.
+ */
+function scanNormalizedUnits(text: string, emit: NormalizedUnitEmitter): void {
+	let index = 0;
+	while (index < text.length) {
+		KANA_RUN_AT.lastIndex = index;
+		const run = KANA_RUN_AT.exec(text);
+		let unit: string;
+		let piece: string;
+		if (run) {
+			unit = run[0];
+			piece = foldLatin(convertKanaRun(unit));
+		} else {
+			// codePointAt keeps lone surrogates one UTF-16 unit long, so the
+			// final boundary always lands exactly on text.length.
+			const unitLength = (text.codePointAt(index) ?? 0) > 0xffff ? 2 : 1;
+			unit = text.slice(index, index + unitLength);
+			piece = foldCodePoint(unit);
+		}
+		emit(piece, index, index + unit.length);
+		index += unit.length;
+	}
+}
+
 export type NormalizedTextMap = {
 	/** normalizeOcrText of the source text. */
 	normalized: string;
-	/** UTF-16 offset in the source text where code point i starts; the last
-	 * entry is text.length. */
+	/** UTF-16 offset in the source text where normalization unit i starts (a
+	 * kana run or one code point); the last entry is text.length. */
 	rawBoundaries: number[];
 	/** Length of {@link normalized} produced by the source prefix that ends at
 	 * rawBoundaries[i]. */
@@ -96,24 +131,11 @@ export function buildNormalizedTextMap(text: string): NormalizedTextMap {
 	const rawBoundaries: number[] = [0];
 	const prefixLengths: number[] = [0];
 	let normalized = '';
-	let index = 0;
-	while (index < text.length) {
-		KANA_RUN_AT.lastIndex = index;
-		const run = KANA_RUN_AT.exec(text);
-		let unitLength: number;
-		if (run) {
-			normalized += foldLatin(convertKanaRun(run[0]));
-			unitLength = run[0].length;
-		} else {
-			// codePointAt keeps lone surrogates one UTF-16 unit long, so the
-			// final boundary always lands exactly on text.length.
-			unitLength = (text.codePointAt(index) ?? 0) > 0xffff ? 2 : 1;
-			normalized += foldCodePoint(text.slice(index, index + unitLength));
-		}
-		index += unitLength;
-		rawBoundaries.push(index);
+	scanNormalizedUnits(text, (piece, _unitStart, unitEnd) => {
+		normalized += piece;
+		rawBoundaries.push(unitEnd);
 		prefixLengths.push(normalized.length);
-	}
+	});
 	return {
 		normalized,
 		rawBoundaries,

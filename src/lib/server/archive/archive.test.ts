@@ -302,6 +302,9 @@ describe('archive pure helpers', () => {
 		expect(normalizeOcrText('アイヌ イタンキ')).toBe('ainu itanki');
 		expect(normalizeOcrText('Айны')).toBe('аины');
 		expect(normalizeOcrText('Straße')).toBe('strasse');
+		// Lowercasing is unit-local, so a word-final sigma folds to σ rather
+		// than the context-sensitive ς a whole-string fold would produce.
+		expect(normalizeOcrText('ΟΣ')).toBe('οσ');
 	});
 
 	it('builds the offset map over a long katakana window in linear time', () => {
