@@ -190,6 +190,13 @@
       "when": 1786684022079,
       "tag": "0026_archive_revision_sections",
       "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "6",
+      "when": 1788434348011,
+      "tag": "0027_person_slug_redirects",
+      "breakpoints": true
     }
   ]
 }

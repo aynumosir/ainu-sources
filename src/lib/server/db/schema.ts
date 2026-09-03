@@ -210,7 +210,13 @@ export const persons = sqliteTable(
 		updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now),
 
 		// --- durability / lifecycle (Phase 2 additive) ---
+		/** active | merged */
 		status: text('status').notNull().default('active'),
+		/** when status='merged', the person this row folds into (soft-merge) */
+		mergedIntoPersonId: text('merged_into_person_id').references(
+			(): AnySQLiteColumn => persons.id,
+			{ onDelete: 'restrict' }
+		),
 		origin: text('origin'),
 		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
 		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
@@ -485,6 +491,20 @@ export const slugRedirects = sqliteTable(
 		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
 	},
 	(t) => [index('slug_redirects_source_idx').on(t.sourceId)]
+);
+
+/** Retired person slugs: a renamed or merged person keeps answering at its old
+ *  address. Same promise as `slug_redirects`, for `/people/<slug>`. */
+export const personSlugRedirects = sqliteTable(
+	'person_slug_redirects',
+	{
+		oldSlug: text('old_slug').primaryKey(),
+		personId: text('person_id')
+			.notNull()
+			.references(() => persons.id, { onDelete: 'restrict' }),
+		createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(now)
+	},
+	(t) => [index('person_slug_redirects_person_idx').on(t.personId)]
 );
 
 // ---------------------------------------------------------------------------

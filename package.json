@@ -57,7 +57,8 @@
 		"archive:refresh-significance": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/refresh-significance.ts",
 		"archive:refresh-language-composition": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/refresh-language-composition.ts",
 		"archive:build-language-profiles": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/build-language-profiles.ts",
-		"archive:gen-derivatives": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/gen-derivatives.ts"
+		"archive:gen-derivatives": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/gen-derivatives.ts",
+		"merge-persons": "bun scripts/merge-persons.ts"
 	},
 	"devDependencies": {
 		"@better-auth/cli": "~1.4.21",
