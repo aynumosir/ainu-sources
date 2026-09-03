@@ -401,7 +401,7 @@ export async function getStats(): Promise<DbStats> {
 		.from(sources)
 		.where(activeSourcesOnly());
 	const [pc, plc, ic, dig] = await Promise.all([
-		db.select({ n: count() }).from(persons),
+		db.select({ n: count() }).from(persons).where(activePersonsOnly()),
 		db.select({ n: count() }).from(places),
 		db.select({ n: count() }).from(institutions),
 		// "with digital access" = active sources that have ≥1 link (join sources so
@@ -485,8 +485,11 @@ export interface PersonListOptions {
 	sort?: 'count' | 'name' | 'name-desc';
 }
 
+/** A merged person row stays for history but is nobody's page or list entry. */
+const activePersonsOnly = () => eq(persons.status, 'active');
+
 export async function listPersons(opts: PersonListOptions = {}): Promise<PersonWithCount[]> {
-	const conds: SQLCond[] = [];
+	const conds: SQLCond[] = [activePersonsOnly()];
 	if (opts.q && opts.q.trim()) {
 		const q = `%${opts.q.trim()}%`;
 		conds.push(or(like(persons.name, q), like(persons.nameEn, q))!);
@@ -557,7 +560,11 @@ export async function getPersonBySlug(
 	| { person: Person; sources: { source: Source; role: string }[]; areas: PersonArea[] }
 	| undefined
 > {
-	const r = await db.select().from(persons).where(eq(persons.slug, slug)).limit(1);
+	const r = await db
+		.select()
+		.from(persons)
+		.where(and(eq(persons.slug, slug), activePersonsOnly()))
+		.limit(1);
 	const person = r[0];
 	if (!person) return undefined;
 	const srcRows = await db
@@ -692,7 +699,11 @@ export interface SitemapEntries {
 export async function getSitemapEntries(): Promise<SitemapEntries> {
 	const [s, pe, pl, inst] = await Promise.all([
 		db.select({ slug: sources.slug, updatedAt: sources.updatedAt }).from(sources).where(activeSourcesOnly()).orderBy(asc(sources.slug)),
-		db.select({ slug: persons.slug, updatedAt: persons.updatedAt }).from(persons).orderBy(asc(persons.slug)),
+		db
+			.select({ slug: persons.slug, updatedAt: persons.updatedAt })
+			.from(persons)
+			.where(activePersonsOnly())
+			.orderBy(asc(persons.slug)),
 		db.select({ slug: places.slug }).from(places).orderBy(asc(places.slug)),
 		db.select({ slug: institutions.slug }).from(institutions).orderBy(asc(institutions.slug))
 	]);

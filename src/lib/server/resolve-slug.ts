@@ -12,7 +12,7 @@
 // is the SAME source under a new name, hence permanent.
 // ---------------------------------------------------------------------------
 import { eq, inArray, and } from 'drizzle-orm';
-import { slugRedirects, sources } from './db/schema';
+import { personSlugRedirects, persons, slugRedirects, sources } from './db/schema';
 import { slugContentError } from './slug-content';
 import type { Db } from './merge/types';
 
@@ -73,5 +73,53 @@ export async function explicitSlugError(db: Db, slug: string): Promise<string | 
 		.where(eq(slugRedirects.oldSlug, slug))
 		.limit(1);
 	if (red) return `slug "${slug}" is retired and permanently redirects to another slug`;
+	return null;
+}
+
+// ---------------------------------------------------------------------------
+// People — the same promise for `/people/<slug>`.
+// ---------------------------------------------------------------------------
+
+/**
+ * The current slug behind a person slug that no longer renders: a slug retired
+ * by a rename or merge (`person_slug_redirects`), or the slug of a merged row
+ * (`persons.status = 'merged'` + `merged_into_person_id`). Both hop once to an
+ * active person. Undefined when the slug is unknown, or already current.
+ */
+export async function resolvePersonSlug(db: Db, slug: string): Promise<string | undefined> {
+	const [red] = await db
+		.select({ slug: persons.slug, status: persons.status })
+		.from(personSlugRedirects)
+		.innerJoin(persons, eq(personSlugRedirects.personId, persons.id))
+		.where(eq(personSlugRedirects.oldSlug, slug))
+		.limit(1);
+	if (red && red.status === 'active' && red.slug !== slug) return red.slug;
+	const [row] = await db
+		.select({ status: persons.status, into: persons.mergedIntoPersonId })
+		.from(persons)
+		.where(eq(persons.slug, slug))
+		.limit(1);
+	if (!row || row.status !== 'merged' || !row.into) return undefined;
+	const [winner] = await db
+		.select({ slug: persons.slug })
+		.from(persons)
+		.where(and(eq(persons.id, row.into), eq(persons.status, 'active')))
+		.limit(1);
+	return winner && winner.slug !== slug ? winner.slug : undefined;
+}
+
+/**
+ * Why a slug may NOT be minted for a NEW person, or null when it is free: a
+ * live or merged person already holds it, or a redirect retired it.
+ */
+export async function personSlugError(db: Db, slug: string): Promise<string | null> {
+	const [p] = await db.select({ id: persons.id }).from(persons).where(eq(persons.slug, slug)).limit(1);
+	if (p) return `slug "${slug}" is already taken by an existing person`;
+	const [red] = await db
+		.select({ oldSlug: personSlugRedirects.oldSlug })
+		.from(personSlugRedirects)
+		.where(eq(personSlugRedirects.oldSlug, slug))
+		.limit(1);
+	if (red) return `slug "${slug}" is retired and permanently redirects to another person`;
 	return null;
 }
