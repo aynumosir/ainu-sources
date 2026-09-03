@@ -107,16 +107,28 @@ function registerPersonKeys(idx: PersonIndex, keys: string[], id: string): void 
 }
 
 /** The fold keys a DB person row is findable under (canon recovered from its slug). */
-function personKeysForRow(row: { slug: string; name: string; nameEn: string | null }): string[] {
+function personKeysForRow(row: {
+	slug: string;
+	name: string;
+	nameEn: string | null;
+	wikidata?: string | null;
+}): string[] {
 	const canon = PERSON_CANON_SLUGS.has(row.slug) ? row.slug : (canonicalSlugFor(row.name) ?? null);
-	return personFoldKeys({ canon, name: row.name, nameEn: row.nameEn });
+	return personFoldKeys({ canon, name: row.name, nameEn: row.nameEn, wikidata: row.wikidata ?? null });
 }
 
 /** Build seed's personByKey, SEEDED FROM THE DB, so resolution matches the bootstrap. */
 async function loadPersonIndex(db: Db): Promise<PersonIndex> {
 	const rows = await db
-		.select({ id: schema.persons.id, slug: schema.persons.slug, name: schema.persons.name, nameEn: schema.persons.nameEn })
+		.select({
+			id: schema.persons.id,
+			slug: schema.persons.slug,
+			name: schema.persons.name,
+			nameEn: schema.persons.nameEn,
+			wikidata: schema.persons.wikidata
+		})
 		.from(schema.persons)
+		.where(eq(schema.persons.status, 'active'))
 		.orderBy(schema.persons.slug); // deterministic order → stable first-writer-wins
 	const idx: PersonIndex = { byKey: new Map() };
 	for (const p of rows) registerPersonKeys(idx, personKeysForRow(p), p.id);
@@ -173,14 +185,30 @@ async function maybeUpgradePerson(db: Db, id: string, d: PersonDerivation): Prom
  */
 export async function getPerson(db: Db, name: string, stamp: EntityStamp): Promise<string> {
 	const d = derivePerson(name);
-	const keys = personFoldKeys(d);
+	const keys = personFoldKeys({ ...d, wikidata: d.wikidata ?? null });
 	const idx = await personIndex(db);
 	for (const k of keys) {
 		const hit = idx.byKey.get(k);
 		if (hit) {
 			await maybeUpgradePerson(db, hit, d);
+			// The form's own keys (a Wikidata item the row lacked until now, a new
+			// spelling) must find the same person for the rest of the run.
+			registerPersonKeys(idx, keys, hit);
 			return hit;
 		}
+	}
+
+	// A slug retired by a rename or merge names the person it redirects to;
+	// minting it again would shadow that redirect.
+	const [retired] = await db
+		.select({ personId: schema.personSlugRedirects.personId })
+		.from(schema.personSlugRedirects)
+		.where(eq(schema.personSlugRedirects.oldSlug, d.slug))
+		.limit(1);
+	if (retired) {
+		await maybeUpgradePerson(db, retired.personId, d);
+		registerPersonKeys(idx, keys, retired.personId);
+		return retired.personId;
 	}
 
 	const now = stampNow(stamp);

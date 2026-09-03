@@ -764,16 +764,61 @@ export function derivePerson(raw: string): PersonDerivation {
  * bootstrap join. (For a canon / single-identity person every key resolves to the
  * same id, so this order only ever disambiguates such pre-existing twins.)
  */
+/** Kyūjitai → shinjitai for the characters that recur in personal names, so
+ *  金澤 and 金沢 fold to one person. */
+const KANJI_VARIANTS: Record<string, string> = {
+	澤: '沢',
+	齋: '斎',
+	齊: '斉',
+	濱: '浜',
+	濵: '浜',
+	邊: '辺',
+	邉: '辺',
+	國: '国',
+	櫻: '桜',
+	廣: '広',
+	壽: '寿',
+	龍: '竜',
+	瀧: '滝',
+	眞: '真',
+	學: '学',
+	會: '会',
+	與: '与',
+	藏: '蔵',
+	榮: '栄',
+	淺: '浅',
+	澁: '渋',
+	圓: '円',
+	惠: '恵',
+	德: '徳',
+	鐵: '鉄',
+	郞: '郎',
+	靑: '青',
+	兒: '児',
+	髙: '高',
+	﨑: '崎'
+};
+const KANJI_VARIANT_RE = new RegExp(`[${Object.keys(KANJI_VARIANTS).join('')}]`, 'g');
+export function foldKanji(s: string): string {
+	return s.replace(KANJI_VARIANT_RE, (c) => KANJI_VARIANTS[c] ?? c);
+}
+
 export function personFoldKeys(d: {
 	canon: string | null;
 	name: string;
 	nameEn: string | null;
+	wikidata?: string | null;
 }): string[] {
 	const keys: string[] = [];
 	if (d.canon) keys.push(`canon:${d.canon}`);
+	if (d.wikidata) keys.push(`q:${d.wikidata}`);
 	if (KANA_KANJI.test(d.name)) {
 		const k = d.name.replace(/\s+/g, '');
-		if (k) keys.push(k);
+		if (k) {
+			keys.push(k);
+			const folded = foldKanji(k);
+			if (folded !== k) keys.push(folded);
+		}
 	} else {
 		const k = d.name.toLowerCase().replace(/[^a-z0-9]/g, '');
 		if (k) keys.push(k);
