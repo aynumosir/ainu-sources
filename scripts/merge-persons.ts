@@ -6,7 +6,9 @@
  *
  * Input: a TSV with header `keep_slug  merge_slug  new_slug  note`. Each row
  * folds the person at `merge_slug` into the person at `keep_slug`; a non-empty
- * `new_slug` also renames the kept person. `note` is reviewer context.
+ * `new_slug` also renames the kept person. A row with an empty `merge_slug`
+ * and a `new_slug` only renames (a generated `p-` slug getting its readable
+ * one). `note` is reviewer context.
  *
  * For each row, in ONE atomic db.batch (a server-side transaction, the same
  * mechanism as scripts/apply-reslug.ts):
@@ -53,6 +55,7 @@ const HEADER = ['keep_slug', 'merge_slug', 'new_slug', 'note'];
 export interface MergeRow {
 	line: number;
 	keepSlug: string;
+	/** empty for a rename-only row */
 	mergeSlug: string;
 	newSlug: string | null;
 }
@@ -76,19 +79,23 @@ export function parseMergeTsv(text: string): ParseResult {
 		if (!raw.trim()) return;
 		const line = i + 2;
 		const [keepSlug = '', mergeSlug = '', newSlug = ''] = raw.split('\t').map((c) => c.trim());
-		if (!SLUG_RE.test(keepSlug) || !SLUG_RE.test(mergeSlug)) {
+		if (!SLUG_RE.test(keepSlug) || (mergeSlug && !SLUG_RE.test(mergeSlug))) {
 			errors.push(`line ${line}: keep_slug and merge_slug must be slugs`);
+			return;
+		}
+		if (!mergeSlug && !newSlug) {
+			errors.push(`line ${line}: a row needs a merge_slug, a new_slug, or both`);
 			return;
 		}
 		if (keepSlug === mergeSlug) {
 			errors.push(`line ${line}: keep_slug equals merge_slug`);
 			return;
 		}
-		if (seenMerge.has(mergeSlug)) {
+		if (mergeSlug && seenMerge.has(mergeSlug)) {
 			errors.push(`line ${line}: ${mergeSlug} merged twice`);
 			return;
 		}
-		seenMerge.add(mergeSlug);
+		if (mergeSlug) seenMerge.add(mergeSlug);
 		if (newSlug) {
 			if (!SLUG_RE.test(newSlug)) {
 				errors.push(`line ${line}: new_slug ${newSlug} is not a slug`);
@@ -180,7 +187,9 @@ export async function runMerges(
 	};
 	const out = opts.log ?? ((line: string) => console.log(line));
 	const log = (r: MergeRow, msg: string) =>
-		out(`line ${r.line}  ${r.mergeSlug} → ${r.keepSlug}${r.newSlug ? ` (→ ${r.newSlug})` : ''}: ${msg}`);
+		out(
+			`line ${r.line}  ${r.mergeSlug || '(rename)'} → ${r.keepSlug}${r.newSlug ? ` (→ ${r.newSlug})` : ''}: ${msg}`
+		);
 
 	for (const r of rows) {
 		// keep_slug may already have been renamed to new_slug by an earlier run
@@ -192,6 +201,35 @@ export async function runMerges(
 		if (!keep || keep.status !== 'active') {
 			log(r, 'keep_slug names no active person');
 			stats.missing++;
+			continue;
+		}
+		const rename = r.newSlug && r.newSlug !== keep.slug ? r.newSlug : null;
+		if (rename) {
+			const live = await personBySlug(db, rename);
+			const retired = await redirectTarget(db, rename);
+			if (live || retired) {
+				log(r, `refused: new_slug ${rename} is taken`);
+				stats.refused++;
+				continue;
+			}
+		}
+		if (!r.mergeSlug) {
+			if (!rename) {
+				log(r, 'already renamed');
+				stats.alreadyApplied++;
+				continue;
+			}
+			log(r, `rename ${keep.slug} → ${rename} [${keep.name} / ${keep.nameEn ?? ''}]`);
+			if (opts.apply) {
+				await db.batch([
+					db.insert(personSlugRedirects).values({ oldSlug: keep.slug, personId: keep.id }),
+					db
+						.update(persons)
+						.set({ slug: rename, updatedAt: new Date() })
+						.where(eq(persons.id, keep.id))
+				]);
+			}
+			stats.applied++;
 			continue;
 		}
 		const merge = await personBySlug(db, r.mergeSlug);
@@ -210,16 +248,6 @@ export async function runMerges(
 			log(r, `refused: different Wikidata items ${keep.wikidata} vs ${merge.wikidata}`);
 			stats.refused++;
 			continue;
-		}
-		const rename = r.newSlug && r.newSlug !== keep.slug ? r.newSlug : null;
-		if (rename) {
-			const live = await personBySlug(db, rename);
-			const retired = await redirectTarget(db, rename);
-			if (live || retired) {
-				log(r, `refused: new_slug ${rename} is taken`);
-				stats.refused++;
-				continue;
-			}
 		}
 
 		const keptJoins = await db
