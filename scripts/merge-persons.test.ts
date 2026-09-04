@@ -34,6 +34,12 @@ describe('parseMergeTsv', () => {
 		expect(parseMergeTsv('keep_slug\tmerge_slug\tnote\na\tb\tx').errors[0]).toMatch(/bad header/);
 	});
 
+	it('reads a rename-only row and rejects a row with neither merge nor rename', () => {
+		const p = parseMergeTsv(tsv('p-i37yiv\t\taraida-seino\t', 'p-1\t\t\t'));
+		expect(p.rows).toEqual([{ line: 2, keepSlug: 'p-i37yiv', mergeSlug: '', newSlug: 'araida-seino' }]);
+		expect(p.errors).toHaveLength(1);
+	});
+
 	it('rejects a self-merge, a repeated merge, a non-slug and a repeated new_slug', () => {
 		const p = parseMergeTsv(
 			tsv(
@@ -198,6 +204,17 @@ describe('runMerges', () => {
 		const again = await runMerges(db, rows, { apply: true, ...quiet });
 		expect(again.alreadyApplied).toBe(1);
 		expect(again.missing).toBe(0);
+	});
+
+	it('renames a person without a merge partner, once', async () => {
+		const id = await person('p-i37yiv', { name: '新井田 セイノ' });
+		const rows = parseMergeTsv(tsv('p-i37yiv\t\taraida-seino\t')).rows;
+		const first = await runMerges(db, rows, { apply: true, ...quiet });
+		expect(first.applied).toBe(1);
+		expect((await row(id)).slug).toBe('araida-seino');
+		expect(await resolvePersonSlug(db, 'p-i37yiv')).toBe('araida-seino');
+		const again = await runMerges(db, rows, { apply: true, ...quiet });
+		expect(again.alreadyApplied).toBe(1);
 	});
 
 	it('carries the redirects a merged person already owned over to the kept person', async () => {
