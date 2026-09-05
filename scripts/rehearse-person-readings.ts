@@ -27,10 +27,16 @@ try {
 		}
 	}
 	const before = await db.select().from(schema.persons);
+	const expectedChanges = before.filter(row => {
+		const correction = readings.find(e => e.slugs.includes(row.slug))?.corrected ?? {};
+		return Object.entries(correction).some(([key, value]) => row[key as keyof typeof row] !== value);
+	}).length;
 	const plan = await run(db, { dryRun: true });
-	if (plan.other || plan.applied !== readings.length) throw new Error('Incomplete reading plan');
+	if (plan.other || plan.applied + plan.noop !== readings.length || plan.applied !== expectedChanges)
+		throw new Error('Incomplete reading plan');
 	if (JSON.stringify(await db.select().from(schema.persons)) !== JSON.stringify(before)) throw new Error('Dry run changed data');
 	const applied = await run(db);
+	if (applied.applied !== expectedChanges) throw new Error('Applied count differs from reading plan');
 	const again = await run(db);
 	if (again.applied || again.other) throw new Error('Reading import is not idempotent');
 	const after = await db.select().from(schema.persons);

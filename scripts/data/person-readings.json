@@ -52,6 +52,23 @@
   },
   {
     "slugs": [
+      "akibe-hideo"
+    ],
+    "name": "秋辺 日出男",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あきべ ひでお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.nettam.jp/author/hideo-akibe/"
+    ],
+    "note": "本人の執筆者紹介にかな。阿寒のアイヌ文化活動の経歴と一致。"
+  },
+  {
+    "slugs": [
       "akibe-tokuhei"
     ],
     "name": "秋辺 得平",
@@ -69,6 +86,23 @@
   },
   {
     "slugs": [
+      "amanai-shigeki"
+    ],
+    "name": "天内 重樹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あまない しげき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://nam.go.jp/wp/wp-content/uploads/2025/12/everydayainu.pdf"
+    ],
+    "note": "国立アイヌ民族博物館の映画『普段着のアイヌ』出演者紹介にかな。"
+  },
+  {
+    "slugs": [
       "amano-tetsuya"
     ],
     "name": "天野 哲也",
@@ -83,6 +117,41 @@
       "https://id.ndl.go.jp/auth/ndlna/00934294"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "anetai-masaki"
+    ],
+    "name": "姉帯 正樹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あねたい まさき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971430859807289780",
+      "https://cir.nii.ac.jp/crid/1970867909853790510"
+    ],
+    "note": "登録著作『アイヌ民族の伝承有用植物』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
+      "araida-seino"
+    ],
+    "name": "新井田 セイノ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あらいだ せいの"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/00-3.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座2000年度第3期、印刷頁2の協力者紹介。姓のふりがなと本人名のカナ表記。"
   },
   {
     "slugs": [
@@ -222,6 +291,23 @@
   },
   {
     "slugs": [
+      "echizenya-hiroshi"
+    ],
+    "name": "越前谷 博",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "えちぜんや ひろし"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://eng.hgu.jp/teaching_staff/997.html"
+    ],
+    "note": "北海学園大学の教員紹介にかなを併記。自然言語処理の所属研究分野で同定。"
+  },
+  {
+    "slugs": [
       "egami-namio"
     ],
     "name": "江上 波夫",
@@ -270,6 +356,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00544849"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "endo-shiho"
+    ],
+    "name": "遠藤 志保",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "えんどう しほ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.hm.pref.hokkaido.lg.jp/wp-content/uploads/2025/03/1711bukai-shiryo-1-1.pdf"
+    ],
+    "note": "北海道博物館の専門部会事務局名簿にふりがな。所属と一致。"
   },
   {
     "slugs": [
@@ -338,6 +441,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00129451"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fujita-mamoru"
+    ],
+    "name": "藤田護",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふじた まもる"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.hanmoto.com/bd/isbn/9784911029169"
+    ],
+    "note": "『長濱清蔵のアイヌ語』の出版社提供著者情報にかな。アイヌ語口承文芸研究者と同定。"
   },
   {
     "slugs": [
@@ -480,6 +600,23 @@
   },
   {
     "slugs": [
+      "hachiya-mai"
+    ],
+    "name": "八谷 麻衣",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はちや まい"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/11-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
       "haginaka-mie"
     ],
     "name": "萩中 美枝",
@@ -517,6 +654,23 @@
   },
   {
     "slugs": [
+      "hashio-naokazu"
+    ],
+    "name": "橋尾 直和",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はしお なおかず"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://naruto.repo.nii.ac.jp/records/16890"
+    ],
+    "note": "言語学研究の大学リポジトリ著者メタデータにハシオ ナオカズ。登録する方言研究者と一致。"
+  },
+  {
+    "slugs": [
       "hasuike-etsuko"
     ],
     "name": "蓮池 悦子",
@@ -548,6 +702,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00009116"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hayasaka-shun"
+    ],
+    "name": "早坂 駿",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はやさか しゅん"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/web/potal_site/files/2026Ainugoradiovol.1_A4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
   },
   {
     "slugs": [
@@ -616,6 +787,25 @@
       "https://id.ndl.go.jp/auth/ndlna/00386334"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hirako-goichi"
+    ],
+    "name": "平光 吾一",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Goichi Hirako"
+    },
+    "corrected": {
+      "nameKana": "ひらこう ごいち",
+      "nameEn": "Hirakō Goichi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.jnet-ejournal.org/backnumber/3-2/pdf/3-2-131.pdf"
+    ],
+    "note": "医学史論文の人物紹介にひらこう ごいち。解剖学者の経歴・アイヌ研究を併記。既存Hirakoを訂正。"
   },
   {
     "slugs": [
@@ -721,6 +911,23 @@
   },
   {
     "slugs": [
+      "hori-etsuko"
+    ],
+    "name": "堀 悦子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ほり えつこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/25-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
       "ikegami-jiro"
     ],
     "name": "池上 二良",
@@ -752,6 +959,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00324985"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "inoue-fumio"
+    ],
+    "name": "井上 文夫",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いのうえ ふみお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971430859815915080"
+    ],
+    "note": "登録著作『岡山県アイヌ語地名解』のCiNii著者標目で読みを確認。"
   },
   {
     "slugs": [
@@ -825,6 +1049,42 @@
   },
   {
     "slugs": [
+      "ishida-hisao"
+    ],
+    "name": "石田 久大",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしだ ひさお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971712334788315297",
+      "https://cir.nii.ac.jp/crid/1970023484843150761",
+      "https://cir.nii.ac.jp/crid/1971712334788315393"
+    ],
+    "note": "登録著作『近文に伝わるアイヌのあそび歌』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
+      "ishida-shuzo"
+    ],
+    "name": "石田 収蔵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしだ しゅうぞう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970304959944545803"
+    ],
+    "note": "研究資料集『石田収蔵旧蔵写真』のタイトル読み。国立アイヌ民族博物館の石田収蔵資料紹介でも同一の人類学者であることを照合。"
+  },
+  {
+    "slugs": [
       "ishihara-mai"
     ],
     "name": "石原 真衣",
@@ -839,6 +1099,23 @@
       "https://id.ndl.go.jp/auth/ndlna/031373991"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ishihara-makoto"
+    ],
+    "name": "石原 誠",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしはら まこと"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970023484968754354"
+    ],
+    "note": "登録著作『イタㇰカシカムイ《言葉の霊》 : アイヌ語の世界』のCiNii著者標目で読みを確認。"
   },
   {
     "slugs": [
@@ -910,6 +1187,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00265411"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "isobe-seiichi"
+    ],
+    "name": "礒部 精一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いそべ せいいち"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://library-opac.siu.ac.jp/iwjs0020opc/ctlsrh.do?locale=ja&ncid=BN07570159&search_mode=detail&tab_num=0"
+    ],
+    "note": "登録著作『和愛愛和アイヌ語辭典』の大学図書館著者標目にかな。"
   },
   {
     "slugs": [
@@ -1083,6 +1377,40 @@
   },
   {
     "slugs": [
+      "kaizawa-miwako"
+    ],
+    "name": "貝澤 美和子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かいざわ みわこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.nibutani-ainucraft.com/craftspeople_profile/kaizawa_miwako/"
+    ],
+    "note": "工芸家を紹介する二風谷アイヌクラフトの本人紹介にかな。"
+  },
+  {
+    "slugs": [
+      "kaizawa-toru"
+    ],
+    "name": "貝澤徹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かいざわ とおる"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.nibutani-ainucraft.com/craftspeople_profile/kaizawa_toru/"
+    ],
+    "note": "工芸家を紹介する二風谷アイヌクラフトの本人紹介にかな。"
+  },
+  {
+    "slugs": [
       "kan-wada"
     ],
     "name": "和田 完",
@@ -1134,6 +1462,23 @@
   },
   {
     "slugs": [
+      "kano-rumiko"
+    ],
+    "name": "加納 ルミ子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かのう るみこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/11-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
       "kasai-takechiyo"
     ],
     "name": "葛西 猛千代",
@@ -1148,6 +1493,40 @@
       "https://id.ndl.go.jp/auth/ndlna/00027000"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "katayama-hiroko"
+    ],
+    "name": "片山 弘子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かたやま ひろこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/00-3.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座2000年度第3期、印刷頁2の講師紹介のふりがな。"
+  },
+  {
+    "slugs": [
+      "katayama-tatsumine"
+    ],
+    "name": "片山 龍峯",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かたやま たつみね"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/2120307889841118208"
+    ],
+    "note": "登録著作『平成10年度言語研修：アイヌ語教材（I–1）アイヌ語北海道南部方言基礎編』のCiNii著者標目で読みを確認。"
   },
   {
     "slugs": [
@@ -1250,6 +1629,40 @@
       "https://id.ndl.go.jp/auth/ndlna/00157200"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kawakami-megumi"
+    ],
+    "name": "川上 恵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわかみ めぐみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/web/potal_site/files/2025AinugoradioVol.1_a4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
+      "kawakami-yoko"
+    ],
+    "name": "川上 容子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわかみ ようこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/%E3%83%A9%E3%82%B8%E3%82%AA%E8%AC%9B%E5%BA%A72016vol1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
   },
   {
     "slugs": [
@@ -1406,6 +1819,58 @@
   },
   {
     "slugs": [
+      "kimura-kimi"
+    ],
+    "name": "木村 きみ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きむら きみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971149384796475958",
+      "https://cir.nii.ac.jp/crid/1970867909764854682"
+    ],
+    "note": "登録著作『雷を打ち負かした女の子 : アイヌの昔話』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
+      "kimura-rino"
+    ],
+    "name": "木村 梨乃",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きむら りの"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/web/potal_site/files/2023AinugoradioVol.1_a4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
+      "kimura-taeko"
+    ],
+    "name": "木村 多栄子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きむら たえこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/25-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
       "kindaichi-kyosuke"
     ],
     "name": "金田一 京助",
@@ -1471,6 +1936,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00031847"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kishimoto-yoshihisa"
+    ],
+    "name": "岸本 宜久",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きしもと よしひさ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201901020657391871"
+    ],
+    "note": "研究者プロフィールにかな。アイヌ語鵡川方言の研究課題・論文で同定。"
   },
   {
     "slugs": [
@@ -1542,6 +2024,40 @@
   },
   {
     "slugs": [
+      "kobayashi-miki"
+    ],
+    "name": "小林 美紀",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こばやし みき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971712334786521751"
+    ],
+    "note": "登録著作『ウポポイのアイヌ語表示辞典』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
+      "kochi-rie"
+    ],
+    "name": "甲地 利恵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こうち りえ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.hm.pref.hokkaido.lg.jp/wp-content/uploads/2025/03/1711bukai-shiryo-1-1.pdf"
+    ],
+    "note": "北海道博物館の専門部会事務局名簿にふりがな。アイヌ音楽研究者と同定。"
+  },
+  {
+    "slugs": [
       "kohama-mototsugu"
     ],
     "name": "小浜 基次",
@@ -1556,6 +2072,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00755353"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "koji-maeda"
+    ],
+    "name": "前田 耕司",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まえだ こうじ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://w-rdb.waseda.jp/html/100000515_ja.html"
+    ],
+    "note": "早稲田大学研究者データベースにかな。先住民族教育の業績で同定。"
   },
   {
     "slugs": [
@@ -1764,6 +2297,40 @@
   },
   {
     "slugs": [
+      "kumagai-kane"
+    ],
+    "name": "熊谷 カネ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "くまがい かね"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/06-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
+      "kuzuno-daiki"
+    ],
+    "name": "葛野 大喜",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "くずの だいき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/web/learn/language/files/2020.Ainugoradio%20Vol.1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
       "kuzuno-tatsujiro"
     ],
     "name": "葛野 辰次郎",
@@ -1778,6 +2345,42 @@
       "https://id.ndl.go.jp/auth/ndlna/00140069"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kuzuno-tsugio"
+    ],
+    "name": "葛野 次雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "くずの つぎお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/99-4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座1999年度第4期、印刷頁2の講師紹介のふりがな。"
+  },
+  {
+    "slugs": [
+      "maeda-manami"
+    ],
+    "name": "前田 愛美",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "まえだ まなみ",
+      "nameEn": "Maeda Manami"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA89946196"
+    ],
+    "note": "登録著作『アイヌ語ユカラ辞典草案』の著者標目にマエダ マナミ。ローマ字は確認かなの転写。"
   },
   {
     "slugs": [
@@ -1818,6 +2421,23 @@
   },
   {
     "slugs": [
+      "maruyama-hiroshi"
+    ],
+    "name": "丸山 博",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まるやま ひろし"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA0974713X"
+    ],
+    "note": "『アイヌ民族の復権』と結び付く著者典拠の読み。医学者の同名典拠は使用しない。"
+  },
+  {
+    "slugs": [
       "masayuki-ueno"
     ],
     "name": "上野 昌之",
@@ -1832,6 +2452,23 @@
       "https://id.ndl.go.jp/auth/ndlna/001193020"
     ],
     "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "masui-fumito"
+    ],
+    "name": "桝井 文人",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ますい ふみと"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=200901097778465975"
+    ],
+    "note": "研究者プロフィールにかな。北見工業大学・自然言語処理研究で同定。"
   },
   {
     "slugs": [
@@ -1903,6 +2540,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00041827"
     ],
     "note": "アイヌタイムズ49号の追悼記事タイトルにMatsumoto Shigeyoshi。"
+  },
+  {
+    "slugs": [
+      "matsuna-takashi"
+    ],
+    "name": "松名 隆",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まつな たかし"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://muroran-it.repo.nii.ac.jp/records/5332"
+    ],
+    "note": "室蘭工業大学リポジトリの著者メタデータにかな。言語文化研究の所属業績で同定。"
   },
   {
     "slugs": [
@@ -2062,6 +2716,57 @@
   },
   {
     "slugs": [
+      "miyata-hisako"
+    ],
+    "name": "宮田 久子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "みやた ひさこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/99-2.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座1999年度第2期、印刷頁2の原稿協力者紹介のふりがな。"
+  },
+  {
+    "slugs": [
+      "mizushima-miki"
+    ],
+    "name": "水島未記",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "みずしま みき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://nature.hokkaido-np.co.jp/project/image-mallytsushin/moorie_04-2025.pdf"
+    ],
+    "note": "本人執筆の博物館植物標本紹介にかなと所属を併記。"
+  },
+  {
+    "slugs": [
+      "mogami-tokunai"
+    ],
+    "name": "最上 徳内",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "もがみ とくない"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://dc.tulips.tsukuba.ac.jp/s/pub_ja/document/rb_10076914341"
+    ],
+    "note": "筑波大学所蔵『蝦夷國風俗人情之沙汰』の著者標目にモガミ トクナイ。生年1755も一致。"
+  },
+  {
+    "slugs": [
       "momose-hibiki"
     ],
     "name": "百瀬 響",
@@ -2079,6 +2784,23 @@
   },
   {
     "slugs": [
+      "momouchi-yoshio"
+    ],
+    "name": "桃内 佳雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ももうち よしお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=200901085612121412"
+    ],
+    "note": "研究者プロフィールにかな。北海学園大学・アイヌ語対訳コーパス研究で同定。"
+  },
+  {
+    "slugs": [
       "mori-masao"
     ],
     "name": "護 雅夫",
@@ -2093,6 +2815,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00046749"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "muraki-miyuki"
+    ],
+    "name": "村木 美幸",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "むらき みゆき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BN10920871"
+    ],
+    "note": "『アイヌ語の集い：知里真志保を継ぐ』の著者標目にムラキ ミユキ。アイヌ民族博物館の活動と一致。"
   },
   {
     "slugs": [
@@ -2147,6 +2886,23 @@
   },
   {
     "slugs": [
+      "nagata-yoshishige"
+    ],
+    "name": "永田 良茂",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ながた よししげ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971430859772727429"
+    ],
+    "note": "登録著作『神戸のアイヌ語地名』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
       "nakagawa-hiroshi"
     ],
     "name": "中川 裕",
@@ -2161,6 +2917,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00203799"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nakai-takanori"
+    ],
+    "name": "中井 貴規",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なかい たかのり"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/radio_2015vol.1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
   },
   {
     "slugs": [
@@ -2215,6 +2988,25 @@
   },
   {
     "slugs": [
+      "nakano-tomoe"
+    ],
+    "name": "中野 巴",
+    "expected": {
+      "nameKana": null,
+      "name": "中野 巴"
+    },
+    "corrected": {
+      "nameKana": "なかの ともえ",
+      "name": "中野 巴絵"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/10-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。 紹介に巴絵。登録論文の原著者名とも一致するため、末字の脱落を訂正。"
+  },
+  {
+    "slugs": [
       "narita-shuichi"
     ],
     "name": "成田 修一",
@@ -2263,6 +3055,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00054195"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nihashi-junichi"
+    ],
+    "name": "二橋 潤一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "にはし じゅんいち"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.guitar-e.org/program/1999_11th_Gasso_JGA.pdf"
+    ],
+    "note": "演奏会プログラムに作曲者のかなを併記。作曲家・北海道教育大学の研究者と同定。"
   },
   {
     "slugs": [
@@ -2317,6 +3126,23 @@
   },
   {
     "slugs": [
+      "nomoto-hisae"
+    ],
+    "name": "野本 久栄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "のもと ひさえ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.city.chitose.lg.jp/fs/6/0/3/4/9/4/_/1-26.pdf"
+    ],
+    "note": "千歳市広報の本人インタビューにかな。ムックリ演奏・アイヌ文化活動から同定。"
+  },
+  {
+    "slugs": [
       "notoya-enkichi"
     ],
     "name": "能登屋 円吉",
@@ -2365,6 +3191,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00057271"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ochiai-izumi"
+    ],
+    "name": "落合いずみ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おちあい いずみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://repository.kulib.kyoto-u.ac.jp/collections/4d3cfe40-e3dc-479a-adce-c7b57faf0d3d?locale=en"
+    ],
+    "note": "京都大学言語学研究34号の著者メタデータにかなとローマ字。言語学研究者と一致。"
   },
   {
     "slugs": [
@@ -2575,6 +3418,23 @@
   },
   {
     "slugs": [
+      "okamoto-tomoya"
+    ],
+    "name": "岡本 朋也",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おかもと ともや"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/web/potal_site/files/2024AinugoradioVol.1_a4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
       "okamura-kichiemon"
     ],
     "name": "岡村 吉右衛門",
@@ -2606,6 +3466,25 @@
       "https://id.ndl.go.jp/auth/ndlna/01162724"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "okita-noriaki"
+    ],
+    "name": "大喜多 紀明",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Ōkita Noriaki"
+    },
+    "corrected": {
+      "nameKana": "おおぎた のりあき",
+      "nameEn": "Ōgita Noriaki"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://journal.otsuma.ac.jp/2025no35/2025_133.pdf"
+    ],
+    "note": "本人論文の著者紹介におおぎた のりあき。知里幸惠研究の業績も併記。既存Ōkitaを訂正。"
   },
   {
     "slugs": [
@@ -2714,6 +3593,41 @@
   },
   {
     "slugs": [
+      "ono-yuki"
+    ],
+    "name": "小野 雄貴",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おの ゆうき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA89946196"
+    ],
+    "note": "登録著作『アイヌ語ユカラ辞典草案』の著者標目にオノ ユウキ。"
+  },
+  {
+    "slugs": [
+      "orita-suteno"
+    ],
+    "name": "織田 ステノ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おりた すての"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970023484854598288",
+      "https://cir.nii.ac.jp/crid/1970867909764854682"
+    ],
+    "note": "登録著作『アイヌ語静内方言の音声資料 : 田村すず子採録 : 織田ステノさんと虎尾ハルさんの口頭文芸と会話』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
       "osaka-taku"
     ],
     "name": "大坂拓",
@@ -2748,6 +3662,57 @@
   },
   {
     "slugs": [
+      "oshino-akemi"
+    ],
+    "name": "押野 朱美",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おしの あけみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/12-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
+      "oshino-rika"
+    ],
+    "name": "押野 里架",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おしの りか"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/12-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
+      "osuga-rueko"
+    ],
+    "name": "大須賀 るえ子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおすが るえこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/01-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
       "ota-ryu"
     ],
     "name": "太田 竜",
@@ -2765,6 +3730,23 @@
   },
   {
     "slugs": [
+      "otani-yoichi"
+    ],
+    "name": "大谷洋一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおたに よういち"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ainu-center.hm.pref.hokkaido.lg.jp/HacrcHpImage/05/pdf/05_004_2009.pdf"
+    ],
+    "note": "北海道立アイヌ民族文化研究センター年報2009の職員業績欄にかなを併記。"
+  },
+  {
+    "slugs": [
       "otomo-yukio"
     ],
     "name": "大友 幸男",
@@ -2779,6 +3761,25 @@
       "https://id.ndl.go.jp/auth/ndlna/00367668"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-11492jn"
+    ],
+    "name": "大塚 梨恵",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おおつか りえ",
+      "nameEn": "Ōtsuka Rie"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA85688146"
+    ],
+    "note": "登録著作『サハリンアイヌ語辞典』の著者標目にオオツカ リエ。ローマ字は確認かなの転写。"
   },
   {
     "slugs": [
@@ -3026,6 +4027,25 @@
       "https://ci.nii.ac.jp/author/DA15117125"
     ],
     "note": "同じアイヌ語地名研究の著者典拠、北海道大学学位論文著者カナとも一致。"
+  },
+  {
+    "slugs": [
+      "p-16iqb0n"
+    ],
+    "name": "墨谷 真澄",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "すみや ますみ",
+      "nameEn": "Sumiya Masumi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.city.tomakomai.hokkaido.jp/files/kouhou/pdf/5373_07258412.pdf"
+    ],
+    "note": "広報とまこまい2023年5月号、印刷頁30の店主インタビューにふりがな。読み聞かせ活動を行うブックカフェ豆太の墨谷真澄。ローマ字は確認かなの転写。"
   },
   {
     "slugs": [
@@ -3391,6 +4411,25 @@
   },
   {
     "slugs": [
+      "p-1d9nra9"
+    ],
+    "name": "岡部 卓",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おかべ たく",
+      "nameEn": "Okabe Taku"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971993809681021475"
+    ],
+    "note": "登録著作『アイヌ語地名と木田金次郎 : 岩内町町制施行120周年記念 : 2020特別展示』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
       "p-1dhckok"
     ],
     "name": "廣瀬隆人",
@@ -3464,6 +4503,26 @@
       "https://id.ndl.go.jp/auth/ndlna/00527898"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1epyoxi"
+    ],
+    "name": "杉江 光",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "すぎえ こう",
+      "nameEn": "Sugie Kō"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971712334788315297",
+      "https://cir.nii.ac.jp/crid/1971712334788315393"
+    ],
+    "note": "登録著作『近文に伝わるアイヌのあそび歌』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
   },
   {
     "slugs": [
@@ -3562,6 +4621,23 @@
   },
   {
     "slugs": [
+      "p-1fxhyqx"
+    ],
+    "name": "瀧下 史",
+    "expected": {
+      "nameEn": null
+    },
+    "corrected": {
+      "nameEn": "Takishita Fumi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1571698602508228608"
+    ],
+    "note": "登録論文『日本の多文化教育における地名学習の受容に関する一考察 : 関東地方のアイヌ語地名を例として(英語教育)』の著者ローマ字表記。かな表記は未確認。"
+  },
+  {
+    "slugs": [
       "p-1g2agq6"
     ],
     "name": "山下 栄光",
@@ -3578,6 +4654,25 @@
       "https://id.ndl.go.jp/auth/ndlna/001362944"
     ],
     "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1g2da7z"
+    ],
+    "name": "山下 真悟",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "やました しんご",
+      "nameEn": "Yamashita Shingo"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA85688146"
+    ],
+    "note": "登録著作『サハリンアイヌ語辞典』の著者標目にヤマシタ シンゴ。ローマ字は確認かなの転写。"
   },
   {
     "slugs": [
@@ -3616,6 +4711,25 @@
       "https://id.ndl.go.jp/auth/ndlna/01032256"
     ],
     "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1gunmdd"
+    ],
+    "name": "田澤 守",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "たざわ まもる",
+      "nameEn": "Tazawa Mamoru"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970304959895185305"
+    ],
+    "note": "登録著作『モーションキャプチャおよびCG技術による樺太アイヌ古式舞踊の再現』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
   },
   {
     "slugs": [
@@ -3809,6 +4923,25 @@
   },
   {
     "slugs": [
+      "p-1jj1xvq"
+    ],
+    "name": "三浦 亜耶",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "みうら あや",
+      "nameEn": "Miura Aya"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA89946196"
+    ],
+    "note": "登録著作『アイヌ語ユカラ辞典草案』の著者標目にミウラ アヤ。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
       "p-1jwkn23"
     ],
     "name": "岩佐 奈々子",
@@ -3885,6 +5018,25 @@
   },
   {
     "slugs": [
+      "p-1lf7xk2"
+    ],
+    "name": "中田 恭平",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "なかた きょうへい",
+      "nameEn": "Nakata Kyōhei"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA89946196"
+    ],
+    "note": "登録著作『アイヌ語ユカラ辞典草案』の著者標目にナカタ キョウヘイ。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
       "p-1lg7zk7"
     ],
     "name": "中畠 孝幸",
@@ -3942,6 +5094,45 @@
   },
   {
     "slugs": [
+      "p-1m0sbcb"
+    ],
+    "name": "山田 祥一",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "やまだ しょういち",
+      "nameEn": "Yamada Shōichi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971712822169053635"
+    ],
+    "note": "登録著作『アイヌ語ひだか方言辞典草案』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
+      "p-1mxux2y"
+    ],
+    "name": "豊岡 喜一郎",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "とよおか きいちろう",
+      "nameEn": "Toyooka Kiichirō"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970867909825275440",
+      "https://cir.nii.ac.jp/crid/1970867909789549205"
+    ],
+    "note": "登録著作『キイチアイヌのユーカラ今昔』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
       "p-1n77u3o"
     ],
     "name": "川上 将史",
@@ -3958,6 +5149,23 @@
       "https://www.hokkaidoisan.org/pdf/isan_07.pdf"
     ],
     "note": "本人取材記事のプロフィール。臨床工学技士の同姓同名人物とは区別。"
+  },
+  {
+    "slugs": [
+      "p-1nen1vw"
+    ],
+    "name": "島津 礼子",
+    "expected": {
+      "nameEn": null
+    },
+    "corrected": {
+      "nameEn": "Shimazu Reiko"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1390009224858117376"
+    ],
+    "note": "登録論文『先住民アイヌの知識，自然観と持続可能性 : アイヌの口承文芸に焦点を当てて』の著者ローマ字表記。かな表記は未確認。"
   },
   {
     "slugs": [
@@ -4016,6 +5224,44 @@
   },
   {
     "slugs": [
+      "p-1o7hzxb"
+    ],
+    "name": "長田 祐季",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "ながた ゆうき",
+      "nameEn": "Nagata Yūki"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA89946196"
+    ],
+    "note": "登録著作『アイヌ語ユカラ辞典草案』の著者標目にナガタ ユウキ。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
+      "p-1omusa0"
+    ],
+    "name": "島田 静雄",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "しまだ しずお",
+      "nameEn": "Shimada Shizuo"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970867909861501637"
+    ],
+    "note": "登録著作『アイヌ語より見たる福井県の地名方言伝説』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
       "p-1owqqtz"
     ],
     "name": "井上 善十郎",
@@ -4032,6 +5278,44 @@
       "https://id.ndl.go.jp/auth/ndlna/00019923"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1p39exq"
+    ],
+    "name": "上野 愛理",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "うえの あいり",
+      "nameEn": "Ueno Airi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA89946196"
+    ],
+    "note": "登録著作『アイヌ語ユカラ辞典草案』の著者標目にウエノ アイリ。注記の愛里は異表記として保留。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
+      "p-1p89kig"
+    ],
+    "name": "坂田 亜里沙",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "さかた ありさ",
+      "nameEn": "Sakata Arisa"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA85688146"
+    ],
+    "note": "登録著作『サハリンアイヌ語辞典』の著者標目にサカタ アリサ。ローマ字は確認かなの転写。"
   },
   {
     "slugs": [
@@ -4168,6 +5452,26 @@
   },
   {
     "slugs": [
+      "p-1vg5icr"
+    ],
+    "name": "西島 てる",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "にしじま てる",
+      "nameEn": "Nishijima Teru"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971712334817938335",
+      "https://cir.nii.ac.jp/crid/1970867909764854682"
+    ],
+    "note": "登録著作『二風谷の手帖 : アイヌ民話のふるさと』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
       "p-1w11480"
     ],
     "name": "浜守 杏奈",
@@ -4237,6 +5541,62 @@
       "https://id.ndl.go.jp/auth/ndlna/01161229"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-34nem"
+    ],
+    "name": "倉重 裕美",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "くらしげ ゆみ",
+      "nameEn": "Kurashige Yumi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA85688146"
+    ],
+    "note": "登録著作『サハリンアイヌ語辞典』の著者標目にクラシゲ ユミ。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
+      "p-3kz7ca"
+    ],
+    "name": "南 収",
+    "expected": {
+      "nameEn": null
+    },
+    "corrected": {
+      "nameEn": "Minami Osamu"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://sapmed.repo.nii.ac.jp/record/7967/files/n0441079352103.pdf"
+    ],
+    "note": "本人共著の北海道立衛生研究所報にOsamu Minami。姉帯・村木・安田との共著および伝承植物研究で同定。かな明示は未確認。"
+  },
+  {
+    "slugs": [
+      "p-70s9t4"
+    ],
+    "name": "八重 九郎",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "やえ くろう",
+      "nameEn": "Yae Kurō"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971712334812473394",
+      "https://cir.nii.ac.jp/crid/1971149384740197140"
+    ],
+    "note": "登録著作『釧路地方のアイヌ語語彙集』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
   },
   {
     "slugs": [
@@ -4373,6 +5733,23 @@
   },
   {
     "slugs": [
+      "p-cgadvd"
+    ],
+    "name": "戸川 貴之",
+    "expected": {
+      "nameEn": null
+    },
+    "corrected": {
+      "nameEn": "Togawa Takashi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://hokkyodai.repo.nii.ac.jp/records/2000809"
+    ],
+    "note": "北海道教育大学リポジトリの著者メタデータにTOGAWA, Takashi。帯広の国語教員・アイヌ文学教材研究の業績と一致。かな表記の明示は未確認。"
+  },
+  {
+    "slugs": [
       "p-e80k7j"
     ],
     "name": "千葉 伸彦",
@@ -4501,6 +5878,24 @@
       "https://web-ic.fukoku-life.co.jp/japan-vision/081.html"
     ],
     "note": "本人取材記事のプロフィール。"
+  },
+  {
+    "slugs": [
+      "p-kmjzaq"
+    ],
+    "name": "川村 シンリツ・エオリパック・アイヌ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわむら しんりつ・えおりぱっく・あいぬ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971430859854403626",
+      "https://cir.nii.ac.jp/crid/1970304959875781127"
+    ],
+    "note": "登録著作『上川地方のアイヌ語』のCiNii著者標目で読みを確認。"
   },
   {
     "slugs": [
@@ -4730,6 +6125,44 @@
   },
   {
     "slugs": [
+      "p-yiokn0"
+    ],
+    "name": "鹿田 川見",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "しかだ かわみ",
+      "nameEn": "Shikada Kawami"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/98-4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座1998年度第4期、印刷頁2の講師紹介。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
+      "p-yj098k"
+    ],
+    "name": "早田 国光",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "はやた くにみつ",
+      "nameEn": "Hayata Kunimitsu"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970586434850363425"
+    ],
+    "note": "登録著作『十勝アイヌ語地名手帖』のCiNii著者標目で読みを確認。ローマ字は確認かなの転写。"
+  },
+  {
+    "slugs": [
       "p-ywxeun"
     ],
     "name": "畑中 友次",
@@ -4819,6 +6252,23 @@
   },
   {
     "slugs": [
+      "ryuzo-torii"
+    ],
+    "name": "鳥居 龍藏",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "とりい りゅうぞう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00085489"
+    ],
+    "note": "NDL典拠の標目に加え、異表記の鳥居龍藏も一致。生没年1870–1953の人類学者。"
+  },
+  {
+    "slugs": [
       "saito-hiroyuki"
     ],
     "name": "斎藤博之",
@@ -4833,6 +6283,40 @@
       "https://id.ndl.go.jp/auth/ndlna/00064962"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "saito-reiko"
+    ],
+    "name": "齋藤 玲子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さいとう れいこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.city.suita.osaka.jp/_res/projects/default_project/_page_/001/028/503/kyougikai1002.pdf"
+    ],
+    "note": "吹田市教育委員会の委嘱説明にかなと国立民族学博物館の所属を併記。"
+  },
+  {
+    "slugs": [
+      "sakaguchi-ryo"
+    ],
+    "name": "阪口 諒",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さかぐち りょう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201901011635089684"
+    ],
+    "note": "研究者プロフィールにかな。樺太アイヌ語研究の論文・所属で同定。"
   },
   {
     "slugs": [
@@ -4972,6 +6456,23 @@
   },
   {
     "slugs": [
+      "sasakura-irumi"
+    ],
+    "name": "笹倉 いる美",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ささくら いるみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/jads/25/0/25_37/_pdf"
+    ],
+    "note": "本人論文『のるりすと』の25年（2018年）に氏名のかなと所属を併記。"
+  },
+  {
+    "slugs": [
       "sato-masahiko"
     ],
     "name": "佐藤 昌彦",
@@ -5020,6 +6521,25 @@
       "https://id.ndl.go.jp/auth/ndlna/00553333"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sawai-tomeno"
+    ],
+    "name": "沢井 トメノ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さわい とめの"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971149384775450651",
+      "https://cir.nii.ac.jp/crid/1971712334715032206",
+      "https://cir.nii.ac.jp/crid/1971149384796475958"
+    ],
+    "note": "登録著作『アイヌ語北海道東部方言教本』のCiNii著者標目で読みを確認。"
   },
   {
     "slugs": [
@@ -5088,6 +6608,40 @@
       "https://id.ndl.go.jp/auth/ndlna/01126308"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sekine-kenji"
+    ],
+    "name": "関根 健司",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "せきね けんじ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://d17u3w3ts5ihmp.cloudfront.net/storage/app/public/files/4383.pdf"
+    ],
+    "note": "本人執筆の『原教界』91号（2020年）著者紹介にかなを併記。"
+  },
+  {
+    "slugs": [
+      "sekine-maya"
+    ],
+    "name": "関根 摩耶",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "せきね まや"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.keio.ac.jp/ja/assets/download/student-life/student-features/1/2021.pdf"
+    ],
+    "note": "慶應義塾の受賞者紹介に、アイヌ文化普及活動と氏名のかなを併記。"
   },
   {
     "slugs": [
@@ -5176,6 +6730,23 @@
   },
   {
     "slugs": [
+      "shimokura-emi"
+    ],
+    "name": "下倉 絵美",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しもくら えみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/web/learn/language/files/2022AinugoradioVol.1_a4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
       "shinmura-izuru"
     ],
     "name": "新村 出",
@@ -5207,6 +6778,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00141316"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shiraishi-hidetoshi"
+    ],
+    "name": "白石 英才",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しらいし ひでとし"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://eprints.lib.hokudai.ac.jp/dspace/bitstream/2115/58361/1/13Shiraishi-Tangiku_shiryo.pdf"
+    ],
+    "note": "本人論文『ニヴフ語アムール方言の基礎語彙3』末尾にかなと所属を併記。"
   },
   {
     "slugs": [
@@ -5331,6 +6919,42 @@
   },
   {
     "slugs": [
+      "suga-yasuo"
+    ],
+    "name": "菅 泰雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すが やすお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001185732"
+    ],
+    "note": "言語学者の典拠。researchmapを読みの出典とする。材料工学者の別典拠00350992は採用しない。"
+  },
+  {
+    "slugs": [
+      "sugawara-katsukichi"
+    ],
+    "name": "菅原 勝吉",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Sugawara Katsukichi"
+    },
+    "corrected": {
+      "nameKana": "すがわら かつよし",
+      "nameEn": "Sugawara Katsuyoshi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/web/learn/language/files/2021Ainugoradio%20Vol.1_a4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。 既存Katsukichiを訂正。2005・2009年度の紹介でもかつよし。"
+  },
+  {
+    "slugs": [
       "sugimura-kinarabukku"
     ],
     "name": "杉村 キナラブック",
@@ -5345,6 +6969,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00074451"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sugiyama-sueo"
+    ],
+    "name": "杉山 壽榮男",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すぎやま すえお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.museum.or.jp/eto-colle/2026/123589"
+    ],
+    "note": "石巻市博物館の出品作品紹介に氏名の読み。アイヌ工芸を収集した図案家として同一性を確認。"
   },
   {
     "slugs": [
@@ -5450,6 +7091,60 @@
   },
   {
     "slugs": [
+      "taira-ryuichi"
+    ],
+    "name": "平 隆一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たいら りゅういち"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970023484923742227",
+      "https://cir.nii.ac.jp/crid/1970586434904879106"
+    ],
+    "note": "登録著作『アイヌ語地名における 「位置名詞」 と 「car、par、put」』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
+      "takagi-kikue"
+    ],
+    "name": "高木 喜久恵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たかぎ きくえ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/00-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+  },
+  {
+    "slugs": [
+      "takahashi-nori"
+    ],
+    "name": "高橋 規",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Takahashi Nori"
+    },
+    "corrected": {
+      "nameKana": "たかはし ただし",
+      "nameEn": "Takahashi Tadashi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18351650"
+    ],
+    "note": "『アイヌ生活誌』と『口承文学(2) ; アイヌ文学』の著者標目はタカハシ タダシ。既存のNoriを訂正。"
+  },
+  {
+    "slugs": [
       "takakura-shinichiro"
     ],
     "name": "高倉 新一郎",
@@ -5484,6 +7179,23 @@
   },
   {
     "slugs": [
+      "takashima-yoko"
+    ],
+    "name": "高島 葉子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たかしま ようこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1050585426678933760"
+    ],
+    "note": "登録著作『アイヌにおける人と動物の婚姻譚に関する比較考察 : アイヌ、和人、エスキモー』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
       "takiguchi-yumi"
     ],
     "name": "瀧口 夕美",
@@ -5498,6 +7210,40 @@
       "https://id.ndl.go.jp/auth/ndlna/001303277"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tamura-masashi"
+    ],
+    "name": "田村 雅史",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たむら まさし"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970304959920382266"
+    ],
+    "note": "登録著作『アイヌ語樺太・名寄・釧路方言の資料 : 田村すず子採録 : 藤山ハルさん・山田ハヨさん・北風磯吉さん・徹辺重次郎さんの口頭文芸・語彙・民族誌』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
+      "tamura-masato"
+    ],
+    "name": "田村 将人",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たむら まさと"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18059976"
+    ],
+    "note": "国立アイヌ民族博物館の登録著作に結び付く著者典拠の読み。"
   },
   {
     "slugs": [
@@ -5532,6 +7278,43 @@
       "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9158&domain=ainu"
     ],
     "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "tanaka-yoshito"
+    ],
+    "name": "田中 吉人",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Tanaka Yoshito"
+    },
+    "corrected": {
+      "nameKana": "たなか よしひと",
+      "nameEn": "Tanaka Yoshihito"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ndlsearch.ndl.go.jp/en/books/R100000002-I000001211820",
+      "https://id.ndl.go.jp/auth/ndlna/00082173"
+    ],
+    "note": "登録著作『川は生きている』がNDL典拠00082173（本人回答）に結び付くことを確認。法政目録のヨシヒトとも一致。既存Yoshitoを訂正。"
+  },
+  {
+    "slugs": [
+      "tangiku-itsuji"
+    ],
+    "name": "丹菊 逸治",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たんぎく いつじ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/73701/Tangiku20181106.pdf"
+    ],
+    "note": "『アイヌ叙景詩鑑賞』著者紹介にかなを併記。"
   },
   {
     "slugs": [
@@ -5586,6 +7369,23 @@
   },
   {
     "slugs": [
+      "tezuka-yoritaka"
+    ],
+    "name": "手塚 順孝",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "てずか よりたか"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1971712334824725932"
+    ],
+    "note": "登録著作『アイヌ語北見・宗谷方言辞典草案』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
       "tokuda-sadakazu"
     ],
     "name": "徳田 貞一",
@@ -5617,6 +7417,23 @@
       "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=5430&domain=ezo"
     ],
     "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "tosabayashi-yoshio"
+    ],
+    "name": "土佐林 義雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "とさばやし よしお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA80557311"
+    ],
+    "note": "『アイヌ民族の墓標』の著者標目の読み。"
   },
   {
     "slugs": [
@@ -5705,6 +7522,40 @@
   },
   {
     "slugs": [
+      "ueda-toshi"
+    ],
+    "name": "上田 トシ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うえだ とし"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970586434909305747"
+    ],
+    "note": "登録著作『アイヌ昔話集 : 自然とともに生きてきた北の民の心のふるさと』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
+      "uehara-kumajiro"
+    ],
+    "name": "上原 熊次郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うえはら くまじろう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://kotobank.jp/word/上原熊次郎-1057404"
+    ],
+    "note": "講談社『デジタル版 日本人名大辞典+Plus』の見出し読み。『蝦夷方言藻汐草』の著者で同一性を確認。"
+  },
+  {
+    "slugs": [
       "uemura-yukio"
     ],
     "name": "上村 幸雄",
@@ -5719,6 +7570,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00088157"
     ],
     "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ueno-sada"
+    ],
+    "name": "上野 サダ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うえの さだ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/00-4.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座2000年度第4期、印刷頁2の講師紹介。姓のふりがなと本人名のカナ表記。"
   },
   {
     "slugs": [
@@ -5756,6 +7624,23 @@
   },
   {
     "slugs": [
+      "wada-bunjiro"
+    ],
+    "name": "和田 文治郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "わだ ぶんじろう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BC13860076"
+    ],
+    "note": "北海道大学アイヌ・先住民研究センター刊行の収集資料目録のタイトル読み。"
+  },
+  {
+    "slugs": [
       "watanabe-shigeru"
     ],
     "name": "渡辺 茂",
@@ -5770,6 +7655,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00091030"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "watanabe-takashi"
+    ],
+    "name": "渡辺 隆",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "わたなべ たかし"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ndlsearch.ndl.go.jp/books/R100000136-I1970586434794925221"
+    ],
+    "note": "登録著作『蝦夷地アイヌ地名集積』の著者標目はワタナベ タカシ。恵庭の地名研究者で同定。"
   },
   {
     "slugs": [
@@ -5804,6 +7706,23 @@
       "https://id.ndl.go.jp/auth/ndlna/00360835"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yamaji-hiroaki"
+    ],
+    "name": "山路 広明",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまじ ひろあき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970023484872890546"
+    ],
+    "note": "登録著作『アイヌ語辞典 : シサム・アイヌ・イタク・ウプシ・カンビ』のCiNii著者標目で読みを確認。"
   },
   {
     "slugs": [
@@ -5892,6 +7811,43 @@
   },
   {
     "slugs": [
+      "yasuda-chinatsu"
+    ],
+    "name": "安田 千夏",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Yasuda Chinatsu"
+    },
+    "corrected": {
+      "nameKana": "やすだ ちか",
+      "nameEn": "Yasuda Chika"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.hm.pref.hokkaido.lg.jp/wp-content/uploads/2025/01/bulletin_ACRC_vol6_02_p051_059.pdf",
+      "https://id.ndl.go.jp/auth/ndlna/00949591"
+    ],
+    "note": "本人のアイヌ口承文芸論文にYASUDA Chika。NDL典拠00949591の出版社回答ヤスダ チカとも一致。既存Chinatsuを訂正。"
+  },
+  {
+    "slugs": [
+      "yasuda-setsuhiko"
+    ],
+    "name": "安田 節彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やすだ せつひこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970304959907522856"
+    ],
+    "note": "登録著作『M.M.ドブロトヴォールスキィのアイヌ語・ロシア語辞典』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
       "yasuoka-koichi"
     ],
     "name": "安岡 孝一",
@@ -5943,6 +7899,23 @@
   },
   {
     "slugs": [
+      "yonezawa-ryo"
+    ],
+    "name": "米澤 諒",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よねざわ りょう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://note.com/rbgfontana/n/ne8db9bf7525c"
+    ],
+    "note": "取材者本人が公開したアイヌのルーツに関するインタビューに、よねざわ・りょう。"
+  },
+  {
+    "slugs": [
       "yoshida-iwao"
     ],
     "name": "吉田 巌",
@@ -5957,6 +7930,77 @@
       "https://id.ndl.go.jp/auth/ndlna/00096802"
     ],
     "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yoshida-katsumi"
+    ],
+    "name": "吉田 和美",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Katsumi Yoshida"
+    },
+    "corrected": {
+      "nameKana": "よしだ かずみ",
+      "nameEn": "Yoshida Kazumi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA89946196"
+    ],
+    "note": "登録著作『アイヌ語ユカラ辞典草案』の著者標目はヨシダ カズミ。既存Katsumiを訂正。"
+  },
+  {
+    "slugs": [
+      "yoshikawa-yoshimi"
+    ],
+    "name": "吉川 佳見",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よしかわ よしみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://researchmap.jp/y.yoshikawa/education/31662590"
+    ],
+    "note": "本人研究者プロフィールにかな。北海道博物館・アイヌ語研究の所属業績と一致。"
+  },
+  {
+    "slugs": [
+      "yoshimoto-yuko"
+    ],
+    "name": "吉本 裕子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よしもと ゆうこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970586434905370253",
+      "https://cir.nii.ac.jp/crid/1970304959929548354"
+    ],
+    "note": "登録著作『エカシの記憶を展示する : 昭和のアイヌの暮らし』のCiNii著者標目で読みを確認。"
+  },
+  {
+    "slugs": [
+      "yoshimura-fuyuko"
+    ],
+    "name": "吉村 冬子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よしむら ふゆこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/12-1.pdf"
+    ],
+    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
   },
   {
     "slugs": [
