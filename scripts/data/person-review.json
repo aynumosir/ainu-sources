@@ -1,0 +1,3852 @@
+[
+  {
+    "slugs": [
+      "shirayama-tomomasa"
+    ],
+    "name": "白山 友正",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1901
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：白山, 友正, 1901-1977",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00073128"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：歌集宇宙花 / 文化人名録 第26版"
+  },
+  {
+    "slugs": [
+      "takashi-irimoto"
+    ],
+    "name": "煎本 孝",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1947
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：煎本, 孝, 1947-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00131179"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：カナダ・インディアンの世界から / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "sasaki-kotaro"
+    ],
+    "name": "佐々木 弘太郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1923
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：佐々木, 弘太郎, 1923-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00067381"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：樺太アイヌ語地名小辞典"
+  },
+  {
+    "slugs": [
+      "kato-masaru"
+    ],
+    "name": "加藤克",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1972
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：加藤, 克, 1972-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001118815"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ブラキストン「標本」史, 2012.9"
+  },
+  {
+    "slugs": [
+      "sekiguchi-yoshihiko"
+    ],
+    "name": "関口 由彦",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1977
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：関口, 由彦",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01126308"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：首都圏に生きるアイヌ民族 / 関口由彦 著 / 初出資料"
+  },
+  {
+    "slugs": [
+      "fukuda-kichijiro"
+    ],
+    "name": "福田 吉次郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1917
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：福田, 吉次郎, 1917-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00216783"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ語で解く地名と文化事典 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "hirano-katsuya"
+    ],
+    "name": "平野 克弥",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1967
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：平野, 克弥",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01131179"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：Doing思想史 / テツオ・ナジタ [述] ; 平野克弥 編訳 ; 三橋修, 笠井昭文, 沢田博 訳 / 初出資料"
+  },
+  {
+    "slugs": [
+      "p-1vdwlmy"
+    ],
+    "name": "青木 愛子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1914
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：青木, 愛子, 1914-1995",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00136781"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌお産ばあちゃんのウパシクマ / 青木愛子 述 ; 長井博 記録"
+  },
+  {
+    "slugs": [
+      "takiguchi-yumi"
+    ],
+    "name": "瀧口 夕美",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1971
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：瀧口, 夕美, 1971-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001303277"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：民族衣装を着なかったアイヌ, 2013.6"
+  },
+  {
+    "slugs": [
+      "yoshida-iwao"
+    ],
+    "name": "吉田 巌",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1882
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：吉田, 巌, 1882-1963",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00096802"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：吉田巌伝記資料"
+  },
+  {
+    "slugs": [
+      "p-1ehn8nt"
+    ],
+    "name": "森 美典",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1930
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：森, 美典, 1930-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00181460"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：富丘の歴史 / 出版者回答"
+  },
+  {
+    "slugs": [
+      "p-1nobjlt"
+    ],
+    "name": "木名瀬 高嗣",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1970
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：木名瀬, 高嗣, 1970-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/031977221"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：鳩沢佐美夫の仕事, 2021.12"
+  },
+  {
+    "slugs": [
+      "p-11xgdoe"
+    ],
+    "name": "菊地 達夫",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1968
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：菊地, 達夫, 1968-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001332064"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：テキスト初等社会科, 2019.9"
+  },
+  {
+    "slugs": [
+      "hayashi-shihei"
+    ],
+    "name": "林 子平",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1738
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：林, 子平, 1738-1793",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00269629"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：三国通覧図説 / 大人名事典"
+  },
+  {
+    "slugs": [
+      "akagi-sanpei"
+    ],
+    "name": "赤木 三兵",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1909
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：赤木, 三兵, 1909-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00000892"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：北海道局名の旅. 1 / 赤木三兵 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "fukuoka-itoko"
+    ],
+    "name": "福岡 イト子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1933
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：福岡, イト子, 1933-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00412449"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ植物誌 / 福岡イト子 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "p-1qsdo77"
+    ],
+    "name": "二谷 国松",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1888
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：二谷, 国松, 1888-1960",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001202351"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：カムイを射止めた男の子, 2015.3"
+  },
+  {
+    "slugs": [
+      "kawakami-jun"
+    ],
+    "name": "川上 淳",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1954
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：川上, 淳, 1954-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00131361"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：根室市西月ケ岡遺跡発掘調査報告書 / 勤務先回答"
+  },
+  {
+    "slugs": [
+      "chiri-takanaka"
+    ],
+    "name": "知里 高央",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1907
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：知里, 高央, 1907-1965",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00084155"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ語彙記録 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "seino-haruki"
+    ],
+    "name": "清野 春樹",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1949
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：清野, 春樹, 1949-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01113028"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：川に沿う邑 / 清野春樹 著 / 初出資料 / 瀧山と恥川の秘密, 2014.2 (生年)"
+  },
+  {
+    "slugs": [
+      "p-9d1qfm"
+    ],
+    "name": "はまおか のりこ",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1954
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：はまおか, のりこ, 1954-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00670792"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：スモーキーはチーズがお好き / 木花アツコ 原作 ; はまおかのりこ 画"
+  },
+  {
+    "slugs": [
+      "fukuda-tomoyuki"
+    ],
+    "name": "福田 友之",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1947
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：福田, 友之, 1947-2021",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01142584"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：私の考古学ノート / 福田友之 著: 本文 (生年) / 青森県の貝塚, 2012.8 (読み) / 先史学史歴史, 2021.8: 本文 (没年)"
+  },
+  {
+    "slugs": [
+      "yasuoka-koichi"
+    ],
+    "name": "安岡 孝一",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1965
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：安岡, 孝一",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00257623"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：誰にでも使えるUNIX講座 / 安岡孝一 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "niioka-takehiko"
+    ],
+    "name": "新岡 武彦",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1911
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：新岡, 武彦, 1911-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00104877"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：樺太・北海道の古文化 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "fujimoto-hideo"
+    ],
+    "name": "藤本 英夫",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1927
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：藤本, 英夫, 1927-2005",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00015734"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌの墓 / 奥付 (本文・カバーを含む) / 朝日新聞 (20060108)(没年)"
+  },
+  {
+    "slugs": [
+      "p-1cyxo40"
+    ],
+    "name": "尾崎 功",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1943
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：尾崎, 功, 1943-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00987315"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：北海道・道の駅地名めぐりの旅 / 尾崎功 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "kawakami-yuji"
+    ],
+    "name": "川上 勇治",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1930
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：川上, 勇治, 1930-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00029165"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：サルウンクル物語 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "p-15p7dwk"
+    ],
+    "name": "鈴木 邦輝",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1954
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：鈴木, 邦輝, 1954-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00107254"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：道北地方のチャシ"
+  },
+  {
+    "slugs": [
+      "oide-ayako"
+    ],
+    "name": "大出 あや子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1923
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：大出, あや子, 1923-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00155614"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：日本語音声考 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "ogiya-masayasu"
+    ],
+    "name": "扇谷 昌康",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1927
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：扇谷, 昌康, 1927-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00058242"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：沙流郡のアイヌ語地名 1 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "kobayashi-masao"
+    ],
+    "name": "小林 正雄",
+    "expected": {
+      "birthYear": null,
+      "wikidata": "Q17158294",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%B0%8F%E6%9E%97%E6%AD%A3%E9%9B%84",
+      "deathYear": null
+    },
+    "corrected": {
+      "birthYear": 1916,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小林, 正雄, 1916-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00033225"
+      },
+      {
+        "title": "郷土史家の著作と照合。外交官の識別子を解除。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00033225"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：渡辺勝・カネ日記 郷土史家の著作と照合。外交官の識別子を解除。"
+  },
+  {
+    "slugs": [
+      "inoue-koichi"
+    ],
+    "name": "井上 紘一",
+    "expected": {
+      "birthYear": 1976,
+      "wikidata": "Q11373178",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BA%95%E4%B8%8A%E7%B4%98%E4%B8%80",
+      "deathYear": null
+    },
+    "corrected": {
+      "birthYear": 1940,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：井上, 紘一, 1940-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00019599"
+      },
+      {
+        "title": "北大の文化人類学者（1940年生）。野球選手の情報を解除。",
+        "url": "https://src-h.slav.hokudai.ac.jp/center/tenken/2001/inoue.html"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：人類社会の形成 上巻 / 研究者研究課題総覧 北大の文化人類学者（1940年生）。野球選手の情報を解除。"
+  },
+  {
+    "slugs": [
+      "ono-tetsuto"
+    ],
+    "name": "大野 徹人",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1973
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：大野, 徹人, 1973-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001164045"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アポイのふもとから, 2014.2"
+  },
+  {
+    "slugs": [
+      "suzuki-ryuichi"
+    ],
+    "name": "鈴木 隆一",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1977
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：鈴木, 隆一, 1977-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00909324"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ちいさなくまのカムイのおはなし / すずきりゅういち さく / 表紙・本文等"
+  },
+  {
+    "slugs": [
+      "kishimoto-suigetsu"
+    ],
+    "name": "岸本 翠月",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1908
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：岸本, 翠月, 1908-1979",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00031847"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：日本の包容性 / 本人回答"
+  },
+  {
+    "slugs": [
+      "sato-tomomi"
+    ],
+    "name": "佐藤 知己",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1961
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：佐藤, 知己, 1961-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00553333"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：「蝦夷言いろは引」の研究 / 佐藤知己 [著] / 研究者研究課題総覧 1996年版"
+  },
+  {
+    "slugs": [
+      "p-1bj2gjr"
+    ],
+    "name": "前沢 卓",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1946
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：前沢, 卓, 1946-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001205893"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ民族命と誇り, 2014.12"
+  },
+  {
+    "slugs": [
+      "ito-kohei"
+    ],
+    "name": "伊藤 公平",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1937
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：伊藤, 公平, 1937-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00022855"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：かえらざる川 / 奥付: 留辺蘂の地名 (留辺蘂町 (北海道) 留辺蘂町郷土研究会 1998.3)"
+  },
+  {
+    "slugs": [
+      "p-1ixvufv"
+    ],
+    "name": "菅原 進",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1925
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：菅原, 進",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01237129"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アィヌ語地名解. 第1巻 / 菅原進 著 / 初出資料"
+  },
+  {
+    "slugs": [
+      "p-1avbcz7"
+    ],
+    "name": "三橋 博",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1922
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：三橋, 博, 1922-1991",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00044136"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：医薬資源 / 大学研究者研究課題総覧"
+  },
+  {
+    "slugs": [
+      "p-1gxsmy4"
+    ],
+    "name": "由良 勇",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1921
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：由良, 勇, 1921-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00217615"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ語地名と伝説の岩 / 家族回答"
+  },
+  {
+    "slugs": [
+      "p-1b2n71h"
+    ],
+    "name": "中里 巧",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1954
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：中里, 巧, 1954-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00346122"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：キルケゴールとその思想風土 / 中里巧 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "ito-katsuhisa"
+    ],
+    "name": "伊藤 勝久",
+    "expected": {
+      "birthYear": 1956,
+      "wikidata": "Q11379914",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BC%8A%E8%97%A4%E5%8B%9D%E4%B9%85",
+      "deathYear": null
+    },
+    "corrected": {
+      "birthYear": 1964,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：伊藤, 勝久, 1964-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01168320"
+      },
+      {
+        "title": "アイヌ民族文化教育の研究者（1964年生）。同名の別研究者の情報を解除。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01168320"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：北海道の義務教育初等教育学校におけるアイヌ民族伝統文化理解教育の現状 / 伊藤勝久 [著] / 名称: 初出資料 / 読み・生年: ReaD (200907) アイヌ民族文化教育の研究者（1964年生）。同名の別研究者の情報を解除。"
+  },
+  {
+    "slugs": [
+      "p-f77x97"
+    ],
+    "name": "北道 邦彦",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1935
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：北道, 邦彦, 1935-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00794881"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ神謡集 / 知里幸惠 著訳 ; 北道邦彦 編 / 本人回答"
+  },
+  {
+    "slugs": [
+      "p-1nkxafa"
+    ],
+    "name": "佐川 年秀",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1954
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：佐川, 年秀, 1954-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00809160"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：旅のアジア語 / 佐川年秀 編著 / 奥付"
+  },
+  {
+    "slugs": [
+      "p-1wrmcss"
+    ],
+    "name": "立石 久雄",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1926
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：立石, 久雄, 1926-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00204946"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：シュメールと古代エジプトの文学 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "p-1exy4mi"
+    ],
+    "name": "梶浦 浩",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1928
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：梶浦, 浩, 1928-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00346152"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：縄文人の遺産 / 梶浦浩 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "nishiyama-shimako"
+    ],
+    "name": "西山 史真子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1964
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：西山, 史真子, 1964-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00533241"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：カムイユカラ / 西山史真子 [ほか]画 ; 白沢ナベ, 中本ムツ子 [述] / 表紙・本文等"
+  },
+  {
+    "slugs": [
+      "p-1nliw67"
+    ],
+    "name": "小谷 凱宣",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1939
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小谷, 凱宣, 1939-2019",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00121713"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ツンドラの古代人 / 大学研究者研究課題総覧 / 読売新聞 (20190804) (没年)"
+  },
+  {
+    "slugs": [
+      "p-17ykr4g"
+    ],
+    "name": "蓑島 栄紀",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1972
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：蓑島, 栄紀, 1972-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00864627"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：古代国家と北方社会 / 蓑島栄紀 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "kato-hyakuichi"
+    ],
+    "name": "加藤 百一",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1913
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：加藤, 百一, 1913-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00027692"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：日本の酒の歴史 / 出版者回答"
+  },
+  {
+    "slugs": [
+      "p-1ezvvm9"
+    ],
+    "name": "小原 隆幸",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1933
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小原, 隆幸, 1933-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00547008"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：北海道アイヌ語地名集 / 小原隆幸 [著] / 本人回答"
+  },
+  {
+    "slugs": [
+      "ogawa-sanae"
+    ],
+    "name": "小川 早苗",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1940
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小川, 早苗",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01197806"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ民族もんよう集 / 小川早苗 執筆 ; 小川早苗 編 / 名称: 初出資料 / アイヌ民族もんよう, 2019.5 (第7刷) (読み)"
+  },
+  {
+    "slugs": [
+      "utagawa-hiroshi",
+      "udagawa-hiroshi"
+    ],
+    "name": "宇田川 洋",
+    "expected": {
+      "birthYear": 1994,
+      "nameEn": "Hiroshi Utagawa",
+      "nameKana": null
+    },
+    "corrected": {
+      "birthYear": 1944,
+      "nameEn": "Udagawa Hiroshi",
+      "nameKana": "うだがわ ひろし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：宇田川, 洋, 1944-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00108647"
+      },
+      {
+        "title": "著者紹介の読みはウダガワヒロシ。",
+        "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784894533066"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：北海道の考古学 / 奥付 (本文・カバーを含む) 著者紹介の読みはウダガワヒロシ。"
+  },
+  {
+    "slugs": [
+      "yamada-takako"
+    ],
+    "name": "山田 孝子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1948
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：山田, 孝子, 1948-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00360835"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌの世界観 / 山田孝子 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "narumi-hideshi"
+    ],
+    "name": "鳴海 日出志",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1940
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：鳴海, 日出志, 1940-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00186544"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：日本語とインド・ヨーロッパ語 / 鳴海日出志 著 / 標題紙及び標題紙裏"
+  },
+  {
+    "slugs": [
+      "tanimoto-akihisa"
+    ],
+    "name": "谷本 晃久",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1970
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：谷本, 晃久, 1970-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001171975"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：近藤重蔵と近藤富蔵, 2014.4"
+  },
+  {
+    "slugs": [
+      "simada-kenichi"
+    ],
+    "name": "島田 健一",
+    "expected": {
+      "birthYear": null,
+      "wikidata": "Q105704182",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%B3%B6%E7%94%B0%E5%81%A5%E4%B8%80",
+      "deathYear": null
+    },
+    "corrected": {
+      "birthYear": 1929,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：島田, 健一, 1929-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00184373"
+      },
+      {
+        "title": "1929年生の地名研究著者。別人の識別子との同一性を確認できず解除。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00184373"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：沙流 (さる) 郡のアイヌ語地名 1 / 奥付 (本文・カバーを含む) 1929年生の地名研究著者。別人の識別子との同一性を確認できず解除。"
+  },
+  {
+    "slugs": [
+      "ishii-tomomi"
+    ],
+    "name": "石井 智美",
+    "expected": {
+      "birthYear": 1984,
+      "wikidata": "Q11584983",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%9F%B3%E4%BA%95%E6%99%BA%E7%BE%8E",
+      "deathYear": null
+    },
+    "corrected": {
+      "birthYear": 1959,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：石井, 智美, 1959-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001291581"
+      },
+      {
+        "title": "食・栄養の研究者（1959年生）。歌手の情報を解除。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001291581"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：海を渡った日本食, 2018.3 / 食べることを通して考える日本・世界, 2024.2(生年) 食・栄養の研究者（1959年生）。歌手の情報を解除。"
+  },
+  {
+    "slugs": [
+      "oshima-minoru"
+    ],
+    "name": "大島 稔",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1951
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：大島, 稔",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01041583"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：Languages of the North Pacific rim. v. 4 / Osahito Miyaoka, Minoru Oshima, eds"
+  },
+  {
+    "slugs": [
+      "koyama-shohei"
+    ],
+    "name": "小山 正平",
+    "expected": {
+      "birthYear": null,
+      "wikidata": "Q42564725",
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "corrected": {
+      "birthYear": 1909,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小山, 正平, 1909-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00105951"
+      },
+      {
+        "title": "1909年生の地名研究著者。別分野の研究者識別子を解除。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00105951"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：地名の発掘 / その他の参考資料 (知人回答、電話帳を含む) 1909年生の地名研究著者。別分野の研究者識別子を解除。"
+  },
+  {
+    "slugs": [
+      "mitsuru-ota"
+    ],
+    "name": "太田 満",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1967
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：太田, 満, 1967-2020",
+        "url": "https://id.ndl.go.jp/auth/ndlna/032572861"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：和愛辞典, 2022.12"
+  },
+  {
+    "slugs": [
+      "tachibana-yoshimitsu"
+    ],
+    "name": "橘 善光",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1933
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：橘, 善光, 1933-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00083103"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：下北の古代文化 / その他の参考資料 (知人回答、電話帳を含む)"
+  },
+  {
+    "slugs": [
+      "komatsu-tetsuro"
+    ],
+    "name": "小松 哲郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1930
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小松, 哲郎, 1930-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00802770"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌの暮らしと伝承 / ジョン・バチェラー 著 ; 小松哲郎 訳 / 出版者回答"
+  },
+  {
+    "slugs": [
+      "keira-mitsunori"
+    ],
+    "name": "計良 光範",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1944
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：計良, 光範, 1944-2015",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00395366"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌの世界 / 計良光範 著 / 著者略歴 / ごまめの歯ぎしり, 2016.3 (没年)"
+  },
+  {
+    "slugs": [
+      "p-12ohmil"
+    ],
+    "name": "木村 英明",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1943
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：木村, 英明, 1943-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00164827"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：海と川のインディアン / 出版者回答"
+  },
+  {
+    "slugs": [
+      "p-n3f6iu"
+    ],
+    "name": "狩俣 恵一",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1951
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：狩俣, 恵一, 1951-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00799691"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：南島歌謡の研究 / 狩俣恵一 著 / 研究者研究課題総覧 1996年版"
+  },
+  {
+    "slugs": [
+      "sakakibara-masafumi"
+    ],
+    "name": "榊原 正文",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1955
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：榊原, 正文, 1955-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00365660"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：「北方四島」のアイヌ語地名ノート / 榊原正文 著 / 出版者回答"
+  },
+  {
+    "slugs": [
+      "komatsu-kazuhiro"
+    ],
+    "name": "小松 和弘",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1961
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小松, 和弘, 1961-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00254980"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ / ヨーゼフ・クライナー, ハンスディーター・エールシュレーガー 共著 ; 小松和弘 訳"
+  },
+  {
+    "slugs": [
+      "sato-masahiko"
+    ],
+    "name": "佐藤 昌彦",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1955
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：佐藤, 昌彦, 1955-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00688871"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：佐藤式\"楽しい工作\"メニュー10選 / 佐藤昌彦 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "p-1lodgy3"
+    ],
+    "name": "長崎 郁",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1968
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：長崎, 郁, 1968-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001219435"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ語研究の諸問題, 2015.3 / シベリア先住民の食卓, 2016.3 (生年)"
+  },
+  {
+    "slugs": [
+      "p-1iwaxi2"
+    ],
+    "name": "若月 亨",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1967
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：若月, 亨, 1967-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00350936"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ヘンケとアハチ / 藤村久和, 若月亨 編 / 出版者回答"
+  },
+  {
+    "slugs": [
+      "p-1hcevqu"
+    ],
+    "name": "尾崎 喜光",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1958
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：尾崎, 喜光",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01147845"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：対人行動の日韓対照研究 / 尾崎喜光 編著 / 初出資料"
+  },
+  {
+    "slugs": [
+      "wada-bunjiro"
+    ],
+    "name": "和田 文治郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1898
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：和田, 文治郎, 1898-1958",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001141718"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：樺太アイヌ説話集, 2013.3: 本文 (生没年) / 推量読み"
+  },
+  {
+    "slugs": [
+      "kimura-jun",
+      "kimura-makoto"
+    ],
+    "name": "木村 純",
+    "expected": {
+      "birthYear": 1960,
+      "wikidata": "Q11519047",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%9C%A8%E6%9D%91%E7%B4%94",
+      "deathYear": null,
+      "nameEn": "Jun Kimura",
+      "nameKana": null
+    },
+    "corrected": {
+      "birthYear": 1950,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null,
+      "nameEn": "Kimura Makoto",
+      "nameKana": "きむら まこと"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：木村, 純, 1950-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00682648"
+      },
+      {
+        "title": "北海道大学の教育学研究者（1950年生）。読みはきむらまこと。作曲家の情報を解除。",
+        "url": "https://www.hup.gr.jp/items/65002265"
+      },
+      {
+        "title": "出版社の著者紹介で読みを確認。",
+        "url": "https://www.hup.gr.jp/items/65002265"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：自己教育の主体として / 山本健慈, 高倉嗣昌, 木村純 編著 / 研究者研究課題総覧 1996年版 北海道大学の教育学研究者（1950年生）。読みはきむらまこと。作曲家の情報を解除。 出版社の著者紹介で読みを確認。"
+  },
+  {
+    "slugs": [
+      "kruzenshtern-ivan-fedorovich-1770-1846"
+    ],
+    "name": "Kruzenshtern, Ivan Fedorovich, 1770-1846",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1770
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：Kruzenshtern, Ivan Fedorovich, 1770-1846",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00446425"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：北方未公開古文書集成 第5巻 奉使日本紀行 / LCCN: n 85086203"
+  },
+  {
+    "slugs": [
+      "ogihara-shinko"
+    ],
+    "name": "荻原 真子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1942
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：荻原, 真子, 1942-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00126111"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：シベリア極東の考古学 2 / 奥付 (本文・カバーを含む) / 英雄叙事詩, 2018.10 (生年)"
+  },
+  {
+    "slugs": [
+      "p-s5616a"
+    ],
+    "name": "玉山 成元",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1932
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：玉山, 成元, 1932-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00080932"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：普光観智国師 / 大学研究者研究課題総覧"
+  },
+  {
+    "slugs": [
+      "p-1hw7p2a"
+    ],
+    "name": "丸山 隆司",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1948
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：丸山, 隆司, 1948-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00857730"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：神の言葉・人の言葉 / 岡部隆志, 丸山隆司 編 / 研究者研究課題総覧 1990年版"
+  },
+  {
+    "slugs": [
+      "uchida-junko"
+    ],
+    "name": "内田 順子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1967
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：内田, 順子, 1967-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00805320"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：宮古島狩俣の神歌 / 内田順子 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "p-1yumqo7"
+    ],
+    "name": "津田 命子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1945
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：津田, 命子",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01161229"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ刺しゅう入門. チヂリ編 / 津田命子 著 / 初出資料"
+  },
+  {
+    "slugs": [
+      "kasai-takechiyo"
+    ],
+    "name": "葛西 猛千代",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1870
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：葛西, 猛千代, 1870-1951",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00027000"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：樺太之地名 / CD人物レファレンス事典 日本編 (生没年)"
+  },
+  {
+    "slugs": [
+      "otomo-yukio"
+    ],
+    "name": "大友 幸男",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1924
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：大友, 幸男, 1924-1999",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00367668"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：江釣子古墳群の謎 / 大友幸男 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "p-y2rdpz"
+    ],
+    "name": "地蔵 慶護",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1930
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：地蔵, 慶護, 1930-2010",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00162153"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ばんじり物語 / 奥付 (本文・カバーを含む) / 地蔵慶護誌文集, 2020.11 (没年)"
+  },
+  {
+    "slugs": [
+      "p-zo7x46"
+    ],
+    "name": "明石 一紀",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1947
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：明石, 一紀, 1947-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00192670"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：日本古代の親族構造 / 明石一紀 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "nakamura-kazuyuki"
+    ],
+    "name": "中村 和之",
+    "expected": {
+      "birthYear": 1986,
+      "wikidata": "Q115529978",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%B8%AD%E6%9D%91%E5%92%8C%E4%B9%8B",
+      "deathYear": null
+    },
+    "corrected": {
+      "birthYear": 1956,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：中村, 和之, 1956-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01120632"
+      },
+      {
+        "title": "函館高専の歴史学研究者（1956年生）。俳優の情報を解除。",
+        "url": "https://www.cc-hakodate.jp/wp-content/uploads/2017/02/hakodategaku20120630.pdf"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ヌルガン永寧寺遺跡と碑文 / A. R. アルテーミエフ 著 ; 菊池俊彦, 中村和之 監修 ; 垣内あと 訳 / 初出資料 函館高専の歴史学研究者（1956年生）。俳優の情報を解除。"
+  },
+  {
+    "slugs": [
+      "p-1cf44kw"
+    ],
+    "name": "石倉 欣二",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1937
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：石倉, 欣二, 1937-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00119332"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：つるのあねさ / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "p-1t0p9g6"
+    ],
+    "name": "平賀 エテノア",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1880
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：平賀, エテノア, 1880-1960",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001202349"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：フキノトウになった女の子, 2014.3"
+  },
+  {
+    "slugs": [
+      "p-ywxeun"
+    ],
+    "name": "畑中 友次",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1895
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：畑中, 友次, 1895-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00008825"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：古地名の謎"
+  },
+  {
+    "slugs": [
+      "p-11ol90n"
+    ],
+    "name": "太宰 幸子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1943
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：太宰, 幸子, 1943-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01153074"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：仙台城下の地名 / 太宰幸子 著 / 初出資料 / 地名は知っていた, 2012.12 (生年)"
+  },
+  {
+    "slugs": [
+      "p-f7krcf"
+    ],
+    "name": "成田 得平",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1943
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：成田, 得平, 1943-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00149586"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：近代化の中のアイヌ差別の構造 / 出版者回答"
+  },
+  {
+    "slugs": [
+      "p-y0a5qq"
+    ],
+    "name": "四辻 一朗",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1914
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：四辻, 一朗, 1914-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00098209"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌの物語 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "ono-yoneichi"
+    ],
+    "name": "小野 米一",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1939
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小野, 米一, 1939-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00117587"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：占冠村のことば / 大学研究者研究課題総覧"
+  },
+  {
+    "slugs": [
+      "p-1kl2r4i"
+    ],
+    "name": "中澤 道三",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1937
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：中澤, 道三, 1937-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/033725544"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：秩父のアイヌ語地名, 2024.5 / 推量読み"
+  },
+  {
+    "slugs": [
+      "uoi-kazuyoshi"
+    ],
+    "name": "魚井 一由",
+    "expected": {
+      "birthYear": 1947
+    },
+    "corrected": {
+      "birthYear": 1946
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：魚井, 一由, 1946-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00252137"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ・フォークロア / ニコライ・ネフスキー 著 ; エリ・グロムコフスカヤ 編 ; 魚井一由 訳 / 奥付"
+  },
+  {
+    "slugs": [
+      "goto-toshio"
+    ],
+    "name": "後藤 利雄",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1922
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：後藤, 利雄, 1922-2001",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00006173"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：人麿の歌集とその成立 / 大学研究者研究課題総覧 / 山形方言 34号 (没年)"
+  },
+  {
+    "slugs": [
+      "hiraishi-kiyotaka"
+    ],
+    "name": "平石 清隆",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1963
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：平石, 清隆, 1963-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/033352038"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：沙流地方のウウェペケㇾ, 2003.12 / 推量読み"
+  },
+  {
+    "slugs": [
+      "p-x4n5eb"
+    ],
+    "name": "狩野 義美",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1933
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：狩野, 義美",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01116047"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：新冠・静内地方のアイヌ語 / 狩野義美 著 / 名称: 初出資料 / 古川アシンノカルの生涯, 2016.3 (読み)"
+  },
+  {
+    "slugs": [
+      "inaba-katsuo"
+    ],
+    "name": "因幡 勝雄",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1937
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：因幡, 勝雄, 1937-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00324985"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ドングリ林の精霊たち / 因幡勝雄 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "p-79rn4z"
+    ],
+    "name": "北尾 浩一",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1953
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：北尾, 浩一",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00214876"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ふるさと星物語 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "kobayashi-koji"
+    ],
+    "name": "小林 孝二",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1952
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小林, 孝二",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01204951"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌの建築文化再考 / 小林孝二 著 / 初出資料"
+  },
+  {
+    "slugs": [
+      "pon-huci"
+    ],
+    "name": "ポン・フチ",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1949
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：ポン・フチ, 1949-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00064365"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ語は生きている"
+  },
+  {
+    "slugs": [
+      "sekine-tatsuhito"
+    ],
+    "name": "関根 達人",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1965
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：関根, 達人, 1965-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00911260"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：津軽十三湊湊迎寺過去帳の研究 / 関根達人 編著 / 研究者研究課題総覧 1996年版"
+  },
+  {
+    "slugs": [
+      "yasuoka-motoko"
+    ],
+    "name": "安岡 素子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1971
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：安岡, 素子",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00763524"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：文字コードの世界 / 安岡孝一, 安岡素子 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "minako-sakata"
+    ],
+    "name": "坂田 美奈子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1969
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：坂田, 美奈子, 1969-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001092869"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ口承文学の認識論(エピステモロジー), 2011.9 / 先住民アイヌはどんな歴史を歩んできたか, 2018.8 (生年)"
+  },
+  {
+    "slugs": [
+      "p-1hvppjg"
+    ],
+    "name": "丸山 隆司",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1948
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：丸山, 隆司, 1948-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00857730"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：神の言葉・人の言葉 / 岡部隆志, 丸山隆司 編 / 研究者研究課題総覧 1990年版"
+  },
+  {
+    "slugs": [
+      "osaka-taku"
+    ],
+    "name": "大坂拓",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1983
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：大坂, 拓, 1983-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/034031464"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：写真が語るアイヌの近代, 2025.3"
+  },
+  {
+    "slugs": [
+      "kenji-araki"
+    ],
+    "name": "荒木健治",
+    "expected": {
+      "birthYear": 1924,
+      "wikidata": "Q16263813",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E8%8D%92%E6%9C%A8%E5%81%A5%E6%B2%BB",
+      "deathYear": null
+    },
+    "corrected": {
+      "birthYear": 1959,
+      "wikidata": null,
+      "wikipedia": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：荒木, 健治, 1959-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00980282"
+      },
+      {
+        "title": "自然言語処理研究者（1959年生）。野球選手の識別子を解除。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00980282"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：自然言語処理ことはじめ / 荒木健治 著 / 奥付 自然言語処理研究者（1959年生）。野球選手の識別子を解除。"
+  },
+  {
+    "slugs": [
+      "arakida-iehisa"
+    ],
+    "name": "荒木田 家寿",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1902
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：荒木田, 家寿, 1902-1981",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00003041"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：あいぬの昔話 / 文化人名録 第22版"
+  },
+  {
+    "slugs": [
+      "yamasaki-koji"
+    ],
+    "name": "山崎 幸治",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1975
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：山崎, 幸治, 1975-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/001109228"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：世界のなかのアイヌ・アート, 2012.3印刷 / 北海道大学ホームページ (20120726) (読み) / もっと知りたいアイヌの美術, 2022.2 (生年)"
+  },
+  {
+    "slugs": [
+      "tachibana-shoichi"
+    ],
+    "name": "橘 正一",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1902
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：橘, 正一, 1902-1940",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00083083"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：方言学概論 / 奥付: 方言読本 / 国語研究 8(5) (生没年)"
+  },
+  {
+    "slugs": [
+      "endo-masatoshi"
+    ],
+    "name": "遠藤 匡俊",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1954
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：遠藤, 匡俊, 1954-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00544849"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌと狩猟採集社会 / 遠藤匡俊 著 / 研究者研究課題総覧 1996年版"
+  },
+  {
+    "slugs": [
+      "kawakami-matsuko"
+    ],
+    "name": "川上 まつ子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1913
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：川上, まつ子, 1913-1988",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00157200"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ポロシルンカムイになった少年 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "kohama-mototsugu"
+    ],
+    "name": "小浜 基次",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1904
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小浜, 基次, 1904-1970",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00755353"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：小浜基次教授退官記念講演集録 / 欠田早苗 編 / 読み・生没年: 文化人名録 第22版"
+  },
+  {
+    "slugs": [
+      "watanabe-shigeru"
+    ],
+    "name": "渡辺 茂",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1913
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：渡辺, 茂, 1913-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00091030"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：総合史料目録 / 本人回答"
+  },
+  {
+    "slugs": [
+      "ishida-hajime"
+    ],
+    "name": "石田 肇",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1956
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：石田, 肇, 1956-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01240181"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：考古学を科学する / 中條利一郎, 酒井英男, 石田肇 編 / 名称・読み: 初出資料 / 生年: ReaD (20111006)"
+  },
+  {
+    "slugs": [
+      "izutsu-katsunobu"
+    ],
+    "name": "井筒 勝信",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1969
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：井筒, 勝信",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01070841"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：場所と力 / 井筒勝信 著 / 初出資料"
+  },
+  {
+    "slugs": [
+      "yamamoto-yuko"
+    ],
+    "name": "山本 祐弘",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1904
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：山本, 祐弘, 1904-1990",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00093743"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：インテリアと家具の歴史 / 文化人名録 / 著作権台帳CD-ROM 2002年版 (没年)"
+  },
+  {
+    "slugs": [
+      "tsumagari-toshiro"
+    ],
+    "name": "津曲 敏郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1951
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：津曲, 敏郎, 1951-2020",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00254566"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ウイルタのことば. 4 / 北川源太郎 筆録 ; 池上二良, 津曲敏郎 訳解 / 標題紙及び標題紙裏 / 朝日新聞 (20201113) (没年)"
+  },
+  {
+    "slugs": [
+      "momose-hibiki"
+    ],
+    "name": "百瀬 響",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1963
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：百瀬, 響, 1963-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00762834"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：「開拓使文書」アイヌ関連件名目録 / 百瀬響 編 / 研究者研究課題総覧 1996年版"
+  },
+  {
+    "slugs": [
+      "shimizu-seijiro"
+    ],
+    "name": "清水 清次郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1925
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：清水, 清次郎, 1925-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00173763"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：謎の日本超古代民族 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "matsui-tsuneyuki"
+    ],
+    "name": "松井 恒幸",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1928
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：松井, 恒幸, 1928-1982",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00103410"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：写真集明治大正昭和旭川 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "p-1hmrc4r"
+    ],
+    "name": "筒井 功",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1944
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：筒井, 功, 1944-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00189562"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ソ連の旅 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "p-1c6rkvl"
+    ],
+    "name": "土屋 茂",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1915
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：土屋, 茂, 1915-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00352939"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ語の地名から見た広尾町の歴史と風景 / 土屋茂 著 / 本人回答"
+  },
+  {
+    "slugs": [
+      "furuhara-toshihiro"
+    ],
+    "name": "古原 敏弘",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1952
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：古原, 敏弘, 1952-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/01000125"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌの道 / 佐々木利和, 古原敏弘, 児島恭子 編 / 奥付"
+  },
+  {
+    "slugs": [
+      "honda-yuko"
+    ],
+    "name": "本田 優子",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1957
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：本田, 優子, 1957-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00669825"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：二つの風の谷 / 本田優子 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "magata-tokumatsu"
+    ],
+    "name": "間方 徳松",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1912
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：間方, 徳松, 1912-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00121838"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：越中の大昔 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "hiraga-sada"
+    ],
+    "name": "平賀 サダ",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1895
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：平賀, サダ, 1895-1972",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00386334"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：Akketek hopuni / 平賀サダ 語り手 ; 田村すず子 著 / 出版者回答"
+  },
+  {
+    "slugs": [
+      "ogata-tamotsu"
+    ],
+    "name": "小片 保",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1916
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小片, 保, 1916-1980",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00113013"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：小片保教授業績集 / 大学研究者研究課題総覧"
+  },
+  {
+    "slugs": [
+      "p-1f5kvww"
+    ],
+    "name": "橋本 潔",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1949
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：橋本, 潔, 1949-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00919234"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ語で解く「魏志倭人伝」 / 橋本潔 著 / 奥付 / チョコレートはアイヌ語!, 2005.8 (生年)"
+  },
+  {
+    "slugs": [
+      "hitoshi-watanabe"
+    ],
+    "name": "渡辺 仁",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1919
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：渡辺, 仁, 1919-1998",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00090648"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ヒトはなぜ立ちあがったか / 渡辺仁 著 / 大学研究者研究課題総覧"
+  },
+  {
+    "slugs": [
+      "ogawa-masato"
+    ],
+    "name": "小川 正人",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1963
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小川, 正人, 1963-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00681475"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：近代アイヌ教育制度史研究 / 小川正人 著 / 奥付"
+  },
+  {
+    "slugs": [
+      "p-y9ma1q"
+    ],
+    "name": "田中 勝也",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1937
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：田中, 勝也, 1937-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00081575"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：倭と山窩 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "saikaku-sadayoshi"
+    ],
+    "name": "西鶴 定嘉",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1896
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：西鶴, 定嘉, 1896-1989",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00055559"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：日本と北方領土 / 奥付 (本文・カバーを含む) / 北海道の文化 (80) (没年)"
+  },
+  {
+    "slugs": [
+      "nabesawa-motozo"
+    ],
+    "name": "鍋沢 元蔵",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1886
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：鍋沢, 元蔵, 1886-1967",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00049485"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：クトネシリカ / 鍋沢元蔵ノートの研究, 2016.3 (読み), 本文 (生没年)"
+  },
+  {
+    "slugs": [
+      "chamberlain-basil-hall-1850-1935"
+    ],
+    "name": "Chamberlain, Basil Hall, 1850-1935",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1850
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：Chamberlain, Basil Hall, 1850-1935",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00435646"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：日本小文典批評 / LCCN: n50036958"
+  },
+  {
+    "slugs": [
+      "p-k7l165"
+    ],
+    "name": "戸部 千春",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1954
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：戸部, 千春, 1954-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/033626494"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：豊島三右衛門 釧路地方地名考, 2024.4: 本文 (読み)"
+  },
+  {
+    "slugs": [
+      "p-ay1sl9"
+    ],
+    "name": "飯野 正典",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1936
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：飯野, 正典, 1936-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00211070"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ雅語辞典 / 家族回答"
+  },
+  {
+    "slugs": [
+      "ishikawa-motosuke"
+    ],
+    "name": "石川 元助",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1913
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：石川, 元助, 1913-1981",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00021278"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：毒矢の文化 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "p-754y3m"
+    ],
+    "name": "小林 房太郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1872
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小林, 房太郎, 1872-1937",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00033052"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：世界地名大辞典"
+  },
+  {
+    "slugs": [
+      "ogasawara-sayo"
+    ],
+    "name": "小笠原 小夜",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1973
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：小笠原, 小夜, 1973-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/031698818"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌ民族27の昔話, 2021.9"
+  },
+  {
+    "slugs": [
+      "p-1owqqtz"
+    ],
+    "name": "井上 善十郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1893
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：井上, 善十郎, 1893-1961",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00019923"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：新衛生学 / 文化人名録 第22版"
+  },
+  {
+    "slugs": [
+      "p-1to67i7"
+    ],
+    "name": "佐藤 忠悦",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1940
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：佐藤, 忠悦, 1940-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00899899"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：白瀬南極探検隊と二人の樺太アイヌ / 佐藤忠悦 著 / 著者略歴"
+  },
+  {
+    "slugs": [
+      "matsumoto-narumi"
+    ],
+    "name": "松本 成美",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1927
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：松本, 成美, 1927-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00041827"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：コタンに生きる / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "kan-wada"
+    ],
+    "name": "和田 完",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1933
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：和田, 完, 1933-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00089876"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：人間行動の諸相 / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "p-12ok2ju"
+    ],
+    "name": "木村 邦彦",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1927
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：木村, 邦彦, 1927-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00031002"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：人の成長と性 / 大学研究者研究課題総覧"
+  },
+  {
+    "slugs": [
+      "emori-susumu"
+    ],
+    "name": "榎森 進",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1940
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：榎森, 進, 1940-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00130876"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：北海道近世史の研究 / 榎森進 著 / 研究者研究課題総覧 1984年版"
+  },
+  {
+    "slugs": [
+      "p-1llynl7"
+    ],
+    "name": "長井 博",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1943
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：長井, 博, 1943-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00137684"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：アイヌお産ばあちゃんのウパシクマ / 奥付 (本文・カバーを含む)"
+  },
+  {
+    "slugs": [
+      "sasaki-shiro"
+    ],
+    "name": "佐々木 史郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1957
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：佐々木, 史郎, 1957-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00383617"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：ツングース言語文化論集. 2 / 研究者研究課題総覧 1990年版"
+  },
+  {
+    "slugs": [
+      "ogaki-naoaki"
+    ],
+    "name": "大垣 直明",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1943
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立国会図書館典拠：大垣, 直明, 1943-",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00130125"
+      }
+    ],
+    "note": "関連著作・研究分野を照合。典拠の出典：北海道における注文住宅のデザイン・プラン・材料等の決定過程に関する研究 / 大学研究者研究課題総覧"
+  },
+  {
+    "slugs": [
+      "watanabe-kaori"
+    ],
+    "name": "渡邊香織",
+    "expected": {
+      "wikidata": "Q97169710",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%B8%A1%E9%82%89%E9%A6%99%E7%B9%94",
+      "birthYear": null,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "千葉大学のアイヌ語研究。モデルの識別子との同一性を確認できず解除。",
+        "url": "https://opac.ll.chiba-u.jp/da/curator/108062/S21857148-21-P243-SAK.pdf"
+      }
+    ],
+    "note": " 千葉大学のアイヌ語研究。モデルの識別子との同一性を確認できず解除。"
+  },
+  {
+    "slugs": [
+      "kobayashi-miki"
+    ],
+    "name": "小林 美紀",
+    "expected": {
+      "wikidata": "Q11461822",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%B0%8F%E6%9E%97%E7%BE%8E%E7%B4%80",
+      "birthYear": 1977,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立アイヌ民族博物館研究員。アナウンサーの情報を解除。",
+        "url": "https://www.ff-ainu.or.jp/web/overview/files/R3jigyo3.pdf"
+      }
+    ],
+    "note": " 国立アイヌ民族博物館研究員。アナウンサーの情報を解除。"
+  },
+  {
+    "slugs": [
+      "yamaguchi-shinju"
+    ],
+    "name": "山口 伸樹",
+    "expected": {
+      "wikidata": "Q38278658",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%B1%B1%E5%8F%A3%E4%BC%B8%E6%A8%B9",
+      "birthYear": 1958,
+      "deathYear": null,
+      "nameEn": "Shinju Yamaguchi"
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null,
+      "nameEn": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "アイヌ語研究論文の著者。政治家の情報との同一性を確認できず解除。",
+        "url": "https://cir.nii.ac.jp/crid/1050007072212351488"
+      },
+      {
+        "title": "誤った識別子に由来する未確認のローマ字表記も解除。",
+        "url": "https://cir.nii.ac.jp/crid/1050007072212351488"
+      }
+    ],
+    "note": " アイヌ語研究論文の著者。政治家の情報との同一性を確認できず解除。 誤った識別子に由来する未確認のローマ字表記も解除。"
+  },
+  {
+    "slugs": [
+      "ishikawa-mikaho"
+    ],
+    "name": "石川 美香穂",
+    "expected": {
+      "wikidata": "Q11586336",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%9F%B3%E5%B7%9D%E7%BE%8E%E9%A6%99%E7%A9%82",
+      "birthYear": 1974,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "アイヌ語講座助手。脚本家の情報との同一性を確認できず解除。",
+        "url": "https://www.ff-ainu.or.jp/web/overview/cultural_exchange/details/6_7.html"
+      }
+    ],
+    "note": " アイヌ語講座助手。脚本家の情報との同一性を確認できず解除。"
+  },
+  {
+    "slugs": [
+      "koji-maeda"
+    ],
+    "name": "前田 耕司",
+    "expected": {
+      "wikidata": "Q11397713",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%89%8D%E7%94%B0%E8%80%95%E5%8F%B8",
+      "birthYear": 1964,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "早稲田大学の教育学研究者。野球選手の情報を解除。",
+        "url": "https://w-rdb.waseda.jp/html/100000515_ja.html"
+      }
+    ],
+    "note": " 早稲田大学の教育学研究者。野球選手の情報を解除。"
+  },
+  {
+    "slugs": [
+      "ito-atsunori"
+    ],
+    "name": "伊藤 敦規",
+    "expected": {
+      "wikidata": "Q11380151",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BC%8A%E8%97%A4%E6%95%A6%E8%A6%8F",
+      "birthYear": 1963,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "国立民族学博物館の人類学研究者。野球選手の情報を解除。",
+        "url": "https://www.minpaku.ac.jp/post-staff/6504"
+      }
+    ],
+    "note": " 国立民族学博物館の人類学研究者。野球選手の情報を解除。"
+  },
+  {
+    "slugs": [
+      "ikeda-yuko"
+    ],
+    "name": "池田 裕子",
+    "expected": {
+      "wikidata": "Q11552128",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%B1%A0%E7%94%B0%E8%A3%95%E5%AD%90",
+      "birthYear": 1987,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "東海大学の教育史研究者。タレントの情報を解除。",
+        "url": "https://kaken.nii.ac.jp/ja/file/KAKENHI-PROJECT-15K04248/15K04248seika.pdf"
+      }
+    ],
+    "note": " 東海大学の教育史研究者。タレントの情報を解除。"
+  },
+  {
+    "slugs": [
+      "sakuma-manabu"
+    ],
+    "name": "佐久間 学",
+    "expected": {
+      "wikidata": "Q11382700",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BD%90%E4%B9%85%E9%96%93%E5%AD%A6",
+      "birthYear": 1973,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "札幌市立大学の建築研究。歌手の情報を解除。",
+        "url": "https://scu.repo.nii.ac.jp/record/63/files/SCU6_10.pdf"
+      }
+    ],
+    "note": " 札幌市立大学の建築研究。歌手の情報を解除。"
+  },
+  {
+    "slugs": [
+      "watanabe-takashi"
+    ],
+    "name": "渡辺 隆",
+    "expected": {
+      "wikidata": "Q115188482",
+      "wikipedia": null,
+      "birthYear": 1978,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "地名・登山史の著者。芸人の情報を解除。同名著者が複数いるため生年未確定。",
+        "url": "https://cir.nii.ac.jp/all?q=消えてしまったアイヌ語の山名"
+      }
+    ],
+    "note": " 地名・登山史の著者。芸人の情報を解除。同名著者が複数いるため生年未確定。"
+  },
+  {
+    "slugs": [
+      "takahashi-motoi"
+    ],
+    "name": "高橋 基",
+    "expected": {
+      "wikidata": "Q115320688",
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "旭川の地名研究者・元高校教諭。映像撮影者の識別子を解除。",
+        "url": "https://www.city.asahikawa.hokkaido.jp/hakubutukan/kenkyuu/d053440_d/fil/meibo.pdf"
+      }
+    ],
+    "note": " 旭川の地名研究者・元高校教諭。映像撮影者の識別子を解除。"
+  },
+  {
+    "slugs": [
+      "ono-yuki"
+    ],
+    "name": "小野 雄貴",
+    "expected": {
+      "wikidata": "Q98758131",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%B0%8F%E9%87%8E%E9%9B%84%E8%B2%B4",
+      "birthYear": 1993,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "旭川方言辞典の編者。スポーツ選手の情報との同一性を確認できず解除。",
+        "url": "https://asahikawaramat.blogspot.com/p/blog-page_08.html"
+      }
+    ],
+    "note": " 旭川方言辞典の編者。スポーツ選手の情報との同一性を確認できず解除。"
+  },
+  {
+    "slugs": [
+      "maeda-manami"
+    ],
+    "name": "前田 愛美",
+    "expected": {
+      "wikidata": "Q108783784",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%89%8D%E7%94%B0%E6%84%9B%E7%BE%8E",
+      "birthYear": null,
+      "deathYear": null,
+      "nameEn": "Manami Maeda"
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null,
+      "nameEn": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "アイヌ語辞典編者。声優の識別子との同一性を確認できず解除。",
+        "url": "https://www.kosho.or.jp/products/detail.php?product_id=409519520"
+      },
+      {
+        "title": "声優に由来する未確認のローマ字表記も解除。",
+        "url": "https://www.kosho.or.jp/products/detail.php?product_id=409519520"
+      }
+    ],
+    "note": " アイヌ語辞典編者。声優の識別子との同一性を確認できず解除。 声優に由来する未確認のローマ字表記も解除。"
+  },
+  {
+    "slugs": [
+      "yoshida-katsumi"
+    ],
+    "name": "吉田 和美",
+    "expected": {
+      "wikidata": "Q11413636",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%90%89%E7%94%B0%E5%8B%9D%E5%B7%B1",
+      "birthYear": 1948,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "辞典編者の表記は吉田和美。実業家の吉田勝己の情報を解除。",
+        "url": "https://asahikawaramat.blogspot.com/p/blog-page_08.html"
+      }
+    ],
+    "note": " 辞典編者の表記は吉田和美。実業家の吉田勝己の情報を解除。"
+  },
+  {
+    "slugs": [
+      "takahashi-akiko"
+    ],
+    "name": "高橋 晶子",
+    "expected": {
+      "wikidata": "Q11671328",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E9%AB%98%E6%A9%8B%E6%99%B6%E5%AD%90",
+      "birthYear": 1958,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "児童文学・アイヌ口承文芸の研究者。建築家の情報との同一性を確認できず解除。",
+        "url": "https://www.h-bungaku.or.jp/issue/pdf/issue_nenpou17/17-8_17.pdf"
+      }
+    ],
+    "note": " 児童文学・アイヌ口承文芸の研究者。建築家の情報との同一性を確認できず解除。"
+  },
+  {
+    "slugs": [
+      "taniguchi-mamoru"
+    ],
+    "name": "谷口 守",
+    "expected": {
+      "wikidata": "Q133443405",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E8%B0%B7%E5%8F%A3%E5%AE%88",
+      "birthYear": 1961,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "郷土教材の国語教育研究。都市計画研究者の情報との同一性を確認できず解除。",
+        "url": "https://hokkyodai.repo.nii.ac.jp/records/2000434"
+      }
+    ],
+    "note": " 郷土教材の国語教育研究。都市計画研究者の情報との同一性を確認できず解除。"
+  },
+  {
+    "slugs": [
+      "sato-sachiko"
+    ],
+    "name": "佐藤 幸子",
+    "expected": {
+      "wikidata": "Q11383946",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BD%90%E8%97%A4%E5%B9%B8%E5%AD%90",
+      "birthYear": 1980,
+      "deathYear": null
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "実践女子大学の食生活研究者。芸能人の情報を解除。",
+        "url": "https://www.jissen.ac.jp/about/teacher/sato_sachiko.html"
+      }
+    ],
+    "note": " 実践女子大学の食生活研究者。芸能人の情報を解除。"
+  },
+  {
+    "slugs": [
+      "ishida-shuzo"
+    ],
+    "name": "石田 收藏",
+    "expected": {
+      "name": "石田 收藏",
+      "nameEn": "Ishida Shūzō",
+      "birthYear": null
+    },
+    "corrected": {
+      "name": "石田 収蔵",
+      "nameEn": "Ishida Shūzō",
+      "birthYear": 1879
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "典拠の標準表記は石田収蔵。收藏という誤字を訂正。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00798475"
+      },
+      {
+        "title": "国立アイヌ民族博物館研究報告：石田収蔵の野帳等資料の紹介",
+        "url": "https://nam.go.jp/wp/wp-content/uploads/2022/10/000-all-pages-20mb.pdf"
+      }
+    ],
+    "note": " 典拠の標準表記は石田収蔵。收藏という誤字を訂正。"
+  },
+  {
+    "slugs": [
+      "kirikae-hideo"
+    ],
+    "name": "切替 英雄",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1954
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://doi.org/10.1163/25898833-12340047"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "kirsten-refsing"
+    ],
+    "name": "Kirsten Refsing",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1948
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://pressto.amu.edu.pl/index.php/linpo/article/view/46190"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "donald-l-philippi"
+    ],
+    "name": "Donald L. Philippi",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1930
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://web.archive.org/web/20190901121816/http://www.jai2.com/dlpobit.htm"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "mikiso-hane"
+    ],
+    "name": "Mikiso Hane",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1922
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://www.tributearchive.com/obituaries/16069452"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "mikhail-mikhailovich-dobrotvorsky"
+    ],
+    "name": "Mikhail Mikhailovich Dobrotvorsky",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1836
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://sakh-virtualmuseum.ru/dobrotvorskiy-mikhail-mikhaylovich"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。",
+    "acceptedNames": [
+      "M.M. ドブロトゥヴォールスキー"
+    ]
+  },
+  {
+    "slugs": [
+      "hirame-yoshi"
+    ],
+    "name": "平目 よし",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1899
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://nibutani-ainu-museum.com/pdf/ainu_gaiyou.pdf"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "kaizawa-turushino"
+    ],
+    "name": "貝澤 とぅるしの",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1889
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://nibutani-ainu-museum.com/pdf/ainu_gaiyou.pdf"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "nabesawa-nepuki"
+    ],
+    "name": "鍋澤 ねぷき",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1889
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://nibutani-ainu-museum.com/pdf/ainu_gaiyou.pdf"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "kimura-kimi"
+    ],
+    "name": "木村 きみ",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1900
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://www.ff-ainu.or.jp/about/files/H24%E8%AC%9B%E6%BC%94%E4%BC%9A%E3%80%80%E8%AC%9B%E6%BC%94%E9%8C%B2%EF%BC%88%E6%9C%AD%E5%B9%8C%EF%BC%89%E4%B8%AD%E5%B7%9D%E8%A3%95.pdf"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "kurokawa-teshime"
+    ],
+    "name": "黒川 てしめ",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1895
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://eprints.lib.hokudai.ac.jp/dspace/bitstream/2115/73701/1/Tangiku20181106.pdf"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "kitakaze-isokichi"
+    ],
+    "name": "北風 磯吉",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1880
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://kotobank.jp/word/北風磯吉-1069251"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "p-70s9t4"
+    ],
+    "name": "八重 九郎",
+    "expected": {
+      "birthYear": null
+    },
+    "corrected": {
+      "birthYear": 1895
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "没年調査の根拠資料に生年も明記。",
+        "url": "https://www.hm.pref.hokkaido.lg.jp/wp-content/uploads/2025/01/bulletin_ACRC_vol7_04_p051_071.pdf"
+      }
+    ],
+    "note": " 没年調査の根拠資料に生年も明記。"
+  },
+  {
+    "slugs": [
+      "takahashi-yasui",
+      "takahashi-yasushige"
+    ],
+    "name": "高橋 靖以",
+    "expected": {
+      "nameEn": "Takahashi Yasui",
+      "nameKana": null
+    },
+    "corrected": {
+      "nameEn": "Takahashi Yasushige",
+      "nameKana": "たかはし やすしげ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "著者の表記を原綴・大学の著者情報に合わせる",
+        "url": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/34543/"
+      }
+    ]
+  },
+  {
+    "slugs": [
+      "ptaszynski-michal"
+    ],
+    "name": "Ptaszynski Michal",
+    "expected": {
+      "name": "Ptaszynski Michal",
+      "nameEn": "Ptaszynski Michal"
+    },
+    "corrected": {
+      "name": "Michał Ptaszyński",
+      "nameEn": "Michał Ptaszyński"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      {
+        "title": "著者の表記を原綴・大学の著者情報に合わせる",
+        "url": "https://tip.cs.kitami-it.ac.jp/en/members/ptaszynski-michal/"
+      }
+    ]
+  }
+]

@@ -1,0 +1,825 @@
+id	old_slug	slug	name	birth_year	death_year	status	merged_into_person_id	review_result	evidence
+6446e92c-4305-40dc-a1e6-b2685aca409b	girolamo-de-angelis	girolamo-de-angelis	Girolamo De Angelis	1567	1623	active		変更なし・全項目確認済みを意味しない	—
+3945118d-3e3e-4959-ac92-9cf111d1353a	yi-chi-hang	yi-chi-hang	李志恒			active		変更なし・全項目確認済みを意味しない	—
+4447993c-05a2-4064-920c-b7eee2016b9b	kunen	kunen	空念		1731	active		変更なし・全項目確認済みを意味しない	—
+044c0878-a0b0-44ef-af58-8cc67c2cf261	matsumiya-kanzan	matsumiya-kanzan	松宮 観山	1686	1780	active		変更なし・全項目確認済みを意味しない	—
+2e44bf73-b873-4613-83bb-500ddff25c8b	terashima-ryoan	terashima-ryoan	寺島 良安	1654		active		変更なし・全項目確認済みを意味しない	—
+022e0858-b289-47d2-843f-b6e09176cf73	shoku-tenrei	shoku-tenrei	天嶺性空			active		変更なし・全項目確認済みを意味しない	—
+d405cdcc-d32f-45f8-9014-f5207160476c	suga-toshinoru	suga-toshinoru	Suga Toshinoru (菅俊仍縷)?			active		変更なし・全項目確認済みを意味しない	—
+ebd4265b-90b1-4094-b477-a29ed97d5c9c	stepan-p-krasheninnikov	stepan-p-krasheninnikov	Stepan P. Krasheninnikov		1755	active		変更なし・全項目確認済みを意味しない	—
+c63176d8-94c2-4bb6-a379-86cff577ee43	itakura-genjiro	itakura-genjiro	板倉 源次郎			active		変更なし・全項目確認済みを意味しない	—
+0eef2547-813e-4a38-b5fa-28659256d038	georg-wilhelm-steller	georg-wilhelm-steller	Georg Wilhelm Steller	1709	1746	active		変更なし・全項目確認済みを意味しない	—
+fe25e9b7-0167-403d-bac5-c9a3a3605030	hayashi-shihei	hayashi-shihei	林 子平	1738	1793	active		修正	https://id.ndl.go.jp/auth/ndlna/00269629
+a2de7997-7ab6-4b43-acd4-de9af8163612	sato-tomomi	sato-tomomi	佐藤 知己	1961		active		修正	https://id.ndl.go.jp/auth/ndlna/00553333
+16e80dba-659f-421a-9e0f-6b073d40cc7e	mogami-tokunai	mogami-tokunai	最上 徳内	1755	1836	active		変更なし・全項目確認済みを意味しない	—
+f4c012f9-ea32-46fa-9f44-250249a22422	uehara-kumajiro	uehara-kumajiro	上原 熊次郎		1827	active		変更なし・全項目確認済みを意味しない	—
+8c600665-0f2e-4218-aa88-c07aea17ebe7	abe-chozaburo	abe-chozaburo	阿部 長三郎			active		変更なし・全項目確認済みを意味しない	—
+1c5271f0-4023-4176-b187-f9556b4f1566	vasily-golovnin	vasily-golovnin	Vasily Golovnin	1776	1831	active		変更なし・全項目確認済みを意味しない	—
+0544d181-5521-4fa6-ac8e-fcc94f6bf2d4	ilya-g-voznesensky	ilya-g-voznesensky	Ilya G. Voznesensky	1816	1871	active		変更なし・全項目確認済みを意味しない	—
+610095e2-adea-4141-9f0a-384751f09421	mikhail-mikhailovich-dobrotvorsky	mikhail-mikhailovich-dobrotvorsky	M.M. ドブロトゥヴォールスキー	1836	1874	active		修正	https://sakh-virtualmuseum.ru/dobrotvorskiy-mikhail-mikhaylovich
+96c2bcdd-59f5-4982-a31e-de6aaa49fafe	shichisaburo-mizushina	shichisaburo-mizushina	Shichisaburo Mizushina		1940	active		変更なし・全項目確認済みを意味しない	—
+95c64a51-1e6f-41b1-b898-7c50496e0550	shozaburo-kanazawa	shozaburo-kanazawa	金沢 庄三郎	1872	1967	active		変更なし・全項目確認済みを意味しない	—
+8b75fc9b-a13a-4f24-be5d-61cdad999111	ryuzo-torii	ryuzo-torii	鳥居 龍藏	1870	1953	active		変更なし・全項目確認済みを意味しない	—
+d4ff530a-f922-40d7-8bdf-69b9c5a5bf29	batchelor-john	batchelor-john	ジョン・バチラー	1854	1944	active		変更なし・全項目確認済みを意味しない	—
+dc9b0aef-b30a-4df8-a0d4-b728b81c53a9	yamabe-yasunosuke	yamabe-yasunosuke	山辺 安之助	1867	1923	active		変更なし・全項目確認済みを意味しない	—
+293ae8ef-ebce-41ac-9f67-b95d61208d9b	kindaichi-kyosuke	kindaichi-kyosuke	金田一 京助	1882	1971	active		変更なし・全項目確認済みを意味しない	—
+8b851403-f430-42e6-94e5-ebcabc9bc63c	chiri-mashiho	chiri-mashiho	知里 真志保	1909	1961	active		変更なし・全項目確認済みを意味しない	—
+eebd3cfc-253a-417b-a15c-ad3dd61dcabb	wada-bunjiro	wada-bunjiro	和田 文治郎	1898	1958	active		修正	https://id.ndl.go.jp/auth/ndlna/001141718
+c46bb3ca-4f2f-4887-8819-fdc63cf38a07	tamura-suzuko	tamura-suzuko	田村 すゞ子	1934	2015	active		変更なし・全項目確認済みを意味しない	—
+0b28b2bc-4c54-48e0-ad86-2898f475b4dc	hattori-shiro	hattori-shiro	服部 四郎	1908	1995	active		変更なし・全項目確認済みを意味しない	—
+7ec5f1e0-0135-44c0-95cf-bc4018d885f2	mike-wright	mike-wright	Mike Wright			active		変更なし・全項目確認済みを意味しない	—
+e97f99df-11ff-445e-99c9-e5d979f876aa	alexander-vovin	alexander-vovin	Alexander Vovin	1961	2022	active		変更なし・全項目確認済みを意味しない	—
+21746c06-8845-46b8-8d23-60b85e694b17	nakagawa-hiroshi	nakagawa-hiroshi	中川 裕	1955		active		変更なし・全項目確認済みを意味しない	—
+57e0702b-cca0-43aa-b3aa-b08f3cf4b645	issan-uoi	issan-uoi	Issan Uoi			active		変更なし・全項目確認済みを意味しない	—
+c4b55d50-d136-4087-ba76-18e37ccb18a6	kayano-shigeru	kayano-shigeru	萱野 茂	1926	2006	active		変更なし・全項目確認済みを意味しない	—
+fd6049ea-316c-41b6-8551-3357454314ea	nobue-chiba	nobue-chiba	Nobue Chiba			active		変更なし・全項目確認済みを意味しない	—
+a29a8cd5-0644-4535-b629-fea1291f6cdc	alexander-yu-akulov	alexander-yu-akulov	Alexander Yu. Akulov			active		変更なし・全項目確認済みを意味しない	—
+086bfd37-2501-4032-8085-36969213f1ad	wikipedia-contributors	wikipedia-contributors	Wikipedia contributors			active		変更なし・全項目確認済みを意味しない	—
+993ef3a2-b71e-4a29-91fe-9b90c32c3000	bugaeva-anna	bugaeva-anna	アンナ・ブガエワ			active		変更なし・全項目確認済みを意味しない	—
+48965f28-98a1-492b-9e02-ec988c3c9bc5	moriyo-shimabukuro	moriyo-shimabukuro	Moriyo Shimabukuro			active		変更なし・全項目確認済みを意味しない	—
+37b8330e-be0f-4400-bc22-553a6ba3971f	asjp-consortium	asjp-consortium	ASJP Consortium (Wichmann et al.)			active		変更なし・全項目確認済みを意味しない	—
+d0689aea-e04e-4a47-8aee-8c75d6084e63	dellert-johannes-et-al	dellert-johannes-et-al	Dellert, Johannes et al.			active		変更なし・全項目確認済みを意味しない	—
+70b95bc0-9d77-4b14-8f1d-5ad8fc2620e5	simon-ager	simon-ager	Simon Ager			active		変更なし・全項目確認済みを意味しない	—
+d0ddb86b-c2a0-4f53-8374-c199b1cb0d3c	takashi-tomita	takashi-tomita	Takashi Tomita			active		変更なし・全項目確認済みを意味しない	—
+211d61a3-10ee-45d9-8b9a-3840d68bca5d	mitsuru-ota	mitsuru-ota	太田 満	1967	2020	active		修正	https://id.ndl.go.jp/auth/ndlna/032572861
+b551ff0b-1805-4ad4-88a9-9592a82664ea	ijas-silja	ijas-silja	イヤス シリヤ			active		変更なし・全項目確認済みを意味しない	—
+56b5e701-4b45-4d93-9585-0155db681838	igor-garshin	igor-garshin	Igor Garshin			active		変更なし・全項目確認済みを意味しない	—
+60d37312-0769-49f9-a8c4-c940134705e3	wiktionary-contributors	wiktionary-contributors	Wiktionary contributors			active		変更なし・全項目確認済みを意味しない	—
+ee9378ba-7cc4-47c9-9ef8-a300199cebec	loanwordbank-contributors	loanwordbank-contributors	Loanwordbank contributors			active		変更なし・全項目確認済みを意味しない	—
+6ebc9c19-e192-4cf7-a1b2-dec153036f81	english-wiktionary	english-wiktionary	English Wiktionary			active		変更なし・全項目確認済みを意味しない	—
+7b41113b-dec4-44df-a415-3dee75f862f1	pilsudski	pilsudski	Pilsudski			merged	e29ab0f2-6e9f-46ad-b92b-8fbb66286173	統合	—
+780c539e-72e4-4ce5-81ae-b7cfd2f3f39e	murasaki	murasaki	Murasaki			active		変更なし・全項目確認済みを意味しない	—
+28b30c48-af39-412b-a217-4ea4de1c272f	shibatani-masayoshi	shibatani-masayoshi	Shibatani Masayoshi			active		変更なし・全項目確認済みを意味しない	—
+985d2771-db4f-43c0-a4c1-5ad45fce6e04	hokkaido-utari-kyokai	hokkaido-utari-kyokai	Hokkaido Utari Kyokai			active		変更なし・全項目確認済みを意味しない	—
+04978da1-7395-445f-9199-eb3390ba0636	fukazawa-mika	fukazawa-mika	深澤 美香			active		変更なし・全項目確認済みを意味しない	—
+c1b80912-e78b-4981-b749-76eda719f810	refsing	refsing	Refsing		2023	merged	0e7906de-439d-43f6-9495-da14b4b6ccfb	統合	—
+9c0572b8-f3cf-4853-a7ad-08fb3a78fbf4	ninjal	ninjal	NINJAL			active		変更なし・全項目確認済みを意味しない	—
+f1786dfe-03ed-4851-bfe0-dd9eb402cf77	kishimoto-yoshihisa	kishimoto-yoshihisa	岸本 宜久			active		変更なし・全項目確認済みを意味しない	—
+05f553b4-21f1-4429-9fee-ea3e41efbaef	yoshikawa-yoshimi	yoshikawa-yoshimi	吉川 佳見			active		変更なし・全項目確認済みを意味しない	—
+53d7a37b-8099-4ace-8d8d-df1472745aa5	kirikae-hideo	kirikae-hideo	切替 英雄	1954	2021	active		修正	https://doi.org/10.1163/25898833-12340047
+5610efc3-ef32-4c86-88cd-4a6d41fd327e	otani-yoichi	otani-yoichi	大谷洋一			active		変更なし・全項目確認済みを意味しない	—
+f5dbb7cb-2026-4cb6-8838-7f08ffede4ae	tangiku-itsuji	tangiku-itsuji	丹菊 逸治			active		変更なし・全項目確認済みを意味しない	—
+ec1d91aa-7e9f-4fb1-b508-5947175ea2d3	yoshida-erika	yoshida-erika	吉田 恵理佳			active		変更なし・全項目確認済みを意味しない	—
+0ec8fd30-35d4-410e-a6dc-fdce6b2adaa0	dal-corso-elia	dal-corso-elia	Dal Corso Elia			active		変更なし・全項目確認済みを意味しない	—
+910560fb-aa37-4354-b336-c466c330458c	echizenya-hiroshi	echizenya-hiroshi	越前谷 博			active		変更なし・全項目確認済みを意味しない	—
+3fd27ed6-12a4-4735-a4f3-6440d3943fa7	sakaguchi-ryo	sakaguchi-ryo	阪口 諒			active		変更なし・全項目確認済みを意味しない	—
+283b0c4c-7c0d-456b-b36e-893943f5d071	nowakowski-karol	nowakowski-karol	Nowakowski Karol			active		変更なし・全項目確認済みを意味しない	—
+0017eee6-4b44-4f0a-9550-00da5f5e0726	ma-changcheng	ma-changcheng	馬 長城			active		変更なし・全項目確認済みを意味しない	—
+312250a3-a8ea-4355-ab67-5c8c2e6eaa46	yasuoka-koichi	yasuoka-koichi	安岡 孝一	1965		active		修正	https://id.ndl.go.jp/auth/ndlna/00257623
+1961b0ed-4a48-4b85-ba2e-a01e96869386	yasuoka-motoko	yasuoka-motoko	安岡 素子	1971		active		修正	https://id.ndl.go.jp/auth/ndlna/00763524
+60c57642-52a2-47d9-addc-c2c55e43c703	takahashi-yasui	takahashi-yasushige	高橋 靖以			active		修正	https://eprints.lib.hokudai.ac.jp/repo/huscap/all/34543/
+49af149b-b455-491a-853f-af247c7608c4	okuda-osami	okuda-osami	奥田 統己	1963		active		変更なし・全項目確認済みを意味しない	—
+8c02112d-fa40-48a7-a3e8-c05f13c96c2f	senuma-hajime	senuma-hajime	Senuma Hajime			active		変更なし・全項目確認済みを意味しない	—
+bdcba2ff-d432-4030-b40c-a9b216eabdd7	aizawa-akiko	aizawa-akiko	Aizawa Akiko			active		変更なし・全項目確認済みを意味しない	—
+a5a557fe-cb51-4b37-a043-be5fdaaad4f2	fujita-mamoru	fujita-mamoru	藤田護			active		変更なし・全項目確認済みを意味しない	—
+7df2e39d-372b-4268-bf99-dfa5de5f6856	watanabe-kaori	watanabe-kaori	渡邊香織			active		修正	https://opac.ll.chiba-u.jp/da/curator/108062/S21857148-21-P243-SAK.pdf
+28954098-e88d-4448-b6ab-8d0d6af806b9	kobayashi-miki	kobayashi-miki	小林 美紀			active		修正	https://www.ff-ainu.or.jp/web/overview/files/R3jigyo3.pdf
+c6e243b9-759a-4b7f-89f1-0e1134575822	yamaguchi-shinju	yamaguchi-shinju	山口 伸樹			active		修正	https://cir.nii.ac.jp/crid/1050007072212351488 | https://cir.nii.ac.jp/crid/1050007072212351488
+9888390b-a25d-4e8e-9312-0c577b558b16	j-m	j-m	阪口諒・ディクソンJ. M.			merged	3fd27ed6-12a4-4735-a4f3-6440d3943fa7	統合	—
+620a6e36-71f6-4729-92c2-03f1679b3175	miyagawa-so	miyagawa-so	宮川 創	1989		active		変更なし・全項目確認済みを意味しない	—
+0ef39637-9947-46bc-b0f4-1cbca447cc1a	igarashi-ryo	igarashi-ryo	五十嵐 涼			active		変更なし・全項目確認済みを意味しない	—
+41e5a045-bb1a-44f4-bd18-2b8d6fd5de74	kato-daiki	kato-daiki	加藤 大樹			active		変更なし・全項目確認済みを意味しない	—
+e057bf3f-ac69-4f33-aae9-e25d23cb2e7c	murasaki-kyoko	murasaki-kyoko	村崎 恭子	1937		active		変更なし・全項目確認済みを意味しない	—
+9fef8805-fb55-4f33-bbf4-a3f4e7b159bf	hirosawa	hirosawa	廣澤			active		変更なし・全項目確認済みを意味しない	—
+f0497a0e-8fdd-43cc-bd63-f9e1ff3cb940	cjyet-yo	cjyet-yo	于 拙			active		変更なし・全項目確認済みを意味しない	—
+01aee963-9ff0-480c-8042-79d3fc31c9a2	nikitina-tatiana	nikitina-tatiana	Nikitina Tatiana			active		変更なし・全項目確認済みを意味しない	—
+66c3c39a-3202-4cb4-a091-028693116c77	ochiai-izumi	ochiai-izumi	落合いずみ			active		変更なし・全項目確認済みを意味しない	—
+d491c40e-711e-421c-a4a2-fc4be9cf21c7	shirasawa-nabe	shirasawa-nabe	白沢ナベ	1905	1993	active		変更なし・全項目確認済みを意味しない	—
+a4d03887-c6b2-4b6e-b1ba-0bd761c8fa5a	izutsu-katsunobu	izutsu-katsunobu	井筒 勝信	1969		active		修正	https://id.ndl.go.jp/auth/ndlna/01070841
+2275d0a5-484c-4ac2-8b93-1ce2647dfa98	azumi-yasunori	azumi-yasunori	安曇 恭徳			active		変更なし・全項目確認済みを意味しない	—
+00255242-2a21-4cdf-932d-2c07a4ee0f1a	momouchi-yoshio	momouchi-yoshio	桃内 佳雄	1942		active		変更なし・全項目確認済みを意味しない	—
+334b3344-7fea-457d-a283-eb44673ba7b6	itabashi-yoshizo	itabashi-yoshizo	板橋 義三	1953		active		変更なし・全項目確認済みを意味しない	—
+d9ccaeab-ff5b-4d85-99bc-1e7f0ba436a0	tamura-masashi	tamura-masashi	田村 雅史			active		変更なし・全項目確認済みを意味しない	—
+38409031-9d93-4285-a508-7327190b7fcb	baek-sangyub	baek-sangyub	Baek Sangyub			active		変更なし・全項目確認済みを意味しない	—
+ddbab99a-0b5d-48f3-9b46-7218adc455fb	ptaszynski-michal	ptaszynski-michal	Michał Ptaszyński			active		修正	https://tip.cs.kitami-it.ac.jp/en/members/ptaszynski-michal/
+3cfc53e5-0e98-4851-b38a-0cab87df8200	ono-yohei	ono-yohei	小野洋平			active		変更なし・全項目確認済みを意味しない	—
+5142e481-9c0d-4695-ab5d-e73e36ab7a3a	barrie-michael	barrie-michael	Barrie Michael			active		変更なし・全項目確認済みを意味しない	—
+8a41036e-34c1-4101-9b80-31ea3d103a97	mathieu-eric	mathieu-eric	Mathieu Éric			active		変更なし・全項目確認済みを意味しない	—
+cf422380-fd52-49ef-bba5-ea856ae0f51c	klara-chuda	klara-chuda	フダー・クラーラ			active		変更なし・全項目確認済みを意味しない	—
+e3810e21-7240-4101-b851-eab00f806603	yoshimoto-yuko	yoshimoto-yuko	吉本 裕子			active		変更なし・全項目確認済みを意味しない	—
+64359ec8-2530-4066-885f-c637086a5178	nam-deokhyun	nam-deokhyun	Nam Deokhyun			active		変更なし・全項目確認済みを意味しない	—
+f4913fa6-9240-4357-9208-3de1fb69e110	matsuura-kohei-et-al	matsuura-kohei-et-al	Matsuura Kohei et al			merged	cf1207de-02de-42c9-a2c9-a9280f7b79c1	統合	—
+565e391b-d666-409b-91e3-de296dbd2841	jussi-nurmi	jussi-nurmi	ヌルミ・ユッシ			active		変更なし・全項目確認済みを意味しない	—
+5d776ebc-96d9-4fb4-a908-60c43df5e525	furukawa-kyoko	furukawa-kyoko	古川 恭子			active		変更なし・全項目確認済みを意味しない	—
+df839b94-3330-4037-8662-c240039e8594	endo-shiho	endo-shiho	遠藤 志保			active		変更なし・全項目確認済みを意味しない	—
+5b60536b-bdf0-423c-91bb-9607f8744d8f	nakai-takanori	nakai-takanori	中井 貴規			active		変更なし・全項目確認済みを意味しない	—
+534d6bdf-f708-4a97-9f1c-145dfc03b340	sugawara-katsukichi	sugawara-katsukichi	菅原 勝吉			active		変更なし・全項目確認済みを意味しない	—
+5e5768dd-ba1d-4937-81cc-6b81ef2e9d4e	shimokura-emi	shimokura-emi	下倉 絵美			active		変更なし・全項目確認済みを意味しない	—
+c93cbc9e-644c-40ad-ba83-cebc24d966cc	p-yiokn0	p-yiokn0	鹿田 川見			active		変更なし・全項目確認済みを意味しない	—
+0e8eb85f-4f85-436e-ad05-5a5b4d11703c	nakamoto-mutsuko	nakamoto-mutsuko	中本 ムツ子	1928	2011	active		変更なし・全項目確認済みを意味しない	—
+fe259d69-b3fd-486f-bb8a-4f0bf866dd85	sawai-masatoshi	sawai-masatoshi	澤井 政敏			active		変更なし・全項目確認済みを意味しない	—
+14bf7c7a-e966-4b53-8b11-c30570c76432	sugawara-katsuyoshi	sugawara-katsuyoshi	菅原 勝良			active		変更なし・全項目確認済みを意味しない	—
+ff1ba01e-5cd0-4138-9cef-e73b6976a18d	oshino-akemi	oshino-akemi	押野 朱美			active		変更なし・全項目確認済みを意味しない	—
+d7cd5ea0-9144-4f0a-ad32-2449eed7118c	oshino-rika	oshino-rika	押野 里架			active		変更なし・全項目確認済みを意味しない	—
+48a84209-8d41-4c22-b4a8-d431bad4f412	kuzuno-tsugio	kuzuno-tsugio	葛野 次雄	1954		active		変更なし・全項目確認済みを意味しない	—
+0afb63aa-9287-47d0-83b2-b5c08d71fc63	akibe-tokuhei	akibe-tokuhei	秋辺 得平	1943		active		変更なし・全項目確認済みを意味しない	—
+dff796b6-fc4f-4b56-9ec4-4444172e1b2d	ueno-sada	ueno-sada	上野 サダ		2007	active		変更なし・全項目確認済みを意味しない	—
+fe2e6067-307b-4e93-9baa-6d48fd31ea38	hori-etsuko	hori-etsuko	堀 悦子			active		変更なし・全項目確認済みを意味しない	—
+e557d335-0276-4659-8afb-fcda50059ac8	takagi-kikue	takagi-kikue	高木 喜久恵			active		変更なし・全項目確認済みを意味しない	—
+299dd06c-1dc9-4a54-a2b2-0cafc2ff3474	katayama-hiroko	katayama-hiroko	片山 弘子			active		変更なし・全項目確認済みを意味しない	—
+d9669d8f-2b4c-4386-a06d-57b815427445	nakano-tomoe	nakano-tomoe	中野 巴			active		変更なし・全項目確認済みを意味しない	—
+7dc89bd7-2b59-4e44-a6fa-149fa221a560	sekine-maya	sekine-maya	関根 摩耶			active		変更なし・全項目確認済みを意味しない	—
+4d64fe11-3562-45b9-a8a4-f4bbfd9ba792	kumagai-kane	kumagai-kane	熊谷 カネ			active		変更なし・全項目確認済みを意味しない	—
+7a75f730-0ba3-4bc3-b8fd-00cead02dbdd	kawakami-yoko	kawakami-yoko	川上 容子			active		変更なし・全項目確認済みを意味しない	—
+9ae154a0-ee70-4017-9c0c-8cad769eec04	kimura-rino	kimura-rino	木村 梨乃			active		変更なし・全項目確認済みを意味しない	—
+8caf9257-3cbb-4b7f-96d7-c2e347d7bee2	takiguchi-yumi	takiguchi-yumi	瀧口 夕美	1971		active		修正	https://id.ndl.go.jp/auth/ndlna/001303277
+2853bf43-736a-41c1-98ab-71e335a9f47f	p-1g3g6l0	p-1g3g6l0	山丸 賢雄			active		変更なし・全項目確認済みを意味しない	—
+ffae056a-1eb4-4bae-877c-22f9bf27e3e3	p-1cnoo6r	p-1cnoo6r	増野 光			active		変更なし・全項目確認済みを意味しない	—
+ed4fb951-3731-4248-997d-918f20ce8b10	kayano-shiro	kayano-shiro	萱野 志朗	1958		active		変更なし・全項目確認済みを意味しない	—
+8bcd2f1b-7ce4-4779-95d2-b9c40a71b95a	sekine-kenji	sekine-kenji	関根 健司			active		変更なし・全項目確認済みを意味しない	—
+f394c31e-e995-43a3-a9c8-cb0680ab2835	kawakami-megumi	kawakami-megumi	川上 恵			active		変更なし・全項目確認済みを意味しない	—
+1f4a6c2c-8aec-47be-8f8e-c6cd7e073b58	okamoto-tomoya	okamoto-tomoya	岡本 朋也			active		変更なし・全項目確認済みを意味しない	—
+16d73a81-5dfc-4ef1-ad38-45c9cf190a6a	hachiya-mai	hachiya-mai	八谷 麻衣			active		変更なし・全項目確認済みを意味しない	—
+0c61d1b9-352b-45e4-80dc-d9f06d189432	p-1j8u2n8	p-1j8u2n8	上武 和臣			active		変更なし・全項目確認済みを意味しない	—
+a638d1f1-eb0f-4b11-9abc-b6902990cb89	osuga-rueko	osuga-rueko	大須賀 るえ子			active		変更なし・全項目確認済みを意味しない	—
+522b527d-f4e7-425a-a16f-9e79b906105c	kimura-taeko	kimura-taeko	木村 多栄子			active		変更なし・全項目確認済みを意味しない	—
+6eaed32c-7ffa-46d6-a9d6-1c74e101352d	asai-take	asai-take	浅井 タケ	1902	1994	active		変更なし・全項目確認済みを意味しない	—
+a23b3810-dfd6-4cb4-a732-92456c4b9d33	mokottunas-kitahara	mokottunas-kitahara	北原 モコットゥナㇱ	1976		active		変更なし・全項目確認済みを意味しない	—
+54810fa9-d6e7-4178-a268-12e2750fd65b	p-157hhhq	p-157hhhq	クスリコヤ			active		変更なし・全項目確認済みを意味しない	—
+463ffcce-3d36-4a93-b5a8-7e95702d6f4f	p-ynb2tw	p-ynb2tw	徹辺 重次郎			active		変更なし・全項目確認済みを意味しない	—
+9e4e27c6-7725-4d41-b7b8-ed11881bd26d	yamada-hayo	yamada-hayo	山田 ハヨ			active		変更なし・全項目確認済みを意味しない	—
+42b11a82-dcd0-4579-a5c2-278d708e586f	kitakaze-isokichi	kitakaze-isokichi	北風 磯吉	1880	1969	active		修正	https://kotobank.jp/word/北風磯吉-1069251
+a8ee2b51-5c77-46cb-8445-a2256095bbb7	fujiyama-haru	fujiyama-haru	藤山 ハル	1900	1974	active		変更なし・全項目確認済みを意味しない	—
+bcd19556-3752-436b-959b-867eede43b8a	nagahama-seizo	nagahama-seizo	長濱 清蔵			active		変更なし・全項目確認済みを意味しない	—
+cd98aaaf-dbd4-4b54-bbdb-0eb2edba80c8	araida-seino	araida-seino	新井田 セイノ	1917	2011	active		変更なし・全項目確認済みを意味しない	—
+9e38c2a4-539b-4575-a5da-b5b7b2731d76	yoshimura-fuyuko	yoshimura-fuyuko	吉村 冬子	1926	2022	active		変更なし・全項目確認済みを意味しない	—
+bcef6384-4870-4dc0-8821-1ce31b164867	kawakami-matsuko	kawakami-matsuko	川上 まつ子	1913	1988	active		修正	https://id.ndl.go.jp/auth/ndlna/00157200
+30a46fab-1a41-49f7-9b86-f9a16fc274ca	kuzuno-daiki	kuzuno-daiki	葛野 大喜			active		変更なし・全項目確認済みを意味しない	—
+8d10c0fa-a36d-48fc-a846-5912833b3570	kano-rumiko	kano-rumiko	加納 ルミ子			active		変更なし・全項目確認済みを意味しない	—
+871e5076-1455-41dd-82e7-1a45d3c46b5e	yae-kiyotoshi	yae-kiyotoshi	八重 清敏			active		変更なし・全項目確認済みを意味しない	—
+1f0d28ef-3ca3-4273-b6ad-cb14d228778d	ishikawa-mikaho	ishikawa-mikaho	石川 美香穂			active		修正	https://www.ff-ainu.or.jp/web/overview/cultural_exchange/details/6_7.html
+b4463eac-39cf-41b1-b994-92465116bdf4	yonezawa-ryo	yonezawa-ryo	米澤 諒			active		変更なし・全項目確認済みを意味しない	—
+6ecf92af-4539-4199-9311-493de5a5385c	ogawa-sanae	ogawa-sanae	小川 早苗	1940		active		修正	https://id.ndl.go.jp/auth/ndlna/01197806
+6f3797b3-d7b9-4686-bac8-46f32a7c468a	hayasaka-shun	hayasaka-shun	早坂 駿			active		変更なし・全項目確認済みを意味しない	—
+8de55797-1013-45b8-8f8c-c90498bd688c	kaizawa-miwako	kaizawa-miwako	貝澤 美和子			active		変更なし・全項目確認済みを意味しない	—
+7d584442-34da-47db-9f47-760944c8bdb5	amanai-shigeki	amanai-shigeki	天内 重樹			active		変更なし・全項目確認済みを意味しない	—
+a8e556c7-3d16-4de4-ae35-dccbc8b1fb0f	okada-yuki	okada-yuki	岡田 勇樹			active		変更なし・全項目確認済みを意味しない	—
+18e97669-8165-4060-b46a-a2682a382c06	hiraga-sada	hiraga-sada	平賀 サダ	1895	1972	active		修正	https://id.ndl.go.jp/auth/ndlna/00386334
+d0086e14-4aec-420a-81a5-f1fa16ef4c25	oda-ito	oda-ito	小田 イト	1911	2000	active		変更なし・全項目確認済みを意味しない	—
+914159af-d91e-45a0-8b44-1675cd823521	kimura-kimi	kimura-kimi	木村 きみ	1900	1988	active		修正	https://www.ff-ainu.or.jp/about/files/H24%E8%AC%9B%E6%BC%94%E4%BC%9A%E3%80%80%E8%AC%9B%E6%BC%94%E9%8C%B2%EF%BC%88%E6%9C%AD%E5%B9%8C%EF%BC%89%E4%B8%AD%E5%B7%9D%E8%A3%95.pdf
+5fe3d0a5-c867-49fc-90d1-f1c19f45edbd	sentoku-taroji	sentoku-taroji	千徳 太郎治	1872	1929	active		変更なし・全項目確認済みを意味しない	—
+246d0ae9-3bde-4566-9457-cd8d8310c068	chiri-yukie	chiri-yukie	知里 幸恵	1903	1922	active		変更なし・全項目確認済みを意味しない	—
+1f53ac28-5e58-4031-a6c2-48e008105a31	hamada-takashi	hamada-takashi	浜田 隆史			active		変更なし・全項目確認済みを意味しない	—
+37759b5e-0d8d-4fef-b6cb-8bc496b49045	yokoyama-hiroyuki	yokoyama-hiroyuki	横山 裕之			active		変更なし・全項目確認済みを意味しない	—
+402e02dc-c35d-4d1e-b38c-39c54eec9408	kanzaki-masayoshi	kanzaki-masayoshi	神崎 雅好			active		変更なし・全項目確認済みを意味しない	—
+de73444c-37b8-48a0-8146-616c8a260d06	komatsu-kazuhiro	komatsu-kazuhiro	小松 和弘	1961		active		修正	https://id.ndl.go.jp/auth/ndlna/00254980
+00b7905b-1362-43b3-a3ec-32a730215a9d	p-c4w1s9	p-c4w1s9	瀬戸 成子			active		変更なし・全項目確認済みを意味しない	—
+aaf8f623-2f85-4490-bad8-a0ed0420d788	aihara-noriaki	aihara-noriaki	相原 典明			active		変更なし・全項目確認済みを意味しない	—
+50d0cf89-8fa4-4e77-af47-540d299e2f01	matsumoto-narumi	matsumoto-narumi	松本 成美	1927		active		修正	https://id.ndl.go.jp/auth/ndlna/00041827
+c4f841ec-4b59-4442-9acf-42802192f86e	nomoto-hisae	nomoto-hisae	野本 久栄			active		変更なし・全項目確認済みを意味しない	—
+c02163e3-152c-4077-9b98-281c1289cc16	yoshimura-akio	yoshimura-akio	吉村 明夫			active		変更なし・全項目確認済みを意味しない	—
+efdbb281-f3a9-4901-8f16-51e74c99e142	akibe-hideo	akibe-hideo	秋辺 日出男			active		変更なし・全項目確認済みを意味しない	—
+dc9d953a-5529-4146-9420-fe97ee82345e	ono-tetsuto	ono-tetsuto	大野 徹人	1973		active		修正	https://id.ndl.go.jp/auth/ndlna/001164045
+3edadb8c-7624-4043-9fcc-ed5af2b71fa0	okuda-sachiko	okuda-sachiko	奥田 幸子			active		変更なし・全項目確認済みを意味しない	—
+632685a9-a9ec-49c6-8ce5-d71abe8801cd	heo-min	heo-min	허 민 (Heo Min)			active		変更なし・全項目確認済みを意味しない	—
+d88e3ea6-1b5b-4525-9f58-771e3f16b052	tokutomi-kei	tokutomi-kei	徳冨 圭			active		変更なし・全項目確認済みを意味しない	—
+2b8e1782-d9fd-4174-a62f-01db98fc4409	komatsu-tetsuro	komatsu-tetsuro	小松 哲郎	1930		active		修正	https://id.ndl.go.jp/auth/ndlna/00802770
+6394fa9a-c2a8-4602-a703-f58c1e52e9b2	miyata-hisako	miyata-hisako	宮田 久子			active		変更なし・全項目確認済みを意味しない	—
+69b73a44-fc79-45c7-b2eb-0eb43343d52e	hiraishi-kiyotaka	hiraishi-kiyotaka	平石 清隆	1963		active		修正	https://id.ndl.go.jp/auth/ndlna/033352038
+c27242c2-0cdb-4ad3-9eb6-f015b4b4fe8d	p-c4y57k	p-c4y57k	瀬戸 海惠			active		変更なし・全項目確認済みを意味しない	—
+d779f343-7164-468b-a007-257d031b0649	ogawa-masayo	ogawa-masayo	小川 昌代			active		変更なし・全項目確認済みを意味しない	—
+ee32136b-af0e-4e1d-830d-2335ead9fd20	inagaki-katsuhiko	inagaki-katsuhiko	稲垣 克彦			active		変更なし・全項目確認済みを意味しない	—
+1675a58b-9735-434e-a972-084c1cf20cbd	sawai-harumi	sawai-harumi	澤井 春美			active		変更なし・全項目確認済みを意味しない	—
+2a31cbe0-7ce3-41a7-9cc1-8eed44e50323	yoneda-noriyuki	yoneda-noriyuki	米田 儀行			active		変更なし・全項目確認済みを意味しない	—
+5a07d9b8-c853-4101-bf96-8da3d4769f9d	p-1bk86gi	p-1bk86gi	千口 昇			active		変更なし・全項目確認済みを意味しない	—
+0b6ea5f1-8605-493a-8456-d66c1bb8af52	yae-masako	yae-masako	八重 昌子			active		変更なし・全項目確認済みを意味しない	—
+b53e7960-a9e3-47bc-97ff-626dcb4f5a5d	maruno-kazuko	maruno-kazuko	丸野 和子			active		変更なし・全項目確認済みを意味しない	—
+917c6470-4f63-4bd7-84e7-65a2ea47ef7d	ota-kamus-okkay	ota-kamus-okkay	太田 カムㇱオッカイ			active		変更なし・全項目確認済みを意味しない	—
+79e3a307-ab0c-4344-97c7-ecaefca227b8	matsuno-ayaka	matsuno-ayaka	松野 綾香			active		変更なし・全項目確認済みを意味しない	—
+9919f7de-735b-435a-a400-e82557a0e023	isobe-etsuko	isobe-etsuko	磯部 恵津子			active		変更なし・全項目確認済みを意味しない	—
+cb202852-8439-4cf4-a824-54655e85c45f	tazawa-takashi	tazawa-takashi	田澤 崇			active		変更なし・全項目確認済みを意味しない	—
+9bb1d816-039d-4a55-a8e8-0f30034242e0	narita-hidetoshi	narita-hidetoshi	成田 英敏			active		変更なし・全項目確認済みを意味しない	—
+582199b2-7edc-49fb-a495-c9ebb8c843ff	katayama-tatsumine	katayama-tatsumine	片山 龍峯		2004	active		変更なし・全項目確認済みを意味しない	—
+87be5745-8c07-4a74-86f2-5166f049357d	kanno-yuko	kanno-yuko	菅野 由布子			active		変更なし・全項目確認済みを意味しない	—
+7a9d60d8-4d61-4bae-9b2d-e84285e5b43a	nabesawa-motozo	nabesawa-motozo	鍋沢 元蔵	1886	1967	active		修正	https://id.ndl.go.jp/auth/ndlna/00049485
+afaa683f-d1d0-42b0-8231-e0d2020da481	orita-suteno	orita-suteno	織田 ステノ	1902	1993	active		変更なし・全項目確認済みを意味しない	—
+87334f7a-6d3f-40c3-adfe-fcb461cd92d9	ueda-toshi	ueda-toshi	上田 トシ		2005	active		変更なし・全項目確認済みを意味しない	—
+8699fa09-9b15-4211-ad8a-f780ff085118	stephanie	stephanie	ステファニー			active		変更なし・全項目確認済みを意味しない	—
+5dae855e-4f63-4a3f-9b39-4199483270d9	rikkoppe	rikkoppe	リッコッペ			active		変更なし・全項目確認済みを意味しない	—
+a39347ea-27f6-474a-9ab3-785be9fc1070	penrek	penrek	ペンレㇰ			active		変更なし・全項目確認済みを意味しない	—
+79d0fccb-bded-490e-b970-b4aebbcd7dae	retannay	retannay	レタンナイ			active		変更なし・全項目確認済みを意味しない	—
+23675ef4-4489-405f-92d4-d0364a48f2f6	keci	keci	ケチ			active		変更なし・全項目確認済みを意味しない	—
+70fa4b52-f6fb-42d0-acca-48019f5e2c58	rariw	rariw	ラリウ			active		変更なし・全項目確認済みを意味しない	—
+996efaa7-538e-490d-9c32-5fd1acf9dcd9	kuwanno	kuwanno	クワンノ			active		変更なし・全項目確認済みを意味しない	—
+89674b9d-ef7e-4a1c-909a-8534c9ba4f0f	sicchari	sicchari	シッチャリ			active		変更なし・全項目確認済みを意味しない	—
+87e7d85e-86d7-4d53-bc97-2cd458075381	toyokawa-yoko	toyokawa-yoko	豊川 容子			active		変更なし・全項目確認済みを意味しない	—
+ba8c43ab-1b48-41ab-b037-2a567f11291a	poronay	poronay	ポロナイ			active		変更なし・全項目確認済みを意味しない	—
+6109aed4-e89c-4988-bd68-e3e1f75970c7	kuzuno-tatsujiro	kuzuno-tatsujiro	葛野 辰次郎	1910	2002	active		変更なし・全項目確認済みを意味しない	—
+b408cb04-ce4c-4e1f-944b-3142aa6c3d11	hiraga-sadamo	hiraga-sadamo	平賀 さだも		1972	merged	18e97669-8165-4060-b46a-a2682a382c06	統合	—
+5d23b041-5db6-4253-bb42-29f094578f7b	kaizawa-turushino	kaizawa-turushino	貝澤 とぅるしの	1889	1982	active		修正	https://nibutani-ainu-museum.com/pdf/ainu_gaiyou.pdf
+520b5c9f-1365-4b3f-9742-3d379678a2b2	hirame-yoshi	hirame-yoshi	平目 よし	1899	1973	active		修正	https://nibutani-ainu-museum.com/pdf/ainu_gaiyou.pdf
+11b590dd-bbde-4011-9e80-f8a88170d976	kurokawa-teshime	kurokawa-teshime	黒川 てしめ	1895	1973	active		修正	https://eprints.lib.hokudai.ac.jp/dspace/bitstream/2115/73701/1/Tangiku20181106.pdf
+1cfa0e40-82f8-461a-a042-af8a8fbf4f1a	nabesawa-nepuki	nabesawa-nepuki	鍋澤 ねぷき	1889	1974	active		修正	https://nibutani-ainu-museum.com/pdf/ainu_gaiyou.pdf
+646edd79-8717-4f23-9780-c1c6cf3a8b7f	matsushima-tomi	matsushima-tomi	松島 トミ		2010	active		変更なし・全項目確認済みを意味しない	—
+a81af09f-c6da-41d5-b9ff-ffe95ec246ef	ogawa-shigeno	ogawa-shigeno	小川 シゲノ			active		変更なし・全項目確認済みを意味しない	—
+89b3b0d6-e0a7-4409-adc9-41b5a28ef871	toshima-taneranke	toshima-taneranke	遠島 タネランケ		1970	active		変更なし・全項目確認済みを意味しない	—
+69ae55bb-78be-4a08-85a4-6a3ea6adf985	sawai-tomeno	sawai-tomeno	沢井 トメノ			active		変更なし・全項目確認済みを意味しない	—
+7453badf-b355-4c4f-9751-ebc0aebaea22	sean-lee	sean-lee	Sean Lee			active		変更なし・全項目確認済みを意味しない	—
+45181b7f-fd62-417e-8075-901b718b30e7	toshikazu-hasegawa	toshikazu-hasegawa	Toshikazu Hasegawa			active		変更なし・全項目確認済みを意味しない	—
+82566cea-4ea4-4829-8261-5ba5fc3493ed	yukio-dodo	yukio-dodo	Yukio Dodo			active		変更なし・全項目確認済みを意味しない	—
+9ea782fa-94e8-47f3-a986-0a547b3926f9	kylie-martin	kylie-martin	Kylie Martin			active		変更なし・全項目確認済みを意味しない	—
+ed113723-e086-4dd9-907c-480557eee021	tsunehiko-hanihara	tsunehiko-hanihara	Tsunehiko Hanihara			active		変更なし・全項目確認済みを意味しない	—
+a4e3c843-6a97-4728-a085-0791b3fbb5de	emiko-ohnuki-tierney	emiko-ohnuki-tierney	Emiko Ohnuki‐Tierney			active		変更なし・全項目確認済みを意味しない	—
+109964bc-ea11-4cb0-b142-ea11fb56a523	michele-m-mason	michele-m-mason	Michele M. Mason			active		変更なし・全項目確認済みを意味しない	—
+210ce8ea-907f-48b2-87e1-34481a087bdc	ishida-hajime	ishida-hajime	石田 肇	1956		active		修正	https://id.ndl.go.jp/auth/ndlna/01240181
+0e707112-f18a-4303-8b0b-339cab6cd441	jose-andres-alonso-de-la-fuente	jose-andres-alonso-de-la-fuente	José Andrés Alonso de la Fuente			active		変更なし・全項目確認済みを意味しない	—
+96e178ba-825d-47b7-9451-c1c37edb18ef	micha-ptaszynski	micha-ptaszynski	Michał Ptaszyński			merged	ddbab99a-0b5d-48f3-9b46-7218adc455fb	統合	—
+94e24cfd-a7b6-4126-a07b-24b17712df91	masui-fumito	masui-fumito	桝井 文人			active		変更なし・全項目確認済みを意味しない	—
+72b80723-2f53-4c20-9920-b75a89c44a96	georgina-stevens	georgina-stevens	Georgina Stevens			active		変更なし・全項目確認済みを意味しない	—
+600877bf-4e2a-485f-8ae2-a236d0269efb	xanat-vargas-meza	xanat-vargas-meza	Xanat Vargas Meza			active		変更なし・全項目確認済みを意味しない	—
+dab9b5ba-b11b-46b0-8307-25c755d911c2	yoichi-ochiai	yoichi-ochiai	Yoichi Ochiai			active		変更なし・全項目確認済みを意味しない	—
+d108c8ee-8810-4446-a832-a9306e9d58b5	fred-c-c-peng	fred-c-c-peng	Fred C.C. Peng			active		変更なし・全項目確認済みを意味しない	—
+563d6aa3-f007-4902-a0d1-cd5f1c0bd1a0	justin-r-hunter	justin-r-hunter	Justin R. Hunter			active		変更なし・全項目確認済みを意味しない	—
+37be6fd3-9dc1-4e14-b5ea-58a27be18cf2	alfred-f-majewicz	alfred-f-majewicz	Alfred F. Majewicz	1949		active		変更なし・全項目確認済みを意味しない	—
+230fc285-03c7-454f-8e53-0c92c921261c	kagami-akikatsu	kagami-akikatsu	鏡味 明克	1936		active		変更なし・全項目確認済みを意味しない	—
+510ff4a1-28c4-47c2-aec7-ca3b9c933c83	hirano-katsuya	hirano-katsuya	平野 克弥	1967		active		修正	https://id.ndl.go.jp/auth/ndlna/01131179
+7b9bd95c-75d1-409b-8531-4924d2c74323	wawat-rahwati	wawat-rahwati	Wawat Rahwati			active		変更なし・全項目確認済みを意味しない	—
+a8d7d3c9-b49b-406e-81b1-8f8b8b63eba8	noriaki-ohgita	noriaki-ohgita	Noriaki Ohgita			active		変更なし・全項目確認済みを意味しない	—
+fa663780-97f4-4dd4-a40f-15712335bf71	vasilii-v-shchepkin	vasilii-v-shchepkin	Vasilii V. Shchepkin			active		変更なし・全項目確認済みを意味しない	—
+3cef3327-90e3-41c7-9bf5-8c0c509270c9	tatsiana-tsagelnik	tatsiana-tsagelnik	Tatsiana Tsagelnik			active		変更なし・全項目確認済みを意味しない	—
+ea09d737-9d20-4537-8f79-b33f284231b5	shiraishi-hidetoshi	shiraishi-hidetoshi	白石 英才			active		変更なし・全項目確認済みを意味しない	—
+4bc67fac-d393-41b4-bef2-a1bfb28f0ba7	kohei-matsuura	kohei-matsuura	Kohei Matsuura			merged	cf1207de-02de-42c9-a2c9-a9280f7b79c1	統合	—
+6474903b-982c-4f6e-b743-21e753ceaa65	masato-mimura	masato-mimura	Masato Mimura			active		変更なし・全項目確認済みを意味しない	—
+a36ce639-3995-4a65-89f0-03335e80bdbf	tatsuya-kawahara	tatsuya-kawahara	河原 達也	1964		active		変更なし・全項目確認済みを意味しない	—
+a94eb948-27d9-4c1f-a6c9-3fcb8f1520cb	yamada-takako	yamada-takako	山田 孝子	1948		active		修正	https://id.ndl.go.jp/auth/ndlna/00360835
+2e3acfca-9c33-47bc-926b-8607141ff54e	p-yrdqvb	p-yrdqvb	Е. С. Чекункова			active		変更なし・全項目確認済みを意味しない	—
+1061ca0c-df2e-4e8f-a730-fe8504721249	patrick-heinrich	patrick-heinrich	Patrick Heinrich			active		変更なし・全項目確認済みを意味しない	—
+f44448ca-9b2c-46fd-bd5a-84cf0e132ee6	p-zczg8j	p-zczg8j	英才 白石			merged	ea09d737-9d20-4537-8f79-b33f284231b5	統合	—
+7625bd22-f697-448e-a718-72776c0fb4c1	alexander-akulov	alexander-akulov	Alexander Akulov			merged	a29a8cd5-0644-4535-b629-fea1291f6cdc	統合	—
+723ab052-c159-412a-817d-d4274400a77b	mark-winchester	mark-winchester	Mark Winchester			active		変更なし・全項目確認済みを意味しない	—
+d440c3ae-ccc4-4d52-b124-186cca67a218	ivan-brenes	ivan-brenes	Ivan Brenes			active		変更なし・全項目確認済みを意味しない	—
+e489137d-0418-4842-9c38-7e10db3779f1	p-1hnx9qy	p-1hnx9qy	阿部 長三郎			merged	8c600665-0f2e-4218-aa88-c07aea17ebe7	統合	—
+86557907-700a-4196-ba33-af1fdd09b15d	kruzenshtern-ivan-fedorovich-1770-1846	kruzenshtern-ivan-fedorovich-1770-1846	Kruzenshtern, Ivan Fedorovich, 1770-1846	1770	1846	active		修正	https://id.ndl.go.jp/auth/ndlna/00446425
+730f7758-f66e-4f46-91a9-fcebed9e0389	davydov-gavriil-ivanovich-1784-1809	davydov-gavriil-ivanovich-1784-1809	Davydov, Gavriil Ivanovich, 1784-1809		1809	active		変更なし・全項目確認済みを意味しない	—
+7fc69d4f-5238-4498-9144-f1044cdd43ec	chamberlain-basil-hall-1850-1935	chamberlain-basil-hall-1850-1935	Chamberlain, Basil Hall, 1850-1935	1850	1935	merged	6ff12f13-4a68-4563-a03a-6ce0c5769e48	統合	https://id.ndl.go.jp/auth/ndlna/00435646
+00586823-af21-49aa-86ac-02794552c0ab	carl-etter	carl-etter	Carl Etter			active		変更なし・全項目確認済みを意味しない	—
+6ff12f13-4a68-4563-a03a-6ce0c5769e48	basil-hall-chamberlain	basil-hall-chamberlain	Basil Hall Chamberlain	1850	1935	active		変更なし・全項目確認済みを意味しない	—
+e5ae8f06-231a-478a-8c04-035affe991c1	p-ay1sl9	p-ay1sl9	飯野 正典	1936		active		修正	https://id.ndl.go.jp/auth/ndlna/00211070
+b8796b72-2aea-42da-a69d-f3f9bae65d54	chiri-takanaka	chiri-takanaka	知里 高央	1907	1965	active		修正	https://id.ndl.go.jp/auth/ndlna/00084155
+5483f19c-add9-4ef7-8aee-8e3b449c8403	yokoyama-takao	yokoyama-takao	横山 孝雄	1937	2019	active		変更なし・全項目確認済みを意味しない	—
+f686ecab-4316-4eea-8300-9ec0c232530f	chiri-mutsumi	chiri-mutsumi	知里 むつみ	1948	2016	active		変更なし・全項目確認済みを意味しない	—
+e8794def-749a-4c8e-9cf1-2190cd678a7c	isobe-seiichi	isobe-seiichi	礒部 精一			active		変更なし・全項目確認済みを意味しない	—
+4a4e9252-47d5-4a7f-909f-48852fafdea0	yamaji-hiroaki	yamaji-hiroaki	山路 広明			active		変更なし・全項目確認済みを意味しない	—
+0b32e1e3-d407-49f5-ba3a-201132a415e5	kubodera-itsuhiko	kubodera-itsuhiko	久保寺 逸彦	1902	1971	active		変更なし・全項目確認済みを意味しない	—
+d0268c40-1123-48a2-99a9-32c3cf751b80	sasaki-kotaro	sasaki-kotaro	佐々木 弘太郎	1923		active		修正	https://id.ndl.go.jp/auth/ndlna/00067381
+43f4ef4e-6268-4ff2-ba12-89e57cdcf997	otomo-yukio	otomo-yukio	大友 幸男	1924	1999	active		修正	https://id.ndl.go.jp/auth/ndlna/00367668
+fffe4392-984d-4d7e-955d-ca55b9e6daa9	okamura-kichiemon	okamura-kichiemon	岡村 吉右衛門	1916	2002	active		変更なし・全項目確認済みを意味しない	—
+78186cfe-32d8-4c53-ac99-b7aa491f35b5	p-f77x97	p-f77x97	北道 邦彦	1935		active		修正	https://id.ndl.go.jp/auth/ndlna/00794881
+9a2193bb-d99b-4a34-9d6e-44f2e7514abb	p-1wrmcss	p-1wrmcss	立石 久雄	1926		active		修正	https://id.ndl.go.jp/auth/ndlna/00204946
+592006fa-95e1-4086-83a5-998fbbe97d6a	keira-mitsunori	keira-mitsunori	計良 光範	1944	2015	active		修正	https://id.ndl.go.jp/auth/ndlna/00395366
+a018aecf-695a-4cf0-8643-59888909ec2b	haginaka-mie	haginaka-mie	萩中 美枝	1927	2021	active		変更なし・全項目確認済みを意味しない	—
+876d7586-54b5-4d95-93da-a62720e38030	kondo-kyojiro	kondo-kyojiro	近藤 鏡二郎	1913	1975	active		変更なし・全項目確認済みを意味しない	—
+d941b45f-d0ff-4db1-b803-71c96ceaaf0b	kosaka-yosuke	kosaka-yosuke	小坂 洋右	1961		active		変更なし・全項目確認済みを意味しない	—
+c66c4e08-910f-400c-9255-f568f450742b	matsuyoshi-sadao	matsuyoshi-sadao	松好 貞夫	1899	1982	active		変更なし・全項目確認済みを意味しない	—
+185224ab-5546-417e-9a49-772cd7a89407	arakida-iehisa	arakida-iehisa	荒木田 家寿	1902	1981	active		修正	https://id.ndl.go.jp/auth/ndlna/00003041
+fafbfd60-3b6b-4130-92a9-5661de3ad2bd	p-1h7mpe9	p-1h7mpe9	下川 苔地			active		変更なし・全項目確認済みを意味しない	—
+dad2c30a-c920-41b6-9a18-ef346507825f	p-y0a5qq	p-y0a5qq	四辻 一朗	1914		active		修正	https://id.ndl.go.jp/auth/ndlna/00098209
+d77dcbab-7478-47ad-b60f-28e56f2d5806	kawai-raseki	kawai-raseki	河合 裸石	1883	1941	active		変更なし・全項目確認済みを意味しない	—
+bfb70f1e-7c78-46c1-9536-ce2f28b2239d	jinbo-kotora	jinbo-kotora	神保 小虎	1867	1924	active		変更なし・全項目確認済みを意味しない	—
+6c8a25cc-98c9-4f80-bbe0-707cb033527d	yoshida-iwao	yoshida-iwao	吉田 巌	1882	1963	active		修正	https://id.ndl.go.jp/auth/ndlna/00096802
+39907190-b751-4557-87f4-3a22ee3ceded	kobayashi-masao	kobayashi-masao	小林 正雄	1916		active		修正	https://id.ndl.go.jp/auth/ndlna/00033225 | https://id.ndl.go.jp/auth/ndlna/00033225
+07d047c1-e723-498f-ab25-d2d44b2b9be2	shiga-setsuko	shiga-setsuko	志賀 雪湖			active		変更なし・全項目確認済みを意味しない	—
+2edcfd30-93d9-41bc-9aa6-17d25da392f1	p-17c61nk	p-17c61nk	英雄 切替		2021	merged	53d7a37b-8099-4ace-8d8d-df1472745aa5	統合	—
+168104b9-4e54-4331-9527-d3c7873e8cd7	p-u0mwi1	p-u0mwi1	すず子 田村		2015	merged	c46bb3ca-4f2f-4887-8819-fdc63cf38a07	統合	—
+9c381024-8178-4896-bc99-ab750b20f4c8	mark-k-watson	mark-k-watson	Mark K. Watson			active		変更なし・全項目確認済みを意味しない	—
+0bcaaa3b-0eb8-4703-86d1-60754961b2a7	john-c-maher	john-c-maher	マーハ ジョン C.	1951		active		変更なし・全項目確認済みを意味しない	—
+4ef6035e-5d77-4371-81ac-3b2859e4fd66	gayman-jeffry	gayman-jeffry	Jeffry Gayman			active		変更なし・全項目確認済みを意味しない	—
+e29ab0f2-6e9f-46ad-b92b-8fbb66286173	bronis-aw-pi-sudski	bronis-aw-pi-sudski	Bronisław Piłsudski	1866	1918	active		変更なし・全項目確認済みを意味しない	—
+691ca2b1-7753-4a36-b47f-c7b9ce6e452a	maruyama-hiroshi	maruyama-hiroshi	丸山 博			active		変更なし・全項目確認済みを意味しない	—
+9e72101a-51e4-463b-b229-4699403be1f4	naohiro-nakamura	naohiro-nakamura	Naohiro Nakamura			active		変更なし・全項目確認済みを意味しない	—
+ac834cf1-cd9d-4147-8af9-5e6239457839	richard-w-howell	richard-w-howell	Richard W. Howell			active		変更なし・全項目確認済みを意味しない	—
+8e685e45-217a-4418-a200-2a488869407d	takayuki-okazaki	takayuki-okazaki	Takayuki Okazaki			active		変更なし・全項目確認済みを意味しない	—
+e8579501-d13f-4e7f-bc01-2cca5d609944	josef-kreiner	josef-kreiner	クライナー ヨーゼフ	1940		active		変更なし・全項目確認済みを意味しない	—
+15358415-3838-4db0-881f-bd79e40ef251	nana-sato-rossberg	nana-sato-rossberg	佐藤 ロスベアグ ナナ			active		変更なし・全項目確認済みを意味しない	—
+249a231e-2a56-489b-b18b-3ba583bc5541	minako-sakata	minako-sakata	坂田 美奈子	1969		active		修正	https://id.ndl.go.jp/auth/ndlna/001092869
+b4d517e1-f21e-4434-a05b-e3c94409ee34	takeshi-kimura	takeshi-kimura	Takeshi Kimura			active		変更なし・全項目確認済みを意味しない	—
+f2654d94-c503-470f-8d46-dfeed3e63a37	jennifer-teeter	jennifer-teeter	Jennifer Teeter			active		変更なし・全項目確認済みを意味しない	—
+6fd8ee7a-8dfd-40f3-a6a4-f36a2fc9beb4	saana-santalahti	saana-santalahti	Saana Santalahti			active		変更なし・全項目確認済みを意味しない	—
+970d3307-1090-4d9a-bb9b-cdcd56b9687f	george-simeon	george-simeon	George Simeon	1934	2016	active		変更なし・全項目確認済みを意味しない	—
+0e7906de-439d-43f6-9495-da14b4b6ccfb	kirsten-refsing	kirsten-refsing	Kirsten Refsing	1948	2023	active		修正	https://pressto.amu.edu.pl/index.php/linpo/article/view/46190
+1c9aa84e-376b-41a9-8770-1cdbd78e4c3d	moses-osamu-baba	moses-osamu-baba	Moses Osamu Baba			active		変更なし・全項目確認済みを意味しない	—
+ee5ae523-e6cd-469b-abdf-ffe38f669b43	yoko-tanabe	yoko-tanabe	Yoko Tanabe			active		変更なし・全項目確認済みを意味しない	—
+bd2ea4e5-2770-4d2a-84a1-ea43242a1ccf	hiroshi-echizen-ya	hiroshi-echizen-ya	Hiroshi Echizen‐ya			merged	910560fb-aa37-4354-b336-c466c330458c	統合	—
+aa196132-a858-4bbf-9edf-d895faa86309	kenji-araki	kenji-araki	荒木健治	1959		active		修正	https://id.ndl.go.jp/auth/ndlna/00980282 | https://id.ndl.go.jp/auth/ndlna/00980282
+2f463c17-f401-46b4-8f09-8fc577726cb6	koji-tochinai	koji-tochinai	栃内 香次	1939		active		変更なし・全項目確認済みを意味しない	—
+8714e212-3823-4f31-8e5a-9a16764e0f37	donald-l-philippi	donald-l-philippi	Donald L. Philippi	1930	1993	active		修正	https://web.archive.org/web/20190901121816/http://www.jai2.com/dlpobit.htm
+a569844a-770f-451f-9c24-868e0aa932c3	kiyoteru-tsutsui	kiyoteru-tsutsui	Kiyoteru Tsutsui			active		変更なし・全項目確認済みを意味しない	—
+55496e04-8113-42ec-a4d3-95b12c17ab51	johannes-rahder	johannes-rahder	Johannes Rahder	1898	1988	active		変更なし・全項目確認済みを意味しない	—
+79c1d01a-2577-4764-bdc9-6ea5198d7799	mara-miller	mara-miller	Mara Miller			active		変更なし・全項目確認済みを意味しない	—
+09120447-9f3b-437d-a941-7d5c408c0290	yamasaki-koji	yamasaki-koji	山崎 幸治	1975		active		修正	https://id.ndl.go.jp/auth/ndlna/001109228
+e8ec638f-baca-4e61-a263-064d52a41338	tresi-nonno	tresi-nonno	Tresi Nonno			active		変更なし・全項目確認済みを意味しない	—
+d6a27f83-78ad-4497-980a-bbb0c23bf45d	theresa-savage	theresa-savage	Theresa Savage			active		変更なし・全項目確認済みを意味しない	—
+a65c8575-0bd0-47dd-a092-87e169637f9c	john-kupchik	john-kupchik	John Kupchik			active		変更なし・全項目確認済みを意味しない	—
+ea4b7c98-ecf8-42d9-912a-062684f263ea	yuko-kameda	yuko-kameda	Yuko Kameda			active		変更なし・全項目確認済みを意味しない	—
+11f6a951-cdf3-46ed-9dba-691f2de2d6be	hayato-kasuga	hayato-kasuga	Hayato Kasuga			active		変更なし・全項目確認済みを意味しない	—
+149ccbec-b734-4f36-849f-11ea32fa294a	yumiko-ohara	yumiko-ohara	Yumiko Ohara			active		変更なし・全項目確認済みを意味しない	—
+47c52866-b61b-4ac7-aa70-251e3c74ed84	v-m-alpatov	v-m-alpatov	V. M. Alpatov			active		変更なし・全項目確認済みを意味しない	—
+9b9c9acd-dfb6-4dd5-9bf8-45dc87876103	sarah-m-strong	sarah-m-strong	Sarah M. Strong			active		変更なし・全項目確認済みを意味しない	—
+dde2ee7f-b572-49cf-90c0-907a711e9c75	hans-dieter-olschleger	hans-dieter-olschleger	Hans Dieter Ölschleger	1952		active		変更なし・全項目確認済みを意味しない	—
+f1784948-58f1-441a-b5b9-f123c881a678	david-l-howell	david-l-howell	David L. Howell			active		変更なし・全項目確認済みを意味しない	—
+8ffbce66-3705-4d6a-aa82-6c8c80a43a4b	mark-j-hudson	mark-j-hudson	Mark J. Hudson	1963		active		変更なし・全項目確認済みを意味しない	—
+35cbd4e1-eb35-43fe-b58f-d129da4b80ce	sunazawa-kayo	sunazawa-kayo	Sunazawa Kayo			active		変更なし・全項目確認済みを意味しない	—
+da89d3f5-0fe6-404a-8d2c-77c806dafa7f	ann-elise-lewallen	ann-elise-lewallen	ann-elise lewallen			active		変更なし・全項目確認済みを意味しない	—
+bfa4153c-9cbc-4544-bb88-1e01f1a88446	shizue-ukaji	shizue-ukaji	宇梶 静江	1933		active		変更なし・全項目確認済みを意味しない	—
+1b49c0af-f7b5-40ed-b69e-08e690ae2d9a	kazuyuki-tanimoto	kazuyuki-tanimoto	谷本 一之	1932	2009	active		変更なし・全項目確認済みを意味しない	—
+11f718e1-0003-4d67-8b48-76593d16ccb7	david-w-hughes	david-w-hughes	David W. Hughes		2025	active		変更なし・全項目確認済みを意味しない	—
+89637ae0-34fa-4874-b26f-fea18fd7855f	mikiso-hane	mikiso-hane	Mikiso Hane	1922	2003	active		修正	https://www.tributearchive.com/obituaries/16069452
+1be466f9-a0ed-4d3a-87e8-9e77853ed1c8	kanako-uzawa	kanako-uzawa	Kanako Uzawa			active		変更なし・全項目確認済みを意味しない	—
+84eb823c-e2c9-4e84-b7e7-74855267afd6	yolanda-munoz-gonzalez	yolanda-munoz-gonzalez	Yolanda Muñoz González			active		変更なし・全項目確認済みを意味しない	—
+23000c31-6c04-4a2d-9934-bc6e366c8e23	tsuda-nobuko	tsuda-nobuko	Tsuda Nobuko			merged	70e98f0f-7ed7-4671-b97e-91de14b3c7fa	統合	—
+7d7a8528-8494-43e7-92a6-a605df102f43	katarina-sjoberg	katarina-sjoberg	Katarina Sjoberg			active		変更なし・全項目確認済みを意味しない	—
+d9075444-c63e-4aca-9435-6a002aedaa9d	simon-cotterill	simon-cotterill	Simon Cotterill			active		変更なし・全項目確認済みを意味しない	—
+c922028a-252b-40d9-a788-a331dace8cf8	koji-maeda	koji-maeda	前田 耕司			active		修正	https://w-rdb.waseda.jp/html/100000515_ja.html
+68c4ebd3-1f7b-45c8-bccd-9485da1a577a	sidney-c-h-cheung	sidney-c-h-cheung	Sidney C. H. Cheung			active		変更なし・全項目確認済みを意味しない	—
+3b93ba79-8fc8-4055-89a0-e2b9f3ba05cd	michael-roellinghoff	michael-roellinghoff	Michael Roellinghoff			active		変更なし・全項目確認済みを意味しない	—
+3e38c57d-3dda-4308-ac7e-a5c2331247f3	goro-shima	goro-shima	GORO SHIMA		1983	active		変更なし・全項目確認済みを意味しない	—
+b2f638b8-7c2a-4042-84ed-488a80360eb8	takakura-shinichiro	takakura-shinichiro	高倉 新一郎	1902	1990	active		変更なし・全項目確認済みを意味しない	—
+1e0c9ae4-65b2-47dd-bcb2-904c77958919	jun-ho-choe	jun-ho-choe	Jun-Ho Choe			active		変更なし・全項目確認済みを意味しない	—
+421a5fa1-a1a8-49a8-bcba-5797da3ff6ac	norbert-r-adami	norbert-r-adami	Norbert R. Adami			active		変更なし・全項目確認済みを意味しない	—
+fcea7571-665d-4ccd-b966-1ee51b1de5f2	hans-a-dettmer	hans-a-dettmer	Hans A. Dettmer	1927	2014	active		変更なし・全項目確認済みを意味しない	—
+9f2a3436-263e-451c-b813-60b63c5b4f3d	kan-wada	kan-wada	和田 完	1933	2004	active		修正	https://id.ndl.go.jp/auth/ndlna/00089876
+07edd587-1d39-4051-b864-3f591d7801a3	takashi-irimoto	takashi-irimoto	煎本 孝	1947		active		修正	https://id.ndl.go.jp/auth/ndlna/00131179
+215203d9-755f-44f8-afab-3b6b571818bf	hirofumi-kato	hirofumi-kato	加藤 博文	1966		active		変更なし・全項目確認済みを意味しない	—
+886964e8-d2f9-4e56-817a-418f8a20d8e5	fosco-maraini	fosco-maraini	Fosco Maraini	1912	2004	active		変更なし・全項目確認済みを意味しない	—
+0d8e81a3-5504-4885-81cc-ad513d558a88	noemi-godefroy	noemi-godefroy	Noémi Godefroy			active		変更なし・全項目確認済みを意味しない	—
+69efd193-bb9c-4652-aa50-2c6ebe5dc23e	roslynn-ang	roslynn-ang	Roslynn Ang			active		変更なし・全項目確認済みを意味しない	—
+717bafba-d6d3-43b4-81d6-20d60c4da14b	mayumi-okada	mayumi-okada	Mayumi Okada			active		変更なし・全項目確認済みを意味しない	—
+c7669da6-f047-40b1-b14a-e56481d4e206	kakurina-natalja	kakurina-natalja	Kakurina Nataļja			active		変更なし・全項目確認済みを意味しない	—
+b137fbf8-921e-4e4e-8ffd-b479c58a9a53	tessa-morris-suzuki	tessa-morris-suzuki	Tessa Morris-Suzuki			active		変更なし・全項目確認済みを意味しない	—
+5fb25d85-7155-46e2-8ee6-ce7daca4ab51	richard-siddle	richard-siddle	Richard Siddle			active		変更なし・全項目確認済みを意味しない	—
+f96c7bb7-7b2e-47b5-a1f7-0ec11e1d9465	kyoko-selden	kyoko-selden	Kyoko Selden		2013	active		変更なし・全項目確認済みを意味しない	—
+f0a245ce-7266-4771-b7a7-d0d94a68f3f8	ida-ayu-laksmita-sari	ida-ayu-laksmita-sari	Ida Ayu Laksmita Sari			active		変更なし・全項目確認済みを意味しない	—
+36de5d6d-b13b-468d-943a-15f24041db1e	osamu-kondo	osamu-kondo	OSAMU KONDO			active		変更なし・全項目確認済みを意味しない	—
+13e117cb-676c-44ea-8fe6-c86d6b3008a0	honda-katsuichi	honda-katsuichi	Honda Katsuichi			active		変更なし・全項目確認済みを意味しない	—
+98cb7065-2cb1-4579-a6a1-d8c97b1f9a28	hitoshi-watanabe	hitoshi-watanabe	渡辺 仁	1919	1998	active		修正	https://id.ndl.go.jp/auth/ndlna/00090648
+035e8eb4-43cf-41b5-9e7f-645e6a96867b	akira-goto	akira-goto	Akira Goto			active		変更なし・全項目確認済みを意味しない	—
+ee7c73e9-633e-4937-ae6b-2f4d710e423d	joseph-m-kitagawa	joseph-m-kitagawa	Joseph M. Kitagawa		1992	active		変更なし・全項目確認済みを意味しない	—
+b9be1fbe-4b1d-48fd-954e-9aa7ffdfeb07	hosanna-fukuzawa	hosanna-fukuzawa	Hosanna Fukuzawa			active		変更なし・全項目確認済みを意味しない	—
+0af02cd9-0144-47a9-b4a0-c8dad73a7942	tatsuyoshi-masuda	tatsuyoshi-masuda	Tatsuyoshi Masuda			active		変更なし・全項目確認済みを意味しない	—
+ba7c1f42-90cc-4871-b4fe-35cc4951064e	alexander-bukh	alexander-bukh	Alexander Bukh			active		変更なし・全項目確認済みを意味しない	—
+83b78a8c-0f55-49bf-80ba-be3a9902a578	peter-geiser	peter-geiser	Peter Geiser			active		変更なし・全項目確認済みを意味しない	—
+cc502356-e731-45a0-91fd-cd06726237c1	tadao-mitui	tadao-mitui	Tadao Mitui			active		変更なし・全項目確認済みを意味しない	—
+3e8a9633-6734-4bd8-be1a-b006d76908c8	sigeru-sumi	sigeru-sumi	Sigeru Sumi			active		変更なし・全項目確認済みを意味しない	—
+66236f14-2cad-4541-a3f6-50976b2aec1b	chisato-dubreuil	chisato-dubreuil	Chisato Dubreuil			active		変更なし・全項目確認済みを意味しない	—
+896034d6-bee4-4cb0-9d30-507db30e44c2	gary-w-crawford	gary-w-crawford	Gary W. Crawford			active		変更なし・全項目確認済みを意味しない	—
+f57795d4-e712-4341-8ea4-386e515a9a86	kirsten-yumiko-taguchi	kirsten-yumiko-taguchi	Kirsten Yumiko Taguchi			active		変更なし・全項目確認済みを意味しない	—
+89dd414e-665e-4753-8165-3b63b881d423	chisato-dubreuil-2	chisato-dubreuil-2	Chisato (Kitty) Dubreuil			merged	66236f14-2cad-4541-a3f6-50976b2aec1b	統合	—
+c0623632-e5a8-4b55-ad40-4b051bc9bef6	s-itoh	s-itoh	S. Itoh			active		変更なし・全項目確認済みを意味しない	—
+1dac58ff-81ca-4654-849d-ed6f428e8792	a-kuroshima	a-kuroshima	A. Kuroshima			active		変更なし・全項目確認済みを意味しない	—
+e4199533-3ee0-4a37-bc25-f349519eaa59	masayuki-ueno	masayuki-ueno	上野 昌之			active		変更なし・全項目確認済みを意味しない	—
+d60065d1-8173-4266-af1d-c3adce3beeb4	yasushige-takahashi	yasushige-takahashi	Yasushige Takahashi			merged	60c57642-52a2-47d9-addc-c2c55e43c703	統合	—
+fca2c46b-c5a2-4045-9892-ab9762836647	miyama-osamu	miyama-osamu	美山 治			active		変更なし・全項目確認済みを意味しない	—
+cf1207de-02de-42c9-a2c9-a9280f7b79c1	p-15abopl	p-15abopl	松浦 孝平			active		変更なし・全項目確認済みを意味しない	—
+1c051ff1-50d5-489d-8780-386fba7577e4	ikegami-jiro	ikegami-jiro	池上 二良	1920	2011	active		変更なし・全項目確認済みを意味しない	—
+0c96e814-9b0f-4494-b14a-1d92dadd65b6	ono-yugo	ono-yugo	小野 有五	1948		active		変更なし・全項目確認済みを意味しない	—
+f7bab563-8931-4ae6-a64a-ce7acfe9074e	kuwabayashi-kenji	kuwabayashi-kenji	桑林 賢治			active		変更なし・全項目確認済みを意味しない	—
+acffbaf9-d3dc-4f6e-a2b2-14f232da54bf	endo-masatoshi	endo-masatoshi	遠藤 匡俊	1954		active		修正	https://id.ndl.go.jp/auth/ndlna/00544849
+786e7420-7ce7-4fdb-aa96-5a78da668380	kato-hyakuichi	kato-hyakuichi	加藤 百一	1913		active		修正	https://id.ndl.go.jp/auth/ndlna/00027692
+2febe329-abc1-413e-a5e4-0b02f51594e5	yokohira-hiroshi	yokohira-hiroshi	横平 弘			active		変更なし・全項目確認済みを意味しない	—
+3e02729a-362e-4f07-bda0-4e38a940a7a7	p-1n77u3o	p-1n77u3o	川上 将史			active		変更なし・全項目確認済みを意味しない	—
+930235c9-2bff-4fde-984d-b0a0c7575bd6	maekawa-fumio	maekawa-fumio	前川文夫	1908	1984	active		変更なし・全項目確認済みを意味しない	—
+dc4741b3-b9d1-4b67-aa53-0bffa54790f4	sato-masahiko	sato-masahiko	佐藤 昌彦	1955		active		修正	https://id.ndl.go.jp/auth/ndlna/00688871
+8705bd56-0a88-4b7b-add6-1e1f07c5745d	obayashi-taryo	obayashi-taryo	大林 太良	1929	2001	active		変更なし・全項目確認済みを意味しない	—
+e0ef899d-b6f9-48a4-8c3c-86cc06e1aac1	p-12ohmil	p-12ohmil	木村 英明	1943		active		修正	https://id.ndl.go.jp/auth/ndlna/00164827
+4de5b89a-c3fc-4b61-ba9b-20f3198c65b8	ito-atsunori	ito-atsunori	伊藤 敦規			active		修正	https://www.minpaku.ac.jp/post-staff/6504
+46f4720c-697f-4e63-a0f1-36313632336f	p-1dhckok	p-1dhckok	廣瀬隆人			active		変更なし・全項目確認済みを意味しない	—
+48337dd2-91ee-4e42-b0d9-3931e5d8e07e	p-1hw7p2a	p-1hw7p2a	丸山 隆司	1948		merged	44161ff8-e323-4e28-948e-32d07855b46e	統合	https://id.ndl.go.jp/auth/ndlna/00857730
+6af68d70-018d-46c3-bc9d-fcf56cedd36d	ishikawa-motosuke	ishikawa-motosuke	石川 元助	1913	1981	active		修正	https://id.ndl.go.jp/auth/ndlna/00021278
+253b905e-63d1-437c-8b98-43f00298fd6b	p-tuy84r	p-tuy84r	坂本 恵衣			active		変更なし・全項目確認済みを意味しない	—
+6cdcac0f-5727-4b0e-b68b-8dafafe2a0f5	uchida-yuichi	uchida-yuichi	内田 祐一			active		変更なし・全項目確認済みを意味しない	—
+4c99a273-210d-41f3-b688-84c8c3ec7342	p-1awxh9o	p-1awxh9o	伊勢 寛			active		変更なし・全項目確認済みを意味しない	—
+622312f1-7519-4159-a247-6b1355e29dff	tsumagari-toshiro	tsumagari-toshiro	津曲 敏郎	1951	2020	active		修正	https://id.ndl.go.jp/auth/ndlna/00254566
+5afb8f5e-5a6d-4372-ad09-312c86ad0334	inukai-tetsuo	inukai-tetsuo	犬飼 哲夫	1897	1989	active		変更なし・全項目確認済みを意味しない	—
+c6156e70-ec8c-4763-8090-04344bd72054	p-1cuw446	p-1cuw446	宮地 鼓			active		変更なし・全項目確認済みを意味しない	—
+d0075f9b-59e5-4a9d-9a2c-2f67578cc10c	p-12ykcjr	p-12ykcjr	奥山 英登			active		変更なし・全項目確認済みを意味しない	—
+8169f2d1-7ad0-4bf5-a267-6b46bc2b9f88	kawakami-jun	kawakami-jun	川上 淳	1954		active		修正	https://id.ndl.go.jp/auth/ndlna/00131361
+bbea24c5-5681-4cfc-81b1-fe79e949e763	p-cgadvd	p-cgadvd	戸川 貴之			active		変更なし・全項目確認済みを意味しない	—
+13cac7ee-7b12-4eca-858d-26a0388640c0	p-1jwkn23	p-1jwkn23	岩佐 奈々子			active		変更なし・全項目確認済みを意味しない	—
+ed597f83-8dd6-4401-8764-4e982a9baa93	arai-kaori	arai-kaori	新井 かおり			active		変更なし・全項目確認済みを意味しない	—
+284991a0-3cca-49c0-9d08-580e2ee57aa1	iwasawa-takako	iwasawa-takako	岩澤 孝子			active		変更なし・全項目確認済みを意味しない	—
+db661c7f-ed0d-4d7b-a6dd-e68d178558a4	momose-hibiki	momose-hibiki	百瀬 響	1963		active		修正	https://id.ndl.go.jp/auth/ndlna/00762834
+0cf87895-34fe-48c8-a9c2-01fd9c88d4d0	takegahara-yukio	takegahara-yukio	竹ケ原 幸朗		2008	active		変更なし・全項目確認済みを意味しない	—
+c0c4f101-52ce-44e5-b43f-f57d5375c91c	tamura-masato	tamura-masato	田村 将人			active		変更なし・全項目確認済みを意味しない	—
+e65b38be-9804-4ff8-8014-bc45f0f008e0	p-1wrm8x0	p-1wrm8x0	立石 信一			active		変更なし・全項目確認済みを意味しない	—
+968d5f12-169f-4beb-927a-a436825a0b1b	sekiguchi-yoshihiko	sekiguchi-yoshihiko	関口 由彦	1977		active		修正	https://id.ndl.go.jp/auth/ndlna/01126308
+7590ab89-7bad-4c78-90e2-de11f2622b60	p-z25ghv	p-z25ghv	是澤 櫻子			active		変更なし・全項目確認済みを意味しない	—
+d8efa1ea-01cb-40b6-9e2b-9538bdecbbf7	hayashi-yoshishige	hayashi-yoshishige	林 善茂	1922	2013	active		変更なし・全項目確認済みを意味しない	—
+4d603cde-d5b5-4814-908a-af87401bbc39	sumiya-kazuhiko	sumiya-kazuhiko	住谷 一彦	1925	2022	active		変更なし・全項目確認済みを意味しない	—
+31c21718-1a67-418c-a6fb-9f1991630e18	p-1avbcz7	p-1avbcz7	三橋 博	1922	1991	active		修正	https://id.ndl.go.jp/auth/ndlna/00044136
+0d6784a9-b15c-4304-be27-86b7b3c7a697	kono-hiromichi	kono-hiromichi	河野 広道	1905	1963	active		変更なし・全項目確認済みを意味しない	—
+c4f6ff49-4ebd-4ca3-8cf2-e4fb5e74c7d1	yahata-tomoe	yahata-tomoe	八幡 巴			active		変更なし・全項目確認済みを意味しない	—
+a725cd64-5384-4e61-8e0b-5bfa69203493	sasaki-shiro	sasaki-shiro	佐々木 史郎	1957		active		修正	https://id.ndl.go.jp/auth/ndlna/00383617
+7a4b3492-92b0-4dca-9d5c-1e640e8394f4	p-yy1781	p-yy1781	北嶋 由紀（イサイカ）			merged	a1737947-faa6-450c-8ea8-00d02a18a039	統合	—
+1c30bcbf-acf5-40a8-baea-9fe6020cbfb4	p-1bcg76a	p-1bcg76a	呉 松旆			active		変更なし・全項目確認済みを意味しない	—
+eb146289-8f27-447e-a71a-c6d5220c2392	p-1nobjlt	p-1nobjlt	木名瀬 高嗣	1970		active		修正	https://id.ndl.go.jp/auth/ndlna/031977221
+ddc34b97-21ff-4fa6-b048-c6201d85b486	okita-noriaki	okita-noriaki	大喜多 紀明			active		変更なし・全項目確認済みを意味しない	—
+5a62def9-e129-42cf-bd5b-9b022015e051	natori-takemitsu	natori-takemitsu	名取 武光	1905	1987	active		変更なし・全項目確認済みを意味しない	—
+be0fd363-5685-4c29-b604-46605aff6d56	tokuda-sadakazu	tokuda-sadakazu	徳田 貞一		1945	active		変更なし・全項目確認済みを意味しない	—
+78662632-8af1-4ee2-a8be-d087498bd163	kono-tsunekichi	kono-tsunekichi	河野 常吉	1863	1930	active		変更なし・全項目確認済みを意味しない	—
+43b9ad4b-f01f-4800-b00c-42cb4c625df8	fujimoto-hideo	fujimoto-hideo	藤本 英夫	1927	2005	active		修正	https://id.ndl.go.jp/auth/ndlna/00015734
+e0a834dc-caed-45a0-8b8d-046a716ddd29	miyabe-kingo	miyabe-kingo	宮部金吾	1860	1951	active		変更なし・全項目確認済みを意味しない	—
+e8d14f78-9a16-4119-a068-2bd58c425877	p-1nliw67	p-1nliw67	小谷 凱宣	1939	2019	active		修正	https://id.ndl.go.jp/auth/ndlna/00121713
+19be7467-3c25-44a3-90be-ffc9929c9746	ogawa-masato	ogawa-masato	小川 正人	1963		active		修正	https://id.ndl.go.jp/auth/ndlna/00681475
+319ed413-7947-4ef5-a94b-68df92a13743	nishikiya-tadashi	nishikiya-tadashi	錦谷 禎			active		変更なし・全項目確認済みを意味しない	—
+5e05cb0c-9fd9-46a6-b3d6-d59bbb3180d9	p-idpctl	p-idpctl	シン ウォンジ			active		変更なし・全項目確認済みを意味しない	—
+0073fac1-d56b-4fc9-a789-e3081212db61	tosabayashi-yoshio	tosabayashi-yoshio	土佐林 義雄	1887	1957	active		変更なし・全項目確認済みを意味しない	—
+dcf0827c-d935-4e36-9d6b-33c5980a3c52	sasaki-toshikazu	sasaki-toshikazu	佐々木 利和	1948		active		変更なし・全項目確認済みを意味しない	—
+bf684fb3-da5e-47c2-a2cc-a888795586ff	utagawa-hiroshi	udagawa-hiroshi	宇田川 洋	1944		active		修正	https://id.ndl.go.jp/auth/ndlna/00108647 | https://www.kinokuniya.co.jp/f/dsg-01-9784894533066
+acc6d4b5-b943-4736-8b1f-c2f41881da1a	p-30hnss	p-30hnss	クライナー ヨーゼフ			merged	e8579501-d13f-4e7f-bc01-2cca5d609944	統合	—
+786658da-d7a6-4b9d-9c43-0843d24d4a5f	miki-masafumi	miki-masafumi	三木 理史	1965		active		変更なし・全項目確認済みを意味しない	—
+cae6dd7e-767c-4388-a9dd-2317c4f6d5a8	p-1owqqtz	p-1owqqtz	井上 善十郎	1893	1961	active		修正	https://id.ndl.go.jp/auth/ndlna/00019923
+b649f6e4-ba30-4437-adea-b37f939cab8f	okawada-akira	okawada-akira	岡和田 晃	1981		active		変更なし・全項目確認済みを意味しない	—
+d95fe90f-4677-462a-8034-08fd7da48249	kobayashi-koji	kobayashi-koji	小林 孝二	1952		active		修正	https://id.ndl.go.jp/auth/ndlna/01204951
+3d7e0508-8a17-4885-85bd-7c81a256be7c	ogaki-naoaki	ogaki-naoaki	大垣 直明	1943		active		修正	https://id.ndl.go.jp/auth/ndlna/00130125
+f3622e3c-82ee-47a1-8ac4-5c8149c24cc6	seki-masanori	seki-masanori	關 政則			active		変更なし・全項目確認済みを意味しない	—
+8b555196-8be8-401b-b518-95b1b248bc99	shinohara-chika	shinohara-chika	篠原 智花			active		変更なし・全項目確認済みを意味しない	—
+def4a5cc-d817-4735-b0b0-4c0b88424d23	sasakura-irumi	sasakura-irumi	笹倉 いる美			active		変更なし・全項目確認済みを意味しない	—
+65aa311e-d4b3-488c-b7f8-4875b431ca60	niioka-takehiko	niioka-takehiko	新岡 武彦	1911	1990	active		修正	https://id.ndl.go.jp/auth/ndlna/00104877
+6f0eeb46-f7f6-46a0-bcc4-eaa94ce3b428	tsuboi-shogoro	tsuboi-shogoro	坪井 正五郎	1863	1913	active		変更なし・全項目確認済みを意味しない	—
+1caf986e-ea32-4650-bd78-823a1ddf1d46	ishida-shuzo	ishida-shuzo	石田 収蔵	1879	1940	active		修正	https://id.ndl.go.jp/auth/ndlna/00798475 | https://nam.go.jp/wp/wp-content/uploads/2022/10/000-all-pages-20mb.pdf
+c0c8842b-7ac7-487b-9089-d72c5d658ec5	p-1w11480	p-1w11480	浜守 杏奈			active		変更なし・全項目確認済みを意味しない	—
+d806e17f-2808-4b2d-83c4-ecb72572444d	sato-sachiko	sato-sachiko	佐藤 幸子			active		修正	https://www.jissen.ac.jp/about/teacher/sato_sachiko.html
+b155f27f-69ef-4451-91e7-e203f8d94a06	saito-reiko	saito-reiko	齋藤 玲子			active		変更なし・全項目確認済みを意味しない	—
+a1c87347-a686-48e6-8e0a-5be0d1d21faa	p-1geswer	p-1geswer	石橋 俊實		1991	active		変更なし・全項目確認済みを意味しない	—
+8970a746-c7a0-48e2-8609-4ed0ab334821	hirako-goichi	hirako-goichi	平光 吾一	1887	1967	active		変更なし・全項目確認済みを意味しない	—
+8d8002a8-9849-47a0-805c-298a574574a2	matsunaga-yasuhiro	matsunaga-yasuhiro	松永 康佑			active		変更なし・全項目確認済みを意味しない	—
+06f86d3f-c747-463f-b067-a0e89b5ca3b8	sugiyama-sueo	sugiyama-sueo	杉山 壽榮男		1946	active		変更なし・全項目確認済みを意味しない	—
+4fb2581c-a6a4-4abb-9627-ea92e60e17dd	suzuki-hisashi	suzuki-hisashi	鈴木 尚	1912	2004	active		変更なし・全項目確認済みを意味しない	—
+90a3bc08-552d-4068-9e7d-2d689ecb7651	haniwara-kazuro	haniwara-kazuro	埴原 和郎	1927	2004	active		変更なし・全項目確認済みを意味しない	—
+171f98e9-bace-41a7-a202-2cd13751c1bf	p-113iutn	p-113iutn	大場 秀夫			active		変更なし・全項目確認済みを意味しない	—
+8a83feb2-89e0-4608-8658-e2c8656870f5	nakamura-kazuyuki	nakamura-kazuyuki	中村 和之	1956		active		修正	https://id.ndl.go.jp/auth/ndlna/01120632 | https://www.cc-hakodate.jp/wp-content/uploads/2017/02/hakodategaku20120630.pdf
+025fe196-0615-450b-9c22-a3aec1d799f7	kohama-mototsugu	kohama-mototsugu	小浜 基次	1904	1970	active		修正	https://id.ndl.go.jp/auth/ndlna/00755353
+48302a09-e64f-4ab9-a4f5-944af736f1e8	yachita-mio	yachita-mio	谷地田 未緒			active		変更なし・全項目確認済みを意味しない	—
+77dbf5d4-e700-433e-9f20-449a69adb18f	p-754y3m	p-754y3m	小林 房太郎	1872	1937	active		修正	https://id.ndl.go.jp/auth/ndlna/00033052
+d0507c27-5b55-4906-af83-f494c05ee348	ikeda-yuko	ikeda-yuko	池田 裕子			active		修正	https://kaken.nii.ac.jp/ja/file/KAKENHI-PROJECT-15K04248/15K04248seika.pdf
+05ff7fb4-eece-41cb-b7cb-4ca342896c4e	p-13p2pr0	p-13p2pr0	野本 正博			active		変更なし・全項目確認済みを意味しない	—
+9a1a2602-1262-4bf8-a1e9-cf38586df197	yamamoto-yuko	yamamoto-yuko	山本 祐弘	1904	1990	active		修正	https://id.ndl.go.jp/auth/ndlna/00093743
+c0d11903-60af-44d9-aa7e-771c10b666fe	yanagita-kunio	yanagita-kunio	柳田 國男	1875	1962	active		変更なし・全項目確認済みを意味しない	—
+ea0cd219-b3ac-4f38-8798-f45c6cfd27c2	okada-hiroaki	okada-hiroaki	岡田 宏明	1932	2004	active		変更なし・全項目確認済みを意味しない	—
+99f4bd47-9466-4d2c-bd22-fd0c373e4cf1	kawamura-minato	kawamura-minato	川村 湊	1951		active		変更なし・全項目確認済みを意味しない	—
+372d5aca-3c88-4b39-8c00-c809775f4c20	p-12ok2ju	p-12ok2ju	木村 邦彦	1927	2017	active		修正	https://id.ndl.go.jp/auth/ndlna/00031002
+0d4cae93-bc77-4074-875f-86e1a51b17f8	ishii-tomomi	ishii-tomomi	石井 智美	1959		active		修正	https://id.ndl.go.jp/auth/ndlna/001291581 | https://id.ndl.go.jp/auth/ndlna/001291581
+1afdc19a-e6c0-4a99-b392-04695fd4c286	keira-tomoko	keira-tomoko	計良 智子	1947	2016	active		変更なし・全項目確認済みを意味しない	—
+bfa81d6c-38ed-40e1-b896-55c0b061ebde	ishihara-mai	ishihara-mai	石原 真衣	1982		active		変更なし・全項目確認済みを意味しない	—
+3984db24-5ca3-4831-b220-1341769c2f3d	deriha-koji	deriha-koji	出利葉 浩司			active		変更なし・全項目確認済みを意味しない	—
+2cb1edae-7675-4fc5-a448-0b56fec92b5b	egami-namio	egami-namio	江上 波夫	1906	2002	active		変更なし・全項目確認済みを意味しない	—
+0353dd02-1037-4814-9a37-3465c987a3a2	nagata-hosei	nagata-hosei	永田 方正	1844	1911	active		変更なし・全項目確認済みを意味しない	—
+0b219981-9e99-49af-a522-0f70da1a27dc	sakuma-manabu	sakuma-manabu	佐久間 学			active		修正	https://scu.repo.nii.ac.jp/record/63/files/SCU6_10.pdf
+951039d2-5a7d-472b-b789-400610671c6d	p-l1k9nn	p-l1k9nn	羽深 久夫			active		変更なし・全項目確認済みを意味しない	—
+d394af42-8aaa-4aef-af52-668da9cb249d	shirayama-tomomasa	shirayama-tomomasa	白山 友正	1901	1977	active		修正	https://id.ndl.go.jp/auth/ndlna/00073128
+cb63dc5b-ef12-4f0a-9e28-ba378b8f23a0	kondo-shiro	kondo-shiro	近藤 四郎	1918	2003	active		変更なし・全項目確認済みを意味しない	—
+400e38d6-0809-4bc8-97ca-78762235b556	ogata-tamotsu	ogata-tamotsu	小片 保	1916	1980	active		修正	https://id.ndl.go.jp/auth/ndlna/00113013
+d7cb13c4-9a3d-4bfb-beb5-5264a6fcc1e1	kono-motomichi	kono-motomichi	河野 本道	1939	2015	active		変更なし・全項目確認済みを意味しない	—
+60d758cd-b786-4904-a519-6fea95ba3d30	segawa-kiyoko	segawa-kiyoko	瀬川 清子	1895	1984	active		変更なし・全項目確認済みを意味しない	—
+3e205cf8-12da-412c-b9ee-d40d276fc5fe	p-1cwkgj0	p-1cwkgj0	床 州生			active		変更なし・全項目確認済みを意味しない	—
+411f4e9d-a192-4a47-aafd-1342185051fb	p-1b2n71h	p-1b2n71h	中里 巧	1954		active		修正	https://id.ndl.go.jp/auth/ndlna/00346122
+2ae4b197-c970-40a8-9bdc-4e669e4a5aa3	baba-yumi	baba-yumi	馬場 裕美			active		変更なし・全項目確認済みを意味しない	—
+4102096e-f795-4fea-9030-5077af2d7fd7	osaka-taku	osaka-taku	大坂拓	1983		active		修正	https://id.ndl.go.jp/auth/ndlna/034031464
+9dbef4e9-437b-4aa5-85e5-c5b17164acbd	tanimoto-akihisa	tanimoto-akihisa	谷本 晃久	1970		active		修正	https://id.ndl.go.jp/auth/ndlna/001171975
+70e98f0f-7ed7-4671-b97e-91de14b3c7fa	p-1yumqo7	p-1yumqo7	津田 命子	1945		active		修正	https://id.ndl.go.jp/auth/ndlna/01161229
+501aa3be-dad5-4ef3-8a09-1ba46b4e8c7c	onai-toru	onai-toru	小内 透	1955		active		変更なし・全項目確認済みを意味しない	—
+b5420bf3-57bf-4c2a-ad74-d30f0a18117b	takashi-kinase	takashi-kinase	Takashi Kinase			merged	eb146289-8f27-447e-a71a-c6d5220c2392	統合	—
+6bc9eb6d-1131-49d1-ab23-1b235402f9de	ivar-lindquist	ivar-lindquist	Ivar Lindquist	1895	1985	active		変更なし・全項目確認済みを意味しない	—
+3883976e-e9e9-48ba-b820-7a76721bc3ae	vaclav-blazek	vaclav-blazek	Václav Blažek	1959		active		変更なし・全項目確認済みを意味しない	—
+5af23408-1f70-4871-b2bf-fd046adf60ae	oki	oki	Oki .			active		変更なし・全項目確認済みを意味しない	—
+5ecd923d-e21f-4ccf-bf82-441ce241c89f	james-patrie	james-patrie	James Patrie			active		変更なし・全項目確認済みを意味しない	—
+42d33910-612b-474b-a06b-ba82c6b0d164	p-1etbux2	p-1etbux2	日出志 鳴海			merged	c5f848b4-5bb7-4e33-ae2c-4b17dbd2b232	統合	—
+2446936c-a7d0-4c3b-a4c1-f7d37e5ad6cf	benon-zbigniew-sza-ek	benon-zbigniew-sza-ek	Benon Zbigniew Szałek			active		変更なし・全項目確認済みを意味しない	—
+2b9c900d-0279-4f3f-a2e0-661b9933ada2	sakakibara-masafumi	sakakibara-masafumi	榊原 正文	1955		active		修正	https://id.ndl.go.jp/auth/ndlna/00365660
+fc42bea7-2ab1-4f32-91a7-72556460dab4	ito-seichi	ito-seichi	伊藤 せいち			active		変更なし・全項目確認済みを意味しない	—
+42f0285f-ffb9-46ce-ad53-f5bcf49286a4	p-y2rdpz	p-y2rdpz	地蔵 慶護	1930	2010	active		修正	https://id.ndl.go.jp/auth/ndlna/00162153
+84d54be7-e601-40d5-9ec2-c9d4bc204789	takahashi-shin	takahashi-shin	高橋 慎			active		変更なし・全項目確認済みを意味しない	—
+b27954aa-8745-4844-8f4f-85d4d6194508	miyoshi-isao	miyoshi-isao	三好 勲			active		変更なし・全項目確認済みを意味しない	—
+4f407a6c-0554-4850-95ef-0f0bba277cd2	akiyama-hidetoshi	akiyama-hidetoshi	秋山 秀敏			active		変更なし・全項目確認済みを意味しない	—
+d261d667-2cc7-41d6-a5ad-cb9d31ea09d5	p-1d9nra9	p-1d9nra9	岡部 卓			active		変更なし・全項目確認済みを意味しない	—
+b944d5d2-de57-44d8-8bd5-744f3a13c155	ogiya-masayasu	ogiya-masayasu	扇谷 昌康	1927		active		修正	https://id.ndl.go.jp/auth/ndlna/00058242
+c06a59d8-c3eb-4e6d-bf56-b73c0f1c4258	miyazaki-kota	miyazaki-kota	宮崎 耕太			active		変更なし・全項目確認済みを意味しない	—
+1f6daa18-3e3d-4ba8-a984-0399a6dcdeb9	watanabe-takashi	watanabe-takashi	渡辺 隆			active		修正	https://cir.nii.ac.jp/all?q=消えてしまったアイヌ語の山名
+0f9ec014-a286-46bd-ae50-1802a57990ce	p-1i159kw	p-1i159kw	小林 耕一			active		変更なし・全項目確認済みを意味しない	—
+f5b14aa1-affa-469c-b2c1-ea120882db81	nakano-yoshinobu	nakano-yoshinobu	中野 良宣			active		変更なし・全項目確認済みを意味しない	—
+924ed7a4-98d1-40aa-9503-d8ef8c80b869	iguchi-toshio	iguchi-toshio	井口 利夫			active		変更なし・全項目確認済みを意味しない	—
+5d40c545-f8a1-4f2b-9c01-4850fb4f51e2	shimizu-seijiro	shimizu-seijiro	清水 清次郎	1925		active		修正	https://id.ndl.go.jp/auth/ndlna/00173763
+16aacd84-bbaf-4ba6-ba77-4681b89a082c	takahashi-motoi	takahashi-motoi	高橋 基			active		修正	https://www.city.asahikawa.hokkaido.jp/hakubutukan/kenkyuu/d053440_d/fil/meibo.pdf
+fa4d953f-56b7-42b6-89b4-9d8de441d26f	p-12o91rj	p-12o91rj	木村 博海			active		変更なし・全項目確認済みを意味しない	—
+d3b892d6-12f5-4abc-af53-189725ce5696	taira-ryuichi	taira-ryuichi	平 隆一			active		変更なし・全項目確認済みを意味しない	—
+24918796-4600-427f-98c6-84bbe8d79d70	kasai-takechiyo	kasai-takechiyo	葛西 猛千代	1870	1951	active		修正	https://id.ndl.go.jp/auth/ndlna/00027000
+e6e49168-8bbb-4048-b21e-5712f49e750b	p-1g2agq6	p-1g2agq6	山下 栄光			active		変更なし・全項目確認済みを意味しない	—
+d2cc579a-cbfe-4ae0-b14c-4e31d79d5dd8	p-zo7x46	p-zo7x46	明石 一紀	1947		active		修正	https://id.ndl.go.jp/auth/ndlna/00192670
+c5c01541-2b71-496c-a3ba-3f09cc56681d	p-yj098k	p-yj098k	早田 国光			active		変更なし・全項目確認済みを意味しない	—
+ac143195-0f70-460d-9688-78f8062ed9e9	p-x4n5eb	p-x4n5eb	狩野 義美	1933		active		修正	https://id.ndl.go.jp/auth/ndlna/01116047
+e3a4163a-041a-434c-9df8-5a381a2843c8	sudo-ryusen	sudo-ryusen	須藤 隆仙	1929	2018	active		変更なし・全項目確認済みを意味しない	—
+3a26292e-5ee0-4dac-b891-4d6fc4c96347	p-14v1ctr	p-14v1ctr	本田 克代			active		変更なし・全項目確認済みを意味しない	—
+7aeef5a8-5115-4ed5-ac35-d607a9227322	p-pfh2dq	p-pfh2dq	土井 勝典			active		変更なし・全項目確認済みを意味しない	—
+56fac019-d50d-4423-b280-4d4303785c0c	p-70s9t4	p-70s9t4	八重 九郎	1895	1978	active		修正	https://www.hm.pref.hokkaido.lg.jp/wp-content/uploads/2025/01/bulletin_ACRC_vol7_04_p051_071.pdf
+c5f848b4-5bb7-4e33-ae2c-4b17dbd2b232	narumi-hideshi	narumi-hideshi	鳴海 日出志	1940		active		修正	https://id.ndl.go.jp/auth/ndlna/00186544
+ac8dcb7a-75ac-43c0-a511-950ebc06ebc4	p-1cyxo40	p-1cyxo40	尾崎 功	1943		active		修正	https://id.ndl.go.jp/auth/ndlna/00987315
+57204d40-ab97-40af-869b-5dc05877fa55	kojima-kyoko	kojima-kyoko	児島 恭子	1954		active		変更なし・全項目確認済みを意味しない	—
+33c03b67-e8b7-4dbb-b40b-04e7411bd8ff	p-1prw9wa	p-1prw9wa	中野 克良			active		変更なし・全項目確認済みを意味しない	—
+fe97e5ed-f3fb-481e-8f05-cd8606e803b7	tezuka-yoritaka	tezuka-yoritaka	手塚 順孝			active		変更なし・全項目確認済みを意味しない	—
+c76ad303-12e9-4287-88d9-4b1511441897	p-gitgqw	p-gitgqw	打田 元輝			active		変更なし・全項目確認済みを意味しない	—
+98859ddf-cd5e-4adf-b797-97de7bed782b	pon-huci	pon-huci	ポン・フチ	1949		active		修正	https://id.ndl.go.jp/auth/ndlna/00064365
+a14c10fd-97ec-4a2f-871b-caa6bf9debdd	p-1avld4w	p-1avld4w	中村 幽			active		変更なし・全項目確認済みを意味しない	—
+9c49627e-c5e1-4c25-8b4b-2ff0738bdff1	p-1nkxafa	p-1nkxafa	佐川 年秀	1954		active		修正	https://id.ndl.go.jp/auth/ndlna/00809160
+699e0d5b-e253-492f-be0e-3bce9ed5ca0c	p-1ktul8c	p-1ktul8c	岡本 武雄			active		変更なし・全項目確認済みを意味しない	—
+ce3697ba-3fe3-46b8-af41-27732ba7f7ac	hirayama-hiroto	hirayama-hiroto	平山 裕人	1958		active		変更なし・全項目確認済みを意味しない	—
+22bfab9e-159e-42a1-a55a-ebd9a4e82406	yamamoto-tasuke	yamamoto-tasuke	山本 多助	1904	1993	active		変更なし・全項目確認済みを意味しない	—
+af83c5ac-33b0-461f-bfe5-87627283c0c5	p-k7l165	p-k7l165	戸部 千春	1954		active		修正	https://id.ndl.go.jp/auth/ndlna/033626494
+2969e014-749f-4e6e-944d-9b538d3fa5f5	goto-toshio	goto-toshio	後藤 利雄	1922	2001	active		修正	https://id.ndl.go.jp/auth/ndlna/00006173
+bdd0d772-c3b4-48df-b30a-a0fda57f8bb5	fujimura-hisakazu	fujimura-hisakazu	藤村 久和	1940	2025	active		変更なし・全項目確認済みを意味しない	—
+1c75b264-6d93-4eb8-92bd-c4431c53fc01	uoi-kazuyoshi	uoi-kazuyoshi	魚井 一由	1946	2008	active		修正	https://id.ndl.go.jp/auth/ndlna/00252137
+2e359585-e371-42d7-a607-1d85d4190d15	p-1ve2u2k	p-1ve2u2k	青木 茂治			active		変更なし・全項目確認済みを意味しない	—
+19ec2da4-841c-48d8-b42c-8098257fc2ba	p-1kl2r4i	p-1kl2r4i	中澤 道三	1937		active		修正	https://id.ndl.go.jp/auth/ndlna/033725544
+f23c5c2c-d199-448c-9d90-85d93c9d129e	saga-ayami	saga-ayami	佐賀 彩美			active		変更なし・全項目確認済みを意味しない	—
+22fc10fe-f27b-4abc-aa78-2c2994bcdc90	tachibana-yoshimitsu	tachibana-yoshimitsu	橘 善光	1933		active		修正	https://id.ndl.go.jp/auth/ndlna/00083103
+3a25a327-8ae4-4edb-b2af-70b5640de3e9	p-1hmrc4r	p-1hmrc4r	筒井 功	1944		active		修正	https://id.ndl.go.jp/auth/ndlna/00189562
+56a11198-e602-4a6c-a30b-6427c83e4e6c	p-1ixvufv	p-1ixvufv	菅原 進	1925		active		修正	https://id.ndl.go.jp/auth/ndlna/01237129
+d07330cd-15e2-49d7-960c-3d5cb19eead6	shirai-katsuhiko	shirai-katsuhiko	白井 克彦	1939		active		変更なし・全項目確認済みを意味しない	—
+8968501f-366c-46cf-a33c-579392ad418f	sugimura-kinarabukku	sugimura-kinarabukku	杉村 キナラブック	1888	1973	active		変更なし・全項目確認済みを意味しない	—
+a11c944f-481c-40b4-8f70-723ecc7e8bef	tanaka-yoshito	tanaka-yoshito	田中 吉人			active		変更なし・全項目確認済みを意味しない	—
+8120436a-a687-4ec4-9a98-47b59557a714	ishihara-makoto	ishihara-makoto	石原 誠			active		変更なし・全項目確認済みを意味しない	—
+b7ba3afd-19ef-4555-a28d-d9167b101979	oshima-minoru	oshima-minoru	大島 稔	1951		active		修正	https://id.ndl.go.jp/auth/ndlna/01041583
+18d08f03-42f0-4326-93d1-a827d51ffd7c	hishinuma-uichi	hishinuma-uichi	菱沼 右一		1944	active		変更なし・全項目確認済みを意味しない	—
+5a507031-66f8-42a5-b58f-67f99434a8e4	hashio-naokazu	hashio-naokazu	橋尾 直和	1960		active		変更なし・全項目確認済みを意味しない	—
+e2cf9541-8ad6-46ba-a490-c9f7cb14ced9	p-1pt2eas	p-1pt2eas	村﨑 恭子			merged	e057bf3f-ac69-4f33-aae9-e25d23cb2e7c	統合	—
+12fbf0c8-fabe-4e61-b888-3d742fa12c55	oide-ayako	oide-ayako	大出 あや子	1923		active		修正	https://id.ndl.go.jp/auth/ndlna/00155614
+627fdfc6-43ce-4579-b665-e4c664dac94f	p-kmjzaq	p-kmjzaq	川村 シンリツ・エオリパック・アイヌ		2021	active		変更なし・全項目確認済みを意味しない	—
+50828db5-9a04-4665-9220-74b1649c489f	p-1f5kvww	p-1f5kvww	橋本 潔	1949		active		修正	https://id.ndl.go.jp/auth/ndlna/00919234
+aad1b69b-85a0-4c76-9b34-9d041cfdbf01	minami-noriyuki	minami-noriyuki	南 哲行			active		変更なし・全項目確認済みを意味しない	—
+a842a569-5ccc-4bb8-bfce-e9198e2e4832	okada-michiaki	okada-michiaki	岡田 路明			active		変更なし・全項目確認済みを意味しない	—
+dd1aa8b6-12ab-4f65-aabd-100930042abb	p-9u49vf	p-9u49vf	北洞 孝雄			active		変更なし・全項目確認済みを意味しない	—
+2219555d-db27-414d-a0d5-73d17cb836e8	p-1cbtbaa	p-1cbtbaa	鍛治 明香			active		変更なし・全項目確認済みを意味しない	—
+d08a1e62-3125-4b61-a186-571e259c0c3b	a-bugaeva	a-bugaeva	A Bugaeva			merged	993ef3a2-b71e-4a29-91fe-9b90c32c3000	統合	—
+55a133e9-983a-41ce-a087-0cd9952bbd49	ono-yoneichi	ono-yoneichi	小野 米一	1939		active		修正	https://id.ndl.go.jp/auth/ndlna/00117587
+8b2dcf7b-87d5-40b0-b019-f771dc098337	p-1toajjl	p-1toajjl	佐藤 知巳			active		変更なし・全項目確認済みを意味しない	—
+f89a7349-109b-466d-9366-6aca2e955796	p-1lg7zk7	p-1lg7zk7	中畠 孝幸			active		変更なし・全項目確認済みを意味しない	—
+5a6effb4-20eb-4c2e-99d2-15b929b522c6	suga-yasuo	suga-yasuo	菅 泰雄			active		変更なし・全項目確認済みを意味しない	—
+e7712c3c-f4c2-4a06-8454-49228c591bf1	p-1hcevqu	p-1hcevqu	尾崎 喜光	1958		active		修正	https://id.ndl.go.jp/auth/ndlna/01147845
+8035ce7f-afb0-4b0b-9359-17c26168f185	seino-haruki	seino-haruki	清野 春樹	1949		active		修正	https://id.ndl.go.jp/auth/ndlna/01113028
+4bc7f75e-a894-49c8-8aef-0cc63aa798c4	p-jg0yjt	p-jg0yjt	喜多 直人			active		変更なし・全項目確認済みを意味しない	—
+4bbcde4f-e2ab-4132-bec0-b06f94d9af08	magata-tokumatsu	magata-tokumatsu	間方 徳松	1912		active		修正	https://id.ndl.go.jp/auth/ndlna/00121838
+f5ee4743-5b3e-4950-a5c0-85b615a89ba0	p-1c6rkvl	p-1c6rkvl	土屋 茂	1915		active		修正	https://id.ndl.go.jp/auth/ndlna/00352939
+4b19cc4b-c88f-47fb-8e35-800225642881	p-1mjn4tu	p-1mjn4tu	高柳 茂			active		変更なし・全項目確認済みを意味しない	—
+ba2db991-7a3f-46b1-a0a6-5144f1e0dc4f	saikaku-sadayoshi	saikaku-sadayoshi	西鶴 定嘉	1896	1989	active		修正	https://id.ndl.go.jp/auth/ndlna/00055559
+c80f66bf-9aac-4459-859a-17a8ef7d78a8	ito-katsuhisa	ito-katsuhisa	伊藤 勝久	1964		active		修正	https://id.ndl.go.jp/auth/ndlna/01168320 | https://id.ndl.go.jp/auth/ndlna/01168320
+6d399d5b-1906-4aa3-bf79-1d0258fa9e43	p-ywxeun	p-ywxeun	畑中 友次	1895		active		修正	https://id.ndl.go.jp/auth/ndlna/00008825
+1fc13088-d030-4ce7-946b-1164e6adc0f7	p-11ol90n	p-11ol90n	太宰 幸子	1943		active		修正	https://id.ndl.go.jp/auth/ndlna/01153074
+ff8fbd50-515f-416d-8782-f2295bda003a	p-1omusa0	p-1omusa0	島田 静雄			active		変更なし・全項目確認済みを意味しない	—
+a324ffdd-0380-4d8d-b3af-fc1ded207e74	p-1gy7bfv	p-1gy7bfv	山口 和彦			active		変更なし・全項目確認済みを意味しない	—
+5f55660d-81f6-4ba1-b304-970b3f9a6ffa	honda-yuko	honda-yuko	本田 優子	1957		active		修正	https://id.ndl.go.jp/auth/ndlna/00669825
+3962be8a-ce72-4304-98be-7c5066d2c4bb	p-18cdb7j	p-18cdb7j	並木 翔太郎			active		変更なし・全項目確認済みを意味しない	—
+1b19570c-d182-4418-9968-1fdba32a272b	uemura-yukio	uemura-yukio	上村 幸雄	1929	2017	active		変更なし・全項目確認済みを意味しない	—
+d4b66a37-7c23-46a3-b7e1-e6519b5677f9	inoue-takuya	inoue-takuya	井上拓也			active		変更なし・全項目確認済みを意味しない	—
+dc0e464c-372d-4420-ba8b-1af62231aec5	p-11492jn	p-11492jn	大塚 梨恵			active		変更なし・全項目確認済みを意味しない	—
+e0f5e4dc-0dbd-4d2c-b093-a53e2f2c73cf	p-1p39exq	p-1p39exq	上野 愛理			active		変更なし・全項目確認済みを意味しない	—
+74cb001b-1cc6-4a74-9ba6-d1c0e019ef6a	p-34nem	p-34nem	倉重 裕美			active		変更なし・全項目確認済みを意味しない	—
+4e6858f0-71cc-47ef-a2af-88a0cd00bcee	p-1lf7xk2	p-1lf7xk2	中田 恭平			active		変更なし・全項目確認済みを意味しない	—
+fd676475-1049-459e-9a20-6d5779dc4f20	p-1g2da7z	p-1g2da7z	山下 真悟			active		変更なし・全項目確認済みを意味しない	—
+c1c62709-3d1b-4ddc-a953-b4dd04fcd9ef	p-1p89kig	p-1p89kig	坂田 亜里沙			active		変更なし・全項目確認済みを意味しない	—
+a2b634e4-fbd3-4c27-bd71-4758561d8d34	ono-yuki	ono-yuki	小野 雄貴			active		修正	https://asahikawaramat.blogspot.com/p/blog-page_08.html
+18fe0e57-0741-478a-96ee-2c4e3d0fa2db	maeda-manami	maeda-manami	前田 愛美			active		修正	https://www.kosho.or.jp/products/detail.php?product_id=409519520 | https://www.kosho.or.jp/products/detail.php?product_id=409519520
+6c559e7f-86e4-4b03-adf7-9b6454b49a3b	p-1m0sbcb	p-1m0sbcb	山田 祥一			active		変更なし・全項目確認済みを意味しない	—
+22204c26-f354-445f-8632-93917cb55752	tachibana-shoichi	tachibana-shoichi	橘 正一	1902	1940	active		修正	https://id.ndl.go.jp/auth/ndlna/00083083
+465ff545-b9bd-4cf3-9e5d-4a9ccc833322	p-15wtsj1	p-15wtsj1	大矢 京右			active		変更なし・全項目確認済みを意味しない	—
+a57b9e53-5daa-43b1-8707-dbdf85205512	miyaoka-osahito	miyaoka-osahito	宮岡 伯人	1936	2023	active		変更なし・全項目確認済みを意味しない	—
+95dd1f5b-87e2-4bc1-bdb8-2299c004839d	p-1o7hzxb	p-1o7hzxb	長田 祐季			active		変更なし・全項目確認済みを意味しない	—
+77ddca7b-c2ce-4552-8139-06984502b7dd	yoshida-katsumi	yoshida-katsumi	吉田 和美			active		修正	https://asahikawaramat.blogspot.com/p/blog-page_08.html
+4f41db43-35e2-4710-8350-1627b03c4be3	p-1jj1xvq	p-1jj1xvq	三浦 亜耶			active		変更なし・全項目確認済みを意味しない	—
+4997a20a-7cce-4bb3-ac49-05ad71e1db9c	kochi-rie	kochi-rie	甲地 利恵			active		変更なし・全項目確認済みを意味しない	—
+5e7b637c-46c1-47e5-906a-cd2335f5f7f4	p-n3f6iu	p-n3f6iu	狩俣 恵一	1951		active		修正	https://id.ndl.go.jp/auth/ndlna/00799691
+e1d2473f-dfb6-495d-9410-7210d12000c8	kazama-shinjiro	kazama-shinjiro	風間 伸次郎	1965		active		変更なし・全項目確認済みを意味しない	—
+31844ad0-3d6c-4cae-8d17-17d3596c041e	ogihara-shinko	ogihara-shinko	荻原 真子	1942		active		修正	https://id.ndl.go.jp/auth/ndlna/00126111
+48acf747-e618-4b36-8be3-52295df713af	furuhara-toshihiro	furuhara-toshihiro	古原 敏弘	1952		active		修正	https://id.ndl.go.jp/auth/ndlna/01000125
+5b415d2c-23a6-4ebe-9114-816b7cd93703	yasuda-chinatsu	yasuda-chinatsu	安田 千夏			active		変更なし・全項目確認済みを意味しない	—
+619b44d4-7290-4260-bf8b-2347a238206b	p-1l8orb9	p-1l8orb9	鈴木明世			active		変更なし・全項目確認済みを意味しない	—
+e133c0a8-f72d-44da-874b-9ac628af4211	kamemaru-yukiko	kamemaru-yukiko	亀丸由紀子			active		変更なし・全項目確認済みを意味しない	—
+c8857604-09c8-4cf1-85af-66ccfef20cfc	p-1dcznn	p-1dcznn	沖野 慎二			active		変更なし・全項目確認済みを意味しない	—
+b15c40b5-0e07-4bba-8919-97f31123a583	narita-shuichi	narita-shuichi	成田 修一			active		変更なし・全項目確認済みを意味しない	—
+c33edf96-34e0-4fb3-b65e-5f74a33aa863	hirota-toru	hirota-toru	廣田 徹			active		変更なし・全項目確認済みを意味しない	—
+b6e2fce4-10e6-4431-8f6a-ff1e4e4693ab	vattukumpu-tero	vattukumpu-tero	Vattukumpu Tero			active		変更なし・全項目確認済みを意味しない	—
+de7fffe7-03b7-47be-9f5b-c920aa1d01fb	matsuna-takashi	matsuna-takashi	松名 隆			active		変更なし・全項目確認済みを意味しない	—
+cb708e09-1807-4335-b9a8-2385e00902c1	p-1clrtot	p-1clrtot	塩谷 亨			active		変更なし・全項目確認済みを意味しない	—
+de1b5fef-47a4-4a33-adff-610b074d7e81	nagata-yoshishige	nagata-yoshishige	永田 良茂			active		変更なし・全項目確認済みを意味しない	—
+132a4fba-b94d-4b73-9e29-5681343e3260	p-1gkpt1n	p-1gkpt1n	イヤス シリヤ			merged	b551ff0b-1805-4ad4-88a9-9592a82664ea	統合	—
+cba95c26-7a3e-4f3a-8e53-0061f2b8f0ee	p-y9ma1q	p-y9ma1q	田中 勝也	1937		active		修正	https://id.ndl.go.jp/auth/ndlna/00081575
+2a940e15-5d0f-4a35-a9b6-10f9e6305531	asakura-toshimitsu	asakura-toshimitsu	朝倉 利光	1934		active		変更なし・全項目確認済みを意味しない	—
+3dc1c73b-eeb9-486e-bf74-d395260b6186	inoue-koichi	inoue-koichi	井上 紘一	1940		active		修正	https://id.ndl.go.jp/auth/ndlna/00019599 | https://src-h.slav.hokudai.ac.jp/center/tenken/2001/inoue.html
+4b340b14-ddbc-463e-8eab-70cd2f84156b	terada-yoshitaka	terada-yoshitaka	寺田 吉孝	1954	2023	active		変更なし・全項目確認済みを意味しない	—
+3ef7469b-3c95-4c18-a1c4-f93e3dc37379	mori-masao	mori-masao	護 雅夫	1921	1996	active		変更なし・全項目確認済みを意味しない	—
+85340041-4563-4cbd-8f62-0de0c0986a4c	m-m-dobrotvorskii	m-m-dobrotvorskii	M.M. Dobrotvorskii		1874	merged	610095e2-adea-4141-9f0a-384751f09421	統合	—
+6daa2528-dd8d-4c97-abe1-26e202c2a4d7	yasuda-setsuhiko	yasuda-setsuhiko	安田 節彦			active		変更なし・全項目確認済みを意味しない	—
+f64922a6-89df-4c42-9c57-dfaaa87efb2b	m-m	m-m	M.M. ドブロトゥヴォールスキー		1874	merged	610095e2-adea-4141-9f0a-384751f09421	統合	—
+7b443364-da85-4e8e-832a-9c8293b711cf	koyama-shohei	koyama-shohei	小山 正平	1909		active		修正	https://id.ndl.go.jp/auth/ndlna/00105951 | https://id.ndl.go.jp/auth/ndlna/00105951
+bb4046c5-4ed6-44c2-971b-3214bd9548c7	p-1n213a8	p-1n213a8	寺田 吉孝[訳]			merged	4b340b14-ddbc-463e-8eab-70cd2f84156b	統合	—
+5743d781-98c3-4a3b-9f0b-b76b55fdc862	p-ppm4a7	p-ppm4a7	安田 節彦[訳]			merged	6daa2528-dd8d-4c97-abe1-26e202c2a4d7	統合	—
+fbc8f195-300a-42b9-831f-289e1968152d	ito-kohei	ito-kohei	伊藤 公平	1937		active		修正	https://id.ndl.go.jp/auth/ndlna/00022855
+3ebade7c-3130-40a5-8940-b993b863c8cc	takahashi-akiko	takahashi-akiko	高橋 晶子			active		修正	https://www.h-bungaku.or.jp/issue/pdf/issue_nenpou17/17-8_17.pdf
+6927befa-9efb-4980-91a9-51038afd8b6a	p-11xgdoe	p-11xgdoe	菊地 達夫	1968		active		修正	https://id.ndl.go.jp/auth/ndlna/001332064
+01d024b0-6cfa-478e-97f6-3b5676e2c2d1	p-1exy4mi	p-1exy4mi	梶浦 浩	1928		active		修正	https://id.ndl.go.jp/auth/ndlna/00346152
+f3a0c82a-78ab-4a9a-8966-82eb276069d2	p-1p7zrli	p-1p7zrli	仙石 裕子			active		変更なし・全項目確認済みを意味しない	—
+4c6bedf9-6b0c-4820-9931-faffbf557dc4	p-1ezvvm9	p-1ezvvm9	小原 隆幸	1933		active		修正	https://id.ndl.go.jp/auth/ndlna/00547008
+fbaabb42-dec1-4468-aa7b-2f4b44e8382a	matsuki-akira	matsuki-akira	松木 明	1903	1981	active		変更なし・全項目確認済みを意味しない	—
+c82c93c9-8f8b-491a-b8c0-c7e1047ba7b5	kanemaru-tsuguo	kanemaru-tsuguo	金丸 継夫			active		変更なし・全項目確認済みを意味しない	—
+375a261c-1b4a-460e-9a22-cc5ad03d38fa	kudo-masaki	kudo-masaki	工藤 雅樹	1937	2010	active		変更なし・全項目確認済みを意味しない	—
+114d3d03-cfc2-48d3-881b-e304de311f0c	p-1l86b0i	p-1l86b0i	鈴木 仁			active		変更なし・全項目確認済みを意味しない	—
+635c2180-9482-45e2-a9a2-86f2d3e32494	p-1gxsmy4	p-1gxsmy4	由良 勇	1921		active		修正	https://id.ndl.go.jp/auth/ndlna/00217615
+f0ebc646-4436-4fe7-9be9-60eca88579a0	p-1ehn8nt	p-1ehn8nt	森 美典	1930		active		修正	https://id.ndl.go.jp/auth/ndlna/00181460
+86e361eb-74ad-4951-b087-ca54afe8a07a	p-1ekqz6t	p-1ekqz6t	鎌田 正信	1923		active		変更なし・全項目確認済みを意味しない	—
+3abbbe4c-1aac-4a88-8a2d-2ded5a119e80	p-1kxg80o	p-1kxg80o	槻舘 尚武			active		変更なし・全項目確認済みを意味しない	—
+bf6a2409-fcf4-473c-a819-0fce15cd1fda	p-1fxhyqx	p-1fxhyqx	瀧下 史			active		変更なし・全項目確認済みを意味しない	—
+5806d90e-78df-4e5d-ab29-3eabddd51b0a	tanigawa-kenichi	tanigawa-kenichi	谷川 健一	1921	2013	active		変更なし・全項目確認済みを意味しない	—
+ab3d1626-1266-4009-9eaf-f0c1263cb92f	p-16gziul	p-16gziul	松田 宏介			active		変更なし・全項目確認済みを意味しない	—
+b5b68cc4-e51c-4698-a8cd-54546e2710fb	taniguchi-mamoru	taniguchi-mamoru	谷口 守			active		修正	https://hokkyodai.repo.nii.ac.jp/records/2000434
+e3c6e35b-791b-47f3-a573-667485a620ef	p-1i0xg02	p-1i0xg02	小林 和夫			active		変更なし・全項目確認済みを意味しない	—
+f8697b8d-fe91-4b81-b670-f5461ccf594d	p-1qevig6	p-1qevig6	寺本 千名夫			active		変更なし・全項目確認済みを意味しない	—
+08abfc10-eb7b-49fd-867b-30c8c54afd39	mega-junya	mega-junya	女鹿 潤哉			active		変更なし・全項目確認済みを意味しない	—
+b51ae848-2e5b-484a-ace0-ab72da408310	oikawa-akihiko	oikawa-akihiko	及川 明彦			active		変更なし・全項目確認済みを意味しない	—
+caf109b2-18d1-4253-b11e-a9cbaa5f6927	inoue-fumio	inoue-fumio	井上 文夫			active		変更なし・全項目確認済みを意味しない	—
+efe95001-120b-4b94-9612-e550abf59eaa	p-12syzn8	p-12syzn8	柳下 み咲			active		変更なし・全項目確認済みを意味しない	—
+9a145f66-0bc8-469f-8bee-d526b8c4c539	p-s5616a	p-s5616a	玉山 成元	1932		active		修正	https://id.ndl.go.jp/auth/ndlna/00080932
+21001a26-c1c2-48be-8496-8ed4afd6b6f9	umehara-takeshi	umehara-takeshi	梅原 猛	1925	2019	active		変更なし・全項目確認済みを意味しない	—
+204a92db-4bb1-435e-90fb-89aca6eb459d	nurmi-jussi-henri-sebastian	nurmi-jussi-henri-sebastian	Nurmi Jussi Henri Sebastian			merged	565e391b-d666-409b-91e3-de296dbd2841	統合	—
+01ecaa72-1fd7-4b8b-95b3-1840d5043c08	p-12qbr50	p-12qbr50	都築 埴雅			active		変更なし・全項目確認済みを意味しない	—
+df36776b-6744-4998-9183-8f153a8e6714	p-1cl3ueh	p-1cl3ueh	大澤 香			active		変更なし・全項目確認済みを意味しない	—
+55007d3d-5e75-4b22-815a-fa75644666c3	p-1t0p9g6	p-1t0p9g6	平賀 エテノア	1880	1960	active		修正	https://id.ndl.go.jp/auth/ndlna/001202349
+1d3dd099-a2cf-4018-a65d-6888d4e2c20b	simada-kenichi	simada-kenichi	島田 健一	1929		active		修正	https://id.ndl.go.jp/auth/ndlna/00184373 | https://id.ndl.go.jp/auth/ndlna/00184373
+4e1f3f1c-fb0e-441b-9d44-25bd4593958c	sakitani-mitsuru	sakitani-mitsuru	崎谷 満	1954		active		変更なし・全項目確認済みを意味しない	—
+e16bab05-cb08-4bd6-9d13-51678b00c0eb	yazaki-haruna	yazaki-haruna	矢崎 春菜			active		変更なし・全項目確認済みを意味しない	—
+8d20d5e5-3a55-4e04-aa75-490f8f15b571	nihashi-junichi	nihashi-junichi	二橋 潤一	1950		active		変更なし・全項目確認済みを意味しない	—
+a7a53637-85c0-47e7-a929-a5fea4e9f1c2	p-1epyoxi	p-1epyoxi	杉江 光			active		変更なし・全項目確認済みを意味しない	—
+e2b0f9c5-367f-47ca-bc93-5c228e5661b3	ishida-hisao	ishida-hisao	石田 久大			active		変更なし・全項目確認済みを意味しない	—
+643bce7a-126b-4bcb-a4aa-d2088418bb60	p-1r1lqct	p-1r1lqct	川村 久恵			active		変更なし・全項目確認済みを意味しない	—
+80daecb3-9b1b-41fe-8f48-4f6757d05042	ishii-masami	ishii-masami	石井 正己	1958		active		変更なし・全項目確認済みを意味しない	—
+644bb1c5-6cb9-4292-8fc6-069a785ef873	p-1lodgy3	p-1lodgy3	長崎 郁	1968		active		修正	https://id.ndl.go.jp/auth/ndlna/001219435
+759a72b8-a5cd-44f5-8864-8f5faed9c664	tanaka-satoko	tanaka-satoko	田中 聖子			active		変更なし・全項目確認済みを意味しない	—
+c9d0593a-ae2c-4bae-9e3e-855e3b94e144	oba-yoshio	oba-yoshio	大場 四千男	1943		active		変更なし・全項目確認済みを意味しない	—
+44161ff8-e323-4e28-948e-32d07855b46e	p-1hvppjg	p-1hvppjg	丸山 隆司	1948		active		修正	https://id.ndl.go.jp/auth/ndlna/00857730
+0aa6e4b1-d252-4e65-930d-b3fb2e040360	nagao-yuka	nagao-yuka	長尾 優花			active		変更なし・全項目確認済みを意味しない	—
+f5a6677b-bad0-4f3b-8b96-8515c009ab65	p-kbsdtj	p-kbsdtj	西﨑 専一			active		変更なし・全項目確認済みを意味しない	—
+6529ff28-a054-4635-beed-fba8db99834b	ishimura-hiroko	ishimura-hiroko	石村 博子	1951		active		変更なし・全項目確認済みを意味しない	—
+fb45a638-6e53-4470-8ddd-f48b495b29a0	p-16iqb0n	p-16iqb0n	墨谷 真澄			active		変更なし・全項目確認済みを意味しない	—
+5eaf8651-8448-4e2e-a476-0c61c1c9af58	p-19hj4z9	p-19hj4z9	欠ヶ端 和也			active		変更なし・全項目確認済みを意味しない	—
+84f5cc72-d072-4df3-b521-8df0baedb0cf	p-1mxux2y	p-1mxux2y	豊岡 喜一郎			active		変更なし・全項目確認済みを意味しない	—
+a088e177-7cb5-4a76-8e5f-c78a867e1baf	ota-ryu	ota-ryu	太田 竜	1930	2009	active		変更なし・全項目確認済みを意味しない	—
+eeb71423-06a1-46c7-93a9-52596d36948b	p-15p4zpg	p-15p4zpg	鈴木 華織			active		変更なし・全項目確認済みを意味しない	—
+04d5e2f8-2294-4e1b-8621-aeed781be574	emori-susumu	emori-susumu	榎森 進	1940		active		修正	https://id.ndl.go.jp/auth/ndlna/00130876
+be38e300-d905-4276-99b0-dd1fc5e3f3bf	p-f7krcf	p-f7krcf	成田 得平	1943		active		修正	https://id.ndl.go.jp/auth/ndlna/00149586
+f27318c5-c531-4772-bee2-ded0aa61b161	kinoshita-junji	kinoshita-junji	木下 順二	1914	2006	active		変更なし・全項目確認済みを意味しない	—
+8d6d2f54-e85d-4f5a-84a6-9cdb691cd0cf	p-1cf44kw	p-1cf44kw	石倉 欣二	1937		active		修正	https://id.ndl.go.jp/auth/ndlna/00119332
+f177e6b9-e815-4690-9180-be94bb9208fd	kanaya-eijiro	kanaya-eijiro	金谷 栄二郎		2001	active		変更なし・全項目確認済みを意味しない	—
+17d69e99-6f9d-42c1-844a-becf082fd5cb	kannari-matsu	kannari-matsu	金成 まつ	1875	1961	active		変更なし・全項目確認済みを意味しない	—
+0a815d15-cef4-4619-bc77-4cbac99b8485	p-q25d75	p-q25d75	四宅 ヤエ	1904	1980	active		変更なし・全項目確認済みを意味しない	—
+e89f44b2-3948-48a9-abb1-fd44a0d22928	p-1iwaxi2	p-1iwaxi2	若月 亨	1967		active		修正	https://id.ndl.go.jp/auth/ndlna/00350936
+cbd32aa9-d100-4b63-8635-5f79e81a60db	hasuike-etsuko	hasuike-etsuko	蓮池 悦子			active		変更なし・全項目確認済みを意味しない	—
+91627a80-5bbf-4803-8933-7070a65c98b0	p-1gunmdd	p-1gunmdd	田澤 守			active		変更なし・全項目確認済みを意味しない	—
+8c7a23ca-61ce-48cb-bde7-f73402a0fa6c	sakurai-yoshihide	sakurai-yoshihide	櫻井 義秀	1961		active		変更なし・全項目確認済みを意味しない	—
+73599a10-e8b5-47b7-8b90-f0c3dab3d9e3	fujii-sadakazu	fujii-sadakazu	藤井 貞和	1942		active		変更なし・全項目確認済みを意味しない	—
+95e0bf18-33fd-4c66-8146-42c4554a0c02	p-ch68k3	p-ch68k3	太田マルクオッカイ満		2020	merged	211d61a3-10ee-45d9-8b9a-3840d68bca5d	統合	—
+d9986eb1-5d87-4640-8620-b52e32200eb1	p-1nen1vw	p-1nen1vw	島津 礼子			active		変更なし・全項目確認済みを意味しない	—
+f75bbed8-7dea-4d29-a456-a5b37928395d	p-tcs8zz	p-tcs8zz	道合 裕基			active		変更なし・全項目確認済みを意味しない	—
+bdea573e-263d-4b8e-95c0-d2f9b4f47a9a	p-lc9any	p-lc9any	今石 みぎわ			active		変更なし・全項目確認済みを意味しない	—
+a66eded9-4c8d-4d3c-b14f-02f997094374	yoshinari-naoki	yoshinari-naoki	吉成 直樹	1955		active		変更なし・全項目確認済みを意味しない	—
+2ba9aee8-62cd-460b-bf3b-b9afec6d0f27	ogasawara-sayo	ogasawara-sayo	小笠原 小夜	1973		active		修正	https://id.ndl.go.jp/auth/ndlna/031698818
+46207bed-50c6-456f-8698-faad2e27dca3	kawakami-yuji	kawakami-yuji	川上 勇治	1930	2004	active		修正	https://id.ndl.go.jp/auth/ndlna/00029165
+c3796f37-7bd8-4b44-90f4-a268fb51147d	p-9d1qfm	p-9d1qfm	はまおか のりこ	1954		active		修正	https://id.ndl.go.jp/auth/ndlna/00670792
+ca211d22-1060-476f-ac7b-f0ef389fe8de	sunazawa-kura	sunazawa-kura	砂沢 クラ	1897	1990	active		変更なし・全項目確認済みを意味しない	—
+4dcecb4a-81d3-4173-9225-6fcbf9e55dd7	ryo-michiko	ryo-michiko	寮 美千子	1955		active		変更なし・全項目確認済みを意味しない	—
+d7db4a9d-fd0a-43d4-b151-205aad49b6b6	suzuki-ryuichi	suzuki-ryuichi	鈴木 隆一	1977		active		修正	https://id.ndl.go.jp/auth/ndlna/00909324
+ff84fed6-e586-4b16-8e12-b7f0e85a3696	p-1qsdo77	p-1qsdo77	二谷 国松	1888	1960	active		修正	https://id.ndl.go.jp/auth/ndlna/001202351
+3e80af8b-4da6-49a9-90e8-68d4c686eceb	takashima-yoko	takashima-yoko	高島 葉子			active		変更なし・全項目確認済みを意味しない	—
+54da4f9e-97f1-4265-8739-ad99f3544d74	p-kjevsf	p-kjevsf	高野 繁廣			active		変更なし・全項目確認済みを意味しない	—
+ed20974a-939d-40d2-9880-574293ab412d	p-1vg5icr	p-1vg5icr	西島 てる		1988	active		変更なし・全項目確認済みを意味しない	—
+6b403ce1-dbb2-4725-883b-5dc4c8660b22	takahashi-nori	takahashi-nori	高橋 規			active		変更なし・全項目確認済みを意味しない	—
+2998540c-eeaa-4fec-ab4b-98b2a78b35b5	anetai-masaki	anetai-masaki	姉帯 正樹			active		変更なし・全項目確認済みを意味しない	—
+eac8130b-b929-4847-bbb9-391741305f89	p-zxb1g8	p-zxb1g8	若林 和夫			active		変更なし・全項目確認済みを意味しない	—
+532e1828-564c-42eb-868d-8e207326790f	nojiri-hoei	nojiri-hoei	野尻 抱影	1885	1977	active		変更なし・全項目確認済みを意味しない	—
+852ea205-f3e5-4712-835f-6e677aba1c12	p-79rn4z	p-79rn4z	北尾 浩一	1953		active		修正	https://id.ndl.go.jp/auth/ndlna/00214876
+0849cc31-9377-4205-8fae-ad849e3b89e0	p-15p7dwk	p-15p7dwk	鈴木 邦輝	1954		active		修正	https://id.ndl.go.jp/auth/ndlna/00107254
+f98a4a7a-b930-4fa6-b9ba-2538c4ea698e	ito-hiromitsu	ito-hiromitsu	伊藤 裕満			active		変更なし・全項目確認済みを意味しない	—
+fe52d5ca-c021-421d-89b5-3d8c57d31541	mae-masanao	mae-masanao	前 正七生			active		変更なし・全項目確認済みを意味しない	—
+6be82fee-e174-4ea6-8406-a247f260e253	muraki-miyuki	muraki-miyuki	村木 美幸			active		変更なし・全項目確認済みを意味しない	—
+6c346d82-890f-4cbe-80a1-ee57de3c558e	p-11firet	p-11firet	若園 雄志郎			active		変更なし・全項目確認済みを意味しない	—
+10819f34-aa51-4890-bdfc-bc37842461af	inaba-katsuo	inaba-katsuo	因幡 勝雄	1937		active		修正	https://id.ndl.go.jp/auth/ndlna/00324985
+67877f6c-d32b-4379-ba9a-6aecd1c57a68	kido-shirabe	kido-shirabe	木戸 調			active		変更なし・全項目確認済みを意味しない	—
+0a8810d4-fa33-483c-b6f1-ccd1e733a08c	p-1cy2d4k	p-1cy2d4k	小川 広			active		変更なし・全項目確認済みを意味しない	—
+30dec08d-0659-4a50-b1e0-9a8154f0d119	p-1i361g2	p-1i361g2	小柳 誠之			active		変更なし・全項目確認済みを意味しない	—
+02adb55d-5e02-42fd-a2c3-20a3845d9ed7	p-11o400v	p-11o400v	杉山 泰子			active		変更なし・全項目確認済みを意味しない	—
+67ee5c9e-2a8f-472a-9b87-eac03726df1d	p-3kz7ca	p-3kz7ca	南 収			active		変更なし・全項目確認済みを意味しない	—
+54e65c18-e296-43a9-b099-c83969bdd822	sekine-tatsuhito	sekine-tatsuhito	関根 達人	1965		active		修正	https://id.ndl.go.jp/auth/ndlna/00911260
+02ccc344-7ca4-4acf-b5c7-f26cdea150a8	p-1vdwlmy	p-1vdwlmy	青木 愛子	1914	1995	active		修正	https://id.ndl.go.jp/auth/ndlna/00136781
+21ac75ae-39ef-4808-9ec2-ca71d3da15f3	p-1llynl7	p-1llynl7	長井 博	1943		active		修正	https://id.ndl.go.jp/auth/ndlna/00137684
+f0a9146c-d1c0-496e-99f9-3d092b34a8f7	p-1bj2gjr	p-1bj2gjr	前沢 卓	1946		active		修正	https://id.ndl.go.jp/auth/ndlna/001205893
+d766d348-3983-41fb-962e-081644ffce9c	sato-naotaro	sato-naotaro	佐藤 直太郎			active		変更なし・全項目確認済みを意味しない	—
+fd31d5b6-ed36-470b-ab6c-d8b8e67bab9a	p-e80k7j	p-e80k7j	千葉 伸彦			active		変更なし・全項目確認済みを意味しない	—
+8db7a2da-5035-4568-9a7f-c34206d4ed9c	p-smb1hw	p-smb1hw	能登 千織			active		変更なし・全項目確認済みを意味しない	—
+dde3acd8-fd9d-4e61-afd4-03e715172c6f	p-mhjk5r	p-mhjk5r	白老町 (北海道)			active		変更なし・全項目確認済みを意味しない	—
+a1737947-faa6-450c-8ea8-00d02a18a039	p-7gxsyg	p-7gxsyg	北嶋 由紀			active		変更なし・全項目確認済みを意味しない	—
+2e33ec3e-78c6-4533-8405-dc55eed2516b	p-1babm4k	p-1babm4k	兼俊明夫			active		変更なし・全項目確認済みを意味しない	—
+ae85d025-a981-4def-b176-2be279002198	kimura-jun	kimura-makoto	木村 純	1950		active		修正	https://id.ndl.go.jp/auth/ndlna/00682648 | https://www.hup.gr.jp/items/65002265 | https://www.hup.gr.jp/items/65002265
+3f9a74f9-9634-42fa-84d4-1ae367015c91	fukuoka-itoko	fukuoka-itoko	福岡 イト子	1933		active		修正	https://id.ndl.go.jp/auth/ndlna/00412449
+5e8bc1ed-fbc3-44fb-ad84-0068bf2ffdf5	uchida-junko	uchida-junko	内田 順子	1967		active		修正	https://id.ndl.go.jp/auth/ndlna/00805320
+81e1447a-b890-4351-ac4e-2f29ea707d81	p-17ykr4g	p-17ykr4g	蓑島 栄紀	1972		active		修正	https://id.ndl.go.jp/auth/ndlna/00864627
+5e2aebb7-a63c-4dec-911e-51d709cb4532	segawa-takuro	segawa-takuro	瀬川 拓郎	1958		active		変更なし・全項目確認済みを意味しない	—
+923c25bf-f95a-4c50-bac0-317b1a51b8fd	p-1b2n8qc	p-1b2n8qc	中野 巴			merged	d9669d8f-2b4c-4386-a06d-57b815427445	統合	—
+241c9d78-5bcc-49eb-a871-6bce49e8f53d	p-125jcv5	p-125jcv5	野崎 剛毅			active		変更なし・全項目確認済みを意味しない	—
+31047405-7036-46af-abd8-fd180b243c47	c	c	マーハ ジョン C.			merged	0bcaaa3b-0eb8-4703-86d1-60754961b2a7	統合	—
+d3c993b3-91ee-4d6a-b777-ba7c93754c30	p-xgwq0d	p-xgwq0d	保健体育専攻音楽分野			active		変更なし・全項目確認済みを意味しない	—
+2e587af6-1a31-4d15-b8ea-4a244d2ccb22	august-pfizmaier	august-pfizmaier	August Pfizmaier	1808	1887	active		変更なし・全項目確認済みを意味しない	—
+b3e69dbf-6fbb-45fa-935f-c4a4df32a2cc	hidezo-yamada	hidezo-yamada	山田 秀三	1899	1992	active		変更なし・全項目確認済みを意味しない	—
+6a935ba7-7980-4f42-a7b7-3ee9fb19cd6d	shichiro-murayama	shichiro-murayama	村山 七郎	1908	1995	active		変更なし・全項目確認済みを意味しない	—
+c8596e30-23c5-4440-ae9f-2592d8e0fdf5	waseda-daigaku-gogaku-kyoiku-kenkyujo	waseda-daigaku-gogaku-kyoiku-kenkyujo	Waseda Daigaku. Gogaku Kyōiku Kenkyūjo			active		変更なし・全項目確認済みを意味しない	—
+168b7c02-a09b-4eec-a1c2-d69bb7107f03	masafumi-sakakihara	masafumi-sakakihara	Masafumi Sakakihara			merged	2b9c900d-0279-4f3f-a2e0-661b9933ada2	統合	—
+3e044b42-0f73-406b-93b3-51372d4c1a48	tomizo-taisho	tomizo-taisho	Tomizo Taisho		1999	merged	43f4ef4e-6268-4ff2-ba12-89e57cdcf997	統合	—
+23792a48-4402-450b-b48f-8fc419b7128d	genzo-sarashina	genzo-sarashina	更科 源蔵	1904	1985	active		変更なし・全項目確認済みを意味しない	—
+a08de047-97b4-4b9f-837d-933c1a013bd8	p-1r1qwie	p-1r1qwie	川村 正一			active		変更なし・全項目確認済みを意味しない	—
+5058d85d-51e0-4c9e-838f-48e2371a68c2	fukuda-kichijiro	fukuda-kichijiro	福田 吉次郎	1917		active		修正	https://id.ndl.go.jp/auth/ndlna/00216783
+6dc22672-3217-4dbf-825e-30b719a6b683	yuasa-tadashi	yuasa-tadashi	湯淺 正			active		変更なし・全項目確認済みを意味しない	—
+193a34fe-48cb-4052-abb6-d2ea8140e7db	notoya-enkichi	notoya-enkichi	能登屋 円吉	1811		active		変更なし・全項目確認済みを意味しない	—
+de6adb69-2139-494d-bc08-5125c24d76de	ohguri-hiroshi	ohguri-hiroshi	大栗 裕	1918	1982	active		変更なし・全項目確認済みを意味しない	—
+0707268b-35b5-4c66-b6c7-6ec9e71d5b7e	p-1gpzz1i	p-1gpzz1i	畑佐 満			active		変更なし・全項目確認済みを意味しない	—
+8226d933-28b5-40d1-afef-ec7179819db5	p-1to67i7	p-1to67i7	佐藤 忠悦	1940		active		修正	https://id.ndl.go.jp/auth/ndlna/00899899
+6948b86f-bb7d-40e9-8bee-00e938eb7f12	akasaka-norio	akasaka-norio	赤坂 憲雄	1953		active		変更なし・全項目確認済みを意味しない	—
+c9111211-c4e8-4e6c-bd49-173177370044	kato-tetsusaburo	kato-tetsusaburo	加藤 鉄三郎			active		変更なし・全項目確認済みを意味しない	—
+325d64d1-e26e-4423-971f-cfacd905b349	p-1fjb2l0	p-1fjb2l0	池田 実			active		変更なし・全項目確認済みを意味しない	—
+591f2280-9786-42a0-af33-c8605c828c4b	fukuda-tomoyuki	fukuda-tomoyuki	福田 友之	1947	2021	active		修正	https://id.ndl.go.jp/auth/ndlna/01142584
+9fb5f3f8-e42a-4e41-9081-a87db71f1339	ono-susumu	ono-susumu	大野 晋	1919	2008	active		変更なし・全項目確認済みを意味しない	—
+60613378-2b16-4215-9418-c139e9d32c9e	akiba-minoru	akiba-minoru	秋葉 實	1926	2015	active		変更なし・全項目確認済みを意味しない	—
+e752717a-aeef-485b-a32d-d93a1f21853c	uchida-minoru	uchida-minoru	内田 実	1927		active		変更なし・全項目確認済みを意味しない	—
+f0d6e981-ef2e-4e06-ab77-032c5b910018	p-14d41fh	p-14d41fh	堺谷 美香			active		変更なし・全項目確認済みを意味しない	—
+476e8292-d0e2-434f-82e8-269507438f09	p-165tq3u	p-165tq3u	春木 まり子			active		変更なし・全項目確認済みを意味しない	—
+b29cc571-c0cd-45ae-b978-f5575d16cbee	yamanaka-jota	yamanaka-jota	山中 襄太	1895	1996	active		変更なし・全項目確認済みを意味しない	—
+b42e2eac-4c96-475b-a9d1-0e1e7e6444c2	p-12ak29f	p-12ak29f	高野 三代作			active		変更なし・全項目確認済みを意味しない	—
+21e815b1-0800-4d18-a866-41fa6eb06ccc	murakami-keiji	murakami-keiji	村上 啓司			active		変更なし・全項目確認済みを意味しない	—
+5e0187e6-d609-458a-8a76-b94148df04c5	watanabe-shigeru	watanabe-shigeru	渡辺 茂	1913		active		修正	https://id.ndl.go.jp/auth/ndlna/00091030
+01ec4aea-5d03-4e38-97b8-a4ef6bbee240	akagi-sanpei	akagi-sanpei	赤木 三兵	1909		active		修正	https://id.ndl.go.jp/auth/ndlna/00000892
+eb4fd8ed-a136-4cd0-9b0b-408679b14fbb	kita-sadakichi	kita-sadakichi	喜田 貞吉	1871	1939	active		変更なし・全項目確認済みを意味しない	—
+c2f75fe6-7be1-443c-a06e-36c52b971d9b	sonota-yoshio	sonota-yoshio	其田 良雄			active		変更なし・全項目確認済みを意味しない	—
+47114b94-e6f2-441c-9a8b-3e91b1ba66e7	p-1fmpqxw	p-1fmpqxw	上原 正道			active		変更なし・全項目確認済みを意味しない	—
+5aa4497d-2d0b-48e4-ae04-5262be09844b	todome-seiji	todome-seiji	留目 政治			active		変更なし・全項目確認済みを意味しない	—
+762ffdea-176d-4e42-8a80-d585c7ba99c4	p-1s1xuvx	p-1s1xuvx	河野 本道選			merged	d7cb13c4-9a3d-4bfb-beb5-5264a6fcc1e1	統合	—
+c57c5893-d635-4f8f-8f3b-0840c25da2f4	sakurai-kiyohiko	sakurai-kiyohiko	桜井 清彦	1922	2010	active		変更なし・全項目確認済みを意味しない	—
+36b7091b-e752-456d-bd96-05949d92846b	shinmura-izuru	shinmura-izuru	新村 出	1876	1967	active		変更なし・全項目確認済みを意味しない	—
+bb05837e-3f62-44df-b4e6-76bd72ba295f	kiyono-kenji	kiyono-kenji	清野 謙次	1885	1955	active		変更なし・全項目確認済みを意味しない	—
+87ef8a6d-201d-4798-b295-78600e593a00	p-3u7nms	p-3u7nms	袖上生			active		変更なし・全項目確認済みを意味しない	—
+a25e6419-3351-4250-a9e8-ec495210a84d	matsui-tsuneyuki	matsui-tsuneyuki	松井 恒幸	1928	1982	active		修正	https://id.ndl.go.jp/auth/ndlna/00103410
+db61a674-86a4-4548-9602-85e8f038e6fd	nakajima-riichiro	nakajima-riichiro	中島 利一郎	1884	1959	active		変更なし・全項目確認済みを意味しない	—
+40900782-eb33-48ee-b126-153053dc71f9	matsuura-takeshiro	matsuura-takeshiro	松浦 武四郎	1818	1888	active		変更なし・全項目確認済みを意味しない	—
+f83903ec-0976-49c2-bebc-d03c8793822d	p-1iix9fs	p-1iix9fs	ジョン・バチラー		1944	merged	d4ff530a-f922-40d7-8bdf-69b9c5a5bf29	統合	—
+847ac1e9-1107-4e36-af20-f94529a6c186	fujii-naoharu	fujii-naoharu	藤井 尚治	1921	1997	active		変更なし・全項目確認済みを意味しない	—
+66f8e556-b8ad-4f10-8980-1b1e062b3038	p-1r6enj9	p-1r6enj9	岡部 方幾			active		変更なし・全項目確認済みを意味しない	—
+376b3cb8-cf9d-420d-b9bb-3754d0a4aa12	oni-haruto	oni-haruto	鬼 春人			active		変更なし・全項目確認済みを意味しない	—
+e9611f23-ddf6-47e5-80aa-445af5f3bebe	kishimoto-suigetsu	kishimoto-suigetsu	岸本 翠月	1908	1979	active		修正	https://id.ndl.go.jp/auth/ndlna/00031847
+4443b699-db03-4018-b7a3-1f4432edc350	yoshihara-katsumi	yoshihara-katsumi	吉原 克己			active		変更なし・全項目確認済みを意味しない	—
+8fae391c-3516-4a16-911d-a38111661668	p-1b9d5u9	p-1b9d5u9	鏡味 完二	1909	1963	active		変更なし・全項目確認済みを意味しない	—
+6d89ce52-e6a2-4ec6-b77a-859f383777c0	p-1pw3zjc	p-1pw3zjc	伊藤 初太郎			active		変更なし・全項目確認済みを意味しない	—
+2d8f798c-7468-4ce4-ad25-02a3f169bfc5	p-1q8kgfm	p-1q8kgfm	帝国学士院			active		変更なし・全項目確認済みを意味しない	—
+d68c3c19-7ba0-4c2a-81f7-4c04833f1e4f	p-10qepje	p-10qepje	金田一京助 [著]		1971	merged	293ae8ef-ebce-41ac-9f67-b95d61208d9b	統合	—
+abb847e1-78f1-49f9-a9b7-c0258435ec12	toru-asai	toru-asai	浅井 亨	1930	2006	active		変更なし・全項目確認済みを意味しない	—
+f1f7d229-f012-453c-90fb-6260bbae629a	tjeerd-de-graaf	tjeerd-de-graaf	Tjeerd de Graaf			active		変更なし・全項目確認済みを意味しない	—
+d924b7cf-2045-4dfc-a15b-545913d23cb7	p-1coy4an	p-1coy4an	ナリタ シュウイチ			merged	b15c40b5-0e07-4bba-8919-97f31123a583	統合	—
+400b7a55-022d-44a4-afe4-4e657b1b82a2	p-1e99429	p-1e99429	東 俊佑			active		変更なし・全項目確認済みを意味しない	—
+9a835b0f-5360-4f0b-bf0a-74c6a429f64f	kato-masaru	kato-masaru	加藤克	1972		active		修正	https://id.ndl.go.jp/auth/ndlna/001118815
+6836afcf-34a6-4425-8e3b-22b83cec6e60	kaizawa-toru	kaizawa-toru	貝澤徹	1958		active		変更なし・全項目確認済みを意味しない	—
+a0c1a1e1-e392-40f9-8aee-014c68a8db09	mizushima-miki	mizushima-miki	水島未記			active		変更なし・全項目確認済みを意味しない	—
+1198a19b-9b92-421f-867d-4ca678f8de89	p-3x3ob	p-3x3ob	北原			merged	a23b3810-dfd6-4cb4-a732-92456c4b9d33	統合	—
+53a02f27-704f-4db5-8d42-51d2c44dbb26	p-33mypx	p-33mypx	モコットゥナㇱ			merged	a23b3810-dfd6-4cb4-a732-92456c4b9d33	統合	—
+b08fe51a-0569-478e-ade3-a4d4337989fb	amano-tetsuya	amano-tetsuya	天野 哲也	1947		active		変更なし・全項目確認済みを意味しない	—
+d36f6195-f2c5-430f-b340-f8a0b26ed4a0	p-1fu17q9	p-1fu17q9	多氣志樓主人			merged	40900782-eb33-48ee-b126-153053dc71f9	統合	—
+3bad1622-0703-4580-acab-66a6fb68350f	saito-hiroyuki	saito-hiroyuki	斎藤博之	1919	1987	active		変更なし・全項目確認済みを意味しない	—
+106066a5-0b7e-4164-9492-5b5d3acf6817	nishiyama-shimako	nishiyama-shimako	西山 史真子	1964		active		修正	https://id.ndl.go.jp/auth/ndlna/00533241
+bcf5125a-d937-43ee-9c9d-2a3c9e543e73	sasaki-kan	sasaki-kan	佐々木 冠	1966		active		変更なし・全項目確認済みを意味しない	—
+b6837476-49bf-425c-8f75-033062c3e80d	p-a9jl3o	p-a9jl3o	Йоситака ТЭРАДА			merged	4b340b14-ddbc-463e-8eab-70cd2f84156b	統合	—
+d88e9419-f3b9-4810-b32a-1b7417e51f5f	p-1x34rk8	p-1x34rk8	Сэцухико ЯСУДА			merged	6daa2528-dd8d-4c97-abe1-26e202c2a4d7	統合	—
+36115ffa-2416-46fe-ae4b-1c78ee4d2d80	p-187swy5	p-187swy5	Осипова Марина Викторовна			active		変更なし・全項目確認済みを意味しない	—
+e6e00733-9ae3-4861-9e99-362f43335e1f	p-6yv07m	p-6yv07m	Гафорова Тахмина Сатторовна			active		変更なし・全項目確認済みを意味しない	—
+6132d0f1-9db1-4642-a340-934403d0795d	p-z77k06	p-z77k06	Хакимов Насим Саъдуллоевич			active		変更なし・全項目確認済みを意味しない	—
+825038a5-e7f3-4ee9-b769-7efc99e03e93	p-1y2rjz2	p-1y2rjz2	Валиев Джамшед Абдурасулович			active		変更なし・全項目確認済みを意味しない	—
+8f6905aa-39c8-4f20-9d21-b58e9f34aa8f	p-h6ymt5	p-h6ymt5	Каримова Шарифхуджа			active		変更なし・全項目確認済みを意味しない	—
+4d17f016-7955-457c-ad6c-2f92e9579ea9	p-bywmz3	p-bywmz3	Имамбердиева Саломат Менгликуловна			active		変更なし・全項目確認済みを意味しない	—
+5888dcb5-b81e-4ed7-ade9-631f0d5806c2	p-9v6b8s	p-9v6b8s	Мирниёзов А. К.			active		変更なし・全項目確認済みを意味しない	—
+8a4c3728-de5b-4e51-a501-25eb021f69af	george-john-simeon	george-john-simeon	George John Simeon			active		変更なし・全項目確認済みを意味しない	—
+b4f53bce-7515-45cd-b25e-4309e704e6a7	p-6ghjis	p-6ghjis	北原次郎太	1976		merged	a23b3810-dfd6-4cb4-a732-92456c4b9d33	変更なし・全項目確認済みを意味しない	—
+6e592a9d-dbe5-4a5a-bf3e-e54bb734e15f	p-12ywow8	p-12ywow8	金成 マツ	1875	1961	merged	17d69e99-6f9d-42c1-844a-becf082fd5cb	変更なし・全項目確認済みを意味しない	—
+33ccb1ac-5b5b-4f01-af86-9a373365a1b5	p-1m0sdnz	p-1m0sdnz	山田 秀三	1899	1992	merged	b3e69dbf-6fbb-45fa-935f-c4a4df32a2cc	変更なし・全項目確認済みを意味しない	—
+cbba5a25-9c50-4926-a3e6-d70e28a4603a	p-14h09wv	p-14h09wv	更科 源蔵	1904	1985	merged	23792a48-4402-450b-b48f-8fc419b7128d	変更なし・全項目確認済みを意味しない	—
+24275d39-4816-4c2d-9fc5-ae6da65c36fa	p-14dam0m	p-14dam0m	栗原 登一	1930	2009	merged	a088e177-7cb5-4a76-8e5f-c78a867e1baf	変更なし・全項目確認済みを意味しない	—
+f6a8a8a1-5777-42d2-be2b-31d90adbda29	p-1oqavzn	p-1oqavzn	金沢 庄三郎	1872	1967	merged	95c64a51-1e6f-41b1-b898-7c50496e0550	変更なし・全項目確認済みを意味しない	—
+93948183-45a4-4347-9ff6-de5041c4aecb	p-1myvkr1	p-1myvkr1	山辺 安之助	1867	1923	merged	dc9b0aef-b30a-4df8-a0d4-b728b81c53a9	変更なし・全項目確認済みを意味しない	—
+fe3f535a-c426-4e71-b1c5-156a1db906c9	p-1ril0bu	p-1ril0bu	河原 達也	1964		merged	a36ce639-3995-4a65-89f0-03335e80bdbf	変更なし・全項目確認済みを意味しない	—
+a320160b-a234-4a05-8b4f-dd9166bc3904	p-11tm1i0	p-11tm1i0	村山 七郎	1908	1995	merged	6a935ba7-7980-4f42-a7b7-3ee9fb19cd6d	変更なし・全項目確認済みを意味しない	—
+8c7bea5c-9851-49e9-9ab8-c7a6cd854145	p-1fhspjb	p-1fhspjb	浅井 亨	1930	2006	merged	abb847e1-78f1-49f9-a9b7-c0258435ec12	変更なし・全項目確認済みを意味しない	—
+b74f9891-5ccd-4803-b2e2-9dd5f860e042	p-73vdv3	p-73vdv3	前田 耕司	1964		merged	c922028a-252b-40d9-a788-a331dace8cf8	変更なし・全項目確認済みを意味しない	—
+5b78673e-678a-4257-9af8-aa4ccd1c6023	p-b9qpuy	p-b9qpuy	加藤 博文	1966		merged	215203d9-755f-44f8-afab-3b6b571818bf	変更なし・全項目確認済みを意味しない	—
+6d1b98ef-1eee-488b-ac8c-eaee9ccb7b54	p-mp1g3v	p-mp1g3v	鳥居 龍藏	1870	1953	merged	8b75fc9b-a13a-4f24-be5d-61cdad999111	変更なし・全項目確認済みを意味しない	—
+ea2f39fc-0f74-42e7-b762-cf22cc709e65	p-1rc07us	p-1rc07us	高倉 新一郎	1902	1990	merged	b2f638b8-7c2a-4042-84ed-488a80360eb8	変更なし・全項目確認済みを意味しない	—
+7f81418d-9689-4b15-a7c9-20b3a01737b9	p-zu0j3h	p-zu0j3h	荻原 眞子			merged	31844ad0-3d6c-4cae-8d17-17d3596c041e	変更なし・全項目確認済みを意味しない	—
+3990142d-10e8-42ba-9f64-f5840a32c334	p-13nud53	p-13nud53	栃内 香次	1939		merged	2f463c17-f401-46b4-8f09-8fc577726cb6	変更なし・全項目確認済みを意味しない	—
+ce4a0ddb-5940-443b-b145-123f187a6dc2	p-f2z1gj	p-f2z1gj	横山 むつみ	1948	2016	merged	f686ecab-4316-4eea-8300-9ec0c232530f	変更なし・全項目確認済みを意味しない	—
+f6619285-6c07-47b1-b99c-625c57b8e356	p-1fjdt0a	p-1fjdt0a	宇梶 静江	1933		merged	bfa4153c-9cbc-4544-bb88-1e01f1a88446	変更なし・全項目確認済みを意味しない	—
+9216adde-6ea4-4eff-b074-6ee8c9fe6cbe	p-1xtz98	p-1xtz98	河野 広道	1905	1963	merged	0d6784a9-b15c-4304-be27-86b7b3c7a697	変更なし・全項目確認済みを意味しない	—
+0e49dfc0-e728-43be-aa30-caab0c350830	p-bmjmr7	p-bmjmr7	谷本 一之	1932	2009	merged	1b49c0af-f7b5-40ed-b69e-08e690ae2d9a	変更なし・全項目確認済みを意味しない	—
+9b19ea49-21b4-473f-8aa3-cf31a07506c9	p-12c82fl	p-12c82fl	和田 文治郎		1958	merged	eebd3cfc-253a-417b-a15c-ad3dd61dcabb	変更なし・全項目確認済みを意味しない	—
+32cbfcfb-b74a-4488-a172-3617eb1c99b9		sato-genrokuro	佐藤 玄六郎			active		追加	—
+0439bd97-a64f-4d53-9a82-4eaa3b824183		ishida-hajime-ainu-language	石田 肇			active		追加	—
+c0dc9fe1-1759-4cb9-96aa-44e996abe2f3		sato-yuuka	Yuuka Sato			active		追加	—
+9884bcb8-53d0-49e7-9d91-fa42c87aae5f		sasaki-kazuyoshi	Kazuyoshi Sasaki			active		追加	—
+2d0df511-e9e9-4788-9f6e-0e83ccb224ff		dixon-j-m	ジェームズ・メイン・ディクソン	1856	1933	active		追加	—

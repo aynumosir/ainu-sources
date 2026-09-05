@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "murasaki",
+    "name": "Murasaki",
+    "checkedAt": "2026-09-05",
+    "expected": {
+      "wikidata": "Q81731",
+      "wikipedia": "https://en.wikipedia.org/wiki/Murasaki_Shikibu",
+      "birthYear": 978,
+      "deathYear": 1014
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "reason": "アイヌ語文法資料の著者を紫式部とする識別子・生没年を解除。名だけでは著者の同定に至らない。",
+    "sources": [
+      {
+        "title": "アイヌ語文法資料の著者を紫式部とする識別子・生没年を解除。名だけでは著者の同定に至らない。",
+        "url": "https://db.aynu.org/sources/2025-murasaki"
+      }
+    ]
+  },
+  {
+    "slug": "toru-asai",
+    "name": "浅井 亨",
+    "checkedAt": "2026-09-05",
+    "expected": {
+      "wikidata": "Q92683821",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%B5%85%E4%BA%95%E4%BA%A8",
+      "birthYear": 1902,
+      "deathYear": 1986
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": 1930,
+      "deathYear": 2006
+    },
+    "reason": "言語学者・医師の浅井亨（1930–2006）。政治家の浅井亨と区別。",
+    "sources": [
+      {
+        "title": "言語学者・医師の浅井亨（1930–2006）。政治家の浅井亨と区別。",
+        "url": "https://eprints.lib.hokudai.ac.jp/dspace/bitstream/2115/84928/1/05_Ono.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "p-1fhspjb",
+    "name": "浅井 亨",
+    "checkedAt": "2026-09-05",
+    "expected": {
+      "wikidata": "Q92683821",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%B5%85%E4%BA%95%E4%BA%A8",
+      "birthYear": 1902,
+      "deathYear": 1986
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": 1930,
+      "deathYear": 2006
+    },
+    "reason": "浅井亨の統合済み別レコードにも同じ訂正を適用。",
+    "sources": [
+      {
+        "title": "浅井亨の統合済み別レコードにも同じ訂正を適用。",
+        "url": "https://eprints.lib.hokudai.ac.jp/dspace/bitstream/2115/84928/1/05_Ono.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "uchida-minoru",
+    "name": "内田 実",
+    "checkedAt": "2026-09-05",
+    "expected": {
+      "wikidata": "Q109318167",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%86%85%E7%94%B0%E5%AE%9F",
+      "birthYear": 1873,
+      "deathYear": 1945
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": 1927,
+      "deathYear": null
+    },
+    "reason": "北海道農業地域論の地理学者（1927年生）。美術収集家の内田実と区別。没年未確認。",
+    "sources": [
+      {
+        "title": "北海道農業地域論の地理学者（1927年生）。美術収集家の内田実と区別。没年未確認。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00552930"
+      }
+    ]
+  },
+  {
+    "slug": "p-1ekqz6t",
+    "name": "鎌田 正信",
+    "checkedAt": "2026-09-05",
+    "expected": {
+      "wikidata": "Q134509048",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E9%8E%8C%E7%94%B0%E6%AD%A3%E4%BF%A1",
+      "birthYear": 1882,
+      "deathYear": 1964
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": 1923,
+      "deathYear": null
+    },
+    "reason": "道東地方のアイヌ語地名の著者（1923年生）。同名人物の生没年を解除。没年未確認。",
+    "sources": [
+      {
+        "title": "道東地方のアイヌ語地名の著者（1923年生）。同名人物の生没年を解除。没年未確認。",
+        "url": "https://id.ndl.go.jp/auth/ndlna/00527898"
+      }
+    ]
+  },
+  {
+    "slug": "ishihara-makoto",
+    "name": "石原 誠",
+    "checkedAt": "2026-09-05",
+    "expected": {
+      "wikidata": "Q11585316",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%9F%B3%E5%8E%9F%E8%AA%A0",
+      "birthYear": 1879,
+      "deathYear": 1938
+    },
+    "corrected": {
+      "wikidata": null,
+      "wikipedia": null,
+      "birthYear": null,
+      "deathYear": null
+    },
+    "reason": "サッポロ堂書店の書誌研究者。2009年の謝辞に登場し、1938年没の同名人物と区別。生没年未確認。",
+    "sources": [
+      {
+        "title": "サッポロ堂書店の書誌研究者。2009年の謝辞に登場し、1938年没の同名人物と区別。生没年未確認。",
+        "url": "https://ainu-center.hm.pref.hokkaido.lg.jp/kankou/kiyou/pdf/kiyou15-04.pdf"
+      }
+    ]
+  }
+]

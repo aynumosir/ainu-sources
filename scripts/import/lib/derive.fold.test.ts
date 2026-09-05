@@ -3,7 +3,7 @@
  * later source spells the name differently.
  */
 import { describe, it, expect } from 'vitest';
-import { foldKanji, foldRomaji, personFoldKeys } from './derive';
+import { canonicalSlugFor, foldKanji, foldRomaji, personFoldKeys } from './derive';
 
 describe('foldKanji', () => {
 	it('maps the old character forms that recur in personal names', () => {
@@ -44,4 +44,10 @@ describe('personFoldKeys', () => {
 		expect(a.some((k) => b.includes(k))).toBe(false);
 		expect(personFoldKeys({ canon: null, name: '', nameEn: null })).toEqual([]);
 	});
+});
+
+it('does not resolve a qualified author through a surname-only alias', () => {
+ expect(canonicalSlugFor('Sato, Genrokuro')).toBeNull();
+ expect(canonicalSlugFor('SATO, Yuka')).toBeNull();
+ expect(canonicalSlugFor('Sato, Tomomi')).toBe('sato-tomomi');
 });

@@ -552,7 +552,6 @@ export function canonicalSlugFor(display: string): string | null {
 	add(bare);
 	const m = bare.match(/^([^,]+),\s*(.+)$/); // "Last, First"
 	if (m) {
-		add(m[1].trim()); // bare "Last"
 		add(`${m[2].trim()} ${m[1].trim()}`); // "First Last"
 	}
 	// A 2-token Latin name → also try the swapped order. OpenAlex/Crossref emit

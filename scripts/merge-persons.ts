@@ -31,7 +31,7 @@
  *   • --apply performs the writes; a list with a parse error applies nothing
  *   • idempotent: a merged row, and a keep_slug already renamed to new_slug,
  *     are recognised and skipped on a rerun
- *   • refuses a slug outside ^[a-z0-9][a-z0-9-]{1,59}$, a new_slug that a live
+ *   • refuses a slug outside ^[a-z0-9][a-z0-9-]{0,59}$, a new_slug that a live
  *     person holds or a redirect retired, one proposed twice, and a merge
  *     whose two rows carry different Wikidata items
  *   • exits non-zero when any row was refused or names a slug that does not exist
@@ -49,7 +49,7 @@ import { foldKanji, foldRomaji } from './import/lib/derive';
 const { persons, sourcePersons, personSlugRedirects } = schema;
 type Db = LibSQLDatabase<typeof schema>;
 
-export const SLUG_RE = /^[a-z0-9][a-z0-9-]{1,59}$/;
+export const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,59}$/;
 const HEADER = ['keep_slug', 'merge_slug', 'new_slug', 'note'];
 
 export interface MergeRow {

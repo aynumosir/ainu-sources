@@ -29,6 +29,10 @@ describe('parseMergeTsv', () => {
 		]);
 	});
 
+	it('accepts an existing one-character slug', () => {
+		expect(parseMergeTsv(tsv('john-c-maher\tc\t\t')).errors).toEqual([]);
+	});
+
 	it('rejects a short or wrong header', () => {
 		expect(parseMergeTsv('a\tb\nx\ty').errors[0]).toMatch(/bad header/);
 		expect(parseMergeTsv('keep_slug\tmerge_slug\tnote\na\tb\tx').errors[0]).toMatch(/bad header/);
