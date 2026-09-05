@@ -5,15 +5,17 @@
  * order, over ONE shared db handle, and DELETES NOTHING:
  *
  *   dictionaries → grammar → corpus → manual → academic → curated-biblio
- *                → extracted-cites → relations → person-enrichment
+ *                → extracted-cites → relations → person-enrichment → person-readings
  *
  * The order is load-bearing (Risk C): every source-observing feed runs before the
  * relations post-pass (which derives source→source edges from the sources that
  * already exist) and the person-enrichment post-pass (which backfills person
- * scalars). Each importer opens its OWN `source_observation_runs` row, routes every
+ * scalars). Source importers open their OWN `source_observation_runs` row, route every
  * write through the merge engine (dup-noop on re-submit, value-hash noop per field),
  * and re-observes upstream disappearances as drift — never a delete, never a wipe,
- * no transaction. So a 2nd full run over an unchanged catalogue is a pure noop
+ * no whole-import transaction. The final readings pass applies the sourced
+ * person-name manifest atomically after validating all existing values.
+ * A 2nd full run over an unchanged catalogue is a pure noop
  * (rootHash unchanged); the 1st run over a bootstrap clone is approved-additive
  * (new academic candidates + set canonicalization + upstream catch-up).
  *
@@ -48,6 +50,7 @@ import { run as importCuratedBiblio } from './import/curated-biblio';
 import { run as importExtractedCites } from './import/extracted-cites';
 import { run as importRelations } from './import/relations';
 import { run as importPersonEnrichment } from './import/person-enrichment';
+import { run as importPersonReadings } from './import/person-readings';
 
 // ── the feeds, IN seed.ts's load-bearing source order ──────────────────────────
 interface Feed {
@@ -63,7 +66,8 @@ const FEEDS: Feed[] = [
 	{ name: 'curated-biblio', run: importCuratedBiblio },
 	{ name: 'extracted-cites', run: importExtractedCites },
 	{ name: 'relations', run: importRelations },
-	{ name: 'person-enrichment', run: importPersonEnrichment }
+	{ name: 'person-enrichment', run: importPersonEnrichment },
+	{ name: 'person-readings', run: importPersonReadings }
 ];
 
 // ── argv ─────────────────────────────────────────────────────────────────────

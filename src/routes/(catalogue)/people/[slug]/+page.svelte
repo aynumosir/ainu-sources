@@ -55,6 +55,9 @@
 
 	<header class="mt-3 border-b border-stone-200 pb-6">
 		<h1 class="font-serif text-3xl font-bold leading-tight text-ink">{person.name}</h1>
+		{#if person.nameKana && person.nameKana !== person.name}
+			<p lang="ja" class="mt-1 text-sm text-stone-500">{person.nameKana}</p>
+		{/if}
 		{#if person.nameEn && person.nameEn !== person.name}
 			<p class="mt-1 text-lg text-stone-600">{person.nameEn}</p>
 		{/if}

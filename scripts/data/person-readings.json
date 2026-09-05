@@ -1,0 +1,5995 @@
+[
+  {
+    "slugs": [
+      "akagi-sanpei"
+    ],
+    "name": "赤木 三兵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あかぎ さんぺい"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00000892"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "akasaka-norio"
+    ],
+    "name": "赤坂 憲雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あかさか のりお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00159066"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "akiba-minoru"
+    ],
+    "name": "秋葉 實",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あきば みのる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=8975&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "akibe-tokuhei"
+    ],
+    "name": "秋辺 得平",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あきべ とくへい"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00382740"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "amano-tetsuya"
+    ],
+    "name": "天野 哲也",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あまの てつや"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00934294"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "arakida-iehisa"
+    ],
+    "name": "荒木田 家寿",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あらきだ いえひさ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00003041"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "asai-take"
+    ],
+    "name": "浅井 タケ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あさい たけ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00869099"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "asakura-toshimitsu"
+    ],
+    "name": "朝倉 利光",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あさくら としみつ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00899437"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "chiri-mashiho"
+    ],
+    "name": "知里 真志保",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ちり ましほ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00084154"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "chiri-mutsumi"
+    ],
+    "name": "知里 むつみ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ちり むつみ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00184658"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "chiri-takanaka"
+    ],
+    "name": "知里 高央",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ちり たかなか"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00084155"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "chiri-yukie"
+    ],
+    "name": "知里 幸恵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ちり ゆきえ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00084156"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "deriha-koji"
+    ],
+    "name": "出利葉 浩司",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "でりは こうじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9089&domain=ainu"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "egami-namio"
+    ],
+    "name": "江上 波夫",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "えがみ なみお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00005086"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "emori-susumu"
+    ],
+    "name": "榎森 進",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "えもり すすむ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00130876"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "endo-masatoshi"
+    ],
+    "name": "遠藤 匡俊",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "えんどう まさとし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00544849"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fujii-naoharu"
+    ],
+    "name": "藤井 尚治",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふじい なおはる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00015387"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fujii-sadakazu"
+    ],
+    "name": "藤井 貞和",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふじい さだかず"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00015412"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fujimoto-hideo"
+    ],
+    "name": "藤本 英夫",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふじもと ひでお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00015734"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fujimura-hisakazu"
+    ],
+    "name": "藤村 久和",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふじむら ひさかず"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00129451"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fujiyama-haru"
+    ],
+    "name": "藤山 ハル",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふじやま はる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01199055"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fukazawa-mika"
+    ],
+    "name": "深澤 美香",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふかざわ みか"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/034109763"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fukuda-kichijiro"
+    ],
+    "name": "福田 吉次郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふくだ きちじろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00216783"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fukuda-tomoyuki"
+    ],
+    "name": "福田 友之",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふくだ ともゆき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01142584"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "fukuoka-itoko"
+    ],
+    "name": "福岡 イト子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ふくおか いとこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00412449"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "furuhara-toshihiro"
+    ],
+    "name": "古原 敏弘",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Furuhara Toshihiro"
+    },
+    "corrected": {
+      "nameKana": "こはら としひろ",
+      "nameEn": "Kohara Toshihiro"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://dl.ndl.go.jp/view/prepareDownload?contentNo=1&itemId=info%3Andljp%2Fpid%2F10207345",
+      "https://id.ndl.go.jp/auth/ndlna/01000125"
+    ],
+    "note": "所属機関の研究職員紹介にふりがな。"
+  },
+  {
+    "slugs": [
+      "genzo-sarashina"
+    ],
+    "name": "更科 源蔵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さらしな げんぞう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00067147"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "goto-toshio"
+    ],
+    "name": "後藤 利雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ごとう としお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00006173"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "haginaka-mie"
+    ],
+    "name": "萩中 美枝",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はぎなか みえ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00110331"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "haniwara-kazuro"
+    ],
+    "name": "埴原 和郎",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Kazurō Haniwara"
+    },
+    "corrected": {
+      "nameKana": "はにはら かずろう",
+      "nameEn": "Hanihara Kazurō"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/asj/113/1/113_1_1/_pdf",
+      "https://id.ndl.go.jp/auth/ndlna/00007084"
+    ],
+    "note": "学会の追悼論文の英文姓名。NDL典拠とも一致。"
+  },
+  {
+    "slugs": [
+      "hasuike-etsuko"
+    ],
+    "name": "蓮池 悦子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はすいけ えつこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=12047&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "hattori-shiro"
+    ],
+    "name": "服部 四郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はっとり しろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00009116"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hayashi-shihei"
+    ],
+    "name": "林 子平",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はやし しへい"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00269629"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hayashi-yoshishige"
+    ],
+    "name": "林 善茂",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はやし よししげ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00009851"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hidezo-yamada"
+    ],
+    "name": "山田 秀三",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまだ ひでぞう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00091892"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hiraga-sada"
+    ],
+    "name": "平賀 サダ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ひらが さだ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00386334"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hirano-katsuya"
+    ],
+    "name": "平野 克弥",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ひらの かつや"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01131179"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hirayama-hiroto"
+    ],
+    "name": "平山 裕人",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ひらやま ひろと"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00428974"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hirofumi-kato"
+    ],
+    "name": "加藤 博文",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かとう ひろふみ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00996082"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hishinuma-uichi"
+    ],
+    "name": "菱沼 右一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ひしぬま ういち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00011892"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "hitoshi-watanabe"
+    ],
+    "name": "渡辺 仁",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "わたなべ ひとし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00090648"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "honda-yuko"
+    ],
+    "name": "本田 優子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ほんだ ゆうこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00669825"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ikegami-jiro"
+    ],
+    "name": "池上 二良",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いけがみ じろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00142653"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "inaba-katsuo"
+    ],
+    "name": "因幡 勝雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いなば かつお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00324985"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "inoue-koichi"
+    ],
+    "name": "井上 紘一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いのうえ こういち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00019599"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "inukai-tetsuo"
+    ],
+    "name": "犬飼 哲夫",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いぬかい てつお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00169966"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ishida-hajime"
+    ],
+    "name": "石田 肇",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしだ はじめ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01240181"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ishida-hajime-ainu-language"
+    ],
+    "name": "石田 肇",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いしだ はじめ",
+      "nameEn": "Ishida Hajime"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=4354&domain=ainu"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。"
+  },
+  {
+    "slugs": [
+      "ishihara-mai"
+    ],
+    "name": "石原 真衣",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしはら まい"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/031373991"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ishii-masami"
+    ],
+    "name": "石井 正己",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしい まさみ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00657305"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ishii-tomomi"
+    ],
+    "name": "石井 智美",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Tomomi Ishii"
+    },
+    "corrected": {
+      "nameKana": "いしい さとみ",
+      "nameEn": "Ishii Satomi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://inr.jp/company/staff",
+      "https://id.ndl.go.jp/auth/ndlna/001291581"
+    ],
+    "note": "本人の現所属先プロフィール。酪農学園大学での食文化研究歴とも一致。"
+  },
+  {
+    "slugs": [
+      "ishikawa-motosuke"
+    ],
+    "name": "石川 元助",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしかわ もとすけ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00021278"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ishimura-hiroko"
+    ],
+    "name": "石村 博子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしむら ひろこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00265411"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "itabashi-yoshizo"
+    ],
+    "name": "板橋 義三",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いたばし よしぞう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00202758"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ito-atsunori"
+    ],
+    "name": "伊藤 敦規",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いとう あつのり"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001109233"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ito-hiromitsu"
+    ],
+    "name": "伊藤 裕満",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いとう ひろみつ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=8339&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "ito-katsuhisa"
+    ],
+    "name": "伊藤 勝久",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いとう かつひさ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01168320"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ito-kohei"
+    ],
+    "name": "伊藤 公平",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いとう こうへい"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00022855"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ito-seichi"
+    ],
+    "name": "伊藤 せいち",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いとう せいち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9624&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "iwasawa-takako"
+    ],
+    "name": "岩澤 孝子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いわさわ たかこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/031781499"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "izutsu-katsunobu"
+    ],
+    "name": "井筒 勝信",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いずつ かつのぶ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01070841"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "jinbo-kotora"
+    ],
+    "name": "神保 小虎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "じんぼ ことら"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00098567"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kagami-akikatsu"
+    ],
+    "name": "鏡味 明克",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かがみ あきかつ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00024686"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kan-wada"
+    ],
+    "name": "和田 完",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "わだ かん"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00089876"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kanaya-eijiro"
+    ],
+    "name": "金谷 栄二郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かなや えいじろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00159800"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kannari-matsu"
+    ],
+    "name": "金成 まつ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かんなり まつ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00026598"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kasai-takechiyo"
+    ],
+    "name": "葛西 猛千代",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かさい たけちよ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00027000"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kato-hyakuichi"
+    ],
+    "name": "加藤 百一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かとう ひゃくいち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00027692"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kato-masaru"
+    ],
+    "name": "加藤克",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かとう まさる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001118815"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kato-tetsusaburo"
+    ],
+    "name": "加藤 鉄三郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かとう てつさぶろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=17968&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "kawai-raseki"
+    ],
+    "name": "河合 裸石",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわい らせき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00028959"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kawakami-jun"
+    ],
+    "name": "川上 淳",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわかみ じゅん"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00131361"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kawakami-matsuko"
+    ],
+    "name": "川上 まつ子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわかみ まつこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00157200"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kawakami-yuji"
+    ],
+    "name": "川上 勇治",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわかみ ゆうじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00029165"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kawamura-minato"
+    ],
+    "name": "川村 湊",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわむら みなと"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00131366"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kayano-shigeru"
+    ],
+    "name": "萱野 茂",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かやの しげる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00030008"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kayano-shiro"
+    ],
+    "name": "萱野 志朗",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かやの しろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00188612"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kazama-shinjiro"
+    ],
+    "name": "風間 伸次郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かざま しんじろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00383618"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kazuyuki-tanimoto"
+    ],
+    "name": "谷本 一之",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たにもと かずゆき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00082625"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "keira-mitsunori"
+    ],
+    "name": "計良 光範",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "けいら みつのり"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00395366"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "keira-tomoko"
+    ],
+    "name": "計良 智子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "けいら ともこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00377824"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kenji-araki"
+    ],
+    "name": "荒木健治",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あらき けんじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00980282"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kindaichi-kyosuke"
+    ],
+    "name": "金田一 京助",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きんだいち きょうすけ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00031353"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kinoshita-junji"
+    ],
+    "name": "木下 順二",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きのした じゅんじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00031535"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kirikae-hideo"
+    ],
+    "name": "切替 英雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きりかえ ひでお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00196544"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kishimoto-suigetsu"
+    ],
+    "name": "岸本 翠月",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きしもと すいげつ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00031847"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kita-sadakichi"
+    ],
+    "name": "喜田 貞吉",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きた さだきち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00030338"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kiyono-kenji"
+    ],
+    "name": "清野 謙次",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きよの けんじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00032730"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kobayashi-koji"
+    ],
+    "name": "小林 孝二",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こばやし こうじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01204951"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kobayashi-masao"
+    ],
+    "name": "小林 正雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こばやし まさお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00033225"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kohama-mototsugu"
+    ],
+    "name": "小浜 基次",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こはま もとつぐ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00755353"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "koji-tochinai"
+    ],
+    "name": "栃内 香次",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "とちない こうじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00085615"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kojima-kyoko"
+    ],
+    "name": "児島 恭子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こじま きょうこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00907200"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "komatsu-kazuhiro"
+    ],
+    "name": "小松 和弘",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こまつ かずひろ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00254980"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "komatsu-tetsuro"
+    ],
+    "name": "小松 哲郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こまつ てつろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aynuitak.at-ninja.jp/ContentsESP.pdf",
+      "https://id.ndl.go.jp/auth/ndlna/00802770"
+    ],
+    "note": "2号の著者表記KOMACU Tecuroo、55号の追悼記事Komatsu Tetsuroで確認。NDLのテツオ表記は採らない。"
+  },
+  {
+    "slugs": [
+      "kondo-kyojiro"
+    ],
+    "name": "近藤 鏡二郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こんどう きょうじろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00035058"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kondo-shiro"
+    ],
+    "name": "近藤 四郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こんどう しろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00102714"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kono-hiromichi"
+    ],
+    "name": "河野 広道",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こうの ひろみち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00035412"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kono-motomichi"
+    ],
+    "name": "河野 本道",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こうの もとみち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00035468"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kono-tsunekichi"
+    ],
+    "name": "河野 常吉",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こうの つねきち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=341&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "kosaka-yosuke"
+    ],
+    "name": "小坂 洋右",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "こさか ようすけ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00253398"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kubodera-itsuhiko"
+    ],
+    "name": "久保寺 逸彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "くぼでら いつひこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00036682"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kudo-masaki"
+    ],
+    "name": "工藤 雅樹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "くどう まさき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00102914"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "kuzuno-tatsujiro"
+    ],
+    "name": "葛野 辰次郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "くずの たつじろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00140069"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "maekawa-fumio"
+    ],
+    "name": "前川文夫",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まえかわ ふみお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00039480"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "magata-tokumatsu"
+    ],
+    "name": "間方 徳松",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Magata Tokumatsu"
+    },
+    "corrected": {
+      "nameKana": "まかた とくまつ",
+      "nameEn": "Makata Tokumatsu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA08672997",
+      "https://id.ndl.go.jp/auth/ndlna/00121838"
+    ],
+    "note": "NDL典拠00121838、当該著書と一致。"
+  },
+  {
+    "slugs": [
+      "masayuki-ueno"
+    ],
+    "name": "上野 昌之",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うえの まさゆき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001193020"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "matsui-tsuneyuki"
+    ],
+    "name": "松井 恒幸",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まつい つねゆき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00103410"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "matsuki-akira"
+    ],
+    "name": "松木 明",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まつき あきら"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00041461"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "matsumiya-kanzan"
+    ],
+    "name": "松宮 観山",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まつみや かんざん"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00270763"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "matsumoto-narumi"
+    ],
+    "name": "松本 成美",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Matsumoto Narumi"
+    },
+    "corrected": {
+      "nameKana": "まつもと しげよし",
+      "nameEn": "Matsumoto Shigeyoshi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aynuitak.at-ninja.jp/ContentsESP.pdf",
+      "https://id.ndl.go.jp/auth/ndlna/00041827"
+    ],
+    "note": "アイヌタイムズ49号の追悼記事タイトルにMatsumoto Shigeyoshi。"
+  },
+  {
+    "slugs": [
+      "matsunaga-yasuhiro"
+    ],
+    "name": "松永 康佑",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Yasuhiro Matsunaga"
+    },
+    "corrected": {
+      "nameKana": "まつなが こうすけ",
+      "nameEn": "Matsunaga Kosuke"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.scu.ac.jp/research/news/profile/kosuke-matsunaga/",
+      "https://id.ndl.go.jp/auth/ndlna/031781584"
+    ],
+    "note": "所属大学の英文表記。"
+  },
+  {
+    "slugs": [
+      "matsuura-takeshiro"
+    ],
+    "name": "松浦 武四郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まつうら たけしろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00270793"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "matsuyoshi-sadao"
+    ],
+    "name": "松好 貞夫",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まつよし さだお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00042826"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "miki-masafumi"
+    ],
+    "name": "三木 理史",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "みき まさふみ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00764219"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "minako-sakata"
+    ],
+    "name": "坂田 美奈子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さかた みなこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001092869"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "mitsuru-ota"
+    ],
+    "name": "太田 満",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおた みつる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/032572861"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "miyabe-kingo"
+    ],
+    "name": "宮部金吾",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "みやべ きんご"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00044610"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "miyagawa-so"
+    ],
+    "name": "宮川 創",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "みやがわ そう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/031230426"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "miyaoka-osahito"
+    ],
+    "name": "宮岡 伯人",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "みやおか おさひと"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00103855"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "momose-hibiki"
+    ],
+    "name": "百瀬 響",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ももせ ひびき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00762834"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "mori-masao"
+    ],
+    "name": "護 雅夫",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "もり まさお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00046749"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "murasaki-kyoko"
+    ],
+    "name": "村崎 恭子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "むらさき きょうこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00048879"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nabesawa-motozo"
+    ],
+    "name": "鍋沢 元蔵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なべさわ もとぞう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00049485"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nagata-hosei"
+    ],
+    "name": "永田 方正",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ながた ほうせい"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00050348"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nakagawa-hiroshi"
+    ],
+    "name": "中川 裕",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なかがわ ひろし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00203799"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nakajima-riichiro"
+    ],
+    "name": "中島 利一郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なかじま りいちろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00053482"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nakamoto-mutsuko"
+    ],
+    "name": "中本 ムツ子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なかもと むつこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00533242"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nakamura-kazuyuki"
+    ],
+    "name": "中村 和之",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なかむら かずゆき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01120632"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "narita-shuichi"
+    ],
+    "name": "成田 修一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なりた しゅういち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=8989&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "narumi-hideshi"
+    ],
+    "name": "鳴海 日出志",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なるみ ひでし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00186544"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "natori-takemitsu"
+    ],
+    "name": "名取 武光",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なとり たけみつ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00054195"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "niioka-takehiko"
+    ],
+    "name": "新岡 武彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "にいおか たけひこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00104877"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nishiyama-shimako"
+    ],
+    "name": "西山 史真子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "にしやま しまこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00533241"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "nojiri-hoei"
+    ],
+    "name": "野尻 抱影",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "のじり ほうえい"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00056925"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "notoya-enkichi"
+    ],
+    "name": "能登屋 円吉",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "のとや えんきち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00746396"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "oba-yoshio"
+    ],
+    "name": "大場 四千男",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおば よしお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00117391"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "obayashi-taryo"
+    ],
+    "name": "大林 太良",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおばやし たりょう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00057271"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "oda-ito"
+    ],
+    "name": "小田 イト",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おだ いと"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00266318"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ogaki-naoaki"
+    ],
+    "name": "大垣 直明",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおがき なおあき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00130125"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ogasawara-sayo"
+    ],
+    "name": "小笠原 小夜",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おがさわら さよ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/031698818"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ogata-tamotsu"
+    ],
+    "name": "小片 保",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おがた たもつ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00113013"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ogawa-masato"
+    ],
+    "name": "小川 正人",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Ogawa Masato"
+    },
+    "corrected": {
+      "nameKana": "おがわ まさひと",
+      "nameEn": "Ogawa Masahito"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.hm.pref.hokkaido.lg.jp/study/staff/ogawa-masahito/",
+      "https://id.ndl.go.jp/auth/ndlna/00681475"
+    ],
+    "note": "北海道博物館の本人紹介にOGAWA Masahitoと明記。"
+  },
+  {
+    "slugs": [
+      "ogawa-sanae"
+    ],
+    "name": "小川 早苗",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おがわ さなえ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01197806"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ogihara-shinko"
+    ],
+    "name": "荻原 真子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おぎはら しんこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00126111"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ogiya-masayasu"
+    ],
+    "name": "扇谷 昌康",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おうぎや まさやす"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00058242"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ohguri-hiroshi"
+    ],
+    "name": "大栗 裕",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおぐり ひろし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01058651"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "oide-ayako"
+    ],
+    "name": "大出 あや子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおいで あやこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00155614"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "okada-hiroaki"
+    ],
+    "name": "岡田 宏明",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おかだ ひろあき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00059263"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "okada-michiaki"
+    ],
+    "name": "岡田 路明",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おかだ みちあき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=14966&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "okamura-kichiemon"
+    ],
+    "name": "岡村 吉右衛門",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おかむら きちえもん"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00059906"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "okawada-akira"
+    ],
+    "name": "岡和田 晃",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おかわだ あきら"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01162724"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "okuda-osami"
+    ],
+    "name": "奥田 統己",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おくだ おさみ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00675445"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "onai-toru"
+    ],
+    "name": "小内 透",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おない とおる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00409028"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ono-susumu"
+    ],
+    "name": "大野 晋",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおの すすむ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00061836"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ono-tetsuto"
+    ],
+    "name": "大野 徹人",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Ōno Tetsuto"
+    },
+    "corrected": {
+      "nameKana": "おおの てつひと",
+      "nameEn": "Ōno Tetsuhito"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BD08024529",
+      "https://id.ndl.go.jp/auth/ndlna/001164045"
+    ],
+    "note": "当該著作の著者典拠、NDL典拠001164045と一致。"
+  },
+  {
+    "slugs": [
+      "ono-yoneichi"
+    ],
+    "name": "小野 米一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おの よねいち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00117587"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ono-yugo"
+    ],
+    "name": "小野 有五",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おの ゆうご"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00140916"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "osaka-taku"
+    ],
+    "name": "大坂拓",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおさか たく"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/034031464"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "oshima-minoru"
+    ],
+    "name": "大島 稔",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおしま みのる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01041583"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ota-ryu"
+    ],
+    "name": "太田 竜",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおた りゅう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00062933"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "otomo-yukio"
+    ],
+    "name": "大友 幸男",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おおとも ゆきお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00367668"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-11firet"
+    ],
+    "name": "若園 雄志郎",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "わかぞの ゆうしろう",
+      "nameEn": "Wakazono Yushiro"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://researcher.utsunomiya-u.ac.jp/html/100003537_ja.html"
+    ],
+    "note": "大学研究者総覧のカナ・英語姓名。"
+  },
+  {
+    "slugs": [
+      "p-11ol90n"
+    ],
+    "name": "太宰 幸子",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "だざい ゆきこ",
+      "nameEn": "Dazai Yukiko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01153074"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-11xgdoe"
+    ],
+    "name": "菊地 達夫",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "きくち たつお",
+      "nameEn": "Kikuchi Tatsuo"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001332064"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-125jcv5"
+    ],
+    "name": "野崎 剛毅",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "のざき よしき",
+      "nameEn": "Nozaki Yoshiki"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.hanmoto.com/bd/isbn/9784832967939"
+    ],
+    "note": "出版社提供の著者紹介で確認。"
+  },
+  {
+    "slugs": [
+      "p-12ohmil"
+    ],
+    "name": "木村 英明",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "きむら ひであき",
+      "nameEn": "Kimura Hideaki"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00164827"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-12ok2ju"
+    ],
+    "name": "木村 邦彦",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "きむら くにひこ",
+      "nameEn": "Kimura Kunihiko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00031002"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-12ykcjr"
+    ],
+    "name": "奥山 英登",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おくやま ひでと",
+      "nameEn": "Okuyama Hideto"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://ceca.mini.icom.museum/wp-content/uploads/sites/5/2023/09/Book-BEST-PRACTICE-11-2023-336Mo.pdf"
+    ],
+    "note": "ICOM CECAの著者リストHideto Okuyama（64頁）。"
+  },
+  {
+    "slugs": [
+      "p-13p2pr0"
+    ],
+    "name": "野本 正博",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "のもと まさひろ",
+      "nameEn": "Nomoto Masahiro"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://hijas-arc.ws.hosei.ac.jp/news/20250314-16info.html"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-14d41fh"
+    ],
+    "name": "堺谷 美香",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "さかいや みか",
+      "nameEn": "Sakaiya Mika"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://sapporo-u.repo.nii.ac.jp/records/4590"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-15p7dwk"
+    ],
+    "name": "鈴木 邦輝",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "すずき くにてる",
+      "nameEn": "Suzuki Kuniteru"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00107254"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-15wtsj1"
+    ],
+    "name": "大矢 京右",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おおや きょうすけ",
+      "nameEn": "Oya Kyosuke"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202501018157450815"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-165tq3u"
+    ],
+    "name": "春木 まり子",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "はるき まりこ",
+      "nameEn": "Haruki Mariko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://sapporo-u.repo.nii.ac.jp/records/4590"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-16gziul"
+    ],
+    "name": "松田 宏介",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "まつだ こうすけ",
+      "nameEn": "Matsuda Kosuke"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA15117125"
+    ],
+    "note": "同じアイヌ語地名研究の著者典拠、北海道大学学位論文著者カナとも一致。"
+  },
+  {
+    "slugs": [
+      "p-17ykr4g"
+    ],
+    "name": "蓑島 栄紀",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "みのしま ひでき",
+      "nameEn": "Minoshima Hideki"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00864627"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-18cdb7j"
+    ],
+    "name": "並木 翔太郎",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "なみき しょうたろう",
+      "nameEn": "Namiki Shotaro"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201801014971578920"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-19hj4z9"
+    ],
+    "name": "欠ヶ端 和也",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かけはた かずや",
+      "nameEn": "Kakehata Kazuya"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://irc.aa.tufs.ac.jp/wp-content/uploads/2022/07/irc_proj_report2021_IRC202107.pdf"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-1avbcz7"
+    ],
+    "name": "三橋 博",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "みつはし ひろし",
+      "nameEn": "Mitsuhashi Hiroshi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00044136"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1awxh9o"
+    ],
+    "name": "伊勢 寛",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いせ ひろし",
+      "nameEn": "Ise Hiroshi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://doi.org/10.5996/newgeo.51.4_1"
+    ],
+    "note": "当該論文の登録メタデータHiroshi ISE。"
+  },
+  {
+    "slugs": [
+      "p-1b2n71h"
+    ],
+    "name": "中里 巧",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "なかざと さとし",
+      "nameEn": "Nakazato Satoshi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00346122"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1b9d5u9"
+    ],
+    "name": "鏡味 完二",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かがみ かんじ",
+      "nameEn": "Kagami Kanji"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00024693"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1bcg76a"
+    ],
+    "name": "呉 松旆",
+    "expected": {
+      "nameEn": null
+    },
+    "corrected": {
+      "nameEn": "Wu Sung-Pei"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1520577741138402560"
+    ],
+    "note": "当該論文の英文著者名。日本語音読Go Shohaiは採用しない。"
+  },
+  {
+    "slugs": [
+      "p-1bj2gjr"
+    ],
+    "name": "前沢 卓",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "まえさわ たか",
+      "nameEn": "Maesawa Taka"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001205893"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1bk86gi"
+    ],
+    "name": "千口 昇",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "せんぐち のぼる",
+      "nameEn": "Senguchi Noboru"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aynuitak.at-ninja.jp/ContentsESP.pdf"
+    ],
+    "note": "42号の著者表記SENGUCxI Noboru。"
+  },
+  {
+    "slugs": [
+      "p-1c6rkvl"
+    ],
+    "name": "土屋 茂",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "つちや しげる",
+      "nameEn": "Tsuchiya Shigeru"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00352939"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1cbtbaa"
+    ],
+    "name": "鍛治 明香",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かじ さやか",
+      "nameEn": "Kaji Sayaka"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA10302877"
+    ],
+    "note": "同じ著書「イタㇰカシカムイ」の著者典拠にカジ サヤカ。"
+  },
+  {
+    "slugs": [
+      "p-1cf44kw"
+    ],
+    "name": "石倉 欣二",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いしくら きんじ",
+      "nameEn": "Ishikura Kinji"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00119332"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1cl3ueh"
+    ],
+    "name": "大澤 香",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おおざわ かおり",
+      "nameEn": "Ozawa Kaori"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/032391601"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1clrtot"
+    ],
+    "name": "塩谷 亨",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "しおのや とおる",
+      "nameEn": "Shionoya Toru"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://rdsoran.muroran-it.ac.jp/html/100000210_ja.html"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-1cnoo6r"
+    ],
+    "name": "増野 光",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null,
+      "name": "増野 光"
+    },
+    "corrected": {
+      "nameKana": "ますの みつのり",
+      "nameEn": "Masuno Mitsunori",
+      "name": "増野 光教"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/00-1.pdf",
+      "https://www.ff-ainu.or.jp/web/overview/business/details/1273.html"
+    ],
+    "note": "資料中の完全な姓名は増野光教。欠けていた教の字を復元。"
+  },
+  {
+    "slugs": [
+      "p-1cuw446"
+    ],
+    "name": "宮地 鼓",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "みやじ つずみ",
+      "nameEn": "Miyaji Tsuzumi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://kaken.nii.ac.jp/ja/file/KAKENHI-PROJECT-24740345/24740345seika.pdf"
+    ],
+    "note": "研究成果報告書にMIYAJI TSUZUMI。NDL典拠のミヤジ ツズミも照合。"
+  },
+  {
+    "slugs": [
+      "p-1cwkgj0"
+    ],
+    "name": "床 州生",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "とこ しゅうせい",
+      "nameEn": "Toko Shusei"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/namjournal/2024/3/2024_2024-05.0/_pdf/-char/ja"
+    ],
+    "note": "同じインタビューの編集者による紹介文でTOKO Shusei。"
+  },
+  {
+    "slugs": [
+      "p-1cyxo40"
+    ],
+    "name": "尾崎 功",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おざき いさお",
+      "nameEn": "Ozaki Isao"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00987315"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1dhckok"
+    ],
+    "name": "廣瀬隆人",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "ひろせ たかひと",
+      "nameEn": "Hirose Takahito"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=8970&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。"
+  },
+  {
+    "slugs": [
+      "p-1e99429"
+    ],
+    "name": "東 俊佑",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "あずま しゅんすけ",
+      "nameEn": "Azuma Shunsuke"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.hm.pref.hokkaido.lg.jp/study/staff/"
+    ],
+    "note": "所属博物館のAZUMA Shunsuke表記から転写。"
+  },
+  {
+    "slugs": [
+      "p-1ehn8nt"
+    ],
+    "name": "森 美典",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "もり よしすけ",
+      "nameEn": "Mori Yoshisuke"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00181460"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1ekqz6t"
+    ],
+    "name": "鎌田 正信",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かまだ まさのぶ",
+      "nameEn": "Kamada Masanobu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00527898"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1exy4mi"
+    ],
+    "name": "梶浦 浩",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かじうら ひろし",
+      "nameEn": "Kajiura Hiroshi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00346152"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1ezvvm9"
+    ],
+    "name": "小原 隆幸",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おばら たかゆき",
+      "nameEn": "Obara Takayuki"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00547008"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1f5kvww"
+    ],
+    "name": "橋本 潔",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "はしもと きよし",
+      "nameEn": "Hashimoto Kiyoshi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00919234"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1fjb2l0"
+    ],
+    "name": "池田 実",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いけだ みのる",
+      "nameEn": "Ikeda Minoru"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=6228&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。"
+  },
+  {
+    "slugs": [
+      "p-1fmpqxw"
+    ],
+    "name": "上原 正道",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "うえはら まさみち",
+      "nameEn": "Uehara Masamichi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=906&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。"
+  },
+  {
+    "slugs": [
+      "p-1g2agq6"
+    ],
+    "name": "山下 栄光",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "やました えいみつ",
+      "nameEn": "Yamashita Eimitsu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001362944"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1g3g6l0"
+    ],
+    "name": "山丸 賢雄",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "やままる けんゆう",
+      "nameEn": "Yamamaru Ken’yū"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/H29%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88Vol.1.pdf"
+    ],
+    "note": "講師プロフィールのふりがなで確認。NDLの推量読みを独立に裏付け。"
+  },
+  {
+    "slugs": [
+      "p-1gpzz1i"
+    ],
+    "name": "畑佐 満",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "はたさ みつる",
+      "nameEn": "Hatasa Mitsuru"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01032256"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1gxsmy4"
+    ],
+    "name": "由良 勇",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "ゆら いさみ",
+      "nameEn": "Yura Isami"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00217615"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1gy7bfv"
+    ],
+    "name": "山口 和彦",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "やまぐち かずひこ",
+      "nameEn": "Yamaguchi Kazuhiko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://researcher.sapmed.ac.jp/html/100000043_ja.html"
+    ],
+    "note": "同じアイヌ語旭川方言語彙論文を掲載する本人の大学総覧。"
+  },
+  {
+    "slugs": [
+      "p-1h7mpe9"
+    ],
+    "name": "下川 苔地",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "しもかわ たいち",
+      "nameEn": "Shimokawa Taichi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00692746"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1hcevqu"
+    ],
+    "name": "尾崎 喜光",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おざき よしみつ",
+      "nameEn": "Ozaki Yoshimitsu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01147845"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1hmrc4r"
+    ],
+    "name": "筒井 功",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "つつい いさお",
+      "nameEn": "Tsutsui Isao"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00189562"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1hvppjg"
+    ],
+    "name": "丸山 隆司",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "まるやま たかし",
+      "nameEn": "Maruyama Takashi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00857730"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1i0xg02"
+    ],
+    "name": "小林 和夫",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "こばやし かずお",
+      "nameEn": "Kobayashi Kazuo"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=6217&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。"
+  },
+  {
+    "slugs": [
+      "p-1iwaxi2"
+    ],
+    "name": "若月 亨",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "わかつき とおる",
+      "nameEn": "Wakatsuki Tooru"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00350936"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1ixvufv"
+    ],
+    "name": "菅原 進",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "すがわら すすむ",
+      "nameEn": "Sugawara Susumu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01237129"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1j8u2n8"
+    ],
+    "name": "上武 和臣",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "うえたけ かずとみ",
+      "nameEn": "Uetake Kazutomi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/01-4.pdf"
+    ],
+    "note": "講師プロフィールのふりがな。"
+  },
+  {
+    "slugs": [
+      "p-1jwkn23"
+    ],
+    "name": "岩佐 奈々子",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いわさ ななこ",
+      "nameEn": "Iwasa Nanako"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202101012090351992"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-1kxg80o"
+    ],
+    "name": "槻舘 尚武",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "つきだて なおたけ",
+      "nameEn": "Tsukidate Naotake"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.yamanashi-eiwa.ac.jp/guide/guide-868/"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-1l86b0i"
+    ],
+    "name": "鈴木 仁",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "すずき じん",
+      "nameEn": "Suzuki Jin"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://hdl.handle.net/2115/63905"
+    ],
+    "note": "当該論文の著者表記Suzuki Jin。"
+  },
+  {
+    "slugs": [
+      "p-1l8orb9"
+    ],
+    "name": "鈴木明世",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "すずき あきよ",
+      "nameEn": "Suzuki Akiyo"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.hm.pref.hokkaido.lg.jp/study/staff/suzuki-akiyo/"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-1lg7zk7"
+    ],
+    "name": "中畠 孝幸",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "なかはた たかゆき",
+      "nameEn": "Nakahata Takayuki"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://ir.library.osaka-u.ac.jp/repo/ouka/all/8045/"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-1llynl7"
+    ],
+    "name": "長井 博",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "ながい ひろし",
+      "nameEn": "Nagai Hiroshi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00137684"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1lodgy3"
+    ],
+    "name": "長崎 郁",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "ながさき いく",
+      "nameEn": "Nagasaki Iku"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001219435"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1n77u3o"
+    ],
+    "name": "川上 将史",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かわかみ まさし",
+      "nameEn": "Kawakami Masashi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.hokkaidoisan.org/pdf/isan_07.pdf"
+    ],
+    "note": "本人取材記事のプロフィール。臨床工学技士の同姓同名人物とは区別。"
+  },
+  {
+    "slugs": [
+      "p-1nkxafa"
+    ],
+    "name": "佐川 年秀",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "さがわ としひで",
+      "nameEn": "Sagawa Toshihide"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00809160"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1nliw67"
+    ],
+    "name": "小谷 凱宣",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "こたに よしのぶ",
+      "nameEn": "Kotani Yoshinobu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00121713"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1nobjlt"
+    ],
+    "name": "木名瀬 高嗣",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きなせ たかし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/031977221"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1owqqtz"
+    ],
+    "name": "井上 善十郎",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いのうえ ぜんじゅうろう",
+      "nameEn": "Inoue Zenjuro"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00019923"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1qevig6"
+    ],
+    "name": "寺本 千名夫",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "てらもと ちなお",
+      "nameEn": "Teramoto Chinao"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=14666&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。"
+  },
+  {
+    "slugs": [
+      "p-1qsdo77"
+    ],
+    "name": "二谷 国松",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "にたに くにまつ",
+      "nameEn": "Nitani Kunimatsu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001202351"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1r1lqct"
+    ],
+    "name": "川村 久恵",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かわむら ひさえ",
+      "nameEn": "Kawamura Hisae"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://archive.tonkori.com/news/page/11"
+    ],
+    "note": "本人参加の音楽活動のメンバー紹介。"
+  },
+  {
+    "slugs": [
+      "p-1r1qwie"
+    ],
+    "name": "川村 正一",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かわむら しょういち",
+      "nameEn": "Kawamura Shoichi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00896498"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1t0p9g6"
+    ],
+    "name": "平賀 エテノア",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "ひらが えてのあ",
+      "nameEn": "Hiraga Etenoa"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001202349"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1to67i7"
+    ],
+    "name": "佐藤 忠悦",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "さとう ちゅうえつ",
+      "nameEn": "Sato Chuetsu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00899899"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1vdwlmy"
+    ],
+    "name": "青木 愛子",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "あおき あいこ",
+      "nameEn": "Aoki Aiko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00136781"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1w11480"
+    ],
+    "name": "浜守 杏奈",
+    "expected": {
+      "nameEn": null
+    },
+    "corrected": {
+      "nameEn": "Hamamori Anna"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://jissen.repo.nii.ac.jp/record/2545/files/%E7%94%9F%E6%B4%BB%E7%A7%91%E5%AD%A660-6.pdf"
+    ],
+    "note": "当該論文の英文著者名。大学の別資料に矛盾するカナがあり、カナは保留。"
+  },
+  {
+    "slugs": [
+      "p-1wrm8x0"
+    ],
+    "name": "立石 信一",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "たていし しんいち",
+      "nameEn": "Tateishi Shinichi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://ycu.repo.nii.ac.jp/records/1116"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-1wrmcss"
+    ],
+    "name": "立石 久雄",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "たていし ひさお",
+      "nameEn": "Tateishi Hisao"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00204946"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-1yumqo7"
+    ],
+    "name": "津田 命子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "つだ のぶこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01161229"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-754y3m"
+    ],
+    "name": "小林 房太郎",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "こばやし ふさたろう",
+      "nameEn": "Kobayashi Fusataro"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00033052"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-79rn4z"
+    ],
+    "name": "北尾 浩一",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "きたお こういち",
+      "nameEn": "Kitao Koichi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00214876"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-7gxsyg"
+    ],
+    "name": "北嶋 由紀",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "きたじま ゆき",
+      "nameEn": "Kitajima Yuki"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/namjournal/2023/2/2023_2023-5/_pdf"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-9d1qfm"
+    ],
+    "name": "はまおか のりこ",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "はまおか のりこ",
+      "nameEn": "Hamaoka Noriko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00670792"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-9u49vf"
+    ],
+    "name": "北洞 孝雄",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "きたぼら たかお",
+      "nameEn": "Kitabora Takao"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.jomonart.or.jp/pdf/goshinmoro-newsletter-vol05.pdf"
+    ],
+    "note": "本田優子のインタビューで本人の知る研究者をきたぼら・たかおと紹介。法政の疑問符付きキタホラは採用しない。"
+  },
+  {
+    "slugs": [
+      "p-ay1sl9"
+    ],
+    "name": "飯野 正典",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いいの まさのり",
+      "nameEn": "Iino Masanori"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00211070"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-c4w1s9"
+    ],
+    "name": "瀬戸 成子",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "せと しげこ",
+      "nameEn": "Seto Shigeko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aynuitak.at-ninja.jp/ContentsESP.pdf"
+    ],
+    "note": "27号・39号の著者表記SETO Ŝigeko。"
+  },
+  {
+    "slugs": [
+      "p-e80k7j"
+    ],
+    "name": "千葉 伸彦",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "ちば のぶひこ",
+      "nameEn": "Chiba Nobuhiko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.tokyo-ondai.ac.jp/features/lesson_j-pop/13434.php"
+    ],
+    "note": "所属大学のトンコリ講師紹介。福祉研究者の同姓同名人物とは区別。"
+  },
+  {
+    "slugs": [
+      "p-f77x97"
+    ],
+    "name": "北道 邦彦",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "きたみち くにひこ",
+      "nameEn": "Kitamichi Kunihiko"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00794881"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-f7krcf"
+    ],
+    "name": "成田 得平",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "なりた とくへい",
+      "nameEn": "Narita Tokuhei"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00149586"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-idpctl"
+    ],
+    "name": "シン ウォンジ",
+    "expected": {
+      "nameEn": null
+    },
+    "corrected": {
+      "nameEn": "Shin Wonji"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202401014730401864"
+    ],
+    "note": "国立アイヌ民族博物館の研究者プロフィール。"
+  },
+  {
+    "slugs": [
+      "p-jg0yjt"
+    ],
+    "name": "喜多 直人",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "きた なおと",
+      "nameEn": "Kita Naoto"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202201007675417283"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-k7l165"
+    ],
+    "name": "戸部 千春",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "とべ ちはる",
+      "nameEn": "Tobe Chiharu"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/033626494"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-kjevsf"
+    ],
+    "name": "高野 繁廣",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "たかの しげひろ",
+      "nameEn": "Takano Shigehiro"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://web-ic.fukoku-life.co.jp/japan-vision/081.html"
+    ],
+    "note": "本人取材記事のプロフィール。"
+  },
+  {
+    "slugs": [
+      "p-l1k9nn"
+    ],
+    "name": "羽深 久夫",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "はぶか ひさお",
+      "nameEn": "Habuka Hisao"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://doi.org/10.3130/aija.79.2733"
+    ],
+    "note": "当該論文の登録メタデータHisao HABUKA。"
+  },
+  {
+    "slugs": [
+      "p-lc9any"
+    ],
+    "name": "今石 みぎわ",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いまいし みぎわ",
+      "nameEn": "Imaishi Migiwa"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001205180"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-n3f6iu"
+    ],
+    "name": "狩俣 恵一",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かりまた けいいち",
+      "nameEn": "Karimata Keiichi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00799691"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-q25d75"
+    ],
+    "name": "四宅 ヤエ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "したく やえ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00143884"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-s5616a"
+    ],
+    "name": "玉山 成元",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "たまやま じょうげん",
+      "nameEn": "Tamayama Jogen"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00080932"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-smb1hw"
+    ],
+    "name": "能登 千織",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "のと ちおり",
+      "nameEn": "Noto Chiori"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18530558"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-tcs8zz"
+    ],
+    "name": "道合 裕基",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "どうあい ひろのり",
+      "nameEn": "Doai Hironori"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://hdl.handle.net/2433/197749"
+    ],
+    "note": "大学リポジトリの和文・カナ・英文著者メタデータ。"
+  },
+  {
+    "slugs": [
+      "p-tuy84r"
+    ],
+    "name": "坂本 恵衣",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "さかもと けい",
+      "nameEn": "Sakamoto Kei"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://www.city.ishikari.hokkaido.jp/museum/1004794/index.html"
+    ],
+    "note": "所属資料館の学芸員紹介にふりがな。"
+  },
+  {
+    "slugs": [
+      "p-x4n5eb"
+    ],
+    "name": "狩野 義美",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かりの よしみ",
+      "nameEn": "Karino Yoshimi"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01116047"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-y0a5qq"
+    ],
+    "name": "四辻 一朗",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "よつじ いちろう",
+      "nameEn": "Yotsuji Ichiro"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00098209"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-y2rdpz"
+    ],
+    "name": "地蔵 慶護",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "じぞう けいご",
+      "nameEn": "Jizo Keigo"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00162153"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-y9ma1q"
+    ],
+    "name": "田中 勝也",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "たなか かつや",
+      "nameEn": "Tanaka Katsuya"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00081575"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-ywxeun"
+    ],
+    "name": "畑中 友次",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "はたなか ともじ",
+      "nameEn": "Hatanaka Tomoji"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00008825"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "p-z25ghv"
+    ],
+    "name": "是澤 櫻子",
+    "expected": {
+      "nameEn": null
+    },
+    "corrected": {
+      "nameEn": "Koresawa Sakurako"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/91266/03_4_Koresawa.pdf"
+    ],
+    "note": "本人・所属機関または原著論文の著者表記で確認。"
+  },
+  {
+    "slugs": [
+      "p-zo7x46"
+    ],
+    "name": "明石 一紀",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "あかし かずのり",
+      "nameEn": "Akashi Kazunori"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00192670"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "pon-huci"
+    ],
+    "name": "ポン・フチ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ぽん ふち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00064365"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "ryo-michiko"
+    ],
+    "name": "寮 美千子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "りょう みちこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00189412"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "saito-hiroyuki"
+    ],
+    "name": "斎藤博之",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さいとう ひろゆき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00064962"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sakakibara-masafumi"
+    ],
+    "name": "榊原 正文",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さかきばら まさふみ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00365660"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sakitani-mitsuru"
+    ],
+    "name": "崎谷 満",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さきたに みつる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01010171"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sakurai-kiyohiko"
+    ],
+    "name": "桜井 清彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さくらい きよひこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00066695"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sakurai-yoshihide"
+    ],
+    "name": "櫻井 義秀",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さくらい よしひで"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00899001"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sasaki-kan"
+    ],
+    "name": "佐々木 冠",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ささき かん"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00934228"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sasaki-kotaro"
+    ],
+    "name": "佐々木 弘太郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ささき こうたろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00067381"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sasaki-shiro"
+    ],
+    "name": "佐々木 史郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ささき しろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00383617"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sasaki-toshikazu"
+    ],
+    "name": "佐々木 利和",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ささき としかず"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00189905"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sato-masahiko"
+    ],
+    "name": "佐藤 昌彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さとう まさひこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00688871"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sato-naotaro"
+    ],
+    "name": "佐藤 直太郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さとう なおたろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=2940&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "sato-tomomi"
+    ],
+    "name": "佐藤 知己",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さとう ともみ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00553333"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "segawa-kiyoko"
+    ],
+    "name": "瀬川 清子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "せがわ きよこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00069310"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "segawa-takuro"
+    ],
+    "name": "瀬川 拓郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "せがわ たくろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01026274"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "seino-haruki"
+    ],
+    "name": "清野 春樹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "せいの はるき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01113028"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sekiguchi-yoshihiko"
+    ],
+    "name": "関口 由彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "せきぐち よしひこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01126308"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sekine-tatsuhito"
+    ],
+    "name": "関根 達人",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "せきね たつひと"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00911260"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sentoku-taroji"
+    ],
+    "name": "千徳 太郎治",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "せんとく たろうじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00069939"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shichiro-murayama"
+    ],
+    "name": "村山 七郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "むらやま しちろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00049202"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shiga-setsuko"
+    ],
+    "name": "志賀 雪湖",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しが せつこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00726686"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shimizu-seijiro"
+    ],
+    "name": "清水 清次郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しみず せいじろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00173763"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shinmura-izuru"
+    ],
+    "name": "新村 出",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しんむら いずる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00072302"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shirai-katsuhiko"
+    ],
+    "name": "白井 克彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しらい かつひこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00141316"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shirasawa-nabe"
+    ],
+    "name": "白沢ナベ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しらさわ なべ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00361593"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shirayama-tomomasa"
+    ],
+    "name": "白山 友正",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しらやま ともまさ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00073128"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shizue-ukaji"
+    ],
+    "name": "宇梶 静江",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うかじ しずえ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01061517"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "shozaburo-kanazawa"
+    ],
+    "name": "金沢 庄三郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かなざわ しょうざぶろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00026011"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "simada-kenichi"
+    ],
+    "name": "島田 健一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しまだ けんいち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00184373"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sonota-yoshio"
+    ],
+    "name": "其田 良雄",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Sonota Yoshio"
+    },
+    "corrected": {
+      "nameKana": "そのだ よしお",
+      "nameEn": "Sonoda Yoshio"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=5016&domain=ainu"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 NDL典拠のソノダとも一致。既存のSonotaを訂正。"
+  },
+  {
+    "slugs": [
+      "sudo-ryusen"
+    ],
+    "name": "須藤 隆仙",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すどう りゅうせん"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00073786"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sugimura-kinarabukku"
+    ],
+    "name": "杉村 キナラブック",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すぎむら きならぶっく"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00074451"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sumiya-kazuhiko"
+    ],
+    "name": "住谷 一彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すみや かずひこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00074968"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "sunazawa-kura"
+    ],
+    "name": "砂沢 クラ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すなざわ くら"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00136218"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "suzuki-hisashi"
+    ],
+    "name": "鈴木 尚",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すずき ひさし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00075364"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "suzuki-ryuichi"
+    ],
+    "name": "鈴木 隆一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すずき りゅういち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00909324"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tachibana-shoichi"
+    ],
+    "name": "橘 正一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たちばな しょういち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00083083"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tachibana-yoshimitsu"
+    ],
+    "name": "橘 善光",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たちばな よしみつ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00083103"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "takakura-shinichiro"
+    ],
+    "name": "高倉 新一郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たかくら しんいちろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00078504"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "takashi-irimoto"
+    ],
+    "name": "煎本 孝",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いりもと たかし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00131179"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "takiguchi-yumi"
+    ],
+    "name": "瀧口 夕美",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たきぐち ゆみ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001303277"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tamura-suzuko"
+    ],
+    "name": "田村 すゞ子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たむら すずこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00081129"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tanaka-satoko"
+    ],
+    "name": "田中 聖子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たなか さとこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9158&domain=ainu"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "tanigawa-kenichi"
+    ],
+    "name": "谷川 健一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たにがわ けんいち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00082455"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tanimoto-akihisa"
+    ],
+    "name": "谷本 晃久",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たにもと あきひさ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001171975"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tatsuya-kawahara"
+    ],
+    "name": "河原 達也",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かわはら たつや"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01017710"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tokuda-sadakazu"
+    ],
+    "name": "徳田 貞一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "とくだ さだかず"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00084654"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "toru-asai"
+    ],
+    "name": "浅井 亨",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あさい とおる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=5430&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "tsuboi-shogoro"
+    ],
+    "name": "坪井 正五郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "つぼい しょうごろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00086000"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "tsumagari-toshiro"
+    ],
+    "name": "津曲 敏郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "つまがり としろう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00254566"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "uchida-junko"
+    ],
+    "name": "内田 順子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うちだ じゅんこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00805320"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "uchida-minoru"
+    ],
+    "name": "内田 実",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うちだ みのる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00552930"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "uchida-yuichi"
+    ],
+    "name": "内田 祐一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うちだ ゆういち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=16721&domain=ezo"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "uemura-yukio"
+    ],
+    "name": "上村 幸雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うえむら ゆきお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00088157"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "umehara-takeshi"
+    ],
+    "name": "梅原 猛",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うめはら たけし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00088587"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "uoi-kazuyoshi"
+    ],
+    "name": "魚井 一由",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "うおい かずよし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00252137"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "watanabe-shigeru"
+    ],
+    "name": "渡辺 茂",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "わたなべ しげる"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00091030"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yamabe-yasunosuke"
+    ],
+    "name": "山辺 安之助",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまべ やすのすけ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00091807"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yamada-takako"
+    ],
+    "name": "山田 孝子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまだ たかこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00360835"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yamamoto-tasuke"
+    ],
+    "name": "山本 多助",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまもと たすけ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00120379"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yamamoto-yuko"
+    ],
+    "name": "山本 祐弘",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまもと ゆうこう"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00093743"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yamanaka-jota"
+    ],
+    "name": "山中 襄太",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまなか じょうた"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00093955"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yamasaki-koji"
+    ],
+    "name": "山崎 幸治",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまさき こうじ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001109228"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yanagita-kunio"
+    ],
+    "name": "柳田 國男",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やなぎた くにお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=1242&domain=ainu"
+    ],
+    "note": "同じ著作の法政大学北方史統合検索データベースに記載された確定読み。"
+  },
+  {
+    "slugs": [
+      "yasuoka-koichi"
+    ],
+    "name": "安岡 孝一",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やすおか こういち"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00257623"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yasuoka-motoko"
+    ],
+    "name": "安岡 素子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やすおか もとこ"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00763524"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yokoyama-takao"
+    ],
+    "name": "横山 孝雄",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よこやま たかお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00123795"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yoshida-iwao"
+    ],
+    "name": "吉田 巌",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よしだ いわお"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00096802"
+    ],
+    "note": "既存の人物同定で照合したNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yoshinari-naoki"
+    ],
+    "name": "吉成 直樹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よしなり なおき"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00395365"
+    ],
+    "note": "姓名と生年が一致するNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "yuasa-tadashi"
+    ],
+    "name": "湯淺 正",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ゆあさ ただし"
+    },
+    "checkedAt": "2026-09-05",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00730346"
+    ],
+    "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  }
+]

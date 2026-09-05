@@ -1,0 +1,760 @@
+slug	name_before	name_after	kana_before	kana_after	latin_before	latin_after	status	sources	note
+girolamo-de-angelis	Girolamo De Angelis	Girolamo De Angelis			Girolamo De Angelis	Girolamo De Angelis	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+yi-chi-hang	李志恒	李志恒			Yi Chi-hang	Yi Chi-hang	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kunen	空念	空念			Kunen	Kunen	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+matsumiya-kanzan	松宮 観山	松宮 観山		まつみや かんざん	Matsumiya Kanzan	Matsumiya Kanzan	verified-update	https://id.ndl.go.jp/auth/ndlna/00270763	姓名と生年が一致するNDL典拠の読み。
+terashima-ryoan	寺島 良安	寺島 良安			Terashima Ryoan	Terashima Ryoan	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+shoku-tenrei	天嶺性空	天嶺性空			Shoku Tenrei	Shoku Tenrei	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+suga-toshinoru	Suga Toshinoru (菅俊仍縷)?	Suga Toshinoru (菅俊仍縷)?			Suga Toshinoru	Suga Toshinoru	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+stepan-p-krasheninnikov	Stepan P. Krasheninnikov	Stepan P. Krasheninnikov			Krasheninnikov, Stepan P.	Krasheninnikov, Stepan P.	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+itakura-genjiro	板倉 源次郎	板倉 源次郎			Itakura Genjiro	Itakura Genjiro	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+georg-wilhelm-steller	Georg Wilhelm Steller	Georg Wilhelm Steller			Georg Wilhelm Steller	Georg Wilhelm Steller	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+hayashi-shihei	林 子平	林 子平		はやし しへい	Hayashi Shihei	Hayashi Shihei	verified-update	https://id.ndl.go.jp/auth/ndlna/00269629	既存の人物同定で照合したNDL典拠の読み。
+sato-tomomi	佐藤 知己	佐藤 知己		さとう ともみ	Sato Tomomi	Sato Tomomi	verified-update	https://id.ndl.go.jp/auth/ndlna/00553333	既存の人物同定で照合したNDL典拠の読み。
+mogami-tokunai	最上 徳内	最上 徳内			Mogami Tokunai	Mogami Tokunai	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+uehara-kumajiro	上原 熊次郎	上原 熊次郎			Uehara Kumajirō	Uehara Kumajirō	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+abe-chozaburo	阿部 長三郎	阿部 長三郎			Abe Chozaburo	Abe Chozaburo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+vasily-golovnin	Vasily Golovnin	Vasily Golovnin			Vasily Golovnin	Vasily Golovnin	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ilya-g-voznesensky	Ilya G. Voznesensky	Ilya G. Voznesensky			Voznesensky, Ilya G.	Voznesensky, Ilya G.	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+mikhail-mikhailovich-dobrotvorsky	M.M. ドブロトゥヴォールスキー	M.M. ドブロトゥヴォールスキー			Mikhail Mikhailovich Dobrotvorsky	Mikhail Mikhailovich Dobrotvorsky	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+shichisaburo-mizushina	Shichisaburo Mizushina	Shichisaburo Mizushina			Shichisaburo Mizushina	Shichisaburo Mizushina	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+shozaburo-kanazawa	金沢 庄三郎	金沢 庄三郎		かなざわ しょうざぶろう	Kanazawa Shōzaburō	Kanazawa Shōzaburō	verified-update	https://id.ndl.go.jp/auth/ndlna/00026011	姓名と生年が一致するNDL典拠の読み。
+ryuzo-torii	鳥居 龍藏	鳥居 龍藏			Ryūzō Torii	Ryūzō Torii	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+batchelor-john	ジョン・バチラー	ジョン・バチラー			John Batchelor	John Batchelor	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yamabe-yasunosuke	山辺 安之助	山辺 安之助		やまべ やすのすけ	Yamabe Yasunosuke	Yamabe Yasunosuke	verified-update	https://id.ndl.go.jp/auth/ndlna/00091807	姓名と生年が一致するNDL典拠の読み。
+kindaichi-kyosuke	金田一 京助	金田一 京助		きんだいち きょうすけ	Kindaichi Kyosuke	Kindaichi Kyosuke	verified-update	https://id.ndl.go.jp/auth/ndlna/00031353	姓名と生年が一致するNDL典拠の読み。
+chiri-mashiho	知里 真志保	知里 真志保		ちり ましほ	Chiri Mashiho	Chiri Mashiho	verified-update	https://id.ndl.go.jp/auth/ndlna/00084154	姓名と生年が一致するNDL典拠の読み。
+wada-bunjiro	和田 文治郎	和田 文治郎			Wada Bunjiro	Wada Bunjiro	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+tamura-suzuko	田村 すゞ子	田村 すゞ子		たむら すずこ	Tamura Suzuko	Tamura Suzuko	verified-update	https://id.ndl.go.jp/auth/ndlna/00081129	姓名と生年が一致するNDL典拠の読み。
+hattori-shiro	服部 四郎	服部 四郎		はっとり しろう	Hattori Shiro	Hattori Shiro	verified-update	https://id.ndl.go.jp/auth/ndlna/00009116	姓名と生年が一致するNDL典拠の読み。
+mike-wright	Mike Wright	Mike Wright			Mike Wright	Mike Wright	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+alexander-vovin	Alexander Vovin	Alexander Vovin			Alexander Vovin	Alexander Vovin	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+nakagawa-hiroshi	中川 裕	中川 裕		なかがわ ひろし	Nakagawa Hiroshi	Nakagawa Hiroshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00203799	姓名と生年が一致するNDL典拠の読み。
+issan-uoi	Issan Uoi	Issan Uoi			Issan Uoi	Issan Uoi	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kayano-shigeru	萱野 茂	萱野 茂		かやの しげる	Kayano Shigeru	Kayano Shigeru	verified-update	https://id.ndl.go.jp/auth/ndlna/00030008	姓名と生年が一致するNDL典拠の読み。
+nobue-chiba	Nobue Chiba	Nobue Chiba			Nobue Chiba	Nobue Chiba	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+alexander-yu-akulov	Alexander Yu. Akulov	Alexander Yu. Akulov			Alexander Yu. Akulov	Alexander Yu. Akulov	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+wikipedia-contributors	Wikipedia contributors	Wikipedia contributors			Wikipedia contributors	Wikipedia contributors	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+bugaeva-anna	アンナ・ブガエワ	アンナ・ブガエワ			Anna Bugaeva	Anna Bugaeva	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+moriyo-shimabukuro	Moriyo Shimabukuro	Moriyo Shimabukuro			Moriyo Shimabukuro	Moriyo Shimabukuro	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+asjp-consortium	ASJP Consortium (Wichmann et al.)	ASJP Consortium (Wichmann et al.)			ASJP Consortium (Wichmann et al.)	ASJP Consortium (Wichmann et al.)	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+dellert-johannes-et-al	Dellert, Johannes et al.	Dellert, Johannes et al.			Dellert, Johannes et al.	Dellert, Johannes et al.	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+simon-ager	Simon Ager	Simon Ager			Simon Ager	Simon Ager	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+takashi-tomita	Takashi Tomita	Takashi Tomita			Takashi Tomita	Takashi Tomita	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+mitsuru-ota	太田 満	太田 満		おおた みつる	Ōta Mitsuru	Ōta Mitsuru	verified-update	https://id.ndl.go.jp/auth/ndlna/032572861	既存の人物同定で照合したNDL典拠の読み。
+ijas-silja	イヤス シリヤ	イヤス シリヤ			Ijas Silja	Ijas Silja	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+igor-garshin	Igor Garshin	Igor Garshin			Igor Garshin	Igor Garshin	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+wiktionary-contributors	Wiktionary contributors	Wiktionary contributors			Wiktionary contributors	Wiktionary contributors	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+loanwordbank-contributors	Loanwordbank contributors	Loanwordbank contributors			Loanwordbank contributors	Loanwordbank contributors	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+english-wiktionary	English Wiktionary	English Wiktionary			English Wiktionary	English Wiktionary	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+murasaki	Murasaki	Murasaki			Murasaki	Murasaki	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+shibatani-masayoshi	Shibatani Masayoshi	Shibatani Masayoshi			Shibatani Masayoshi	Shibatani Masayoshi	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+hokkaido-utari-kyokai	Hokkaido Utari Kyokai	Hokkaido Utari Kyokai			Hokkaido Utari Kyokai	Hokkaido Utari Kyokai	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+fukazawa-mika	深澤 美香	深澤 美香		ふかざわ みか	Fukazawa Mika	Fukazawa Mika	verified-update	https://id.ndl.go.jp/auth/ndlna/034109763	登録著作と同じ著作を出典とするNDL典拠の読み。
+ninjal	NINJAL	NINJAL			NINJAL	NINJAL	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kishimoto-yoshihisa	岸本 宜久	岸本 宜久			Kishimoto Yoshihisa	Kishimoto Yoshihisa	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yoshikawa-yoshimi	吉川 佳見	吉川 佳見			Yoshikawa Yoshimi	Yoshikawa Yoshimi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kirikae-hideo	切替 英雄	切替 英雄		きりかえ ひでお	Kirikae Hideo	Kirikae Hideo	verified-update	https://id.ndl.go.jp/auth/ndlna/00196544	登録著作と同じ著作を出典とするNDL典拠の読み。
+otani-yoichi	大谷洋一	大谷洋一			Ōtani Yōichi	Ōtani Yōichi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+tangiku-itsuji	丹菊 逸治	丹菊 逸治			Tangiku Itsuji	Tangiku Itsuji	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yoshida-erika	吉田 恵理佳	吉田 恵理佳			Yoshida Erika	Yoshida Erika	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+dal-corso-elia	Dal Corso Elia	Dal Corso Elia			Dal Corso Elia	Dal Corso Elia	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+echizenya-hiroshi	越前谷 博	越前谷 博			Echizenya Hiroshi	Echizenya Hiroshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sakaguchi-ryo	阪口 諒	阪口 諒			Sakaguchi Ryo	Sakaguchi Ryo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nowakowski-karol	Nowakowski Karol	Nowakowski Karol			Nowakowski Karol	Nowakowski Karol	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ma-changcheng	馬 長城	馬 長城			Ma Changcheng	Ma Changcheng	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yasuoka-koichi	安岡 孝一	安岡 孝一		やすおか こういち	Yasuoka Koichi	Yasuoka Koichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00257623	既存の人物同定で照合したNDL典拠の読み。
+yasuoka-motoko	安岡 素子	安岡 素子		やすおか もとこ	Yasuoka Motoko	Yasuoka Motoko	verified-update	https://id.ndl.go.jp/auth/ndlna/00763524	既存の人物同定で照合したNDL典拠の読み。
+takahashi-yasushige	高橋 靖以	高橋 靖以	たかはし やすしげ	たかはし やすしげ	Takahashi Yasushige	Takahashi Yasushige	existing-kana		既存のかなを保持。
+okuda-osami	奥田 統己	奥田 統己		おくだ おさみ	Okuda Osami	Okuda Osami	verified-update	https://id.ndl.go.jp/auth/ndlna/00675445	姓名と生年が一致するNDL典拠の読み。
+senuma-hajime	Senuma Hajime	Senuma Hajime			Senuma Hajime	Senuma Hajime	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+aizawa-akiko	Aizawa Akiko	Aizawa Akiko			Aizawa Akiko	Aizawa Akiko	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+fujita-mamoru	藤田護	藤田護			Fujita Mamoru	Fujita Mamoru	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+watanabe-kaori	渡邊香織	渡邊香織			Watanabe Kaori	Watanabe Kaori	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kobayashi-miki	小林 美紀	小林 美紀			Kobayashi Miki	Kobayashi Miki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yamaguchi-shinju	山口 伸樹	山口 伸樹					reading-unresolved		確定読みの裏付けを未確認。
+miyagawa-so	宮川 創	宮川 創		みやがわ そう	Miyagawa So	Miyagawa So	verified-update	https://id.ndl.go.jp/auth/ndlna/031230426	姓名と生年が一致するNDL典拠の読み。
+igarashi-ryo	五十嵐 涼	五十嵐 涼			Igarashi Ryo	Igarashi Ryo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kato-daiki	加藤 大樹	加藤 大樹			Katō Daiki	Katō Daiki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+murasaki-kyoko	村崎 恭子	村崎 恭子		むらさき きょうこ	Murasaki Kyōko	Murasaki Kyōko	verified-update	https://id.ndl.go.jp/auth/ndlna/00048879	姓名と生年が一致するNDL典拠の読み。
+hirosawa	廣澤	廣澤			Hirosawa	Hirosawa	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+cjyet-yo	于 拙	于 拙			Cjyet Yo	Cjyet Yo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nikitina-tatiana	Nikitina Tatiana	Nikitina Tatiana			Nikitina Tatiana	Nikitina Tatiana	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ochiai-izumi	落合いずみ	落合いずみ			Ochiai Izumi	Ochiai Izumi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+shirasawa-nabe	白沢ナベ	白沢ナベ		しらさわ なべ	Nabe Shirasawa	Nabe Shirasawa	verified-update	https://id.ndl.go.jp/auth/ndlna/00361593	姓名と生年が一致するNDL典拠の読み。
+izutsu-katsunobu	井筒 勝信	井筒 勝信		いずつ かつのぶ	Izutsu Katsunobu	Izutsu Katsunobu	verified-update	https://id.ndl.go.jp/auth/ndlna/01070841	既存の人物同定で照合したNDL典拠の読み。
+azumi-yasunori	安曇 恭徳	安曇 恭徳			Azumi Yasunori	Azumi Yasunori	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+momouchi-yoshio	桃内 佳雄	桃内 佳雄			Momouchi Yoshio	Momouchi Yoshio	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+itabashi-yoshizo	板橋 義三	板橋 義三		いたばし よしぞう	Itabashi Yoshizo	Itabashi Yoshizo	verified-update	https://id.ndl.go.jp/auth/ndlna/00202758	姓名と生年が一致するNDL典拠の読み。
+tamura-masashi	田村 雅史	田村 雅史			Tamura Masashi	Tamura Masashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+baek-sangyub	Baek Sangyub	Baek Sangyub			Baek Sangyub	Baek Sangyub	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ptaszynski-michal	Michał Ptaszyński	Michał Ptaszyński			Michał Ptaszyński	Michał Ptaszyński	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ono-yohei	小野洋平	小野洋平			Ono Yohei	Ono Yohei	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+barrie-michael	Barrie Michael	Barrie Michael			Barrie Michael	Barrie Michael	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+mathieu-eric	Mathieu Éric	Mathieu Éric			Mathieu Éric	Mathieu Éric	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+klara-chuda	フダー・クラーラ	フダー・クラーラ			Klára Chudá	Klára Chudá	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yoshimoto-yuko	吉本 裕子	吉本 裕子			Yoshimoto Yūko	Yoshimoto Yūko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nam-deokhyun	Nam Deokhyun	Nam Deokhyun			Nam Deokhyun	Nam Deokhyun	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+jussi-nurmi	ヌルミ・ユッシ	ヌルミ・ユッシ			Jussi Nurmi	Jussi Nurmi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+furukawa-kyoko	古川 恭子	古川 恭子			Furukawa Kyōko	Furukawa Kyōko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+endo-shiho	遠藤 志保	遠藤 志保			Endo Shiho	Endo Shiho	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nakai-takanori	中井 貴規	中井 貴規			Nakai Takanori	Nakai Takanori	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sugawara-katsukichi	菅原 勝吉	菅原 勝吉			Sugawara Katsukichi	Sugawara Katsukichi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+shimokura-emi	下倉 絵美	下倉 絵美			Shimokura Emi	Shimokura Emi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-yiokn0	鹿田 川見	鹿田 川見					reading-unresolved		確定読みの裏付けを未確認。
+nakamoto-mutsuko	中本 ムツ子	中本 ムツ子		なかもと むつこ	Mutsuko Nakamoto	Mutsuko Nakamoto	verified-update	https://id.ndl.go.jp/auth/ndlna/00533242	姓名と生年が一致するNDL典拠の読み。
+sawai-masatoshi	澤井 政敏	澤井 政敏			Sawai Masatoshi	Sawai Masatoshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sugawara-katsuyoshi	菅原 勝良	菅原 勝良			Sugawara Katsuyoshi	Sugawara Katsuyoshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+oshino-akemi	押野 朱美	押野 朱美			Oshino Akemi	Oshino Akemi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+oshino-rika	押野 里架	押野 里架			Oshino Rika	Oshino Rika	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kuzuno-tsugio	葛野 次雄	葛野 次雄			Tsugio Kuzuno	Tsugio Kuzuno	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+akibe-tokuhei	秋辺 得平	秋辺 得平		あきべ とくへい	Tokuhei Akibe	Tokuhei Akibe	verified-update	https://id.ndl.go.jp/auth/ndlna/00382740	姓名と生年が一致するNDL典拠の読み。
+ueno-sada	上野 サダ	上野 サダ			Ueno Sada	Ueno Sada	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+hori-etsuko	堀 悦子	堀 悦子			Hori Etsuko	Hori Etsuko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+takagi-kikue	高木 喜久恵	高木 喜久恵			Takagi Kikue	Takagi Kikue	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+katayama-hiroko	片山 弘子	片山 弘子			Katayama Hiroko	Katayama Hiroko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nakano-tomoe	中野 巴	中野 巴			Nakano Tomoe	Nakano Tomoe	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sekine-maya	関根 摩耶	関根 摩耶			Sekine Maya	Sekine Maya	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kumagai-kane	熊谷 カネ	熊谷 カネ			Kumagai Kane	Kumagai Kane	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kawakami-yoko	川上 容子	川上 容子			Kawakami Yōko	Kawakami Yōko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kimura-rino	木村 梨乃	木村 梨乃			Kimura Rino	Kimura Rino	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+takiguchi-yumi	瀧口 夕美	瀧口 夕美		たきぐち ゆみ	Takiguchi Yūmi	Takiguchi Yūmi	verified-update	https://id.ndl.go.jp/auth/ndlna/001303277	既存の人物同定で照合したNDL典拠の読み。
+p-1g3g6l0	山丸 賢雄	山丸 賢雄		やままる けんゆう		Yamamaru Ken’yū	verified-update	https://www.ff-ainu.or.jp/radio/files/H29%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88Vol.1.pdf	講師プロフィールのふりがなで確認。NDLの推量読みを独立に裏付け。
+p-1cnoo6r	増野 光	増野 光教		ますの みつのり		Masuno Mitsunori	verified-update	https://www.ff-ainu.or.jp/radio/files/00-1.pdf https://www.ff-ainu.or.jp/web/overview/business/details/1273.html	資料中の完全な姓名は増野光教。欠けていた教の字を復元。
+kayano-shiro	萱野 志朗	萱野 志朗		かやの しろう	Shirō Kayano	Shirō Kayano	verified-update	https://id.ndl.go.jp/auth/ndlna/00188612	登録著作と同じ著作を出典とするNDL典拠の読み。
+sekine-kenji	関根 健司	関根 健司			Sekine Kenji	Sekine Kenji	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kawakami-megumi	川上 恵	川上 恵			Kawakami Megumi	Kawakami Megumi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+okamoto-tomoya	岡本 朋也	岡本 朋也			Okamoto Tomoya	Okamoto Tomoya	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+hachiya-mai	八谷 麻衣	八谷 麻衣			Hachiya Mai	Hachiya Mai	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1j8u2n8	上武 和臣	上武 和臣		うえたけ かずとみ		Uetake Kazutomi	verified-update	https://www.ff-ainu.or.jp/radio/files/01-4.pdf	講師プロフィールのふりがな。
+osuga-rueko	大須賀 るえ子	大須賀 るえ子			Ōsuga Rueko	Ōsuga Rueko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kimura-taeko	木村 多栄子	木村 多栄子			Kimura Taeko	Kimura Taeko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+asai-take	浅井 タケ	浅井 タケ		あさい たけ	Take Asai	Take Asai	verified-update	https://id.ndl.go.jp/auth/ndlna/00869099	姓名と生年が一致するNDL典拠の読み。
+mokottunas-kitahara	北原 モコットゥナㇱ	北原 モコットゥナㇱ			Kitahara Mokottunas	Kitahara Mokottunas	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-157hhhq	クスリコヤ	クスリコヤ					reading-unresolved		確定読みの裏付けを未確認。
+p-ynb2tw	徹辺 重次郎	徹辺 重次郎					reading-unresolved		確定読みの裏付けを未確認。
+yamada-hayo	山田 ハヨ	山田 ハヨ			Yamada Hayo	Yamada Hayo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kitakaze-isokichi	北風 磯吉	北風 磯吉			Kitakaze Isokichi	Kitakaze Isokichi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+fujiyama-haru	藤山 ハル	藤山 ハル		ふじやま はる	Haru Fujiyama	Haru Fujiyama	verified-update	https://id.ndl.go.jp/auth/ndlna/01199055	姓名と生年が一致するNDL典拠の読み。
+nagahama-seizo	長濱 清蔵	長濱 清蔵			Nagahama Seizō	Nagahama Seizō	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+araida-seino	新井田 セイノ	新井田 セイノ			Seino Araida	Seino Araida	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yoshimura-fuyuko	吉村 冬子	吉村 冬子			Yoshimura Fuyuko	Yoshimura Fuyuko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kawakami-matsuko	川上 まつ子	川上 まつ子		かわかみ まつこ	Kawakami Matsuko	Kawakami Matsuko	verified-update	https://id.ndl.go.jp/auth/ndlna/00157200	既存の人物同定で照合したNDL典拠の読み。
+kuzuno-daiki	葛野 大喜	葛野 大喜			Kuzuno Daiki	Kuzuno Daiki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kano-rumiko	加納 ルミ子	加納 ルミ子			Kanō Rumiko	Kanō Rumiko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yae-kiyotoshi	八重 清敏	八重 清敏			Yae Kiyotoshi	Yae Kiyotoshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+ishikawa-mikaho	石川 美香穂	石川 美香穂			Mikaho Ishikawa	Mikaho Ishikawa	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yonezawa-ryo	米澤 諒	米澤 諒			Yonezawa Ryō	Yonezawa Ryō	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+ogawa-sanae	小川 早苗	小川 早苗		おがわ さなえ	Ogawa Sanae	Ogawa Sanae	verified-update	https://id.ndl.go.jp/auth/ndlna/01197806	既存の人物同定で照合したNDL典拠の読み。
+hayasaka-shun	早坂 駿	早坂 駿			Hayasaka Shun	Hayasaka Shun	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kaizawa-miwako	貝澤 美和子	貝澤 美和子			Kaizawa Miwako	Kaizawa Miwako	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+amanai-shigeki	天内 重樹	天内 重樹			Amanai Shigeki	Amanai Shigeki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+okada-yuki	岡田 勇樹	岡田 勇樹			Okada Yūki	Okada Yūki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+hiraga-sada	平賀 サダ	平賀 サダ		ひらが さだ	Hiraga Sada	Hiraga Sada	verified-update	https://id.ndl.go.jp/auth/ndlna/00386334	既存の人物同定で照合したNDL典拠の読み。
+oda-ito	小田 イト	小田 イト		おだ いと	Ito Oda	Ito Oda	verified-update	https://id.ndl.go.jp/auth/ndlna/00266318	姓名と生年が一致するNDL典拠の読み。
+kimura-kimi	木村 きみ	木村 きみ			Kimura Kimi	Kimura Kimi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sentoku-taroji	千徳 太郎治	千徳 太郎治		せんとく たろうじ	Taroji Sentoku	Taroji Sentoku	verified-update	https://id.ndl.go.jp/auth/ndlna/00069939	姓名と生年が一致するNDL典拠の読み。
+chiri-yukie	知里 幸恵	知里 幸恵		ちり ゆきえ	Chiri Yukie	Chiri Yukie	verified-update	https://id.ndl.go.jp/auth/ndlna/00084156	姓名と生年が一致するNDL典拠の読み。
+hamada-takashi	浜田 隆史	浜田 隆史			Hamada Takashi	Hamada Takashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yokoyama-hiroyuki	横山 裕之	横山 裕之			Yokoyama Hiroyuki	Yokoyama Hiroyuki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kanzaki-masayoshi	神崎 雅好	神崎 雅好			Kanzaki Masayoshi	Kanzaki Masayoshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+komatsu-kazuhiro	小松 和弘	小松 和弘		こまつ かずひろ	Komatsu Kazuhiro	Komatsu Kazuhiro	verified-update	https://id.ndl.go.jp/auth/ndlna/00254980	既存の人物同定で照合したNDL典拠の読み。
+p-c4w1s9	瀬戸 成子	瀬戸 成子		せと しげこ		Seto Shigeko	verified-update	https://aynuitak.at-ninja.jp/ContentsESP.pdf	27号・39号の著者表記SETO Ŝigeko。
+aihara-noriaki	相原 典明	相原 典明			Aihara Noriaki	Aihara Noriaki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+matsumoto-narumi	松本 成美	松本 成美		まつもと しげよし	Matsumoto Narumi	Matsumoto Shigeyoshi	verified-update	https://aynuitak.at-ninja.jp/ContentsESP.pdf https://id.ndl.go.jp/auth/ndlna/00041827	アイヌタイムズ49号の追悼記事タイトルにMatsumoto Shigeyoshi。
+nomoto-hisae	野本 久栄	野本 久栄			Nomoto Hisae	Nomoto Hisae	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yoshimura-akio	吉村 明夫	吉村 明夫			Yoshimura Akio	Yoshimura Akio	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+akibe-hideo	秋辺 日出男	秋辺 日出男			Akibe Hideo	Akibe Hideo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+ono-tetsuto	大野 徹人	大野 徹人		おおの てつひと	Ōno Tetsuto	Ōno Tetsuhito	verified-update	https://ci.nii.ac.jp/ncid/BD08024529 https://id.ndl.go.jp/auth/ndlna/001164045	当該著作の著者典拠、NDL典拠001164045と一致。
+okuda-sachiko	奥田 幸子	奥田 幸子			Okuda Sachiko	Okuda Sachiko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+heo-min	허 민 (Heo Min)	허 민 (Heo Min)			허 민 (Heo Min)	허 민 (Heo Min)	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+tokutomi-kei	徳冨 圭	徳冨 圭			Tokutomi Kei	Tokutomi Kei	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+komatsu-tetsuro	小松 哲郎	小松 哲郎		こまつ てつろう	Komatsu Tetsurō	Komatsu Tetsurō	verified-update	https://aynuitak.at-ninja.jp/ContentsESP.pdf https://id.ndl.go.jp/auth/ndlna/00802770	2号の著者表記KOMACU Tecuroo、55号の追悼記事Komatsu Tetsuroで確認。NDLのテツオ表記は採らない。
+miyata-hisako	宮田 久子	宮田 久子			Miyata Hisako	Miyata Hisako	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+hiraishi-kiyotaka	平石 清隆	平石 清隆			Hiraishi Kiyotaka	Hiraishi Kiyotaka	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-c4y57k	瀬戸 海惠	瀬戸 海惠					reading-unresolved		著者側の対訳目次にSETO MieとSETO Ŝigekoの両方があり矛盾。
+ogawa-masayo	小川 昌代	小川 昌代			Ogawa Masayo	Ogawa Masayo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+inagaki-katsuhiko	稲垣 克彦	稲垣 克彦			Inagaki Katsuhiko	Inagaki Katsuhiko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sawai-harumi	澤井 春美	澤井 春美			Sawai Harumi	Sawai Harumi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yoneda-noriyuki	米田 儀行	米田 儀行			Yoneda Noriyuki	Yoneda Noriyuki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1bk86gi	千口 昇	千口 昇		せんぐち のぼる		Senguchi Noboru	verified-update	https://aynuitak.at-ninja.jp/ContentsESP.pdf	42号の著者表記SENGUCxI Noboru。
+yae-masako	八重 昌子	八重 昌子			Yae Masako	Yae Masako	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+maruno-kazuko	丸野 和子	丸野 和子			Maruno Kazuko	Maruno Kazuko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+ota-kamus-okkay	太田 カムㇱオッカイ	太田 カムㇱオッカイ			Ōta Kamus Okkay	Ōta Kamus Okkay	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+matsuno-ayaka	松野 綾香	松野 綾香			Matsuno Ayaka	Matsuno Ayaka	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+isobe-etsuko	磯部 恵津子	磯部 恵津子			Isobe Etsuko	Isobe Etsuko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+tazawa-takashi	田澤 崇	田澤 崇			Tazawa Takashi	Tazawa Takashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+narita-hidetoshi	成田 英敏	成田 英敏			Narita Hidetoshi	Narita Hidetoshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+katayama-tatsumine	片山 龍峯	片山 龍峯			Katayama Tatsumine	Katayama Tatsumine	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kanno-yuko	菅野 由布子	菅野 由布子			Kanno Yūko	Kanno Yūko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nabesawa-motozo	鍋沢 元蔵	鍋沢 元蔵		なべさわ もとぞう	Nabesawa Motozō	Nabesawa Motozō	verified-update	https://id.ndl.go.jp/auth/ndlna/00049485	既存の人物同定で照合したNDL典拠の読み。
+orita-suteno	織田 ステノ	織田 ステノ			Suteno Orita	Suteno Orita	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+ueda-toshi	上田 トシ	上田 トシ			Ueda Toshi	Ueda Toshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+stephanie	ステファニー	ステファニー			Stephanie	Stephanie	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+rikkoppe	リッコッペ	リッコッペ			Rikkoppe	Rikkoppe	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+penrek	ペンレㇰ	ペンレㇰ			Penrek	Penrek	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+retannay	レタンナイ	レタンナイ			Retannay	Retannay	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+keci	ケチ	ケチ			Keci	Keci	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+rariw	ラリウ	ラリウ			Rariw	Rariw	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kuwanno	クワンノ	クワンノ			Kuwanno	Kuwanno	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sicchari	シッチャリ	シッチャリ			Sicchari	Sicchari	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+toyokawa-yoko	豊川 容子	豊川 容子			Toyokawa Yōko	Toyokawa Yōko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+poronay	ポロナイ	ポロナイ			Poronay	Poronay	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kuzuno-tatsujiro	葛野 辰次郎	葛野 辰次郎		くずの たつじろう	Tatsujirō Kuzuno	Tatsujirō Kuzuno	verified-update	https://id.ndl.go.jp/auth/ndlna/00140069	姓名と生年が一致するNDL典拠の読み。
+kaizawa-turushino	貝澤 とぅるしの	貝澤 とぅるしの			Kaizawa Turushino	Kaizawa Turushino	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+hirame-yoshi	平目 よし	平目 よし			Hirame Yoshi	Hirame Yoshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kurokawa-teshime	黒川 てしめ	黒川 てしめ			Kurokawa Teshime	Kurokawa Teshime	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nabesawa-nepuki	鍋澤 ねぷき	鍋澤 ねぷき			Nabesawa Nepuki	Nabesawa Nepuki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+matsushima-tomi	松島 トミ	松島 トミ			Matsushima Tomi	Matsushima Tomi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+ogawa-shigeno	小川 シゲノ	小川 シゲノ			Ogawa Shigeno	Ogawa Shigeno	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+toshima-taneranke	遠島 タネランケ	遠島 タネランケ			Tōshima Taneranke	Tōshima Taneranke	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sawai-tomeno	沢井 トメノ	沢井 トメノ			Sawai Tomeno	Sawai Tomeno	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sean-lee	Sean Lee	Sean Lee			Sean Lee	Sean Lee	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+toshikazu-hasegawa	Toshikazu Hasegawa	Toshikazu Hasegawa			Toshikazu Hasegawa	Toshikazu Hasegawa	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+yukio-dodo	Yukio Dodo	Yukio Dodo			Yukio Dodo	Yukio Dodo	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kylie-martin	Kylie Martin	Kylie Martin			Kylie Martin	Kylie Martin	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+tsunehiko-hanihara	Tsunehiko Hanihara	Tsunehiko Hanihara			Tsunehiko Hanihara	Tsunehiko Hanihara	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+emiko-ohnuki-tierney	Emiko Ohnuki‐Tierney	Emiko Ohnuki‐Tierney			Emiko Ohnuki‐Tierney	Emiko Ohnuki‐Tierney	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+michele-m-mason	Michele M. Mason	Michele M. Mason			Michele M. Mason	Michele M. Mason	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ishida-hajime	石田 肇	石田 肇		いしだ はじめ	Ishida Hajime	Ishida Hajime	verified-update	https://id.ndl.go.jp/auth/ndlna/01240181	既存の人物同定で照合したNDL典拠の読み。
+jose-andres-alonso-de-la-fuente	José Andrés Alonso de la Fuente	José Andrés Alonso de la Fuente			José Andrés Alonso de la Fuente	José Andrés Alonso de la Fuente	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+masui-fumito	桝井 文人	桝井 文人			Masui Fumito	Masui Fumito	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+georgina-stevens	Georgina Stevens	Georgina Stevens			Georgina Stevens	Georgina Stevens	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+xanat-vargas-meza	Xanat Vargas Meza	Xanat Vargas Meza			Xanat Vargas Meza	Xanat Vargas Meza	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+yoichi-ochiai	Yoichi Ochiai	Yoichi Ochiai			Yoichi Ochiai	Yoichi Ochiai	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+fred-c-c-peng	Fred C.C. Peng	Fred C.C. Peng			Fred C.C. Peng	Fred C.C. Peng	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+justin-r-hunter	Justin R. Hunter	Justin R. Hunter			Justin R. Hunter	Justin R. Hunter	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+alfred-f-majewicz	Alfred F. Majewicz	Alfred F. Majewicz			Alfred F. Majewicz	Alfred F. Majewicz	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kagami-akikatsu	鏡味 明克	鏡味 明克		かがみ あきかつ	Kagami Akikatsu	Kagami Akikatsu	verified-update	https://id.ndl.go.jp/auth/ndlna/00024686	姓名と生年が一致するNDL典拠の読み。
+hirano-katsuya	平野 克弥	平野 克弥		ひらの かつや	Hirano Katsuya	Hirano Katsuya	verified-update	https://id.ndl.go.jp/auth/ndlna/01131179	既存の人物同定で照合したNDL典拠の読み。
+wawat-rahwati	Wawat Rahwati	Wawat Rahwati			Wawat Rahwati	Wawat Rahwati	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+noriaki-ohgita	Noriaki Ohgita	Noriaki Ohgita			Noriaki Ohgita	Noriaki Ohgita	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+vasilii-v-shchepkin	Vasilii V. Shchepkin	Vasilii V. Shchepkin			Vasilii V. Shchepkin	Vasilii V. Shchepkin	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+tatsiana-tsagelnik	Tatsiana Tsagelnik	Tatsiana Tsagelnik			Tatsiana Tsagelnik	Tatsiana Tsagelnik	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+shiraishi-hidetoshi	白石 英才	白石 英才			Shiraishi Hidetoshi	Shiraishi Hidetoshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+masato-mimura	Masato Mimura	Masato Mimura			Masato Mimura	Masato Mimura	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+tatsuya-kawahara	河原 達也	河原 達也		かわはら たつや	Tatsuya Kawahara	Tatsuya Kawahara	verified-update	https://id.ndl.go.jp/auth/ndlna/01017710	姓名と生年が一致するNDL典拠の読み。
+yamada-takako	山田 孝子	山田 孝子		やまだ たかこ	Yamada Takako	Yamada Takako	verified-update	https://id.ndl.go.jp/auth/ndlna/00360835	既存の人物同定で照合したNDL典拠の読み。
+p-yrdqvb	Е. С. Чекункова	Е. С. Чекункова			Е. С. Чекункова	Е. С. Чекункова	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+patrick-heinrich	Patrick Heinrich	Patrick Heinrich			Patrick Heinrich	Patrick Heinrich	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+mark-winchester	Mark Winchester	Mark Winchester			Mark Winchester	Mark Winchester	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ivan-brenes	Ivan Brenes	Ivan Brenes			Ivan Brenes	Ivan Brenes	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kruzenshtern-ivan-fedorovich-1770-1846	Kruzenshtern, Ivan Fedorovich, 1770-1846	Kruzenshtern, Ivan Fedorovich, 1770-1846			Kruzenshtern, Ivan Fedorovich, 1770-1846	Kruzenshtern, Ivan Fedorovich, 1770-1846	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+davydov-gavriil-ivanovich-1784-1809	Davydov, Gavriil Ivanovich, 1784-1809	Davydov, Gavriil Ivanovich, 1784-1809			Davydov, Gavriil Ivanovich, 1784-1809	Davydov, Gavriil Ivanovich, 1784-1809	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+carl-etter	Carl Etter	Carl Etter			Carl Etter	Carl Etter	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+basil-hall-chamberlain	Basil Hall Chamberlain	Basil Hall Chamberlain			Basil Hall Chamberlain	Basil Hall Chamberlain	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+p-ay1sl9	飯野 正典	飯野 正典		いいの まさのり		Iino Masanori	verified-update	https://id.ndl.go.jp/auth/ndlna/00211070	既存の人物同定で照合したNDL典拠の読み。
+chiri-takanaka	知里 高央	知里 高央		ちり たかなか	Chiri Takanaka	Chiri Takanaka	verified-update	https://id.ndl.go.jp/auth/ndlna/00084155	既存の人物同定で照合したNDL典拠の読み。
+yokoyama-takao	横山 孝雄	横山 孝雄		よこやま たかお	Takao Yokoyama	Takao Yokoyama	verified-update	https://id.ndl.go.jp/auth/ndlna/00123795	姓名と生年が一致するNDL典拠の読み。
+chiri-mutsumi	知里 むつみ	知里 むつみ		ちり むつみ	Mutsumi Yokoyama	Mutsumi Yokoyama	verified-update	https://id.ndl.go.jp/auth/ndlna/00184658	姓名と生年が一致するNDL典拠の読み。
+isobe-seiichi	礒部 精一	礒部 精一			Isobe Seiichi	Isobe Seiichi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+yamaji-hiroaki	山路 広明	山路 広明			Yamaji Hiroaki	Yamaji Hiroaki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kubodera-itsuhiko	久保寺 逸彦	久保寺 逸彦		くぼでら いつひこ	Kubodera Itsuhiko	Kubodera Itsuhiko	verified-update	https://id.ndl.go.jp/auth/ndlna/00036682	姓名と生年が一致するNDL典拠の読み。
+sasaki-kotaro	佐々木 弘太郎	佐々木 弘太郎		ささき こうたろう	Sasaki Kōtarō	Sasaki Kōtarō	verified-update	https://id.ndl.go.jp/auth/ndlna/00067381	既存の人物同定で照合したNDL典拠の読み。
+otomo-yukio	大友 幸男	大友 幸男		おおとも ゆきお	Ōtomo Yukio	Ōtomo Yukio	verified-update	https://id.ndl.go.jp/auth/ndlna/00367668	既存の人物同定で照合したNDL典拠の読み。
+okamura-kichiemon	岡村 吉右衛門	岡村 吉右衛門		おかむら きちえもん	Kichiemon Okamura	Kichiemon Okamura	verified-update	https://id.ndl.go.jp/auth/ndlna/00059906	姓名と生年が一致するNDL典拠の読み。
+p-f77x97	北道 邦彦	北道 邦彦		きたみち くにひこ		Kitamichi Kunihiko	verified-update	https://id.ndl.go.jp/auth/ndlna/00794881	既存の人物同定で照合したNDL典拠の読み。
+p-1wrmcss	立石 久雄	立石 久雄		たていし ひさお		Tateishi Hisao	verified-update	https://id.ndl.go.jp/auth/ndlna/00204946	既存の人物同定で照合したNDL典拠の読み。
+keira-mitsunori	計良 光範	計良 光範		けいら みつのり	Keira Mitsunori	Keira Mitsunori	verified-update	https://id.ndl.go.jp/auth/ndlna/00395366	既存の人物同定で照合したNDL典拠の読み。
+haginaka-mie	萩中 美枝	萩中 美枝		はぎなか みえ	Haginaka Mie	Haginaka Mie	verified-update	https://id.ndl.go.jp/auth/ndlna/00110331	姓名と生年が一致するNDL典拠の読み。
+kondo-kyojiro	近藤 鏡二郎	近藤 鏡二郎		こんどう きょうじろう	Kondō Kyōjirō	Kondō Kyōjirō	verified-update	https://id.ndl.go.jp/auth/ndlna/00035058	姓名と生年が一致するNDL典拠の読み。
+kosaka-yosuke	小坂 洋右	小坂 洋右		こさか ようすけ	Yōsuke Kosaka	Yōsuke Kosaka	verified-update	https://id.ndl.go.jp/auth/ndlna/00253398	姓名と生年が一致するNDL典拠の読み。
+matsuyoshi-sadao	松好 貞夫	松好 貞夫		まつよし さだお	Sadao Matsuyoshi	Sadao Matsuyoshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00042826	姓名と生年が一致するNDL典拠の読み。
+arakida-iehisa	荒木田 家寿	荒木田 家寿		あらきだ いえひさ	Arakida Iehisa	Arakida Iehisa	verified-update	https://id.ndl.go.jp/auth/ndlna/00003041	既存の人物同定で照合したNDL典拠の読み。
+p-1h7mpe9	下川 苔地	下川 苔地		しもかわ たいち		Shimokawa Taichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00692746	登録著作と同じ著作を出典とするNDL典拠の読み。
+p-y0a5qq	四辻 一朗	四辻 一朗		よつじ いちろう		Yotsuji Ichiro	verified-update	https://id.ndl.go.jp/auth/ndlna/00098209	既存の人物同定で照合したNDL典拠の読み。
+kawai-raseki	河合 裸石	河合 裸石		かわい らせき	Raseki Kawai	Raseki Kawai	verified-update	https://id.ndl.go.jp/auth/ndlna/00028959	姓名と生年が一致するNDL典拠の読み。
+jinbo-kotora	神保 小虎	神保 小虎		じんぼ ことら	Jinbo Kotora	Jinbo Kotora	verified-update	https://id.ndl.go.jp/auth/ndlna/00098567	姓名と生年が一致するNDL典拠の読み。
+yoshida-iwao	吉田 巌	吉田 巌		よしだ いわお	Yoshida Iwao	Yoshida Iwao	verified-update	https://id.ndl.go.jp/auth/ndlna/00096802	既存の人物同定で照合したNDL典拠の読み。
+kobayashi-masao	小林 正雄	小林 正雄		こばやし まさお	Masao Kobayashi	Masao Kobayashi	verified-update	https://id.ndl.go.jp/auth/ndlna/00033225	既存の人物同定で照合したNDL典拠の読み。
+shiga-setsuko	志賀 雪湖	志賀 雪湖		しが せつこ	Shiga Setsuko	Shiga Setsuko	verified-update	https://id.ndl.go.jp/auth/ndlna/00726686	登録著作と同じ著作を出典とするNDL典拠の読み。
+mark-k-watson	Mark K. Watson	Mark K. Watson			Mark K. Watson	Mark K. Watson	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+john-c-maher	マーハ ジョン C.	マーハ ジョン C.			John C. Maher	John C. Maher	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+gayman-jeffry	Jeffry Gayman	Jeffry Gayman			Jeffry Gayman	Jeffry Gayman	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+bronis-aw-pi-sudski	Bronisław Piłsudski	Bronisław Piłsudski			Bronisław Piłsudski	Bronisław Piłsudski	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+maruyama-hiroshi	丸山 博	丸山 博			Maruyama Hiroshi	Maruyama Hiroshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+naohiro-nakamura	Naohiro Nakamura	Naohiro Nakamura			Naohiro Nakamura	Naohiro Nakamura	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+richard-w-howell	Richard W. Howell	Richard W. Howell			Richard W. Howell	Richard W. Howell	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+takayuki-okazaki	Takayuki Okazaki	Takayuki Okazaki			Takayuki Okazaki	Takayuki Okazaki	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+josef-kreiner	クライナー ヨーゼフ	クライナー ヨーゼフ			Josef Kreiner	Josef Kreiner	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nana-sato-rossberg	佐藤 ロスベアグ ナナ	佐藤 ロスベアグ ナナ			Nana Sato-Rossberg	Nana Sato-Rossberg	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+minako-sakata	坂田 美奈子	坂田 美奈子		さかた みなこ	Sakata Minako	Sakata Minako	verified-update	https://id.ndl.go.jp/auth/ndlna/001092869	既存の人物同定で照合したNDL典拠の読み。
+takeshi-kimura	Takeshi Kimura	Takeshi Kimura			Takeshi Kimura	Takeshi Kimura	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+jennifer-teeter	Jennifer Teeter	Jennifer Teeter			Jennifer Teeter	Jennifer Teeter	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+saana-santalahti	Saana Santalahti	Saana Santalahti			Saana Santalahti	Saana Santalahti	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+george-simeon	George Simeon	George Simeon			George Simeon	George Simeon	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kirsten-refsing	Kirsten Refsing	Kirsten Refsing			Kirsten Refsing	Kirsten Refsing	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+moses-osamu-baba	Moses Osamu Baba	Moses Osamu Baba			Moses Osamu Baba	Moses Osamu Baba	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+yoko-tanabe	Yoko Tanabe	Yoko Tanabe			Yoko Tanabe	Yoko Tanabe	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kenji-araki	荒木健治	荒木健治		あらき けんじ	Araki Kenji	Araki Kenji	verified-update	https://id.ndl.go.jp/auth/ndlna/00980282	既存の人物同定で照合したNDL典拠の読み。
+koji-tochinai	栃内 香次	栃内 香次		とちない こうじ	Kōji Tochinai	Kōji Tochinai	verified-update	https://id.ndl.go.jp/auth/ndlna/00085615	姓名と生年が一致するNDL典拠の読み。
+donald-l-philippi	Donald L. Philippi	Donald L. Philippi			Donald L. Philippi	Donald L. Philippi	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kiyoteru-tsutsui	Kiyoteru Tsutsui	Kiyoteru Tsutsui			Kiyoteru Tsutsui	Kiyoteru Tsutsui	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+johannes-rahder	Johannes Rahder	Johannes Rahder			Johannes Rahder	Johannes Rahder	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+mara-miller	Mara Miller	Mara Miller			Mara Miller	Mara Miller	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+yamasaki-koji	山崎 幸治	山崎 幸治		やまさき こうじ	Yamasaki Koji	Yamasaki Koji	verified-update	https://id.ndl.go.jp/auth/ndlna/001109228	既存の人物同定で照合したNDL典拠の読み。
+tresi-nonno	Tresi Nonno	Tresi Nonno			Tresi Nonno	Tresi Nonno	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+theresa-savage	Theresa Savage	Theresa Savage			Theresa Savage	Theresa Savage	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+john-kupchik	John Kupchik	John Kupchik			John Kupchik	John Kupchik	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+yuko-kameda	Yuko Kameda	Yuko Kameda			Yuko Kameda	Yuko Kameda	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+hayato-kasuga	Hayato Kasuga	Hayato Kasuga			Hayato Kasuga	Hayato Kasuga	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+yumiko-ohara	Yumiko Ohara	Yumiko Ohara			Yumiko Ohara	Yumiko Ohara	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+v-m-alpatov	V. M. Alpatov	V. M. Alpatov			V. M. Alpatov	V. M. Alpatov	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+sarah-m-strong	Sarah M. Strong	Sarah M. Strong			Sarah M. Strong	Sarah M. Strong	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+hans-dieter-olschleger	Hans Dieter Ölschleger	Hans Dieter Ölschleger			Hans Dieter Ölschleger	Hans Dieter Ölschleger	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+david-l-howell	David L. Howell	David L. Howell			David L. Howell	David L. Howell	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+mark-j-hudson	Mark J. Hudson	Mark J. Hudson			Mark J. Hudson	Mark J. Hudson	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+sunazawa-kayo	Sunazawa Kayo	Sunazawa Kayo			Sunazawa Kayo	Sunazawa Kayo	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ann-elise-lewallen	ann-elise lewallen	ann-elise lewallen			ann-elise lewallen	ann-elise lewallen	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+shizue-ukaji	宇梶 静江	宇梶 静江		うかじ しずえ	Shizue Ukaji	Shizue Ukaji	verified-update	https://id.ndl.go.jp/auth/ndlna/01061517	姓名と生年が一致するNDL典拠の読み。
+kazuyuki-tanimoto	谷本 一之	谷本 一之		たにもと かずゆき	Kazuyuki Tanimoto	Kazuyuki Tanimoto	verified-update	https://id.ndl.go.jp/auth/ndlna/00082625	姓名と生年が一致するNDL典拠の読み。
+david-w-hughes	David W. Hughes	David W. Hughes			David W. Hughes	David W. Hughes	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+mikiso-hane	Mikiso Hane	Mikiso Hane			Mikiso Hane	Mikiso Hane	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kanako-uzawa	Kanako Uzawa	Kanako Uzawa			Kanako Uzawa	Kanako Uzawa	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+yolanda-munoz-gonzalez	Yolanda Muñoz González	Yolanda Muñoz González			Yolanda Muñoz González	Yolanda Muñoz González	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+katarina-sjoberg	Katarina Sjoberg	Katarina Sjoberg			Katarina Sjoberg	Katarina Sjoberg	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+simon-cotterill	Simon Cotterill	Simon Cotterill			Simon Cotterill	Simon Cotterill	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+koji-maeda	前田 耕司	前田 耕司			Kōji Maeda	Kōji Maeda	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sidney-c-h-cheung	Sidney C. H. Cheung	Sidney C. H. Cheung			Sidney C. H. Cheung	Sidney C. H. Cheung	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+michael-roellinghoff	Michael Roellinghoff	Michael Roellinghoff			Michael Roellinghoff	Michael Roellinghoff	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+goro-shima	GORO SHIMA	GORO SHIMA			GORO SHIMA	GORO SHIMA	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+takakura-shinichiro	高倉 新一郎	高倉 新一郎		たかくら しんいちろう	Takakura Shinichiro	Takakura Shinichiro	verified-update	https://id.ndl.go.jp/auth/ndlna/00078504	姓名と生年が一致するNDL典拠の読み。
+jun-ho-choe	Jun-Ho Choe	Jun-Ho Choe			Jun-Ho Choe	Jun-Ho Choe	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+norbert-r-adami	Norbert R. Adami	Norbert R. Adami			Norbert R. Adami	Norbert R. Adami	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+hans-a-dettmer	Hans A. Dettmer	Hans A. Dettmer			Hans A. Dettmer	Hans A. Dettmer	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kan-wada	和田 完	和田 完		わだ かん	Wada Kan	Wada Kan	verified-update	https://id.ndl.go.jp/auth/ndlna/00089876	既存の人物同定で照合したNDL典拠の読み。
+takashi-irimoto	煎本 孝	煎本 孝		いりもと たかし	Irimoto Takashi	Irimoto Takashi	verified-update	https://id.ndl.go.jp/auth/ndlna/00131179	既存の人物同定で照合したNDL典拠の読み。
+hirofumi-kato	加藤 博文	加藤 博文		かとう ひろふみ	Hirofumi Katō	Hirofumi Katō	verified-update	https://id.ndl.go.jp/auth/ndlna/00996082	姓名と生年が一致するNDL典拠の読み。
+fosco-maraini	Fosco Maraini	Fosco Maraini			Fosco Maraini	Fosco Maraini	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+noemi-godefroy	Noémi Godefroy	Noémi Godefroy			Noémi Godefroy	Noémi Godefroy	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+roslynn-ang	Roslynn Ang	Roslynn Ang			Roslynn Ang	Roslynn Ang	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+mayumi-okada	Mayumi Okada	Mayumi Okada			Mayumi Okada	Mayumi Okada	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kakurina-natalja	Kakurina Nataļja	Kakurina Nataļja			Kakurina Nataļja	Kakurina Nataļja	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+tessa-morris-suzuki	Tessa Morris-Suzuki	Tessa Morris-Suzuki			Tessa Morris-Suzuki	Tessa Morris-Suzuki	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+richard-siddle	Richard Siddle	Richard Siddle			Richard Siddle	Richard Siddle	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kyoko-selden	Kyoko Selden	Kyoko Selden			Kyoko Selden	Kyoko Selden	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+ida-ayu-laksmita-sari	Ida Ayu Laksmita Sari	Ida Ayu Laksmita Sari			Ida Ayu Laksmita Sari	Ida Ayu Laksmita Sari	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+osamu-kondo	OSAMU KONDO	OSAMU KONDO			OSAMU KONDO	OSAMU KONDO	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+honda-katsuichi	Honda Katsuichi	Honda Katsuichi			Honda Katsuichi	Honda Katsuichi	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+hitoshi-watanabe	渡辺 仁	渡辺 仁		わたなべ ひとし	Watanabe Hitoshi	Watanabe Hitoshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00090648	既存の人物同定で照合したNDL典拠の読み。
+akira-goto	Akira Goto	Akira Goto			Akira Goto	Akira Goto	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+joseph-m-kitagawa	Joseph M. Kitagawa	Joseph M. Kitagawa			Joseph M. Kitagawa	Joseph M. Kitagawa	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+hosanna-fukuzawa	Hosanna Fukuzawa	Hosanna Fukuzawa			Hosanna Fukuzawa	Hosanna Fukuzawa	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+tatsuyoshi-masuda	Tatsuyoshi Masuda	Tatsuyoshi Masuda			Tatsuyoshi Masuda	Tatsuyoshi Masuda	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+alexander-bukh	Alexander Bukh	Alexander Bukh			Alexander Bukh	Alexander Bukh	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+peter-geiser	Peter Geiser	Peter Geiser			Peter Geiser	Peter Geiser	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+tadao-mitui	Tadao Mitui	Tadao Mitui			Tadao Mitui	Tadao Mitui	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+sigeru-sumi	Sigeru Sumi	Sigeru Sumi			Sigeru Sumi	Sigeru Sumi	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+chisato-dubreuil	Chisato Dubreuil	Chisato Dubreuil			Chisato Dubreuil	Chisato Dubreuil	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+gary-w-crawford	Gary W. Crawford	Gary W. Crawford			Gary W. Crawford	Gary W. Crawford	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+kirsten-yumiko-taguchi	Kirsten Yumiko Taguchi	Kirsten Yumiko Taguchi			Kirsten Yumiko Taguchi	Kirsten Yumiko Taguchi	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+s-itoh	S. Itoh	S. Itoh			S. Itoh	S. Itoh	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+a-kuroshima	A. Kuroshima	A. Kuroshima			A. Kuroshima	A. Kuroshima	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+masayuki-ueno	上野 昌之	上野 昌之		うえの まさゆき	Ueno Masayuki	Ueno Masayuki	verified-update	https://id.ndl.go.jp/auth/ndlna/001193020	登録著作と同じ著作を出典とするNDL典拠の読み。
+miyama-osamu	美山 治	美山 治			Miyama Osamu	Miyama Osamu	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-15abopl	松浦 孝平	松浦 孝平			Kohei Matsuura	Kohei Matsuura	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+ikegami-jiro	池上 二良	池上 二良		いけがみ じろう	Jirō Ikegami	Jirō Ikegami	verified-update	https://id.ndl.go.jp/auth/ndlna/00142653	姓名と生年が一致するNDL典拠の読み。
+ono-yugo	小野 有五	小野 有五		おの ゆうご	Ono Yūgo	Ono Yūgo	verified-update	https://id.ndl.go.jp/auth/ndlna/00140916	姓名と生年が一致するNDL典拠の読み。
+kuwabayashi-kenji	桑林 賢治	桑林 賢治			Kuwabayashi Kenji	Kuwabayashi Kenji	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+endo-masatoshi	遠藤 匡俊	遠藤 匡俊		えんどう まさとし	Endō Masatoshi	Endō Masatoshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00544849	既存の人物同定で照合したNDL典拠の読み。
+kato-hyakuichi	加藤 百一	加藤 百一		かとう ひゃくいち	Katō Hyakuichi	Katō Hyakuichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00027692	既存の人物同定で照合したNDL典拠の読み。
+yokohira-hiroshi	横平 弘	横平 弘			Yokohira Hiroshi	Yokohira Hiroshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1n77u3o	川上 将史	川上 将史		かわかみ まさし		Kawakami Masashi	verified-update	https://www.hokkaidoisan.org/pdf/isan_07.pdf	本人取材記事のプロフィール。臨床工学技士の同姓同名人物とは区別。
+maekawa-fumio	前川文夫	前川文夫		まえかわ ふみお	Fumio Maekawa	Fumio Maekawa	verified-update	https://id.ndl.go.jp/auth/ndlna/00039480	姓名と生年が一致するNDL典拠の読み。
+sato-masahiko	佐藤 昌彦	佐藤 昌彦		さとう まさひこ	Satō Masahiko	Satō Masahiko	verified-update	https://id.ndl.go.jp/auth/ndlna/00688871	既存の人物同定で照合したNDL典拠の読み。
+obayashi-taryo	大林 太良	大林 太良		おおばやし たりょう	Taryō Ōbayashi	Taryō Ōbayashi	verified-update	https://id.ndl.go.jp/auth/ndlna/00057271	姓名と生年が一致するNDL典拠の読み。
+p-12ohmil	木村 英明	木村 英明		きむら ひであき		Kimura Hideaki	verified-update	https://id.ndl.go.jp/auth/ndlna/00164827	既存の人物同定で照合したNDL典拠の読み。
+ito-atsunori	伊藤 敦規	伊藤 敦規		いとう あつのり	Atsunori Itō	Atsunori Itō	verified-update	https://id.ndl.go.jp/auth/ndlna/001109233	登録著作と同じ著作を出典とするNDL典拠の読み。
+p-1dhckok	廣瀬隆人	廣瀬隆人		ひろせ たかひと		Hirose Takahito	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=8970&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。
+ishikawa-motosuke	石川 元助	石川 元助		いしかわ もとすけ	Ishikawa Motosuke	Ishikawa Motosuke	verified-update	https://id.ndl.go.jp/auth/ndlna/00021278	既存の人物同定で照合したNDL典拠の読み。
+p-tuy84r	坂本 恵衣	坂本 恵衣		さかもと けい		Sakamoto Kei	verified-update	https://www.city.ishikari.hokkaido.jp/museum/1004794/index.html	所属資料館の学芸員紹介にふりがな。
+uchida-yuichi	内田 祐一	内田 祐一		うちだ ゆういち	Uchida Yūichi	Uchida Yūichi	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=16721&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+p-1awxh9o	伊勢 寛	伊勢 寛		いせ ひろし		Ise Hiroshi	verified-update	https://doi.org/10.5996/newgeo.51.4_1	当該論文の登録メタデータHiroshi ISE。
+tsumagari-toshiro	津曲 敏郎	津曲 敏郎		つまがり としろう	Tsumagari Toshirō	Tsumagari Toshirō	verified-update	https://id.ndl.go.jp/auth/ndlna/00254566	既存の人物同定で照合したNDL典拠の読み。
+inukai-tetsuo	犬飼 哲夫	犬飼 哲夫		いぬかい てつお	Inukai Tetsuo	Inukai Tetsuo	verified-update	https://id.ndl.go.jp/auth/ndlna/00169966	姓名と生年が一致するNDL典拠の読み。
+p-1cuw446	宮地 鼓	宮地 鼓		みやじ つずみ		Miyaji Tsuzumi	verified-update	https://kaken.nii.ac.jp/ja/file/KAKENHI-PROJECT-24740345/24740345seika.pdf	研究成果報告書にMIYAJI TSUZUMI。NDL典拠のミヤジ ツズミも照合。
+p-12ykcjr	奥山 英登	奥山 英登		おくやま ひでと		Okuyama Hideto	verified-update	https://ceca.mini.icom.museum/wp-content/uploads/sites/5/2023/09/Book-BEST-PRACTICE-11-2023-336Mo.pdf	ICOM CECAの著者リストHideto Okuyama（64頁）。
+kawakami-jun	川上 淳	川上 淳		かわかみ じゅん	Jun Kawakami	Jun Kawakami	verified-update	https://id.ndl.go.jp/auth/ndlna/00131361	既存の人物同定で照合したNDL典拠の読み。
+p-cgadvd	戸川 貴之	戸川 貴之					reading-unresolved		確定読みの裏付けを未確認。
+p-1jwkn23	岩佐 奈々子	岩佐 奈々子		いわさ ななこ		Iwasa Nanako	verified-update	https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202101012090351992	本人・所属機関または原著論文の著者表記で確認。
+arai-kaori	新井 かおり	新井 かおり			Arai Kaori	Arai Kaori	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+iwasawa-takako	岩澤 孝子	岩澤 孝子		いわさわ たかこ	Iwasawa Takako	Iwasawa Takako	verified-update	https://id.ndl.go.jp/auth/ndlna/031781499	登録著作と同じ著作を出典とするNDL典拠の読み。
+momose-hibiki	百瀬 響	百瀬 響		ももせ ひびき	Momose Hibiki	Momose Hibiki	verified-update	https://id.ndl.go.jp/auth/ndlna/00762834	既存の人物同定で照合したNDL典拠の読み。
+takegahara-yukio	竹ケ原 幸朗	竹ケ原 幸朗			Takegahara Yukio	Takegahara Yukio	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+tamura-masato	田村 将人	田村 将人			Tamura Masato	Tamura Masato	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1wrm8x0	立石 信一	立石 信一		たていし しんいち		Tateishi Shinichi	verified-update	https://ycu.repo.nii.ac.jp/records/1116	本人・所属機関または原著論文の著者表記で確認。
+sekiguchi-yoshihiko	関口 由彦	関口 由彦		せきぐち よしひこ	Sekiguchi Yoshihiko	Sekiguchi Yoshihiko	verified-update	https://id.ndl.go.jp/auth/ndlna/01126308	既存の人物同定で照合したNDL典拠の読み。
+p-z25ghv	是澤 櫻子	是澤 櫻子				Koresawa Sakurako	verified-update	https://eprints.lib.hokudai.ac.jp/repo/huscap/all/91266/03_4_Koresawa.pdf	本人・所属機関または原著論文の著者表記で確認。
+hayashi-yoshishige	林 善茂	林 善茂		はやし よししげ	Yoshishige Hayashi	Yoshishige Hayashi	verified-update	https://id.ndl.go.jp/auth/ndlna/00009851	姓名と生年が一致するNDL典拠の読み。
+sumiya-kazuhiko	住谷 一彦	住谷 一彦		すみや かずひこ	Kazuhiko Sumiya	Kazuhiko Sumiya	verified-update	https://id.ndl.go.jp/auth/ndlna/00074968	姓名と生年が一致するNDL典拠の読み。
+p-1avbcz7	三橋 博	三橋 博		みつはし ひろし		Mitsuhashi Hiroshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00044136	既存の人物同定で照合したNDL典拠の読み。
+kono-hiromichi	河野 広道	河野 広道		こうの ひろみち	Kōno Hiromichi	Kōno Hiromichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00035412	姓名と生年が一致するNDL典拠の読み。
+yahata-tomoe	八幡 巴	八幡 巴			Yahata Tomoe	Yahata Tomoe	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sasaki-shiro	佐々木 史郎	佐々木 史郎		ささき しろう	Sasaki Shirō	Sasaki Shirō	verified-update	https://id.ndl.go.jp/auth/ndlna/00383617	既存の人物同定で照合したNDL典拠の読み。
+p-1bcg76a	呉 松旆	呉 松旆				Wu Sung-Pei	verified-update	https://cir.nii.ac.jp/crid/1520577741138402560	当該論文の英文著者名。日本語音読Go Shohaiは採用しない。
+p-1nobjlt	木名瀬 高嗣	木名瀬 高嗣		きなせ たかし	Takashi Kinase	Takashi Kinase	verified-update	https://id.ndl.go.jp/auth/ndlna/031977221	既存の人物同定で照合したNDL典拠の読み。
+okita-noriaki	大喜多 紀明	大喜多 紀明			Ōkita Noriaki	Ōkita Noriaki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+natori-takemitsu	名取 武光	名取 武光		なとり たけみつ	Takemitsu Natori	Takemitsu Natori	verified-update	https://id.ndl.go.jp/auth/ndlna/00054195	姓名と生年が一致するNDL典拠の読み。
+tokuda-sadakazu	徳田 貞一	徳田 貞一		とくだ さだかず	Tokuda Sadakazu	Tokuda Sadakazu	verified-update	https://id.ndl.go.jp/auth/ndlna/00084654	既存の人物同定で照合したNDL典拠の読み。
+kono-tsunekichi	河野 常吉	河野 常吉		こうの つねきち	Tsunekichi Kōno	Tsunekichi Kōno	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=341&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+fujimoto-hideo	藤本 英夫	藤本 英夫		ふじもと ひでお	Fujimoto Hideo	Fujimoto Hideo	verified-update	https://id.ndl.go.jp/auth/ndlna/00015734	既存の人物同定で照合したNDL典拠の読み。
+miyabe-kingo	宮部金吾	宮部金吾		みやべ きんご	Kingo Miyabe	Kingo Miyabe	verified-update	https://id.ndl.go.jp/auth/ndlna/00044610	姓名と生年が一致するNDL典拠の読み。
+p-1nliw67	小谷 凱宣	小谷 凱宣		こたに よしのぶ		Kotani Yoshinobu	verified-update	https://id.ndl.go.jp/auth/ndlna/00121713	既存の人物同定で照合したNDL典拠の読み。
+ogawa-masato	小川 正人	小川 正人		おがわ まさひと	Ogawa Masato	Ogawa Masahito	verified-update	https://www.hm.pref.hokkaido.lg.jp/study/staff/ogawa-masahito/ https://id.ndl.go.jp/auth/ndlna/00681475	北海道博物館の本人紹介にOGAWA Masahitoと明記。
+nishikiya-tadashi	錦谷 禎	錦谷 禎			Nishikiya Tadashi	Nishikiya Tadashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-idpctl	シン ウォンジ	シン ウォンジ				Shin Wonji	verified-update	https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202401014730401864	国立アイヌ民族博物館の研究者プロフィール。
+tosabayashi-yoshio	土佐林 義雄	土佐林 義雄			Yoshio Tosabayashi	Yoshio Tosabayashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sasaki-toshikazu	佐々木 利和	佐々木 利和		ささき としかず	Toshikazu Sasaki	Toshikazu Sasaki	verified-update	https://id.ndl.go.jp/auth/ndlna/00189905	姓名と生年が一致するNDL典拠の読み。
+udagawa-hiroshi	宇田川 洋	宇田川 洋	うだがわ ひろし	うだがわ ひろし	Udagawa Hiroshi	Udagawa Hiroshi	existing-kana		既存のかなを保持。
+miki-masafumi	三木 理史	三木 理史		みき まさふみ	Masafumi Miki	Masafumi Miki	verified-update	https://id.ndl.go.jp/auth/ndlna/00764219	姓名と生年が一致するNDL典拠の読み。
+p-1owqqtz	井上 善十郎	井上 善十郎		いのうえ ぜんじゅうろう		Inoue Zenjuro	verified-update	https://id.ndl.go.jp/auth/ndlna/00019923	既存の人物同定で照合したNDL典拠の読み。
+okawada-akira	岡和田 晃	岡和田 晃		おかわだ あきら	Akira Okawada	Akira Okawada	verified-update	https://id.ndl.go.jp/auth/ndlna/01162724	姓名と生年が一致するNDL典拠の読み。
+kobayashi-koji	小林 孝二	小林 孝二		こばやし こうじ	Kobayashi Kōji	Kobayashi Kōji	verified-update	https://id.ndl.go.jp/auth/ndlna/01204951	既存の人物同定で照合したNDL典拠の読み。
+ogaki-naoaki	大垣 直明	大垣 直明		おおがき なおあき	Ōgaki Naoaki	Ōgaki Naoaki	verified-update	https://id.ndl.go.jp/auth/ndlna/00130125	既存の人物同定で照合したNDL典拠の読み。
+seki-masanori	關 政則	關 政則			Seki Masanori	Seki Masanori	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+shinohara-chika	篠原 智花	篠原 智花			Shinohara Chika	Shinohara Chika	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sasakura-irumi	笹倉 いる美	笹倉 いる美			Sasakura Irumi	Sasakura Irumi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+niioka-takehiko	新岡 武彦	新岡 武彦		にいおか たけひこ	Niioka Takehiko	Niioka Takehiko	verified-update	https://id.ndl.go.jp/auth/ndlna/00104877	既存の人物同定で照合したNDL典拠の読み。
+tsuboi-shogoro	坪井 正五郎	坪井 正五郎		つぼい しょうごろう	Tsuboi Shōgorō	Tsuboi Shōgorō	verified-update	https://id.ndl.go.jp/auth/ndlna/00086000	姓名と生年が一致するNDL典拠の読み。
+ishida-shuzo	石田 収蔵	石田 収蔵			Ishida Shūzō	Ishida Shūzō	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1w11480	浜守 杏奈	浜守 杏奈				Hamamori Anna	verified-update	https://jissen.repo.nii.ac.jp/record/2545/files/%E7%94%9F%E6%B4%BB%E7%A7%91%E5%AD%A660-6.pdf	当該論文の英文著者名。大学の別資料に矛盾するカナがあり、カナは保留。
+sato-sachiko	佐藤 幸子	佐藤 幸子			Sachiko Satō	Sachiko Satō	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+saito-reiko	齋藤 玲子	齋藤 玲子			Saito Reiko	Saito Reiko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1geswer	石橋 俊實	石橋 俊實					reading-unresolved		確定読みの裏付けを未確認。
+hirako-goichi	平光 吾一	平光 吾一			Goichi Hirako	Goichi Hirako	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+matsunaga-yasuhiro	松永 康佑	松永 康佑		まつなが こうすけ	Yasuhiro Matsunaga	Matsunaga Kosuke	verified-update	https://www.scu.ac.jp/research/news/profile/kosuke-matsunaga/ https://id.ndl.go.jp/auth/ndlna/031781584	所属大学の英文表記。
+sugiyama-sueo	杉山 壽榮男	杉山 壽榮男			Sugiyama Sueo	Sugiyama Sueo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+suzuki-hisashi	鈴木 尚	鈴木 尚		すずき ひさし	Hisashi Suzuki	Hisashi Suzuki	verified-update	https://id.ndl.go.jp/auth/ndlna/00075364	姓名と生年が一致するNDL典拠の読み。
+haniwara-kazuro	埴原 和郎	埴原 和郎		はにはら かずろう	Kazurō Haniwara	Hanihara Kazurō	verified-update	https://www.jstage.jst.go.jp/article/asj/113/1/113_1_1/_pdf https://id.ndl.go.jp/auth/ndlna/00007084	学会の追悼論文の英文姓名。NDL典拠とも一致。
+p-113iutn	大場 秀夫	大場 秀夫					reading-unresolved		確定読みの裏付けを未確認。
+nakamura-kazuyuki	中村 和之	中村 和之		なかむら かずゆき	Kazuyuki Nakamura	Kazuyuki Nakamura	verified-update	https://id.ndl.go.jp/auth/ndlna/01120632	既存の人物同定で照合したNDL典拠の読み。
+kohama-mototsugu	小浜 基次	小浜 基次		こはま もとつぐ	Kohama Mototsugu	Kohama Mototsugu	verified-update	https://id.ndl.go.jp/auth/ndlna/00755353	既存の人物同定で照合したNDL典拠の読み。
+yachita-mio	谷地田 未緒	谷地田 未緒			Yachita Mio	Yachita Mio	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-754y3m	小林 房太郎	小林 房太郎		こばやし ふさたろう		Kobayashi Fusataro	verified-update	https://id.ndl.go.jp/auth/ndlna/00033052	既存の人物同定で照合したNDL典拠の読み。
+ikeda-yuko	池田 裕子	池田 裕子			Yūko Ikeda	Yūko Ikeda	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-13p2pr0	野本 正博	野本 正博		のもと まさひろ		Nomoto Masahiro	verified-update	https://hijas-arc.ws.hosei.ac.jp/news/20250314-16info.html	本人・所属機関または原著論文の著者表記で確認。
+yamamoto-yuko	山本 祐弘	山本 祐弘		やまもと ゆうこう	Yamamoto Yūkō	Yamamoto Yūkō	verified-update	https://id.ndl.go.jp/auth/ndlna/00093743	既存の人物同定で照合したNDL典拠の読み。
+yanagita-kunio	柳田 國男	柳田 國男		やなぎた くにお	Kunio Yanagita	Kunio Yanagita	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=1242&domain=ainu	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+okada-hiroaki	岡田 宏明	岡田 宏明		おかだ ひろあき	Hiroaki Okada	Hiroaki Okada	verified-update	https://id.ndl.go.jp/auth/ndlna/00059263	姓名と生年が一致するNDL典拠の読み。
+kawamura-minato	川村 湊	川村 湊		かわむら みなと	Minato Kawamura	Minato Kawamura	verified-update	https://id.ndl.go.jp/auth/ndlna/00131366	姓名と生年が一致するNDL典拠の読み。
+p-12ok2ju	木村 邦彦	木村 邦彦		きむら くにひこ		Kimura Kunihiko	verified-update	https://id.ndl.go.jp/auth/ndlna/00031002	既存の人物同定で照合したNDL典拠の読み。
+ishii-tomomi	石井 智美	石井 智美		いしい さとみ	Tomomi Ishii	Ishii Satomi	verified-update	https://inr.jp/company/staff https://id.ndl.go.jp/auth/ndlna/001291581	本人の現所属先プロフィール。酪農学園大学での食文化研究歴とも一致。
+keira-tomoko	計良 智子	計良 智子		けいら ともこ	Tomoko Keira	Tomoko Keira	verified-update	https://id.ndl.go.jp/auth/ndlna/00377824	姓名と生年が一致するNDL典拠の読み。
+ishihara-mai	石原 真衣	石原 真衣		いしはら まい	Mai Ishihara	Mai Ishihara	verified-update	https://id.ndl.go.jp/auth/ndlna/031373991	姓名と生年が一致するNDL典拠の読み。
+deriha-koji	出利葉 浩司	出利葉 浩司		でりは こうじ	Deriha Kōji	Deriha Kōji	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9089&domain=ainu	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+egami-namio	江上 波夫	江上 波夫		えがみ なみお	Namio Egami	Namio Egami	verified-update	https://id.ndl.go.jp/auth/ndlna/00005086	姓名と生年が一致するNDL典拠の読み。
+nagata-hosei	永田 方正	永田 方正		ながた ほうせい	Hōsei Nagata	Hōsei Nagata	verified-update	https://id.ndl.go.jp/auth/ndlna/00050348	姓名と生年が一致するNDL典拠の読み。
+sakuma-manabu	佐久間 学	佐久間 学			Manabu Sakuma	Manabu Sakuma	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-l1k9nn	羽深 久夫	羽深 久夫		はぶか ひさお		Habuka Hisao	verified-update	https://doi.org/10.3130/aija.79.2733	当該論文の登録メタデータHisao HABUKA。
+shirayama-tomomasa	白山 友正	白山 友正		しらやま ともまさ	Shirayama Tomomasa	Shirayama Tomomasa	verified-update	https://id.ndl.go.jp/auth/ndlna/00073128	既存の人物同定で照合したNDL典拠の読み。
+kondo-shiro	近藤 四郎	近藤 四郎		こんどう しろう	Shirō Kondō	Shirō Kondō	verified-update	https://id.ndl.go.jp/auth/ndlna/00102714	姓名と生年が一致するNDL典拠の読み。
+ogata-tamotsu	小片 保	小片 保		おがた たもつ	Ogata Tamotsu	Ogata Tamotsu	verified-update	https://id.ndl.go.jp/auth/ndlna/00113013	既存の人物同定で照合したNDL典拠の読み。
+kono-motomichi	河野 本道	河野 本道		こうの もとみち	Motomichi Kōno	Motomichi Kōno	verified-update	https://id.ndl.go.jp/auth/ndlna/00035468	姓名と生年が一致するNDL典拠の読み。
+segawa-kiyoko	瀬川 清子	瀬川 清子		せがわ きよこ	Kiyoko Segawa	Kiyoko Segawa	verified-update	https://id.ndl.go.jp/auth/ndlna/00069310	姓名と生年が一致するNDL典拠の読み。
+p-1cwkgj0	床 州生	床 州生		とこ しゅうせい		Toko Shusei	verified-update	https://www.jstage.jst.go.jp/article/namjournal/2024/3/2024_2024-05.0/_pdf/-char/ja	同じインタビューの編集者による紹介文でTOKO Shusei。
+p-1b2n71h	中里 巧	中里 巧		なかざと さとし		Nakazato Satoshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00346122	既存の人物同定で照合したNDL典拠の読み。
+baba-yumi	馬場 裕美	馬場 裕美			Baba Yumi	Baba Yumi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+osaka-taku	大坂拓	大坂拓		おおさか たく	Osaka Taku	Osaka Taku	verified-update	https://id.ndl.go.jp/auth/ndlna/034031464	既存の人物同定で照合したNDL典拠の読み。
+tanimoto-akihisa	谷本 晃久	谷本 晃久		たにもと あきひさ	Tanimoto Akihisa	Tanimoto Akihisa	verified-update	https://id.ndl.go.jp/auth/ndlna/001171975	既存の人物同定で照合したNDL典拠の読み。
+p-1yumqo7	津田 命子	津田 命子		つだ のぶこ	Tsuda Nobuko	Tsuda Nobuko	verified-update	https://id.ndl.go.jp/auth/ndlna/01161229	既存の人物同定で照合したNDL典拠の読み。
+onai-toru	小内 透	小内 透		おない とおる	Tōru Onai	Tōru Onai	verified-update	https://id.ndl.go.jp/auth/ndlna/00409028	姓名と生年が一致するNDL典拠の読み。
+ivar-lindquist	Ivar Lindquist	Ivar Lindquist			Ivar Lindquist	Ivar Lindquist	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+vaclav-blazek	Václav Blažek	Václav Blažek			Václav Blažek	Václav Blažek	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+oki	Oki .	Oki .			Oki .	Oki .	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+james-patrie	James Patrie	James Patrie			James Patrie	James Patrie	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+benon-zbigniew-sza-ek	Benon Zbigniew Szałek	Benon Zbigniew Szałek			Benon Zbigniew Szałek	Benon Zbigniew Szałek	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+sakakibara-masafumi	榊原 正文	榊原 正文		さかきばら まさふみ	Sakakibara Masafumi	Sakakibara Masafumi	verified-update	https://id.ndl.go.jp/auth/ndlna/00365660	既存の人物同定で照合したNDL典拠の読み。
+ito-seichi	伊藤 せいち	伊藤 せいち		いとう せいち	Itō Seichi	Itō Seichi	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9624&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+p-y2rdpz	地蔵 慶護	地蔵 慶護		じぞう けいご		Jizo Keigo	verified-update	https://id.ndl.go.jp/auth/ndlna/00162153	既存の人物同定で照合したNDL典拠の読み。
+takahashi-shin	高橋 慎	高橋 慎			Takahashi Shin	Takahashi Shin	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+miyoshi-isao	三好 勲	三好 勲			Miyoshi Isao	Miyoshi Isao	kana-unresolved		法政目録のイサムと既存のIsaoが不一致。
+akiyama-hidetoshi	秋山 秀敏	秋山 秀敏			Akiyama Hidetoshi	Akiyama Hidetoshi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1d9nra9	岡部 卓	岡部 卓					reading-unresolved		確定読みの裏付けを未確認。
+ogiya-masayasu	扇谷 昌康	扇谷 昌康		おうぎや まさやす	Ōgiya Masayasu	Ōgiya Masayasu	verified-update	https://id.ndl.go.jp/auth/ndlna/00058242	既存の人物同定で照合したNDL典拠の読み。
+miyazaki-kota	宮崎 耕太	宮崎 耕太			Miyazaki Kōta	Miyazaki Kōta	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+watanabe-takashi	渡辺 隆	渡辺 隆			Takashi Watanabe	Takashi Watanabe	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1i159kw	小林 耕一	小林 耕一					reading-unresolved		確定読みの裏付けを未確認。
+nakano-yoshinobu	中野 良宣	中野 良宣			Nakano Yoshinobu	Nakano Yoshinobu	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+iguchi-toshio	井口 利夫	井口 利夫			Iguchi Toshio	Iguchi Toshio	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+shimizu-seijiro	清水 清次郎	清水 清次郎		しみず せいじろう	Shimizu Seijirō	Shimizu Seijirō	verified-update	https://id.ndl.go.jp/auth/ndlna/00173763	既存の人物同定で照合したNDL典拠の読み。
+takahashi-motoi	高橋 基	高橋 基			Motoi Takahashi	Motoi Takahashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-12o91rj	木村 博海	木村 博海					reading-unresolved		確定読みの裏付けを未確認。
+taira-ryuichi	平 隆一	平 隆一			Taira Ryūichi	Taira Ryūichi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kasai-takechiyo	葛西 猛千代	葛西 猛千代		かさい たけちよ	Kasai Takechiyo	Kasai Takechiyo	verified-update	https://id.ndl.go.jp/auth/ndlna/00027000	既存の人物同定で照合したNDL典拠の読み。
+p-1g2agq6	山下 栄光	山下 栄光		やました えいみつ		Yamashita Eimitsu	verified-update	https://id.ndl.go.jp/auth/ndlna/001362944	登録著作と同じ著作を出典とするNDL典拠の読み。
+p-zo7x46	明石 一紀	明石 一紀		あかし かずのり		Akashi Kazunori	verified-update	https://id.ndl.go.jp/auth/ndlna/00192670	既存の人物同定で照合したNDL典拠の読み。
+p-yj098k	早田 国光	早田 国光					reading-unresolved		確定読みの裏付けを未確認。
+p-x4n5eb	狩野 義美	狩野 義美		かりの よしみ		Karino Yoshimi	verified-update	https://id.ndl.go.jp/auth/ndlna/01116047	既存の人物同定で照合したNDL典拠の読み。
+sudo-ryusen	須藤 隆仙	須藤 隆仙		すどう りゅうせん	Ryūsen Sudō	Ryūsen Sudō	verified-update	https://id.ndl.go.jp/auth/ndlna/00073786	姓名と生年が一致するNDL典拠の読み。
+p-14v1ctr	本田 克代	本田 克代					reading-unresolved		確定読みの裏付けを未確認。
+p-pfh2dq	土井 勝典	土井 勝典					reading-unresolved		確定読みの裏付けを未確認。
+p-70s9t4	八重 九郎	八重 九郎					reading-unresolved		確定読みの裏付けを未確認。
+narumi-hideshi	鳴海 日出志	鳴海 日出志		なるみ ひでし	Narumi Hideshi	Narumi Hideshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00186544	既存の人物同定で照合したNDL典拠の読み。
+p-1cyxo40	尾崎 功	尾崎 功		おざき いさお		Ozaki Isao	verified-update	https://id.ndl.go.jp/auth/ndlna/00987315	既存の人物同定で照合したNDL典拠の読み。
+kojima-kyoko	児島 恭子	児島 恭子		こじま きょうこ	Kyōko Kojima	Kyōko Kojima	verified-update	https://id.ndl.go.jp/auth/ndlna/00907200	姓名と生年が一致するNDL典拠の読み。
+p-1prw9wa	中野 克良	中野 克良					reading-unresolved		確定読みの裏付けを未確認。
+tezuka-yoritaka	手塚 順孝	手塚 順孝			Tezuka Yoritaka	Tezuka Yoritaka	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-gitgqw	打田 元輝	打田 元輝					reading-unresolved		確定読みの裏付けを未確認。
+pon-huci	ポン・フチ	ポン・フチ		ぽん ふち	Pon Huci	Pon Huci	verified-update	https://id.ndl.go.jp/auth/ndlna/00064365	既存の人物同定で照合したNDL典拠の読み。
+p-1avld4w	中村 幽	中村 幽					reading-unresolved		確定読みの裏付けを未確認。
+p-1nkxafa	佐川 年秀	佐川 年秀		さがわ としひで		Sagawa Toshihide	verified-update	https://id.ndl.go.jp/auth/ndlna/00809160	既存の人物同定で照合したNDL典拠の読み。
+p-1ktul8c	岡本 武雄	岡本 武雄					reading-unresolved		確定読みの裏付けを未確認。
+hirayama-hiroto	平山 裕人	平山 裕人		ひらやま ひろと	Hiroto Hirayama	Hiroto Hirayama	verified-update	https://id.ndl.go.jp/auth/ndlna/00428974	姓名と生年が一致するNDL典拠の読み。
+yamamoto-tasuke	山本 多助	山本 多助		やまもと たすけ	Tasuke Yamamoto	Tasuke Yamamoto	verified-update	https://id.ndl.go.jp/auth/ndlna/00120379	姓名と生年が一致するNDL典拠の読み。
+p-k7l165	戸部 千春	戸部 千春		とべ ちはる		Tobe Chiharu	verified-update	https://id.ndl.go.jp/auth/ndlna/033626494	既存の人物同定で照合したNDL典拠の読み。
+goto-toshio	後藤 利雄	後藤 利雄		ごとう としお	Gotō Toshio	Gotō Toshio	verified-update	https://id.ndl.go.jp/auth/ndlna/00006173	既存の人物同定で照合したNDL典拠の読み。
+fujimura-hisakazu	藤村 久和	藤村 久和		ふじむら ひさかず	Hisakazu Fujimura	Hisakazu Fujimura	verified-update	https://id.ndl.go.jp/auth/ndlna/00129451	姓名と生年が一致するNDL典拠の読み。
+uoi-kazuyoshi	魚井 一由	魚井 一由		うおい かずよし	Kazuyoshi Uoi	Kazuyoshi Uoi	verified-update	https://id.ndl.go.jp/auth/ndlna/00252137	既存の人物同定で照合したNDL典拠の読み。
+p-1ve2u2k	青木 茂治	青木 茂治					reading-unresolved		確定読みの裏付けを未確認。
+p-1kl2r4i	中澤 道三	中澤 道三					reading-unresolved		確定読みの裏付けを未確認。
+saga-ayami	佐賀 彩美	佐賀 彩美			Saga Ayami	Saga Ayami	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+tachibana-yoshimitsu	橘 善光	橘 善光		たちばな よしみつ	Tachibana Yoshimitsu	Tachibana Yoshimitsu	verified-update	https://id.ndl.go.jp/auth/ndlna/00083103	既存の人物同定で照合したNDL典拠の読み。
+p-1hmrc4r	筒井 功	筒井 功		つつい いさお		Tsutsui Isao	verified-update	https://id.ndl.go.jp/auth/ndlna/00189562	既存の人物同定で照合したNDL典拠の読み。
+p-1ixvufv	菅原 進	菅原 進		すがわら すすむ		Sugawara Susumu	verified-update	https://id.ndl.go.jp/auth/ndlna/01237129	既存の人物同定で照合したNDL典拠の読み。
+shirai-katsuhiko	白井 克彦	白井 克彦		しらい かつひこ	Katsuhiko Shirai	Katsuhiko Shirai	verified-update	https://id.ndl.go.jp/auth/ndlna/00141316	姓名と生年が一致するNDL典拠の読み。
+sugimura-kinarabukku	杉村 キナラブック	杉村 キナラブック		すぎむら きならぶっく	Kinarabukku Sugimura	Kinarabukku Sugimura	verified-update	https://id.ndl.go.jp/auth/ndlna/00074451	姓名と生年が一致するNDL典拠の読み。
+tanaka-yoshito	田中 吉人	田中 吉人			Tanaka Yoshito	Tanaka Yoshito	kana-unresolved		法政目録のヨシヒトと既存のYoshitoが不一致。
+ishihara-makoto	石原 誠	石原 誠			Makoto Ishihara	Makoto Ishihara	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+oshima-minoru	大島 稔	大島 稔		おおしま みのる	Ōshima Minoru	Ōshima Minoru	verified-update	https://id.ndl.go.jp/auth/ndlna/01041583	既存の人物同定で照合したNDL典拠の読み。
+hishinuma-uichi	菱沼 右一	菱沼 右一		ひしぬま ういち	Hishinuma Uichi	Hishinuma Uichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00011892	既存の人物同定で照合したNDL典拠の読み。
+hashio-naokazu	橋尾 直和	橋尾 直和			Naokazu Hashio	Naokazu Hashio	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+oide-ayako	大出 あや子	大出 あや子		おおいで あやこ	Ōide Ayako	Ōide Ayako	verified-update	https://id.ndl.go.jp/auth/ndlna/00155614	既存の人物同定で照合したNDL典拠の読み。
+p-kmjzaq	川村 シンリツ・エオリパック・アイヌ	川村 シンリツ・エオリパック・アイヌ					reading-unresolved		確定読みの裏付けを未確認。
+p-1f5kvww	橋本 潔	橋本 潔		はしもと きよし		Hashimoto Kiyoshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00919234	既存の人物同定で照合したNDL典拠の読み。
+minami-noriyuki	南 哲行	南 哲行			Noriyuki Minami	Noriyuki Minami	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+okada-michiaki	岡田 路明	岡田 路明		おかだ みちあき	Okada Michiaki	Okada Michiaki	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=14966&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+p-9u49vf	北洞 孝雄	北洞 孝雄		きたぼら たかお		Kitabora Takao	verified-update	https://www.jomonart.or.jp/pdf/goshinmoro-newsletter-vol05.pdf	本田優子のインタビューで本人の知る研究者をきたぼら・たかおと紹介。法政の疑問符付きキタホラは採用しない。
+p-1cbtbaa	鍛治 明香	鍛治 明香		かじ さやか		Kaji Sayaka	verified-update	https://ci.nii.ac.jp/author/DA10302877	同じ著書「イタㇰカシカムイ」の著者典拠にカジ サヤカ。
+ono-yoneichi	小野 米一	小野 米一		おの よねいち	Ono Yoneichi	Ono Yoneichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00117587	既存の人物同定で照合したNDL典拠の読み。
+p-1toajjl	佐藤 知巳	佐藤 知巳					reading-unresolved		確定読みの裏付けを未確認。
+p-1lg7zk7	中畠 孝幸	中畠 孝幸		なかはた たかゆき		Nakahata Takayuki	verified-update	https://ir.library.osaka-u.ac.jp/repo/ouka/all/8045/	本人・所属機関または原著論文の著者表記で確認。
+suga-yasuo	菅 泰雄	菅 泰雄			Suga Yasuo	Suga Yasuo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1hcevqu	尾崎 喜光	尾崎 喜光		おざき よしみつ		Ozaki Yoshimitsu	verified-update	https://id.ndl.go.jp/auth/ndlna/01147845	既存の人物同定で照合したNDL典拠の読み。
+seino-haruki	清野 春樹	清野 春樹		せいの はるき	Seino Haruki	Seino Haruki	verified-update	https://id.ndl.go.jp/auth/ndlna/01113028	既存の人物同定で照合したNDL典拠の読み。
+p-jg0yjt	喜多 直人	喜多 直人		きた なおと		Kita Naoto	verified-update	https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202201007675417283	本人・所属機関または原著論文の著者表記で確認。
+magata-tokumatsu	間方 徳松	間方 徳松		まかた とくまつ	Magata Tokumatsu	Makata Tokumatsu	verified-update	https://ci.nii.ac.jp/author/DA08672997 https://id.ndl.go.jp/auth/ndlna/00121838	NDL典拠00121838、当該著書と一致。
+p-1c6rkvl	土屋 茂	土屋 茂		つちや しげる		Tsuchiya Shigeru	verified-update	https://id.ndl.go.jp/auth/ndlna/00352939	既存の人物同定で照合したNDL典拠の読み。
+p-1mjn4tu	高柳 茂	高柳 茂					reading-unresolved		確定読みの裏付けを未確認。
+saikaku-sadayoshi	西鶴 定嘉	西鶴 定嘉			Saikaku Sadayoshi	Saikaku Sadayoshi	kana-unresolved		NDL/CiNiiはサダカ、学会論文・法政目録はサダヨシ。本人の読みを確定できない。
+ito-katsuhisa	伊藤 勝久	伊藤 勝久		いとう かつひさ	Katsuhisa Itō	Katsuhisa Itō	verified-update	https://id.ndl.go.jp/auth/ndlna/01168320	既存の人物同定で照合したNDL典拠の読み。
+p-ywxeun	畑中 友次	畑中 友次		はたなか ともじ		Hatanaka Tomoji	verified-update	https://id.ndl.go.jp/auth/ndlna/00008825	既存の人物同定で照合したNDL典拠の読み。
+p-11ol90n	太宰 幸子	太宰 幸子		だざい ゆきこ		Dazai Yukiko	verified-update	https://id.ndl.go.jp/auth/ndlna/01153074	既存の人物同定で照合したNDL典拠の読み。
+p-1omusa0	島田 静雄	島田 静雄					reading-unresolved		確定読みの裏付けを未確認。
+p-1gy7bfv	山口 和彦	山口 和彦		やまぐち かずひこ		Yamaguchi Kazuhiko	verified-update	https://researcher.sapmed.ac.jp/html/100000043_ja.html	同じアイヌ語旭川方言語彙論文を掲載する本人の大学総覧。
+honda-yuko	本田 優子	本田 優子		ほんだ ゆうこ	Honda Yūko	Honda Yūko	verified-update	https://id.ndl.go.jp/auth/ndlna/00669825	既存の人物同定で照合したNDL典拠の読み。
+p-18cdb7j	並木 翔太郎	並木 翔太郎		なみき しょうたろう		Namiki Shotaro	verified-update	https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201801014971578920	本人・所属機関または原著論文の著者表記で確認。
+uemura-yukio	上村 幸雄	上村 幸雄		うえむら ゆきお	Yukio Uemura	Yukio Uemura	verified-update	https://id.ndl.go.jp/auth/ndlna/00088157	姓名と生年が一致するNDL典拠の読み。
+inoue-takuya	井上拓也	井上拓也			Inoue Takuya	Inoue Takuya	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-11492jn	大塚 梨恵	大塚 梨恵					reading-unresolved		確定読みの裏付けを未確認。
+p-1p39exq	上野 愛理	上野 愛理					reading-unresolved		確定読みの裏付けを未確認。
+p-34nem	倉重 裕美	倉重 裕美					reading-unresolved		確定読みの裏付けを未確認。
+p-1lf7xk2	中田 恭平	中田 恭平					reading-unresolved		確定読みの裏付けを未確認。
+p-1g2da7z	山下 真悟	山下 真悟					reading-unresolved		確定読みの裏付けを未確認。
+p-1p89kig	坂田 亜里沙	坂田 亜里沙					reading-unresolved		確定読みの裏付けを未確認。
+ono-yuki	小野 雄貴	小野 雄貴			Yūki Ono	Yūki Ono	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+maeda-manami	前田 愛美	前田 愛美					reading-unresolved		確定読みの裏付けを未確認。
+p-1m0sbcb	山田 祥一	山田 祥一					reading-unresolved		確定読みの裏付けを未確認。
+tachibana-shoichi	橘 正一	橘 正一		たちばな しょういち	Tachibana Shōichi	Tachibana Shōichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00083083	既存の人物同定で照合したNDL典拠の読み。
+p-15wtsj1	大矢 京右	大矢 京右		おおや きょうすけ		Oya Kyosuke	verified-update	https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202501018157450815	本人・所属機関または原著論文の著者表記で確認。
+miyaoka-osahito	宮岡 伯人	宮岡 伯人		みやおか おさひと	Osahito Miyaoka	Osahito Miyaoka	verified-update	https://id.ndl.go.jp/auth/ndlna/00103855	姓名と生年が一致するNDL典拠の読み。
+p-1o7hzxb	長田 祐季	長田 祐季					reading-unresolved		確定読みの裏付けを未確認。
+yoshida-katsumi	吉田 和美	吉田 和美			Katsumi Yoshida	Katsumi Yoshida	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1jj1xvq	三浦 亜耶	三浦 亜耶					reading-unresolved		確定読みの裏付けを未確認。
+kochi-rie	甲地 利恵	甲地 利恵			Kōchi Rie	Kōchi Rie	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-n3f6iu	狩俣 恵一	狩俣 恵一		かりまた けいいち		Karimata Keiichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00799691	既存の人物同定で照合したNDL典拠の読み。
+kazama-shinjiro	風間 伸次郎	風間 伸次郎		かざま しんじろう	Kazama Shinjirō	Kazama Shinjirō	verified-update	https://id.ndl.go.jp/auth/ndlna/00383618	姓名と生年が一致するNDL典拠の読み。
+ogihara-shinko	荻原 真子	荻原 真子		おぎはら しんこ	Ogihara Shinko	Ogihara Shinko	verified-update	https://id.ndl.go.jp/auth/ndlna/00126111	既存の人物同定で照合したNDL典拠の読み。
+furuhara-toshihiro	古原 敏弘	古原 敏弘		こはら としひろ	Furuhara Toshihiro	Kohara Toshihiro	verified-update	https://dl.ndl.go.jp/view/prepareDownload?contentNo=1&itemId=info%3Andljp%2Fpid%2F10207345 https://id.ndl.go.jp/auth/ndlna/01000125	所属機関の研究職員紹介にふりがな。
+yasuda-chinatsu	安田 千夏	安田 千夏			Yasuda Chinatsu	Yasuda Chinatsu	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1l8orb9	鈴木明世	鈴木明世		すずき あきよ		Suzuki Akiyo	verified-update	https://www.hm.pref.hokkaido.lg.jp/study/staff/suzuki-akiyo/	本人・所属機関または原著論文の著者表記で確認。
+kamemaru-yukiko	亀丸由紀子	亀丸由紀子			Kamemaru Yukiko	Kamemaru Yukiko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1dcznn	沖野 慎二	沖野 慎二					reading-unresolved		確定読みの裏付けを未確認。
+narita-shuichi	成田 修一	成田 修一		なりた しゅういち	Narita Shūichi	Narita Shūichi	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=8989&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+hirota-toru	廣田 徹	廣田 徹			Hirota Tōru	Hirota Tōru	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+vattukumpu-tero	Vattukumpu Tero	Vattukumpu Tero			Vattukumpu Tero	Vattukumpu Tero	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+matsuna-takashi	松名 隆	松名 隆			Matsuna Takashi	Matsuna Takashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1clrtot	塩谷 亨	塩谷 亨		しおのや とおる		Shionoya Toru	verified-update	https://rdsoran.muroran-it.ac.jp/html/100000210_ja.html	本人・所属機関または原著論文の著者表記で確認。
+nagata-yoshishige	永田 良茂	永田 良茂			Nagata Yoshishige	Nagata Yoshishige	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-y9ma1q	田中 勝也	田中 勝也		たなか かつや		Tanaka Katsuya	verified-update	https://id.ndl.go.jp/auth/ndlna/00081575	既存の人物同定で照合したNDL典拠の読み。
+asakura-toshimitsu	朝倉 利光	朝倉 利光		あさくら としみつ	Toshimitsu Asakura	Toshimitsu Asakura	verified-update	https://id.ndl.go.jp/auth/ndlna/00899437	姓名と生年が一致するNDL典拠の読み。
+inoue-koichi	井上 紘一	井上 紘一		いのうえ こういち	Kōichi Inoue	Kōichi Inoue	verified-update	https://id.ndl.go.jp/auth/ndlna/00019599	既存の人物同定で照合したNDL典拠の読み。
+terada-yoshitaka	寺田 吉孝	寺田 吉孝			Yoshitaka Terada	Yoshitaka Terada	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+mori-masao	護 雅夫	護 雅夫		もり まさお	Mori Masao	Mori Masao	verified-update	https://id.ndl.go.jp/auth/ndlna/00046749	姓名と生年が一致するNDL典拠の読み。
+yasuda-setsuhiko	安田 節彦	安田 節彦			Yasuda Setsuhiko	Yasuda Setsuhiko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+koyama-shohei	小山 正平	小山 正平			Shohei Koyama	Shohei Koyama	kana-unresolved		NDLのオヤマと既存のKoyamaが不一致。一次資料の裏付けを追加で要する。
+ito-kohei	伊藤 公平	伊藤 公平		いとう こうへい	Itō Kōhei	Itō Kōhei	verified-update	https://id.ndl.go.jp/auth/ndlna/00022855	既存の人物同定で照合したNDL典拠の読み。
+takahashi-akiko	高橋 晶子	高橋 晶子			Akiko Takahashi	Akiko Takahashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-11xgdoe	菊地 達夫	菊地 達夫		きくち たつお		Kikuchi Tatsuo	verified-update	https://id.ndl.go.jp/auth/ndlna/001332064	既存の人物同定で照合したNDL典拠の読み。
+p-1exy4mi	梶浦 浩	梶浦 浩		かじうら ひろし		Kajiura Hiroshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00346152	既存の人物同定で照合したNDL典拠の読み。
+p-1p7zrli	仙石 裕子	仙石 裕子					reading-unresolved		確定読みの裏付けを未確認。
+p-1ezvvm9	小原 隆幸	小原 隆幸		おばら たかゆき		Obara Takayuki	verified-update	https://id.ndl.go.jp/auth/ndlna/00547008	既存の人物同定で照合したNDL典拠の読み。
+matsuki-akira	松木 明	松木 明		まつき あきら	Akira Matsuki	Akira Matsuki	verified-update	https://id.ndl.go.jp/auth/ndlna/00041461	姓名と生年が一致するNDL典拠の読み。
+kanemaru-tsuguo	金丸 継夫	金丸 継夫			Kanemaru Tsuguo	Kanemaru Tsuguo	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kudo-masaki	工藤 雅樹	工藤 雅樹		くどう まさき	Masaki Kudō	Masaki Kudō	verified-update	https://id.ndl.go.jp/auth/ndlna/00102914	姓名と生年が一致するNDL典拠の読み。
+p-1l86b0i	鈴木 仁	鈴木 仁		すずき じん		Suzuki Jin	verified-update	https://hdl.handle.net/2115/63905	当該論文の著者表記Suzuki Jin。
+p-1gxsmy4	由良 勇	由良 勇		ゆら いさみ		Yura Isami	verified-update	https://id.ndl.go.jp/auth/ndlna/00217615	既存の人物同定で照合したNDL典拠の読み。
+p-1ehn8nt	森 美典	森 美典		もり よしすけ		Mori Yoshisuke	verified-update	https://id.ndl.go.jp/auth/ndlna/00181460	既存の人物同定で照合したNDL典拠の読み。
+p-1ekqz6t	鎌田 正信	鎌田 正信		かまだ まさのぶ		Kamada Masanobu	verified-update	https://id.ndl.go.jp/auth/ndlna/00527898	既存の人物同定で照合したNDL典拠の読み。
+p-1kxg80o	槻舘 尚武	槻舘 尚武		つきだて なおたけ		Tsukidate Naotake	verified-update	https://www.yamanashi-eiwa.ac.jp/guide/guide-868/	本人・所属機関または原著論文の著者表記で確認。
+p-1fxhyqx	瀧下 史	瀧下 史					reading-unresolved		確定読みの裏付けを未確認。
+tanigawa-kenichi	谷川 健一	谷川 健一		たにがわ けんいち	Ken'ichi Tanigawa	Ken'ichi Tanigawa	verified-update	https://id.ndl.go.jp/auth/ndlna/00082455	姓名と生年が一致するNDL典拠の読み。
+p-16gziul	松田 宏介	松田 宏介		まつだ こうすけ		Matsuda Kosuke	verified-update	https://ci.nii.ac.jp/author/DA15117125	同じアイヌ語地名研究の著者典拠、北海道大学学位論文著者カナとも一致。
+taniguchi-mamoru	谷口 守	谷口 守			Mamoru Taniguchi	Mamoru Taniguchi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1i0xg02	小林 和夫	小林 和夫		こばやし かずお		Kobayashi Kazuo	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=6217&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。
+p-1qevig6	寺本 千名夫	寺本 千名夫		てらもと ちなお		Teramoto Chinao	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=14666&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。
+mega-junya	女鹿 潤哉	女鹿 潤哉			Mega Jun’ya	Mega Jun’ya	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+oikawa-akihiko	及川 明彦	及川 明彦			Oikawa Akihiko	Oikawa Akihiko	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+inoue-fumio	井上 文夫	井上 文夫			Inoue Fumio	Inoue Fumio	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-12syzn8	柳下 み咲	柳下 み咲					reading-unresolved		確定読みの裏付けを未確認。
+p-s5616a	玉山 成元	玉山 成元		たまやま じょうげん		Tamayama Jogen	verified-update	https://id.ndl.go.jp/auth/ndlna/00080932	既存の人物同定で照合したNDL典拠の読み。
+umehara-takeshi	梅原 猛	梅原 猛		うめはら たけし	Takeshi Umehara	Takeshi Umehara	verified-update	https://id.ndl.go.jp/auth/ndlna/00088587	姓名と生年が一致するNDL典拠の読み。
+p-12qbr50	都築 埴雅	都築 埴雅					reading-unresolved		確定読みの裏付けを未確認。
+p-1cl3ueh	大澤 香	大澤 香		おおざわ かおり		Ozawa Kaori	verified-update	https://id.ndl.go.jp/auth/ndlna/032391601	登録著作と同じ著作を出典とするNDL典拠の読み。
+p-1t0p9g6	平賀 エテノア	平賀 エテノア		ひらが えてのあ		Hiraga Etenoa	verified-update	https://id.ndl.go.jp/auth/ndlna/001202349	既存の人物同定で照合したNDL典拠の読み。
+simada-kenichi	島田 健一	島田 健一		しまだ けんいち	Ken'ichi Simada	Ken'ichi Simada	verified-update	https://id.ndl.go.jp/auth/ndlna/00184373	既存の人物同定で照合したNDL典拠の読み。
+sakitani-mitsuru	崎谷 満	崎谷 満		さきたに みつる	Mitsuru Sakitani	Mitsuru Sakitani	verified-update	https://id.ndl.go.jp/auth/ndlna/01010171	姓名と生年が一致するNDL典拠の読み。
+yazaki-haruna	矢崎 春菜	矢崎 春菜			Yazaki Haruna	Yazaki Haruna	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+nihashi-junichi	二橋 潤一	二橋 潤一			Jun'ichi Nihashi	Jun'ichi Nihashi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1epyoxi	杉江 光	杉江 光					reading-unresolved		確定読みの裏付けを未確認。
+ishida-hisao	石田 久大	石田 久大			Ishida Hisao	Ishida Hisao	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1r1lqct	川村 久恵	川村 久恵		かわむら ひさえ		Kawamura Hisae	verified-update	https://archive.tonkori.com/news/page/11	本人参加の音楽活動のメンバー紹介。
+ishii-masami	石井 正己	石井 正己		いしい まさみ	Masami Ishii	Masami Ishii	verified-update	https://id.ndl.go.jp/auth/ndlna/00657305	姓名と生年が一致するNDL典拠の読み。
+p-1lodgy3	長崎 郁	長崎 郁		ながさき いく		Nagasaki Iku	verified-update	https://id.ndl.go.jp/auth/ndlna/001219435	既存の人物同定で照合したNDL典拠の読み。
+tanaka-satoko	田中 聖子	田中 聖子		たなか さとこ	Tanaka Satoko	Tanaka Satoko	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9158&domain=ainu	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+oba-yoshio	大場 四千男	大場 四千男		おおば よしお	Yoshio Ōba	Yoshio Ōba	verified-update	https://id.ndl.go.jp/auth/ndlna/00117391	姓名と生年が一致するNDL典拠の読み。
+p-1hvppjg	丸山 隆司	丸山 隆司		まるやま たかし		Maruyama Takashi	verified-update	https://id.ndl.go.jp/auth/ndlna/00857730	既存の人物同定で照合したNDL典拠の読み。
+nagao-yuka	長尾 優花	長尾 優花			Nagao Yuka	Nagao Yuka	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-kbsdtj	西﨑 専一	西﨑 専一					reading-unresolved		確定読みの裏付けを未確認。
+ishimura-hiroko	石村 博子	石村 博子		いしむら ひろこ	Ishimura Hiroko	Ishimura Hiroko	verified-update	https://id.ndl.go.jp/auth/ndlna/00265411	姓名と生年が一致するNDL典拠の読み。
+p-16iqb0n	墨谷 真澄	墨谷 真澄					reading-unresolved		確定読みの裏付けを未確認。
+p-19hj4z9	欠ヶ端 和也	欠ヶ端 和也		かけはた かずや		Kakehata Kazuya	verified-update	https://irc.aa.tufs.ac.jp/wp-content/uploads/2022/07/irc_proj_report2021_IRC202107.pdf	本人・所属機関または原著論文の著者表記で確認。
+p-1mxux2y	豊岡 喜一郎	豊岡 喜一郎					reading-unresolved		確定読みの裏付けを未確認。
+ota-ryu	太田 竜	太田 竜		おおた りゅう	Ryu Ota	Ryu Ota	verified-update	https://id.ndl.go.jp/auth/ndlna/00062933	姓名と生年が一致するNDL典拠の読み。
+p-15p4zpg	鈴木 華織	鈴木 華織					reading-unresolved		確定読みの裏付けを未確認。
+emori-susumu	榎森 進	榎森 進		えもり すすむ	Emori Susumu	Emori Susumu	verified-update	https://id.ndl.go.jp/auth/ndlna/00130876	既存の人物同定で照合したNDL典拠の読み。
+p-f7krcf	成田 得平	成田 得平		なりた とくへい		Narita Tokuhei	verified-update	https://id.ndl.go.jp/auth/ndlna/00149586	既存の人物同定で照合したNDL典拠の読み。
+kinoshita-junji	木下 順二	木下 順二		きのした じゅんじ	Junji Kinoshita	Junji Kinoshita	verified-update	https://id.ndl.go.jp/auth/ndlna/00031535	姓名と生年が一致するNDL典拠の読み。
+p-1cf44kw	石倉 欣二	石倉 欣二		いしくら きんじ		Ishikura Kinji	verified-update	https://id.ndl.go.jp/auth/ndlna/00119332	既存の人物同定で照合したNDL典拠の読み。
+kanaya-eijiro	金谷 栄二郎	金谷 栄二郎		かなや えいじろう	Kanaya Eijirō	Kanaya Eijirō	verified-update	https://id.ndl.go.jp/auth/ndlna/00159800	登録著作と同じ著作を出典とするNDL典拠の読み。
+kannari-matsu	金成 まつ	金成 まつ		かんなり まつ	Kannari Matsu	Kannari Matsu	verified-update	https://id.ndl.go.jp/auth/ndlna/00026598	姓名と生年が一致するNDL典拠の読み。
+p-q25d75	四宅 ヤエ	四宅 ヤエ		したく やえ	Shitaku, Yae	Shitaku, Yae	verified-update	https://id.ndl.go.jp/auth/ndlna/00143884	姓名と生年が一致するNDL典拠の読み。
+p-1iwaxi2	若月 亨	若月 亨		わかつき とおる		Wakatsuki Tooru	verified-update	https://id.ndl.go.jp/auth/ndlna/00350936	既存の人物同定で照合したNDL典拠の読み。
+hasuike-etsuko	蓮池 悦子	蓮池 悦子		はすいけ えつこ	Hasuike Etsuko	Hasuike Etsuko	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=12047&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+p-1gunmdd	田澤 守	田澤 守					reading-unresolved		確定読みの裏付けを未確認。
+sakurai-yoshihide	櫻井 義秀	櫻井 義秀		さくらい よしひで	Yoshihide Sakurai	Yoshihide Sakurai	verified-update	https://id.ndl.go.jp/auth/ndlna/00899001	姓名と生年が一致するNDL典拠の読み。
+fujii-sadakazu	藤井 貞和	藤井 貞和		ふじい さだかず	Sadakazu Fujii	Sadakazu Fujii	verified-update	https://id.ndl.go.jp/auth/ndlna/00015412	姓名と生年が一致するNDL典拠の読み。
+p-1nen1vw	島津 礼子	島津 礼子					reading-unresolved		確定読みの裏付けを未確認。
+p-tcs8zz	道合 裕基	道合 裕基		どうあい ひろのり		Doai Hironori	verified-update	https://hdl.handle.net/2433/197749	大学リポジトリの和文・カナ・英文著者メタデータ。
+p-lc9any	今石 みぎわ	今石 みぎわ		いまいし みぎわ		Imaishi Migiwa	verified-update	https://id.ndl.go.jp/auth/ndlna/001205180	登録著作と同じ著作を出典とするNDL典拠の読み。
+yoshinari-naoki	吉成 直樹	吉成 直樹		よしなり なおき	Naoki Yoshinari	Naoki Yoshinari	verified-update	https://id.ndl.go.jp/auth/ndlna/00395365	姓名と生年が一致するNDL典拠の読み。
+ogasawara-sayo	小笠原 小夜	小笠原 小夜		おがさわら さよ	Ogasawara Sayo	Ogasawara Sayo	verified-update	https://id.ndl.go.jp/auth/ndlna/031698818	既存の人物同定で照合したNDL典拠の読み。
+kawakami-yuji	川上 勇治	川上 勇治		かわかみ ゆうじ	Kawakami Yūji	Kawakami Yūji	verified-update	https://id.ndl.go.jp/auth/ndlna/00029165	既存の人物同定で照合したNDL典拠の読み。
+p-9d1qfm	はまおか のりこ	はまおか のりこ		はまおか のりこ		Hamaoka Noriko	verified-update	https://id.ndl.go.jp/auth/ndlna/00670792	既存の人物同定で照合したNDL典拠の読み。
+sunazawa-kura	砂沢 クラ	砂沢 クラ		すなざわ くら	Kura Sunazawa	Kura Sunazawa	verified-update	https://id.ndl.go.jp/auth/ndlna/00136218	姓名と生年が一致するNDL典拠の読み。
+ryo-michiko	寮 美千子	寮 美千子		りょう みちこ	Michiko Ryō	Michiko Ryō	verified-update	https://id.ndl.go.jp/auth/ndlna/00189412	姓名と生年が一致するNDL典拠の読み。
+suzuki-ryuichi	鈴木 隆一	鈴木 隆一		すずき りゅういち	Suzuki Ryūichi	Suzuki Ryūichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00909324	既存の人物同定で照合したNDL典拠の読み。
+p-1qsdo77	二谷 国松	二谷 国松		にたに くにまつ		Nitani Kunimatsu	verified-update	https://id.ndl.go.jp/auth/ndlna/001202351	既存の人物同定で照合したNDL典拠の読み。
+takashima-yoko	高島 葉子	高島 葉子			Yōko Takashima	Yōko Takashima	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-kjevsf	高野 繁廣	高野 繁廣		たかの しげひろ		Takano Shigehiro	verified-update	https://web-ic.fukoku-life.co.jp/japan-vision/081.html	本人取材記事のプロフィール。
+p-1vg5icr	西島 てる	西島 てる					reading-unresolved		確定読みの裏付けを未確認。
+takahashi-nori	高橋 規	高橋 規			Takahashi Nori	Takahashi Nori	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+anetai-masaki	姉帯 正樹	姉帯 正樹			Anetai Masaki	Anetai Masaki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-zxb1g8	若林 和夫	若林 和夫					reading-unresolved		確定読みの裏付けを未確認。
+nojiri-hoei	野尻 抱影	野尻 抱影		のじり ほうえい	Hōei Nojiri	Hōei Nojiri	verified-update	https://id.ndl.go.jp/auth/ndlna/00056925	姓名と生年が一致するNDL典拠の読み。
+p-79rn4z	北尾 浩一	北尾 浩一		きたお こういち		Kitao Koichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00214876	既存の人物同定で照合したNDL典拠の読み。
+p-15p7dwk	鈴木 邦輝	鈴木 邦輝		すずき くにてる		Suzuki Kuniteru	verified-update	https://id.ndl.go.jp/auth/ndlna/00107254	既存の人物同定で照合したNDL典拠の読み。
+ito-hiromitsu	伊藤 裕満	伊藤 裕満		いとう ひろみつ	Itō Hiromitsu	Itō Hiromitsu	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=8339&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+mae-masanao	前 正七生	前 正七生			Mae Masanao	Mae Masanao	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+muraki-miyuki	村木 美幸	村木 美幸			Muraki Miyuki	Muraki Miyuki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-11firet	若園 雄志郎	若園 雄志郎		わかぞの ゆうしろう		Wakazono Yushiro	verified-update	https://researcher.utsunomiya-u.ac.jp/html/100003537_ja.html	大学研究者総覧のカナ・英語姓名。
+inaba-katsuo	因幡 勝雄	因幡 勝雄		いなば かつお	Inaba Katsuo	Inaba Katsuo	verified-update	https://id.ndl.go.jp/auth/ndlna/00324985	既存の人物同定で照合したNDL典拠の読み。
+kido-shirabe	木戸 調	木戸 調			Kido Shirabe	Kido Shirabe	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1cy2d4k	小川 広	小川 広					reading-unresolved		確定読みの裏付けを未確認。
+p-1i361g2	小柳 誠之	小柳 誠之					reading-unresolved		確定読みの裏付けを未確認。
+p-11o400v	杉山 泰子	杉山 泰子					reading-unresolved		確定読みの裏付けを未確認。
+p-3kz7ca	南 収	南 収					reading-unresolved		確定読みの裏付けを未確認。
+sekine-tatsuhito	関根 達人	関根 達人		せきね たつひと	Sekine Tatsuhito	Sekine Tatsuhito	verified-update	https://id.ndl.go.jp/auth/ndlna/00911260	既存の人物同定で照合したNDL典拠の読み。
+p-1vdwlmy	青木 愛子	青木 愛子		あおき あいこ		Aoki Aiko	verified-update	https://id.ndl.go.jp/auth/ndlna/00136781	既存の人物同定で照合したNDL典拠の読み。
+p-1llynl7	長井 博	長井 博		ながい ひろし		Nagai Hiroshi	verified-update	https://id.ndl.go.jp/auth/ndlna/00137684	既存の人物同定で照合したNDL典拠の読み。
+p-1bj2gjr	前沢 卓	前沢 卓		まえさわ たか		Maesawa Taka	verified-update	https://id.ndl.go.jp/auth/ndlna/001205893	既存の人物同定で照合したNDL典拠の読み。
+sato-naotaro	佐藤 直太郎	佐藤 直太郎		さとう なおたろう	Satō Naotarō	Satō Naotarō	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=2940&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+p-e80k7j	千葉 伸彦	千葉 伸彦		ちば のぶひこ		Chiba Nobuhiko	verified-update	https://www.tokyo-ondai.ac.jp/features/lesson_j-pop/13434.php	所属大学のトンコリ講師紹介。福祉研究者の同姓同名人物とは区別。
+p-smb1hw	能登 千織	能登 千織		のと ちおり		Noto Chiori	verified-update	https://ci.nii.ac.jp/author/DA18530558	本人・所属機関または原著論文の著者表記で確認。
+p-mhjk5r	白老町 (北海道)	白老町 (北海道)					reading-unresolved		確定読みの裏付けを未確認。
+p-7gxsyg	北嶋 由紀	北嶋 由紀		きたじま ゆき		Kitajima Yuki	verified-update	https://www.jstage.jst.go.jp/article/namjournal/2023/2/2023_2023-5/_pdf	本人・所属機関または原著論文の著者表記で確認。
+p-1babm4k	兼俊明夫	兼俊明夫					reading-unresolved		確定読みの裏付けを未確認。
+kimura-makoto	木村 純	木村 純	きむら まこと	きむら まこと	Kimura Makoto	Kimura Makoto	existing-kana		既存のかなを保持。
+fukuoka-itoko	福岡 イト子	福岡 イト子		ふくおか いとこ	Fukuoka Itoko	Fukuoka Itoko	verified-update	https://id.ndl.go.jp/auth/ndlna/00412449	既存の人物同定で照合したNDL典拠の読み。
+uchida-junko	内田 順子	内田 順子		うちだ じゅんこ	Uchida Junko	Uchida Junko	verified-update	https://id.ndl.go.jp/auth/ndlna/00805320	既存の人物同定で照合したNDL典拠の読み。
+p-17ykr4g	蓑島 栄紀	蓑島 栄紀		みのしま ひでき		Minoshima Hideki	verified-update	https://id.ndl.go.jp/auth/ndlna/00864627	既存の人物同定で照合したNDL典拠の読み。
+segawa-takuro	瀬川 拓郎	瀬川 拓郎		せがわ たくろう	Takurō Segawa	Takurō Segawa	verified-update	https://id.ndl.go.jp/auth/ndlna/01026274	姓名と生年が一致するNDL典拠の読み。
+p-125jcv5	野崎 剛毅	野崎 剛毅		のざき よしき		Nozaki Yoshiki	verified-update	https://www.hanmoto.com/bd/isbn/9784832967939	出版社提供の著者紹介で確認。
+p-xgwq0d	保健体育専攻音楽分野	保健体育専攻音楽分野					reading-unresolved		確定読みの裏付けを未確認。
+august-pfizmaier	August Pfizmaier	August Pfizmaier			August Pfizmaier	August Pfizmaier	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+hidezo-yamada	山田 秀三	山田 秀三		やまだ ひでぞう	Hidezō Yamada	Hidezō Yamada	verified-update	https://id.ndl.go.jp/auth/ndlna/00091892	姓名と生年が一致するNDL典拠の読み。
+shichiro-murayama	村山 七郎	村山 七郎		むらやま しちろう	Shichirō Murayama	Shichirō Murayama	verified-update	https://id.ndl.go.jp/auth/ndlna/00049202	姓名と生年が一致するNDL典拠の読み。
+waseda-daigaku-gogaku-kyoiku-kenkyujo	Waseda Daigaku. Gogaku Kyōiku Kenkyūjo	Waseda Daigaku. Gogaku Kyōiku Kenkyūjo			Waseda Daigaku. Gogaku Kyōiku Kenkyūjo	Waseda Daigaku. Gogaku Kyōiku Kenkyūjo	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+genzo-sarashina	更科 源蔵	更科 源蔵		さらしな げんぞう	Genzō Sarashina	Genzō Sarashina	verified-update	https://id.ndl.go.jp/auth/ndlna/00067147	姓名と生年が一致するNDL典拠の読み。
+p-1r1qwie	川村 正一	川村 正一		かわむら しょういち		Kawamura Shoichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00896498	登録著作と同じ著作を出典とするNDL典拠の読み。
+fukuda-kichijiro	福田 吉次郎	福田 吉次郎		ふくだ きちじろう	Fukuda Kichijirō	Fukuda Kichijirō	verified-update	https://id.ndl.go.jp/auth/ndlna/00216783	既存の人物同定で照合したNDL典拠の読み。
+yuasa-tadashi	湯淺 正	湯淺 正		ゆあさ ただし	Yuasa Tadashi	Yuasa Tadashi	verified-update	https://id.ndl.go.jp/auth/ndlna/00730346	登録著作と同じ著作を出典とするNDL典拠の読み。
+notoya-enkichi	能登屋 円吉	能登屋 円吉		のとや えんきち	Notoya Enkichi	Notoya Enkichi	verified-update	https://id.ndl.go.jp/auth/ndlna/00746396	登録著作と同じ著作を出典とするNDL典拠の読み。
+ohguri-hiroshi	大栗 裕	大栗 裕		おおぐり ひろし	Hiroshi Ohguri	Hiroshi Ohguri	verified-update	https://id.ndl.go.jp/auth/ndlna/01058651	姓名と生年が一致するNDL典拠の読み。
+p-1gpzz1i	畑佐 満	畑佐 満		はたさ みつる		Hatasa Mitsuru	verified-update	https://id.ndl.go.jp/auth/ndlna/01032256	登録著作と同じ著作を出典とするNDL典拠の読み。
+p-1to67i7	佐藤 忠悦	佐藤 忠悦		さとう ちゅうえつ		Sato Chuetsu	verified-update	https://id.ndl.go.jp/auth/ndlna/00899899	既存の人物同定で照合したNDL典拠の読み。
+akasaka-norio	赤坂 憲雄	赤坂 憲雄		あかさか のりお	Norio Akasaka	Norio Akasaka	verified-update	https://id.ndl.go.jp/auth/ndlna/00159066	姓名と生年が一致するNDL典拠の読み。
+kato-tetsusaburo	加藤 鉄三郎	加藤 鉄三郎		かとう てつさぶろう	Katō Tetsusaburō	Katō Tetsusaburō	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=17968&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+p-1fjb2l0	池田 実	池田 実		いけだ みのる		Ikeda Minoru	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=6228&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。
+fukuda-tomoyuki	福田 友之	福田 友之		ふくだ ともゆき	Fukuda Tomoyuki	Fukuda Tomoyuki	verified-update	https://id.ndl.go.jp/auth/ndlna/01142584	既存の人物同定で照合したNDL典拠の読み。
+ono-susumu	大野 晋	大野 晋		おおの すすむ	Susumu Ōno	Susumu Ōno	verified-update	https://id.ndl.go.jp/auth/ndlna/00061836	姓名と生年が一致するNDL典拠の読み。
+akiba-minoru	秋葉 實	秋葉 實		あきば みのる	Minoru Akiba	Minoru Akiba	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=8975&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+uchida-minoru	内田 実	内田 実		うちだ みのる	Uchida Minoru	Uchida Minoru	verified-update	https://id.ndl.go.jp/auth/ndlna/00552930	既存の人物同定で照合したNDL典拠の読み。
+p-14d41fh	堺谷 美香	堺谷 美香		さかいや みか		Sakaiya Mika	verified-update	https://sapporo-u.repo.nii.ac.jp/records/4590	本人・所属機関または原著論文の著者表記で確認。
+p-165tq3u	春木 まり子	春木 まり子		はるき まりこ		Haruki Mariko	verified-update	https://sapporo-u.repo.nii.ac.jp/records/4590	本人・所属機関または原著論文の著者表記で確認。
+yamanaka-jota	山中 襄太	山中 襄太		やまなか じょうた	Jōta Yamanaka	Jōta Yamanaka	verified-update	https://id.ndl.go.jp/auth/ndlna/00093955	姓名と生年が一致するNDL典拠の読み。
+p-12ak29f	高野 三代作	高野 三代作					reading-unresolved		確定読みの裏付けを未確認。
+murakami-keiji	村上 啓司	村上 啓司			Murakami Keiji	Murakami Keiji	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+watanabe-shigeru	渡辺 茂	渡辺 茂		わたなべ しげる	Watanabe Shigeru	Watanabe Shigeru	verified-update	https://id.ndl.go.jp/auth/ndlna/00091030	既存の人物同定で照合したNDL典拠の読み。
+akagi-sanpei	赤木 三兵	赤木 三兵		あかぎ さんぺい	Akagi Sanpei	Akagi Sanpei	verified-update	https://id.ndl.go.jp/auth/ndlna/00000892	既存の人物同定で照合したNDL典拠の読み。
+kita-sadakichi	喜田 貞吉	喜田 貞吉		きた さだきち	Sadakichi Kita	Sadakichi Kita	verified-update	https://id.ndl.go.jp/auth/ndlna/00030338	姓名と生年が一致するNDL典拠の読み。
+sonota-yoshio	其田 良雄	其田 良雄		そのだ よしお	Sonota Yoshio	Sonoda Yoshio	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=5016&domain=ainu	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 NDL典拠のソノダとも一致。既存のSonotaを訂正。
+p-1fmpqxw	上原 正道	上原 正道		うえはら まさみち		Uehara Masamichi	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=906&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。
+todome-seiji	留目 政治	留目 政治			Todome Seiji	Todome Seiji	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+sakurai-kiyohiko	桜井 清彦	桜井 清彦		さくらい きよひこ	Kiyohiko Sakurai	Kiyohiko Sakurai	verified-update	https://id.ndl.go.jp/auth/ndlna/00066695	姓名と生年が一致するNDL典拠の読み。
+shinmura-izuru	新村 出	新村 出		しんむら いずる	Shinmura Izuru	Shinmura Izuru	verified-update	https://id.ndl.go.jp/auth/ndlna/00072302	姓名と生年が一致するNDL典拠の読み。
+kiyono-kenji	清野 謙次	清野 謙次		きよの けんじ	Kenji Kiyono	Kenji Kiyono	verified-update	https://id.ndl.go.jp/auth/ndlna/00032730	姓名と生年が一致するNDL典拠の読み。
+p-3u7nms	袖上生	袖上生					reading-unresolved		確定読みの裏付けを未確認。
+matsui-tsuneyuki	松井 恒幸	松井 恒幸		まつい つねゆき	Matsui Tsuneyuki	Matsui Tsuneyuki	verified-update	https://id.ndl.go.jp/auth/ndlna/00103410	既存の人物同定で照合したNDL典拠の読み。
+nakajima-riichiro	中島 利一郎	中島 利一郎		なかじま りいちろう	Riichirō Nakajima	Riichirō Nakajima	verified-update	https://id.ndl.go.jp/auth/ndlna/00053482	姓名と生年が一致するNDL典拠の読み。
+matsuura-takeshiro	松浦 武四郎	松浦 武四郎		まつうら たけしろう	Matsuura Takeshirō	Matsuura Takeshirō	verified-update	https://id.ndl.go.jp/auth/ndlna/00270793	姓名と生年が一致するNDL典拠の読み。
+fujii-naoharu	藤井 尚治	藤井 尚治		ふじい なおはる	Naoharu Fujii	Naoharu Fujii	verified-update	https://id.ndl.go.jp/auth/ndlna/00015387	姓名と生年が一致するNDL典拠の読み。
+p-1r6enj9	岡部 方幾	岡部 方幾					reading-unresolved		確定読みの裏付けを未確認。
+oni-haruto	鬼 春人	鬼 春人			Oni Haruto	Oni Haruto	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+kishimoto-suigetsu	岸本 翠月	岸本 翠月		きしもと すいげつ	Kishimoto Suigetsu	Kishimoto Suigetsu	verified-update	https://id.ndl.go.jp/auth/ndlna/00031847	既存の人物同定で照合したNDL典拠の読み。
+yoshihara-katsumi	吉原 克己	吉原 克己			Yoshihara Katsumi	Yoshihara Katsumi	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+p-1b9d5u9	鏡味 完二	鏡味 完二		かがみ かんじ		Kagami Kanji	verified-update	https://id.ndl.go.jp/auth/ndlna/00024693	姓名と生年が一致するNDL典拠の読み。
+p-1pw3zjc	伊藤 初太郎	伊藤 初太郎					reading-unresolved		確定読みの裏付けを未確認。
+p-1q8kgfm	帝国学士院	帝国学士院					reading-unresolved		確定読みの裏付けを未確認。
+toru-asai	浅井 亨	浅井 亨		あさい とおる	Tōru Asai	Tōru Asai	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=5430&domain=ezo	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。
+tjeerd-de-graaf	Tjeerd de Graaf	Tjeerd de Graaf			Tjeerd de Graaf	Tjeerd de Graaf	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+p-1e99429	東 俊佑	東 俊佑		あずま しゅんすけ		Azuma Shunsuke	verified-update	https://www.hm.pref.hokkaido.lg.jp/study/staff/	所属博物館のAZUMA Shunsuke表記から転写。
+kato-masaru	加藤克	加藤克		かとう まさる	Katō Masaru	Katō Masaru	verified-update	https://id.ndl.go.jp/auth/ndlna/001118815	既存の人物同定で照合したNDL典拠の読み。
+kaizawa-toru	貝澤徹	貝澤徹			Toru Kaizawa	Toru Kaizawa	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+mizushima-miki	水島未記	水島未記			Mizushima Miki	Mizushima Miki	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+amano-tetsuya	天野 哲也	天野 哲也		あまの てつや	Tetsuya Amano	Tetsuya Amano	verified-update	https://id.ndl.go.jp/auth/ndlna/00934294	姓名と生年が一致するNDL典拠の読み。
+saito-hiroyuki	斎藤博之	斎藤博之		さいとう ひろゆき	Saitō Hiroyuki	Saitō Hiroyuki	verified-update	https://id.ndl.go.jp/auth/ndlna/00064962	姓名と生年が一致するNDL典拠の読み。
+nishiyama-shimako	西山 史真子	西山 史真子		にしやま しまこ	Nishiyama Shimako	Nishiyama Shimako	verified-update	https://id.ndl.go.jp/auth/ndlna/00533241	既存の人物同定で照合したNDL典拠の読み。
+sasaki-kan	佐々木 冠	佐々木 冠		ささき かん	Kan Sasaki	Kan Sasaki	verified-update	https://id.ndl.go.jp/auth/ndlna/00934228	姓名と生年が一致するNDL典拠の読み。
+p-187swy5	Осипова Марина Викторовна	Осипова Марина Викторовна			Осипова Марина Викторовна	Осипова Марина Викторовна	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+p-6yv07m	Гафорова Тахмина Сатторовна	Гафорова Тахмина Сатторовна			Гафорова Тахмина Сатторовна	Гафорова Тахмина Сатторовна	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+p-z77k06	Хакимов Насим Саъдуллоевич	Хакимов Насим Саъдуллоевич			Хакимов Насим Саъдуллоевич	Хакимов Насим Саъдуллоевич	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+p-1y2rjz2	Валиев Джамшед Абдурасулович	Валиев Джамшед Абдурасулович			Валиев Джамшед Абдурасулович	Валиев Джамшед Абдурасулович	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+p-h6ymt5	Каримова Шарифхуджа	Каримова Шарифхуджа			Каримова Шарифхуджа	Каримова Шарифхуджа	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+p-bywmz3	Имамбердиева Саломат Менгликуловна	Имамбердиева Саломат Менгликуловна			Имамбердиева Саломат Менгликуловна	Имамбердиева Саломат Менгликуловна	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+p-9v6b8s	Мирниёзов А. К.	Мирниёзов А. К.			Мирниёзов А. К.	Мирниёзов А. К.	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+george-john-simeon	George John Simeon	George John Simeon			George John Simeon	George John Simeon	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+sato-genrokuro	佐藤 玄六郎	佐藤 玄六郎			Satō Genrokurō	Satō Genrokurō	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。
+ishida-hajime-ainu-language	石田 肇	石田 肇		いしだ はじめ		Ishida Hajime	verified-update	https://aterui.ws.hosei.ac.jp/togo/detail.php?id=4354&domain=ainu	同じ著作の法政大学北方史統合検索データベースに記載された確定読み。 確認されたカナをヘボン式に転写。
+sato-yuuka	Yuuka Sato	Yuuka Sato			Yuuka Sato	Yuuka Sato	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+sasaki-kazuyoshi	Kazuyoshi Sasaki	Kazuyoshi Sasaki			Kazuyoshi Sasaki	Kazuyoshi Sasaki	non-Japanese-script		日本語以外の表記につき、かなの照合対象外。
+dixon-j-m	ジェームズ・メイン・ディクソン	ジェームズ・メイン・ディクソン			James Main Dixon	James Main Dixon	kana-unresolved		かなの裏付けを未確認。既存のローマ字は今回の確認済み件数に含めない。

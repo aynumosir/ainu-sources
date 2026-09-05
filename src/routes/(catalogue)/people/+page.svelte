@@ -107,6 +107,9 @@
 			{#each people as p (p.id)}
 				<a href={localizeHref(`/people/${p.slug}`)} class="card flex flex-col gap-1 p-3">
 					<span class="font-serif text-base font-bold leading-snug text-ink">{p.name}</span>
+					{#if p.nameKana && p.nameKana !== p.name}
+						<span lang="ja" class="text-sm text-stone-500">{p.nameKana}</span>
+					{/if}
 					{#if p.nameEn && p.nameEn !== p.name}
 						<span class="text-sm text-stone-500">{p.nameEn}</span>
 					{/if}
