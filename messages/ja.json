@@ -236,5 +236,10 @@
 	"nav_audit": "監査",
 	"person_former_pen_name": "旧筆名",
 	"person_other_name": "別名",
-	"person_alternative_reading": "別の読み"
+	"person_alternative_reading": "別の読み",
+	"error_404_title": "ページが見つかりません",
+	"error_404_body": "このページは存在しないか、別の場所へ移動しています。",
+	"error_generic_title": "問題が発生しました",
+	"error_generic_body": "ページを読み込めませんでした。もう一度お試しください。",
+	"error_back_home": "ホームへ戻る"
 }

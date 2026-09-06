@@ -235,5 +235,10 @@
 	"nav_audit": "Audit",
 	"person_former_pen_name": "former pen name",
 	"person_other_name": "also known as",
-	"person_alternative_reading": "alternative reading"
+	"person_alternative_reading": "alternative reading",
+	"error_404_title": "Page not found",
+	"error_404_body": "This page doesn't exist, or it has moved to a different address.",
+	"error_generic_title": "Something went wrong",
+	"error_generic_body": "The page failed to load. Please try again.",
+	"error_back_home": "Back to the home page"
 }
