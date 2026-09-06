@@ -18,7 +18,7 @@
 	--color-brand-800: #1c3287;
 
 	/* Neutral scale. 50–300 are surfaces and rules; 400 and up are text, and
-	   every text step clears 4.5:1 on white (400 is 5.0:1, 500 is 7.3:1). */
+	   every text step clears 4.5:1 on white (400 is 5.2:1, 500 is 7.5:1). */
 	--color-stone-50: #f8f8f7;
 	--color-stone-100: #ededeb;
 	--color-stone-200: #d8d8d4;

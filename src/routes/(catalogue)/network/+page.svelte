@@ -186,7 +186,7 @@
 
 			<div class="mt-3">
 				<div
-					class="mb-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-stone-400"
+					class="mb-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-stone-300"
 				>
 					<span>{m.network_heat_low()}</span>
 					<span class="text-stone-300">{m.network_significance()}</span>
@@ -195,7 +195,7 @@
 				<div class="h-2 w-full rounded-full ring-1 ring-white/10" style="background:{HEAT_GRADIENT}"></div>
 			</div>
 
-			<p class="mt-3 text-[11px] text-stone-400">
+			<p class="mt-3 text-[11px] text-stone-300">
 				{m.network_stats({ works: network.stats.nodes, citations: network.stats.edges })}
 			</p>
 		</div>

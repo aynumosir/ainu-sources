@@ -17,7 +17,7 @@
 
 	// Warm "archive" palette, by category.
 	const COLORS: Record<string, string> = {
-		primary: '#d97706', // amber
+		primary: '#b45309', // amber
 		corpus: '#059669', // emerald
 		secondary: '#0284c7', // sky
 		tool: '#7c3aed' // violet
