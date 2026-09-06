@@ -227,5 +227,7 @@
 	"footer_data_credit": "Данные: ainu-dictionaries, ainu-grammar, ainu-corpora.",
 	"region_unassigned": "Без региона",
 	"nav_audit": "Аудит",
-  "person_former_surname_activity_name": "прежняя фамилия; творческое имя"
+  "person_former_pen_name": "прежний псевдоним",
+	"person_other_name": "другое имя",
+	"person_alternative_reading": "другое чтение"
 }

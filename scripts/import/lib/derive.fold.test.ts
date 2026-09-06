@@ -56,10 +56,18 @@ it('does not resolve a qualified author through a surname-only alias', () => {
 it('keeps the reviewed identity and romanization when importing former surnames or typos', () => {
 	for (const name of ['川上容子', '豊川 容子']) {
 		const person = derivePerson(name);
-		expect([person.slug, person.name, person.nameEn]).toEqual(['kawakami-yoko', '川上 容子', 'Kawakami Yōko']);
+		expect([person.slug, person.name, person.nameEn]).toEqual(['kawakami-yoko', '豊川 容子', 'Toyokawa Yōko']);
 	}
 	for (const name of ['菅原勝吉', '菅原 勝良']) {
 		const person = derivePerson(name);
 		expect([person.slug, person.name, person.nameEn]).toEqual(['sugawara-katsukichi', '菅原 勝吉', 'Sugawara Katsuyoshi']);
 	}
+});
+
+
+it('folds both documented Seto pen names to the later pen name', () => {
+ for (const name of ['瀬戸成子', '瀬戸 海惠']) {
+  const person = derivePerson(name);
+  expect([person.slug, person.name, person.nameEn]).toEqual(['p-c4w1s9', '瀬戸 海惠', 'Seto Mie']);
+ }
 });

@@ -493,11 +493,12 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 	const conds: SQLCond[] = [activePersonsOnly()];
 	if (opts.q && opts.q.trim()) {
 		const q = `%${opts.q.trim()}%`;
-		const kana = opts.q.normalize('NFKC').replace(/\s+/g, '')
-			.replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+		const compact = opts.q.normalize('NFKC').replace(/\s+/g, '');
+		const kana = compact.replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
 		conds.push(or(
 			like(persons.name, q), like(persons.nameEn, q),
 			inArray(persons.slug, personSlugsMatchingAlias(opts.q)),
+			sql`replace(replace(${persons.name}, ' ', ''), '　', '') like ${`%${compact}%`}`,
 			sql`replace(replace(${persons.nameKana}, ' ', ''), '　', '') like ${`%${kana}%`}`
 		)!);
 	}

@@ -10,6 +10,7 @@ import { join } from 'node:path';
 import * as schema from '../../src/lib/server/db/schema';
 import { run, type PersonReading } from './person-readings';
 import manifest from '../data/person-readings.json';
+import { planPersonReviews } from './lib/person-review';
 
 it('applies the sourced manifest idempotently while preserving identities, dates and links', async () => {
 	const scratch = mkdtempSync(join(tmpdir(), 'reading-test-'));
@@ -66,4 +67,13 @@ it('rejects unsupported fields, duplicate decisions, merged targets and missing 
 		await expect(run(db, {}, [entry])).rejects.toThrow('target merged');
 		expect((await run(db, {}, [{ ...entry, slugs: ['absent'] }])).detail?.missing).toEqual(['absent']);
 	} finally { client.close(); rmSync(scratch, { recursive: true, force: true }); }
+});
+
+
+it('accepts only explicitly reviewed prior field values when a preferred name changes', () => {
+ const entry = manifest.find(e => e.slugs.includes('kawakami-yoko'))!;
+ const row = { id: 'yoko', slug: 'kawakami-yoko', name: '川上 容子', nameEn: 'Kawakami Yōko', nameKana: 'かわかみ ようこ' };
+ expect(planPersonReviews([row], [entry]).get('yoko')).toEqual(entry.corrected);
+ expect(() => planPersonReviews([{ ...row, nameKana: 'かわかみ よしこ' }], [entry])).toThrow('needs rechecking');
+ expect(() => planPersonReviews([{ ...row, nameEn: 'Unreviewed name' }], [entry])).toThrow('needs rechecking');
 });

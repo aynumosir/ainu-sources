@@ -228,5 +228,7 @@
 	"footer_data_credit": "データ：ainu-dictionaries / ainu-grammar / ainu-corpora",
 	"region_unassigned": "未分類",
 	"nav_audit": "監査",
-  "person_former_surname_activity_name": "旧姓・活動名"
+  "person_former_pen_name": "旧筆名",
+	"person_other_name": "別名",
+	"person_alternative_reading": "別の読み"
 }

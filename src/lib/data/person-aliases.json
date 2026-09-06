@@ -1,11 +1,62 @@
 [
   {
     "slug": "kawakami-yoko",
-    "aliases": [{ "name": "豊川 容子", "kind": "formerSurnameAndActivityName" }],
+    "aliases": [
+      {
+        "name": "川上 容子",
+        "nameKana": "かわかみ ようこ",
+        "nameEn": "Kawakami Yōko",
+        "kind": "otherName"
+      }
+    ],
     "sources": [
       "https://www.ff-ainu.or.jp/radio/files/16-1.pdf",
       "https://www.ff-ainu.or.jp/web/potal_site/files/2025AinugoradioVol.3_a4.pdf",
-      "https://haf.jp/pdf/archive_r7/009.pdf"
+      "https://hagamag.com/uncategory/10819"
+    ]
+  },
+  {
+    "slug": "sawai-masatoshi",
+    "aliases": [
+      {
+        "name": "澤井 アク",
+        "nameKana": "さわい あく",
+        "nameEn": "Sawai Aku",
+        "kind": "otherName"
+      }
+    ],
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/98-1.pdf",
+      "https://aterui8.jp/history/info/aterui_info026.html"
+    ]
+  },
+  {
+    "slug": "terashima-ryoan",
+    "aliases": [
+      {
+        "name": "てらしま りょうあん",
+        "nameKana": "てらしま りょうあん",
+        "nameEn": "Terashima Ryōan",
+        "kind": "readingVariant"
+      }
+    ],
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA00157410"
+    ]
+  },
+  {
+    "slug": "p-c4w1s9",
+    "aliases": [
+      {
+        "name": "瀬戸 成子",
+        "nameKana": "せと しげこ",
+        "nameEn": "Seto Shigeko",
+        "kind": "formerPenName"
+      }
+    ],
+    "sources": [
+      "https://otarunay.at-ninja.jp/taimuzu-all3.html",
+      "https://aynuitak.at-ninja.jp/ContentsESP.pdf"
     ]
   }
 ]

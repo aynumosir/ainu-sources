@@ -205,6 +205,7 @@ export function linkTypeFor(host: string): string {
 // Map every observed form → one canonical slug, with a canonical display name,
 // so a person is a single record linking to all their works.
 export const PERSON_ALIASES: Record<string, string> = {
+	'瀬戸成子': 'p-c4w1s9', '瀬戸海惠': 'p-c4w1s9',
 	'川上容子': 'kawakami-yoko', '豊川容子': 'kawakami-yoko',
 	'菅原勝吉': 'sugawara-katsukichi', '菅原勝良': 'sugawara-katsukichi',
 	Tamura: 'tamura-suzuko', 'Tamura, Suzuko': 'tamura-suzuko', 'Tamura Suzuko': 'tamura-suzuko', 'Suzuko Tamura': 'tamura-suzuko', 田村すゞ子: 'tamura-suzuko', 田村すず子: 'tamura-suzuko', 田村寿々子: 'tamura-suzuko',
@@ -248,7 +249,8 @@ export const PERSON_ALIASES: Record<string, string> = {
 	北海道ウタリ協会: 'hokkaido-utari-kyokai'
 };
 export const PERSON_CANON: Record<string, { name: string; nameEn?: string }> = {
-	'kawakami-yoko': { name: '川上 容子', nameEn: 'Kawakami Yōko' },
+	'p-c4w1s9': { name: '瀬戸 海惠', nameEn: 'Seto Mie' },
+	'kawakami-yoko': { name: '豊川 容子', nameEn: 'Toyokawa Yōko' },
 	'sugawara-katsukichi': { name: '菅原 勝吉', nameEn: 'Sugawara Katsuyoshi' },
 	'tamura-suzuko': { name: '田村 すゞ子', nameEn: 'Tamura Suzuko' },
 	'nakagawa-hiroshi': { name: '中川 裕', nameEn: 'Nakagawa Hiroshi' },
@@ -297,7 +299,8 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		// researchmap (deceased) — link her Wikidata so life dates fill in. Keyed by
 		// canon slug; all her name variants (incl. birth name 福田すゞ子) alias to it.
 		'tamura-suzuko': { nameEn: 'Tamura Suzuko', wikidata: 'Q11576823' },
-		'kawakami-yoko': { nameEn: 'Kawakami Yōko' },
+		'p-c4w1s9': { nameEn: 'Seto Mie' },
+		'kawakami-yoko': { nameEn: 'Toyokawa Yōko' },
 		'sugawara-katsukichi': { nameEn: 'Sugawara Katsuyoshi' },
 		吉川佳見: { nameEn: 'Yoshikawa Yoshimi', researchmap: 'y.yoshikawa' },
 		阪口諒: { nameEn: 'Sakaguchi Ryo', researchmap: 'SAKAGUCHI_Ryo' },

@@ -228,5 +228,7 @@
 	"footer_data_credit": "Data from ainu-dictionaries, ainu-grammar and ainu-corpora.",
 	"region_unassigned": "Unassigned",
 	"nav_audit": "Audit",
-  "person_former_surname_activity_name": "former surname; activity name"
+  "person_former_pen_name": "former pen name",
+	"person_other_name": "also known as",
+	"person_alternative_reading": "alternative reading"
 }

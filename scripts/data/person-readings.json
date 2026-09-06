@@ -1653,16 +1653,27 @@
     ],
     "name": "川上 容子",
     "expected": {
+      "name": "川上 容子",
+      "nameEn": "Kawakami Yōko",
       "nameKana": null
     },
     "corrected": {
-      "nameKana": "かわかみ ようこ"
+      "name": "豊川 容子",
+      "nameEn": "Toyokawa Yōko",
+      "nameKana": "とよかわ ようこ"
     },
     "checkedAt": "2026-09-06",
     "sources": [
-      "https://www.ff-ainu.or.jp/radio/files/%E3%83%A9%E3%82%B8%E3%82%AA%E8%AC%9B%E5%BA%A72016vol1.pdf"
+      "https://hagamag.com/uncategory/10819",
+      "https://www.ff-ainu.or.jp/web/potal_site/files/2025AinugoradioVol.3_a4.pdf",
+      "https://haf.jp/pdf/archive_r7/009.pdf"
     ],
-    "note": "アイヌ語ラジオ講座第1期テキストの講師・協力者紹介のふりがな。印刷頁2。"
+    "note": "本人インタビューのプロフィールは豊川容子、とよかわ・ようこ。2025年ラジオ講座は川上容子の活動名を豊川容子と明記。公演資料の活動名を主表示とし、川上容子は別名に保存。以前確認した川上名義の読みも再適用時の既知の値として明示。",
+    "acceptedPriorValues": {
+      "nameKana": [
+        "かわかみ ようこ"
+      ]
+    }
   },
   {
     "slugs": [
@@ -5718,18 +5729,30 @@
     ],
     "name": "瀬戸 成子",
     "expected": {
-      "nameKana": null,
-      "nameEn": null
+      "name": "瀬戸 成子",
+      "nameEn": null,
+      "nameKana": null
     },
     "corrected": {
-      "nameKana": "せと しげこ",
-      "nameEn": "Seto Shigeko"
+      "name": "瀬戸 海惠",
+      "nameEn": "Seto Mie",
+      "nameKana": "せと みえ"
     },
-    "checkedAt": "2026-09-05",
+    "checkedAt": "2026-09-06",
     "sources": [
-      "https://aynuitak.at-ninja.jp/ContentsESP.pdf"
+      "https://otarunay.at-ninja.jp/taimuzu-all3.html",
+      "https://aynuitak.at-ninja.jp/ContentsESP.pdf",
+      "https://aynuitak.at-ninja.jp/ContentsESP61-68.pdf"
     ],
-    "note": "27号・39号の著者表記SETO Ŝigeko。"
+    "note": "編集責任者の全記事一覧、第57号に瀬戸成子から海惠へのペンネーム変更を明記。エスペラント索引57-1・60-1はSETO Mie。63-1のSETO Ŝigekoは旧名の読みと一致し、別人の根拠にはならない。後の筆名海惠を主表示、成子を旧筆名として保存。",
+    "acceptedPriorValues": {
+      "nameEn": [
+        "Seto Shigeko"
+      ],
+      "nameKana": [
+        "せと しげこ"
+      ]
+    }
   },
   {
     "slugs": [
@@ -8055,5 +8078,106 @@
       "https://id.ndl.go.jp/auth/ndlna/00730346"
     ],
     "note": "登録著作と同じ著作を出典とするNDL典拠の読み。"
+  },
+  {
+    "slugs": [
+      "terada-yoshitaka"
+    ],
+    "name": "寺田 吉孝",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "てらだ よしたか"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://human.hgu.jp/publication/docs/journal-humanities74.pdf"
+    ],
+    "note": "北海学園大学『人文論集』74号、印刷頁16（PDF20頁）の本人略歴に「てらだ よしたか」。同誌英文目次もYoshitaka TERADA。ロシア語研究者の経歴が一致し、旧設置名簿のヨシカツよりこの明示的な略歴を優先。"
+  },
+  {
+    "slugs": [
+      "sawai-masatoshi"
+    ],
+    "name": "澤井 政敏",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Sawai Masatoshi"
+    },
+    "corrected": {
+      "nameKana": "さわい あく",
+      "nameEn": "Sawai Aku"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ff-ainu.or.jp/radio/files/98-1.pdf",
+      "https://cendoc.docip.org/collect/cendocdo/index/assoc/HASH01a8/af6fda93.dir/960407.pdf",
+      "https://aterui8.jp/history/info/aterui_info026.html"
+    ],
+    "note": "1998年度第1期ラジオ講座、印刷頁2の原画像で澤井政敏のふりがな「さわい あく」を確認。Ainu National Congress文書のSAWAI Aku、1994年主催団体の澤井アク表記とも一致。アクは抽出破損ではない。澤井アクを可視の別名にも追加。"
+  },
+  {
+    "slugs": [
+      "terashima-ryoan"
+    ],
+    "name": "寺島 良安",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Terashima Ryoan"
+    },
+    "corrected": {
+      "nameKana": "てらじま りょうあん",
+      "nameEn": "Terajima Ryōan"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/00272207",
+      "https://ci.nii.ac.jp/author/DA00157410",
+      "https://www.klnet.pref.kanagawa.jp/publications/public-relations/topicsnotobira/2021/01/topics_tobira152.pdf"
+    ],
+    "note": "NDL・CiNiiの主標目と神奈川県立図書館の和漢三才図会紹介のふりがながテラジマリョウアン。CiNiiが明示する別読みテラシマリョウアンも可視・検索可能な別読みとして保存。"
+  },
+  {
+    "slugs": [
+      "p-1kl2r4i"
+    ],
+    "name": "中澤 道三",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "なかざわ みちぞう",
+      "nameEn": "Nakazawa Michizō"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18273863",
+      "https://id.ndl.go.jp/auth/ndlna/033725544",
+      "https://nagata-tamat.life.coocan.jp/top2.html"
+    ],
+    "note": "登録著書『秩父：アイヌ語・縄文語地名考』のCiNii著者標目はナカザワミチゾウ。同じ研究所刊行の後年著書を典拠とするNDLドウサンは明示的に推量読み。未確定の推量を同等の反証と扱わず、著書に結びつく非推量の標目を採用。研究会案内も同分野の人物と確認。"
+  },
+  {
+    "slugs": [
+      "miyoshi-isao"
+    ],
+    "name": "三好 勲",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Miyoshi Isao"
+    },
+    "corrected": {
+      "nameKana": "みよし いさむ",
+      "nameEn": "Miyoshi Isamu"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=18301&domain=ezo",
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=2369&domain=ainu",
+      "https://ainu-center.hm.pref.hokkaido.lg.jp/kankou/kiyou/pdf/kiyou13-05.pdf"
+    ],
+    "note": "登録論文「アイヌ語地名キキンをめぐって」の法政標目はみよしいさむ。別著書の法政いさお？は明示的に疑問符付き。北海道博物館目録で論文・巻号・著者の対応も確認。J-GLOBALの医師Miyoshi Isaoは経歴の異なる同姓同名であり根拠から除外。非疑問形の当該論文標目を採用。"
   }
 ]
