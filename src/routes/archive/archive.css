@@ -6,28 +6,26 @@
 	:root,
 	:root[data-archive-theme='light'] {
 		color-scheme: light;
-		--archive-bg: #f6f0e4;
-		--archive-paper: #fff9ee;
+		--archive-bg: #f3f3f1;
+		--archive-paper: #ffffff;
 		--archive-surface: var(--archive-paper);
-		--archive-panel: #fbf3e6;
-		--archive-muted: #eee3d0;
-		--archive-border: #d8c8ad;
-		--archive-border-strong: #a89270;
-		--archive-text: #1f1b16;
-		--archive-text-soft: #4b4136;
-		--archive-subtle: #75695d;
-		--archive-faint-text: #6f6256;
-		--archive-gilt: #b88a32;
-		--archive-gilt-text: #835d16;
-		--archive-gilt-soft: #d5b36a;
-		--archive-accent: var(--archive-gilt);
-		--archive-accent-soft: var(--archive-gilt-soft);
-		--archive-good: #24785a;
-		--archive-warn: #9a6418;
+		--archive-panel: #f8f8f7;
+		--archive-muted: #ededeb;
+		--archive-border: #d8d8d4;
+		--archive-border-strong: #8c8c86;
+		--archive-text: #151515;
+		--archive-text-soft: #3a3a37;
+		--archive-subtle: #55554f;
+		--archive-faint-text: #6d6d68;
+		--archive-accent: #2540ad;
+		--archive-accent-text: #2540ad;
+		--archive-accent-soft: #98a8ec;
+		--archive-good: #1d7a5a;
+		--archive-warn: #a35a00;
 		--archive-danger: #b42332;
 		--archive-quarantine: #6b3fa0;
-		--archive-stage: #1c170f;
-		--archive-stage-control: rgba(255, 249, 238, 0.92);
+		--archive-stage: #131316;
+		--archive-stage-control: rgba(255, 255, 255, 0.92);
 		--font-archive-serif:
 			'Source Serif 4', 'Spectral', 'Noto Serif JP', ui-serif, Georgia, 'Times New Roman', serif;
 		--font-archive-jp: 'Shippori Mincho B1', 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
@@ -39,54 +37,50 @@
 	@media (prefers-color-scheme: dark) {
 		:root:not([data-archive-theme='light']) {
 			color-scheme: dark;
-			--archive-bg: #14110e;
-			--archive-paper: #1f1a15;
+			--archive-bg: #131316;
+			--archive-paper: #1c1c20;
 			--archive-surface: var(--archive-paper);
-			--archive-panel: #252018;
-			--archive-muted: #2c251c;
-			--archive-border: #4a3d2c;
-			--archive-border-strong: #7d6746;
-			--archive-text: #f2eadc;
-			--archive-text-soft: #d2c4ad;
-			--archive-subtle: #a89982;
-			--archive-faint-text: #b5a58e;
-			--archive-gilt: #d1a64a;
-			--archive-gilt-text: #dfbd70;
-			--archive-gilt-soft: #e2c678;
-			--archive-accent: var(--archive-gilt);
-			--archive-accent-soft: var(--archive-gilt-soft);
+			--archive-panel: #222227;
+			--archive-muted: #2a2a30;
+			--archive-border: #3b3b42;
+			--archive-border-strong: #6b6b74;
+			--archive-text: #f0f0ee;
+			--archive-text-soft: #cfcfcb;
+			--archive-subtle: #a3a3a0;
+			--archive-faint-text: #8f8f8c;
+			--archive-accent: #8b9cf0;
+			--archive-accent-text: #a5b3f5;
+			--archive-accent-soft: #6479de;
 			--archive-good: #77c7a5;
-			--archive-warn: #e8cb79;
+			--archive-warn: #e8c46a;
 			--archive-danger: #ff8d98;
 			--archive-quarantine: #c9a7ff;
-			--archive-stage: #090705;
-			--archive-stage-control: rgba(37, 32, 24, 0.88);
+			--archive-stage: #0a0a0c;
+			--archive-stage-control: rgba(28, 28, 32, 0.9);
 		}
 	}
 	:root[data-archive-theme='dark'] {
 		color-scheme: dark;
-		--archive-bg: #14110e;
-		--archive-paper: #1f1a15;
+		--archive-bg: #131316;
+		--archive-paper: #1c1c20;
 		--archive-surface: var(--archive-paper);
-		--archive-panel: #252018;
-		--archive-muted: #2c251c;
-		--archive-border: #4a3d2c;
-		--archive-border-strong: #7d6746;
-		--archive-text: #f2eadc;
-		--archive-text-soft: #d2c4ad;
-		--archive-subtle: #a89982;
-		--archive-faint-text: #b5a58e;
-		--archive-gilt: #d1a64a;
-		--archive-gilt-text: #dfbd70;
-		--archive-gilt-soft: #e2c678;
-		--archive-accent: var(--archive-gilt);
-		--archive-accent-soft: var(--archive-gilt-soft);
+		--archive-panel: #222227;
+		--archive-muted: #2a2a30;
+		--archive-border: #3b3b42;
+		--archive-border-strong: #6b6b74;
+		--archive-text: #f0f0ee;
+		--archive-text-soft: #cfcfcb;
+		--archive-subtle: #a3a3a0;
+		--archive-faint-text: #8f8f8c;
+		--archive-accent: #8b9cf0;
+		--archive-accent-text: #a5b3f5;
+		--archive-accent-soft: #6479de;
 		--archive-good: #77c7a5;
-		--archive-warn: #e8cb79;
+		--archive-warn: #e8c46a;
 		--archive-danger: #ff8d98;
 		--archive-quarantine: #c9a7ff;
-		--archive-stage: #090705;
-		--archive-stage-control: rgba(37, 32, 24, 0.88);
+		--archive-stage: #0a0a0c;
+		--archive-stage-control: rgba(28, 28, 32, 0.9);
 	}
 	.archive {
 		min-height: 100svh;
@@ -136,11 +130,11 @@
 		font-variant-numeric: tabular-nums;
 	}
 	.archive :is(input, select, textarea) {
-		accent-color: var(--archive-gilt);
+		accent-color: var(--archive-accent);
 	}
 	.archive :is(input, select, textarea):focus {
-		border-color: var(--archive-gilt);
-		--tw-ring-color: var(--archive-gilt);
+		border-color: var(--archive-accent);
+		--tw-ring-color: var(--archive-accent);
 	}
 }
 
@@ -217,7 +211,7 @@
    from their own scoped styles. */
 .archive .archive-card-engine {
 	font-family: var(--font-archive-mono);
-	color: var(--archive-gilt-text);
+	color: var(--archive-accent-text);
 }
 
 .archive .archive-card-notext {

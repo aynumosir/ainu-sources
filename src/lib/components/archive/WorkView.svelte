@@ -332,7 +332,7 @@
 							page === currentPage
 								? 'bg-[var(--archive-muted)] text-[var(--archive-text)]'
 								: 'bg-[var(--archive-paper)] text-[var(--archive-subtle)] hover:bg-[var(--archive-panel)]'
-						} ${page === currentPage ? 'shadow-[inset_3px_0_0_var(--archive-gilt)]' : ''}`}
+						} ${page === currentPage ? 'shadow-[inset_3px_0_0_var(--archive-accent)]' : ''}`}
 						style={`transform:translateY(${(page - 1) * THUMB_ROW_HEIGHT}px)`}
 					>
 						<span class="relative flex h-[96px] w-16 shrink-0 items-center justify-center overflow-hidden border border-[var(--archive-border)] bg-white">
@@ -370,7 +370,7 @@
 			資料内の本文を検索 Search text in this work
 			<input bind:value={findQuery} class="mt-2 w-full border border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 py-2 text-[15px]" />
 		</label>
-		<button type="submit" class="mt-3 border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">
+		<button type="submit" class="mt-3 border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">
 			<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} inverse />
 		</button>
 	</form>
@@ -381,7 +381,7 @@
 		{#each linkedAuthors as person, index}
 			{#if index > 0}, {/if}<a
 				href={`/people/${encodeURIComponent(person.slug)}`}
-				class="text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+				class="text-[var(--archive-accent-text)] underline decoration-dotted underline-offset-4"
 			>{person.name}</a>
 		{/each}
 	{:else}
@@ -458,7 +458,7 @@
 			<p class="mt-3 font-(family-name:--font-archive-serif) text-[15px] leading-7">
 				{@render authorNames()}. <cite>{source.title}</cite>. {year}.<br /><span class="tnum">{citedPage}</span>.
 			</p>
-			<button type="button" onclick={copyCitation} class="mt-3 border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
+			<button type="button" onclick={copyCitation} class="mt-3 border border-[var(--archive-border)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-accent)]">
 				<BilingualLabel ja={archiveLabels.copyCitation.ja} en={archiveLabels.copyCitation.en} />
 			</button>
 			{#if copyStatus}<span class="ml-2 text-[12px] text-[var(--archive-good)]" role="status">{copyStatus}</span>{/if}
@@ -510,7 +510,7 @@
 								href={link.url}
 								target="_blank"
 								rel="noreferrer"
-								class="text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+								class="text-[var(--archive-accent-text)] underline decoration-dotted underline-offset-4"
 							>{link.label ?? link.url} ↗</a>
 							{#if link.notes}
 								<p class="mt-0.5 text-[12px] text-[var(--archive-faint-text)]">{link.notes}</p>
@@ -532,7 +532,7 @@
 								<li>
 									<a
 										href={`/people/${encodeURIComponent(person.slug)}`}
-										class="text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+										class="text-[var(--archive-accent-text)] underline decoration-dotted underline-offset-4"
 									>{person.name}</a>
 									<span class="text-[var(--archive-faint-text)]"> · {person.role}</span>
 								</li>
@@ -571,7 +571,7 @@
 			</dl>
 			<a
 				href={`/sources/${encodeURIComponent(source.slug)}`}
-				class="mt-4 inline-flex text-[13px] font-semibold text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+				class="mt-4 inline-flex text-[13px] font-semibold text-[var(--archive-accent-text)] underline decoration-dotted underline-offset-4"
 			>
 				目録で見る View in catalogue
 			</a>
@@ -599,7 +599,7 @@
 							href={`/api/archive/revisions/${file.revisionId}/content?disposition=attachment`}
 							target="_blank"
 							rel="noreferrer"
-							class="mt-2 inline-flex text-[12px] font-semibold text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+							class="mt-2 inline-flex text-[12px] font-semibold text-[var(--archive-accent-text)] underline decoration-dotted underline-offset-4"
 						>
 							Download
 						</a>
@@ -624,14 +624,14 @@
 <article class="work-view flex min-h-0 flex-col bg-[var(--archive-bg)]">
 	<header class="work-header sticky top-14 z-30 border-b border-[var(--archive-border-strong)] bg-[var(--archive-paper)] px-4 py-3">
 		<div class="mx-auto flex max-w-[96rem] items-start gap-4">
-			<a href="/archive" class="shrink-0 pt-1 text-[13px] font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">← 資料一覧 Library</a>
+			<a href="/archive" class="shrink-0 pt-1 text-[13px] font-medium text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]">← 資料一覧 Library</a>
 			<div class="min-w-0 flex-1">
 				<h1 class="archive-title truncate text-[19px] font-semibold">{source.title}</h1>
 				<p class="mt-1 flex flex-wrap gap-x-2 text-[13px] text-[var(--archive-subtle)]">
 					{#if firstLinkedAuthor}
 						<a
 							href={`/people/${encodeURIComponent(firstLinkedAuthor.slug)}`}
-							class="text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4"
+							class="text-[var(--archive-accent-text)] underline decoration-dotted underline-offset-4"
 						>{firstLinkedAuthor.name}</a>
 					{:else}
 						<span>{author}</span>
@@ -661,7 +661,7 @@
 					onclick={() => go(-1)}
 					disabled={currentPage <= 1}
 					aria-label="Previous page"
-					class="absolute left-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center bg-[var(--archive-stage-control)] text-[var(--archive-text)] shadow-lg backdrop-blur hover:text-[var(--archive-gilt-text)] disabled:opacity-25"
+					class="absolute left-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center bg-[var(--archive-stage-control)] text-[var(--archive-text)] shadow-lg backdrop-blur hover:text-[var(--archive-accent-text)] disabled:opacity-25"
 				><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 				{#if viewMode === 'image'}
 					{@render imagePage()}
@@ -680,7 +680,7 @@
 					onclick={() => go(1)}
 					disabled={currentPage >= pageCount}
 					aria-label="Next page"
-					class="absolute right-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center bg-[var(--archive-stage-control)] text-[var(--archive-text)] shadow-lg backdrop-blur hover:text-[var(--archive-gilt-text)] disabled:opacity-25"
+					class="absolute right-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center bg-[var(--archive-stage-control)] text-[var(--archive-text)] shadow-lg backdrop-blur hover:text-[var(--archive-accent-text)] disabled:opacity-25"
 				><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 			</div>
 
@@ -692,7 +692,7 @@
 						aria-pressed={viewMode === 'image'}
 						onclick={() => (viewMode = 'image')}
 						class="min-w-[5rem] px-3 py-1.5 text-center"
-						class:bg-[var(--archive-gilt-text)]={viewMode === 'image'}
+						class:bg-[var(--archive-accent-text)]={viewMode === 'image'}
 						class:text-[var(--archive-paper)]={viewMode === 'image'}
 					>Image</button>
 					<button
@@ -700,7 +700,7 @@
 						aria-pressed={viewMode === 'text'}
 						onclick={() => (viewMode = 'text')}
 						class="min-w-[5rem] border-l border-[var(--archive-border)] px-3 py-1.5 text-center"
-						class:bg-[var(--archive-gilt-text)]={viewMode === 'text'}
+						class:bg-[var(--archive-accent-text)]={viewMode === 'text'}
 						class:text-[var(--archive-paper)]={viewMode === 'text'}
 					>Text</button>
 					<button
@@ -708,7 +708,7 @@
 						aria-pressed={viewMode === 'side-by-side'}
 						onclick={() => (viewMode = 'side-by-side')}
 						class="side-by-side-option min-w-[5rem] border-l border-[var(--archive-border)] px-3 py-1.5 text-center"
-						class:bg-[var(--archive-gilt-text)]={viewMode === 'side-by-side'}
+						class:bg-[var(--archive-accent-text)]={viewMode === 'side-by-side'}
 						class:text-[var(--archive-paper)]={viewMode === 'side-by-side'}
 					>Side-by-side</button>
 				</div>
@@ -732,7 +732,7 @@
 			<button type="button" aria-label="Close sheet" class="absolute inset-0 h-full w-full" onclick={() => (sheet = null)}></button>
 			<section class="relative max-h-[78svh] w-full overflow-y-auto border-t border-[var(--archive-border-strong)] bg-[var(--archive-paper)] shadow-xl">
 				<div class="sticky top-0 z-10 flex justify-end border-b border-dotted border-[var(--archive-border)] bg-[var(--archive-paper)] px-4 py-2">
-					<button type="button" class="text-[13px] text-[var(--archive-gilt-text)]" onclick={() => (sheet = null)}>Close</button>
+					<button type="button" class="text-[13px] text-[var(--archive-accent-text)]" onclick={() => (sheet = null)}>Close</button>
 				</div>
 				{#if sheet === 'pages'}
 					<div class="h-[65svh]">{@render contentsPanel()}</div>
@@ -807,7 +807,7 @@
 		margin-left: 1px;
 	}
 	.archive-composition-seg[data-lang='ain'] {
-		background: var(--archive-gilt);
+		background: var(--archive-accent);
 	}
 	.archive-composition-seg[data-lang='jpn'] {
 		background: var(--archive-border-strong);

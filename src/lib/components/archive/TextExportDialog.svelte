@@ -122,5 +122,5 @@
 	.notice { border: 1px solid var(--archive-border); background: var(--archive-panel); padding: 0.6rem; font-size: 12px; }
 	.error { border-color: var(--archive-danger); color: var(--archive-danger); }
 	footer button { border: 1px solid var(--archive-border); padding: 0.45rem 0.8rem; font-size: 13px; }
-	footer .primary { border-color: var(--archive-gilt); background: var(--archive-gilt); color: var(--archive-paper); font-weight: 650; }
+	footer .primary { border-color: var(--archive-accent); background: var(--archive-accent); color: var(--archive-paper); font-weight: 650; }
 </style>

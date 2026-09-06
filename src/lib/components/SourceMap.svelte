@@ -49,7 +49,7 @@
 		a.style.color = color;
 		a.textContent = name;
 		const span = document.createElement('span');
-		span.style.color = '#78716c';
+		span.style.color = '#6d6d68';
 		span.textContent = role;
 		div.appendChild(a);
 		div.appendChild(document.createElement('br'));
@@ -108,7 +108,7 @@
 		markers = [];
 		const bounds = new L.LngLatBounds();
 		for (const p of pins) {
-			const color = PLACE_ROLE_COLOR[p.role] ?? '#78716c';
+			const color = PLACE_ROLE_COLOR[p.role] ?? '#6d6d68';
 			const name = p.nameEn && p.nameEn !== p.name ? `${p.name} · ${p.nameEn}` : p.name;
 			const role = tl(PLACE_ROLE_LABELS, p.role);
 			const href = localizeHref(`/places/${p.slug}`);
@@ -138,7 +138,7 @@
 			<span class="flex items-center gap-1.5 text-xs text-stone-500">
 				<span
 					class="inline-block size-2.5 rounded-full"
-					style="background:{PLACE_ROLE_COLOR[role] ?? '#78716c'}"
+					style="background:{PLACE_ROLE_COLOR[role] ?? '#6d6d68'}"
 				></span>
 				{tl(PLACE_ROLE_LABELS, role)}
 			</span>

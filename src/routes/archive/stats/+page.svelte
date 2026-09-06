@@ -65,7 +65,7 @@
 		{/if}
 		<div class="mt-3 flex h-6 w-full overflow-hidden border border-[var(--archive-border)]">
 			<div
-				class="bg-[var(--archive-gilt)]"
+				class="bg-[var(--archive-accent)]"
 				style={`width:${percent(pagesWithText, pagesScanned)}%`}
 				title={`${pagesWithText} pages with text`}
 			></div>
@@ -103,7 +103,7 @@
 				<div class="flex items-center gap-3">
 					<span class="w-20 shrink-0 text-[13px] tabular-nums text-[var(--archive-subtle)]">{bucket.value}</span>
 					<span
-						class="inline-block h-4 bg-[var(--archive-gilt)]"
+						class="inline-block h-4 bg-[var(--archive-accent)]"
 						style={`width:${Math.max(2, (bucket.count / eraMax) * 70)}%`}
 					></span>
 					<span class="text-[13px] tabular-nums">{bucket.count}</span>

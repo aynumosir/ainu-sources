@@ -28,7 +28,7 @@
 			}}
 		/>
 	{:else}
-		<span class="archive-title text-[27px] font-semibold text-[var(--archive-gilt-text)]">{initial}</span>
+		<span class="archive-title text-[27px] font-semibold text-[var(--archive-accent-text)]">{initial}</span>
 	{/if}
 </div>
 

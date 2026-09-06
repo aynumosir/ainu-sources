@@ -54,7 +54,7 @@
 
 <details bind:this={menu} class="relative">
 	<summary
-		class="flex cursor-pointer list-none items-center gap-2 text-[13px] font-medium text-[var(--archive-text)] marker:hidden hover:text-[var(--archive-gilt-text)]"
+		class="flex cursor-pointer list-none items-center gap-2 text-[13px] font-medium text-[var(--archive-text)] marker:hidden hover:text-[var(--archive-accent-text)]"
 		aria-label={`Account menu for ${displayName}`}
 	>
 		<span class="relative max-w-44 truncate">
@@ -86,7 +86,7 @@
 				<span class="tnum">{usageLine}</span>
 			</div>
 			<div class="mt-2 h-1 overflow-hidden bg-[var(--archive-muted)]" role="progressbar" aria-label="Archive usage" aria-valuemin="0" aria-valuemax="100" aria-valuenow={Math.round(usagePercent)}>
-				<div class="h-full bg-[var(--archive-gilt)]" style={`width:${usagePercent}%`}></div>
+				<div class="h-full bg-[var(--archive-accent)]" style={`width:${usagePercent}%`}></div>
 			</div>
 		</div>
 
@@ -104,7 +104,7 @@
 						onclick={() => chooseTheme(option.value as 'light' | 'dark' | 'system')}
 						class={`px-2 py-1.5 first:border-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:border-[var(--archive-border)] ${
 							archiveSession.theme === option.value
-								? 'bg-[var(--archive-gilt)] text-[var(--archive-paper)]'
+								? 'bg-[var(--archive-accent)] text-[var(--archive-paper)]'
 								: 'bg-[var(--archive-paper)] text-[var(--archive-subtle)] hover:bg-[var(--archive-panel)]'
 						}`}
 					>
@@ -115,9 +115,9 @@
 		</fieldset>
 
 		<div class="mt-4 space-y-2 border-t border-dotted border-[var(--archive-border)] pt-3 text-[13px]">
-			<a href="/archive/account" class="block text-[var(--archive-text)] hover:text-[var(--archive-gilt-text)]" onclick={() => menu?.removeAttribute('open')}>Account</a>
+			<a href="/archive/account" class="block text-[var(--archive-text)] hover:text-[var(--archive-accent-text)]" onclick={() => menu?.removeAttribute('open')}>Account</a>
 			<form method="POST" action="/account?/signout" use:enhance={signOutEnhance}>
-				<button type="submit" class="text-[var(--archive-text)] hover:text-[var(--archive-gilt-text)]">Sign out</button>
+				<button type="submit" class="text-[var(--archive-text)] hover:text-[var(--archive-accent-text)]">Sign out</button>
 			</form>
 		</div>
 	</div>

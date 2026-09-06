@@ -103,7 +103,7 @@
 		color: var(--archive-subtle);
 	}
 	button {
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 	}
 	ol {
 		margin: 0;

@@ -473,10 +473,10 @@
 	<div class="flex min-h-svh flex-col bg-[var(--archive-bg)] text-[var(--archive-text)]">
 		<header class="sticky top-0 z-30 border-b border-dotted border-[var(--archive-border)] bg-[var(--archive-paper)]">
 			<div class="flex flex-wrap items-center gap-2 px-3 py-2">
-				<a href={sourceHref} class="text-[13px] font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" aria-label={bilingualAriaLabel(archiveLabels.back)}>
+				<a href={sourceHref} class="text-[13px] font-medium text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]" aria-label={bilingualAriaLabel(archiveLabels.back)}>
 					<BilingualLabel ja={archiveLabels.back.ja} en={archiveLabels.back.en} />
 				</a>
-				<a href={sourceHref} class="archive-title min-w-0 flex-1 truncate text-[17px] font-semibold text-[var(--archive-text)] hover:text-[var(--archive-gilt-text)]">
+				<a href={sourceHref} class="archive-title min-w-0 flex-1 truncate text-[17px] font-semibold text-[var(--archive-text)] hover:text-[var(--archive-accent-text)]">
 					{data.source.title}
 				</a>
 				{#if data.files.length > 1}
@@ -530,7 +530,7 @@
 						type="button"
 						aria-label={bilingualAriaLabel(archiveLabels.imageMode)}
 						onclick={() => setMode('image')}
-						class={`px-2 py-1 ${mode === 'image' ? 'bg-[var(--archive-gilt)] text-[var(--archive-paper)]' : 'bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
+						class={`px-2 py-1 ${mode === 'image' ? 'bg-[var(--archive-accent)] text-[var(--archive-paper)]' : 'bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
 					>
 						<BilingualLabel ja={archiveLabels.imageMode.ja} en={archiveLabels.imageMode.en} inverse={mode === 'image'} />
 					</button>
@@ -538,7 +538,7 @@
 						type="button"
 						aria-label="PDF"
 						onclick={() => setMode('pdf')}
-						class={`border-l border-[var(--archive-border)] px-2 py-1 ${mode === 'pdf' ? 'bg-[var(--archive-gilt)] text-[var(--archive-paper)]' : 'bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
+						class={`border-l border-[var(--archive-border)] px-2 py-1 ${mode === 'pdf' ? 'bg-[var(--archive-accent)] text-[var(--archive-paper)]' : 'bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
 					>
 						PDF
 					</button>
@@ -547,7 +547,7 @@
 					type="button"
 					aria-label={bilingualAriaLabel(archiveLabels.textPanel)}
 					onclick={toggleTextPanel}
-					class={`border px-2 py-1 text-[13px] ${textPanelOpen ? 'border-[var(--archive-gilt)] bg-[var(--archive-panel)] text-[var(--archive-text)]' : 'border-[var(--archive-border)] bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
+					class={`border px-2 py-1 text-[13px] ${textPanelOpen ? 'border-[var(--archive-accent)] bg-[var(--archive-panel)] text-[var(--archive-text)]' : 'border-[var(--archive-border)] bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
 				>
 					<BilingualLabel ja={archiveLabels.textPanel.ja} en={archiveLabels.textPanel.en} />
 				</button>
@@ -556,7 +556,7 @@
 					aria-label={bilingualAriaLabel(archiveLabels.metadataPanel)}
 					title={bilingualAriaLabel(archiveLabels.metadataPanel)}
 					onclick={toggleMetadataPanel}
-					class={`h-8 w-8 border text-[15px] font-semibold ${metadataPanelOpen ? 'border-[var(--archive-gilt)] bg-[var(--archive-panel)] text-[var(--archive-gilt-text)]' : 'border-[var(--archive-border)] bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
+					class={`h-8 w-8 border text-[15px] font-semibold ${metadataPanelOpen ? 'border-[var(--archive-accent)] bg-[var(--archive-panel)] text-[var(--archive-accent-text)]' : 'border-[var(--archive-border)] bg-[var(--archive-paper)] text-[var(--archive-subtle)]'}`}
 				>
 					<span aria-hidden="true">i</span>
 				</button>
@@ -565,20 +565,20 @@
 						type="button"
 						aria-label="Reader menu"
 						onclick={() => (overflowOpen = !overflowOpen)}
-						class="h-8 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)] text-[17px] hover:border-[var(--archive-gilt)]"
+						class="h-8 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)] text-[17px] hover:border-[var(--archive-accent)]"
 					>
 						<span aria-hidden="true">⋯</span>
 					</button>
 					{#if overflowOpen}
 						<div class="absolute right-0 mt-2 w-64 border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3 text-[13px] shadow-lg">
-							<button type="button" class="block w-full py-1 text-left text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" onclick={copyCitation}>
+							<button type="button" class="block w-full py-1 text-left text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]" onclick={copyCitation}>
 								<BilingualLabel ja={archiveLabels.copyCitation.ja} en={archiveLabels.copyCitation.en} />
 							</button>
-							<a href={`/api/archive/revisions/${data.revision.id}/content?disposition=attachment`} target="_blank" rel="noreferrer" class="block py-1 text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
+							<a href={`/api/archive/revisions/${data.revision.id}/content?disposition=attachment`} target="_blank" rel="noreferrer" class="block py-1 text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]">
 								<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} />
 								<span class="ml-1 text-[var(--archive-subtle)]">{formatBytes(data.revision.bytes)}</span>
 							</a>
-							<button type="button" class="block w-full py-1 text-left text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" onclick={() => (shortcutHelpOpen = true)}>
+							<button type="button" class="block w-full py-1 text-left text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]" onclick={() => (shortcutHelpOpen = true)}>
 								<BilingualLabel ja={archiveLabels.shortcuts.ja} en={archiveLabels.shortcuts.en} />
 							</button>
 							<p class="mt-3 border-t border-dotted border-[var(--archive-border)] pt-3 text-[12px] leading-5 text-[var(--archive-faint-text)]">
@@ -607,17 +607,17 @@
 							en={archiveLabels.metadataPanel.en}
 							class="text-[17px] font-semibold"
 						/>
-						<button type="button" class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" onclick={() => (metadataPanelOpen = false)}>Close</button>
+						<button type="button" class="text-[13px] text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]" onclick={() => (metadataPanelOpen = false)}>Close</button>
 					</div>
 					{@render metadataContent()}
 				</aside>
 			{/if}
 			<main class="relative min-w-0 flex-1" bind:this={stageEl}>
 				<div class="absolute inset-y-0 left-2 z-10 flex items-center">
-					<button type="button" aria-label={bilingualAriaLabel(archiveLabels.previousPage)} onclick={() => go(-1)} class="h-12 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[17px] hover:border-[var(--archive-gilt)]">‹</button>
+					<button type="button" aria-label={bilingualAriaLabel(archiveLabels.previousPage)} onclick={() => go(-1)} class="h-12 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[17px] hover:border-[var(--archive-accent)]">‹</button>
 				</div>
 				<div class="absolute inset-y-0 right-2 z-10 flex items-center">
-					<button type="button" aria-label={bilingualAriaLabel(archiveLabels.nextPage)} onclick={() => go(1)} class="h-12 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[17px] hover:border-[var(--archive-gilt)]">›</button>
+					<button type="button" aria-label={bilingualAriaLabel(archiveLabels.nextPage)} onclick={() => go(1)} class="h-12 w-8 border border-[var(--archive-border)] bg-[var(--archive-paper)]/90 text-[17px] hover:border-[var(--archive-accent)]">›</button>
 				</div>
 				<section class="flex h-full min-h-[calc(100svh-4rem)] items-stretch justify-center overflow-hidden bg-[var(--archive-bg)]">
 					{#if takedownNotice}
@@ -655,7 +655,7 @@
 				<aside class="reader-text-panel border-l border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
 					<div class="flex items-center justify-between gap-2 border-b border-dotted border-[var(--archive-border)] pb-2">
 						<p class="archive-kicker">OCR text · p.{currentPage}</p>
-						<button type="button" class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" onclick={() => (textPanelOpen = false)}>Close</button>
+						<button type="button" class="text-[13px] text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]" onclick={() => (textPanelOpen = false)}>Close</button>
 					</div>
 					<div class="mt-4 font-(family-name:--font-archive-serif) text-[17px] leading-8">
 						{#if selectedText.status === 'ready'}
@@ -681,7 +681,7 @@
 			<div class="max-w-md border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5 text-[15px] shadow-lg" role="dialog" aria-label="Archive stream limit reached">
 				<h2 class="text-[17px] font-semibold">Archive stream limit reached</h2>
 				<p class="mt-3 leading-7 text-[var(--archive-subtle)]">The daily byte budget or stream limit is exhausted. Reset time: {resetTime}.</p>
-				<button type="button" class="mt-4 border border-[var(--archive-border)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]" onclick={() => (quotaModalOpen = false)}>Close</button>
+				<button type="button" class="mt-4 border border-[var(--archive-border)] px-3 py-2 text-[13px] hover:border-[var(--archive-accent)]" onclick={() => (quotaModalOpen = false)}>Close</button>
 			</div>
 		</div>
 	{/if}
@@ -703,7 +703,7 @@
 					<dt class="archive-mono">f</dt><dd>Fullscreen stage</dd>
 					<dt class="archive-mono">?</dt><dd>Show this help</dd>
 				</dl>
-				<button type="button" class="mt-4 border border-[var(--archive-border)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]" onclick={() => (shortcutHelpOpen = false)}>Close</button>
+				<button type="button" class="mt-4 border border-[var(--archive-border)] px-3 py-2 text-[13px] hover:border-[var(--archive-accent)]" onclick={() => (shortcutHelpOpen = false)}>Close</button>
 			</div>
 		</div>
 	{/if}
@@ -724,7 +724,7 @@
 					</label>
 					<div class="mt-4 flex justify-end gap-2">
 						<button type="button" class="border border-[var(--archive-border)] px-3 py-2 text-[13px]" onclick={() => (findOpen = false)}>Cancel</button>
-						<button type="submit" class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">Search</button>
+						<button type="submit" class="border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)]">Search</button>
 					</div>
 				</form>
 			</div>
@@ -742,7 +742,7 @@
 						en={archiveLabels.metadataPanel.en}
 						class="text-[17px] font-semibold"
 					/>
-					<button type="button" class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]" onclick={() => (metadataPanelOpen = false)}>Close</button>
+					<button type="button" class="text-[13px] text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]" onclick={() => (metadataPanelOpen = false)}>Close</button>
 				</div>
 				<div class="overflow-auto">
 					{@render metadataContent()}

@@ -182,7 +182,7 @@
 												aria-label={bilingualAriaLabel(archiveLabels.save)}
 												disabled={saving === user.userId}
 												onclick={() => save(user)}
-												class="h-8 border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)] disabled:opacity-60"
+												class="h-8 border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-text)] disabled:opacity-60"
 											>
 												{#if saving === user.userId}
 													Saving

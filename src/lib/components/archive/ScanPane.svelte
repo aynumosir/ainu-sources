@@ -159,7 +159,7 @@
 	header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dotted var(--archive-border); background: var(--archive-paper); padding: 0.55rem 0.8rem; font-size: 12px; color: var(--archive-subtle); }
 	.skeleton { width: min(70%, 34rem); height: 80%; border: 1px solid var(--archive-border); background: var(--archive-panel); animation: pulse 1.2s ease-in-out infinite; }
 	.missing { border: 1px dashed var(--archive-border); background: var(--archive-paper); padding: 1.25rem; text-align: center; font-size: 13px; color: var(--archive-subtle); }
-	.missing button { margin-top: 0.7rem; color: var(--archive-gilt-text); }
+	.missing button { margin-top: 0.7rem; color: var(--archive-accent-text); }
 	.error { margin-top: 0.5rem; color: var(--archive-danger); }
 	@keyframes pulse { 50% { opacity: 0.55; } }
 </style>

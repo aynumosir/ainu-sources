@@ -94,7 +94,7 @@
 				<p class="mt-2 text-[15px] leading-7 text-[var(--archive-subtle)]">
 					Manage archive roles and administrative settings.
 				</p>
-				<a href="/archive/admin" class="mt-3 inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
+				<a href="/archive/admin" class="mt-3 inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-accent)]">
 					Open admin
 				</a>
 			</section>
@@ -123,7 +123,7 @@
 				End the app session for this archive.
 			</p>
 			<form method="POST" action="/account?/signout" use:enhance={signOutEnhance} class="mt-3">
-				<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.signOut)} class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]">
+				<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.signOut)} class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-accent)]">
 					<BilingualLabel ja={archiveLabels.signOut.ja} en={archiveLabels.signOut.en} />
 				</button>
 			</form>

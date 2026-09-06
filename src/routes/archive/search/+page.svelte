@@ -45,7 +45,7 @@
 				資料 Work
 				<input name="source_slug" value={data.sourceSlug} placeholder="slug, e.g. 1996-kayano-ainu-jiten" class="mt-1 h-10 w-full rounded-none border-[var(--archive-border)] bg-[var(--archive-panel)] px-3 text-[15px] text-[var(--archive-text)]" />
 			</label>
-			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.search)} class="h-10 border border-[var(--archive-gilt-text)] bg-[var(--archive-gilt-text)] px-4 text-[13px] font-semibold text-[var(--archive-paper)] hover:border-[var(--archive-gilt)] hover:bg-[var(--archive-gilt)]">
+			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.search)} class="h-10 border border-[var(--archive-accent-text)] bg-[var(--archive-accent-text)] px-4 text-[13px] font-semibold text-[var(--archive-paper)] hover:border-[var(--archive-accent)] hover:bg-[var(--archive-accent)]">
 				<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} compact />
 			</button>
 		</div>
@@ -59,7 +59,7 @@
 							name="mode"
 							value={mode.value}
 							checked={data.mode === mode.value}
-							class="accent-[var(--archive-gilt-text)]"
+							class="accent-[var(--archive-accent-text)]"
 						/>
 						<BilingualLabel ja={mode.ja} en={mode.en} />
 					</label>
@@ -86,7 +86,7 @@
 			<ol class="space-y-2">
 				{#each data.works as work (work.slug)}
 					<li class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-3">
-						<a href={`/archive/sources/${work.slug}`} class="archive-title font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">{work.source.title}</a>
+						<a href={`/archive/sources/${work.slug}`} class="archive-title font-medium text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]">{work.source.title}</a>
 						{#if work.source.titleEn && work.source.titleEn !== work.source.title}
 							<p class="text-[13px] text-[var(--archive-subtle)]">{work.source.titleEn}</p>
 						{/if}
@@ -107,7 +107,7 @@
 				{#each data.result.items as item (item.revisionId + ':' + item.variant + ':' + item.page)}
 					<li class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-4">
 						<div class="space-y-1">
-							<a href={`/archive/sources/${item.source.slug}`} class="archive-title font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">{item.source.title}</a>
+							<a href={`/archive/sources/${item.source.slug}`} class="archive-title font-medium text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]">{item.source.title}</a>
 							{#if item.source.titleEn && item.source.titleEn !== item.source.title}
 								<p class="text-[13px] text-[var(--archive-subtle)]">{item.source.titleEn}</p>
 							{/if}
@@ -122,12 +122,12 @@
 						</p>
 						<p class="mt-3 text-[15px] leading-7">
 							{#each highlightSnippet(item.snippet.text, item.snippet.offsets) as segment, index (index)}
-								{#if segment.highlighted}<mark class="bg-transparent font-semibold text-[var(--archive-text)] underline decoration-[var(--archive-gilt)] decoration-2 underline-offset-2">{segment.text}</mark>{:else}{segment.text}{/if}
+								{#if segment.highlighted}<mark class="bg-transparent font-semibold text-[var(--archive-text)] underline decoration-[var(--archive-accent)] decoration-2 underline-offset-2">{segment.text}</mark>{:else}{segment.text}{/if}
 							{/each}
 						</p>
 						<div class="mt-3">
 							{#if item.fileId}
-								<a href={`/archive/read/${item.source.slug}/${item.fileId}?p=${item.wholeDocument ? 1 : item.page}`} aria-label={bilingualAriaLabel(archiveLabels.readPage)} class="text-[13px] font-medium text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">
+								<a href={`/archive/read/${item.source.slug}/${item.fileId}?p=${item.wholeDocument ? 1 : item.page}`} aria-label={bilingualAriaLabel(archiveLabels.readPage)} class="text-[13px] font-medium text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]">
 									<BilingualLabel ja={archiveLabels.readPage.ja} en={archiveLabels.readPage.en} compact />
 								</a>
 							{:else}
@@ -141,7 +141,7 @@
 				<a
 					href={`/archive/search?q=${encodeURIComponent(data.q)}${data.sourceSlug ? `&source_slug=${encodeURIComponent(data.sourceSlug)}` : ''}&cursor=${encodeURIComponent(data.result.nextCursor)}`}
 					aria-label={bilingualAriaLabel(archiveLabels.loadMore)}
-					class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-4 py-2 text-[15px] font-medium hover:border-[var(--archive-gilt)]"
+					class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-4 py-2 text-[15px] font-medium hover:border-[var(--archive-accent)]"
 				>
 					<BilingualLabel ja={archiveLabels.loadMore.ja} en={archiveLabels.loadMore.en} />
 				</a>

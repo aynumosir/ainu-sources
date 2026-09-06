@@ -162,7 +162,7 @@ export const PLACE_ROLE_COLOR: Record<string, string> = {
 	record: '#e11d48', // rose
 	dialect: '#059669', // emerald
 	subject: '#d97706', // amber
-	holding: '#78716c' // stone
+	holding: '#6d6d68' // stone
 };
 
 // --- source-to-source relation types ---

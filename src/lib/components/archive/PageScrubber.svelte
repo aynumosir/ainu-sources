@@ -62,7 +62,7 @@
 		width: 2.5rem;
 		height: 3.2rem;
 		transform: translateX(-50%);
-		border: 1px solid var(--archive-gilt);
+		border: 1px solid var(--archive-accent);
 		background: var(--archive-paper);
 		box-shadow: 0 2px 6px rgb(0 0 0 / 22%);
 		overflow: hidden;

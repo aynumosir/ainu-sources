@@ -2,23 +2,33 @@
 @plugin '@tailwindcss/forms';
 
 @theme {
-	--color-paper: #f4ecd9;
-	--color-paper-card: #fbf5e7;
-	--color-paper-sunk: #ece0c6;
-	--color-ink: #2b2114;
+	/* Ground: a cool near-white page, white surfaces on top of it, near-black ink. */
+	--color-paper: #f3f3f1;
+	--color-paper-card: #ffffff;
+	--color-paper-sunk: #e7e7e4;
+	--color-ink: #151515;
 
-	--color-brand-50: #f8ece5;
-	--color-brand-100: #efd6c8;
-	--color-brand-300: #d39f89;
-	--color-brand-400: #c07a5d;
-	--color-brand-600: #9a3d2c;
-	--color-brand-700: #843123;
-	--color-brand-800: #69261a;
+	/* Accent: ultramarine. brand-700 is the link and button colour (9:1 on white). */
+	--color-brand-50: #eef1fc;
+	--color-brand-100: #dbe1f9;
+	--color-brand-300: #98a8ec;
+	--color-brand-400: #6479de;
+	--color-brand-600: #3251c9;
+	--color-brand-700: #2540ad;
+	--color-brand-800: #1c3287;
 
-	--color-gold: #9a7b3f;
-	--color-stone-100: #ece1cb;
-	--color-stone-200: #ddcdac;
-	--color-stone-300: #cbb78f;
+	/* Neutral scale. 50–300 are surfaces and rules; 400 and up are text, and
+	   every text step clears 4.5:1 on white (400 is 5.0:1, 500 is 7.3:1). */
+	--color-stone-50: #f8f8f7;
+	--color-stone-100: #ededeb;
+	--color-stone-200: #d8d8d4;
+	--color-stone-300: #bcbcb7;
+	--color-stone-400: #6d6d68;
+	--color-stone-500: #55554f;
+	--color-stone-600: #42423e;
+	--color-stone-700: #2f2f2c;
+	--color-stone-800: #1f1f1d;
+	--color-stone-900: #151515;
 
 	--font-sans:
 		'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;

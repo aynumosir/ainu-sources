@@ -684,7 +684,7 @@
 		white-space: nowrap;
 	}
 	.stage:focus-visible {
-		outline: 2px solid var(--archive-gilt);
+		outline: 2px solid var(--archive-accent);
 		outline-offset: -2px;
 	}
 	.grabbable {
@@ -753,14 +753,14 @@
 		place-items: center;
 	}
 	.rail button:hover:not(:disabled) {
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 	}
 	.rail button:disabled {
 		opacity: 0.3;
 	}
 	.rail button.active {
-		border-color: var(--archive-gilt);
-		color: var(--archive-gilt-text);
+		border-color: var(--archive-accent);
+		color: var(--archive-accent-text);
 	}
 	.rail .rule {
 		width: 1px;

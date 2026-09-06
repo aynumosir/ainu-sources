@@ -16,7 +16,7 @@ export const OSM_STYLE: StyleSpecification = {
 	},
 	layers: [
 		// Parchment backdrop shows through while tiles load (matches the old map bg).
-		{ id: 'bg', type: 'background', paint: { 'background-color': '#e6ddc6' } },
+		{ id: 'bg', type: 'background', paint: { 'background-color': '#e4e6e3' } },
 		{ id: 'osm', type: 'raster', source: 'osm' }
 	]
 };

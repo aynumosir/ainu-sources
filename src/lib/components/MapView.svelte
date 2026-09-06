@@ -14,7 +14,7 @@
 		hokkaido: '#4338ca',
 		sakhalin: '#059669',
 		kuril: '#d97706',
-		other: '#78716c'
+		other: '#6d6d68'
 	};
 
 	// #rrggbb → rgba() with alpha. Transparency must live in the fill color, NOT
@@ -50,7 +50,7 @@
 		a.style.color = '#4338ca';
 		a.textContent = name;
 		const span = document.createElement('span');
-		span.style.color = '#78716c';
+		span.style.color = '#6d6d68';
 		span.textContent = `${count} ${m.map_sources_here()}`;
 		div.appendChild(a);
 		div.appendChild(document.createElement('br'));
@@ -88,7 +88,7 @@
 			map.addControl(new maplibre.NavigationControl({ showCompass: false }), 'top-right');
 
 			for (const p of places) {
-				const color = REGION_COLOR[p.region ?? 'other'] ?? '#78716c';
+				const color = REGION_COLOR[p.region ?? 'other'] ?? '#6d6d68';
 				const radius = 6 + Math.min(22, Math.sqrt(p.sourceCount) * 3);
 				const name = p.nameEn && p.nameEn !== p.name ? `${p.name} · ${p.nameEn}` : p.name;
 				const href = localizeHref(`/places/${p.slug}`);

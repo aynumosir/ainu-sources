@@ -113,7 +113,7 @@
 		z-index: 0;
 	}
 	.archive-card-link:focus-visible {
-		outline: 2px solid var(--archive-gilt);
+		outline: 2px solid var(--archive-accent);
 		outline-offset: -2px;
 	}
 	.archive-card-thumb {
@@ -145,7 +145,7 @@
 	}
 	.archive-card h2 {
 		padding-right: 1.1rem;
-		background-image: linear-gradient(var(--archive-gilt), var(--archive-gilt));
+		background-image: linear-gradient(var(--archive-accent), var(--archive-accent));
 		background-repeat: no-repeat;
 		background-position: 0 100%;
 		background-size: 0% 1.5px;
@@ -178,17 +178,17 @@
 		color: var(--archive-subtle);
 	}
 	.archive-card-primary {
-		border: 1px solid var(--archive-gilt);
+		border: 1px solid var(--archive-accent);
 		padding: 0.05rem 0.35rem;
 		font-variant: small-caps;
 		letter-spacing: 0.03em;
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 	}
 	.archive-card-dialect {
 		color: var(--archive-subtle);
 	}
 	.archive-card-citations {
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 	}
 	.archive-card-catalogue {
 		position: relative;
@@ -196,12 +196,12 @@
 		align-self: flex-end;
 		margin: auto 0.85rem 0.7rem 0;
 		font-size: 11px;
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 		text-decoration: underline;
 		text-decoration-style: dotted;
 		text-underline-offset: 2px;
 	}
 	.archive-card-catalogue:hover {
-		color: var(--archive-gilt);
+		color: var(--archive-accent);
 	}
 </style>

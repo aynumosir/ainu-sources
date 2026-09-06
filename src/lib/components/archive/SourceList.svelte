@@ -92,7 +92,7 @@
 		top: 0;
 		bottom: 0;
 		width: 2px;
-		background: var(--archive-gilt);
+		background: var(--archive-accent);
 		transform: scaleY(0);
 		transition: transform 0.15s ease;
 	}
@@ -111,7 +111,7 @@
 		padding: 0.5rem 0.85rem;
 	}
 	.archive-list-link:focus-visible {
-		outline: 2px solid var(--archive-gilt);
+		outline: 2px solid var(--archive-accent);
 		outline-offset: -2px;
 	}
 	.archive-list-thumb {
@@ -160,14 +160,14 @@
 	}
 	.archive-list-primary {
 		flex-shrink: 0;
-		border: 1px solid var(--archive-gilt);
+		border: 1px solid var(--archive-accent);
 		padding: 0 0.3rem;
 		font-family: var(--font-archive-sans);
 		font-size: 10px;
 		font-variant: small-caps;
 		font-weight: 600;
 		letter-spacing: 0.03em;
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 	}
 	.archive-list-dialect {
 		flex-shrink: 0;
@@ -182,7 +182,7 @@
 		font-family: var(--font-archive-sans);
 		font-size: 11px;
 		letter-spacing: 0.02em;
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 	}
 	.archive-list-catalogue {
 		position: absolute;
@@ -190,7 +190,7 @@
 		top: 0.5rem;
 		z-index: 2;
 		font-size: 12px;
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 0.15s ease;

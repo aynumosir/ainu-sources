@@ -173,7 +173,7 @@
 	.kicker-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.55rem; border-bottom: 1px dotted var(--archive-border); padding: 0.45rem 0.7rem; }
 	.controls { display: flex; min-width: 0; align-items: center; gap: 0.45rem; }
 	.controls > button { border: 1px solid var(--archive-border); padding: 0.35rem 0.55rem; color: var(--archive-subtle); font-size: 12px; }
-	.controls > button.active { border-color: var(--archive-gilt); color: var(--archive-gilt-text); }
+	.controls > button.active { border-color: var(--archive-accent); color: var(--archive-accent-text); }
 	.column-state { display: grid; min-height: 18rem; flex: 1; place-content: center; gap: 0.4rem; padding: 2rem; text-align: center; color: var(--archive-subtle); }
 	.column-state.error { color: var(--archive-danger); }
 	.gap-note { border-bottom: 1px dotted var(--archive-border); padding: 0.45rem 0.8rem; font-size: 12px; color: var(--archive-warn); }

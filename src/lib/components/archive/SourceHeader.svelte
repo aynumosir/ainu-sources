@@ -23,7 +23,7 @@
 </script>
 
 <header class="border border-[var(--archive-border)] bg-[var(--archive-paper)] p-5">
-	<a href="/archive" class="text-[13px] text-[var(--archive-gilt-text)] hover:text-[var(--archive-gilt)]">← Library</a>
+	<a href="/archive" class="text-[13px] text-[var(--archive-accent-text)] hover:text-[var(--archive-accent)]">← Library</a>
 	<div class="mt-3 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
 		<div class="flex min-w-0 gap-4">
 			{#if coverSrc && !coverFailed}
@@ -56,7 +56,7 @@
 		</div>
 		<div class="flex flex-wrap gap-2">
 			{#if primaryFile?.fileId}
-				<a href={`/archive/read/${source.slug}/${primaryFile.fileId}`} aria-label={bilingualAriaLabel(archiveLabels.read)} class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]">
+				<a href={`/archive/read/${source.slug}/${primaryFile.fileId}`} aria-label={bilingualAriaLabel(archiveLabels.read)} class="border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-text)]">
 					<BilingualLabel ja={archiveLabels.read.ja} en={archiveLabels.read.en} inverse />
 				</a>
 			{/if}
@@ -65,7 +65,7 @@
 					type="button"
 					aria-label={bilingualAriaLabel(archiveLabels.download)}
 					onclick={() => download?.open()}
-					class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-gilt)]"
+					class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] font-semibold hover:border-[var(--archive-accent)]"
 				>
 					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} />
 				</button>

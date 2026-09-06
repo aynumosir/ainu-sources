@@ -55,7 +55,7 @@
 			aria-label={bilingualAriaLabel(busy ? archiveLabels.loading : archiveLabels.loadMore)}
 			aria-busy={busy}
 			onclick={click}
-			class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-4 py-2 text-[15px] font-medium text-[var(--archive-text)] hover:border-[var(--archive-gilt)]"
+			class="inline-flex border border-[var(--archive-border)] bg-[var(--archive-paper)] px-4 py-2 text-[15px] font-medium text-[var(--archive-text)] hover:border-[var(--archive-accent)]"
 		>
 			{#if busy}
 				<BilingualLabel ja={archiveLabels.loading.ja} en={archiveLabels.loading.en} />

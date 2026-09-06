@@ -52,14 +52,14 @@
 	}
 	.archive-view-switch button.is-on {
 		background: var(--archive-paper);
-		color: var(--archive-gilt-text);
-		box-shadow: inset 0 -2px 0 0 var(--archive-gilt);
+		color: var(--archive-accent-text);
+		box-shadow: inset 0 -2px 0 0 var(--archive-accent);
 	}
 	.archive-view-switch button + button {
 		border-left: 1px solid var(--archive-border);
 	}
 	.archive-view-switch button:focus-visible {
-		outline: 2px solid var(--archive-gilt);
+		outline: 2px solid var(--archive-accent);
 		outline-offset: -2px;
 	}
 </style>

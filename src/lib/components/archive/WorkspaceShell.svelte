@@ -761,7 +761,7 @@
 	.workspace-header { position: relative; z-index: 30; flex: none; border-bottom: 1px solid var(--archive-border); background: var(--archive-paper); }
 	.top-line { display: flex; min-width: 0; align-items: center; gap: 0.6rem; border-bottom: 1px dotted var(--archive-border); padding: 0.5rem 0.75rem; }
 	.back-link,
-	.catalogue-link { flex: none; color: var(--archive-gilt-text); font-size: 12px; }
+	.catalogue-link { flex: none; color: var(--archive-accent-text); font-size: 12px; }
 	h1 { min-width: 5rem; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 17px; font-weight: 650; }
 	.whole-document-note {
 		margin: 0;
@@ -778,7 +778,7 @@
 	.menu-button { width: 2rem; height: 2rem; border: 1px solid var(--archive-border); color: var(--archive-subtle); }
 	.menu-wrap { position: relative; }
 	.menu { position: absolute; top: calc(100% + 0.4rem); right: 0; z-index: 50; display: grid; width: 15rem; border: 1px solid var(--archive-border); background: var(--archive-paper); padding: 0.5rem; box-shadow: 0 10px 30px rgb(0 0 0 / 22%); }
-	.menu button { padding: 0.45rem; text-align: left; color: var(--archive-gilt-text); font-size: 12px; }
+	.menu button { padding: 0.45rem; text-align: left; color: var(--archive-accent-text); font-size: 12px; }
 	.mobile-tabs { display: none; }
 	.file-gap,
 	.rollout-note,
@@ -812,7 +812,7 @@
 		.mobile-tabs { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px dotted var(--archive-border); }
 		.mobile-tabs button { padding: 0.45rem; color: var(--archive-subtle); font-size: 12px; }
 		.mobile-tabs button + button { border-left: 1px solid var(--archive-border); }
-		.mobile-tabs button.active { background: var(--archive-gilt); color: var(--archive-paper); }
+		.mobile-tabs button.active { background: var(--archive-accent); color: var(--archive-paper); }
 		.workspace-grid,
 		.workspace-grid.text-first { grid-template-columns: minmax(0, 1fr); }
 		.scan-cell,

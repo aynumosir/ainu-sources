@@ -46,7 +46,7 @@
 				<a
 					href={localizeHref(`/sources/${item.source.slug}`)}
 					class={variant === 'archive'
-						? 'text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4'
+						? 'text-[var(--archive-accent-text)] underline decoration-dotted underline-offset-4'
 						: 'link'}
 				>
 					{item.source.title}

@@ -122,7 +122,7 @@
 		white-space: pre-wrap;
 	}
 	textarea:focus {
-		outline: 2px solid color-mix(in srgb, var(--archive-gilt) 55%, transparent);
+		outline: 2px solid color-mix(in srgb, var(--archive-accent) 55%, transparent);
 		outline-offset: -2px;
 		box-shadow: none;
 	}
@@ -147,7 +147,7 @@
 		font-size: 12px;
 	}
 	.policy-line :is(a, button) {
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 	}
 	footer {
 		border-top: 1px solid var(--archive-border);
@@ -177,13 +177,13 @@
 		width: 0.75rem;
 		height: 0.75rem;
 		border: 1px solid var(--archive-border-strong);
-		border-top-color: var(--archive-gilt);
+		border-top-color: var(--archive-accent);
 		border-radius: 999px;
 		animation: spin 700ms linear infinite;
 	}
 	.save {
-		border: 1px solid var(--archive-gilt);
-		background: var(--archive-gilt);
+		border: 1px solid var(--archive-accent);
+		background: var(--archive-accent);
 		padding: 0.35rem 0.7rem;
 		color: var(--archive-paper);
 		font-size: 13px;
@@ -195,7 +195,7 @@
 		color: var(--archive-subtle);
 	}
 	.note-toggle {
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 		font-size: 12px;
 	}
 	label {

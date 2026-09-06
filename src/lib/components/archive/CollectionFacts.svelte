@@ -61,7 +61,7 @@
 	}
 	.archive-facts-pct {
 		font-size: 0.62em;
-		color: var(--archive-gilt-text);
+		color: var(--archive-accent-text);
 		margin-left: 0.04em;
 	}
 	.archive-facts-label {

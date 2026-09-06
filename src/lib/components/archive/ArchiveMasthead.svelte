@@ -62,7 +62,7 @@
 				name="q"
 				value={searchValue}
 				placeholder="本文を検索 Search text…"
-				class="h-9 w-full rounded-none border border-[var(--archive-border)] bg-[var(--archive-panel)] pl-8 pr-3 text-[14px] text-[var(--archive-text)] placeholder:text-[var(--archive-faint-text)] focus:border-[var(--archive-gilt)] focus:outline-none"
+				class="h-9 w-full rounded-none border border-[var(--archive-border)] bg-[var(--archive-panel)] pl-8 pr-3 text-[14px] text-[var(--archive-text)] placeholder:text-[var(--archive-faint-text)] focus:border-[var(--archive-accent)] focus:outline-none"
 			/>
 		</div>
 	</form>
@@ -71,8 +71,8 @@
 {#snippet navLinks()}
 	{#each navItems as item (item.href)}
 		<a
-			class={`shrink-0 border-b px-0.5 pb-1 font-(family-name:--font-archive-serif) font-semibold text-[var(--archive-subtle)] transition hover:border-[var(--archive-gilt)] hover:text-[var(--archive-text)] ${
-				isCurrent(item.section) ? 'border-[var(--archive-gilt)] text-[var(--archive-text)]' : 'border-transparent'
+			class={`shrink-0 border-b px-0.5 pb-1 font-(family-name:--font-archive-serif) font-semibold text-[var(--archive-subtle)] transition hover:border-[var(--archive-accent)] hover:text-[var(--archive-text)] ${
+				isCurrent(item.section) ? 'border-[var(--archive-accent)] text-[var(--archive-text)]' : 'border-transparent'
 			}`}
 			href={item.href}
 			aria-label={bilingualAriaLabel(item.label)}
@@ -88,7 +88,7 @@
 		     second full-width row — a single row has no width left for all
 		     four once the viewport narrows past a phone. -->
 		<div class="flex min-h-10 items-center gap-3">
-			<a href="/archive" class="archive-wordmark shrink-0 text-[21px] leading-tight text-[var(--archive-text)] hover:text-[var(--archive-gilt-text)]">
+			<a href="/archive" class="archive-wordmark shrink-0 text-[21px] leading-tight text-[var(--archive-text)] hover:text-[var(--archive-accent-text)]">
 				aynumosir archive
 			</a>
 			<div class="hidden min-w-0 flex-1 items-center gap-3 sm:flex">

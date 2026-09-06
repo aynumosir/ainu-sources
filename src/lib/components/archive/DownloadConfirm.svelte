@@ -36,13 +36,13 @@
 				Downloads are logged for audit and quota accounting.
 			</p>
 			<div class="mt-5 flex justify-end gap-2">
-				<button type="button" onclick={close} class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] hover:border-[var(--archive-gilt)]">Cancel</button>
+				<button type="button" onclick={close} class="border border-[var(--archive-border)] bg-[var(--archive-paper)] px-3 py-2 text-[13px] hover:border-[var(--archive-accent)]">Cancel</button>
 				<a
 					href={`/api/archive/revisions/${file.revisionId}/content?disposition=attachment`}
 					target="_blank"
 					rel="noreferrer"
 					aria-label={bilingualAriaLabel(archiveLabels.download)}
-					class="border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]"
+					class="border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-text)]"
 					onclick={close}
 				>
 					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} inverse />

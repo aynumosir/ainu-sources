@@ -8,7 +8,7 @@
 <span
 	class={`whitespace-nowrap px-1.5 py-0.5 text-[12px] font-medium ${
 		summary.state === 'available'
-			? 'bg-[var(--archive-accent-soft)] text-[var(--archive-gilt-text)]'
+			? 'bg-[var(--archive-accent-soft)] text-[var(--archive-accent-text)]'
 			: summary.state === 'unreadable'
 				? 'bg-[var(--archive-panel)] text-[var(--archive-danger)]'
 				: summary.state === 'partial'

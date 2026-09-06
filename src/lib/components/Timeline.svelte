@@ -17,13 +17,13 @@
 
 	// Warm "archive" palette, by category.
 	const COLORS: Record<string, string> = {
-		primary: '#9a3d2c', // rubric red
-		corpus: '#5b7d52', // sage / pine
-		secondary: '#9a7b3f', // antique brass
-		tool: '#7a6a8a' // muted plum
+		primary: '#d97706', // amber
+		corpus: '#059669', // emerald
+		secondary: '#0284c7', // sky
+		tool: '#7c3aed' // violet
 	};
 	const ORDER = ['primary', 'corpus', 'secondary', 'tool'] as const;
-	const colorOf = (c: string) => COLORS[c] ?? '#8a7a5f';
+	const colorOf = (c: string) => COLORS[c] ?? '#6d6d68';
 	const catLabel = (k: string) =>
 		k === 'primary'
 			? m.home_stat_primary()
@@ -142,7 +142,7 @@
 			<svg width="100%" {height} viewBox="0 0 {innerW} {height}" preserveAspectRatio="none" class="block" role="img" aria-label="Sources by period">
 				{#each ticks as t (t)}
 					<line x1={xr(t)} y1={TOP} x2={xr(t)} y2={baseline} stroke="var(--color-stone-200)" stroke-width={t % 100 === 0 ? 1 : 0.5} />
-					<text x={xr(t)} y={height - 9} text-anchor="middle" class="tnum" font-size="10" fill="#a8a29e">{t}</text>
+					<text x={xr(t)} y={height - 9} text-anchor="middle" class="tnum" font-size="10" fill="#6d6d68">{t}</text>
 				{/each}
 				<line x1={PAD} y1={baseline} x2={innerW - PAD} y2={baseline} stroke="var(--color-stone-300)" stroke-width="1" />
 				{#each bins as b, i (i)}
@@ -168,7 +168,7 @@
 			<svg width={fullW} {height} viewBox="0 0 {fullW} {height}" class="block" role="img" aria-label="Timeline of sources">
 				{#each ticks as t (t)}
 					<line x1={xf(t)} y1={TOP} x2={xf(t)} y2={baseline} stroke="var(--color-stone-200)" stroke-width={t % 100 === 0 ? 1 : 0.5} />
-					<text x={xf(t)} y={height - 9} text-anchor="middle" class="tnum" font-size="10" fill="#a8a29e">{t}</text>
+					<text x={xf(t)} y={height - 9} text-anchor="middle" class="tnum" font-size="10" fill="#6d6d68">{t}</text>
 				{/each}
 				<line x1={PAD} y1={baseline} x2={fullW - PAD + 8} y2={baseline} stroke="var(--color-stone-300)" stroke-width="1" />
 				{#each laid as d (d.p.slug)}

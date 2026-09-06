@@ -47,7 +47,7 @@
 					This archive is a private collection for designated researchers. Ask an archive administrator to grant you access.
 				</p>
 				<form method="POST" action="/account?/signout" use:enhance={signOutEnhance} class="mt-5">
-					<button type="submit" aria-label="Sign out" class="text-[13px] font-semibold text-[var(--archive-gilt-text)] underline decoration-dotted underline-offset-4">
+					<button type="submit" aria-label="Sign out" class="text-[13px] font-semibold text-[var(--archive-accent-text)] underline decoration-dotted underline-offset-4">
 						Sign out
 					</button>
 				</form>
@@ -65,7 +65,7 @@
 				<a
 					href={signInHref}
 					aria-label={bilingualAriaLabel(archiveLabels.signIn)}
-					class="mt-6 inline-flex border border-[var(--archive-gilt)] bg-[var(--archive-gilt)] px-4 py-2 text-[15px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-gilt-text)]"
+					class="mt-6 inline-flex border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-4 py-2 text-[15px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-text)]"
 				>
 					<BilingualLabel ja={archiveLabels.signIn.ja} en={archiveLabels.signIn.en} inverse />
 				</a>
