@@ -65,7 +65,7 @@
 				<a
 					href={signInHref}
 					aria-label={bilingualAriaLabel(archiveLabels.signIn)}
-					class="mt-6 inline-flex border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-4 py-2 text-[15px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-text)]"
+					class="mt-6 inline-flex border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-4 py-2 text-[15px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-hover)]"
 				>
 					<BilingualLabel ja={archiveLabels.signIn.ja} en={archiveLabels.signIn.en} inverse />
 				</a>

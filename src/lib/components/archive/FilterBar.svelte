@@ -184,7 +184,7 @@
 			</select>
 		</label>
 		<div class="flex items-center gap-2 sm:col-span-2 lg:col-span-3 lg:justify-end">
-			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.apply)} class="h-10 border border-[var(--archive-accent-text)] bg-[var(--archive-accent-text)] px-4 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent)] hover:border-[var(--archive-accent)]">
+			<button type="submit" aria-label={bilingualAriaLabel(archiveLabels.apply)} class="h-10 border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-4 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-hover)] hover:border-[var(--archive-accent-hover)]">
 				<BilingualLabel ja={archiveLabels.apply.ja} en={archiveLabels.apply.en} compact />
 			</button>
 			<a href={clearHref} aria-label={bilingualAriaLabel(archiveLabels.clear)} class="flex h-10 items-center border border-[var(--archive-border)] px-3 text-[13px] font-semibold text-[var(--archive-subtle)] hover:border-[var(--archive-accent)] hover:text-[var(--archive-accent-text)]">

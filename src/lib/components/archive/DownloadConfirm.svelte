@@ -42,7 +42,7 @@
 					target="_blank"
 					rel="noreferrer"
 					aria-label={bilingualAriaLabel(archiveLabels.download)}
-					class="border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-text)]"
+					class="border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-hover)]"
 					onclick={close}
 				>
 					<BilingualLabel ja={archiveLabels.download.ja} en={archiveLabels.download.en} inverse />

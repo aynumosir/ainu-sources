@@ -684,7 +684,7 @@
 		white-space: nowrap;
 	}
 	.stage:focus-visible {
-		outline: 2px solid var(--archive-accent);
+		outline: 2px solid var(--archive-stage-focus);
 		outline-offset: -2px;
 	}
 	.grabbable {
