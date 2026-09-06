@@ -250,10 +250,11 @@ export const PERSON_ALIASES: Record<string, string> = {
 	北原モコットゥナㇱ次郎太: 'mokottunas-kitahara', 北原モコットゥナシ次郎太: 'mokottunas-kitahara',
 	北原次郎太: 'mokottunas-kitahara', 北原次郎太モコットゥナㇱ: 'mokottunas-kitahara',
 	'Mokottunas Kitahara': 'mokottunas-kitahara', 'Kitahara Mokottunas': 'mokottunas-kitahara',
+	'Kitahara Mokottunas Jirōta': 'mokottunas-kitahara', 'Kitahara Mokottunas Jirota': 'mokottunas-kitahara',
 	北海道ウタリ協会: 'hokkaido-utari-kyokai'
 };
 export const PERSON_CANON: Record<string, { name: string; nameEn?: string }> = {
-	'mokottunas-kitahara': { name: '北原 モコットゥナㇱ 次郎太', nameEn: 'Kitahara Mokottunas' },
+	'mokottunas-kitahara': { name: '北原 モコットゥナㇱ 次郎太', nameEn: 'Kitahara Mokottunas Jirōta' },
 	'p-c4w1s9': { name: '瀬戸 海惠', nameEn: 'Seto Mie' },
 	'kawakami-yoko': { name: '豊川 容子', nameEn: 'Toyokawa Yōko' },
 	'sugawara-katsukichi': { name: '菅原 勝吉', nameEn: 'Sugawara Katsuyoshi' },
@@ -304,7 +305,7 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		// researchmap (deceased) — link her Wikidata so life dates fill in. Keyed by
 		// canon slug; all her name variants (incl. birth name 福田すゞ子) alias to it.
 		'tamura-suzuko': { nameEn: 'Tamura Suzuko', wikidata: 'Q11576823' },
-		'mokottunas-kitahara': { nameEn: 'Kitahara Mokottunas', researchmap: '1976' },
+		'mokottunas-kitahara': { nameEn: 'Kitahara Mokottunas Jirōta', researchmap: '1976' },
 		'p-c4w1s9': { nameEn: 'Seto Mie' },
 		'kawakami-yoko': { nameEn: 'Toyokawa Yōko' },
 		'sugawara-katsukichi': { nameEn: 'Sugawara Katsuyoshi' },
@@ -457,7 +458,7 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		關政則: { nameEn: 'Seki Masanori' }, 関政則: { nameEn: 'Seki Masanori' },
 		大垣直明: { nameEn: 'Ōgaki Naoaki' },
 		カガミアキカツ: { nameEn: 'Kagami Akikatsu' }, 鏡味明克: { nameEn: 'Kagami Akikatsu' },
-		北原モコットゥナシ: { nameEn: 'Kitahara Mokottunas' },
+		北原モコットゥナシ: { nameEn: 'Kitahara Mokottunas Jirōta' },
 		小林孝二: { nameEn: 'Kobayashi Kōji' }, 岩澤孝子: { nameEn: 'Iwasawa Takako' },
 		古川恭子: { nameEn: 'Furukawa Kyōko' }, 笹倉いる美: { nameEn: 'Sasakura Irumi' },
 		村崎恭子: { nameEn: 'Murasaki Kyōko' }, ムラサキキョウコ: { nameEn: 'Murasaki Kyōko' },

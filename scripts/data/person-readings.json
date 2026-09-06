@@ -8227,11 +8227,13 @@
     "name": "北原 モコットゥナㇱ",
     "expected": {
       "nameKana": null,
-      "name": "北原 モコットゥナㇱ"
+      "name": "北原 モコットゥナㇱ",
+      "nameEn": "Kitahara Mokottunas"
     },
     "corrected": {
       "nameKana": "きたはら モコットゥナㇱ じろうた",
-      "name": "北原 モコットゥナㇱ 次郎太"
+      "name": "北原 モコットゥナㇱ 次郎太",
+      "nameEn": "Kitahara Mokottunas Jirōta"
     },
     "checkedAt": "2026-09-06",
     "sources": [
@@ -8240,7 +8242,7 @@
       "https://ci.nii.ac.jp/author/DA14332144",
       "https://www.dei.hokudai.ac.jp/archives/20817/"
     ],
-    "note": "CiNii著者典拠に全称「北原, モコットゥナㇱ次郎太」と読みを確認。大学主催行事にも次郎太を含む表記がある。全称を主表示とし、小書きㇱを保持。短い公表名・日本語名は検索用に保存。",
+    "note": "CiNii著者典拠に全称「北原, モコットゥナㇱ次郎太」と読みを確認。大学主催行事にも次郎太を含む表記がある。全称を主表示とし、小書きㇱを保持。短い公表名・日本語名は検索用に保存。 ラテン文字表示は確認済みの読み「じろうた」を Jirōta と転写し、全称と同じ順序に揃える。",
     "acceptedPriorValues": {
       "nameKana": [
         "きたはら モコットゥナㇱ"
