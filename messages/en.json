@@ -133,7 +133,7 @@
 	"form_title_en": "Title (English)",
 	"form_title_ain": "Title (Ainu)",
 	"form_slug": "Slug (URL name)",
-	"form_slug_hint": "Optional. Lowercase letters, digits and hyphens (2\u201360 chars), e.g. year-author-short-title. Permanent once minted; left blank, it is derived from the title.",
+	"form_slug_hint": "Optional. Lowercase letters, digits and hyphens (2–60 chars), e.g. year-author-short-title. Permanent once minted; left blank, it is derived from the title.",
 	"form_category": "Category",
 	"form_type": "Type",
 	"form_author": "Author",
@@ -182,6 +182,9 @@
 	"people_sort_count": "Most sources",
 	"people_sort_name": "Name (A–Z)",
 	"people_sort_name_desc": "Name (Z–A)",
+	"people_count_n": "{count} people",
+	"people_load_more": "Show more ({shown} / {total})",
+	"people_load_failed": "Loading failed. Try again.",
 	"person_sources": "Sources",
 	"person_dates": "Dates",
 	"person_find_more": "Find more",
@@ -231,7 +234,7 @@
 	"footer_data_credit": "Data from ainu-dictionaries, ainu-grammar and ainu-corpora.",
 	"region_unassigned": "Unassigned",
 	"nav_audit": "Audit",
-  "person_former_pen_name": "former pen name",
+	"person_former_pen_name": "former pen name",
 	"person_other_name": "also known as",
 	"person_alternative_reading": "alternative reading"
 }

@@ -1,17 +1,11 @@
-import { personRole } from '$lib/person-roles';
+import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { listPersons, listPersonRoles, type PersonListOptions } from '$lib/server/queries';
-
-const SORTS = ['count', 'name', 'name-desc'] as const;
+import { listPersonRoles } from '$lib/server/queries';
+import { parsePeopleQuery, loadPeopleChunk } from '$lib/server/people-list';
 
 export const load: PageServerLoad = async ({ url }) => {
-	const sp = url.searchParams;
-	const sortParam = sp.get('sort');
-	const opts: PersonListOptions = {
-		q: sp.get('q') ?? undefined,
-		role: sp.get('role') ? personRole(sp.get('role')!) : undefined,
-		sort: SORTS.includes(sortParam as never) ? (sortParam as PersonListOptions['sort']) : 'count'
-	};
-	const [people, roles] = await Promise.all([listPersons(opts), listPersonRoles()]);
-	return { people, roles, filters: { q: opts.q ?? '', role: opts.role ?? '', sort: opts.sort } };
+	const query = parsePeopleQuery(url.searchParams);
+	if (query === undefined) throw error(404);
+	const [people, roles] = await Promise.all([loadPeopleChunk(query), listPersonRoles()]);
+	return { people, roles, filters: { q: query.q, role: query.role, sort: query.sort } };
 };

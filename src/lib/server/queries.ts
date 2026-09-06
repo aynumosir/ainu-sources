@@ -488,12 +488,21 @@ export interface PersonListOptions {
 	q?: string;
 	role?: string;
 	sort?: 'count' | 'name' | 'name-desc';
+	/** Rows to skip; clamped to [0, PERSON_MAX_OFFSET]. */
+	offset?: number;
+	/** Rows to return; clamped to [1, PERSON_PAGE_SIZE]. Unset returns every row. */
+	limit?: number;
 }
+
+/** Rows one people-list request returns; the page appends chunks of this size. */
+export const PERSON_PAGE_SIZE = 60;
+/** Deepest offset a people-list request may ask for. */
+export const PERSON_MAX_OFFSET = 10_000;
 
 /** A merged person row stays for history but is nobody's page or list entry. */
 const activePersonsOnly = () => eq(persons.status, 'active');
 
-export async function listPersons(opts: PersonListOptions = {}): Promise<PersonWithCount[]> {
+function personConditions(opts: PersonListOptions): SQLCond[] {
 	const conds: SQLCond[] = [activePersonsOnly()];
 	if (opts.q && opts.q.trim()) {
 		const q = `%${opts.q.trim()}%`;
@@ -519,6 +528,20 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 			)
 		);
 	}
+	return conds;
+}
+
+/** Active persons matching the filters, without the per-person aggregate. */
+export async function countPersons(opts: PersonListOptions = {}): Promise<number> {
+	const [row] = await db
+		.select({ n: count() })
+		.from(persons)
+		.where(and(...personConditions(opts)));
+	return row?.n ?? 0;
+}
+
+export async function listPersons(opts: PersonListOptions = {}): Promise<PersonWithCount[]> {
+	const conds = personConditions(opts);
 
 	// Count + role labels reflect only ACTIVE works: the second leftJoin keeps the
 	// person row even with zero active sources, but `sources.id` is non-null only
@@ -541,9 +564,11 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 		.from(persons)
 		.leftJoin(sourcePersons, eq(sourcePersons.personId, persons.id))
 		.leftJoin(sources, and(eq(sources.id, sourcePersons.sourceId), activeSourcesOnly()))
-		.where(conds.length ? and(...conds) : undefined)
+		.where(and(...conds))
 		.groupBy(persons.id)
-		.orderBy(...order);
+		.orderBy(...order)
+		.limit(opts.limit === undefined ? -1 : Math.min(PERSON_PAGE_SIZE, Math.max(1, opts.limit)))
+		.offset(Math.min(PERSON_MAX_OFFSET, Math.max(0, opts.offset ?? 0)));
 
 	return rows.map((r) => ({
 		...r.person,

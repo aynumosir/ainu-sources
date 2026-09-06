@@ -132,7 +132,7 @@
 	"form_title_en": "Title (English)",
 	"form_title_ain": "Title (Ainu)",
 	"form_slug": "Slug (URL name)",
-	"form_slug_hint": "Optional. Lowercase letters, digits and hyphens (2\u201360 chars), e.g. year-author-short-title. Permanent once minted; left blank, it is derived from the title.",
+	"form_slug_hint": "Optional. Lowercase letters, digits and hyphens (2–60 chars), e.g. year-author-short-title. Permanent once minted; left blank, it is derived from the title.",
 	"form_category": "Category",
 	"form_type": "Type",
 	"form_author": "Author",
@@ -181,6 +181,9 @@
 	"people_sort_count": "Kampi poronno",
 	"people_sort_name": "Re (A–Z)",
 	"people_sort_name_desc": "Re (Z–A)",
+	"people_count_n": "{count} utar",
+	"people_load_more": "Na poronno nukar ({shown} / {total})",
+	"people_load_failed": "Ek eaykap. Na sine suy iki yan.",
 	"person_sources": "Kampi",
 	"person_dates": "Pa",
 	"person_find_more": "Na hunara",
@@ -230,7 +233,7 @@
 	"footer_data_credit": "Data from ainu-dictionaries, ainu-grammar and ainu-corpora.",
 	"region_unassigned": "Unassigned",
 	"nav_audit": "Audit",
-  "person_former_pen_name": "former pen name",
+	"person_former_pen_name": "former pen name",
 	"person_other_name": "also known as",
 	"person_alternative_reading": "alternative reading"
 }

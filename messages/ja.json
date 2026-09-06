@@ -182,6 +182,9 @@
 	"people_sort_count": "資料数順",
 	"people_sort_name": "名前（A–Z）",
 	"people_sort_name_desc": "名前（Z–A）",
+	"people_count_n": "{count}人",
+	"people_load_more": "さらに表示（{shown} / {total}）",
+	"people_load_failed": "読み込めませんでした。もう一度お試しください。",
 	"person_sources": "関連資料",
 	"person_dates": "生没年",
 	"person_find_more": "関連情報を探す",
@@ -231,7 +234,7 @@
 	"footer_data_credit": "データ：ainu-dictionaries / ainu-grammar / ainu-corpora",
 	"region_unassigned": "未分類",
 	"nav_audit": "監査",
-  "person_former_pen_name": "旧筆名",
+	"person_former_pen_name": "旧筆名",
 	"person_other_name": "別名",
 	"person_alternative_reading": "別の読み"
 }

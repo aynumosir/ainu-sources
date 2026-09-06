@@ -7,8 +7,73 @@
 	import { collectionPageJsonLd, breadcrumbJsonLd } from '$lib/seo';
 	import { tl, PERSON_ROLE_LABELS, LANGUAGE_LABELS } from '$lib/constants';
 
+	import { deLocalizeHref } from '$lib/paraglide/runtime';
+	import { onMount, untrack } from 'svelte';
+
 	let { data } = $props();
-	const people = $derived(data.people);
+	type Person = (typeof data.people.items)[number];
+
+	// The server renders one chunk; scrolling appends the rest from /api/people.
+	let appended = $state.raw<Person[]>([]);
+	let appendedHasMore = $state<boolean | undefined>();
+	let loading = $state(false);
+	let failed = $state(false);
+	const people = $derived([...data.people.items, ...appended]);
+	const hasMore = $derived(appendedHasMore ?? data.people.hasMore);
+	const total = $derived(data.people.total);
+	// A new search or sort drops what earlier scrolling appended.
+	$effect(() => {
+		void data.people;
+		untrack(() => {
+			appended = [];
+			appendedHasMore = undefined;
+			failed = false;
+		});
+	});
+	const nextOffset = $derived(data.people.offset + people.length);
+
+	function chunkParams(offset: number): URLSearchParams {
+		const sp = new URLSearchParams(page.url.search);
+		sp.delete('offset');
+		if (offset > 0) sp.set('offset', String(offset));
+		return sp;
+	}
+	const nextHref = $derived.by(() => {
+		const qs = chunkParams(nextOffset).toString();
+		return localizeHref(`${deLocalizeHref(page.url.pathname)}?${qs}`);
+	});
+
+	async function loadMore() {
+		if (loading || !hasMore) return;
+		loading = true;
+		failed = false;
+		try {
+			const res = await fetch(`/api/people?${chunkParams(nextOffset)}`);
+			if (!res.ok) throw new Error(String(res.status));
+			const chunk: { items: Person[]; hasMore: boolean } = await res.json();
+			const seen = new Set(people.map((p) => p.id));
+			appended = [...appended, ...chunk.items.filter((p) => !seen.has(p.id))];
+			appendedHasMore = chunk.hasMore;
+		} catch {
+			failed = true;
+		} finally {
+			loading = false;
+		}
+	}
+
+	let sentinel = $state<HTMLElement>();
+	onMount(() => {
+		const io = new IntersectionObserver(
+			(entries) => {
+				if (entries.some((e) => e.isIntersecting)) void loadMore();
+			},
+			{ rootMargin: '600px 0px' }
+		);
+		$effect(() => {
+			if (sentinel) io.observe(sentinel);
+			return () => io.disconnect();
+		});
+	});
 
 	const origin = $derived(page.url.origin);
 	const seoJsonLd = $derived([
@@ -17,7 +82,7 @@
 			path: '/people',
 			name: m.people_title(),
 			description: m.people_lead(),
-			numberOfItems: people.length
+			numberOfItems: total
 		}),
 		breadcrumbJsonLd(origin, [
 			{ name: m.site_short(), path: '/' },
@@ -98,8 +163,8 @@
 				>{m.filter_clear()}</a
 			>
 		{/if}
-		<span class="ml-auto self-center text-xs text-stone-400"
-			>{m.common_sources_n({ count: people.length })}</span
+		<span class="tnum ml-auto self-center text-xs text-stone-400"
+			>{m.people_count_n({ count: total })}</span
 		>
 	</form>
 
@@ -137,6 +202,24 @@
 				</a>
 			{/each}
 		</div>
+		{#if hasMore}
+			<div bind:this={sentinel} class="mt-6 flex flex-col items-center gap-2 text-sm">
+				{#if failed}
+					<span class="text-stone-500">{m.people_load_failed()}</span>
+				{/if}
+				<a
+					href={nextHref}
+					rel="nofollow"
+					aria-busy={loading}
+					onclick={(e) => {
+						e.preventDefault();
+						void loadMore();
+					}}
+					class="tnum rounded-md border border-stone-300 px-4 py-1.5 font-medium text-stone-700 hover:bg-stone-100 aria-busy:pointer-events-none aria-busy:opacity-60"
+					>{loading ? m.common_loading() : m.people_load_more({ shown: nextOffset, total })}</a
+				>
+			</div>
+		{/if}
 	{:else}
 		<div
 			class="mt-6 rounded-xl border border-dashed border-stone-300 p-12 text-center text-stone-500"
