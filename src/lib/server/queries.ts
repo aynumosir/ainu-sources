@@ -654,18 +654,18 @@ export interface InstitutionWithCount extends Institution {
 }
 export async function listInstitutions(): Promise<InstitutionWithCount[]> {
 	const rows = await db
-		.select({ inst: institutions, n: sql<number>`count(${sources.id})` })
+		.select({ inst: institutions, n: sql<number>`count(distinct ${sources.id})` })
 		.from(institutions)
 		.leftJoin(sourceInstitutions, eq(sourceInstitutions.institutionId, institutions.id))
 		.leftJoin(sources, and(eq(sources.id, sourceInstitutions.sourceId), activeSourcesOnly()))
 		.groupBy(institutions.id)
-		.orderBy(desc(sql`count(${sources.id})`), asc(institutions.name));
+		.orderBy(desc(sql`count(distinct ${sources.id})`), asc(institutions.name));
 	return rows.map((r) => ({ ...r.inst, sourceCount: r.n }));
 }
 
 export async function getInstitutionBySlug(
 	slug: string
-): Promise<{ institution: Institution; sources: { source: Source; role: string }[] } | undefined> {
+): Promise<{ institution: Institution; sources: { source: Source; roles: string[] }[] } | undefined> {
 	const r = await db.select().from(institutions).where(eq(institutions.slug, slug)).limit(1);
 	const institution = r[0];
 	if (!institution) return undefined;
@@ -675,7 +675,13 @@ export async function getInstitutionBySlug(
 		.innerJoin(sources, eq(sourceInstitutions.sourceId, sources.id))
 		.where(and(eq(sourceInstitutions.institutionId, institution.id), activeSourcesOnly()))
 		.orderBy(asc(sources.yearStart));
-	return { institution, sources: srcs };
+	const grouped = new Map<string, {source: Source; roles: string[]}>();
+	for (const {source, role} of srcs) {
+		const entry = grouped.get(source.id) ?? {source, roles: []};
+		if (!entry.roles.includes(role)) entry.roles.push(role);
+		grouped.set(source.id, entry);
+	}
+	return { institution, sources: [...grouped.values()] };
 }
 
 export interface TagWithCount extends Tag {

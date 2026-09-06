@@ -1,0 +1,23 @@
+[
+  {
+    "personSlug": "p-mhjk5r",
+    "personName": "白老町 (北海道)",
+    "aliases": ["白老町 (北海道)", "白老町（北海道）", "白老町"],
+    "institution": {"slug": "shiraoi-town", "name": "白老町", "country": "JP", "city": "白老町"},
+    "sourceIds": ["4b385af4-0a23-4844-981a-6e4bd3807438", "0f9ff7e7-838c-42e3-8ba9-189668323739"]
+  },
+  {
+    "personSlug": "p-xgwq0d",
+    "personName": "保健体育専攻音楽分野",
+    "aliases": ["保健体育専攻音楽分野", "北海道教育大学旭川校芸術・保健体育専攻音楽分野"],
+    "institution": {"slug": "hue-asahikawa-music", "name": "北海道教育大学旭川校芸術・保健体育専攻音楽分野", "country": "JP", "city": "旭川市"},
+    "sourceIds": ["e21fab69-fdbe-4a14-b47c-eac620d183b2", "a28e82b3-0dfe-4d57-a12c-3242f09beaa7"]
+  },
+  {
+    "personSlug": "p-1q8kgfm",
+    "personName": "帝国学士院",
+    "aliases": ["帝国学士院"],
+    "institution": {"slug": "imperial-academy", "name": "帝国学士院", "country": "JP", "city": ""},
+    "sourceIds": ["3c009b2d-8a3b-46d5-a52c-613288c34d24", "3a788096-a288-491d-b8c5-c1e5971c1de7"]
+  }
+]

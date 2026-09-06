@@ -6,7 +6,7 @@ const snapshot = JSON.parse(readFileSync(process.argv[2], 'utf8'));
 const client = createClient({ url: process.env.DATABASE_URL!, authToken: process.env.DATABASE_AUTH_TOKEN });
 const ignore = new Set(['created_at', 'updated_at']);
 try {
- for (const table of ['persons', 'source_persons', 'person_slug_redirects']) {
+ for (const table of ['persons', 'source_persons', 'person_slug_redirects', ...['institutions', 'source_institutions'].filter(t => t in snapshot)]) {
   const actual = (await client.execute(`SELECT * FROM ${table}`)).rows;
   const expected = snapshot[table] as Record<string, unknown>[];
   const key = table === 'person_slug_redirects' ? 'old_slug' : 'id';

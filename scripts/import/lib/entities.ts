@@ -1,3 +1,4 @@
+import { organizationForName } from '../../../src/lib/organizations';
 /**
  * DB-backed, IDEMPOTENT entity resolvers + join upserts for the harvest importers.
  *
@@ -254,7 +255,7 @@ export async function getPlace(db: Db, p: GazEntry, stamp: EntityStamp): Promise
 	});
 }
 
-export async function getInstitution(db: Db, inst: InstEntry, stamp: EntityStamp): Promise<string> {
+export async function getInstitution(db: Db, inst: Pick<InstEntry, 'slug' | 'name'> & Partial<InstEntry>, stamp: EntityStamp): Promise<string> {
 	const now = stampNow(stamp);
 	return resolveBySlug(db, schema.institutions, inst.slug, {
 		id: uuid(),
@@ -289,6 +290,18 @@ export async function getTag(db: Db, def: TagDef, stamp: EntityStamp): Promise<s
 // Join upserts (existence-checked; deferred UNIQUE indexes)
 // ---------------------------------------------------------------------------
 
+/** Preserve reviewed organizational authors in the organization graph. */
+async function addOrganizationAuthor(db: Db, sourceId: string, name: string, stamp: EntityStamp, role: string): Promise<boolean> {
+ const organization = organizationForName(name);
+ if (!organization) return false;
+ const institutionId = await getInstitution(db, organization, stamp);
+ await upsertJoin(db, schema.sourceInstitutions,
+  {sourceId: schema.sourceInstitutions.sourceId, entity: schema.sourceInstitutions.institutionId, role: schema.sourceInstitutions.role},
+  {sourceId, institutionId, role},
+  {id: uuid(), sourceId, institutionId, role, status:'active', origin:stamp.origin, observationId:stamp.observationId ?? null, confidence:stamp.confidence ?? null, firstSeenAt:stampNow(stamp), lastSeenAt:stampNow(stamp)});
+ return true;
+}
+
 /**
  * Attach persons parsed from a free-form author string. Mirrors seed.ts's
  * `addPersons` splitting (co-author separators, 中黒 for Han co-authors only) and
@@ -313,6 +326,7 @@ export async function addPersons(
 		.filter(Boolean);
 	let i = 0;
 	for (const name of parts) {
+		if (await addOrganizationAuthor(db, sourceId, name, stamp, role)) continue;
 		if (INSTITUTION_RE.test(name)) continue;
 		const personId = await getPerson(db, name, stamp);
 		await upsertJoin(
@@ -359,6 +373,7 @@ export async function addPersonsGated(
 	let i = 0;
 	for (const a of authors)
 		for (const name of authorParts(a)) {
+			if (await addOrganizationAuthor(db, sourceId, name, stamp, role)) continue;
 			if (
 				INSTITUTION_RE.test(name) ||
 				isGarbageName(name) ||

@@ -4,7 +4,7 @@
 	import { page } from '$app/state';
 	import Seo from '$lib/components/Seo.svelte';
 	import { institutionJsonLd, breadcrumbJsonLd } from '$lib/seo';
-	import { tl, TYPE_LABELS } from '$lib/constants';
+	import { tl, TYPE_LABELS, INSTITUTION_ROLE_LABELS } from '$lib/constants';
 	import { formatYear } from '$lib/format';
 
 	let { data } = $props();
@@ -63,7 +63,7 @@
 		<h2 class="font-serif text-lg font-bold text-ink">{m.institution_sources()}</h2>
 		{#if sources.length}
 			<ul class="mt-3 divide-y divide-stone-200">
-				{#each sources as { source } (source.id)}
+				{#each sources as { source, roles } (source.id)}
 					<li class="py-2.5">
 						<a
 							href={localizeHref(`/sources/${source.slug}`)}
@@ -72,7 +72,7 @@
 							<span class="tnum w-24 shrink-0 text-sm text-stone-400">{formatYear(source)}</span>
 							<span class="min-w-0">
 								<span class="link font-medium">{source.title}</span>
-								<span class="text-xs text-stone-400"> · {tl(TYPE_LABELS, source.type)}</span>
+								<span class="text-xs text-stone-400"> · {tl(TYPE_LABELS, source.type)} · {roles.map(role => tl(INSTITUTION_ROLE_LABELS, role)).join(', ')}</span>
 							</span>
 						</a>
 					</li>

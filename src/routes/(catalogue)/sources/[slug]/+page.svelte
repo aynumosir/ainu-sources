@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { INSTITUTION_ROLE_LABELS } from '$lib/constants';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 	import { page } from '$app/state';
@@ -261,8 +262,8 @@
 						{m.source_institutions()}
 					</h2>
 					<ul class="mt-2 space-y-1">
-						{#each d.institutions as inst (inst.id)}
-							<li><a href={localizeHref(`/institutions/${inst.slug}`)} class="link">{inst.name}</a></li>
+						{#each d.institutions as inst (`${inst.id}:${inst.role}`)}
+							<li><a href={localizeHref(`/institutions/${inst.slug}`)} class="link">{inst.name}</a> <span class="text-xs text-stone-500">({tl(INSTITUTION_ROLE_LABELS, inst.role)})</span></li>
 						{/each}
 					</ul>
 				</div>

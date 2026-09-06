@@ -1,12 +1,15 @@
 import type { PageServerLoad } from './$types';
 import { error, redirect } from '@sveltejs/kit';
-import { getPersonBySlug } from '$lib/server/queries';
+import { organizationForPersonSlug } from '$lib/organizations';
+import { getInstitutionBySlug, getPersonBySlug } from '$lib/server/queries';
 import { resolvePersonSlug } from '$lib/server/resolve-slug';
 import { db } from '$lib/server/db';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const r = await getPersonBySlug(params.slug);
 	if (!r) {
+		const organization = organizationForPersonSlug(params.slug);
+		if (organization && await getInstitutionBySlug(organization.slug)) redirect(301, `/institutions/${organization.slug}`);
 		const current = await resolvePersonSlug(db, params.slug);
 		if (current) redirect(301, `/people/${current}`);
 		error(404, 'Person not found');

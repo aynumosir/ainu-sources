@@ -312,6 +312,9 @@ export function sourceJsonLd(
 	const authors = detail.persons
 		.filter((p) => ['author', 'editor', 'compiler'].includes(p.role))
 		.map((p) => prune({ '@type': 'Person', name: p.name, url: localizedAbs(origin, `/people/${p.slug}`) }));
+	authors.push(...detail.institutions
+		.filter(i => ['author', 'editor', 'compiler'].includes(i.role))
+		.map(i => prune({ '@type': 'Organization', name: i.name, url: localizedAbs(origin, `/institutions/${i.slug}`) })));
 	const publishers = detail.institutions
 		.filter((i) => i.role === 'publisher')
 		.map((i) => prune({ '@type': 'Organization', name: i.name, url: localizedAbs(origin, `/institutions/${i.slug}`) }));

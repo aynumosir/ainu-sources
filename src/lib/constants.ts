@@ -139,6 +139,13 @@ export const PERSON_ROLE_LABELS: Record<string, L> = {
 };
 
 // --- place roles ---
+export const INSTITUTION_ROLE_LABELS: Record<string, L> = {
+ ...PERSON_ROLE_LABELS,
+ holding: {en: 'Holding institution', ja: '所蔵', ru: 'Хранение'},
+ publisher: {en: 'Publisher', ja: '出版・刊行', ru: 'Издатель'},
+ digitizer: {en: 'Digitizer', ja: '電子化', ru: 'Оцифровка'}
+};
+
 export const PLACE_ROLE_LABELS: Record<string, L> = {
 	composition: { en: 'Place of composition', ja: '成立地', ru: 'Место создания' },
 	publication: { en: 'Place of publication', ja: '出版地', ru: 'Место издания' },

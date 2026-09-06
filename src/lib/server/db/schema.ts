@@ -323,7 +323,7 @@ export const sourcePlaces = sqliteTable(
 );
 
 // ---------------------------------------------------------------------------
-// Institutions (機関) — libraries, museums, universities
+// Organizations (機関・団体) — corporate authors, publishers and holding institutions
 // ---------------------------------------------------------------------------
 export const institutions = sqliteTable(
 	'institutions',
@@ -366,7 +366,7 @@ export const sourceInstitutions = sqliteTable(
 		institutionId: text('institution_id')
 			.notNull()
 			.references(() => institutions.id, { onDelete: 'cascade' }),
-		/** holding | publisher | digitizer */
+		/** author | editor | holding | publisher | digitizer */
 		role: text('role').notNull().default('holding'),
 		callNumber: text('call_number'),
 		notes: text('notes'),
