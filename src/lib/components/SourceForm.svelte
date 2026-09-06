@@ -136,7 +136,7 @@
 	<!-- Responsibility + date -->
 	<fieldset class="grid gap-4 sm:grid-cols-2">
 		<label class="sm:col-span-2">
-			<span class={labelCls}>{m.form_author()}</span>
+			<span class={labelCls} title={m.person_role_author_help()}>{m.form_author()}</span>
 			<input name="author" value={initial.author ?? ''} class={inputCls} />
 		</label>
 		<label>

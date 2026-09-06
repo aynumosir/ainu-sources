@@ -1,5 +1,4 @@
 <script lang="ts">
-	import PersonRoleGuide from '$lib/components/PersonRoleGuide.svelte';
 	import { INSTITUTION_ROLE_LABELS } from '$lib/constants';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
@@ -171,13 +170,13 @@
 			<section>
 				<h2 class="font-serif text-lg font-bold text-ink">{m.source_biblio()}</h2>
 				<dl class="mt-3 grid grid-cols-[8rem_1fr] gap-x-4 gap-y-2 text-sm sm:grid-cols-[10rem_1fr]">
-					{#snippet row(label: string, value: string)}
+					{#snippet row(label: string, value: string, title?: string)}
 						{#if value}
-							<dt class="text-stone-500">{label}</dt>
+							<dt {title} class="text-stone-500">{label}</dt>
 							<dd class="text-stone-800">{value}</dd>
 						{/if}
 					{/snippet}
-					{@render row(m.source_author(), s.author ?? '')}
+					{@render row(m.source_author(), s.author ?? '', m.person_role_author_help())}
 					{@render row(
 						m.source_date(),
 						formatYear(s) + (s.yearCertainty && s.yearCertainty !== 'exact' ? ` (${tl(YEAR_CERTAINTY_LABELS, s.yearCertainty)})` : '')
@@ -225,12 +224,11 @@
 					<h2 class="font-sans text-xs font-semibold uppercase tracking-wide text-stone-400">
 						{m.source_people()}
 					</h2>
-					<PersonRoleGuide />
 					<ul class="mt-2 space-y-1">
-						{#each d.persons as p (p.id)}
+						{#each d.persons as p (p.id + p.role)}
 							<li>
 								<a href={localizeHref(`/people/${p.slug}`)} class="link">{p.name}</a>
-								<span class="text-xs text-stone-400">· {tl(PERSON_ROLE_LABELS, p.role)}</span>
+								<span title={p.role === 'author' ? m.person_role_author_help() : p.role === 'speaker' ? m.person_role_speaker_help() : undefined} class="text-xs text-stone-400">· {tl(PERSON_ROLE_LABELS, p.role)}</span>
 							</li>
 						{/each}
 					</ul>

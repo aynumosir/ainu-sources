@@ -131,7 +131,6 @@ export const PERSON_ROLE_LABELS: Record<string, L> = {
 	author: { en: 'Author', ja: '著者', ru: 'Автор', ain: 'inuyekur' },
 	editor: { en: 'Editor', ja: '編者', ru: 'Редактор' },
 	compiler: { en: 'Compiler', ja: '編纂者', ru: 'Составитель' },
-	recorder: { en: 'Recorder', ja: '記録者', ru: 'Записал' },
 	speaker: { en: 'Speaker', ja: '話者', ru: 'Носитель', ain: 'itak kor kur' },
 	transcriber: { en: 'Transcriber', ja: '翻刻者', ru: 'Транскриптор' },
 	translator: { en: 'Translator', ja: '翻訳者', ru: 'Переводчик' },

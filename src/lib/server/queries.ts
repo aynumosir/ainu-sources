@@ -1,3 +1,4 @@
+import { personRole } from '$lib/person-roles';
 import { personSlugsMatchingAlias } from '$lib/person-aliases';
 import { db } from './db';
 import {
@@ -362,7 +363,10 @@ export async function getSourceDetail(slug: string): Promise<SourceDetail | unde
 			db.select({ n: count() }).from(sourceRevisions).where(eq(sourceRevisions.sourceId, id))
 		]);
 
-	const personsR: PersonRef[] = personRows.map((r) => ({ ...r.person, role: r.role }));
+	const personsR: PersonRef[] = [...new Map(personRows.map((r) => {
+		const role = personRole(r.role);
+		return [r.person.id + ':' + role, { ...r.person, role }];
+	})).values()];
 	const placesR: PlaceRef[] = placeRows.map((r) => ({ ...r.place, role: r.role }));
 	const instR: InstitutionRef[] = instRows.map((r) => ({
 		...r.institution,
@@ -509,7 +513,9 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 				db
 					.select({ id: sourcePersons.personId })
 					.from(sourcePersons)
-					.where(eq(sourcePersons.role, opts.role))
+					.where(personRole(opts.role) === 'author'
+						? inArray(sourcePersons.role, ['author', 'recorder'])
+						: eq(sourcePersons.role, opts.role))
 			)
 		);
 	}
@@ -518,7 +524,7 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 	// person row even with zero active sources, but `sources.id` is non-null only
 	// for an active link, so count/roles ignore hidden/merged/candidate works. All
 	// no-ops when every source is active (sources.id then matches every link).
-	const cnt = sql<number>`count(${sources.id})`;
+	const cnt = countDistinct(sources.id);
 	const order =
 		opts.sort === 'name'
 			? [asc(persons.name)]
@@ -542,7 +548,7 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 	return rows.map((r) => ({
 		...r.person,
 		sourceCount: r.n,
-		roles: r.roles ? r.roles.split(',').filter(Boolean) : []
+		roles: r.roles ? [...new Set(r.roles.split(',').filter(Boolean).map(personRole))] : []
 	}));
 }
 
@@ -552,7 +558,7 @@ export async function listPersonRoles(): Promise<string[]> {
 		.selectDistinct({ role: sourcePersons.role })
 		.from(sourcePersons)
 		.orderBy(asc(sourcePersons.role));
-	return rows.map((r) => r.role).filter(Boolean);
+	return [...new Set(rows.map((r) => personRole(r.role)).filter(Boolean))].sort();
 }
 
 export interface PersonArea {
@@ -584,7 +590,7 @@ export async function getPersonBySlug(
 	// A merged person can carry the same (source, role) twice — dedupe so the page's
 	// keyed {#each} doesn't get duplicate keys (which crashes hydration).
 	const seenSR = new Set<string>();
-	const srcs = srcRows.filter((r) => {
+	const srcs = srcRows.map((r) => ({ ...r, role: personRole(r.role) })).filter((r) => {
 		const k = `${r.source.id}\t${r.role}`;
 		if (seenSR.has(k)) return false;
 		seenSR.add(k);

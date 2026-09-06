@@ -1,3 +1,4 @@
+import { personRole } from '$lib/person-roles';
 import type { PageServerLoad } from './$types';
 import { listPersons, listPersonRoles, type PersonListOptions } from '$lib/server/queries';
 
@@ -8,7 +9,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	const sortParam = sp.get('sort');
 	const opts: PersonListOptions = {
 		q: sp.get('q') ?? undefined,
-		role: sp.get('role') ?? undefined,
+		role: sp.get('role') ? personRole(sp.get('role')!) : undefined,
 		sort: SORTS.includes(sortParam as never) ? (sortParam as PersonListOptions['sort']) : 'count'
 	};
 	const [people, roles] = await Promise.all([listPersons(opts), listPersonRoles()]);

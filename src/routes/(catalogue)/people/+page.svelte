@@ -1,5 +1,4 @@
 <script lang="ts">
-	import PersonRoleGuide from '$lib/components/PersonRoleGuide.svelte';
 	import { personAliases, personAliasLang } from '$lib/person-aliases';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
@@ -45,7 +44,6 @@
 <div class="mx-auto max-w-5xl px-4 py-8">
 	<h1 class="font-serif text-3xl font-bold text-ink">{m.people_title()}</h1>
 	<p class="mt-1 text-sm text-stone-500">{m.people_lead()}</p>
-	<PersonRoleGuide open />
 
 	<!-- Filter & sort toolbar -->
 	<form
@@ -73,7 +71,7 @@
 			>
 				<option value="">{m.people_role_all()}</option>
 				{#each data.roles as r (r)}
-					<option value={r}>{tl(PERSON_ROLE_LABELS, r)}</option>
+					<option value={r} title={r === 'author' ? m.person_role_author_help() : r === 'speaker' ? m.person_role_speaker_help() : undefined}>{tl(PERSON_ROLE_LABELS, r)}</option>
 				{/each}
 			</select>
 		</label>
@@ -123,6 +121,7 @@
 						<span class="mt-0.5 flex flex-wrap gap-1">
 							{#each p.roles as role (role)}
 								<span
+									title={role === 'author' ? m.person_role_author_help() : role === 'speaker' ? m.person_role_speaker_help() : undefined}
 									class="inline-flex items-center rounded-full bg-stone-100 px-2 py-0.5 text-[11px] font-medium text-stone-600 ring-1 ring-inset ring-stone-200"
 									>{tl(PERSON_ROLE_LABELS, role)}</span
 								>
