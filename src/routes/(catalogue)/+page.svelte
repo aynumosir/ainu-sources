@@ -119,7 +119,7 @@
 			<a href={localizeHref('/timeline')} class="link text-sm">{m.home_explore_timeline()} →</a>
 		</div>
 		<div class="mt-6">
-			<Timeline points={timeline} height={200} variant="mini" showLegend={true} />
+			<Timeline density={timeline} height={200} variant="mini" showLegend={true} />
 		</div>
 	</section>
 

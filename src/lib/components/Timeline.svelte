@@ -1,15 +1,19 @@
 <script lang="ts">
-	import type { TimelinePoint } from '$lib/types';
+	import type { TimelinePoint, TimelineDensityPoint } from '$lib/types';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 
 	let {
-		points,
+		points = [],
+		density = [],
 		height = 360,
 		showLegend = true,
 		variant = 'full'
 	}: {
-		points: TimelinePoint[];
+		/** Per-source rows — the full variant draws one dot (and one link) each. */
+		points?: TimelinePoint[];
+		/** Year×category counts — the mini variant bins these into density bars. */
+		density?: TimelineDensityPoint[];
 		height?: number;
 		showLegend?: boolean;
 		variant?: 'full' | 'mini';
@@ -38,7 +42,7 @@
 	const BOTTOM = 28;
 
 	const bounds = $derived.by(() => {
-		const ys = points.map((p) => p.yearStart);
+		const ys = variant === 'mini' ? density.map((d) => d.year) : points.map((p) => p.yearStart);
 		const min = ys.length ? Math.floor(Math.min(...ys) / 50) * 50 : 1600;
 		const max = ys.length ? Math.ceil(Math.max(...ys) / 50) * 50 : 2050;
 		return { min, max };
@@ -63,12 +67,12 @@
 		const binCount = Math.max(8, Math.floor(plotW / 9));
 		const binYears = Math.max(1, Math.ceil(span / binCount));
 		const map = new Map<number, { total: number; cats: Record<string, number> }>();
-		for (const p of points) {
-			const b = Math.floor((p.yearStart - bounds.min) / binYears);
+		for (const d of density) {
+			const b = Math.floor((d.year - bounds.min) / binYears);
 			let e = map.get(b);
 			if (!e) map.set(b, (e = { total: 0, cats: {} }));
-			e.total += 1;
-			e.cats[p.category] = (e.cats[p.category] ?? 0) + 1;
+			e.total += d.count;
+			e.cats[d.category] = (e.cats[d.category] ?? 0) + d.count;
 		}
 		const max = Math.max(1, ...[...map.values()].map((e) => e.total));
 		const usableH = baseline - TOP;

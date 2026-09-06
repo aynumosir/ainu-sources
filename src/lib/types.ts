@@ -109,6 +109,15 @@ export interface TimelinePoint {
 	region: string | null;
 }
 
+/** One year×category count for the homepage mini density chart. The full
+ *  timeline needs a row per source; the mini chart only bins counts, so the
+ *  server aggregates and the page hydrates ~1k rows instead of ~6k. */
+export interface TimelineDensityPoint {
+	year: number;
+	category: string;
+	count: number;
+}
+
 export interface MapPlace {
 	id: string;
 	slug: string;

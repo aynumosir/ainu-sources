@@ -21,7 +21,7 @@ import {
 	type Institution,
 	type Tag
 } from './db/schema';
-import { and, or, eq, ne, like, inArray, gte, lte, desc, asc, sql, count, countDistinct } from 'drizzle-orm';
+import { and, or, eq, ne, like, inArray, gte, lte, isNotNull, desc, asc, sql, count, countDistinct } from 'drizzle-orm';
 import type {
 	SourceFilters,
 	Facets,
@@ -30,6 +30,7 @@ import type {
 	SourceDetail,
 	DbStats,
 	TimelinePoint,
+	TimelineDensityPoint,
 	MapPlace,
 	PersonRef,
 	PlaceRef,
@@ -450,6 +451,23 @@ export async function getTimeline(): Promise<TimelinePoint[]> {
 		.where(activeSourcesOnly())
 		.orderBy(asc(sources.yearStart));
 	return rows.filter((r): r is TimelinePoint => r.yearStart != null);
+}
+
+/** Year×category counts behind the homepage mini timeline. Aggregating in SQL
+ *  keeps the home page's payload at density-row size; the chart bins these the
+ *  same way it used to bin per-source points. */
+export async function getTimelineDensity(): Promise<TimelineDensityPoint[]> {
+	const rows = await db
+		.select({
+			year: sources.yearStart,
+			category: sources.category,
+			count: count()
+		})
+		.from(sources)
+		.where(and(activeSourcesOnly(), isNotNull(sources.yearStart)))
+		.groupBy(sources.yearStart, sources.category)
+		.orderBy(asc(sources.yearStart));
+	return rows.map((r) => ({ year: r.year as number, category: r.category, count: r.count }));
 }
 
 export async function getMapPlaces(): Promise<MapPlace[]> {
