@@ -58,3 +58,17 @@ it('finds a former pen name and a documented alternative reading', async () => {
   for (const q of ['てらしまりょうあん','テラシマ リョウアン','てらじまりょうあん']) expect((await listPersons({q})).map(p=>p.id)).toEqual(['terajima']);
  } finally { client.close(); }
 });
+
+it('finds Russian names without kana and full Japanese–Ainu name readings', async () => {
+ const client = createClient({url:'file::memory:'});
+ try {
+  const db=drizzle(client,{schema});state.db=db;
+  await migrate(db,{migrationsFolder:fileURLToPath(new URL('../../../drizzle',import.meta.url))});
+  await db.insert(schema.persons).values([
+   {id:'anna',slug:'bugaeva-anna',name:'アンナ・ブガエワ',nameEn:'Anna Bugaeva'},
+   {id:'kitahara',slug:'mokottunas-kitahara',name:'北原 モコットゥナㇱ',nameKana:'きたはら モコットゥナㇱ'}
+  ]);
+  for(const q of ['Анна Бугаева','анна бугаева','АННА БУГАЕВА','Бугаева']) expect((await listPersons({q})).map(p=>p.id)).toEqual(['anna']);
+  for(const q of ['北原次郎太','北原モコットゥナㇱ次郎太','きたはらじろうた','きたはら モコットゥナㇱ じろうた','きたはらもこっとぅなㇱ']) expect((await listPersons({q})).map(p=>p.id)).toEqual(['kitahara']);
+ } finally {client.close();}
+});

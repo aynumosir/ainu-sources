@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { personAliases } from '$lib/person-aliases';
+	import { personAliases, personAliasLang } from '$lib/person-aliases';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 	import { page } from '$app/state';
 	import Seo from '$lib/components/Seo.svelte';
 	import { collectionPageJsonLd, breadcrumbJsonLd } from '$lib/seo';
-	import { tl, PERSON_ROLE_LABELS } from '$lib/constants';
+	import { tl, PERSON_ROLE_LABELS, LANGUAGE_LABELS } from '$lib/constants';
 
 	let { data } = $props();
 	const people = $derived(data.people);
@@ -109,7 +109,7 @@
 				<a href={localizeHref(`/people/${p.slug}`)} class="card flex flex-col gap-1 p-3">
 					<span class="font-serif text-base font-bold leading-snug text-ink">{p.name}</span>
 					{#each personAliases(p.slug) as alias (alias.name)}
-						<span lang="ja" class="text-sm text-stone-600">{alias.name} <span class="text-xs text-stone-500">（{alias.kind === 'formerPenName' ? m.person_former_pen_name() : alias.kind === 'readingVariant' ? m.person_alternative_reading() : m.person_other_name()}）</span></span>
+						<span class="text-sm text-stone-600"><span lang={personAliasLang(alias)}>{alias.name}</span>{#if alias.nameKana}<span class="ml-1 text-xs text-stone-500">{alias.nameKana}</span>{/if} <span class="text-xs text-stone-500">（{alias.kind === 'languageVariant' && alias.language ? tl(LANGUAGE_LABELS, alias.language) : alias.kind === 'formerPenName' ? m.person_former_pen_name() : alias.kind === 'readingVariant' ? m.person_alternative_reading() : m.person_other_name()}）</span></span>
 					{/each}
 					{#if p.nameKana && p.nameKana !== p.name}
 						<span lang="ja" class="text-sm text-stone-500">{p.nameKana}</span>

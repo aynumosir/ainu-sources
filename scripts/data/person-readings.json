@@ -8219,5 +8219,24 @@
     ],
     "checkedAt": "2026-09-06",
     "note": "登録著書を含む自著のCiNii標目は一貫してカナマルツギオ。著書に直接結びつく標目を採用。法政の疑問符付きカネマルツグオや別論文のカナマルツグオより、複数の当該著書に共通する読みを優先。"
+  },
+  {
+    "slugs": [
+      "mokottunas-kitahara"
+    ],
+    "name": "北原 モコットゥナㇱ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きたはら モコットゥナㇱ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://researchers.general.hokudai.ac.jp/search/detail.html?lang=ja&systemId=06ba60f8cba08ad5520e17560c007669",
+      "https://www.cais.hokudai.ac.jp/wp-content/uploads/2022/04/r0403vr_fulltext.pdf",
+      "https://ci.nii.ac.jp/author/DA14332144"
+    ],
+    "note": "大学の研究者総覧で姓キタハラを確認し、アイヌ名の表記を保持。次郎太の読みはセンター報告書にじろうたと明記。現在の大学の公表名を主表示とし、次郎太を含む全称と日本語名を読み付き別名として保存。"
   }
 ]

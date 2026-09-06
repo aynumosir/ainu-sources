@@ -58,5 +58,38 @@
       "https://otarunay.at-ninja.jp/taimuzu-all3.html",
       "https://aynuitak.at-ninja.jp/ContentsESP.pdf"
     ]
+  },
+  {
+    "slug": "bugaeva-anna",
+    "aliases": [
+      {
+        "name": "Анна Бугаева",
+        "kind": "languageVariant",
+        "language": "rus"
+      }
+    ],
+    "sources": [
+      "https://vja.ruslang.ru/ru/authors/2572"
+    ]
+  },
+  {
+    "slug": "mokottunas-kitahara",
+    "aliases": [
+      {
+        "name": "北原 モコットゥナㇱ 次郎太",
+        "nameKana": "きたはら モコットゥナㇱ じろうた",
+        "kind": "otherName"
+      },
+      {
+        "name": "北原 次郎太",
+        "nameKana": "きたはら じろうた",
+        "kind": "otherName"
+      }
+    ],
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA14332144",
+      "https://www.cais.hokudai.ac.jp/wp-content/uploads/2022/04/r0403vr_fulltext.pdf",
+      "https://www.dei.hokudai.ac.jp/archives/20817/"
+    ]
   }
 ]
