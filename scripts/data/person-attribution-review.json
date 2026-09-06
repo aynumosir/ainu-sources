@@ -499,6 +499,28 @@
       "role": "author",
       "sortOrder": 1,
       "evidence": "https://opac.ll.chiba-u.jp/da/curator/108063/S21857148-21-P263-SAK.pdf"
+    },
+    {
+      "id": "d936fb16-d29a-4296-b927-caadd32b3ae4",
+      "sourceSlug": "1968-simeon-phonemics-morphology-hokkaido-ainu",
+      "sourceId": "22ea658a-692c-4afb-95cb-fed8091b449e",
+      "personSlug": "george-john-simeon",
+      "role": "author",
+      "sortOrder": 0,
+      "evidence": "https://dornsife.usc.edu/ling/576-2/",
+      "note": "大学の博士論文一覧および書誌の著者表示を確認。未登録の著者関連を追加。",
+      "checkedAt": "2026-09-06"
+    },
+    {
+      "id": "50b8e9e2-743a-4936-a147-1b82b38f22df",
+      "sourceSlug": "1968-simeon-horobetsu-kinship-terms",
+      "sourceId": "f85648db-b62e-4e00-b6c6-55cdf9a7f6a2",
+      "personSlug": "george-john-simeon",
+      "role": "author",
+      "sortOrder": 0,
+      "evidence": "https://dornsife.usc.edu/ling/576-2/",
+      "note": "Simeon 1968のAppendix II。統合前の資料にだけ残っていた著者関連を、同じ著者表示を持つ統合先へ追加。",
+      "checkedAt": "2026-09-06"
     }
   ]
 }
