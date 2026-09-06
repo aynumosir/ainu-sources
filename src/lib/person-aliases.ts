@@ -6,6 +6,8 @@ export interface PersonAlias {
 	nameEn?: string;
 	kind: string;
 	language?: string;
+	/** Redundant name forms retained for searching, without a visible alias line. */
+	searchOnly?: boolean;
 }
 const entries: {slug: string; aliases: PersonAlias[]}[] = data;
 export function personAliasLang(alias: PersonAlias): string {
@@ -14,7 +16,7 @@ export function personAliasLang(alias: PersonAlias): string {
 }
 
 export function personAliases(slug: string) {
-	return entries.find(entry => entry.slug === slug)?.aliases ?? [];
+	return (entries.find(entry => entry.slug === slug)?.aliases ?? []).filter(alias => !alias.searchOnly);
 }
 
 const normalize = (value: string) => value.normalize('NFKC').replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60)).replace(/\s+/g, '').toLowerCase();

@@ -8,6 +8,7 @@ import * as schema from './db/schema';
 const state = vi.hoisted(() => ({ db: undefined as unknown }));
 vi.mock('./db', () => ({ get db() { return state.db; } }));
 import { listPersons } from './queries';
+import { personAliases } from '../person-aliases';
 
 it('finds verified readings in hiragana or katakana with optional name spacing', async () => {
 	const client = createClient({ url: 'file::memory:' });
@@ -66,9 +67,15 @@ it('finds Russian names without kana and full Japanese–Ainu name readings', as
   await migrate(db,{migrationsFolder:fileURLToPath(new URL('../../../drizzle',import.meta.url))});
   await db.insert(schema.persons).values([
    {id:'anna',slug:'bugaeva-anna',name:'アンナ・ブガエワ',nameEn:'Anna Bugaeva'},
-   {id:'kitahara',slug:'mokottunas-kitahara',name:'北原 モコットゥナㇱ',nameKana:'きたはら モコットゥナㇱ'}
+   {id:'kitahara',slug:'mokottunas-kitahara',name:'北原 モコットゥナㇱ 次郎太',nameKana:'きたはら モコットゥナㇱ じろうた'}
   ]);
   for(const q of ['Анна Бугаева','анна бугаева','АННА БУГАЕВА','Бугаева']) expect((await listPersons({q})).map(p=>p.id)).toEqual(['anna']);
   for(const q of ['北原次郎太','北原モコットゥナㇱ次郎太','きたはらじろうた','きたはら モコットゥナㇱ じろうた','きたはらもこっとぅなㇱ']) expect((await listPersons({q})).map(p=>p.id)).toEqual(['kitahara']);
  } finally {client.close();}
+});
+
+it('keeps redundant Kitahara forms searchable without displaying alias lines', () => {
+ expect(personAliases('mokottunas-kitahara')).toEqual([]);
+ expect(personAliases('bugaeva-anna').map(a => a.name)).toContain('Анна Бугаева');
+ expect(personAliases('kawakami-yoko').map(a => a.name)).toContain('川上 容子');
 });

@@ -8226,17 +8226,25 @@
     ],
     "name": "北原 モコットゥナㇱ",
     "expected": {
-      "nameKana": null
+      "nameKana": null,
+      "name": "北原 モコットゥナㇱ"
     },
     "corrected": {
-      "nameKana": "きたはら モコットゥナㇱ"
+      "nameKana": "きたはら モコットゥナㇱ じろうた",
+      "name": "北原 モコットゥナㇱ 次郎太"
     },
     "checkedAt": "2026-09-06",
     "sources": [
       "https://researchers.general.hokudai.ac.jp/search/detail.html?lang=ja&systemId=06ba60f8cba08ad5520e17560c007669",
       "https://www.cais.hokudai.ac.jp/wp-content/uploads/2022/04/r0403vr_fulltext.pdf",
-      "https://ci.nii.ac.jp/author/DA14332144"
+      "https://ci.nii.ac.jp/author/DA14332144",
+      "https://www.dei.hokudai.ac.jp/archives/20817/"
     ],
-    "note": "大学の研究者総覧で姓キタハラを確認し、アイヌ名の表記を保持。次郎太の読みはセンター報告書にじろうたと明記。現在の大学の公表名を主表示とし、次郎太を含む全称と日本語名を読み付き別名として保存。"
+    "note": "CiNii著者典拠に全称「北原, モコットゥナㇱ次郎太」と読みを確認。大学主催行事にも次郎太を含む表記がある。全称を主表示とし、小書きㇱを保持。短い公表名・日本語名は検索用に保存。",
+    "acceptedPriorValues": {
+      "nameKana": [
+        "きたはら モコットゥナㇱ"
+      ]
+    }
   }
 ]

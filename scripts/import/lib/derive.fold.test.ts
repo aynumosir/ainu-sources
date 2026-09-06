@@ -71,3 +71,10 @@ it('folds both documented Seto pen names to the later pen name', () => {
   expect([person.slug, person.name, person.nameEn]).toEqual(['p-c4w1s9', '瀬戸 海惠', 'Seto Mie']);
  }
 });
+
+it('imports Kitahara name variants as the same person with the verified full name', () => {
+ for (const name of ['北原モコットゥナㇱ', '北原モコットゥナシ', '北原 モコットゥナㇱ 次郎太', '北原次郎太', '北原次郎太モコットゥナㇱ', 'Mokottunas Kitahara']) {
+  const person = derivePerson(name);
+  expect([person.slug, person.name, person.nameEn]).toEqual(['mokottunas-kitahara', '北原 モコットゥナㇱ 次郎太', 'Kitahara Mokottunas']);
+ }
+});

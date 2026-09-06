@@ -78,12 +78,20 @@
       {
         "name": "北原 モコットゥナㇱ 次郎太",
         "nameKana": "きたはら モコットゥナㇱ じろうた",
-        "kind": "otherName"
+        "kind": "otherName",
+        "searchOnly": true
       },
       {
         "name": "北原 次郎太",
         "nameKana": "きたはら じろうた",
-        "kind": "otherName"
+        "kind": "otherName",
+        "searchOnly": true
+      },
+      {
+        "name": "北原 モコットゥナㇱ",
+        "nameKana": "きたはら モコットゥナㇱ",
+        "kind": "otherName",
+        "searchOnly": true
       }
     ],
     "sources": [
