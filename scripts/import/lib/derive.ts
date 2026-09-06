@@ -213,7 +213,7 @@ export const PERSON_ALIASES: Record<string, string> = {
 	福田すず子: 'tamura-suzuko', 福田すゞ子: 'tamura-suzuko', 'Fukuda Suzuko': 'tamura-suzuko', 'Suzuko Fukuda': 'tamura-suzuko', 'Fukuda, Suzuko': 'tamura-suzuko',
 	Nakagawa: 'nakagawa-hiroshi', 'Nakagawa, Hiroshi': 'nakagawa-hiroshi', 'Nakagawa Hiroshi': 'nakagawa-hiroshi', 中川裕: 'nakagawa-hiroshi',
 	Kayano: 'kayano-shigeru', 'Kayano, Shigeru': 'kayano-shigeru', 'Kayano Shigeru': 'kayano-shigeru', 萱野茂: 'kayano-shigeru',
-	Sato: 'sato-tomomi', 'Sato, Tomomi': 'sato-tomomi', 'Sato Tomomi': 'sato-tomomi', 佐藤知己: 'sato-tomomi',
+	Sato: 'sato-tomomi', 'Sato, Tomomi': 'sato-tomomi', 'Sato Tomomi': 'sato-tomomi', 佐藤知己: 'sato-tomomi', 佐藤知巳: 'sato-tomomi',
 	Bugaeva: 'bugaeva-anna', 'Bugaeva, Anna': 'bugaeva-anna', 'Bugaeva Anna': 'bugaeva-anna', 'Anna Bugaeva': 'bugaeva-anna', 'ブガエワ・アンナ': 'bugaeva-anna', ブガエワアンナ: 'bugaeva-anna',
 	// Karol Nowakowski (Sakhalin-Ainu ASR/NLP) — papers list him in Latin (OpenAlex
 	// emits the 3-token "NOWAKOWSKI KAROL PIOTR"); merge all forms so researchmap attaches.
