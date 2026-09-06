@@ -31,13 +31,16 @@
 	 * ACCESS_TEAM_DOMAIN, ACCESS_AUD, ACCESS_SERVICE_TOKENS,
 	 * ARCHIVE_CSRF_SECRET, ARCHIVE_ENFORCE_MEMBERSHIP, ARCHIVE_ORIGIN,
 	 * ARCHIVE_DAILY_BYTE_LIMIT, ARCHIVE_CONCURRENT_STREAM_LIMIT) are set with
-	 * `wrangler secret put`.
+	 * `wrangler secret put`. CORPUS_ORIGIN (optional) points the text reader at
+	 * another corpus API when the CORPUS service binding is absent, e.g. a
+	 * local `wrangler dev` of ainu-corpora-api.
 	 */
 	"vars": {
 		"ORIGIN": "https://db.aynu.org"
 	},
 	"services": [
-		{ "binding": "ARCHIVE", "service": "ainu-archive" }
+		{ "binding": "ARCHIVE", "service": "ainu-archive" },
+		{ "binding": "CORPUS", "service": "ainu-corpora-api" }
 	],
 	/**
 	 * Semantic search: bge-m3 embeds the query at request time; the Vectorize

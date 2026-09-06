@@ -106,6 +106,30 @@
 		</div>
 	</header>
 
+	{#if data.text}
+		<div class="mt-4 rounded-lg border border-stone-200 bg-stone-50 px-4 py-3">
+			<div class="flex flex-wrap items-center gap-3">
+				<a
+					href={localizeHref(`/sources/${s.slug}/read`)}
+					class="rounded-md bg-brand-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-800"
+					>{m.reader_read()}</a
+				>
+				<span class="tnum text-sm text-stone-600">
+					<span
+						>{m.reader_summary({
+							documents: data.text.documents.toLocaleString('en-US'),
+							sentences: data.text.sentences.toLocaleString('en-US')
+						})}</span
+					>{#if data.text.text_layer}<span class="mx-1.5 text-stone-400">·</span><span
+							>{data.text.text_layer_status === 'reviewed'
+								? m.reader_modern_reviewed()
+								: m.reader_modern_provisional()}</span
+						>{/if}
+				</span>
+			</div>
+		</div>
+	{/if}
+
 	{#if data.archive}
 		<div class="mt-4 rounded-lg border border-stone-200 bg-stone-50 px-4 py-3">
 			{#if data.hasArchiveAccess}

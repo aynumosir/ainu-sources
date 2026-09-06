@@ -24,6 +24,19 @@ The central entity is the **Source** (`資料`). Around it: `source_links`, `per
 `source_institutions`, `source_relations`, `tags` + `source_tags`, and `source_revisions`
 (full edit history). See `src/lib/server/db/schema.ts`.
 
+## Reading corpus texts
+
+A source whose sentences are held by the corpus API (corpus.aynu.org) gets a
+reader at `/sources/<slug>/read`: the contents page lists its documents in
+reading order, and `/sources/<slug>/read/<document key>` shows one document
+sentence by sentence — the modern-orthography text as the main line, with the
+source spelling, a katakana rendering and the translation as layers the reader
+switches on. Documents longer than 400 sentences are read in parts (`?page=`).
+The text comes from the corpus API's `/v1/text/*` routes over the `CORPUS`
+service binding (`src/lib/server/corpus.ts`); set `CORPUS_ORIGIN` to reach a
+corpus API running elsewhere, such as a local one during development. Reader
+pages are public and edge-cached like the rest of the catalogue.
+
 ## Machine-readable export & stability promise
 
 `GET /api/sources/export.json` returns the whole catalogue (no pagination) as a JSON

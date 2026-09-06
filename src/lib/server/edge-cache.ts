@@ -29,6 +29,7 @@ const CACHEABLE = [
 	/^\/sources$/u,
 	/^\/sources\/[^/]+$/u,
 	/^\/sources\/[^/]+\/cite\.(?:bib|json|yml|yaml|ris)$/u,
+	/^\/sources\/[^/]+\/read(?:\/.+)?$/u,
 	/^\/people$/u,
 	/^\/people\/[^/]+$/u,
 	/^\/places$/u,
