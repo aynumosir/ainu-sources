@@ -17,7 +17,7 @@
 	<button
 		type="submit"
 		aria-label={bilingualAriaLabel(archiveLabels.search)}
-		class="h-9 border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-text)]"
+		class="h-9 border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-hover)]"
 	>
 		<BilingualLabel ja={archiveLabels.search.ja} en={archiveLabels.search.en} inverse />
 	</button>

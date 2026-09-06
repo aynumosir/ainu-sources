@@ -56,7 +56,7 @@
 		</div>
 		<div class="flex flex-wrap gap-2">
 			{#if primaryFile?.fileId}
-				<a href={`/archive/read/${source.slug}/${primaryFile.fileId}`} aria-label={bilingualAriaLabel(archiveLabels.read)} class="border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-text)]">
+				<a href={`/archive/read/${source.slug}/${primaryFile.fileId}`} aria-label={bilingualAriaLabel(archiveLabels.read)} class="border border-[var(--archive-accent)] bg-[var(--archive-accent)] px-3 py-2 text-[13px] font-semibold text-[var(--archive-paper)] hover:bg-[var(--archive-accent-hover)]">
 					<BilingualLabel ja={archiveLabels.read.ja} en={archiveLabels.read.en} inverse />
 				</a>
 			{/if}
