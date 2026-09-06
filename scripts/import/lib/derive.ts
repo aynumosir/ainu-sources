@@ -205,6 +205,9 @@ export function linkTypeFor(host: string): string {
 // Map every observed form → one canonical slug, with a canonical display name,
 // so a person is a single record linking to all their works.
 export const PERSON_ALIASES: Record<string, string> = {
+	村崎恭子: 'murasaki-kyoko', 古川恭子: 'murasaki-kyoko', 'Murasaki Kyoko': 'murasaki-kyoko', 'Furukawa Kyoko': 'murasaki-kyoko',
+	八幡巴: 'yahata-tomoe', 八幡巴絵: 'yahata-tomoe', 'Yahata Tomoe': 'yahata-tomoe',
+	天嶺性空: 'shoku-tenrei', 'Tenrei Shoku': 'shoku-tenrei', 'Tenrei Shōkū': 'shoku-tenrei', 'Shoku Tenrei': 'shoku-tenrei',
 	'瀬戸成子': 'p-c4w1s9', '瀬戸海惠': 'p-c4w1s9',
 	'川上容子': 'kawakami-yoko', '豊川容子': 'kawakami-yoko',
 	'菅原勝吉': 'sugawara-katsukichi', '菅原勝良': 'sugawara-katsukichi',
@@ -254,6 +257,9 @@ export const PERSON_ALIASES: Record<string, string> = {
 	北海道ウタリ協会: 'hokkaido-utari-kyokai'
 };
 export const PERSON_CANON: Record<string, { name: string; nameEn?: string }> = {
+	'murasaki-kyoko': { name: '村崎 恭子', nameEn: 'Murasaki Kyōko' },
+	'yahata-tomoe': { name: '八幡 巴絵', nameEn: 'Yahata Tomoe' },
+	'shoku-tenrei': { name: '天嶺性空', nameEn: 'Tenrei Shōkū' },
 	'mokottunas-kitahara': { name: '北原 モコットゥナㇱ 次郎太', nameEn: 'Kitahara Mokottunas Jirōta' },
 	'p-c4w1s9': { name: '瀬戸 海惠', nameEn: 'Seto Mie' },
 	'kawakami-yoko': { name: '豊川 容子', nameEn: 'Toyokawa Yōko' },

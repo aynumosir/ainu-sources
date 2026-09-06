@@ -46,6 +46,14 @@ describe('personFoldKeys', () => {
 	});
 });
 
+it('resolves reviewed former and incomplete names to their current identity', () => {
+ expect(canonicalSlugFor('古川 恭子')).toBe('murasaki-kyoko');
+ expect(canonicalSlugFor('Furukawa Kyōko')).toBe('murasaki-kyoko');
+ expect(canonicalSlugFor('八幡 巴')).toBe('yahata-tomoe');
+ expect(canonicalSlugFor('八幡 巴絵')).toBe('yahata-tomoe');
+ expect(canonicalSlugFor('Tenrei Shōkū')).toBe('shoku-tenrei');
+});
+
 it('does not resolve a qualified author through a surname-only alias', () => {
  expect(canonicalSlugFor('Sato, Genrokuro')).toBeNull();
  expect(canonicalSlugFor('SATO, Yuka')).toBeNull();

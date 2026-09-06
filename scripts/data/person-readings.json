@@ -4636,16 +4636,19 @@
     ],
     "name": "瀧下 史",
     "expected": {
-      "nameEn": null
+      "nameEn": null,
+      "nameKana": null
     },
     "corrected": {
-      "nameEn": "Takishita Fumi"
+      "nameEn": "Takishita Fumi",
+      "nameKana": "たきした ふみ"
     },
     "checkedAt": "2026-09-06",
     "sources": [
-      "https://cir.nii.ac.jp/crid/1571698602508228608"
+      "https://cir.nii.ac.jp/crid/1571698602508228608",
+      "https://cir.nii.ac.jp/crid/1390009224890896896"
     ],
-    "note": "登録論文『日本の多文化教育における地名学習の受容に関する一考察 : 関東地方のアイヌ語地名を例として(英語教育)』の著者ローマ字表記。かな表記は未確認。"
+    "note": "登録論文『日本の多文化教育における地名学習の受容に関する一考察 : 関東地方のアイヌ語地名を例として(英語教育)』の著者ローマ字表記。かな表記は未確認。 登録論文の著者メタデータにタキシタ フミ。漢字・英文著者名・共著者で照合。"
   },
   {
     "slugs": [
@@ -5167,16 +5170,19 @@
     ],
     "name": "島津 礼子",
     "expected": {
-      "nameEn": null
+      "nameEn": null,
+      "nameKana": null
     },
     "corrected": {
-      "nameEn": "Shimazu Reiko"
+      "nameEn": "Shimazu Reiko",
+      "nameKana": "しまず れいこ"
     },
     "checkedAt": "2026-09-06",
     "sources": [
-      "https://cir.nii.ac.jp/crid/1390009224858117376"
+      "https://cir.nii.ac.jp/crid/1390009224858117376",
+      "https://ci.nii.ac.jp/author/DA19167045"
     ],
-    "note": "登録論文『先住民アイヌの知識，自然観と持続可能性 : アイヌの口承文芸に焦点を当てて』の著者ローマ字表記。かな表記は未確認。"
+    "note": "登録論文『先住民アイヌの知識，自然観と持続可能性 : アイヌの口承文芸に焦点を当てて』の著者ローマ字表記。かな表記は未確認。 CiNii著者典拠にシマズ レイコ。西日本のアイヌ学習調査と一致。"
   },
   {
     "slugs": [
@@ -5487,16 +5493,19 @@
     ],
     "name": "浜守 杏奈",
     "expected": {
-      "nameEn": null
+      "nameEn": null,
+      "nameKana": null
     },
     "corrected": {
-      "nameEn": "Hamamori Anna"
+      "nameEn": "Hamamori Anna",
+      "nameKana": "はまもり あんな"
     },
-    "checkedAt": "2026-09-05",
+    "checkedAt": "2026-09-06",
     "sources": [
-      "https://jissen.repo.nii.ac.jp/record/2545/files/%E7%94%9F%E6%B4%BB%E7%A7%91%E5%AD%A660-6.pdf"
+      "https://jissen.repo.nii.ac.jp/record/2545/files/%E7%94%9F%E6%B4%BB%E7%A7%91%E5%AD%A660-6.pdf",
+      "https://gakujyo.bunkyo.ac.jp/bnkhp/KgApp/k02/syozoku/2158001501"
     ],
-    "note": "当該論文の英文著者名。大学の別資料に矛盾するカナがあり、カナは保留。"
+    "note": "当該論文の英文著者名。大学の別資料に矛盾するカナがあり、カナは保留。 大学教員一覧にハマモリ アンナ。食文化研究者と照合。"
   },
   {
     "slugs": [
@@ -6209,16 +6218,19 @@
     ],
     "name": "是澤 櫻子",
     "expected": {
-      "nameEn": null
+      "nameEn": null,
+      "nameKana": null
     },
     "corrected": {
-      "nameEn": "Koresawa Sakurako"
+      "nameEn": "Koresawa Sakurako",
+      "nameKana": "これさわ さくらこ"
     },
-    "checkedAt": "2026-09-05",
+    "checkedAt": "2026-09-06",
     "sources": [
-      "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/91266/03_4_Koresawa.pdf"
+      "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/91266/03_4_Koresawa.pdf",
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202201015470073673"
     ],
-    "note": "本人・所属機関または原著論文の著者表記で確認。"
+    "note": "本人・所属機関または原著論文の著者表記で確認。 研究者登録にコレサワ サクラコ。国立アイヌ民族博物館所属・ロシア先住民研究で照合。"
   },
   {
     "slugs": [
@@ -8248,5 +8260,457 @@
         "きたはら モコットゥナㇱ"
       ]
     }
+  },
+  {
+    "slugs": [
+      "kamemaru-yukiko"
+    ],
+    "name": "亀丸由紀子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かめまる ゆきこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.hkk.or.jp/kouhou/file/no707_ainurace.pdf"
+    ],
+    "note": "著者紹介にかなを明記。北海道博物館所属と装身具研究で照合。"
+  },
+  {
+    "slugs": [
+      "miyama-osamu"
+    ],
+    "name": "美山 治",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "みやま おさむ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://tsukuba.repo.nii.ac.jp/record/14346/files/A3018.pdf"
+    ],
+    "note": "筑波大学博士論文審査要旨に氏名のふりがな。登録論文の題名と一致。"
+  },
+  {
+    "slugs": [
+      "hirota-toru"
+    ],
+    "name": "廣田 徹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ひろた とおる"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=200901004507476272",
+      "https://ndlsearch.ndl.go.jp/books/R000000004-I6883864"
+    ],
+    "note": "研究者登録にヒロタ トオル。日本文学・専修大学北海道短期大学所属で照合。"
+  },
+  {
+    "slugs": [
+      "mae-masanao"
+    ],
+    "name": "前 正七生",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まえ まさなお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://gyoseki.ccb.shukutoku.ac.jp/stuhp/KgApp/k03/resid/S000285"
+    ],
+    "note": "大学教員総覧にマエマサナオ。アイヌ文化に関する研究業績と照合。"
+  },
+  {
+    "slugs": [
+      "yachita-mio"
+    ],
+    "name": "谷地田 未緒",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やちた みお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.kyogei.co.jp/data_room/hana/pdf/bouquet14_b5.pdf"
+    ],
+    "note": "博物館への取材記事の本人紹介にやちた・みお。"
+  },
+  {
+    "slugs": [
+      "ono-yohei"
+    ],
+    "name": "小野洋平",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おの ようへい"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://researchmap.jp/ono_yohei/association_memberships/24583953/"
+    ],
+    "note": "本人researchmapのオノ ヨウヘイ。登録済み研究者IDと一致。"
+  },
+  {
+    "slugs": [
+      "inoue-takuya"
+    ],
+    "name": "井上拓也",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いのうえ たくや"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.ritsumei.ac.jp/file.jsp?id=688634"
+    ],
+    "note": "大学の本人紹介PDFにイノウエ タクヤ。"
+  },
+  {
+    "slugs": [
+      "yahata-tomoe"
+    ],
+    "name": "八幡 巴",
+    "expected": {
+      "nameKana": null,
+      "name": "八幡 巴"
+    },
+    "corrected": {
+      "nameKana": "やはた ともえ",
+      "name": "八幡 巴絵"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202401006812002248",
+      "https://archivenam.ainu-upopoy.jp/staff/"
+    ],
+    "note": "研究者登録にヤハタ トモエ。国立アイヌ民族博物館の白老ルウンペ論文と照合。"
+  },
+  {
+    "slugs": [
+      "yazaki-haruna"
+    ],
+    "name": "矢崎 春菜",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やざき はるな"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.library.pref.hokkaido.jp/web/hoppo/qulnh00000000gk3.html"
+    ],
+    "note": "道立図書館の講師紹介にかな。アイヌ口承文芸研究・博物館所属で照合。"
+  },
+  {
+    "slugs": [
+      "kuwabayashi-kenji"
+    ],
+    "name": "桑林 賢治",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "くわばやし けんじ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202101011924886680"
+    ],
+    "note": "本人研究者登録にクワバヤシ ケンジ。アイヌの記憶の場所研究で照合。"
+  },
+  {
+    "slugs": [
+      "narita-hidetoshi"
+    ],
+    "name": "成田 英敏",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なりた ひでとし"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA09629086"
+    ],
+    "note": "CiNii著者典拠にナリタ ヒデトシ。カムイユカラ絵本の画者と一致。"
+  },
+  {
+    "slugs": [
+      "sawai-harumi"
+    ],
+    "name": "澤井 春美",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さわい はるみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA15148093"
+    ],
+    "note": "CiNii著者典拠にサワイ ハルミ。沢井トメノの十勝方言語彙集と一致。"
+  },
+  {
+    "slugs": [
+      "nana-sato-rossberg"
+    ],
+    "name": "佐藤 ロスベアグ ナナ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さとう ロスベアグ ナナ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.nichibun.ac.jp/ja/research/uploads/pdf/Visiting_research_fellows_230401.pdf"
+    ],
+    "note": "日文研の受入研究員名簿にサトウ＝ロスベアグ・ナナ。ロンドン大学翻訳学研究者と照合。"
+  },
+  {
+    "slugs": [
+      "minami-noriyuki"
+    ],
+    "name": "南 哲行",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "みなみ のりゆき"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.stc.or.jp/journal_sabo/pdf/art_129/129_03_mirai.pdf"
+    ],
+    "note": "所属機関刊行物の署名にふりがな。砂防・災害研究者として一致。"
+  },
+  {
+    "slugs": [
+      "takegahara-yukio"
+    ],
+    "name": "竹ケ原 幸朗",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たけがはら ゆきお"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.hanmoto.com/bd/isbn/9784784517022"
+    ],
+    "note": "出版社提供書誌に『タケガハラ ユキオ ケンキュウ シュウセイ』。本人著作集の読みで確認。"
+  },
+  {
+    "slugs": [
+      "ma-changcheng"
+    ],
+    "name": "馬 長城",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ま ちょうじょう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202201013896912785"
+    ],
+    "note": "本人研究者登録に日本語読みマ チョウジョウ。中国語原語名の発音とは区別。"
+  },
+  {
+    "slugs": [
+      "p-1geswer"
+    ],
+    "name": "石橋 俊實",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "いしばし としみ",
+      "nameEn": "Ishibashi Toshimi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BN03776185?l=en"
+    ],
+    "note": "退官記念論文集の著者標目にイシバシ トシミ。北大精神医学から東北大に移った教授と照合。"
+  },
+  {
+    "slugs": [
+      "baba-yumi"
+    ],
+    "name": "馬場 裕美",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ばば ゆみ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202501004645547541"
+    ],
+    "note": "研究者登録にババ ユミ。アイヌ熊送り説話研究と一致。"
+  },
+  {
+    "slugs": [
+      "takahashi-motoi"
+    ],
+    "name": "高橋 基",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たかはし もとい"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.city.asahikawa.hokkaido.jp/hakubutukan/kenkyuu/d053440_d/fil/meibo.pdf"
+    ],
+    "note": "旭川市アイヌ語地名表記推進懇談会名簿にふりがな。"
+  },
+  {
+    "slugs": [
+      "p-12syzn8"
+    ],
+    "name": "柳下 み咲",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "やなぎした みさき",
+      "nameEn": "Yanagishita Misaki"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail.do?bibid=1102059503&lang=ja"
+    ],
+    "note": "都立図書館の内容細目に著者読みヤナギシタ ミサキ。アイヌ関連論文と照合。"
+  },
+  {
+    "slugs": [
+      "sato-sachiko"
+    ],
+    "name": "佐藤 幸子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さとう さちこ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://gyoseki.jissen.ac.jp/profile/ja.8d0c45228fec679e.html?mode=pc"
+    ],
+    "note": "大学研究者総覧にサトウ サチコ。アイヌ食文化論文と一致。"
+  },
+  {
+    "slugs": [
+      "abe-chozaburo"
+    ],
+    "name": "阿部 長三郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あべ ちょうざぶろう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BA6855534X"
+    ],
+    "note": "『藻汐草』の著者標目にアベ チョウザブロウ。"
+  },
+  {
+    "slugs": [
+      "itakura-genjiro"
+    ],
+    "name": "板倉 源次郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いたくら げんじろう"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www3.library.pref.hokkaido.jp/detail/5069"
+    ],
+    "note": "道立図書館『北海随筆』原本レコードにイタクラ ゲンジロウ。"
+  },
+  {
+    "slugs": [
+      "shoku-tenrei"
+    ],
+    "name": "天嶺性空",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Shoku Tenrei"
+    },
+    "corrected": {
+      "nameKana": "てんれい しょうくう",
+      "nameEn": "Tenrei Shōkū"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA16268330"
+    ],
+    "note": "CiNii著者典拠にテンレイ ショウクウ。仏教人名規範の日本語読みも同じ。"
+  },
+  {
+    "slugs": [
+      "kido-shirabe"
+    ],
+    "name": "木戸 調",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きど しらべ"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1390572174842303232"
+    ],
+    "note": "登録論文の著者ローマ字Kido Shirabeをかなに転記。"
+  },
+  {
+    "slugs": [
+      "p-15abopl"
+    ],
+    "name": "松浦 孝平",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まつうら こうへい"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/jnlp/28/3/28_824/_pdf"
+    ],
+    "note": "登録論文の署名Kohei Matsuuraをかなに転記。"
   }
 ]

@@ -99,5 +99,18 @@
       "https://www.cais.hokudai.ac.jp/wp-content/uploads/2022/04/r0403vr_fulltext.pdf",
       "https://www.dei.hokudai.ac.jp/archives/20817/"
     ]
+  },
+  {
+    "slug": "murasaki-kyoko",
+    "aliases": [
+      {
+        "name": "古川 恭子",
+        "kind": "otherName"
+      }
+    ],
+    "sources": [
+      "https://src-h.slav.hokudai.ac.jp/jp/news/174/CNews174.pdf",
+      "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/53479/55Murasaki.pdf"
+    ]
   }
 ]
