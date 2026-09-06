@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { personAliases } from '$lib/person-aliases';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 	import { page } from '$app/state';
@@ -107,6 +108,9 @@
 			{#each people as p (p.id)}
 				<a href={localizeHref(`/people/${p.slug}`)} class="card flex flex-col gap-1 p-3">
 					<span class="font-serif text-base font-bold leading-snug text-ink">{p.name}</span>
+					{#each personAliases(p.slug) as alias (alias.name)}
+						<span lang="ja" class="text-sm text-stone-600">{alias.name} <span class="text-xs text-stone-500">（{m.person_former_surname_activity_name()}）</span></span>
+					{/each}
 					{#if p.nameKana && p.nameKana !== p.name}
 						<span lang="ja" class="text-sm text-stone-500">{p.nameKana}</span>
 					{/if}

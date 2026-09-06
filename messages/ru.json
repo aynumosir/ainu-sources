@@ -226,5 +226,6 @@
 	"footer_part_of": "Часть семейства Aynu.org",
 	"footer_data_credit": "Данные: ainu-dictionaries, ainu-grammar, ainu-corpora.",
 	"region_unassigned": "Без региона",
-	"nav_audit": "Аудит"
+	"nav_audit": "Аудит",
+  "person_former_surname_activity_name": "прежняя фамилия; творческое имя"
 }

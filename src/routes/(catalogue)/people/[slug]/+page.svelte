@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { personAliases } from '$lib/person-aliases';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 	import { page } from '$app/state';
@@ -55,6 +56,9 @@
 
 	<header class="mt-3 border-b border-stone-200 pb-6">
 		<h1 class="font-serif text-3xl font-bold leading-tight text-ink">{person.name}</h1>
+		{#each personAliases(person.slug) as alias (alias.name)}
+			<p lang="ja" class="text-sm text-stone-600">{alias.name} <span class="text-xs text-stone-500">（{m.person_former_surname_activity_name()}）</span></p>
+		{/each}
 		{#if person.nameKana && person.nameKana !== person.name}
 			<p lang="ja" class="mt-1 text-sm text-stone-500">{person.nameKana}</p>
 		{/if}

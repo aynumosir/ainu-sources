@@ -1,3 +1,4 @@
+import { personAliases } from './person-aliases';
 /**
  * SEO helpers — absolute/localized URLs, hreflang alternates, Open Graph locale
  * mapping, safe JSON-LD serialization, and schema.org builders for every entity.
@@ -360,7 +361,7 @@ export function personJsonLd(person: Person, origin: string): Json {
 		'@id': `${url}#person`,
 		url,
 		name: person.name,
-		alternateName: dedupe([person.nameEn, person.nameKana, person.nameAin], person.name),
+		alternateName: dedupe([person.nameEn, person.nameKana, person.nameAin, ...personAliases(person.slug).map(alias => alias.name)], person.name),
 		birthDate: person.birthYear != null ? String(person.birthYear) : undefined,
 		deathDate: person.deathYear != null ? String(person.deathYear) : undefined,
 		description: truncate(person.bio, 300) || undefined,

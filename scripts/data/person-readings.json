@@ -6269,6 +6269,26 @@
   },
   {
     "slugs": [
+      "saikaku-sadayoshi"
+    ],
+    "name": "西鶴 定嘉",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Saikaku Sadayoshi"
+    },
+    "corrected": {
+      "nameKana": "にしつる さだよし",
+      "nameEn": "Nishitsuru Sadayoshi"
+    },
+    "checkedAt": "2026-09-06",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/kyouikushigaku/52/0/52_KJ00005697466/_pdf",
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?domain=ainu&id=5654"
+    ],
+    "note": "人物の経歴を扱う教育史学会論文のふりがなと法政目録が、にしつる さだよしで一致。NDL/CiNiiのさだかとは異なるが、人物に即した論文の明示読みを採用。"
+  },
+  {
+    "slugs": [
       "saito-hiroyuki"
     ],
     "name": "斎藤博之",

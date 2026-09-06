@@ -205,6 +205,8 @@ export function linkTypeFor(host: string): string {
 // Map every observed form → one canonical slug, with a canonical display name,
 // so a person is a single record linking to all their works.
 export const PERSON_ALIASES: Record<string, string> = {
+	'川上容子': 'kawakami-yoko', '豊川容子': 'kawakami-yoko',
+	'菅原勝吉': 'sugawara-katsukichi', '菅原勝良': 'sugawara-katsukichi',
 	Tamura: 'tamura-suzuko', 'Tamura, Suzuko': 'tamura-suzuko', 'Tamura Suzuko': 'tamura-suzuko', 'Suzuko Tamura': 'tamura-suzuko', 田村すゞ子: 'tamura-suzuko', 田村すず子: 'tamura-suzuko', 田村寿々子: 'tamura-suzuko',
 	// née Fukuda — her maiden name appears on early work
 	福田すず子: 'tamura-suzuko', 福田すゞ子: 'tamura-suzuko', 'Fukuda Suzuko': 'tamura-suzuko', 'Suzuko Fukuda': 'tamura-suzuko', 'Fukuda, Suzuko': 'tamura-suzuko',
@@ -246,6 +248,8 @@ export const PERSON_ALIASES: Record<string, string> = {
 	北海道ウタリ協会: 'hokkaido-utari-kyokai'
 };
 export const PERSON_CANON: Record<string, { name: string; nameEn?: string }> = {
+	'kawakami-yoko': { name: '川上 容子', nameEn: 'Kawakami Yōko' },
+	'sugawara-katsukichi': { name: '菅原 勝吉', nameEn: 'Sugawara Katsuyoshi' },
 	'tamura-suzuko': { name: '田村 すゞ子', nameEn: 'Tamura Suzuko' },
 	'nakagawa-hiroshi': { name: '中川 裕', nameEn: 'Nakagawa Hiroshi' },
 	'kayano-shigeru': { name: '萱野 茂', nameEn: 'Kayano Shigeru' },
@@ -293,6 +297,8 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		// researchmap (deceased) — link her Wikidata so life dates fill in. Keyed by
 		// canon slug; all her name variants (incl. birth name 福田すゞ子) alias to it.
 		'tamura-suzuko': { nameEn: 'Tamura Suzuko', wikidata: 'Q11576823' },
+		'kawakami-yoko': { nameEn: 'Kawakami Yōko' },
+		'sugawara-katsukichi': { nameEn: 'Sugawara Katsuyoshi' },
 		吉川佳見: { nameEn: 'Yoshikawa Yoshimi', researchmap: 'y.yoshikawa' },
 		阪口諒: { nameEn: 'Sakaguchi Ryo', researchmap: 'SAKAGUCHI_Ryo' },
 		丹菊逸治: { nameEn: 'Tangiku Itsuji', researchmap: 'tangikuitsuji' },
@@ -339,7 +345,7 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		田村雅史: { nameEn: 'Tamura Masashi' },
 		後藤利雄: { nameEn: 'Gotō Toshio' }, 萩中美枝: { nameEn: 'Haginaka Mie' },
 		留目政治: { nameEn: 'Todome Seiji' }, 其田良雄: { nameEn: 'Sonota Yoshio' },
-		鬼春人: { nameEn: 'Oni Haruto' }, 西鶴定嘉: { nameEn: 'Saikaku Sadayoshi' },
+		鬼春人: { nameEn: 'Oni Haruto' }, 西鶴定嘉: { nameEn: 'Nishitsuru Sadayoshi' },
 		佐々木弘太郎: { nameEn: 'Sasaki Kōtarō' }, 岡田路明: { nameEn: 'Okada Michiaki' },
 		亀丸由紀子: { nameEn: 'Kamemaru Yukiko' }, 橘善光: { nameEn: 'Tachibana Yoshimitsu' },
 		小川正人: { nameEn: 'Ogawa Masato' }, 葛西猛千代: { nameEn: 'Kasai Takechiyo' },

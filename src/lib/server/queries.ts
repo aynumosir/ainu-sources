@@ -1,3 +1,4 @@
+import { personSlugsMatchingAlias } from '$lib/person-aliases';
 import { db } from './db';
 import {
 	sources,
@@ -496,6 +497,7 @@ export async function listPersons(opts: PersonListOptions = {}): Promise<PersonW
 			.replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
 		conds.push(or(
 			like(persons.name, q), like(persons.nameEn, q),
+			inArray(persons.slug, personSlugsMatchingAlias(opts.q)),
 			sql`replace(replace(${persons.nameKana}, ' ', ''), '　', '') like ${`%${kana}%`}`
 		)!);
 	}

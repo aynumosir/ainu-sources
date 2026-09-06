@@ -24,3 +24,22 @@ it('finds verified readings in hiragana or katakana with optional name spacing',
 		expect(await listPersons({ q: 'おがわまさと' })).toEqual([]);
 	} finally { client.close(); }
 });
+
+it('finds a former surname on the active person and respects role filters', async () => {
+	const client = createClient({ url: 'file::memory:' });
+	try {
+		const db = drizzle(client, { schema });
+		state.db = db;
+		await migrate(db, { migrationsFolder: fileURLToPath(new URL('../../../drizzle', import.meta.url)) });
+		await db.insert(schema.persons).values([
+			{ id: 'yoko', slug: 'kawakami-yoko', name: '川上 容子' },
+			{ id: 'former', slug: 'toyokawa-yoko', name: '豊川 容子', status: 'merged', mergedIntoPersonId: 'yoko' }
+		]);
+		await db.insert(schema.sources).values({ id: 'radio', slug: 'radio', title: 'Radio', type: 'other' });
+		await db.insert(schema.sourcePersons).values({ id: 'speaker', sourceId: 'radio', personId: 'yoko', role: 'speaker' });
+		for (const q of ['豊川容子', '豊川 容子', '豊川　容子', '豊川'])
+			expect((await listPersons({ q })).map(p => p.id)).toEqual(['yoko']);
+		expect((await listPersons({ q: '豊川', role: 'speaker' })).map(p => p.id)).toEqual(['yoko']);
+		expect(await listPersons({ q: '豊川', role: 'translator' })).toEqual([]);
+	} finally { client.close(); }
+});

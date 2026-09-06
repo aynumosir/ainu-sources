@@ -227,5 +227,6 @@
 	"footer_part_of": "Aynu.org ファミリーの一部",
 	"footer_data_credit": "データ：ainu-dictionaries / ainu-grammar / ainu-corpora",
 	"region_unassigned": "未分類",
-	"nav_audit": "監査"
+	"nav_audit": "監査",
+  "person_former_surname_activity_name": "旧姓・活動名"
 }
