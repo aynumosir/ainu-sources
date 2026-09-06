@@ -369,7 +369,7 @@ export const PERSON_ENRICH: Record<string, { nameEn?: string; researchmap?: stri
 		片山龍峯: { nameEn: 'Katayama Tatsumine' }, 菅泰雄: { nameEn: 'Suga Yasuo' },
 		井口利夫: { nameEn: 'Iguchi Toshio' }, 安田千夏: { nameEn: 'Yasuda Chika' },
 		松井恒幸: { nameEn: 'Matsui Tsuneyuki' }, 湯淺正: { nameEn: 'Yuasa Tadashi' },
-		礒部精一: { nameEn: 'Isobe Seiichi' }, 金丸継夫: { nameEn: 'Kanemaru Tsuguo' },
+		礒部精一: { nameEn: 'Isobe Seiichi' }, 金丸継夫: { nameEn: 'Kanamaru Tsugio' },
 		上田トシ: { nameEn: 'Ueda Toshi' }, 太田満: { nameEn: 'Ōta Mitsuru' },
 		安岡素子: { nameEn: 'Yasuoka Motoko' }, 木村きみ: { nameEn: 'Kimura Kimi' },
 		瀧口夕美: { nameEn: 'Takiguchi Yūmi' }, 越前谷博: { nameEn: 'Echizenya Hiroshi' },

@@ -8179,5 +8179,45 @@
       "https://ainu-center.hm.pref.hokkaido.lg.jp/kankou/kiyou/pdf/kiyou13-05.pdf"
     ],
     "note": "登録論文「アイヌ語地名キキンをめぐって」の法政標目はみよしいさむ。別著書の法政いさお？は明示的に疑問符付き。北海道博物館目録で論文・巻号・著者の対応も確認。J-GLOBALの医師Miyoshi Isaoは経歴の異なる同姓同名であり根拠から除外。非疑問形の当該論文標目を採用。"
+  },
+  {
+    "slugs": [
+      "koyama-shohei"
+    ],
+    "name": "小山 正平",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Shohei Koyama"
+    },
+    "corrected": {
+      "nameKana": "こやま しょうへい",
+      "nameEn": "Koyama Shōhei"
+    },
+    "sources": [
+      "https://cir.nii.ac.jp/crid/1970586434821290285"
+    ],
+    "checkedAt": "2026-09-06",
+    "note": "登録著書『萬葉集とアイヌ語』に直接結びつくCiNii標目コヤマショウヘイを採用。別著書『地名の発掘』に由来するNDLオヤマは著者同定が未確認であり、当該著書の読みを覆す根拠としない。"
+  },
+  {
+    "slugs": [
+      "kanemaru-tsuguo"
+    ],
+    "name": "金丸 継夫",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Kanemaru Tsuguo"
+    },
+    "corrected": {
+      "nameKana": "かなまる つぎお",
+      "nameEn": "Kanamaru Tsugio"
+    },
+    "sources": [
+      "https://ci.nii.ac.jp/ncid/BB29712296",
+      "https://ci.nii.ac.jp/ncid/BB2971257X",
+      "https://ci.nii.ac.jp/ncid/BB29712398"
+    ],
+    "checkedAt": "2026-09-06",
+    "note": "登録著書を含む自著のCiNii標目は一貫してカナマルツギオ。著書に直接結びつく標目を採用。法政の疑問符付きカネマルツグオや別論文のカナマルツグオより、複数の当該著書に共通する読みを優先。"
   }
 ]
