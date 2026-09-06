@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PersonRoleGuide from '$lib/components/PersonRoleGuide.svelte';
 	import { INSTITUTION_ROLE_LABELS } from '$lib/constants';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
@@ -224,6 +225,7 @@
 					<h2 class="font-sans text-xs font-semibold uppercase tracking-wide text-stone-400">
 						{m.source_people()}
 					</h2>
+					<PersonRoleGuide />
 					<ul class="mt-2 space-y-1">
 						{#each d.persons as p (p.id)}
 							<li>

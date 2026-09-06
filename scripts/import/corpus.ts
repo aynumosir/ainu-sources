@@ -35,6 +35,7 @@
  *       DATABASE_URL=file:/tmp/clone.db bun run import:corpus --dry-run
  */
 import fs from 'node:fs';
+import { corpusContributorRole } from './lib/corpus-roles';
 import path from 'node:path';
 import readline from 'node:readline';
 import {
@@ -289,9 +290,10 @@ export async function run(db: Db, opts: ImporterRunOptions = {}): Promise<Import
 		}
 		// Dialect places (role='dialect').
 		await addPlaces(db, sid, placeDialect, stamp);
-		// Corpus collections are Ainu-language (mostly oral-literature) text sets;
-		// the credited contributors are speakers / narrators (話者).
-		for (const au of authors) await addPersons(db, sid, au, stamp, 'speaker');
+		// Apply reviewed author attributions within the predominantly oral corpus.
+		for (const au of authors) {
+			await addPersons(db, sid, au, stamp, corpusContributorRole(collection, au));
+		}
 		// Topical/genre tags from the collection title (+ English title).
 		await attachTags(db, sid, [a.collection, titleEn], stamp, TAG_DEFS);
 	}

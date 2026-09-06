@@ -435,6 +435,32 @@
       "evidence": "https://cyberleninka.ru/article/n/velikaya-tayna-ispanishady-yazyka-i-stilya",
       "note": "原著者表示・他の著者リンクと一致しないChekunkovaへの誤リンク。",
       "expectedAuthor": "Мирниёзов А. К."
+    },
+    {
+      "id": "5a0cdc53-1f95-4cc1-a436-25798aa817e8",
+      "sourceSlug": "new-express-plus-ainu",
+      "sourceId": "25f1ea2c-d854-48be-9103-eca206821b52",
+      "fromSlug": "nakagawa-hiroshi",
+      "fromPersonId": "21746c06-8845-46b8-8d23-60b85e694b17",
+      "toSlug": "nakagawa-hiroshi",
+      "role": "speaker",
+      "toRole": "author",
+      "evidence": "https://webfrance.hakusuisha.co.jp/posts/9080",
+      "note": "書誌の著者表示を確認。コーパスのauthor欄から話者へ一律変換された関連を著者へ訂正。",
+      "checkedAt": "2026-09-06"
+    },
+    {
+      "id": "94fce119-d57f-405f-aa51-c819e997000d",
+      "sourceSlug": "learning-ainu-through-kamuy-yukar",
+      "sourceId": "71148f0d-012f-409a-94a5-c1bebbf6c1c5",
+      "fromSlug": "nakagawa-hiroshi",
+      "fromPersonId": "21746c06-8845-46b8-8d23-60b85e694b17",
+      "toSlug": "nakagawa-hiroshi",
+      "role": "speaker",
+      "toRole": "author",
+      "evidence": "https://ndlsearch.ndl.go.jp/books/R100000002-I025789172",
+      "note": "書誌の著者表示を確認。コーパスのauthor欄から話者へ一律変換された関連を著者へ訂正。",
+      "checkedAt": "2026-09-06"
     }
   ],
   "additions": [

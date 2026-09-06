@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PersonRoleGuide from '$lib/components/PersonRoleGuide.svelte';
 	import { personAliases, personAliasLang } from '$lib/person-aliases';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
@@ -44,6 +45,7 @@
 <div class="mx-auto max-w-5xl px-4 py-8">
 	<h1 class="font-serif text-3xl font-bold text-ink">{m.people_title()}</h1>
 	<p class="mt-1 text-sm text-stone-500">{m.people_lead()}</p>
+	<PersonRoleGuide open />
 
 	<!-- Filter & sort toolbar -->
 	<form
@@ -62,7 +64,7 @@
 			/>
 		</label>
 		<label class="flex flex-col gap-1">
-			<span class="text-xs font-medium text-stone-500">{m.source_people()}</span>
+			<span class="text-xs font-medium text-stone-500">{m.person_roles_heading()}</span>
 			<select
 				name="role"
 				value={data.filters.role}

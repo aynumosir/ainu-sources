@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PersonRoleGuide from '$lib/components/PersonRoleGuide.svelte';
 	import { personAliases, personAliasLang } from '$lib/person-aliases';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
@@ -113,6 +114,7 @@
 
 	<section class="mt-6">
 		<h2 class="font-serif text-lg font-bold text-ink">{m.person_sources()}</h2>
+		<PersonRoleGuide />
 		{#if sources.length}
 			<ul class="mt-3 divide-y divide-stone-100 rounded-xl border border-stone-200 bg-paper-card">
 				{#each sources as { source, role } (source.id + role)}
