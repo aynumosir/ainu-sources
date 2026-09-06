@@ -10,6 +10,10 @@ import { buildCitation, toReference } from '$lib/server/cite';
 import { getCorpusFetcher, getTextSources } from '$lib/server/corpus';
 
 export const load: PageServerLoad = async ({ params, request, platform }) => {
+	// Corpus text: when the corpus holds this source's sentences, the page
+	// offers the reader with the document and sentence totals. Started first,
+	// since it depends on nothing below and is memoised across requests.
+	const textSources = getTextSources(getCorpusFetcher(platform?.env));
 	const detail = await getSourceDetail(params.slug);
 	if (!detail) {
 		// A merged loser permanently redirects to its (active) winner; a RENAMED
@@ -46,9 +50,7 @@ export const load: PageServerLoad = async ({ params, request, platform }) => {
 		? { pageCount: Number(archiveMeta[0].pageCount), hasText: archiveMeta[0].hasText === 1 }
 		: null;
 
-	// Corpus text: when the corpus holds this source's sentences, the page
-	// offers the reader with the document and sentence totals.
-	const text = (await getTextSources(getCorpusFetcher(platform?.env))).get(detail.source.slug) ?? null;
+	const text = (await textSources).get(detail.source.slug) ?? null;
 
 	return { detail, citation, hasArchiveAccess, archive, text };
 };

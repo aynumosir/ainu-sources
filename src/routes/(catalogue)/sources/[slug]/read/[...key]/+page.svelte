@@ -4,7 +4,7 @@
 	import { m } from '$lib/paraglide/messages.js';
 	import { page } from '$app/state';
 	import Seo from '$lib/components/Seo.svelte';
-	import { breadcrumbJsonLd } from '$lib/seo';
+	import { breadcrumbJsonLd, truncate } from '$lib/seo';
 	import { safeUrl } from '$lib/safe-url';
 	import { documentLabel, documentSection, readerHref } from '$lib/text-reader/keys';
 	import { kanaOf } from '$lib/text-reader/kana';
@@ -17,9 +17,9 @@
 	const title = $derived(documentLabel(doc));
 	const section = $derived(documentSection(doc.key));
 	const sourceUrl = $derived(safeUrl(doc.uri));
-	const speaker = $derived(sentences.find((x) => x.author)?.author ?? null);
-	const dialect = $derived(sentences.find((x) => x.dialect)?.dialect ?? null);
-	const hasSourceSpelling = $derived(sentences.some((x) => x.source_text && x.source_text !== x.text));
+	const speaker = $derived(doc.author);
+	const dialect = $derived(doc.dialect);
+	const hasSourceSpelling = $derived(doc.text_layer != null);
 	const hasTranslation = $derived(doc.translated > 0);
 	const layerNote = $derived(
 		doc.text_layer ? (doc.text_layer_status === 'reviewed' ? m.reader_modern_reviewed() : m.reader_modern_provisional()) : null
@@ -37,7 +37,7 @@
 
 	const partHref = (n: number) => localizeHref(readerHref(s.slug, doc.key, n));
 	const seoTitle = $derived(`${title} · ${s.title} · ${m.site_short()}`);
-	const seoDescription = $derived(sentences.slice(0, 3).map((x) => x.text).join(' '));
+	const seoDescription = $derived(truncate(sentences.slice(0, 3).map((x) => x.text).join(' ')));
 	const jsonLd = $derived(
 		breadcrumbJsonLd(page.url.origin, [
 			{ name: m.site_short(), path: '/' },
@@ -108,7 +108,7 @@
 		{/if}
 	</div>
 
-	<ol class="mt-6 space-y-4">
+	<ol class="mt-6 space-y-4" start={data.text.offset + 1}>
 		{#each sentences as x (x.id)}
 			<li id={`s${x.index + 1}`} class="grid scroll-mt-28 grid-cols-[2.5rem_minmax(0,1fr)] gap-x-3">
 				<a
@@ -117,9 +117,12 @@
 					aria-label={`${x.index + 1}`}>{x.index + 1}</a
 				>
 				<div class="min-w-0">
+					{#if !speaker && x.author}
+						<p class="text-xs text-stone-500">{x.author}</p>
+					{/if}
 					<p lang="ain-Latn" class="font-serif text-lg leading-relaxed text-ink">{x.text}</p>
 					{#if showSource && x.source_text && x.source_text !== x.text}
-						<p lang="ain" class="mt-0.5 text-sm leading-relaxed text-stone-500">{x.source_text}</p>
+						<p lang="ain-Latn" class="mt-0.5 text-sm leading-relaxed text-stone-500">{x.source_text}</p>
 					{/if}
 					{#if showKana}
 						<p lang="ain-Kana" class="mt-0.5 text-base leading-relaxed text-stone-600">{kanaOf(x.text)}</p>

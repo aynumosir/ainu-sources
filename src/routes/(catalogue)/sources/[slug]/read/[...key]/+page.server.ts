@@ -8,6 +8,8 @@ import { READER_PAGE_SIZE, keySegments, pageCountOf, readerHref } from '$lib/tex
 
 export const load: PageServerLoad = async ({ params, url, platform }) => {
 	const key = keySegments(params.key).join('/');
+	// One address per document: doubled or trailing slashes go to the plain key.
+	if (key !== params.key) redirect(301, `${readerHref(params.slug, key)}${url.search}`);
 	const source = await getSourceBySlug(params.slug);
 	if (!source) {
 		const target = await getMergeRedirectTarget(params.slug);
@@ -17,16 +19,24 @@ export const load: PageServerLoad = async ({ params, url, platform }) => {
 		error(404, 'Source not found');
 	}
 
-	const requested = Math.trunc(Number(url.searchParams.get('page') ?? '1'));
-	const pageNo = Number.isFinite(requested) && requested > 1 ? requested : 1;
+	// One address per part: the first part has no query, and a page value that
+	// is not a whole number above one goes back to it.
+	const pageParam = url.searchParams.get('page');
+	const requested = pageParam == null ? 1 : Number(pageParam);
+	const pageNo = Number.isInteger(requested) && requested > 1 ? requested : 1;
+	if (pageParam != null && (pageNo === 1 || String(pageNo) !== pageParam)) redirect(301, readerHref(params.slug, key, pageNo));
 
-	const text = await getTextDocument(getCorpusFetcher(platform?.env), source.slug, key, {
+	const r = await getTextDocument(getCorpusFetcher(platform?.env), source.slug, key, {
 		offset: (pageNo - 1) * READER_PAGE_SIZE,
 		limit: READER_PAGE_SIZE
 	});
-	if (!text) error(404, 'Text not found');
+	if (!r.ok) {
+		if (r.reason === 'unreachable') error(503, 'The corpus is not reachable right now');
+		error(404, 'Text not found');
+	}
+	const text = r.data;
 
-	const pageCount = pageCountOf(text.total, READER_PAGE_SIZE);
+	const pageCount = pageCountOf(text.total, text.limit);
 	if (pageNo > pageCount) redirect(302, readerHref(source.slug, key, pageCount));
 
 	return {

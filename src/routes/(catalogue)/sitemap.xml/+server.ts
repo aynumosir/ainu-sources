@@ -1,6 +1,7 @@
 import type { RequestHandler } from './$types';
 import { getSitemapEntries } from '$lib/server/queries';
 import { hreflangAlternates } from '$lib/seo';
+import { getCorpusFetcher, getTextSources } from '$lib/server/corpus';
 
 const xml = (s: string) =>
 	s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
@@ -25,9 +26,13 @@ function urlNode(origin: string, e: Entry): string {
 	return `\t<url>\n\t\t<loc>${xml(loc)}</loc>${links}${lastmod}${changefreq}${priority}\n\t</url>`;
 }
 
-export const GET: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async ({ url, platform }) => {
 	const origin = url.origin;
-	const { sources, persons, places, institutions } = await getSitemapEntries();
+	const [{ sources, persons, places, institutions }, textSources] = await Promise.all([
+		getSitemapEntries(),
+		getTextSources(getCorpusFetcher(platform?.env))
+	]);
+	const readable = sources.filter((s) => textSources.has(s.slug));
 
 	const staticPages: Entry[] = [
 		{ path: '/', changefreq: 'daily', priority: 1.0 },
@@ -43,6 +48,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	const entries: Entry[] = [
 		...staticPages,
 		...sources.map((s) => ({ path: `/sources/${s.slug}`, lastmod: s.updatedAt, changefreq: 'monthly', priority: 0.8 })),
+		...readable.map((s) => ({ path: `/sources/${s.slug}/read`, changefreq: 'monthly', priority: 0.7 })),
 		...persons.map((p) => ({ path: `/people/${p.slug}`, lastmod: p.updatedAt, changefreq: 'monthly', priority: 0.5 })),
 		...places.map((p) => ({ path: `/places/${p.slug}`, changefreq: 'monthly', priority: 0.5 })),
 		...institutions.map((i) => ({ path: `/institutions/${i.slug}`, changefreq: 'monthly', priority: 0.5 }))

@@ -13,6 +13,7 @@ export type CorpusFetcher = { fetch(input: RequestInfo | URL, init?: RequestInit
 
 export const CORPUS_PUBLIC_ORIGIN = 'https://corpus.aynu.org';
 const REQUEST_TIMEOUT_MS = 8000;
+const SOURCES_TIMEOUT_MS = 3000;
 
 export interface TextSourceSummary {
 	source_slug: string;
@@ -31,6 +32,10 @@ export interface TextDocument {
 	translated: number;
 	text_layer: string | null;
 	text_layer_status: string | null;
+	/** Speaker or author when every sentence of the document agrees. */
+	author: string | null;
+	/** Dialect when every sentence of the document agrees. */
+	dialect: string | null;
 	uri: string | null;
 }
 
@@ -59,6 +64,13 @@ export interface TextDocumentPage {
 
 type Envelope<T> = { api_version: string; data: T } | { api_version: string; error: { code: string; message: string } };
 
+/**
+ * What a corpus call came back with. `absent` is the corpus saying the thing
+ * does not exist; `unreachable` is a failure to get an answer at all, which a
+ * page must not present as "not found".
+ */
+export type CorpusResult<T> = { ok: true; data: T } | { ok: false; reason: 'absent' | 'unreachable' };
+
 /** The corpus origin for public fetches: CORPUS_ORIGIN when set, else corpus.aynu.org. */
 export function corpusOrigin(): string {
 	return (env.CORPUS_ORIGIN || CORPUS_PUBLIC_ORIGIN).replace(/\/+$/u, '');
@@ -76,28 +88,47 @@ export function getCorpusFetcher(platformEnv: { CORPUS?: CorpusFetcher } | undef
 	return platformEnv?.CORPUS ?? direct;
 }
 
-async function callCorpus<T>(fetcher: CorpusFetcher, path: string, query: Record<string, string | number>): Promise<T | null> {
+const isArray = (v: unknown): boolean => Array.isArray(v);
+const isPage = (v: unknown): boolean =>
+	!!v && typeof v === 'object' && Array.isArray((v as { sentences?: unknown }).sentences) && typeof (v as { document?: unknown }).document === 'object';
+
+/** `accept` says whether a 200 payload has the shape the caller will read. */
+async function callCorpus<T>(
+	fetcher: CorpusFetcher,
+	path: string,
+	query: Record<string, string | number>,
+	accept: (data: unknown) => boolean,
+	timeoutMs = REQUEST_TIMEOUT_MS
+): Promise<CorpusResult<T>> {
 	const url = new URL(path, corpusOrigin());
 	for (const [k, v] of Object.entries(query)) url.searchParams.set(k, String(v));
 	try {
 		const res = await fetcher.fetch(url.toString(), {
 			headers: { accept: 'application/json' },
-			signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS)
+			signal: AbortSignal.timeout(timeoutMs)
 		});
-		if (res.status === 404) return null;
+		if (res.status === 404) return { ok: false, reason: 'absent' };
 		if (!res.ok) {
 			console.warn(`[corpus] ${path} answered ${res.status}`);
-			return null;
+			return { ok: false, reason: 'unreachable' };
 		}
-		const body = (await res.json()) as Envelope<T>;
+		const body = (await res.json()) as Envelope<T> | null;
+		if (!body || typeof body !== 'object') {
+			console.warn(`[corpus] ${path}: not an envelope`);
+			return { ok: false, reason: 'unreachable' };
+		}
 		if ('error' in body) {
-			console.warn(`[corpus] ${path}: ${body.error.code} ${body.error.message}`);
-			return null;
+			console.warn(`[corpus] ${path}: ${body.error?.code} ${body.error?.message}`);
+			return { ok: false, reason: 'unreachable' };
 		}
-		return body.data;
+		if (!('data' in body) || !accept(body.data)) {
+			console.warn(`[corpus] ${path}: unexpected payload shape`);
+			return { ok: false, reason: 'unreachable' };
+		}
+		return { ok: true, data: body.data };
 	} catch (e) {
 		console.warn(`[corpus] ${path} failed:`, e instanceof Error ? e.message : e);
-		return null;
+		return { ok: false, reason: 'unreachable' };
 	}
 }
 
@@ -116,17 +147,26 @@ function normalizeSentence(s: TextSentence): TextSentence {
 }
 
 const SOURCES_TTL_MS = 10 * 60 * 1000;
+const SOURCES_RETRY_MS = 30 * 1000;
 let sourcesMemo: { at: number; value: Map<string, TextSourceSummary> } | null = null;
+let sourcesFailedAt: number | null = null;
 
 /**
  * Which sources have readable text, keyed by catalogue slug. One small list
- * for the whole corpus, so it is memoised per isolate for ten minutes.
+ * for the whole corpus, so it is memoised per isolate for ten minutes; a
+ * failed fetch is not retried for thirty seconds, and the last good list
+ * stands in meanwhile.
  */
 export async function getTextSources(fetcher: CorpusFetcher, now = Date.now()): Promise<Map<string, TextSourceSummary>> {
 	if (sourcesMemo && now - sourcesMemo.at < SOURCES_TTL_MS) return sourcesMemo.value;
-	const list = await callCorpus<TextSourceSummary[]>(fetcher, '/v1/text/sources', {});
-	if (!list) return sourcesMemo?.value ?? new Map();
-	const value = new Map(list.map((s) => [s.source_slug, s]));
+	if (sourcesFailedAt != null && now - sourcesFailedAt < SOURCES_RETRY_MS) return sourcesMemo?.value ?? new Map();
+	const r = await callCorpus<TextSourceSummary[]>(fetcher, '/v1/text/sources', {}, isArray, SOURCES_TIMEOUT_MS);
+	if (!r.ok) {
+		sourcesFailedAt = now;
+		return sourcesMemo?.value ?? new Map();
+	}
+	sourcesFailedAt = null;
+	const value = new Map(r.data.map((s) => [s.source_slug, s]));
 	sourcesMemo = { at: now, value };
 	return value;
 }
@@ -134,26 +174,25 @@ export async function getTextSources(fetcher: CorpusFetcher, now = Date.now()): 
 /** Test seam: forget the memoised source list. */
 export function resetTextSourcesMemo(): void {
 	sourcesMemo = null;
+	sourcesFailedAt = null;
 }
 
-/** The documents of one source in reading order. Empty when it has no text. */
-export async function getTextDocuments(fetcher: CorpusFetcher, slug: string): Promise<TextDocument[]> {
-	return (await callCorpus<TextDocument[]>(fetcher, '/v1/text/documents', { source: slug })) ?? [];
+/** The documents of one source in reading order; an empty list when it has no text. */
+export async function getTextDocuments(fetcher: CorpusFetcher, slug: string): Promise<CorpusResult<TextDocument[]>> {
+	return callCorpus<TextDocument[]>(fetcher, '/v1/text/documents', { source: slug }, isArray);
 }
 
-/** One page of a document's sentences, or null when the document does not exist. */
+/** One page of a document's sentences; `absent` when the document does not exist. */
 export async function getTextDocument(
 	fetcher: CorpusFetcher,
 	slug: string,
 	key: string,
 	opts: { offset?: number; limit?: number } = {}
-): Promise<TextDocumentPage | null> {
-	const page = await callCorpus<TextDocumentPage>(fetcher, '/v1/text/document', {
-		source: slug,
-		key,
-		...(opts.offset ? { offset: opts.offset } : {}),
-		...(opts.limit ? { limit: opts.limit } : {})
-	});
-	if (!page) return null;
-	return { ...page, sentences: page.sentences.map(normalizeSentence) };
+): Promise<CorpusResult<TextDocumentPage>> {
+	const query: Record<string, string | number> = { source: slug, key };
+	if (opts.offset != null && opts.offset > 0) query.offset = opts.offset;
+	if (opts.limit != null && opts.limit > 0) query.limit = opts.limit;
+	const r = await callCorpus<TextDocumentPage>(fetcher, '/v1/text/document', query, isPage);
+	if (!r.ok) return r;
+	return { ok: true, data: { ...r.data, sentences: r.data.sentences.map(normalizeSentence) } };
 }

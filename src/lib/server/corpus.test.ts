@@ -74,7 +74,7 @@ describe('getTextSources', () => {
 		expect(fetcher.calls).toHaveLength(2);
 	});
 
-	it('keeps the last good list when the corpus is unreachable', async () => {
+	it('keeps the last good list when the corpus is unreachable and waits before retrying', async () => {
 		vi.spyOn(console, 'warn').mockImplementation(() => {});
 		let fail = false;
 		const fetcher = fetcherOf(() => {
@@ -83,8 +83,23 @@ describe('getTextSources', () => {
 		});
 		await getTextSources(fetcher, 0);
 		fail = true;
-		const again = await getTextSources(fetcher, 20 * 60 * 1000);
-		expect(again.has('x')).toBe(true);
+		const t = 20 * 60 * 1000;
+		expect((await getTextSources(fetcher, t)).has('x')).toBe(true);
+		expect(fetcher.calls).toHaveLength(2);
+		await getTextSources(fetcher, t + 10_000);
+		expect(fetcher.calls).toHaveLength(2);
+		await getTextSources(fetcher, t + 40_000);
+		expect(fetcher.calls).toHaveLength(3);
+	});
+
+	it('treats a malformed 200 as unreachable', async () => {
+		vi.spyOn(console, 'warn').mockImplementation(() => {});
+		const junk = fetcherOf(() => new Response(JSON.stringify({ api_version: '1', data: { nope: true } })));
+		expect((await getTextSources(junk)).size).toBe(0);
+		expect(await getTextDocuments(junk, 'x')).toEqual({ ok: false, reason: 'unreachable' });
+		expect(await getTextDocument(junk, 'x', 'y')).toEqual({ ok: false, reason: 'unreachable' });
+		const notJson = fetcherOf(() => new Response('<html>', { status: 200 }));
+		expect(await getTextDocuments(notJson, 'x')).toEqual({ ok: false, reason: 'unreachable' });
 	});
 
 	it('is empty when the API answers with an error envelope', async () => {
@@ -96,15 +111,17 @@ describe('getTextSources', () => {
 
 describe('getTextDocuments', () => {
 	it('passes the slug and returns the list', async () => {
-		const fetcher = fetcherOf(() => envelope([{ key: 'aa-asai/001', ord: 0, title: 'さらわれた娘', sentences: 19, translated: 19, text_layer: null, text_layer_status: null, uri: null }]));
+		const fetcher = fetcherOf(() => envelope([{ key: 'aa-asai/001', ord: 0, title: 'さらわれた娘', sentences: 19, translated: 19, text_layer: null, text_layer_status: null, author: null, dialect: null, uri: null }]));
 		const docs = await getTextDocuments(fetcher, 'asai-take-folktales');
-		expect(docs[0].key).toBe('aa-asai/001');
+		expect(docs.ok && docs.data[0].key).toBe('aa-asai/001');
 		expect(fetcher.calls[0].searchParams.get('source')).toBe('asai-take-folktales');
 	});
-	it('is empty on a network failure', async () => {
+	it('reports a network failure as unreachable, and a 5xx too', async () => {
 		vi.spyOn(console, 'warn').mockImplementation(() => {});
-		const fetcher = fetcherOf(() => { throw new Error('offline'); });
-		expect(await getTextDocuments(fetcher, 'x')).toEqual([]);
+		const offline = fetcherOf(() => { throw new Error('offline'); });
+		expect(await getTextDocuments(offline, 'x')).toEqual({ ok: false, reason: 'unreachable' });
+		const broken = fetcherOf(() => new Response('', { status: 502 }));
+		expect(await getTextDocuments(broken, 'x')).toEqual({ ok: false, reason: 'unreachable' });
 	});
 });
 
@@ -112,7 +129,7 @@ describe('getTextDocument', () => {
 	it('normalises sentence text and forwards paging', async () => {
 		const fetcher = fetcherOf(() =>
 			envelope({
-				document: { key: 'aa-asai/001', ord: 0, title: 't', sentences: 2, translated: 2, text_layer: 'modern-orthography-latn@1', text_layer_status: 'provisional', uri: null },
+				document: { key: 'aa-asai/001', ord: 0, title: 't', sentences: 2, translated: 2, text_layer: 'modern-orthography-latn@1', text_layer_status: 'provisional', author: null, dialect: null, uri: null },
 				prev: null,
 				next: null,
 				total: 2,
@@ -121,15 +138,16 @@ describe('getTextDocument', () => {
 				sentences: [{ id: 'aa-asai/001#1', index: 1, text: 'maas  pontara', source_text: 'maas　pontara', text_layer: null, text_layer_status: null, translation: null, dialect: null, author: null, uri: null }]
 			})
 		);
-		const page = await getTextDocument(fetcher, 'asai-take-folktales', 'aa-asai/001', { offset: 1, limit: 1 });
+		const r = await getTextDocument(fetcher, 'asai-take-folktales', 'aa-asai/001', { offset: 1, limit: 1 });
+		const page = r.ok ? r.data : null;
 		expect(page?.sentences[0].text).toBe('maas pontara');
 		expect(page?.sentences[0].source_text).toBe('maas pontara');
 		expect(fetcher.calls[0].searchParams.get('key')).toBe('aa-asai/001');
 		expect(fetcher.calls[0].searchParams.get('offset')).toBe('1');
 		expect(fetcher.calls[0].searchParams.get('limit')).toBe('1');
 	});
-	it('is null for a 404', async () => {
+	it('is absent for a 404', async () => {
 		const fetcher = fetcherOf(() => new Response('', { status: 404 }));
-		expect(await getTextDocument(fetcher, 'x', 'y')).toBeNull();
+		expect(await getTextDocument(fetcher, 'x', 'y')).toEqual({ ok: false, reason: 'absent' });
 	});
 });

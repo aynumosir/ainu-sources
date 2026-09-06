@@ -10,9 +10,11 @@
 	const s = $derived(data.source);
 	const groups = $derived(groupBySection(data.documents));
 	const totalSentences = $derived(data.documents.reduce((sum, d) => sum + d.sentences, 0));
-	const layerStatus = $derived(
-		data.documents.every((d) => d.text_layer) ? (data.documents[0]?.text_layer_status ?? 'provisional') : null
-	);
+	const layerStatus = $derived.by(() => {
+		const statuses = new Set(data.documents.map((d) => (d.text_layer ? d.text_layer_status : null)));
+		return statuses.size === 1 ? [...statuses][0] : null;
+	});
+	const sections = $derived(groups.map((g) => g.section).filter((x) => x));
 	const summary = $derived(
 		m.reader_summary({
 			documents: data.documents.length.toLocaleString('en-US'),
@@ -51,9 +53,17 @@
 		</p>
 	</header>
 
+	{#if sections.length > 1}
+		<nav class="mt-5 flex flex-wrap gap-x-3 gap-y-1 text-sm" aria-label={m.reader_contents()}>
+			{#each sections as section (section)}
+				<a href={`#section-${section}`} class="link">{section}</a>
+			{/each}
+		</nav>
+	{/if}
+
 	{#each groups as group (group.section + group.docs[0].key)}
 		{#if group.section}
-			<h2 class="eyebrow mt-8">{group.section}</h2>
+			<h2 class="eyebrow mt-8 scroll-mt-20" id={`section-${group.section}`}>{group.section}</h2>
 		{/if}
 		<ol class="mt-3 divide-y divide-stone-200 border-b border-stone-200">
 			{#each group.docs as doc (doc.key)}

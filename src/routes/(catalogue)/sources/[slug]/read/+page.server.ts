@@ -15,7 +15,12 @@ export const load: PageServerLoad = async ({ params, platform }) => {
 		error(404, 'Source not found');
 	}
 
-	const documents = await getTextDocuments(getCorpusFetcher(platform?.env), source.slug);
+	const r = await getTextDocuments(getCorpusFetcher(platform?.env), source.slug);
+	if (!r.ok) {
+		if (r.reason === 'unreachable') error(503, 'The corpus is not reachable right now');
+		error(404, 'This source has no readable text');
+	}
+	const documents = r.data;
 	if (documents.length === 0) error(404, 'This source has no readable text');
 
 	return {
