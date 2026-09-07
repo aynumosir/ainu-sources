@@ -2,16 +2,14 @@
 	import { recordsForCatalogue, recordsHref } from '$lib/records';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
-	let { catalogue, compact = false }: { catalogue: string; compact?: boolean } = $props();
+	let { catalogue }: { catalogue: string } = $props();
 	const records = $derived(recordsForCatalogue(catalogue));
 </script>
 
 {#if records.length}
 	<section class="mt-6 rounded-xl border border-brand-200 bg-paper-card p-5" aria-label={m.records_title()}>
-		{#if !compact}
 		<h2 class="font-serif text-xl font-bold text-ink">{m.records_title()}</h2>
 		<p class="mt-2 text-sm text-stone-600">{m.records_intro()}</p>
-		{/if}
 		{#each records as record (record.slug)}
 			{#if record.kind === 'wordlist' && record.catalogue === catalogue}
 				<a class="mt-3 inline-block font-medium text-brand-700 underline" href={recordsHref(`/sources/${record.slug}/entries`, getLocale())}>{m.records_entries()} ↗</a>
@@ -34,8 +32,6 @@
 				{/each}
 			</ul>
 		{/each}
-		{#if !compact}
 		<p class="mt-4 text-xs text-stone-500">{m.records_credit()} <a class="underline" href={recordsHref('/about', getLocale())}>ERDAL ↗</a></p>
-		{/if}
 	</section>
 {/if}

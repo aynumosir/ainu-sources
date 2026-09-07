@@ -14,7 +14,6 @@
 
 	const nav = [
 		{ href: '/sources', label: () => m.nav_sources() },
-		{ href: '/records', label: () => m.records_nav() },
 		{ href: '/timeline', label: () => m.nav_timeline() },
 		{ href: '/map', label: () => m.nav_map() },
 		{ href: '/network', label: () => m.nav_network() },
