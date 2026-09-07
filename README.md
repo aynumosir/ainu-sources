@@ -133,3 +133,24 @@ src/
 scripts/import-all.ts   idempotent merge-engine seed (`bun run seed`; ETL from the data repos)
 messages/{en,ja,ru}.json
 ```
+
+## Early records integration
+
+`/records` connects the catalogue to [ERDAL](https://rec.aynu.org). Matching source
+pages offer manuscript readers, vocabulary tables for wordlists, and per-volume
+TEI downloads. Catalogue cards mark transcription availability. A work includes
+all its witnesses; a separately catalogued copy includes only its own volumes.
+The public source-detail API and bulk export include an additive `records` array
+with reader, vocabulary, and TEI URLs (`[]` when no match is known).
+
+Run `bun run records:sync` to refresh `src/lib/records-index.json` from ERDAL's
+published `/x/index.json`. The command validates catalogue identities against the
+public catalogue export, resolves retired slugs, and rejects missing identities
+or malformed data before replacing the snapshot. Redirects and duplicate catalogue
+identities are rejected. The validated snapshot is written to a temporary sibling
+file and atomically renamed, preserving the existing file if writing fails.
+Commit the refreshed metadata
+with the site change. Page rendering uses this snapshot without remote requests;
+counts reflect the last refresh. No transcription content is copied. ERDAL
+credits the contributors and documents the transcription and image terms.
+Japanese visitors follow Japanese reader URLs; other locales use English.

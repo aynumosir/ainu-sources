@@ -5,6 +5,7 @@ import { urlsetXml, xmlResponse, type SitemapEntry } from '$lib/server/sitemap';
  *  sources / entities children. */
 const staticPages: SitemapEntry[] = [
 	{ path: '/', changefreq: 'daily', priority: 1.0 },
+	{ path: '/records', changefreq: 'weekly', priority: 0.7 },
 	{ path: '/sources', changefreq: 'daily', priority: 0.9 },
 	{ path: '/people', changefreq: 'weekly', priority: 0.7 },
 	{ path: '/places', changefreq: 'weekly', priority: 0.7 },

@@ -3,6 +3,7 @@
  * its linked persons, places, institutions, digital links, relations and tags.
  * Reuses `getSourceDetail()` — the same loader the /sources/[slug] page uses.
  */
+import { recordsLinks } from '$lib/records';
 import { json, error, redirect } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { db } from '$lib/server/db';
@@ -27,7 +28,7 @@ export const GET: RequestHandler = async ({ params }) => {
 		if (renamed) redirect(301, `/api/sources/${renamed}`);
 		throw error(404, `no source with slug ${params.slug}`);
 	}
-	return json(detail, { headers: CORS });
+	return json({ ...detail, records: recordsLinks(detail.source.slug) }, { headers: CORS });
 };
 
 /**

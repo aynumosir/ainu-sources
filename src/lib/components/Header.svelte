@@ -14,6 +14,7 @@
 
 	const nav = [
 		{ href: '/sources', label: () => m.nav_sources() },
+		{ href: '/records', label: () => m.records_nav() },
 		{ href: '/timeline', label: () => m.nav_timeline() },
 		{ href: '/map', label: () => m.nav_map() },
 		{ href: '/network', label: () => m.nav_network() },
@@ -39,24 +40,7 @@
 			>
 		</a>
 
-		<nav class="ml-2 hidden items-center gap-1 md:flex" aria-label="Primary">
-			{#each nav as item (item.href)}
-				<a
-					href={localizeHref(item.href)}
-					aria-current={isActive(item.href) ? 'page' : undefined}
-					class="rounded-md px-2.5 py-1.5 text-sm font-medium text-stone-600 transition hover:bg-stone-100 hover:text-ink aria-[current=page]:bg-stone-100 aria-[current=page]:text-ink"
-					>{item.label()}</a
-				>
-			{/each}
-			{#if hasArchiveAccess}
-				<a
-					href="/archive"
-					aria-current={isActive('/archive') ? 'page' : undefined}
-					class="rounded-md px-2.5 py-1.5 text-sm font-medium text-stone-600 transition hover:bg-stone-100 hover:text-ink aria-[current=page]:bg-stone-100 aria-[current=page]:text-ink"
-					>{m.nav_archive()}</a
-				>
-			{/if}
-		</nav>
+
 
 		<div class="ml-auto hidden min-w-0 flex-1 justify-end lg:flex">
 			<div class="w-56"><SearchBox compact /></div>
@@ -94,6 +78,25 @@
 			</button>
 		</div>
 	</div>
+
+		<nav class="mx-auto hidden max-w-6xl flex-wrap items-center gap-1 px-4 pb-2 md:flex" aria-label="Primary">
+			{#each nav as item (item.href)}
+				<a
+					href={localizeHref(item.href)}
+					aria-current={isActive(item.href) ? 'page' : undefined}
+					class="rounded-md px-2.5 py-1.5 text-sm font-medium text-stone-600 transition hover:bg-stone-100 hover:text-ink aria-[current=page]:bg-stone-100 aria-[current=page]:text-ink"
+					>{item.label()}</a
+				>
+			{/each}
+			{#if hasArchiveAccess}
+				<a
+					href="/archive"
+					aria-current={isActive('/archive') ? 'page' : undefined}
+					class="rounded-md px-2.5 py-1.5 text-sm font-medium text-stone-600 transition hover:bg-stone-100 hover:text-ink aria-[current=page]:bg-stone-100 aria-[current=page]:text-ink"
+					>{m.nav_archive()}</a
+				>
+			{/if}
+		</nav>
 
 	{#if open}
 		<div class="border-t border-stone-200 px-4 py-3 md:hidden">
