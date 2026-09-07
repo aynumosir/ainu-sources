@@ -252,8 +252,8 @@ describe('status-aware reads — only active sources / accepted relations leak t
 		expect(net.stats.edges).toBe(1); // only w→a2; w→h (hidden), w→c (candidate), l→a2 (merged) dropped
 	});
 
-	it('getSitemapEntries lists only active source slugs', async () => {
-		const { sources } = await queries.getSitemapEntries();
+	it('getSitemapSources lists only active source slugs', async () => {
+		const sources = await queries.getSitemapSources();
 		expect(sources.map((s) => s.slug)).toEqual(['active-two', 'winner']);
 	});
 
@@ -315,7 +315,7 @@ describe('no-op on all-active data — the predicate filters by status and nothi
 	it('listSources / getStats / sitemap now include all six sources', async () => {
 		expect((await queries.listSources({})).total).toBe(6);
 		expect((await queries.getStats()).total).toBe(6);
-		expect((await queries.getSitemapEntries()).sources.length).toBe(6);
+		expect((await queries.getSitemapSources()).length).toBe(6);
 	});
 
 	it('withDigital now counts all three linked sources', async () => {

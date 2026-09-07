@@ -751,17 +751,23 @@ export async function listTags(): Promise<TagWithCount[]> {
 // Sitemap
 // ---------------------------------------------------------------------------
 
-export interface SitemapEntries {
-	sources: { slug: string; updatedAt: Date }[];
+/** Slugs + lastmod for every public source detail page (sitemap-sources.xml). */
+export async function getSitemapSources(): Promise<{ slug: string; updatedAt: Date }[]> {
+	return db
+		.select({ slug: sources.slug, updatedAt: sources.updatedAt })
+		.from(sources)
+		.where(activeSourcesOnly())
+		.orderBy(asc(sources.slug));
+}
+
+/** Slugs (+ lastmod where the table tracks one) for the entity directories
+ *  behind sitemap-entities.xml. */
+export async function getSitemapEntities(): Promise<{
 	persons: { slug: string; updatedAt: Date }[];
 	places: { slug: string }[];
 	institutions: { slug: string }[];
-}
-
-/** Slugs (+ lastmod where available) for every public, indexable detail page. */
-export async function getSitemapEntries(): Promise<SitemapEntries> {
-	const [s, pe, pl, inst] = await Promise.all([
-		db.select({ slug: sources.slug, updatedAt: sources.updatedAt }).from(sources).where(activeSourcesOnly()).orderBy(asc(sources.slug)),
+}> {
+	const [pe, pl, inst] = await Promise.all([
 		db
 			.select({ slug: persons.slug, updatedAt: persons.updatedAt })
 			.from(persons)
@@ -770,7 +776,7 @@ export async function getSitemapEntries(): Promise<SitemapEntries> {
 		db.select({ slug: places.slug }).from(places).orderBy(asc(places.slug)),
 		db.select({ slug: institutions.slug }).from(institutions).orderBy(asc(institutions.slug))
 	]);
-	return { sources: s, persons: pe, places: pl, institutions: inst };
+	return { persons: pe, places: pl, institutions: inst };
 }
 
 // ---------------------------------------------------------------------------
