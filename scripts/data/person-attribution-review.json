@@ -672,6 +672,34 @@
       "note": "統合済み資料に残っていた著者関連。統合先の2000-komatsu-samani-ainu-vocabularyへ同じ関連を追加して削除。",
       "expectedAuthor": "Komatsu, Kazuhiro",
       "checkedAt": "2026-09-07"
+    },
+    {
+      "id": "20518714-8896-4228-95ac-492f19f9f03e",
+      "sourceSlug": "prague-manifesto-ainu-translation",
+      "sourceId": "22ef95c2-c6e5-487c-bc5d-0a1642fc50e4",
+      "fromSlug": "yokoyama-hiroyuki",
+      "fromPersonId": "37759b5e-0d8d-4fef-b6cb-8bc496b49045",
+      "toSlug": "yokoyama-hiroyuki",
+      "role": "author",
+      "toRole": "translator",
+      "evidence": "http://www.hokkajda-esp-ligo.jp/jp/AinaManifestoDePrago.htm",
+      "note": "資料はプラハ宣言のアイヌ語訳。横山裕之の役割は翻訳者。",
+      "expectedAuthor": "横山 裕之",
+      "checkedAt": "2026-09-07"
+    },
+    {
+      "id": "231cd8d6-ac68-419e-82ac-afeada111c9a",
+      "sourceSlug": "kayano-shigerus-ainu-language-diet-speech",
+      "sourceId": "94137f13-130f-4ca0-aa06-ab579d153b5f",
+      "fromSlug": "kayano-shigeru",
+      "fromPersonId": "c4b55d50-d136-4087-ba76-18e37ccb18a6",
+      "toSlug": "kayano-shigeru",
+      "role": "author",
+      "toRole": "speaker",
+      "evidence": "https://ja.wikisource.org/wiki/%E8%90%B1%E9%87%8E%E8%8C%82%E3%81%AE%E3%82%A2%E3%82%A4%E3%83%8C%E8%AA%9E%E3%81%AB%E3%82%88%E3%82%8B%E6%BC%94%E8%AA%AC",
+      "note": "1994年11月24日の国会でのアイヌ語演説。資料の本体は萱野茂の発話。",
+      "expectedAuthor": "萱野 茂",
+      "checkedAt": "2026-09-07"
     }
   ],
   "additions": [
