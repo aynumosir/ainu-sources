@@ -136,7 +136,8 @@ messages/{en,ja,ru}.json
 
 ## Early records integration
 
-The footer and About page link directly to [ERDAL](https://rec.aynu.org).
+The footer groups [Early Records](https://rec.aynu.org) and the
+[Morpheme Database](https://mdb.aynu.org) under Related projects.
 Matching source pages offer manuscript readers, vocabulary tables for wordlists,
 and per-volume TEI downloads. Catalogue cards mark transcription availability. A work includes
 all its witnesses; a separately catalogued copy includes only its own volumes.

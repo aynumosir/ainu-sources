@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages.js';
-	import { recordsHref } from '$lib/records';
-	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+	import { localizeHref } from '$lib/paraglide/runtime';
 	import { page } from '$app/state';
 	import Seo from '$lib/components/Seo.svelte';
 	import { breadcrumbJsonLd, truncate, localizedAbs } from '$lib/seo';
@@ -37,10 +36,6 @@
 	</header>
 
 	<div class="mt-10 space-y-10">
-		<section class="space-y-3">
-			<h2 class="font-serif text-2xl font-bold text-ink"><a href={recordsHref('', getLocale())}>ERDAL ↗</a></h2>
-			<p class="leading-relaxed text-stone-700">{m.records_intro()}</p>
-		</section>
 		<section class="space-y-3">
 			<h2 class="font-serif text-2xl font-bold text-ink">{m.about_purpose_h()}</h2>
 			<p class="leading-relaxed text-stone-700">{m.about_purpose_p()}</p>

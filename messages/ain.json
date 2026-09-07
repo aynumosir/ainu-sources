@@ -246,12 +246,20 @@
 	"error_generic_body": "The page failed to load. Please try again.",
 	"error_back_home": "Back to the home page",
 	"records_title": "Read early records",
-	"records_intro": "Facsimiles and transcriptions from the Early Records Database of the Ainu Language (ERDAL), with vocabulary readings and TEI downloads.",
+	"records_intro": "Facsimiles and transcriptions from the Early Records Database of the Ainu Language, with vocabulary readings and TEI downloads.",
 	"records_read": "Read manuscript",
 	"records_entries": "Browse vocabulary",
 	"records_catalogue": "Catalogue record",
 	"records_pages": "{count} pages",
 	"records_items": "{count} vocabulary items",
 	"records_available": "Transcription available",
-	"records_credit": "Transcriptions: contributors to the Ainu project on みんなで翻刻, CC BY-SA 4.0. Images are provided under each holding institution’s terms."
+	"records_credit": "Transcriptions: contributors to the Ainu project on みんなで翻刻, CC BY-SA 4.0. Images are provided under each holding institution’s terms.",
+	"footer_browse": "Browse",
+	"footer_project": "Project",
+	"footer_related_projects": "Related projects",
+	"project_early_records": "Early Records",
+	"project_early_records_description": "Historical manuscripts and transcriptions.",
+	"project_morpheme_database": "Morpheme Database",
+	"project_morpheme_database_description": "Ainu morphemes, word structure, and derivation.",
+	"nav_explore": "Explore"
 }

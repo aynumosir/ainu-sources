@@ -247,12 +247,20 @@
 	"error_generic_body": "ページを読み込めませんでした。もう一度お試しください。",
 	"error_back_home": "ホームへ戻る",
 	"records_title": "古記録を読む",
-	"records_intro": "アイヌ語古記録データベース（ERDAL）で、原本画像と翻刻を対照し、語彙の読解やTEIデータを参照できます。",
+	"records_intro": "アイヌ語古記録データベースで、原本画像と翻刻を対照し、語彙の読解やTEIデータを参照できます。",
 	"records_read": "原本・翻刻を読む",
 	"records_entries": "語彙を見る",
 	"records_catalogue": "書誌情報",
 	"records_pages": "{count}ページ",
 	"records_items": "語彙{count}項目",
 	"records_available": "翻刻あり",
-	"records_credit": "翻刻：みんなで翻刻「アイヌ関連資料」プロジェクトの参加者（CC BY-SA 4.0）。画像の利用条件は各所蔵機関の規定によります。"
+	"records_credit": "翻刻：みんなで翻刻「アイヌ関連資料」プロジェクトの参加者（CC BY-SA 4.0）。画像の利用条件は各所蔵機関の規定によります。",
+	"footer_browse": "資料を探す",
+	"footer_project": "プロジェクト",
+	"footer_related_projects": "関連プロジェクト",
+	"project_early_records": "古記録",
+	"project_early_records_description": "古記録の原本画像と翻刻。",
+	"project_morpheme_database": "形態素データベース",
+	"project_morpheme_database_description": "アイヌ語の形態素・語構造・派生。",
+	"nav_explore": "探す"
 }
