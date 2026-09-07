@@ -102,9 +102,10 @@
 	// height, so the tallest spike just fills the space and nothing clips. The
 	// year's dots are distributed along the spike, ordered (and colour-banded)
 	// by category. Dense years → tall solid spikes; sparse years → airy dots.
-	const PXY = 4.4;
-	const fullW = $derived(PAD * 2 + span * PXY);
-	const xf = (year: number) => PAD + (year - bounds.min) * PXY;
+	let zoom = $state(1);
+	const zoomId = $props.id();
+	const fullW = $derived(PAD * 2 + Math.max(1, Math.round(cw) - PAD * 2 - 2) * zoom);
+	const xf = (year: number) => PAD + ((year - bounds.min) / span) * (fullW - PAD * 2);
 	const laid = $derived.by(() => {
 		const groups = new Map<number, TimelinePoint[]>();
 		for (const p of points) {
@@ -172,8 +173,14 @@
 			{/if}
 		</div>
 	{:else}
+		<div class="mb-3 flex flex-wrap items-center gap-3 text-sm text-stone-600">
+			<label for={zoomId}>{m.timeline_zoom()}</label>
+			<input id={zoomId} type="range" min="1" max="4" step="0.25" bind:value={zoom} oninput={() => (hover = null)} class="w-36 accent-brand-700" />
+			<button type="button" onclick={() => { zoom = 1; hover = null; }} class="rounded-md border border-stone-300 px-2 py-1 hover:bg-stone-100">{m.timeline_fit()}</button>
+			<p class="text-xs text-stone-500">{m.timeline_navigation_hint()}</p>
+		</div>
 		<div class="card relative overflow-x-auto">
-			<svg width={fullW} {height} viewBox="0 0 {fullW} {height}" class="block" role="img" aria-label="Timeline of sources">
+			<svg width={fullW} {height} viewBox="0 0 {fullW} {height}" class="block" role="group" aria-label={m.timeline_title()}>
 				{#each ticks as t (t)}
 					<line x1={xf(t)} y1={TOP} x2={xf(t)} y2={baseline} stroke="var(--color-stone-200)" stroke-width={t % 100 === 0 ? 1 : 0.5} />
 					<text x={xf(t)} y={height - 9} text-anchor="middle" class="tnum" font-size="10" fill="#a8a29e">{t}</text>
