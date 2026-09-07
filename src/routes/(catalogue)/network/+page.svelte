@@ -52,7 +52,7 @@
 	let container: HTMLDivElement;
 	let graph = $state.raw<any>(null);
 	let fitPending = false;
-	let fitStarted = false;
+	let layoutTicks = 0;
 	let hoveredId: string | null = null;
 	const endpoint = (node: any): string => typeof node === 'object' ? node.id : node;
 	const touchesHover = (link: any) => hoveredId === endpoint(link.source) || hoveredId === endpoint(link.target);
@@ -65,7 +65,7 @@
 		if (!graph) return;
 		const h = heatById;
 		fitPending = true;
-		fitStarted = false;
+		layoutTicks = 0;
 		hoveredId = null;
 		graph.numDimensions(dimensions);
 		graph.controls().enableRotate = dimensions === 3;
@@ -114,8 +114,9 @@
 				.warmupTicks(60)
 				.cooldownTicks(100)
 				.onEngineTick(() => {
-					if (fitPending && !fitStarted) {
-						fitStarted = true;
+					// The first tick precedes Three.js object positioning. Wait for
+					// the previous frame's world bounds before measuring the graph.
+					if (fitPending && ++layoutTicks === 2) {
 						graph?.zoomToFit(400, 40);
 					}
 				})
