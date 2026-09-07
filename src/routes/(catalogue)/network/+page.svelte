@@ -2,36 +2,25 @@
 	import { onMount } from 'svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
-	import { goto } from '$app/navigation';
+	import { networkView, rankedNodes, searchNodes, significanceHeat } from '$lib/network-view';
 	import Seo from '$lib/components/Seo.svelte';
 
 	let { data } = $props();
 	const network = $derived(data.network);
 
-	// ---------------------------------------------------------------------------
-	// Significance is badly compressed: one outlier at 1.0, everything else packed
-	// into ~0.16..0.25. A raw linear map makes the mid-band indistinguishable. We
-	// instead spread nodes by their PERCENTILE RANK of significance, which evenly
-	// distributes the cluster across 0..1 while keeping the top work on top.
-	// `heat` (0..1) then drives both colour and part of node size.
-	// ---------------------------------------------------------------------------
-	const heatById = $derived.by(() => {
-		const ns = network.nodes;
-		const n = ns.length;
-		const map = new Map<string, number>();
-		if (n <= 1) {
-			for (const x of ns) map.set(x.id, 1);
-			return map;
-		}
-		// Ascending order of significance → percentile rank.
-		const order = [...ns].sort((a, b) => a.significance - b.significance);
-		for (let i = 0; i < order.length; i++) {
-			map.set(order[i].id, i / (n - 1)); // 0 = least significant, 1 = most
-		}
-		return map;
-	});
-	const heatOf = (n: any) => heatById.get(n.id) ?? 0;
-
+	let limit = $state(150);
+	let dimensions = $state(2);
+	let selectedId = $state<string | null>(null);
+	let query = $state('');
+	let error = $state(false);
+	const heatById = $derived(significanceHeat(network.nodes));
+	const visible = $derived(networkView(network, limit, selectedId));
+	const selected = $derived(network.nodes.find((node) => node.id === selectedId));
+	const ranked = $derived(rankedNodes(network.nodes));
+	const matches = $derived(searchNodes(ranked, query));
+	const top = $derived(query.trim() ? matches : selected ? visible.nodes.filter((n) => n.id !== selectedId) : ranked.slice(0, 25));
+	const incoming = $derived(new Set(network.links.filter((l) => l.target === selectedId).map((l) => l.source)));
+	const outgoing = $derived(new Set(network.links.filter((l) => l.source === selectedId).map((l) => l.target)));
 	// Warm "editorial ember" heat ramp: smouldering brown → rubric red → brass →
 	// near-white-hot. Reads instantly as low→high without needing a category key.
 	const HEAT_STOPS: [number, [number, number, number]][] = [
@@ -60,54 +49,50 @@
 		HEAT_STOPS.map(([t, c]) => `rgb(${c[0]},${c[1]},${c[2]}) ${(t * 100).toFixed(0)}%`).join(',') +
 		')';
 
-	// Node draw size: a generous floor so mid-band works stay clickable, plus a
-	// heat term (percentile-spread, so the cluster fans out) and a sqrt(inDegree)
-	// term. Heat is gamma-curved so the very top stands out without dwarfing the
-	// field (percentile rank already caps the outlier's lead).
-	const nodeVal = (n: any) => 2 + Math.pow(heatOf(n), 0.85) * 18 + Math.sqrt(n.inDegree ?? 0) * 6;
-
-	const top = $derived(network.nodes.slice(0, 25));
 	let container: HTMLDivElement;
-	let graph: any = null;
+	let graph = $state.raw<any>(null);
+	let fitPending = false;
+	let layoutTicks = 0;
+	let hoveredId: string | null = null;
+	const endpoint = (node: any): string => typeof node === 'object' ? node.id : node;
+	const touchesHover = (link: any) => hoveredId === endpoint(link.source) || hoveredId === endpoint(link.target);
+	const linkColor = (link: any) => hoveredId
+		? touchesHover(link) ? '#ffeaa8' : 'rgba(214,168,98,0.025)'
+		: selectedId ? 'rgba(214,168,98,0.55)' : 'rgba(214,168,98,0.23)';
+	const arrowLength = (link: any) => selectedId || touchesHover(link) ? 3 : 0;
+
+	$effect(() => {
+		if (!graph) return;
+		const h = heatById;
+		fitPending = true;
+		layoutTicks = 0;
+		hoveredId = null;
+		graph.numDimensions(dimensions);
+		graph.controls().enableRotate = dimensions === 3;
+		// OrbitControls uses 2 for mouse pan, 1 for touch pan, and 0 for rotate.
+		graph.controls().mouseButtons.LEFT = dimensions === 2 ? 2 : 0;
+		graph.controls().touches.ONE = dimensions === 2 ? 1 : 0;
+		graph.cameraPosition({ x: 0, y: 0, z: 600 }, { x: 0, y: 0, z: 0 });
+		graph.graphData({
+			nodes: visible.nodes.map((n) => ({ ...n, __heat: h.get(n.id) ?? 0 })),
+			links: visible.links.map((l) => ({ ...l }))
+		}).linkColor(linkColor).linkDirectionalArrowLength(arrowLength);
+	});
 
 	onMount(() => {
 		let destroyed = false;
-		let onResize: (() => void) | null = null;
+		let observer: ResizeObserver | null = null;
 		(async () => {
-			const ForceGraph3D = (await import('3d-force-graph')).default;
+			const [{ default: ForceGraph3D }, { forceCollide, forceX, forceY, forceZ }] = await Promise.all([import('3d-force-graph'), import('d3-force-3d')]);
 			if (destroyed) return;
-
-			// Resolve heat once on the data we hand the lib. Clone so the lib can
-			// mutate (it swaps link source/target for node refs). Pre-compute
-			// curvature: when both A→B and B→A exist, bow the pair apart.
-			const h = heatById;
-			const pairKey = (a: string, b: string) => `${a}|${b}`;
-			const present = new Set(network.links.map((l) => pairKey(l.source, l.target)));
-			const gdata = {
-				nodes: network.nodes.map((n) => ({ ...n, __heat: h.get(n.id) ?? 0 })),
-				links: network.links.map((l) => ({
-					...l,
-					__curv: present.has(pairKey(l.target, l.source)) ? 0.28 : 0
-				}))
-			};
-
-			const endHeat = (l: any) => {
-				const s = typeof l.source === 'object' ? l.source : null;
-				const t = typeof l.target === 'object' ? l.target : null;
-				const sh = s ? (s.__heat ?? 0) : (h.get(l.source) ?? 0);
-				const th = t ? (t.__heat ?? 0) : (h.get(l.target) ?? 0);
-				return Math.max(sh, th); // edge as bright as its hotter endpoint
-			};
-
-			graph = new ForceGraph3D(container)
+			graph = new ForceGraph3D(container, { controlType: 'orbit' })
 				.backgroundColor('#0c0a09')
-				.graphData(gdata)
 				.nodeId('id')
-				.nodeRelSize(4)
-				.nodeVal(nodeVal)
-				.nodeColor((n: any) => heatColor(n.__heat ?? 0))
+				.nodeRelSize(3.5)
+				.nodeVal((n: any) => 1 + 12 * (n.__heat ?? 0))
+				.nodeColor((n: any) => n.id === selectedId ? '#ffffff' : heatColor(n.__heat ?? 0))
 				.nodeOpacity(0.95)
-				.nodeResolution(14)
+				.nodeResolution(8)
 				.nodeLabel((n: any) => {
 					const en = n.titleEn && n.titleEn !== n.title ? n.titleEn : null;
 					const tl = langOf(n.title);
@@ -118,32 +103,51 @@
 							<div style="color:#fbbf24;margin-top:4px">${escapeHtml(m.network_significance())} ${(n.significance * 100).toFixed(0)} · ${escapeHtml(m.network_cited())} ${n.inDegree}×</div>
 						</div>`;
 				})
-				// Links must read on near-black: warm brass, with opacity & width scaled
-				// by the edge's hottest endpoint, plus arrows and flowing particles.
-				.linkColor((l: any) => {
-					const a = 0.3 + 0.55 * endHeat(l);
-					return `rgba(214,168,98,${a.toFixed(2)})`;
-				})
-				.linkWidth((l: any) => 0.6 + 1.8 * endHeat(l))
-				.linkCurvature((l: any) => l.__curv ?? 0)
+				.linkColor(linkColor)
+				.linkWidth(0)
 				.linkOpacity(1)
-				.linkDirectionalArrowLength(3.2)
-				.linkDirectionalArrowRelPos(1)
-				.linkDirectionalArrowColor(() => 'rgba(245,222,179,0.9)')
-				.linkDirectionalParticles((l: any) => (endHeat(l) > 0.55 ? 2 : 1))
-				.linkDirectionalParticleWidth((l: any) => 1 + 1.4 * endHeat(l))
-				.linkDirectionalParticleSpeed(0.006)
-				.linkDirectionalParticleColor(() => 'rgba(255,236,179,0.95)')
-				.onNodeClick((n: any) => goto(localizeHref(`/sources/${n.slug}`)))
+				.linkDirectionalArrowLength(arrowLength)
+				.linkDirectionalArrowRelPos(0.85)
+				.linkDirectionalArrowColor(() => '#ffeaa8')
+				.linkDirectionalParticles(0)
+				.showNavInfo(false)
+				.warmupTicks(60)
+				.cooldownTicks(100)
+				.onEngineTick(() => {
+					// The first tick precedes Three.js object positioning. Wait for
+					// the previous frame's world bounds before measuring the graph.
+					if (fitPending && ++layoutTicks === 2) {
+						graph?.zoomToFit(400, 40);
+					}
+				})
+				.onEngineStop(() => {
+					if (fitPending) {
+						fitPending = false;
+						graph?.zoomToFit(400, 40);
+					}
+				})
+				.onNodeHover((n: any) => {
+					hoveredId = n?.id ?? null;
+					graph?.linkColor(linkColor).linkDirectionalArrowLength(arrowLength);
+					container.style.cursor = n ? 'pointer' : 'grab';
+				})
+				.onNodeClick((n: any) => focusNode(n.id))
 				.width(container.clientWidth)
 				.height(container.clientHeight);
-
-			onResize = () => graph?.width(container.clientWidth).height(container.clientHeight);
-			window.addEventListener('resize', onResize);
-		})();
+			graph.d3Force('charge').strength(-80).distanceMax(250);
+			graph.d3Force('link').distance(65);
+			graph.d3Force('collision', forceCollide((n: any) => 3.5 * Math.cbrt(1 + 12 * (n.__heat ?? 0)) + 4));
+			graph.d3Force('x', forceX(0).strength(0.04));
+			graph.d3Force('y', forceY(0).strength(0.04));
+			graph.d3Force('z', forceZ(0).strength(0.04));
+			observer = new ResizeObserver(() => {
+				graph?.width(container.clientWidth).height(container.clientHeight);
+			});
+			observer.observe(container);
+		})().catch(() => { if (!destroyed) error = true; });
 		return () => {
 			destroyed = true;
-			if (onResize) window.removeEventListener('resize', onResize);
+			observer?.disconnect();
 			graph?._destructor?.();
 		};
 	});
@@ -165,49 +169,70 @@
 		return undefined;
 	}
 	function focusNode(id: string) {
-		const n = graph?.graphData().nodes.find((x: any) => x.id === id);
-		if (n && graph) graph.cameraPosition({ x: n.x, y: n.y, z: (n.z ?? 0) + 110 }, n, 800);
+		selectedId = id;
+		query = '';
 	}
 </script>
 
 <Seo title={`${m.network_title()} · ${m.site_short()}`} description={m.network_lead()} />
 
-<!-- Mobile: graph then list flow naturally (footer sits below the full list).
-     Desktop: a fixed-height split pane whose sidebar scrolls internally. -->
-<div class="flex flex-col lg:h-[calc(100vh-3.5rem)] lg:min-h-0 lg:flex-row">
-	<!-- 3D graph -->
-	<div class="relative h-[60vh] bg-[#0c0a09] lg:h-auto lg:min-h-0 lg:flex-1">
-		<div bind:this={container} class="absolute inset-0"></div>
 
-		<!-- Title + significance heat legend (replaces the old category swatches) -->
-		<div class="pointer-events-none absolute left-4 top-4 max-w-xs">
-			<h1 class="font-serif text-xl font-bold text-white drop-shadow">{m.network_title()}</h1>
-			<p class="mt-1 text-xs leading-relaxed text-stone-300">{m.network_lead()}</p>
-
-			<div class="mt-3">
-				<div
-					class="mb-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-stone-400"
-				>
+<div class="network-layout flex flex-col lg:min-h-0 lg:flex-row">
+	<section class="flex min-w-0 flex-col bg-[#0c0a09] lg:min-h-0 lg:flex-1" aria-label={m.network_title()}>
+		<div class="shrink-0 border-b border-white/10 px-4 py-3 text-stone-300">
+			<div class="flex flex-wrap items-center justify-between gap-2">
+				<h1 class="font-serif text-xl font-bold text-white">{m.network_title()}</h1>
+				<div class="flex flex-wrap items-center gap-2 text-xs">
+					<label for="network-limit">{m.network_overview()}</label>
+					<select id="network-limit" class="rounded border border-stone-600 bg-stone-900 py-1 text-xs text-white" bind:value={limit} onchange={() => selectedId = null}>
+						<option value={150}>{m.network_top_works({ count: 150 })}</option>
+						<option value={300}>{m.network_top_works({ count: 300 })}</option>
+						<option value={0}>{m.network_all_works()}</option>
+					</select>
+					<div class="flex overflow-hidden rounded border border-stone-600">
+						<button class="px-2 py-1 hover:bg-stone-800" class:bg-stone-700={dimensions === 2} aria-pressed={dimensions === 2} onclick={() => dimensions = 2}>2D</button>
+						<button class="border-l border-stone-600 px-2 py-1 hover:bg-stone-800" class:bg-stone-700={dimensions === 3} aria-pressed={dimensions === 3} onclick={() => dimensions = 3}>3D</button>
+					</div>
+					<button class="rounded border border-stone-600 px-2 py-1 hover:bg-stone-800 disabled:opacity-40" disabled={!graph || error} onclick={() => graph?.zoomToFit(400, 40)}>{m.network_fit()}</button>
+					{#if selected}<button class="rounded border border-stone-600 px-2 py-1 hover:bg-stone-800" onclick={() => selectedId = null}>{m.network_back()}</button>{/if}
+				</div>
+			</div>
+			<p class="mt-1 text-xs leading-relaxed text-stone-400">{m.network_lead()}</p>
+			<div class="mt-2 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-400">
+				<p aria-live="polite">{m.network_visible_stats({ works: visible.nodes.length, total: network.stats.nodes, citations: visible.links.length })}</p>
+				<div class="flex items-center gap-2" title={m.network_significance()}>
 					<span>{m.network_heat_low()}</span>
-					<span class="text-stone-300">{m.network_significance()}</span>
+					<span class="h-1.5 w-20 rounded-full" style="background:{HEAT_GRADIENT}"></span>
 					<span>{m.network_heat_high()}</span>
 				</div>
-				<div class="h-2 w-full rounded-full ring-1 ring-white/10" style="background:{HEAT_GRADIENT}"></div>
 			</div>
-
-			<p class="mt-3 text-[11px] text-stone-400">
-				{m.network_stats({ works: network.stats.nodes, citations: network.stats.edges })}
-			</p>
 		</div>
-	</div>
+		<div class="relative h-[55vh] min-h-72 lg:h-auto lg:min-h-0 lg:flex-1">
+			<div bind:this={container} class="absolute inset-0 overflow-hidden" aria-hidden="true"></div>
+			{#if error || !network.nodes.length || !graph}
+				<p class="absolute inset-0 flex items-center justify-center px-6 text-center text-sm text-stone-300" role="status">
+					{error ? m.network_error() : !network.nodes.length ? m.network_empty() : m.network_loading()}
+				</p>
+			{/if}
+		</div>
+	</section>
 
 	<!-- Ranked significance list. min-h-0 on the flex child lets overflow-y-auto work. -->
 	<aside
-		class="flex w-full flex-col border-t border-stone-200 bg-paper-card lg:min-h-0 lg:w-96 lg:shrink-0 lg:border-l lg:border-t-0"
+		class="flex w-full flex-col border-t border-stone-200 bg-paper-card lg:min-h-0 lg:w-80 xl:w-96 lg:shrink-0 lg:border-l lg:border-t-0"
 	>
 		<div class="shrink-0 border-b border-stone-200/70 px-4 pb-3 pt-4">
-			<h2 class="font-serif text-base font-bold text-ink">{m.network_ranking()}</h2>
-			<p class="mt-1 text-xs text-stone-500">{m.network_ranking_lead()}</p>
+			<label for="network-search" class="mb-1 block text-xs text-stone-500">{m.network_search()}</label>
+			<input id="network-search" type="search" bind:value={query} class="mb-3 w-full rounded-md border-stone-300 bg-paper px-3 py-2 text-sm" placeholder={m.network_search_placeholder()} />
+			{#if selected}
+				<div class="mb-3 rounded-md border border-stone-300 bg-paper p-3">
+					<p class="mb-1 text-xs text-stone-500">{m.network_selected()}</p>
+					<a class="link font-serif text-sm" href={localizeHref(`/sources/${selected.slug}`)} lang={langOf(selected.title)}>{selected.title}</a>
+					<p class="mt-2 text-xs text-stone-500">{m.network_neighborhood()}</p>
+				</div>
+			{/if}
+			<h2 class="font-serif text-base font-bold text-ink">{query.trim() ? m.network_results({ count: matches.length }) : selected ? m.network_connections() : m.network_ranking()}</h2>
+			{#if !selected && !query.trim()}<p class="mt-1 text-xs text-stone-500">{m.network_ranking_lead()}</p>{/if}
 		</div>
 
 		<ol class="space-y-px px-2 py-2 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
@@ -239,10 +264,13 @@
 							<span class="tnum">· {m.network_cited()} {n.inDegree}×</span>
 							<button
 								type="button"
-								class="ml-auto shrink-0 text-brand-600 opacity-0 transition group-hover:opacity-100 hover:underline focus:opacity-100"
+								class="ml-auto shrink-0 text-brand-600 hover:underline"
 								onclick={() => focusNode(n.id)}>⊹ {m.network_focus()}</button
 							>
 						</span>
+						{#if selected}
+							<span class="mt-1 block text-[11px] text-stone-500">{incoming.has(n.id) ? m.network_cites_selected() : ''}{incoming.has(n.id) && outgoing.has(n.id) ? ' · ' : ''}{outgoing.has(n.id) ? m.network_cited_by_selected() : ''}</span>
+						{/if}
 						<span class="mt-1 block h-1 overflow-hidden rounded-full bg-stone-100">
 							<span
 								class="block h-1 rounded-full"
@@ -251,8 +279,16 @@
 						</span>
 					</span>
 				</li>
+			{:else}
+				<li class="px-2 py-4 text-sm text-stone-500">{m.network_no_results()}</li>
 			{/each}
 		</ol>
 	</aside>
 </div>
 
+
+<style>
+	@media (min-width: 1024px) {
+		.network-layout { height: calc(100dvh - 6rem); min-height: 32rem; }
+	}
+</style>
