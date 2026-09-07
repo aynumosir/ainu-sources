@@ -32,6 +32,6 @@
 				{/each}
 			</ul>
 		{/each}
-		<p class="mt-4 text-xs text-stone-500">{m.records_credit()} <a class="underline" href={recordsHref('/about', getLocale())}>ERDAL ↗</a></p>
+		<p class="mt-4 text-xs text-stone-500">{m.records_credit()} <a class="underline" href={recordsHref('/about', getLocale())}>{m.project_early_records()} ↗</a></p>
 	</section>
 {/if}

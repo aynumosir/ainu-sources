@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { localizeHref, deLocalizeHref } from '$lib/paraglide/runtime';
+	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 	import LanguageSwitcher from './LanguageSwitcher.svelte';
 	import SearchBox from './SearchBox.svelte';
+	import CatalogueNav from './CatalogueNav.svelte';
 
 	let {
 		user = null,
@@ -12,19 +12,6 @@
 
 	let open = $state(false);
 
-	const nav = [
-		{ href: '/sources', label: () => m.nav_sources() },
-		{ href: '/timeline', label: () => m.nav_timeline() },
-		{ href: '/map', label: () => m.nav_map() },
-		{ href: '/network', label: () => m.nav_network() },
-		{ href: '/people', label: () => m.nav_people() },
-		{ href: '/about', label: () => m.nav_about() }
-	];
-
-	const currentPath = $derived(deLocalizeHref(page.url.pathname));
-	function isActive(href: string): boolean {
-		return currentPath === href || currentPath.startsWith(href + '/');
-	}
 </script>
 
 <header class="sticky top-0 z-40 border-b border-stone-200 bg-paper/90 backdrop-blur">
@@ -40,9 +27,10 @@
 		</a>
 
 
+		<div class="hidden md:block"><CatalogueNav {hasArchiveAccess} /></div>
 
 		<div class="ml-auto hidden min-w-0 flex-1 justify-end lg:flex">
-			<div class="w-56"><SearchBox compact /></div>
+			<div class="w-40 xl:w-56"><SearchBox compact /></div>
 		</div>
 
 		<div class="ml-auto flex items-center gap-2 lg:ml-3">
@@ -78,50 +66,11 @@
 		</div>
 	</div>
 
-		<nav class="mx-auto hidden max-w-6xl flex-wrap items-center gap-1 px-4 pb-2 md:flex" aria-label="Primary">
-			{#each nav as item (item.href)}
-				<a
-					href={localizeHref(item.href)}
-					aria-current={isActive(item.href) ? 'page' : undefined}
-					class="rounded-md px-2.5 py-1.5 text-sm font-medium text-stone-600 transition hover:bg-stone-100 hover:text-ink aria-[current=page]:bg-stone-100 aria-[current=page]:text-ink"
-					>{item.label()}</a
-				>
-			{/each}
-			{#if hasArchiveAccess}
-				<a
-					href="/archive"
-					aria-current={isActive('/archive') ? 'page' : undefined}
-					class="rounded-md px-2.5 py-1.5 text-sm font-medium text-stone-600 transition hover:bg-stone-100 hover:text-ink aria-[current=page]:bg-stone-100 aria-[current=page]:text-ink"
-					>{m.nav_archive()}</a
-				>
-			{/if}
-		</nav>
 
 	{#if open}
 		<div class="border-t border-stone-200 px-4 py-3 md:hidden">
 			<div class="mb-3"><SearchBox compact /></div>
-			<nav class="flex flex-col gap-0.5" aria-label="Mobile">
-				{#each nav as item (item.href)}
-					<a
-						href={localizeHref(item.href)}
-						onclick={() => (open = false)}
-						aria-current={isActive(item.href) ? 'page' : undefined}
-						class="rounded-md px-2 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100 aria-[current=page]:bg-stone-100"
-						>{item.label()}</a
-					>
-				{/each}
-				{#if hasArchiveAccess}
-					<a
-						href="/archive"
-						onclick={() => (open = false)}
-						aria-current={isActive('/archive') ? 'page' : undefined}
-						class="rounded-md px-2 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100 aria-[current=page]:bg-stone-100"
-						>{m.nav_archive()}</a
-					>
-				{/if}
-				<a href={localizeHref('/places')} onclick={() => (open = false)} class="rounded-md px-2 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100">{m.nav_places()}</a>
-				<a href={localizeHref('/institutions')} onclick={() => (open = false)} class="rounded-md px-2 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100">{m.nav_institutions()}</a>
-			</nav>
+			<CatalogueNav vertical {hasArchiveAccess} onNavigate={() => (open = false)} />
 			<div class="mt-3 flex items-center justify-between border-t border-stone-200 pt-3">
 				<LanguageSwitcher />
 				<a

@@ -249,7 +249,7 @@
 	"error_generic_body": "Не удалось загрузить страницу. Попробуйте ещё раз.",
 	"error_back_home": "На главную",
 	"records_title": "Читать ранние записи",
-	"records_intro": "Факсимиле и транскрипции в базе ранних записей айнского языка (ERDAL), толкования лексики и файлы TEI.",
+	"records_intro": "Факсимиле и транскрипции в базе ранних записей айнского языка, толкования лексики и файлы TEI.",
 	"records_read": "Открыть рукопись",
 	"records_entries": "Смотреть лексику",
 	"records_catalogue": "Запись каталога",
@@ -274,5 +274,13 @@
 	"network_no_results": "Работы не найдены.",
 	"network_error": "Не удалось загрузить граф. Поиск и ссылки на работы доступны в списке.",
 	"network_empty": "Нет цитирований для отображения.",
-	"network_loading": "Загрузка сети…"
+	"network_loading": "Загрузка сети…",
+	"footer_related_projects": "Связанные проекты",
+	"project_morpheme_database": "База морфем",
+	"footer_project": "Проект",
+	"project_early_records_description": "Исторические рукописи и транскрипции.",
+	"project_early_records": "Ранние записи",
+	"footer_browse": "Просмотр",
+	"nav_explore": "Обзор",
+	"project_morpheme_database_description": "Морфемы, строение слов и словообразование айнского языка."
 }
