@@ -136,9 +136,9 @@ messages/{en,ja,ru}.json
 
 ## Early records integration
 
-`/records` connects the catalogue to [ERDAL](https://rec.aynu.org). Matching source
-pages offer manuscript readers, vocabulary tables for wordlists, and per-volume
-TEI downloads. Catalogue cards mark transcription availability. A work includes
+The footer and About page link directly to [ERDAL](https://rec.aynu.org).
+Matching source pages offer manuscript readers, vocabulary tables for wordlists,
+and per-volume TEI downloads. Catalogue cards mark transcription availability. A work includes
 all its witnesses; a separately catalogued copy includes only its own volumes.
 The public source-detail API and bulk export include an additive `records` array
 with reader, vocabulary, and TEI URLs (`[]` when no match is known).

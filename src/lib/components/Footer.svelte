@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { recordsHref } from '$lib/records';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 
 	const year = 2026;
@@ -8,7 +9,6 @@
 			heading: () => m.nav_sources(),
 			links: [
 				{ href: '/sources', label: () => m.nav_sources() },
-				{ href: '/records', label: () => m.records_nav() },
 				{ href: '/timeline', label: () => m.nav_timeline() },
 				{ href: '/map', label: () => m.nav_map() }
 			]
@@ -36,6 +36,7 @@
 		<div class="sm:col-span-2 md:col-span-1">
 			<div class="font-serif text-base font-bold text-ink">{m.site_short()}</div>
 			<p class="mt-2 max-w-xs text-sm text-stone-500">{m.footer_tagline()}</p>
+			<a href={recordsHref('', getLocale())} class="mt-3 inline-block text-sm text-brand-700 underline">ERDAL ↗</a>
 		</div>
 		{#each cols as col (col.heading())}
 			<nav>
