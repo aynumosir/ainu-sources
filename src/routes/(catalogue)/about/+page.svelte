@@ -37,6 +37,10 @@
 
 	<div class="mt-10 space-y-10">
 		<section class="space-y-3">
+			<h2 class="font-serif text-2xl font-bold text-ink"><a href={localizeHref('/records')}>{m.records_title()}</a></h2>
+			<p class="leading-relaxed text-stone-700">{m.records_intro()}</p>
+		</section>
+		<section class="space-y-3">
 			<h2 class="font-serif text-2xl font-bold text-ink">{m.about_purpose_h()}</h2>
 			<p class="leading-relaxed text-stone-700">{m.about_purpose_p()}</p>
 		</section>

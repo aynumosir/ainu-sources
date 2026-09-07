@@ -1,0 +1,157 @@
+{
+	"sources": [
+		{
+			"slug": "moshiogusa",
+			"catalogue": "1792-uehara-moshiogusa",
+			"title": "蝦夷方言藻汐草",
+			"titleLatin": "Ezo hōgen moshiogusa",
+			"kind": "wordlist",
+			"units": [
+				{
+					"slug": "ninjal-1",
+					"label": "乾巻",
+					"catalogue": null,
+					"title": null,
+					"holder": "国立国語研究所",
+					"holderEn": "National Institute for Japanese Language and Linguistics",
+					"shelfmark": "W57-2/U36",
+					"pages": 104,
+					"items": 1658
+				},
+				{
+					"slug": "ninjal-2",
+					"label": "坤巻",
+					"catalogue": null,
+					"title": null,
+					"holder": "国立国語研究所",
+					"holderEn": "National Institute for Japanese Language and Linguistics",
+					"shelfmark": "W57-2/U36",
+					"pages": 108,
+					"items": 895
+				},
+				{
+					"slug": "leiden",
+					"label": "",
+					"catalogue": "1792-uehara-ezo-hogen",
+					"title": "蝦夷方言",
+					"holder": "Wereldmuseum Leiden",
+					"holderEn": "Wereldmuseum Leiden",
+					"shelfmark": "RV-578-131",
+					"pages": 107,
+					"items": 110
+				}
+			]
+		},
+		{
+			"slug": "hokkai-zuihitsu",
+			"catalogue": "1739-itakura-hokkai-zuihitsu",
+			"title": "北海随筆",
+			"titleLatin": "Hokkai zuihitsu",
+			"kind": "prose",
+			"units": [
+				{
+					"slug": "tsukuba",
+					"label": "",
+					"catalogue": null,
+					"title": null,
+					"holder": "筑波大学附属図書館",
+					"holderEn": "University of Tsukuba Library",
+					"shelfmark": null,
+					"pages": 53,
+					"items": 0
+				}
+			]
+		},
+		{
+			"slug": "ezo-yabubanashi",
+			"catalogue": "anon-ezo-yabu-hanashi",
+			"title": "蝦夷薮話",
+			"titleLatin": "Ezo yabubanashi",
+			"kind": "prose",
+			"units": [
+				{
+					"slug": "hokudai",
+					"label": "",
+					"catalogue": null,
+					"title": null,
+					"holder": "北海道大学附属図書館",
+					"holderEn": "Hokkaido University Library",
+					"shelfmark": null,
+					"pages": 24,
+					"items": 0
+				}
+			]
+		},
+		{
+			"slug": "ezo-kiko",
+			"catalogue": "mamiya-ezoki-gyo",
+			"title": "蝦夷紀行",
+			"titleLatin": "Ezo kikō",
+			"kind": "prose",
+			"units": [
+				{
+					"slug": "ryukoku",
+					"label": "",
+					"catalogue": null,
+					"title": null,
+					"holder": "龍谷大学図書館",
+					"holderEn": "Ryukoku University Library",
+					"shelfmark": "491.7-26-W-3",
+					"pages": 18,
+					"items": 0
+				}
+			]
+		},
+		{
+			"slug": "ezoto-kikan",
+			"catalogue": "hata-ezo-kikan",
+			"title": "蝦夷島奇観",
+			"titleLatin": "Ezotō kikan",
+			"kind": "illustrated",
+			"units": [
+				{
+					"slug": "hokudai",
+					"label": "",
+					"catalogue": null,
+					"title": null,
+					"holder": "北海道大学附属図書館",
+					"holderEn": "Hokkaido University Library",
+					"shelfmark": null,
+					"pages": 52,
+					"items": 0
+				}
+			]
+		},
+		{
+			"slug": "ezo-soshi",
+			"catalogue": "1790-mogami-ezo-soshi",
+			"title": "蝦夷草紙",
+			"titleLatin": "Ezo sōshi",
+			"kind": "prose",
+			"units": [
+				{
+					"slug": "nijl",
+					"label": "",
+					"catalogue": null,
+					"title": null,
+					"holder": "国文学研究資料館",
+					"holderEn": "National Institute of Japanese Literature",
+					"shelfmark": null,
+					"pages": 129,
+					"items": 0
+				},
+				{
+					"slug": "ryukoku",
+					"label": "",
+					"catalogue": null,
+					"title": null,
+					"holder": "龍谷大学図書館",
+					"holderEn": "Ryukoku University Library",
+					"shelfmark": "491.7-4-W-2",
+					"pages": 63,
+					"items": 0
+				}
+			]
+		}
+	]
+}

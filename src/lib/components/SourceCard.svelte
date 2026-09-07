@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { recordsForCatalogue } from '$lib/records';
+	import { m } from '$lib/paraglide/messages.js';
 	import type { Source } from '$lib/server/db/schema';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { formatYear, formatCount, asArray } from '$lib/format';
@@ -29,6 +31,9 @@
 	</h3>
 	{#if source.titleEn && source.titleEn !== source.title}
 		<p class="-mt-1 text-sm text-stone-500">{source.titleEn}</p>
+	{/if}
+	{#if recordsForCatalogue(source.slug).length}
+		<span class="text-xs font-medium text-brand-700">{m.records_available()}</span>
 	{/if}
 	<div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone-500">
 		{#if source.author}<span class="truncate">{source.author}</span>{/if}

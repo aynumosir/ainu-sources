@@ -244,5 +244,16 @@
 	"error_404_body": "This page doesn't exist, or it has moved to a different address.",
 	"error_generic_title": "Something went wrong",
 	"error_generic_body": "The page failed to load. Please try again.",
-	"error_back_home": "Back to the home page"
+	"error_back_home": "Back to the home page",
+	"records_nav": "Early records",
+	"records_title": "Read early records",
+	"records_intro": "Facsimiles and transcriptions from the Early Records Database of the Ainu Language (ERDAL), with vocabulary readings and TEI downloads.",
+	"records_read": "Read manuscript",
+	"records_entries": "Browse vocabulary",
+	"records_catalogue": "Catalogue record",
+	"records_pages": "{count} pages",
+	"records_items": "{count} vocabulary items",
+	"records_available": "Transcription available",
+	"records_credit": "Transcriptions: contributors to the Ainu project on みんなで翻刻, CC BY-SA 4.0. Images are provided under each holding institution’s terms.",
+	"records_browse": "Browse all early records"
 }

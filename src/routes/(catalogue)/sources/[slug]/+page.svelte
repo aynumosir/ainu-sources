@@ -5,6 +5,7 @@
 	import { page } from '$app/state';
 	import Seo from '$lib/components/Seo.svelte';
 	import { sourceJsonLd, breadcrumbJsonLd, truncate } from '$lib/seo';
+	import RecordsPanel from '$lib/components/RecordsPanel.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import SourceMap from '$lib/components/SourceMap.svelte';
 	import CiteBox from '$lib/components/CiteBox.svelte';
@@ -105,6 +106,8 @@
 			>
 		</div>
 	</header>
+
+	<RecordsPanel catalogue={s.slug} />
 
 	{#if data.archive}
 		<div class="mt-4 rounded-lg border border-stone-200 bg-stone-50 px-4 py-3">
