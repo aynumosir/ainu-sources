@@ -1,14 +1,13 @@
 import type { RequestHandler } from './$types';
-import { sitemapIndexXml, xmlResponse } from '$lib/server/sitemap';
+import { SITE_ORIGIN } from '$lib/seo';
+import { sitemapIndexXml, sitemapQueryRedirect, xmlResponse } from '$lib/server/sitemap';
+import { sitemapChildPaths } from '$lib/server/sitemap-manifest';
 
-/** Sitemap index: points crawlers at the per-section child sitemaps. */
-export const GET: RequestHandler = async ({ url }) => {
-	const lastmod = new Date().toISOString().slice(0, 10);
-	return xmlResponse(
-		sitemapIndexXml(url.origin, [
-			{ path: '/sitemap-pages.xml', lastmod },
-			{ path: '/sitemap-sources.xml', lastmod },
-			{ path: '/sitemap-entities.xml', lastmod }
-		])
+export const GET: RequestHandler = async ({ url }) =>
+	sitemapQueryRedirect(url) ??
+	xmlResponse(
+		sitemapIndexXml(
+			SITE_ORIGIN,
+			sitemapChildPaths.map((path) => ({ path }))
+		)
 	);
-};

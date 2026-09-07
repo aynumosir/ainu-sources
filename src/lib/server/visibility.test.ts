@@ -30,6 +30,7 @@ import { migrate } from 'drizzle-orm/libsql/migrator';
 import { env } from '$env/dynamic/private';
 import * as schema from './db/schema';
 import * as queries from './queries';
+import { sourceSitemapShards } from './sitemap-manifest';
 import { getCitationNetwork } from './network';
 import { db } from './db';
 
@@ -125,17 +126,26 @@ async function seed(allActive = false) {
 		{ sourceId: 'w', tagId: 't1' },
 		{ sourceId: 'h', tagId: 't1' }
 	]);
-	await db.insert(schema.persons).values([{ id: 'p1', slug: 'p1', name: 'Person One' }]);
+	await db.insert(schema.persons).values([
+		{ id: 'p1', slug: 'p1', name: 'Person One' },
+		{ id: 'p2', slug: 'p2', name: 'Person Two', status: sStatus('merged') }
+	]);
 	await db.insert(schema.sourcePersons).values([
 		{ sourceId: 'w', personId: 'p1', role: 'author' },
 		{ sourceId: 'h', personId: 'p1', role: 'author' }
 	]);
-	await db.insert(schema.places).values([{ id: 'pl1', slug: 'pl1', name: 'Place One', lat: 43.06, lng: 141.35 }]);
+	await db.insert(schema.places).values([
+		{ id: 'pl1', slug: 'pl1', name: 'Place One', lat: 43.06, lng: 141.35 },
+		{ id: 'pl2', slug: 'pl2', name: 'Place Two', status: sStatus('hidden') }
+	]);
 	await db.insert(schema.sourcePlaces).values([
 		{ sourceId: 'w', placeId: 'pl1', role: 'dialect' },
 		{ sourceId: 'h', placeId: 'pl1', role: 'dialect' }
 	]);
-	await db.insert(schema.institutions).values([{ id: 'i1', slug: 'i1', name: 'Institution One' }]);
+	await db.insert(schema.institutions).values([
+		{ id: 'i1', slug: 'i1', name: 'Institution One' },
+		{ id: 'i2', slug: 'i2', name: 'Institution Two', status: sStatus('hidden') }
+	]);
 	await db.insert(schema.sourceInstitutions).values([
 		{ sourceId: 'w', institutionId: 'i1', role: 'holding' },
 		{ sourceId: 'h', institutionId: 'i1', role: 'holding' }
@@ -143,6 +153,21 @@ async function seed(allActive = false) {
 }
 
 const NON_ACTIVE_SLUGS = ['loser', 'hidden-src', 'deleted-src', 'cand-xyz-candidate'];
+
+async function allSitemapSources() {
+	const shards = await Promise.all(sourceSitemapShards.map((shard) => queries.getSitemapSources(shard)));
+	return shards.flat();
+}
+
+async function explain(sql: string): Promise<string[]> {
+	const client = createClient({ url: `file:${DB_PATH}` });
+	try {
+		const plan = await client.execute(`EXPLAIN QUERY PLAN ${sql}`);
+		return plan.rows.map((row) => String(row.detail));
+	} finally {
+		client.close();
+	}
+}
 
 // ===========================================================================
 // 1. Mixed-status fixture: non-active rows must never surface.
@@ -252,9 +277,43 @@ describe('status-aware reads — only active sources / accepted relations leak t
 		expect(net.stats.edges).toBe(1); // only w→a2; w→h (hidden), w→c (candidate), l→a2 (merged) dropped
 	});
 
-	it('getSitemapSources lists only active source slugs', async () => {
-		const sources = await queries.getSitemapSources();
-		expect(sources.map((s) => s.slug)).toEqual(['active-two', 'winner']);
+	it('sitemap queries list only active source and entity slugs', async () => {
+		const sourceRows = await allSitemapSources();
+		expect(sourceRows.map((source) => source.slug).sort()).toEqual(['active-two', 'winner']);
+		expect(await queries.getSitemapEntities('people')).toEqual([
+			expect.objectContaining({ slug: 'p1' })
+		]);
+		expect(await queries.getSitemapEntities('places')).toEqual([{ slug: 'pl1' }]);
+		expect(await queries.getSitemapEntities('institutions')).toEqual([{ slug: 'i1' }]);
+	});
+
+	it('serves every sitemap range from a covering index without temporary sorting', async () => {
+		const cases = [
+			{
+				sql: `SELECT slug, updated_at FROM sources WHERE status = 'active' AND slug >= '190' AND slug < '191' ORDER BY slug LIMIT 2001`,
+				index: 'sources_sitemap_idx'
+			},
+			{
+				sql: `SELECT slug, updated_at FROM persons WHERE status = 'active' ORDER BY slug LIMIT 2001`,
+				index: 'persons_sitemap_idx'
+			},
+			{
+				sql: `SELECT slug FROM places WHERE status = 'active' ORDER BY slug LIMIT 2001`,
+				index: 'places_sitemap_idx'
+			},
+			{
+				sql: `SELECT slug FROM institutions WHERE status = 'active' ORDER BY slug LIMIT 2001`,
+				index: 'institutions_sitemap_idx'
+			}
+		];
+
+		for (const query of cases) {
+			const details = await explain(query.sql);
+			const plan = details.join('\n');
+			expect(plan).toContain(`USING COVERING INDEX ${query.index}`);
+			expect(details.some((detail) => detail.includes('USE TEMP B-TREE'))).toBe(false);
+			expect(details.some((detail) => detail.startsWith('SCAN '))).toBe(false);
+		}
 	});
 
 	it('getSourceDetail resolves an active source and shows only accepted/active relations', async () => {
@@ -315,7 +374,22 @@ describe('no-op on all-active data — the predicate filters by status and nothi
 	it('listSources / getStats / sitemap now include all six sources', async () => {
 		expect((await queries.listSources({})).total).toBe(6);
 		expect((await queries.getStats()).total).toBe(6);
-		expect((await queries.getSitemapSources()).length).toBe(6);
+		expect((await allSitemapSources()).length).toBe(6);
+	});
+
+	it('entity sitemaps include rows whose status becomes active', async () => {
+		expect((await queries.getSitemapEntities('people')).map((row) => row.slug)).toEqual([
+			'p1',
+			'p2'
+		]);
+		expect((await queries.getSitemapEntities('places')).map((row) => row.slug)).toEqual([
+			'pl1',
+			'pl2'
+		]);
+		expect((await queries.getSitemapEntities('institutions')).map((row) => row.slug)).toEqual([
+			'i1',
+			'i2'
+		]);
 	});
 
 	it('withDigital now counts all three linked sources', async () => {

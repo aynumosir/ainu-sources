@@ -21,7 +21,23 @@ import {
 	type Institution,
 	type Tag
 } from './db/schema';
-import { and, or, eq, ne, like, inArray, gte, lte, isNotNull, desc, asc, sql, count, countDistinct } from 'drizzle-orm';
+import {
+	and,
+	or,
+	eq,
+	ne,
+	like,
+	inArray,
+	gte,
+	lte,
+	lt,
+	isNotNull,
+	desc,
+	asc,
+	sql,
+	count,
+	countDistinct
+} from 'drizzle-orm';
 import type {
 	SourceFilters,
 	Facets,
@@ -38,6 +54,11 @@ import type {
 	RelatedSource
 } from '$lib/types';
 import { asArray, centuryOf } from '$lib/format';
+import {
+	SITEMAP_LOGICAL_ENTRY_LIMIT,
+	type EntitySitemapKind,
+	type SourceSitemapShard
+} from './sitemap-manifest';
 import { activeSourcesOnly, publicRelationsOnly } from './visibility';
 import {
 	createSourceOnApp,
@@ -751,32 +772,52 @@ export async function listTags(): Promise<TagWithCount[]> {
 // Sitemap
 // ---------------------------------------------------------------------------
 
-/** Slugs + lastmod for every public source detail page (sitemap-sources.xml). */
-export async function getSitemapSources(): Promise<{ slug: string; updatedAt: Date }[]> {
+export interface SitemapEntityRow {
+	slug: string;
+	updatedAt?: Date;
+}
+
+/** One bounded, half-open source-slug range plus one row for overflow detection. */
+export async function getSitemapSources(
+	shard: SourceSitemapShard
+): Promise<{ slug: string; updatedAt: Date }[]> {
+	const conditions: SQLCond[] = [activeSourcesOnly()];
+	if (shard.start !== undefined) conditions.push(gte(sources.slug, shard.start));
+	if (shard.end !== undefined) conditions.push(lt(sources.slug, shard.end));
+
 	return db
 		.select({ slug: sources.slug, updatedAt: sources.updatedAt })
 		.from(sources)
-		.where(activeSourcesOnly())
-		.orderBy(asc(sources.slug));
+		.where(and(...conditions))
+		.orderBy(asc(sources.slug))
+		.limit(SITEMAP_LOGICAL_ENTRY_LIMIT + 1);
 }
 
-/** Slugs (+ lastmod where the table tracks one) for the entity directories
- *  behind sitemap-entities.xml. */
-export async function getSitemapEntities(): Promise<{
-	persons: { slug: string; updatedAt: Date }[];
-	places: { slug: string }[];
-	institutions: { slug: string }[];
-}> {
-	const [pe, pl, inst] = await Promise.all([
-		db
-			.select({ slug: persons.slug, updatedAt: persons.updatedAt })
-			.from(persons)
-			.where(activePersonsOnly())
-			.orderBy(asc(persons.slug)),
-		db.select({ slug: places.slug }).from(places).orderBy(asc(places.slug)),
-		db.select({ slug: institutions.slug }).from(institutions).orderBy(asc(institutions.slug))
-	]);
-	return { persons: pe, places: pl, institutions: inst };
+/** One bounded active-entity directory plus one row for overflow detection. */
+export async function getSitemapEntities(kind: EntitySitemapKind): Promise<SitemapEntityRow[]> {
+	switch (kind) {
+		case 'people':
+			return db
+				.select({ slug: persons.slug, updatedAt: persons.updatedAt })
+				.from(persons)
+				.where(activePersonsOnly())
+				.orderBy(asc(persons.slug))
+				.limit(SITEMAP_LOGICAL_ENTRY_LIMIT + 1);
+		case 'places':
+			return db
+				.select({ slug: places.slug })
+				.from(places)
+				.where(eq(places.status, 'active'))
+				.orderBy(asc(places.slug))
+				.limit(SITEMAP_LOGICAL_ENTRY_LIMIT + 1);
+		case 'institutions':
+			return db
+				.select({ slug: institutions.slug })
+				.from(institutions)
+				.where(eq(institutions.status, 'active'))
+				.orderBy(asc(institutions.slug))
+				.limit(SITEMAP_LOGICAL_ENTRY_LIMIT + 1);
+	}
 }
 
 // ---------------------------------------------------------------------------
