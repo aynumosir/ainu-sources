@@ -3,7 +3,7 @@
 	import { localizeHref, deLocalizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 
-	let { page, pageCount }: { page: number; pageCount: number } = $props();
+	let { page, pageCount, fragment = '' }: { page: number; pageCount: number; fragment?: string } = $props();
 
 	function hrefFor(p: number): string {
 		const params = new URLSearchParams(appPage.url.search);
@@ -11,7 +11,7 @@
 		else params.set('page', String(p));
 		const path = deLocalizeHref(appPage.url.pathname);
 		const qs = params.toString();
-		return localizeHref(qs ? `${path}?${qs}` : path);
+		return localizeHref(qs ? `${path}?${qs}` : path) + (fragment ? `#${encodeURIComponent(fragment)}` : '');
 	}
 
 	// windowed page numbers

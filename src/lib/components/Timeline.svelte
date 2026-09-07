@@ -8,7 +8,7 @@
 		showLegend?: boolean;
 	} & (
 		| {
-				/** Per-source rows — the full variant draws one dot (and one link) each. */
+				/** Per-source rows — the full variant groups them into linked year bars. */
 				points: TimelinePoint[];
 				density?: never;
 				variant?: 'full';
@@ -97,38 +97,26 @@
 		});
 	});
 
-	// ---- FULL: every source as a dot, arranged into per-year "spikes" --------
-	// Each year is a vertical spike whose HEIGHT ∝ √(count) scaled to the plot
-	// height, so the tallest spike just fills the space and nothing clips. The
-	// year's dots are distributed along the spike, ordered (and colour-banded)
-	// by category. Dense years → tall solid spikes; sparse years → airy dots.
-	const PXY = 4.4;
-	const fullW = $derived(PAD * 2 + span * PXY);
-	const xf = (year: number) => PAD + (year - bounds.min) * PXY;
-	const laid = $derived.by(() => {
-		const groups = new Map<number, TimelinePoint[]>();
-		for (const p of points) {
-			const g = groups.get(p.yearStart);
-			if (g) g.push(p);
-			else groups.set(p.yearStart, [p]);
+	// The full chart fits the viewport. One stacked bar per year opens its source list.
+	const yearly = $derived.by(() => {
+		const groups = new Map<number, Record<string, number>>();
+		for (const point of points) {
+			const cats = groups.get(point.yearStart) ?? {};
+			cats[point.category] = (cats[point.category] ?? 0) + 1;
+			groups.set(point.yearStart, cats);
 		}
-		const maxN = Math.max(1, ...[...groups.values()].map((g) => g.length));
-		const usableH = baseline - TOP;
-		const out: { p: TimelinePoint; px: number; py: number; r: number; color: string }[] = [];
-		for (const [year, gs] of groups) {
-			gs.sort((a, b) => ORDER.indexOf(a.category as never) - ORDER.indexOf(b.category as never));
-			const n = gs.length;
-			const spikeH = Math.max(6, (Math.sqrt(n) / Math.sqrt(maxN)) * usableH);
-			const r = n > 60 ? 1.9 : n > 25 ? 2.4 : 3.2;
-			const baseX = xf(year);
-			gs.forEach((p, i) => {
-				const py = baseline - ((i + 0.5) / n) * spikeH;
-				// gentle deterministic horizontal jitter so dense spikes read as a column, not a line
-				const jx = n > 1 ? ((i % 3) - 1) * Math.min(1.6, spikeH / n / 2) : 0;
-				out.push({ p, px: baseX + jx, py, r, color: colorOf(p.category) });
+		const maximum = Math.max(1, ...[...groups.values()].map((cats) => Object.values(cats).reduce((a, b) => a + b, 0)));
+		return [...groups].sort(([a], [b]) => a - b).map(([year, cats]) => {
+			const total = Object.values(cats).reduce((a, b) => a + b, 0);
+			const totalHeight = Math.max(2, Math.sqrt(total / maximum) * (baseline - TOP));
+			let top = baseline;
+			const segments = Object.entries(cats).sort(([a], [b]) => ORDER.indexOf(a as never) - ORDER.indexOf(b as never)).map(([category, count]) => {
+				const h = count / total * totalHeight;
+				top -= h;
+				return { y: top, h, color: colorOf(category) };
 			});
-		}
-		return out;
+			return { year, total, segments, x: xr(year), width: Math.max(1, plotW / span * 0.8) };
+		});
 	});
 
 	let hover = $state<{ x: number; top: number; label: string } | null>(null);
@@ -172,29 +160,22 @@
 			{/if}
 		</div>
 	{:else}
-		<div class="card relative overflow-x-auto">
-			<svg width={fullW} {height} viewBox="0 0 {fullW} {height}" class="block" role="img" aria-label="Timeline of sources">
+		<div class="card relative">
+			<svg width="100%" {height} viewBox="0 0 {innerW} {height}" class="block" role="group" aria-label={m.timeline_title()}>
 				{#each ticks as t (t)}
-					<line x1={xf(t)} y1={TOP} x2={xf(t)} y2={baseline} stroke="var(--color-stone-200)" stroke-width={t % 100 === 0 ? 1 : 0.5} />
-					<text x={xf(t)} y={height - 9} text-anchor="middle" class="tnum" font-size="10" fill="#a8a29e">{t}</text>
+					<line x1={xr(t)} y1={TOP} x2={xr(t)} y2={baseline} stroke="var(--color-stone-200)" stroke-width={t % 100 === 0 ? 1 : 0.5} />
+					<text x={xr(t)} y={height - 9} text-anchor="middle" class="tnum" font-size="10" fill="#a8a29e">{t}</text>
 				{/each}
-				<line x1={PAD} y1={baseline} x2={fullW - PAD + 8} y2={baseline} stroke="var(--color-stone-300)" stroke-width="1" />
-				{#each laid as d (d.p.slug)}
-					<a
-						href={localizeHref(`/sources/${d.p.slug}`)}
-						aria-label="{d.p.title} ({d.p.yearStart})"
-						onmouseenter={() => (hover = { x: d.px, top: d.py - 6, label: `${d.p.yearStart} · ${d.p.titleEn || d.p.title}` })}
-						onmouseleave={() => (hover = null)}
-					>
-						<circle cx={d.px} cy={d.py} r={d.r} fill={d.color} fill-opacity="0.85" stroke="white" stroke-width="0.6" />
+				<line x1={PAD} y1={baseline} x2={innerW - PAD} y2={baseline} stroke="var(--color-stone-300)" />
+				{#each yearly as bar (bar.year)}
+					<a href={localizeHref(`/timeline?year=${bar.year}#timeline-sources`)} aria-label={`${bar.year} · ${m.common_sources_n({ count: bar.total })}`}>
+						<title>{bar.year} · {m.common_sources_n({ count: bar.total })}</title>
+						{#each bar.segments as segment, i (i)}
+							<rect x={bar.x - bar.width / 2} y={segment.y} width={bar.width} height={segment.h} fill={segment.color} fill-opacity="0.85" />
+						{/each}
 					</a>
 				{/each}
 			</svg>
-			{#if hover}
-				<div class="pointer-events-none absolute z-10 w-max max-w-xs -translate-x-1/2 -translate-y-full rounded-md bg-ink px-2 py-1 text-xs text-white shadow-lg" style="left:{hover.x}px; top:{hover.top}px">
-					<span class="tnum font-semibold">{hover.label}</span>
-				</div>
-			{/if}
 		</div>
 	{/if}
 </div>
