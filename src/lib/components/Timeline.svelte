@@ -3,21 +3,25 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 
-	let {
-		points = [],
-		density = [],
-		height = 360,
-		showLegend = true,
-		variant = 'full'
-	}: {
-		/** Per-source rows — the full variant draws one dot (and one link) each. */
-		points?: TimelinePoint[];
-		/** Year×category counts — the mini variant bins these into density bars. */
-		density?: TimelineDensityPoint[];
+	type TimelineProps = {
 		height?: number;
 		showLegend?: boolean;
-		variant?: 'full' | 'mini';
-	} = $props();
+	} & (
+		| {
+				/** Per-source rows — the full variant draws one dot (and one link) each. */
+				points: TimelinePoint[];
+				density?: never;
+				variant?: 'full';
+			}
+		| {
+				/** Year×category counts — the mini variant bins these into density bars. */
+				density: TimelineDensityPoint[];
+				points?: never;
+				variant: 'mini';
+			}
+	);
+
+	let { points = [], density = [], height = 360, showLegend = true, variant = 'full' }: TimelineProps = $props();
 
 	// Warm "archive" palette, by category.
 	const COLORS: Record<string, string> = {

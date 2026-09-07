@@ -466,7 +466,7 @@ export async function getTimelineDensity(): Promise<TimelineDensityPoint[]> {
 		.from(sources)
 		.where(and(activeSourcesOnly(), isNotNull(sources.yearStart)))
 		.groupBy(sources.yearStart, sources.category)
-		.orderBy(asc(sources.yearStart));
+		.orderBy(asc(sources.yearStart), asc(sources.category));
 	return rows.map((r) => ({ year: r.year as number, category: r.category, count: r.count }));
 }
 

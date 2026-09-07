@@ -1,0 +1,1 @@
+CREATE INDEX `sources_status_year_category_idx` ON `sources` (`status`,`year_start`,`category`);
