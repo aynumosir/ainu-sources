@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, follow" />
+		<meta name="theme-color" content="#f3ead6" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<title>%sveltekit.status% · Page unavailable · Ainu Sources</title>
+		<style>
+			:root {
+				font-family:
+					Inter, 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+				color: #2b2114;
+				background: #f4ecd9;
+			}
+
+			body {
+				display: grid;
+				min-height: 100vh;
+				min-height: 100svh;
+				margin: 0;
+				place-items: center;
+			}
+
+			main {
+				box-sizing: border-box;
+				width: min(100%, 36rem);
+				padding: 3rem 1.5rem;
+				text-align: center;
+			}
+
+			.status {
+				margin: 0;
+				color: #9a3d2c;
+				font-family: Spectral, 'Noto Serif JP', Georgia, serif;
+				font-size: clamp(4rem, 18vw, 6rem);
+				font-weight: 700;
+				line-height: 1;
+			}
+
+			h1 {
+				margin: 1rem 0 0;
+				font-family: Spectral, 'Noto Serif JP', Georgia, serif;
+				font-size: 1.5rem;
+			}
+
+			p {
+				margin: 0.75rem 0 0;
+				color: #44403c;
+				font-size: 0.875rem;
+				line-height: 1.6;
+			}
+
+			a {
+				display: inline-flex;
+				margin-top: 2rem;
+				border-radius: 0.375rem;
+				background: #843123;
+				color: white;
+				font-size: 0.875rem;
+				font-weight: 600;
+				padding: 0.7rem 1.25rem;
+				text-decoration: none;
+			}
+
+			a:hover,
+			a:focus-visible {
+				background: #69261a;
+			}
+
+			a:focus-visible {
+				outline: 3px solid #2b2114;
+				outline-offset: 3px;
+			}
+		</style>
+	</head>
+	<body>
+		<main id="content">
+			<p class="status" id="status">%sveltekit.status%</p>
+			<h1 id="title">Page unavailable</h1>
+			<p id="body">The page could not be loaded. Please try again.</p>
+			<a id="home" href="/">Back to the home page</a>
+		</main>
+		<script>
+			const localized = {
+				en: {
+					lang: 'en',
+					title: 'Page unavailable',
+					body: 'The page could not be loaded. Please try again.',
+					home: 'Back to the home page'
+				},
+				ja: {
+					lang: 'ja',
+					title: 'ページを表示できません',
+					body: 'ページを読み込めませんでした。もう一度お試しください。',
+					home: 'ホームへ戻る'
+				},
+				ru: {
+					lang: 'ru',
+					title: 'Страница недоступна',
+					body: 'Не удалось загрузить страницу. Попробуйте ещё раз.',
+					home: 'На главную'
+				},
+				ain: {
+					lang: 'en',
+					title: 'Page unavailable',
+					body: 'The page could not be loaded. Please try again.',
+					home: 'Back to the home page'
+				}
+			};
+			const segment = location.pathname.split('/').filter(Boolean)[0] || 'en';
+			const locale = Object.prototype.hasOwnProperty.call(localized, segment) ? segment : 'en';
+			const copy = localized[locale];
+			const prefix = locale === 'en' ? '' : `/${locale}`;
+
+			document.documentElement.lang = locale;
+			document.getElementById('content').lang = copy.lang;
+			document.getElementById('title').textContent = copy.title;
+			document.getElementById('body').textContent = copy.body;
+			document.getElementById('home').textContent = copy.home;
+			document.getElementById('home').href = prefix || '/';
+			document.title = `${document.getElementById('status').textContent} · ${copy.title} · Ainu Sources`;
+		</script>
+	</body>
+</html>

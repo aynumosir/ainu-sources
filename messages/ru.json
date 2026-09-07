@@ -235,5 +235,14 @@
 	"nav_audit": "Аудит",
 	"person_former_pen_name": "прежний псевдоним",
 	"person_other_name": "другое имя",
-	"person_alternative_reading": "другое чтение"
+	"person_alternative_reading": "другое чтение",
+	"error_401_title": "Требуется вход",
+	"error_401_body": "Войдите, чтобы просмотреть эту страницу.",
+	"error_403_title": "Доступ запрещён",
+	"error_403_body": "У вашей учётной записи нет доступа к этой странице.",
+	"error_404_title": "Страница не найдена",
+	"error_404_body": "Такой страницы нет или она переехала на другой адрес.",
+	"error_generic_title": "Произошла ошибка",
+	"error_generic_body": "Не удалось загрузить страницу. Попробуйте ещё раз.",
+	"error_back_home": "На главную"
 }
