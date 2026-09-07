@@ -34,6 +34,7 @@ it('links only credit parts that name exactly one active person', () => {
 		{ id: 's6', slug: 'corpus', author: '中川 裕', status: 'active', provenanceRepo: 'ainu-corpora' },
 		{ id: 's7', slug: 'merged-source', author: '中川 裕', status: 'merged', provenanceRepo: null },
 		{ id: 's8', slug: 'already-linked', author: '佐藤 知己', status: 'active', provenanceRepo: null },
+		{ id: 's11b', slug: 'linked-in-other-role', author: '中川 裕', status: 'active', provenanceRepo: null },
 		{ id: 's9', slug: 'glyph-variant', author: '未知の共著者、佐藤 知巳', status: 'active', provenanceRepo: null },
 		{ id: 's10', slug: 'marc-chain', author: '中川, 裕, 片山, 龍峯', status: 'active', provenanceRepo: 'ndl' },
 		{ id: 's11', slug: 'posthumous-window', author: '中川 裕', status: 'active', provenanceRepo: null, yearStart: 1923 },
@@ -42,7 +43,10 @@ it('links only credit parts that name exactly one active person', () => {
 	const plans = planCreditLinks({
 		personRows,
 		sourceRows,
-		edgeRows: [{ sourceId: 's8', personId: 'p2', role: 'author' }],
+		edgeRows: [
+			{ sourceId: 's8', personId: 'p2', role: 'author' },
+			{ sourceId: 's11b', personId: 'p1', role: 'speaker' }
+		],
 		aliasRows: [{ slug: 'sato-tomomi', aliases: [{ name: '佐藤 知巳' }] }]
 	});
 	const bySource = new Map(plans.map((p) => [p.sourceSlug, p]));
@@ -55,6 +59,7 @@ it('links only credit parts that name exactly one active person', () => {
 	expect(bySource.has('corpus')).toBe(false);
 	expect(bySource.has('merged-source')).toBe(false);
 	expect(bySource.has('already-linked')).toBe(false);
+	expect(bySource.has('linked-in-other-role')).toBe(false);
 	expect(bySource.get('glyph-variant')).toMatchObject({ personSlug: 'sato-tomomi', sortOrder: 0 });
 	expect(bySource.get('marc-chain')).toMatchObject({ personSlug: 'nakagawa-hiroshi', role: 'author' });
 	expect(bySource.has('posthumous-window')).toBe(true);

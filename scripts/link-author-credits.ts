@@ -138,7 +138,9 @@ export function planCreditLinks(input: {
 			add(alt.nameEn, p.id);
 		}
 	}
-	const existing = new Set(input.edgeRows.map((e) => `${e.sourceId}|${e.personId}|${e.role}`));
+	// Any edge to the person — whatever its role — already carries the credit;
+	// upgrading or splitting the role is a review decision, not a sweep.
+	const existing = new Set(input.edgeRows.map((e) => `${e.sourceId}|${e.personId}`));
 	const plans: CreditLinkPlan[] = [];
 	for (const s of input.sourceRows) {
 		if (s.status !== ACTIVE_SOURCE_STATUS || !s.author) continue;
@@ -171,7 +173,7 @@ export function planCreditLinks(input: {
 					: /編|監修|校訂/.test(name)
 						? 'editor'
 						: 'author';
-				if (existing.has(`${s.id}|${personId}|${role}`)) {
+				if (existing.has(`${s.id}|${personId}`)) {
 					seen.add(personId);
 					if (!chain) break;
 					continue;

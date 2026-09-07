@@ -700,6 +700,58 @@
       "note": "1994年11月24日の国会でのアイヌ語演説。資料の本体は萱野茂の発話。",
       "expectedAuthor": "萱野 茂",
       "checkedAt": "2026-09-07"
+    },
+    {
+      "id": "7033a7eb-2f17-4673-981c-ff90672c2934",
+      "sourceSlug": "1964-yoshiwara-ainu-go-shojiten-sono-ichi",
+      "sourceId": "648f5705-f7e9-469d-af6f-45e02d010f61",
+      "fromSlug": "yoshihara-katsumi",
+      "fromPersonId": "4443b699-db03-4018-b7a3-1f4432edc350",
+      "toSlug": null,
+      "role": "author",
+      "evidence": "https://db.aynu.org/ja/sources/1964-yoshiwara-ainu-go-shojiten-sono-ichi",
+      "note": "著者表示は（編）であり、編者としての関連がすでにあるため重複する著者関連を削除。",
+      "expectedAuthor": "吉原 克己(編)",
+      "checkedAt": "2026-09-07"
+    },
+    {
+      "id": "06280a4c-c785-45fa-a05a-3e97913cf407",
+      "sourceSlug": "2001-tamura-saru-hogen-onsei-shiryo-wa-teke-shin-yo",
+      "sourceId": "d33d31e4-ef62-4022-8fe7-24cab119de0f",
+      "fromSlug": "tamura-suzuko",
+      "fromPersonId": "c46bb3ca-4f2f-4887-8819-fdc63cf38a07",
+      "toSlug": null,
+      "role": "author",
+      "evidence": "https://db.aynu.org/ja/sources/2001-tamura-saru-hogen-onsei-shiryo-wa-teke-shin-yo",
+      "note": "著者表示は（編）であり、編者としての関連がすでにあるため重複する著者関連を削除。",
+      "expectedAuthor": "田村すず子(編)",
+      "checkedAt": "2026-09-07"
+    },
+    {
+      "id": "94aa66ed-6244-4ca1-805c-cdf89bf1254b",
+      "sourceSlug": "2002-tamura-saru-hogen-onsei-shiryo-wa-teke-shin-yo",
+      "sourceId": "5864dedd-5eeb-4b01-a70e-37057a18cd76",
+      "fromSlug": "tamura-suzuko",
+      "fromPersonId": "c46bb3ca-4f2f-4887-8819-fdc63cf38a07",
+      "toSlug": null,
+      "role": "author",
+      "evidence": "https://db.aynu.org/ja/sources/2002-tamura-saru-hogen-onsei-shiryo-wa-teke-shin-yo",
+      "note": "著者表示は（編）であり、編者としての関連がすでにあるため重複する著者関連を削除。",
+      "expectedAuthor": "田村すず子(編)",
+      "checkedAt": "2026-09-07"
+    },
+    {
+      "id": "f00cca20-c06c-4fcb-915c-2457e440327c",
+      "sourceSlug": "1995-murasaki-karafuto-ainu-go-kosho-shiryo",
+      "sourceId": "3a2b05c1-54bc-453e-8831-35c3037c933a",
+      "fromSlug": "murasaki-kyoko",
+      "fromPersonId": "e057bf3f-ac69-4f33-aae9-e25d23cb2e7c",
+      "toSlug": null,
+      "role": "author",
+      "evidence": "https://db.aynu.org/ja/sources/1995-murasaki-karafuto-ainu-go-kosho-shiryo",
+      "note": "著者表示は（編）であり、編者としての関連がすでにあるため重複する著者関連を削除。",
+      "expectedAuthor": "村崎恭子(編)",
+      "checkedAt": "2026-09-07"
     }
   ],
   "additions": [
