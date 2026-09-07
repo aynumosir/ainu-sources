@@ -3,25 +3,29 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 
-	const is404 = $derived(page.status === 404);
-	const title = $derived(is404 ? m.error_404_title() : m.error_generic_title());
-	const body = $derived(is404 ? m.error_404_body() : m.error_generic_body());
+	const copy = $derived.by(() => {
+		switch (page.status) {
+			case 401:
+				return { title: m.error_401_title(), body: m.error_401_body() };
+			case 403:
+				return { title: m.error_403_title(), body: m.error_403_body() };
+			case 404:
+				return { title: m.error_404_title(), body: m.error_404_body() };
+			default:
+				return { title: m.error_generic_title(), body: m.error_generic_body() };
+		}
+	});
 </script>
 
 <svelte:head>
-	<title>{page.status} · {title} · {m.site_short()}</title>
+	<title>{page.status} · {copy.title} · {m.site_short()}</title>
 	<meta name="robots" content="noindex, follow" />
 </svelte:head>
 
 <div class="mx-auto flex min-h-svh max-w-2xl flex-col items-center justify-center px-4 py-24 text-center">
-	<p class="font-serif text-7xl font-bold text-stone-300">{page.status}</p>
-	<h1 class="mt-4 font-serif text-2xl font-bold text-ink">{title}</h1>
-	<p class="mt-2 text-sm text-stone-500">{body}</p>
-	{#if page.error?.message && !is404}
-		<p class="mt-4 max-w-md rounded-md bg-stone-100 px-3 py-2 font-mono text-xs break-words text-stone-500">
-			{page.error.message}
-		</p>
-	{/if}
+	<p class="font-serif text-7xl font-bold text-brand-600">{page.status}</p>
+	<h1 class="mt-4 font-serif text-2xl font-bold text-ink">{copy.title}</h1>
+	<p class="mt-2 text-sm text-stone-700">{copy.body}</p>
 	<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 		<a
 			href={localizeHref('/')}
