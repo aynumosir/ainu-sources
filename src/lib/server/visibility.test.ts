@@ -182,6 +182,65 @@ describe('status-aware reads — only active sources / accepted relations leak t
 		expect(pts.map((p) => p.slug).sort()).toEqual(['active-two', 'winner']);
 	});
 
+	it('getTimelineDensity groups active dated sources by year and category', async () => {
+		await db.insert(schema.sources).values([
+			{
+				id: 'density-primary',
+				slug: 'density-primary',
+				title: 'Second Primary Work',
+				category: 'primary',
+				type: 'book',
+				yearStart: 1900,
+				status: 'active'
+			},
+			{
+				id: 'density-corpus',
+				slug: 'density-corpus',
+				title: 'Corpus Work',
+				category: 'corpus',
+				type: 'corpus-text',
+				yearStart: 1900,
+				status: 'active'
+			},
+			{
+				id: 'density-undated',
+				slug: 'density-undated',
+				title: 'Undated Work',
+				category: 'primary',
+				type: 'book',
+				yearStart: null,
+				status: 'active'
+			}
+		]);
+
+		expect(await queries.getTimelineDensity()).toEqual([
+			{ year: 1900, category: 'corpus', count: 1 },
+			{ year: 1900, category: 'primary', count: 2 },
+			{ year: 1905, category: 'secondary', count: 1 }
+		]);
+	});
+
+	it('getTimelineDensity uses its covering index without temporary B-trees', async () => {
+		const client = createClient({ url: `file:${DB_PATH}` });
+		try {
+			const plan = await client.execute(`
+				EXPLAIN QUERY PLAN
+				SELECT year_start, category, count(*)
+				FROM sources
+				WHERE status = 'active' AND year_start IS NOT NULL
+				GROUP BY year_start, category
+				ORDER BY year_start ASC, category ASC
+			`);
+			const details = plan.rows.map((row) => String(row.detail));
+			expect(details.join('\n')).toContain(
+				'USING COVERING INDEX sources_status_year_category_idx'
+			);
+			expect(details.some((detail) => detail.includes('USE TEMP B-TREE'))).toBe(false);
+		} finally {
+			client.close();
+		}
+	});
+
 	it('getMapPlaces counts only active sources per place', async () => {
 		const places = await queries.getMapPlaces();
 		expect(places.find((p) => p.slug === 'pl1')?.sourceCount).toBe(1); // W only, not H

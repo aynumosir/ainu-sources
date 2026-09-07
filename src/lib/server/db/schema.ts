@@ -142,6 +142,7 @@ export const sources = sqliteTable(
 		index('sources_region_idx').on(t.region),
 		index('sources_year_idx').on(t.yearStart),
 		index('sources_status_idx').on(t.status),
+		index('sources_status_year_category_idx').on(t.status, t.yearStart, t.category),
 		index('sources_merged_into_idx').on(t.mergedIntoSourceId),
 		index('sources_content_hash_idx').on(t.contentHash),
 		// Catalog sort orders — without these, sort=title/significance on
