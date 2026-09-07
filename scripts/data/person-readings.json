@@ -4197,16 +4197,19 @@
     ],
     "name": "呉 松旆",
     "expected": {
-      "nameEn": null
+      "nameEn": "Wu Sung-Pei",
+      "nameKana": null
     },
     "corrected": {
-      "nameEn": "Wu Sung-Pei"
+      "nameEn": "Siông-phài Ngôo",
+      "nameKana": "ご しょうはい"
     },
-    "checkedAt": "2026-09-05",
+    "checkedAt": "2026-09-07",
     "sources": [
-      "https://cir.nii.ac.jp/crid/1520577741138402560"
+      "https://cir.nii.ac.jp/crid/1520577741138402560",
+      "https://researchmap.jp/wusungpei"
     ],
-    "note": "当該論文の英文著者名。日本語音読Go Shohaiは採用しない。"
+    "note": "2026-09-05は当該論文の英文著者名Wu Sung-Peiを採用し日本語音読は不採用とした。2026-09-07に本人researchmap(登録論文を業績一覧に含む)が「ゴ ショウハイ (Siông-phài Ngôo)」を併記しているのを確認し、かなと本人による閩南語綴りを採用。"
   },
   {
     "slugs": [
@@ -5587,16 +5590,19 @@
     ],
     "name": "南 収",
     "expected": {
-      "nameEn": null
+      "nameEn": "Minami Osamu",
+      "nameKana": null
     },
     "corrected": {
-      "nameEn": "Minami Osamu"
+      "nameEn": "Minami Osamu",
+      "nameKana": "みなみ おさむ"
     },
-    "checkedAt": "2026-09-06",
+    "checkedAt": "2026-09-07",
     "sources": [
-      "https://sapmed.repo.nii.ac.jp/record/7967/files/n0441079352103.pdf"
+      "https://sapmed.repo.nii.ac.jp/record/7967/files/n0441079352103.pdf",
+      "https://dl.ndl.go.jp/pid/11626449"
     ],
-    "note": "本人共著の北海道立衛生研究所報にOsamu Minami。姉帯・村木・安田との共著および伝承植物研究で同定。かな明示は未確認。"
+    "note": "2026-09-06は英文署名Osamu Minamiからローマ字のみ設定。2026-09-07に同シリーズ第4報(NDLデジタル)の署名「姉帯正樹・南収・矢野昭起 / Masaki Anetai, Osamu Minami and Shoki Yano」から転写し、かな「みなみ おさむ」を追加。"
   },
   {
     "slugs": [
@@ -8712,5 +8718,777 @@
       "https://www.jstage.jst.go.jp/article/jnlp/28/3/28_824/_pdf"
     ],
     "note": "登録論文の署名Kohei Matsuuraをかなに転記。"
+  },
+  {
+    "slugs": [
+      "oni-haruto"
+    ],
+    "name": "鬼 春人",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Oni Haruto"
+    },
+    "corrected": {
+      "nameKana": "おに はるひと",
+      "nameEn": "Oni Haruhito"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA08556657"
+    ],
+    "note": "NDL典拠(00061402)はオニ,ハルト。追悼文題名のシュンジンという異読があり、CiNii典拠と古稀記念論集を採用。CiNii Books著者典拠「鬼, 春人／オニ, ハルヒト」。著書に吉展ちゃん事件の犯人(1965)、ナウカ刊行書(1968)、ロシヤ・ソヴェートの文化と科学=鬼春人先生古稀記念論集(1979)"
+  },
+  {
+    "slugs": [
+      "p-14v1ctr"
+    ],
+    "name": "本田 克代",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ほんだ かつよ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18398202",
+      "https://id.ndl.go.jp/auth/ndlna/001186632"
+    ],
+    "note": "登録著作の千島クナシリ地名研究と根室で一致。CiNii Books典拠「本田, 克代／ホンダ, カツヨ」別名Honda, Katsuyo。著書に根室市の地名(根室市地名研究会 2015)、柳田文庫目録(2014)"
+  },
+  {
+    "slugs": [
+      "kaizawa-turushino"
+    ],
+    "name": "貝澤 とぅるしの",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かいざわ とぅるしの"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18475052"
+    ],
+    "note": "CiNii Books典拠「貝沢, とぅるしの／カイザワ, トゥルシノ」。炎の馬=アイヌ民話集(1977)の語り手"
+  },
+  {
+    "slugs": [
+      "nabesawa-nepuki"
+    ],
+    "name": "鍋澤 ねぷき",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "なべさわ ねぷき"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18475110"
+    ],
+    "note": "CiNii Books典拠「鍋沢, ねぷき／ナベサワ, ネプキ」。炎の馬=アイヌ民話集(1977)の語り手"
+  },
+  {
+    "slugs": [
+      "murakami-keiji"
+    ],
+    "name": "村上 啓司",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "むらかみ けいじ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18366115"
+    ],
+    "note": "登録著作の森林植物とアイヌ語地名シリーズと北海道自然保護協会で一致。CiNii Books典拠「村上, 啓司／ムラカミ, ケイジ」。北海道自然保護読本(1992)執筆"
+  },
+  {
+    "slugs": [
+      "sato-genrokuro"
+    ],
+    "name": "佐藤 玄六郎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さとう げんろくろう"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA08618991"
+    ],
+    "note": "別名典拠に佐藤, 玄六郎行信(サトウ, ゲンロクロウ ユキノブ)。CiNii Books典拠「佐藤, 玄六郎／サトウ, ゲンロクロウ」。蝦夷拾遺関連書(北光書房1943ほか)"
+  },
+  {
+    "slugs": [
+      "kunen"
+    ],
+    "name": "空念",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "くうねん"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/01230875.json"
+    ],
+    "note": "典拠は読み推量の注記付き。狄言葉(登録資料)と同一人物。NDL典拠「空念, -1731／クウネン」。松前・蝦夷地納経記の廻国僧"
+  },
+  {
+    "slugs": [
+      "shinohara-chika"
+    ],
+    "name": "篠原 智花",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "しのはら ちか"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://id.ndl.go.jp/auth/ndlna/001263221"
+    ],
+    "note": "典拠に名称推量の注記。北海道立北方民族博物館学芸員で登録著作と一致。NDL典拠「篠原, 智花／シノハラ, チカ」。著書The world of tonkori(2017)"
+  },
+  {
+    "slugs": [
+      "kitakaze-isokichi"
+    ],
+    "name": "北風 磯吉",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "きたかぜ いそきち"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://ci.nii.ac.jp/author/DA18303975"
+    ],
+    "note": "カタログの生没年1880–1969と1970年刊行の死後出版が一致。CiNii Books典拠「北風, 磯吉／キタカゼ, イソキチ」。著書アイヌの民俗(1970)"
+  },
+  {
+    "slugs": [
+      "iguchi-toshio"
+    ],
+    "name": "井口 利夫",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いぐち としお"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=15589&domain=ezo",
+      "https://id.ndl.go.jp/auth/ndlna/001176765"
+    ],
+    "note": "法政大学アイヌ語地名研究DB書誌の著者欄「井口　利夫（いぐち　としお）」(アイヌ語地名研究6、厚岸のモイワについて、2003)。NDL典拠も同一読み"
+  },
+  {
+    "slugs": [
+      "cjyet-yo"
+    ],
+    "name": "于 拙",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ウ セツ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://researchmap.jp/yocjyet"
+    ],
+    "note": "学位論文『アイヌ語コーパスの構築…』の本人確認済み。中国名のためカタカナ表記。researchmap氏名欄「于 拙 (Cjyet Yo)」にカタカナ読み「ウ セツ」を併記。大阪大学大学院人文学研究科、研究キーワードにアイヌ語"
+  },
+  {
+    "slugs": [
+      "maruno-kazuko"
+    ],
+    "name": "丸野 和子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まるの かずこ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "http://aynuitak.g2.xrea.com/malnovatitolo/AT20_titoloj.htm"
+    ],
+    "note": "登録コーパス(アイヌタイムズ)自身の発行アーカイブのローマ字署名から転写。アイヌタイムズエスペラント版アーカイブ15-2「クマ トゥラノ カン」署名「丸野 和子（沙流・千歳）MARUNO Kazuko /Saru-Cxitose dialekto」"
+  },
+  {
+    "slugs": [
+      "hamada-takashi"
+    ],
+    "name": "浜田 隆史",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "はまだ たかし"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "http://aynuitak.g2.xrea.com/malnovatitolo/AT20_titoloj.htm",
+      "https://otarunay.at-ninja.jp/"
+    ],
+    "note": "ラグタイムギタリストとアイヌタイムズ編集者の同一性を本人サイトで確認。本人サイト(オタルナイ・レコード)の自己紹介「アイヌタイムズの編集責任者」。エスペラント版総目録15-11の署名「浜田 隆史 HAMADA Takasxi」"
+  },
+  {
+    "slugs": [
+      "igarashi-ryo"
+    ],
+    "name": "五十嵐 涼",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いがらし りょう"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://aclanthology.org/2024.nlp4dh-1.40/"
+    ],
+    "note": "登録作品自体のローマ字署名から転写。ACL Anthology登録論文の著者欄「Ryo Igarashi」(JAIST)"
+  },
+  {
+    "slugs": [
+      "sakuma-manabu"
+    ],
+    "name": "佐久間 学",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さくま まなぶ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/aija/80/707/80_167/_pdf/-char/ja"
+    ],
+    "note": "登録作品自体のローマ字署名から転写。登録論文(日本建築学会計画系論文集)PDF英文署名「Manabu SAKUMA and Hisao HABUKA」、和文署名「佐久間 学 札幌市立大学大学院デザイン研究科」"
+  },
+  {
+    "slugs": [
+      "saga-ayami"
+    ],
+    "name": "佐賀 彩美",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "さが あやみ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.hkk.or.jp/kouhou/file/no663_series-ainu.pdf"
+    ],
+    "note": "北海道開発技術センター調査研究部研究員、アイヌ文化を読む会担当。北海道開発協会広報誌連載見出し「私がアイヌ文化にはまったわけ 佐賀 彩美（さが あやみ）」"
+  },
+  {
+    "slugs": [
+      "p-1babm4k"
+    ],
+    "name": "兼俊明夫",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "かねとし あきお",
+      "nameEn": "Akio Kanetoshi"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.iph.pref.hokkaido.jp/Kankobutsu/Shoho/annual46/shoho460206.pdf"
+    ],
+    "note": "登録作品自体の英文署名から転写。姓は兼俊(かねとし)。北海道立衛生研究所道衛研所報46(登録著作)PDF署名「兼俊 明夫 …Toru Fujimoto, Akio Kanetoshi, Masaki Anetai」"
+  },
+  {
+    "slugs": [
+      "kato-daiki"
+    ],
+    "name": "加藤 大樹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "かとう だいき"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.ieice.org/publications/conference-FIT-DVDs/FIT2002/pdf/E/E_49.PDF"
+    ],
+    "note": "登録作品自体のローマ字署名から転写。登録著作(FIT2002講演論文集E-49)の署名「加藤大樹 / Daiki Kato / 越前谷博…」"
+  },
+  {
+    "slugs": [
+      "oikawa-akihiko"
+    ],
+    "name": "及川 明彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おいかわ あきひこ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9753&domain=ezo"
+    ],
+    "note": "法政大学アテルイDB書誌の著者欄「及川　明彦（おいかわ　あきひこ）」(久慈地区のアイヌ語地名について)"
+  },
+  {
+    "slugs": [
+      "mega-junya"
+    ],
+    "name": "女鹿 潤哉",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "めが じゅんや"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://aterui.ws.hosei.ac.jp/togo/detail.php?id=9753&domain=ezo"
+    ],
+    "note": "同著者欄「女鹿　潤哉（めが　じゅんや）」"
+  },
+  {
+    "slugs": [
+      "yoshida-erika"
+    ],
+    "name": "吉田 恵理佳",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よしだ えりか"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.tufs.ac.jp/ts/personal/kazama/Journal.html"
+    ],
+    "note": "登録作品自体のページのローマ字署名から転写。東外大風間ゼミ論集『思言』第9号の署名「吉田恵理佳(YOSHIDA Erika) アイヌ語の被抱合名詞に関する一考察」"
+  },
+  {
+    "slugs": [
+      "yamaguchi-shinju"
+    ],
+    "name": "山口 伸樹",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "やまぐち のぶき",
+      "nameEn": "Yamaguchi Nobuki"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://opac.ll.chiba-u.jp/da/curator/900040762/"
+    ],
+    "note": "千葉大学CURATOR書誌(登録論文)のCreator欄「山口, 伸樹」別表記「ヤマグチ, ノブキ Yamaguchi, Nobuki」"
+  },
+  {
+    "slugs": [
+      "hirosawa"
+    ],
+    "name": "廣澤",
+    "expected": {
+      "nameKana": null,
+      "name": "廣澤",
+      "nameEn": "Hirosawa"
+    },
+    "corrected": {
+      "nameKana": "ひろさわ しんたろう",
+      "name": "廣澤 慎太郎",
+      "nameEn": "Shintaro Hirosawa"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://researchmap.jp/hirosawa.shintaro",
+      "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99070/"
+    ],
+    "note": "登録論文の北大リポジトリ記録「廣澤, 慎太郎」とresearchmap氏名欄「ヒロサワ シンタロウ (Shintaro Hirosawa)」から氏名を補完し、かなを設定。登録論文(ruwe neの用法)と完全一致"
+  },
+  {
+    "slugs": [
+      "okada-yuki"
+    ],
+    "name": "岡田 勇樹",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おかだ ゆうき"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://fmpipausi.sakura.ne.jp/menu.html",
+      "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/94493/"
+    ],
+    "note": "FMピパウシ掲載の北海道新聞記事見出し「アイヌ文化の担い手を育成 岡田勇樹（おかだゆうき）さん」。北大リポジトリにも「岡田, 勇樹 / Okada, Yuki」"
+  },
+  {
+    "slugs": [
+      "p-1cy2d4k"
+    ],
+    "name": "小川 広",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おがわ ひろし",
+      "nameEn": "Hiroshi Ogawa"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.iph.pref.hokkaido.jp/Kankobutsu/Shoho/annual46/shoho460204.pdf"
+    ],
+    "note": "登録作品自体のローマ字署名から転写。登録著作(北海道立衛生研究所所報46、第1報)の英文著者欄「Masaki Anetai, Hiroshi Ogawa, Takaaki Hayashi」—Ogawaは小川広のみで対応は一意"
+  },
+  {
+    "slugs": [
+      "ogawa-masayo"
+    ],
+    "name": "小川 昌代",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "おがわ まさよ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "http://aynuitak.g2.xrea.com/malnovatitolo/AT60_titoloj.htm"
+    ],
+    "note": "登録コーパス誌自身の総目次のローマ字表記(ux=ŭ)から転写。アイヌタイムズ公式エスペラント版総目次60号「小川 昌代（沙流・千歳） OGAUxA Masajo」"
+  },
+  {
+    "slugs": [
+      "yamada-hayo"
+    ],
+    "name": "山田 ハヨ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "やまだ はよ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://lingdy.aa-ken.jp/elpr/bibliography.html"
+    ],
+    "note": "話者。ローマ字表記から転写。登録資料(田村すず子採録ELPR A2-039)公式英文目録の情報提供者欄「Hayo Yamada」"
+  },
+  {
+    "slugs": [
+      "p-ynb2tw"
+    ],
+    "name": "徹辺 重次郎",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "てしべ じゅうじろう",
+      "nameEn": "Jujiro Teshibe"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://lingdy.aa-ken.jp/elpr/bibliography.html"
+    ],
+    "note": "話者。ローマ字表記から転写。同目録の情報提供者欄「Jujiro Teshibe」"
+  },
+  {
+    "slugs": [
+      "nishikiya-tadashi"
+    ],
+    "name": "錦谷 禎",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "にしきや ただし"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/jssdj/1971/14/1971_KJ00007022738/_pdf/-char/en"
+    ],
+    "note": "登録作品自体のローマ字署名から転写。登録論文(装飾学会誌、アイヌ文様の始源とその構成No.3)第1頁の署名「錦 谷 禎」「Tadashi Nishikiya」"
+  },
+  {
+    "slugs": [
+      "nagao-yuka"
+    ],
+    "name": "長尾 優花",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ながお ゆか"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/94277/"
+    ],
+    "note": "北大リポジトリ(登録論文)書誌の著者欄「長尾, 優花 / Nagao, Yuka」"
+  },
+  {
+    "slugs": [
+      "nagahama-seizo"
+    ],
+    "name": "長濱 清蔵",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "ながはま せいぞう"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.hanmoto.com/bd/isbn/9784911029169"
+    ],
+    "note": "登録作品そのものの書名に含まれる人名の読み。出版社提供データの書名ルビ「長濱清蔵のアイヌ語 (ナガハマセイゾウノアイヌゴ)」"
+  },
+  {
+    "slugs": [
+      "ishikawa-mikaho"
+    ],
+    "name": "石川 美香穂",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いしかわ みかほ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.allcinema.net/person/734484"
+    ],
+    "note": "脚本家。ウポポイ展示脚本で登録作品と照合。allcinema人物欄「石川美香穂」「いしかわ・みかほ」。北方民族博物館研究紀要34号謝辞の樺太アイヌ語の会会員「石川美香穂（脚本家）」と同一人"
+  },
+  {
+    "slugs": [
+      "inagaki-katsuhiko"
+    ],
+    "name": "稲垣 克彦",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いながき かつひこ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://hyouka04.asahikawa-med.ac.jp/html/100000229_ja.html"
+    ],
+    "note": "アイヌタイムズ執筆者・FMピパウシ日本語担当の活動と照合。旭川医科大学研究者詳細の氏名欄「イナガキ カツヒコ 稲垣 克彦 INAGAKI Katsuhiko」。同プロフィールに「DNA解析と『アイヌ民族否定論』」掲載"
+  },
+  {
+    "slugs": [
+      "taniguchi-mamoru"
+    ],
+    "name": "谷口 守",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "たにぐち まもる"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://ronbun.nijl.ac.jp/kokubun/01275958"
+    ],
+    "note": "都市計画研究者・音楽家の同名人物とは別人。国文学・アーカイブズ学論文DB「執筆者名: 谷口守」「執筆者名（よみ）: たにぐちまもる」。登録作品も同誌(国語論集)連載"
+  },
+  {
+    "slugs": [
+      "toshima-taneranke"
+    ],
+    "name": "遠島 タネランケ",
+    "expected": {
+      "nameKana": null,
+      "nameEn": "Tōshima Taneranke"
+    },
+    "corrected": {
+      "nameKana": "としま タネランケ",
+      "nameEn": "Toshima Taneranke"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://web.archive.org/web/20241219100757/https://ainu-center.hm.pref.hokkaido.lg.jp/kankou/kiyou/pdf/kiyou15-02.pdf"
+    ],
+    "note": "本文に遠島タネランケ氏（1887-1970）。北海道立アイヌ民族文化研究センター研究紀要15号42頁注7「茶師野ツルヨ氏口碑、増田又喜氏記録中のルビなどから判断して、遠島は「としま」と読む」(多田康之氏ご教示)"
+  },
+  {
+    "slugs": [
+      "p-15p4zpg"
+    ],
+    "name": "鈴木 華織",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "すずき かおり"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://note.com/bellwoodgao3d/n/nb64a67a319fd"
+    ],
+    "note": "本人の中上健次論ページのタイトル「すずきかおり（鈴木華織）」。法政大学大学院発表者(中上健次研究)と照合"
+  },
+  {
+    "slugs": [
+      "arai-kaori"
+    ],
+    "name": "新井 かおり",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "あらい かおり"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/jjoha/19/0/19_167/_article/-char/en"
+    ],
+    "note": "登録論文(アイヌプリと研究)英語版著者欄「Kaori Arai」。J-GLOBAL検索結果に「アライ カオリ」"
+  },
+  {
+    "slugs": [
+      "yi-chi-hang"
+    ],
+    "name": "李志恒",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "い ちはん"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://rishiri-town.jp/教育/利尻町博物館/利尻の自然・歴史/歴史/"
+    ],
+    "note": "利尻町博物館歴史トピックス「李志恒（いちはん）の日記「漂舟録」」(1696年漂着の朝鮮人)"
+  },
+  {
+    "slugs": [
+      "matsushima-tomi"
+    ],
+    "name": "松島 トミ",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "まつしま とみ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.hm.pref.hokkaido.lg.jp/wp-content/uploads/2025/01/bulletin_ACRC_vol7_03_p041_050.pdf"
+    ],
+    "note": "話者。論文中のローマ字表記から転写。登録資料(アイヌ口承文芸―夫に浮気された女―)英文要旨「Ms. MATSUSHIMA Tomi (1922-2010)」"
+  },
+  {
+    "slugs": [
+      "yokoyama-hiroyuki"
+    ],
+    "name": "横山 裕之",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よこやま ひろゆき"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "http://aynuitak.g2.xrea.com/malnovatitolo/AT20_titoloj.htm",
+      "https://www.hokkajda-esp-ligo.jp/jp/jek99/ajnua_lingvo/ajnua_lingvo.pdf"
+    ],
+    "note": "登録コーパス誌自身のアーカイブのローマ字署名から転写。アイヌタイムズ公式エスペラント版総目次11-2の署名「横山 裕之（沙流・千歳）JOKOJAMA Hirojuki」。エスペラント連盟資料の文責「横山裕之（北海道エスペラント連盟員）」"
+  },
+  {
+    "slugs": [
+      "yokohira-hiroshi"
+    ],
+    "name": "横平 弘",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "よこひら ひろし"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.jstage.jst.go.jp/article/journalhs1981/5/0/5_0_243/_pdf/-char/en"
+    ],
+    "note": "1985年論文(地耐力からみた札幌市の都市化過程)の署名「by Hiroshi Yokohira」。所属が道都短期大学で登録作品と一致"
+  },
+  {
+    "slugs": [
+      "ikeda-yuko"
+    ],
+    "name": "池田 裕子",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "いけだ ゆうこ"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.u-tokai.ac.jp/facultyguide/faculty/3841/"
+    ],
+    "note": "東海大学教員研究者ガイド「池田 裕子 イケダ ユウコ」研究キーワード樺太・日本教育史(登録論文と一致)"
+  },
+  {
+    "slugs": [
+      "p-1dcznn"
+    ],
+    "name": "沖野 慎二",
+    "expected": {
+      "nameKana": null,
+      "nameEn": null
+    },
+    "corrected": {
+      "nameKana": "おきの しんじ",
+      "nameEn": "Okino Shinji"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://nrid.nii.ac.jp/ja/nrid/1000050250494/"
+    ],
+    "note": "KAKEN研究者ページ見出し「沖野 慎二 OKINO Shinji」。研究課題「札幌農学校とアイヌ民族学との関わりについての歴史的研究」"
+  },
+  {
+    "slugs": [
+      "watanabe-kaori"
+    ],
+    "name": "渡邊香織",
+    "expected": {
+      "nameKana": null
+    },
+    "corrected": {
+      "nameKana": "わたなべ かおり"
+    },
+    "checkedAt": "2026-09-07",
+    "sources": [
+      "https://www.hanmoto.com/bd/isbn/9784411031464"
+    ],
+    "note": "版元ドットコム著者欄「渡邊 香織 ( ワタナベ カオリ )」。著者略歴は千葉大学大学院人文公共学府(登録論文のアイヌ語教育研究と同一大学)"
   }
 ]
