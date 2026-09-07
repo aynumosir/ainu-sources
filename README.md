@@ -146,7 +146,10 @@ with reader, vocabulary, and TEI URLs (`[]` when no match is known).
 Run `bun run records:sync` to refresh `src/lib/records-index.json` from ERDAL's
 published `/x/index.json`. The command validates catalogue identities against the
 public catalogue export, resolves retired slugs, and rejects missing identities
-or malformed data before replacing the snapshot. Commit the refreshed metadata
+or malformed data before replacing the snapshot. Redirects and duplicate catalogue
+identities are rejected. The validated snapshot is written to a temporary sibling
+file and atomically renamed, preserving the existing file if writing fails.
+Commit the refreshed metadata
 with the site change. Page rendering uses this snapshot without remote requests;
 counts reflect the last refresh. No transcription content is copied. ERDAL
 credits the contributors and documents the transcription and image terms.

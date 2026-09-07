@@ -41,15 +41,19 @@ export function projectRecordsIndex(input: unknown, catalogue: unknown): { sourc
 	if (!Array.isArray(catalogue)) throw new Error('Expected catalogue array');
 	const aliases = new Map<string, string>();
 	const terminals = new Set<string>();
+	const setAlias = (name: string, target: string) => {
+		if (aliases.has(name)) throw new Error(`Duplicate catalogue identity: ${name}`);
+		aliases.set(name, target);
+	};
 	for (const value of catalogue) {
 		const row = object(value);
 		if (!['active', 'deprecated', 'merged'].includes(str(row.status))) continue;
 		const name = slug(row.slug);
 		const target = row.status === 'merged' ? slug(row.merged_into_slug) : name;
-		aliases.set(name, target);
+		setAlias(name, target);
 		if (row.status !== 'merged') terminals.add(name);
 		if (!Array.isArray(row.old_slugs)) throw new Error('Expected old_slugs');
-		for (const old of row.old_slugs) aliases.set(slug(old), target);
+		for (const old of row.old_slugs) setAlias(slug(old), target);
 	}
 	const resolve = (v: unknown) => {
 		const name = slug(v);

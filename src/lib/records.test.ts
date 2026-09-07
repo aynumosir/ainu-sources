@@ -49,6 +49,18 @@ describe('records snapshot validation', () => {
 			expect(() => projectRecordsIndex({ sources: [{ ...source, catalogue: 'merged' }] }, [...catalogue, { ...merged, merged_into_slug: target }])).toThrow();
 		}
 	});
+	it('rejects duplicate current and retired catalogue identities regardless of row order', () => {
+		for (const row of [
+			{ slug: 'current', status: 'active', old_slugs: [] },
+			{ slug: 'other', status: 'active', old_slugs: ['retired'] },
+			{ slug: 'retired', status: 'active', old_slugs: [] },
+			{ slug: 'other', status: 'active', old_slugs: ['current'] }
+		]) {
+			for (const rows of [[...catalogue, row], [row, ...catalogue]]) {
+				expect(() => projectRecordsIndex({ sources: [source] }, rows)).toThrow('Duplicate catalogue identity');
+			}
+		}
+	});
 	it('keeps every published work reachable by its catalogue identity', () => {
 		for (const record of earlyRecords) expect(recordsForCatalogue(record.catalogue)).toContainEqual(record);
 	});
