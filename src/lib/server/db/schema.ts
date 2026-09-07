@@ -143,6 +143,7 @@ export const sources = sqliteTable(
 		index('sources_year_idx').on(t.yearStart),
 		index('sources_status_idx').on(t.status),
 		index('sources_status_year_category_idx').on(t.status, t.yearStart, t.category),
+		index('sources_sitemap_idx').on(t.status, t.slug, t.updatedAt),
 		index('sources_merged_into_idx').on(t.mergedIntoSourceId),
 		index('sources_content_hash_idx').on(t.contentHash),
 		// Catalog sort orders — without these, sort=title/significance on
@@ -224,6 +225,7 @@ export const persons = sqliteTable(
 	},
 	(t) => [
 		uniqueIndex('persons_slug_idx').on(t.slug),
+		index('persons_sitemap_idx').on(t.status, t.slug, t.updatedAt),
 		// partial unique: only enforced where orcid is set (column is new/empty → safe)
 		uniqueIndex('persons_orcid_idx')
 			.on(t.orcid)
@@ -289,7 +291,10 @@ export const places = sqliteTable(
 		firstSeenAt: integer('first_seen_at', { mode: 'timestamp_ms' }),
 		lastSeenAt: integer('last_seen_at', { mode: 'timestamp_ms' })
 	},
-	(t) => [uniqueIndex('places_slug_idx').on(t.slug)]
+	(t) => [
+		uniqueIndex('places_slug_idx').on(t.slug),
+		index('places_sitemap_idx').on(t.status, t.slug)
+	]
 );
 
 export const sourcePlaces = sqliteTable(
@@ -350,6 +355,7 @@ export const institutions = sqliteTable(
 	},
 	(t) => [
 		uniqueIndex('institutions_slug_idx').on(t.slug),
+		index('institutions_sitemap_idx').on(t.status, t.slug),
 		// partial unique: only enforced where ror is set (column is new/empty → safe)
 		uniqueIndex('institutions_ror_idx')
 			.on(t.ror)

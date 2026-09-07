@@ -1,8 +1,12 @@
 import type { RequestHandler } from './$types';
-import { urlsetXml, xmlResponse, type SitemapEntry } from '$lib/server/sitemap';
+import { SITE_ORIGIN } from '$lib/seo';
+import {
+	sitemapQueryRedirect,
+	urlsetXml,
+	xmlResponse,
+	type SitemapEntry
+} from '$lib/server/sitemap';
 
-/** Fixed catalogue pages (directories and views). Detail pages live in the
- *  sources / entities children. */
 const staticPages: SitemapEntry[] = [
 	{ path: '/', changefreq: 'daily', priority: 1.0 },
 	{ path: '/sources', changefreq: 'daily', priority: 0.9 },
@@ -16,4 +20,4 @@ const staticPages: SitemapEntry[] = [
 ];
 
 export const GET: RequestHandler = async ({ url }) =>
-	xmlResponse(urlsetXml(url.origin, staticPages));
+	sitemapQueryRedirect(url) ?? xmlResponse(urlsetXml(SITE_ORIGIN, staticPages));
