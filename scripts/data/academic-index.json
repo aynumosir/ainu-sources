@@ -36041,8 +36041,15 @@
       "岸本 宜久"
     ],
     "venue": "北方言語研究",
-    "url": "https://cir.nii.ac.jp/crid/1390026491503704320",
-    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99352/13_Kishimoto.pdf"
+    "url": "https://doi.org/10.14943/2115.99352",
+    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99352/13_Kishimoto.pdf",
+    "links": [
+      {
+        "type": "website",
+        "url": "https://cir.nii.ac.jp/crid/1390026491503704320",
+        "label": "北方言語研究"
+      }
+    ]
   },
   {
     "source": "cinii",
@@ -37732,8 +37739,15 @@
       "小野 洋平"
     ],
     "venue": "北方言語研究",
-    "url": "https://cir.nii.ac.jp/crid/1390589441457124736",
-    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99347/09_Fukazawa_Ono.pdf"
+    "url": "https://doi.org/10.14943/2115.99347",
+    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99347/09_Fukazawa_Ono.pdf",
+    "links": [
+      {
+        "type": "website",
+        "url": "https://cir.nii.ac.jp/crid/1390589441457124736",
+        "label": "北方言語研究"
+      }
+    ]
   },
   {
     "source": "cinii",
@@ -40986,8 +41000,15 @@
       "廣澤 慎太郎"
     ],
     "venue": "アイヌ・先住民研究",
-    "url": "https://cir.nii.ac.jp/crid/1390307746620053632",
-    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99070/06_6_p63-94.pdf"
+    "url": "https://doi.org/10.14943/Jais.6.063",
+    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99070/06_6_p63-94.pdf",
+    "links": [
+      {
+        "type": "website",
+        "url": "https://cir.nii.ac.jp/crid/1390307746620053632",
+        "label": "アイヌ・先住民研究"
+      }
+    ]
   },
   {
     "source": "cinii",
@@ -95686,9 +95707,16 @@
       "フダー クラーラ"
     ],
     "venue": "言語科学研究",
-    "url": "https://hdl.handle.net/2115/99129",
+    "url": "https://doi.org/10.14943/2115.99129",
     "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99129/03_08.pdf",
-    "category": "secondary"
+    "category": "secondary",
+    "links": [
+      {
+        "type": "website",
+        "url": "https://hdl.handle.net/2115/99129",
+        "label": "言語科学研究"
+      }
+    ]
   },
   {
     "source": "wlg",
@@ -95737,9 +95765,16 @@
       "Silja Maria Ijas"
     ],
     "venue": "Hokkaido University",
-    "url": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99806/",
+    "url": "https://doi.org/10.14943/doctoral.k16962",
     "pdf": null,
-    "category": "secondary"
+    "category": "secondary",
+    "links": [
+      {
+        "type": "website",
+        "url": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99806/",
+        "label": "Hokkaido University"
+      }
+    ]
   },
   {
     "source": "journalfi",
