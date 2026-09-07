@@ -1038,7 +1038,7 @@ export const CORPUS_META: Record<string, { slug: string; titleEn: string }> = {
 // Language-code → 3-letter meta-language, accepting both 2-letter (CiNii/Crossref)
 // and 3-letter (researchmap) tags. seed.ts's `META_LANG`, verbatim.
 export const META_LANG: Record<string, string> = {
-	en: 'eng', eng: 'eng', ja: 'jpn', jpn: 'jpn', ru: 'rus', rus: 'rus',
+	fi: 'fin', fin: 'fin', en: 'eng', eng: 'eng', ja: 'jpn', jpn: 'jpn', ru: 'rus', rus: 'rus',
 	de: 'deu', deu: 'deu', fr: 'fra', fra: 'fra', es: 'spa', spa: 'spa',
 	it: 'ita', ita: 'ita', pl: 'pol', pol: 'pol', ko: 'kor', kor: 'kor',
 	zh: 'zho', zho: 'zho', nl: 'nld', nld: 'nld', la: 'lat', lat: 'lat'
@@ -1092,6 +1092,12 @@ export function classifyAcademic(rec: {
 	if (rec.source === 'qiita' || rec.source === 'note')
 		return { category: 'tool', type: 'web-article' }; // blog post, distinct from a published article
 	if (rec.category === 'tool') return { category: 'tool', type: rec.type };
+	// Verified bibliographic forms take precedence over title keywords.
+	if (rec.category === 'secondary')
+		return {
+			category: 'secondary',
+			type: rec.type === 'grammar-book' ? 'book' : rec.type === 'grammar-article' ? 'article' : rec.type
+		};
 	// Primary Edo materials: a vocabulary keeps its lexicographic form; else a document
 	if (rec.category === 'primary') {
 		if (/藻汐草|語箋|語集|蝦夷語|方言|単語|語彙|詞|言葉|ことば|辞書|辞典/.test(t))

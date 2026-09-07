@@ -10065,15 +10065,15 @@
     "year": 2026,
     "type": "article",
     "rawType": "article",
-    "language": null,
+    "language": "en",
     "authors": [
       "Kohei Matsuura",
       "Takanori Ashihara",
       "Tatsuya Kawahara"
     ],
-    "venue": null,
+    "venue": "Proceedings of the Fifteenth Language Resources and Evaluation Conference",
     "url": "https://doi.org/10.63317/3iw5dymnwwbr",
-    "pdf": null
+    "pdf": "https://aclanthology.org/2026.lrec-1.112.pdf"
   },
   {
     "source": "openalex",
@@ -36031,7 +36031,7 @@
   {
     "source": "cinii",
     "externalId": "https://cir.nii.ac.jp/crid/1390026491503704320",
-    "doi": null,
+    "doi": "10.14943/2115.99352",
     "title": "アイヌ語鵡川方言テキスト(3) : シナ皮剥ぎの思い出",
     "year": 2026,
     "type": "article",
@@ -36042,7 +36042,7 @@
     ],
     "venue": "北方言語研究",
     "url": "https://cir.nii.ac.jp/crid/1390026491503704320",
-    "pdf": null
+    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99352/13_Kishimoto.pdf"
   },
   {
     "source": "cinii",
@@ -37721,7 +37721,7 @@
   {
     "source": "cinii",
     "externalId": "https://cir.nii.ac.jp/crid/1390589441457124736",
-    "doi": null,
+    "doi": "10.14943/2115.99347",
     "title": "語形と規則性の複合的なデータの構築 : アイヌ語基礎語彙の情報の最大化に向けて",
     "year": 2026,
     "type": "article",
@@ -37733,7 +37733,7 @@
     ],
     "venue": "北方言語研究",
     "url": "https://cir.nii.ac.jp/crid/1390589441457124736",
-    "pdf": null
+    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99347/09_Fukazawa_Ono.pdf"
   },
   {
     "source": "cinii",
@@ -40976,7 +40976,7 @@
   {
     "source": "cinii",
     "externalId": "https://cir.nii.ac.jp/crid/1390307746620053632",
-    "doi": null,
+    "doi": "10.14943/Jais.6.063",
     "title": "アイヌ語における証拠性表現の用法について : ruwe neの用法を中心に",
     "year": 2026,
     "type": "article",
@@ -40987,7 +40987,7 @@
     ],
     "venue": "アイヌ・先住民研究",
     "url": "https://cir.nii.ac.jp/crid/1390307746620053632",
-    "pdf": null
+    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99070/06_6_p63-94.pdf"
   },
   {
     "source": "cinii",
@@ -95199,14 +95199,14 @@
     "year": 2026,
     "type": "article",
     "rawType": "proceedings-article",
-    "language": null,
+    "language": "en",
     "authors": [
       "Tatsuya Kawahara",
       "Kohei Matsuura"
     ],
     "venue": "Proceedings of the Ninth Workshop on the Use of Computational Methods in the Study of Endangered Languages (ComputEL-9)",
     "url": "https://doi.org/10.18653/v1/2026.computel-1.2",
-    "pdf": null
+    "pdf": "https://aclanthology.org/2026.computel-1.2.pdf"
   },
   {
     "source": "crossref",
@@ -95672,5 +95672,180 @@
         "label": "Internet Archive (full text)"
       }
     ]
+  },
+  {
+    "source": "huscap",
+    "externalId": "2115/99129",
+    "doi": "10.14943/2115.99129",
+    "title": "主観性から見た外部所有構文における身体部位名詞の表現をめぐって : 多言語的・類型論的視点から",
+    "year": 2026,
+    "type": "article",
+    "rawType": "journal-article",
+    "language": "ja",
+    "authors": [
+      "フダー クラーラ"
+    ],
+    "venue": "言語科学研究",
+    "url": "https://hdl.handle.net/2115/99129",
+    "pdf": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99129/03_08.pdf",
+    "category": "secondary"
+  },
+  {
+    "source": "wlg",
+    "externalId": "99/zanot",
+    "doi": null,
+    "title": "Changing ways of talking about the Ainu language? A corpus-based analysis of Japan’s National Diet discourse",
+    "year": 2026,
+    "type": "article",
+    "rawType": "journal-article",
+    "language": "en",
+    "authors": [
+      "Angelo Zanot"
+    ],
+    "venue": "Wiener Linguistische Gazette",
+    "url": "https://wlg.univie.ac.at/aktuelle-ausgaben/inhalt-ausgabe-992026/",
+    "pdf": "https://wlg.univie.ac.at/fileadmin/user_upload/p_wlg/992026/zanot-ainu-language.pdf",
+    "category": "secondary"
+  },
+  {
+    "source": "lingref",
+    "externalId": "3811",
+    "doi": null,
+    "title": "Strategies for PPs in Ainu",
+    "year": 2025,
+    "type": "article",
+    "rawType": "proceedings-article",
+    "language": "en",
+    "authors": [
+      "Éva Dékány"
+    ],
+    "venue": "Proceedings of the 42nd West Coast Conference on Formal Linguistics",
+    "url": "https://www.lingref.com/cpp/wccfl/42/paper3811.pdf",
+    "pdf": "https://www.lingref.com/cpp/wccfl/42/paper3811.pdf",
+    "category": "secondary"
+  },
+  {
+    "source": "huscap",
+    "externalId": "2115/99806",
+    "doi": "10.14943/doctoral.k16962",
+    "title": "Language Attitudes of Ainu People toward their Language, its Speakers, and Linguistic Institutions : Implications for Revitalization and Modern Use",
+    "year": 2026,
+    "type": "thesis",
+    "rawType": "doctoral-thesis",
+    "language": "en",
+    "authors": [
+      "Silja Maria Ijas"
+    ],
+    "venue": "Hokkaido University",
+    "url": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/99806/",
+    "pdf": null,
+    "category": "secondary"
+  },
+  {
+    "source": "journalfi",
+    "externalId": "179232",
+    "doi": null,
+    "title": "Ainukulttuurin museo opastajana ainun kieleen: Aineettomia matkamuistoja ja etnolingvististä elinvoimaa?",
+    "year": 2025,
+    "type": "article",
+    "rawType": "book-chapter",
+    "language": "fi",
+    "authors": [
+      "Riikka Länsisalmi",
+      "Saana Santalahti"
+    ],
+    "venue": "Studia Orientalia",
+    "url": "https://journal.fi/store/article/view/179232",
+    "pdf": "https://journal.fi/store/article/view/179232/121117",
+    "category": "secondary"
+  },
+  {
+    "source": "crossref",
+    "externalId": "10.1075/ijolc.00071.izu",
+    "doi": "10.1075/ijolc.00071.izu",
+    "title": "When to prefer split-self conceptions: Self-reference in solitude speech in Ainu, English, Japanese, and Korean",
+    "year": 2025,
+    "type": "article",
+    "rawType": "journal-article",
+    "language": "en",
+    "authors": [
+      "Katsunobu Izutsu",
+      "Takeshi Koguma",
+      "Mitsuko Narita Izutsu"
+    ],
+    "venue": "International Journal of Language and Culture",
+    "url": "https://doi.org/10.1075/ijolc.00071.izu",
+    "pdf": null,
+    "category": "secondary"
+  },
+  {
+    "source": "hokkaido-museum",
+    "externalId": "bulletin-acrc/11/15",
+    "doi": null,
+    "title": "山縣良温の「アイヌ語講義原稿」",
+    "year": 2026,
+    "type": "article",
+    "rawType": "materials-introduction",
+    "language": "ja",
+    "authors": [
+      "沢井 春美",
+      "小川 正人"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": "https://www.hm.pref.hokkaido.lg.jp/study/publication/bulletin-acrc-vol11/",
+    "pdf": "https://www.hm.pref.hokkaido.lg.jp/wp-content/uploads/2026/04/bulletin_HMA_vol11_02_P015_084.pdf",
+    "category": "secondary"
+  },
+  {
+    "source": "hokkaido-museum",
+    "externalId": "bulletin-acrc/11/99",
+    "doi": null,
+    "title": "キーステン・レフシン資料音声資料目録(1)",
+    "year": 2026,
+    "type": "article",
+    "rawType": "materials-introduction",
+    "language": "ja",
+    "authors": [
+      "奥田 統己",
+      "吉川 佳見"
+    ],
+    "venue": "北海道博物館アイヌ民族文化研究センター研究紀要",
+    "url": "https://www.hm.pref.hokkaido.lg.jp/study/publication/bulletin-acrc-vol11/",
+    "pdf": "https://www.hm.pref.hokkaido.lg.jp/wp-content/uploads/2026/04/bulletin_HMA_vol11_04_P099_106.pdf",
+    "category": "secondary"
+  },
+  {
+    "source": "journalfi",
+    "externalId": "179222",
+    "doi": null,
+    "title": "A Diachronic Study of Anticausatives in Ainu",
+    "year": 2025,
+    "type": "article",
+    "rawType": "book-chapter",
+    "language": "en",
+    "authors": [
+      "Anna Bugaeva"
+    ],
+    "venue": "Studia Orientalia",
+    "url": "https://journal.fi/store/article/view/179222",
+    "pdf": "https://journal.fi/store/article/view/179222/121104",
+    "category": "secondary"
+  },
+  {
+    "source": "hoppohm",
+    "externalId": "bulletin/35/177",
+    "doi": null,
+    "title": "近世末期のアイヌ語辞書～『番人円吉蝦夷記』",
+    "year": 2026,
+    "type": "article",
+    "rawType": "materials-introduction",
+    "language": "ja",
+    "authors": [
+      "宮川 琢"
+    ],
+    "venue": "北海道立北方民族博物館研究紀要",
+    "url": "https://www.hoppohm.org/book/kiyou/kiyou_31_35.htm",
+    "pdf": null,
+    "category": "secondary"
   }
 ]

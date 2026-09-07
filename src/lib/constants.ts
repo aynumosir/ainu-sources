@@ -84,6 +84,7 @@ export const LANGUAGE_LABELS: Record<string, L> = {
 	ain: { en: 'Ainu', ja: 'アイヌ語', ru: 'Айнский', ain: 'Aynu itak' },
 	jpn: { en: 'Japanese', ja: '日本語', ru: 'Японский', ain: 'Sisam itak' },
 	rus: { en: 'Russian', ja: 'ロシア語', ru: 'Русский', ain: 'Nuca itak' },
+	fin: { en: 'Finnish', ja: 'フィンランド語', ru: 'Финский' },
 	eng: { en: 'English', ja: '英語', ru: 'Английский' },
 	lat: { en: 'Latin', ja: 'ラテン語', ru: 'Латинский' },
 	zho: { en: 'Chinese', ja: '中国語', ru: 'Китайский' },
