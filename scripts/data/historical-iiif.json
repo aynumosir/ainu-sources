@@ -1,0 +1,1333 @@
+[
+  {
+    "slug": "etorofu-hyoryuki-hokudai",
+    "title": "恵渡路部漂流記",
+    "existing": false,
+    "fields": {
+      "title": "恵渡路部漂流記",
+      "category": "primary",
+      "type": "old-document",
+      "languages": [
+        "ain",
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "大隅国国分の浜之市を出た船が択捉島に漂着した顛末を記す漂流記。漂流者の経験を通して、択捉島での暮らしやアイヌとの接触を伝える。『蝦夷藪話』の名で伝わる写本もあり、伝本による本文の違いを比較できる。",
+      "yearCertainty": "unknown"
+    },
+    "materials": [
+      {
+        "label": "恵渡路部漂流記（北海道大学附属図書館）",
+        "manifest": "https://kokusho.nijl.ac.jp/biblio/100348741/manifest",
+        "description": "",
+        "honkokuEntryId": "a21e410013af91efa21fc7a97617a119"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100348741/manifest",
+        "label": "恵渡路部漂流記（北海道大学附属図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/a21e410013af91efa21fc7a97617a119",
+        "label": "みんなで翻刻：恵渡路部漂流記（北海道大学附属図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1792-uehara-moshiogusa",
+    "title": "蝦夷方言藻汐草",
+    "existing": true,
+    "fields": {
+      "summary": "上原熊次郎・阿部長三郎による江戸時代後期のアイヌ語辞書。日本語とアイヌ語を対応させた語彙や会話表現を収める。当時の仮名によるアイヌ語表記と、通詞が扱ったことばを知る資料である。",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "蝦夷方言藻汐草　乾巻",
+        "manifest": "https://dglb01.ninjal.ac.jp/ninjaldl/ezomosio/001/manifest.json",
+        "description": "",
+        "honkokuEntryId": "3daea514503efa7c8ec5ccc61c9be9d8"
+      },
+      {
+        "label": "蝦夷方言藻汐草　坤巻",
+        "manifest": "https://dglb01.ninjal.ac.jp/ninjaldl/ezomosio/002/manifest.json",
+        "description": "",
+        "honkokuEntryId": "62c6743982041882d0aefd6582ac6a84"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dglb01.ninjal.ac.jp/ninjaldl/ezomosio/001/manifest.json",
+        "label": "蝦夷方言藻汐草　乾巻"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/3daea514503efa7c8ec5ccc61c9be9d8",
+        "label": "みんなで翻刻：蝦夷方言藻汐草　乾巻"
+      },
+      {
+        "type": "iiif",
+        "url": "https://dglb01.ninjal.ac.jp/ninjaldl/ezomosio/002/manifest.json",
+        "label": "蝦夷方言藻汐草　坤巻"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/62c6743982041882d0aefd6582ac6a84",
+        "label": "みんなで翻刻：蝦夷方言藻汐草　坤巻"
+      }
+    ]
+  },
+  {
+    "slug": "1792-uehara-ezo-hogen",
+    "title": "蝦夷方言（ライデン国立民族学博物館蔵）",
+    "existing": true,
+    "fields": {
+      "notes": "蝦夷方言（ライデン国立民族学博物館蔵）\nRV-578-131-, 蝦夷方言, えぞほうげん, 上原熊次郎、阿部長三郎",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "蝦夷方言（ライデン国立民族学博物館蔵）",
+        "manifest": "https://www.dh-jac.net/db1/books/RV-578-131-/portal/manifest.json",
+        "description": "RV-578-131-, 蝦夷方言, えぞほうげん, 上原熊次郎、阿部長三郎",
+        "honkokuEntryId": "83b29132c6d01a596a847de5ba3b0b0d"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://www.dh-jac.net/db1/books/RV-578-131-/portal/manifest.json",
+        "label": "蝦夷方言（ライデン国立民族学博物館蔵）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/83b29132c6d01a596a847de5ba3b0b0d",
+        "label": "みんなで翻刻：蝦夷方言"
+      }
+    ]
+  },
+  {
+    "slug": "1739-itakura-hokkai-zuihitsu",
+    "title": "北海随筆",
+    "existing": true,
+    "fields": {
+      "summary": "坂倉源次郎が松前・蝦夷地での見聞をもとに、元文4年（1739）にまとめた記録。地理、産物、松前の制度、アイヌの風俗やことばを扱う。18世紀前半の蝦夷地と和人・アイヌの関係を伝える。",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "北海随筆（筑波大学附属図書館）",
+        "manifest": "https://kokusho.nijl.ac.jp/biblio/100334875/manifest",
+        "description": "",
+        "honkokuEntryId": "28556c9ece7f2b208437d213ad5f7dd8"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100334875/manifest",
+        "label": "北海随筆（筑波大学附属図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/28556c9ece7f2b208437d213ad5f7dd8",
+        "label": "みんなで翻刻：北海随筆（筑波大学附属図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1872-sapporo-omusha-kumaokuri-haishi",
+    "title": "札幌土人オムシヤ及熊送リ廃止ノ件",
+    "existing": false,
+    "fields": {
+      "title": "札幌土人オムシヤ及熊送リ廃止ノ件",
+      "category": "primary",
+      "type": "old-document",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "明治5年（1872）、札幌のアイヌに関するオムシャと熊送りの廃止を扱った開拓使の行政文書。明治初期の行政がアイヌの儀礼や慣習に介入した経緯を読む資料である。名称は原文書の件名による。",
+      "author": "開拓使東京出張所",
+      "yearStart": 1872,
+      "yearText": "1872",
+      "yearCertainty": "exact"
+    },
+    "materials": [
+      {
+        "label": "札幌土人オムシヤ及熊送リ廃止ノ件（北海道立文書館）",
+        "manifest": "https://www3.library.pref.hokkaido.jp/manifest/36891",
+        "description": "",
+        "honkokuEntryId": "919eb65ac7fa19ba13a051bd9aee90e1"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://www3.library.pref.hokkaido.jp/manifest/36891",
+        "label": "札幌土人オムシヤ及熊送リ廃止ノ件（北海道立文書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/919eb65ac7fa19ba13a051bd9aee90e1",
+        "label": "みんなで翻刻：札幌土人オムシヤ及熊送リ廃止ノ件（北海道立文書館）"
+      }
+    ]
+  },
+  {
+    "slug": "niira-ezoki-hokudai",
+    "title": "蝦夷記（新楽閑叟・北海道大学本）",
+    "existing": false,
+    "fields": {
+      "title": "蝦夷記（新楽閑叟・北海道大学本）",
+      "category": "primary",
+      "type": "old-document",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "新楽閑叟による蝦夷地関係の記録。本文末に文化3年（1806）2月の記載を持つ。北海道大学所蔵本には、文化4年の択捉島でのロシア人との交戦を伝える「松前騒動ニ幸三郎ガ事」が付されている。",
+      "author": "新楽閑叟",
+      "yearCertainty": "unknown"
+    },
+    "materials": [
+      {
+        "label": "蝦夷記　新楽閑叟著（北海道大学附属図書館）",
+        "manifest": "https://kokusho.nijl.ac.jp/biblio/100348683/manifest",
+        "description": "",
+        "honkokuEntryId": "63f711fb800795cbaaad4959ea7eab0e"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100348683/manifest",
+        "label": "蝦夷記　新楽閑叟著（北海道大学附属図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/63f711fb800795cbaaad4959ea7eab0e",
+        "label": "みんなで翻刻：蝦夷記　新楽閑叟著（北海道大学附属図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1918-takekuma-ainu-monogatari-second-edition",
+    "title": "アイヌ物語（1918年第二版）",
+    "existing": false,
+    "fields": {
+      "title": "アイヌ物語（1918年第二版）",
+      "category": "primary",
+      "type": "book",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "アイヌの教員・武隈徳三郎が著し、河野常吉が校訂した書。大正7年（1918）刊。アイヌの居住地域、和人との関係、風俗習慣、宗教、教育、工芸を五章にまとめる。入れ墨、家屋、熊祭、裁判、家庭教育、学校教育、彫刻・刺繍などを取り上げ、大正期のアイヌ社会と教育をめぐる著者の考えを記す。",
+      "author": "武隈徳三郎",
+      "yearStart": 1918,
+      "yearText": "1918",
+      "yearCertainty": "exact"
+    },
+    "materials": [
+      {
+        "label": "アイヌ物語　1918年版（国立国会図書館）",
+        "manifest": "https://dl.ndl.go.jp/api/iiif/1875471/manifest.json",
+        "description": "",
+        "honkokuEntryId": "cfbacb02195a2dec04abf90cfa800723"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1875471/manifest.json",
+        "label": "アイヌ物語　1918年版（国立国会図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/cfbacb02195a2dec04abf90cfa800723",
+        "label": "みんなで翻刻：アイヌ物語　1918年版（国立国会図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "anon-ezo-yabu-hanashi",
+    "title": "蝦夷薮話",
+    "existing": true,
+    "fields": {
+      "author": "聊睡庵",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "蝦夷薮話（北海道大学附属図書館）",
+        "manifest": "https://kokusho.nijl.ac.jp/biblio/100348715/manifest",
+        "description": "",
+        "honkokuEntryId": "91e9d7edfbcead11d8bc83a6fc83183c"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100348715/manifest",
+        "label": "蝦夷薮話（北海道大学附属図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/91e9d7edfbcead11d8bc83a6fc83183c",
+        "label": "みんなで翻刻：蝦夷薮話（北海道大学附属図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1859-ezo-matsumae-ichienzu",
+    "title": "蝦夷松前一円図",
+    "existing": false,
+    "fields": {
+      "title": "蝦夷松前一円図",
+      "category": "primary",
+      "type": "map",
+      "languages": [
+        "ain",
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "安政6年（1859）、文亀堂刊の大型の蝦夷地図。図中の題名は「改正蝦夷輿地全図」。海岸線や地名に加え、周囲に各地の里程とアイヌ語を記す。幕末の地理認識と、地図に添えられたアイヌ語の表記を読むことができる。",
+      "yearStart": 1859,
+      "yearText": "1859",
+      "yearCertainty": "exact"
+    },
+    "materials": [
+      {
+        "label": "蝦夷松前一円図（北海道立図書館）",
+        "manifest": "https://www3.library.pref.hokkaido.jp/manifest/1668",
+        "description": "",
+        "honkokuEntryId": "22d8fca10711120c32c4c0e3f0286d7f"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://www3.library.pref.hokkaido.jp/manifest/1668",
+        "label": "蝦夷松前一円図（北海道立図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/22d8fca10711120c32c4c0e3f0286d7f",
+        "label": "みんなで翻刻：蝦夷松前一円図（北海道立図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1710-matsumiya-ezodan-hikki",
+    "title": "蝦夷談筆記",
+    "existing": true,
+    "fields": {
+      "summary": "松宮観山による、宝永7年（1710）成立の蝦夷地関係の記録。松前・蝦夷地の事情やアイヌの風俗を記し、「蝦夷言葉」としてアイヌ語の語彙を収める。複数の写本が伝わり、語彙の表記や配列に違いが見られる。",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "蝦夷談筆記（国文学研究資料館）",
+        "manifest": "https://kokusho.nijl.ac.jp/biblio/200019334/manifest",
+        "description": "",
+        "honkokuEntryId": "b454712b20a04a214db1c0f4915e0a88"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/200019334/manifest",
+        "label": "蝦夷談筆記（国文学研究資料館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/b454712b20a04a214db1c0f4915e0a88",
+        "label": "みんなで翻刻：蝦夷談筆記（国文学研究資料館）"
+      }
+    ]
+  },
+  {
+    "slug": "uehara-ezogoshu-shoheizaka",
+    "title": "蝦夷語集（昌平坂学問所旧蔵本）",
+    "existing": false,
+    "fields": {
+      "title": "蝦夷語集（昌平坂学問所旧蔵本）",
+      "category": "primary",
+      "type": "dictionary",
+      "languages": [
+        "ain",
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "上原有次（熊次郎）編のアイヌ語語彙集。日本語の見出しに対応するアイヌ語を記した、江戸時代の大部の辞書である。国立公文書館内閣文庫に昌平坂学問所旧蔵本が伝わり、語彙や仮名表記をほかの近世アイヌ語資料と比較できる。",
+      "author": "上原有次（熊次郎）",
+      "yearCertainty": "unknown"
+    },
+    "materials": [
+      {
+        "label": "蝦夷語集　第1冊（国立公文書館）",
+        "manifest": "https://www.digital.archives.go.jp/api/iiif/4271977/manifest.json",
+        "description": "",
+        "honkokuEntryId": "3b39c87b316cfe8f7dcce6c33b565a10"
+      },
+      {
+        "label": "蝦夷語集　第2冊（国立公文書館）",
+        "manifest": "https://www.digital.archives.go.jp/api/iiif/4271978/manifest.json",
+        "description": "",
+        "honkokuEntryId": "39c3da992b8efb5aa2a6c560200d3450"
+      },
+      {
+        "label": "蝦夷語集　第3冊（国立公文書館）",
+        "manifest": "https://www.digital.archives.go.jp/api/iiif/4271979/manifest.json",
+        "description": "",
+        "honkokuEntryId": "c7732253e1c5ac54c5779faeabb395e7"
+      },
+      {
+        "label": "蝦夷語集　第4冊（国立公文書館）",
+        "manifest": "https://www.digital.archives.go.jp/api/iiif/4271980/manifest.json",
+        "description": "",
+        "honkokuEntryId": "79c1543ebe95755a4314c64865ea91e9"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://www.digital.archives.go.jp/api/iiif/4271977/manifest.json",
+        "label": "蝦夷語集　第1冊（国立公文書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/3b39c87b316cfe8f7dcce6c33b565a10",
+        "label": "みんなで翻刻：蝦夷語集　第1冊（国立公文書館）"
+      },
+      {
+        "type": "iiif",
+        "url": "https://www.digital.archives.go.jp/api/iiif/4271978/manifest.json",
+        "label": "蝦夷語集　第2冊（国立公文書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/39c3da992b8efb5aa2a6c560200d3450",
+        "label": "みんなで翻刻：蝦夷語集　第2冊（国立公文書館）"
+      },
+      {
+        "type": "iiif",
+        "url": "https://www.digital.archives.go.jp/api/iiif/4271979/manifest.json",
+        "label": "蝦夷語集　第3冊（国立公文書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/c7732253e1c5ac54c5779faeabb395e7",
+        "label": "みんなで翻刻：蝦夷語集　第3冊（国立公文書館）"
+      },
+      {
+        "type": "iiif",
+        "url": "https://www.digital.archives.go.jp/api/iiif/4271980/manifest.json",
+        "label": "蝦夷語集　第4冊（国立公文書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/79c1543ebe95755a4314c64865ea91e9",
+        "label": "みんなで翻刻：蝦夷語集　第4冊（国立公文書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1854-uehara-ezo-go-sen",
+    "title": "蝦夷語箋",
+    "existing": true,
+    "fields": {
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "蝦夷語箋（国立国語研究所）",
+        "manifest": "https://dglb01.ninjal.ac.jp/ninjaldl/ezogosen/001/manifest.json",
+        "description": "",
+        "honkokuEntryId": "90aaa0afa9cf2f14fc579f138ed2fca9"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dglb01.ninjal.ac.jp/ninjaldl/ezogosen/001/manifest.json",
+        "label": "蝦夷語箋（国立国語研究所）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/90aaa0afa9cf2f14fc579f138ed2fca9",
+        "label": "みんなで翻刻：蝦夷語箋（国立国語研究所）"
+      }
+    ]
+  },
+  {
+    "slug": "ezo-no-ki-nagoya",
+    "title": "蝦夷之記",
+    "existing": false,
+    "fields": {
+      "title": "蝦夷之記",
+      "category": "primary",
+      "type": "old-document",
+      "languages": [
+        "ain",
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "近世後期の写本。全四巻を一冊に収め、蝦夷地の風俗・制度・産物、シャクシャインの戦いなどを記す。巻二末に「蝦夷詞一覧」と松前氏の系図、巻末にアイヌの風俗を描いた絵図を収録する。アイヌ語の語彙と、近世の和人によるアイヌ社会の記述を読むことができる。",
+      "yearCertainty": "unknown"
+    },
+    "materials": [
+      {
+        "label": "蝦夷之記（名古屋大学附属図書館）",
+        "manifest": "https://da.adm.thers.ac.jp/iiif/1/classic_books/N004-20230901-01457/manifest.json",
+        "description": "",
+        "honkokuEntryId": "2c249601fc9f87def7444e3f6b38fcbd"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://da.adm.thers.ac.jp/iiif/1/classic_books/N004-20230901-01457/manifest.json",
+        "label": "蝦夷之記（名古屋大学附属図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/2c249601fc9f87def7444e3f6b38fcbd",
+        "label": "みんなで翻刻：蝦夷之記（名古屋大学附属図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1856-abe-ezo-koteiki",
+    "title": "蝦夷行程記",
+    "existing": false,
+    "fields": {
+      "title": "蝦夷行程記",
+      "category": "primary",
+      "type": "old-document",
+      "languages": [
+        "ain",
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "享保期の採薬使による調査記録などをもとにまとめられた蝦夷地の地誌。各地の行程とともに、アイヌの暮らしや景観を挿絵で伝える。阿部喜任纂述、松浦弘（武四郎）校訂の刊本がある。",
+      "author": "阿部喜任；松浦弘（校訂）",
+      "yearStart": 1856,
+      "yearText": "1856",
+      "yearCertainty": "exact",
+      "notes": "蝦夷行程記　巻之上下（国文学研究資料館）\n蝦夷地の地誌。享保期の江戸幕府の採薬使として蝦夷をまわった安部照任の記録などを用いてまとめたたもの。アイヌの人々の生活や景観をを描いた挿絵がある。"
+    },
+    "materials": [
+      {
+        "label": "蝦夷行程記　巻之上下（国文学研究資料館）",
+        "manifest": "https://codh.rois.ac.jp/pmjt/book/200021834/manifest.json",
+        "description": "蝦夷地の地誌。享保期の江戸幕府の採薬使として蝦夷をまわった安部照任の記録などを用いてまとめたたもの。アイヌの人々の生活や景観をを描いた挿絵がある。",
+        "honkokuEntryId": "e4d3bddb0e82b63b09b10ead9a5a354f"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://codh.rois.ac.jp/pmjt/book/200021834/manifest.json",
+        "label": "蝦夷行程記　巻之上下（国文学研究資料館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/e4d3bddb0e82b63b09b10ead9a5a354f",
+        "label": "みんなで翻刻：蝦夷行程記　巻之上下（国文学研究資料館）"
+      }
+    ]
+  },
+  {
+    "slug": "mamiya-ezoki-gyo",
+    "title": "蝦夷紀行",
+    "existing": true,
+    "fields": {
+      "notes": "蝦夷記行　第1冊（龍谷大学図書館）\n第一冊\n\n蝦夷記行　第2冊（龍谷大学図書館）\n第二冊\n\n蝦夷記行　第3冊（龍谷大学図書館）\n第三冊",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "蝦夷記行　第1冊（龍谷大学図書館）",
+        "manifest": "https://da.library.ryukoku.ac.jp/iiif/170161/1/manifest.json",
+        "description": "第一冊",
+        "honkokuEntryId": "0916dafb80cdc48ca7687afcad4a4f35"
+      },
+      {
+        "label": "蝦夷記行　第2冊（龍谷大学図書館）",
+        "manifest": "https://da.library.ryukoku.ac.jp/iiif/170161/2/manifest.json",
+        "description": "第二冊",
+        "honkokuEntryId": "4f5889d5a17d5f2ea180667bdcceb564"
+      },
+      {
+        "label": "蝦夷記行　第3冊（龍谷大学図書館）",
+        "manifest": "https://da.library.ryukoku.ac.jp/iiif/170161/3/manifest.json",
+        "description": "第三冊",
+        "honkokuEntryId": "e1145e020745c4bcb6935a297203b39d"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://da.library.ryukoku.ac.jp/iiif/170161/1/manifest.json",
+        "label": "蝦夷記行　第1冊（龍谷大学図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/0916dafb80cdc48ca7687afcad4a4f35",
+        "label": "みんなで翻刻：蝦夷記行　第1冊（龍谷大学図書館）"
+      },
+      {
+        "type": "iiif",
+        "url": "https://da.library.ryukoku.ac.jp/iiif/170161/2/manifest.json",
+        "label": "蝦夷記行　第2冊（龍谷大学図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/4f5889d5a17d5f2ea180667bdcceb564",
+        "label": "みんなで翻刻：蝦夷記行　第2冊（龍谷大学図書館）"
+      },
+      {
+        "type": "iiif",
+        "url": "https://da.library.ryukoku.ac.jp/iiif/170161/3/manifest.json",
+        "label": "蝦夷記行　第3冊（龍谷大学図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/e1145e020745c4bcb6935a297203b39d",
+        "label": "みんなで翻刻：蝦夷記行　第3冊（龍谷大学図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "hata-ezo-kikan",
+    "title": "蝦夷島奇観",
+    "existing": true,
+    "fields": {
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "蝦夷奇観（北海道大学附属図書館）",
+        "manifest": "https://kokusho.nijl.ac.jp/biblio/100348684/manifest",
+        "description": "",
+        "honkokuEntryId": "a3013422bbda9107097d0fa32db5da97"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100348684/manifest",
+        "label": "蝦夷奇観（北海道大学附属図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/a3013422bbda9107097d0fa32db5da97",
+        "label": "みんなで翻刻：蝦夷奇観（北海道大学附属図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1790-mogami-ezo-soshi",
+    "title": "蝦夷草紙",
+    "existing": true,
+    "fields": {
+      "summary": "最上徳内が蝦夷地での調査をもとにまとめた地誌。蝦夷地・千島・樺太の地理、アイヌの風俗・生業・ことば、松前藩の支配や交易を扱う。各地での見聞とともに、蝦夷地の統治をめぐる著者の考えを伝える。",
+      "notes": "蝦夷草紙　第1冊（龍谷大学図書館）\n第一冊\n\n蝦夷草紙　第2冊（龍谷大学図書館）\n第二冊",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "蝦夷草紙　第1冊（龍谷大学図書館）",
+        "manifest": "https://da.library.ryukoku.ac.jp/iiif/170155/1/manifest.json",
+        "description": "第一冊",
+        "honkokuEntryId": "9987c791c64b854f7fadde0412de937a"
+      },
+      {
+        "label": "蝦夷草紙（国文学研究資料館）",
+        "manifest": "https://kokusho.nijl.ac.jp/biblio/200019346/manifest",
+        "description": "",
+        "honkokuEntryId": "60cea8fb013aea6ece937dde8bffc2bb"
+      },
+      {
+        "label": "蝦夷草紙　第2冊（龍谷大学図書館）",
+        "manifest": "https://da.library.ryukoku.ac.jp/iiif/170155/2/manifest.json",
+        "description": "第二冊",
+        "honkokuEntryId": "b93ce6401f4732f11fadf04457b0f5e1"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://da.library.ryukoku.ac.jp/iiif/170155/1/manifest.json",
+        "label": "蝦夷草紙　第1冊（龍谷大学図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/9987c791c64b854f7fadde0412de937a",
+        "label": "みんなで翻刻：蝦夷草紙　第1冊（龍谷大学図書館）"
+      },
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/200019346/manifest",
+        "label": "蝦夷草紙（国文学研究資料館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/60cea8fb013aea6ece937dde8bffc2bb",
+        "label": "みんなで翻刻：蝦夷草紙（国文学研究資料館）"
+      },
+      {
+        "type": "iiif",
+        "url": "https://da.library.ryukoku.ac.jp/iiif/170155/2/manifest.json",
+        "label": "蝦夷草紙　第2冊（龍谷大学図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/b93ce6401f4732f11fadf04457b0f5e1",
+        "label": "みんなで翻刻：蝦夷草紙　第2冊（龍谷大学図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "1891-nagata-hokkaido-ezogo-chimeikai",
+    "title": "北海道蝦夷語地名解",
+    "existing": false,
+    "fields": {
+      "title": "北海道蝦夷語地名解",
+      "category": "primary",
+      "type": "topical-dictionary",
+      "languages": [
+        "ain",
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "永田方正が北海道各地のアイヌ語地名を集め、明治24年（1891）に刊行した地名集。地名の表記と意味について著者の解釈を記す。現在の地名との対応や、明治期に記録されたアイヌ語地名を調べる資料となる。",
+      "author": "永田方正",
+      "yearStart": 1891,
+      "yearText": "1891",
+      "yearCertainty": "exact"
+    },
+    "materials": [
+      {
+        "label": "北海道蝦夷語地名解　第1–3篇（国立国会図書館）",
+        "manifest": "https://dl.ndl.go.jp/api/iiif/992037/manifest.json",
+        "description": "",
+        "honkokuEntryId": "6b33c8ce461677af6f32ef91ae85acec"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/992037/manifest.json",
+        "label": "北海道蝦夷語地名解　第1–3篇（国立国会図書館）"
+      },
+      {
+        "type": "transcription",
+        "url": "https://app.honkoku.org/reader/6b33c8ce461677af6f32ef91ae85acec",
+        "label": "みんなで翻刻：北海道蝦夷語地名解　第1–3篇（国立国会図書館）"
+      }
+    ]
+  },
+  {
+    "slug": "senno-karafuto-ainu-kusamura-hanashi",
+    "title": "樺太アイヌ叢話",
+    "existing": true,
+    "fields": {
+      "summary": "千徳太郎治による樺太アイヌの歴史・生活文化に関する記録。1929年刊。",
+      "yearStart": 1929,
+      "yearText": "1929",
+      "notes": "樺太アイヌ叢話（国立国会図書館）\n千徳太郎治による樺太アイヌの歴史・生活文化に関する記録。1929年刊。"
+    },
+    "materials": [
+      {
+        "label": "樺太アイヌ叢話（国立国会図書館）",
+        "manifest": "https://dl.ndl.go.jp/api/iiif/1464093/manifest.json",
+        "description": "千徳太郎治による樺太アイヌの歴史・生活文化に関する記録。1929年刊。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1464093/manifest.json",
+        "label": "樺太アイヌ叢話（国立国会図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000039-I1464093",
+        "label": "国立国会図書館：書誌・原資料"
+      },
+      {
+        "type": "transcription",
+        "url": "https://ja.wikisource.org/wiki/樺太アイヌ叢話",
+        "label": "Wikisource（校正状況はリンク先参照）"
+      }
+    ],
+    "corrections": {
+      "yearText": {
+        "from": "",
+        "to": "1929"
+      }
+    }
+  },
+  {
+    "slug": "1903-torii-chishima-ainu",
+    "title": "千島アイヌ",
+    "existing": false,
+    "fields": {
+      "title": "千島アイヌ",
+      "category": "primary",
+      "type": "book",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "千島アイヌについての調査をまとめた書。1903年刊。図版・地図を収める。",
+      "author": "鳥居竜蔵",
+      "yearStart": 1903,
+      "yearText": "1903",
+      "yearCertainty": "exact",
+      "notes": "千島アイヌ（国立国会図書館）\n千島アイヌについての調査をまとめた書。1903年刊。図版・地図を収める。"
+    },
+    "materials": [
+      {
+        "label": "千島アイヌ（国立国会図書館）",
+        "manifest": "https://dl.ndl.go.jp/api/iiif/992519/manifest.json",
+        "description": "千島アイヌについての調査をまとめた書。1903年刊。図版・地図を収める。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/992519/manifest.json",
+        "label": "千島アイヌ（国立国会図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000924448",
+        "label": "国立国会図書館：書誌・原資料"
+      },
+      {
+        "type": "transcription",
+        "url": "https://ja.wikisource.org/wiki/Index:NDL992519_千島アイヌ_part1.pdf",
+        "label": "Wikisource（校正状況はリンク先参照）"
+      }
+    ]
+  },
+  {
+    "slug": "1926-sasaki-ainu-kumagari-kumamatsuri",
+    "title": "アイヌの熊狩と熊祭",
+    "existing": false,
+    "fields": {
+      "title": "アイヌの熊狩と熊祭",
+      "category": "primary",
+      "type": "book",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "熊猟、仔熊の飼育、熊祭の意味と進行を記す。ヒグマの生態や被害・捕獲の記録、伝説も収める。旭川の佐々木豊栄堂刊。",
+      "author": "佐々木長左衛門",
+      "yearStart": 1926,
+      "yearText": "1926",
+      "yearCertainty": "exact",
+      "notes": "アイヌの熊狩と熊祭（国立国会図書館）\n熊猟、仔熊の飼育、熊祭の意味と進行を記す。ヒグマの生態や被害・捕獲の記録、伝説も収める。旭川の佐々木豊栄堂刊。"
+    },
+    "materials": [
+      {
+        "label": "アイヌの熊狩と熊祭（国立国会図書館）",
+        "manifest": "https://dl.ndl.go.jp/api/iiif/1019362/manifest.json",
+        "description": "熊猟、仔熊の飼育、熊祭の意味と進行を記す。ヒグマの生態や被害・捕獲の記録、伝説も収める。旭川の佐々木豊栄堂刊。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1019362/manifest.json",
+        "label": "アイヌの熊狩と熊祭（国立国会図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000598706",
+        "label": "国立国会図書館：書誌・原資料"
+      }
+    ]
+  },
+  {
+    "slug": "1923-mitsuoka-ainu-ashiato",
+    "title": "アイヌの足跡",
+    "existing": false,
+    "fields": {
+      "title": "アイヌの足跡",
+      "category": "primary",
+      "type": "book",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "白老村で刊行された謄写版資料。生業、衣食住、言葉、歌、楽器、婚姻、葬儀、入れ墨、熊猟・熊祭を紹介し、白老の沿革や当時の施策にも触れる。",
+      "author": "満岡伸一",
+      "yearStart": 1923,
+      "yearText": "1923",
+      "yearCertainty": "exact",
+      "notes": "アイヌの足跡（国立国会図書館）\n白老村で刊行された謄写版資料。生業、衣食住、言葉、歌、楽器、婚姻、葬儀、入れ墨、熊猟・熊祭を紹介し、白老の沿革や当時の施策にも触れる。"
+    },
+    "materials": [
+      {
+        "label": "アイヌの足跡（国立国会図書館）",
+        "manifest": "https://dl.ndl.go.jp/api/iiif/926156/manifest.json",
+        "description": "白老村で刊行された謄写版資料。生業、衣食住、言葉、歌、楽器、婚姻、葬儀、入れ墨、熊猟・熊祭を紹介し、白老の沿革や当時の施策にも触れる。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/926156/manifest.json",
+        "label": "アイヌの足跡（国立国会図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000547427",
+        "label": "国立国会図書館：書誌・原資料"
+      }
+    ]
+  },
+  {
+    "slug": "1935-batchelor-ainu-go-nippon-chimei",
+    "title": "アイヌ語より見たる日本地名研究（1935年訂正版）",
+    "existing": true,
+    "fields": {
+      "languages": [
+        "jpn",
+        "ain"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "summary": "アイヌ語から日本各地の地名を解釈した研究書。地名解釈の鍵、火・水に関する考察、索引を収める。各地名の由来は著者の説として記録されている。",
+      "notes": "アイヌ語より見たる日本地名研究（1935年訂正版）（国立国会図書館）\nアイヌ語から日本各地の地名を解釈した研究書。地名解釈の鍵、火・水に関する考察、索引を収める。各地名の由来は著者の説として記録されている。"
+    },
+    "materials": [
+      {
+        "label": "アイヌ語より見たる日本地名研究（1935年訂正版）（国立国会図書館）",
+        "manifest": "https://dl.ndl.go.jp/api/iiif/1195591/manifest.json",
+        "description": "アイヌ語から日本各地の地名を解釈した研究書。地名解釈の鍵、火・水に関する考察、索引を収める。各地名の由来は著者の説として記録されている。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://dl.ndl.go.jp/api/iiif/1195591/manifest.json",
+        "label": "アイヌ語より見たる日本地名研究（1935年訂正版）（国立国会図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000783096",
+        "label": "国立国会図書館：書誌・原資料"
+      },
+      {
+        "type": "cinii",
+        "url": "https://cir.nii.ac.jp/crid/1970023484896822467",
+        "label": "CiNii：1935年改訂版"
+      }
+    ],
+    "corrections": {
+      "type": {
+        "from": "article",
+        "to": "book"
+      }
+    }
+  },
+  {
+    "slug": "1875-dobrotvorsky-ainu-russian-dictionary",
+    "title": "Аинско-русский словарь",
+    "existing": true,
+    "fields": {
+      "summary": "M. M. Dobrotvorskyによるアイヌ語・ロシア語辞典。1875年刊。バイエルン州立図書館所蔵本のデジタル画像。",
+      "notes": "Аинско-русский словарь（バイエルン州立図書館）\nM. M. Dobrotvorskyによるアイヌ語・ロシア語辞典。1875年刊。バイエルン州立図書館所蔵本のデジタル画像。",
+      "languages": [
+        "ain",
+        "rus"
+      ],
+      "scripts": [
+        "cyrl"
+      ]
+    },
+    "materials": [
+      {
+        "label": "Аинско-русский словарь（バイエルン州立図書館）",
+        "manifest": "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb11317688/manifest",
+        "description": "M. M. Dobrotvorskyによるアイヌ語・ロシア語辞典。1875年刊。バイエルン州立図書館所蔵本のデジタル画像。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb11317688/manifest",
+        "label": "Аинско-русский словарь（バイエルン州立図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://www.digitale-sammlungen.de/en/details/bsb11317688",
+        "label": "バイエルン州立図書館：書誌・原資料"
+      },
+      {
+        "type": "website",
+        "url": "https://rusneb.ru/catalog/000199_000009_003604991/",
+        "label": "ロシア国立図書館・НЭБ：別スキャン"
+      }
+    ]
+  },
+  {
+    "slug": "1851-august-pfizmaier-ueber-den-bau-der-aino-sprache",
+    "title": "Untersuchungen über den Bau der Aino-Sprache",
+    "existing": true,
+    "fields": {
+      "notes": "Untersuchungen über den Bau der Aino-Sprache（バイエルン州立図書館）\nAugust Pfizmaierによるドイツ語のアイヌ語文法研究。『藻汐草』を資料としてアイヌ語の構造を論じる。1851年刊。",
+      "languages": [
+        "ain",
+        "deu"
+      ],
+      "scripts": [
+        "latn"
+      ]
+    },
+    "materials": [
+      {
+        "label": "Untersuchungen über den Bau der Aino-Sprache（バイエルン州立図書館）",
+        "manifest": "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb10571490/manifest",
+        "description": "August Pfizmaierによるドイツ語のアイヌ語文法研究。『藻汐草』を資料としてアイヌ語の構造を論じる。1851年刊。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb10571490/manifest",
+        "label": "Untersuchungen über den Bau der Aino-Sprache（バイエルン州立図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://www.digitale-sammlungen.de/en/details/bsb10571490",
+        "label": "バイエルン州立図書館：書誌・原資料"
+      }
+    ]
+  },
+  {
+    "slug": "1905-batchelor-ainu-english-japanese-dictionary",
+    "title": "An Ainu-English-Japanese Dictionary",
+    "existing": true,
+    "fields": {
+      "summary": "John Batchelorによるアイヌ語・英語・日本語辞典の1905年版。アイヌ語文法を併録する。京都府立図書館所蔵本。",
+      "notes": "An Ainu-English-Japanese Dictionary（京都府立図書館）\nJohn Batchelorによるアイヌ語・英語・日本語辞典の1905年版。アイヌ語文法を併録する。京都府立図書館所蔵本。",
+      "languages": [
+        "ain",
+        "eng",
+        "jpn"
+      ],
+      "scripts": [
+        "latn",
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "An Ainu-English-Japanese Dictionary（京都府立図書館）",
+        "manifest": "https://adeac.jp/viewitem/doshisha-kyotofu/viewer/iiif/K01_012/manifest.json",
+        "description": "John Batchelorによるアイヌ語・英語・日本語辞典の1905年版。アイヌ語文法を併録する。京都府立図書館所蔵本。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://adeac.jp/viewitem/doshisha-kyotofu/viewer/iiif/K01_012/manifest.json",
+        "label": "An Ainu-English-Japanese Dictionary（京都府立図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://ndlsearch.ndl.go.jp/en/books/R100000094-I247126",
+        "label": "京都府立図書館：書誌・原資料"
+      },
+      {
+        "type": "transcription",
+        "url": "https://en.wikisource.org/wiki/An_Ainu–English–Japanese_Dictionary",
+        "label": "Wikisource（校正状況はリンク先参照）"
+      }
+    ]
+  },
+  {
+    "slug": "1888-chamberlain-basil-hall-aino-folk-tales",
+    "title": "Aino Folk-Tales",
+    "existing": true,
+    "fields": {
+      "summary": "Basil Hall Chamberlainによるアイヌの昔話の英訳集。1888年刊。Internet Archive公開スキャン。",
+      "notes": "Aino Folk-Tales（Internet Archive）\nBasil Hall Chamberlainによるアイヌの昔話の英訳集。1888年刊。Internet Archive公開スキャン。",
+      "languages": [
+        "eng"
+      ],
+      "scripts": [
+        "latn"
+      ]
+    },
+    "materials": [
+      {
+        "label": "Aino Folk-Tales（Internet Archive）",
+        "manifest": "https://iiif.archive.org/iiif/ainofolktales00chamgoog/manifest.json",
+        "description": "Basil Hall Chamberlainによるアイヌの昔話の英訳集。1888年刊。Internet Archive公開スキャン。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/ainofolktales00chamgoog/manifest.json",
+        "label": "Aino Folk-Tales（Internet Archive）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/ainofolktales00chamgoog",
+        "label": "Internet Archive：書誌・原資料"
+      },
+      {
+        "type": "transcription",
+        "url": "https://en.wikisource.org/wiki/Aino_Folk-Tales",
+        "label": "Wikisource（校正状況はリンク先参照）"
+      }
+    ]
+  },
+  {
+    "slug": "1893-batchelor-miyabe-ainu-economic-plants",
+    "title": "Ainu Economic Plants",
+    "existing": false,
+    "fields": {
+      "title": "Ainu Economic Plants",
+      "category": "primary",
+      "type": "book",
+      "languages": [
+        "eng",
+        "ain",
+        "jpn",
+        "lat"
+      ],
+      "scripts": [
+        "latn",
+        "kana",
+        "kanji"
+      ],
+      "summary": "John Batchelor・宮部金吾共著。アイヌが利用する植物のアイヌ語名、学名、和名と用途を記す英文資料。植物利用と名称の地域差を伝える。1893年刊。",
+      "author": "John Batchelor；宮部金吾",
+      "yearStart": 1893,
+      "yearText": "1893",
+      "yearCertainty": "exact",
+      "notes": "Ainu Economic Plants（ハーバード大学図書館・Internet Archive公開）\nJohn Batchelor・宮部金吾共著。アイヌが利用する植物のアイヌ語名、学名、和名と用途を記す英文資料。植物利用と名称の地域差を伝える。1893年刊。"
+    },
+    "materials": [
+      {
+        "label": "Ainu Economic Plants（ハーバード大学図書館・Internet Archive公開）",
+        "manifest": "https://iiif.archive.org/iiif/ainueconomicpla00miyagoog/manifest.json",
+        "description": "John Batchelor・宮部金吾共著。アイヌが利用する植物のアイヌ語名、学名、和名と用途を記す英文資料。植物利用と名称の地域差を伝える。1893年刊。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/ainueconomicpla00miyagoog/manifest.json",
+        "label": "Ainu Economic Plants（ハーバード大学図書館・Internet Archive公開）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/ainueconomicpla00miyagoog",
+        "label": "ハーバード大学図書館・Internet Archive公開：書誌・原資料"
+      }
+    ]
+  },
+  {
+    "slug": "1897-batchelor-chikoro-utarapa-ne-yesu-kiristo",
+    "title": "The New Testament in Ainu",
+    "existing": true,
+    "fields": {
+      "summary": "John Batchelor訳、1897年刊のアイヌ語新約聖書。ローマ字による長文の翻訳資料であり、語彙、文法、綴り方、キリスト教の訳語を調べることができる。",
+      "notes": "The New Testament in Ainu（ボストン大学神学部図書館・Internet Archive公開）\nJohn Batchelor訳、1897年刊のアイヌ語新約聖書。ローマ字による長文の翻訳資料であり、語彙、文法、綴り方、キリスト教の訳語を調べることができる。"
+    },
+    "materials": [
+      {
+        "label": "The New Testament in Ainu（ボストン大学神学部図書館・Internet Archive公開）",
+        "manifest": "https://iiif.archive.org/iiif/chikoroutarapane00batc/manifest.json",
+        "description": "John Batchelor訳、1897年刊のアイヌ語新約聖書。ローマ字による長文の翻訳資料であり、語彙、文法、綴り方、キリスト教の訳語を調べることができる。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/chikoroutarapane00batc/manifest.json",
+        "label": "The New Testament in Ainu（ボストン大学神学部図書館・Internet Archive公開）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/chikoroutarapane00batc",
+        "label": "ボストン大学神学部図書館・Internet Archive公開：書誌・原資料"
+      }
+    ]
+  },
+  {
+    "slug": "1887-chamberlain-language-mythology-geographical",
+    "title": "The Language, Mythology, and Geographical Nomenclature of Japan Viewed in the Light of Aino Studies",
+    "existing": true,
+    "fields": {
+      "summary": "Basil Hall Chamberlainによる言語比較、神話・伝承、地名の研究。John Batchelorのアイヌ語文法と蝦夷地・アイヌ関係文献目録を併録する。1887年刊。",
+      "notes": "The Language, Mythology, and Geographical Nomenclature of Japan Viewed in the Light of Aino Studies（ハーバード大学図書館・Internet Archive公開）\nBasil Hall Chamberlainによる言語比較、神話・伝承、地名の研究。John Batchelorのアイヌ語文法と蝦夷地・アイヌ関係文献目録を併録する。1887年刊。",
+      "languages": [
+        "eng",
+        "ain",
+        "jpn"
+      ],
+      "scripts": [
+        "latn",
+        "kana",
+        "kanji"
+      ]
+    },
+    "materials": [
+      {
+        "label": "The Language, Mythology, and Geographical Nomenclature of Japan Viewed in the Light of Aino Studies（ハーバード大学図書館・Internet Archive公開）",
+        "manifest": "https://iiif.archive.org/iiif/languagemytholo00batcgoog/manifest.json",
+        "description": "Basil Hall Chamberlainによる言語比較、神話・伝承、地名の研究。John Batchelorのアイヌ語文法と蝦夷地・アイヌ関係文献目録を併録する。1887年刊。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/languagemytholo00batcgoog/manifest.json",
+        "label": "The Language, Mythology, and Geographical Nomenclature of Japan Viewed in the Light of Aino Studies（ハーバード大学図書館・Internet Archive公開）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/languagemytholo00batcgoog",
+        "label": "ハーバード大学図書館・Internet Archive公開：書誌・原資料"
+      }
+    ]
+  },
+  {
+    "slug": "1901-batchelor-john-the-ainu-and-their-folk-lore",
+    "title": "The Ainu and Their Folk-Lore",
+    "existing": true,
+    "fields": {
+      "summary": "John Batchelorによるアイヌの神話、伝説、信仰、儀礼、生活習慣の民俗誌。写真・挿絵を収め、宣教師である著者の解釈とともに伝承や生活文化を記す。1901年刊。",
+      "notes": "The Ainu and Their Folk-Lore（カリフォルニア大学図書館・Internet Archive公開）\nJohn Batchelorによるアイヌの神話、伝説、信仰、儀礼、生活習慣の民俗誌。写真・挿絵を収め、宣教師である著者の解釈とともに伝承や生活文化を記す。1901年刊。"
+    },
+    "materials": [
+      {
+        "label": "The Ainu and Their Folk-Lore（カリフォルニア大学図書館・Internet Archive公開）",
+        "manifest": "https://iiif.archive.org/iiif/ainutheirfolklor00batcrich/manifest.json",
+        "description": "John Batchelorによるアイヌの神話、伝説、信仰、儀礼、生活習慣の民俗誌。写真・挿絵を収め、宣教師である著者の解釈とともに伝承や生活文化を記す。1901年刊。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/ainutheirfolklor00batcrich/manifest.json",
+        "label": "The Ainu and Their Folk-Lore（カリフォルニア大学図書館・Internet Archive公開）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/ainutheirfolklor00batcrich",
+        "label": "カリフォルニア大学図書館・Internet Archive公開：書誌・原資料"
+      }
+    ]
+  }
+]
