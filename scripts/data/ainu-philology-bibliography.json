@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "2014-fukazawa-kagaka-hyoki-tokucho-keiko",
+    "title": "加賀家文書における表記の特徴と傾向：ローマ字表記への試み",
+    "type": "article",
+    "category": "secondary",
+    "author": "深澤美香",
+    "languages": [
+      "jpn",
+      "ain"
+    ],
+    "scripts": [
+      "kanji",
+      "kana",
+      "latn"
+    ],
+    "yearStart": 2014,
+    "summary": "『アイヌ語の文献学的研究（1）』、千葉大学大学院人文社会科学研究科研究プロジェクト報告書274集、49–72頁。加賀伝蔵が記録したアイヌ語の仮名表記を分析し、ローマ字表記への対応を検討する。50頁で『蝦夷語箋』『蝦夷語集』『藻汐草』の表記研究を整理しており、近世アイヌ語資料の母音・子音表記や筆写時の変更を検討するための研究文献。",
+    "links": [
+      {
+        "type": "pdf",
+        "url": "https://opac.ll.chiba-u.jp/da/curator/900118055/2014no.274_49_72.pdf",
+        "label": "千葉大学学術成果リポジトリ：本文 PDF（49–72頁）"
+      },
+      {
+        "type": "website",
+        "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I025444781",
+        "label": "掲載書の書誌・目次（国立国会図書館）"
+      }
+    ]
+  }
+]
