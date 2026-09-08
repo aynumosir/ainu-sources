@@ -22,6 +22,7 @@
 		"import:grammar": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/grammar.ts",
 		"import:corpus": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/corpus.ts",
 		"import:curated-biblio": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/curated-biblio.ts",
+		"import:historical-iiif": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/historical-iiif.ts",
 		"import:academic": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/academic.ts",
 		"import:relations": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/relations.ts",
 		"import:extracted-cites": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/import/extracted-cites.ts",

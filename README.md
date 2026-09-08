@@ -78,6 +78,20 @@ old wipe-rebuild seed survives, gated, as `scripts/seed-legacy-wipe.ts`
 
 ## Local development
 
+### Historical facsimiles
+
+`scripts/data/historical-iiif.json` records Japanese, Ainu, Russian, German and
+English historical materials, with individual library copies, volume manifests,
+descriptions and transcription links. It includes the Honkoku Ainu project and
+works available on Wikisource. Original manuscripts and distinct editions retain
+separate identities where the existing catalogue describes a later copy or edition.
+
+`bun run import:historical-iiif --db file:/path/to/catalogue.db` previews the
+targeted import. Add `--apply` to write through the provenance-aware merge engine.
+The importer also accepts `DATABASE_URL` and `DATABASE_AUTH_TOKEN`. It adds links,
+fills missing descriptive fields and preserves existing language/script tags.
+Explicit bibliographic corrections are checked against their recorded prior values.
+
 ```sh
 bun install
 cp .env.example .env          # the defaults use a local file:local.db
