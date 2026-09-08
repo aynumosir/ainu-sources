@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { recordsForCatalogue } from '$lib/records';
+	import { mdbLinks } from '$lib/mdb';
 	import { m } from '$lib/paraglide/messages.js';
 	import type { Source } from '$lib/server/db/schema';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -34,6 +35,9 @@
 	{/if}
 	{#if recordsForCatalogue(source.slug).length}
 		<span class="text-xs font-medium text-brand-700">{m.records_available()}</span>
+	{/if}
+	{#if mdbLinks(source.slug).length}
+		<span class="text-xs font-medium text-brand-700">{m.mdb_lexemes_available()}</span>
 	{/if}
 	<div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone-500">
 		{#if source.author}<span class="truncate">{source.author}</span>{/if}

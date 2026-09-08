@@ -60,7 +60,8 @@
 		"archive:build-language-profiles": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/build-language-profiles.ts",
 		"archive:gen-derivatives": "bun --preload ./scripts/sveltekit-env-shim.ts scripts/archive/gen-derivatives.ts",
 		"merge-persons": "bun scripts/merge-persons.ts",
-		"records:sync": "bun scripts/sync-records.ts"
+		"records:sync": "bun scripts/sync-records.ts",
+		"mdb:sync": "bun scripts/sync-mdb.ts"
 	},
 	"devDependencies": {
 		"@better-auth/cli": "~1.4.21",

@@ -288,5 +288,9 @@
 	"footer_project": "プロジェクト",
 	"project_early_records": "古記録",
 	"nav_explore": "探す",
-	"project_morpheme_database_description": "アイヌ語の形態素・語構造・派生。"
+	"project_morpheme_database_description": "アイヌ語の形態素・語構造・派生。",
+	"mdb_lexemes_title": "アイヌ語の語彙素を調べる",
+	"mdb_lexemes_intro": "アイヌ語形態素データベースでは、この辞書に記録された語の意味や形態素解析を調べられます。",
+	"mdb_lexemes_browse": "{count}件の語彙素を見る",
+	"mdb_lexemes_available": "MDBに語彙素あり"
 }

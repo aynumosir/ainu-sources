@@ -12,6 +12,7 @@
  * so citations minted before a re-slug also validate offline.
  */
 import { recordsLinks } from '$lib/records';
+import { mdbLinks } from '$lib/mdb';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { asc, eq, inArray } from 'drizzle-orm';
@@ -86,7 +87,8 @@ export const GET: RequestHandler = async () => {
 			status: r.status,
 			merged_into_slug: r.mergedIntoSlug,
 			old_slugs: oldSlugsBySource.get(r.id) ?? [],
-			records: recordsLinks(r.slug)
+			records: recordsLinks(r.slug),
+			mdb: mdbLinks(r.slug)
 		})),
 		{ headers: HEADERS }
 	);

@@ -287,5 +287,9 @@
 	"project_early_records": "Ранние записи",
 	"footer_browse": "Просмотр",
 	"nav_explore": "Обзор",
-	"project_morpheme_database_description": "Морфемы, строение слов и словообразование айнского языка."
+	"project_morpheme_database_description": "Морфемы, строение слов и словообразование айнского языка.",
+	"mdb_lexemes_title": "Изучить айнские лексемы",
+	"mdb_lexemes_intro": "База айнских морфем позволяет найти значения и морфологический анализ слов, записанных в этом словаре.",
+	"mdb_lexemes_browse": "Просмотреть лексемы ({count})",
+	"mdb_lexemes_available": "Лексемы доступны в MDB"
 }
