@@ -20,7 +20,7 @@ describe('isCacheablePath', () => {
 		'/places/samani',
 		'/institutions',
 		'/timeline',
-		'/map',
+		'/places',
 		'/network',
 		// same rules through every locale prefix
 		'/ja/sources/1995-nakagawa-ainu-chitose-dialect-dictionary',
@@ -31,6 +31,8 @@ describe('isCacheablePath', () => {
 
 	// Anything that is private, personal, or mutating must never be stored.
 	for (const path of [
+		'/map',
+		'/ja/map',
 		'/archive',
 		'/archive/work/1995-nakagawa-ainu-chitose-dialect-dictionary/p/22',
 		'/ja/archive/read/x/y',

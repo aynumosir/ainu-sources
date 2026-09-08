@@ -111,7 +111,7 @@
 	}
 }
 
-/* MapLibre GL tweaks (map page) */
+/* MapLibre GL tweaks */
 .maplibregl-map {
 	font-family: var(--font-sans);
 	background: #e6ddc6;

@@ -36,7 +36,6 @@ const CACHEABLE = [
 	/^\/institutions$/u,
 	/^\/institutions\/[^/]+$/u,
 	/^\/timeline$/u,
-	/^\/map$/u,
 	/^\/network$/u
 ];
 
