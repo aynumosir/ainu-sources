@@ -40,7 +40,9 @@ describe('sitemap routes', () => {
 	it('publishes all static pages in every locale', async () => {
 		const response = await getPages(event('/sitemaps/pages.xml'));
 		const xml = await response.text();
-		expect((xml.match(/<url>/g) ?? []).length).toBe(9 * 4);
+		expect((xml.match(/<url>/g) ?? []).length).toBe(8 * 4);
+		expect(xml).toContain(`${SITE_ORIGIN}/places`);
+		expect(xml).not.toContain(`${SITE_ORIGIN}/map`);
 		expect(xml).toContain(`${SITE_ORIGIN}/ja/about`);
 		expect(xml).toContain(`${SITE_ORIGIN}/ru/about`);
 		expect(xml).toContain(`${SITE_ORIGIN}/ain/about`);

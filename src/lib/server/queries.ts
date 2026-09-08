@@ -47,7 +47,6 @@ import type {
 	DbStats,
 	TimelinePoint,
 	TimelineDensityPoint,
-	MapPlace,
 	PersonRef,
 	PlaceRef,
 	InstitutionRef,
@@ -489,29 +488,6 @@ export async function getTimelineDensity(): Promise<TimelineDensityPoint[]> {
 		.groupBy(sources.yearStart, sources.category)
 		.orderBy(asc(sources.yearStart), asc(sources.category));
 	return rows.map((r) => ({ year: r.year as number, category: r.category, count: r.count }));
-}
-
-export async function getMapPlaces(): Promise<MapPlace[]> {
-	const rows = await db
-		.select({
-			id: places.id,
-			slug: places.slug,
-			name: places.name,
-			nameEn: places.nameEn,
-			region: places.region,
-			kind: places.kind,
-			lat: places.lat,
-			lng: places.lng,
-			// Count only active sources for the map badge: the inner-most join keeps a
-			// place even with zero active sources (leftJoin), but counts only the
-			// active ones. Identical to count(sourcePlaces.sourceId) when all active.
-			sourceCount: sql<number>`count(${sources.id})`
-		})
-		.from(places)
-		.leftJoin(sourcePlaces, eq(sourcePlaces.placeId, places.id))
-		.leftJoin(sources, and(eq(sources.id, sourcePlaces.sourceId), activeSourcesOnly()))
-		.groupBy(places.id);
-	return rows.filter((r): r is MapPlace => r.lat != null && r.lng != null);
 }
 
 // ---------------------------------------------------------------------------

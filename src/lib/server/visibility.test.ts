@@ -266,8 +266,8 @@ describe('status-aware reads — only active sources / accepted relations leak t
 		}
 	});
 
-	it('getMapPlaces counts only active sources per place', async () => {
-		const places = await queries.getMapPlaces();
+	it('listPlaces counts only active sources per place', async () => {
+		const places = await queries.listPlaces();
 		expect(places.find((p) => p.slug === 'pl1')?.sourceCount).toBe(1); // W only, not H
 	});
 
@@ -418,7 +418,7 @@ describe('no-op on all-active data — the predicate filters by status and nothi
 
 		expect((await queries.getPersonBySlug('p1'))!.sources.length).toBe(2); // W + H
 		expect((await queries.listPersons()).find((p) => p.slug === 'p1')?.sourceCount).toBe(2);
-		expect((await queries.getMapPlaces()).find((p) => p.slug === 'pl1')?.sourceCount).toBe(2);
+		expect((await queries.listPlaces()).find((p) => p.slug === 'pl1')?.sourceCount).toBe(2);
 		expect((await queries.listTags()).find((t) => t.slug === 'topic-one')?.sourceCount).toBe(2);
 
 		const detail = await queries.getSourceDetail('winner');

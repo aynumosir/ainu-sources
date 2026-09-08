@@ -22,7 +22,7 @@ for studying a Russian-only appendix is insufficient on its own.
 - **Drizzle ORM + libSQL/Turso** (SQLite)
 - **better-auth** (email + GitHub) for collaborative wiki-style editing
 - **Paraglide** i18n — English / 日本語 / Русский
-- **Leaflet** map; custom SVG timeline
+- **MapLibre GL** map; custom SVG timeline
 
 ## Data model
 
@@ -149,7 +149,7 @@ src/
   routes/
     sources/         list, [slug] detail, new, [slug]/edit, [slug]/history, [slug]/cite.{bib,json}
     people|places|institutions/   directory + [slug]
-    timeline/ map/ about/ login/ register/ account/
+    timeline/ about/ login/ register/ account/
     api/search/      JSON quick-search
 scripts/import-all.ts   idempotent merge-engine seed (`bun run seed`; ETL from the data repos)
 messages/{en,ja,ru}.json
