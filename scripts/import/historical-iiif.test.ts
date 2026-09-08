@@ -51,10 +51,10 @@ it('rejects an incomplete batch before writing any of its new sources', async ()
 	expect(await db.select().from(sources)).toEqual(before);
 });
 
-it('covers all 26 Honkoku materials and 39 distinct facsimiles without literal Unicode escapes', () => {
+it('covers all 26 Honkoku materials and 47 distinct facsimiles without literal Unicode escapes', () => {
 	const materials = records.flatMap((record) => record.materials);
 	expect(materials.filter((material) => 'honkokuEntryId' in material)).toHaveLength(26);
-	expect(new Set(materials.map((material) => material.manifest)).size).toBe(39);
+	expect(new Set(materials.map((material) => material.manifest)).size).toBe(47);
 	expect(new Set(records.map((record) => record.slug)).size).toBe(records.length);
 	for (const material of materials) {
 		expect(material.label).not.toContain(String.fromCharCode(92) + 'u3000');

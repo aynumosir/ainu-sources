@@ -1329,5 +1329,322 @@
         "label": "カリフォルニア大学図書館・Internet Archive公開：書誌・原資料"
       }
     ]
+  },
+  {
+    "slug": "1892-batchelor-ainu-of-japan",
+    "title": "The Ainu of Japan: The Religion, Superstitions, and General History of the Hairy Aborigines of Japan",
+    "existing": false,
+    "fields": {
+      "summary": "ジョン・バチェラーによるアイヌの生活と信仰についての英文著作。衣服、住居、イナウ、婚姻、狩猟、葬送などを図版とともに記す。宣教師としての経験と宗教観が記述に反映されている。1892年ロンドン刊。",
+      "languages": [
+        "eng"
+      ],
+      "scripts": [
+        "latn"
+      ],
+      "title": "The Ainu of Japan: The Religion, Superstitions, and General History of the Hairy Aborigines of Japan",
+      "author": "John Batchelor",
+      "category": "primary",
+      "type": "book",
+      "yearStart": 1892,
+      "yearText": "1892",
+      "yearCertainty": "exact",
+      "notes": "The Ainu of Japan: The Religion, Superstitions, and General History of the Hairy Aborigines of Japan（トロント大学図書館・Internet Archive公開）\nジョン・バチェラーによるアイヌの生活と信仰についての英文著作。衣服、住居、イナウ、婚姻、狩猟、葬送などを図版とともに記す。宣教師としての経験と宗教観が記述に反映されている。1892年ロンドン刊。"
+    },
+    "materials": [
+      {
+        "label": "The Ainu of Japan: The Religion, Superstitions, and General History of the Hairy Aborigines of Japan（トロント大学図書館・Internet Archive公開）",
+        "manifest": "https://iiif.archive.org/iiif/ainuofjapanrelig00batcuoft/manifest.json",
+        "description": "ジョン・バチェラーによるアイヌの生活と信仰についての英文著作。衣服、住居、イナウ、婚姻、狩猟、葬送などを図版とともに記す。宣教師としての経験と宗教観が記述に反映されている。1892年ロンドン刊。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/ainuofjapanrelig00batcuoft/manifest.json",
+        "label": "The Ainu of Japan: The Religion, Superstitions, and General History of the Hairy Aborigines of Japan（トロント大学図書館・Internet Archive公開）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/ainuofjapanrelig00batcuoft",
+        "label": "トロント大学図書館・Internet Archive公開：書誌・画像"
+      }
+    ]
+  },
+  {
+    "slug": "1893-landor-alone-hairy-ainu-3-800",
+    "title": "Alone with the Hairy Ainu; or, 3,800 Miles on a Pack Saddle in Yezo and a Cruise to the Kurile Islands",
+    "existing": true,
+    "fields": {
+      "summary": "A. H. サヴェジ・ランドーによる北海道・千島旅行記。沙流川、十勝、釧路、宗谷などの旅程に沿って、訪問先の人々や生活を記し、住居、衣服、音楽などを論じる。1893年ロンドン刊。著者の観察と当時の人種観を含む。",
+      "languages": [
+        "eng"
+      ],
+      "scripts": [
+        "latn"
+      ],
+      "notes": "Alone with the Hairy Ainu; or, 3,800 Miles on a Pack Saddle in Yezo and a Cruise to the Kurile Islands（コネチカット大学図書館・Internet Archive公開）\nA. H. サヴェジ・ランドーによる北海道・千島旅行記。沙流川、十勝、釧路、宗谷などの旅程に沿って、訪問先の人々や生活を記し、住居、衣服、音楽などを論じる。1893年ロンドン刊。著者の観察と当時の人種観を含む。"
+    },
+    "materials": [
+      {
+        "label": "Alone with the Hairy Ainu; or, 3,800 Miles on a Pack Saddle in Yezo and a Cruise to the Kurile Islands（コネチカット大学図書館・Internet Archive公開）",
+        "manifest": "https://iiif.archive.org/iiif/alonewithhairyai00land/manifest.json",
+        "description": "A. H. サヴェジ・ランドーによる北海道・千島旅行記。沙流川、十勝、釧路、宗谷などの旅程に沿って、訪問先の人々や生活を記し、住居、衣服、音楽などを論じる。1893年ロンドン刊。著者の観察と当時の人種観を含む。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/alonewithhairyai00land/manifest.json",
+        "label": "Alone with the Hairy Ainu; or, 3,800 Miles on a Pack Saddle in Yezo and a Cruise to the Kurile Islands（コネチカット大学図書館・Internet Archive公開）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/alonewithhairyai00land",
+        "label": "コネチカット大学図書館・Internet Archive公開：書誌・画像"
+      }
+    ]
+  },
+  {
+    "slug": "1904-starr-ainu-group-saint-louis-exposition",
+    "title": "The Ainu Group at the Saint Louis Exposition",
+    "existing": false,
+    "fields": {
+      "summary": "フレデリック・スターによる1904年セントルイス万国博覧会のアイヌ参加者に関する記録。北海道への渡航、参加者を米国へ連れていく経緯、人々の紹介を写真とともに収める。博覧会での民族展示を企画した側の視点を伝える。",
+      "languages": [
+        "eng"
+      ],
+      "scripts": [
+        "latn"
+      ],
+      "title": "The Ainu Group at the Saint Louis Exposition",
+      "author": "Frederick Starr",
+      "category": "primary",
+      "type": "book",
+      "yearStart": 1904,
+      "yearText": "1904",
+      "yearCertainty": "exact",
+      "notes": "The Ainu Group at the Saint Louis Exposition（トロント大学図書館・Internet Archive公開）\nフレデリック・スターによる1904年セントルイス万国博覧会のアイヌ参加者に関する記録。北海道への渡航、参加者を米国へ連れていく経緯、人々の紹介を写真とともに収める。博覧会での民族展示を企画した側の視点を伝える。"
+    },
+    "materials": [
+      {
+        "label": "The Ainu Group at the Saint Louis Exposition（トロント大学図書館・Internet Archive公開）",
+        "manifest": "https://iiif.archive.org/iiif/ainugroupatsaint00staruoft/manifest.json",
+        "description": "フレデリック・スターによる1904年セントルイス万国博覧会のアイヌ参加者に関する記録。北海道への渡航、参加者を米国へ連れていく経緯、人々の紹介を写真とともに収める。博覧会での民族展示を企画した側の視点を伝える。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/ainugroupatsaint00staruoft/manifest.json",
+        "label": "The Ainu Group at the Saint Louis Exposition（トロント大学図書館・Internet Archive公開）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/ainugroupatsaint00staruoft",
+        "label": "トロント大学図書館・Internet Archive公開：書誌・画像"
+      }
+    ]
+  },
+  {
+    "slug": "1892-hitchcock-ainos-yezo-japan",
+    "title": "The Ainos of Yezo, Japan",
+    "existing": false,
+    "fields": {
+      "summary": "ロミン・ヒッチコックによる北海道アイヌの民族誌。生活、道具、衣服、信仰などの記述と図版を収める。米国国立博物館の1890年度報告に収録された論文の別刷で、標題紙の刊年は1892年。",
+      "languages": [
+        "eng"
+      ],
+      "scripts": [
+        "latn"
+      ],
+      "title": "The Ainos of Yezo, Japan",
+      "author": "Romyn Hitchcock",
+      "category": "primary",
+      "type": "book",
+      "yearStart": 1892,
+      "yearText": "1892",
+      "yearCertainty": "exact",
+      "notes": "The Ainos of Yezo, Japan（ハーバード大学図書館・Internet Archive公開）\nロミン・ヒッチコックによる北海道アイヌの民族誌。生活、道具、衣服、信仰などの記述と図版を収める。米国国立博物館の1890年度報告に収録された論文の別刷で、標題紙の刊年は1892年。"
+    },
+    "materials": [
+      {
+        "label": "The Ainos of Yezo, Japan（ハーバード大学図書館・Internet Archive公開）",
+        "manifest": "https://iiif.archive.org/iiif/ainosyezojapans00musegoog/manifest.json",
+        "description": "ロミン・ヒッチコックによる北海道アイヌの民族誌。生活、道具、衣服、信仰などの記述と図版を収める。米国国立博物館の1890年度報告に収録された論文の別刷で、標題紙の刊年は1892年。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://iiif.archive.org/iiif/ainosyezojapans00musegoog/manifest.json",
+        "label": "The Ainos of Yezo, Japan（ハーバード大学図書館・Internet Archive公開）"
+      },
+      {
+        "type": "website",
+        "url": "https://archive.org/details/ainosyezojapans00musegoog",
+        "label": "ハーバード大学図書館・Internet Archive公開：書誌・画像"
+      }
+    ]
+  },
+  {
+    "slug": "1855-mamiya-kita-ezo-zusetsu-ibaraki",
+    "title": "北蝦夷図説",
+    "existing": false,
+    "fields": {
+      "summary": "間宮林蔵の口述を秦貞廉がまとめた樺太の地誌。樺太の人々の暮らしや風俗を絵図と文章で記す。茨城大学附属図書館菅文庫所蔵の安政2年（1855）刊本で、第一から第四までの4冊を収める。",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "title": "北蝦夷図説",
+      "author": "間宮林蔵口述；秦貞廉編",
+      "category": "primary",
+      "type": "book",
+      "yearStart": 1855,
+      "yearText": "1855",
+      "yearCertainty": "exact",
+      "notes": "北蝦夷図説（茨城大学附属図書館）\n間宮林蔵の口述を秦貞廉がまとめた樺太の地誌。樺太の人々の暮らしや風俗を絵図と文章で記す。茨城大学附属図書館菅文庫所蔵の安政2年（1855）刊本で、第一から第四までの4冊を収める。"
+    },
+    "materials": [
+      {
+        "label": "北蝦夷図説（茨城大学附属図書館）",
+        "manifest": "https://kokusho.nijl.ac.jp/biblio/100384535/manifest",
+        "description": "間宮林蔵の口述を秦貞廉がまとめた樺太の地誌。樺太の人々の暮らしや風俗を絵図と文章で記す。茨城大学附属図書館菅文庫所蔵の安政2年（1855）刊本で、第一から第四までの4冊を収める。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100384535/manifest",
+        "label": "北蝦夷図説（茨城大学附属図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://digitalcollection.lib.ibaraki.ac.jp/kan-kokusho/001000102329/",
+        "label": "茨城大学附属図書館：書誌・画像"
+      }
+    ]
+  },
+  {
+    "slug": "1833-hata-ezo-kenbun-shiki-tohoku",
+    "title": "蝦夷見聞私記",
+    "existing": false,
+    "fields": {
+      "summary": "秦檍麿が記した蝦夷地の見聞録。東北大学附属図書館所蔵の天保4年（1833）写本で、寛政10年（1798）10月の記を持つ。別称は『蝦夷見聞録絵図』。彩色地図を含む1冊で、蝦夷地に関する記述と図像を読む資料となる。",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "title": "蝦夷見聞私記",
+      "author": "秦檍麿",
+      "category": "primary",
+      "type": "old-document",
+      "yearStart": 1833,
+      "yearText": "1833",
+      "yearCertainty": "exact",
+      "notes": "蝦夷見聞私記（東北大学附属図書館）\n秦檍麿が記した蝦夷地の見聞録。東北大学附属図書館所蔵の天保4年（1833）写本で、寛政10年（1798）10月の記を持つ。別称は『蝦夷見聞録絵図』。彩色地図を含む1冊で、蝦夷地に関する記述と図像を読む資料となる。"
+    },
+    "materials": [
+      {
+        "label": "蝦夷見聞私記（東北大学附属図書館）",
+        "manifest": "https://touda.tohoku.ac.jp/collection/iiif/metadata/10050030000018/manifest.json",
+        "description": "秦檍麿が記した蝦夷地の見聞録。東北大学附属図書館所蔵の天保4年（1833）写本で、寛政10年（1798）10月の記を持つ。別称は『蝦夷見聞録絵図』。彩色地図を含む1冊で、蝦夷地に関する記述と図像を読む資料となる。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://touda.tohoku.ac.jp/collection/iiif/metadata/10050030000018/manifest.json",
+        "label": "蝦夷見聞私記（東北大学附属図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://touda.tohoku.ac.jp/collection/database/library/10050030000018",
+        "label": "東北大学附属図書館：書誌・画像"
+      }
+    ]
+  },
+  {
+    "slug": "1786-sato-ezo-shui",
+    "title": "蝦夷拾遺",
+    "existing": true,
+    "fields": {
+      "summary": "天明5年（1785）の蝦夷地踏査に基づく報告書。地理、人物と産物、雑説、ロシア人や山丹人に関する記述を収め、彩色絵図を伴う。名古屋大学附属図書館所蔵本は近世後期の転写本で、天明6年（1786）の佐藤行信自序を持つ。",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "notes": "蝦夷拾遺（名古屋大学附属図書館）\n名古屋大学附属図書館所蔵、請求記号291.1-Sa。近世後期の転写本1冊（67丁）に4巻と別巻1巻を収める。1786年は自序の年で、当該写本の書写年は確定していない。"
+    },
+    "materials": [
+      {
+        "label": "蝦夷拾遺（名古屋大学附属図書館）",
+        "manifest": "https://da.adm.thers.ac.jp/iiif/1/classic_books/N004-20230901-01459/manifest.json",
+        "description": "名古屋大学附属図書館所蔵、請求記号291.1-Sa。近世後期の転写本1冊（67丁）に4巻と別巻1巻を収める。1786年は自序の年で、当該写本の書写年は確定していない。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://da.adm.thers.ac.jp/iiif/1/classic_books/N004-20230901-01459/manifest.json",
+        "label": "蝦夷拾遺（名古屋大学附属図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://da.adm.thers.ac.jp/item/n004-20230901-01459",
+        "label": "名古屋大学附属図書館：書誌・画像"
+      }
+    ]
+  },
+  {
+    "slug": "1855-ezochi-zenzu-meiji",
+    "title": "蝦夷地全圖",
+    "existing": false,
+    "fields": {
+      "summary": "安政2年（1855）に春樹堂から刊行された蝦夷地の色刷木版地図。明治大学図書館蘆田文庫所蔵。幕末の蝦夷地の地名表記や地理認識を調べる資料で、折り畳み式の1舗からなる。",
+      "languages": [
+        "jpn"
+      ],
+      "scripts": [
+        "kana",
+        "kanji"
+      ],
+      "title": "蝦夷地全圖",
+      "category": "primary",
+      "type": "map",
+      "yearStart": 1855,
+      "yearText": "1855",
+      "yearCertainty": "exact",
+      "notes": "蝦夷地全圖（明治大学図書館）\n安政2年（1855）に春樹堂から刊行された蝦夷地の色刷木版地図。明治大学図書館蘆田文庫所蔵。幕末の蝦夷地の地名表記や地理認識を調べる資料で、折り畳み式の1舗からなる。"
+    },
+    "materials": [
+      {
+        "label": "蝦夷地全圖（明治大学図書館）",
+        "manifest": "https://m-archives.meiji.jp/api/meiji-da/items/LI00001243/manifest.json",
+        "description": "安政2年（1855）に春樹堂から刊行された蝦夷地の色刷木版地図。明治大学図書館蘆田文庫所蔵。幕末の蝦夷地の地名表記や地理認識を調べる資料で、折り畳み式の1舗からなる。"
+      }
+    ],
+    "links": [
+      {
+        "type": "iiif",
+        "url": "https://m-archives.meiji.jp/api/meiji-da/items/LI00001243/manifest.json",
+        "label": "蝦夷地全圖（明治大学図書館）"
+      },
+      {
+        "type": "website",
+        "url": "https://m-archives.meiji.jp/content/detail/LI00001243",
+        "label": "明治大学図書館：書誌・画像"
+      }
+    ]
   }
 ]
