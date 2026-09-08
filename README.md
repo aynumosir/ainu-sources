@@ -157,6 +157,18 @@ messages/{en,ja,ru}.json
 
 ## Early records integration
 
+Catalogue pages for dictionaries represented in the [Morpheme Database](https://mdb.aynu.org)
+link to the lexemes attested in that dictionary. Catalogue cards indicate availability.
+The public source-detail API and bulk export expose these links in `mdb` (`[]` when
+no coverage is known), including the exact dictionary ID and distinct lexeme count.
+Counts describe MDB coverage at the last refresh, rather than the dictionary's full entry count.
+
+Run `bun run mdb:sync` to refresh `src/lib/mdb-index.json` from MDB's
+`/api/dictionaries` endpoint. The command validates the versioned coverage data against
+the public catalogue export, resolves renamed or merged records, and replaces the
+snapshot atomically. Failed requests or invalid identities leave the previous snapshot intact.
+Pages use the checked-in snapshot without contacting MDB during rendering.
+
 The footer groups [Early Records](https://rec.aynu.org) and the
 [Morpheme Database](https://mdb.aynu.org) under Related projects.
 Matching source pages offer manuscript readers, vocabulary tables for wordlists,

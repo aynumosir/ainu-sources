@@ -287,5 +287,9 @@
 	"project_early_records": "Early Records",
 	"footer_browse": "Browse",
 	"nav_explore": "Explore",
-	"project_morpheme_database_description": "Ainu morphemes, word structure, and derivation."
+	"project_morpheme_database_description": "Ainu morphemes, word structure, and derivation.",
+	"mdb_lexemes_title": "Explore Ainu lexemes",
+	"mdb_lexemes_intro": "The Ainu Morpheme Database links words recorded in this dictionary to their meanings and morphological analyses.",
+	"mdb_lexemes_browse": "Browse {count} lexemes",
+	"mdb_lexemes_available": "Lexemes available in MDB"
 }

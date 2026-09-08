@@ -1,0 +1,47 @@
+{
+	"version": 1,
+	"sources": [
+		{
+			"id": "1898_Kanazawa_NINJAL-Topical-Ainu-Conversation-Dictionary",
+			"catalogue": "1898-kanazawa-topical-dictionary-conversational-ainu",
+			"title": "トピック別 アイヌ語会話辞典",
+			"lexemes": 1405
+		},
+		{
+			"id": "1995_Nakagawa_Ainu-Chitose-Dialect-Dictionary",
+			"catalogue": "1995-nakagawa-ainu-chitose-dialect-dictionary",
+			"title": "アイヌ語千歳方言辞典",
+			"lexemes": 3401
+		},
+		{
+			"id": "1996_Kayano_Kayanos-Ainu-Dictionary",
+			"catalogue": "1996-kayano-kayanos-ainu-dictionary",
+			"title": "萱野茂のアイヌ語辞典",
+			"lexemes": 8248
+		},
+		{
+			"id": "1996_Tamura_Ainu-Saru-Dialect-Dictionary",
+			"catalogue": "1996-tamura-ainu-saru-dialect-dictionary",
+			"title": "アイヌ語沙流方言辞典",
+			"lexemes": 8877
+		},
+		{
+			"id": "2000_Komatsu_Samani-Ainu-Vocabulary",
+			"catalogue": "2000-komatsu-samani-ainu-vocabulary",
+			"title": "様似のアイヌ語語彙集",
+			"lexemes": 1214
+		},
+		{
+			"id": "2002_Chiba_Mukawa-Dialect-Japanese-Ainu-Dictionary",
+			"catalogue": "2002-chiba-mukawa-dialect-japanese-ainu-dictionary",
+			"title": "アイヌ語鵡川方言日本語‐アイヌ語辞典",
+			"lexemes": 2911
+		},
+		{
+			"id": "2021_Tomita_Aynu-Online-Dictionary",
+			"catalogue": "2021-tomita-aynu-online-dictionary",
+			"title": "アイヌ語電子辞書",
+			"lexemes": 10999
+		}
+	]
+}
