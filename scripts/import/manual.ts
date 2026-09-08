@@ -42,6 +42,7 @@ import {
 	type ImporterSummary
 } from './lib/run';
 import type { MergeInput } from '../../src/lib/server/merge';
+import ainuPhilologyBibliography from '../data/ainu-philology-bibliography.json';
 
 const ORIGIN = 'manual';
 const DERIVATION = 'curated_assertion';
@@ -192,7 +193,8 @@ const MANUAL_SOURCES: ManualSource[] = [
 		languages: ['ain'],
 		summary: 'アイヌ語テキスト処理ユーティリティ。npm / crates.io / PyPI で公開。',
 		links: [{ type: 'github', url: 'https://github.com/aynumosir', label: 'GitHub (aynumosir)' }]
-	}
+	},
+	...ainuPhilologyBibliography
 ];
 
 // Video / animation sources (type: 'video', category: 'corpus').
