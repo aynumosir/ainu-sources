@@ -8,6 +8,13 @@ sources are, what they contain, who recorded them, and what research surrounds t
 
 Part of the [Aynu.org](https://aynu.org) family.
 
+## Collection scope
+
+Include only sources with substantive relevance to Ainu language, people, history,
+or culture. Verify that relevance in the work itself and describe it in the catalogue
+summary. An incidental mention of Ainu, an author's other Ainu research, or usefulness
+for studying a Russian-only appendix is insufficient on its own.
+
 ## Stack
 
 - **SvelteKit 2 + Svelte 5** (runes), **Tailwind CSS v4**

@@ -42,7 +42,6 @@ import {
 	type ImporterSummary
 } from './lib/run';
 import type { MergeInput } from '../../src/lib/server/merge';
-import ezogosenBibliography from '../data/ezogosen-bibliography.json';
 
 const ORIGIN = 'manual';
 const DERIVATION = 'curated_assertion';
@@ -193,8 +192,7 @@ const MANUAL_SOURCES: ManualSource[] = [
 		languages: ['ain'],
 		summary: 'アイヌ語テキスト処理ユーティリティ。npm / crates.io / PyPI で公開。',
 		links: [{ type: 'github', url: 'https://github.com/aynumosir', label: 'GitHub (aynumosir)' }]
-	},
-	...ezogosenBibliography
+	}
 ];
 
 // Video / animation sources (type: 'video', category: 'corpus').
