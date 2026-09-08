@@ -848,7 +848,13 @@
         "url": "https://ja.wikisource.org/wiki/樺太アイヌ叢話",
         "label": "Wikisource（校正状況はリンク先参照）"
       }
-    ]
+    ],
+    "corrections": {
+      "yearText": {
+        "from": "",
+        "to": "1929"
+      }
+    }
   },
   {
     "slug": "1903-torii-chishima-ainu",
