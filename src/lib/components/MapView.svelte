@@ -94,7 +94,13 @@
 				map.touchZoomRotate.disableRotation();
 				map.addControl(new library.NavigationControl({ showCompass: false }), 'top-right');
 				const currentMap = map;
-				observer = new ResizeObserver(() => fitMap(currentMap));
+				observer = new ResizeObserver(() => {
+					if (!el?.clientWidth || !el.clientHeight) {
+						pendingFit = true;
+						return;
+					}
+					fitMap(currentMap);
+				});
 				observer.observe(el);
 				ready = { map, library };
 			} catch {
