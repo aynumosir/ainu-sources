@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { SITE_ORIGIN, hreflangAlternates } from '$lib/seo';
 import {
+	EmptySitemapError,
 	SitemapLimitError,
 	assertSitemapLimits,
 	sitemapIndexXml,
@@ -23,6 +24,26 @@ describe('sitemap manifest', () => {
 		for (let index = 1; index < sourceSitemapShards.length; index += 1) {
 			expect(sourceSitemapShards[index - 1].end).toBe(sourceSitemapShards[index].start);
 		}
+	});
+
+	it('includes non-year prefixes in the first populated decade ranges', () => {
+		expect(sourceSitemapShards.find((shard) => shard.id === '190')).toMatchObject({ start: '19', end: '191' });
+		expect(sourceSitemapShards.find((shard) => shard.id === '200')).toMatchObject({ start: '20', end: '201' });
+		for (const id of ['19-other', '20-other']) {
+			expect(sourceSitemapShards.some((shard) => shard.id === id)).toBe(false);
+			expect(sitemapChildPaths).not.toContain(`/sitemaps/sources/${id}.xml`);
+		}
+		expect(sitemapChildPaths).toHaveLength(24);
+	});
+
+	it.each([
+		['19', '190'], ['19-example', '190'], ['190', '190'], ['191', '191'],
+		['20', '200'], ['20-example', '200'], ['200', '200'], ['201', '201']
+	])('assigns %s to exactly the %s shard', (slug, id) => {
+		expect(sourceSitemapShards.filter((shard) =>
+			(shard.start === undefined || slug >= shard.start) &&
+			(shard.end === undefined || slug < shard.end)
+		).map((shard) => shard.id)).toEqual([id]);
 	});
 
 	it('gives every child one canonical path', () => {
@@ -56,6 +77,12 @@ describe('sitemap XML', () => {
 			expect(xml).toContain(alternate.href.replace('&', '&amp;'));
 		}
 		expect(xml).toContain('<lastmod>2026-09-01T12:00:00.000Z</lastmod>');
+	});
+
+	it('rejects empty output before collecting or streaming XML', () => {
+		expect(() => assertSitemapLimits(SITE_ORIGIN, [])).toThrow(EmptySitemapError);
+		expect(() => urlsetXml(SITE_ORIGIN, [])).toThrow(EmptySitemapError);
+		expect(() => urlsetResponse(SITE_ORIGIN, [])).toThrow(EmptySitemapError);
 	});
 
 	it('rejects output above either protocol ceiling', () => {

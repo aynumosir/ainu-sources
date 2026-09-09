@@ -169,6 +169,22 @@ async function explain(sql: string): Promise<string[]> {
 	}
 }
 
+const sourceSitemapPlans = sourceSitemapShards.map((shard) => {
+	const conditions = ["status = 'active'"];
+	if (shard.start !== undefined) conditions.push(`slug >= '${shard.start}'`);
+	if (shard.end !== undefined) conditions.push(`slug < '${shard.end}'`);
+	return {
+		sql: `SELECT slug, updated_at FROM sources WHERE ${conditions.join(' AND ')} ORDER BY slug LIMIT 2001`,
+		index: 'sources_sitemap_idx'
+	};
+});
+
+function assertCoveringPlan(details: string[], index: string) {
+	expect(details.join('\n')).toContain(`USING COVERING INDEX ${index}`);
+	expect(details.some((detail) => detail.includes('USE TEMP B-TREE'))).toBe(false);
+	expect(details.some((detail) => detail.startsWith('SCAN '))).toBe(false);
+}
+
 // ===========================================================================
 // 1. Mixed-status fixture: non-active rows must never surface.
 // ===========================================================================
@@ -287,12 +303,51 @@ describe('status-aware reads — only active sources / accepted relations leak t
 		expect(await queries.getSitemapEntities('institutions')).toEqual([{ slug: 'i1' }]);
 	});
 
+	it('assigns every range boundary and its neighboring slugs exactly once', async () => {
+		await wipe();
+		const boundaries = sourceSitemapShards.flatMap((shard) => shard.start === undefined ? [] : [shard.start]);
+		const slugs = [...new Set([
+			'0', '19-example', '190', '20-example', '200', 'z', '資料', '𐀀',
+			...boundaries.flatMap((boundary) => [
+				boundary.slice(0, -1) + String.fromCharCode(boundary.charCodeAt(boundary.length - 1) - 1) + '~',
+				boundary, `${boundary}-example`
+			])
+		])];
+		await db.insert(schema.sources).values(slugs.map((slug, index) => ({
+			id: `boundary-${index}`, slug, title: 'Sitemap boundary fixture', category: 'primary', type: 'book', status: 'active'
+		})));
+		const compare = (a: string, b: string) => Buffer.compare(Buffer.from(a), Buffer.from(b));
+		const seen: string[] = [];
+		for (const shard of sourceSitemapShards) {
+			const rows = await queries.getSitemapSources(shard);
+			const expected = slugs.filter((slug) =>
+				(shard.start === undefined || compare(slug, shard.start) >= 0) &&
+				(shard.end === undefined || compare(slug, shard.end) < 0)
+			).sort(compare);
+			expect(rows.map((row) => row.slug), shard.id).toEqual(expected);
+			seen.push(...rows.map((row) => row.slug));
+		}
+		expect(seen.sort(compare)).toEqual(slugs.sort(compare));
+		expect(new Set(seen).size).toBe(seen.length);
+	});
+
+	it('detects a missing source sitemap covering index for every range', async () => {
+		const client = createClient({ url: ':memory:' });
+		try {
+			await migrate(drizzle(client, { schema }), { migrationsFolder: MIGRATIONS });
+			await client.execute('DROP INDEX sources_sitemap_idx');
+			for (const query of sourceSitemapPlans) {
+				const plan = await client.execute(`EXPLAIN QUERY PLAN ${query.sql}`);
+				expect(() => assertCoveringPlan(plan.rows.map((row) => String(row.detail)), query.index)).toThrow();
+			}
+		} finally {
+			client.close();
+		}
+	});
+
 	it('serves every sitemap range from a covering index without temporary sorting', async () => {
 		const cases = [
-			{
-				sql: `SELECT slug, updated_at FROM sources WHERE status = 'active' AND slug >= '190' AND slug < '191' ORDER BY slug LIMIT 2001`,
-				index: 'sources_sitemap_idx'
-			},
+			...sourceSitemapPlans,
 			{
 				sql: `SELECT slug, updated_at FROM persons WHERE status = 'active' ORDER BY slug LIMIT 2001`,
 				index: 'persons_sitemap_idx'
@@ -309,10 +364,7 @@ describe('status-aware reads — only active sources / accepted relations leak t
 
 		for (const query of cases) {
 			const details = await explain(query.sql);
-			const plan = details.join('\n');
-			expect(plan).toContain(`USING COVERING INDEX ${query.index}`);
-			expect(details.some((detail) => detail.includes('USE TEMP B-TREE'))).toBe(false);
-			expect(details.some((detail) => detail.startsWith('SCAN '))).toBe(false);
+			assertCoveringPlan(details, query.index);
 		}
 	});
 

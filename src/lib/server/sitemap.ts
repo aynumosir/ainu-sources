@@ -69,6 +69,12 @@ export function sitemapMetrics(origin: string, entries: readonly SitemapEntry[])
 	return { urls, bytes };
 }
 
+export class EmptySitemapError extends Error {
+	constructor() {
+		super('Sitemap has no URLs');
+	}
+}
+
 export class SitemapLimitError extends Error {
 	constructor(
 		readonly metrics: SitemapMetrics,
@@ -88,6 +94,7 @@ export function assertSitemapLimits(
 		maxBytes: limits.maxBytes ?? SITEMAP_BYTE_LIMIT
 	};
 	const metrics = sitemapMetrics(origin, entries);
+	if (metrics.urls === 0) throw new EmptySitemapError();
 	if (metrics.urls > resolved.maxUrls || metrics.bytes > resolved.maxBytes) {
 		throw new SitemapLimitError(metrics, resolved);
 	}
@@ -151,8 +158,11 @@ export function sitemapQueryRedirect(url: URL): Response | undefined {
 	return new Response(null, { status: 308, headers: { Location: url.pathname } });
 }
 
-export const sitemapCapacityResponse = () =>
-	new Response('Sitemap capacity exceeded', {
+export const sitemapCapacityResponse = () => sitemapUnavailableResponse('Sitemap capacity exceeded');
+export const emptySitemapResponse = () => sitemapUnavailableResponse('Sitemap has no URLs');
+
+const sitemapUnavailableResponse = (message: string) =>
+	new Response(message, {
 		status: 503,
 		headers: {
 			'Content-Type': 'text/plain; charset=utf-8',

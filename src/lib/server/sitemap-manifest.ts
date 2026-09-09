@@ -24,14 +24,13 @@ export const sourceSitemapShards = [
 	sourceShard('before-17', undefined, '17'),
 	sourceShard('17', '17', '18'),
 	sourceShard('18', '18', '19'),
-	sourceShard('19-other', '19', '190'),
 	...Array.from({ length: 10 }, (_, offset) => {
 		const yearPrefix = 190 + offset;
 		const end = yearPrefix === 199 ? '20' : String(yearPrefix + 1);
-		return sourceShard(String(yearPrefix), String(yearPrefix), end);
+		const start = yearPrefix === 190 ? '19' : String(yearPrefix);
+		return sourceShard(String(yearPrefix), start, end);
 	}),
-	sourceShard('20-other', '20', '200'),
-	sourceShard('200', '200', '201'),
+	sourceShard('200', '20', '201'),
 	sourceShard('201', '201', '202'),
 	sourceShard('202', '202', '203'),
 	sourceShard('numeric-rest', '203', 'a'),
