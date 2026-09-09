@@ -3,6 +3,8 @@ import type { RequestHandler } from './$types';
 import { SITE_ORIGIN } from '$lib/seo';
 import { getSitemapEntities } from '$lib/server/queries';
 import {
+	EmptySitemapError,
+	emptySitemapResponse,
 	SitemapLimitError,
 	sitemapCapacityResponse,
 	sitemapQueryRedirect,
@@ -34,6 +36,7 @@ export const GET: RequestHandler = async ({ params, url }) => {
 			}))
 		);
 	} catch (cause) {
+		if (cause instanceof EmptySitemapError) return emptySitemapResponse();
 		if (cause instanceof SitemapLimitError) return sitemapCapacityResponse();
 		throw cause;
 	}

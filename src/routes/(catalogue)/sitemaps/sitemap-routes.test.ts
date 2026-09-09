@@ -64,6 +64,37 @@ describe('sitemap routes', () => {
 		expect(xml).not.toContain('preview.example');
 	});
 
+	it.each(['190', '200'])('queries the widened %s range', async (id) => {
+		sourceRows.mockResolvedValue([{ slug: `${id.slice(0, 2)}-example`, updatedAt: new Date('2026-09-01') }]);
+		const response = await getSources(event(`/sitemaps/sources/${id}.xml`, { shard: id }));
+		expect(response.status).toBe(200);
+		expect(sourceRows).toHaveBeenCalledWith(expect.objectContaining({ id, start: id.slice(0, 2) }));
+		expect(await response.text()).toContain(`/sources/${id.slice(0, 2)}-example`);
+	});
+
+	it.each(['19-other', '20-other'])('rejects removed shard %s before querying', async (id) => {
+		await expect(getSources(event(`/sitemaps/sources/${id}.xml`, { shard: id }))).rejects.toMatchObject({ status: 404 });
+		expect(sourceRows).not.toHaveBeenCalled();
+		const index = await getIndex(event('/sitemap.xml'));
+		expect(await index.text()).not.toContain(`/sitemaps/sources/${id}.xml`);
+	});
+
+	it('returns uncached errors for empty source and entity children', async () => {
+		sourceRows.mockResolvedValue([]);
+		entityRows.mockResolvedValue([]);
+		const responses = [
+			await getSources(event('/sitemaps/sources/190.xml', { shard: '190' })),
+			await getEntities(event('/sitemaps/entities/places.xml', { kind: 'places' }))
+		];
+		for (const response of responses) {
+			expect(response.status).toBe(503);
+			expect(response.headers.get('cache-control')).toBe('no-store');
+			expect(response.headers.get('x-robots-tag')).toBe('noindex');
+			expect(response.headers.get('content-type')).toBe('text/plain; charset=utf-8');
+			expect(await response.text()).toBe('Sitemap has no URLs');
+		}
+	});
+
 	it('rejects unknown source and entity children before querying', async () => {
 		await expect(
 			getSources(event('/sitemaps/sources/missing.xml', { shard: 'missing' }))
