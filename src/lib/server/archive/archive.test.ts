@@ -112,7 +112,6 @@ async function seedRevision(isCurrent = true, media = 'application/pdf') {
 		title: '資料一',
 		category: 'primary',
 		type: 'book',
-		humanDownload: true
 	});
 	await db.insert(schema.archiveRepositories).values({ id: 'repo-1', name: 'books' });
 	await db.insert(schema.sourceFiles).values({
@@ -158,7 +157,6 @@ async function seedUploadSource(slug = 'source-one') {
 		title: 'Source One',
 		category: 'primary',
 		type: 'book',
-		humanDownload: true
 	});
 }
 
@@ -183,7 +181,6 @@ async function seedArchiveListRow(input: {
 		yearStart: input.yearStart ?? null,
 		summary: input.summary ?? null,
 		textComposition: input.textComposition ?? null,
-		humanDownload: true
 	});
 	await db.insert(schema.sourceFiles).values({
 		id: `list-file-${input.index}`,
@@ -885,7 +882,6 @@ describe('archive DB flows', () => {
 			title: 'Source One',
 			category: 'primary',
 			type: 'book',
-			humanDownload: true
 		});
 		const result = await createUploadSession(db, contributor, {
 			sourceSlug: 'source-one',
@@ -1202,9 +1198,8 @@ describe('archive DB flows', () => {
 		expect(result.total).toBe(2);
 	});
 
-	it('keeps readable OCR searchable when original-file download is disabled', async () => {
+	it('keeps available OCR searchable without source permissions', async () => {
 		await seedRevision();
-		await db.update(schema.sources).set({ humanDownload: false }).where(eq(schema.sources.id, 'source-1'));
 		await replaceOcrPages(db, 'rev-1', 'gemini', [{ page: 1, text: 'searchable kamuy text' }]);
 		const result = await searchOcr(db, reader, { q: 'kamuy' });
 		expect(result.items).toHaveLength(1);
@@ -1234,7 +1229,6 @@ describe('archive DB flows', () => {
 			yearCertainty: 'range',
 			category: 'primary',
 			type: 'book',
-			humanDownload: true
 		});
 		await db.insert(schema.sourceFiles).values({
 			id: 'file-2',
@@ -1482,7 +1476,6 @@ describe('archive DB flows', () => {
 		).rejects.toMatchObject({ status: 403, details: { auditId: expect.any(String) } });
 
 		await db.update(schema.fileRevisions).set({ accessState: 'available' }).where(eq(schema.fileRevisions.id, 'rev-1'));
-		await db.update(schema.sources).set({ humanDownload: false }).where(eq(schema.sources.id, 'source-1'));
 		await expect(
 			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'page_image' })
 		).resolves.toMatchObject({ decision: 'allow', quota: { budgetKind: 'view' } });
@@ -1491,17 +1484,15 @@ describe('archive DB flows', () => {
 		).resolves.toMatchObject({ decision: 'allow', quota: { budgetKind: 'view' } });
 		await expect(
 			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'original', requestedBytes: 1 })
-		).rejects.toMatchObject({ status: 403, details: { auditId: expect.any(String) } });
-
-		await db.update(schema.sources).set({ humanDownload: true }).where(eq(schema.sources.id, 'source-1'));
+		).resolves.toMatchObject({ decision: 'allow', quota: { budgetKind: 'download' } });
 		env.ARCHIVE_DAILY_BYTE_LIMIT = '10';
 		await expect(
 			authorizeContent(db, { principal: sessionReader, revisionId: 'rev-1', useKind: 'original', requestedBytes: 11 })
 		).rejects.toMatchObject({ status: 429, details: { auditId: expect.any(String), resetAt: expect.any(String) } });
 
 		const events = await db.select().from(schema.sourceLifecycleEvents);
-		expect(events.filter((event) => event.eventType === 'content_access_authorized')).toHaveLength(3);
-		expect(events.filter((event) => event.eventType === 'content_access_denied')).toHaveLength(5);
+		expect(events.filter((event) => event.eventType === 'content_access_authorized')).toHaveLength(4);
+		expect(events.filter((event) => event.eventType === 'content_access_denied')).toHaveLength(4);
 	});
 
 	it('keeps view-budget reads separate from download budget and stream leases', async () => {

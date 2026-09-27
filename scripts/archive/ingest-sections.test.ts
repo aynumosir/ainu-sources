@@ -20,7 +20,7 @@ beforeEach(async () => {
 	db = drizzle(createClient({ url: `file:${path.join(dir, 'test.db')}` }), { schema });
 	await migrate(db, { migrationsFolder: MIGRATIONS });
 	await db.insert(schema.user).values({ id: 'u1', name: 'U', email: 'u@example.test', emailVerified: true });
-	await db.insert(schema.sources).values({ id: 'src', slug: 'work-one', title: 'Work One', type: 'book', humanDownload: true });
+	await db.insert(schema.sources).values({ id: 'src', slug: 'work-one', title: 'Work One', type: 'book' });
 	await db.insert(schema.sourceFiles).values({ id: 'file-1', sourceId: 'src', role: 'scan', createdBy: 'u1' });
 	await db.insert(schema.archiveBlobs).values({
 		sha256: 'a'.repeat(64),

@@ -83,13 +83,8 @@ export const sources = sqliteTable(
 		/** what entryCount counts: 'entries' | 'sentences' | 'pages' | 'lemmas' */
 		entryCountLabel: text('entry_count_label'),
 
-		// --- rights ---
+		// --- bibliographic license ---
 		license: text('license'),
-		humanDownload: integer('human_download', { mode: 'boolean' }).notNull().default(false),
-		localProcessing: integer('local_processing', { mode: 'boolean' }).notNull().default(false),
-		hostedAiText: integer('hosted_ai_text', { mode: 'boolean' }).notNull().default(false),
-		hostedAiImages: integer('hosted_ai_images', { mode: 'boolean' }).notNull().default(false),
-		bulkExport: integer('bulk_export', { mode: 'boolean' }).notNull().default(false),
 
 		// --- prose ---
 		summary: text('summary'), // original description (markdown allowed)

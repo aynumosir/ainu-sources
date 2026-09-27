@@ -123,6 +123,18 @@ bun run dev                   # http://localhost:5173
 
 ## Deployment (Cloudflare Workers · db.aynu.org)
 
+The private archive uses authenticated roles and revision access states for
+uploads and content access. Sources have no per-source download, processing,
+hosted-AI or export permission flags. The catalogue's `license` field remains
+bibliographic metadata. Membership checks, capability ownership, quotas and
+audit events apply to archive requests.
+
+For an existing database, deploy the merged code that removes source permission
+checks **before** applying migration `0031_remove_source_rights.sql`. That code
+works with the old columns still present; earlier code requires them. Back up
+the database before migration. Rolling back to earlier code after migration
+requires restoring the five columns and their data first.
+
 1. Create a Turso database and apply the schema:
    ```sh
    turso db create ainu-sources

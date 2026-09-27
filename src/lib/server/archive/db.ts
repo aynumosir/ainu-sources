@@ -206,7 +206,6 @@ async function resolveUploadSourceFile(
 ): Promise<schema.SourceFile> {
 	const [source] = await tx.select().from(sources).where(eq(sources.slug, input.sourceSlug)).limit(1);
 	if (!source) throw new ArchiveHttpError(404, 'source not found');
-	if (!source.humanDownload) throw new ArchiveHttpError(403, 'source rights do not allow archive uploads');
 	let repoId: string | null = null;
 	if (input.checkoutRepo) {
 		const [repo] = await tx
@@ -562,8 +561,7 @@ export async function getRevision(db: Db, id: string, principal: ArchivePrincipa
 			accessState: fileRevisions.accessState,
 			isCurrent: fileRevisions.isCurrent,
 			submittedBy: fileRevisions.submittedBy,
-			submittedAt: fileRevisions.submittedAt,
-			humanDownload: sources.humanDownload
+			submittedAt: fileRevisions.submittedAt
 		})
 		.from(fileRevisions)
 		.innerJoin(sourceFiles, eq(fileRevisions.sourceFileId, sourceFiles.id))
@@ -581,14 +579,10 @@ export async function getRevision(db: Db, id: string, principal: ArchivePrincipa
 export async function getRevisionForContent(
 	db: Db,
 	id: string,
-	principal: ArchivePrincipal,
-	opts: { requireDownloadRight?: boolean } = {}
+	principal: ArchivePrincipal
 ) {
 	const row = await getRevision(db, id, principal);
 	requireAccessState(principal, row.accessState);
-	if (opts.requireDownloadRight !== false && !row.humanDownload && principal.role !== 'archive_admin') {
-		throw new ArchiveHttpError(403, 'source rights do not allow human download');
-	}
 	return row;
 }
 
@@ -1283,7 +1277,7 @@ export async function listArchiveWorks(
 		sql`source_files.id = (${representativeFile(db, input.principal)})`
 	];
 	if (input.principal.role !== 'archive_admin') {
-		clauses.push(eq(fileRevisions.accessState, 'available'), eq(sources.humanDownload, true));
+		clauses.push(eq(fileRevisions.accessState, 'available'));
 	}
 	if (input.text?.trim()) {
 		const needle = likeNeedle(input.text.trim());

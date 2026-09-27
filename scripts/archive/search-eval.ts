@@ -167,7 +167,6 @@ async function seedFixture(db: Db, fixture: Fixture): Promise<void> {
 			yearStart: document.year,
 			category: 'research',
 			type: 'article',
-			humanDownload: true
 		});
 		await db.insert(schema.sourceFiles).values({
 			id: `file-${document.id}`,
