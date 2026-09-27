@@ -46,7 +46,6 @@ export type AuthorizeContentResult = {
 		id: string;
 		slug: string;
 		title: string;
-		humanDownload: boolean;
 	};
 	decision: 'allow';
 	quota: { reserved: number; remaining: number; resetAt: string; budgetKind: ArchiveBudgetKind };
@@ -63,7 +62,6 @@ const VIEW_USE_KINDS = new Set<ArchiveContentUseKind>([
 	'mcp_image'
 ]);
 const PAGE_IMAGE_ESTIMATE_BYTES = 1024 * 1024;
-const DOWNLOAD_RIGHT_USE_KINDS = new Set<ArchiveContentUseKind>(['original', 'export', 'capability']);
 const SEARCH_REVISION = {
 	id: 'archive-search',
 	sourceFileId: 'archive-search',
@@ -82,8 +80,7 @@ const SEARCH_REVISION = {
 	accessState: 'available',
 	isCurrent: true,
 	submittedBy: 'archive-search',
-	submittedAt: null,
-	humanDownload: true
+	submittedAt: null
 } as RevisionForContent;
 
 function intEnv(name: string): number {
@@ -93,10 +90,6 @@ function intEnv(name: string): number {
 
 function budgetKindFor(useKind: ArchiveContentUseKind): ArchiveBudgetKind {
 	return VIEW_USE_KINDS.has(useKind) ? 'view' : 'download';
-}
-
-function requiresDownloadRight(useKind: ArchiveContentUseKind): boolean {
-	return DOWNLOAD_RIGHT_USE_KINDS.has(useKind);
 }
 
 /**
@@ -176,9 +169,7 @@ export async function authorizeContent(db: Db, input: AuthorizeContentInput): Pr
 	try {
 		await checkFreshMembership(db, input.principal);
 		if (input.revisionId) {
-			revision = await getRevisionForContent(db, input.revisionId, input.principal, {
-				requireDownloadRight: requiresDownloadRight(input.useKind)
-			});
+			revision = await getRevisionForContent(db, input.revisionId, input.principal);
 		}
 		const requestedBytes = requestedBytesFor(input, revision);
 		if (input.useKind === 'text' || input.useKind === 'mcp_text') {
@@ -205,10 +196,9 @@ export async function authorizeContent(db: Db, input: AuthorizeContentInput): Pr
 				? {
 						id: revision.sourceId,
 						slug: revision.sourceSlug,
-						title: revision.title,
-						humanDownload: revision.humanDownload
+						title: revision.title
 					}
-				: ({ id: 'archive-search', slug: 'archive-search', title: 'Archive search', humanDownload: true } as AuthorizeContentResult['source']),
+				: { id: 'archive-search', slug: 'archive-search', title: 'Archive search' },
 			decision: 'allow',
 			quota: {
 				reserved: quota.reserved,

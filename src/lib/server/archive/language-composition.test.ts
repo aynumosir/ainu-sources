@@ -162,7 +162,6 @@ async function seedWork(db: Db) {
 		title: '資料一',
 		category: 'primary',
 		type: 'book',
-		humanDownload: true
 	});
 	await db.insert(schema.archiveRepositories).values({ id: 'repo-1', name: 'books' });
 	await db.insert(schema.sourceFiles).values({

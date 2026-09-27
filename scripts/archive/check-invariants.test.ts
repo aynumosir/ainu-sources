@@ -22,8 +22,8 @@ beforeEach(async () => {
 	await migrate(db, { migrationsFolder: MIGRATIONS });
 	await db.insert(schema.user).values({ id: 'u1', name: 'U', email: 'u@example.test', emailVerified: true });
 	await db.insert(schema.sources).values([
-		{ id: 'src', slug: 'work-one', title: 'Work One', type: 'dictionary', humanDownload: true },
-		{ id: 'other', slug: 'work-two', title: 'Work Two', type: 'dictionary', humanDownload: true }
+		{ id: 'src', slug: 'work-one', title: 'Work One', type: 'dictionary' },
+		{ id: 'other', slug: 'work-two', title: 'Work Two', type: 'dictionary' }
 	]);
 	await db.insert(schema.archiveBlobs).values({
 		sha256: 'a'.repeat(64),

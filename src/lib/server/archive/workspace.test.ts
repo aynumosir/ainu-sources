@@ -70,7 +70,6 @@ async function seedRevision(): Promise<void> {
 		title: 'Source One',
 		category: 'primary',
 		type: 'book',
-		humanDownload: true
 	});
 	await db.insert(schema.archiveRepositories).values({ id: 'repo-1', name: 'books' });
 	await db.insert(schema.sourceFiles).values({

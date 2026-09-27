@@ -33,7 +33,6 @@ beforeEach(async () => {
 		slug: 'work-one',
 		title: 'Work One',
 		type: 'dictionary',
-		humanDownload: true
 	});
 	await db.insert(schema.archiveRepositories).values([
 		{ id: 'repo-a', name: 'repo-a' },
@@ -121,7 +120,6 @@ async function secondRecordClaimingTheSameScan() {
 		slug: 'work-one-comparison',
 		title: 'Work One, comparison table',
 		type: 'comparative-wordlist',
-		humanDownload: true
 	});
 	await db.insert(schema.sourceFiles).values({ id: 'dataset-scan', sourceId: 'dataset', role: 'scan' });
 	await db.insert(schema.archiveRepositories).values({ id: 'repo-c', name: 'repo-c' });

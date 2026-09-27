@@ -25,7 +25,6 @@ beforeEach(async () => {
 		slug: 'work-one',
 		title: 'Work One',
 		type: 'dictionary',
-		humanDownload: true
 	});
 	await db.insert(schema.archiveBlobs).values([
 		{ sha256: 'a'.repeat(64), bytes: 10, detectedMediaType: 'application/pdf', storageState: 'verified', verifiedAt: new Date() },
