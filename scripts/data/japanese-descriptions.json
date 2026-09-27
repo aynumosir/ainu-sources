@@ -1,0 +1,567 @@
+[
+  {
+    "slug": "1643-vries-voyage-ainu-words",
+    "title": "フリース航海記録のアイヌ語",
+    "expectedSummary": "Ainu words and phrases noted in Dutch during the 1643 voyage of Maarten Gerritsz. Vries, with the place and date of each: Aniwa Bay, Taraika, Akkeshi, Etorofu and Habomai/Shikotan. The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet フ1643) after Leupe (ed.), *Reize van Maarten Gerritsz. Vries in 1643 naar Japan* (1858), in ainu-dictionaries `1643_Vries_Voyage-Journal-Vocabulary`.",
+    "summaryJa": "1643年のフリース（Maarten Gerritsz. Vries）の航海で、オランダ語によって記録されたアイヌ語の語句。亜庭湾、タライカ、厚岸、択捉、歯舞・色丹など、各語の記録地と日付を伴う。Leupe編『Reize van Maarten Gerritsz. Vries in 1643 naar Japan』（1858年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「フ1643」）で電子化した。"
+  },
+  {
+    "slug": "1705-anon-teki-saezuri",
+    "title": "狄さへつり",
+    "expectedSummary": "Large Edo-period Ainu vocabulary arranged by topic, written in hiragana with many hentaigana. The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet さ, 899 rows) after 佐藤知己「江戸時代のアイヌ語彙集「狄さへつり」について」(2017), in ainu-dictionaries `1705_Anon_Teki-Saezuri`.",
+    "summaryJa": "多くの変体仮名を含む平仮名で書かれた、江戸時代の大規模なアイヌ語彙集。語彙を分野別に配列する。佐藤知己「江戸時代のアイヌ語彙集『狄さへつり』について」（2017年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「さ」、899行）で電子化した。"
+  },
+  {
+    "slug": "1715-matsumae-shotoku-gonen-kakitsuke",
+    "title": "正徳五年松前志摩守差出候書付",
+    "expectedSummary": "Ainu vocabulary in a statement the Matsumae domain submitted in 1715. 春日勇人 notes that it is based on 蝦夷談筆記 (1710). The data set is his digitisation (「アイヌ語・語彙DB」2026-06-02, sheet 正1715) after 児玉作左衛門『明治前日本人類学・先史学史』(1971), in ainu-dictionaries `1715_Matsumae_Shotoku-Gonen-Kakitsuke`.",
+    "summaryJa": "1715年に松前藩が提出した書付に含まれるアイヌ語彙。春日勇人は『蝦夷談筆記』（1710年）に基づくものとする。児玉作左衛門『明治前日本人類学・先史学史』（1971年）をもとに、春日が「アイヌ語・語彙DB」（2026年6月2日版、シート「正1715」）で電子化した。"
+  },
+  {
+    "slug": "1738-krasheninnikov-kuril-ainu-words",
+    "title": "クリル語単語集",
+    "expectedSummary": "Kuril Ainu words that Krasheninnikov recorded in 1738 at Bolsheretsk, Kamchatka, from Northern Kuril informants, printed in Cyrillic in *Описание земли Камчатки* (1755). The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet ク単1738) after 村山七郎『北千島アイヌ語 : 文献学的研究』(1971), in ainu-dictionaries `1738_Krasheninnikov_Kuril-Ainu-Words`.",
+    "summaryJa": "クラシェニンニコフが1738年にカムチャツカのボリシェレツクで、北千島出身者から聞き取った千島アイヌ語の語彙。『Описание земли Камчатки』（1755年）にキリル文字で掲載された。村山七郎『北千島アイヌ語：文献学的研究』（1971年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「ク単1738」）で電子化した。"
+  },
+  {
+    "slug": "1756-anon-fudo-yuranshu",
+    "title": "風土遊覧集",
+    "expectedSummary": "Ainu words in the 1756 風土遊覧集. The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet 風1756) after 児玉作左衛門『明治前日本人類学・先史学史』(1971), in ainu-dictionaries `1756_Anon_Fudo-Yuranshu`.",
+    "summaryJa": "『風土遊覧集』（1756年）に含まれるアイヌ語彙。児玉作左衛門『明治前日本人類学・先史学史』（1971年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「風1756」）で電子化した。"
+  },
+  {
+    "slug": "1787-la-perouse-ainu-vocabulary",
+    "title": "ラ・ペルーズの語彙集",
+    "expectedSummary": "Sakhalin Ainu words recorded in French spelling during La Pérouse's 1787 stay in Sakhalin, published in *Voyage de La Pérouse autour du monde* (Paris, 1797). The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet ペ1787), in ainu-dictionaries `1787_LaPerouse_Voyage-Vocabulary`.",
+    "summaryJa": "ラ・ペルーズが1787年の樺太滞在中にフランス語式の綴りで記録した樺太アイヌ語の語彙。『Voyage de La Pérouse autour du monde』（パリ、1797年）に掲載された。春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「ペ1787」）で電子化した。"
+  },
+  {
+    "slug": "1796-broughton-ainu-vocabulary",
+    "title": "ブロートンの語彙集",
+    "expectedSummary": "Hokkaido Ainu words in English spelling from Broughton's voyage, published in *A Voyage of Discovery to the North Pacific Ocean* (London, 1804). The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet ブ1796), in ainu-dictionaries `1796_Broughton_Voyage-Vocabulary`.",
+    "summaryJa": "ブロートンの航海で英語式の綴りによって記録された北海道アイヌ語の語彙。『A Voyage of Discovery to the North Pacific Ocean』（ロンドン、1804年）に掲載された。春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「ブ1796」）で電子化した。"
+  },
+  {
+    "slug": "1804-kaga-ezogo-wakai",
+    "title": "蝦夷語和解",
+    "expectedSummary": "Glosses by the interpreter 加賀伝蔵 on the vocabulary of 蝦夷方言藻汐草 (加賀家文書). The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet 解1804) after 深澤美香 (2016), in ainu-dictionaries `1804_Kaga_Ezogo-Wakai`; rec.aynu.org links 藻汐草 entries to its rows.",
+    "summaryJa": "通詞・加賀伝蔵が『蝦夷方言藻汐草』の語彙に付した注釈。加賀家文書に含まれる。深澤美香（2016年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「解1804」）で電子化した。rec.aynu.orgでは『藻汐草』の各項目から対応するデータを参照できる。"
+  },
+  {
+    "slug": "1805-rezanov-ainu-glossary",
+    "title": "レザノフの語彙集",
+    "expectedSummary": "Ainu glossary from Rezanov's 1805 embassy, with parallel columns for Aniwa Bay and Soya. The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet レ1805) after Adami, \"Ein bisher unbekanntes Ainu-Glossar aus dem Jahre 1805\" (1986), in ainu-dictionaries `1805_Rezanov_Ainu-Glossary`.",
+    "summaryJa": "1805年のレザノフ使節団によるアイヌ語彙集。亜庭湾と宗谷の語形を並べて示す。Adami「Ein bisher unbekanntes Ainu-Glossar aus dem Jahre 1805」（1986年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「レ1805」）で電子化した。"
+  },
+  {
+    "slug": "1844-voznesensky-kuril-ainu-words",
+    "title": "ヴォズネセンスキィ・コレクション（千島アイヌ語）",
+    "expectedSummary": "Kuril Ainu words collected by Ilya G. Voznesensky before 1843, unpublished; the data set gives the words as edited in Vovin, *A Reconstruction of Proto-Ainu* (1993), in 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet Vo1843). Krasheninnikov's クリル語単語集, formerly filed here, has its own entry.",
+    "summaryJa": "イリヤ・G・ヴォズネセンスキィが1843年以前に収集した、未刊の千島アイヌ語彙。Vovin『A Reconstruction of Proto-Ainu』（1993年）で編集された語形を、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「Vo1843」）で電子化した。"
+  },
+  {
+    "slug": "1869-anon-ezo-kotodome",
+    "title": "蝦夷言留",
+    "expectedSummary": "Ainu vocabulary 蝦夷言留 (1869). The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet 留1869) after 佐藤知己『蝦夷言留の研究』(2020), in ainu-dictionaries `1869_Anon_Ezo-Kotodome`.",
+    "summaryJa": "1869年のアイヌ語彙集『蝦夷言留』。佐藤知己『蝦夷言留の研究』（2020年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「留1869」）で電子化した。"
+  },
+  {
+    "slug": "1872-pinart-kuril-ainu-vocabulary",
+    "title": "ピナールの語彙集",
+    "expectedSummary": "Kuril Ainu words and phrases recorded by Alphonse Pinart in 1872. The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet ピ1872) after Asai, \"Classification of dialects: Cluster analysis of Ainu dialects\" (1974), in ainu-dictionaries `1872_Pinart_Kuril-Ainu-Vocabulary`.",
+    "summaryJa": "アルフォンス・ピナールが1872年に記録した千島アイヌ語の語句。Asai「Classification of dialects: Cluster analysis of Ainu dialects」（1974年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「ピ1872」）で電子化した。"
+  },
+  {
+    "slug": "1882-dybowski-shumshu-ainu-vocabulary",
+    "title": "シュムシュ島アイヌ語方言小辞典",
+    "expectedSummary": "Shumshu (Northern Kuril) Ainu vocabulary recorded by Benedykt Dybowski in 1879–1883 and published in 1891–1892. The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet デ1882) after 村山七郎『北千島アイヌ語 : 文献学的研究』(1971), in ainu-dictionaries `1882_Dybowski_Shumshu-Ainu-Dictionary`.",
+    "summaryJa": "ベネディクト・ディボフスキが1879～1883年に記録し、1891～1892年に公刊した占守島（北千島）のアイヌ語彙。村山七郎『北千島アイヌ語：文献学的研究』（1971年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「デ1882」）で電子化した。"
+  },
+  {
+    "slug": "1968-simeon-horobetsu-kinship-terms",
+    "title": "Horobetsu kinship terminology (Simeon 1968, Appendix II)",
+    "expectedSummary": "38 kinship terms printed as Appendix II (pp. 72–74) of George John Simeon's dissertation *The phonemics and morphology of Hokkaido Ainu* (University of Southern California, 1968), elicited June–July 1967 from Itaku Haru of Horobetsu, then 84. Lemmas carry Simeon's phonemic notation. The list distinguishes reference from address forms (*onaha* / *miki*), covers the *siwto-* affinal set, and gives phrases for cross and parallel cousins.",
+    "summaryJa": "George John Simeonの博士論文『The phonemics and morphology of Hokkaido Ainu』（南カリフォルニア大学、1968年）の付録II（72～74頁）に収められた親族名称38語。1967年6～7月に、当時84歳の幌別のItaku Haruから聞き取られた。見出し語はSimeonの音素表記による。言及形と呼びかけ形（onaha／miki）を区別し、siwto-を含む姻族名称や、交差イトコ・平行イトコを表す句も収録する。"
+  },
+  {
+    "slug": "1968-simeon-phonemics-morphology-hokkaido-ainu",
+    "title": "The phonemics and morphology of Hokkaido Ainu",
+    "expectedSummary": "PhD dissertation (University of Southern California, August 1968; UMI 68-17,042). Structuralist sketch of Hokkaido Ainu phonemics, morphophonemics, and morphology from June–July 1967 fieldwork with Kayano Shigeru (Hiratori, then 42), Itaku Haru (Horobetsu, then 84; formerly of John Batchelor's household), and Sasaki Taro (Higashi-Shizunai, then 62).",
+    "summaryJa": "南カリフォルニア大学の博士論文（1968年8月、UMI 68-17,042）。北海道アイヌ語の音素論、形態音韻論、形態論を構造主義的に記述する。1967年6～7月に、萱野茂（平取、当時42歳）、Itaku Haru（幌別、当時84歳、かつてジョン・バチェラーの家に居住）、Sasaki Taro（東静内、当時62歳）を対象に行った調査に基づく。"
+  },
+  {
+    "slug": "1969-george-simeon-hokkaido-ainu-word-classes",
+    "title": "Hokkaido Ainu word classes",
+    "expectedSummary": "Lingua 23: 144–148 (1969). Condensed journal version of the word-class (morphology) analysis of Simeon's 1968 USC dissertation: verb, copula, adverb, noun, pronoun, numeral, adnoun, particle, and conjunction as thematic classes, with prepositions and postpositions as paradigmatic classes.",
+    "summaryJa": "Lingua第23巻（1969年）、144～148頁。Simeonの1968年の南カリフォルニア大学博士論文における品詞・形態論の分析をまとめた論文。動詞、コピュラ、副詞、名詞、代名詞、数詞、連体詞、小辞、接続詞をthematic classes、前置詞と後置詞をparadigmatic classesとして扱う。"
+  },
+  {
+    "slug": "1969-simeon-george-hokkaido-ainu-phonemics",
+    "title": "Hokkaido Ainu phonemics",
+    "expectedSummary": "Journal of the American Oriental Society 89(4): 751–757 (1969). Condensed journal version of the phonemics chapters of Simeon's 1968 USC dissertation, based on June–July 1967 fieldwork on the Hiratori, Horobetsu, and Higashi-Shizunai dialects.",
+    "summaryJa": "Journal of the American Oriental Society第89巻第4号（1969年）、751～757頁。Simeonの1968年の南カリフォルニア大学博士論文のうち、音素論に関する章をまとめた論文。1967年6～7月の平取・幌別・東静内方言の調査に基づく。"
+  },
+  {
+    "slug": "1976-george-simeon-the-hokkaido-ainu-copula",
+    "title": "THE HOKKAIDO AINU COPULA",
+    "expectedSummary": "Linguistics 14(181): 63– (1976). Treatment of the Hokkaido Ainu copula, developing the copula section (§3.1.2) of Simeon's 1968 USC dissertation; data from the same 1967 Hiratori, Horobetsu, and Higashi-Shizunai fieldwork.",
+    "summaryJa": "Linguistics第14巻第181号（1976年）、63頁以降に掲載。北海道アイヌ語のコピュラを扱い、Simeonの1968年の南カリフォルニア大学博士論文のコピュラ節（3.1.2節）を発展させた論文。同じ1967年の平取・幌別・東静内での調査資料に基づく。"
+  },
+  {
+    "slug": "1992-tajima-complex-predicate-formation-ainu",
+    "title": "Complex predicate formation in Ainu",
+    "expectedSummary": "MA thesis on Ainu complex-predicate formation, noun incorporation, and the syntactic constraints on word formation; includes the analysis of Batchelor’s Aeuitaknup as a=e-u-itak-nu-p.",
+    "summaryJa": "アイヌ語の複合述語形成、名詞抱合、語形成に対する統語的制約を扱う修士論文。バチェラーのAeuitaknupをa=e-u-itak-nu-pと分析する箇所を含む。"
+  },
+  {
+    "slug": "2011-bugaeva-documentation-southern-hokkaido-ainu-2007",
+    "title": "Documentation of Southern Hokkaido Ainu (2007-2009) [deposit 2]",
+    "expectedSummary": "Endangered Languages Archive, SOAS, University of London. Available online at : https://elar.soas.ac.uk/Collection/MPI124799",
+    "summaryJa": "ロンドン大学SOASのEndangered Languages Archiveで公開されている資料。https://elar.soas.ac.uk/Collection/MPI124799"
+  },
+  {
+    "slug": "2011-bugaeva-talking-dictionary-ainu-deposit-3",
+    "title": "A talking dictionary of Ainu [deposit 3]",
+    "expectedSummary": "Endangered Languages Archive, SOAS, University of London. Available online at https://elar.soas.ac.uk/Collection/MPI124799",
+    "summaryJa": "ロンドン大学SOASのEndangered Languages Archiveで公開されている資料。https://elar.soas.ac.uk/Collection/MPI124799"
+  },
+  {
+    "slug": "2011-nakagawa-corpus-folktales-saru-dialect-ainu",
+    "title": "A corpus of folktales of the Saru dialect of Ainu by Mrs. Kimi Kimura (1900-1988) [deposit 1]",
+    "expectedSummary": "Endangered Languages Archive, SOAS, University of London. Available online at : https://elar.soas.ac.uk/Collection/MPI124799",
+    "summaryJa": "ロンドン大学SOASのEndangered Languages Archiveで公開されている資料。https://elar.soas.ac.uk/Collection/MPI124799"
+  },
+  {
+    "slug": "2022-sotaro0124-ainu-japan-translation-model",
+    "title": "Ainu-Japan_translation_model",
+    "expectedSummary": "Hugging Face dataset",
+    "summaryJa": "Hugging Faceで公開されているデータセット。"
+  },
+  {
+    "slug": "2023-ananyaayasi-ainu",
+    "title": "Ainu",
+    "expectedSummary": "Hugging Face dataset",
+    "summaryJa": "Hugging Faceで公開されているデータセット。"
+  },
+  {
+    "slug": "2023-ananyaayasi-ainu-processed-v2",
+    "title": "ainu-processed-v2",
+    "expectedSummary": "Hugging Face dataset",
+    "summaryJa": "Hugging Faceで公開されているデータセット。"
+  },
+  {
+    "slug": "2023-junyinc-speecht5-tts-ainu",
+    "title": "speecht5_tts_ainu",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-koichiyasuoka-deberta-base-ainu",
+    "title": "deberta-base-ainu",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-koichiyasuoka-deberta-base-ainu-ud-goeswith",
+    "title": "deberta-base-ainu-ud-goeswith",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-koichiyasuoka-deberta-base-ainu-upos",
+    "title": "deberta-base-ainu-upos",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-koichiyasuoka-roberta-base-ainu",
+    "title": "roberta-base-ainu",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-koichiyasuoka-roberta-base-ainu-ud-goeswith",
+    "title": "roberta-base-ainu-ud-goeswith",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-koichiyasuoka-roberta-base-ainu-upos",
+    "title": "roberta-base-ainu-upos",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-somiyagawa-ainu-2-japanese",
+    "title": "ainu-2-japanese",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-somiyagawa-ainutrans-2-0",
+    "title": "AinuTrans-2.0",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2023-takubo-kiki-gengo-kiroku-iji-saisei-ryukyu-shogo",
+    "title": "危機言語の記録・維持・再生の諸問題：琉球諸語を中心に",
+    "expectedSummary": "PERIPHERAL / LOW RELEVANCE — the talk lists アイヌ語 only as one of Japan's 8 UNESCO-recognized endangered languages alongside Hachijo and 6 Ryukyuan languages; the",
+    "summaryJa": "琉球諸語を中心に、危機言語の記録・維持・再生に関わる課題を論じる。アイヌ語は、日本の消滅危機言語の一つとして言及される。"
+  },
+  {
+    "slug": "2023-wav2gloss-ninjal-ainu-folklore",
+    "title": "NINJAL-Ainu-Folklore",
+    "expectedSummary": "Hugging Face dataset",
+    "summaryJa": "Hugging Faceで公開されているデータセット。"
+  },
+  {
+    "slug": "2023-yasuoka-roma-ji-katakana-kiriru-moji-universal-3",
+    "title": "ローマ字・カタカナ・キリル文字によるアイヌ語Universal Dependenciesの可能性",
+    "expectedSummary": "Builds Universal Dependencies treebanks for written Ainu across three scripts (Latin/Katakana/Cyrillic), using アイヌ神謠集, アイヌ語會話字典, the Ainu translation of 五倫名義解,",
+    "summaryJa": "ローマ字・カタカナ・キリル文字で書かれたアイヌ語資料へのUniversal Dependenciesの適用を検討する。『アイヌ神謠集』『アイヌ語會話字典』やアイヌ語訳『五倫名義解』などを扱う。"
+  },
+  {
+    "slug": "2024-aynumosir-gpt2-ainu",
+    "title": "gpt2-ainu",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-aynumosir-mt5-base-ainu",
+    "title": "mt5-base-ainu",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-aynumosir-mt5-small-ainu",
+    "title": "mt5-small-ainu",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-aynumosir-mt5-small-ainu-romanize",
+    "title": "mt5-small-ainu-romanize",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-aynumosir-roberta-base-ainu-pos",
+    "title": "roberta-base-ainu-pos",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-corso-non-reflexive-reflexives-conceptual-domain",
+    "title": "Non-reflexive reflexives? The conceptual domain of Sakhalin Ainu yay- and si-",
+    "expectedSummary": "Semantics of the two Sakhalin Ainu reflexive prefixes yay- and si-; reflexive vs non-reflexive uses.",
+    "summaryJa": "樺太アイヌ語の再帰接頭辞yay-とsi-の意味を分析し、再帰用法と非再帰用法を検討する。"
+  },
+  {
+    "slug": "2024-ijas-boundaries-set-assumptions-authentic-speakers",
+    "title": "Boundaries set by assumptions of \"authentic\" speakers and \"correct\" language – discussing examples of Ainu",
+    "expectedSummary": "Sociolinguistics of Ainu revitalisation/reclamation: who counts as an 'authentic'/'correct' Ainu speaker, new speakers, boundaries created by (ethnically Japane",
+    "summaryJa": "アイヌ語の復興をめぐり、「真正な」話者や「正しい」言語という観念が、新たな話者との間にどのような境界を生むかを論じる。"
+  },
+  {
+    "slug": "2024-mradermacher-ainutrans-2-0-gguf",
+    "title": "AinuTrans-2.0-GGUF",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-sato-grammaticalization-chains-ainu-exploring",
+    "title": "Grammaticalization chains in Ainu: exploring the evolution of the auxiliary verb construction 'V1+V2aux'",
+    "expectedSummary": "Core Ainu historical morphosyntax: diachrony of the V1+V2 auxiliary verb construction across Hokkaido, West/East Sakhalin and Kuril Ainu; grammaticalization/cla",
+    "summaryJa": "北海道・樺太西部・樺太東部・千島のアイヌ語を対象に、V1＋V2補助動詞構文の歴史的変化と文法化を検討する。"
+  },
+  {
+    "slug": "2024-twentynine-byt5-small-ainu-latinizer-cos-w-restarts",
+    "title": "byt5-small-ainu-latinizer-cos_w_restarts",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-twentynine-byt5-small-ainu-latinizer-linear",
+    "title": "byt5-small-ainu-latinizer-linear",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-twentynine-byt5-small-ainu-latinizer-polynomial",
+    "title": "byt5-small-ainu-latinizer-polynomial",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2024-vaage-sociolinguistic-analysis-humourous-elements",
+    "title": "A sociolinguistic analysis of humourous elements in Ainu language and culture",
+    "expectedSummary": "Sociolinguistics of humour in Ainu oral tradition (riddles, language play, Penanpe/Pananpe comic tales, kamuy), based on recorded Ainu texts.",
+    "summaryJa": "記録されたアイヌ語テキストをもとに、謎かけ、言葉遊び、ペナンペ・パナンペの滑稽譚など、口承文芸のユーモアを社会言語学的に分析する。"
+  },
+  {
+    "slug": "2025-aynumosir-mt5-base-ainu-onnx",
+    "title": "mt5-base-ainu-onnx",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2025-dekany-syntax-numeral-modification-ainu",
+    "title": "The syntax of numeral modification in Ainu",
+    "expectedSummary": "A study of simplex and complex numeral modification in Southern Hokkaido Ainu. Proposes different structures for different numeral values and reassesses the analysis of counting suffixes.",
+    "summaryJa": "北海道南部のアイヌ語における単純数詞と複合数詞による修飾を扱う。数値によって異なる構造を提案し、計数接尾辞の分析を再検討する。"
+  },
+  {
+    "slug": "2025-nakata-shometsu-kiki-gengo-kopasu-sakusei-gengo",
+    "title": "消滅危機言語のコーパス作成を支える言語識別 〜アイヌ語を対象として〜",
+    "expectedSummary": "Language identification to support corpus creation for endangered languages, explicitly targeting Ainu (アイヌ語) — directly an Ainu corpus/NLP tooling paper.",
+    "summaryJa": "消滅危機言語のコーパス作成を支える言語識別について、アイヌ語を対象に検討する。"
+  },
+  {
+    "slug": "2026-aoiandroid-ainutrans-2-0-onnx",
+    "title": "ainutrans-2.0-onnx",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2026-bugaeva-body-part-incorporation",
+    "title": "Body-part noun incorporation and related borderline phenomena in Ainu",
+    "expectedSummary": "Conference contribution accepted for SLE 2026 on body-part noun incorporation and related borderline phenomena in Ainu. The official accepted-paper list supplies the title and author; an abstract or full paper has not been located.",
+    "summaryJa": "アイヌ語の身体部位名詞抱合と、それに関連する境界的な現象を扱うSLE 2026採択発表。公式の採択一覧で題目と著者を確認できるが、要旨・全文は未確認。"
+  },
+  {
+    "slug": "2026-bugaeva-paratactic-clause-chaining",
+    "title": "From two to one: Paratactic clause chaining as a source of complex predicates in Ainuic",
+    "expectedSummary": "Conference abstract comparing clause chaining and aspectual complex predicates across Ainu varieties, with a proposal about their historical relationship.",
+    "summaryJa": "アイヌ語諸変種の節連鎖とアスペクトを表す複合述語を比較し、両者の歴史的関係について提案する学会発表要旨。"
+  },
+  {
+    "slug": "2026-dal-corso-kusu-anankastic-modality",
+    "title": "The Sakhalin Ainu kusu as a marker of anankastic modality",
+    "expectedSummary": "Conference contribution accepted for SLE 2026 on Sakhalin Ainu kusu and anankastic modality. The official accepted-paper list supplies the title and author; an abstract or full paper has not been located.",
+    "summaryJa": "樺太アイヌ語のkusuが表す、目的の達成に必要な条件を示すモダリティ（anankastic modality）を扱うSLE 2026採択発表。公式の採択一覧で題目と著者を確認できるが、要旨・全文は未確認。"
+  },
+  {
+    "slug": "2026-dekany-two-sources-numeral-modification",
+    "title": "Two sources of numeral modification in Southern Hokkaido Ainu",
+    "expectedSummary": "Forthcoming working-paper article on numeral modification in Southern Hokkaido Ainu. MTMT lists 2026 but retains publicationPending=true; publication has not been confirmed. An author-posted manuscript is available.",
+    "summaryJa": "北海道南部のアイヌ語における数詞修飾を扱うワーキングペーパー掲載予定論文。MTMTには2026年の文献として登録されているが、刊行待ちの状態にあり、刊行は未確認。著者が公開した原稿を閲覧できる。"
+  },
+  {
+    "slug": "2026-fuente-what-do-eels-teeth-counting",
+    "title": "What Do Eels, Teeth and Counting People Have in Common? On the “Nimak Rule” in Ainu",
+    "expectedSummary": "A historical analysis of a subset of Ainu n/zero alternations. Proposes the sporadic “nimak rule” and relates it to lexical etymologies and the allomorphy of human-counting forms.",
+    "summaryJa": "アイヌ語のnとゼロの交替の一部を歴史的に分析する。散発的な「nimak規則」を提案し、語源や人数を数える語形の異形態との関係を論じる。"
+  },
+  {
+    "slug": "2026-fukazawa-gokei-kisokusei-kiso-goi",
+    "title": "語形と規則性の複合的なデータの構築 : アイヌ語基礎語彙の情報の最大化に向けて",
+    "expectedSummary": "A study of combined word-form and regularity data in Ainu basic vocabulary, extending the authors’ earlier analyses of the Hattori–Chiri and Asai materials.",
+    "summaryJa": "アイヌ語の基礎語彙について、語形と規則性を組み合わせたデータを検討する。服部・知里および浅井の資料に対する著者らの先行分析を発展させた研究。"
+  },
+  {
+    "slug": "2026-izutsu-necessity-ainu-japanese-korean",
+    "title": "Inside and outside the modal (auxiliary) verb system: So-called root, deontic, and epistemic necessity with special reference to Ainu, Japanese, and Korean",
+    "expectedSummary": "Conference contribution accepted for SLE 2026 on root, deontic and epistemic necessity, with special reference to Ainu, Japanese and Korean. An abstract or full paper has not been located.",
+    "summaryJa": "アイヌ語・日本語・朝鮮語を中心に、根源的・義務的・認識的な必要性を扱うSLE 2026採択発表。要旨・全文は未確認。"
+  },
+  {
+    "slug": "2026-kasuga-ainu-goi-db",
+    "title": "アイヌ語・語彙DB",
+    "expectedSummary": "Excel workbook with one sheet per Ainu word list of the 17th–19th centuries (from de Angelis 1621 to Torii 1899 and あいぬ物語 1913). Each word carries the recorded form, a modern lemma, the form spelt in Latin letters and a concept number of Hattori's 1964 dialect dictionary; the colour of the form cell marks the compiler's review (checked, doubtful, likely wrong, unchecked). Version of 2 June 2026. The data behind the author's 2026 talk 「アイヌ語古文献の方言分類」.",
+    "summaryJa": "17～19世紀のアイヌ語彙集を資料ごとに収めたExcelブック。デ・アンジェリスの1621年の記録から鳥居の1899年の記録までを扱い、『あいぬ物語』（1913年）も含む。各語に記録形、現代の見出し語、ラテン文字表記、服部の1964年の方言辞典の概念番号を付す。語形セルの色で、編者による確認状況（確認済み・疑わしい・誤りの可能性が高い・未確認）を示す。2026年6月2日版。著者の2026年の発表「アイヌ語古文献の方言分類」の基礎データ。"
+  },
+  {
+    "slug": "2026-kasuga-ainu-kobunken-hogen-bunrui",
+    "title": "アイヌ語古文献の方言分類",
+    "expectedSummary": "Talk at the 10th meeting of the Japan Association of Northern Language Studies (日本北方言語学会 第10回大会), 26 September 2026, University of Tsukuba (hybrid). Using the regional distribution of individual words (e.g. menokosi, par / car, ape / unci), it groups Ainu records of the 17th–19th centuries into dialect areas and estimates where each was compiled. The 77-slide handout carries the word tables of each record, drawn from the author's vocabulary workbook 「アイヌ語・語彙DB」.",
+    "summaryJa": "2026年9月26日、筑波大学でハイブリッド開催された日本北方言語学会第10回大会の発表。menokosi、par／car、ape／unciなど、個々の語の地域分布をもとに17～19世紀のアイヌ語文献を方言地域別に分類し、各資料の成立地を推定する。77枚の発表資料には、著者の「アイヌ語・語彙DB」に基づく各文献の語彙表を掲載する。"
+  },
+  {
+    "slug": "2026-kishimoto-mukawa-hogen-shina-kawahagi-omoide",
+    "title": "アイヌ語鵡川方言テキスト(3) : シナ皮剥ぎの思い出",
+    "expectedSummary": "Two Mukawa Ainu narratives by Fuyuko Yoshimura about stripping linden bark. The author describes the texts as heritage-language material from a generation whose first language was Japanese; accompanying audio is available.",
+    "summaryJa": "吉村冬子がシナの樹皮剥ぎについて語った、鵡川方言のアイヌ語による二つの物語。著者は、日本語を第一言語とする世代の継承語資料として位置づける。対応する音声も公開されている。"
+  },
+  {
+    "slug": "2026-koichiyasuoka-paddleocr-vl-1-5-ainu",
+    "title": "PaddleOCR-VL-1.5-Ainu",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2026-koichiyasuoka-paddleocr-vl-1-6-ainu",
+    "title": "PaddleOCR-VL-1.6-Ainu",
+    "expectedSummary": "Hugging Face model",
+    "summaryJa": "Hugging Faceで公開されているモデル。"
+  },
+  {
+    "slug": "2026-sato-ainu-database-report-15",
+    "title": "アイヌ語調査資料のデータベース化に関する基礎的研究(15)",
+    "expectedSummary": "Volume 15 of Tomomi Satō’s research reports on database construction for Ainu fieldwork materials. The author’s institutional bibliography records publication in March 2026; contents and full text have not been verified.",
+    "summaryJa": "佐藤知己による、アイヌ語調査資料のデータベース化に関する研究報告の第15冊。著者の所属機関の業績一覧には2026年3月刊行と記載されている。内容・全文は未確認。"
+  },
+  {
+    "slug": "2026-yasuoka-katakana-ainu-go-ocr",
+    "title": "Qwen3.5によるカタカナアイヌ語OCRの開発",
+    "expectedSummary": null,
+    "summaryJa": "視覚言語モデルQwen3.5を用いて、カタカナで書かれたアイヌ語のOCRを開発する研究。",
+    "basis": "scripts/data/curated-biblio.json#conf-x-2026-12"
+  },
+  {
+    "slug": "2026-yohei-classification-history-examining-new",
+    "title": "From Classification to History : Examining New Lexicostatistical Methodologies in Using the Data in Ainu Dialects",
+    "expectedSummary": "A lexicostatistical study separating recurring regularities from lexical-item information in Ainu dialect data. Compares alternative representations of dialect relationships and considers historical divergence and contact.",
+    "summaryJa": "アイヌ語方言のデータに見られる反復的な規則性と、個々の語彙項目の情報を分けて扱う基礎語彙統計学的研究。方言間の関係を表す複数の方法を比較し、歴史的な分岐と接触を検討する。"
+  },
+  {
+    "slug": "2026-yoshikawa-saru-hogen-judo-hyogen",
+    "title": "アイヌ語沙流方言における受動表現",
+    "expectedSummary": "Saru Ainu data for a questionnaire on passive expressions. Discusses indefinite person marking, agent phrases and middle ci-, distinguishing explanatory constructed examples from examples drawn from published texts.",
+    "summaryJa": "受動表現に関する調査票への回答として、アイヌ語沙流方言のデータを提示する。不定人称標示、動作主を表す句、中動態のci-を扱い、説明のための作例と公刊テキストからの用例を区別する。"
+  },
+  {
+    "slug": "2027-knapen-sakhalin-taxonyms-taxonomies",
+    "title": "Ethnobotany on Sakhalin: The History and Structure of Nivkh, Uilta and Ainu Taxonyms and Taxonomies",
+    "expectedSummary": "Forthcoming chapter on the history and structure of Nivkh, Uilta and Ainu plant names and classifications. The publisher announces the containing volume for March 2027.",
+    "summaryJa": "ニヴフ語・ウイルタ語・アイヌ語の植物名称と分類の歴史・構造を扱う刊行予定の章。出版社は収録書籍の刊行を2027年3月と予告している。"
+  },
+  {
+    "slug": "a-diachronic-study-of-anticausatives-in-ainu",
+    "title": "A diachronic study of anticausatives in Ainu",
+    "expectedSummary": "Typological/diachronic study of Ainu anticausative marking; core Ainu morphosyntax at a major typology conference.",
+    "summaryJa": "アイヌ語の反使役の標示を、言語類型論と通時的研究の観点から検討する。"
+  },
+  {
+    "slug": "ainu-ga-sareta-no",
+    "title": "宝永元年空念上人筆録アイヌ語彙「狄言葉」が記録された地域の推定",
+    "expectedSummary": "Linguistic study of the Ainu vocabulary list 「狄言葉」 recorded in 1704 (宝永元年) by the Soto-sect monk Kūnen (空念上人) — one of the oldest dated Ainu-language sources. C",
+    "summaryJa": "曹洞宗の僧・空念が宝永元年（1704年）に筆録したアイヌ語彙「狄言葉」について、記録された地域を言語学的に検討する。"
+  },
+  {
+    "slug": "ainu-no-bi-heno",
+    "title": "アイヌ語の音声認識・合成及び琉球諸語への展開",
+    "expectedSummary": "Invited colloquium on ASR/TTS for the Ainu language: ~90%+ phoneme-recognition accuracy from the National Ainu Museum Ainu Language Archive, low-resource method",
+    "summaryJa": "国立アイヌ民族博物館のアイヌ語アーカイブを用いた音声認識・音声合成の研究と、琉球諸語への展開を紹介する招待講演。"
+  },
+  {
+    "slug": "ainu-nowatari-to",
+    "title": "アイヌ語のわたり音と母音連続",
+    "expectedSummary": "A report of a presentation on glides and vowel sequences in Ainu. A separate article with the same title appeared in the society’s 2025 anniversary volume.",
+    "summaryJa": "アイヌ語のわたり音と母音連続を扱う研究発表の報告。同題の別論文が、学会の2025年の記念論集に掲載されている。"
+  },
+  {
+    "slug": "ainu-to-nonaru",
+    "title": "アイヌ語と朝鮮語のナル的表現",
+    "expectedSummary": "Comparative/typological treatment of 'naru'-type (becoming) expressions covering Ainu (アイヌ語) alongside Korean, within a cross-Asian symposium (Turkic, Mongolic,",
+    "summaryJa": "アイヌ語と朝鮮語の「ナル」的表現を比較し、言語類型論の観点から検討する。"
+  },
+  {
+    "slug": "kara-he-ainu-detao-ita-no-shi-no",
+    "title": "分類から歴史へ ―アイヌ語方言データを用いた基礎語彙統計学の新しい方法論の検証―",
+    "expectedSummary": "From classification to history: testing a new lexicostatistic methodology on Ainu dialect basic-vocabulary data.",
+    "summaryJa": "アイヌ語方言の基礎語彙データを用いて、言語の分類から歴史の解明へとつなげる基礎語彙統計学の新しい方法を検証する。"
+  },
+  {
+    "slug": "kara-ta-niokeru-no-omegutte-kara",
+    "title": "主観性から見た外部所有構文における身体部位名詞の表現をめぐって : 多言語的・類型論的視点から",
+    "expectedSummary": "A crosslinguistic study of external possession involving body-part nouns. Includes Ainu examples in its examination of person marking, possessors and subjectivity.",
+    "summaryJa": "身体部位名詞を伴う外部所有構文を言語間で比較する研究。アイヌ語の例も取り上げ、人称標示、所有者、主観性の関係を検討する。"
+  },
+  {
+    "slug": "kisuten-refushin-1",
+    "title": "キーステン・レフシン資料音声資料目録(1)",
+    "expectedSummary": "A catalogue of Kirsten Refsing’s 1980–1981 Shizunai Ainu recordings with Suteno Orita, which underlie her 1986 grammar.",
+    "summaryJa": "Kirsten Refsingが1980～1981年に織田ステノを対象に行った静内方言のアイヌ語録音の目録。録音資料はRefsingの1986年の文法書の基礎となった。"
+  },
+  {
+    "slug": "language-attitudes-of-ainu-people-toward-their-language-its",
+    "title": "Language Attitudes of Ainu People toward their Language, its Speakers, and Linguistic Institutions : Implications for Revitalization and Modern Use",
+    "expectedSummary": "A doctoral thesis on Ainu people’s attitudes toward their language, its speakers and linguistic institutions, with implications for revitalization and modern use. The repository provides an abstract, examination report and summary; full text remains embargoed.",
+    "summaryJa": "アイヌの人々が、自らの言語、その話者、言語に関わる諸機関に対して抱く態度を調べ、言語復興と現代的な使用への示唆を論じる博士論文。リポジトリでは論文要旨、審査結果、内容の要約を公開しているが、全文の公開は猶予されている。"
+  },
+  {
+    "slug": "ninjal-shinpojiumu-shinajishinpojiumu-2025",
+    "title": "NINJAL国際シンポジウム「言語復興シナジーシンポジウム2025」",
+    "expectedSummary": "Endangered-language revitalization symposium with substantial Ainu programming: the Ureshipa Project lecture and multiple Ainu-focused round tables + a closing",
+    "summaryJa": "消滅危機言語の復興を扱う国際シンポジウム。ウレシパ・プロジェクトの講演や、アイヌ語をめぐる複数のラウンドテーブルを含む。"
+  },
+  {
+    "slug": "no-ainu-589d7918",
+    "title": "山縣良温の「アイヌ語講義原稿」",
+    "expectedSummary": "An edition and discussion of Yamagata Ryōon’s Ainu lecture manuscript. Includes sections on Tokachi person forms, kinship terms, word-initial h and vocabulary.",
+    "summaryJa": "山縣良温の「アイヌ語講義原稿」を翻刻し、解説する。十勝方言の人称形、親族名称、語頭のh、語彙に関する節を含む。"
+  },
+  {
+    "slug": "o-itainu-no-niokeru",
+    "title": "逆翻訳を用いたアイヌ語・日本語機械翻訳の改善における研究",
+    "expectedSummary": "Core Ainu language-technology / MT: improves low-resource Ainu-Japanese neural machine translation (NLLB-200) via iterative back-translation + random-sampling p",
+    "summaryJa": "反復的な逆翻訳を用いて、NLLB-200によるアイヌ語・日本語間のニューラル機械翻訳の改善を図る研究。"
+  },
+  {
+    "slug": "on-stative-active-intransitive-split-within-tripartite",
+    "title": "On stative/active intransitive split within tripartite alignment: A case of Kuril Ainu",
+    "expectedSummary": "Dedicated Ainu historical/reconstruction talk: reconstructs the grammatical-relations system of the least-documented Kuril (Chishima) variety of Ainu from publi",
+    "summaryJa": "千島アイヌ語の文法関係を再建し、三項型の格配列における状態自動詞と動作自動詞の区別を検討する。"
+  },
+  {
+    "slug": "roma-katakana-kiriru-ainu-roberta-deberta-moderuno",
+    "title": "ローマ字・カタカナ・キリル文字併用アイヌ語RoBERTa・DeBERTaモデルの開発",
+    "expectedSummary": "Builds pre-trained RoBERTa/DeBERTa language models for Ainu handling three scripts (Latin / katakana / Cyrillic) simultaneously, for downstream morphological (形",
+    "summaryJa": "ローマ字・カタカナ・キリル文字の3種類の表記に対応するアイヌ語の事前学習済みRoBERTa・DeBERTaモデルを開発する。"
+  },
+  {
+    "slug": "saharinto-noainu-ni-ru-no",
+    "title": "サハリンと北海道のアイヌ語地名に残る「川」の古形",
+    "expectedSummary": "Reconstructs the proto-Ainu word for 'river' (*peti) from Ainu-derived place names in Sakhalin and Hokkaido; argues Japanese borrowed names when Ainu still used",
+    "summaryJa": "サハリンと北海道のアイヌ語地名をもとに、「川」を表すアイヌ祖語の語形*petiを再建する。"
+  },
+  {
+    "slug": "seals-and-sea-ice-the",
+    "title": "Seals and sea ice: the",
+    "expectedSummary": "Ainu prehistory / language-contact talk: examines Amuric (Nivkh) linguistic material in Proto-Ainu and Amuric→Sakhalin-Ainu borrowing (Shiraishi & Tangiku 2022)",
+    "summaryJa": "アイヌ祖語に見られるアムール語族（ニヴフ語）の要素と、樺太アイヌ語への借用をもとに、先史時代の言語接触を検討する。"
+  },
+  {
+    "slug": "strategies-for-pps-in-ainu",
+    "title": "Strategies for PPs in Ainu",
+    "expectedSummary": "A syntactic analysis of postpositional constructions in Saru and Chitose Ainu, focusing on locative nouns, or and possessive structure.",
+    "summaryJa": "沙流・千歳方言のアイヌ語の後置詞構文を統語論的に分析する。位置名詞、or、所有構造に焦点を当てる。"
+  },
+  {
+    "slug": "to-no-nadetano-ainu-no-no-ni-kete-2",
+    "title": "語形と規則性の複合的なデータの構築 ―アイヌ語基礎語彙の情報の最大化に向けて―",
+    "expectedSummary": "Building combined word-form + regularity data for Ainu basic vocabulary, toward maximizing information in Ainu lexical data (lexicostatistics/dialectology).",
+    "summaryJa": "アイヌ語の基礎語彙について、語形と規則性を組み合わせたデータを構築し、語彙データから得られる情報を増やす方法を検討する。"
+  },
+  {
+    "slug": "upopoi-mappuniyoru-12-no-universal-dependencies",
+    "title": "ウポポイ園内マップによる12種のUniversal Dependencies",
+    "expectedSummary": "Builds Universal Dependencies treebank data from the Upopoy (国立アイヌ民族博物館・民族共生象徴空間) park-map signage; part of Yasuoka's Ainu-UD research line. CAVEAT: could not c",
+    "summaryJa": "ウポポイ園内マップを用いて、12種のUniversal Dependenciesのデータを構築する研究。"
+  },
+  {
+    "slug": "when-to-prefer-split-self-conceptions-self-reference-in",
+    "title": "When to prefer split-self conceptions: Self-reference in solitude speech in Ainu, English, Japanese, and Korean",
+    "expectedSummary": "A comparative study of self-reference in voiced and unvoiced solitude speech, including second-person self-reference in Ainu.",
+    "summaryJa": "声に出す独話と声に出さない独話における自己への言及を比較する研究。アイヌ語で二人称を用いて自分自身に言及する例を含む。"
+  },
+  {
+    "slug": "xxxx-compilation-kamchatka-ainu",
+    "title": "カムチャツカ・アイヌ語（Asia Polyglotta）",
+    "expectedSummary": "Steller's 1743 record of Ainu from Kamchatka as printed in Klaproth's *Asia Polyglotta* (1823). The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet ス2村) after 村山七郎『北千島アイヌ語 : 文献学的研究』(1971), in ainu-dictionaries `XXXX_Compilation_Kamchatka-Ainu`. Whether it counts as Kuril or as a distinct Kamchatka dialect is unsettled; MDB tags it カムチャツカ.",
+    "summaryJa": "クラプロート『Asia Polyglotta』（1823年）に掲載された、シュテラーによる1743年のカムチャツカのアイヌ語記録。村山七郎『北千島アイヌ語：文献学的研究』（1971年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「ス2村」）で電子化した。千島方言に含めるか、独立したカムチャツカ方言とするかは確定していない。MDBでは「カムチャツカ」と分類されている。"
+  },
+  {
+    "slug": "xxxx-compilation-kuril-islands-ainu",
+    "title": "クリル諸島アイヌ語（ラングスドルフ旅行記）",
+    "expectedSummary": "Steller's 1743 Kuril Ainu record as printed in Langsdorff, *Bemerkungen auf einer Reise um die Welt* (1812). The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet ス1村1743) after 村山七郎『北千島アイヌ語 : 文献学的研究』(1971), in ainu-dictionaries `XXXX_Compilation_Kuril-Islands-Ainu`. Steller's own list is catalogued as `1743-steller-kuril-ainu-vocabulary`.",
+    "summaryJa": "ラングスドルフ『Bemerkungen auf einer Reise um die Welt』（1812年）に掲載された、シュテラーによる1743年の千島アイヌ語記録。村山七郎『北千島アイヌ語：文献学的研究』（1971年）をもとに、春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「ス1村1743」）で電子化した。シュテラー自身の語彙表も別資料として収録されている。"
+  },
+  {
+    "slug": "xxxx-compilation-sakhalin-ainu",
+    "title": "アジア博言集（アイヌ語）",
+    "expectedSummary": "Ainu vocabulary of Julius Klaproth's *Asia Polyglotta* (Paris, 1823), with Kuril, Sakhalin and Hokkaido columns drawn from earlier records and German glosses. The data set is 春日勇人's digitisation (「アイヌ語・語彙DB」2026-06-02, sheet Klaproth1823) in ainu-dictionaries `1823_Klaproth_Asia-Polyglotta`.",
+    "summaryJa": "ユリウス・クラプロート『Asia Polyglotta』（パリ、1823年）に含まれるアイヌ語彙。先行する記録から千島・樺太・北海道の語形を集め、ドイツ語の語釈とともに並べる。春日勇人が「アイヌ語・語彙DB」（2026年6月2日版、シート「Klaproth1823」）で電子化した。"
+  }
+]
