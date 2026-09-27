@@ -43,6 +43,14 @@ Apply migration `0030_japanese_descriptions` before running code that reads
 `scripts/data/curated-biblio.json`; run `bun run import:curated-biblio` after the
 migration to load them through the usual merge and revision workflow.
 
+Reviewed translations of existing catalogue descriptions are stored in
+`scripts/data/japanese-descriptions.json`, keyed by source slug with the expected
+original title and description. Preview with `bun run import:japanese-descriptions`;
+add `--apply` to fill missing Japanese descriptions through the merge engine.
+The importer checks every record before writing, refuses changed originals or
+existing differing translations, and leaves originals intact. Repeating a
+completed import writes nothing.
+
 ## Machine-readable export & stability promise
 
 `GET /api/sources/export.json` returns the whole catalogue (no pagination) as a JSON
