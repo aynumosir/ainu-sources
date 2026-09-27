@@ -63,6 +63,7 @@ export function parseSourceForm(fd: FormData): { input?: SourceInput; error?: st
 		entryCountLabel: opt('entryCountLabel'),
 		license: opt('license'),
 		summary: opt('summary'),
+		summaryJa: opt('summaryJa'),
 		notes: opt('notes'),
 		reliability: opt('reliability'),
 		links,

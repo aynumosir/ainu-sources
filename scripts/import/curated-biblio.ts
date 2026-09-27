@@ -74,6 +74,7 @@ interface CuratedEntry {
 	url?: string;
 	urlType?: string;
 	summary?: string;
+	summaryJa?: string;
 	holding?: string;
 	callNumber?: string;
 	dialect?: string;
@@ -114,6 +115,7 @@ function deriveEntry(e: CuratedEntry): {
 	if (e.holding) fields.holdingInstitution = e.holding;
 	if (e.callNumber) fields.callNumber = e.callNumber;
 	if (e.summary) fields.summary = e.summary;
+	if (e.summaryJa) fields.summaryJa = e.summaryJa;
 
 	const link = e.url
 		? { type: e.urlType ?? 'website', url: e.url, label: e.publisher ?? null }

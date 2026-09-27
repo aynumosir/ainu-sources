@@ -31,6 +31,7 @@ export const load: PageServerLoad = async ({ params, locals, url }) => {
 		entryCountLabel: s.entryCountLabel ?? '',
 		license: s.license ?? '',
 		summary: s.summary ?? '',
+		summaryJa: s.summaryJa ?? '',
 		notes: s.notes ?? '',
 		reliability: s.reliability ?? '',
 		links: detail.links.map((l) => ({ type: l.type, label: l.label ?? '', url: l.url })),

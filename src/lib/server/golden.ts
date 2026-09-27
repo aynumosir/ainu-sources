@@ -79,6 +79,7 @@ export const SOURCE_SCALAR_COLUMNS = [
 	'entryCountLabel',
 	'license',
 	'summary',
+	'summaryJa',
 	'notes',
 	'reliability',
 	'provenanceRepo',

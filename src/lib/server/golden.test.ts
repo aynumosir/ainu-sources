@@ -188,7 +188,7 @@ describe('order-independence', () => {
 describe('stable fixture hash', () => {
 	it('projects to the exact pinned sha256 (guards against silent projection drift)', () => {
 		expect(hashProjection(projectSource(fixture))).toBe(
-			'6f6d61f0e5dde3587b6b53b1be05daab9d0283b9d30a734d33fd905e084c08a6'
+			'4df56c4c28996407b7f44ec10534b93a72add9bc8507ebca5e3c35be37cbdeeb'
 		);
 	});
 });

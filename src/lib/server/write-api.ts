@@ -35,7 +35,7 @@ export function requireWriteToken(request: Request): void {
 const STRING_FIELDS = [
 	'title', 'titleEn', 'titleAin', 'category', 'type', 'author', 'yearText',
 	'yearCertainty', 'dialect', 'region', 'holdingInstitution', 'callNumber',
-	'entryCountLabel', 'license', 'summary', 'notes', 'reliability'
+	'entryCountLabel', 'license', 'summary', 'summaryJa', 'notes', 'reliability'
 ] as const;
 const NUMBER_FIELDS = ['yearStart', 'yearEnd', 'entryCount'] as const;
 const STRING_ARRAY_FIELDS = ['languages', 'scripts', 'tagNames'] as const;
@@ -129,6 +129,7 @@ export function detailToInput(d: SourceDetail): SourceInput {
 		entryCountLabel: s.entryCountLabel,
 		license: s.license,
 		summary: s.summary,
+		summaryJa: s.summaryJa,
 		notes: s.notes,
 		reliability: s.reliability,
 		links: d.links.map((l) => ({ type: l.type, label: l.label, url: l.url })),

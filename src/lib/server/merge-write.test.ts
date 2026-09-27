@@ -681,3 +681,21 @@ describe('cutover — normal-edit equivalence with the pre-cutover write path', 
 		expect((await getSource(newId)).notes).toBe('a freshly edited notes body'); // replaced
 	});
 });
+
+
+describe('Japanese descriptions', () => {
+	it('creates, edits and clears the translation independently of the original', async () => {
+		const input = makeInput({ summary: 'A dictionary.', summaryJa: 'アイヌ語辞典。\n\n語彙を収録。' });
+		const created = await createSourceViaMerge(db, input, USER);
+		expect(mergeNotice(created.result)).toBeNull();
+		const id = created.result.sourceId!;
+		expect(await getSource(id)).toMatchObject({ summary: input.summary, summaryJa: input.summaryJa });
+		const edited = await updateSourceViaMerge(db, id, { ...input, summaryJa: 'アイヌ語の語彙を収録した辞典。' }, USER);
+		expect(mergeNotice(edited.result)).toBeNull();
+		expect(await getSource(id)).toMatchObject({ summary: input.summary, summaryJa: 'アイヌ語の語彙を収録した辞典。' });
+		expect((await provenanceOf(id, 'summaryJa')).derivation).toBe('editorial_decision');
+		const cleared = await updateSourceViaMerge(db, id, { ...input, summaryJa: null }, USER);
+		expect(mergeNotice(cleared.result)).toBeNull();
+		expect(await getSource(id)).toMatchObject({ summary: input.summary, summaryJa: null });
+	});
+});

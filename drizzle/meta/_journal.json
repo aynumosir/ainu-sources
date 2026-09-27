@@ -211,6 +211,13 @@
       "when": 1788784334711,
       "tag": "0029_unique_surge",
       "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "6",
+      "when": 1790481222609,
+      "tag": "0030_japanese_descriptions",
+      "breakpoints": true
     }
   ]
 }

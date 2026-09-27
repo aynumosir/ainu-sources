@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { INSTITUTION_ROLE_LABELS } from '$lib/constants';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { localizedSummary } from '$lib/source-description';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages.js';
 	import { page } from '$app/state';
 	import Seo from '$lib/components/Seo.svelte';
@@ -32,10 +33,11 @@
 	const d = $derived(data.detail);
 	const s = $derived(d.source);
 
+	const summary = $derived(localizedSummary(s, getLocale()));
 	const origin = $derived(page.url.origin);
 	const seoDescription = $derived(
-		s.summary?.trim()
-			? truncate(s.summary)
+		summary
+			? truncate(summary)
 			: `${tl(TYPE_LABELS, s.type)}${s.author ? ' · ' + s.author : ''} · ${formatYear(s)}`
 	);
 	const seoJsonLd = $derived([
@@ -159,10 +161,10 @@
 					</div>
 				</section>
 			{/if}
-			{#if s.summary}
+			{#if summary}
 				<section>
 					<h2 class="font-serif text-lg font-bold text-ink">{m.source_summary()}</h2>
-					<p class="mt-2 leading-relaxed text-stone-700">{s.summary}</p>
+					<p class="mt-2 leading-relaxed text-stone-700">{summary}</p>
 				</section>
 			{/if}
 			{#if s.notes}

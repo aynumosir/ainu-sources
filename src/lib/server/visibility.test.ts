@@ -477,3 +477,12 @@ describe('no-op on all-active data — the predicate filters by status and nothi
 		expect(detail!.related.map((r) => r.source.slug).sort()).toEqual(['active-two', 'cand-xyz-candidate', 'hidden-src']);
 	});
 });
+
+
+it('finds Japanese-only descriptions while excluding hidden records', async () => {
+	await seed(false);
+	await db.update(schema.sources).set({ summaryJa: '樺太方言の語彙を収録。' });
+	const result = await queries.listSources({ q: '樺太方言' });
+	expect(result.total).toBe(2);
+	expect(result.items.map((s) => s.slug).sort()).toEqual(['active-two', 'winner']);
+});
