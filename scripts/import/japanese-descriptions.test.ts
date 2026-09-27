@@ -82,3 +82,19 @@ it('preflights editorial deletion claims before applying any translation', async
 	expect((await db.select().from(schema.sources)).every((row) => row.summaryJa === null)).toBe(true);
 	expect(await db.select().from(schema.sourceObservations)).toEqual(observationsBefore);
 });
+
+
+it.each([{ type: 'thesis' }, { summary: 'A fuller editorial description.' }])(
+	'blocks stale winning claims that would overwrite unrelated catalogue fields: %j', async (change) => {
+		await db.insert(schema.sources).values({ id: 'two', slug: 'second', title: '第二辞典', type: 'article', summary: 'Repository label' });
+		await mergeSourceObservation(db, { origin: 'crossref', originRecordId: 'second', targetSourceId: 'two', derivation: 'observed', confidence: 0.8, fields: { type: 'article', summary: 'Repository label' } });
+		await db.update(schema.sources).set(change).where(eq(schema.sources.id, 'two'));
+		const [second] = await db.select().from(schema.sources).where(eq(schema.sources.id, 'two'));
+		const entries = [entry, { slug: second.slug, title: second.title, expectedSummary: second.summary, summaryJa: '研究論文。' }];
+		const before = await db.select().from(schema.sourceObservations);
+		await expect(run(db, { entries })).rejects.toThrow('Catalogue and edit history disagree');
+		await expect(run(db, { entries, apply: true })).rejects.toThrow('Catalogue and edit history disagree');
+		expect(await db.select().from(schema.sourceObservations)).toEqual(before);
+		expect((await db.select().from(schema.sources)).every((row) => row.summaryJa === null)).toBe(true);
+	}
+);

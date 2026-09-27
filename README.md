@@ -48,7 +48,8 @@ Reviewed translations of existing catalogue descriptions are stored in
 original title and description. Preview with `bun run import:japanese-descriptions`;
 add `--apply` to fill missing Japanese descriptions through the merge engine.
 The importer checks every record before writing, refuses changed originals or
-existing differing translations, and leaves originals intact. Repeating a
+existing differing translations, or stale edit-history values that could replace
+current metadata. It verifies that unrelated source fields stay intact. Repeating a
 completed import writes nothing.
 
 ## Machine-readable export & stability promise

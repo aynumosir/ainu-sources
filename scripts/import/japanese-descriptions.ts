@@ -4,10 +4,11 @@
  * Defaults to a read-only preview; --apply writes through the merge engine.
  */
 import { eq, inArray } from 'drizzle-orm';
-import { sources } from '../../src/lib/server/db/schema';
-import { mergeSourceObservation, planSourceObservation, type Db, type MergeInput } from '../../src/lib/server/merge';
+import { sources, sourceFieldClaims, sourceFieldProvenance } from '../../src/lib/server/db/schema';
+import { mergeSourceObservation, planSourceObservation, canonicalStringify, type Db, type MergeInput } from '../../src/lib/server/merge';
 import { parseImporterCli } from './lib/run';
 import manifest from '../data/japanese-descriptions.json';
+import { FIELD_POLICIES } from '../../src/lib/server/merge/field-policies';
 
 export interface JapaneseDescription {
 	slug: string;
@@ -17,14 +18,10 @@ export interface JapaneseDescription {
 	basis?: string;
 }
 
-const columns = {
-	id: sources.id, slug: sources.slug, title: sources.title,
-	summary: sources.summary, summaryJa: sources.summaryJa, status: sources.status
-};
 type Current = typeof sources.$inferSelect;
 
 /** Reject stale identities, changed originals, and existing editorial translations. */
-function check(entry: JapaneseDescription, row?: Pick<Current, keyof typeof columns>): boolean {
+function check(entry: JapaneseDescription, row?: Current): boolean {
 	if (!row || row.status !== 'active' || row.title !== entry.title) {
 		throw new Error(`Source identity changed: ${entry.slug}`);
 	}
@@ -33,6 +30,25 @@ function check(entry: JapaneseDescription, row?: Pick<Current, keyof typeof colu
 	if (row.summaryJa?.trim()) throw new Error(`Japanese description already exists: ${entry.slug}`);
 	return true;
 }
+
+/** The projector replays all winning claims; stale winners must not undo catalogue edits. */
+async function checkLedger(db: Db, rows: Current[]) {
+	if (!rows.length) return;
+	const winners = await db.select({ sourceId: sourceFieldProvenance.sourceId, field: sourceFieldClaims.fieldName, value: sourceFieldClaims.value })
+		.from(sourceFieldProvenance)
+		.innerJoin(sourceFieldClaims, eq(sourceFieldProvenance.currentClaimId, sourceFieldClaims.id))
+		.where(inArray(sourceFieldProvenance.sourceId, rows.map((row) => row.id)));
+	const byId = new Map(rows.map((row) => [row.id, row]));
+	for (const winner of winners) {
+		const row = byId.get(winner.sourceId)!;
+		if (FIELD_POLICIES[winner.field]?.claimable &&
+			canonicalStringify(row[winner.field as keyof Current]) !== canonicalStringify(winner.value)) {
+			throw new Error(`Catalogue and edit history disagree: ${row.slug} (${winner.field})`);
+		}
+	}
+}
+
+const ENGINE_FIELDS = new Set(['summaryJa', 'updatedAt', 'contentHash', 'normalizerVersion', 'firstSeenAt', 'lastSeenAt', 'contentChangedAt', 'driftStatus']);
 
 function observation(entry: JapaneseDescription, sourceId: string): MergeInput {
 	return {
@@ -61,7 +77,7 @@ export async function run(
 		slugs.add(entry.slug);
 	}
 	if (!entries.length) return { total: 0, pending: 0, unchanged: 0, applied: 0 };
-	const rows = await db.select(columns).from(sources).where(inArray(sources.slug, [...slugs]));
+	const rows = await db.select().from(sources).where(inArray(sources.slug, [...slugs]));
 	const bySlug = new Map(rows.map((row) => [row.slug, row]));
 	const pending = entries.filter((entry) => check(entry, bySlug.get(entry.slug)));
 	// Canonical null can still carry an editorial deletion claim. Check precedence
@@ -76,19 +92,26 @@ export async function run(
 			throw new Error(`Japanese description blocked by merge review or provenance: ${entry.slug}`);
 		}
 	}
+	await checkLedger(db, pending.map((entry) => bySlug.get(entry.slug)!));
 	let applied = 0;
 	if (options.apply) {
 		for (const entry of pending) {
-			const [current] = await db.select(columns).from(sources).where(eq(sources.slug, entry.slug));
+			const [current] = await db.select().from(sources).where(eq(sources.slug, entry.slug));
 			if (!check(entry, current)) continue;
 			if (current.id !== bySlug.get(entry.slug)!.id) throw new Error(`Source identity changed: ${entry.slug}`);
+			await checkLedger(db, [current]);
 			const result = await mergeSourceObservation(db, observation(entry, current.id));
 			if (result.status !== 'applied' && result.status !== 'noop') {
 				throw new Error(`Description not applied (${result.status}): ${entry.slug}`);
 			}
-			const [after] = await db.select(columns).from(sources).where(eq(sources.id, current.id));
+			const [after] = await db.select().from(sources).where(eq(sources.id, current.id));
 			if (after.summary !== entry.expectedSummary || after.summaryJa !== entry.summaryJa) {
 				throw new Error(`Description verification failed: ${entry.slug}`);
+			}
+			for (const field of Object.keys(current) as (keyof Current)[]) {
+				if (!ENGINE_FIELDS.has(field) && canonicalStringify(after[field]) !== canonicalStringify(current[field])) {
+					throw new Error(`Unexpected catalogue change: ${entry.slug} (${field})`);
+				}
 			}
 			applied += 1;
 			options.log?.(`Applied Japanese description: ${entry.slug}`);
