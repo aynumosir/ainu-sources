@@ -64,7 +64,8 @@ export const GET: RequestHandler = async ({ url }) => {
 				scripts: s.scripts,
 				entryCount: s.entryCount,
 				entryCountLabel: s.entryCountLabel,
-				summary: s.summary
+				summary: s.summary,
+				summaryJa: s.summaryJa
 			}))
 		},
 		{ headers: CORS }

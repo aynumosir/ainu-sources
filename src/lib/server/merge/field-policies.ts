@@ -99,6 +99,7 @@ export const FIELD_POLICIES: Record<string, FieldPolicy> = {
 	titleAin: scalarText(),
 	author: scalarText(),
 	summary: scalarText(),
+	summaryJa: scalarText(),
 	dialect: scalarText(),
 	holdingInstitution: scalarText(),
 	callNumber: scalarText(),

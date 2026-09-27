@@ -150,6 +150,8 @@
 	"form_entry_count_label": "単位（例：entries, sentences）",
 	"form_license": "ライセンス",
 	"form_summary": "解説",
+	"form_summary_original": "概要（原文）",
+	"form_summary_ja": "概要（日本語）",
 	"form_notes": "備考・翻刻メモ",
 	"form_reliability": "信頼度",
 	"form_links": "外部リンク",

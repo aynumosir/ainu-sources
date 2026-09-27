@@ -1295,6 +1295,7 @@ export async function listArchiveWorks(
 				or lower(${sources.slug}) like ${needle} escape '\\'
 				or lower(coalesce(${sources.author}, '')) like ${needle} escape '\\'
 				or lower(coalesce(${sources.summary}, '')) like ${needle} escape '\\'
+				or lower(coalesce(${sources.summaryJa}, '')) like ${needle} escape '\\'
 			)`
 		);
 	}

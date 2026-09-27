@@ -92,7 +92,8 @@ export const sources = sqliteTable(
 		bulkExport: integer('bulk_export', { mode: 'boolean' }).notNull().default(false),
 
 		// --- prose ---
-		summary: text('summary'), // short description (markdown allowed)
+		summary: text('summary'), // original description (markdown allowed)
+		summaryJa: text('summary_ja'), // Japanese description
 		notes: text('notes'), // longer notes / 翻刻・解読メモ
 		reliability: text('reliability'),
 

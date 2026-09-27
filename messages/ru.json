@@ -149,6 +149,8 @@
 	"form_entry_count_label": "Единицы (напр. entries, sentences)",
 	"form_license": "Лицензия",
 	"form_summary": "Описание",
+	"form_summary_original": "Описание (оригинал)",
+	"form_summary_ja": "Описание (японский)",
 	"form_notes": "Примечания / заметки о транскрипции",
 	"form_reliability": "Надёжность",
 	"form_links": "Внешние ссылки",

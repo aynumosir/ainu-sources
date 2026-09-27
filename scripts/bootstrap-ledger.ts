@@ -142,6 +142,7 @@ const CLAIMABLE_FIELDS = [
 	'entryCountLabel',
 	'license',
 	'summary',
+	'summaryJa',
 	'notes',
 	'reliability',
 	'featured'

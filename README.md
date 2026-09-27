@@ -31,6 +31,18 @@ The central entity is the **Source** (`資料`). Around it: `source_links`, `per
 `source_institutions`, `source_relations`, `tags` + `source_tags`, and `source_revisions`
 (full edit history). See `src/lib/server/db/schema.ts`.
 
+Catalogue descriptions have an original `summary` and an optional Japanese
+`summaryJa`. Japanese pages use `summaryJa` when present; other locales use the
+original. If either is missing, the available description is shown. This applies
+to source pages and their search-engine metadata. Both fields are editable in the
+source form and write API, and both are searched by catalogue and archive filters.
+The language of a description is independent of the work's `languages` metadata.
+
+Apply migration `0030_japanese_descriptions` before running code that reads
+`summaryJa`. The curated bibliography importer reads Japanese descriptions from
+`scripts/data/curated-biblio.json`; run `bun run import:curated-biblio` after the
+migration to load them through the usual merge and revision workflow.
+
 ## Machine-readable export & stability promise
 
 `GET /api/sources/export.json` returns the whole catalogue (no pagination) as a JSON

@@ -42,6 +42,7 @@
 		entryCountLabel?: string;
 		license?: string;
 		summary?: string;
+		summaryJa?: string;
 		notes?: string;
 		reliability?: string;
 		links?: LinkRow[];
@@ -204,8 +205,12 @@
 	<!-- Prose -->
 	<fieldset class="space-y-4">
 		<label class="block">
-			<span class={labelCls}>{m.form_summary()}</span>
+			<span class={labelCls}>{m.form_summary_original()}</span>
 			<textarea name="summary" rows="2" class={inputCls}>{initial.summary ?? ''}</textarea>
+		</label>
+		<label class="block">
+			<span class={labelCls}>{m.form_summary_ja()}</span>
+			<textarea name="summaryJa" lang="ja" rows="2" class={inputCls}>{initial.summaryJa ?? ''}</textarea>
 		</label>
 		<label class="block">
 			<span class={labelCls}>{m.form_notes()}</span>

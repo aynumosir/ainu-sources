@@ -1705,6 +1705,13 @@ describe('archive DB flows', () => {
 		expect(second.items.map((item) => item.source.title)).toEqual(['Kamuy Alpha']);
 	});
 
+	it('finds works by their Japanese catalogue description', async () => {
+		await seedRevision();
+		await db.update(schema.sources).set({ summaryJa: '樺太方言の語彙を収録。' }).where(eq(schema.sources.id, 'source-1'));
+		const result = await listArchiveWorks(db, { text: '樺太方言', sort: 'title', limit: 50, principal: reader });
+		expect(result.items.map((item) => item.source.id)).toEqual(['source-1']);
+	});
+
 	it('filters works by category, tag, and text language', async () => {
 		await db.insert(schema.archiveRepositories).values({ id: 'repo-1', name: 'books' });
 		const composition = (lang: string, share: number): import('$lib/archive/text-composition').SourceTextComposition => ({

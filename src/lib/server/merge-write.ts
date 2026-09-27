@@ -88,6 +88,7 @@ const EDIT_TEXT_FIELDS = [
 	'entryCountLabel',
 	'license',
 	'summary',
+	'summaryJa',
 	'notes',
 	'reliability'
 ] as const;

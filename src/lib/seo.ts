@@ -8,7 +8,8 @@ import { personAliases } from './person-aliases';
  * canonical + alternate URLs are derived from the locale-stripped ("bare") path
  * so they stay reciprocal across locales.
  */
-import { localizeUrl, deLocalizeUrl, locales, baseLocale } from '$lib/paraglide/runtime';
+import { localizedSummary } from '$lib/source-description';
+import { getLocale, localizeUrl, deLocalizeUrl, locales, baseLocale } from '$lib/paraglide/runtime';
 import { tl, REGION_LABELS, type Locale } from '$lib/constants';
 import { asArray, personFindLinks } from '$lib/format';
 import type {
@@ -339,7 +340,7 @@ export function sourceJsonLd(
 		url,
 		name: s.title,
 		alternateName: dedupe([s.titleEn, s.titleAin, ...asArray(s.altTitles)], s.title),
-		description: truncate(s.summary, 300) || undefined,
+		description: truncate(localizedSummary(s, getLocale()), 300) || undefined,
 		inLanguage: asArray(s.languages).map(toBcp47),
 		author: authors.length ? authors : s.author || undefined,
 		datePublished: s.yearStart != null ? String(s.yearStart) : undefined,

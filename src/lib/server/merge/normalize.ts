@@ -248,7 +248,7 @@ export function normalizeFieldValue(field: string, value: unknown): unknown {
 		case 'enum':
 			return normalizeText(value);
 		default:
-			return field === 'notes' || field === 'summary'
+			return field === 'notes' || field === 'summary' || field === 'summaryJa'
 				? normalizeProse(value)
 				: normalizeText(value);
 	}

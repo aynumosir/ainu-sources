@@ -91,7 +91,8 @@ function baseConditions(f: SourceFilters): SQLCond[] {
 				like(sources.titleAin, q),
 				like(sources.author, q),
 				like(sources.dialect, q),
-				like(sources.summary, q)
+				like(sources.summary, q),
+				like(sources.summaryJa, q)
 			)!
 		);
 	}
@@ -850,6 +851,7 @@ export interface SourceInput {
 	entryCountLabel?: string | null;
 	license?: string | null;
 	summary?: string | null;
+	summaryJa?: string | null;
 	notes?: string | null;
 	reliability?: string | null;
 	links?: { type: string; label?: string | null; url: string }[];
@@ -884,6 +886,7 @@ export function scalarValues(input: SourceInput) {
 		entryCountLabel: input.entryCountLabel || null,
 		license: input.license || null,
 		summary: input.summary || null,
+		summaryJa: input.summaryJa || null,
 		notes: input.notes || null,
 		reliability: input.reliability || null
 	};
@@ -1034,7 +1037,8 @@ export async function getContentAudit(): Promise<ContentAudit> {
 			type: sources.type,
 			region: sources.region,
 			languages: sources.languages,
-			summary: sources.summary
+			summary: sources.summary,
+			summaryJa: sources.summaryJa
 		})
 		.from(sources);
 
@@ -1057,7 +1061,7 @@ export async function getContentAudit(): Promise<ContentAudit> {
 		if (r.yearStart == null && blank(r.yearText)) year.push(lite(r));
 		if (blank(r.region)) region.push(lite(r));
 		if (!asArray(r.languages).length) language.push(lite(r));
-		if (blank(r.summary)) summary.push(lite(r));
+		if (blank(r.summary) && blank(r.summaryJa)) summary.push(lite(r));
 		const k = dupKey(r.title);
 		if (k) {
 			const g = byKey.get(k);
